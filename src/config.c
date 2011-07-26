@@ -929,7 +929,10 @@ Bool TY_(ParseConfigValue)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr optval
         TidyBuffer inbuf;            /* Set up input source */
         tidyBufInitWithAllocator( &inbuf, doc->allocator );
         tidyBufAttach( &inbuf, (byte*)optval, TY_(tmbstrlen)(optval)+1 );
-        doc->config.cfgIn = TY_(BufferInput)( doc, &inbuf, ASCII );
+        if (optId == TidyOutFile)
+            doc->config.cfgIn = TY_(BufferInput)( doc, &inbuf, RAW );
+        else
+            doc->config.cfgIn = TY_(BufferInput)( doc, &inbuf, ASCII );
         doc->config.c = GetC( &doc->config );
 
         status = option->parser( doc, option );

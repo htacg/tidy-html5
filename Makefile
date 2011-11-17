@@ -1,0 +1,7 @@
+HTML2MARKDOWN=html2text
+
+README.md: README.html
+	$(HTML2MARKDOWN) $(HTML2MARKDOWNFLAGS) $< > $@
+
+clean:
+	$(RM) README.md

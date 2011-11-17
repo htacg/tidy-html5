@@ -96,7 +96,7 @@ CFLAGS= -g -pedantic -Wall -I $(INCDIR)
 CFLAGS += -Wunused-parameter
 
 OTHERCFLAGS=
-OTHERCFLAGS+= -D_DEBUG=1
+OTHERCFLAGS+= -D_DEBUG=1 -D_MSC_VER=1400
 # OTHERCFLAGS+= -fvisibility=hidden -DTIDY_EXPORT='__attribute__((visibility("default")))'
 ifdef SUPPORT_UTF16_ENCODINGS
 CFLAGS += -DSUPPORT_UTF16_ENCODINGS=$(SUPPORT_UTF16_ENCODINGS)

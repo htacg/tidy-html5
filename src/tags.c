@@ -24,10 +24,8 @@ static CheckAttribs CheckAREA;
 static CheckAttribs CheckTABLE;
 static CheckAttribs CheckCaption;
 static CheckAttribs CheckSCRIPT;
-static CheckAttribs CheckSTYLE;
 static CheckAttribs CheckHTML;
 static CheckAttribs CheckFORM;
-static CheckAttribs CheckMETA;
 
 #define VERS_ELEM_A          (HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50)
 #define VERS_ELEM_ABBR       (xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50)
@@ -217,7 +215,7 @@ static const Dict tag_defs[] =
   { TidyTag_LISTING,    "listing",    VERS_ELEM_LISTING,    &TY_(W3CAttrsFor_LISTING)[0],    (CM_BLOCK|CM_OBSOLETE),                        TY_(ParsePre),      NULL           },
   { TidyTag_MAP,        "map",        VERS_ELEM_MAP,        &TY_(W3CAttrsFor_MAP)[0],        (CM_INLINE),                                   TY_(ParseBlock),    NULL           },
   { TidyTag_MENU,       "menu",       VERS_ELEM_MENU,       &TY_(W3CAttrsFor_MENU)[0],       (CM_BLOCK|CM_OBSOLETE),                        TY_(ParseList),     NULL           },
-  { TidyTag_META,       "meta",       VERS_ELEM_META,       &TY_(W3CAttrsFor_META)[0],       (CM_HEAD|CM_EMPTY),                            TY_(ParseEmpty),    CheckMETA      },
+  { TidyTag_META,       "meta",       VERS_ELEM_META,       &TY_(W3CAttrsFor_META)[0],       (CM_HEAD|CM_EMPTY),                            TY_(ParseEmpty),    NULL           },
   { TidyTag_NOFRAMES,   "noframes",   VERS_ELEM_NOFRAMES,   &TY_(W3CAttrsFor_NOFRAMES)[0],   (CM_BLOCK|CM_FRAMES),                          TY_(ParseNoFrames), NULL           },
   { TidyTag_NOSCRIPT,   "noscript",   VERS_ELEM_NOSCRIPT,   &TY_(W3CAttrsFor_NOSCRIPT)[0],   (CM_BLOCK|CM_INLINE|CM_MIXED),                 TY_(ParseBlock),    NULL           },
   { TidyTag_OBJECT,     "object",     VERS_ELEM_OBJECT,     &TY_(W3CAttrsFor_OBJECT)[0],     (CM_OBJECT|CM_HEAD|CM_IMG|CM_INLINE|CM_PARAM), TY_(ParseBlock),    NULL           },
@@ -243,7 +241,7 @@ static const Dict tag_defs[] =
   { TidyTag_SPAN,       "span",       VERS_ELEM_SPAN,       &TY_(W3CAttrsFor_SPAN)[0],       (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_STRIKE,     "strike",     VERS_ELEM_STRIKE,     &TY_(W3CAttrsFor_STRIKE)[0],     (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_STRONG,     "strong",     VERS_ELEM_STRONG,     &TY_(W3CAttrsFor_STRONG)[0],     (CM_INLINE),                                   TY_(ParseInline),   NULL           },
-  { TidyTag_STYLE,      "style",      VERS_ELEM_STYLE,      &TY_(W3CAttrsFor_STYLE)[0],      (CM_HEAD),                                     TY_(ParseScript),   CheckSTYLE     },
+  { TidyTag_STYLE,      "style",      VERS_ELEM_STYLE,      &TY_(W3CAttrsFor_STYLE)[0],      (CM_HEAD),                                     TY_(ParseScript),   NULL           },
   { TidyTag_SUB,        "sub",        VERS_ELEM_SUB,        &TY_(W3CAttrsFor_SUB)[0],        (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_SUP,        "sup",        VERS_ELEM_SUP,        &TY_(W3CAttrsFor_SUP)[0],        (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_TABLE,      "table",      VERS_ELEM_TABLE,      &TY_(W3CAttrsFor_TABLE)[0],      (CM_BLOCK),                                    TY_(ParseTableTag), CheckTABLE     },
@@ -839,21 +837,6 @@ void CheckSCRIPT( TidyDocImpl* doc, Node *node )
     }
 }
 
-
-/* add missing type attribute when appropriate */
-void CheckSTYLE( TidyDocImpl* doc, Node *node )
-{
-    AttVal *type = TY_(AttrGetById)(node, TidyAttr_TYPE);
-
-    TY_(CheckAttributes)( doc, node );
-
-    if ( !type || !type->value || !TY_(tmbstrlen)(type->value) )
-    {
-        type = TY_(RepairAttrValue)(doc, node, "type", "text/css");
-        TY_(ReportAttrError)( doc, node, type, INSERTING_ATTRIBUTE );
-    }
-}
-
 /* add missing type attribute when appropriate */
 void CheckLINK( TidyDocImpl* doc, Node *node )
 {
@@ -884,19 +867,6 @@ void CheckFORM( TidyDocImpl* doc, Node *node )
     if (!action)
         TY_(ReportMissingAttr)(doc, node, "action");
 }
-
-/* reports missing content attribute */
-void CheckMETA( TidyDocImpl* doc, Node *node )
-{
-    AttVal *content = TY_(AttrGetById)(node, TidyAttr_CONTENT);
-
-    TY_(CheckAttributes)(doc, node);
-
-    if (!content)
-        TY_(ReportMissingAttr)( doc, node, "content" );
-    /* name or http-equiv attribute must also be set */
-}
-
 
 Bool TY_(nodeIsText)( Node* node )
 {

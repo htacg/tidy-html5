@@ -420,10 +420,10 @@ static void help( ctmbstr prog )
     printf( "\n");
 
 #ifdef PLATFORM_NAME
-    printf( "Options for HTML Tidy for %s released on %s:\n",
-             PLATFORM_NAME, tidyReleaseDate() );
+    printf( "Options for HTML Tidy for %s from https://github.com/w3c/tidy-html5\n",
+             PLATFORM_NAME);
 #else
-    printf( "Options for HTML Tidy released on %s:\n", tidyReleaseDate() );
+    printf( "Options for HTML Tidy from https://github.com/w3c/tidy-html5\n");
 #endif
     printf( "\n");
 
@@ -903,10 +903,10 @@ static void optionvalues( TidyDoc tdoc )
 static void version( void )
 {
 #ifdef PLATFORM_NAME
-    printf( "HTML Tidy for %s released on %s\n",
-             PLATFORM_NAME, tidyReleaseDate() );
+    printf( "HTML Tidy for %s from https://github.com/w3c/tidy-html5\n",
+             PLATFORM_NAME);
 #else
-    printf( "HTML Tidy released on %s\n", tidyReleaseDate() );
+    printf( "HTML Tidy from https://github.com/w3c/tidy-html5\n");
 #endif
 }
 

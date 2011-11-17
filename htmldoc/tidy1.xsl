@@ -358,7 +358,7 @@ HTML Tidy Project Page at \fIhttp://tidy.sourceforge.net\fR
 .SH AUTHOR
 \fBTidy\fR was written by Dave Raggett &lt;\fIdsr@w3.org\fR&gt;, and is now maintained and developed by the Tidy team at \fIhttp://tidy.sourceforge.net/\fR.  It is released under the \fIMIT Licence\fR.
 .LP
-Generated automatically with HTML Tidy released on <xsl:value-of select="cmdline/@version" />.
+Generated automatically with HTML Tidy from https://github.com/w3c/tidy-html5.
 </xsl:template>
 
 

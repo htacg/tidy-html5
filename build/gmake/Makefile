@@ -211,6 +211,7 @@ debug:
 
 clean:
 	rm -f $(OBJFILES) $(EXES) $(LIBRARY) $(DOCS) $(HELPXML) $(CONFIGXML) $(OBJDIR)/*.lo
+	rm -rf $(BINDIR)/tidy.dSYM $(BINDIR)/tab2space.dSYM
 	if [ -d $(OBJDIR)/.libs ]; then rmdir $(OBJDIR)/.libs; fi
 	if [ -d $(LIBDIR)/.libs ]; then rmdir $(LIBDIR)/.libs; fi
 	if [ "$(OBJDIR)" != "$(TOPDIR)" -a -d $(OBJDIR) ]; then rmdir $(OBJDIR); fi

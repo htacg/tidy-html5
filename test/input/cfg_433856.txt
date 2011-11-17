@@ -1,0 +1,2 @@
+// Tidy configuration file for bug #433856
+drop-font-tags: yes

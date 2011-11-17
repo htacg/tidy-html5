@@ -1,0 +1,10 @@
+// HTML Tidy configuration file created by TidyGUI
+indent: auto
+char-encoding: latin1
+tidy-mark: no
+clean: yes
+drop-font-tags: yes
+logical-emphasis: yes
+indent-attributes: yes
+// output-xhtml: yes
+

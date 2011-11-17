@@ -1,0 +1,4 @@
+// add-xml-decl: yes
+input-xml: yes
+output-xml: yes
+char-encoding: latin1

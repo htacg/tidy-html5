@@ -1,0 +1,34 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>[ #505770] Unclosed <option> tag causing problems</TITLE>
+</HEAD>
+<BODY>
+
+<form name="myhand">
+<input type="text" disabled size="30" value="Top
+Card on Discard Pile -- None" name="topcard">
+<br>
+<select ondblclick="parent.master.aGame.Hand.Cards
+[this.selectedIndex].ShowCard();"
+onChange="document.myhand.cardtext.value = this
+[this.selectedIndex].value" name="handselect" size="7">
+<option value="">-------------Empty Hand---------
+----
+<option value="">
+<option value="">
+<option value="">
+<option value="">
+<option value="">
+<option value="">
+</select>
+<textarea disabled rows=5 cols=28 title="Selected
+Card Text" name="cardtext">Selected Card Text
+</textarea>
+<br>
+<input type="button" value="Discard & Draw"><br>
+<input type="button" value="Discard & Draw from
+Discard">
+</form>
+</BODY>
+</HTML>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>[#427826] Script source needs escaping/CDATA
+  section</title>
+  <script type="application/ecmascript">
+  <![CDATA[
+  <!--
+  function isLessThan()
+  {
+    var a = 2, b = 3;
+    if (a < b) alert("a less than b");
+    return ( a < b );
+  }
+  -->
+  ]]>
+  </script>
+  <script type="text/javascript"
+        language='JavaScript'>
+  //<![CDATA[
+  <!--
+  alert("...");
+  //-->
+  //]]>
+  </script>
+  <script type="text/javascript"
+        language='JavaScript'>
+  //<![CDATA[
+  function loop_de_loop()
+  {
+    for ( ix=0; ix < 5; ++ix )
+    {
+      alert( "Bob's yer uncle " + ix );
+    }
+  }
+  //]]>
+  </script>
+  <script type="text/javascript"
+        language='JavaScript'>
+  //<![CDATA[
+  function round_again()
+  {
+    for ( ix=0; ix < 5; ++ix )
+    {
+      alert( "Shivver me timbers " + ix );
+    }
+  }
+  //]]>
+  </script>
+</head>
+
+<body onload="isLessThan()">
+  <p>If converted to XML/XHTML, the &lt; in the javascript source
+  above causes problems for XML tools.</p>
+</body>
+</html>

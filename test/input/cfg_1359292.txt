@@ -1,0 +1,25 @@
+wrap: 68
+tab-size: 4
+repeated-attributes: keep-last
+alt-text: None, says tidy
+show-warnings: no
+indent: auto
+indent-attributes: yes
+output-xml: yes
+output-xhtml: yes
+add-xml-decl: yes
+bare: yes
+logical-emphasis: yes
+drop-proprietary-attributes: yes
+break-before-br: yes
+quote-nbsp: no
+assume-xml-procins: yes
+keep-time: no
+word-2000: yes
+tidy-mark: no
+literal-attributes: yes
+hide-comments: yes
+ascii-chars: no
+join-styles: no
+output-bom: no
+drop-empty-paras: no

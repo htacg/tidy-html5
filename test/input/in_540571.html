@@ -1,0 +1,15 @@
+<html>
+<head>
+<title>#540571 Inconsistent behaviour with span inline element</title>
+</head>
+<body>
+<font color="red"><h1>Hello World</h1></font>
+<p>
+The font inline is moved so it becomes a child of the h1 element.
+</p>
+<span color="red"><h1>Hello World</h1></span>
+<p>
+The span inline is not moved so it becomes a child of the h1 element, which is inconsistent and does not correspond with current browser behaviour any more.
+</p>
+</body>
+</html>

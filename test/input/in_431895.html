@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<!--
+                          bug-2001-01-03-a.html
+
+Problem:
+  The "gnu-emacs" option reports the filename, line number, and column   
+  number in error and warning messages.  However, the filename is not set
+  when processing XML or if the "-quiet" option is used when processing
+  HTML; "(null)" is reported instead.
+
+Expected behavior:
+  The filename should be reported regardless of other configuration
+  options.
+
+Verification:
+  tidy -q -e --gnu-emacs yes bug-2001-01-03-a.html
+    
+Correction:
+  localize.c ()
+  tidy.c (main)
+-->
+
+<html>
+
+<head>
+<title>Bug-2001-01-03-A [ #431895 ] gnu-emacs filename not set for XML or -q</title>
+</head>
+
+<body>
+
+<p>
+<p>Some text.</p>
+
+</body>
+</html>

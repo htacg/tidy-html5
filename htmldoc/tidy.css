@@ -1,0 +1,329 @@
+/* 1st Style ignored by Netscape */
+td.dummy, font.dummy, .dummy, a:link.dummy, a:visited.dummy, a:active.dummy
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 16pt;
+color: #336699;
+text-decoration: none;
+font-weight: normal
+}
+
+body
+{
+margin-left: 10%;
+margin-right: 10%;
+font-family: sans-serif;
+background-color: #FFFFFF
+}
+
+/* Blue TITLE */
+td.title, font.title, .title, a:link.title, a:visited.title, a:active.title
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 16pt;
+color: #336699;
+text-decoration: none;
+font-weight: normal
+}
+
+/* BODY TEXT */
+td.text, font.text, .text, a:link.text, a:visited.text, a:active.text
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 9pt;
+color: #000000;
+text-decoration: none;
+font-weight: normal
+}
+
+/* BOLD BODY TEXT */
+td.textbold, font.textbold, .textbold, a:link.textbold, a:visited.textbold, a:active.textbold
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 9pt;
+color: #000000;
+text-decoration: none;
+font-weight: bold
+}
+
+/* BOLD BODY TEXT LINK WITH UNDERLINE*/
+td.textboldlink, font.textboldlink, .textboldlink, a:link.textboldlink, a:visited.textboldlink, a:active.textboldlink
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 9pt;
+color: #000000;
+font-weight: bold
+}
+
+/* SMALL BODY TEXT */
+td.smtext, font.smtext, .smtext, a:link.smtext, a:visited.smtext, a:active.smtext
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 8pt;
+color: #000000;
+text-decoration: none;
+font-weight: normal
+}
+
+/* SMALL BOLD BODY TEXT */
+td.smtextbold, font.smtextbold, .smtextbold, a:link.smtextbold, a:visited.smtextbold, a:active.smtextbold
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 8pt;
+color: #000000;
+text-decoration: none;
+font-weight: bold
+}
+
+/* TITLES
+td.title, font.title, .title, a:link.title, a:visited.title, a:active.title
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 12pt;
+color: #CC3300;
+text-decoration: none;
+font-weight: bold
+}
+*/
+
+/* SUBTITLES */
+td.subtitle, font.subtitle, .subtitle, a:link.subtitle, a:visited.subtitle, a:active.subtitle
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 11pt;
+color: #000000;
+text-decoration: none;
+font-weight: bold
+}
+
+/* LEGAL TEXT */
+td.legal, font.legal, .legal, a:link.legal, a:visited.legal, a:active.legal
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 8pt;
+color: #000000;
+text-decoration: none;
+font-weight: normal
+}
+
+td.legallink, font.legallink, .legallink, a:link.legallink, a:visited.legallink, a:active.legallink
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 8pt;
+color: #CC3300;
+font-weight: normal
+}
+
+/* RED TEXT */
+td.textred, font.textred, .textred, a:link.textred, a:visited.textred, a:active.textred
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 10pt;
+color: #CC3300;
+text-decoration: none;
+font-weight: normal
+}
+
+/* RED TEXT BOLD*/
+td.textredbold, font.textredbold, .textredbold, a:link.textredbold, a:visited.textredbold, a:active.textredbold
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 10pt;
+color: #CC3300;
+text-decoration: none;
+font-weight: bold
+}
+
+/* LINKS */
+td.link, font.link, .link, a:link.link, a:visited.link, a:active.link
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 10pt;
+color: #3366CC;
+font-weight: normal
+}
+
+td.tabletitlelink, font.tabletitlelink, .tabletitlelink, a:link.tabletitlelink, a:visited.tabletitlelink, a:active.tabletitlelink
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 10pt;
+background-color: #e9e9d3;
+color: #000000;
+}
+
+/* TABLE TITLES */
+td.tabletitle, font.tabletitle, .tabletitle, a:link.tabletitle, a:visited.tabletitle, a:active.tabletitle
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 10pt;
+color: #336699;
+background-color: #e9e9d3;
+/* text-decoration: none; */
+font-weight: bold
+}
+
+/* TABLE CELL */
+td.cell, tr.cell, font.cell, .cell, a:link.cell, a:visited.cell, a:active.cell
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 12pt;
+color: #000000;
+font-weight: normal;
+/* background-color: #e9e9d3 */
+background-color: #f5f5f5
+}
+
+/* SHADED TABLE CELL */
+td.shaded, tr.shaded, font.shaded, .shaded, a:link.shaded, a:visited.shaded, a:active.shaded
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 12pt;
+color: #000000;
+font-weight: normal;
+background-color: #f5f5f5
+}
+
+/* GLOSSARY TERM */
+td.term, font.term, .term, a:link.term, a:visited.term, a:active.term
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 10pt;
+font-style: normal;
+color: #000000;
+text-decoration: none;
+font-weight: normal
+}
+
+/* ELEMENT TAGS */
+ul
+{
+font-family: Arial, Helvetica, sans-serif;
+font-size: 10pt;
+font-style: normal;
+font-weight: normal
+}
+li
+{
+font-family: Arial, Helvetica, sans-serif;
+font-size: 10pt;
+font-style: normal;
+font-weight: normal
+}
+
+a:link.h1, a:visited.h1, .h1
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 12pt;
+color: #0066CC
+}
+a:active.h1
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 12pt;
+font-weight: bold;
+color: #0066CC
+}
+h1
+{
+margin-left: -8%;
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 12pt;
+color: #0066CC
+}
+
+.h2
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 11pt;
+/* font-weight: bold; */
+color: #000000
+}
+
+h2
+{
+margin-left: -4%;
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 11pt;
+/* font-weight: bold; */
+color: #000000
+}
+
+A:link.h3, A:visited.h3, .h3
+{  font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 10pt;
+color: #000000;
+font-weight: bold
+}
+
+A:active.h3
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 10pt;
+color: #000000;
+font-weight: bold
+}
+
+h3
+{
+margin-left: -4%;
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 10pt;
+font-weight: bold;
+color: #000000
+}
+
+h4
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 9pt;
+font-weight: bold;
+color: #000000
+}
+
+.code, A:active.code, A:link.code, A:visited.code
+{
+font-family: "Courier New", Courier, monospace;
+}
+
+.abstract
+{
+	font-style : italic;
+}
+
+p
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 10pt;
+font-style: normal
+}
+
+td
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 10pt;
+font-style: normal
+}
+
+/* LINKS */
+a:link, a:active
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 10pt;
+color: #3366CC;
+font-weight: normal
+}
+
+a:visited
+{
+font-family: Arial, Helvetica, "Trebuchet MS", sans-serif;
+font-size: 10pt;
+color: #333366;
+font-weight: normal
+}
+
+code {
+  /* use browser/user default for `font-family` */
+  font-weight: bold;
+  color: brown;
+  background: transparent;
+}

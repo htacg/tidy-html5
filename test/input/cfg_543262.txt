@@ -1,0 +1,5 @@
+doctype: omit
+output-xhtml: yes
+char-encoding: latin1
+numeric-entities: yes
+quiet: yes

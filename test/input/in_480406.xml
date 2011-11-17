@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<!-- [ #480406 ] Single document element discarded - use "-xml" on command line -->
+<test />
+

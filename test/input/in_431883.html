@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+
+<!--
+                          bug-2000-12-27-a.html
+
+Problem:
+  Running Tidy on this file produces the diagnostic:
+
+    Doctype given is "-//W3C//DTD HTML 3.2//EN"
+
+  ...when clearly the DOCTYPE is not as shown.  Problem appears to be that
+  doctype is "fixed" in FixDocType before it is reported in ReportVersion.
+  See "tidy.c" lines 1001, 1016.
+
+Expected behavior:
+
+  The DOCTYPE that appears in the file should be reported in the "Doctype
+  given" diagnostic.
+
+Verification:
+  tidy -e bug-2000-12-27-a.html
+
+Correction:
+  tidy.c (main)
+-->
+
+<html>
+
+<head>
+<title>Bug-2000-12-27-A [ #431883 ] Given doctype reported incorrectly</title>
+</head>
+
+<body>
+
+
+<!-- 
+  If you use a plain table tag, tidy complains about
+  no summary attribute and demotes the version to 3.2
+-->
+<table>
+
+<!--  
+  If you add a summary attribute to the table tag,
+  tidy identifies the doc as 4.01 transitional.
+
+<table summary="Tidy reports this as 3.2, not 4.0"> 
+-->
+
+<tr>
+<td>A cell.</td>
+</tr>
+</table>
+
+</body>
+</html>

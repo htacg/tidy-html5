@@ -1,0 +1,7 @@
+indent: auto
+char-encoding: latin1
+tidy-mark: no
+clean: yes
+drop-font-tags: no
+logical-emphasis: yes
+indent-attributes: yes

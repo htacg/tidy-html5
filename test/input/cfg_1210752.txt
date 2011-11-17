@@ -1,0 +1,2 @@
+output-encoding: raw
+output-xhtml: yes

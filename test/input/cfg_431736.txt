@@ -1,0 +1,2 @@
+// Tidy configuration file for bug #431736
+output-xhtml: yes

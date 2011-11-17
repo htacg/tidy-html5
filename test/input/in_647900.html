@@ -1,0 +1,35 @@
+<html>
+<head>
+  <title>[ 647900 ] tables are incorrectly merged</title>
+</head>
+<body>
+  <table summary="Paragraph should follow table, not precede.">
+  <tr>
+    <td>Table data</td>
+  </table>
+
+  <p>A paragraph</p>
+
+  <table summary="Same again.">
+  <tr>
+    <th>Foo
+  <tr>
+    <td>
+    <table summary="Nested">
+    <td>Foo
+    </table>
+  </table>
+
+  <p>Another paragraph</p>
+
+  <form action="foo.cgi">
+    <table summary="Bad form">
+    <tr>
+      <td>Input: <input type="text" name="foo"></td>
+      <td></form></td>
+    </tr>
+    </table>
+
+  <p>Yet another paragraph</p>
+</body>
+</html>

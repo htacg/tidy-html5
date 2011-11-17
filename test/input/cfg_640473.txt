@@ -1,0 +1,14 @@
+# [640743] same as default config ...
+indent: auto
+char-encoding: latin1
+tidy-mark: no
+clean: yes
+drop-font-tags: yes
+logical-emphasis: yes
+indent-attributes: yes
+
+# + declared tags
+new-blocklevel-tags: foo 
+new-inline-tags: bar 
+new-empty-tags: zippo 
+new-pre-tags: baz 

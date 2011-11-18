@@ -13,5 +13,5 @@ following steps.
 
   1. `make -C build/gmake/`
 
-  2. `make install`
+  2. `make -C build/gmake/ install`
 

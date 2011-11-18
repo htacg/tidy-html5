@@ -13,5 +13,8 @@ following steps.
 
   1. `make -C build/gmake/`
 
-  2. `make -C build/gmake/ install`
+  2. `make install -C build/gmake/`
+
+Note that you will either need to run `make install` as root, or with `sudo
+make install`.
 

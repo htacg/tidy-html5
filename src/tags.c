@@ -786,23 +786,21 @@ void CheckTABLE( TidyDocImpl* doc, Node *node )
     }
 }
 
-/* add missing type attribute when appropriate */
+/* report missing href attribute; report missing rel attribute */
 void CheckLINK( TidyDocImpl* doc, Node *node )
 {
-    AttVal *rel = TY_(AttrGetById)(node, TidyAttr_REL);
+    Bool HasHref = TY_(AttrGetById)(node, TidyAttr_HREF) != NULL;
+    Bool HasRel = TY_(AttrGetById)(node, TidyAttr_REL) != NULL;
+    Bool HasItemprop = TY_(AttrGetById)(node, TidyAttr_ITEMPROP) != NULL;
 
-    TY_(CheckAttributes)( doc, node );
-
-    /* todo: <link rel="alternate stylesheet"> */
-    if (AttrValueIs(rel, "stylesheet"))
+    if (!HasHref)
     {
-        AttVal *type = TY_(AttrGetById)(node, TidyAttr_TYPE);
-        if (!type)
-        {
-            TY_(AddAttribute)( doc, node, "type", "text/css" );
-            type = TY_(AttrGetById)(node, TidyAttr_TYPE);
-            TY_(ReportAttrError)( doc, node, type, INSERTING_ATTRIBUTE );
-        }
+      TY_(ReportMissingAttr)( doc, node, "href" );
+    }
+
+    if (!HasItemprop && !HasRel)
+    {
+      TY_(ReportMissingAttr)( doc, node, "rel" );
     }
 }
 

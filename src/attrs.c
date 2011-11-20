@@ -158,6 +158,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_HTTP_EQUIV,        "http-equiv",            CH_PCDATA    }, /* META */
   { TidyAttr_ID,                "id",                    CH_IDDEF     }, 
   { TidyAttr_ISMAP,             "ismap",                 CH_BOOL      }, /* IMG */
+  { TidyAttr_ITEMPROP,          "itemprop",              CH_PCDATA    }, 
   { TidyAttr_LABEL,             "label",                 CH_PCDATA    }, /* OPT, OPTGROUP */
   { TidyAttr_LANG,              "lang",                  CH_LANG      }, 
   { TidyAttr_LANGUAGE,          "language",              CH_PCDATA    }, /* SCRIPT */

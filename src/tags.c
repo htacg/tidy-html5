@@ -23,7 +23,6 @@ static CheckAttribs CheckLINK;
 static CheckAttribs CheckAREA;
 static CheckAttribs CheckTABLE;
 static CheckAttribs CheckCaption;
-static CheckAttribs CheckSCRIPT;
 static CheckAttribs CheckHTML;
 static CheckAttribs CheckFORM;
 
@@ -235,7 +234,7 @@ static const Dict tag_defs[] =
   { TidyTag_RUBY,       "ruby",       VERS_ELEM_RUBY,       &TY_(W3CAttrsFor_RUBY)[0],       (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_S,          "s",          VERS_ELEM_S,          &TY_(W3CAttrsFor_S)[0],          (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_SAMP,       "samp",       VERS_ELEM_SAMP,       &TY_(W3CAttrsFor_SAMP)[0],       (CM_INLINE),                                   TY_(ParseInline),   NULL           },
-  { TidyTag_SCRIPT,     "script",     VERS_ELEM_SCRIPT,     &TY_(W3CAttrsFor_SCRIPT)[0],     (CM_HEAD|CM_MIXED|CM_BLOCK|CM_INLINE),         TY_(ParseScript),   CheckSCRIPT    },
+  { TidyTag_SCRIPT,     "script",     VERS_ELEM_SCRIPT,     &TY_(W3CAttrsFor_SCRIPT)[0],     (CM_HEAD|CM_MIXED|CM_BLOCK|CM_INLINE),         TY_(ParseScript),   NULL           },
   { TidyTag_SELECT,     "select",     VERS_ELEM_SELECT,     &TY_(W3CAttrsFor_SELECT)[0],     (CM_INLINE|CM_FIELD),                          TY_(ParseSelect),   NULL           },
   { TidyTag_SMALL,      "small",      VERS_ELEM_SMALL,      &TY_(W3CAttrsFor_SMALL)[0],      (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_SPAN,       "span",       VERS_ELEM_SPAN,       &TY_(W3CAttrsFor_SPAN)[0],       (CM_INLINE),                                   TY_(ParseInline),   NULL           },
@@ -784,56 +783,6 @@ void CheckTABLE( TidyDocImpl* doc, Node *node )
     {
         if (attval->value == NULL)
             attval->value = TY_(tmbstrdup)(doc->allocator, "1");
-    }
-}
-
-/* add missing type attribute when appropriate */
-void CheckSCRIPT( TidyDocImpl* doc, Node *node )
-{
-    AttVal *lang, *type;
-    char buf[16];
-
-    TY_(CheckAttributes)(doc, node);
-
-    lang = TY_(AttrGetById)(node, TidyAttr_LANGUAGE);
-    type = TY_(AttrGetById)(node, TidyAttr_TYPE);
-
-    if (!type)
-    {
-        /* check for javascript */
-        if (lang)
-        {
-            /* Test #696799. lang->value can be NULL. */
-            buf[0] = '\0';
-            TY_(tmbstrncpy)(buf, lang->value, sizeof(buf));
-            buf[10] = '\0';
-
-            if (TY_(tmbstrncasecmp)(buf, "javascript", 10) == 0 ||
-                 TY_(tmbstrncasecmp)(buf,   "jscript",  7) == 0)
-            {
-                TY_(AddAttribute)(doc, node, "type", "text/javascript");
-            }
-            else if (TY_(tmbstrcasecmp)(buf, "vbscript") == 0)
-            {
-                /* per Randy Waki 8/6/01 */
-                TY_(AddAttribute)(doc, node, "type", "text/vbscript");
-            }
-        }
-        else
-        {
-            TY_(AddAttribute)(doc, node, "type", "text/javascript");
-        }
-
-        type = TY_(AttrGetById)(node, TidyAttr_TYPE);
-
-        if (type != NULL)
-        {
-            TY_(ReportAttrError)(doc, node, type, INSERTING_ATTRIBUTE);
-        }
-        else
-        {
-            TY_(ReportMissingAttr)(doc, node, "type");
-        }
     }
 }
 

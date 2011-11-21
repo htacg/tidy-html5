@@ -763,20 +763,8 @@ void CheckAREA( TidyDocImpl* doc, Node *node )
 void CheckTABLE( TidyDocImpl* doc, Node *node )
 {
     AttVal* attval;
-    Bool HasSummary = TY_(AttrGetById)(node, TidyAttr_SUMMARY) != NULL;
 
     TY_(CheckAttributes)(doc, node);
-
-    /* a missing summary attribute is bad accessibility, no matter
-       what HTML version is involved; a document without is valid */
-    if (cfg(doc, TidyAccessibilityCheckLevel) == 0)
-    {
-        if (!HasSummary)
-        {
-            doc->badAccess |= BA_MISSING_SUMMARY;
-            TY_(ReportMissingAttr)( doc, node, "summary");
-        }
-    }
 
     /* convert <table border> to <table border="1"> */
     if ( cfgBool(doc, TidyXmlOut) && (attval = TY_(AttrGetById)(node, TidyAttr_BORDER)) )

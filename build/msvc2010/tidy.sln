@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tidy", "tidy.vcxproj", "{86771E17-F0DB-445E-AFE9-33EC8AA1E002}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tidydll", "tidydll.vcxproj", "{C9371CCA-E73B-4661-847C-EB45A234C5C7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3EA53A3-86BB-4D0A-B999-D1EC9411DDD4} = {A3EA53A3-86BB-4D0A-B999-D1EC9411DDD4}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tidylib", "tidylib.vcxproj", "{A3EA53A3-86BB-4D0A-B999-D1EC9411DDD4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86771E17-F0DB-445E-AFE9-33EC8AA1E002}.Debug|Win32.ActiveCfg = Debug|Win32
+		{86771E17-F0DB-445E-AFE9-33EC8AA1E002}.Debug|Win32.Build.0 = Debug|Win32
+		{86771E17-F0DB-445E-AFE9-33EC8AA1E002}.Release|Win32.ActiveCfg = Release|Win32
+		{86771E17-F0DB-445E-AFE9-33EC8AA1E002}.Release|Win32.Build.0 = Release|Win32
+		{C9371CCA-E73B-4661-847C-EB45A234C5C7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C9371CCA-E73B-4661-847C-EB45A234C5C7}.Debug|Win32.Build.0 = Debug|Win32
+		{C9371CCA-E73B-4661-847C-EB45A234C5C7}.Release|Win32.ActiveCfg = Release|Win32
+		{C9371CCA-E73B-4661-847C-EB45A234C5C7}.Release|Win32.Build.0 = Release|Win32
+		{A3EA53A3-86BB-4D0A-B999-D1EC9411DDD4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A3EA53A3-86BB-4D0A-B999-D1EC9411DDD4}.Debug|Win32.Build.0 = Debug|Win32
+		{A3EA53A3-86BB-4D0A-B999-D1EC9411DDD4}.Release|Win32.ActiveCfg = Release|Win32
+		{A3EA53A3-86BB-4D0A-B999-D1EC9411DDD4}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

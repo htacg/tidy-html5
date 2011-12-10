@@ -24,7 +24,6 @@ static CheckAttribs CheckAREA;
 static CheckAttribs CheckTABLE;
 static CheckAttribs CheckCaption;
 static CheckAttribs CheckHTML;
-static CheckAttribs CheckFORM;
 
 #define VERS_ELEM_A          (HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50)
 #define VERS_ELEM_ABBR       (xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50)
@@ -188,7 +187,7 @@ static const Dict tag_defs[] =
   { TidyTag_EM,         "em",         VERS_ELEM_EM,         &TY_(W3CAttrsFor_EM)[0],         (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_FIELDSET,   "fieldset",   VERS_ELEM_FIELDSET,   &TY_(W3CAttrsFor_FIELDSET)[0],   (CM_BLOCK),                                    TY_(ParseBlock),    NULL           },
   { TidyTag_FONT,       "font",       VERS_ELEM_FONT,       &TY_(W3CAttrsFor_FONT)[0],       (CM_INLINE),                                   TY_(ParseInline),   NULL           },
-  { TidyTag_FORM,       "form",       VERS_ELEM_FORM,       &TY_(W3CAttrsFor_FORM)[0],       (CM_BLOCK),                                    TY_(ParseBlock),    CheckFORM      },
+  { TidyTag_FORM,       "form",       VERS_ELEM_FORM,       &TY_(W3CAttrsFor_FORM)[0],       (CM_BLOCK),                                    TY_(ParseBlock),    NULL           },
   { TidyTag_FRAME,      "frame",      VERS_ELEM_FRAME,      &TY_(W3CAttrsFor_FRAME)[0],      (CM_FRAMES|CM_EMPTY),                          TY_(ParseEmpty),    NULL           },
   { TidyTag_FRAMESET,   "frameset",   VERS_ELEM_FRAMESET,   &TY_(W3CAttrsFor_FRAMESET)[0],   (CM_HTML|CM_FRAMES),                           TY_(ParseFrameSet), NULL           },
   { TidyTag_H1,         "h1",         VERS_ELEM_H1,         &TY_(W3CAttrsFor_H1)[0],         (CM_BLOCK|CM_HEADING),                         TY_(ParseInline),   NULL           },
@@ -790,17 +789,6 @@ void CheckLINK( TidyDocImpl* doc, Node *node )
     {
       TY_(ReportMissingAttr)( doc, node, "rel" );
     }
-}
-
-/* reports missing action attribute */
-void CheckFORM( TidyDocImpl* doc, Node *node )
-{
-    AttVal *action = TY_(AttrGetById)(node, TidyAttr_ACTION);
-
-    TY_(CheckAttributes)(doc, node);
-
-    if (!action)
-        TY_(ReportMissingAttr)(doc, node, "action");
 }
 
 Bool TY_(nodeIsText)( Node* node )

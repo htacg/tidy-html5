@@ -1,0 +1,10 @@
+/build/msvc2010/Obj/
+/build/msvc2010/Debugtidydll/
+/build/msvc2010/Debugtidylib/
+/build/msvc2010/Debug/
+/build/msvc2010/Releasetidydll/
+/build/msvc2010/Releasetidylib/
+/build/msvc2010/Release/
+*.user
+*.suo
+*.sdf

@@ -1367,11 +1367,8 @@ Bool TY_(IsValidHTMLID)(ctmbstr id)
     if (!s)
         return no;
 
-    if (!TY_(IsLetter)(*s++))
-        return no;
-
     while (*s)
-        if (!TY_(IsNamechar)(*s++))
+        if (TY_(IsHTMLSpace)(*s++))
             return no;
 
     return yes;

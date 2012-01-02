@@ -230,6 +230,11 @@ Bool TY_(IsLetter)(uint c)
     return (map & letter)!=0;
 }
 
+Bool TY_(IsHTMLSpace)(uint c)
+{
+    return c == 0x020 || c == 0x009 || c == 0x00a || c == 0x00c || c == 0x00d;
+}
+
 Bool TY_(IsNamechar)(uint c)
 {
     uint map = MAP(c);

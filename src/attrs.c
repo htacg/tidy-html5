@@ -158,7 +158,6 @@ static const Attribute attribute_defs [] =
   { TidyAttr_HTTP_EQUIV,        "http-equiv",            CH_PCDATA    }, /* META */
   { TidyAttr_ID,                "id",                    CH_IDDEF     }, 
   { TidyAttr_ISMAP,             "ismap",                 CH_BOOL      }, /* IMG */
-  { TidyAttr_ITEMPROP,          "itemprop",              CH_PCDATA    }, 
   { TidyAttr_LABEL,             "label",                 CH_PCDATA    }, /* OPT, OPTGROUP */
   { TidyAttr_LANG,              "lang",                  CH_LANG      }, 
   { TidyAttr_LANGUAGE,          "language",              CH_PCDATA    }, /* SCRIPT */
@@ -1175,7 +1174,7 @@ const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attv
 
     if ( attribute != NULL )
     {
-        if (AttributeVersions(node, attval) & VERS_XML)
+        if (attrIsXML_LANG(attval) || attrIsXML_SPACE(attval))
         {
             doc->lexer->isvoyager = yes;
             if (!cfgBool(doc, TidyHtmlOut))
@@ -1367,8 +1366,11 @@ Bool TY_(IsValidHTMLID)(ctmbstr id)
     if (!s)
         return no;
 
+    if (!TY_(IsLetter)(*s++))
+        return no;
+
     while (*s)
-        if (TY_(IsHTMLSpace)(*s++))
+        if (!TY_(IsNamechar)(*s++))
             return no;
 
     return yes;

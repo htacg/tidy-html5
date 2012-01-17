@@ -8,3 +8,8 @@
 *.user
 *.suo
 *.sdf
+/build/gmake/obj/
+/bin/
+/lib/
+/test/testall.log
+/test/tmp/

@@ -416,7 +416,6 @@ void TY_(ConstrainVersion)( TidyDocImpl* doc, uint vers );
 Bool TY_(IsWhite)(uint c);
 Bool TY_(IsDigit)(uint c);
 Bool TY_(IsLetter)(uint c);
-Bool TY_(IsHTMLSpace)(uint c);
 Bool TY_(IsNewline)(uint c);
 Bool TY_(IsNamechar)(uint c);
 Bool TY_(IsXMLLetter)(uint c);

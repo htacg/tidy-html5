@@ -8,6 +8,14 @@
 *.user
 *.suo
 *.sdf
+/build/msvc/Debug/
+/build/msvc/Release/
+/build/msvc/bin/
+/build/msvc/lib/
+/build/msvc/tidy.ncb
+/build/msvc/tidy.sln
+/build/msvc/tidy.vcproj
+/build/msvc/tidylib.vcproj
 /build/gmake/obj/
 /bin/
 /lib/

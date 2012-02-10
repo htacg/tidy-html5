@@ -119,6 +119,10 @@ int TY_(HTMLVersion)(TidyDocImpl* doc)
                  !cfgBool(doc, TidyHtmlOut);
     Bool html4 = dtmode == TidyDoctypeStrict || dtmode == TidyDoctypeLoose || VERS_FROM40 & dtver;
 
+    // don't mess with <!doctype html>
+    if (HT50) return HT50;
+    if (XH50) return XH50;
+
     for (i = 0; W3C_Doctypes[i].name; ++i)
     {
         if ((xhtml && !(VERS_XHTML & W3C_Doctypes[i].vers)) ||

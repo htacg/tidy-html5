@@ -3220,10 +3220,6 @@ void TY_(ParseHead)(TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode))
                                      head ?
                                      TOO_MANY_ELEMENTS_IN : TOO_MANY_ELEMENTS);
             }
-            else if ( nodeIsNOSCRIPT(node) )
-            {
-                TY_(ReportError)(doc, head, node, TAG_NOT_ALLOWED_IN);
-            }
 
 #ifdef AUTO_INPUT_ENCODING
             else if (nodeIsMETA(node))

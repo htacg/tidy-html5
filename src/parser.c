@@ -1830,7 +1830,7 @@ void TY_(ParseEmpty)(TidyDocImpl* doc, Node *element, GetTokenMode mode)
         {
             if ( !(node->type == EndTag && node->tag == element->tag) )
             {
-                TY_(ReportError)(doc, element, node, ELEMENT_NOT_EMPTY);
+                /* TY_(ReportError)(doc, element, node, ELEMENT_NOT_EMPTY); */
                 TY_(UngetToken)( doc );
             }
             else

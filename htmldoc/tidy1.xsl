@@ -47,20 +47,24 @@
 
 
 <xsl:template name="header-section">
-  <xsl:text/>.\" tidy man page for the Tidy Sourceforge project
-.TH tidy 1 "$Date: 2007/02/01 12:25:21 $" "HTML Tidy <xsl:value-of select="cmdline/@version" />" "User commands"
+  <xsl:text/>.\" tidy man page for the HTML5 for of Tidy
+.TH TIDY 1 "https://github.com/w3c/tidy-html5" "HTML Tidy" "https://github.com/w3c/tidy-html5"
 </xsl:template>
 
 
 <xsl:template name="cmdline-section">
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
 .SH NAME
-\fBtidy\fR - validate, correct, and pretty-print HTML files
-.br
-(version: <xsl:value-of select="cmdline/@version" />)
+\fBtidy\fR - check, correct, and pretty-print HTML(5) files
 .SH SYNOPSIS
 \fBtidy\fR [option ...] [file ...] [option ...] [file ...]
 .SH DESCRIPTION
-Tidy reads HTML, XHTML and XML files and writes cleaned up markup.  For HTML variants, it detects and corrects many common coding errors and strives to produce visually equivalent markup that is both W3C compliant and works on most browsers. A common use of Tidy is to convert plain HTML to XHTML.  For generic XML files, Tidy is limited to correcting basic well-formedness errors and pretty printing.
+Tidy reads HTML(5), XHTML(5) and XML files and writes cleaned-up markup.  For HTML variants, it detects, reports, and corrects many common coding errors and strives to produce visually equivalent markup that is both conformant to the HTML specifications and that works in most browsers.
+.LP
+A common use of Tidy is to convert plain HTML to XHTML.  For generic XML files, Tidy is limited to correcting basic well-formedness errors and pretty printing.
 .LP
 If no input file is specified, Tidy reads the standard input.  If no output file is specified, Tidy writes the tidied markup to the standard output.  If no error file is specified, Tidy writes messages to the standard error.
 For command line options that expect a numerical argument, a default is assumed if no meaningful value can be found. 
@@ -75,9 +79,36 @@ Input/Output default to stdin/stdout respectively. Single letter options apart f
 .in 1i
 \fBtidy -f errs.txt -imu foo.html\fR
 .LP
-For further info on HTML see \fIhttp://www.w3.org/MarkUp\fR.
+For more information on HTML, see the following:
+.RS 4
 .LP
-For more information about HTML Tidy, visit the project home page at \fIhttp://tidy.sourceforge.net\fR.  Here, you will find links to documentation, mailing lists (with searchable archives) and links to report bugs.
+\fBHTML: Edition for Web Authors\fR (the latest HTML specification)
+.br
+http://dev.w3.org/html5/spec-author-view
+.LP
+\fBHTML: The Markup Language\fR (an HTML language reference)
+.br
+http://dev.w3.org/html5/markup/
+.RE
+.LP
+For more information about HTML Tidy, see:
+.RS 4
+.LP
+https://github.com/w3c/tidy-html5
+.RE
+.LP
+For bug reports and comments, see:
+.RS 4
+.LP
+https://github.com/w3c/tidy-html5/issues/
+...or send questions and comments to \fBhtml-tidy@w3.org\fR
+.RE
+.LP
+Validate your HTML documents using the \fBW3C Nu Markup Validator\fR:
+.RS 4
+.LP
+http://validator.w3.org/nu/
+.RE
 .SH ENVIRONMENT
 .TP
 .B HTML_TIDY
@@ -353,12 +384,12 @@ appearing in content with another backslash.
 
 <!-- Appears at the bottom of the man page: -->
 <xsl:template name="manpage-see-also-section">
-.SH "SEE ALSO"
-HTML Tidy Project Page at \fIhttp://tidy.sourceforge.net\fR
 .SH AUTHOR
-\fBTidy\fR was written by Dave Raggett &lt;\fIdsr@w3.org\fR&gt;, and is now maintained and developed by the Tidy team at \fIhttp://tidy.sourceforge.net/\fR.  It is released under the \fIMIT Licence\fR.
+\fBTidy\fR was written by \fBDave Raggett\fR &lt;dsr@w3.org&gt;, and was for a long while maintained by a team at http://tidy.sourceforge.net/
 .LP
-Generated automatically with HTML Tidy from https://github.com/w3c/tidy-html5.
+The HTML5 fork of \fBTidy\fR is at https://github.com/w3c/tidy-html5/
+.LP
+The sources for \fBTidy\fR are available under the MIT Licence.
 </xsl:template>
 
 

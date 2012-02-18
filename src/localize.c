@@ -1784,7 +1784,8 @@ void TY_(GeneralInfo)( TidyDocImpl* doc )
     tidy_out(doc, "About this fork of Tidy: https://github.com/w3c/tidy-html5\n");
     tidy_out(doc, "Bug reports and comments: https://github.com/w3c/tidy-html5/issues/\n");
     tidy_out(doc, "Or send questions and comments to html-tidy@w3.org\n");
-    tidy_out(doc, "Latest HTML specification: http://dev.w3.org/html5/spec/\n");
+    tidy_out(doc, "Latest HTML specification: http://dev.w3.org/html5/spec-author-view/\n");
+    tidy_out(doc, "HTML language reference: http://dev.w3.org/html5/markup/\n");
     tidy_out(doc, "Validate your HTML5 documents: http://validator.w3.org/nu/\n");
     tidy_out(doc, "Lobby your company to join the W3C: http://www.w3.org/Consortium\n");
 }

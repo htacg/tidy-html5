@@ -230,6 +230,6 @@ uint TY_(nodeHeaderLevel)( Node* node );  /* 1, 2, ..., 6 */
 #define nodeIsU( node )          TagIsId( node, TidyTag_U )
 #define nodeIsMENU( node )       TagIsId( node, TidyTag_MENU )
 #define nodeIsBUTTON( node )     TagIsId( node, TidyTag_BUTTON )
-
+#define nodeIsCANVAS( node )     TagIsId( node, TidyTag_CANVAS )
 
 #endif /* __TAGS_H__ */

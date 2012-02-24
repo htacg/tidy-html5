@@ -284,6 +284,11 @@ static Bool CanPrune( TidyDocImpl* doc, Node *element )
     if (nodeIsTEXTAREA(element))
         return no;
 
+    /* fix for ISSUE #7 https://github.com/w3c/tidy-html5/issues/7 */
+    if (nodeIsCANVAS(element))
+        return no;
+
+
     if ( attrGetID(element) || attrGetNAME(element) )
         return no;
 

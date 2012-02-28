@@ -142,5 +142,8 @@ extern const AttrVersion TY_(W3CAttrsFor_AUDIO)[];
 extern const AttrVersion TY_(W3CAttrsFor_VIDEO)[];
 extern const AttrVersion TY_(W3CAttrsFor_CANVAS)[];
 extern const AttrVersion TY_(W3CAttrsFor_SOURCE)[];
+extern const AttrVersion TY_(W3CAttrsFor_EMBED)[];
+extern const AttrVersion TY_(W3CAttrsFor_KEYGEN)[];
+extern const AttrVersion TY_(W3CAttrsFor_WBR)[];
 
 #endif /* __ATTRDICT_H__ */

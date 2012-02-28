@@ -1,3 +1,5 @@
+/build/gmake/obj/
+/bin/
 /build/msvc2010/Obj/
 /build/msvc2010/Debugtidydll/
 /build/msvc2010/Debugtidylib/
@@ -5,6 +7,10 @@
 /build/msvc2010/Releasetidydll/
 /build/msvc2010/Releasetidylib/
 /build/msvc2010/Release/
+/htmldoc/tidy-config.xml
+/htmldoc/tidy-help.xml
+/htmldoc/tidy.1
+/lib/
 *.user
 *.suo
 *.sdf

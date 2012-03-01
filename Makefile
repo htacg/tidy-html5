@@ -1,8 +1,11 @@
 HTML2MARKDOWN=html2text
 GIT=git
 GITFLAGS=
+DOXYGEN=doxygen
+DOXYGENFLAGS=
 
-all: README.md src/version.h bin/tidy
+.PHONEY: api-docs src/version.h
+all: README.md src/version.h bin/tidy quickref.html api-docs
 
 bin/tidy:
 	$(MAKE) -C build/gmake
@@ -14,10 +17,17 @@ README.md: README.html
 src/version.h:
 	$(GIT) $(GITFLAGS) log --pretty=format:'static const char TY_(release_date)[] = "https://github.com/w3c/tidy-html5/tree/%h";' -n 1 > $@
 
+quickref.html: htmldoc/quickref.html
+	cp $< $@
+
+api-docs:
+	$(DOXYGEN) $(DOXYGENFLAGS) htmldoc/doxygen.cfg
+
 install:
 	sudo $(MAKE) install -C build/gmake
 
 clean:
 	$(MAKE) clean -C build/gmake
 	$(RM) README.md
-	$(RM) src/version.h
+	$(RM) test/testall.log
+	$(RM) -r test/tmp

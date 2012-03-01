@@ -10,6 +10,7 @@
 /htmldoc/tidy-config.xml
 /htmldoc/tidy-help.xml
 /htmldoc/tidy.1
+/htmldoc/quickref.html
 /lib/
 *.user
 *.suo

@@ -5,7 +5,7 @@ DOXYGEN=doxygen
 DOXYGENFLAGS=
 
 .PHONEY: api-docs
-all: bin/tidy quickref.html
+all: bin/tidy
 
 bin/tidy:
 	$(MAKE) -C build/gmake
@@ -20,7 +20,7 @@ README.md: README.html .FORCE
 src/version.h: .FORCE
 	$(GIT) $(GITFLAGS) log --pretty=format:'static const char TY_(release_date)[] = "https://github.com/w3c/tidy-html5/tree/%h";' -n 1 > $@
 
-quickref.html: htmldoc/quickref.html
+quickref.html: htmldoc/quickref.html .FORCE
 	cp $< $@
 
 api-docs:
@@ -29,7 +29,7 @@ api-docs:
 install:
 	sudo $(MAKE) install -C build/gmake
 
-version: all src/version.h README.md
+version: all src/version.h README.md quickref.html api-docs
 
 clean:
 	$(MAKE) clean -C build/gmake

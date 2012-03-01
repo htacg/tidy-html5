@@ -4,8 +4,8 @@ GITFLAGS=
 DOXYGEN=doxygen
 DOXYGENFLAGS=
 
-.PHONEY: api-docs src/version.h
-all: README.md src/version.h bin/tidy quickref.html api-docs
+.PHONEY: api-docs
+all: README.md  bin/tidy quickref.html
 
 bin/tidy:
 	$(MAKE) -C build/gmake
@@ -14,8 +14,10 @@ bin/tidy:
 README.md: README.html
 	$(HTML2MARKDOWN) $(HTML2MARKDOWNFLAGS) $< > $@
 
-src/version.h:
+src/version.h: .FORCE
 	$(GIT) $(GITFLAGS) log --pretty=format:'static const char TY_(release_date)[] = "https://github.com/w3c/tidy-html5/tree/%h";' -n 1 > $@
+.FORCE:
+# dummy target to force the src/version.h file to always get remade
 
 quickref.html: htmldoc/quickref.html
 	cp $< $@
@@ -25,6 +27,8 @@ api-docs:
 
 install:
 	sudo $(MAKE) install -C build/gmake
+
+version: all src/version.h
 
 clean:
 	$(MAKE) clean -C build/gmake

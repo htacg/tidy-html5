@@ -1408,10 +1408,10 @@ Bool TY_(AddGenerator)( TidyDocImpl* doc )
     if (head)
     {
 #ifdef PLATFORM_NAME
-        TY_(tmbsnprintf)(buf, sizeof(buf), "HTML Tidy for "PLATFORM_NAME" from https://github.com/w3c/tidy-html5",
+        TY_(tmbsnprintf)(buf, sizeof(buf), "HTML Tidy for "PLATFORM_NAME" %s",
                          tidyReleaseDate());
 #else
-        TY_(tmbsnprintf)(buf, sizeof(buf), "HTML Tidy from https://github.com/w3c/tidy-html5");
+        TY_(tmbsnprintf)(buf, sizeof(buf), "HTML Tidy %s", tidyReleaseDate());
 #endif
 
         for ( node = head->content; node; node = node->next )

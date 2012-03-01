@@ -1,8 +1,9 @@
-# Tidy for HTML5
+# HTML Tidy for HTML5 (experimental)
 
-This repo is a fork of the code from [tidy.sourceforge.net][1]. This source
-code in this version supports processing of HTML5 documents. The changes for
-HTML5 support started from a [patch developed by Björn Höhrmann][2].
+This repo is an experimental fork of the code from [tidy.sourceforge.net][1].
+This source code in this version supports processing of HTML5 documents. The
+changes for HTML5 support started from a [patch developed by Björn
+Höhrmann][2].
 
    [1]: http://tidy.sourceforge.net
 

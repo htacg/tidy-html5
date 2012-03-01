@@ -416,14 +416,16 @@ static void help( ctmbstr prog )
 {
     printf( "%s [option...] [file...] [option...] [file...]\n", prog );
     printf( "Utility to clean up and pretty print HTML/XHTML/XML\n");
-    printf( "See http://tidy.sourceforge.net/\n");
+    printf( "\n");
+
+    printf( "This is an HTML5-aware experimental fork of HTML Tidy.\n");
+    printf( "%s\n", tidyReleaseDate() );
     printf( "\n");
 
 #ifdef PLATFORM_NAME
-    printf( "Options for HTML Tidy for %s from https://github.com/w3c/tidy-html5\n",
-             PLATFORM_NAME);
+    printf( "Options for HTML Tidy for %s:\n", PLATFORM_NAME );
 #else
-    printf( "Options for HTML Tidy from https://github.com/w3c/tidy-html5\n");
+    printf( "Options for HTML Tidy:\n");
 #endif
     printf( "\n");
 
@@ -434,9 +436,24 @@ static void help( ctmbstr prog )
             "to the man page.\n\n");
 
     printf( "Input/Output default to stdin/stdout respectively.\n");
+    printf( "\n");
     printf( "Single letter options apart from -f may be combined\n");
     printf( "as in:  tidy -f errs.txt -imu foo.html\n");
-    printf( "For further info on HTML see http://www.w3.org/MarkUp\n");
+    printf( "\n");
+    printf( "For more information on HTML, see the following:\n" );
+    printf( "\n");
+    printf( "  HTML: Edition for Web Authors (the latest HTML specification)\n");
+    printf( "  http://dev.w3.org/html5/spec-author-view\n" );
+    printf( "\n");
+    printf( "  HTML: The Markup Language (an HTML language reference)\n" );
+    printf( "  http://dev.w3.org/html5/markup/\n" );
+    printf( "\n");
+    printf( "File bug reports at https://github.com/w3c/tidy-html5/issues/\n" );
+    printf( "or send questions and comments to html-tidy@w3.org\n" );
+    printf( "\n");
+    printf( "Validate your HTML documents using the W3C Nu Markup Validator:\n" );
+    printf( "\n");
+    printf( "  http://validator.w3.org/nu/" );
     printf( "\n");
 }
 
@@ -903,10 +920,10 @@ static void optionvalues( TidyDoc tdoc )
 static void version( void )
 {
 #ifdef PLATFORM_NAME
-    printf( "HTML Tidy for %s from https://github.com/w3c/tidy-html5\n",
-             PLATFORM_NAME);
+    printf( "HTML Tidy for HTML5 (experimental) for %s %s\n",
+             PLATFORM_NAME, tidyReleaseDate() );
 #else
-    printf( "HTML Tidy from https://github.com/w3c/tidy-html5\n");
+    printf( "HTML Tidy for HTML5 (experimental) %s\n", tidyReleaseDate() );
 #endif
 }
 

@@ -47,8 +47,8 @@
 
 
 <xsl:template name="header-section">
-  <xsl:text/>.\" tidy man page for the HTML5 for of Tidy
-.TH TIDY 1 "https://github.com/w3c/tidy-html5" "HTML Tidy" "https://github.com/w3c/tidy-html5"
+  <xsl:text/>.\" tidy man page for the HTML5 fork of Tidy
+.TH TIDY 1 "<xsl:value-of select="cmdline/@version" />" "HTML Tidy" "<xsl:value-of select="cmdline/@version" />"
 </xsl:template>
 
 
@@ -78,37 +78,6 @@ Input/Output default to stdin/stdout respectively. Single letter options apart f
 .LP
 .in 1i
 \fBtidy -f errs.txt -imu foo.html\fR
-.LP
-For more information on HTML, see the following:
-.RS 4
-.LP
-\fBHTML: Edition for Web Authors\fR (the latest HTML specification)
-.br
-http://dev.w3.org/html5/spec-author-view
-.LP
-\fBHTML: The Markup Language\fR (an HTML language reference)
-.br
-http://dev.w3.org/html5/markup/
-.RE
-.LP
-For more information about HTML Tidy, see:
-.RS 4
-.LP
-https://github.com/w3c/tidy-html5
-.RE
-.LP
-For bug reports and comments, see:
-.RS 4
-.LP
-https://github.com/w3c/tidy-html5/issues/
-...or send questions and comments to \fBhtml-tidy@w3.org\fR
-.RE
-.LP
-Validate your HTML documents using the \fBW3C Nu Markup Validator\fR:
-.RS 4
-.LP
-http://validator.w3.org/nu/
-.RE
 .SH ENVIRONMENT
 .TP
 .B HTML_TIDY
@@ -384,12 +353,42 @@ appearing in content with another backslash.
 
 <!-- Appears at the bottom of the man page: -->
 <xsl:template name="manpage-see-also-section">
+.SH SEE ALSO
+For more information on HTML:
+.RS 4
+.LP
+\fBHTML: Edition for Web Authors\fR (the latest HTML specification)
+.br
+http://dev.w3.org/html5/spec-author-view
+.LP
+\fBHTML: The Markup Language\fR (an HTML language reference)
+.br
+http://dev.w3.org/html5/markup/
+.RE
+.LP
+For more information about the experimental HTML5 fork of HTML Tidy:
+.RS 4
+.LP
+https://github.com/w3c/tidy-html5
+.RE
+.LP
+For bug reports and comments:
+.RS 4
+.LP
+https://github.com/w3c/tidy-html5/issues/
+.RE
+.LP
+Or send questions and comments to \fBhtml-tidy@w3.org\fR
+.LP
+Validate your HTML documents using the \fBW3C Nu Markup Validator\fR:
+.RS 4
+.LP
+http://validator.w3.org/nu/
+.RE
 .SH AUTHOR
-\fBTidy\fR was written by \fBDave Raggett\fR &lt;dsr@w3.org&gt;, and was for a long while maintained by a team at http://tidy.sourceforge.net/
+\fBTidy\fR was written by \fBDave Raggett\fR &lt;dsr@w3.org&gt;, and susequently maintained by a team at http://tidy.sourceforge.net/
 .LP
-The HTML5 fork of \fBTidy\fR is at https://github.com/w3c/tidy-html5/
-.LP
-The sources for \fBTidy\fR are available under the MIT Licence.
+The sources for the HTML5 fork of \fBTidy\fR are available at https://github.com/w3c/tidy-html5/ under the MIT Licence.
 </xsl:template>
 
 

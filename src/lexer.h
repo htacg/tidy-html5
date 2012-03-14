@@ -194,7 +194,7 @@ typedef enum
 /* special flag */
 #define VERS_XML           65536u
 
-/* "HTML5" */
+/* HTML5 */
 #define HT50              131072u
 #define XH50              262144u
 

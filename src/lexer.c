@@ -119,9 +119,8 @@ int TY_(HTMLVersion)(TidyDocImpl* doc)
                  !cfgBool(doc, TidyHtmlOut);
     Bool html4 = dtmode == TidyDoctypeStrict || dtmode == TidyDoctypeLoose || VERS_FROM40 & dtver;
 
-    // don't mess with <!doctype html>
-    if (HT50) return HT50;
-    if (XH50) return XH50;
+    if (xhtml && dtver == VERS_UNKNOWN) return XH50;
+    if (dtver == VERS_UNKNOWN) return HT50;
 
     for (i = 0; W3C_Doctypes[i].name; ++i)
     {
@@ -1552,6 +1551,8 @@ Bool TY_(SetXHTMLDocType)( TidyDocImpl* doc )
     TidyDoctypeModes dtmode = (TidyDoctypeModes)cfg(doc, TidyDoctypeMode);
     ctmbstr pub = "PUBLIC";
     ctmbstr sys = "SYSTEM";
+    Bool xhtml = (cfgBool(doc, TidyXmlOut) || doc->lexer->isvoyager) &&
+                 !cfgBool(doc, TidyHtmlOut);
 
     lexer->versionEmitted = TY_(ApparentVersion)( doc );
 
@@ -1595,7 +1596,11 @@ Bool TY_(SetXHTMLDocType)( TidyDocImpl* doc )
         TY_(RepairAttrValue)(doc, doctype, sys, "");
         break;
     case TidyDoctypeAuto:
-        if (lexer->versions & XH11 && lexer->doctype == XH11)
+        if (xhtml && lexer->doctype == VERS_UNKNOWN) {
+          lexer->versionEmitted = XH50;
+          return yes;
+        }
+        else if (lexer->versions & XH11 && lexer->doctype == XH11)
         {
             if (!TY_(GetAttrByName)(doctype, sys))
                 TY_(RepairAttrValue)(doc, doctype, sys, GetSIFromVers(XH11));
@@ -1632,10 +1637,6 @@ Bool TY_(SetXHTMLDocType)( TidyDocImpl* doc )
             TY_(RepairAttrValue)(doc, doctype, pub, GetFPIFromVers(X10T));
             TY_(RepairAttrValue)(doc, doctype, sys, GetSIFromVers(X10T));
             lexer->versionEmitted = X10T;
-        }
-        else if (lexer->versions & XH50)
-        {
-            lexer->versionEmitted = XH50;
         }
         else
         {

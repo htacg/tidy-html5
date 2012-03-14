@@ -1407,10 +1407,10 @@ Bool TY_(AddGenerator)( TidyDocImpl* doc )
     if (head)
     {
 #ifdef PLATFORM_NAME
-        TY_(tmbsnprintf)(buf, sizeof(buf), "HTML Tidy for "PLATFORM_NAME" %s",
+        TY_(tmbsnprintf)(buf, sizeof(buf), "HTML Tidy for HTML5 (experimental) for "PLATFORM_NAME" %s",
                          tidyReleaseDate());
 #else
-        TY_(tmbsnprintf)(buf, sizeof(buf), "HTML Tidy %s", tidyReleaseDate());
+        TY_(tmbsnprintf)(buf, sizeof(buf), "HTML Tidy for HTML5 (experimental) %s", tidyReleaseDate());
 #endif
 
         for ( node = head->content; node; node = node->next )

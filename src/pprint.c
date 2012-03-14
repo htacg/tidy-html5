@@ -1800,6 +1800,11 @@ void PPrintScriptStyle( TidyDocImpl* doc, uint mode, uint indent, Node *node )
             commentStart = VB_COMMENT_START;
             commentEnd = VB_COMMENT_END;
         }
+        else
+        {
+          commentStart = JS_COMMENT_START;
+          commentEnd = JS_COMMENT_END;
+        }
 
         hasCData = HasCDATA(doc->lexer, node->content);
 

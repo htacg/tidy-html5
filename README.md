@@ -8,6 +8,10 @@ changes for HTML5 support started from a [patch developed by Björn Höhrmann][2
 
    [2]: http://lists.w3.org/Archives/Public/www-archive/2011Nov/0007.html
 
+For more information, see [http://w3c.github.com/tidy-html5/][3]
+
+   [3]: http://w3c.github.com/tidy-html5/
+
 For *nix platforms, you can build and install from the source code using the
 following steps.
 

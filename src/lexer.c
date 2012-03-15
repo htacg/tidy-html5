@@ -1551,8 +1551,6 @@ Bool TY_(SetXHTMLDocType)( TidyDocImpl* doc )
     TidyDoctypeModes dtmode = (TidyDoctypeModes)cfg(doc, TidyDoctypeMode);
     ctmbstr pub = "PUBLIC";
     ctmbstr sys = "SYSTEM";
-    Bool xhtml = (cfgBool(doc, TidyXmlOut) || doc->lexer->isvoyager) &&
-                 !cfgBool(doc, TidyHtmlOut);
 
     lexer->versionEmitted = TY_(ApparentVersion)( doc );
 
@@ -1578,6 +1576,13 @@ Bool TY_(SetXHTMLDocType)( TidyDocImpl* doc )
 
     switch(dtmode)
     {
+
+    case TidyDoctypeHtml5:
+        /* HTML5 */
+        TY_(RepairAttrValue)(doc, doctype, pub, NULL);
+        TY_(RepairAttrValue)(doc, doctype, sys, NULL);
+        lexer->versionEmitted = XH50;
+        break;
     case TidyDoctypeStrict:
         /* XHTML 1.0 Strict */
         TY_(RepairAttrValue)(doc, doctype, pub, GetFPIFromVers(X10S));
@@ -1596,7 +1601,7 @@ Bool TY_(SetXHTMLDocType)( TidyDocImpl* doc )
         TY_(RepairAttrValue)(doc, doctype, sys, "");
         break;
     case TidyDoctypeAuto:
-        if (xhtml && lexer->doctype == VERS_UNKNOWN) {
+        if (lexer->doctype == VERS_UNKNOWN) {
           lexer->versionEmitted = XH50;
           return yes;
         }
@@ -1694,6 +1699,9 @@ Bool TY_(FixDocType)( TidyDocImpl* doc )
 
     switch (dtmode)
     {
+    case TidyDoctypeHtml5:
+        guessed = HT50;
+        break;
     case TidyDoctypeStrict:
         guessed = H41S;
         break;

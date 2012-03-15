@@ -136,6 +136,7 @@ static const ctmbstr newlinePicks[] =
 
 static const ctmbstr doctypePicks[] = 
 {
+  "html5",
   "omit",
   "auto",
   "strict",
@@ -206,7 +207,7 @@ static ParseProperty ParseSorter;
 static ParseProperty ParseCharEnc;
 static ParseProperty ParseNewline;
 
-/* omit | auto | strict | loose | <fpi> */
+/* html5 | omit | auto | strict | loose | <fpi> */
 static ParseProperty ParseDocType;
 
 /* keep-first or keep-last? */
@@ -1432,7 +1433,7 @@ ctmbstr TY_(CharEncodingOptName)( int encoding )
 }
 
 /*
-   doctype: omit | auto | strict | loose | <fpi>
+   doctype: html5 | omit | auto | strict | loose | <fpi>
 
    where the fpi is a string similar to
 
@@ -1469,6 +1470,8 @@ Bool ParseDocType( TidyDocImpl* doc, const TidyOptionImpl* option )
 
     if ( TY_(tmbstrcasecmp)(buf, "auto") == 0 )
         dtmode = TidyDoctypeAuto;
+    else if ( TY_(tmbstrcasecmp)(buf, "html5") == 0 )
+        dtmode = TidyDoctypeHtml5;
     else if ( TY_(tmbstrcasecmp)(buf, "omit") == 0 )
         dtmode = TidyDoctypeOmit;
     else if ( TY_(tmbstrcasecmp)(buf, "strict") == 0 )

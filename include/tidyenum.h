@@ -241,6 +241,7 @@ typedef enum
 */
 typedef enum
 {
+    TidyDoctypeHtml5,   /**< <!DOCTYPE html> */
     TidyDoctypeOmit,    /**< Omit DOCTYPE altogether */
     TidyDoctypeAuto,    /**< Keep DOCTYPE in input.  Set version to content */
     TidyDoctypeStrict,  /**< Convert document to HTML 4 strict content model */

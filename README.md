@@ -2,8 +2,7 @@
 
 This repo is an experimental fork of the code from [tidy.sourceforge.net][1].
 This source code in this version supports processing of HTML5 documents. The
-changes for HTML5 support started from a [patch developed by Björn
-Höhrmann][2].
+changes for HTML5 support started from a [patch developed by Björn Höhrmann][2].
 
    [1]: http://tidy.sourceforge.net
 
@@ -16,6 +15,6 @@ following steps.
 
   2. `make install -C build/gmake/`
 
-Note that you will either need to run `make install` as root, or with `sudo
-make install`.
+Note that you will either need to run `make install` as root, or with `sudo make
+install`.
 

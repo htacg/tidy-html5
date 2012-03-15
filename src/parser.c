@@ -240,6 +240,9 @@ void TY_(InsertNodeAfterElement)(Node *element, Node *node)
 
 static Bool CanPrune( TidyDocImpl* doc, Node *element )
 {
+    if ( !cfgBool(doc, TidyDropEmptyElems) )
+        return no;
+
     if ( TY_(nodeIsText)(element) )
         return yes;
 

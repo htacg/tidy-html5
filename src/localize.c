@@ -425,6 +425,9 @@ static const TidyOptionDoc option_docs[] =
    "<code>--numeric-entities yes</code>. This option does not offer a "
    "validation of the document conformance. "
   },
+  {TidyDropEmptyElems,
+   "This option specifies if Tidy should discard empty elements. "
+  },
   {TidyDropEmptyParas,
    "This option specifies if Tidy should discard empty paragraphs. "
   },

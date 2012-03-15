@@ -1576,7 +1576,6 @@ Bool TY_(SetXHTMLDocType)( TidyDocImpl* doc )
 
     switch(dtmode)
     {
-
     case TidyDoctypeHtml5:
         /* HTML5 */
         TY_(RepairAttrValue)(doc, doctype, pub, NULL);

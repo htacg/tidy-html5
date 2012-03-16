@@ -260,7 +260,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_SDASUFF,           "sdasuff",               CH_PCDATA    }, /* SDATA attribute in HTML 2.0 */
   { TidyAttr_URN,               "urn",                   CH_PCDATA    }, /* for <a>, never implemented */
 
-  /* "HTML5" */
+  /* HTML5 */
   { TidyAttr_ASYNC,             "async",                 CH_PCDATA    },
   { TidyAttr_AUTOCOMPLETE,      "autocomplete",          CH_PCDATA    },
   { TidyAttr_AUTOFOCUS,         "autofocus",             CH_PCDATA    },
@@ -369,7 +369,7 @@ static uint AttributeVersions(Node* node, AttVal* attval)
 {
     uint i;
 
-    /* "HTML5" data-* attributes */
+    /* HTML5 data-* attributes */
     if (attval && attval->attribute)
         if (TY_(tmbstrncmp)(attval->attribute, "data-", 5) == 0)
             return (XH50 | HT50);
@@ -1175,7 +1175,7 @@ const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attv
 
     if ( attribute != NULL )
     {
-        if (AttributeVersions(node, attval) & VERS_XML)
+        if (attrIsXML_LANG(attval) || attrIsXML_SPACE(attval))
         {
             doc->lexer->isvoyager = yes;
             if (!cfgBool(doc, TidyHtmlOut))

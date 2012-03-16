@@ -95,8 +95,8 @@ const AttrVersion TY_(W3CAttrsFor_A)[] =
   { TidyAttr_TYPE,               xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_URN,                HT20|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_ABBR)[] = 
@@ -170,8 +170,8 @@ const AttrVersion TY_(W3CAttrsFor_ABBR)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_ACRONYM)[] = 
@@ -193,8 +193,8 @@ const AttrVersion TY_(W3CAttrsFor_ACRONYM)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_ADDRESS)[] = 
@@ -270,8 +270,8 @@ const AttrVersion TY_(W3CAttrsFor_ADDRESS)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_APPLET)[] = 
@@ -291,7 +291,7 @@ const AttrVersion TY_(W3CAttrsFor_APPLET)[] =
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_VSPACE,             xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_WIDTH,              xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_AREA)[] = 
@@ -375,8 +375,8 @@ const AttrVersion TY_(W3CAttrsFor_AREA)[] =
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_TYPE,               xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_ARTICLE)[] = 
@@ -449,7 +449,8 @@ const AttrVersion TY_(W3CAttrsFor_ARTICLE)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_ASIDE)[] = 
@@ -522,7 +523,8 @@ const AttrVersion TY_(W3CAttrsFor_ASIDE)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_AUDIO)[] = 
@@ -601,7 +603,8 @@ const AttrVersion TY_(W3CAttrsFor_AUDIO)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_B)[] = 
@@ -676,8 +679,8 @@ const AttrVersion TY_(W3CAttrsFor_B)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_BASE)[] = 
@@ -753,7 +756,7 @@ const AttrVersion TY_(W3CAttrsFor_BASE)[] =
   { TidyAttr_TARGET,             xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_BASEFONT)[] = 
@@ -762,7 +765,7 @@ const AttrVersion TY_(W3CAttrsFor_BASEFONT)[] =
   { TidyAttr_FACE,               xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_ID,                 xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_SIZE,               xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_BDI)[] = 
@@ -835,7 +838,7 @@ const AttrVersion TY_(W3CAttrsFor_BDI)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_BDO)[] = 
@@ -909,8 +912,8 @@ const AttrVersion TY_(W3CAttrsFor_BDO)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_BIG)[] = 
@@ -932,8 +935,8 @@ const AttrVersion TY_(W3CAttrsFor_BIG)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_BLOCKQUOTE)[] = 
@@ -1009,8 +1012,8 @@ const AttrVersion TY_(W3CAttrsFor_BLOCKQUOTE)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_BODY)[] = 
@@ -1105,8 +1108,8 @@ const AttrVersion TY_(W3CAttrsFor_BODY)[] =
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_VLINK,              xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_BR)[] = 
@@ -1182,7 +1185,7 @@ const AttrVersion TY_(W3CAttrsFor_BR)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_BUTTON)[] = 
@@ -1267,8 +1270,8 @@ const AttrVersion TY_(W3CAttrsFor_BUTTON)[] =
   { TidyAttr_TYPE,               xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_VALUE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_CANVAS)[] = 
@@ -1343,7 +1346,8 @@ const AttrVersion TY_(W3CAttrsFor_CANVAS)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_WIDTH,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_CAPTION)[] = 
@@ -1418,8 +1422,8 @@ const AttrVersion TY_(W3CAttrsFor_CAPTION)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_CENTER)[] = 
@@ -1440,8 +1444,8 @@ const AttrVersion TY_(W3CAttrsFor_CENTER)[] =
   { TidyAttr_OnMOUSEUP,          xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_STYLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_CITE)[] = 
@@ -1516,8 +1520,8 @@ const AttrVersion TY_(W3CAttrsFor_CITE)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_CODE)[] = 
@@ -1592,8 +1596,8 @@ const AttrVersion TY_(W3CAttrsFor_CODE)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_COL)[] = 
@@ -1673,8 +1677,8 @@ const AttrVersion TY_(W3CAttrsFor_COL)[] =
   { TidyAttr_VALIGN,             xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_WIDTH,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_COLGROUP)[] = 
@@ -1754,8 +1758,8 @@ const AttrVersion TY_(W3CAttrsFor_COLGROUP)[] =
   { TidyAttr_VALIGN,             xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_WIDTH,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_COMMAND)[] = 
@@ -1834,7 +1838,8 @@ const AttrVersion TY_(W3CAttrsFor_COMMAND)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TYPE,               xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_DATALIST)[] = 
@@ -1907,7 +1912,8 @@ const AttrVersion TY_(W3CAttrsFor_DATALIST)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_DD)[] = 
@@ -1982,8 +1988,8 @@ const AttrVersion TY_(W3CAttrsFor_DD)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_DEL)[] = 
@@ -2059,8 +2065,8 @@ const AttrVersion TY_(W3CAttrsFor_DEL)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_DETAILS)[] = 
@@ -2134,7 +2140,8 @@ const AttrVersion TY_(W3CAttrsFor_DETAILS)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_DFN)[] = 
@@ -2208,8 +2215,8 @@ const AttrVersion TY_(W3CAttrsFor_DFN)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_DIR)[] = 
@@ -2233,8 +2240,8 @@ const AttrVersion TY_(W3CAttrsFor_DIR)[] =
   { TidyAttr_SDAPREF,            HT20|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_STYLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_DIV)[] = 
@@ -2309,8 +2316,8 @@ const AttrVersion TY_(W3CAttrsFor_DIV)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_DL)[] = 
@@ -2387,8 +2394,8 @@ const AttrVersion TY_(W3CAttrsFor_DL)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_DT)[] = 
@@ -2463,8 +2470,8 @@ const AttrVersion TY_(W3CAttrsFor_DT)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_EM)[] = 
@@ -2539,8 +2546,8 @@ const AttrVersion TY_(W3CAttrsFor_EM)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_EMBED)[] = 
@@ -2617,7 +2624,7 @@ const AttrVersion TY_(W3CAttrsFor_EMBED)[] =
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TYPE,               xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_WIDTH,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_FIELDSET)[] = 
@@ -2694,8 +2701,8 @@ const AttrVersion TY_(W3CAttrsFor_FIELDSET)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_FIGCAPTION)[] = 
@@ -2768,7 +2775,8 @@ const AttrVersion TY_(W3CAttrsFor_FIGCAPTION)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_FIGURE)[] = 
@@ -2841,7 +2849,8 @@ const AttrVersion TY_(W3CAttrsFor_FIGURE)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_FONT)[] = 
@@ -2855,8 +2864,8 @@ const AttrVersion TY_(W3CAttrsFor_FONT)[] =
   { TidyAttr_SIZE,               xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_STYLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_FOOTER)[] = 
@@ -2929,7 +2938,8 @@ const AttrVersion TY_(W3CAttrsFor_FOOTER)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_FORM)[] = 
@@ -3014,8 +3024,8 @@ const AttrVersion TY_(W3CAttrsFor_FORM)[] =
   { TidyAttr_TARGET,             xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_FRAME)[] = 
@@ -3032,7 +3042,7 @@ const AttrVersion TY_(W3CAttrsFor_FRAME)[] =
   { TidyAttr_SRC,                xxxx|xxxx|xxxx|xxxx|xxxx|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_FRAMESET)[] = 
@@ -3045,7 +3055,7 @@ const AttrVersion TY_(W3CAttrsFor_FRAMESET)[] =
   { TidyAttr_ROWS,               xxxx|xxxx|xxxx|xxxx|xxxx|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_H1)[] = 
@@ -3121,8 +3131,8 @@ const AttrVersion TY_(W3CAttrsFor_H1)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_H2)[] = 
@@ -3198,8 +3208,8 @@ const AttrVersion TY_(W3CAttrsFor_H2)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_H3)[] = 
@@ -3275,8 +3285,8 @@ const AttrVersion TY_(W3CAttrsFor_H3)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_H4)[] = 
@@ -3352,8 +3362,8 @@ const AttrVersion TY_(W3CAttrsFor_H4)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_H5)[] = 
@@ -3429,8 +3439,8 @@ const AttrVersion TY_(W3CAttrsFor_H5)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_H6)[] = 
@@ -3506,8 +3516,8 @@ const AttrVersion TY_(W3CAttrsFor_H6)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_HEAD)[] = 
@@ -3582,8 +3592,8 @@ const AttrVersion TY_(W3CAttrsFor_HEAD)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_HEADER)[] = 
@@ -3656,7 +3666,8 @@ const AttrVersion TY_(W3CAttrsFor_HEADER)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_HGROUP)[] = 
@@ -3729,7 +3740,8 @@ const AttrVersion TY_(W3CAttrsFor_HGROUP)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_HR)[] = 
@@ -3808,8 +3820,8 @@ const AttrVersion TY_(W3CAttrsFor_HR)[] =
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_WIDTH,              xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_HTML)[] = 
@@ -3886,8 +3898,8 @@ const AttrVersion TY_(W3CAttrsFor_HTML)[] =
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_VERSION,            HT20|HT32|H40T|H41T|xxxx|H40F|H41F|xxxx|xxxx|xxxx|xxxx|XH11|XB10|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_I)[] = 
@@ -3962,8 +3974,8 @@ const AttrVersion TY_(W3CAttrsFor_I)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_IFRAME)[] = 
@@ -4049,7 +4061,7 @@ const AttrVersion TY_(W3CAttrsFor_IFRAME)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_WIDTH,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_IMG)[] = 
@@ -4136,8 +4148,8 @@ const AttrVersion TY_(W3CAttrsFor_IMG)[] =
   { TidyAttr_VSPACE,             xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_WIDTH,              xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_INPUT)[] = 
@@ -4245,8 +4257,8 @@ const AttrVersion TY_(W3CAttrsFor_INPUT)[] =
   { TidyAttr_VALUE,              HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_WIDTH,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_INS)[] = 
@@ -4322,8 +4334,8 @@ const AttrVersion TY_(W3CAttrsFor_INS)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_ISINDEX)[] = 
@@ -4336,8 +4348,8 @@ const AttrVersion TY_(W3CAttrsFor_ISINDEX)[] =
   { TidyAttr_SDAPREF,            HT20|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_STYLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_KBD)[] = 
@@ -4412,8 +4424,8 @@ const AttrVersion TY_(W3CAttrsFor_KBD)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_KEYGEN)[] = 
@@ -4492,7 +4504,8 @@ const AttrVersion TY_(W3CAttrsFor_KEYGEN)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_LABEL)[] = 
@@ -4568,8 +4581,8 @@ const AttrVersion TY_(W3CAttrsFor_LABEL)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_LEGEND)[] = 
@@ -4644,8 +4657,8 @@ const AttrVersion TY_(W3CAttrsFor_LEGEND)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_LI)[] = 
@@ -4722,8 +4735,8 @@ const AttrVersion TY_(W3CAttrsFor_LI)[] =
   { TidyAttr_TYPE,               xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_VALUE,              xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_LINK)[] = 
@@ -4810,15 +4823,15 @@ const AttrVersion TY_(W3CAttrsFor_LINK)[] =
   { TidyAttr_TYPE,               xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_URN,                HT20|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_LISTING)[] = 
 {
   { TidyAttr_SDAFORM,            HT20|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_SDAPREF,            HT20|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_MAP)[] = 
@@ -4893,8 +4906,8 @@ const AttrVersion TY_(W3CAttrsFor_MAP)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_MARK)[] = 
@@ -4967,7 +4980,8 @@ const AttrVersion TY_(W3CAttrsFor_MARK)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_MENU)[] = 
@@ -5045,8 +5059,8 @@ const AttrVersion TY_(W3CAttrsFor_MENU)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TYPE,               xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_META)[] = 
@@ -5125,8 +5139,8 @@ const AttrVersion TY_(W3CAttrsFor_META)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_METER)[] = 
@@ -5206,7 +5220,8 @@ const AttrVersion TY_(W3CAttrsFor_METER)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_VALUE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_NAV)[] = 
@@ -5279,13 +5294,14 @@ const AttrVersion TY_(W3CAttrsFor_NAV)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_NEXTID)[] = 
 {
   { TidyAttr_N,                  HT20|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_NOFRAMES)[] = 
@@ -5306,8 +5322,8 @@ const AttrVersion TY_(W3CAttrsFor_NOFRAMES)[] =
   { TidyAttr_OnMOUSEUP,          xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_STYLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_NOSCRIPT)[] = 
@@ -5381,8 +5397,8 @@ const AttrVersion TY_(W3CAttrsFor_NOSCRIPT)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_OBJECT)[] = 
@@ -5473,8 +5489,8 @@ const AttrVersion TY_(W3CAttrsFor_OBJECT)[] =
   { TidyAttr_VSPACE,             xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_WIDTH,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_OL)[] = 
@@ -5553,8 +5569,8 @@ const AttrVersion TY_(W3CAttrsFor_OL)[] =
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_TYPE,               xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_OPTGROUP)[] = 
@@ -5630,8 +5646,8 @@ const AttrVersion TY_(W3CAttrsFor_OPTGROUP)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_OPTION)[] = 
@@ -5711,8 +5727,8 @@ const AttrVersion TY_(W3CAttrsFor_OPTION)[] =
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_VALUE,              HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_OUTPUT)[] = 
@@ -5788,7 +5804,8 @@ const AttrVersion TY_(W3CAttrsFor_OUTPUT)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_P)[] = 
@@ -5864,8 +5881,8 @@ const AttrVersion TY_(W3CAttrsFor_P)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_PARAM)[] = 
@@ -5943,13 +5960,13 @@ const AttrVersion TY_(W3CAttrsFor_PARAM)[] =
   { TidyAttr_VALUE,              xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_VALUETYPE,          xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_PLAINTEXT)[] = 
 {
   { TidyAttr_SDAFORM,            HT20|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_PRE)[] = 
@@ -6025,9 +6042,9 @@ const AttrVersion TY_(W3CAttrsFor_PRE)[] =
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_WIDTH,              HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
   { TidyAttr_XML_SPACE,          xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_PROGRESS)[] = 
@@ -6103,7 +6120,8 @@ const AttrVersion TY_(W3CAttrsFor_PROGRESS)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_VALUE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_Q)[] = 
@@ -6178,8 +6196,8 @@ const AttrVersion TY_(W3CAttrsFor_Q)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_RB)[] = 
@@ -6200,8 +6218,8 @@ const AttrVersion TY_(W3CAttrsFor_RB)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_RBC)[] = 
@@ -6222,8 +6240,8 @@ const AttrVersion TY_(W3CAttrsFor_RBC)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_RP)[] = 
@@ -6297,8 +6315,8 @@ const AttrVersion TY_(W3CAttrsFor_RP)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_RT)[] = 
@@ -6373,8 +6391,8 @@ const AttrVersion TY_(W3CAttrsFor_RT)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_RTC)[] = 
@@ -6395,8 +6413,8 @@ const AttrVersion TY_(W3CAttrsFor_RTC)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_RUBY)[] = 
@@ -6470,8 +6488,8 @@ const AttrVersion TY_(W3CAttrsFor_RUBY)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_S)[] = 
@@ -6544,8 +6562,8 @@ const AttrVersion TY_(W3CAttrsFor_S)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_SAMP)[] = 
@@ -6620,8 +6638,8 @@ const AttrVersion TY_(W3CAttrsFor_SAMP)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_SCRIPT)[] = 
@@ -6704,7 +6722,7 @@ const AttrVersion TY_(W3CAttrsFor_SCRIPT)[] =
   { TidyAttr_TYPE,               xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XML_SPACE,          xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_SECTION)[] = 
@@ -6777,7 +6795,8 @@ const AttrVersion TY_(W3CAttrsFor_SECTION)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_SELECT)[] = 
@@ -6860,8 +6879,8 @@ const AttrVersion TY_(W3CAttrsFor_SELECT)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_SMALL)[] = 
@@ -6935,8 +6954,8 @@ const AttrVersion TY_(W3CAttrsFor_SMALL)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_SOURCE)[] = 
@@ -7012,7 +7031,8 @@ const AttrVersion TY_(W3CAttrsFor_SOURCE)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TYPE,               xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_SPAN)[] = 
@@ -7086,8 +7106,8 @@ const AttrVersion TY_(W3CAttrsFor_SPAN)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_STRIKE)[] = 
@@ -7108,8 +7128,8 @@ const AttrVersion TY_(W3CAttrsFor_STRIKE)[] =
   { TidyAttr_OnMOUSEUP,          xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_STYLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_STRONG)[] = 
@@ -7184,8 +7204,8 @@ const AttrVersion TY_(W3CAttrsFor_STRONG)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_STYLE)[] = 
@@ -7262,9 +7282,9 @@ const AttrVersion TY_(W3CAttrsFor_STYLE)[] =
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_TYPE,               xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
   { TidyAttr_XML_SPACE,          xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_SUB)[] = 
@@ -7338,8 +7358,8 @@ const AttrVersion TY_(W3CAttrsFor_SUB)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_SUMMARY)[] = 
@@ -7412,7 +7432,8 @@ const AttrVersion TY_(W3CAttrsFor_SUMMARY)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_SUP)[] = 
@@ -7486,8 +7507,8 @@ const AttrVersion TY_(W3CAttrsFor_SUP)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_TABLE)[] = 
@@ -7571,8 +7592,8 @@ const AttrVersion TY_(W3CAttrsFor_TABLE)[] =
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_WIDTH,              xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_TBODY)[] = 
@@ -7650,8 +7671,8 @@ const AttrVersion TY_(W3CAttrsFor_TBODY)[] =
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_VALIGN,             xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_TD)[] = 
@@ -7739,8 +7760,8 @@ const AttrVersion TY_(W3CAttrsFor_TD)[] =
   { TidyAttr_VALIGN,             xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|xxxx|xxxx },
   { TidyAttr_WIDTH,              xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_TEXTAREA)[] = 
@@ -7827,8 +7848,8 @@ const AttrVersion TY_(W3CAttrsFor_TEXTAREA)[] =
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_WRAP,               xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_TFOOT)[] = 
@@ -7906,8 +7927,8 @@ const AttrVersion TY_(W3CAttrsFor_TFOOT)[] =
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_VALIGN,             xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_TH)[] = 
@@ -7995,8 +8016,8 @@ const AttrVersion TY_(W3CAttrsFor_TH)[] =
   { TidyAttr_VALIGN,             xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|xxxx|xxxx },
   { TidyAttr_WIDTH,              xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_THEAD)[] = 
@@ -8074,8 +8095,8 @@ const AttrVersion TY_(W3CAttrsFor_THEAD)[] =
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_VALIGN,             xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_TIME)[] = 
@@ -8150,7 +8171,8 @@ const AttrVersion TY_(W3CAttrsFor_TIME)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_TITLE)[] = 
@@ -8225,8 +8247,8 @@ const AttrVersion TY_(W3CAttrsFor_TITLE)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_TR)[] = 
@@ -8305,8 +8327,8 @@ const AttrVersion TY_(W3CAttrsFor_TR)[] =
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_VALIGN,             xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_TRACK)[] = 
@@ -8384,7 +8406,8 @@ const AttrVersion TY_(W3CAttrsFor_TRACK)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_TT)[] = 
@@ -8407,8 +8430,8 @@ const AttrVersion TY_(W3CAttrsFor_TT)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_U)[] = 
@@ -8481,8 +8504,8 @@ const AttrVersion TY_(W3CAttrsFor_U)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_UL)[] = 
@@ -8559,8 +8582,8 @@ const AttrVersion TY_(W3CAttrsFor_UL)[] =
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_TYPE,               xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_VAR)[] = 
@@ -8635,8 +8658,8 @@ const AttrVersion TY_(W3CAttrsFor_VAR)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
   { TidyAttr_XMLNS,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 },
-  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_VIDEO)[] = 
@@ -8718,7 +8741,8 @@ const AttrVersion TY_(W3CAttrsFor_VIDEO)[] =
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_WIDTH,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_WBR)[] = 
@@ -8791,14 +8815,15 @@ const AttrVersion TY_(W3CAttrsFor_WBR)[] =
   { TidyAttr_STYLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TABINDEX,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_TITLE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_XML_LANG,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 const AttrVersion TY_(W3CAttrsFor_XMP)[] = 
 {
   { TidyAttr_SDAFORM,            HT20|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_SDAPREF,            HT20|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
-  { TidyAttr_UNKNOWN,            0                                                                     },
+  { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
 /*

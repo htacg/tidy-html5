@@ -52,20 +52,23 @@ a:active {
   font-family: Verdana, sans-serif;
 }
 #toc-button {
-  position:fixed;
-  top:10px;
-  right:10px;
-  background:transparent;
-  padding:15px;
-  z-index:999;
-  max-height:400px;
-  overflow:auto;
-  font-size:11px;
-  font-family:Verdana, sans-serif;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  padding: 15px;
+  z-index: 999;
+  max-height: 400px;
+  overflow: auto;
+  font-size: 11px;
+  font-family: Verdana, sans-serif;
 }
 #toc .button,
-#toc-button .button {
+#toc-button .button,
+#quickref-button .button {
   float: right;
+  width: 59px;
+  text-align: center;
   margin: 0 0 5px 5px;
   padding: 5px;
   border: 1px #008 solid;
@@ -93,6 +96,18 @@ a:active {
 }
 .show {
   display: block;
+}
+#quickref-button {
+  position: fixed;
+  top: 40px;
+  right: 10px;
+  background: transparent;
+  padding: 15px;
+  z-index: 999;
+  max-height: 400px;
+  overflow: auto;
+  font-size: 11px;
+  font-family: Verdana, sans-serif;
 }
 code { color: green; font-weight: bold; }
 pre { color: green; font-weight: bold; font-family: monospace}
@@ -535,12 +550,16 @@ original version of Tidy.
 <div id=toc-button style="">
 <a class=button href="
   javascript:document.getElementById('toc').className = 'show';
-  document.getElementById('toc-button').className = 'hide';">Show TOC</a>
+  document.getElementById('toc-button').className = 'hide';
+  document.getElementById('quickref-button').className = 'hide';"
+>Show TOC</a>
 </div>
 <div id=toc class=hide>
 <a class=button href="
  javascript:document.getElementById('toc').className = 'hide';
- document.getElementById('toc-button').className = 'show';">Close</a>
+ document.getElementById('toc-button').className = 'show';
+ document.getElementById('quickref-button').className = 'show';"
+>Close</a>
 <ol>
 <li><a href="#what-tidy-does">What Tidy does</a>
 <li><a href="#help">How to run Tidy from the command line</a>
@@ -559,4 +578,8 @@ original version of Tidy.
 <li><a href="#implementation">Source code</a>
 <li><a href="#acks">Acknowledgements</a>
 </ol>
+</div>
+
+<div id=quickref-button style="">
+<a class=button href="quickref.html">QuickRef</a>
 </div>

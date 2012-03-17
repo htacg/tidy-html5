@@ -367,6 +367,18 @@ new-blocklevel-tags: cfoutput, cfquery
 new-empty-tags: cfelse
 </pre>
 
+<h2 id="new-config">New configuration options</h2>
+<p>The experimental HTML5-aware fork of Tidy adds the following new
+configuration options:
+<ul>
+<li><a href="http://w3c.github.com/tidy-html5/quickref.html#coerce-endtags">coerce-endtags</a>
+<li><a href="http://w3c.github.com/tidy-html5/quickref.html#drop-empty-elements">drop-empty-elements</a>
+<li><a href="http://w3c.github.com/tidy-html5/quickref.html#merge-emphasis">merge-emphasis</a>
+</ul>
+<p>In addition, it also adds a new <code>html5</code> value for the
+<a href="http://w3c.github.com/tidy-html5/quickref.html#doctype">doctype</a>
+configuration option.
+
 <h2 id=indenting>Indenting output for readability</h2>
 <p>Indenting the source markup of an HTML document makes the markup easier
 to read. Tidy can indent the markup for an HTML document while recognizing
@@ -566,6 +578,7 @@ original version of Tidy.
 <li><a href="#options">Options and configuration settings</a>
 <li><a href="#config">Using a config file</a>
 <li><a href="#sample-config">Sample config file</a>
+<li><a href="#new-config">New configuration options</a>
 <li><a href="#indenting">Indenting output for readability</a>
 <li><a href="#preserve-indenting">Preserving original indenting not possible</a>
 <li><a href="#encodings">Encodings and character references</a>

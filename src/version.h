@@ -1,1 +1,1 @@
-static const char TY_(release_date)[] = "https://github.com/w3c/tidy-html5/tree/3a9a794";
+static const char TY_(release_date)[] = "https://github.com/w3c/tidy-html5/tree/3ed33a1";

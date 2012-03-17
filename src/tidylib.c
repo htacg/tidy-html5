@@ -1246,13 +1246,15 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     Bool tidyMark = cfgBool( doc, TidyMark );
     Bool tidyXmlTags = cfgBool( doc, TidyXmlTags );
     Bool wantNameAttr = cfgBool( doc, TidyAnchorAsName );
+    Bool mergeEmphasis = cfgBool( doc, TidyMergeEmphasis );
     Node* node;
 
     if (tidyXmlTags)
        return tidyDocStatus( doc );
 
     /* simplifies <b><b> ... </b> ...</b> etc. */
-    TY_(NestedEmphasis)( doc, &doc->root );
+    if ( mergeEmphasis )
+        TY_(NestedEmphasis)( doc, &doc->root );
 
     /* cleans up <dir>indented text</dir> etc. */
     TY_(List2BQ)( doc, &doc->root );

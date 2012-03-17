@@ -470,6 +470,12 @@ static const TidyOptionDoc option_docs[] =
   {TidyHideComments,
    "This option specifies if Tidy should print out comments. "
   },
+  {TidyCoerceEndTags,
+   "This option specifies if Tidy should coerce a start tag into an end tag "
+   "in cases where it looks like an end tag was probably intended; "
+   "for example, given &lt;span&gt;foo &lt;b&gt;bar&lt;b&gt; baz&lt;/span&gt;, "
+   "Tidy will output &lt;span&gt;foo &lt;b&gt;bar&lt;/b&gt; baz&lt;/span&gt;. "
+  },
   {TidyHideEndTags,
    "This option specifies if Tidy should omit optional end-tags when "
    "generating the pretty printed markup. This option is ignored if you are "
@@ -503,6 +509,18 @@ static const TidyOptionDoc option_docs[] =
    "This option specifies if Tidy should convert the value of an attribute "
    "that takes a list of predefined values to lower case. This is required "
    "for XHTML documents. "
+  },
+  {TidyMergeEmphasis,
+   "This option specifies if Tidy should merge nested &lt;b&gt; and &lt;i&gt; "
+   "elements; for example, for the case "
+   "&lt;b class=\"rtop-2\"&gt;foo &lt;b class=\"r2-2\"&gt;bar&lt;/b&gt; baz&lt;/b&gt;, "
+   "Tidy will output  &lt;b class=\"rtop-2\"&gt;foo bar baz&lt;/b&gt;. "
+   "Note that if you set this option to \"no\" Tidy will by default still "
+   "attempt to correct some cases of nested &lt;b&gt; and &lt;i&gt; elements; "
+   "for example, given "
+   "&lt;span&gt;foo &lt;b&gt;bar &lt;b&gt;baz&lt;/b&gt;&lt;/b&gt; &lt;/span&gt;, "
+   "Tidy will output &lt;span&gt;foo &lt;b&gt;bar baz&lt;/b&gt;&lt;/span&gt;. "
+   "To suppress that behavior, set the coerce-endtags option to \"no\". "
   },
   {TidyMergeDivs,
    "Can be used to modify behavior of -c (--clean yes) option. "

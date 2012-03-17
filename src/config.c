@@ -239,6 +239,7 @@ static const TidyOptionImpl option_defs[] =
   { TidyShowWarnings,            DG, "show-warnings",               BL, yes,             ParseBool,         boolPicks       },
   { TidyQuiet,                   MS, "quiet",                       BL, no,              ParseBool,         boolPicks       },
   { TidyIndentContent,           PP, "indent",                      IN, TidyNoState,     ParseAutoBool,     autoBoolPicks   },
+  { TidyCoerceEndTags,           MU, "coerce-endtags",              BL, yes,             ParseBool,         boolPicks       },
   { TidyHideEndTags,             MU, "hide-endtags",                BL, no,              ParseBool,         boolPicks       },
   { TidyXmlTags,                 MU, "input-xml",                   BL, no,              ParseBool,         boolPicks       },
   { TidyXmlOut,                  MU, "output-xml",                  BL, no,              ParseBool,         boolPicks       },
@@ -311,6 +312,7 @@ static const TidyOptionImpl option_defs[] =
 #if SUPPORT_ASIAN_ENCODINGS
   { TidyPunctWrap,               PP, "punctuation-wrap",            BL, no,              ParseBool,         boolPicks       },
 #endif
+  { TidyMergeEmphasis,           MU, "merge-emphasis",              BL, yes,             ParseBool,         boolPicks       },
   { TidyMergeDivs,               MU, "merge-divs",                  IN, TidyAutoState,   ParseAutoBool,     autoBoolPicks   },
   { TidyDecorateInferredUL,      MU, "decorate-inferred-ul",        BL, no,              ParseBool,         boolPicks       },
   { TidyPreserveEntities,        MU, "preserve-entities",           BL, no,              ParseBool,         boolPicks       },

@@ -8,7 +8,7 @@
   <body>
     <h1 id="top">Quick Reference</h1>
     <h2>HTML Tidy Configuration Options</h2>
-    <p>Version: <a href="https://github.com/w3c/tidy-html5/tree/5c4d2e5">https://github.com/w3c/tidy-html5/tree/5c4d2e5</a></p>
+    <p>Version: <a href="https://github.com/w3c/tidy-html5/tree/3a9a794">https://github.com/w3c/tidy-html5/tree/3a9a794</a></p>
     <p>
       <a class="h3" href="#MarkupHeader">HTML, XHTML, XML</a>
       <br />
@@ -87,6 +87,13 @@
         </td>
         <td>Boolean</td>
         <td>no</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#coerce-endtags">coerce-endtags</a>
+        </td>
+        <td>Boolean</td>
+        <td>yes</td>
       </tr>
       <tr>
         <td>
@@ -250,6 +257,13 @@
         </td>
         <td>AutoBool</td>
         <td>auto</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#merge-emphasis">merge-emphasis</a>
+        </td>
+        <td>Boolean</td>
+        <td>yes</td>
       </tr>
       <tr>
         <td>
@@ -867,6 +881,23 @@
         <td>&#160;</td>
       </tr>
       <tr>
+        <td class="tabletitle" valign="top" id="coerce-endtags">coerce-endtags</td>
+        <td class="tabletitlelink" valign="top" align="right">
+          <a href="#top">Top</a>
+        </td>
+      </tr>
+      <tr>
+        <td valign="top">Type: <strong>Boolean</strong><br />
+            Default: <strong>yes</strong><br />Example: <strong>y/n, yes/no, t/f, true/false, 1/0</strong></td>
+        <td align="right" valign="top"></td>
+      </tr>
+      <tr>
+        <td colspan="2">This option specifies if Tidy should coerce a start tag into an end tag in cases where it looks like an end tag was probably intended; for example, given &lt;span&gt;foo &lt;b&gt;bar&lt;b&gt; baz&lt;/span&gt;, Tidy will output &lt;span&gt;foo &lt;b&gt;bar&lt;/b&gt; baz&lt;/span&gt;. </td>
+      </tr>
+      <tr>
+        <td>&#160;</td>
+      </tr>
+      <tr>
         <td class="tabletitle" valign="top" id="css-prefix">css-prefix</td>
         <td class="tabletitlelink" valign="top" align="right">
           <a href="#top">Top</a>
@@ -1267,6 +1298,23 @@
       </tr>
       <tr>
         <td colspan="2">Can be used to modify behavior of -c (--clean yes) option. This option specifies if Tidy should merge nested &lt;div&gt; such as "&lt;div&gt;&lt;div&gt;...&lt;/div&gt;&lt;/div&gt;". If set to "auto", the attributes of the inner &lt;div&gt; are moved to the outer one. As well, nested &lt;div&gt; with ID attributes are not merged. If set to "yes", the attributes of the inner &lt;div&gt; are discarded with the exception of "class" and "style". </td>
+      </tr>
+      <tr>
+        <td>&#160;</td>
+      </tr>
+      <tr>
+        <td class="tabletitle" valign="top" id="merge-emphasis">merge-emphasis</td>
+        <td class="tabletitlelink" valign="top" align="right">
+          <a href="#top">Top</a>
+        </td>
+      </tr>
+      <tr>
+        <td valign="top">Type: <strong>Boolean</strong><br />
+            Default: <strong>yes</strong><br />Example: <strong>y/n, yes/no, t/f, true/false, 1/0</strong></td>
+        <td align="right" valign="top"></td>
+      </tr>
+      <tr>
+        <td colspan="2">This option specifies if Tidy should merge nested &lt;b&gt; and &lt;i&gt; elements; for example, for the case &lt;b class="rtop-2"&gt;foo &lt;b class="r2-2"&gt;bar&lt;/b&gt; baz&lt;/b&gt;, Tidy will output  &lt;b class="rtop-2"&gt;foo bar baz&lt;/b&gt;. Note that if you set this option to "no" Tidy will by default still attempt to correct some cases of nested &lt;b&gt; and &lt;i&gt; elements; for example, given &lt;span&gt;foo &lt;b&gt;bar &lt;b&gt;baz&lt;/b&gt;&lt;/b&gt; &lt;/span&gt;, Tidy will output &lt;span&gt;foo &lt;b&gt;bar baz&lt;/b&gt;&lt;/span&gt;. To suppress that behavior, set the coerce-endtags option to "no". </td>
       </tr>
       <tr>
         <td>&#160;</td>

@@ -1400,6 +1400,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
              && !nodeIsSUP(node)
              && !nodeIsQ(node)
              && !nodeIsSPAN(node)
+             && cfgBool(doc, TidyCoerceEndTags)
            )
         {
             /* proceeds only if "node" does not have any attribute and
@@ -1617,7 +1618,8 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
             /* #427827 - fix by Randy Waki and Bjoern Hoehrmann 23 Aug 00 */
             /* other fixes by Dave Raggett */
             /* if (node->attributes == NULL) */
-            if (node->type != EndTag && node->attributes == NULL)
+            if (node->type != EndTag && node->attributes == NULL
+                && cfgBool(doc, TidyCoerceEndTags) )
             {
                 node->type = EndTag;
                 TY_(ReportError)(doc, element, node, COERCE_TO_ENDTAG);
@@ -3022,7 +3024,8 @@ void TY_(ParseTitle)(TidyDocImpl* doc, Node *title, GetTokenMode ARG_UNUSED(mode
     Node *node;
     while ((node = TY_(GetToken)(doc, MixedContent)) != NULL)
     {
-        if (node->tag == title->tag && node->type == StartTag)
+        if (node->tag == title->tag && node->type == StartTag
+            && cfgBool(doc, TidyCoerceEndTags) )
         {
             TY_(ReportError)(doc, title, node, COERCE_TO_ENDTAG);
             node->type = EndTag;

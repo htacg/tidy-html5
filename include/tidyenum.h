@@ -112,6 +112,7 @@ typedef enum
   TidyQuiet,           /**< No 'Parsing X', guessed DTD or summary */
   TidyIndentContent,   /**< Indent content of appropriate tags */
                        /**< "auto" does text/block level content indentation */
+  TidyCoerceEndTags,   /**< Coerce end tags from start tags where probably intended */
   TidyHideEndTags,     /**< Suppress optional end tags */
   TidyXmlTags,         /**< Treat input as XML */
   TidyXmlOut,          /**< Create output as XML */
@@ -199,6 +200,7 @@ typedef enum
 #else
   TidyPunctWrapNotUsed,
 #endif
+  TidyMergeEmphasis,       /**< Merge nested B and I elements */
   TidyMergeDivs,       /**< Merge multiple DIVs */
   TidyDecorateInferredUL,  /**< Mark inferred UL elements with no indent CSS */
   TidyPreserveEntities,    /**< Preserve entities */

@@ -440,6 +440,9 @@ static void help( ctmbstr prog )
     printf( "Single letter options apart from -f may be combined\n");
     printf( "as in:  tidy -f errs.txt -imu foo.html\n");
     printf( "\n");
+    printf( "For more information on this HTML5-aware experimental fork of Tidy,\n" );
+    printf( "see http://w3c.github.com/tidy-html5/\n" );
+    printf( "\n");
     printf( "For more information on HTML, see the following:\n" );
     printf( "\n");
     printf( "  HTML: Edition for Web Authors (the latest HTML specification)\n");

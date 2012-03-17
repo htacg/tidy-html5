@@ -354,6 +354,12 @@ appearing in content with another backslash.
 <!-- Appears at the bottom of the man page: -->
 <xsl:template name="manpage-see-also-section">
 .SH SEE ALSO
+For more information about the experimental HTML5 fork of Tidy:
+.RS 4
+.LP
+http://w3c.github.com/tidy-html5/
+.RE
+.LP
 For more information on HTML:
 .RS 4
 .LP
@@ -364,12 +370,6 @@ http://dev.w3.org/html5/spec-author-view
 \fBHTML: The Markup Language\fR (an HTML language reference)
 .br
 http://dev.w3.org/html5/markup/
-.RE
-.LP
-For more information about the experimental HTML5 fork of HTML Tidy:
-.RS 4
-.LP
-https://github.com/w3c/tidy-html5
 .RE
 .LP
 For bug reports and comments:
@@ -386,7 +386,7 @@ Validate your HTML documents using the \fBW3C Nu Markup Validator\fR:
 http://validator.w3.org/nu/
 .RE
 .SH AUTHOR
-\fBTidy\fR was written by \fBDave Raggett\fR &lt;dsr@w3.org&gt;, and susequently maintained by a team at http://tidy.sourceforge.net/
+\fBTidy\fR was written by \fBDave Raggett\fR &lt;dsr@w3.org&gt;, and subsequently maintained by a team at http://tidy.sourceforge.net/
 .LP
 The sources for the HTML5 fork of \fBTidy\fR are available at https://github.com/w3c/tidy-html5/ under the MIT Licence.
 </xsl:template>

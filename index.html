@@ -22,6 +22,14 @@ h1 {
   vertical-align: top;
   margin-bottom: 0px;
 }
+h1#intro {
+  margin: 1em 0 0.5em 0;
+  display: inline-block;
+}
+.download {
+  margin: 1em 0 0 3em;
+  display: inline-block;
+}
 a {
   text-decoration: none;
   color: #0B5B9D;
@@ -32,6 +40,9 @@ a:hover {
   text-decoration: none;
   background-color: #0B5B9D;
   color: white;
+}
+a.nobluehover:hover {
+  background-color: #fff;
 }
 a:active {
   text-decoration: none;
@@ -116,9 +127,18 @@ em { font-style: italic; color: rgb(0, 0, 153) }
 :visited { color: rgb(153, 0, 153) }
 </style>
 
+<a class="nobluehover" href="https://github.com/w3c/tidy-html5"><img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+
 <h1 id=intro>HTML Tidy for HTML5 (experimental)</h1>
-<p>This page documents the experimental HTML5 fork of HTML Tidy available
-at
+
+<div class="download">
+  <a class="nobluehover" href="https://github.com/w3c/tidy-html5/zipball/master">
+    <img border="0" width="90" src="https://github.com/images/modules/download/zip.png"></a>
+  <a class="nobluehover" href="https://github.com/w3c/tidy-html5/tarball/master">
+    <img border="0" width="90" src="https://github.com/images/modules/download/tar.png"></a>
+</div>
+
+<p>This page documents the experimental HTML5 fork of HTML Tidy available at
 <a href="https://github.com/w3c/tidy-html5">https://github.com/w3c/tidy-html5</a>.
 
 <p>File bug reports and enhancement requests at

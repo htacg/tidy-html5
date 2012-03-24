@@ -488,7 +488,7 @@ static const TidyOptionDoc option_docs[] =
    "This option is ignored for XML output. "
   },
   {TidyHideEndTags,
-   "This option is an alias for the omit-optional-tags option. "
+   "This option is an alias for omit-optional-tags. "
   },
   {TidyIndentCdata,
    "This option specifies if Tidy should indent &lt;![CDATA[]]&gt; sections. "

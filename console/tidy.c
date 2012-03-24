@@ -191,8 +191,8 @@ static const CmdOptDesc cmdopt_defs[] =  {
       "suppress nonessential output",
       "quiet: yes", CmdOptProcDir, "-q" },
     { "-omit",
-      "omit optional end tags",
-      "hide-endtags: yes", CmdOptProcDir },
+      "omit optional start tags and end tags",
+      "omit-optional-tags: yes", CmdOptProcDir },
     { "-xml",
       "specify the input is well formed XML",
       "input-xml: yes", CmdOptProcDir },
@@ -1002,7 +1002,7 @@ int main( int argc, char** argv )
                     tidyOptResetToDefault( tdoc, TidyIndentSpaces );
             }
             else if ( strcasecmp(arg, "omit") == 0 )
-                tidyOptSetBool( tdoc, TidyHideEndTags, yes );
+                tidyOptSetBool( tdoc, TidyOmitOptionalTags, yes );
 
             else if ( strcasecmp(arg, "upper") == 0 )
                 tidyOptSetBool( tdoc, TidyUpperCaseTags, yes );

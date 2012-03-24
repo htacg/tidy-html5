@@ -113,7 +113,8 @@ typedef enum
   TidyIndentContent,   /**< Indent content of appropriate tags */
                        /**< "auto" does text/block level content indentation */
   TidyCoerceEndTags,   /**< Coerce end tags from start tags where probably intended */
-  TidyHideEndTags,     /**< Suppress optional end tags */
+  TidyOmitOptionalTags,/**< Suppress optional start tags and end tags */
+  TidyHideEndTags,     /**< Legacy name for TidyOmitOptionalTags */
   TidyXmlTags,         /**< Treat input as XML */
   TidyXmlOut,          /**< Create output as XML */
   TidyXhtmlOut,        /**< Output extensible HTML */

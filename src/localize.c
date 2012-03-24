@@ -479,10 +479,16 @@ static const TidyOptionDoc option_docs[] =
    "for example, given &lt;span&gt;foo &lt;b&gt;bar&lt;b&gt; baz&lt;/span&gt;, "
    "Tidy will output &lt;span&gt;foo &lt;b&gt;bar&lt;/b&gt; baz&lt;/span&gt;. "
   },
+  {TidyOmitOptionalTags,
+   "This option specifies if Tidy should omit optional start tags and end tags "
+   "when generating output. Setting this option causes all tags for the "
+   "html, head, and body elements to be omitted from output, as well as such "
+   "end tags as &lt;/p&gt;, &lt;/li&gt;, &lt;/dt&gt;, &lt;/dd&gt;, "
+   "&lt;/option&gt;, &lt;/tr&gt;, &lt;/td&gt;, and &lt;/th&gt;. "
+   "This option is ignored for XML output. "
+  },
   {TidyHideEndTags,
-   "This option specifies if Tidy should omit optional end-tags when "
-   "generating the pretty printed markup. This option is ignored if you are "
-   "outputting to XML. "
+   "This option is an alias for the omit-optional-tags option. "
   },
   {TidyIndentCdata,
    "This option specifies if Tidy should indent &lt;![CDATA[]]&gt; sections. "

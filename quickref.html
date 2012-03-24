@@ -8,7 +8,7 @@
   <body>
     <h1 id="top">Quick Reference</h1>
     <h2>HTML Tidy Configuration Options</h2>
-    <p>Version: <a href="https://github.com/w3c/tidy-html5/tree/ddb5702">https://github.com/w3c/tidy-html5/tree/ddb5702</a></p>
+    <p>Version: <a href="https://github.com/w3c/tidy-html5/tree/4ff3234">https://github.com/w3c/tidy-html5/tree/4ff3234</a></p>
     <p>
       <a class="h3" href="#MarkupHeader">HTML, XHTML, XML</a>
       <br />
@@ -318,6 +318,13 @@
       <tr>
         <td>
           <a href="#numeric-entities">numeric-entities</a>
+        </td>
+        <td>Boolean</td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#omit-optional-tags">omit-optional-tags</a>
         </td>
         <td>Boolean</td>
         <td>no</td>
@@ -1149,7 +1156,7 @@
         <td align="right" valign="top"></td>
       </tr>
       <tr>
-        <td colspan="2">This option specifies if Tidy should omit optional end-tags when generating the pretty printed markup. This option is ignored if you are outputting to XML. </td>
+        <td colspan="2">This option is an alias for the omit-optional-tags option. </td>
       </tr>
       <tr>
         <td>&#160;</td>
@@ -1466,6 +1473,23 @@
       </tr>
       <tr>
         <td colspan="2">This option specifies if Tidy should output entities other than the built-in HTML entities (&amp;amp;, &amp;lt;, &amp;gt; and &amp;quot;) in the numeric rather than the named entity form. Only entities compatible with the DOCTYPE declaration generated are used. Entities that can be represented in the output encoding are translated correspondingly. </td>
+      </tr>
+      <tr>
+        <td>&#160;</td>
+      </tr>
+      <tr>
+        <td class="tabletitle" valign="top" id="omit-optional-tags">omit-optional-tags</td>
+        <td class="tabletitlelink" valign="top" align="right">
+          <a href="#top">Top</a>
+        </td>
+      </tr>
+      <tr>
+        <td valign="top">Type: <strong>Boolean</strong><br />
+            Default: <strong>no</strong><br />Example: <strong>y/n, yes/no, t/f, true/false, 1/0</strong></td>
+        <td align="right" valign="top"></td>
+      </tr>
+      <tr>
+        <td colspan="2">This option specifies if Tidy should omit optional start tags and end tags when generating output. Setting this option causes all tags for the html, head, and body elements to be omitted from output, as well as such end tags as &lt;/p&gt;, &lt;/li&gt;, &lt;/dt&gt;, &lt;/dd&gt;, &lt;/option&gt;, &lt;/tr&gt;, &lt;/td&gt;, and &lt;/th&gt;. This option is ignored for XML output. </td>
       </tr>
       <tr>
         <td>&#160;</td>

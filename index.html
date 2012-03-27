@@ -554,6 +554,32 @@ if (close(TIDY) == 0) {
 <p>The source code for the experimental HTML5 fork of Tidy can be found at
 <a href="https://github.com/w3c/tidy-html5">https://github.com/w3c/tidy-html5</a>.
 
+<h2 id=building-cli>Building the tidy command-line tool</h2>
+<p>For Linux/BSD/OSX platforms, you can build and install the
+<code>tidy</code> command-line tool from the source code using the
+following steps.</p>
+
+<ol>
+<li><code>make -C build/gmake/</code></li>
+<li><code>make install -C build/gmake/</code></li>
+</ol>
+
+<p>Note that you will either need to run <code>make install</code> as root,
+or with <code>sudo make install</code>.</p>
+
+<h2 id=building-library>Building the libtidy shared library</h2>
+<p>For Linux/BSD/OSX platforms, you can build and install the
+<code>tidylib</code> shared library (for use in building other
+applications) from the source code using the following steps.</p>
+
+<ol>
+<li>sh build/gnuauto/setup.sh &amp;&amp; ./configure &amp;&amp; make</li>
+<li>make install</li>
+</ol>
+
+<p>Note that you will either need to run <code>make install</code> as root,
+or with <code>sudo make install</code>.</p>
+
 <h2 id=acks>Acknowledgements</h2>
 <p>Dave Raggett has a list of
 <a href="http://www.w3.org/People/Raggett/tidy/#acks">Acknowledgements</a>
@@ -590,6 +616,8 @@ original version of Tidy.
 <li><a href="#xml">Correcting well-formedness errors in XML markup</a>
 <li><a href="#scripts">Using Tidy from scripts</a>
 <li><a href="#implementation">Source code</a>
+<li><a href="#build-cli">Building the tidy command-line tool</a>
+<li><a href="#build-library">Building the tidylib shared library</a>
 <li><a href="#acks">Acknowledgements</a>
 </ol>
 </div>

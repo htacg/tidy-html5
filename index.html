@@ -554,7 +554,7 @@ if (close(TIDY) == 0) {
 <p>The source code for the experimental HTML5 fork of Tidy can be found at
 <a href="https://github.com/w3c/tidy-html5">https://github.com/w3c/tidy-html5</a>.
 
-<h2 id=building-cli>Building the tidy command-line tool</h2>
+<h2 id=build-cli>Building the tidy command-line tool</h2>
 <p>For Linux/BSD/OSX platforms, you can build and install the
 <code>tidy</code> command-line tool from the source code using the
 following steps.</p>
@@ -567,14 +567,14 @@ following steps.</p>
 <p>Note that you will either need to run <code>make install</code> as root,
 or with <code>sudo make install</code>.</p>
 
-<h2 id=building-library>Building the libtidy shared library</h2>
+<h2 id=build-library>Building the libtidy shared library</h2>
 <p>For Linux/BSD/OSX platforms, you can build and install the
 <code>tidylib</code> shared library (for use in building other
 applications) from the source code using the following steps.</p>
 
 <ol>
-<li>sh build/gnuauto/setup.sh &amp;&amp; ./configure &amp;&amp; make</li>
-<li>make install</li>
+<li><code>sh build/gnuauto/setup.sh &amp;&amp; ./configure &amp;&amp; make</code></li>
+<li><code>make install</code></li>
 </ol>
 
 <p>Note that you will either need to run <code>make install</code> as root,
@@ -587,14 +587,14 @@ for people who made suggestions or reported bugs for the
 original version of Tidy.
 
 <div id=toc-button style="">
-<a class=button href="
+<a class=button href="#" onclick="
   javascript:document.getElementById('toc').className = 'show';
   document.getElementById('toc-button').className = 'hide';
   document.getElementById('quickref-button').className = 'hide';"
 >Show TOC</a>
 </div>
 <div id=toc class=hide>
-<a class=button href="
+<a class=button href="#" onclick="
  javascript:document.getElementById('toc').className = 'hide';
  document.getElementById('toc-button').className = 'show';
  document.getElementById('quickref-button').className = 'show';"

@@ -74,6 +74,7 @@ a:active {
   border: 1px #008 solid;
   color:#00f;
   background-color:#ccf;
+  cursor: pointer;
 }
 #toc ol {
   margin:  0;
@@ -569,7 +570,7 @@ or with <code>sudo make install</code>.</p>
 
 <h2 id=build-library>Building the libtidy shared library</h2>
 <p>For Linux/BSD/OSX platforms, you can build and install the
-<code>tidylib</code> shared library (for use in building other
+<code>tidylib</code> shared library (for integrating Tidy into other 
 applications) from the source code using the following steps.</p>
 
 <ol>
@@ -587,15 +588,15 @@ for people who made suggestions or reported bugs for the
 original version of Tidy.
 
 <div id=toc-button style="">
-<a class=button href="#" onclick="
-  javascript:document.getElementById('toc').className = 'show';
+<a class=button onclick="
+  document.getElementById('toc').className = 'show';
   document.getElementById('toc-button').className = 'hide';
   document.getElementById('quickref-button').className = 'hide';"
 >Show TOC</a>
 </div>
 <div id=toc class=hide>
-<a class=button href="#" onclick="
- javascript:document.getElementById('toc').className = 'hide';
+<a class=button onclick="
+ document.getElementById('toc').className = 'hide';
  document.getElementById('toc-button').className = 'show';
  document.getElementById('quickref-button').className = 'show';"
 >Close</a>
@@ -625,3 +626,12 @@ original version of Tidy.
 <div id=quickref-button style="">
 <a class=button href="quickref.html">QuickRef</a>
 </div>
+<script>
+ document.addEventListener("mouseup", function() {
+ if (document.getElementById('toc').className = 'show') {
+     document.getElementById('toc').className = 'hide';
+     document.getElementById('toc-button').className = 'show';
+     document.getElementById('quickref-button').className = 'show';
+}
+}, false)
+</script>

@@ -108,6 +108,7 @@ typedef enum
   TidyOutFile,         /**< File name to write markup to */
   TidyWriteBack,       /**< If true then output tidied markup */
   TidyShowMarkup,      /**< If false, normal output is suppressed */
+  TidyShowInfo,        /**< If true, info-level messages are shown */
   TidyShowWarnings,    /**< However errors are always shown */
   TidyQuiet,           /**< No 'Parsing X', guessed DTD or summary */
   TidyIndentContent,   /**< Indent content of appropriate tags */

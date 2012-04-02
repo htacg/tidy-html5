@@ -236,6 +236,7 @@ static const TidyOptionImpl option_defs[] =
   { TidyOutFile,                 MS, "output-file",                 ST, 0,               ParseString,       NULL            },
   { TidyWriteBack,               MS, "write-back",                  BL, no,              ParseBool,         boolPicks       },
   { TidyShowMarkup,              PP, "markup",                      BL, yes,             ParseBool,         boolPicks       },
+  { TidyShowInfo,                DG, "show-info",                   BL, yes,             ParseBool,         boolPicks       },
   { TidyShowWarnings,            DG, "show-warnings",               BL, yes,             ParseBool,         boolPicks       },
   { TidyQuiet,                   MS, "quiet",                       BL, no,              ParseBool,         boolPicks       },
   { TidyIndentContent,           PP, "indent",                      IN, TidyNoState,     ParseAutoBool,     autoBoolPicks   },

@@ -681,6 +681,9 @@ static const TidyOptionDoc option_docs[] =
    "This option specifies the number Tidy uses to determine if further errors "
    "should be shown. If set to 0, then no errors are shown. "
   },
+  {TidyShowInfo,
+   "This option specifies if Tidy should display info-level messages. "
+  },
   {TidyShowWarnings,
    "This option specifies if Tidy should suppress warnings. This can be "
    "useful when a few errors are hidden in a flurry of warnings. "
@@ -1083,6 +1086,7 @@ __attribute__((format(printf, 2, 3)))
 
 void message( TidyDocImpl* doc, TidyReportLevel level, ctmbstr msg, ... )
 {
+    if (level == TidyInfo && !cfgBool(doc, TidyShowInfo)) return;
     va_list args;
     va_start( args, msg );
     messagePos( doc, level, 0, 0, msg, args );
@@ -1812,6 +1816,7 @@ void TY_(NeedsAuthorIntervention)( TidyDocImpl* doc )
 
 void TY_(GeneralInfo)( TidyDocImpl* doc )
 {
+    if (!cfgBool(doc, TidyShowInfo)) return;
     tidy_out(doc, "About this fork of Tidy: http://w3c.github.com/tidy-html5/\n");
     tidy_out(doc, "Bug reports and comments: https://github.com/w3c/tidy-html5/issues/\n");
     tidy_out(doc, "Or send questions and comments to html-tidy@w3.org\n");

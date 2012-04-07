@@ -746,9 +746,18 @@ static const TidyOptionDoc option_docs[] =
    "pseudo elements, which look like: &lt;% ... %&gt;. "
   },
   {TidyWrapAttVals,
-   "This option specifies if Tidy should line wrap attribute values, for "
-   "easier editing. This option can be set independently of "
-   "wrap-script-literals. "
+   "This option specifies if Tidy should line-wrap attribute values, for "
+   "easier editing. Line wrapping means that if the value of an attribute "
+   "causes a line to exceed the width specified by the \"wrap\" option, "
+   "tidy will add one or more line breaks to the value, causing it to "
+   "wrapped into multiple lines. Note the this option can be set "
+   "independently of wrap-script-literals. Also note that by default, tidy "
+   "\"munges\" or \"normalizes\" attribute values by replacing any newline "
+   "or tab character with a single space character, and further by replacing "
+   "any sequences of multiple whitespace characters with a single space. "
+   "To force tidy to preserve the original, literal values of all attributes, "
+   "and ensure that whitespace characters within attribute values are passed "
+   "through unchanged, set the value the literal-attributes option to \"no\". "
    ,TidyWrapAttValsLinks
   },
   {TidyWrapJste,

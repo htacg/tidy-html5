@@ -1158,7 +1158,7 @@ static void PPrintAttribute( TidyDocImpl* doc, uint indent,
     {
         if ( TY_(IsScript)(doc, name) )
             wrappable = cfgBool( doc, TidyWrapScriptlets );
-        else if (!(attrIsCONTENT(attr) || attrIsVALUE(attr) || attrIsALT(attr)) && wrapAttrs )
+        else if (!(attrIsCONTENT(attr) || attrIsVALUE(attr) || attrIsALT(attr) || attrIsTITLE(attr)) && wrapAttrs )
             wrappable = yes;
     }
 

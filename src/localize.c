@@ -710,8 +710,14 @@ static const TidyOptionDoc option_docs[] =
    ,TidyIndentSpacesLinks
   },
   {TidyLiteralAttribs,
-   "This option specifies if Tidy should ensure that whitespace characters "
-   "within attribute values are passed through unchanged. "
+   "This option specifies how Tidy deals with whitespace characters within "
+   "attribute values. If the value is \"no\" (the default), Tidy \"munges\" "
+   "or \"normalizes\" attribute values by replacing any newline or tab "
+   "character with a single space character, and further by replacing "
+   "any sequences of multiple whitespace characters with a single space. "
+   "To force tidy to preserve the original, literal values of all attributes, "
+   "and ensure that whitespace characters within attribute values are passed "
+   "through unchanged, set this option to \"yes\". "
   },
   {TidyShowMarkup,
    "This option specifies if Tidy should generate a pretty printed version "
@@ -751,13 +757,13 @@ static const TidyOptionDoc option_docs[] =
    "causes a line to exceed the width specified by the \"wrap\" option, "
    "tidy will add one or more line breaks to the value, causing it to "
    "wrapped into multiple lines. Note that this option can be set "
-   "independently of wrap-script-literals. Also note that by default, tidy "
+   "independently of wrap-script-literals. Also note that by default, Tidy "
    "\"munges\" or \"normalizes\" attribute values by replacing any newline "
    "or tab character with a single space character, and further by replacing "
    "any sequences of multiple whitespace characters with a single space. "
-   "To force tidy to preserve the original, literal values of all attributes, "
+   "To force Tidy to preserve the original, literal values of all attributes, "
    "and ensure that whitespace characters within attribute values are passed "
-   "through unchanged, set the literal-attributes option to \"no\". "
+   "through unchanged, set the literal-attributes option to \"yes\". "
    ,TidyWrapAttValsLinks
   },
   {TidyWrapJste,

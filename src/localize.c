@@ -1101,8 +1101,8 @@ __attribute__((format(printf, 2, 3)))
 
 void message( TidyDocImpl* doc, TidyReportLevel level, ctmbstr msg, ... )
 {
-    if (level == TidyInfo && !cfgBool(doc, TidyShowInfo)) return;
     va_list args;
+    if (level == TidyInfo && !cfgBool(doc, TidyShowInfo)) return;
     va_start( args, msg );
     messagePos( doc, level, 0, 0, msg, args );
     va_end( args );

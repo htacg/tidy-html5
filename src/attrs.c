@@ -1811,9 +1811,11 @@ void CheckLang( TidyDocImpl* doc, Node *node, AttVal *attval)
 /* checks type attribute */
 void CheckType( TidyDocImpl* doc, Node *node, AttVal *attval)
 {
-    ctmbstr const valuesINPUT[] = {"text", "password", "checkbox", "radio",
-                                   "submit", "reset", "file", "hidden",
-                                   "image", "button", NULL};
+    ctmbstr const valuesINPUT[] = {
+        "text", "password", "checkbox", "radio", "submit", "reset", "file",
+        "hidden", "image", "button", "color", "date", "datetime",
+        "datetime-local", "email", "month", "number", "range", "search",
+        "tel", "time", "url", "week", NULL};
     ctmbstr const valuesBUTTON[] = {"button", "submit", "reset", NULL};
     ctmbstr const valuesUL[] = {"disc", "square", "circle", NULL};
     ctmbstr const valuesOL[] = {"1", "a", "i", NULL};

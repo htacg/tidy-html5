@@ -304,7 +304,7 @@ static const Dict tag_defs[] =
   { TidyTag_TIME,        "time",         VERS_ELEM_TIME,        &TY_(W3CAttrsFor_TIME)[0],        (CM_INLINE),                   TY_(ParseInline),    NULL           },
   { TidyTag_TRACK,       "track",        VERS_ELEM_TRACK,       &TY_(W3CAttrsFor_TRACK)[0],       (CM_BLOCK|CM_EMPTY),           TY_(ParseBlock),     NULL           },
   { TidyTag_VIDEO,       "video",        VERS_ELEM_VIDEO,       &TY_(W3CAttrsFor_VIDEO)[0],       (CM_BLOCK|CM_INLINE),          TY_(ParseBlock),     NULL           },
-  { TidyTag_WBR,         "wbr",          VERS_ELEM_WBR,         &TY_(W3CAttrsFor_VIDEO)[0],       (CM_INLINE|CM_EMPTY),          TY_(ParseEmpty),     NULL           },
+  { TidyTag_WBR,         "wbr",          VERS_ELEM_WBR,         &TY_(W3CAttrsFor_WBR)[0],         (CM_INLINE|CM_EMPTY),          TY_(ParseEmpty),     NULL           },
 
   /* this must be the final entry */
   { (TidyTagId)0,        NULL,         0,                    NULL,                       (0),                                           NULL,          NULL           }

@@ -409,7 +409,7 @@ static const TidyOptionDoc option_docs[] =
   },
   {TidyGDocClean,
    "This option specifies if Tidy "
-   "should enable specific behavior for cleaning up HTML exported from"
+   "should enable specific behavior for cleaning up HTML exported from "
    "Google Docs. "
    , TidyMakeCleanTagsLinks
   },

@@ -12,6 +12,11 @@
 /htmldoc/tidy.1
 /htmldoc/quickref.html
 /lib/
+/autom4te.cache/
+/console/.deps/
+/console/.libs/
+/src/.deps/
+/src/.libs/
 *.user
 *.suo
 *.sdf

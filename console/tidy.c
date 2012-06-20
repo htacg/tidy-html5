@@ -181,6 +181,9 @@ static const CmdOptDesc cmdopt_defs[] =  {
     { "-bare",
       "strip out smart quotes and em dashes, etc.",
       "bare: yes", CmdOptProcDir, "-b" },
+    { "-gdoc",
+      "produce clean version of html exported by google docs",
+      "gdoc: yes", CmdOptProcDir, "-g" },
     { "-numeric",
       "output numeric rather than named entities",
       "numeric-entities: yes", CmdOptProcDir, "-n" },
@@ -1010,6 +1013,9 @@ int main( int argc, char** argv )
             else if ( strcasecmp(arg, "clean") == 0 )
                 tidyOptSetBool( tdoc, TidyMakeClean, yes );
 
+            else if ( strcasecmp(arg, "gdoc") == 0 )
+                tidyOptSetBool( tdoc, TidyGDocClean, yes );
+
             else if ( strcasecmp(arg, "bare") == 0 )
                 tidyOptSetBool( tdoc, TidyMakeBare, yes );
 
@@ -1225,6 +1231,10 @@ int main( int argc, char** argv )
 
                     case 'c':
                         tidyOptSetBool( tdoc, TidyMakeClean, yes );
+                        break;
+
+                    case 'g':
+                        tidyOptSetBool( tdoc, TidyGDocClean, yes );
                         break;
 
                     case 'b':

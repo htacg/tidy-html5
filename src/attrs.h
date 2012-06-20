@@ -87,6 +87,8 @@ const Attribute* TY_(FindAttribute)( TidyDocImpl* doc, AttVal *attval );
 
 AttVal* TY_(GetAttrByName)( Node *node, ctmbstr name );
 
+void TY_(DropAttrByName)( TidyDocImpl* doc, Node *node, ctmbstr name );
+
 AttVal* TY_(AddAttribute)( TidyDocImpl* doc,
                            Node *node, ctmbstr name, ctmbstr value );
 

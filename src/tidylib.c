@@ -29,6 +29,7 @@
 #include "tidy-int.h"
 #include "parser.h"
 #include "clean.h"
+#include "gdoc.h"
 #include "config.h"
 #include "message.h"
 #include "pprint.h"
@@ -1238,6 +1239,7 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     Bool word2K   = cfgBool( doc, TidyWord2000 );
     Bool logical  = cfgBool( doc, TidyLogicalEmphasis );
     Bool clean    = cfgBool( doc, TidyMakeClean );
+    Bool gdoc     = cfgBool( doc, TidyGDocClean );
     Bool dropFont = cfgBool( doc, TidyDropFontTags );
     Bool htmlOut  = cfgBool( doc, TidyHtmlOut );
     Bool xmlOut   = cfgBool( doc, TidyXmlOut );
@@ -1277,6 +1279,10 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     /* replaces presentational markup by style rules */
     if ( clean || dropFont )
         TY_(CleanDocument)( doc );
+
+    /* clean up html exported by Google Focs */
+    if ( gdoc )
+        TY_(CleanGoogleDocument)( doc );
 
     /*  Move terminating <br /> tags from out of paragraphs  */
     /*!  Do we want to do this for all block-level elements?  */

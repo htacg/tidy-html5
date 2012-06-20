@@ -126,6 +126,7 @@ typedef enum
   TidyUpperCaseAttrs,  /**< Output attributes in upper not lower case */
   TidyMakeBare,        /**< Make bare HTML: remove Microsoft cruft */
   TidyMakeClean,       /**< Replace presentational clutter by style rules */
+  TidyGDocClean,       /**< Clean up HTML exported from Google Docs */
   TidyLogicalEmphasis, /**< Replace i by em and b by strong */
   TidyDropPropAttrs,   /**< Discard proprietary attributes */
   TidyDropFontTags,    /**< Discard presentation tags */

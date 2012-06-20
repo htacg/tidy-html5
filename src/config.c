@@ -252,6 +252,7 @@ static const TidyOptionImpl option_defs[] =
   { TidyUpperCaseAttrs,          MU, "uppercase-attributes",        BL, no,              ParseBool,         boolPicks       },
   { TidyMakeBare,                MU, "bare",                        BL, no,              ParseBool,         boolPicks       },
   { TidyMakeClean,               MU, "clean",                       BL, no,              ParseBool,         boolPicks       },
+  { TidyGDocClean,               MU, "gdoc",                        BL, no,              ParseBool,         boolPicks       },
   { TidyLogicalEmphasis,         MU, "logical-emphasis",            BL, no,              ParseBool,         boolPicks       },
   { TidyDropPropAttrs,           MU, "drop-proprietary-attributes", BL, no,              ParseBool,         boolPicks       },
   { TidyDropFontTags,            MU, "drop-font-tags",              BL, no,              ParseBool,         boolPicks       },

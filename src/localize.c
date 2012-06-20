@@ -359,6 +359,8 @@ static const TidyOptionId TidyDropFontTagsLinks[] =
   { TidyMakeClean, TidyUnknownOption };
 static const TidyOptionId TidyMakeCleanTagsLinks[] =
   { TidyDropFontTags, TidyUnknownOption };
+static const TidyOptionId TidyGDocCleanLinks[] =
+  { TidyMakeClean, TidyUnknownOption };
 
 /* Documentation of options */
 static const TidyOptionDoc option_docs[] =
@@ -403,6 +405,12 @@ static const TidyOptionDoc option_docs[] =
    "should strip out surplus presentational tags and attributes replacing "
    "them by style rules and structural markup as appropriate. It works well "
    "on the HTML saved by Microsoft Office products. "
+   , TidyMakeCleanTagsLinks
+  },
+  {TidyGDocClean,
+   "This option specifies if Tidy "
+   "should enable specific behavior for cleaning up HTML exported from"
+   "Google Docs. "
    , TidyMakeCleanTagsLinks
   },
   {TidyDoctype,

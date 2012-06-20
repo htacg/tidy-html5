@@ -751,6 +751,27 @@ AttVal* TY_(GetAttrByName)( Node *node, ctmbstr name )
     return attr;
 }
 
+void TY_(DropAttrByName)( TidyDocImpl* doc, Node *node, ctmbstr name )
+{
+    AttVal *attr, *prev = NULL, *next;
+
+    for (attr = node->attributes; attr != NULL; prev = attr, attr = next)
+    {
+        next = attr->next;
+
+        if (attr->attribute && TY_(tmbstrcmp)(attr->attribute, name) == 0)
+        {
+            if (prev)
+                 prev->next = next;
+            else
+                 node->attributes = next;
+
+            TY_(FreeAttribute)( doc, attr ); 
+            break;
+        }
+    }
+}
+
 AttVal* TY_(AddAttribute)( TidyDocImpl* doc,
                            Node *node, ctmbstr name, ctmbstr value )
 {

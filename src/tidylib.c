@@ -5,19 +5,19 @@
 
   CVS Info :
 
-    $Author: arnaud02 $ 
-    $Date: 2008/06/18 20:18:54 $ 
-    $Revision: 1.75 $ 
+    $Author: arnaud02 $
+    $Date: 2008/06/18 20:18:54 $
+    $Revision: 1.75 $
 
   Defines HTML Tidy API implemented by tidy library.
-  
+
   Very rough initial cut for discussion purposes.
 
   Public interface is const-correct and doesn't explicitly depend
   on any globals.  Thus, thread-safety may be introduced w/out
   changing the interface.
 
-  Looking ahead to a C++ wrapper, C functions always pass 
+  Looking ahead to a C++ wrapper, C functions always pass
   this-equivalent as 1st arg.
 
   Created 2001-05-20 by Charles Reitzel
@@ -117,7 +117,7 @@ TidyOption   tidyImplToOption( const TidyOptionImpl* option )
 ** 0    -> SUCCESS
 ** >0   -> WARNING
 ** <0   -> ERROR
-** 
+**
 */
 
 TidyDoc TIDY_CALL       tidyCreate(void)
@@ -628,8 +628,8 @@ Bool TIDY_CALL tidyOptCopyConfig( TidyDoc to, TidyDoc from )
 
 /* I/O and Message handling interface
 **
-** By default, Tidy will define, create and use 
-** tdocances of input and output handlers for 
+** By default, Tidy will define, create and use
+** tdocances of input and output handlers for
 ** standard C buffered I/O (i.e. FILE* stdin,
 ** FILE* stdout and FILE* stderr for content
 ** input, content output and diagnostic output,
@@ -639,7 +639,7 @@ Bool TIDY_CALL tidyOptCopyConfig( TidyDoc to, TidyDoc from )
 */
 
 /* Use TidyReportFilter to filter messages by diagnostic level:
-** info, warning, etc.  Just set diagnostic output 
+** info, warning, etc.  Just set diagnostic output
 ** handler to redirect all diagnostics output.  Return true
 ** to proceed with output, false to cancel.
 */
@@ -798,7 +798,7 @@ uint TIDY_CALL       tidyConfigErrorCount( TidyDoc tdoc )
 }
 
 
-/* Error reporting functions 
+/* Error reporting functions
 */
 void TIDY_CALL         tidyErrorSummary( TidyDoc tdoc )
 {
@@ -974,7 +974,7 @@ int         tidyDocSaveFile( TidyDocImpl* doc, ctmbstr filnam )
     if ( doc->errors > 0 &&
          cfgBool(doc, TidyWriteBack) && !cfgBool(doc, TidyForceOutput) )
         status = tidyDocStatus( doc );
-    else 
+    else
         fout = fopen( filnam, "wb" );
 
     if ( fout )
@@ -1008,7 +1008,7 @@ int         tidyDocSaveFile( TidyDocImpl* doc, ctmbstr filnam )
 ** The code has been left in in case it works w/ other compilers
 ** or operating systems.  If stdout is in Text mode, be aware that
 ** it will garble UTF16 documents.  In text mode, when it encounters
-** a single byte of value 10 (0xA), it will insert a single byte 
+** a single byte of value 10 (0xA), it will insert a single byte
 ** value 13 (0xD) just before it.  This has the effect of garbling
 ** the entire document.
 */
@@ -1073,7 +1073,7 @@ int         tidyDocSaveString( TidyDocImpl* doc, tmbstr buffer, uint* buflen )
     TidyBuffer outbuf;
     StreamOut* out;
     int status;
-    
+
     tidyBufInitWithAllocator( &outbuf, doc->allocator );
     out = TY_(BufferOutput)( doc, &outbuf, outenc, nl );
     status = tidyDocSaveStream( doc, out );
@@ -1097,7 +1097,7 @@ int         tidyDocSaveBuffer( TidyDocImpl* doc, TidyBuffer* outbuf )
         uint outenc = cfg( doc, TidyOutCharEncoding );
         uint nl = cfg( doc, TidyNewline );
         StreamOut* out = TY_(BufferOutput)( doc, outbuf, outenc, nl );
-    
+
         status = tidyDocSaveStream( doc, out );
         TidyDocFree( doc, out );
     }
@@ -1144,7 +1144,7 @@ int TIDY_CALL        tidyRunDiagnostics( TidyDoc tdoc )
 
 /* Workhorse functions.
 **
-** Parse requires input source, all input config items 
+** Parse requires input source, all input config items
 ** and diagnostic sink to have all been set before calling.
 **
 ** Emit likewise requires that document sink and all
@@ -1226,7 +1226,7 @@ int         tidyDocRunDiagnostics( TidyDocImpl* doc )
         TY_(ReportMarkupVersion)( doc );
         TY_(ReportNumWarnings)( doc );
     }
-    
+
     if ( doc->errors > 0 && !force )
         TY_(NeedsAuthorIntervention)( doc );
 
@@ -1396,7 +1396,6 @@ int         tidyDocSaveStream( TidyDocImpl* doc, StreamOut* out )
     {
         /* noop */
         TY_(DropFontElements)(doc, &doc->root, NULL);
-        TY_(WbrToSpace)(doc, &doc->root);
     }
 
     if ((makeClean && asciiChars) || makeBare)
@@ -1447,8 +1446,8 @@ int         tidyDocSaveStream( TidyDocImpl* doc, StreamOut* out )
 **
 ** The big issue here is the degree to which we should mimic
 ** a DOM and/or SAX nodes.
-** 
-** Is it 100% possible (and, if so, how difficult is it) to 
+**
+** Is it 100% possible (and, if so, how difficult is it) to
 ** emit SAX events from this API?  If SAX events are possible,
 ** is that 100% of data needed to build a DOM?
 */
@@ -1579,7 +1578,7 @@ Bool TIDY_CALL  tidyNodeGetText( TidyDoc tdoc, TidyNode tnod, TidyBuffer* outbuf
 
       TY_(PFlushLine)( doc, 0 );
       doc->docOut = NULL;
-  
+
       TidyDocFree( doc, out );
       return yes;
   }

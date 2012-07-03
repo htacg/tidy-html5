@@ -7,6 +7,8 @@
 /build/msvc2010/Releasetidydll/
 /build/msvc2010/Releasetidylib/
 /build/msvc2010/Release/
+/build/msvc2010/ipch/
+/build/msvc2010/tidy.opensdf
 /htmldoc/tidy-config.xml
 /htmldoc/tidy-help.xml
 /htmldoc/tidy.1

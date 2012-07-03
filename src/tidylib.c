@@ -1281,8 +1281,10 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
         TY_(CleanDocument)( doc );
 
     /* clean up html exported by Google Focs */
+#if 0
     if ( gdoc )
         TY_(CleanGoogleDocument)( doc );
+#endif
 
     /*  Move terminating <br /> tags from out of paragraphs  */
     /*!  Do we want to do this for all block-level elements?  */

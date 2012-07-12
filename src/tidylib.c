@@ -1281,7 +1281,7 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
         TY_(CleanDocument)( doc );
 
     /* clean up html exported by Google Focs */
-#if 0
+#if 1
     if ( gdoc )
         TY_(CleanGoogleDocument)( doc );
 #endif

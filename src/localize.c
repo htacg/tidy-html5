@@ -532,12 +532,6 @@ static const TidyOptionDoc option_docs[] =
    "elements; for example, for the case "
    "&lt;b class=\"rtop-2\"&gt;foo &lt;b class=\"r2-2\"&gt;bar&lt;/b&gt; baz&lt;/b&gt;, "
    "Tidy will output  &lt;b class=\"rtop-2\"&gt;foo bar baz&lt;/b&gt;. "
-   "Note that if you set this option to \"no\" Tidy will by default still "
-   "attempt to correct some cases of nested &lt;b&gt; and &lt;i&gt; elements; "
-   "for example, given "
-   "&lt;span&gt;foo &lt;b&gt;bar &lt;b&gt;baz&lt;/b&gt;&lt;/b&gt; &lt;/span&gt;, "
-   "Tidy will output &lt;span&gt;foo &lt;b&gt;bar baz&lt;/b&gt;&lt;/span&gt;. "
-   "To suppress that behavior, set the coerce-endtags option to \"no\". "
   },
   {TidyMergeDivs,
    "Can be used to modify behavior of -c (--clean yes) option. "

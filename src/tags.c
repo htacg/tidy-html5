@@ -162,7 +162,7 @@ static const Dict tag_defs[] =
   { TidyTag_A,          "a",          VERS_ELEM_A,          &TY_(W3CAttrsFor_A)[0],          (CM_INLINE|CM_BLOCK|CM_MIXED),                 TY_(ParseBlock),    NULL           },
   { TidyTag_ABBR,       "abbr",       VERS_ELEM_ABBR,       &TY_(W3CAttrsFor_ABBR)[0],       (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_ACRONYM,    "acronym",    VERS_ELEM_ACRONYM,    &TY_(W3CAttrsFor_ACRONYM)[0],    (CM_INLINE),                                   TY_(ParseInline),   NULL           },
-  { TidyTag_ADDRESS,    "address",    VERS_ELEM_ADDRESS,    &TY_(W3CAttrsFor_ADDRESS)[0],    (CM_BLOCK),                                    TY_(ParseInline),   NULL           },
+  { TidyTag_ADDRESS,    "address",    VERS_ELEM_ADDRESS,    &TY_(W3CAttrsFor_ADDRESS)[0],    (CM_BLOCK),                                    TY_(ParseBlock),    NULL           },
   { TidyTag_APPLET,     "applet",     VERS_ELEM_APPLET,     &TY_(W3CAttrsFor_APPLET)[0],     (CM_OBJECT|CM_IMG|CM_INLINE|CM_PARAM),         TY_(ParseBlock),    NULL           },
   { TidyTag_AREA,       "area",       VERS_ELEM_AREA,       &TY_(W3CAttrsFor_AREA)[0],       (CM_BLOCK|CM_EMPTY),                           TY_(ParseEmpty),    CheckAREA      },
   { TidyTag_B,          "b",          VERS_ELEM_B,          &TY_(W3CAttrsFor_B)[0],          (CM_INLINE),                                   TY_(ParseInline),   NULL           },

@@ -5,12 +5,12 @@
 
   (c) 1998-2007 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
-  
+
   CVS Info :
 
-    $Author: arnaud02 $ 
-    $Date: 2007/06/14 09:36:06 $ 
-    $Revision: 1.29 $ 
+    $Author: arnaud02 $
+    $Date: 2007/06/14 09:36:06 $
+    $Revision: 1.29 $
 
 */
 
@@ -226,6 +226,7 @@ uint TY_(NodeAttributeVersions)( Node* node, TidyAttrId id );
 #define attrIsID(av)                AttrIsId( av, TidyAttr_ID  )
 #define attrIsISMAP(av)             AttrIsId( av, TidyAttr_ISMAP  )
 #define attrIsITEMPROP(av)          AttrIsId( av, TidyAttr_ITEMPROP  )
+#define attrIsITEMSCOPE(av)         AttrIsId( av, TidyAttr_ITEMSCOPE  )
 #define attrIsLABEL(av)             AttrIsId( av, TidyAttr_LABEL  )
 #define attrIsLANG(av)              AttrIsId( av, TidyAttr_LANG  )
 #define attrIsLANGUAGE(av)          AttrIsId( av, TidyAttr_LANGUAGE  )

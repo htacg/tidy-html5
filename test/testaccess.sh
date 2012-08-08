@@ -8,12 +8,6 @@
 #
 # <URL:http://tidy.sourceforge.net/>
 #
-# CVS Info:
-#
-#    $Author: arnaud02 $
-#    $Date: 2005/03/23 12:57:19 $
-#    $Revision: 1.1 $
-#
 # set -x
 
 VERSION='$Id'

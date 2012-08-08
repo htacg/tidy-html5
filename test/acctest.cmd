@@ -7,11 +7,6 @@ REM See tidy.c for the copyright notice.
 REM
 REM <URL:http://tidy.sourceforge.net/>
 REM
-REM CVS Info:
-REM
-REM    $Author: arnaud02 $
-REM    $Date: 2006/10/20 16:44:40 $
-REM    $Revision: 1.2 $
 
 @REM USER VARIABLES
 @REM ##############

@@ -6,12 +6,6 @@
   (c) 1998-2007 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
 
-  CVS Info :
-
-    $Author: arnaud02 $ 
-    $Date: 2007/02/11 09:45:52 $ 
-    $Revision: 1.7 $ 
-
   Avoids many include file circular dependencies.
 
   Try to keep this file down to the minimum to avoid

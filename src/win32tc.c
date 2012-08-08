@@ -3,7 +3,6 @@
   (c) 1998-2008 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
 
-  $Id: win32tc.c,v 1.12 2008/08/09 11:55:27 hoehrmann Exp $
 */
 
 /* keep these here to keep file non-empty */

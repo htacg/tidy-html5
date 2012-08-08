@@ -5,7 +5,6 @@
 
    Originally contributed by Cory Nelson and Nuno Lopes
 
-   $Id: mappedio.c,v 1.14 2008/03/18 20:19:35 arnaud02 Exp $
 */
 
 /* keep these here to keep file non-empty */

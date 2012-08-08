@@ -3,7 +3,6 @@
   (c) 1998-2008 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
 
-  $Id: iconvtc.c,v 1.2 2008/08/09 11:55:27 hoehrmann Exp $
 */
 
 #include "tidy.h"

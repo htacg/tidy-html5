@@ -4,12 +4,6 @@
   (c) 1998-2008 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
 
-  CVS Info :
-
-    $Author: arnaud02 $ 
-    $Date: 2008/10/14 12:18:10 $ 
-    $Revision: 1.111 $ 
-
   Filters from other formats such as Microsoft Word
   often make excessive use of presentation markup such
   as font tags, B, I, and the align attribute. By applying

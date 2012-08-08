@@ -8,12 +8,6 @@
 
     Written by Charles Reitzel and Jelks Cabaniss
 
-  CVS Info :
-
-    $Author: arnaud02 $
-    $Date: 2005/04/13 11:10:58 $
-    $Revision: 1.2 $
-
 -->
 
 <xsl:stylesheet version="1.0"

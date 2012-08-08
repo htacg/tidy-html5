@@ -3,12 +3,6 @@
   
   (c) 1998-2007 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
-  
-  CVS Info :
-
-    $Author: arnaud02 $ 
-    $Date: 2008/03/22 20:23:37 $ 
-    $Revision: 1.119 $ 
 
 */
 

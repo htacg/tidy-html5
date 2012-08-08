@@ -11,12 +11,6 @@
   Consortium for Informatics and Mathematics, Keio University).
   All Rights Reserved.
 
-  CVS Info :
-
-    $Author: arnaud02 $ 
-    $Date: 2008/06/18 20:18:54 $ 
-    $Revision: 1.18 $ 
-
   Contributing Author(s):
 
      Dave Raggett <dsr@w3.org>

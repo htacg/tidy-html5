@@ -5,15 +5,7 @@
   
    (c) 1998-2008 (W3C) MIT, ERCIM, Keio University
    See tidy.h for the copyright notice.
-  
-   CVS Info:
-    $Author: arnaud02 $ 
-    $Date: 2008/03/22 21:06:11 $ 
-    $Revision: 1.41 $ 
 
-*/
-
-/*
   Given an input source, it returns a sequence of tokens.
 
      GetToken(source) gets the next token

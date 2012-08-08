@@ -3,12 +3,6 @@
   (c) 1998-2008 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
 
-  CVS Info :
-
-    $Author: arnaud02 $ 
-    $Date: 2008/03/22 21:00:18 $ 
-    $Revision: 1.43 $ 
-
   Wrapper around Tidy input source and output sink
   that calls appropriate interfaces, and applies
   necessary char encoding transformations: to/from

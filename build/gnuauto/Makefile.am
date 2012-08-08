@@ -1,11 +1,5 @@
 # Makefile [Makefile.am] - for tidy - HTML parser and pretty printer
 #
-#  CVS Info :
-#
-#     $Author: creitzel $ 
-#     $Date: 2003/03/19 18:37:37 $ 
-#     $Revision: 1.3 $ 
-#
 #  Copyright (c) 1998-2003 World Wide Web Consortium
 #  (Massachusetts Institute of Technology, European Research 
 #  Consortium for Informatics and Mathematics, Keio University).

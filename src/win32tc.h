@@ -7,7 +7,6 @@
    (c) 1998-2006 (W3C) MIT, ERCIM, Keio University
    See tidy.h for the copyright notice.
 
-   $Id: win32tc.h,v 1.3 2006/12/29 16:31:09 arnaud02 Exp $
 */
 
 uint TY_(Win32MLangGetCPFromName)(TidyAllocator *allocator,ctmbstr encoding);

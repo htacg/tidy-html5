@@ -55,10 +55,15 @@ struct _AttrHash
 typedef struct _AttrHash AttrHash;
 #endif
 
+enum
+{
+    ANCHOR_HASH_SIZE=1021u
+};
+
 struct _TidyAttribImpl
 {
     /* anchor/node lookup */
-    Anchor*    anchor_list;
+    Anchor*    anchor_hash[ANCHOR_HASH_SIZE];
 
     /* Declared literal attributes */
     Attribute* declared_attr_list;

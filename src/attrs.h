@@ -122,7 +122,7 @@ Bool TY_(IsValidHTMLID)(ctmbstr id);
 Bool TY_(IsValidXMLID)(ctmbstr id);
 
 /* removes anchor for specific node */
-void TY_(RemoveAnchorByNode)( TidyDocImpl* doc, Node *node );
+void TY_(RemoveAnchorByNode)( TidyDocImpl* doc, ctmbstr name, Node *node );
 
 /* free all anchors */
 void TY_(FreeAnchors)( TidyDocImpl* doc );

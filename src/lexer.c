@@ -1077,7 +1077,7 @@ void TY_(FreeAttrs)( TidyDocImpl* doc, Node *node )
             if ( (attrIsID(av) || attrIsNAME(av)) &&
                  TY_(IsAnchorElement)(doc, node) )
             {
-                TY_(RemoveAnchorByNode)( doc, node );
+                TY_(RemoveAnchorByNode)( doc, av->value, node );
             }
         }
 

@@ -2638,17 +2638,19 @@ void TY_(FixAnchors)(TidyDocImpl* doc, Node *node, Bool wantName, Bool wantId)
 
             if (id && !wantId
                 /* make sure that Name has been emitted if requested */
-                && (hadName || !wantName || NameEmitted) )
+                && (hadName || !wantName || NameEmitted) ) {
+                if (!wantId && !wantName)
+                    TY_(RemoveAnchorByNode)(doc, id->value, node);
                 TY_(RemoveAttribute)(doc, node, id);
+            }
 
             if (name && !wantName
                 /* make sure that Id has been emitted if requested */
-                && (hadId || !wantId || IdEmitted) )
+                && (hadId || !wantId || IdEmitted) ) {
+                if (!wantId && !wantName)
+                    TY_(RemoveAnchorByNode)(doc, name->value, node);
                 TY_(RemoveAttribute)(doc, node, name);
-
-            if (TY_(AttrGetById)(node, TidyAttr_NAME) == NULL &&
-                TY_(AttrGetById)(node, TidyAttr_ID) == NULL)
-                TY_(RemoveAnchorByNode)(doc, node);
+            }
         }
 
         if (node->content)

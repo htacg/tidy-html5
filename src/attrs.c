@@ -900,28 +900,37 @@ static void FreeAnchor(TidyDocImpl* doc, Anchor *a)
     TidyDocFree( doc, a );
 }
 
+static uint anchorNameHash(ctmbstr s)
+{
+    uint hashval;
+
+    for (hashval = 0; *s != '\0'; s++) {
+        tmbchar c = TY_(ToLower)( *s );
+        hashval = c + 31*hashval;
+    }
+
+    return hashval % ANCHOR_HASH_SIZE;
+}
+
 /* removes anchor for specific node */
-void TY_(RemoveAnchorByNode)( TidyDocImpl* doc, Node *node )
+void TY_(RemoveAnchorByNode)( TidyDocImpl* doc, ctmbstr name, Node *node )
 {
     TidyAttribImpl* attribs = &doc->attribs;
-    Anchor *delme = NULL, *curr, *prev;
-    uint h;
+    Anchor *delme = NULL, *curr, *prev = NULL;
+    uint h = anchorNameHash(name);
 
-    for (h = 0; h < ANCHOR_HASH_SIZE; h++) {
-        prev = NULL;
-        for ( curr=attribs->anchor_hash[h]; curr!=NULL; curr=curr->next )
+    for ( curr=attribs->anchor_hash[h]; curr!=NULL; curr=curr->next )
+    {
+        if ( curr->node == node )
         {
-            if ( curr->node == node )
-            {
-                if ( prev )
-                    prev->next = curr->next;
-                else
-                    attribs->anchor_hash[h] = curr->next;
-                delme = curr;
-                break;
-            }
-            prev = curr;
+            if ( prev )
+                prev->next = curr->next;
+            else
+                attribs->anchor_hash[h] = curr->next;
+            delme = curr;
+            break;
         }
+        prev = curr;
     }
     FreeAnchor( doc, delme );
 }
@@ -939,25 +948,12 @@ static Anchor* NewAnchor( TidyDocImpl* doc, ctmbstr name, Node* node )
     return a;
 }
 
-static uint anchorNameHash(ctmbstr s)
-{
-    uint hashval;
-
-    for (hashval = 0; *s != '\0'; s++)
-        hashval = *s + 31*hashval;
-
-    return hashval % ANCHOR_HASH_SIZE;
-}
-
 /* add new anchor to namespace */
 static Anchor* AddAnchor( TidyDocImpl* doc, ctmbstr name, Node *node )
 {
-    uint h;
     TidyAttribImpl* attribs = &doc->attribs;
     Anchor *a = NewAnchor( doc, name, node );
-    tmbstr lname = TY_(tmbstrdup)(doc->allocator, name);
-    lname = TY_(tmbstrtolower)(lname);
-    h = anchorNameHash(lname);
+    uint h = anchorNameHash(name);
 
     if ( attribs->anchor_hash[h] == NULL)
          attribs->anchor_hash[h] = a;
@@ -969,19 +965,17 @@ static Anchor* AddAnchor( TidyDocImpl* doc, ctmbstr name, Node *node )
         here->next = a;
     }
 
-    TidyDocFree(doc, lname);
     return attribs->anchor_hash[h];
 }
 
 /* return node associated with anchor */
 static Node* GetNodeByAnchor( TidyDocImpl* doc, ctmbstr name )
 {
-    uint h;
     TidyAttribImpl* attribs = &doc->attribs;
     Anchor *found;
+    uint h = anchorNameHash(name);
     tmbstr lname = TY_(tmbstrdup)(doc->allocator, name);
     lname = TY_(tmbstrtolower)(lname);
-    h = anchorNameHash(lname);
 
     for ( found = attribs->anchor_hash[h]; found != NULL; found = found->next )
     {

@@ -36,4 +36,3 @@ following steps.
 
 Note that you will either need to run `make install` as root, or with `sudo make
 install`.
-

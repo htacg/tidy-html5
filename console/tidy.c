@@ -6,11 +6,6 @@
   Consortium for Informatics and Mathematics, Keio University).
   All Rights Reserved.
 
-  CVS Info :
-
-    $Author: arnaud02 $ 
-    $Date: 2008/03/22 20:53:08 $ 
-    $Revision: 1.50 $ 
 */
 
 #include "tidy.h"

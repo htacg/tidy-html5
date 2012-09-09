@@ -220,6 +220,7 @@ uint TY_(NodeAttributeVersions)( Node* node, TidyAttrId id );
 #define attrIsID(av)                AttrIsId( av, TidyAttr_ID  )
 #define attrIsISMAP(av)             AttrIsId( av, TidyAttr_ISMAP  )
 #define attrIsITEMPROP(av)          AttrIsId( av, TidyAttr_ITEMPROP  )
+#define attrIsITEMSCOPE(av)         AttrIsId( av, TidyAttr_ITEMSCOPE  )
 #define attrIsLABEL(av)             AttrIsId( av, TidyAttr_LABEL  )
 #define attrIsLANG(av)              AttrIsId( av, TidyAttr_LANG  )
 #define attrIsLANGUAGE(av)          AttrIsId( av, TidyAttr_LANGUAGE  )

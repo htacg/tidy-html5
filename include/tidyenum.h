@@ -539,6 +539,7 @@ typedef enum
   TidyAttr_ID,                /**< ID= */
   TidyAttr_ISMAP,             /**< ISMAP= */
   TidyAttr_ITEMPROP,          /**< ITEMPROP= */
+  TidyAttr_ITEMSCOPE,         /**< ITEMSCOPE= */
   TidyAttr_LABEL,             /**< LABEL= */
   TidyAttr_LANG,              /**< LANG= */
   TidyAttr_LANGUAGE,          /**< LANGUAGE= */

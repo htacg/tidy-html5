@@ -128,6 +128,7 @@ extern const AttrVersion TY_(W3CAttrsFor_ASIDE)[];
 extern const AttrVersion TY_(W3CAttrsFor_NAV)[];
 extern const AttrVersion TY_(W3CAttrsFor_SECTION)[];
 extern const AttrVersion TY_(W3CAttrsFor_FOOTER)[];
+extern const AttrVersion TY_(W3CAttrsFor_MAIN)[];
 extern const AttrVersion TY_(W3CAttrsFor_HEADER)[];
 extern const AttrVersion TY_(W3CAttrsFor_DETAILS)[];
 extern const AttrVersion TY_(W3CAttrsFor_COMMAND)[];

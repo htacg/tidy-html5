@@ -67,11 +67,11 @@ extern "C" {
 */
 typedef enum
 {
-  TidyMarkup,          /**< Markup options: (X)HTML version, etc */
-  TidyDiagnostics,     /**< Diagnostics */
-  TidyPrettyPrint,     /**< Output layout */
-  TidyEncoding,        /**< Character encodings */
-  TidyMiscellaneous    /**< File handling, message format, etc. */
+  TidyMarkup = 0,          /**< Markup options: (X)HTML version, etc */
+  TidyDiagnostics = 1,     /**< Diagnostics */
+  TidyPrettyPrint = 2,     /**< Output layout */
+  TidyEncoding = 3,        /**< Character encodings */
+  TidyMiscellaneous = 4    /**< File handling, message format, etc. */
 } TidyConfigCategory;
 
 
@@ -211,9 +211,9 @@ typedef enum
 */
 typedef enum
 {
-  TidyString,          /**< String */
-  TidyInteger,         /**< Integer or enumeration */
-  TidyBoolean          /**< Boolean flag */
+  TidyString = 0,          /**< String */
+  TidyInteger = 1,         /**< Integer or enumeration */
+  TidyBoolean = 2          /**< Boolean flag */
 } TidyOptionType;
 
 
@@ -221,18 +221,18 @@ typedef enum
 */
 typedef enum
 {
-   TidyNoState,     /**< maps to 'no' */
-   TidyYesState,    /**< maps to 'yes' */
-   TidyAutoState    /**< Automatic */
+   TidyNoState = 0,     /**< maps to 'no' */
+   TidyYesState = 1,    /**< maps to 'yes' */
+   TidyAutoState = 2    /**< Automatic */
 } TidyTriState;
 
 /** TidyNewline option values to control output line endings.
 */
 typedef enum
 {
-    TidyLF,         /**< Use Unix style: LF */
-    TidyCRLF,       /**< Use DOS/Windows style: CR+LF */
-    TidyCR          /**< Use Macintosh style: CR */
+    TidyLF = 0,         /**< Use Unix style: LF */
+    TidyCRLF = 1,       /**< Use DOS/Windows style: CR+LF */
+    TidyCR = 2          /**< Use Macintosh style: CR */
 } TidyLineEnding;
 
 
@@ -240,29 +240,29 @@ typedef enum
 */
 typedef enum
 {
-    TidyDoctypeHtml5,   /**< <!DOCTYPE html> */
-    TidyDoctypeOmit,    /**< Omit DOCTYPE altogether */
-    TidyDoctypeAuto,    /**< Keep DOCTYPE in input.  Set version to content */
-    TidyDoctypeStrict,  /**< Convert document to HTML 4 strict content model */
-    TidyDoctypeLoose,   /**< Convert document to HTML 4 transitional
-                             content model */
-    TidyDoctypeUser     /**< Set DOCTYPE FPI explicitly */
+    TidyDoctypeHtml5 = 0,   /**< <!DOCTYPE html> */
+    TidyDoctypeOmit = 1,    /**< Omit DOCTYPE altogether */
+    TidyDoctypeAuto = 2,    /**< Keep DOCTYPE in input.  Set version to content */
+    TidyDoctypeStrict = 3,  /**< Convert document to HTML 4 strict content model */
+    TidyDoctypeLoose = 4,   /**< Convert document to HTML 4 transitional
+                                 content model */
+    TidyDoctypeUser = 5    /**< Set DOCTYPE FPI explicitly */
 } TidyDoctypeModes;
 
 /** Mode controlling treatment of duplicate Attributes
 */
 typedef enum
 {
-    TidyKeepFirst,
-    TidyKeepLast
+    TidyKeepFirst = 0,
+    TidyKeepLast = 1
 } TidyDupAttrModes;
 
 /** Mode controlling treatment of sorting attributes
 */
 typedef enum
 {
-    TidySortAttrNone,
-    TidySortAttrAlpha
+    TidySortAttrNone = 0,
+    TidySortAttrAlpha = 1
 } TidyAttrSortStrategy;
 
 /* I/O and Message handling interface
@@ -281,13 +281,13 @@ typedef enum
 */
 typedef enum 
 {
-  TidyInfo,             /**< Information about markup usage */
-  TidyWarning,          /**< Warning message */
-  TidyConfig,           /**< Configuration error */
-  TidyAccess,           /**< Accessibility message */
-  TidyError,            /**< Error message - output suppressed */
-  TidyBadDocument,      /**< I/O or file system error */
-  TidyFatal             /**< Crash! */
+  TidyInfo = 0,             /**< Information about markup usage */
+  TidyWarning = 1,          /**< Warning message */
+  TidyConfig = 2,           /**< Configuration error */
+  TidyAccess = 3,           /**< Accessibility message */
+  TidyError = 4,            /**< Error message - output suppressed */
+  TidyBadDocument = 5,      /**< I/O or file system error */
+  TidyFatal = 6             /**< Crash! */
 } TidyReportLevel;
 
 
@@ -298,20 +298,20 @@ typedef enum
 */
 typedef enum 
 {
-  TidyNode_Root,        /**< Root */
-  TidyNode_DocType,     /**< DOCTYPE */
-  TidyNode_Comment,     /**< Comment */
-  TidyNode_ProcIns,     /**< Processing Instruction */
-  TidyNode_Text,        /**< Text */
-  TidyNode_Start,       /**< Start Tag */
-  TidyNode_End,         /**< End Tag */
-  TidyNode_StartEnd,    /**< Start/End (empty) Tag */
-  TidyNode_CDATA,       /**< Unparsed Text */
-  TidyNode_Section,     /**< XML Section */
-  TidyNode_Asp,         /**< ASP Source */
-  TidyNode_Jste,        /**< JSTE Source */
-  TidyNode_Php,         /**< PHP Source */
-  TidyNode_XmlDecl      /**< XML Declaration */
+  TidyNode_Root = 0,        /**< Root */
+  TidyNode_DocType = 1,     /**< DOCTYPE */
+  TidyNode_Comment = 2,     /**< Comment */
+  TidyNode_ProcIns = 3,     /**< Processing Instruction */
+  TidyNode_Text = 4,        /**< Text */
+  TidyNode_Start = 5,       /**< Start Tag */
+  TidyNode_End = 6,         /**< End Tag */
+  TidyNode_StartEnd = 7,    /**< Start/End (empty) Tag */
+  TidyNode_CDATA = 8,       /**< Unparsed Text */
+  TidyNode_Section = 9,     /**< XML Section */
+  TidyNode_Asp = 10,        /**< ASP Source */
+  TidyNode_Jste = 11,       /**< JSTE Source */
+  TidyNode_Php = 12,        /**< PHP Source */
+  TidyNode_XmlDecl = 13     /**< XML Declaration */
 } TidyNodeType;
 
 
@@ -319,16 +319,16 @@ typedef enum
 */
 typedef enum
 {
-  TidyTag_UNKNOWN,  /**< Unknown tag! */
-  TidyTag_A,        /**< A */
-  TidyTag_ABBR,     /**< ABBR */
-  TidyTag_ACRONYM,  /**< ACRONYM */
-  TidyTag_ADDRESS,  /**< ADDRESS */
-  TidyTag_ALIGN,    /**< ALIGN */
-  TidyTag_APPLET,   /**< APPLET */
-  TidyTag_AREA,     /**< AREA */
-  TidyTag_B,        /**< B */
-  TidyTag_BASE,     /**< BASE */
+  TidyTag_UNKNOWN,   /**< Unknown tag! */
+  TidyTag_A,         /**< A */
+  TidyTag_ABBR,      /**< ABBR */
+  TidyTag_ACRONYM,   /**< ACRONYM */
+  TidyTag_ADDRESS,   /**< ADDRESS */
+  TidyTag_ALIGN,     /**< ALIGN */
+  TidyTag_APPLET,    /**< APPLET */
+  TidyTag_AREA,      /**< AREA */
+  TidyTag_B,         /**< B */
+  TidyTag_BASE,      /**< BASE */
   TidyTag_BASEFONT, /**< BASEFONT */
   TidyTag_BDO,      /**< BDO */
   TidyTag_BGSOUND,  /**< BGSOUND */

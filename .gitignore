@@ -1,5 +1,12 @@
 /build/gmake/obj/
 /bin/
+/build/msvc/Obj/
+/build/msvc/DebugDLL/
+/build/msvc/Debugtidylib/
+/build/msvc/Debug/
+/build/msvc/ReleaseDLL/
+/build/msvc/Releasetidylib/
+/build/msvc/Release/
 /build/msvc2010/Obj/
 /build/msvc2010/Debugtidydll/
 /build/msvc2010/Debugtidylib/

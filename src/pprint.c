@@ -1302,6 +1302,9 @@ static Bool AfterSpace(Lexer *lexer, Node *node)
     return AfterSpaceImp(lexer, node, TY_(nodeCMIsEmpty)(node));
 }
 
+static void PPrintEndTag( TidyDocImpl* doc, uint ARG_UNUSED(mode),
+                          uint ARG_UNUSED(indent), Node *node );
+
 static void PPrintTag( TidyDocImpl* doc,
                        uint mode, uint indent, Node *node )
 {
@@ -1344,7 +1347,12 @@ static void PPrintTag( TidyDocImpl* doc,
 
     AddChar( pprint, '>' );
 
-    if ( (node->type != StartEndTag || xhtmlOut) && !(mode & PREFORMATTED) )
+    if (node->type == StartEndTag && TY_(HTMLVersion)(doc) == HT50)
+    {
+        PPrintEndTag( doc, mode, indent, node );
+    }
+
+    if ( (node->type != StartEndTag || xhtmlOut || (node->type == StartEndTag && TY_(HTMLVersion)(doc) == HT50)) && !(mode & PREFORMATTED) )
     {
         uint wraplen = cfg( doc, TidyWrapLen );
         CheckWrapIndent( doc, indent );

@@ -738,6 +738,8 @@ typedef enum
   TidyAttr_SRCDOC,
   TidyAttr_SRCLANG,
   TidyAttr_STEP,
+  
+  TidyAttr_ROLE,
 
 
   N_TIDY_ATTRIBS              /**< Must be last */

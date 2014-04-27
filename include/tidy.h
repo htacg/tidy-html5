@@ -619,9 +619,15 @@ TIDY_EXPORT void TIDY_CALL tidyPutByte( TidyOutputSink* sink, uint byteValue );
 typedef Bool (TIDY_CALL *TidyReportFilter)( TidyDoc tdoc, TidyReportLevel lvl,
                                            uint line, uint col, ctmbstr mssg );
 
+typedef Bool (TIDY_CALL *TidyReportFilter2)( TidyDoc tdoc, TidyReportLevel lvl,
+										   uint line, uint col, ctmbstr mssg, va_list args );
+
 /** Give Tidy a filter callback to use */
 TIDY_EXPORT Bool TIDY_CALL    tidySetReportFilter( TidyDoc tdoc,
                                                   TidyReportFilter filtCallback );
+
+TIDY_EXPORT Bool TIDY_CALL    tidySetReportFilter2( TidyDoc tdoc,
+												  TidyReportFilter2 filtCallback );
 
 /** Set error sink to named file */
 TIDY_EXPORT FILE* TIDY_CALL   tidySetErrorFile( TidyDoc tdoc, ctmbstr errfilnam );
@@ -852,7 +858,7 @@ TIDY_EXPORT uint TIDY_CALL tidyNodeColumn( TidyNode tnod );
 
 /** @defgroup NodeIsElementName Deprecated node interrogation per TagId
 **
-** @deprecated The functions tidyNodeIs{ElementName} are deprecated and 
+** @deprecated The functions tidyNodeIs{ElementName} are deprecated and
 ** should be replaced by tidyNodeGetId.
 ** @{
 */
@@ -954,7 +960,7 @@ TIDY_EXPORT Bool TIDY_CALL tidyAttrIsProp( TidyAttr tattr );
 
 /** @defgroup AttrIsAttributeName Deprecated attribute interrogation per AttrId
 **
-** @deprecated The functions  tidyAttrIs{AttributeName} are deprecated and 
+** @deprecated The functions  tidyAttrIs{AttributeName} are deprecated and
 ** should be replaced by tidyAttrGetId.
 ** @{
 */
@@ -1019,7 +1025,7 @@ TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetById( TidyNode tnod, TidyAttrId attId 
 
 /** @defgroup AttrGetAttributeName Deprecated attribute retrieval per AttrId
 **
-** @deprecated The functions tidyAttrGet{AttributeName} are deprecated and 
+** @deprecated The functions tidyAttrGet{AttributeName} are deprecated and
 ** should be replaced by tidyAttrGetById.
 ** For instance, tidyAttrGetID( TidyNode tnod ) can be replaced by 
 ** tidyAttrGetById( TidyNode tnod, TidyAttr_ID ). This avoids a potential

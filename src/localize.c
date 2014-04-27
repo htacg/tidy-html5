@@ -1034,6 +1034,11 @@ static void messagePos( TidyDocImpl* doc, TidyReportLevel level,
             TidyDoc tdoc = tidyImplToDoc( doc );
             go = doc->mssgFilt( tdoc, level, line, col, messageBuf );
         }
+        if ( doc->mssgFilt2 )
+        {
+            TidyDoc tdoc = tidyImplToDoc( doc );
+            go = doc->mssgFilt2( tdoc, level, line, col, msg, args );
+        }
     }
 
     if ( go )

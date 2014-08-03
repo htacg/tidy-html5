@@ -2,7 +2,7 @@
 
   (c) 1998-2009 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
-  
+
 */
 
 #include "tidy-int.h"
@@ -152,6 +152,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_HTTP_EQUIV,        "http-equiv",            CH_PCDATA    }, /* META */
   { TidyAttr_ID,                "id",                    CH_IDDEF     }, 
   { TidyAttr_ISMAP,             "ismap",                 CH_BOOL      }, /* IMG */
+  { TidyAttr_ITEMPROP,          "itemprop",              CH_PCDATA    }, 
   { TidyAttr_LABEL,             "label",                 CH_PCDATA    }, /* OPT, OPTGROUP */
   { TidyAttr_LANG,              "lang",                  CH_LANG      }, 
   { TidyAttr_LANGUAGE,          "language",              CH_PCDATA    }, /* SCRIPT */
@@ -253,7 +254,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_SDASUFF,           "sdasuff",               CH_PCDATA    }, /* SDATA attribute in HTML 2.0 */
   { TidyAttr_URN,               "urn",                   CH_PCDATA    }, /* for <a>, never implemented */
 
-  /* "HTML5" */
+  /* HTML5 */
   { TidyAttr_ASYNC,             "async",                 CH_PCDATA    },
   { TidyAttr_AUTOCOMPLETE,      "autocomplete",          CH_PCDATA    },
   { TidyAttr_AUTOFOCUS,         "autofocus",             CH_PCDATA    },
@@ -362,7 +363,7 @@ static uint AttributeVersions(Node* node, AttVal* attval)
 {
     uint i;
 
-    /* "HTML5" data-* attributes */
+    /* HTML5 data-* attributes */
     if (attval && attval->attribute)
         if (TY_(tmbstrncmp)(attval->attribute, "data-", 5) == 0)
             return (XH50 | HT50);
@@ -742,6 +743,27 @@ AttVal* TY_(GetAttrByName)( Node *node, ctmbstr name )
             break;
     }
     return attr;
+}
+
+void TY_(DropAttrByName)( TidyDocImpl* doc, Node *node, ctmbstr name )
+{
+    AttVal *attr, *prev = NULL, *next;
+
+    for (attr = node->attributes; attr != NULL; prev = attr, attr = next)
+    {
+        next = attr->next;
+
+        if (attr->attribute && TY_(tmbstrcmp)(attr->attribute, name) == 0)
+        {
+            if (prev)
+                 prev->next = next;
+            else
+                 node->attributes = next;
+
+            TY_(FreeAttribute)( doc, attr ); 
+            break;
+        }
+    }
 }
 
 AttVal* TY_(AddAttribute)( TidyDocImpl* doc,
@@ -1360,11 +1382,8 @@ Bool TY_(IsValidHTMLID)(ctmbstr id)
     if (!s)
         return no;
 
-    if (!TY_(IsLetter)(*s++))
-        return no;
-
     while (*s)
-        if (!TY_(IsNamechar)(*s++))
+        if (TY_(IsHTMLSpace)(*s++))
             return no;
 
     return yes;
@@ -1807,9 +1826,11 @@ void CheckLang( TidyDocImpl* doc, Node *node, AttVal *attval)
 /* checks type attribute */
 void CheckType( TidyDocImpl* doc, Node *node, AttVal *attval)
 {
-    ctmbstr const valuesINPUT[] = {"text", "password", "checkbox", "radio",
-                                   "submit", "reset", "file", "hidden",
-                                   "image", "button", NULL};
+    ctmbstr const valuesINPUT[] = {
+        "text", "password", "checkbox", "radio", "submit", "reset", "file",
+        "hidden", "image", "button", "color", "date", "datetime",
+        "datetime-local", "email", "month", "number", "range", "search",
+        "tel", "time", "url", "week", NULL};
     ctmbstr const valuesBUTTON[] = {"button", "submit", "reset", NULL};
     ctmbstr const valuesUL[] = {"disc", "square", "circle", NULL};
     ctmbstr const valuesOL[] = {"1", "a", "i", NULL};

@@ -5,10 +5,7 @@
   
    (c) 1998-2008 (W3C) MIT, ERCIM, Keio University
    See tidy.h for the copyright notice.
-  
-*/
 
-/*
   Given an input source, it returns a sequence of tokens.
 
      GetToken(source) gets the next token
@@ -189,7 +186,7 @@ typedef enum
 /* special flag */
 #define VERS_XML           65536u
 
-/* "HTML5" */
+/* HTML5 */
 #define HT50              131072u
 #define XH50              262144u
 
@@ -202,6 +199,8 @@ typedef enum
 #define VERS_FRAMESET      (H40F|H41F|X10F)
 #define VERS_XHTML11       (XH11)
 #define VERS_BASIC         (XB10)
+/* HTML5 */
+#define VERS_HTML5         (HT50|XH50)
 
 /* meta symbols */
 #define VERS_HTML40        (VERS_HTML40_STRICT|VERS_HTML40_LOOSE|VERS_FRAMESET)
@@ -411,6 +410,7 @@ void TY_(ConstrainVersion)( TidyDocImpl* doc, uint vers );
 Bool TY_(IsWhite)(uint c);
 Bool TY_(IsDigit)(uint c);
 Bool TY_(IsLetter)(uint c);
+Bool TY_(IsHTMLSpace)(uint c);
 Bool TY_(IsNewline)(uint c);
 Bool TY_(IsNamechar)(uint c);
 Bool TY_(IsXMLLetter)(uint c);

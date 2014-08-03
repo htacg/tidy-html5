@@ -5,7 +5,7 @@
 
   (c) 1998-2007 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
-  
+
 */
 
 #include "forward.h"
@@ -80,6 +80,8 @@ const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attv
 const Attribute* TY_(FindAttribute)( TidyDocImpl* doc, AttVal *attval );
 
 AttVal* TY_(GetAttrByName)( Node *node, ctmbstr name );
+
+void TY_(DropAttrByName)( TidyDocImpl* doc, Node *node, ctmbstr name );
 
 AttVal* TY_(AddAttribute)( TidyDocImpl* doc,
                            Node *node, ctmbstr name, ctmbstr value );
@@ -217,6 +219,7 @@ uint TY_(NodeAttributeVersions)( Node* node, TidyAttrId id );
 #define attrIsHTTP_EQUIV(av)        AttrIsId( av, TidyAttr_HTTP_EQUIV  )
 #define attrIsID(av)                AttrIsId( av, TidyAttr_ID  )
 #define attrIsISMAP(av)             AttrIsId( av, TidyAttr_ISMAP  )
+#define attrIsITEMPROP(av)          AttrIsId( av, TidyAttr_ITEMPROP  )
 #define attrIsLABEL(av)             AttrIsId( av, TidyAttr_LABEL  )
 #define attrIsLANG(av)              AttrIsId( av, TidyAttr_LANG  )
 #define attrIsLANGUAGE(av)          AttrIsId( av, TidyAttr_LANGUAGE  )

@@ -9,6 +9,13 @@
 */
 
 #include "tidy.h"
+#ifdef _MSC_VER
+#include "sprtf.h"
+#endif
+
+#ifndef SPRTF
+#define SPRTF printf
+#endif
 
 static FILE* errout = NULL;  /* set to stderr */
 /* static FILE* txtout = NULL; */  /* set to stdout */
@@ -176,6 +183,9 @@ static const CmdOptDesc cmdopt_defs[] =  {
     { "-bare",
       "strip out smart quotes and em dashes, etc.",
       "bare: yes", CmdOptProcDir, "-b" },
+    { "-gdoc",
+      "produce clean version of html exported by google docs",
+      "gdoc: yes", CmdOptProcDir, "-g" },
     { "-numeric",
       "output numeric rather than named entities",
       "numeric-entities: yes", CmdOptProcDir, "-n" },
@@ -186,8 +196,8 @@ static const CmdOptDesc cmdopt_defs[] =  {
       "suppress nonessential output",
       "quiet: yes", CmdOptProcDir, "-q" },
     { "-omit",
-      "omit optional end tags",
-      "hide-endtags: yes", CmdOptProcDir },
+      "omit optional start tags and end tags",
+      "omit-optional-tags: yes", CmdOptProcDir },
     { "-xml",
       "specify the input is well formed XML",
       "input-xml: yes", CmdOptProcDir },
@@ -411,14 +421,16 @@ static void help( ctmbstr prog )
 {
     printf( "%s [option...] [file...] [option...] [file...]\n", prog );
     printf( "Utility to clean up and pretty print HTML/XHTML/XML\n");
-    printf( "See http://tidy.sourceforge.net/\n");
+    printf( "\n");
+
+    printf( "This is an HTML5-aware experimental fork of HTML Tidy.\n");
+    printf( "%s\n", tidyReleaseDate() );
     printf( "\n");
 
 #ifdef PLATFORM_NAME
-    printf( "Options for HTML Tidy for %s released on %s:\n",
-             PLATFORM_NAME, tidyReleaseDate() );
+    printf( "Options for HTML Tidy for %s:\n", PLATFORM_NAME );
 #else
-    printf( "Options for HTML Tidy released on %s:\n", tidyReleaseDate() );
+    printf( "Options for HTML Tidy:\n");
 #endif
     printf( "\n");
 
@@ -429,9 +441,27 @@ static void help( ctmbstr prog )
             "to the man page.\n\n");
 
     printf( "Input/Output default to stdin/stdout respectively.\n");
+    printf( "\n");
     printf( "Single letter options apart from -f may be combined\n");
     printf( "as in:  tidy -f errs.txt -imu foo.html\n");
-    printf( "For further info on HTML see http://www.w3.org/MarkUp\n");
+    printf( "\n");
+    printf( "For more information on this HTML5-aware experimental fork of Tidy,\n" );
+    printf( "see http://w3c.github.com/tidy-html5/\n" );
+    printf( "\n");
+    printf( "For more information on HTML, see the following:\n" );
+    printf( "\n");
+    printf( "  HTML: Edition for Web Authors (the latest HTML specification)\n");
+    printf( "  http://dev.w3.org/html5/spec-author-view\n" );
+    printf( "\n");
+    printf( "  HTML: The Markup Language (an HTML language reference)\n" );
+    printf( "  http://dev.w3.org/html5/markup/\n" );
+    printf( "\n");
+    printf( "File bug reports at https://github.com/w3c/tidy-html5/issues/\n" );
+    printf( "or send questions and comments to html-tidy@w3.org\n" );
+    printf( "\n");
+    printf( "Validate your HTML documents using the W3C Nu Markup Validator:\n" );
+    printf( "\n");
+    printf( "  http://validator.w3.org/nu/" );
     printf( "\n");
 }
 
@@ -472,6 +502,7 @@ ctmbstr ConfigCategoryName( TidyConfigCategory id )
     fprintf(stderr, "Fatal error: impossible value for id='%d'.\n", (int)id);
     assert(0);
     abort();
+    return "never_here"; /* only for the compiler warning */
 }
 
 /* Description of an option */
@@ -898,10 +929,10 @@ static void optionvalues( TidyDoc tdoc )
 static void version( void )
 {
 #ifdef PLATFORM_NAME
-    printf( "HTML Tidy for %s released on %s\n",
+    printf( "HTML Tidy for HTML5 for %s %s\n",
              PLATFORM_NAME, tidyReleaseDate() );
 #else
-    printf( "HTML Tidy released on %s\n", tidyReleaseDate() );
+    printf( "HTML Tidy for HTML5 %s\n", tidyReleaseDate() );
 #endif
 }
 
@@ -923,6 +954,9 @@ int main( int argc, char** argv )
 
     errout = stderr;  /* initialize to stderr */
     status = 0;
+#ifdef _MSC_VER
+    set_log_file((char *)"temptidy.txt", 0);
+#endif
     
 #ifdef TIDY_CONFIG_FILE
     if ( tidyFileExists( tdoc, TIDY_CONFIG_FILE) )
@@ -977,13 +1011,16 @@ int main( int argc, char** argv )
                     tidyOptResetToDefault( tdoc, TidyIndentSpaces );
             }
             else if ( strcasecmp(arg, "omit") == 0 )
-                tidyOptSetBool( tdoc, TidyHideEndTags, yes );
+                tidyOptSetBool( tdoc, TidyOmitOptionalTags, yes );
 
             else if ( strcasecmp(arg, "upper") == 0 )
                 tidyOptSetBool( tdoc, TidyUpperCaseTags, yes );
 
             else if ( strcasecmp(arg, "clean") == 0 )
                 tidyOptSetBool( tdoc, TidyMakeClean, yes );
+
+            else if ( strcasecmp(arg, "gdoc") == 0 )
+                tidyOptSetBool( tdoc, TidyGDocClean, yes );
 
             else if ( strcasecmp(arg, "bare") == 0 )
                 tidyOptSetBool( tdoc, TidyMakeBare, yes );
@@ -1202,6 +1239,10 @@ int main( int argc, char** argv )
                         tidyOptSetBool( tdoc, TidyMakeClean, yes );
                         break;
 
+                    case 'g':
+                        tidyOptSetBool( tdoc, TidyGDocClean, yes );
+                        break;
+
                     case 'b':
                         tidyOptSetBool( tdoc, TidyMakeBare, yes );
                         break;
@@ -1237,6 +1278,7 @@ int main( int argc, char** argv )
         if ( argc > 1 )
         {
             htmlfil = argv[1];
+            SPRTF("Tidying '%s'\n", htmlfil);
             if ( tidyOptGetBool(tdoc, TidyEmacs) )
                 tidyOptSetValue( tdoc, TidyEmacsFile, htmlfil );
             status = tidyParseFile( tdoc, htmlfil );
@@ -1263,10 +1305,17 @@ int main( int argc, char** argv )
             else
             {
                 ctmbstr outfil = tidyOptGetValue( tdoc, TidyOutFile );
-                if ( outfil )
+                if ( outfil ) {
                     status = tidySaveFile( tdoc, outfil );
-                else
+                } else {
+#if !defined(NDEBUG) && defined(_MSC_VER)
+                    static char tmp_buf[264];
+                    sprintf(tmp_buf,"%s.html",get_log_file());
+                    status = tidySaveFile( tdoc, tmp_buf );
+#else
                     status = tidySaveStdout( tdoc );
+#endif
+                }
             }
         }
 

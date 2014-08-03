@@ -102,11 +102,14 @@ typedef enum
   TidyOutFile,         /**< File name to write markup to */
   TidyWriteBack,       /**< If true then output tidied markup */
   TidyShowMarkup,      /**< If false, normal output is suppressed */
+  TidyShowInfo,        /**< If true, info-level messages are shown */
   TidyShowWarnings,    /**< However errors are always shown */
   TidyQuiet,           /**< No 'Parsing X', guessed DTD or summary */
   TidyIndentContent,   /**< Indent content of appropriate tags */
                        /**< "auto" does text/block level content indentation */
-  TidyHideEndTags,     /**< Suppress optional end tags */
+  TidyCoerceEndTags,   /**< Coerce end tags from start tags where probably intended */
+  TidyOmitOptionalTags,/**< Suppress optional start tags and end tags */
+  TidyHideEndTags,     /**< Legacy name for TidyOmitOptionalTags */
   TidyXmlTags,         /**< Treat input as XML */
   TidyXmlOut,          /**< Create output as XML */
   TidyXhtmlOut,        /**< Output extensible HTML */
@@ -117,9 +120,11 @@ typedef enum
   TidyUpperCaseAttrs,  /**< Output attributes in upper not lower case */
   TidyMakeBare,        /**< Make bare HTML: remove Microsoft cruft */
   TidyMakeClean,       /**< Replace presentational clutter by style rules */
+  TidyGDocClean,       /**< Clean up HTML exported from Google Docs */
   TidyLogicalEmphasis, /**< Replace i by em and b by strong */
   TidyDropPropAttrs,   /**< Discard proprietary attributes */
   TidyDropFontTags,    /**< Discard presentation tags */
+  TidyDropEmptyElems,  /**< Discard empty elements */
   TidyDropEmptyParas,  /**< Discard empty p elements */
   TidyFixComments,     /**< Fix comments with adjacent hyphens */
   TidyBreakBeforeBR,   /**< Output newline before <br> or not? */
@@ -192,6 +197,7 @@ typedef enum
 #else
   TidyPunctWrapNotUsed,
 #endif
+  TidyMergeEmphasis,       /**< Merge nested B and I elements */
   TidyMergeDivs,       /**< Merge multiple DIVs */
   TidyDecorateInferredUL,  /**< Mark inferred UL elements with no indent CSS */
   TidyPreserveEntities,    /**< Preserve entities */
@@ -234,6 +240,7 @@ typedef enum
 */
 typedef enum
 {
+    TidyDoctypeHtml5,   /**< <!DOCTYPE html> */
     TidyDoctypeOmit,    /**< Omit DOCTYPE altogether */
     TidyDoctypeAuto,    /**< Keep DOCTYPE in input.  Set version to content */
     TidyDoctypeStrict,  /**< Convert document to HTML 4 strict content model */
@@ -436,16 +443,20 @@ typedef enum
   TidyTag_ARTICLE,
   TidyTag_ASIDE,
   TidyTag_AUDIO,
+  TidyTag_BDI,
   TidyTag_CANVAS,
   TidyTag_COMMAND,
   TidyTag_DATALIST,
   TidyTag_DETAILS,
+  TidyTag_DIALOG,
   TidyTag_FIGCAPTION,
   TidyTag_FIGURE,
   TidyTag_FOOTER,
   TidyTag_HEADER,
   TidyTag_HGROUP,
+  TidyTag_MAIN,
   TidyTag_MARK,
+  TidyTag_MENUITEM,
   TidyTag_METER,
   TidyTag_NAV,
   TidyTag_OUTPUT,
@@ -531,6 +542,7 @@ typedef enum
   TidyAttr_HTTP_EQUIV,        /**< HTTP_EQUIV= */
   TidyAttr_ID,                /**< ID= */
   TidyAttr_ISMAP,             /**< ISMAP= */
+  TidyAttr_ITEMPROP,          /**< ITEMPROP= */
   TidyAttr_LABEL,             /**< LABEL= */
   TidyAttr_LANG,              /**< LANG= */
   TidyAttr_LANGUAGE,          /**< LANGUAGE= */

@@ -17,11 +17,7 @@ static CheckAttribs CheckLINK;
 static CheckAttribs CheckAREA;
 static CheckAttribs CheckTABLE;
 static CheckAttribs CheckCaption;
-static CheckAttribs CheckSCRIPT;
-static CheckAttribs CheckSTYLE;
 static CheckAttribs CheckHTML;
-static CheckAttribs CheckFORM;
-static CheckAttribs CheckMETA;
 
 #define VERS_ELEM_A          (HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50)
 #define VERS_ELEM_ABBR       (xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50)
@@ -128,16 +124,23 @@ static CheckAttribs CheckMETA;
 #define VERS_ELEM_ARTICLE    (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_ASIDE      (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_AUDIO      (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
+#define VERS_ELEM_BDI        (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_CANVAS     (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_COMMAND    (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_DATALIST   (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_DETAILS    (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
+#define VERS_ELEM_DIALOG     (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
+#define VERS_ELEM_EMBED      (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_FIGCAPTION (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_FIGURE     (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_FOOTER     (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_HEADER     (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_HGROUP     (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
+#define VERS_ELEM_KEYGEN     (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
+#define VERS_ELEM_MAIN       (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_MARK       (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
+#define VERS_ELEM_MENUITEM   (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
+#define VERS_ELEM_KEYGEN     (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_METER      (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_NAV        (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_OUTPUT     (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
@@ -148,16 +151,17 @@ static CheckAttribs CheckMETA;
 #define VERS_ELEM_TIME       (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_TRACK      (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_VIDEO      (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
+#define VERS_ELEM_WBR        (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 
 static const Dict tag_defs[] =
 {
   { TidyTag_UNKNOWN,    "unknown!",   VERS_UNKNOWN,         NULL,                       (0),                                           NULL,          NULL           },
 
   /* W3C defined elements */
-  { TidyTag_A,          "a",          VERS_ELEM_A,          &TY_(W3CAttrsFor_A)[0],          (CM_INLINE),                                   TY_(ParseInline),   NULL           },
+  { TidyTag_A,          "a",          VERS_ELEM_A,          &TY_(W3CAttrsFor_A)[0],          (CM_INLINE|CM_BLOCK|CM_MIXED),                 TY_(ParseBlock),    NULL           },
   { TidyTag_ABBR,       "abbr",       VERS_ELEM_ABBR,       &TY_(W3CAttrsFor_ABBR)[0],       (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_ACRONYM,    "acronym",    VERS_ELEM_ACRONYM,    &TY_(W3CAttrsFor_ACRONYM)[0],    (CM_INLINE),                                   TY_(ParseInline),   NULL           },
-  { TidyTag_ADDRESS,    "address",    VERS_ELEM_ADDRESS,    &TY_(W3CAttrsFor_ADDRESS)[0],    (CM_BLOCK),                                    TY_(ParseInline),   NULL           },
+  { TidyTag_ADDRESS,    "address",    VERS_ELEM_ADDRESS,    &TY_(W3CAttrsFor_ADDRESS)[0],    (CM_BLOCK),                                    TY_(ParseBlock),    NULL           },
   { TidyTag_APPLET,     "applet",     VERS_ELEM_APPLET,     &TY_(W3CAttrsFor_APPLET)[0],     (CM_OBJECT|CM_IMG|CM_INLINE|CM_PARAM),         TY_(ParseBlock),    NULL           },
   { TidyTag_AREA,       "area",       VERS_ELEM_AREA,       &TY_(W3CAttrsFor_AREA)[0],       (CM_BLOCK|CM_EMPTY),                           TY_(ParseEmpty),    CheckAREA      },
   { TidyTag_B,          "b",          VERS_ELEM_B,          &TY_(W3CAttrsFor_B)[0],          (CM_INLINE),                                   TY_(ParseInline),   NULL           },
@@ -185,7 +189,8 @@ static const Dict tag_defs[] =
   { TidyTag_EM,         "em",         VERS_ELEM_EM,         &TY_(W3CAttrsFor_EM)[0],         (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_FIELDSET,   "fieldset",   VERS_ELEM_FIELDSET,   &TY_(W3CAttrsFor_FIELDSET)[0],   (CM_BLOCK),                                    TY_(ParseBlock),    NULL           },
   { TidyTag_FONT,       "font",       VERS_ELEM_FONT,       &TY_(W3CAttrsFor_FONT)[0],       (CM_INLINE),                                   TY_(ParseInline),   NULL           },
-  { TidyTag_FORM,       "form",       VERS_ELEM_FORM,       &TY_(W3CAttrsFor_FORM)[0],       (CM_BLOCK),                                    TY_(ParseBlock),    CheckFORM      },
+  /* HTML5 Form Elements has several new elements and attributes - datalist keygen output */
+  { TidyTag_FORM,       "form",       VERS_ELEM_FORM,       &TY_(W3CAttrsFor_FORM)[0],       (CM_BLOCK),                                    TY_(ParseBlock),    NULL           },
   { TidyTag_FRAME,      "frame",      VERS_ELEM_FRAME,      &TY_(W3CAttrsFor_FRAME)[0],      (CM_FRAMES|CM_EMPTY),                          TY_(ParseEmpty),    NULL           },
   { TidyTag_FRAMESET,   "frameset",   VERS_ELEM_FRAMESET,   &TY_(W3CAttrsFor_FRAMESET)[0],   (CM_HTML|CM_FRAMES),                           TY_(ParseFrameSet), NULL           },
   { TidyTag_H1,         "h1",         VERS_ELEM_H1,         &TY_(W3CAttrsFor_H1)[0],         (CM_BLOCK|CM_HEADING),                         TY_(ParseInline),   NULL           },
@@ -207,13 +212,13 @@ static const Dict tag_defs[] =
   { TidyTag_LABEL,      "label",      VERS_ELEM_LABEL,      &TY_(W3CAttrsFor_LABEL)[0],      (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_LEGEND,     "legend",     VERS_ELEM_LEGEND,     &TY_(W3CAttrsFor_LEGEND)[0],     (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_LI,         "li",         VERS_ELEM_LI,         &TY_(W3CAttrsFor_LI)[0],         (CM_LIST|CM_OPT|CM_NO_INDENT),                 TY_(ParseBlock),    NULL           },
-  { TidyTag_LINK,       "link",       VERS_ELEM_LINK,       &TY_(W3CAttrsFor_LINK)[0],       (CM_HEAD|CM_EMPTY),                            TY_(ParseEmpty),    CheckLINK      },
+  { TidyTag_LINK,       "link",       VERS_ELEM_LINK,       &TY_(W3CAttrsFor_LINK)[0],       (CM_HEAD|CM_BLOCK|CM_EMPTY),                   TY_(ParseEmpty),    CheckLINK      },
   { TidyTag_LISTING,    "listing",    VERS_ELEM_LISTING,    &TY_(W3CAttrsFor_LISTING)[0],    (CM_BLOCK|CM_OBSOLETE),                        TY_(ParsePre),      NULL           },
   { TidyTag_MAP,        "map",        VERS_ELEM_MAP,        &TY_(W3CAttrsFor_MAP)[0],        (CM_INLINE),                                   TY_(ParseBlock),    NULL           },
-  { TidyTag_MENU,       "menu",       VERS_ELEM_MENU,       &TY_(W3CAttrsFor_MENU)[0],       (CM_BLOCK|CM_OBSOLETE),                        TY_(ParseList),     NULL           },
-  { TidyTag_META,       "meta",       VERS_ELEM_META,       &TY_(W3CAttrsFor_META)[0],       (CM_HEAD|CM_EMPTY),                            TY_(ParseEmpty),    CheckMETA      },
+  // { TidyTag_MENU,       "menu",       VERS_ELEM_MENU,       &TY_(W3CAttrsFor_MENU)[0],       (CM_BLOCK|CM_OBSOLETE),                        TY_(ParseList),     NULL           },
+  { TidyTag_META,       "meta",       VERS_ELEM_META,       &TY_(W3CAttrsFor_META)[0],       (CM_HEAD|CM_BLOCK|CM_EMPTY),                   TY_(ParseEmpty),    NULL           },
   { TidyTag_NOFRAMES,   "noframes",   VERS_ELEM_NOFRAMES,   &TY_(W3CAttrsFor_NOFRAMES)[0],   (CM_BLOCK|CM_FRAMES),                          TY_(ParseNoFrames), NULL           },
-  { TidyTag_NOSCRIPT,   "noscript",   VERS_ELEM_NOSCRIPT,   &TY_(W3CAttrsFor_NOSCRIPT)[0],   (CM_BLOCK|CM_INLINE|CM_MIXED),                 TY_(ParseBlock),    NULL           },
+  { TidyTag_NOSCRIPT,   "noscript",   VERS_ELEM_NOSCRIPT,   &TY_(W3CAttrsFor_NOSCRIPT)[0],   (CM_HEAD|CM_BLOCK|CM_INLINE|CM_MIXED),         TY_(ParseBlock),    NULL           },
   { TidyTag_OBJECT,     "object",     VERS_ELEM_OBJECT,     &TY_(W3CAttrsFor_OBJECT)[0],     (CM_OBJECT|CM_HEAD|CM_IMG|CM_INLINE|CM_PARAM), TY_(ParseBlock),    NULL           },
   { TidyTag_OL,         "ol",         VERS_ELEM_OL,         &TY_(W3CAttrsFor_OL)[0],         (CM_BLOCK),                                    TY_(ParseList),     NULL           },
   { TidyTag_OPTGROUP,   "optgroup",   VERS_ELEM_OPTGROUP,   &TY_(W3CAttrsFor_OPTGROUP)[0],   (CM_FIELD|CM_OPT),                             TY_(ParseOptGroup), NULL           },
@@ -231,13 +236,13 @@ static const Dict tag_defs[] =
   { TidyTag_RUBY,       "ruby",       VERS_ELEM_RUBY,       &TY_(W3CAttrsFor_RUBY)[0],       (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_S,          "s",          VERS_ELEM_S,          &TY_(W3CAttrsFor_S)[0],          (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_SAMP,       "samp",       VERS_ELEM_SAMP,       &TY_(W3CAttrsFor_SAMP)[0],       (CM_INLINE),                                   TY_(ParseInline),   NULL           },
-  { TidyTag_SCRIPT,     "script",     VERS_ELEM_SCRIPT,     &TY_(W3CAttrsFor_SCRIPT)[0],     (CM_HEAD|CM_MIXED|CM_BLOCK|CM_INLINE),         TY_(ParseScript),   CheckSCRIPT    },
+  { TidyTag_SCRIPT,     "script",     VERS_ELEM_SCRIPT,     &TY_(W3CAttrsFor_SCRIPT)[0],     (CM_HEAD|CM_MIXED|CM_BLOCK|CM_INLINE),         TY_(ParseScript),   NULL           },
   { TidyTag_SELECT,     "select",     VERS_ELEM_SELECT,     &TY_(W3CAttrsFor_SELECT)[0],     (CM_INLINE|CM_FIELD),                          TY_(ParseSelect),   NULL           },
   { TidyTag_SMALL,      "small",      VERS_ELEM_SMALL,      &TY_(W3CAttrsFor_SMALL)[0],      (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_SPAN,       "span",       VERS_ELEM_SPAN,       &TY_(W3CAttrsFor_SPAN)[0],       (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_STRIKE,     "strike",     VERS_ELEM_STRIKE,     &TY_(W3CAttrsFor_STRIKE)[0],     (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_STRONG,     "strong",     VERS_ELEM_STRONG,     &TY_(W3CAttrsFor_STRONG)[0],     (CM_INLINE),                                   TY_(ParseInline),   NULL           },
-  { TidyTag_STYLE,      "style",      VERS_ELEM_STYLE,      &TY_(W3CAttrsFor_STYLE)[0],      (CM_HEAD),                                     TY_(ParseScript),   CheckSTYLE     },
+  { TidyTag_STYLE,      "style",      VERS_ELEM_STYLE,      &TY_(W3CAttrsFor_STYLE)[0],      (CM_HEAD|CM_BLOCK),                            TY_(ParseScript),   NULL           },
   { TidyTag_SUB,        "sub",        VERS_ELEM_SUB,        &TY_(W3CAttrsFor_SUB)[0],        (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_SUP,        "sup",        VERS_ELEM_SUP,        &TY_(W3CAttrsFor_SUP)[0],        (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_TABLE,      "table",      VERS_ELEM_TABLE,      &TY_(W3CAttrsFor_TABLE)[0],      (CM_BLOCK),                                    TY_(ParseTableTag), CheckTABLE     },
@@ -261,9 +266,7 @@ static const Dict tag_defs[] =
   { TidyTag_BGSOUND,    "bgsound",    VERS_MICROSOFT,       NULL,                       (CM_HEAD|CM_EMPTY),                            TY_(ParseEmpty),    NULL           },
   { TidyTag_BLINK,      "blink",      VERS_PROPRIETARY,     NULL,                       (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_COMMENT,    "comment",    VERS_MICROSOFT,       NULL,                       (CM_INLINE),                                   TY_(ParseInline),   NULL           },
-  { TidyTag_EMBED,      "embed",      VERS_NETSCAPE,        NULL,                       (CM_INLINE|CM_IMG|CM_EMPTY),                   TY_(ParseEmpty),    NULL           },
   { TidyTag_ILAYER,     "ilayer",     VERS_NETSCAPE,        NULL,                       (CM_INLINE),                                   TY_(ParseInline),   NULL           },
-  { TidyTag_KEYGEN,     "keygen",     VERS_NETSCAPE,        NULL,                       (CM_INLINE|CM_EMPTY),                          TY_(ParseEmpty),    NULL           },
   { TidyTag_LAYER,      "layer",      VERS_NETSCAPE,        NULL,                       (CM_BLOCK),                                    TY_(ParseBlock),    NULL           },
   { TidyTag_MARQUEE,    "marquee",    VERS_MICROSOFT,       NULL,                       (CM_INLINE|CM_OPT),                            TY_(ParseInline),   NULL           },
   { TidyTag_MULTICOL,   "multicol",   VERS_NETSCAPE,        NULL,                       (CM_BLOCK),                                    TY_(ParseBlock),    NULL           },
@@ -274,32 +277,40 @@ static const Dict tag_defs[] =
   { TidyTag_SERVER,     "server",     VERS_NETSCAPE,        NULL,                       (CM_HEAD|CM_MIXED|CM_BLOCK|CM_INLINE),         TY_(ParseScript),   NULL           },
   { TidyTag_SERVLET,    "servlet",    VERS_SUN,             NULL,                       (CM_OBJECT|CM_IMG|CM_INLINE|CM_PARAM),         TY_(ParseBlock),    NULL           },
   { TidyTag_SPACER,     "spacer",     VERS_NETSCAPE,        NULL,                       (CM_INLINE|CM_EMPTY),                          TY_(ParseEmpty),    NULL           },
-  { TidyTag_WBR,        "wbr",        VERS_PROPRIETARY,     NULL,                       (CM_INLINE|CM_EMPTY),                          TY_(ParseEmpty),    NULL           },
 
-  /* "HTML5" */
+  /* HTML5 */
   { TidyTag_ARTICLE,     "article",      VERS_ELEM_ARTICLE,     &TY_(W3CAttrsFor_ARTICLE)[0],     (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
   { TidyTag_ASIDE,       "aside",        VERS_ELEM_ASIDE,       &TY_(W3CAttrsFor_ASIDE)[0],       (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
-  { TidyTag_AUDIO,       "audio",        VERS_ELEM_AUDIO,       &TY_(W3CAttrsFor_AUDIO)[0],       (CM_INLINE),                   TY_(ParseInline),    NULL           },
+  { TidyTag_AUDIO,       "audio",        VERS_ELEM_AUDIO,       &TY_(W3CAttrsFor_AUDIO)[0],       (CM_BLOCK|CM_INLINE),          TY_(ParseBlock),     NULL           },
+  { TidyTag_BDI,         "bdi",          VERS_ELEM_BDI,         &TY_(W3CAttrsFor_BDI)[0],         (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
   { TidyTag_CANVAS,      "canvas",       VERS_ELEM_CANVAS,      &TY_(W3CAttrsFor_CANVAS)[0],      (CM_INLINE),                   TY_(ParseInline),    NULL           },
   { TidyTag_COMMAND,     "command",      VERS_ELEM_COMMAND,     &TY_(W3CAttrsFor_COMMAND)[0],     (CM_HEAD|CM_INLINE|CM_EMPTY),  TY_(ParseEmpty),     NULL           },
-  { TidyTag_DATALIST,    "datalist",     VERS_ELEM_DATALIST,    &TY_(W3CAttrsFor_DATALIST)[0],    (CM_INLINE),                   TY_(ParseInline),    NULL           },
+  { TidyTag_DATALIST,    "datalist",     VERS_ELEM_DATALIST,    &TY_(W3CAttrsFor_DATALIST)[0],    (CM_INLINE|CM_FIELD),          TY_(ParseDatalist),  NULL           },
+  //{ TidyTag_DATALIST,    "datalist",     VERS_ELEM_DATALIST,    &TY_(W3CAttrsFor_DATALIST)[0],    (CM_FIELD),                   TY_(ParseInline),    NULL           },
   { TidyTag_DETAILS,     "details",      VERS_ELEM_DETAILS,     &TY_(W3CAttrsFor_DETAILS)[0],     (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
+  { TidyTag_DIALOG,      "dialog",       VERS_ELEM_DIALOG,      &TY_(W3CAttrsFor_DIALOG)[0],      (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
+  { TidyTag_EMBED,       "embed",        VERS_ELEM_EMBED,       &TY_(W3CAttrsFor_EMBED)[0],       (CM_INLINE|CM_IMG|CM_EMPTY),   TY_(ParseEmpty),     NULL           },
   { TidyTag_FIGCAPTION,  "figcaption",   VERS_ELEM_FIGCAPTION,  &TY_(W3CAttrsFor_FIGCAPTION)[0],  (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
   { TidyTag_FIGURE,      "figure",       VERS_ELEM_FIGURE,      &TY_(W3CAttrsFor_FIGURE)[0],      (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
   { TidyTag_FOOTER,      "footer",       VERS_ELEM_FOOTER,      &TY_(W3CAttrsFor_FOOTER)[0],      (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
   { TidyTag_HEADER,      "header",       VERS_ELEM_HEADER,      &TY_(W3CAttrsFor_HEADER)[0],      (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
   { TidyTag_HGROUP,      "hgroup",       VERS_ELEM_HGROUP,      &TY_(W3CAttrsFor_HGROUP)[0],      (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
+  { TidyTag_KEYGEN,      "keygen",       VERS_ELEM_KEYGEN,      &TY_(W3CAttrsFor_KEYGEN)[0],      (CM_INLINE|CM_EMPTY),          TY_(ParseEmpty),     NULL           },
+  { TidyTag_MAIN,        "main",         VERS_ELEM_MAIN,        &TY_(W3CAttrsFor_MAIN)[0],        (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
   { TidyTag_MARK,        "mark",         VERS_ELEM_MARK,        &TY_(W3CAttrsFor_MARK)[0],        (CM_INLINE),                   TY_(ParseInline),    NULL           },
+  { TidyTag_MENU,        "menu",         VERS_ELEM_MENU,        &TY_(W3CAttrsFor_MENU)[0],        (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
+  { TidyTag_MENUITEM,    "menuitem",     VERS_ELEM_MENUITEM,    &TY_(W3CAttrsFor_MENUITEM)[0],    (CM_INLINE|CM_BLOCK|CM_MIXED), TY_(ParseInline),    NULL           },
   { TidyTag_METER,       "meter",        VERS_ELEM_METER,       &TY_(W3CAttrsFor_METER)[0],       (CM_INLINE),                   TY_(ParseInline),    NULL           },
   { TidyTag_NAV,         "nav",          VERS_ELEM_NAV,         &TY_(W3CAttrsFor_NAV)[0],         (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
   { TidyTag_OUTPUT,      "output",       VERS_ELEM_OUTPUT,      &TY_(W3CAttrsFor_OUTPUT)[0],      (CM_INLINE),                   TY_(ParseInline),    NULL           },
   { TidyTag_PROGRESS,    "progress",     VERS_ELEM_PROGRESS,    &TY_(W3CAttrsFor_PROGRESS)[0],    (CM_INLINE),                   TY_(ParseInline),    NULL           },
   { TidyTag_SECTION,     "section",      VERS_ELEM_SECTION,     &TY_(W3CAttrsFor_SECTION)[0],     (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
-  { TidyTag_SOURCE,      "source",       VERS_ELEM_SOURCE,      &TY_(W3CAttrsFor_SOURCE)[0],      (CM_INLINE|CM_EMPTY),          TY_(ParseEmpty),     NULL           },
+  { TidyTag_SOURCE,      "source",       VERS_ELEM_SOURCE,      &TY_(W3CAttrsFor_SOURCE)[0],      (CM_BLOCK|CM_EMPTY),           TY_(ParseBlock),     NULL           },
   { TidyTag_SUMMARY,     "summary",      VERS_ELEM_SUMMARY,     &TY_(W3CAttrsFor_SUMMARY)[0],     (CM_BLOCK),                    TY_(ParseInline),    NULL           },
   { TidyTag_TIME,        "time",         VERS_ELEM_TIME,        &TY_(W3CAttrsFor_TIME)[0],        (CM_INLINE),                   TY_(ParseInline),    NULL           },
-  { TidyTag_TRACK,       "track",        VERS_ELEM_TRACK,       &TY_(W3CAttrsFor_TRACK)[0],       (CM_INLINE|CM_EMPTY),          TY_(ParseEmpty),     NULL           },
-  { TidyTag_VIDEO,       "video",        VERS_ELEM_VIDEO,       &TY_(W3CAttrsFor_VIDEO)[0],       (CM_INLINE),                   TY_(ParseInline),    NULL           },
+  { TidyTag_TRACK,       "track",        VERS_ELEM_TRACK,       &TY_(W3CAttrsFor_TRACK)[0],       (CM_BLOCK|CM_EMPTY),           TY_(ParseBlock),     NULL           },
+  { TidyTag_VIDEO,       "video",        VERS_ELEM_VIDEO,       &TY_(W3CAttrsFor_VIDEO)[0],       (CM_BLOCK|CM_INLINE),          TY_(ParseBlock),     NULL           },
+  { TidyTag_WBR,         "wbr",          VERS_ELEM_WBR,         &TY_(W3CAttrsFor_WBR)[0],         (CM_INLINE|CM_EMPTY),          TY_(ParseEmpty),     NULL           },
 
   /* this must be the final entry */
   { (TidyTagId)0,        NULL,         0,                    NULL,                       (0),                                           NULL,          NULL           }
@@ -344,7 +355,7 @@ static void tagsRemoveFromHash( TidyDocImpl* doc, TidyTagImpl* tags, ctmbstr s )
         {
             DictHash* next = p->next;
             if ( prev )
-                prev->next = next; 
+                prev->next = next;
             else
                 tags->hashtab[h] = next;
             TidyDocFree(doc, p);
@@ -440,7 +451,7 @@ static void FreeDict( TidyDocImpl* doc, Dict *d )
 }
 
 static void declare( TidyDocImpl* doc, TidyTagImpl* tags,
-                     ctmbstr name, uint versions, uint model, 
+                     ctmbstr name, uint versions, uint model,
                      Parser *parser, CheckAttribs *chkattrs )
 {
     if ( name )
@@ -480,7 +491,7 @@ Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
         node->tag = np;
         return yes;
     }
-    
+
     return no;
 }
 
@@ -492,7 +503,7 @@ const Dict* TY_(LookupTagDef)( TidyTagId tid )
         if (np->id == tid)
             return np;
 
-    return NULL;    
+    return NULL;
 }
 
 Parser* TY_(FindParser)( TidyDocImpl* doc, Node *node )
@@ -567,7 +578,7 @@ ctmbstr        TY_(GetNextDeclaredTag)( TidyDocImpl* ARG_UNUSED(doc),
                  curr->parser == TY_(ParseBlock) )
                 name = curr->name;
             break;
-    
+
         case tagtype_pre:
             if ( (curr->model & CM_BLOCK) != 0 &&
                  curr->parser == TY_(ParsePre) )
@@ -697,7 +708,7 @@ void CheckIMG( TidyDocImpl* doc, Node *node )
             doc->badAccess |= BA_MISSING_IMAGE_ALT;
             TY_(ReportMissingAttr)( doc, node, "alt" );
         }
-  
+
         if ( cfgStr(doc, TidyAltText) )
             TY_(AddAttribute)( doc, node, "alt", cfgStr(doc, TidyAltText) );
     }
@@ -760,20 +771,8 @@ void CheckAREA( TidyDocImpl* doc, Node *node )
 void CheckTABLE( TidyDocImpl* doc, Node *node )
 {
     AttVal* attval;
-    Bool HasSummary = TY_(AttrGetById)(node, TidyAttr_SUMMARY) != NULL;
 
     TY_(CheckAttributes)(doc, node);
-
-    /* a missing summary attribute is bad accessibility, no matter
-       what HTML version is involved; a document without is valid */
-    if (cfg(doc, TidyAccessibilityCheckLevel) == 0)
-    {
-        if (!HasSummary)
-        {
-            doc->badAccess |= BA_MISSING_SUMMARY;
-            TY_(ReportMissingAttr)( doc, node, "summary");
-        }
-    }
 
     /* convert <table border> to <table border="1"> */
     if ( cfgBool(doc, TidyXmlOut) && (attval = TY_(AttrGetById)(node, TidyAttr_BORDER)) )
@@ -783,114 +782,23 @@ void CheckTABLE( TidyDocImpl* doc, Node *node )
     }
 }
 
-/* add missing type attribute when appropriate */
-void CheckSCRIPT( TidyDocImpl* doc, Node *node )
-{
-    AttVal *lang, *type;
-    char buf[16];
-
-    TY_(CheckAttributes)(doc, node);
-
-    lang = TY_(AttrGetById)(node, TidyAttr_LANGUAGE);
-    type = TY_(AttrGetById)(node, TidyAttr_TYPE);
-
-    if (!type)
-    {
-        /* check for javascript */
-        if (lang)
-        {
-            /* Test #696799. lang->value can be NULL. */
-            buf[0] = '\0';
-            TY_(tmbstrncpy)(buf, lang->value, sizeof(buf));
-            buf[10] = '\0';
-
-            if (TY_(tmbstrncasecmp)(buf, "javascript", 10) == 0 ||
-                 TY_(tmbstrncasecmp)(buf,   "jscript",  7) == 0)
-            {
-                TY_(AddAttribute)(doc, node, "type", "text/javascript");
-            }
-            else if (TY_(tmbstrcasecmp)(buf, "vbscript") == 0)
-            {
-                /* per Randy Waki 8/6/01 */
-                TY_(AddAttribute)(doc, node, "type", "text/vbscript");
-            }
-        }
-        else
-        {
-            TY_(AddAttribute)(doc, node, "type", "text/javascript");
-        }
-
-        type = TY_(AttrGetById)(node, TidyAttr_TYPE);
-
-        if (type != NULL)
-        {
-            TY_(ReportAttrError)(doc, node, type, INSERTING_ATTRIBUTE);
-        }
-        else
-        {
-            TY_(ReportMissingAttr)(doc, node, "type");
-        }
-    }
-}
-
-
-/* add missing type attribute when appropriate */
-void CheckSTYLE( TidyDocImpl* doc, Node *node )
-{
-    AttVal *type = TY_(AttrGetById)(node, TidyAttr_TYPE);
-
-    TY_(CheckAttributes)( doc, node );
-
-    if ( !type || !type->value || !TY_(tmbstrlen)(type->value) )
-    {
-        type = TY_(RepairAttrValue)(doc, node, "type", "text/css");
-        TY_(ReportAttrError)( doc, node, type, INSERTING_ATTRIBUTE );
-    }
-}
-
-/* add missing type attribute when appropriate */
+/* report missing href attribute; report missing rel attribute */
 void CheckLINK( TidyDocImpl* doc, Node *node )
 {
-    AttVal *rel = TY_(AttrGetById)(node, TidyAttr_REL);
+    Bool HasHref = TY_(AttrGetById)(node, TidyAttr_HREF) != NULL;
+    Bool HasRel = TY_(AttrGetById)(node, TidyAttr_REL) != NULL;
+    Bool HasItemprop = TY_(AttrGetById)(node, TidyAttr_ITEMPROP) != NULL;
 
-    TY_(CheckAttributes)( doc, node );
-
-    /* todo: <link rel="alternate stylesheet"> */
-    if (AttrValueIs(rel, "stylesheet"))
+    if (!HasHref)
     {
-        AttVal *type = TY_(AttrGetById)(node, TidyAttr_TYPE);
-        if (!type)
-        {
-            TY_(AddAttribute)( doc, node, "type", "text/css" );
-            type = TY_(AttrGetById)(node, TidyAttr_TYPE);
-            TY_(ReportAttrError)( doc, node, type, INSERTING_ATTRIBUTE );
-        }
-    }
+      TY_(ReportMissingAttr)( doc, node, "href" );
     }
 
-/* reports missing action attribute */
-void CheckFORM( TidyDocImpl* doc, Node *node )
+    if (!HasItemprop && !HasRel)
     {
-    AttVal *action = TY_(AttrGetById)(node, TidyAttr_ACTION);
-
-    TY_(CheckAttributes)(doc, node);
-
-    if (!action)
-        TY_(ReportMissingAttr)(doc, node, "action");
+      TY_(ReportMissingAttr)( doc, node, "rel" );
     }
-
-/* reports missing content attribute */
-void CheckMETA( TidyDocImpl* doc, Node *node )
-{
-    AttVal *content = TY_(AttrGetById)(node, TidyAttr_CONTENT);
-
-    TY_(CheckAttributes)(doc, node);
-
-    if (!content)
-        TY_(ReportMissingAttr)( doc, node, "content" );
-    /* name or http-equiv attribute must also be set */
 }
-
 
 Bool TY_(nodeIsText)( Node* node )
 {
@@ -915,7 +823,7 @@ Bool TY_(nodeHasText)( TidyDocImpl* doc, Node* node )
 
 Bool TY_(nodeIsElement)( Node* node )
 {
-  return ( node && 
+  return ( node &&
            (node->type == StartTag || node->type == StartEndTag) );
 }
 
@@ -925,7 +833,7 @@ Bool TY_(nodeIsElement)( Node* node )
 */
 Bool nodeMatchCM( Node* node, uint contentModel )
 {
-  return ( node && node->tag && 
+  return ( node && node->tag &&
            (node->tag->model & contentModel) == contentModel );
 }
 #endif
@@ -934,7 +842,7 @@ Bool nodeMatchCM( Node* node, uint contentModel )
 */
 Bool TY_(nodeHasCM)( Node* node, uint contentModel )
 {
-  return ( node && node->tag && 
+  return ( node && node->tag &&
            (node->tag->model & contentModel) != 0 );
 }
 
@@ -957,8 +865,8 @@ Bool TY_(nodeIsHeader)( Node* node )
     return ( tid && (
              tid == TidyTag_H1 ||
              tid == TidyTag_H2 ||
-             tid == TidyTag_H3 ||        
-             tid == TidyTag_H4 ||        
+             tid == TidyTag_H3 ||
+             tid == TidyTag_H4 ||
              tid == TidyTag_H5 ||
              tid == TidyTag_H6 ));
 }

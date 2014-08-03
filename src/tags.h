@@ -110,6 +110,7 @@ Parser TY_(ParseRow);
 Parser TY_(ParseSelect);
 Parser TY_(ParseOptGroup);
 Parser TY_(ParseText);
+Parser TY_(ParseDatalist);
 
 CheckAttribs TY_(CheckAttributes);
 
@@ -224,6 +225,11 @@ uint TY_(nodeHeaderLevel)( Node* node );  /* 1, 2, ..., 6 */
 #define nodeIsU( node )          TagIsId( node, TidyTag_U )
 #define nodeIsMENU( node )       TagIsId( node, TidyTag_MENU )
 #define nodeIsBUTTON( node )     TagIsId( node, TidyTag_BUTTON )
+#define nodeIsCANVAS( node )     TagIsId( node, TidyTag_CANVAS )
+#define nodeIsPROGRESS( node )   TagIsId( node, TidyTag_PROGRESS )
+
+/* HTML5 */
+#define nodeIsDATALIST( node )     TagIsId( node, TidyTag_DATALIST )
 
 
 #endif /* __TAGS_H__ */

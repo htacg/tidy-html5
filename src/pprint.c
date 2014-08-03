@@ -3,7 +3,7 @@
   
   (c) 1998-2007 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
-  
+
 */
 
 #include <stdio.h>
@@ -1152,7 +1152,7 @@ static void PPrintAttribute( TidyDocImpl* doc, uint indent,
     {
         if ( TY_(IsScript)(doc, name) )
             wrappable = cfgBool( doc, TidyWrapScriptlets );
-        else if (!(attrIsCONTENT(attr) || attrIsVALUE(attr) || attrIsALT(attr)) && wrapAttrs )
+        else if (!(attrIsCONTENT(attr) || attrIsVALUE(attr) || attrIsALT(attr) || attrIsTITLE(attr)) && wrapAttrs )
             wrappable = yes;
     }
 
@@ -2083,7 +2083,8 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
         {
             Bool indcont  = ( cfgAutoBool(doc, TidyIndentContent) != TidyNoState );
             Bool indsmart = ( cfgAutoBool(doc, TidyIndentContent) == TidyAutoState );
-            Bool hideend  = cfgBool( doc, TidyHideEndTags );
+            Bool hideend  = cfgBool( doc, TidyHideEndTags ) ||
+              cfgBool( doc, TidyOmitOptionalTags );
             Bool classic  = cfgBool( doc, TidyVertSpace );
             uint contentIndent = indent;
 

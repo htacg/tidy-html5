@@ -4,14 +4,14 @@
   See tidy.h for the copyright notice.
 
   Defines HTML Tidy API implemented by tidy library.
-  
+
   Very rough initial cut for discussion purposes.
 
   Public interface is const-correct and doesn't explicitly depend
   on any globals.  Thus, thread-safety may be introduced w/out
   changing the interface.
 
-  Looking ahead to a C++ wrapper, C functions always pass 
+  Looking ahead to a C++ wrapper, C functions always pass
   this-equivalent as 1st arg.
 
   Created 2001-05-20 by Charles Reitzel
@@ -23,6 +23,7 @@
 #include "tidy-int.h"
 #include "parser.h"
 #include "clean.h"
+#include "gdoc.h"
 #include "config.h"
 #include "message.h"
 #include "pprint.h"
@@ -111,7 +112,7 @@ TidyOption   tidyImplToOption( const TidyOptionImpl* option )
 ** 0    -> SUCCESS
 ** >0   -> WARNING
 ** <0   -> ERROR
-** 
+**
 */
 
 TidyDoc TIDY_CALL       tidyCreate(void)
@@ -622,8 +623,8 @@ Bool TIDY_CALL tidyOptCopyConfig( TidyDoc to, TidyDoc from )
 
 /* I/O and Message handling interface
 **
-** By default, Tidy will define, create and use 
-** tdocances of input and output handlers for 
+** By default, Tidy will define, create and use
+** tdocances of input and output handlers for
 ** standard C buffered I/O (i.e. FILE* stdin,
 ** FILE* stdout and FILE* stderr for content
 ** input, content output and diagnostic output,
@@ -633,7 +634,7 @@ Bool TIDY_CALL tidyOptCopyConfig( TidyDoc to, TidyDoc from )
 */
 
 /* Use TidyReportFilter to filter messages by diagnostic level:
-** info, warning, etc.  Just set diagnostic output 
+** info, warning, etc.  Just set diagnostic output
 ** handler to redirect all diagnostics output.  Return true
 ** to proceed with output, false to cancel.
 */
@@ -792,7 +793,7 @@ uint TIDY_CALL       tidyConfigErrorCount( TidyDoc tdoc )
 }
 
 
-/* Error reporting functions 
+/* Error reporting functions
 */
 void TIDY_CALL         tidyErrorSummary( TidyDoc tdoc )
 {
@@ -968,7 +969,7 @@ int         tidyDocSaveFile( TidyDocImpl* doc, ctmbstr filnam )
     if ( doc->errors > 0 &&
          cfgBool(doc, TidyWriteBack) && !cfgBool(doc, TidyForceOutput) )
         status = tidyDocStatus( doc );
-    else 
+    else
         fout = fopen( filnam, "wb" );
 
     if ( fout )
@@ -1002,7 +1003,7 @@ int         tidyDocSaveFile( TidyDocImpl* doc, ctmbstr filnam )
 ** The code has been left in in case it works w/ other compilers
 ** or operating systems.  If stdout is in Text mode, be aware that
 ** it will garble UTF16 documents.  In text mode, when it encounters
-** a single byte of value 10 (0xA), it will insert a single byte 
+** a single byte of value 10 (0xA), it will insert a single byte
 ** value 13 (0xD) just before it.  This has the effect of garbling
 ** the entire document.
 */
@@ -1067,7 +1068,7 @@ int         tidyDocSaveString( TidyDocImpl* doc, tmbstr buffer, uint* buflen )
     TidyBuffer outbuf;
     StreamOut* out;
     int status;
-    
+
     tidyBufInitWithAllocator( &outbuf, doc->allocator );
     out = TY_(BufferOutput)( doc, &outbuf, outenc, nl );
     status = tidyDocSaveStream( doc, out );
@@ -1091,7 +1092,7 @@ int         tidyDocSaveBuffer( TidyDocImpl* doc, TidyBuffer* outbuf )
         uint outenc = cfg( doc, TidyOutCharEncoding );
         uint nl = cfg( doc, TidyNewline );
         StreamOut* out = TY_(BufferOutput)( doc, outbuf, outenc, nl );
-    
+
         status = tidyDocSaveStream( doc, out );
         TidyDocFree( doc, out );
     }
@@ -1138,7 +1139,7 @@ int TIDY_CALL        tidyRunDiagnostics( TidyDoc tdoc )
 
 /* Workhorse functions.
 **
-** Parse requires input source, all input config items 
+** Parse requires input source, all input config items
 ** and diagnostic sink to have all been set before calling.
 **
 ** Emit likewise requires that document sink and all
@@ -1220,11 +1221,62 @@ int         tidyDocRunDiagnostics( TidyDocImpl* doc )
         TY_(ReportMarkupVersion)( doc );
         TY_(ReportNumWarnings)( doc );
     }
-    
+
     if ( doc->errors > 0 && !force )
         TY_(NeedsAuthorIntervention)( doc );
 
      return tidyDocStatus( doc );
+}
+
+static struct _html5Info
+{
+    const char *tag;
+    uint id;
+} const html5Info[] = {
+    {"acronym", TidyTag_ACRONYM},
+    {"applet", TidyTag_APPLET  },
+    {"basefont",TidyTag_BASEFONT },
+    { "big", TidyTag_BIG },
+    { "center", TidyTag_CENTER },
+    { "dir", TidyTag_DIR },
+    { "font", TidyTag_FONT },
+    { "frame", TidyTag_FRAME},
+    { "frameset", TidyTag_FRAMESET},
+    { "noframes", TidyTag_NOFRAMES },
+    { "strike", TidyTag_STRIKE },
+    { "tt", TidyTag_TT },
+    { 0, 0 }
+};
+Bool inRemovedInfo( uint tid )
+{
+    int i;
+    for (i = 0; ; i++) {
+        if (html5Info[i].tag == 0)
+            break;
+        if (html5Info[i].id == tid)
+            return yes;
+    }
+    return no;
+}
+
+void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
+{
+    Lexer* lexer = doc->lexer;
+    while (node)
+    {
+        if (TY_(nodeIsElement)(node)) {
+            if (node->tag) {
+                if ((!node->tag->versions & VERS_HTML5)||(inRemovedInfo(node->tag->id))) {
+                    /* issue warning */
+                    TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+                }
+            }
+        }
+        if (node->content)
+            TY_(CheckHTML5)( doc, node->content );
+
+        node = node->next;
+    }
 }
 
 int         tidyDocCleanAndRepair( TidyDocImpl* doc )
@@ -1232,6 +1284,7 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     Bool word2K   = cfgBool( doc, TidyWord2000 );
     Bool logical  = cfgBool( doc, TidyLogicalEmphasis );
     Bool clean    = cfgBool( doc, TidyMakeClean );
+    Bool gdoc     = cfgBool( doc, TidyGDocClean );
     Bool dropFont = cfgBool( doc, TidyDropFontTags );
     Bool htmlOut  = cfgBool( doc, TidyHtmlOut );
     Bool xmlOut   = cfgBool( doc, TidyXmlOut );
@@ -1240,13 +1293,16 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     Bool tidyMark = cfgBool( doc, TidyMark );
     Bool tidyXmlTags = cfgBool( doc, TidyXmlTags );
     Bool wantNameAttr = cfgBool( doc, TidyAnchorAsName );
+    Bool mergeEmphasis = cfgBool( doc, TidyMergeEmphasis );
+    ctmbstr sdef = NULL;
     Node* node;
 
     if (tidyXmlTags)
        return tidyDocStatus( doc );
 
     /* simplifies <b><b> ... </b> ...</b> etc. */
-    TY_(NestedEmphasis)( doc, &doc->root );
+    if ( mergeEmphasis )
+        TY_(NestedEmphasis)( doc, &doc->root );
 
     /* cleans up <dir>indented text</dir> etc. */
     TY_(List2BQ)( doc, &doc->root );
@@ -1270,6 +1326,10 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     if ( clean || dropFont )
         TY_(CleanDocument)( doc );
 
+    /* clean up html exported by Google Docs */
+    if ( gdoc )
+        TY_(CleanGoogleDocument)( doc );
+
     /*  Move terminating <br /> tags from out of paragraphs  */
     /*!  Do we want to do this for all block-level elements?  */
 
@@ -1291,6 +1351,12 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
 
     /* remember given doctype for reporting */
     node = TY_(FindDocType)(doc);
+    sdef = tidyOptGetValue((TidyDoc)doc, TidyDoctype );
+    if (!sdef)
+        sdef = tidyOptGetCurrPick((TidyDoc) doc, TidyDoctypeMode );
+    if (sdef && (strcmp(sdef,"html5") == 0)) {
+        TY_(CheckHTML5)( doc, &doc->root );
+    }
     if (node)
     {
         AttVal* fpi = TY_(GetAttrByName)(node, "PUBLIC");
@@ -1388,7 +1454,6 @@ int         tidyDocSaveStream( TidyDocImpl* doc, StreamOut* out )
     {
         /* noop */
         TY_(DropFontElements)(doc, &doc->root, NULL);
-        TY_(WbrToSpace)(doc, &doc->root);
     }
 
     if ((makeClean && asciiChars) || makeBare)
@@ -1439,8 +1504,8 @@ int         tidyDocSaveStream( TidyDocImpl* doc, StreamOut* out )
 **
 ** The big issue here is the degree to which we should mimic
 ** a DOM and/or SAX nodes.
-** 
-** Is it 100% possible (and, if so, how difficult is it) to 
+**
+** Is it 100% possible (and, if so, how difficult is it) to
 ** emit SAX events from this API?  If SAX events are possible,
 ** is that 100% of data needed to build a DOM?
 */
@@ -1571,7 +1636,7 @@ Bool TIDY_CALL  tidyNodeGetText( TidyDoc tdoc, TidyNode tnod, TidyBuffer* outbuf
 
       TY_(PFlushLine)( doc, 0 );
       doc->docOut = NULL;
-  
+
       TidyDocFree( doc, out );
       return yes;
   }

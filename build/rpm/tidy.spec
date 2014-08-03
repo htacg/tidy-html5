@@ -1,5 +1,4 @@
-#
-# spec file for package tidy
+# RPM spec file for tidy
 #
 #    (c) 2006 (W3C) MIT, ERCIM, Keio University
 #    See tidy.h for the copyright notice.

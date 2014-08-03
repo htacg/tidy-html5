@@ -32,8 +32,7 @@
 
     <h2>HTML Tidy Configuration Options</h2>
 
-    <p><em>Generated automatically with HTML Tidy released
-    on <xsl:value-of select="config/@version" />.</em></p>
+    <p>Version: <a href="{config/@version}"><xsl:value-of select="config/@version" /></a></p>
 
     <p><a class="h3" href="#MarkupHeader">HTML, XHTML, XML</a><br />
      <a class="h3" href="#DiagnosticsHeader">Diagnostics</a><br />

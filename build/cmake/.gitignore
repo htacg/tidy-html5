@@ -11,4 +11,5 @@ cmake_install.cmake
 *.sln
 temp*
 *.opensdf
+ipch/*
 

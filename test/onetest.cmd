@@ -7,11 +7,6 @@ REM See tidy.c for the copyright notice.
 REM
 REM <URL:http://tidy.sourceforge.net/>
 REM
-REM CVS Info:
-REM
-REM    $Author: arnaud02 $
-REM    $Date: 2006/12/28 10:01:45 $
-REM    $Revision: 1.5 $
 
 @if "%TIDY%." == "." goto Err1
 @if NOT EXIST %TIDY% goto Err2

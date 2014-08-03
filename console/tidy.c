@@ -9,7 +9,7 @@
 */
 
 #include "tidy.h"
-#ifdef _MSC_VER
+#if !defined(NDEBUG) && defined(_MSC_VER)
 #include "sprtf.h"
 #endif
 
@@ -954,8 +954,9 @@ int main( int argc, char** argv )
 
     errout = stderr;  /* initialize to stderr */
     status = 0;
-#ifdef _MSC_VER
+#if !defined(NDEBUG) && defined(_MSC_VER)
     set_log_file((char *)"temptidy.txt", 0);
+    add_append_log(1);
 #endif
     
 #ifdef TIDY_CONFIG_FILE
@@ -1278,7 +1279,9 @@ int main( int argc, char** argv )
         if ( argc > 1 )
         {
             htmlfil = argv[1];
+#if (!defined(NDEBUG) && defined(_MSC_VER))
             SPRTF("Tidying '%s'\n", htmlfil);
+#endif // DEBUG outout
             if ( tidyOptGetBool(tdoc, TidyEmacs) )
                 tidyOptSetValue( tdoc, TidyEmacsFile, htmlfil );
             status = tidyParseFile( tdoc, htmlfil );

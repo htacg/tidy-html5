@@ -1,6 +1,8 @@
-# HTML Tidy for HTML5 (experimental)
+﻿# HTML Tidy with HTML5 support
 
-This repo is an experimental fork of the code from [tidy.sourceforge.net][1].
+This repo is a fork of the code from [w3c.github.com/tidy-html5][3], which itself
+is a fork of [tidy.sourceforge.net][1].
+
 This source code in this version supports processing of HTML5 documents. The
 changes for HTML5 support started from a [patch developed by Björn Höhrmann][2].
 
@@ -36,3 +38,5 @@ following steps.
 
 Note that you will either need to run `make install` as root, or with `sudo make
 install`.
+
+;eof

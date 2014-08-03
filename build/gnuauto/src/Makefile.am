@@ -59,7 +59,7 @@ libtidy_la_SOURCES = \
 	clean.c		localize.c	config.c	alloc.c \
 	attrask.c	attrdict.c	attrget.c	buffio.c \
 	fileio.c	streamio.c	tagask.c	tmbstr.c \
-	utf8.c		tidylib.c	mappedio.c
+	utf8.c		tidylib.c	mappedio.c	gdoc.c
 
 libtidy_la_LDFLAGS = \
 	-version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE) \
@@ -70,6 +70,6 @@ HFILES = \
 	config.h	entities.h	fileio.h 	forward.h \
 	lexer.h		mappedio.h	message.h	parser.h \
 	pprint.h	streamio.h	tags.h		tmbstr.h \
-	utf8.h		tidy-int.h	version.h
+	utf8.h		tidy-int.h	version.h	gdoc.h
 
 EXTRA_DIST = $(HFILES)

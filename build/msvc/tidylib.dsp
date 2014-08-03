@@ -50,7 +50,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LIB32=link.exe -lib
 # ADD BASE LIB32 /nologo
-# ADD LIB32 /nologo /out:"lib\libtidy.lib"
+# ADD LIB32 /nologo /out:"Release\libtidy.lib"
 
 !ELSEIF  "$(CFG)" == "tidylib - Win32 Debug"
 
@@ -74,7 +74,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LIB32=link.exe -lib
 # ADD BASE LIB32 /nologo
-# ADD LIB32 /nologo /out:"lib\libtidyd.lib"
+# ADD LIB32 /nologo /out:"Debug\libtidy.lib"
 
 !ENDIF 
 

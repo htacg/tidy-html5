@@ -8,12 +8,6 @@
 
     Written by Jelks Cabaniss and Arnaud Desitter
 
-  CVS Info :
-
-    $Author: arnaud02 $
-    $Date: 2007/02/01 12:25:21 $
-    $Revision: 1.8 $
-
 -->
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">

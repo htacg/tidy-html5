@@ -3,7 +3,6 @@
    (c) 1998-2006 (W3C) MIT, ERCIM, Keio University
    See tidy.h for the copyright notice.
 
-   $Id: html5.patch,v 1.1 2012/01/15 14:20:57 hoehrmann Exp $
 */
 
 #include "forward.h"

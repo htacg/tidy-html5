@@ -7,12 +7,6 @@
   You should only need to edit this file and tidy.c
   to localize HTML tidy. *** This needs checking ***
   
-  CVS Info :
-
-    $Author: arnaud02 $ 
-    $Date: 2008/06/18 20:18:54 $ 
-    $Revision: 1.178 $ 
-
 */
 
 #include "tidy-int.h"

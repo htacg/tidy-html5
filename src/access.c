@@ -4,12 +4,6 @@
   Portions (c) 1998-2009 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
   
-  CVS Info :
-
-    $Author: arnaud02 $ 
-    $Date: 2009/03/25 22:04:35 $ 
-    $Revision: 1.42 $ 
-
 */
 
 /*********************************************************************

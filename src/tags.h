@@ -6,12 +6,6 @@
   (c) 1998-2006 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
 
-  CVS Info :
-
-    $Author: arnaud02 $ 
-    $Date: 2006/12/15 10:17:55 $ 
-    $Revision: 1.20 $ 
-
   The HTML tags are stored as 8 bit ASCII strings.
   Use lookupw() to find a tag given a wide char string.
 

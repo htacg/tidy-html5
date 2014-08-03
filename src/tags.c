@@ -3,12 +3,6 @@
   (c) 1998-2008 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
 
-  CVS Info :
-
-    $Author: hoehrmann $ 
-    $Date: 2008/08/09 11:55:27 $ 
-    $Revision: 1.71 $ 
-
   The HTML tags are stored as 8 bit ASCII strings.
 
 */

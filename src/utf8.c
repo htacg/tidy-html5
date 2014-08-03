@@ -3,12 +3,6 @@
   (c) 1998-2007 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
 
-  CVS Info :
-
-    $Author: arnaud02 $ 
-    $Date: 2007/05/30 16:47:31 $ 
-    $Revision: 1.10 $ 
-
   Uses public interfaces to abstract input source and output
   sink, which may be user supplied or either FILE* or memory
   based Tidy implementations.  Encoding support is uniform

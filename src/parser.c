@@ -3,12 +3,6 @@
   (c) 1998-2007 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
   
-  CVS Info :
-
-    $Author: krusch $ 
-    $Date: 2009/10/27 19:27:49 $ 
-    $Revision: 1.188 $ 
-
 */
 
 #include "tidy-int.h"

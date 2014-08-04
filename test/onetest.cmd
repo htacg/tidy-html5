@@ -1,5 +1,5 @@
 @echo off
-
+@set TMPTEST=temptest.txt
 REM onetest.cmd - execute a single test case
 REM
 REM (c) 1998-2006 (W3C) MIT, ERCIM, Keio University
@@ -40,15 +40,19 @@ if exist %TIDYFILE% del %TIDYFILE%
 
 @REM Noisy output, or quiet
 @REM echo Testing %1 input %INFILE% config %CFGFILE% ...
-echo Testing %1
+@echo Testing %1, expect %EXPECTED%
+@echo Testing %1, expect %EXPECTED% >> %TMPTEST%
+@echo Doing: '%TIDY% -f %MSGFILE% -config %CFGFILE% %3 %4 %5 %6 %7 %8 %9 --tidy-mark no -o %TIDYFILE% %INFILE% >> %TMPTEST%
 
-%TIDY% -f %MSGFILE% -config %CFGFILE% %3 %4 %5 %6 %7 %8 %9 --tidy-mark no -o %TIDYFILE% %INFILE%
-set STATUS=%ERRORLEVEL%
+@%TIDY% -f %MSGFILE% -config %CFGFILE% %3 %4 %5 %6 %7 %8 %9 --tidy-mark no -o %TIDYFILE% %INFILE%
+@set STATUS=%ERRORLEVEL%
 
-if %STATUS% EQU %EXPECTED% goto done
-set ERRTESTS=%ERRTESTS% %TESTNO%
-echo *** Failed - got %STATUS%, expected %EXPECTED% ***
-type %MSGFILE%
+@if %STATUS% EQU %EXPECTED% goto done
+@set ERRTESTS=%ERRTESTS% %TESTNO%
+@echo *** Failed - got %STATUS%, expected %EXPECTED% ***
+@type %MSGFILE%
+@echo *** Failed - got %STATUS%, expected %EXPECTED% *** >> %TMPTEST%
+@type %MSGFILE% >> %TMPTEST%
 goto done
 
 :Err1
@@ -82,8 +86,9 @@ goto done
 @goto TRYAT
 
 :TRYAT
-@echo Try running alltest.cmd ..\build\msvc\Release\Tidy.exe tmp ...
+@echo Try running alltest1.cmd ..\build\cmake\Release\Tidy5.exe tmp
 @echo ==============================================================
+@pause
 @goto done
 
 :Err6

@@ -1261,12 +1261,12 @@ Bool inRemovedInfo( uint tid )
 
 void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
 {
-    Lexer* lexer = doc->lexer;
+    /* Lexer* lexer = doc->lexer; */
     while (node)
     {
         if (TY_(nodeIsElement)(node)) {
             if (node->tag) {
-                if ((!node->tag->versions & VERS_HTML5)||(inRemovedInfo(node->tag->id))) {
+                if ((!(node->tag->versions & VERS_HTML5))||(inRemovedInfo(node->tag->id))) {
                     /* issue warning */
                     TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
                 }

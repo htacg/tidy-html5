@@ -12,4 +12,8 @@ cmake_install.cmake
 temp*
 *.opensdf
 ipch/*
+Makefile
+libtidy-static.a
+tab2space
+tidy5
 

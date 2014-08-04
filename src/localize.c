@@ -15,6 +15,9 @@
 #include "message.h"
 #include "tmbstr.h"
 #include "utf8.h"
+#if !defined(NDEBUG) && defined(_MSC_VER)
+#include "sprtf.h"
+#endif
 
 /* used to point to Web Accessibility Guidelines */
 #define ACCESS_URL  "http://www.w3.org/WAI/GL"
@@ -1046,17 +1049,26 @@ static void messagePos( TidyDocImpl* doc, TidyReportLevel level,
         if ( line > 0 && col > 0 )
         {
             ReportPosition(doc, line, col, buf, sizeBuf);
+#if !defined(NDEBUG) && defined(_MSC_VER)
+            SPRTF("%s",buf);
+#else
             for ( cp = buf; *cp; ++cp )
                 TY_(WriteChar)( *cp, doc->errout );
+#endif
         }
 
         LevelPrefix( level, buf, sizeBuf );
+#if !defined(NDEBUG) && defined(_MSC_VER)
+            SPRTF("%s",buf);
+            SPRTF("%s\n",messageBuf);
+#else
         for ( cp = buf; *cp; ++cp )
             TY_(WriteChar)( *cp, doc->errout );
 
         for ( cp = messageBuf; *cp; ++cp )
             TY_(WriteChar)( *cp, doc->errout );
         TY_(WriteChar)( '\n', doc->errout );
+#endif
         TidyDocFree(doc, buf);
     }
     TidyDocFree(doc, messageBuf);

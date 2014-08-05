@@ -47,6 +47,7 @@
 @set TMPCNT3=0
 
 @for %%i in (*.org.html) do @(call :CNTIT %%i)
+@echo.
 @echo Will process %TMPCNT1% files found...
 @echo All should exit with NO WARNINGS or ERRORS
 @echo *** CONTINUE? *** Only Ctlr+C aborts... all other keys continue...
@@ -54,12 +55,14 @@
 
 @for %%i in (*.org.html) do @(call :DOONE %%i)
 
+@echo.
 @echo Done %TMPCNT2% files. See tidied output in %TMPDIR%...
 @if "%TMPCNT3%x" == "0x" (
-@echo With NO WARNINGS or ERRORS! This ia a success...
+@echo With NO WARNINGS or ERRORS! This is a *** SUCCESS ***.
 ) ELSE (
-@echo However have %TMPCNT3% WARNINGS or ERRORS! This is a FAILURE...
+@echo However have %TMPCNT3% WARNINGS or ERRORS! This is a *** FAILURE ***
 )
+@echo.
 
 @goto END
 

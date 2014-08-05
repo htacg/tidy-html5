@@ -2100,7 +2100,7 @@ Node* TY_(GetToken)( TidyDocImpl* doc, GetTokenMode mode )
             return node;
         }
         lexer->itoken = TY_(InsertedToken)( doc );
-        node = lexer->token;
+        node = lexer->itoken;
 #if !defined(NDEBUG) && defined(_MSC_VER)
         insert_count++;
         SPRTF("%d: Returning inserted node %p, '%s'...\n", insert_count, node,

@@ -47,6 +47,25 @@
 #define SPRTF printf
 #endif
 
+#if !defined(NDEBUG) && defined(_MSC_VER)
+static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
+{
+    Lexer* lexer = doc->lexer;
+    Bool lex = ((msg[0] == 'l')&&(msg[1] == 'e')) ? yes : no;
+    if (lexer && lexer->token && (lexer->token->type == TextNode)) {
+        SPRTF("Returning %s TextNode %p... %s\n", msg, node,
+            lex ? "lexer" : "stream");
+    } else {
+        SPRTF("Returning %s node %p <%s>... %s\n", msg, node,
+            node->element ? node->element : "blank",
+            lex ? "lexer" : "stream");
+    }
+}
+#define GTDBG(a,b,c) Show_Node(a,b,c)
+#else
+#define GTDBG
+#endif
+
 /* Forward references
 */
 /* swallows closing '>' */
@@ -2033,7 +2052,7 @@ void TY_(UngetToken)( TidyDocImpl* doc )
             if (lexer->txtend > lexer->txtstart) { \
                 Node *_node = TY_(TextToken)(lexer); \
                 lexer->token = _node; \
-                SPRTF("Returning text node %p...\n",_node); \
+                GTDBG(doc,"text_node",_node); \
                 return _node; \
             }
 
@@ -2058,11 +2077,6 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode );
 
 Node* TY_(GetToken)( TidyDocImpl* doc, GetTokenMode mode )
 {
-#if !defined(NDEBUG) && defined(_MSC_VER)
-    static int pushed_count = 0;
-    static int lexer_count = 0;
-    static int insert_count = 0;
-#endif
     Node *node;
     Lexer* lexer = doc->lexer;
 
@@ -2076,11 +2090,7 @@ Node* TY_(GetToken)( TidyDocImpl* doc, GetTokenMode mode )
             {
                 lexer->pushed = no;
                 node = lexer->itoken;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-                pushed_count++;
-                SPRTF("%d: Returning pushed node %p, '%s'...\n", pushed_count, node,
-                    node->element ? node->element : "<blank>");
-#endif
+                GTDBG(doc,"lex-itoken", node);
                 return node;
             }
             /* itoken has been accepted */
@@ -2092,20 +2102,12 @@ Node* TY_(GetToken)( TidyDocImpl* doc, GetTokenMode mode )
         if (lexer->token->type != TextNode
             || !(lexer->insert || lexer->inode)) {
             node = lexer->token;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-            lexer_count++;
-            SPRTF("%d: Returning lexer node %p, '%s'...\n", lexer_count, node,
-                node->element ? node->element : "<blank>");
-#endif
+            GTDBG(doc,"lex-token", node);
             return node;
         }
         lexer->itoken = TY_(InsertedToken)( doc );
         node = lexer->itoken;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-        insert_count++;
-        SPRTF("%d: Returning inserted node %p, '%s'...\n", insert_count, node,
-            node->element ? node->element : "<blank>");
-#endif
+        GTDBG(doc,"lex-inserted", node);
         return node;
     }
 
@@ -2116,9 +2118,7 @@ Node* TY_(GetToken)( TidyDocImpl* doc, GetTokenMode mode )
     if (lexer->insert || lexer->inode) {
         lexer->token = TY_(InsertedToken)( doc );
         node = lexer->token;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-        SPRTF("Returning INSERT node %p, '%s'...\n", node, node->element ? node->element : "<blank>");
-#endif
+        GTDBG(doc,"lex-inserted2", node);
         return node;
     }
 
@@ -2126,9 +2126,7 @@ Node* TY_(GetToken)( TidyDocImpl* doc, GetTokenMode mode )
     {
         assert( lexer->parent != NULL );
         node = GetCDATA(doc, lexer->parent);
-#if !defined(NDEBUG) && defined(_MSC_VER)
-        SPRTF("Returning Cdatacontent node %p, '%s'...\n", node, node->element ? node->element : "<blank>");
-#endif
+        GTDBG(doc,"lex-cdata", node);
         return node;
     }
 
@@ -2263,9 +2261,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                             StoreOriginalTextInToken(doc, lexer->token, 3);
 #endif
                             node = lexer->token;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-                            SPRTF("Returning text node %p, len %d...\n", node, node->end - node->start );
-#endif
+                            GTDBG(doc,"text", node);
                             return node;
                         }
 
@@ -2494,9 +2490,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 StoreOriginalTextInToken(doc, lexer->token, 0); /* hmm... */
 #endif
                 node = lexer->token;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-                SPRTF("Returning endtag node %p, '%s'...\n", node, node->element ? node->element : "<blank>");
-#endif
+                GTDBG(doc,"endtag", node);
                 return node;  /* the endtag token */
 
             case LEX_STARTTAG: /* first letter of tagname */
@@ -2572,17 +2566,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 StoreOriginalTextInToken(doc, lexer->token, 0);
 #endif
                 node = lexer->token;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-                SPRTF("Returning starttag node %p, '%s'...\n", node, node->element ? node->element : "<blank>");
-                if (node->element) {
-                    //if (stricmp(node->element,"datalist") == 0) {
-                    //    check_me(node->element);
-                    //} else
-                    if (stricmp(node->element,"option") == 0) {
-                        check_me(node->element);
-                    }
-                }
-#endif
+                GTDBG(doc,"starttag", node);
                 return node;  /* return start tag */
 
             case LEX_COMMENT:  /* seen <!-- so look for --> */
@@ -2622,9 +2606,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                         TY_(UngetChar)(c, doc->docIn);
 
                     node = lexer->token;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-                    SPRTF("Returning comment node %p, '%s'...\n", node, node->element ? node->element : "<blank>");
-#endif
+                    GTDBG(doc,"comment", node);
                     return node;
                 }
 
@@ -2671,9 +2653,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 if (lexer->doctype == VERS_UNKNOWN && lexer->token && !cfgBool(doc, TidyXmlTags))
                     lexer->doctype = FindGivenVersion(doc, lexer->token);
                 node = lexer->token;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-                SPRTF("Returning doctype node %p, '%s'...\n", node, node->element ? node->element : "<blank>");
-#endif
+                GTDBG(doc,"doctype", node);
                 return node;
 
             case LEX_PROCINSTR:  /* seen <? so look for '>' */
@@ -2757,9 +2737,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 lexer->state = LEX_CONTENT;
                 lexer->waswhite = no;
                 node = lexer->token;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-                SPRTF("Returning procinstr node %p, '%s'...\n", node, node->element ? node->element : "<blank>");
-#endif
+                GTDBG(doc,"procinstr", node);
                 return node;
 
             case LEX_ASP:  /* seen <% so look for "%>" */
@@ -2783,9 +2761,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 lexer->waswhite = no;
                 lexer->token = AspToken(doc);
                 node = lexer->token;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-                SPRTF("Returning ASP node %p, '%s'...\n", node, node->element ? node->element : "<blank>");
-#endif
+                GTDBG(doc,"ASP", node);
                 return node;  /* the endtag token */
 
 
@@ -2811,9 +2787,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 lexer->waswhite = no;
                 lexer->token = JsteToken(doc);
                 node = lexer->token;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-                SPRTF("Returning JSTE node %p, '%s'...\n", node, node->element ? node->element : "<blank>");
-#endif
+                GTDBG(doc,"JSTE", node);
                 return node;  /* the JSTE token */
 
 
@@ -2837,9 +2811,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 lexer->waswhite = no;
                 lexer->token = PhpToken(doc);
                 node = lexer->token;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-                SPRTF("Returning PHP node %p, '%s'...\n", node, node->element ? node->element : "<blank>");
-#endif
+                GTDBG(doc,"PHP", node);
                 return node;  /* the PHP token */
 
             case LEX_XMLDECL: /* seen "<?xml" so look for "?>" */
@@ -2871,9 +2843,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                         lexer->token = XmlDeclToken(doc);
                         lexer->token->attributes = attributes;
                         node = lexer->token;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-                        SPRTF("Returning xml node %p, '%s'...\n", node, node->element ? node->element : "<blank>");
-#endif
+                        GTDBG(doc,"xml", node);
                         return node;  /* the xml token */
                     }
 
@@ -2903,9 +2873,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 lexer->token = XmlDeclToken(doc);
                 lexer->token->attributes = attributes;
                 node = lexer->token;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-                SPRTF("Returning XML node %p, '%s'...\n", node, node->element ? node->element : "<blank>");
-#endif
+                GTDBG(doc,"XML", node);
                 return node;  /* the XML token */
 
             case LEX_SECTION: /* seen "<![" so look for "]>" */
@@ -2939,9 +2907,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 lexer->waswhite = no;
                 lexer->token = SectionToken(doc);
                 node = lexer->token;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-                SPRTF("Returning SECTION node %p, '%s'...\n", node, node->element ? node->element : "<blank>");
-#endif
+                GTDBG(doc,"SECTION", node);
                 return node;  /* the SECTION token */
 
             case LEX_CDATA: /* seen "<![CDATA[" so look for "]]>" */
@@ -2974,9 +2940,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 lexer->waswhite = no;
                 lexer->token = CDATAToken(doc);
                 node = lexer->token;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-                SPRTF("Returning CDATA node %p, '%s'...\n", node, node->element ? node->element : "<blank>");
-#endif
+                GTDBG(doc,"CDATA", node);
                 return node;  /* the CDATA token */
         }
     }
@@ -2999,9 +2963,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
             StoreOriginalTextInToken(doc, lexer->token, 0); /* ? */
 #endif
             node = lexer->token;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-            SPRTF("Returning textstring node %p, '%s'...\n", node, node->element ? node->element : "<blank>");
-#endif
+            GTDBG(doc,"textstring", node);
             return node;  /* the textstring token */
         }
     }
@@ -3016,9 +2978,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
         lexer->waswhite = no;
         lexer->token = CommentToken(doc);
         node = lexer->token;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-        SPRTF("Returning COMMENT node %p, '%s'...\n", node, node->element ? node->element : "<blank>");
-#endif
+        GTDBG(doc,"COMMENT", node);
         return node;  /* the COMMENT token */
     }
 

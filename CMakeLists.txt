@@ -5,6 +5,11 @@ cmake_minimum_required (VERSION 2.8)
 project (tidy5)
 
 # ### NOTE: *** Adjust when required ***
+set( TIDY_MAJOR_VERSION 1 )
+set( TIDY_MINOR_VERSION 0 )
+set( TIDY_MICRO_VERSION 0 )
+set( LIBTIDY_VERSION "${TIDY_MAJOR_VERSION}.${TIDY_MINOR_VERSION}.${TIDY_MICRO_VERSION}" )
+# establish version date
 set( tidy_YEAR  2014 )
 set( tidy_MONTH 08 )
 set( tidy_DAY   03 )
@@ -106,11 +111,17 @@ else ()
 endif ()
 add_library ( ${name} ${LIB_TYPE} ${CFILES} ${HFILES} ${LIBHFILES} )
 list ( APPEND add_LIBS ${name} )
+if (NOT MSVC)
+    set_target_properties( ${name} PROPERTIES
+                                   VERSION   ${LIBTIDY_VERSION}
+                                   SOVERSION ${TIDY_MAJOR_VERSION} )
+endif ()
 install(TARGETS ${name}
     RUNTIME DESTINATION bin
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
     )
+install( FILES ${HFILES} DESTINATION include )
 
 ##########################################################
 ### main executable

@@ -12,7 +12,7 @@ set( LIBTIDY_VERSION "${TIDY_MAJOR_VERSION}.${TIDY_MINOR_VERSION}.${TIDY_MICRO_V
 # establish version date
 set( tidy_YEAR  2014 )
 set( tidy_MONTH 08 )
-set( tidy_DAY   03 )
+set( tidy_DAY   06 )
 
 # Allow developer to select is Dynamic or static library built
 set( LIB_TYPE STATIC )  # set default static

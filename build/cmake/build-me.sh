@@ -13,9 +13,10 @@ fi
 ### ***** NOTE THIS INSTALL LOCATION ***** ###
 ### Change to suit your taste, environment ###
 ##############################################
-TMPOPTS="-DCMAKE_INSTALL_PREFIX=$HOME"
+TMPINST="$HOME/projects/install/tidy"
+TMPOPTS="-DCMAKE_INSTALL_PREFIX=$TMPINST"
 #############################################
-# Default to SHARED library in unxi
+# Default to SHARED library in unix
 TMPOPTS="$TMPOPTS -DBUILD_SHARED_LIB:BOOL=TRUE"
 
 echo "$BN: Doing: 'cmake $TMPSRC $TMPOPTS' to $BLDLOG"
@@ -34,8 +35,8 @@ fi
 
 echo ""
 echo "$BN: appears a successful build... see $BLDLOG for details"
-
-echo "$BN: Time for 'make install' IFF desired... to $HOME/bin, unless changed..."
+echo ""
+echo "$BN: Time for 'make install' IFF desired... to $TMPINST, unless changed..."
 echo ""
 
 # eof

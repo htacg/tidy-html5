@@ -30,8 +30,10 @@ if(WIN32 AND MSVC)
     # turn off various warnings
     set(WARNING_FLAGS "${WARNING_FLAGS} /wd4996")
     # C4090: 'function' : different 'const' qualifiers
+    # C4244: '=' : conversion from '__int64' to 'uint', possible loss of data
+    # C4267: 'function' : conversion from 'size_t' to 'uint', possible loss of data
     # foreach(warning 4244 4251 4267 4275 4290 4786 4305)
-    foreach(warning 4090)
+    foreach(warning 4090 4244 4267)
         set(WARNING_FLAGS "${WARNING_FLAGS} /wd${warning}")
     endforeach()
 
@@ -41,7 +43,7 @@ if(WIN32 AND MSVC)
     # endif (${MSVC_VERSION} EQUAL 1600)
     set( NOMINMAX 1 )
 else()
-
+    # add any gcc flags
 endif()
 
 set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${WARNING_FLAGS} ${MSVC_FLAGS} -D_REENTRANT" )
@@ -104,6 +106,11 @@ else ()
 endif ()
 add_library ( ${name} ${LIB_TYPE} ${CFILES} ${HFILES} ${LIBHFILES} )
 list ( APPEND add_LIBS ${name} )
+install(TARGETS ${name}
+    RUNTIME DESTINATION bin
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    )
 
 ##########################################################
 ### main executable
@@ -114,13 +121,13 @@ target_link_libraries( ${name} ${add_LIBS} )
 if (MSVC)
     set_target_properties( ${name} PROPERTIES DEBUG_POSTFIX d )
 endif ()
+install (TARGETS ${name} DESTINATION bin)
 
 set(name tab2space)
 add_executable( ${name} ${BINDIR}/tab2space.c )
 if (MSVC)
     set_target_properties( ${name} PROPERTIES DEBUG_POSTFIX d )
 endif ()
-
-# TODO - deal with INSTALL
+# no INSTALL of this 'lcoal' tool
 
 # eof

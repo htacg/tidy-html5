@@ -10,4 +10,5 @@ cmake_install.cmake
 *.sln
 x64/*
 ipch/*
+*.opensdf
 

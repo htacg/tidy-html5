@@ -63,7 +63,7 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
 }
 #define GTDBG(a,b,c) Show_Node(a,b,c)
 #else
-#define GTDBG
+#define GTDBG(a,b,c)
 #endif
 
 /* Forward references

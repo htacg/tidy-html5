@@ -15,6 +15,8 @@ fi
 ##############################################
 TMPOPTS="-DCMAKE_INSTALL_PREFIX=$HOME"
 #############################################
+# Default to SHARED library in unxi
+TMPOPTS="$TMPOPTS -DBUILD_SHARED_LIB:BOOL=TRUE"
 
 echo "$BN: Doing: 'cmake $TMPSRC $TMPOPTS' to $BLDLOG"
 cmake $TMPSRC $TMPOPTS >> $BLDLOG 2>&1

@@ -3,4 +3,7 @@ libtidy-static.a
 tab2space
 tidy5
 libtidy-shared.so
+libtidy-shared.so.1
+libtidy-shared.so.1.0.0
+install_manifest.txt
 

@@ -2,4 +2,5 @@ bldlog-1.txt
 libtidy-static.a
 tab2space
 tidy5
+libtidy-shared.so
 

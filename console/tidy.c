@@ -1315,6 +1315,7 @@ int main( int argc, char** argv )
                     static char tmp_buf[264];
                     sprintf(tmp_buf,"%s.html",get_log_file());
                     status = tidySaveFile( tdoc, tmp_buf );
+                    SPRTF("Saved tidied content to '%s'\n",tmp_buf);
 #else
                     status = tidySaveStdout( tdoc );
 #endif

@@ -41,6 +41,8 @@ shift
 
 TMPCNT1=0
 TMPCNT2=0
+SAMECNT=0
+DIFFCNT=0
 
 for fil in $TMPDIR1/*.html; do
 	TMPCNT1=`expr $TMPCNT1 + 1`
@@ -64,10 +66,19 @@ for fil in $TMPDIR1/*.html; do
 	bfil=`basename $fil`
 	if [ -f "$TMPDIR2/$bfil" ]; then
 		diff -uw $TMPDIR1/$bfil $TMPDIR2/$bfil >> $OUTLOG
+		if [ "$?" = "0" ]; then
+			echo "diff -uw $TMPDIR1/$bfil $TMPDIR2/$bfil are the SAME" >> $OUTLOG
+			SAMECNT=`expr $SAMECNT + 1`
+		else
+			DIFFCNT=`expr $DIFFCNT + 1`
+		fi
 	else
 		echo "$BN: File $bfil not found the 2" >> $OUTLOG
 	fi
 done
+TOTCNT=`expr $SAMECNT + $DIFFCNT`
+echo "$BN: Of the $TOTCNT compares made, $SAMECNT are the SAME, $DIFFCNT are DIFFERENT"
+echo "$BN: Of the $TOTCNT compares made, $SAMECNT are the SAME, $DIFFCNT are DIFFERENT" >> $OUTLOG
 
 echo "$BN: Results are in $OUTLOG"
 

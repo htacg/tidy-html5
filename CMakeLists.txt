@@ -18,6 +18,13 @@ set( tidy_DAY   03 )
 set( LIB_TYPE STATIC )  # set default static
 option( BUILD_SHARED_LIB "Build Shared Library" OFF )
 
+if (CMAKE_SIZEOF_VOID_P EQUAL 8)
+    message(STATUS "*** Have SIZEOF void * = 8, so 64-bit")
+    set( IS_64_BIT 1 )
+else ()
+    message(STATUS "*** SIZEOF void * != 8, so not 64-bit")
+endif ()
+
 # to distinguish between debug and release lib in windows
 if (WIN32)
     set( CMAKE_DEBUG_POSTFIX "d" ) # little effect in unix
@@ -43,6 +50,9 @@ if(WIN32 AND MSVC)
     endforeach()
 
     set( MSVC_FLAGS "-DNOMINMAX -D_USE_MATH_DEFINES -D_CRT_SECURE_NO_WARNINGS -D_SCL_SECURE_NO_WARNINGS -D__CRT_NONSTDC_NO_WARNINGS" )
+    if (IS_64_BIT)
+        set( MSVC_FLAGS "${MSVC_FLAGS} -DWIN64" )
+    endif ()
     # if (${MSVC_VERSION} EQUAL 1600)
     #    set( MSVC_LD_FLAGS "/FORCE:MULTIPLE" )
     # endif (${MSVC_VERSION} EQUAL 1600)

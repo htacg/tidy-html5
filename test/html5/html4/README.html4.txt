@@ -27,7 +27,9 @@ There is also a cleanup.bat to delete the products produced by this test.
 ## Tests 2
 
 This folder contains about 14 HTML files, each using a tag or tags REMOVED from HTML5,
-all named *5.html
+all named *5.html. A lot of the tests came from reading -
+ http://www.whatwg.org/specs/web-apps/current-work/multipage/obsolete.html
+A text copy, obsolete.txt is included in this folder.
 
 These were use to test an develop the CheckHTML5(doc,node) service. And there are
 a set of batch file to run these tests, named test*.bat, and some 'special' 
@@ -46,10 +48,10 @@ testone.bat - After setting the input file, each test????.bat calls this to cond
 All the output is redirected to tempinfo.html
  
 The set of test batch files is -
-testacro.bat testbig.bat testbody.bat testcent.bat testcent2.bat testdir.bat testfont.bat
-testi2.bat testtt.bat
+testacro.bat testbig.bat testbody.bat testcent.bat testcent2.bat testdir.bat 
+testfont.bat testi2.bat testtt.bat
 
-THe name generally indicates the tag or attribute being tested...
+The name generally indicates the tag or attribute being tested...
 
 Enjoy.
 

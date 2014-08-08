@@ -229,7 +229,10 @@ uint TY_(nodeHeaderLevel)( Node* node );  /* 1, 2, ..., 6 */
 #define nodeIsPROGRESS( node )   TagIsId( node, TidyTag_PROGRESS )
 
 /* HTML5 */
-#define nodeIsDATALIST( node )     TagIsId( node, TidyTag_DATALIST )
-
+#define nodeIsDATALIST( node )   TagIsId( node, TidyTag_DATALIST )
+/* NOT in HTML 5 */
+#define nodeIsACRONYM( node )    TagIsId( node, TidyTag_ACRONYM )
+#define nodesIsFRAME( node )     TagIsId( node, TidyTag_FRAME )
+#define nodeIsTT( node )         TagIsId( node, TidyTag_TT )
 
 #endif /* __TAGS_H__ */

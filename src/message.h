@@ -155,8 +155,10 @@ void TY_(ReportFatal)(TidyDocImpl* doc, Node* element, Node* node, uint code);
 #define WHITE_IN_URI                 87
 
 #define REMOVED_HTML5                88 /* this element removed from HTML5 */
+#define BAD_BODY_HTML5               89 /* attr on body removed from HTML5 */
+#define BAD_ALIGN_HTML5              90 /* use of align attr removed from HTML5 */
 
-#define PREVIOUS_LOCATION            89 /* last */
+#define PREVIOUS_LOCATION            91 /* last */
 
 /* character encoding errors */
 

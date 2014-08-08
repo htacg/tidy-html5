@@ -106,6 +106,8 @@ static struct _msgfmt
   { COERCE_TO_ENDTAG_WARN,        "<%s> is probably intended as </%s>"                                      }, /* Warning */
   /* HTML5 */
   { REMOVED_HTML5,                "%s element removed from HTML5"                                           }, /* Warning */
+  { BAD_BODY_HTML5,               "Found attribute on body that is obsolete in HTML5. Use CSS"              }, /* Warning */
+  { BAD_ALIGN_HTML5,              "The align attribute on the %s element is obsolete, Use CSS"              }, /* Wanring */
 
 /* ReportNotice */
   { TRIM_EMPTY_ELEMENT,           "trimming empty %s"                                                       }, /* Notice */
@@ -1467,8 +1469,10 @@ void TY_(ReportWarning)(TidyDocImpl* doc, Node *element, Node *node, uint code)
         messageNode(doc, TidyWarning, rpt, fmt, elemdesc, nodedesc);
         break;
 
-    case REMOVED_HTML5:
     case NESTED_EMPHASIS:
+    case REMOVED_HTML5:
+    case BAD_BODY_HTML5:
+    case BAD_ALIGN_HTML5:
         messageNode(doc, TidyWarning, rpt, fmt, nodedesc);
         break;
     case COERCE_TO_ENDTAG_WARN:
@@ -1595,6 +1599,9 @@ void TY_(ReportError)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     case REPLACING_UNEX_ELEMENT:
         TagToString(element, elemdesc, sizeof(elemdesc));
         messageNode(doc, TidyWarning, rpt, fmt, elemdesc, nodedesc);
+        break;
+    case REMOVED_HTML5:
+        messageNode(doc, TidyError, rpt, fmt, nodedesc);
         break;
     }
 }

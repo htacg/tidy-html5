@@ -1,6 +1,6 @@
 @setlocal
 @call setexe
-@set TMPFIL=C:\HOMEPAGE\Orange\bodyatts5.html
+@set TMPFIL=bodyatts5.html
 @if NOT EXIST %TMPEXE% (
 @echo Unable to locate EXE %TMPEXE%
 @exit /b 1

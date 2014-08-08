@@ -1,6 +1,6 @@
 @setlocal
 @call setexe
-@set TMPFIL=C:\HOMEPAGE\Orange\center5.html
+@set TMPFIL=center5.html
 @if NOT EXIST %TMPFIL% (
 @echo Unable to locate FILE %TMPFIL%
 @exit /b 1

@@ -1,6 +1,6 @@
 @setlocal
 @call setexe
-@set TMPFIL=tt5.html
+@set TMPFIL=strike5.html
 @if NOT EXIST %TMPFIL% (
 @echo Unable to locate FILE %TMPFIL%
 @exit /b 1

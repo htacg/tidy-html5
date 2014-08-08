@@ -1,6 +1,6 @@
 @setlocal
 @call setexe
-@set TMPFIL=C:\HOMEPAGE\Orange\index2.html
+@set TMPFIL=index2.html
 
 @call testone
 

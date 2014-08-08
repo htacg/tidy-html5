@@ -49,7 +49,7 @@ All the output is redirected to tempinfo.html
  
 The set of test batch files is -
 testacro.bat testbig.bat testbody.bat testcent.bat testcent2.bat testdir.bat 
-testfont.bat testi2.bat testtt.bat
+testfont.bat testi2.bat teststrike.bat testtt.bat
 
 The name generally indicates the tag or attribute being tested...
 

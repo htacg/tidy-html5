@@ -10,7 +10,9 @@
 #include "tidy-int.h"
 #include "message.h"
 #include "tmbstr.h"
-
+#if !defined(NDEBUG) && defined(_MSC_VER)
+#include "sprtf.h"
+#endif
 /* Attribute checking methods */
 static CheckAttribs CheckIMG;
 static CheckAttribs CheckLINK;
@@ -475,6 +477,57 @@ static void declare( TidyDocImpl* doc, TidyTagImpl* tags,
         }
     }
 }
+
+#if !defined(NDEBUG) && defined(_MSC_VER)
+/* ==================================================================== 
+   MSVC DEBUG ONLY
+ */
+void ListElementsPerVersion( uint vers, Bool has )
+{
+    uint val, cnt, total, wrap = 10;
+    const Dict *np = tag_defs + 1;
+    const Dict *end = tag_defs + N_TIDY_TAGS;
+    cnt = 0;
+    total = 0;
+    for ( ; np < end; np++) {
+        val = (np->versions & vers);
+        if (has) {
+            if (val) {
+                SPRTF("%s ",np->name);
+                cnt++;
+                total++;
+            }
+        } else {
+            if (!val) {
+                SPRTF("%s ",np->name);
+                cnt++;
+                total++;
+            }
+        }
+        if (cnt == wrap) {
+            SPRTF("\n");
+            cnt = 0;
+        }
+    }
+    if (cnt)
+        SPRTF("\n");
+    SPRTF("Listed total %u tags that %s version %u\n", total,
+        (has ? "have" : "do not have"),
+        vers );
+
+}
+
+void show_not_html5(void)
+{
+    SPRTF("List tags that do not have version HTML5 (HT50|XH50)\n"),
+    ListElementsPerVersion( VERS_HTML5, no );
+}
+void show_have_html5(void)
+{
+    ListElementsPerVersion( VERS_HTML5, yes );
+}
+
+#endif
 
 /* public interface for finding tag by name */
 Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )

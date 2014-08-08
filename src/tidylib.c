@@ -1228,6 +1228,32 @@ int         tidyDocRunDiagnostics( TidyDocImpl* doc )
      return tidyDocStatus( doc );
 }
 
+/* ######################################################################################
+   HTML5 STUFF
+ */
+#if !defined(NDEBUG) && defined(_MSC_VER)
+extern void show_not_html5(void);
+/* -----------------------------
+List tags that do not have version HTML5 (HT50|XH50)
+
+acronym applet basefont big center dir font frame frameset isindex
+listing noframes plaintext rb rbc rtc strike tt xmp nextid
+align bgsound blink comment ilayer layer marquee multicol nobr noembed
+nolayer nosave server servlet spacer
+
+Listed total 35 tags that do not have version 393216
+   ------------------------------ */
+
+static void list_not_html5(void)
+{
+    static Bool done_list = no;
+    if (done_list == no) {
+        done_list = yes;
+        show_not_html5();
+    }
+}
+#endif
+
 /* What about <blink>, <s> stike-through, <u> underline */
 static struct _html5Info
 {
@@ -1293,7 +1319,9 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
     Bool clean = cfgBool( doc, TidyMakeClean );
     Node* body = TY_(FindBody)( doc );
     Bool warn = yes;    /* should this be a warning, error, or report??? */
-
+#if !defined(NDEBUG) && defined(_MSC_VER)
+//    list_not_html5();
+#endif
     while (node)
     {
         if ( nodeHasAlignAttr( node ) ) {
@@ -1434,7 +1462,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
         if (TY_(nodeIsElement)(node)) {
             if (node->tag) {
                 if ((!(node->tag->versions & VERS_HTML5))||(inRemovedInfo(node->tag->id))) {
-                    /* issue warning */
+                    /* issue warning for elements like 'markquee' */
                     TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
                 }
             }
@@ -1446,6 +1474,9 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
         node = node->next;
     }
 }
+/* END HTML5 STUFF
+   ######################################################################################
+ */
 
 int         tidyDocCleanAndRepair( TidyDocImpl* doc )
 {

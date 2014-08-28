@@ -7,7 +7,7 @@
   generated wrappers and COM IDL files.
 
   Copyright (c) 1998-2008 World Wide Web Consortium
-  (Massachusetts Institute of Technology, European Research 
+  (Massachusetts Institute of Technology, European Research
   Consortium for Informatics and Mathematics, Keio University).
   All Rights Reserved.
 
@@ -16,18 +16,18 @@
      Dave Raggett <dsr@w3.org>
 
   The contributing author(s) would like to thank all those who
-  helped with testing, bug fixes and suggestions for improvements. 
+  helped with testing, bug fixes and suggestions for improvements.
   This wouldn't have been possible without your help.
 
   COPYRIGHT NOTICE:
- 
+
   This software and documentation is provided "as is," and
   the copyright holders and contributing author(s) make no
   representations or warranties, express or implied, including
   but not limited to, warranties of merchantability or fitness
   for any particular purpose or that the use of the software or
   documentation will not infringe any third party patents,
-  copyrights, trademarks or other rights. 
+  copyrights, trademarks or other rights.
 
   The copyright holders and contributing author(s) will not be held
   liable for any direct, indirect, special or consequential damages
@@ -43,7 +43,7 @@
      not be misrepresented as being the original source.
   3. This Copyright notice may not be removed or altered from any
      source or altered source distribution.
- 
+
   The copyright holders and contributing author(s) specifically
   permit, without fee, and encourage the use of this source code
   as a component for supporting the Hypertext Markup Language in
@@ -86,7 +86,7 @@ typedef enum
 
   TidyCharEncoding,    /**< In/out character encoding */
   TidyInCharEncoding,  /**< Input character encoding (if different) */
-  TidyOutCharEncoding, /**< Output character encoding (if different) */    
+  TidyOutCharEncoding, /**< Output character encoding (if different) */
   TidyNewline,         /**< Output line ending (default to platform) */
 
   TidyDoctypeMode,     /**< See doctype property */
@@ -94,7 +94,7 @@ typedef enum
 
   TidyDuplicateAttrs,  /**< Keep first or last duplicate attribute */
   TidyAltText,         /**< Default text for alt attribute */
-  
+
   /* obsolete */
   TidySlideStyle,      /**< Style sheet for slides: not used for anything yet */
 
@@ -188,7 +188,7 @@ typedef enum
   TidyEmptyTags,       /**< Declared empty tags */
   TidyPreTags,         /**< Declared pre tags */
 
-  TidyAccessibilityCheckLevel, /**< Accessibility check level 
+  TidyAccessibilityCheckLevel, /**< Accessibility check level
                                    0 (old style), or 1, 2, 3 */
 
   TidyVertSpace,       /**< degree to which markup is spread out vertically */
@@ -267,8 +267,8 @@ typedef enum
 
 /* I/O and Message handling interface
 **
-** By default, Tidy will define, create and use 
-** instances of input and output handlers for 
+** By default, Tidy will define, create and use
+** instances of input and output handlers for
 ** standard C buffered I/O (i.e. FILE* stdin,
 ** FILE* stdout and FILE* stderr for content
 ** input, content output and diagnostic output,
@@ -279,7 +279,7 @@ typedef enum
 
 /** Message severity level
 */
-typedef enum 
+typedef enum
 {
   TidyInfo,             /**< Information about markup usage */
   TidyWarning,          /**< Warning message */
@@ -296,7 +296,7 @@ typedef enum
 
 /** Node types
 */
-typedef enum 
+typedef enum
 {
   TidyNode_Root,        /**< Root */
   TidyNode_DocType,     /**< DOCTYPE */
@@ -738,6 +738,42 @@ typedef enum
   TidyAttr_SRCDOC,
   TidyAttr_SRCLANG,
   TidyAttr_STEP,
+  TidyAttr_ARIA_ACTIVEDESCENDANT,
+  TidyAttr_ARIA_ATOMIC,
+  TidyAttr_ARIA_AUTOCOMPLETE,
+  TidyAttr_ARIA_BUSY,
+  TidyAttr_ARIA_CHECKED,
+  TidyAttr_ARIA_CONTROLS,
+  TidyAttr_ARIA_DESCRIBEDBY,
+  TidyAttr_ARIA_DISABLED,
+  TidyAttr_ARIA_DROPEFFECT,
+  TidyAttr_ARIA_EXPANDED,
+  TidyAttr_ARIA_FLOWTO,
+  TidyAttr_ARIA_GRABBED,
+  TidyAttr_ARIA_HASPOPUP,
+  TidyAttr_ARIA_HIDDEN,
+  TidyAttr_ARIA_INVALID,
+  TidyAttr_ARIA_LABEL,
+  TidyAttr_ARIA_LABELLEDBY,
+  TidyAttr_ARIA_LEVEL,
+  TidyAttr_ARIA_LIVE,
+  TidyAttr_ARIA_MULTILINE,
+  TidyAttr_ARIA_MULTISELECTABLE,
+  TidyAttr_ARIA_OWNS,
+  TidyAttr_ARIA_POSINSET,
+  TidyAttr_ARIA_PRESSED,
+  TidyAttr_ARIA_READONLY,
+  TidyAttr_ARIA_RELEVANT,
+  TidyAttr_ARIA_REQUIRED,
+  TidyAttr_ARIA_SELECTED,
+  TidyAttr_ARIA_SETSIZE,
+  TidyAttr_ARIA_SORT,
+  TidyAttr_ARIA_VALUEMAX,
+  TidyAttr_ARIA_VALUEMIN,
+  TidyAttr_ARIA_VALUENOW,
+  TidyAttr_ARIA_VALUETEXT,
+
+
 
 
   N_TIDY_ATTRIBS              /**< Must be last */
@@ -747,3 +783,4 @@ typedef enum
 }  /* extern "C" */
 #endif
 #endif /* __TIDYENUM_H__ */
+

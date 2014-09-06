@@ -354,6 +354,8 @@ static const Attribute attribute_defs [] =
   { TidyAttr_SRCDOC,            "srcdoc",                CH_PCDATA    },
   { TidyAttr_SRCLANG,           "srclang",               CH_PCDATA    },
   { TidyAttr_STEP,              "step",                  CH_PCDATA    },
+  
+  { TidyAttr_ROLE,              "role",                  CH_PCDATA    },
 
   /* HTML5 Aria Attributes */
   { TidyAttr_ARIA_ACTIVEDESCENDANT,   "aria-activedescendant",   CH_PCDATA   },

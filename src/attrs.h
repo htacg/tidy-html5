@@ -345,8 +345,7 @@ uint TY_(NodeAttributeVersions)( Node* node, TidyAttrId id );
 #define attrIsARIA_VALUEMIN(av)         AttrIsId( av,  TidyAttr_ARIA_VALUEMIN  )
 #define attrIsARIA_VALUENOW(av)         AttrIsId( av,  TidyAttr_ARIA_VALUENOW  )
 #define attrIsARIA_VALUETEXT(av)        AttrIsId( av,  TidyAttr_ARIA_VALUETEXT  )
-
-
+#define attrIsROLE(av)                  AttrIsId( av, TidyAttr_ROLE  )
 
 /* Attribute Retrieval macros
 */
@@ -436,5 +435,6 @@ uint TY_(NodeAttributeVersions)( Node* node, TidyAttrId id );
 #define attrGetARIA_VALUEMIN( nod )         TY_(AttrGetById)( nod,  TidyAttr_ARIA_VALUEMIN  )
 #define attrGetARIA_VALUENOW( nod )         TY_(AttrGetById)( nod,  TidyAttr_ARIA_VALUENOW  )
 #define attrGetARIA_VALUETEXT( nod )        TY_(AttrGetById)( nod,  TidyAttr_ARIA_VALUETEXT  )
+#define attrGetROLE( nod )                  TY_(AttrGetById)( nod, TidyAttr_ROLE  )
 
 #endif /* __ATTRS_H__ */

@@ -774,8 +774,7 @@ typedef enum
   TidyAttr_ARIA_VALUENOW,
   TidyAttr_ARIA_VALUETEXT,
 
-
-
+  TidyAttr_ROLE,
 
   N_TIDY_ATTRIBS              /**< Must be last */
 } TidyAttrId;
@@ -784,4 +783,3 @@ typedef enum
 }  /* extern "C" */
 #endif
 #endif /* __TIDYENUM_H__ */
-

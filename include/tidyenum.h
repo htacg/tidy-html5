@@ -739,6 +739,7 @@ typedef enum
   TidyAttr_SRCDOC,
   TidyAttr_SRCLANG,
   TidyAttr_STEP,
+  TidyAttr_ROLE,
   TidyAttr_ARIA_ACTIVEDESCENDANT,
   TidyAttr_ARIA_ATOMIC,
   TidyAttr_ARIA_AUTOCOMPLETE,
@@ -773,8 +774,6 @@ typedef enum
   TidyAttr_ARIA_VALUEMIN,
   TidyAttr_ARIA_VALUENOW,
   TidyAttr_ARIA_VALUETEXT,
-
-  TidyAttr_ROLE,
 
   N_TIDY_ATTRIBS              /**< Must be last */
 } TidyAttrId;

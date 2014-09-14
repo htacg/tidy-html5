@@ -676,6 +676,8 @@ TIDY_EXPORT int TIDY_CALL         tidyCleanAndRepair( TidyDoc tdoc );
 */
 TIDY_EXPORT int TIDY_CALL         tidyRunDiagnostics( TidyDoc tdoc );
 
+TIDY_EXPORT int TIDY_CALL         tidyReportDoctype( TidyDoc tdoc );
+
 /** @} end Clean group */
 
 

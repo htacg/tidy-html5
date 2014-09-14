@@ -1313,9 +1313,18 @@ int main( int argc, char** argv )
         if ( status >= 0 )
             status = tidyCleanAndRepair( tdoc );
 
-        if ( status >= 0 )
+        if ( status >= 0 ) {
             status = tidyRunDiagnostics( tdoc );
+            if ( !tidyOptGetBool(tdoc, TidyQuiet) ) {
+                /* NOT quiet, show DOCTYPE, if not already shown */
+                if (!tidyOptGetBool(tdoc, TidyShowInfo)) {
+                    tidyOptSetBool( tdoc, TidyShowInfo, yes );
+                    tidyReportDoctype( tdoc );  /* FIX20140913: like warnings, errors, ALWAYS report DOCTYPE */
+                    tidyOptSetBool( tdoc, TidyShowInfo, no );
+                }
+            }
 
+        }
         if ( status > 1 ) /* If errors, do we want to force output? */
             status = ( tidyOptGetBool(tdoc, TidyForceOutput) ? status : -1 );
 

@@ -56,6 +56,7 @@ static int          tidyDocParseSource( TidyDocImpl* impl, TidyInputSource* docI
 ** pre-or-post repair.
 */
 static int          tidyDocRunDiagnostics( TidyDocImpl* doc );
+static void         tidyDocReportDoctype( TidyDocImpl* doc );
 static int          tidyDocCleanAndRepair( TidyDocImpl* doc );
 
 
@@ -1136,6 +1137,16 @@ int TIDY_CALL        tidyRunDiagnostics( TidyDoc tdoc )
     return -EINVAL;
 }
 
+int TIDY_CALL        tidyReportDoctype( TidyDoc tdoc )
+{
+    int iret = -EINVAL;
+    TidyDocImpl* impl = tidyDocToImpl( tdoc );
+    if ( impl ) {
+      tidyDocReportDoctype( impl );
+      iret = 0;
+    }
+    return iret;
+}
 
 /* Workhorse functions.
 **
@@ -1227,6 +1238,12 @@ int         tidyDocRunDiagnostics( TidyDocImpl* doc )
 
      return tidyDocStatus( doc );
 }
+
+void         tidyDocReportDoctype( TidyDocImpl* doc )
+{
+        TY_(ReportMarkupVersion)( doc );
+}
+
 
 /* ######################################################################################
    HTML5 STUFF

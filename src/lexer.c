@@ -48,17 +48,39 @@
 #endif
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
+static Bool show_attrs = yes;
 static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
 {
     Lexer* lexer = doc->lexer;
     Bool lex = ((msg[0] == 'l')&&(msg[1] == 'e')) ? yes : no;
     if (lexer && lexer->token && (lexer->token->type == TextNode)) {
-        SPRTF("Returning %s TextNode %p... %s\n", msg, node,
-            lex ? "lexer" : "stream");
+        if (show_attrs) {
+            SPRTF("Returning %s TextNode ... %s\n", msg,
+                lex ? "lexer" : "stream");
+        } else {
+            SPRTF("Returning %s TextNode %p... %s\n", msg, node,
+                lex ? "lexer" : "stream");
+        }
     } else {
-        SPRTF("Returning %s node %p <%s>... %s\n", msg, node,
-            node->element ? node->element : "blank",
-            lex ? "lexer" : "stream");
+        if (show_attrs) {
+            AttVal* av;
+            tmbstr name = node->element ? node->element : "blank";
+            SPRTF("Returning %s node <%s", msg, name);
+            for (av = node->attributes; av; av = av->next) {
+                name = av->attribute;
+                if (name) {
+                    SPRTF(" %s",name);
+                    if (av->value) {
+                        SPRTF("=\"%s\"", av->value);
+                    }
+                }
+            }
+            SPRTF("> %s\n", lex ? "lexer" : "stream");
+        } else {
+            SPRTF("Returning %s node %p <%s>... %s\n", msg, node,
+                node->element ? node->element : "blank",
+                lex ? "lexer" : "stream");
+        }
     }
 }
 #define GTDBG(a,b,c) Show_Node(a,b,c)
@@ -1066,7 +1088,7 @@ Node *TY_(NewNode)(TidyAllocator* allocator, Lexer *lexer)
         node->column = lexer->columns;
     }
     node->type = TextNode;
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_ALLOCATION)
     SPRTF("Allocated node %p\n", node );
 #endif
     return node;
@@ -1160,7 +1182,7 @@ void TY_(RemoveAttribute)( TidyDocImpl* doc, Node *node, AttVal *attr )
  */
 void TY_(FreeNode)( TidyDocImpl* doc, Node *node )
 {
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_ALLOCATION)
     if (node) SPRTF("Free node %p\n", node );
 #endif
     /* this is no good ;=((

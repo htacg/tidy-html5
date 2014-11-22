@@ -377,6 +377,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_ARIA_LIVE,               "aria-live",               CH_PCDATA   },
   { TidyAttr_ARIA_MULTILINE,          "aria-multiline",          CH_PCDATA   },
   { TidyAttr_ARIA_MULTISELECTABLE,    "aria-multiselectable",    CH_PCDATA   },
+  { TidyAttr_ARIA_ORIENTATION,        "aria-orientation",        CH_PCDATA   },
   { TidyAttr_ARIA_OWNS,               "aria-owns",               CH_PCDATA   },
   { TidyAttr_ARIA_POSINSET,           "aria-posinset",           CH_PCDATA   },
   { TidyAttr_ARIA_PRESSED,            "aria-pressed",            CH_PCDATA   },

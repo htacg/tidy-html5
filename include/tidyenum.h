@@ -763,6 +763,7 @@ typedef enum
   TidyAttr_ARIA_LIVE,
   TidyAttr_ARIA_MULTILINE,
   TidyAttr_ARIA_MULTISELECTABLE,
+  TidyAttr_ARIA_ORIENTATION,
   TidyAttr_ARIA_OWNS,
   TidyAttr_ARIA_POSINSET,
   TidyAttr_ARIA_PRESSED,

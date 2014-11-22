@@ -48,6 +48,7 @@ struct _TidyDocImpl
     StreamOut*          docOut;
     StreamOut*          errout;
     TidyReportFilter    mssgFilt;
+    TidyReportFilter2   mssgFilt2;
     TidyOptCallback     pOptCallback;
 
     /* Parse + Repair Results */

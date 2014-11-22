@@ -542,7 +542,11 @@ typedef enum
   TidyAttr_HTTP_EQUIV,        /**< HTTP_EQUIV= */
   TidyAttr_ID,                /**< ID= */
   TidyAttr_ISMAP,             /**< ISMAP= */
+  TidyAttr_ITEMID,            /**< ITEMID= */
   TidyAttr_ITEMPROP,          /**< ITEMPROP= */
+  TidyAttr_ITEMREF,           /**< ITEMREF= */
+  TidyAttr_ITEMSCOPE,         /**< ITEMSCOPE= */
+  TidyAttr_ITEMTYPE,          /**< ITEMTYPE= */
   TidyAttr_LABEL,             /**< LABEL= */
   TidyAttr_LANG,              /**< LANG= */
   TidyAttr_LANGUAGE,          /**< LANGUAGE= */

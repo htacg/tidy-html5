@@ -1,0 +1,554 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<title>HTML TIDY - Notes on pending work</title>
+<meta name="keywords"
+content="HTML, validation, error correction, pretty-printing" />
+<meta name="author" content="Dave Raggett &lt;dsr@w3.org&gt;" />
+<style type="text/css">
+  body { 
+    margin-left: 10%; 
+    margin-right: 10%; 
+    font-family: sans-serif
+  }
+  h1 { margin-left: -8% }
+  h2,h3,h4,h5,h6 { margin-left: -4% }
+  pre { color: green; font-weight: bold;
+   font-size: 80%; font-family: monospace}
+  em { font-style: italic; font-weight: bold }
+  strong { text-transform: uppercase; font-weight: bold }
+  .note {font-style: italic; color: rgb(192, 101, 101) }
+  //hr {text-align: center; width: 60% }
+  blockquote {
+    color: navy;
+    margin-left: 1%;
+    margin-right: 1%;
+    text-align: center;
+    font-family: "Comic Sans MS", "Times New Roman", serif
+  }
+  table {
+    font-family: sans-serif;
+    font-size: 80%;
+    background: rgb(255,255,153)
+  }
+  td {
+    font-size: 80%
+  }
+  .people {font-family: "Lucida Calligraphy", serif}
+  :link { color: rgb(0, 0, 153) }
+  :visited { color: rgb(153, 0, 153) }
+  :active { color: rgb(255, 0, 102) }
+  a :hover { color: rgb(0, 0, 255) }
+</style>
+
+<style type="text/css">
+ p.c1 {font-style: italic}
+</style>
+</head>
+<body bgcolor="#FFFFFF" background="grid.gif" text="black"
+link="navy" vlink="black" alink="red">
+<h1>HTML TIDY - Notes on Pending Work</h1>
+
+<p><a href="http://www.w3.org/People/Raggett">Dave Raggett</a> <a
+href="mailto:dsr@w3.org">dsr@w3.org</a></p>
+
+<p>This is a page where I am keeping the suggestions for
+improvements or bug fixes. My current work load means that I
+don't get much time to work on HTML Tidy, so I am interested in
+offers of help!</p>
+
+<h4>Public Email List for Tidy: &lt;<a
+href="mailto:html-tidy@w3.org">html-tidy@w3.org</a>&gt;</h4>
+
+<p>I have set up an archived mailing list devoted to Tidy. To
+subscribe send an email to html-tidy-request@w3.org with the word
+subscribe in the subject line (include the word unsubscribe if
+you want to unsubscribe). The <a
+href="http://lists.w3.org/Archives/Public/html-tidy/">archive</a>
+for this list is accessible online. Please use this list to
+report errors or enhancement requests.</p>
+
+<h2>Things awaiting further attention</h2>
+
+<ul>
+<li>Support for BIG5 and ShiftJIS (Rick Jelliffe)</li>
+
+<li>Stronger checking on which attributes appear on what
+elements</li>
+
+<li>Sorting attributes in a canonical order</li>
+
+<li>Version checking for HTML 4.01 vs 4.0 (Tidy currently will
+set the document type to 4.01 in preference to 4.0)</li>
+
+<li>Noticing that the document isn't really XHTML if it isn't
+wellformed, i.e. it lacks end tags and quotes on attribute
+values</li>
+
+<li>Converting &lt;font face="Symbol"&gt;a&lt;/font&gt; etc. to
+the corresponding Unicode characters, when cleaning HTML.</li>
+
+<li>link checking - this would involve some platform dependent
+code as the network interface varies significantly from one
+platform to the next.</li>
+
+<li>When exporting Word2000 to Web page, there is a need for
+smarter rules of thumb for working out whether the paragraph is a
+bulletted or numbered list item, and determining the level of
+nesting. Perhaps the style attribute holds the key? This tends to
+include substrings like: "mso-list:l0 level1 lfo2;" and
+"mso-list:l1 level1 lfo1;". Unfortunately, these aren't always
+present, and I have yet to figure out a foolproof heuristic.</li>
+</ul>
+
+<p>I need to set up an index of precisely what attributes are
+supported on each element. Right now, some elements check their
+own attributes, whilst others are checked via default checks
+defined for each attribute independently of the element. Until
+this is done, you sometimes find that validation services
+discovering errors unnoticed by Tidy itself.</p>
+
+<p>Jelks Cabaniss asks: <i>Could Tidy be made to automatically
+"clean" (FONTs to CSS) if the Strict DOCTYPE is requested? An
+HTML or XHTML Strict document can't have FONT tags according to
+the DTDs</i>. Jelks has a bunch of other good ideas such as
+converting the bgcolor attribute over to CSS.</p>
+
+<p>Adding an option to select slide transition effects. I would
+also like to provide an optional feature for sorting attribute
+values.</p>
+
+<p>I am having problems with form elements as direct children of
+tr or table. It is dangerous to create an implicit table cell,
+and what is needed is a way to move the form element into the
+next cell. If this can't be done an error needs to be raised
+since Tidy will be stuck. On a separate note, Tidy is still
+breaking lines between &lt;img&gt; and &lt;/a&gt; which in
+Netscape shows as an underlined space. It's fine in IE.</p>
+
+<p>Benjamin Holzman &lt;bah@orientation.com&gt; writes: I'm
+wrapping tidy (release-date 2000.01.13) in some perl objects
+(using SWIG), and CharEncoding being a global is a bit of a pain.
+I was wondering what your thoughts would be on how to fix that.
+The character encoding is already a property of struct Out; is
+there any reason why making it part of struct StreamIn as well,
+and perhaps setting that property in OpenInput, based on the
+existing CharEncoding variable, wouldn't allow us to move
+CharEncoding to be local to main?</p>
+
+<p>Oh, in case you're curious about the API, here's a short
+script using my wrappers to be an html to xhtml filter:</p>
+
+<pre>
+      #!/usr/bin/perl
+
+      require tidy;
+
+      my $tidy     = Tidy-&gt;new(*STDIN);
+      my $document = $tidy-&gt;parse;
+      $tidy-&gt;as_xhtml(*STDOUT);
+</pre>
+
+<p>Rick Parsons would like there to be a new wrap-attributes
+option that can be used to suppress line wrapping within
+attributes. There is already a similar option for JavaScript
+literals.</p>
+
+<p>Vijay Patil would like tidy -h to display options sorted
+alphabetically.</p>
+
+<p>Julian Reschke would like there to be an option to add the
+xml:space="preserve" attribute to pre elements when outputting
+xml.</p>
+
+<p>Armando Asantos would like to use Tidy to produce a list of
+URLs for images or hypertext links according to a config option.
+This would be straightforward, but is a lower priority than bug
+fixes etc.</p>
+
+<p>Omri Traub would like an option to wrap the contents of style
+and script elements in CDATA marked sections when converting to
+XHTML. He is also interested in direct support for 16 bit
+character file I/O.</p>
+
+<p>Bertilo Wennergren notes:</p>
+
+<blockquote>If I configure Tidy to "upgrade to style sheets", it
+does so for a few things in my main document, but the code thus
+created get error reports if I feed it back to Tidy. It turns out
+that Tidy creates extra "class" attributes on tags that already
+have "class" attributes set. This happens with this page:
+&lt;http://www.concinnity.se/bertilow/index.htm&gt;.</blockquote>
+
+<p>Randi Waki notes:</p>
+
+<blockquote>
+<p>If a quoted URL attribute value (e.g., href in &lt;a&gt;
+elements) contains a line break, 13-Jan-2000 Tidy changes the
+line break to a space while IE and Netscape discard the line
+break. This can result in a broken link in the tidied
+document.</p>
+
+<p>I believe the following change fixes the problem. In lexer.c,
+insert the following lines before line 2502:</p>
+
+<pre>
+                            /* discard line breaks in quoted URLs */
+                            if (c == '\n' &amp;&amp; IsUrl(name))
+                                continue;
+
+/* existing line 2502 */    c = ' ';
+</pre>
+</blockquote>
+
+<p>Stephen Reynolds would like Tidy to keep track of whether a
+comment started on a new line and preserve this in the
+output.</p>
+
+<p>Terry Teague says:</p>
+
+<blockquote>
+<p>Sorry, I should have been more clear. Part of the problem is
+the current HelpText() function in localize.c doesn't actually
+reflect current reality.</p>
+
+<p>You need to at least add the following line to HelpText()
+:</p>
+
+<pre>
+    tidy_out(out, "  -version or -v  show version\n");
+</pre>
+
+<p>And I suppose it should mention the use of the new
+"--&lt;config options&gt;" type syntax.</p>
+
+<p>Regards, Terry</p>
+</blockquote>
+
+<p>John Russel notes:</p>
+
+<pre>
+ what i wonder is
+1] does the specification indicate these are WRONG
+2] if so why do they pass thru tidy ....
+is url syntax such a can of worms that it is left to user
+   to check .......
+
+CASE 1: misuse of slash for folders
+site had  background="pics\fancy.jpg"
+  instead of   "pics/fancy.jpg"
+
+CASE 2: spaces in filename
+site had href="coin album.html"
+instead of "coin%20album.html"
+</pre>
+
+<p>Andre Stechert would like a way to prevent Tidy from
+"cleaning" newly declared elements which don't have any content
+but do have end tags, see his mail of 17th January 2000</p>
+
+<p>Todd Clark would like to use Tidy with Microsoft's WebClass
+tags. Unfortunately these include unusual characters in the tag
+names such as @ which Tidy objects to, for instance:</p>
+
+<pre>
+&lt;WC@DOMAINNAME&gt;test.com&lt;/WC@DOMAINNAME&gt;
+</pre>
+
+<p>Perhaps it makes sense to offer an option to make Tidy less
+picky about what characters it accepts in tag names. Or perhaps
+"WebClass: yes".</p>
+
+<p>Jelks Cabaniss suggests an option to control dropping of empty
+elements, e.g. according to what attributes they have.</p>
+
+<p>Paavo Hartikainen writes:</p>
+
+<blockquote>
+<p>Tidy always expands '&amp;' to '&amp;' even if I have
+'quote-ampersand: no' defined in configuration file. This is not
+a good thing to do for URLs that have '&amp;' characters in them.
+OS is Debian GNU/Linux 2.1 SPARC. Same thing happens on Alpha.
+Other architectures I have not tried.</p>
+
+<p>My configuration looks like this:</p>
+
+<pre>
+char-encoding: latin1
+error-file: ./errors
+indent-spaces: 2
+logical-emphasis: yes
+output-xhtml: yes
+quiet: no
+quote-ampersand: no
+show-warnings: yes
+tidy-mark: yes
+wrap: 78
+wrap-attributes: no
+write-back: yes
+keep-time: yes
+</pre>
+</blockquote>
+
+<p>Paul White reports that Tidy isn't recognizing HTML 3.2 when
+the doctype is "-//W3C//DTD HTML 3.2 Final//EN" (as per the REC),
+and similarly for HTML 4.01. This would appear to call for a
+change to the table of names in lexer.c.</p>
+
+<p>Stuart Hungerford would like Tidy to detect and fix duplicate
+attributes e.g. multiple class attributes. Celeste Suliin Burris
+would like Tidy to replace spaces in URLs by %20 as some versions
+of Netscape "croak big time" on this. Denis Kokarev also wants
+Tidy to remove duplicate attributes when the values are the same.
+This apparently stops XSLT from working. Brian Schweitzer notes
+that Tidy adds a 2nd class attribute rather than merging the
+classes into a space separated list.</p>
+
+<p>Bertilo Wennergren writes: Tidy seems not to recognize frame
+elements with a closing "/". It actually removes them. Try his <a
+href="http://www.concinnity.se/bertilow/pmeg/pmeg9/k_bazo.htm">example</a>.
+Tidy can produce XHTML Frameset docs, but when fed them back</p>
+
+<p>again it cries foul.</p>
+
+<p>Jose Manuel Cerqueira Esteves notes:</p>
+
+<pre>
+I've used `tidy' to convert a few HTML 4.0 files to XHTML 1.0 and noticed
+a problem when dealing with constructs like
+
+ &lt;small&gt;&lt;small&gt;some text&lt;/small&gt;&lt;/small&gt;
+
+First, `tidy' acts as if the second "&lt;small&gt;" was meant as a closing tag:
+
+ Warning: "&lt;small&gt; is probably intended as &lt;/small&gt;"
+
+Then it trims the resulting empty &lt;small&gt;&lt;/small&gt;:
+
+ Warning: trimming empty &lt;small&gt;
+
+And finally both remaining closing tags ("&lt;/small&gt;"), now spurious,
+are removed:
+
+ Warning: discarding unexpected &lt;/small&gt;
+ Warning: discarding unexpected &lt;/small&gt;
+
+It would be convenient to have at least some `tidy' option to prevent this
+from happening (or perhaps some different heuristics?).
+</pre>
+
+<p>Robbert Hans Baron would like to see Tidy warning about
+duplicate attributes and fixing these when the values are
+identical.</p>
+
+<p>Jutta Wrage notes that: When parsing HTML 3.2 Pages, tidy
+doesn't accept textareas in forms correctly. The HTML Reference
+specification (HTML 3.2 Final) allows: name, rows and cols, but
+upon seeing these Tidy thinks the document is 4.0.</p>
+
+<p>Matthew Brealey notes that a heading start tag is coerced to
+an end heading tag when the end tag is missing. This is
+deliberate, but perhaps not the best heuristic.</p>
+
+<p>HIYAMA Masayuki notes that Tidy should set the encoding
+attribute to match the language encoding, e.g. ?xml version="1.0"
+encoding="iso-2022-jp"?&gt;&lt;.</p>
+
+<p>Mark Modrall has extended Tidy to support selectively
+stripping out listed tags and attributes, see his email of March
+14th.</p>
+
+<p>Yong Taek Bae notes that with the omit end tags option Tidy
+omits the body tag even if it has attributes. This is an
+error.</p>
+
+<p>Tapio Markula reports that Tidy is incorrectly replacing
+accented characters in script elements by entities. The script
+element (in HTML but not XHTML) is CDATA and as such entities
+won't be expanded. This bug needs to be fixed along with the
+support for CDATA sections.</p>
+
+<p>Terrill Bennett reports tidy crashing when producing slides,
+and when the -i option has been set. He later added the crash
+occurs when the page doesn't include an h1 element. See
+Terrill-Bennett-11mar00.txt.</p>
+
+<p>Stephen Lewis notes that if an &lt;hr&gt; element is present
+in the head before the title element, then Tidy gets confused and
+adds in a spurious extra empty title element. This would be
+avoided if Tidy could move the hr into the body before the body
+element is encountered. This raises a number of problems for
+instance working out when to copy in attributes from an explicit
+body element.</p>
+
+<p>Carl Osterly would like Tidy to avoid breaking lines before or
+after the = sign in attribute values when this is practical.
+Perhaps a simple rule of thumb could be used to decide this?</p>
+
+<p>Rick H Wesson notes that Tidy crashes on CDATA marked sections
+when parsing XML.</p>
+
+<p>Luigi Federici would like an option to set the DTD URI for XML
+or XHTML.</p>
+
+<p>Mat Sander notes: If I have php code the indentation behaves
+strange. Repeated tidying php content and end tag indented one
+level extra for each time. The result ends up something like
+this:</p>
+
+<pre>
+...
+    &lt;?php
+                        $r=0;
+                        ?&lt;
+...
+
+I have the fillowing config file for Tidy:
+---
+tidy-mark: no
+markup: yes
+wrap: 0
+indent: auto
+output-xml: no
+output-xhtml: yes
+doctype: loose
+char-encoding: latin1
+quote-marks: yes
+assume-xml-procins: yes
+word-2000: yes
+clean: yes
+logical-emphasis: yes
+drop-empty-paras: yes
+enclose-text: yes
+fix-bad-comments: yes
+alt-text: .
+write-back: bool
+keep-time: yes
+show-warnings: no
+quiet: yes
+split: no
+---
+
+Best Regards,
+Mats-Olof Sander
+
+</pre>
+
+<p>Don Hasson notes that if you make a mistake and leave off the
+ending "/" in the &lt;title&gt; tag, tidy will generate an extra
+set of &lt;title&gt;s.</p>
+
+<p>Example:</p>
+
+<pre>
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;No end here&lt;title&gt;&lt;/head&gt;
+&lt;body&gt;
+Empty
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+
+<p>produces this:</p>
+
+<pre>
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;No end here&lt;/title&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+Empty
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+
+<p>Jeff Wilkinson would like the HTML Tidy page to include
+internal anchors so that he can link directly to the appropriate
+sections.</p>
+
+<p>Peter Vince would like to be able to clean presentation
+attributes on the body element, as well as translating b and i to
+span.</p>
+
+<p>Dave Bryan and Mathew Brealey would like there to be a way to
+suppress the default handling of inline elements in favor of
+simply inserting the appropriate end tag when encountering an
+element that isn't allowed in an inline context. The default
+behavior replicates the rendering on existing browsers but can
+cause problems for hand editors.</p>
+
+<p>Dave Bryan notes that tidy isn't updating the column position
+when parsing attributes.</p>
+
+<p>Can Tidy track when a line break occurs after a PI or comment
+and reproduce this in the output? This idea occurred to me after
+reading a comment from Brad Stowers.</p>
+
+<p>One interesting suggestion is to make some of Tidy's rules of
+thumb sensitive to the program that generated the markup as
+indicated by the meta element. This would allow for greater
+robustness in how the rules operate.</p>
+
+<p>Dave Bryan would like the quiet mode to be tweaked to suppress
+the general info at the end of the report. see
+Dave-Bryan-24mar00.txt.</p>
+
+<p>Erik Rossen would like an option to suppress line wrap within
+tags, so that the tag is always on the same line regardless of
+the number and length of the attributes.</p>
+
+<p>Dan Satria suggest that the clean mechanism check to see if
+there are any existing matching style rules before adding new
+ones.</p>
+
+<p>Zoltan Hawryluk suggests mapping the Netscape layer tag into
+the equivalent CSS positioning syntax.</p>
+
+<p>Jim Walker says Tidy doesn't correctly report errors such as
+<tt>&lt;/&lt;/head&gt;</tt>.</p>
+
+<p>Tidy's slide feature: see Johannes-Poutre-12jul00.txt</p>
+
+<p>Carole Mah suggests Tidy should recover from multiple class
+attributes on the same element.</p>
+
+<h2>Other ideas</h2>
+
+<ul>
+<li>Recursion through subdirectories, so you can fix up your
+entire web site at one go. This assumes I can find a way that is
+portable across a wide range of platforms!</li>
+
+<li>Support for W3C's <a
+href="http://www.w3.org/TR/REC-DOM-Level-1/">Document Object
+Model</a> (DOM) level one.</li>
+
+<li>Full validation of all attribute values.</li>
+
+<li>Mapping Unicode bidi control characters to HTML tags.</li>
+
+<li>Full support for parsing XML (still somewhat limited).</li>
+
+<li>How to say which XML elements should be printed
+"inline".</li>
+
+<li>Acting on the XML encoding attribute, e.g.
+&lt;?xml&#160;encoding="iso-8859-1"&gt;</li>
+
+<li>Improved mapping from HTML presentation attributes/elements
+to CSS.</li>
+
+<li>Improved support for <a
+href="http://java.sun.com/products/jsp/">JSP</a> (Java Server
+pages)</li>
+
+<li>Ugly print option which removes all optional whitespace</li>
+</ul>
+</body>
+</html>
+

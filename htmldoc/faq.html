@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content=
+"HTML Tidy for Mac OS X (vers 1st June 2003), see www.w3.org" />
+<link type="text/css" rel="stylesheet" href="tidy.css" />
+<title>HTML Tidy - Frequently Asked Questions</title>
+<style type="text/css">
+code { font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>HTML Tidy - Frequently Asked Questions</h1>
+
+<h2>Overview</h2>
+
+<p class="abstract">Certain questions about Tidy come up on a
+regular basis. These are some that have been culled from postings
+to the html-tidy@w3.org and tidy-develop@lists.sourceforge.net
+mailing lists. If you don't see your question addressed here, see
+<a href="#support">How To Get Support</a> below.</p>
+
+<ul>
+<li><a href="#what-now">What Now?</a></li>
+
+<li><a href="#support">How to Get Support?</a></li>
+
+<li><a href="#bug">How to Submit A Bug Report</a></li>
+
+<li><a href="#feature">How to Submit A Feature Request</a></li>
+
+<li><a href="#layout">How Do I Control the Output Layout?</a></li>
+
+<li><a href="#version">What Version of Tidy Should I Use?</a></li>
+
+<li><a href="#regression">How Do I Run A Regression Test?</a></li>
+</ul>
+
+<hr />
+<dl>
+<dt><a name="what-now" id="what-now"></a>What Now?</dt>
+
+<dd><p>If you have a popup screen that reads as follows:
+<pre>
+HTML Tidy for Windows &lt;vers 1st August 2002; built on Aug 8 2002, at 15:41:13&gt;
+Parsing Console input &lt;stdin&gt;
+</pre>
+
+<p>and do not know what to do next, read on.</p>
+
+<p>Tidy is waiting for your HTML to come in, so it can parse it.
+ Tidy is fundamentally a tool that reads in HTML cleans it up and
+writes it out again. It was developed as a program you run from the
+console prompt, but there are GUI encapsulations available, e.g.
+HTML-Kit, which you might prefer.</p>
+
+<p>If you are using Windows, the first step is to unzip the zip file
+and place the tidy.exe file in a folder somewhere on your executables
+path. You may also want to set up a config file to save having to type
+lots of options each time you run Tidy. From the console prompt you can
+run Tidy like this:</p>
+
+<pre>
+C> tidy -m mywebpage.html
+</pre>
+
+<p>In this case, the <code>-m</code> option requests Tidy to write
+the tidied file back to the same filename as it read from
+(mywebpage.html). Tidy will give you a breakdown of the problems it
+found and the version of HTML the file appears to be using.</p>
+
+<p>To get a listing of Tidy command line options, just type 
+<code>tidy -?</code>.  To see a listing on configuration options,
+try <code>tidy -help-config</code>.  To get more info on the
+config options, see the <a 
+href="http://tidy.sourceforge.net/docs/quickref.html">Quick Reference</a>.</p>
+
+<p>See also Dave Raggett's <a href="http://tidy.sourceforge.net/docs/Overview.html#help">User Guide</a>.</p>
+
+<p>If you're not comfortable with the DOS command line, you should
+try one of the <a href="http://tidy.sourceforge.net/#tidylibapps">GUI
+Applications</a>.</p>
+</dd>
+
+<dt><a name="support" id="support"></a>How To Get Support</dt>
+
+<dd>
+<p>For general HTML Tidy support, the original mailing list
+html-tidy@w3.org is best. Sometimes developers are the last to
+know... Also, this list covers both Java and C versions, not to
+mention various value-added products such as GUI front ends, Perl
+and Python integration, etc. If you don't get a response after a
+couple tries or if you have a bug fix, bump it over to the
+developer list at tidy-develop@lists.sourceforge.net. It's not a
+hard line, but that is the general arrangement.</p>
+</dd>
+
+<dt><a name="bug" id="bug"></a>How to Submit A Bug Report</dt>
+
+<dd>
+<p>You are encouraged to report bugs you found to the Tidy
+developer team. Tidy's quality depends on your feedback. You can
+either file your bug report in the Sourceforge <a
+href="http://sourceforge.net/tracker/?func=add&amp;group_id=27659&amp;atid=390963">
+bug tracker</a> for HTML Tidy (<em>recommended</em>) or send a mail
+to the mailing list at html-tidy@w3.org. Note you do <em>not</em>
+have to have a Sourceforge account in order to file bug reports, or
+be subscribed to html-tidy@w3.org in order to post messages to the
+list.</p>
+
+<p>Prior to submitting a bug report, please check that the bug is
+not already known. Many are. If you are not sure, just ask. If it
+is new bug, make sure to include at least the following information
+in your report:</p>
+
+<ul>
+<li>A desciption of what you think went wrong.</li>
+
+<li>The HTML Tidy version (find it out by running <code>tidy
+-v</code>) and operating system you are running.</li>
+
+<li>The input, that exposes the bug.<br />
+ A small HTML document that reproduces the problem is best.</li>
+
+<li>The configuration options you've used. Command line options
+like<br />
+ <code>-asxml</code>, configuration files, etc. You may use
+<code>tidy -show-config</code> to get an overview of the active
+Tidy settings.</li>
+
+<li>Your e-mail address for further questions and comments.</li>
+</ul>
+
+<p>These information are necessary to reproduce whatever is
+failing, without them we cannot help you. Additional information -
+and patches - are very welcome!</p>
+
+<p><em>Please include only one bug per report.</em> Reports with
+multiple bugs are less easy to track and some bugs may get
+missed.</p>
+</dd>
+
+<dt><a name="feature" id="feature"></a>How to Submit A Feature
+Request</dt>
+
+<dd>
+<p>If you want Tidy to do something new that it doesn't do today
+(or stop doing something), then it is probably a feature
+request.</p>
+
+<p>The process for submitting a feature request is very similar to
+bug requests. A different <a
+href="http://sourceforge.net/tracker/?atid=390966&amp;group_id=27659">
+tracker</a> is used on SourceForge to denote the difference in
+subject matter.</p>
+
+<p>As with bugs, please be sure that the feature has not already
+been requested. If the feature has already requested, you can add
+your comments to the feature request tracker, or send mail to the
+<a href="mailto:html-tidy@w3.org">mailing list</a> indicating your
+wish to also have the feature implemented. If the feature has not
+already been requested, send the same information as for a bug
+report, but place special emphasis on the desired output for a
+given input, desired options, etc. - please be as specific as
+possible about what you want Tidy to <em>do</em>.</p>
+</dd>
+
+<dt><a name="layout" id="layout"></a>How Do I Control the Output Layout?</dt>
+
+<dd>
+<p>There are three primary options that control how Tidy 
+formats your markup:</p>
+<ul>
+  <li><a class="code"
+         href="quickref.html#indent">indent</a></li>
+  <li><a class="code"
+         href="quickref.html#indent-attributes">indent-attributes</a></li>
+  <li><a class="code"
+         href="quickref.html#vertical-space">vertical-space</a></li>
+</ul>
+
+<p>Briefly, <code>indent</code> sets the level of left-to-right indenting 
+and, somewhat, how often elements are put onto a new line.  The options 
+are <code>yes</code>, <code>no</code>, and <code>auto</code>.  
+<code>indent-attributes</code> is a flag that, when set, tells Tidy to 
+put each attribute on a new line.  <code>vertical-space</code> is a flag
+that, when set, tells Tidy to add some empty lines for readability.  The 
+default for all three is <code>no</code>.  These options may be used in
+any combination to control you you want your markup to look.  The best
+thing is to experiment a bit to see what you like.  Be aware that 
+<code>indent yes</code> is deprecated for production use as it will 
+cause visual changes in most browsers.</p>
+
+<p>To get Tidy <em>Classic</em> <code>--indent auto</code> layout, use the following options:</p>
+
+<pre>
+indent: auto
+indent-attributes: no
+vertical-space: yes
+</pre>
+
+<p>You can read about more <em>Pretty Print</em> options
+<a href="quickref.html#PrettyPrintHeader">here</a>.</p>
+</dd>
+
+<dt><a name="version" id="version"></a>What Version of Tidy Should
+I Use?</dt>
+
+<dd>
+<p>The current Source Forge builds are recommended.  You can find these at 
+<a href="http://tidy.sourceforge.net">http://tidy.sourceforge.net</a>.
+People continue to report examples where Tidy does not catch some 
+ill-formed HTML or, worse, generates ill-formed HTML. These cases have 
+been significantly reduced. That said, be sure to test Tidy with some 
+representative files from your environment.</p>
+
+<p>For development work, use CVS directly on your development
+system. For information on how to pull Tidy sources from <a
+href="http://sourceforge.net/cvs/?group_id=27659">CVS</a>. This way
+you can keep abreast of changes to Tidy and quickly resolve
+conflicts.</p>
+
+<p>For building a front end (e.g. GUI or language binding), the
+simplest approach is to use TidyLib.  For more information
+about building and coding with TidyLib, see the <a 
+href="http://tidy.sourceforge.net/libintro.html">Introduction To TidyLib</a>.</p>
+</dd>
+
+<dt><a name="regression" id="regression">How Do I Run A 
+Regression Test?</a></dt>
+<dd>
+<p>You might ask, "Why should I run a regression test?".  If you
+are a Tidy user, you might want to compare a new version of Tidy
+to the version you are currently running.  This is a good idea
+if you are using Tidy in production applications such as web
+publishing.  If you are a Tidy developer, it is a good idea to
+run the regression test suite to make sure your fix or enhancement
+doesn't add new bugs.</p>
+
+<p>Detecting new bugs is easier said than done, because sometimes
+they are subtle and can only be seen in browsers (or one particular
+browser you don't even have).  But you can catch most crashes and
+many layout problems by running the test suite as described here.</p>
+
+<p>The basic process is simple: run the test suite <strong>before</strong>
+and <strong>after</strong> making changes to TidyLib and compare the output
+markup and messages.  Be aware that the test scripts for WinNT/2K/XP
+(alltest.cmd) and Linux/Unix (testall.sh) place the output files in
+<code>tidy/test/tmp</code>.  If you forget to run the <strong>before</strong>
+test, you can always download a binary from the <a 
+href="http://tidy.sourceforge.net/#binaries">Project Page</a>.  If you
+are not a TidyLib developer, you can download the <a 
+href="http://tidy.sourceforge.net/test/tidy_test.tgz">Test Suite</a> 
+directly.  Here are the steps to evaluate the impact of a TidyLib change.</p>
+
+<h3>For Windows</h3>
+<p><strong>Before</strong> making changes:</p>
+<pre>
+C:\tidy\test> alltest.cmd
+C:\tidy\test> ren tmp baseline
+</pre>
+
+<p><strong>After</strong> making changes and building Tidy:</p>
+<pre>
+C:\tidy\test> alltest.cmd
+C:\tidy\test> windiff tmp baseline
+</pre>
+
+<h3>For Linux/Unix</h3>
+<p><strong>Before</strong> making changes:</p>
+<pre>
+~/tidy/test$ ./testall.sh
+~/tidy/test$ mv tmp baseline
+</pre>
+
+<p><strong>After</strong> making changes and building Tidy:</p>
+<pre>
+~/tidy/test$ ./testall.sh
+~/tidy/test$ diff -u tmp baseline > diff.txt
+</pre>
+</dd>
+
+<!--
+        <dt><a name="" id=""></a></dt>
+        <dd>
+        </dd>
+
+        <dt><a name="" id=""></a></dt>
+        <dd>
+        </dd>
+        -->
+<!-- Save for future questions
+        <dt><a name="" id=""></a></dt>
+        <dd>
+        </dd>
+        -->
+</dl>
+</body>
+</html>

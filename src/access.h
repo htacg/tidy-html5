@@ -6,7 +6,7 @@
   Copyright University of Toronto
   Portions (c) 1998-2006 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
-
+  
 */
 
 /*********************************************************************

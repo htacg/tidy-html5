@@ -1,3 +1,4 @@
+@setlocal
 @echo off
 
 REM alltest1.cmd - execute all test cases

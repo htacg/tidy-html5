@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>
+   center25.html - center tag on table
+  </title>
+  <style>
+  strong { color: red }
+  </style>
+ </head>
+ <body>
+ <center>
+ <table>
+ <tr><td>Table centered by &lt;center&gt;</td></tr>
+ </table>
+ </center>
+ <p>This file contains <strong>&lt;center;&gt; ... &lt;/center;&gt;</strong>
+</p>
+ <p>The 'experimental' Nu Markup Checker flags this as an <strong>HTML5 ERROR</strong> with the string <strong>
+  &quot;Error: The center element is obsolete. Use CSS instead.&quot;</strong>
+ </p>
+
+ <p>If 'clean' at present tidy 'silently' replaces this with a &lt;div class=&quot;c1&quot;&gt;, and 
+  add the CSS in TY_(CleanDocument)(doc), ...
+ </p>
+
+ <p>Q: <strong>Should this behaviour be modified?</strong>
+ </p>
+ <p>A: There are various possibilities<br>
+  <ul>
+   <li>If the document is configured (or found?) to be HTML5, then
+     <ul>
+      <li>If clean configured
+  	<ul>
+   		<li>Fix it silently, <strong>as now</strong>
+   		<li>Fix it with a warning
+		<li>No fix and flag as an error, like the validator
+        </ul>
+      <li>Clean not configured
+  	<ul>
+   		<li>No fix, with no warning or error, <strong>as now</strong>
+   		<li>Fix it with a warning
+		<li>No fix and flag as an error, like the validator
+        </ul>
+     </ul>
+   <li>Else if NOT configured (or found?) to be HTML5
+     <ul>
+      <li>If clean configured
+  	<ul>
+   		<li>Fix it silently, <strong>as now</strong>
+   		<li>Fix it with a warning
+        </ul>
+      <li>Clean not configured
+  	<ul>
+   		<li>Flag as a warning
+		<li>Flag as an error
+		<li>No warning or error, <strong>as now</strong>
+        </ul>
+     </ul>
+  </ul>
+  
+  <p>Also perhaps Tidy5 needs another configuration parameter as suggested by the validator.w3.org,
+  namely <strong>&quot;HTML4-specific tokenization errors are enabled.&quot;</strong> That is being 
+  able to clearly inform tidy that is the document is to be taken as HTML5, then certain
+  tags are to be an error.
+  </p>
+ </body>
+</html>
+ 

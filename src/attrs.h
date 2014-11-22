@@ -284,6 +284,7 @@ uint TY_(NodeAttributeVersions)( Node* node, TidyAttrId id );
 #define attrIsREL(av)               AttrIsId( av, TidyAttr_REL  )
 #define attrIsREV(av)               AttrIsId( av, TidyAttr_REV  )
 #define attrIsRIGHTMARGIN(av)       AttrIsId( av, TidyAttr_RIGHTMARGIN  )
+#define attrIsROLE(av)              AttrIsId( av, TidyAttr_ROLE  )
 #define attrIsROWS(av)              AttrIsId( av, TidyAttr_ROWS  )
 #define attrIsROWSPAN(av)           AttrIsId( av, TidyAttr_ROWSPAN  )
 #define attrIsRULES(av)             AttrIsId( av, TidyAttr_RULES  )
@@ -411,6 +412,8 @@ uint TY_(NodeAttributeVersions)( Node* node, TidyAttrId id );
 #define attrGetFONT( nod )        TY_(AttrGetById)( nod, TidyAttr_FONT  )
 #define attrGetBASEFONT( nod )    TY_(AttrGetById)( nod, TidyAttr_BASEFONT  )
 #define attrGetROWSPAN( nod )     TY_(AttrGetById)( nod, TidyAttr_ROWSPAN  )
+
+#define attrGetROLE( nod )        TY_(AttrGetById)( nod, TidyAttr_ROLE  )
 
 #define attrGetARIA_ACTIVEDESCENDANT( nod ) TY_(AttrGetById)( nod,  TidyAttr_ARIA_ACTIVEDESCENDANT  )
 #define attrGetARIA_ATOMIC( nod )           TY_(AttrGetById)( nod,  TidyAttr_ARIA_ATOMIC  )

@@ -212,6 +212,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_REL,               "rel",                   CH_LINKTYPES }, 
   { TidyAttr_REV,               "rev",                   CH_LINKTYPES }, 
   { TidyAttr_RIGHTMARGIN,       "rightmargin",           CH_NUMBER    }, /* used on BODY */
+  { TidyAttr_ROLE,              "role",                  CH_PCDATA    },
   { TidyAttr_ROWS,              "rows",                  CH_NUMBER    }, /* TEXTAREA */
   { TidyAttr_ROWSPAN,           "rowspan",               CH_NUMBER    }, /* table cells */
   { TidyAttr_RULES,             "rules",                 CH_TRULES    }, /* TABLE */

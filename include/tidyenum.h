@@ -602,6 +602,7 @@ typedef enum
   TidyAttr_REL,               /**< REL= */
   TidyAttr_REV,               /**< REV= */
   TidyAttr_RIGHTMARGIN,       /**< RIGHTMARGIN= */
+  TidyAttr_ROLE,              /**< ROLE= */
   TidyAttr_ROWS,              /**< ROWS= */
   TidyAttr_ROWSPAN,           /**< ROWSPAN= */
   TidyAttr_RULES,             /**< RULES= */

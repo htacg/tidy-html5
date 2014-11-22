@@ -55,10 +55,15 @@ struct _AttrHash
 typedef struct _AttrHash AttrHash;
 #endif
 
+enum
+{
+    ANCHOR_HASH_SIZE=1021u
+};
+
 struct _TidyAttribImpl
 {
     /* anchor/node lookup */
-    Anchor*    anchor_list;
+    Anchor*    anchor_hash[ANCHOR_HASH_SIZE];
 
     /* Declared literal attributes */
     Attribute* declared_attr_list;
@@ -117,7 +122,7 @@ Bool TY_(IsValidHTMLID)(ctmbstr id);
 Bool TY_(IsValidXMLID)(ctmbstr id);
 
 /* removes anchor for specific node */
-void TY_(RemoveAnchorByNode)( TidyDocImpl* doc, Node *node );
+void TY_(RemoveAnchorByNode)( TidyDocImpl* doc, ctmbstr name, Node *node );
 
 /* free all anchors */
 void TY_(FreeAnchors)( TidyDocImpl* doc );

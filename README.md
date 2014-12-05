@@ -21,11 +21,11 @@ For more information, see [w3c.github.com/tidy-html5][3]
 
   2. cmake ../.. [-DCMAKE_INSTALL_PREFIX=/path/for/install]
 
-  3. Windows:  cmake --build . --config Release 
+  3. Windows:  cmake --build . --config Release  
      Unix/OSX: make
 
-  4. Install, if desired 
-     Windows: cmake --build . --config Release --target INSTALL 
+  4. Install, if desired  
+     Windows: cmake --build . --config Release --target INSTALL  
      UNix/OSX: [sudo] make install
 
 ;eof

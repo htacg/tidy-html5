@@ -24,4 +24,6 @@
 /test/tmp2/
 *~
 temp*
+*.bak
+
 

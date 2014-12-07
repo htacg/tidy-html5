@@ -224,6 +224,10 @@ extern "C" {
 
 #endif
 
+#ifdef EMSCRIPTEN
+#define PRESERVE_FILE_TIMES 0
+#include <sys/types.h>
+#endif
 /* Convenience defines for Solaris platforms */
  
 #if defined(sun)

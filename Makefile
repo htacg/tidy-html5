@@ -4,7 +4,7 @@ GITFLAGS=
 DOXYGEN=doxygen
 DOXYGENFLAGS=
 
-.PHONEY: api-docs
+.PHONY: api-docs
 all: bin/tidy
 
 bin/tidy:

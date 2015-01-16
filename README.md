@@ -30,9 +30,9 @@ For Linux/BSD/OSX platforms, you can build and install the `tidylib` shared
 library (for use in building other applications) from the source code using the
 following steps.
 
-  1. sh build/gnuauto/setup.sh && ./configure && make
+  1. `sh build/gnuauto/setup.sh && ./configure && make`
 
-  2. make install
+  2. `make install`
 
 Note that you will either need to run `make install` as root, or with `sudo make
 install`.

@@ -311,6 +311,7 @@ uint TY_(NodeAttributeVersions)( Node* node, TidyAttrId id );
 #define attrIsXMLNS(av)             AttrIsId( av, TidyAttr_XMLNS  )
 #define attrIsXML_LANG(av)          AttrIsId( av, TidyAttr_XML_LANG  )
 #define attrIsXML_SPACE(av)         AttrIsId( av, TidyAttr_XML_SPACE  )
+#define attrIsROLE(av)              AttrIsId( av, TidyAttr_ROLE  )
 
 
 /* Attribute Retrieval macros
@@ -366,5 +367,7 @@ uint TY_(NodeAttributeVersions)( Node* node, TidyAttrId id );
 #define attrGetFONT( nod )        TY_(AttrGetById)( nod, TidyAttr_FONT  )
 #define attrGetBASEFONT( nod )    TY_(AttrGetById)( nod, TidyAttr_BASEFONT  )
 #define attrGetROWSPAN( nod )     TY_(AttrGetById)( nod, TidyAttr_ROWSPAN  )
+
+#define attrGetROLE( nod )        TY_(AttrGetById)( nod, TidyAttr_ROLE  )
 
 #endif /* __ATTRS_H__ */

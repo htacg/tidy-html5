@@ -24,6 +24,8 @@ tool from the source code using the following steps.
 Note that you will either need to run `make install` as root, or with `sudo make
 install`.
 
+On Windows, open and compile the project in build/msvc or build/msvc2010 with Visual Studio.
+
 ## Building the libtidy shared library
 
 For Linux/BSD/OSX platforms, you can build and install the `tidylib` shared
@@ -36,3 +38,5 @@ following steps.
 
 Note that you will either need to run `make install` as root, or with `sudo make
 install`.
+
+On Windows, open and compile the project in build/msvc or build/msvc2010 with Visual Studio.

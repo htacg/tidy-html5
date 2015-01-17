@@ -34,7 +34,7 @@ Option                        Default   Description
 ----------------------------  --------  ---------------------------------
 DMALLOC                       Disabled  Use dmalloc for memory debugging
 SUPPORT_ACCESSIBILITY_CHECKS  Enabled   Support W3C WAI checks
-SUPPORT_UTF16_ENCODINGS       Enabled   Support Unicode documents
+SUPPORT_UTF16_ENCODINGS       Enabled   Support UTF-16 documents
 SUPPORT_ASIAN_ENCODINGS       Enabled   Support Big5 and ShiftJIS docs
 
 

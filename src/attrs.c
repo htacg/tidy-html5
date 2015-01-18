@@ -1763,6 +1763,9 @@ void CheckNumber( TidyDocImpl* doc, Node *node, AttVal *attval)
     /* font size may be preceded by + or - */
     if ( nodeIsFONT(node) && (*p == '+' || *p == '-') )
         ++p;
+    /* tabindex may be preceeded by - */
+    if (attval->attribute && (strcmp(attval->attribute,"tabindex") == 0) && (*p == '-'))
+        ++p;
 
     while (*p)
     {

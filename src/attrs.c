@@ -152,7 +152,11 @@ static const Attribute attribute_defs [] =
   { TidyAttr_HTTP_EQUIV,        "http-equiv",            CH_PCDATA    }, /* META */
   { TidyAttr_ID,                "id",                    CH_IDDEF     }, 
   { TidyAttr_ISMAP,             "ismap",                 CH_BOOL      }, /* IMG */
-  { TidyAttr_ITEMPROP,          "itemprop",              CH_PCDATA    }, 
+  { TidyAttr_ITEMID,            "itemid",                CH_PCDATA    },
+  { TidyAttr_ITEMPROP,          "itemprop",              CH_PCDATA    },
+  { TidyAttr_ITEMREF,           "itemref",               CH_PCDATA    },
+  { TidyAttr_ITEMSCOPE,         "itemscope",             CH_BOOL      },
+  { TidyAttr_ITEMTYPE,          "itemtype",              CH_URL       },
   { TidyAttr_LABEL,             "label",                 CH_PCDATA    }, /* OPT, OPTGROUP */
   { TidyAttr_LANG,              "lang",                  CH_LANG      }, 
   { TidyAttr_LANGUAGE,          "language",              CH_PCDATA    }, /* SCRIPT */
@@ -208,6 +212,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_REL,               "rel",                   CH_LINKTYPES }, 
   { TidyAttr_REV,               "rev",                   CH_LINKTYPES }, 
   { TidyAttr_RIGHTMARGIN,       "rightmargin",           CH_NUMBER    }, /* used on BODY */
+  { TidyAttr_ROLE,              "role",                  CH_PCDATA    },
   { TidyAttr_ROWS,              "rows",                  CH_NUMBER    }, /* TEXTAREA */
   { TidyAttr_ROWSPAN,           "rowspan",               CH_NUMBER    }, /* table cells */
   { TidyAttr_RULES,             "rules",                 CH_TRULES    }, /* TABLE */
@@ -354,6 +359,43 @@ static const Attribute attribute_defs [] =
   { TidyAttr_SRCDOC,            "srcdoc",                CH_PCDATA    },
   { TidyAttr_SRCLANG,           "srclang",               CH_PCDATA    },
   { TidyAttr_STEP,              "step",                  CH_PCDATA    },
+
+  /* HTML5 Aria Attributes */
+  { TidyAttr_ARIA_ACTIVEDESCENDANT,   "aria-activedescendant",   CH_PCDATA   },
+  { TidyAttr_ARIA_ATOMIC,             "aria-atomic",             CH_PCDATA   },
+  { TidyAttr_ARIA_AUTOCOMPLETE,       "aria-autocomplete",       CH_PCDATA   },
+  { TidyAttr_ARIA_BUSY,               "aria-busy",               CH_PCDATA   },
+  { TidyAttr_ARIA_CHECKED,            "aria-checked",            CH_PCDATA   },
+  { TidyAttr_ARIA_CONTROLS,           "aria-controls",           CH_PCDATA   },
+  { TidyAttr_ARIA_DESCRIBEDBY,        "aria-describedby",        CH_PCDATA   },
+  { TidyAttr_ARIA_DISABLED,           "aria-disabled",           CH_PCDATA   },
+  { TidyAttr_ARIA_DROPEFFECT,         "aria-dropeffect",         CH_PCDATA   },
+  { TidyAttr_ARIA_EXPANDED,           "aria-expanded",           CH_PCDATA   },
+  { TidyAttr_ARIA_FLOWTO,             "aria-flowto",             CH_PCDATA   },
+  { TidyAttr_ARIA_GRABBED,            "aria-grabbed",            CH_PCDATA   },
+  { TidyAttr_ARIA_HASPOPUP,           "aria-haspopup",           CH_PCDATA   },
+  { TidyAttr_ARIA_HIDDEN,             "aria-hidden",             CH_PCDATA   },
+  { TidyAttr_ARIA_INVALID,            "aria-invalid",            CH_PCDATA   },
+  { TidyAttr_ARIA_LABEL,              "aria-label",              CH_PCDATA   },
+  { TidyAttr_ARIA_LABELLEDBY,         "aria-labelledby",         CH_PCDATA   },
+  { TidyAttr_ARIA_LEVEL,              "aria-level",              CH_PCDATA   },
+  { TidyAttr_ARIA_LIVE,               "aria-live",               CH_PCDATA   },
+  { TidyAttr_ARIA_MULTILINE,          "aria-multiline",          CH_PCDATA   },
+  { TidyAttr_ARIA_MULTISELECTABLE,    "aria-multiselectable",    CH_PCDATA   },
+  { TidyAttr_ARIA_ORIENTATION,        "aria-orientation",        CH_PCDATA   },
+  { TidyAttr_ARIA_OWNS,               "aria-owns",               CH_PCDATA   },
+  { TidyAttr_ARIA_POSINSET,           "aria-posinset",           CH_PCDATA   },
+  { TidyAttr_ARIA_PRESSED,            "aria-pressed",            CH_PCDATA   },
+  { TidyAttr_ARIA_READONLY,           "aria-readonly",           CH_PCDATA   },
+  { TidyAttr_ARIA_RELEVANT,           "aria-relevant",           CH_PCDATA   },
+  { TidyAttr_ARIA_REQUIRED,           "aria-required",           CH_PCDATA   },
+  { TidyAttr_ARIA_SELECTED,           "aria-selected",           CH_PCDATA   },
+  { TidyAttr_ARIA_SETSIZE,            "aria-setsize",            CH_PCDATA   },
+  { TidyAttr_ARIA_SORT,               "aria-sort",               CH_PCDATA   },
+  { TidyAttr_ARIA_VALUEMAX,           "aria-valuemax",           CH_PCDATA   },
+  { TidyAttr_ARIA_VALUEMIN,           "aria-valuemin",           CH_PCDATA   },
+  { TidyAttr_ARIA_VALUENOW,           "aria-valuenow",           CH_PCDATA   },
+  { TidyAttr_ARIA_VALUETEXT,          "aria-valuetext",          CH_PCDATA   },
 
   /* this must be the final entry */
   { N_TIDY_ATTRIBS,             NULL,                    NULL         }
@@ -900,20 +942,33 @@ static void FreeAnchor(TidyDocImpl* doc, Anchor *a)
     TidyDocFree( doc, a );
 }
 
+static uint anchorNameHash(ctmbstr s)
+{
+    uint hashval;
+
+    for (hashval = 0; *s != '\0'; s++) {
+        tmbchar c = TY_(ToLower)( *s );
+        hashval = c + 31*hashval;
+    }
+
+    return hashval % ANCHOR_HASH_SIZE;
+}
+
 /* removes anchor for specific node */
-void TY_(RemoveAnchorByNode)( TidyDocImpl* doc, Node *node )
+void TY_(RemoveAnchorByNode)( TidyDocImpl* doc, ctmbstr name, Node *node )
 {
     TidyAttribImpl* attribs = &doc->attribs;
     Anchor *delme = NULL, *curr, *prev = NULL;
+    uint h = anchorNameHash(name);
 
-    for ( curr=attribs->anchor_list; curr!=NULL; curr=curr->next )
+    for ( curr=attribs->anchor_hash[h]; curr!=NULL; curr=curr->next )
     {
         if ( curr->node == node )
         {
             if ( prev )
                 prev->next = curr->next;
             else
-                attribs->anchor_list = curr->next;
+                attribs->anchor_hash[h] = curr->next;
             delme = curr;
             break;
         }
@@ -940,18 +995,19 @@ static Anchor* AddAnchor( TidyDocImpl* doc, ctmbstr name, Node *node )
 {
     TidyAttribImpl* attribs = &doc->attribs;
     Anchor *a = NewAnchor( doc, name, node );
+    uint h = anchorNameHash(name);
 
-    if ( attribs->anchor_list == NULL)
-         attribs->anchor_list = a;
+    if ( attribs->anchor_hash[h] == NULL)
+         attribs->anchor_hash[h] = a;
     else
     {
-        Anchor *here =  attribs->anchor_list;
+        Anchor *here =  attribs->anchor_hash[h];
         while (here->next)
             here = here->next;
         here->next = a;
     }
 
-    return attribs->anchor_list;
+    return attribs->anchor_hash[h];
 }
 
 /* return node associated with anchor */
@@ -959,10 +1015,11 @@ static Node* GetNodeByAnchor( TidyDocImpl* doc, ctmbstr name )
 {
     TidyAttribImpl* attribs = &doc->attribs;
     Anchor *found;
+    uint h = anchorNameHash(name);
     tmbstr lname = TY_(tmbstrdup)(doc->allocator, name);
     lname = TY_(tmbstrtolower)(lname);
 
-    for ( found = attribs->anchor_list; found != NULL; found = found->next )
+    for ( found = attribs->anchor_hash[h]; found != NULL; found = found->next )
     {
         if ( TY_(tmbstrcmp)(found->name, lname) == 0 )
             break;
@@ -979,10 +1036,13 @@ void TY_(FreeAnchors)( TidyDocImpl* doc )
 {
     TidyAttribImpl* attribs = &doc->attribs;
     Anchor* a;
-    while (NULL != (a = attribs->anchor_list) )
-    {
-        attribs->anchor_list = a->next;
-        FreeAnchor(doc, a);
+    uint h;
+    for (h = 0; h < ANCHOR_HASH_SIZE; h++) {
+        while (NULL != (a = attribs->anchor_hash[h]) )
+        {
+            attribs->anchor_hash[h] = a->next;
+            FreeAnchor(doc, a);
+        }
     }
 }
 

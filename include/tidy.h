@@ -619,9 +619,15 @@ TIDY_EXPORT void TIDY_CALL tidyPutByte( TidyOutputSink* sink, uint byteValue );
 typedef Bool (TIDY_CALL *TidyReportFilter)( TidyDoc tdoc, TidyReportLevel lvl,
                                            uint line, uint col, ctmbstr mssg );
 
+typedef Bool (TIDY_CALL *TidyReportFilter2)( TidyDoc tdoc, TidyReportLevel lvl,
+                                           uint line, uint col, ctmbstr mssg, va_list args );
+
 /** Give Tidy a filter callback to use */
 TIDY_EXPORT Bool TIDY_CALL    tidySetReportFilter( TidyDoc tdoc,
                                                   TidyReportFilter filtCallback );
+
+TIDY_EXPORT Bool TIDY_CALL    tidySetReportFilter2( TidyDoc tdoc,
+                                                  TidyReportFilter2 filtCallback );
 
 /** Set error sink to named file */
 TIDY_EXPORT FILE* TIDY_CALL   tidySetErrorFile( TidyDoc tdoc, ctmbstr errfilnam );

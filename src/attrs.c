@@ -405,11 +405,14 @@ static uint AttributeVersions(Node* node, AttVal* attval)
 {
     uint i;
 
-    /* HTML5 data-* attributes */
-    if (attval && attval->attribute)
+    /* HTML5 data-* attributes 
+       20150118: added allowfullscreen */
+    if (attval && attval->attribute) {
         if (TY_(tmbstrncmp)(attval->attribute, "data-", 5) == 0)
             return (XH50 | HT50);
-
+        if (strcmp(attval->attribute,"allowfullscreen") == 0)
+            return (XH50 | HT50);
+    }
     /* TODO: maybe this should return VERS_PROPRIETARY instead? */
     if (!attval || !attval->dict)
         return VERS_UNKNOWN;

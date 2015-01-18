@@ -649,6 +649,18 @@ Bool TIDY_CALL        tidySetReportFilter( TidyDoc tdoc, TidyReportFilter filt )
   return no;
 }
 
+Bool TIDY_CALL        tidySetReportFilter2( TidyDoc tdoc, TidyReportFilter2 filt )
+{
+	TidyDocImpl* impl = tidyDocToImpl( tdoc );
+	if ( impl )
+	{
+		impl->mssgFilt2 = filt;
+		return yes;
+	}
+	return no;
+}
+
+
 #if 0   /* Not yet */
 int         tidySetContentOutputSink( TidyDoc tdoc, TidyOutputSink* outp )
 {

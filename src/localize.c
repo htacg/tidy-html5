@@ -1028,11 +1028,18 @@ static void messagePos( TidyDocImpl* doc, TidyReportLevel level,
 
     if ( go )
     {
+		va_list args_copy;
+		va_copy(args_copy, args);
         TY_(tmbvsnprintf)(messageBuf, sizeMessageBuf, msg, args);
         if ( doc->mssgFilt )
         {
             TidyDoc tdoc = tidyImplToDoc( doc );
             go = doc->mssgFilt( tdoc, level, line, col, messageBuf );
+        }
+        if ( doc->mssgFilt2 )
+        {
+            TidyDoc tdoc = tidyImplToDoc( doc );
+            go = go | doc->mssgFilt2( tdoc, level, line, col, msg, args_copy );
         }
     }
 

@@ -1,5 +1,4 @@
-# CMakeLists.txt - 20140801 - for github tidy
-
+# CMakeLists.txt - 20150130 - 20140801 - for github tidy-fork
 cmake_minimum_required (VERSION 2.8)
 
 project (tidy5)
@@ -10,9 +9,9 @@ set( TIDY_MINOR_VERSION 0 )
 set( TIDY_MICRO_VERSION 0 )
 set( LIBTIDY_VERSION "${TIDY_MAJOR_VERSION}.${TIDY_MINOR_VERSION}.${TIDY_MICRO_VERSION}" )
 # establish version date
-set( tidy_YEAR  2014 )
-set( tidy_MONTH 08 )
-set( tidy_DAY   06 )
+set( tidy_YEAR  2015 )
+set( tidy_MONTH 01 )
+set( tidy_DAY   20 )
 
 # Allow developer to select is Dynamic or static library built
 set( LIB_TYPE STATIC )  # set default static
@@ -24,11 +23,6 @@ if (CMAKE_SIZEOF_VOID_P EQUAL 8)
 else ()
     message(STATUS "*** SIZEOF void * != 8, so not 64-bit")
 endif ()
-
-# to distinguish between debug and release lib in windows
-if (WIN32)
-    set( CMAKE_DEBUG_POSTFIX "d" ) # little effect in unix
-endif (WIN32)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
     set( WARNING_FLAGS -Wall )
@@ -48,7 +42,6 @@ if(WIN32 AND MSVC)
     foreach(warning 4090 4244 4267)
         set(WARNING_FLAGS "${WARNING_FLAGS} /wd${warning}")
     endforeach()
-
     set( MSVC_FLAGS "-DNOMINMAX -D_USE_MATH_DEFINES -D_CRT_SECURE_NO_WARNINGS -D_SCL_SECURE_NO_WARNINGS -D__CRT_NONSTDC_NO_WARNINGS" )
     if (IS_64_BIT)
         set( MSVC_FLAGS "${MSVC_FLAGS} -DWIN64" )
@@ -56,7 +49,9 @@ if(WIN32 AND MSVC)
     # if (${MSVC_VERSION} EQUAL 1600)
     #    set( MSVC_LD_FLAGS "/FORCE:MULTIPLE" )
     # endif (${MSVC_VERSION} EQUAL 1600)
-    set( NOMINMAX 1 )
+    # set( NOMINMAX 1 )
+    # to distinguish between debug and release lib in windows
+    set( CMAKE_DEBUG_POSTFIX "d" ) # little effect in unix
 else()
     # add any gcc flags
 endif()

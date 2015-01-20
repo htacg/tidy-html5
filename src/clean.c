@@ -1007,6 +1007,7 @@ static Bool Center2Div( TidyDocImpl* doc, Node *node, Node **pnode)
 {
     if ( nodeIsCENTER(node) )
     {
+#if 0 // 00000000 what is this doing inside an nodeIsCENTER(node)??? 0000000
         if ( cfgBool(doc, TidyDropFontTags) )
         {
             if (node->content)
@@ -1034,7 +1035,7 @@ static Bool Center2Div( TidyDocImpl* doc, Node *node, Node **pnode)
 
             return yes;
         }
-
+#endif // 00000000 what is this doing inside an nodeIsCENTER(node)??? 0000000
         RenameElem( doc, node, TidyTag_DIV );
         TY_(AddStyleProperty)( doc, node, "text-align: center" );
         return yes;

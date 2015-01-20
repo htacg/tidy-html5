@@ -260,7 +260,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_URN,               "urn",                   CH_PCDATA    }, /* for <a>, never implemented */
 
   /* HTML5 */
-  { TidyAttr_ASYNC,             "async",                 CH_PCDATA    },
+  { TidyAttr_ASYNC,             "async",                 CH_BOOL      }, /* <script src="..." async> */
   { TidyAttr_AUTOCOMPLETE,      "autocomplete",          CH_PCDATA    },
   { TidyAttr_AUTOFOCUS,         "autofocus",             CH_PCDATA    },
   { TidyAttr_AUTOPLAY,          "autoplay",              CH_PCDATA    },

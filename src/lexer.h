@@ -199,6 +199,8 @@ typedef enum
 #define VERS_FRAMESET      (H40F|H41F|X10F)
 #define VERS_XHTML11       (XH11)
 #define VERS_BASIC         (XB10)
+/* HTML5 */
+#define VERS_HTML5         (HT50|XH50)
 
 /* meta symbols */
 #define VERS_HTML40        (VERS_HTML40_STRICT|VERS_HTML40_LOOSE|VERS_FRAMESET)

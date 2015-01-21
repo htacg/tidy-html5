@@ -56,6 +56,7 @@ static int          tidyDocParseSource( TidyDocImpl* impl, TidyInputSource* docI
 ** pre-or-post repair.
 */
 static int          tidyDocRunDiagnostics( TidyDocImpl* doc );
+static void         tidyDocReportDoctype( TidyDocImpl* doc );
 static int          tidyDocCleanAndRepair( TidyDocImpl* doc );
 
 
@@ -649,6 +650,17 @@ Bool TIDY_CALL        tidySetReportFilter( TidyDoc tdoc, TidyReportFilter filt )
   return no;
 }
 
+Bool TIDY_CALL        tidySetReportFilter2( TidyDoc tdoc, TidyReportFilter2 filt )
+{
+  TidyDocImpl* impl = tidyDocToImpl( tdoc );
+  if ( impl )
+  {
+    impl->mssgFilt2 = filt;
+    return yes;
+  }
+  return no;
+}
+
 #if 0   /* Not yet */
 int         tidySetContentOutputSink( TidyDoc tdoc, TidyOutputSink* outp )
 {
@@ -1136,6 +1148,16 @@ int TIDY_CALL        tidyRunDiagnostics( TidyDoc tdoc )
     return -EINVAL;
 }
 
+int TIDY_CALL        tidyReportDoctype( TidyDoc tdoc )
+{
+    int iret = -EINVAL;
+    TidyDocImpl* impl = tidyDocToImpl( tdoc );
+    if ( impl ) {
+      tidyDocReportDoctype( impl );
+      iret = 0;
+    }
+    return iret;
+}
 
 /* Workhorse functions.
 **
@@ -1228,6 +1250,262 @@ int         tidyDocRunDiagnostics( TidyDocImpl* doc )
      return tidyDocStatus( doc );
 }
 
+void         tidyDocReportDoctype( TidyDocImpl* doc )
+{
+        TY_(ReportMarkupVersion)( doc );
+}
+
+
+/* ######################################################################################
+   HTML5 STUFF
+ */
+#if !defined(NDEBUG) && defined(_MSC_VER)
+extern void show_not_html5(void);
+/* -----------------------------
+List tags that do not have version HTML5 (HT50|XH50)
+
+acronym applet basefont big center dir font frame frameset isindex
+listing noframes plaintext rb rbc rtc strike tt xmp nextid
+align bgsound blink comment ilayer layer marquee multicol nobr noembed
+nolayer nosave server servlet spacer
+
+Listed total 35 tags that do not have version 393216
+   ------------------------------ */
+
+static void list_not_html5(void)
+{
+    static Bool done_list = no;
+    if (done_list == no) {
+        done_list = yes;
+        show_not_html5();
+    }
+}
+#endif
+
+/* What about <blink>, <s> stike-through, <u> underline */
+static struct _html5Info
+{
+    const char *tag;
+    uint id;
+} const html5Info[] = {
+    {"acronym", TidyTag_ACRONYM},
+    {"applet", TidyTag_APPLET  },
+    {"basefont",TidyTag_BASEFONT },
+    { "big", TidyTag_BIG },
+    { "center", TidyTag_CENTER },
+    { "dir", TidyTag_DIR },
+    { "font", TidyTag_FONT },
+    { "frame", TidyTag_FRAME},
+    { "frameset", TidyTag_FRAMESET},
+    { "noframes", TidyTag_NOFRAMES },
+    { "strike", TidyTag_STRIKE },
+    { "tt", TidyTag_TT },
+    { 0, 0 }
+};
+Bool inRemovedInfo( uint tid )
+{
+    int i;
+    for (i = 0; ; i++) {
+        if (html5Info[i].tag == 0)
+            break;
+        if (html5Info[i].id == tid)
+            return yes;
+    }
+    return no;
+}
+
+static Bool BadBody5( Node* node )
+{
+    if (TY_(AttrGetById)(node, TidyAttr_BACKGROUND) ||
+        TY_(AttrGetById)(node, TidyAttr_BGCOLOR)    ||
+        TY_(AttrGetById)(node, TidyAttr_TEXT)       ||
+        TY_(AttrGetById)(node, TidyAttr_LINK)       ||
+        TY_(AttrGetById)(node, TidyAttr_VLINK)      ||
+        TY_(AttrGetById)(node, TidyAttr_ALINK))
+    {
+        return yes;
+    }
+    return no;
+}
+
+static Bool nodeHasAlignAttr( Node *node )
+{
+    /* #define attrIsALIGN(av) AttrIsId( av, TidyAttr_ALIGN  ) */
+    AttVal* av;
+    for ( av = node->attributes; av != NULL; av = av->next ) {
+        if (attrIsALIGN(av))
+            return yes;
+    }
+    return no;
+}
+
+/* see http://www.whatwg.org/specs/web-apps/current-work/multipage/obsolete.html#obsolete */
+
+void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
+{
+    /* Lexer* lexer = doc->lexer; */
+    Bool clean = cfgBool( doc, TidyMakeClean );
+    Node* body = TY_(FindBody)( doc );
+    Bool warn = yes;    /* should this be a warning, error, or report??? */
+#if !defined(NDEBUG) && defined(_MSC_VER)
+//    list_not_html5();
+#endif
+    while (node)
+    {
+        if ( nodeHasAlignAttr( node ) ) {
+            /*\
+             * Is this for ALL elements that accept an 'align' attribute, or should
+             * this be a sub-set test
+            \*/
+            TY_(ReportWarning)(doc, node, node, BAD_ALIGN_HTML5);
+        }
+        if ( node == body ) {
+            if ( BadBody5(body) ) {
+                /* perhaps need a new/different warning for this, like
+                 * The background 'attribute" on the body element is obsolete. Use CSS instead.
+                 * but how to pass an attribute name to be embedded in the message.
+                \*/
+                TY_(ReportWarning)(doc, node, body, BAD_BODY_HTML5);
+            }
+        } else
+        if ( nodeIsACRONYM(node) ) {
+            if (clean) {
+                /* replace with 'abbr' with warning to that effect 
+                 * maybe should use static void RenameElem( TidyDocImpl* doc, Node* node, TidyTagId tid )
+                 */
+                TY_(CoerceNode)(doc, node, TidyTag_ABBR, warn, no);
+            } else {
+                /* sadly, this stops writing of the tidied document, unless 'forced'
+                   TY_(ReportError)(doc, node, node, REMOVED_HTML5); 
+                   so go back to a 'warning' for now...
+                */
+                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+            }
+        } else 
+        if ( nodeIsAPPLET(node) ) {
+            if (clean) {
+                /* replace with 'object' with warning to that effect 
+                 * maybe should use static void RenameElem( TidyDocImpl* doc, Node* node, TidyTagId tid )
+                 */
+                TY_(CoerceNode)(doc, node, TidyTag_OBJECT, warn, no);
+            } else {
+                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+            }
+        } else
+        if ( nodeIsBASEFONT(node) ) {
+            /*\ 
+             * basefont: CSS equivalen 'font-size', 'font-family' and 'color' on body or class on each subsequent element
+             * Difficult - If it is the first body element, then could consider adding that
+             *  to the <body> as a whole, else could perhaps apply it to all subsequent element.
+             *  But also in consideration is the fact that it was NOT supported in many browsers
+             *  For now just report a warning
+            \*/
+                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+        } else
+        if ( nodeIsBIG(node) ) {
+            /*\
+             * big: CSS equivalent	'font-size:larger'
+             * so could replace the <big> ... </big> with 
+             * <span style="font-size: larger"> ... </span>
+             * then replace <big> with <span>
+             * Need to think about that...
+             * Could use -
+             *   TY_(AddStyleProperty)( doc, node, "font-size: larger" );
+             *   TY_(CoerceNode)(doc, node, TidyTag_SPAN, no, no);
+             * Alternatively generated a <style> but how to get the style name
+             * TY_(AddAttribute)( doc, node, "class", "????" );
+             * Also maybe need a specific message like
+             * Element '%s' replaced with 'span' with a 'font-size: larger style attribute
+             * maybe should use static void RenameElem( TidyDocImpl* doc, Node* node, TidyTagId tid )
+             *
+            \*/
+            if (clean) {
+                TY_(AddStyleProperty)( doc, node, "font-size: larger" );
+                TY_(CoerceNode)(doc, node, TidyTag_SPAN, warn, no);
+            } else {
+                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+            }
+        } else
+        if ( nodeIsCENTER(node) ) {
+            /*\
+             * center: CSS equivalent	'text-align:center'
+             *  and 'margin-left:auto; margin-right:auto' on descendant blocks
+             * Tidy already handles this if 'clean' by SILENTLY generating the <style>
+             * and adding a <div class="c1"> around the elements.
+             * see: static Bool Center2Div( TidyDocImpl* doc, Node *node, Node **pnode)
+            \*/
+                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+        } else 
+        if ( nodeIsDIR(node) ) {
+            /*\
+             *  dir: replace by <ul>
+             *  Tidy already actions this and issues a warning
+             *  Should this be CHANGED???
+            \*/
+                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+        } else
+        if ( nodeIsFONT(node) ) {
+            /*\
+             * Tidy already handles this -
+             * If 'clean' replaced by CSS, else 
+             * if is NOT clean, and doctype html5 then warnings issued
+             * done in Bool Font2Span( TidyDocImpl* doc, Node *node, Node **pnode ) (I think?)
+             *
+            \*/
+                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+        } else
+        if (( nodesIsFRAME(node) ) || ( nodeIsFRAMESET(node) ) || ( nodeIsNOFRAMES(node) )) {
+            /*\
+             * YOW: What to do here?????? Maybe <iframe>????
+            \*/
+                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+        } else
+        if ( nodeIsSTRIKE(node) ) {
+            /*\
+             * strike: CSS equivalent	'text-decoration:line-through'
+             * maybe should use static void RenameElem( TidyDocImpl* doc, Node* node, TidyTagId tid )
+            \*/
+            if (clean) {
+                TY_(AddStyleProperty)( doc, node, "text-decoration: line-through" );
+                TY_(CoerceNode)(doc, node, TidyTag_SPAN, warn, no);
+            } else {
+                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+            }
+        } else
+        if ( nodeIsTT(node) ) {
+            /*\
+             * tt: CSS equivalent	'font-family:monospace'
+             * Tidy presently does nothing. Tidy5 issues a warning
+             * But like the 'clean' <font> replacement this could also be replaced with CSS
+             * maybe should use static void RenameElem( TidyDocImpl* doc, Node* node, TidyTagId tid )
+             *
+            \*/
+            if (clean) {
+                TY_(AddStyleProperty)( doc, node, "font-family: monospace" );
+                TY_(CoerceNode)(doc, node, TidyTag_SPAN, warn, no);
+            } else {
+                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+            }
+        } else
+        if (TY_(nodeIsElement)(node)) {
+            if (node->tag) {
+                if ((!(node->tag->versions & VERS_HTML5))||(inRemovedInfo(node->tag->id))) {
+                    /* issue warning for elements like 'markquee' */
+                    TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+                }
+            }
+        }
+
+        if (node->content)
+            TY_(CheckHTML5)( doc, node->content );
+
+        node = node->next;
+    }
+}
+/* END HTML5 STUFF
+   ######################################################################################
+ */
+
 int         tidyDocCleanAndRepair( TidyDocImpl* doc )
 {
     Bool word2K   = cfgBool( doc, TidyWord2000 );
@@ -1243,6 +1521,7 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     Bool tidyXmlTags = cfgBool( doc, TidyXmlTags );
     Bool wantNameAttr = cfgBool( doc, TidyAnchorAsName );
     Bool mergeEmphasis = cfgBool( doc, TidyMergeEmphasis );
+    ctmbstr sdef = NULL;
     Node* node;
 
     if (tidyXmlTags)
@@ -1299,6 +1578,12 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
 
     /* remember given doctype for reporting */
     node = TY_(FindDocType)(doc);
+    sdef = tidyOptGetValue((TidyDoc)doc, TidyDoctype );
+    if (!sdef)
+        sdef = tidyOptGetCurrPick((TidyDoc) doc, TidyDoctypeMode );
+    if (sdef && (strcmp(sdef,"html5") == 0)) {
+        TY_(CheckHTML5)( doc, &doc->root );
+    }
     if (node)
     {
         AttVal* fpi = TY_(GetAttrByName)(node, "PUBLIC");

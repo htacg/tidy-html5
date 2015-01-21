@@ -477,6 +477,10 @@ extern "C" {
 #define access _access
 #define strcasecmp _stricmp
 
+#ifndef va_copy
+#define va_copy(dest, src) (dest = src)
+#endif
+
 #if _MSC_VER > 1000
 #pragma warning( disable : 4189 ) /* local variable is initialized but not referenced */
 #pragma warning( disable : 4100 ) /* unreferenced formal parameter */

@@ -1,44 +1,125 @@
-<!doctype html>
-<head>
-  <meta charset=utf8>
-  <title>About tidy-html5</title>
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf8">
+  <title>
+   About tidy-html5
+  </title>
+  <meta name="author"
+        content="geoff mclane">
   <style>
+body { margin: 1cm 1cm 1cm 1cm; }
   li span.note { display: block; }
   </style>
-</head>
+ </head>
+ <body>
+  <h1>
+   HTML Tidy for HTML5
+  </h1>
 
-<h1>HTML Tidy for HTML5 (experimental)</h1>
-<p>This repo is an experimental fork of the code from
- <a href="http://tidy.sourceforge.net">tidy.sourceforge.net</a>.
-This source code in this version supports processing of HTML5 documents.
-The changes for HTML5 support started from a
- <a href="http://lists.w3.org/Archives/Public/www-archive/2011Nov/0007.html">patch developed by Björn Höhrmann</a>.</p>
+  <p>
+   This repo is an experimental fork of the code from <a href="http://tidy.sourceforge.net"
+      target="_blank">tidy.sourceforge.net</a>. This source code in this version supports
+      processing of HTML5 documents.
+  </p>
 
-<p>For more information, see
- <a href="http://w3c.github.com/tidy-html5/">w3c.github.com/tidy-html5</a>
+  <p>
+   The changes for HTML5 support started from a <a href=
+   "http://lists.w3.org/Archives/Public/www-archive/2011Nov/0007.html"
+      target="_blank">patch developed by Björn Höhrmann</a>. A copy of this patch is also
+      maintained on this site, but naturally a LOT more has been changed in this fork.
+  </p>
 
-<h2>Building the tidy command-line tool</h2>
-<p>For Linux/BSD/OSX platforms, you can build and install the
-<code>tidy</code> command-line tool from the source code using the
-following steps.</p>
+  <p>
+   For more information, also see <a href="http://w3c.github.com/tidy-html5/"
+      target="_blank">w3c.github.com/tidy-html5</a>
+  </p>
 
-<ol>
-<li><code>make -C build/gmake/</code></li>
-<li><code>make install -C build/gmake/</code></li>
-</ol>
+  <h2>
+   Building tidy with cmake
+  </h2>
 
-<p>Note that you will either need to run <code>make install</code> as root,
-or with <code>sudo make install</code>.</p>
+  <p>
+   For all platforms, you can build and install the <code>tidy</code> command-line tool from the
+   source code using the following steps.
+  </p>
 
-<h2>Building the libtidy shared library</h2>
-<p>For Linux/BSD/OSX platforms, you can build and install the
-<code>tidylib</code> shared library (for use in building other
-applications) from the source code using the following steps.</p>
+  <ul>
+   <li>
+    <code>cd build/cmake</code>
+   </li>
 
-<ol>
-<li>sh build/gnuauto/setup.sh && ./configure && make</li>
-<li>make install</li>
-</ol>
+   <li>
+    <strong>Configuration and Generation</strong>
+   </li>
 
-<p>Note that you will either need to run <code>make install</code> as root,
-or with <code>sudo make install</code>.</p>
+   <li>
+    <code>cmake ../.. [-G "generator of choice"] [-DCMAKE_INSTALL_PREFIX=/install/path]</code>
+   </li>
+
+   <li>
+    <strong>Building - Compile and Link</strong>
+   </li>
+
+   <li>Unix: <code>make</code>
+   </li>
+
+   <li>Windows: <code>cmake --build . --config Release</code>
+   </li>
+
+   <li>
+    <strong>Install</strong>
+   </li>
+
+   <li>Unix: <code>[sudo] make install</code>
+   </li>
+
+   <li>Windows: <code>cmake --build . --config Release --target INSTALL</code>
+   </li>
+  </ul>
+
+  <p>
+   Alternatively the CMake GUI can be used. CMake options can be read from their <a href=
+   "http://www.cmake.org/"
+      target="_blank">site</a>, and/or running # cmake --help to get help, and view the
+      'generators' supported on your platform.
+   <br>
+   The build/cmake folder contains sample windows (batch) and unix (sh) scripts which can be
+   adjusted to suit your choices.
+  </p>
+
+  <p>
+   This document has been tidied using tidy5.exe, using a configuration file, tidy5.cfg containing
+   -
+  </p>
+
+  <pre>
+tidy-mark: no
+indent: yes
+break-before-br: yes
+indent-attributes: yes
+vertical-space: yes
+indent-spaces: 1
+indent-cdata: no
+wrap-asp: no
+wrap-attributes: no
+wrap-jste: no
+wrap-php: no
+wrap-script-literals: no
+wrap-sections: no
+tab-size: 4
+show-info: no
+</pre>
+  <p>
+   Using the following command
+   <br>
+   tidy5 -o README5.html -config tidy5.cfg README.html
+   <br>
+   then after checking README.html is deleted, and README5.html renamed to README.html
+  </p>
+
+  <p align="right">
+   README.html 20141205
+  </p>
+ </body>
+</html>

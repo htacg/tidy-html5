@@ -269,6 +269,11 @@ Bool TIDY_CALL tidyNodeIsMENU( TidyNode tnod )
 { return nodeIsMENU( tidyNodeToImpl(tnod) );
 }
 
+/* HTML5 */
+Bool TIDY_CALL tidyNodeIsDATALIST( TidyNode tnod )
+{ return nodeIsDATALIST( tidyNodeToImpl(tnod) );
+}
+
 
 /*
  * local variables:

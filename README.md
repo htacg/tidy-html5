@@ -1,6 +1,8 @@
-# HTML Tidy for HTML5 (experimental)
+﻿# HTML Tidy with HTML5 support
 
-This repo is an experimental fork of the code from [tidy.sourceforge.net][1].
+This repo is a fork of the code from [w3c.github.com/tidy-html5][3], which itself
+is a fork of [tidy.sourceforge.net][1].
+
 This source code in this version supports processing of HTML5 documents. The
 changes for HTML5 support started from a [patch developed by Björn Höhrmann][2].
 
@@ -12,27 +14,18 @@ For more information, see [w3c.github.com/tidy-html5][3]
 
    [3]: http://w3c.github.com/tidy-html5/
 
-## Building the tidy command-line tool
 
-For Linux/BSD/OSX platforms, you can build and install the `tidy` command-line
-tool from the source code using the following steps.
+## Build the tidy library and command line tool
 
-  1. `make -C build/gmake/`
+  1. cd build/cmake
 
-  2. `make install -C build/gmake/`
+  2. cmake ../.. [-DCMAKE_INSTALL_PREFIX=/path/for/install]
 
-Note that you will either need to run `make install` as root, or with `sudo make
-install`.
+  3. Windows:  cmake --build . --config Release  
+     Unix/OSX: make
 
-## Building the libtidy shared library
+  4. Install, if desired  
+     Windows: cmake --build . --config Release --target INSTALL  
+     UNix/OSX: [sudo] make install
 
-For Linux/BSD/OSX platforms, you can build and install the `tidylib` shared
-library (for use in building other applications) from the source code using the
-following steps.
-
-  1. `sh build/gnuauto/setup.sh && ./configure && make`
-
-  2. `make install`
-
-Note that you will either need to run `make install` as root, or with `sudo make
-install`.
+;eof

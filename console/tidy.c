@@ -437,8 +437,8 @@ static void help( ctmbstr prog )
     printf( "Utility to clean up and pretty print HTML/XHTML/XML\n");
     printf( "\n");
 
-    printf( "This is an HTML5-aware experimental fork of HTML Tidy.\n");
-    printf( "%s\n", tidyReleaseDate() );
+    printf( "This is an HTML5-aware experimental fork of HTML Tidy. Date %s. Version %s\n",
+        tidyReleaseDate(), tidyLibraryVersion() );
     printf( "\n");
 
 #ifdef PLATFORM_NAME
@@ -782,7 +782,7 @@ void printXMLOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
 static void XMLoptionhelp( TidyDoc tdoc )
 {
     printf( "<?xml version=\"1.0\"?>\n"
-            "<config version=\"%s\">\n", tidyReleaseDate());
+            "<config date=\"%s\" version=\"%s\">\n", tidyReleaseDate(), tidyLibraryVersion());
     ForEachOption( tdoc, printXMLOption );
     printf( "</config>\n" );
 }
@@ -943,8 +943,8 @@ static void optionvalues( TidyDoc tdoc )
 static void version( void )
 {
 #ifdef PLATFORM_NAME
-    printf( "HTML Tidy for HTML5 (experimental) for %s %s\n",
-             PLATFORM_NAME, tidyReleaseDate() );
+    printf( "HTML Tidy for HTML5 (experimental) for %s %s, version %s\n",
+             PLATFORM_NAME, tidyReleaseDate(), tidyLibraryVersion() );
 #else
     printf( "HTML Tidy for HTML5 (experimental) %s\n", tidyReleaseDate() );
 #endif

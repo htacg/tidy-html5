@@ -34,6 +34,12 @@ ctmbstr TY_(ReleaseDate)(void)
   return TY_(release_date);
 }
 
+ctmbstr tidyLibraryVersion(void)
+{
+  return TY_(library_version);
+}
+
+
 static struct _msgfmt
 {
     uint code;

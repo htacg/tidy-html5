@@ -327,6 +327,9 @@ TIDY_EXPORT void* TIDY_CALL       tidyGetAppData( TidyDoc tdoc );
 /** Get release date (version) for current library */
 TIDY_EXPORT ctmbstr TIDY_CALL     tidyReleaseDate(void);
 
+/** Get version number for the current library */
+TIDY_EXPORT ctmbstr tidyLibraryVersion(void);
+
 /* Diagnostics and Repair
 */
 

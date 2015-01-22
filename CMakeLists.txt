@@ -4,7 +4,7 @@ cmake_minimum_required (VERSION 2.8)
 project (tidy5)
 
 # ### NOTE: *** Adjust when required ***
-set( TIDY_MAJOR_VERSION 1 )
+set( TIDY_MAJOR_VERSION 5 )
 set( TIDY_MINOR_VERSION 0 )
 set( TIDY_MICRO_VERSION 0 )
 set( LIBTIDY_VERSION "${TIDY_MAJOR_VERSION}.${TIDY_MINOR_VERSION}.${TIDY_MICRO_VERSION}" )
@@ -65,10 +65,7 @@ add_definitions ( -DSUPPORT_UTF16_ENCODINGS=1 )
 add_definitions ( -DSUPPORT_ASIAN_ENCODINGS=1 )
 add_definitions ( -DSUPPORT_ACCESSIBILITY_CHECKS=1 )
 add_definitions ( -DRELEASE_DATE="${tidy_YEAR}/${tidy_MONTH}/${tidy_DAY}" )
-# to distinguish between debug and release lib
-if (WIN32)
-   set( CMAKE_DEBUG_POSTFIX "d" )
-endif(WIN32)
+add_definitions ( -DLIBTIDY_VERSION="${TIDY_MAJOR_VERSION}.${TIDY_MINOR_VERSION}.${TIDY_MICRO_VERSION}" )
 
 if(BUILD_SHARED_LIB)
    set(LIB_TYPE SHARED)

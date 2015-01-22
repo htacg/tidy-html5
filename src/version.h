@@ -1,6 +1,6 @@
 /* version information
 
-  (c) 2007-2009 (W3C) MIT, ERCIM, Keio University
+  (c) 2007-2015 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
 
 */
@@ -10,4 +10,10 @@ static const char TY_(release_date)[] = RELEASE_DATE;
 #else
 static const char TY_(release_date)[] = "2014/08/03";
 #endif
+#ifdef LIBTIDY_VERSION
+static const char TY_(library_version)[] = LIBTIDY_VERSION;
+#else
+static const char TY_(library_version)[] = "5.0.0";
+#endif
 
+/* eof */

@@ -108,19 +108,12 @@ if (MSVC)
 endif ()
 set(name lib-tidy)
 add_library ( ${name} ${LIB_TYPE} ${CFILES} ${HFILES} ${LIBHFILES} )
-if (MSVC)
-    set_target_properties( ${name} PROPERTIES 
-        DEBUG_OUTPUT_NAME tidy5d
-        RELEASE_OUTPUT_NAME tidy5
-        )
-else ()
-    set_target_properties( ${name} PROPERTIES 
-        OUTPUT_NAME tidy5
-        )
-    set_target_properties( ${name} PROPERTIES
-                                   VERSION   ${LIBTIDY_VERSION}
-                                   SOVERSION ${TIDY_MAJOR_VERSION} )
-endif ()
+set_target_properties( ${name} PROPERTIES 
+    OUTPUT_NAME tidy5
+    )
+set_target_properties( ${name} PROPERTIES
+                               VERSION   ${LIBTIDY_VERSION}
+                               SOVERSION ${TIDY_MAJOR_VERSION} )
 list ( APPEND add_LIBS ${name} )
 install(TARGETS ${name}
     RUNTIME DESTINATION bin

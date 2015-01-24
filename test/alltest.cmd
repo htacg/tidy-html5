@@ -1,4 +1,4 @@
-@seetlocal
+@setlocal
 
 @REM alltest.cmd - execute all test cases
 @REM

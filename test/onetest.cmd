@@ -40,12 +40,12 @@ if exist %TIDYFILE% del %TIDYFILE%
 
 @REM Noisy output, or quiet
 @REM echo Testing %1 input %INFILE% config %CFGFILE% ...
-@echo Testing %1, expect %EXPECTED%
-@echo Testing %1, expect %EXPECTED% >> %TMPTEST%
 @echo Doing: '%TIDY% -f %MSGFILE% -config %CFGFILE% %3 %4 %5 %6 %7 %8 %9 --tidy-mark no -o %TIDYFILE% %INFILE% >> %TMPTEST%
 
 @%TIDY% -f %MSGFILE% -config %CFGFILE% %3 %4 %5 %6 %7 %8 %9 --tidy-mark no -o %TIDYFILE% %INFILE%
 @set STATUS=%ERRORLEVEL%
+@echo Testing %1, expect %EXPECTED%, got %STATUS%
+@echo Testing %1, expect %EXPECTED%, got %STATUS% >> %TMPTEST%
 
 @if %STATUS% EQU %EXPECTED% goto done
 @set ERRTESTS=%ERRTESTS% %TESTNO%

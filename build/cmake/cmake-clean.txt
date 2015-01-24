@@ -1,9 +1,9 @@
 bldlog-1.txt
-libtidy-static.a
+libtidy5.a
 tab2space
 tidy5
-libtidy-shared.so
-libtidy-shared.so.1
-libtidy-shared.so.1.0.0
+libtidy5.so
+libtidy5.so.5
+libtidy5.so.5.0.0
 install_manifest.txt
 

@@ -13,9 +13,8 @@ temp*
 *.opensdf
 ipch/*
 Makefile
-libtidy-static.a
 tab2space
 tidy5
-libtidy-shared*
+libtidy5*
 install_manifest.txt
 

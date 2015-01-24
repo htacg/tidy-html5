@@ -106,18 +106,22 @@ if (MSVC)
     list(APPEND CFILES ${SRCDIR}/sprtf.c)
     list(APPEND LIBHFILES ${SRCDIR}/sprtf.h)
 endif ()
-if (BUILD_SHARED_LIB)
-    set(name tidy-shared)
-else ()
-    set(name tidy-static)
-endif ()
+set(name lib-tidy)
 add_library ( ${name} ${LIB_TYPE} ${CFILES} ${HFILES} ${LIBHFILES} )
-list ( APPEND add_LIBS ${name} )
-if (NOT MSVC)
+if (MSVC)
+    set_target_properties( ${name} PROPERTIES 
+        DEBUG_OUTPUT_NAME tidy5d
+        RELEASE_OUTPUT_NAME tidy5
+        )
+else ()
+    set_target_properties( ${name} PROPERTIES 
+        OUTPUT_NAME tidy5
+        )
     set_target_properties( ${name} PROPERTIES
                                    VERSION   ${LIBTIDY_VERSION}
                                    SOVERSION ${TIDY_MAJOR_VERSION} )
 endif ()
+list ( APPEND add_LIBS ${name} )
 install(TARGETS ${name}
     RUNTIME DESTINATION bin
     ARCHIVE DESTINATION lib
@@ -141,6 +145,7 @@ add_executable( ${name} ${BINDIR}/tab2space.c )
 if (MSVC)
     set_target_properties( ${name} PROPERTIES DEBUG_POSTFIX d )
 endif ()
-# no INSTALL of this 'lcoal' tool
+# no INSTALL of this 'local' tool
 
 # eof
+

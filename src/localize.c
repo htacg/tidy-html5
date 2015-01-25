@@ -1066,10 +1066,9 @@ static void messagePos( TidyDocImpl* doc, TidyReportLevel level,
             ReportPosition(doc, line, col, buf, sizeBuf);
 #if !defined(NDEBUG) && defined(_MSC_VER)
             SPRTF("%s",buf);
-#else
+#endif
             for ( cp = buf; *cp; ++cp )
                 TY_(WriteChar)( *cp, doc->errout );
-#endif
         }
 
         LevelPrefix( level, buf, sizeBuf );

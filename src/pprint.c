@@ -1775,10 +1775,10 @@ void PPrintScriptStyle( TidyDocImpl* doc, uint mode, uint indent, Node *node )
     int     contentIndent = -1;
     Bool    xhtmlOut = cfgBool( doc, TidyXhtmlOut );
 
-    PCondFlushLine( doc, indent );  /* Issue #56 - long oustanding bug - flush any existing closing tag */
-
     if ( InsideHead(doc, node) )
       TY_(PFlushLine)( doc, indent );
+
+    PCondFlushLine( doc, indent );  /* Issue #56 - long oustanding bug - flush any existing closing tag */
 
     PPrintTag( doc, mode, indent, node );
 

@@ -1164,15 +1164,21 @@ void tidy_out( TidyDocImpl* doc, ctmbstr msg, ... )
     {
         ctmbstr cp;
         enum { sizeBuf=2048 };
-        char *buf = TidyDocAlloc(doc,sizeBuf);
+        char *buf = (char *)TidyDocAlloc(doc,sizeBuf);
 
         va_list args;
         va_start( args, msg );
         TY_(tmbvsnprintf)(buf, sizeBuf, msg, args);
         va_end( args );
 
+#if !defined(NDEBUG) && defined(_MSC_VER)
+        add_std_out(0);
+#endif
         for ( cp=buf; *cp; ++cp )
           TY_(WriteChar)( *cp, doc->errout );
+#if !defined(NDEBUG) && defined(_MSC_VER)
+        add_std_out(1);
+#endif
         TidyDocFree(doc, buf);
     }
 }

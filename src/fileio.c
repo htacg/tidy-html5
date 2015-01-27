@@ -13,6 +13,9 @@
 #include "forward.h"
 #include "fileio.h"
 #include "tidy.h"
+#if !defined(NDEBUG) && defined(_MSC_VER)
+#include "sprtf.h"
+#endif
 
 typedef struct _fp_input_source
 {
@@ -82,6 +85,9 @@ void TIDY_CALL TY_(filesink_putByte)( void* sinkData, byte bv )
 {
   FILE* fout = (FILE*) sinkData;
   fputc( bv, fout );
+#if !defined(NDEBUG) && defined(_MSC_VER)
+    SPRTF("%c",bv);
+#endif
 }
 
 void TY_(initFileSink)( TidyOutputSink* outp, FILE* fp )

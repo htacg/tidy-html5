@@ -1,13 +1,14 @@
-# CMakeLists.txt - 20150130 - 20140801 - for github tidy-fork
+# CMakeLists.txt - 20150130 - 20140801 - for github htacg/tidy-html5
 cmake_minimum_required (VERSION 2.8)
 
 project (tidy5)
 
 # ### NOTE: *** Adjust when required ***
-set( TIDY_MAJOR_VERSION 5 )
-set( TIDY_MINOR_VERSION 0 )
-set( TIDY_MICRO_VERSION 0 )
+set( TIDY_MAJOR_VERSION 4 )
+set( TIDY_MINOR_VERSION 9 )
+set( TIDY_MICRO_VERSION 1 ) # adjust this for each change
 set( LIBTIDY_VERSION "${TIDY_MAJOR_VERSION}.${TIDY_MINOR_VERSION}.${TIDY_MICRO_VERSION}" )
+
 # establish version date
 set( tidy_YEAR  2015 )
 set( tidy_MONTH 01 )

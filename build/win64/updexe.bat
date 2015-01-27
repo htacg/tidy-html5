@@ -1,15 +1,15 @@
 @setlocal
 @REM copy the EXE into C:\MDOS, IFF changed
 @set TMPDIR=C:\MDOS
-@set TMPFIL=tidy5.exe
-@set TMPSRC=Release\%TMPFIL%
-
+@set TMPFIL1=tidy5.exe
+@set TMPFIL2=tidy5.exe
+@set TMPSRC=Release\%TMPFIL1%
 @if NOT EXIST %TMPSRC% goto ERR1
 @echo Current source %TMPSRC%
 @call dirmin %TMPSRC%
 
 @if NOT EXIST %TMPDIR%\nul goto ERR2
-@set TMPDST=%TMPDIR%\%TMPFIL%
+@set TMPDST=%TMPDIR%\%TMPFIL2%
 @if NOT EXIST %TMPDST% goto DOCOPY
 
 @echo Current destination %TMPDST%
@@ -19,7 +19,9 @@
 @fc4 -q -v0 -b %TMPSRC% %TMPDST% >nul
 @if ERRORLEVEL 2 goto NOFC4
 @if ERRORLEVEL 1 goto DOCOPY
+@echo.
 @echo Files are the SAME... Nothing done...
+@echo.
 @goto END
 
 :NOFC4
@@ -52,4 +54,3 @@ copy %TMPSRC% %TMPDST%
 @exit /b 0
 
 @REM eof
-

@@ -495,8 +495,14 @@ extern "C" {
 
 #if defined(_WIN32)
 
-#if (defined(_USRDLL) || defined(_WINDLL)) && !defined(TIDY_EXPORT)
+#if (defined(_USRDLL) || defined(_WINDLL)) || defined(BUILD_SHARED_LIB) && !defined(TIDY_EXPORT)
+#ifdef BUILDING_SHARED_LIB
 #define TIDY_EXPORT __declspec( dllexport ) 
+#else
+#define TIDY_EXPORT __declspec( dllimport ) 
+#endif
+#else
+#define TIDY_EXPORT extern
 #endif
 
 #ifndef TIDY_CALL

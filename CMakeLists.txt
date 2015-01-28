@@ -16,7 +16,8 @@ set( tidy_DAY   20 )
 
 # Allow developer to select is Dynamic or static library built
 set( LIB_TYPE STATIC )  # set default static
-option( BUILD_SHARED_LIB "Build Shared Library" OFF )
+option( BUILD_SHARED_LIB "Set ON to build Shared (DLL) Library"   OFF )
+option( BUILD_TAB2SPACE  "Set ON to build utility app, tab2space" OFF )
 
 if (CMAKE_SIZEOF_VOID_P EQUAL 8)
     message(STATUS "*** Have SIZEOF void * = 8, so 64-bit")
@@ -115,6 +116,14 @@ set_target_properties( ${name} PROPERTIES
 set_target_properties( ${name} PROPERTIES
                                VERSION   ${LIBTIDY_VERSION}
                                SOVERSION ${TIDY_MAJOR_VERSION} )
+if (BUILD_SHARED_LIB)
+set_target_properties( ${name} PROPERTIES 
+    COMPILE_FLAGS "-DBUILD_SHARED_LIB"
+    )
+set_target_properties( ${name} PROPERTIES 
+    COMPILE_FLAGS "-DBUILDING_SHARED_LIB"
+    )
+endif ()                               
 list ( APPEND add_LIBS ${name} )
 install(TARGETS ${name}
     RUNTIME DESTINATION bin
@@ -132,14 +141,21 @@ target_link_libraries( ${name} ${add_LIBS} )
 if (MSVC)
     set_target_properties( ${name} PROPERTIES DEBUG_POSTFIX d )
 endif ()
+if (BUILD_SHARED_LIB)
+set_target_properties( ${name} PROPERTIES 
+    COMPILE_FLAGS "-DBUILD_SHARED_LIB"
+    )
+endif ()                               
 install (TARGETS ${name} DESTINATION bin)
 
-set(name tab2space)
-add_executable( ${name} ${BINDIR}/tab2space.c )
-if (MSVC)
-    set_target_properties( ${name} PROPERTIES DEBUG_POSTFIX d )
+if (BUILD_TAB2SPACE)
+    set(name tab2space)
+    add_executable( ${name} ${BINDIR}/tab2space.c )
+    if (MSVC)
+        set_target_properties( ${name} PROPERTIES DEBUG_POSTFIX d )
+    endif ()
+    # no INSTALL of this 'local' tool
 endif ()
-# no INSTALL of this 'local' tool
 
 # eof
 

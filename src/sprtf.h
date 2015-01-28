@@ -27,6 +27,8 @@
 // Debug log file output
 #ifndef _SPRTF_HXX_
 #define _SPRTF_HXX_
+#include "platform.h"
+
 #ifdef   __cplusplus
 extern "C" {
 #endif
@@ -36,32 +38,32 @@ extern "C" {
 #define MCDECL
 #endif
 
-extern int add_std_out( int val );
-extern int add_sys_time( int val );
-extern int add_sys_date( int val );
+TIDY_EXPORT int add_std_out( int val );
+TIDY_EXPORT int add_sys_time( int val );
+TIDY_EXPORT int add_sys_date( int val );
 
-extern int add_screen_out( int val );
-extern int add_list_out( int val );
-extern int add_append_log( int val );
+TIDY_EXPORT int add_screen_out( int val );
+TIDY_EXPORT int add_list_out( int val );
+TIDY_EXPORT int add_append_log( int val );
 
-extern int open_log_file( void );
-extern void close_log_file( void );
-extern void set_log_file( char * nf, int open );
-extern char * get_log_file( void );
+TIDY_EXPORT int open_log_file( void );
+TIDY_EXPORT void close_log_file( void );
+TIDY_EXPORT void set_log_file( char * nf, int open );
+TIDY_EXPORT char * get_log_file( void );
 
-extern int MCDECL sprtf( const char *pf, ... );
+TIDY_EXPORT int MCDECL sprtf( const char *pf, ... );
 #define M_MAX_SPRTF 2048
-extern int direct_out_it( char *cp );
+TIDY_EXPORT int direct_out_it( char *cp );
 
-extern char *GetNxtBuf();
+TIDY_EXPORT char *GetNxtBuf();
 
 #define EndBuf(a)   ( a + strlen(a) )
 
-extern char *get_date_stg();
-extern char *get_time_stg();
-extern char *get_date_time_stg();
+TIDY_EXPORT char *get_date_stg();
+TIDY_EXPORT char *get_time_stg();
+TIDY_EXPORT char *get_date_time_stg();
 #ifdef _MSC_VER
-extern int gettimeofday(struct timeval *tp, void *tzp);
+TIDY_EXPORT int gettimeofday(struct timeval *tp, void *tzp);
 #endif
 
 #ifndef SPRTF

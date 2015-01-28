@@ -2138,6 +2138,9 @@ Node* TY_(GetToken)( TidyDocImpl* doc, GetTokenMode mode )
     /* at start of block elements, unclosed inline
        elements are inserted into the token stream */
     if (lexer->insert || lexer->inode) {
+        /*\ Issue #92: could fix by the following, but instead chose not to stack these 2
+         *  if ( !(lexer->insert && (nodeIsINS(lexer->insert) || nodeIsDEL(lexer->insert))) ) {
+        \*/
         lexer->token = TY_(InsertedToken)( doc );
         node = lexer->token;
         GTDBG(doc,"lex-inserted2", node);

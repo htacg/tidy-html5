@@ -41,6 +41,12 @@ static Bool IsNodePushable( Node *node )
     if (node->tag->model & CM_OBJECT)
         return no;
 
+    /*\ Issue #92: OLD problem of ins and del which are marked as both
+     *  inline and block, thus should NOT ever be 'inserted'
+    \*/
+    if (nodeIsINS(node) || nodeIsDEL(node))
+        return no;
+
     return yes;
 }
 

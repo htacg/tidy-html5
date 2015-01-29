@@ -3,11 +3,17 @@ cmake_minimum_required (VERSION 2.8)
 
 project (tidy5)
 
-# ### NOTE: *** Adjust when required ***
-set( TIDY_MAJOR_VERSION 4 )
-set( TIDY_MINOR_VERSION 9 )
-set( TIDY_MICRO_VERSION 1 ) # adjust this for each change
-set( LIBTIDY_VERSION "${TIDY_MAJOR_VERSION}.${TIDY_MINOR_VERSION}.${TIDY_MICRO_VERSION}" )
+# ### NOTE: *** Adjust version.txt when required ***
+# read 'version' file into a variable (stripping any newlines or spaces)
+file(READ version.txt versionFile)
+if (NOT versionFile)
+    message(FATAL_ERROR "Unable to determine libtidy version. version.txt file is missing.")
+endif()
+string(STRIP "${versionFile}" LIBTIDY_VERSION)
+string(REPLACE "." ";" VERSION_LIST ${LIBTIDY_VERSION})
+list(GET VERSION_LIST 0 TIDY_MAJOR_VERSION)
+list(GET VERSION_LIST 1 TIDY_MINOR_VERSION)
+list(GET VERSION_LIST 2 TIDY_POINT_VERSION)
 
 # establish version date
 set( tidy_YEAR  2015 )
@@ -67,13 +73,13 @@ add_definitions ( -DSUPPORT_UTF16_ENCODINGS=1 )
 add_definitions ( -DSUPPORT_ASIAN_ENCODINGS=1 )
 add_definitions ( -DSUPPORT_ACCESSIBILITY_CHECKS=1 )
 add_definitions ( -DRELEASE_DATE="${tidy_YEAR}/${tidy_MONTH}/${tidy_DAY}" )
-add_definitions ( -DLIBTIDY_VERSION="${TIDY_MAJOR_VERSION}.${TIDY_MINOR_VERSION}.${TIDY_MICRO_VERSION}" )
+add_definitions ( -DLIBTIDY_VERSION="${LIBTIDY_VERSION}" )
 
 if(BUILD_SHARED_LIB)
    set(LIB_TYPE SHARED)
-   message("*** Building DLL library ${LIB_TYPE}")
+   message("*** Building DLL library ${LIB_TYPE}, version ${LIBTIDY_VERSION}")
 else(BUILD_SHARED_LIB)
-   message("*** Building static library ${LIB_TYPE}")
+   message("*** Building static library ${LIB_TYPE}, version ${LIBTIDY_VERSION}")
 endif(BUILD_SHARED_LIB)
 
 include_directories ( "${PROJECT_SOURCE_DIR}/include" "${PROJECT_SOURCE_DIR}/src" )

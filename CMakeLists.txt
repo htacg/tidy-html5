@@ -9,16 +9,21 @@ file(READ version.txt versionFile)
 if (NOT versionFile)
     message(FATAL_ERROR "Unable to determine libtidy version. version.txt file is missing.")
 endif()
-string(STRIP "${versionFile}" LIBTIDY_VERSION)
+string(STRIP "${versionFile}" versionFile)
+string(REGEX REPLACE "(.*)[\r\n|\n](.*)" "\\1" LIBTIDY_VERSION ${versionFile})
+string(REGEX REPLACE "(.*)[\r\n|\n](.*)" "\\2" LIBTIDY_DATE ${versionFile})
+
+# establish version number
 string(REPLACE "." ";" VERSION_LIST ${LIBTIDY_VERSION})
 list(GET VERSION_LIST 0 TIDY_MAJOR_VERSION)
 list(GET VERSION_LIST 1 TIDY_MINOR_VERSION)
 list(GET VERSION_LIST 2 TIDY_POINT_VERSION)
 
 # establish version date
-set( tidy_YEAR  2015 )
-set( tidy_MONTH 01 )
-set( tidy_DAY   20 )
+string(REPLACE "." ";" VERSION_LIST ${LIBTIDY_DATE})
+list(GET VERSION_LIST 0 tidy_YEAR)
+list(GET VERSION_LIST 1 tidy_MONTH)
+list(GET VERSION_LIST 2 tidy_DAY)
 
 # Allow developer to select is Dynamic or static library built
 set( LIB_TYPE STATIC )  # set default static

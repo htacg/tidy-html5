@@ -1,31 +1,37 @@
 ﻿# HTML Tidy with HTML5 support
 
-This repo is a fork of the code from [w3c.github.com/tidy-html5][3], which itself
-is a fork of [tidy.sourceforge.net][1].
+This repository consists of the stable and development branches of HTML Tidy.
 
-This source code in this version supports processing of HTML5 documents. The
-changes for HTML5 support started from a [patch developed by Björn Höhrmann][2].
+ - branch **develop-\*\*\*** consists of the current development and release candidate
+   for **HTML Tidy**. Release Candidates can be identified with git tags.
 
-   [1]: http://tidy.sourceforge.net
-
-   [2]: http://lists.w3.org/Archives/Public/www-archive/2011Nov/0007.html
-
-For more information, see [w3c.github.com/tidy-html5][3]
-
-   [3]: http://w3c.github.com/tidy-html5/
+ - branch **master** consists of the current, stable release of **HTML Tidy**. 
 
 
 ## Build the tidy library and command line tool
 
-  1. cd build/cmake
+  1. `cd build/cmake`
 
-  2. cmake ../.. [-DCMAKE_INSTALL_PREFIX=/path/for/install]
+  2. `cmake ../.. [-DCMAKE_INSTALL_PREFIX=/path/for/install]`
 
-  3. Windows:  cmake --build . --config Release  
-     Unix/OSX: make
+  3. Windows:  `cmake --build . --config Release`  
+     Unix/OS X: `make`
 
-  4. Install, if desired  
-     Windows: cmake --build . --config Release --target INSTALL  
-     UNix/OSX: [sudo] make install
+  4. Install, if desired:  
+     Windows: `cmake --build . --config Release --target INSTALL`  
+     Unix/OS X: `[sudo] make install`
 
-;eof
+
+## History
+
+This repository should be considered canonical for HTML Tidy as of 2015-January-15.
+
+ - This repository originally transferred from [w3c.github.com/tidy-html5][1].
+ 
+ - First moved to Github from [tidy.sourceforge.net][2].
+
+
+   [1]: http://w3c.github.com/tidy-html5/
+
+   [2]: http://tidy.sourceforge.net
+

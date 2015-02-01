@@ -1242,6 +1242,7 @@ Bool FindCSSSpanEq( Node *node, ctmbstr *s, Bool deprecatedOnly )
 static Bool CanApplyBlockStyle( Node *node )
 {
     if (TY_(nodeHasCM)(node,CM_BLOCK | CM_LIST | CM_DEFLIST | CM_TABLE)
+        && !nodeIsDIV(node) && !nodeIsP(node)
         && !nodeIsTABLE(node) && !nodeIsTR(node) && !nodeIsLI(node) )
     {
         return yes;

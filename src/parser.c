@@ -317,6 +317,11 @@ static Bool CanPrune( TidyDocImpl* doc, Node *element )
     if ( nodeIsOPTION(element) && element->attributes != NULL )
         return no;
 
+    /* fix for #103 - don't drop empty dd tags lest document not validate */
+    if (nodeIsDD(element))
+        return no;
+
+
     return yes;
 }
 

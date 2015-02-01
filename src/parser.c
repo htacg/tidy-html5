@@ -4320,6 +4320,29 @@ static void AttributeChecks(TidyDocImpl* doc, Node* node)
 }
 
 /*
+  Need to know to avoid error-reporting
+ */
+Bool showingBodyOnly( TidyDocImpl* doc)
+{
+    Node* node;
+
+    TidyTriState bodyOnly = doc->config.value[TidyBodyOnly].v;
+
+    switch( bodyOnly )
+    {
+        case TidyNoState:
+            return no;
+        case TidyYesState:
+            return yes;
+        default:
+            node = TY_(FindBody)( doc );
+            if (node && node->implicit )
+                return yes;
+    }
+    return yes;
+}
+
+/*
   HTML is the top level element
 */
 void TY_(ParseDocument)(TidyDocImpl* doc)
@@ -4414,7 +4437,8 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
         else
             html = node;
 
-        if (!TY_(FindDocType)(doc))
+        /* #72, avoid MISSING_DOCTYPE if show-body-only. */
+        if (!TY_(FindDocType)(doc) && !showingBodyOnly(doc))
             TY_(ReportError)(doc, NULL, NULL, MISSING_DOCTYPE);
 
         TY_(InsertNodeAtEnd)( &doc->root, html);
@@ -4439,7 +4463,11 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
     if (!TY_(FindTITLE)(doc))
     {
         Node* head = TY_(FindHEAD)(doc);
-        TY_(ReportError)(doc, head, NULL, MISSING_TITLE_ELEMENT);
+        /* #72, avoid MISSING_TITLE_ELEMENT if show-body-only (but allow InsertNodeAtEnd to avoid new warning) */
+        if (!showingBodyOnly(doc))
+        {
+            TY_(ReportError)(doc, head, NULL, MISSING_TITLE_ELEMENT);
+        }
         TY_(InsertNodeAtEnd)(head, TY_(InferredTag)(doc, TidyTag_TITLE));
     }
 
@@ -4624,6 +4652,7 @@ void TY_(ParseXMLDocument)(TidyDocImpl* doc)
     if ( cfgBool(doc, TidyXmlDecl) )
         TY_(FixXmlDecl)( doc );
 }
+
 
 /*
  * local variables:

@@ -3367,7 +3367,12 @@ void TY_(ParseHead)(TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode))
 
         if (TY_(nodeIsText)(node))
         {
-            TY_(ReportError)(doc, head, node, TAG_NOT_ALLOWED_IN);
+            /*\ Issue #132 - avoid warning for missing body tag,
+             *  if configured to --omit-otpional-tags yes
+            \*/
+            if (!cfgBool( doc, TidyOmitOptionalTags )) {
+                TY_(ReportError)(doc, head, node, TAG_NOT_ALLOWED_IN);
+            }
             TY_(UngetToken)( doc );
             break;
         }

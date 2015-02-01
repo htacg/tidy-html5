@@ -8,7 +8,7 @@
 #ifdef RELEASE_DATE
 static const char TY_(release_date)[] = RELEASE_DATE;
 #else
-static const char TY_(release_date)[] = "2014/08/03";
+static const char TY_(release_date)[] = "1970/01/01";
 #endif
 #ifdef LIBTIDY_VERSION
 static const char TY_(library_version)[] = LIBTIDY_VERSION;

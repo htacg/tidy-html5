@@ -41,7 +41,7 @@
 
 
 <xsl:template name="header-section">
-  <xsl:text/>.\" tidy man page for the HTML5 fork of Tidy
+  <xsl:text/>.\" tidy man page for the HTML Tidy
 .TH TIDY 1 "<xsl:value-of select="cmdline/@version" />" "HTML Tidy" "<xsl:value-of select="cmdline/@version" />"
 </xsl:template>
 
@@ -56,7 +56,7 @@
 .SH SYNOPSIS
 \fBtidy\fR [option ...] [file ...] [option ...] [file ...]
 .SH DESCRIPTION
-Tidy reads HTML(5), XHTML(5) and XML files and writes cleaned-up markup.  For HTML variants, it detects, reports, and corrects many common coding errors and strives to produce visually equivalent markup that is both conformant to the HTML specifications and that works in most browsers.
+Tidy reads HTML, XHTML, and XML files and writes cleaned-up markup.  For HTML variants, it detects, reports, and corrects many common coding errors and strives to produce visually equivalent markup that is both conformant to the HTML specifications and that works in most browsers.
 .LP
 A common use of Tidy is to convert plain HTML to XHTML.  For generic XML files, Tidy is limited to correcting basic well-formedness errors and pretty printing.
 .LP
@@ -348,10 +348,10 @@ appearing in content with another backslash.
 <!-- Appears at the bottom of the man page: -->
 <xsl:template name="manpage-see-also-section">
 .SH SEE ALSO
-For more information about the experimental HTML5 fork of Tidy:
+For more information about HTML Tidy:
 .RS 4
 .LP
-http://w3c.github.com/tidy-html5/
+http://www.html-tidy.org/
 .RE
 .LP
 For more information on HTML:
@@ -369,10 +369,10 @@ http://dev.w3.org/html5/markup/
 For bug reports and comments:
 .RS 4
 .LP
-https://github.com/w3c/tidy-html5/issues/
+https://github.com/htacg/tidy-html5/issues/
 .RE
 .LP
-Or send questions and comments to \fBhtml-tidy@w3.org\fR
+Or send questions and comments to \fBpublic-htacg@w3.org\fR.
 .LP
 Validate your HTML documents using the \fBW3C Nu Markup Validator\fR:
 .RS 4
@@ -380,9 +380,10 @@ Validate your HTML documents using the \fBW3C Nu Markup Validator\fR:
 http://validator.w3.org/nu/
 .RE
 .SH AUTHOR
-\fBTidy\fR was written by \fBDave Raggett\fR &lt;dsr@w3.org&gt;, and subsequently maintained by a team at http://tidy.sourceforge.net/
+\fBTidy\fR was written by \fBDave Raggett\fR &lt;dsr@w3.org&gt;, and subsequently maintained by a team at http://tidy.sourceforge.net/,
+and now maintained by \fBHTACG\fR (http://www.htacg.org).
 .LP
-The sources for the HTML5 fork of \fBTidy\fR are available at https://github.com/w3c/tidy-html5/ under the MIT Licence.
+The sources for \fBHTML Tidy\fR are available at https://github.com/htacg/tidy-html5/ under the MIT Licence.
 </xsl:template>
 
 

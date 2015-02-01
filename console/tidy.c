@@ -412,7 +412,7 @@ static void print_xml_help_option( void )
 static void xml_help( void )
 {
     printf( "<?xml version=\"1.0\"?>\n"
-            "<cmdline version=\"%s\">\n", tidyReleaseDate());
+            "<cmdline version=\"%s\">\n", tidyLibraryVersion());
     print_xml_help_option();
     printf( "</cmdline>\n" );
 }
@@ -434,11 +434,10 @@ static void help( ctmbstr prog )
 {
     printf( "\n");
     printf( "%s [options...] [file...] [options...] [file...]\n", get_final_name(prog) );
-    printf( "Utility to clean up and pretty print HTML/XHTML/XML\n");
+    printf( "Utility to clean up and pretty print HTML/XHTML/XML.\n");
     printf( "\n");
 
-    printf( "This is an HTML5-aware experimental fork of HTML Tidy. Date %s. Version %s\n",
-        tidyReleaseDate(), tidyLibraryVersion() );
+    printf( "This is modern HTML Tidy version %s.\n", tidyLibraryVersion() );
     printf( "\n");
 
 #ifdef PLATFORM_NAME
@@ -459,8 +458,8 @@ static void help( ctmbstr prog )
     printf( "Single letter options apart from -f may be combined\n");
     printf( "as in:  tidy -f errs.txt -imu foo.html\n");
     printf( "\n");
-    printf( "For more information on this HTML5-aware experimental fork of Tidy,\n" );
-    printf( "see http://w3c.github.com/tidy-html5/\n" );
+    printf( "For more information about HTML Tidy, see\n" );
+    printf( "  http://www.html-tidy.org/\n" );
     printf( "\n");
     printf( "For more information on HTML, see the following:\n" );
     printf( "\n");
@@ -470,13 +469,13 @@ static void help( ctmbstr prog )
     printf( "  HTML: The Markup Language (an HTML language reference)\n" );
     printf( "  http://dev.w3.org/html5/markup/\n" );
     printf( "\n");
-    printf( "File bug reports at https://github.com/w3c/tidy-html5/issues/\n" );
-    printf( "or send questions and comments to html-tidy@w3.org\n" );
+    printf( "File bug reports at https://github.com/htacg/tidy-html5/issues/\n" );
+    printf( "or send questions and comments to public-htacg@w3.org.\n" );
     printf( "\n");
     printf( "Validate your HTML documents using the W3C Nu Markup Validator:\n" );
     printf( "\n");
     printf( "  http://validator.w3.org/nu/" );
-    printf( "\n");
+    printf( "\n\n");
 }
 
 static Bool isAutoBool( TidyOption topt )
@@ -782,7 +781,7 @@ void printXMLOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
 static void XMLoptionhelp( TidyDoc tdoc )
 {
     printf( "<?xml version=\"1.0\"?>\n"
-            "<config date=\"%s\" version=\"%s\">\n", tidyReleaseDate(), tidyLibraryVersion());
+            "<config version=\"%s\">\n", tidyLibraryVersion());
     ForEachOption( tdoc, printXMLOption );
     printf( "</config>\n" );
 }
@@ -943,10 +942,10 @@ static void optionvalues( TidyDoc tdoc )
 static void version( void )
 {
 #ifdef PLATFORM_NAME
-    printf( "HTML Tidy for HTML5 (experimental) for %s %s, version %s\n",
-             PLATFORM_NAME, tidyReleaseDate(), tidyLibraryVersion() );
+    printf( "HTML Tidy for %s version %s\n",
+             PLATFORM_NAME, tidyLibraryVersion() );
 #else
-    printf( "HTML Tidy for HTML5 (experimental) %s\n", tidyReleaseDate() );
+    printf( "HTML Tidy version %s\n", tidyLibraryVersion() );
 #endif
 }
 

@@ -1868,12 +1868,11 @@ void TY_(NeedsAuthorIntervention)( TidyDocImpl* doc )
 void TY_(GeneralInfo)( TidyDocImpl* doc )
 {
     if (!cfgBool(doc, TidyShowInfo)) return;
-    tidy_out(doc, "About this fork of Tidy: https://github.com/htacg/tidy-html5/tree/develop-500\n");
+    tidy_out(doc, "About HTML Tidy: https://github.com/htacg/tidy-html5/tree/develop-500\n");
     tidy_out(doc, "Bug reports and comments: https://github.com/htacg/tidy-html5/issues\n");
     tidy_out(doc, "Or send questions and comments to: https://lists.w3.org/Archives/Public/public-htacg/\n");
-    tidy_out(doc, "HTML5 language tutorial: http://www.w3schools.com/html/html5_intro.asp\n");
     tidy_out(doc, "Latest HTML specification: http://dev.w3.org/html5/spec-author-view/\n");
-    tidy_out(doc, "Validate your HTML5 documents: http://validator.w3.org/nu/\n");
+    tidy_out(doc, "Validate your HTML documents: http://validator.w3.org/nu/\n");
     tidy_out(doc, "Lobby your company to join the W3C: http://www.w3.org/Consortium\n");
 }
 

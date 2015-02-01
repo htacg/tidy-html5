@@ -324,7 +324,11 @@ TIDY_EXPORT void TIDY_CALL        tidySetAppData( TidyDoc tdoc, void* appData );
 /** Get application data set previously */
 TIDY_EXPORT void* TIDY_CALL       tidyGetAppData( TidyDoc tdoc );
 
-/** Get release date (version) for current library */
+/** Get release date (version) for current library 
+ ** @deprecated tidyReleaseDate() is deprecated in favor of semantic
+ ** versioning and should be replaced with tidyLibraryVersion().
+ */
+
 TIDY_EXPORT ctmbstr TIDY_CALL     tidyReleaseDate(void);
 
 /** Get version number for the current library */

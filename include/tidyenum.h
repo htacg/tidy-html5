@@ -423,6 +423,7 @@ typedef enum
   TidyTag_STYLE,    /**< STYLE */
   TidyTag_SUB,      /**< SUB */
   TidyTag_SUP,      /**< SUP */
+  TidyTag_SVG,      /**< SVG  (HTML5) */
   TidyTag_TABLE,    /**< TABLE */
   TidyTag_TBODY,    /**< TBODY */
   TidyTag_TD,       /**< TD */
@@ -783,8 +784,15 @@ typedef enum
   TidyAttr_ARIA_VALUENOW,
   TidyAttr_ARIA_VALUETEXT,
 
-
-
+  /* SVG attributes (SVG 1.1) */
+  TidyAttr_X,					/**< X= */
+  TidyAttr_Y,                   /**< Y= */
+  TidyAttr_VIEWBOX,             /**< VIEWBOX= */
+  TidyAttr_PRESERVEASPECTRATIO, /**< PRESERVEASPECTRATIO= */
+  TidyAttr_ZOOMANDPAN,          /**< ZOOMANDPAN= */
+  TidyAttr_BASEPROFILE,         /**< BASEPROFILE= */
+  TidyAttr_CONTENTSCRIPTTYPE,   /**< CONTENTSCRIPTTYPE= */
+  TidyAttr_CONTENTSTYLETYPE,    /**< CONTENTSTYLETYPE= */
 
   N_TIDY_ATTRIBS              /**< Must be last */
 } TidyAttrId;

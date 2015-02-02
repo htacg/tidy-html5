@@ -103,6 +103,7 @@ extern const AttrVersion TY_(W3CAttrsFor_STRONG)[];
 extern const AttrVersion TY_(W3CAttrsFor_STYLE)[];
 extern const AttrVersion TY_(W3CAttrsFor_SUB)[];
 extern const AttrVersion TY_(W3CAttrsFor_SUP)[];
+extern const AttrVersion TY_(W3CAttrsFor_SVG)[];
 extern const AttrVersion TY_(W3CAttrsFor_TABLE)[];
 extern const AttrVersion TY_(W3CAttrsFor_TBODY)[];
 extern const AttrVersion TY_(W3CAttrsFor_TD)[];

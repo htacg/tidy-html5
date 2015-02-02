@@ -525,6 +525,7 @@ typedef enum
   MixedContent,
   Preformatted,
   IgnoreMarkup,
+  OtherNamespace,
   CdataContent
 } GetTokenMode;
 

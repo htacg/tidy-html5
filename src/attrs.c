@@ -397,6 +397,24 @@ static const Attribute attribute_defs [] =
   { TidyAttr_ARIA_VALUENOW,           "aria-valuenow",           CH_PCDATA   },
   { TidyAttr_ARIA_VALUETEXT,          "aria-valuetext",          CH_PCDATA   },
 
+  { TidyAttr_X,                        "x",                      CH_PCDATA    }, /* for <svg> */
+  { TidyAttr_Y,                        "y",                      CH_PCDATA    }, /* for <svg> */
+#if 0   /* with uppercase chars taken directly from W3C; are these case-insensitive everywhere? */
+  { TidyAttr_VIEWBOX,           "viewBox",           VERS_INLINE_SVG,   CH_PCDATA    }, /* for <svg> */
+  { TidyAttr_PRESERVEASPECTRATIO, "preserveAspectRatio", VERS_INLINE_SVG, CH_PCDATA  }, /* for <svg> */
+  { TidyAttr_ZOOMANDPAN,        "zoomAndPan",        VERS_INLINE_SVG,   CH_PCDATA    }, /* for <svg> */
+  { TidyAttr_BASEPROFILE,       "baseProfile",       VERS_INLINE_SVG,   CH_PCDATA    }, /* for <svg> */
+  { TidyAttr_CONTENTSCRIPTTYPE, "contentScriptType", VERS_INLINE_SVG,   CH_PCDATA    }, /* for <svg> */
+  { TidyAttr_CONTENTSTYLETYPE,  "contentStyleType",  VERS_INLINE_SVG,   CH_PCDATA    }, /* for <svg> */
+#else
+  { TidyAttr_VIEWBOX,                  "viewbox",                CH_PCDATA    }, /* for <svg> */
+  { TidyAttr_PRESERVEASPECTRATIO,      "preserveaspectratio",    CH_PCDATA    }, /* for <svg> */
+  { TidyAttr_ZOOMANDPAN,               "zoomandpan",             CH_PCDATA    }, /* for <svg> */
+  { TidyAttr_BASEPROFILE,              "baseprofile",            CH_PCDATA    }, /* for <svg> */
+  { TidyAttr_CONTENTSCRIPTTYPE,        "contentscripttype",      CH_PCDATA    }, /* for <svg> */
+  { TidyAttr_CONTENTSTYLETYPE,         "contentstyletype",       CH_PCDATA    }, /* for <svg> */
+#endif
+
   /* this must be the final entry */
   { N_TIDY_ATTRIBS,             NULL,                    NULL         }
 };

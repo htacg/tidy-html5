@@ -111,6 +111,7 @@ Parser TY_(ParseSelect);
 Parser TY_(ParseOptGroup);
 Parser TY_(ParseText);
 Parser TY_(ParseDatalist);
+Parser TY_(ParseNamespace);
 
 CheckAttribs TY_(CheckAttributes);
 

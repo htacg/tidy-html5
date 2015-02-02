@@ -108,6 +108,7 @@ static CheckAttribs CheckHTML;
 #define VERS_ELEM_STYLE      (xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50)
 #define VERS_ELEM_SUB        (xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50)
 #define VERS_ELEM_SUP        (xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50)
+#define VERS_ELEM_SVG        (xxxx|xxxx|xxxx|H41T|X10T|xxxx|H41F|X10F|xxxx|H41S|X10S|XH11|xxxx|HT50|XH50)
 #define VERS_ELEM_TABLE      (xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50)
 #define VERS_ELEM_TBODY      (xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50)
 #define VERS_ELEM_TD         (xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50)
@@ -247,6 +248,7 @@ static const Dict tag_defs[] =
   { TidyTag_STYLE,      "style",      VERS_ELEM_STYLE,      &TY_(W3CAttrsFor_STYLE)[0],      (CM_HEAD|CM_BLOCK),                            TY_(ParseScript),   NULL           },
   { TidyTag_SUB,        "sub",        VERS_ELEM_SUB,        &TY_(W3CAttrsFor_SUB)[0],        (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_SUP,        "sup",        VERS_ELEM_SUP,        &TY_(W3CAttrsFor_SUP)[0],        (CM_INLINE),                                   TY_(ParseInline),   NULL           },
+  { TidyTag_SVG,        "svg",        VERS_ELEM_SVG,        &TY_(W3CAttrsFor_SVG)[0],        (CM_INLINE|CM_BLOCK|CM_MIXED),                 TY_(ParseNamespace),NULL           },
   { TidyTag_TABLE,      "table",      VERS_ELEM_TABLE,      &TY_(W3CAttrsFor_TABLE)[0],      (CM_BLOCK),                                    TY_(ParseTableTag), CheckTABLE     },
   { TidyTag_TBODY,      "tbody",      VERS_ELEM_TBODY,      &TY_(W3CAttrsFor_TBODY)[0],      (CM_TABLE|CM_ROWGRP|CM_OPT),                   TY_(ParseRowGroup), NULL           },
   { TidyTag_TD,         "td",         VERS_ELEM_TD,         &TY_(W3CAttrsFor_TD)[0],         (CM_ROW|CM_OPT|CM_NO_INDENT),                  TY_(ParseBlock),    NULL           },
@@ -948,6 +950,41 @@ uint TY_(nodeHeaderLevel)( Node* node )
     }
     return 0;
 }
+
+/* [i_a] generic node tree traversal; see also <tidy-int.h> */
+NodeTraversalSignal TY_(TraverseNodeTree)(TidyDocImpl* doc, Node* node, NodeTraversalCallBack *cb, void *propagate )
+{
+    while (node)
+    {
+        NodeTraversalSignal s = (*cb)(doc, node, propagate);
+
+        if (node->content && (s == ContinueTraversal || s == SkipSiblings))
+        {
+            s = TY_(TraverseNodeTree)(doc, node->content, cb, propagate);
+        }
+
+        switch (s)
+        {
+        case ExitTraversal:
+            return ExitTraversal;
+
+        case VisitParent:
+            node = node->parent;
+            continue;
+
+        case SkipSiblings:
+        case SkipChildrenAndSiblings:
+            return ContinueTraversal;
+
+        default:
+            node = node->next;
+            break;
+        }
+    }
+    return ContinueTraversal;
+}
+
+
 
 /*
  * local variables:

@@ -11693,6 +11693,41 @@ const AttrVersion TY_(W3CAttrsFor_SUP)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
+const AttrVersion TY_(W3CAttrsFor_SVG)[] =
+{
+  { TidyAttr_ALIGN,                 xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_CLASS,                 xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_DIR,                   xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_ID,                    xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_HEIGHT,                xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
+  { TidyAttr_LANG,                  xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|xxxx|xxxx|HT50|XH50 },
+  { TidyAttr_OnCLICK,               xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_OnDBLCLICK,            xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_OnKEYDOWN,             xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_OnKEYPRESS,            xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_OnKEYUP,               xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_OnMOUSEDOWN,           xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_OnMOUSEMOVE,           xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_OnMOUSEOUT,            xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_OnMOUSEOVER,           xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_OnMOUSEUP,             xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_STYLE,                 xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_TITLE,                 xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_WIDTH,                 xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 },
+  { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_XMLNS,                 xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_X,                     xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_Y,                     xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_VIEWBOX,               xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_PRESERVEASPECTRATIO,   xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_ZOOMANDPAN,            xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_VERSION,               xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_BASEPROFILE,           xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_CONTENTSCRIPTTYPE,     xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_CONTENTSTYLETYPE,      xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_UNKNOWN,               0                                                                          },
+};
+
 const AttrVersion TY_(W3CAttrsFor_TABLE)[] = 
 {
   { TidyAttr_ACCESSKEY,             xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },

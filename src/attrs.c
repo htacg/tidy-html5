@@ -965,13 +965,15 @@ static void FreeAnchor(TidyDocImpl* doc, Anchor *a)
 
 static uint anchorNameHash(ctmbstr s)
 {
-    uint hashval;
-
-    for (hashval = 0; *s != '\0'; s++) {
-        tmbchar c = TY_(ToLower)( *s );
-        hashval = c + 31*hashval;
+    uint hashval = 0;
+    /* Issue #149 - an inferred name can be null. avoid crash */
+    if (s) 
+    {
+        for ( ; *s != '\0'; s++) {
+            tmbchar c = TY_(ToLower)( *s );
+            hashval = c + 31*hashval;
+        }
     }
-
     return hashval % ANCHOR_HASH_SIZE;
 }
 

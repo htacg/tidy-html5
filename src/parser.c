@@ -734,6 +734,10 @@ static Bool InsertMisc(Node *element, Node *node)
 static void ParseTag( TidyDocImpl* doc, Node *node, GetTokenMode mode )
 {
     Lexer* lexer = doc->lexer;
+
+	if (node->tag == NULL) /* [i_a]2 prevent crash for active content (php, asp) docs */
+		return;
+
     /*
        Fix by GLP 2000-12-21.  Need to reset insertspace if this 
        is both a non-inline and empty tag (base, link, meta, isindex, hr, area).
@@ -752,6 +756,8 @@ static void ParseTag( TidyDocImpl* doc, Node *node, GetTokenMode mode )
 
     if (node->type == StartEndTag)
         return;
+
+	lexer->parent = node; /* [i_a]2 added this - not sure why - CHECKME: */
 
     (*node->tag->parser)( doc, node, mode );
 }
@@ -3908,7 +3914,7 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
 
         if (TY_(nodeIsElement)(node))
         {
-            if ( TY_(nodeHasCM)(node, CM_INLINE) )
+            if ( TY_(nodeHasCM)(node, CM_INLINE) && !TY_(nodeHasCM)(node, CM_MIXED) ) /* [i_a]2 add CM_MIXED */
             {
                 /* HTML4 strict doesn't allow inline content here */
                 /* but HTML2 does allow img elements as children of body */
@@ -4483,7 +4489,7 @@ static void AttributeChecks(TidyDocImpl* doc, Node* node)
 
         if (TY_(nodeIsElement)(node))
         {
-            if (node->tag->chkattrs)
+            if (node->tag && node->tag->chkattrs) /* [i_a]2 fix crash after adding SVG support with alt/unknown tag subtree insertion there */
                 node->tag->chkattrs(doc, node);
             else
                 TY_(CheckAttributes)(doc, node);

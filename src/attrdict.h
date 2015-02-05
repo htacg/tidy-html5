@@ -72,6 +72,7 @@ extern const AttrVersion TY_(W3CAttrsFor_LI)[];
 extern const AttrVersion TY_(W3CAttrsFor_LINK)[];
 extern const AttrVersion TY_(W3CAttrsFor_LISTING)[];
 extern const AttrVersion TY_(W3CAttrsFor_MAP)[];
+extern const AttrVersion TY_(W3CAttrsFor_MATHML)[]; /* [i_a]2 */
 extern const AttrVersion TY_(W3CAttrsFor_MENU)[];
 extern const AttrVersion TY_(W3CAttrsFor_META)[];
 extern const AttrVersion TY_(W3CAttrsFor_NEXTID)[];

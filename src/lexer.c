@@ -2525,7 +2525,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 c = ParseTagName( doc );
                 isempty = no;
                 attributes = NULL;
-                lexer->token = TagToken( doc, (isempty ? StartEndTag : StartTag) );
+                lexer->token = TagToken( doc, StartTag ); /* [i_a]2 'isempty' is always false, thanks to code 2 lines above */
 
                 /* parse attributes, consuming closing ">" */
                 if (c != '>')
@@ -2561,8 +2561,11 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                     lexer->waswhite = no;
 
                 lexer->state = LEX_CONTENT;
-                if (lexer->token->tag == NULL)
-                    TY_(ReportFatal)( doc, NULL, lexer->token, UNKNOWN_ELEMENT );
+                if (lexer->token->tag == NULL) 
+                {
+                    if (mode != OtherNamespace) /* [i_a]2 only issue warning if NOT 'OtherNamespace', and tag null */
+                        TY_(ReportFatal)( doc, NULL, lexer->token, UNKNOWN_ELEMENT );
+                }
                 else if ( !cfgBool(doc, TidyXmlTags) )
                 {
                     Node* curr = lexer->token;

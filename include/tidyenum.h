@@ -384,6 +384,7 @@ typedef enum
   TidyTag_LINK,     /**< LINK */
   TidyTag_LISTING,  /**< LISTING */
   TidyTag_MAP,      /**< MAP */
+  TidyTag_MATHML,   /**< MATH  (HTML5) [i_a]2 MathML embedded in [X]HTML */
   TidyTag_MARQUEE,  /**< MARQUEE */
   TidyTag_MENU,     /**< MENU */
   TidyTag_META,     /**< META */

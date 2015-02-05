@@ -53,6 +53,9 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
 {
     Lexer* lexer = doc->lexer;
     Bool lex = ((msg[0] == 'l')&&(msg[1] == 'e')) ? yes : no;
+    int line = ( doc->lexer ? doc->lexer->lines : 0 );
+    int col  = ( doc->lexer ? doc->lexer->columns : 0 );
+    SPRTF("R=%d C=%d: ", line, col );
     if (lexer && lexer->token && (lexer->token->type == TextNode)) {
         if (show_attrs) {
             SPRTF("Returning %s TextNode ... %s\n", msg,

@@ -619,6 +619,7 @@ typedef enum
   TidyAttr_SIZE,              /**< SIZE= */
   TidyAttr_SPAN,              /**< SPAN= */
   TidyAttr_SRC,               /**< SRC= */
+  TidyAttr_SRCSET,            /**< SRCSET= (HTML5) */
   TidyAttr_STANDBY,           /**< STANDBY= */
   TidyAttr_START,             /**< START= */
   TidyAttr_STYLE,             /**< STYLE= */

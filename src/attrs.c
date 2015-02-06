@@ -227,6 +227,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_SIZE,              "size",                  CH_NUMBER    }, /* HR, FONT, BASEFONT, SELECT */
   { TidyAttr_SPAN,              "span",                  CH_NUMBER    }, /* COL, COLGROUP */
   { TidyAttr_SRC,               "src",                   CH_URL       }, /* IMG, FRAME, IFRAME */
+  { TidyAttr_SRCSET,            "srcset",                CH_PCDATA    }, /* IMG (HTML5) */
   { TidyAttr_STANDBY,           "standby",               CH_PCDATA    }, /* OBJECT */
   { TidyAttr_START,             "start",                 CH_NUMBER    }, /* OL */
   { TidyAttr_STYLE,             "style",                 CH_PCDATA    }, 

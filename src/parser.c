@@ -24,6 +24,13 @@
 #include "charsets.h"
 #endif
 
+/*
+  Issue #72 - Need to know to avoid error-reporting - no warning only if --show-body-only yes
+  Issue #132 - likewise avoid warning if showing body only
+ */
+#define showingBodyOnly(doc) (cfgAutoBool(doc,TidyBodyOnly) == TidyYesState) ? yes : no
+
+
 Bool TY_(CheckNodeIntegrity)(Node *node)
 {
 #ifndef NO_NODE_INTEGRITY_CHECK
@@ -4359,7 +4366,10 @@ void TY_(ParseHTML)(TidyDocImpl* doc, Node *html, GetTokenMode mode)
         }
 
         node = TY_(InferredTag)(doc, TidyTag_BODY);
-        /* Issue #132 - disable inserting BODY tag warning TY_(ReportError)(doc, html, node, INSERTING_TAG ); */
+        /* Issue #132 - disable inserting BODY tag warning
+           BUT only if NOT --show-body-only yes */
+        if (!showingBodyOnly(doc))
+            TY_(ReportError)(doc, html, node, INSERTING_TAG );
         TY_(ConstrainVersion)(doc, ~VERS_FRAMESET);
         break;
     }
@@ -4501,29 +4511,6 @@ static void AttributeChecks(TidyDocImpl* doc, Node* node)
         assert( next != node ); /* http://tidy.sf.net/issue/1603538 */
         node = next;
     }
-}
-
-/*
-  Need to know to avoid error-reporting
- */
-Bool showingBodyOnly( TidyDocImpl* doc)
-{
-    Node* node;
-
-    TidyTriState bodyOnly = doc->config.value[TidyBodyOnly].v;
-
-    switch( bodyOnly )
-    {
-        case TidyNoState:
-            return no;
-        case TidyYesState:
-            return yes;
-        default:
-            node = TY_(FindBody)( doc );
-            if (node && node->implicit )
-                return yes;
-    }
-    return yes;
 }
 
 /*

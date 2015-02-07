@@ -84,6 +84,7 @@ extern const AttrVersion TY_(W3CAttrsFor_OPTGROUP)[];
 extern const AttrVersion TY_(W3CAttrsFor_OPTION)[];
 extern const AttrVersion TY_(W3CAttrsFor_P)[];
 extern const AttrVersion TY_(W3CAttrsFor_PARAM)[];
+extern const AttrVersion TY_(W3CAttrsFor_PICTURE)[]; /* Issue #151 - html5 */
 extern const AttrVersion TY_(W3CAttrsFor_PLAINTEXT)[];
 extern const AttrVersion TY_(W3CAttrsFor_PRE)[];
 extern const AttrVersion TY_(W3CAttrsFor_Q)[];

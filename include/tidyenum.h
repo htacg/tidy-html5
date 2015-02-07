@@ -401,6 +401,7 @@ typedef enum
   TidyTag_OPTION,   /**< OPTION */
   TidyTag_P,        /**< P */
   TidyTag_PARAM,    /**< PARAM */
+  TidyTag_PICTURE,  /**< PICTURE (HTML5) */
   TidyTag_PLAINTEXT,/**< PLAINTEXT */
   TidyTag_PRE,      /**< PRE */
   TidyTag_Q,        /**< Q */

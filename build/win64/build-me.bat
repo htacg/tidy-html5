@@ -40,7 +40,12 @@
 @REM set TMPINST=F:\Projects\software.x64
 @set TMPOPTS=-DCMAKE_INSTALL_PREFIX=%TMPINST%
 @set TMPOPTS=%TMPOPTS% -G "Visual Studio 10 Win64"
-@REM Added to CMakeLists.txt set(CMAKE_DEBUG_POSTFIX d), and for each EXE
+:RPT
+@if "%~1x" == "x" goto GOTCMD
+@set TMPOPTS=%TMPOPTS% %1
+@shift
+@goto RPT
+:GOTCMD
 
 @call chkmsvc %TMPPRJ%
 

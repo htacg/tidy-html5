@@ -19,6 +19,11 @@ TMPOPTS="-DCMAKE_INSTALL_PREFIX=$TMPINST"
 # Default to SHARED library in unix
 TMPOPTS="$TMPOPTS -DBUILD_SHARED_LIB:BOOL=TRUE"
 
+for arg in $@; do
+    TMPOPTS="$TMPOPTS $arg"
+done
+
+
 echo "$BN: Doing: 'cmake $TMPSRC $TMPOPTS' to $BLDLOG"
 cmake $TMPSRC $TMPOPTS >> $BLDLOG 2>&1
 if [ ! "$?" = "0" ]; then

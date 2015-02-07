@@ -19,6 +19,7 @@ list(GET VERSION_LIST 2 TIDY_POINT_VERSION)
 set( LIB_TYPE STATIC )  # set default static
 option( BUILD_SHARED_LIB "Set ON to build Shared (DLL) Library"   OFF )
 option( BUILD_TAB2SPACE  "Set ON to build utility app, tab2space" OFF )
+option( BUILD_SAMPLE_CODE "Set ON to build the sample code"       OFF )
 
 if (CMAKE_SIZEOF_VOID_P EQUAL 8)
     message(STATUS "*** Have SIZEOF void * = 8, so 64-bit")
@@ -155,6 +156,17 @@ if (BUILD_TAB2SPACE)
         set_target_properties( ${name} PROPERTIES DEBUG_POSTFIX d )
     endif ()
     # no INSTALL of this 'local' tool
+endif ()
+
+if (BUILD_SAMPLE_CODE)
+    set(name test71)
+    set(dir console)
+    add_executable( ${name} ${dir}/${name}.cxx )
+    if (MSVC)
+        set_target_properties( ${name} PROPERTIES DEBUG_POSTFIX d )
+    endif ()
+    target_link_libraries( ${name} ${add_LIBS} )
+    # no INSTALL of this 'local' sample
 endif ()
 
 # eof

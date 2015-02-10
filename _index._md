@@ -1,0 +1,71 @@
+---
+title:   HTML Tidy
+excerpt: HTML Tidy Home Page
+tags:    home, htacg, tidy, tidy html, html tidy
+---
+
+<div class="page-lead homepage">
+  <div class="wrap page-lead-content">
+    <h1>Tidy</h1>
+    <h2>The granddaddy of HTML tools.</h2>
+    <h2>Now with support for modern standards.</h2>
+  </div>
+</div>
+
+
+<div id="main" role="main" class="homepage">
+    <div class="wrap">
+        <div class="page-content">
+
+            <div class="tile_container">
+
+                <div class="tile_item">
+                    <h2>Tidy is Reborn</h2>
+                    <p>
+                        Given charge by the
+                        <a href="http://www.w3.org/community/htacg/">W3C</a>,
+                        <a href="http://www.htach.org/">HTACG</a> brings new
+                        life to HTML Tidy for users and developers alike.
+                    </p>
+                </div>
+
+                <div class="tile_item">
+                    <h2>Tidy is Modern</h2>
+                    <p>
+                        HTACG and prominent contributors have brought
+                        significant changes and modern features to Tidy.
+                    </p>
+                </div>
+
+                <div class="tile_item">
+                    <h2>Tidy Coming Soon</h2>
+                    <p>
+                        A stable, brand new, modern Tidy is coming soon, but you
+                        can preview its modern features <em>right now</em>.
+                    </p>
+                </div>
+
+            </div>
+
+<div markdown="1">
+
+# What is Tidy?
+
+Tidy is a console application for Mac OS X, Linux, Windows, and more.
+
+Tidy is a C Library that your favorite text editors, web development
+applications, and server software on multiple platforms all use to provide
+Tidy’s functions.
+
+
+# What does Tidy do?
+
+Tidy corrects, cleans, diagnoses, and checks the accessibility of your HTML.
+
+</div>
+
+
+
+        </div><!-- .page-content -->
+    </div><!-- .wrap -->
+</div><!-- #main -->

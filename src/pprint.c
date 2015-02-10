@@ -1985,6 +1985,10 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
     else if ( TY_(nodeCMIsEmpty)(node) ||
               (node->type == StartEndTag && !xhtml) )
     {
+        /* Issue #8 - flush to new line? 
+           maybe use if ( TY_(nodeHasCM)(node, CM_BLOCK) ) instead
+           or remove the CM_INLINE from the tag
+         */
         if ( ! TY_(nodeHasCM)(node, CM_INLINE) )
             PCondFlushLine( doc, indent );
 

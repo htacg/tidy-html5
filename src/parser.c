@@ -3921,7 +3921,10 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
 
         if (TY_(nodeIsElement)(node))
         {
-            if ( TY_(nodeHasCM)(node, CM_INLINE) && !TY_(nodeHasCM)(node, CM_MIXED) ) /* [i_a]2 add CM_MIXED */
+            /* Issue #20 - merging from Ger Hobbelt fork put back CM_MIXED, which had been
+               removed to fix this issue - reverting to fix 880221e
+             */
+            if ( TY_(nodeHasCM)(node, CM_INLINE) )
             {
                 /* HTML4 strict doesn't allow inline content here */
                 /* but HTML2 does allow img elements as children of body */

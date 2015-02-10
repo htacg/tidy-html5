@@ -1,2 +1,0 @@
-output-xhtml: yes
-indent: auto

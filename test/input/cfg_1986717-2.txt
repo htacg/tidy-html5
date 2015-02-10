@@ -1,2 +1,0 @@
-tidy-mark: no
-anchor-as-name: yes

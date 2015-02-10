@@ -1,6 +1,0 @@
-// Oct.2008 HTML Tidy configuration file for test 2085175
-indent: auto
-tidy-mark: no
-clean: yes
-bare: yes
-word-2000: yes

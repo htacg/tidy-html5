@@ -1,4 +1,0 @@
-input-xml: yes
-output-xml: yes
-indent: auto
-wrap: 0

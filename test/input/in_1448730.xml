@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<doc>
-<blah>here is some <b>bold</b> text and here's a <customtag>customtag
-content</customtag> who's preceding space will be stripped.</blah>
-</doc>

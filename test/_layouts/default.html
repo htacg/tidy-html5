@@ -18,7 +18,9 @@
   <div id="main">
 
     <nav><ul>
-        <li><a href="#history">Home</a></li>
+        {% if page.extralink %}
+        <li><a href="{{page.extralink}}" class="manual">{{page.extraname}}</a></li>
+        {% endif %}
         {% for node in site.categories[page.category] reversed %}
         {% capture id %}{{ node.id | remove:'/' | downcase }}{% endcapture %}
         <li class="p-{{id}}"><a href="#{{id}}">{{node.title}}</a></li>

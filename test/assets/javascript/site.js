@@ -25,21 +25,24 @@ $.extend($.easing,
         }, options );
         navItems = this;
 
-        //attatch click listeners
+        //attach click listeners
     	navItems.on('click', function(event){
-    		event.preventDefault();
-            var navID = $(this).attr("href").substring(1);
-            disableScrollFn = true;
-            activateNav(navID);
-            populateDestinations(); //recalculate these!
-        	$('html,body').animate({scrollTop: sections[navID] - settings.scrollToOffset},
-                settings.scrollSpeed, "easeInOutExpo", function(){
-                    disableScrollFn = false;
-                }
-            );
+            var skip = $(this).attr("class");
+            if (skip != "manual") {
+                event.preventDefault();
+                var navID = $(this).attr("href").substring(1);
+                disableScrollFn = true;
+                activateNav(navID);
+                populateDestinations(); //recalculate these!
+                $('html,body').animate({scrollTop: sections[navID] - settings.scrollToOffset},
+                    settings.scrollSpeed, "easeInOutExpo", function () {
+                        disableScrollFn = false;
+                    }
+                );
+            }
     	});
 
-        //populate lookup of clicable elements and destination sections
+        //populate lookup of clickable elements and destination sections
         populateDestinations(); //should also be run on browser resize, btw
 
         // setup scroll listener
@@ -57,9 +60,12 @@ $.extend($.easing,
 
     function populateDestinations() {
         navItems.each(function(){
-            var scrollID = $(this).attr('href').substring(1);
-            navs[scrollID] = (settings.activateParentNode)? this.parentNode : this;
-            sections[scrollID] = $(document.getElementById(scrollID)).offset().top;
+            var skip = $(this).attr("class");
+            if (skip != "manual") {
+                var scrollID = $(this).attr('href').substring(1);
+                navs[scrollID] = (settings.activateParentNode) ? this.parentNode : this;
+                sections[scrollID] = $(document.getElementById(scrollID)).offset().top;
+            }
         });
     }
 

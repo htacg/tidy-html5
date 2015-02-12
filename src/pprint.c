@@ -652,27 +652,19 @@ static void PFlushLineImpl( TidyDocImpl* doc )
 {
     TidyPrintImpl* pprint = &doc->pprint;
 
-    uint i, j;
+    uint i;
 
     CheckWrapLine( doc );
 
-    j = 0;  /* Issue #133 - start text output */
     if ( WantIndent(doc) )
     {
         uint spaces = GetSpaces( pprint );
-        for ( i = 0; i < spaces; ++i ) {
+        for ( i = 0; i < spaces; ++i )
             TY_(WriteChar)( ' ', doc->docOut );
-            if (( j < pprint->linelen ) && ( pprint->linebuf[j] == ' ' )) {
-                /*\ Issue #133 - ever increasing indent on each tidy run
-                 *  Now removed any leading spaces by the amount of the indent 
-                \*/
-                j++;
-            }
-        }
     }
 
-    for ( ; j < pprint->linelen; j++ )
-        TY_(WriteChar)( pprint->linebuf[j], doc->docOut );
+    for ( i = 0; i < pprint->linelen; ++i )
+        TY_(WriteChar)( pprint->linebuf[i], doc->docOut );
     
     if ( IsInString(pprint) )
         TY_(WriteChar)( '\\', doc->docOut );

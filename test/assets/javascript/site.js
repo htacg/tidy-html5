@@ -85,7 +85,7 @@ $(document).ready(function (){
             $(this).on('click', function(event) {
         		event.preventDefault();
                 var target = $(event.target).closest("a");
-                var targetHight =  $(target.attr("href")).offset().top
+                var targetHight =  $(target.attr("href")).offset().top;
             	$('html,body').animate({scrollTop: targetHight - 170}, 800, "easeInOutExpo");
             });
         }

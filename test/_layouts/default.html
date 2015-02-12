@@ -18,6 +18,7 @@
   <div id="main">
 
     <nav><ul>
+        <li><a href="#history">Home</a></li>
         {% for node in site.categories[page.category] reversed %}
         {% capture id %}{{ node.id | remove:'/' | downcase }}{% endcapture %}
         <li class="p-{{id}}"><a href="#{{id}}">{{node.title}}</a></li>

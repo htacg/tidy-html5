@@ -90,16 +90,25 @@
 
 
 /**********************************
-	documentation part_what
+	documentation
  **********************************/
-#part-what ul.tidy-features
+#part_what,
+#part_running,
+#part_options_config,
+#part_features_notes,
+#part_building
 {
-	code
+	code,
+	pre
 	{
 		color: darkblue;
-		background: none;
+		background: transparent;
+		font-size: 17px;
 	}
+}
 
+#part_what ul.tidy-features
+{
 	li p:first-child
 	{
 		font-weight: bold;
@@ -109,20 +118,15 @@
 }
 
 /**********************************
-	documentation
+	notes
  **********************************/
-#part_running,
-#part_options_config,
-#part_features_notes
+p.note
 {
-	code
-	{
-		color: darkblue;
-		background: none;
-		font-size: 17px;
-	}
+	width: 60%;
+	background-color: yellow;
+	margin-left: auto;
+	margin-right: auto;
 }
-
 
 
 /**********************************

@@ -1732,10 +1732,29 @@ static int TextEndsWithNewline(Lexer *lexer, Node *node, uint mode )
     return -1;
 }
 
+/*\
+ * Issue #133 - creeping indent - a very OLD bug - 2nd tidy run increases the indent!
+ * If the node is text, then remove any white space equal to the indent,
+ * but this also applies to the AspTag, which is text like...
+ * And may apply to other text like nodes as well.
+ *
+ * Here the total white space is returned, and then a sister service, IncrWS() 
+ * will advance the start of the lexer output by the amount of the indent.
+\*/
+static Bool TY_(nodeIsTextLike)( Node *node )
+{
+    if ( TY_(nodeIsText)(node) )
+        return yes;
+    if ( node->type == AspTag )
+        return yes;
+    /* add other text like nodes... */
+    return no;
+}
+
 static int TextStartsWithWhitespace( Lexer *lexer, Node *node, uint start, uint mode )
 {
     assert( node != NULL );
-    if ( (mode & (CDATA|COMMENT)) && TY_(nodeIsText)(node) && node->end > node->start && start >= node->start )
+    if ( (mode & (CDATA|COMMENT)) && TY_(nodeIsTextLike)(node) && node->end > node->start && start >= node->start )
     {
         uint ch, ix = start;
         /* Skip whitespace. */

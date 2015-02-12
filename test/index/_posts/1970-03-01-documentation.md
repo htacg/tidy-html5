@@ -2,37 +2,18 @@
 title:   "Dox"
 bg:      turquoise
 color:   white
-style:   left
-fa-icon: question-circle
+style:   center
+fa-icon: book
 ---
 
-FAQs
-====
+Documentation
+==============
 
-## Where can I get a copy of HTML Tidy?
+For everything you need to know about running **Tidy** head over to our
+[documentation][1] page.
 
-It’s probable that you already have an outdated version of **HTML Tidy**. It
-comes pre-installed on Mac OS X and many distributions of GNU/Linux and other
-UNIX-type operating systems.
+There you will discover how to build the `tidy` console application for your
+operating system (if necessary), how to use it, and discover examples of all
+of the great things that **Tidy** can do.
 
-Visit [HTML Tidy’s own website][3] or access the source code on our
-[Github repository](4) for more up-to-date versions.
-
-
-## Where can I learn more about HTML Tidy?
-
-Visit [HTML Tidy’s own website][3] or access the source code on our
-[Github repository][4]. You can also learn a lot more background on Tidy’s
-history at [tidy.sourceforge.net][5] and [Dave Ragetts’s original page][1].
-
-
-## How do you pronounce your acronym?
-
-You can pronounce the individual letters in your native language, although it
-seems easier to pronounce it like “H-Task.”
-
-[1]: http://www.w3.org/People/Raggett/
-[2]: http://www.w3.org/community/htacg/
-[3]: http://www.html-tidy.org
-[4]: https://github.com/htacg/tidy-html5
-[5]: https://github.com/htacg/tidy-html5
+ [1]: documentation/

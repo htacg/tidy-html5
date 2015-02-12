@@ -3,36 +3,28 @@ title:   "ACK"
 bg:      purple
 color:   white
 style:   left
-fa-icon: question-circle
+fa-icon: users
 ---
 
-FAQs
-====
+Acknowledgements
+================
 
-## Where can I get a copy of HTML Tidy?
+HTACG and the rest of the **HTML Tidy** team want to extend a sincere and
+heartfelt "thank you" to everyone who made **Tidy** possible.
 
-It’s probable that you already have an outdated version of **HTML Tidy**. It
-comes pre-installed on Mac OS X and many distributions of GNU/Linux and other
-UNIX-type operating systems.
+- [Dave Raggett](http://www.w3.org/People/Raggett/), the original developer.
+- Arnaud Desitter, long time SourceForge maintainer.
+- Charles Reitzel, long time SourceForge maintainer.
+- Björn Höhrmann, long time SourceForge maintainer.
+- Michael Smith, Github W3C maintainer.
+- HTACG members and contributors, who are working hard to bring you a new,
+  stable **Tidy**.
 
-Visit [HTML Tidy’s own website][3] or access the source code on our
-[Github repository](4) for more up-to-date versions.
+Are we missing someone? Issue a pull request against the `gh-pages` branch of
+this [repository][1].
+
+Dave Raggett also maintains a long list of acknowledgements at [his page][2].
 
 
-## Where can I learn more about HTML Tidy?
-
-Visit [HTML Tidy’s own website][3] or access the source code on our
-[Github repository][4]. You can also learn a lot more background on Tidy’s
-history at [tidy.sourceforge.net][5] and [Dave Ragetts’s original page][1].
-
-
-## How do you pronounce your acronym?
-
-You can pronounce the individual letters in your native language, although it
-seems easier to pronounce it like “H-Task.”
-
-[1]: http://www.w3.org/People/Raggett/
-[2]: http://www.w3.org/community/htacg/
-[3]: http://www.html-tidy.org
-[4]: https://github.com/htacg/tidy-html5
-[5]: https://github.com/htacg/tidy-html5
+[1]: https://github.com/htacg/tidy-html5
+[2]: http://www.w3.org/People/Raggett/tidy/#acks

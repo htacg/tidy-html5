@@ -2,4 +2,4 @@
 
 Website © 2015 by [HTACG](http://www.htacg.org/)
 &mdash;
-This site is [open source]({{ site.source_link }}) and we accept pull requests.
+The HTACG and HTML Tidy logos incorporate the HTML5 logo by [W3C](http://w3.org)

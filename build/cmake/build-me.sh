@@ -1,5 +1,5 @@
 #!/bin/sh
-#< build-me.sh - 20140804
+#< build-me.sh - 20150212 - 20140804
 BN=`basename $0`
 
 TMPSRC="../.."
@@ -9,15 +9,16 @@ if [ -f "$BLDLOG" ]; then
 	rm -f $BLDLOG
 fi
 
+TMPOPTS=""
 ##############################################
 ### ***** NOTE THIS INSTALL LOCATION ***** ###
 ### Change to suit your taste, environment ###
 ##############################################
-TMPINST="$HOME/projects/install/tidy"
-TMPOPTS="-DCMAKE_INSTALL_PREFIX=$TMPINST"
+# TMPINST="$HOME/projects/install/tidy"
+# TMPOPTS="-DCMAKE_INSTALL_PREFIX=$TMPINST"
 #############################################
-# Default to SHARED library in unix
-TMPOPTS="$TMPOPTS -DBUILD_SHARED_LIB:BOOL=TRUE"
+# To build SHARED library
+# TMPOPTS="$TMPOPTS -DBUILD_SHARED_LIB:BOOL=TRUE"
 
 for arg in $@; do
     TMPOPTS="$TMPOPTS $arg"
@@ -41,7 +42,7 @@ fi
 echo ""
 echo "$BN: appears a successful build... see $BLDLOG for details"
 echo ""
-echo "$BN: Time for 'make install' IFF desired... to $TMPINST, unless changed..."
+echo "$BN: Time for '[sudo] make install' IFF desired..."
 echo ""
 
 # eof

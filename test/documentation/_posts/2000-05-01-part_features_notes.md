@@ -1,9 +1,9 @@
 ---
-title:    "Hello, World"
-bg:       blue
+title:    "Notes"
+bg:       "#7CE577"
 color:    black    
 style:    center
-fa-icon:
+fa-icon:  file-code-o
 ---
 
 # Congratulations!

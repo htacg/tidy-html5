@@ -118,7 +118,8 @@
 	}
 }
 
-#part_faq
+#part_faq,
+#part_implement
 {
 	dl {
 		font-size: 17px;
@@ -139,6 +140,7 @@
 	code,
 	pre {
 		color: deepskyblue;
+		background-color: transparent;
 	}
 
 	li
@@ -152,6 +154,29 @@
 		color: #000000;
 	}
 }
+
+#part_design,
+#part_implement
+{
+	ul li p {
+		padding-left: 20px;
+		line-height: 1.5;
+	}
+
+	dl
+	{
+		padding-left: 48px;
+
+
+	}
+
+	code,
+	pre
+	{
+		color: darkblue;
+	}
+}
+
 
 /**********************************
 	notes

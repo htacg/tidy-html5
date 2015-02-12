@@ -19,9 +19,11 @@ You can find a [configuration quick reference here][1] (warning: this page may
 be outdated).
 
 If you’re a developer using **TidyLib** please consult the
-[API Documentation][2] (warning: this page may be outdated, too).
+[API Documentation][2] (warning: this page may be outdated, too) and the
+[TidyLib Introduction][3] page.
 
 And if you simply want to use **Tidy**, then please read on.
 
  [1]: ../htmldoc/quickref.html
  [2]: ../htmldoc/api/
+ [3]: ../developer/

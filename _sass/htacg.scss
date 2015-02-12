@@ -96,6 +96,7 @@
 #part_running,
 #part_options_config,
 #part_features_notes,
+#part_faq,
 #part_building
 {
 	code,
@@ -114,6 +115,41 @@
 		font-weight: bold;
 		font-family: "PT Sans", "HelveticaNeue-Light", Arial, sans-serif;
 		padding-left: 0;
+	}
+}
+
+#part_faq
+{
+	dl {
+		font-size: 17px;
+	}
+
+	dt {
+		font-weight: bold;
+		font-family: "PT Sans", "HelveticaNeue-Light", Arial, sans-serif;
+		margin-top: 30px;
+		margin-bottom: 10px;
+		font-size: 22px;
+	}
+
+	dd p:first-child {
+		margin-top: 0;
+	}
+
+	code,
+	pre {
+		color: deepskyblue;
+	}
+
+	li
+	{
+		line-height: 1.6;
+	}
+
+	.note,
+	.note a
+	{
+		color: #000000;
 	}
 }
 

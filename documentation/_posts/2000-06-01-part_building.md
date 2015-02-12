@@ -41,7 +41,7 @@ tool from the source code using the following steps:
 3. Windows:  `cmake --build . --config Release`
    Unix/OS X: `make`
 
-4. Install, if desired:
+4. Install, if desired:<br/>
    Windows: `cmake --build . --config Release --target INSTALL`
    Unix/OS X: `[sudo] make install`
 

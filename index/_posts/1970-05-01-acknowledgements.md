@@ -21,10 +21,11 @@ heartfelt "thank you" to everyone who made **Tidy** possible.
   stable **Tidy**.
 
 Are we missing someone? Issue a pull request against the `gh-pages` branch of
-this [repository][1].
+this [repository][1]. You will want to edit [this file][3].
 
 Dave Raggett also maintains a long list of acknowledgements at [his page][2].
 
 
 [1]: https://github.com/htacg/tidy-html5
 [2]: http://www.w3.org/People/Raggett/tidy/#acks
+[3]: https://github.com/htacg/tidy-html5/blob/gh-pages/index/_posts/1970-05-01-acknowledgements.md

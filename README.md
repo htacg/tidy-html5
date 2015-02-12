@@ -1,3 +1,9 @@
+# Important notice
+
+Current development is taking place in the `develop-500` branch of this repository.
+_This is a temporay measure_, and the plan is move all current activity back to
+`Master` within a day or two (now=2015-02-12UTC+08:00).
+
 # HTML Tidy for HTML5 (experimental)
 
 This repo is an experimental fork of the code from [tidy.sourceforge.net][1].

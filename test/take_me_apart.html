@@ -115,65 +115,7 @@ em { font-style: italic; color: rgb(0, 0, 153) }
 </style>
 
 
-<h2 id="help">How to run Tidy from the command line</h2>
-<p>This is the syntax for invoking Tidy from the command line:
-<pre>
-   <code>tidy <em>[[options] filename]*</em></code>
-</pre>
-<p>
-Tidy defaults to reading from standard input, so if you run Tidy without
-specifying the <code><em>filename</em></code> argument, it will just sit
-there waiting for input to read.
-And Tidy defaults to writing to standard output. So you can pipe output
-from Tidy to other programs, as well as pipe output from other programs to
-Tidy. You can page through the output from Tidy by piping it to a pager:</p>
-<pre>
-   tidy file.html | less
-</pre>
-<p>
-To have Tidy write its output to a file instead, either use the
-<code>-o <em>filename</em></code> or <code>-output <em>filename</em></code>
-option, or redirect standard output to the file; for example:
-<pre>
-   tidy -o output.html index.html
-   tidy index.html > output.html
-</pre>
-<p>Both of those run tidy on the file <b>index.html</b> and write the
-output to the file <b>output.html</b>, while writing any error messages to
-standard error.
-<p>
-Tidy defaults to writing its error messages to standard error (that is, to
-the console where you’re running Tidy). To page through the error messages,
-along with the output, redirect standard error to standard output, and pipe
-it to your pager:
-<pre>
-   tidy index.html 2&gt;&amp;1 | less
-</pre>
-<p>
-To have Tidy write the errors to a file instead, either use the
-<code>-f <em>filename</em></code> or <code>-file <em>filename</em></code>
-option, or redirect standard error to a file:</p>
-<pre>
-   tidy -o output.html -f errs.txt index.html
-   tidy index.html > output.html 2> errs.txt 
-</pre>
-<p>Both of those run tidy on the file <b>index.html</b> and write the
-output to the file <b>output.html</b>, while writing any error messages to
-the file <b>errs.txt</b>.
-<p>
-Writing the error messages to a file is especially useful if the file you
-are checking has many errors; reading them from a file instead of the
-console or pager can make it easier to review them.
-<p>You can use the or <code>-m</code> or <code>-modify</code> option to
-modify (in-place) the contents of the input file you are checking; that is,
-to overwrite those contents with the output from Tidy. Example:
-<pre>
-   tidy -f errs.txt -m index.html
-</pre>
-<p>That runs tidy on the file <b>index.html</b>, modifying it in place
-and writing the error messages to the file <b>errs.txt</b>.
-<p>
-<b>Caution:</b> If you use the -m option, you should first save a copy of your file.
+
 <h2 id=options>Options and configuration settings</h2>
 <p>To get a list of available options, use:</p>
 <pre>
@@ -408,25 +350,6 @@ and <b>wrap-jste</b> config options.</p>
 doesn't yet recognize all XML features, though; for example, it doesn't
 understand CDATA sections or DTD subsets.</p>
 
-<h2 id="scripts">Using Tidy from scripts</h2>
-<p>If you want to run Tidy from a Perl or other scripting language
-you may find it of value to inspect the result returned by Tidy
-when it exits: 0 if everything is fine, 1 if there were warnings
-and 2 if there were errors. This is an example using Perl:</p>
-<pre>
-if (close(TIDY) == 0) {
-  my $exitcode = $? &gt;&gt; 8;
-  if ($exitcode == 1) {
-    printf STDERR "tidy issued warning messages\n";
-  } elsif ($exitcode == 2) {
-    printf STDERR "tidy issued error messages\n";
-  } else {
-    die "tidy exited with code: $exitcode\n";
-  }
-} else {
-  printf STDERR "tidy detected no errors\n";
-}
-</pre>
 
 <h2 id="implementation">Source code</h2>
 <p>The source code for the experimental HTML5 fork of Tidy can be found at

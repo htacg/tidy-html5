@@ -90,13 +90,14 @@
 
 
 /**********************************
-	tidy-features lists
+	documentation part_what
  **********************************/
-ul.tidy-features
+#part-what ul.tidy-features
 {
 	code
 	{
 		color: darkblue;
+		background: none;
 	}
 
 	li p:first-child
@@ -104,6 +105,19 @@ ul.tidy-features
 		font-weight: bold;
 		font-family: "PT Sans", "HelveticaNeue-Light", Arial, sans-serif;
 		padding-left: 0;
+	}
+}
+
+/**********************************
+	documentation part_running
+ **********************************/
+#part_running
+{
+	code
+	{
+		color: darkblue;
+		background: none;
+		font-size: 17px;
 	}
 }
 

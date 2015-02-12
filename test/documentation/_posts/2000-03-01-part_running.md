@@ -6,6 +6,6 @@ style:    left
 fa-icon:  play-circle
 ---
 
-# Congratulations!
+# Running Tidy
 
 You found a random page.

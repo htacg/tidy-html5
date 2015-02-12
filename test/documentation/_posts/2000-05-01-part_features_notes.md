@@ -6,6 +6,6 @@ style:    center
 fa-icon:  file-code-o
 ---
 
-# Congratulations!
+# Notes and Advanced Features
 
 You found a random page.

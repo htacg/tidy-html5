@@ -88,6 +88,27 @@
 	display: none;
 }
 
+
+/**********************************
+	tidy-features lists
+ **********************************/
+ul.tidy-features
+{
+	code
+	{
+		color: darkblue;
+	}
+
+	li p:first-child
+	{
+		font-weight: bold;
+		font-family: "PT Sans", "HelveticaNeue-Light", Arial, sans-serif;
+		padding-left: 0;
+	}
+}
+
+
+
 /**********************************
 	page-specific styles
  **********************************/

@@ -6,6 +6,6 @@ style:    center
 fa-icon:  gears
 ---
 
-# Congratulations!
+# Tidy Options and Configuration
 
 You found a random page.

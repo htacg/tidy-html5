@@ -6,6 +6,6 @@ style:    center
 fa-icon:  cubes
 ---
 
-# Congratulations!
+# Building Tidy
 
 You found a random page.

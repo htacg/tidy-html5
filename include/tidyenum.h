@@ -796,6 +796,8 @@ typedef enum
   TidyAttr_BASEPROFILE,         /**< BASEPROFILE= */
   TidyAttr_CONTENTSCRIPTTYPE,   /**< CONTENTSCRIPTTYPE= */
   TidyAttr_CONTENTSTYLETYPE,    /**< CONTENTSTYLETYPE= */
+  /* MathML <math> attributes */
+  TidyAttr_DISPLAY,             /**< DISPLAY= (html5) */
 
   N_TIDY_ATTRIBS              /**< Must be last */
 } TidyAttrId;

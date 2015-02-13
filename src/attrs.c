@@ -415,6 +415,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_CONTENTSCRIPTTYPE,        "contentscripttype",      CH_PCDATA    }, /* for <svg> */
   { TidyAttr_CONTENTSTYLETYPE,         "contentstyletype",       CH_PCDATA    }, /* for <svg> */
 #endif
+  { TidyAttr_DISPLAY,                  "display",                 CH_PCDATA   }, /* on MATH tag (html5) */
 
   /* this must be the final entry */
   { N_TIDY_ATTRIBS,             NULL,                    NULL         }

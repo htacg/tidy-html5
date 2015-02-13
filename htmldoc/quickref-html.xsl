@@ -24,7 +24,7 @@
   <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>HTML Tidy Configuration Options Quick Reference</title>
-    <link type="text/css" rel="stylesheet" href="tidy.css" />
+    <link type="text/css" rel="stylesheet" href="quickref-html.css" />
   </head>
 
   <body>

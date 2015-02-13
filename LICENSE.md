@@ -1,14 +1,6 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
-	<title>HTML Tidy License</title>
-</head>
+# HTML Tidy
 
-<body>
-<pre>
-HTML Tidy
-
-HTML parser and pretty printer
+## HTML parser and pretty printer
 
 Copyright (c) 1998-2003 World Wide Web Consortium
 (Massachusetts Institute of Technology, European Research 
@@ -34,17 +26,12 @@ for any purpose, without fee, subject to the following restrictions:
 
 1. The origin of this source code must not be misrepresented.
 2. Altered versions must be plainly marked as such and must
-   not be misrepresented as being the original source.
+not be misrepresented as being the original source.
 3. This Copyright notice may not be removed or altered from any
-   source or altered source distribution.
- 
+source or altered source distribution.
+
 The copyright holders and contributing author(s) specifically
 permit, without fee, and encourage the use of this source code
 as a component for supporting the Hypertext Markup Language in
 commercial products. If you use this source code in a product,
-acknowledgment is not required but would be appreciated.
-</pre>
-
-
-</body>
-</html>
+acknowledgement is not required but would be appreciated.

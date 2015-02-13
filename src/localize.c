@@ -1194,7 +1194,7 @@ void ShowVersion( TidyDocImpl* doc )
 #endif
 
     tidy_out( doc, "\nHTML Tidy%s%s (release date: %s; built on %s, at %s)\n"
-                   "See http://tidy.sourceforge.net/ for details.\n",
+                   "See http://www.html-tidy.org/ for details.\n",
               helper, platform, TY_(release_date), __DATE__, __TIME__ );
 }
 #endif

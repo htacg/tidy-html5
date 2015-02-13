@@ -27,13 +27,13 @@ return an integer almost universally adhere to the following convention:
 
  : Check the error buffer or track error messages for details.
 
-2 = Errors (and maybe warnings)
+2 == Errors (and maybe warnings)
 
  : By default, Tidy will not produce output. You can force output with the
    [`TidyForceOutput`][1] option. As with warnings, check error buffer or
    track error messages for details.
 
-<0 = Severe error
+<0 == Severe error
 
  : Usually value equals `-errno`. See `errno.h`.
 

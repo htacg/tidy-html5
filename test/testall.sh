@@ -6,7 +6,7 @@
 # (c) 1998-2003 (W3C) MIT, ERCIM, Keio University
 # See tidy.c for the copyright notice.
 #
-# <URL:http://tidy.sourceforge.net/>
+# <URL:http://www.html-tidy.org/>
 #
 # set -x
 

@@ -6,7 +6,7 @@ REM
 REM (c) 1998-2006 (W3C) MIT, ERCIM, Keio University
 REM See tidy.c for the copyright notice.
 REM
-REM <URL:http://tidy.sourceforge.net/>
+REM <URL:http://www.html-tidy.org/>
 REM
 REM    $Author: arnaud02 $
 REM    $Date: 2006/12/28 10:01:44 $

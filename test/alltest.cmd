@@ -5,7 +5,7 @@
 @REM (c) 1998-2014 (W3C) MIT, ERCIM, Keio University
 @REM See include/tidy.h for the copyright notice.
 @REM
-@REM <URL:http://tidy.sourceforge.net/>
+@REM <URL:http://www.html-tidy.org/>
 @REM
 
 @REM ########################################################

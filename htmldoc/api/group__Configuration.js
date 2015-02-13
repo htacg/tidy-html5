@@ -1,7 +1,6 @@
 var group__Configuration =
 [
-    [ "TidyOptCallback", "group__Configuration.html#gaee8a8bcb6091bd36f6fc20507a4544fc", null ],
-    [ "tidySetOptionCallback", "group__Configuration.html#gab94961700088d2daf8dcc012a5e33e49", null ],
+    [ "TidyOptCallback", "group__Configuration.html#ga083099fce59583b2bd0951e2d8065d88", null ],
     [ "tidyOptGetIdForName", "group__Configuration.html#ga500f31ba81d015b8ce9dad6f2a6ade75", null ],
     [ "tidyGetOptionList", "group__Configuration.html#gab92a35ffbd3b0b668534d63f94d2486f", null ],
     [ "tidyGetNextOption", "group__Configuration.html#ga1a3088dacc539487e00f1eb4009dafc0", null ],

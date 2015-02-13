@@ -8,7 +8,7 @@ var modules =
     [ "Document Parse", "group__Parse.html", "group__Parse" ],
     [ "Diagnostics and Repair", "group__Clean.html", "group__Clean" ],
     [ "Document Save Functions", "group__Save.html", "group__Save" ],
-    [ "Document Tree", "group__Tree.html", "group__Tree" ],
+    [ "Document Tree", "group__Tree.html", null ],
     [ "Node Interrogation", "group__NodeAsk.html", "group__NodeAsk" ],
     [ "Attribute Interrogation", "group__Attribute.html", "group__Attribute" ],
     [ "Attribute Retrieval", "group__AttrGet.html", "group__AttrGet" ]

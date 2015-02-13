@@ -1,5 +1,6 @@
 var buffio_8h =
 [
+    [ "_TidyBuffer", "struct__TidyBuffer.html", "struct__TidyBuffer" ],
     [ "tidyBufInit", "buffio_8h.html#a3cf251a96f69f05495744af6c9d0339b", null ],
     [ "tidyBufInitWithAllocator", "buffio_8h.html#aff43ddd9fc78532617d88db55b164f5e", null ],
     [ "tidyBufAlloc", "buffio_8h.html#a896654bd99113bfe5e86b924836aacc3", null ],

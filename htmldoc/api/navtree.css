@@ -43,6 +43,7 @@
 #nav-tree .label {
   margin:0px;
   padding:0px;
+  font: 12px 'Lucida Grande',Geneva,Helvetica,Arial,sans-serif;
 }
 
 #nav-tree .label a {
@@ -51,8 +52,6 @@
 
 #nav-tree .selected a {
   text-decoration:none;
-  padding:2px;
-  margin:0px;
   color:#fff;
 }
 
@@ -78,6 +77,7 @@
   display:block;
   padding:0px;
   margin:0px;
+  -webkit-overflow-scrolling : touch; /* iOS 5+ */
 }
 
 #side-nav {
@@ -86,7 +86,7 @@
   display:block;
   position: absolute;
   left: 0px;
-  width: 300px;
+  width: 250px;
 }
 
 .ui-resizable .ui-resizable-handle {
@@ -94,7 +94,7 @@
 }
 
 .ui-resizable-e {
-  background:url("ftv2splitbar.png") repeat scroll right center transparent;
+  background:url("splitbar.png") repeat scroll right center transparent;
   cursor:e-resize;
   height:100%;
   right:0;
@@ -117,6 +117,22 @@
   background-image:url('nav_h.png');
   background-repeat:repeat-x;
   background-color: #F9FAFC;
+  -webkit-overflow-scrolling : touch; /* iOS 5+ */
+}
+
+#nav-sync {
+  position:absolute;
+  top:5px;
+  right:24px;
+  z-index:0;
+}
+
+#nav-sync img {
+  opacity:0.3;
+}
+
+#nav-sync img:hover {
+  opacity:0.9;
 }
 
 @media print

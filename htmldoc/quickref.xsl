@@ -24,7 +24,7 @@
   <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>HTML Tidy Configuration Options Quick Reference</title>
-    <link type="text/css" rel="stylesheet" href="quickref-html.css" />
+    <link type="text/css" rel="stylesheet" href="quickref.css" />
   </head>
 
   <body>
@@ -32,7 +32,7 @@
 
     <h2>HTML Tidy Configuration Options</h2>
 
-    <p>Version: <a href="{config/@version}"><xsl:value-of select="config/@version" /></a></p>
+    <p>Version: <xsl:value-of select="config/@version" /></p>
 
     <p><a class="h3" href="#MarkupHeader">HTML, XHTML, XML</a><br />
      <a class="h3" href="#DiagnosticsHeader">Diagnostics</a><br />

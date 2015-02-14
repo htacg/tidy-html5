@@ -50,7 +50,7 @@ option immediately (no intervening space) with the string "`--`"; for example:
 `tidy --break-before-br true --show-warnings false`
 
 You can find documentation for full set of configuration options on the
-[Quick Reference](../htmldoc/quickref.html) page.
+[Quick Reference](/quickref.html) page.
 
 
 ## Sample Configuration File

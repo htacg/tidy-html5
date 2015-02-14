@@ -16,6 +16,6 @@ other applications that perform tidying.
 Please note that this [content is adapted from the original][3] on SourceForge.
 
 
- [1]: ../htmldoc/quickref.html
- [2]: ../htmldoc/api/
+ [1]: /quickref.html
+ [2]: /tidylib_api/
  [3]: http://tidy.sourceforge.net/libintro.html

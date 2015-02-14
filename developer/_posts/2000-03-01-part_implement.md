@@ -43,4 +43,4 @@ You can redirect diagnostic output using either `tidySetErrorFile()`
 or `tidySetErrorBuffer()`. See `tidy.h` for details.
 
 
- [1]: ../htmldoc/quickref#force-output.html
+ [1]: /quickref#force-output.html

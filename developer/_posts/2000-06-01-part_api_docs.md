@@ -14,5 +14,5 @@ source code commenting is. If necessary, you can become familiar with the
 source code.
 
 
- [1]: ../htmldoc/api/
+ [1]: /tidylib_api/
  [2]: http://www.doxygen.org

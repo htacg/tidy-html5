@@ -24,6 +24,6 @@ If you’re a developer using **TidyLib** please consult the
 
 And if you simply want to use **Tidy**, then please read on.
 
- [1]: ../htmldoc/quickref.html
- [2]: ../htmldoc/api/
+ [1]: /quickref.html
+ [2]: /tidylib_api/
  [3]: ../developer/

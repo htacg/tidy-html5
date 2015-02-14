@@ -3,19 +3,19 @@
 **HTML Tidy** provides several types of documentation to suit different purposes. This
 document describes how to generate the following:
 
-`tidylib_api/` (directory)
+- `tidylib_api/` (directory)
 
- : This collection of documents describes the **TidyLib** API and is generated from the
+ - This collection of documents describes the **TidyLib** API and is generated from the
    comments and code in the **Tidy** source code.
    
-`quickref.html`
+- `quickref.html`
 
- : This document provides a nice, readable HTML document describing all of the options and
+ - This document provides a nice, readable HTML document describing all of the options and
    settings that you can use with **Tidy** and internally in **TidyLib**.
    
-`tidy.1`
+- `tidy.1`
 
- : This document is a Mac/Linux/Unix standard `man` page.
+ - This document is a Mac/Linux/Unix standard `man` page.
  
  
 ## The easy way
@@ -57,15 +57,15 @@ where you can find the main `index.html` file.
 Note that these instructions require the standard `xsltproc` utility to build the file,
 but any XSLT processor of your choice should work, too.
 
-`tidy -xml-config > "tidy-config.xml"`
+- `tidy -xml-config > "tidy-config.xml"`
 
- : This uses your up-to-date version of **Tidy** to generate an XML file containing all
+ - This uses your up-to-date version of **Tidy** to generate an XML file containing all
    of **Tidy**’s built-in settings and their descriptions. This file is only temporary,
    as it will be transformed in the next step.
 
-`xsltproc "quickref.xsl" "tidy-config.xml" > "quickref.html"`
+- `xsltproc "quickref.xsl" "tidy-config.xml" > "quickref.html"`
 
- : This examples uses the `xsltproc` command to transform `tidy-config.xml` using the
+ - This examples uses the `xsltproc` command to transform `tidy-config.xml` using the
    rules in the `quickref.xsl` stylesheet, and output it to `quickref.html`.
    
 
@@ -75,21 +75,21 @@ but any XSLT processor of your choice should work, too.
 Note that these instructions require the standard `xsltproc` utility to build the file,
 but any XSLT processor of your choice should work, too.
 
-`tidy -xml-config > "tidy-config.xml"`
+- `tidy -xml-config > "tidy-config.xml"`
 
- : This uses your up-to-date version of **Tidy** to generate an XML file containing all
+ - This uses your up-to-date version of **Tidy** to generate an XML file containing all
    of **Tidy**’s built-in settings and their descriptions. This file is only temporary,
    as it will be transformed in the third step.
 
-`tidy -xml-help > "tidy-help.xml"`
+- `tidy -xml-help > "tidy-help.xml"`
 
- : This uses your up-to-date version of **Tidy** to generate an XML file containing all
+ - This uses your up-to-date version of **Tidy** to generate an XML file containing all
    of **Tidy**’s built-in help information. This file is only temporary,
    as it will be transformed in the next step.
 
-`xsltproc "tidy1.xsl" "tidy-help.xml" > "tidy.1"`
+- `xsltproc "tidy1.xsl" "tidy-help.xml" > "tidy.1"`
 
- : This examples uses the `xsltproc` command to transform `tidy-help.xml` using the
+ - This examples uses the `xsltproc` command to transform `tidy-help.xml` using the
    rules in the `tidy1.xsl` stylesheet, and output it to `tidy.1`.
    
    Note that `tidy1.xls` includes the file `tidy-config.xml` as part of the stylesheet,

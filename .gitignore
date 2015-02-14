@@ -1,7 +1,3 @@
-/htmldoc/tidy-config.xml
-/htmldoc/tidy-help.xml
-/htmldoc/tidy.1
-/htmldoc/quickref.html
 /autom4te.cache/
 /console/.deps/
 /console/.libs/
@@ -17,4 +13,4 @@
 temp*
 *.bak
 .DS_Store
-
+.idea

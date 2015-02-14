@@ -3,7 +3,7 @@
 **HTML Tidy** provides several types of documentation to suit different purposes. This
 document describes how to generate the following:
 
-`htmldoc/api/` (directory)
+`tidylib_api/` (directory)
 
  : This collection of documents describes the **TidyLib** API and is generated from the
    comments and code in the **Tidy** source code.
@@ -18,27 +18,44 @@ document describes how to generate the following:
  : This document is a Mac/Linux/Unix standard `man` page.
  
  
-## htmldoc/api/ (directory)
+## The easy way
 
-If you want to build the API documentation locally you must have [doxygen][1] installed.
+In this directory you can find the shell script `build_docs.sh`, and that will build all
+of the documentation into the `temp/` directory (i.e., `{tidy}/build/documentation/temp`).
+
+Please note these prerequisites:
+
+- It's a Mac/Linux/Unix shell script.
+- Doxygen is required to generate the API documentation.
+- xsltproc is required to generate the man page and the `quickref.html` file.
+
+If you prefer to understand how to do this manually (for example, for integration into
+other scripts, build systems, or IDEs), read on.
+
+
+## Manually
+
+ 
+### `tidylib_api/` (directory)
+
+If you want to build the API documentation you must have [doxygen][1] installed.
 You can clone the [repository from github][2] if it is not currently installed.
 
 Building as simple as:
 
-- `cd {your-tidy-html5-source}/htmldoc/doxygen doxygen.cfg`
+~~~
+cd {tidy}/build/documentation/
+doxygen doxygen.cfg
+~~~
 
-This will result in a document set in `{your-tidy-html5-source}/htmldoc/doxygen/api/`,
+This will result in a document set in `{tidy}/build/documentation/temp/tidylib_api`,
 where you can find the main `index.html` file.
 
 
-## quickref.html
+### `quickref.html`
 
-For convenience you can use the `quickref.sh` shell script on Unix-like systems to
-build the `quickref.html` file. Note that it depends on the standard `xsltproc` utility
-to build the file.
-
-If you are using a non-Unix operating system or have a different XSLT processor then the
-following section describes how the file can be built easily.
+Note that these instructions require the standard `xsltproc` utility to build the file,
+but any XSLT processor of your choice should work, too.
 
 `tidy -xml-config > "tidy-config.xml"`
 
@@ -53,14 +70,10 @@ following section describes how the file can be built easily.
    
 
 
-## tidy.1
+### `tidy.1`
 
-For convenience you can use the `tidy1.sh` shell script on Unix-like systems to
-build the `tidy.1` file. Note that it depends on the standard `xsltproc` utility
-to build the file.
-
-If you are using a non-Unix operating system or have a different XSLT processor then the
-following section describes how the file can be built easily.
+Note that these instructions require the standard `xsltproc` utility to build the file,
+but any XSLT processor of your choice should work, too.
 
 `tidy -xml-config > "tidy-config.xml"`
 

@@ -35,6 +35,9 @@
 #ifdef TIDY_WIN32_MLANG_SUPPORT
 #include "win32tc.h"
 #endif
+#if !defined(NDEBUG) && defined(_MSC_VER)
+#include "sprtf.h"
+#endif
 
 /* Create/Destroy a Tidy "document" object */
 static TidyDocImpl* tidyDocCreate( TidyAllocator *allocator );
@@ -1505,6 +1508,57 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
 /* END HTML5 STUFF
    ######################################################################################
  */
+#if !defined(NDEBUG) && defined(_MSC_VER)
+static void s_show_node( TidyDocImpl* doc, Node *node, int caller, int indent )
+{
+    tmbstr call = "";
+    tmbstr name = "blank";
+    tmbstr impl = node->implicit ? "implicit" : "";
+    switch ( caller )
+    {
+    case 1: call = "discard";   break;
+    case 2: call = "trim";      break;
+    case 3: call = "test";      break;
+    }
+
+    switch ( node->type )
+    {
+    case TidyNode_Root:       name = "Root";                    break;
+    case TidyNode_DocType:    name = "DOCTYPE";                 break;
+    case TidyNode_Comment:    name = "Comment";                 break;
+    case TidyNode_ProcIns:    name = "Processing Instruction";  break;
+    case TidyNode_Text:       name = "Text";                    break;
+    case TidyNode_CDATA:      name = "CDATA";                   break;
+    case TidyNode_Section:    name = "XML Section";             break;
+    case TidyNode_Asp:        name = "ASP";                     break;
+    case TidyNode_Jste:       name = "JSTE";                    break;
+    case TidyNode_Php:        name = "PHP";                     break;
+    case TidyNode_XmlDecl:    name = "XML Declaration";         break;
+
+    case TidyNode_Start:
+    case TidyNode_End:
+    case TidyNode_StartEnd:
+    default:
+        if (node->element)
+            name = node->element;
+      break;
+    }
+    while (indent--)
+        SPRTF(" ");
+    SPRTF("%s ele %s %s\n", call, name, impl );
+}
+
+void show_all_nodes( TidyDocImpl* doc, Node *node, int indent )
+{
+    while (node)
+    {
+        s_show_node( doc, node, 0, indent );
+        show_all_nodes( doc, node->content, indent + 1 );
+        node = node->next;
+    }
+}
+
+#endif
 
 int         tidyDocCleanAndRepair( TidyDocImpl* doc )
 {
@@ -1524,6 +1578,9 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     ctmbstr sdef = NULL;
     Node* node;
 
+#if !defined(NDEBUG) && defined(_MSC_VER)
+    show_all_nodes( doc, &doc->root, 0  );
+#endif
     if (tidyXmlTags)
        return tidyDocStatus( doc );
 
@@ -1629,6 +1686,9 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     if ( xmlOut && xmlDecl )
         TY_(FixXmlDecl)( doc );
 
+#if !defined(NDEBUG) && defined(_MSC_VER)
+    show_all_nodes( doc, &doc->root, 0  );
+#endif
     return tidyDocStatus( doc );
 }
 

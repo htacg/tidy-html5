@@ -1445,6 +1445,7 @@ void TY_(ParseNamespace)(TidyDocImpl* doc, Node *basenode, GetTokenMode mode)
 	Node *node;
 	Node *parent = basenode;
 	uint istackbase;
+    AttVal* av; /* #130 MathML attr and entity fix! */
 
 	/* a la <table>: defer popping elements off the inline stack */
 	TY_(DeferDup)( doc );
@@ -1531,12 +1532,24 @@ void TY_(ParseNamespace)(TidyDocImpl* doc, Node *basenode, GetTokenMode mode)
 		}
 		else if (node->type == StartTag)
 		{
+            /* #130 MathML attr and entity fix! 
+               care if it has attributes, and 'accidently' any of those attributes match known */
+            for ( av = node->attributes; av; av = av->next )
+            {
+                av->dict = 0; /* does something need to be freed? */
+            }
 			/* add another child to the current parent */
 			TY_(InsertNodeAtEnd)(parent, node);
 			parent = node;
 		}
 		else
 		{
+            /* #130 MathML attr and entity fix! 
+               care if it has attributes, and 'accidently' any of those attributes match known */
+            for ( av = node->attributes; av; av = av->next )
+            {
+                av->dict = 0; /* does something need to be freed? */
+            }
 			TY_(InsertNodeAtEnd)(parent, node);
 		}
 	}

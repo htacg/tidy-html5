@@ -234,6 +234,8 @@ uint TY_(nodeHeaderLevel)( Node* node );  /* 1, 2, ..., 6 */
 
 /* HTML5 */
 #define nodeIsDATALIST( node )   TagIsId( node, TidyTag_DATALIST )
+#define nodeIsMATHML( node )     TagIsId( node, TidyTag_MATHML ) /* #130 MathML attr and entity fix! */
+
 /* NOT in HTML 5 */
 #define nodeIsACRONYM( node )    TagIsId( node, TidyTag_ACRONYM )
 #define nodesIsFRAME( node )     TagIsId( node, TidyTag_FRAME )

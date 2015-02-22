@@ -949,9 +949,20 @@ static void ParseEntity( TidyDocImpl* doc, GetTokenMode mode )
          && !cfgBool(doc, TidyXhtmlOut) )
         TY_(ReportEntityError)( doc, APOS_UNDEFINED, lexer->lexbuf+start, 39 );
 
-    /* Lookup entity code and version
-    */
-    found = TY_(EntityInfo)( lexer->lexbuf+start, isXml, &ch, &entver );
+    if (( mode == OtherNamespace ) && ( c == ';' ))
+    {
+        /* #130 MathML attr and entity fix! */
+        found = yes;
+        ch = 255;
+        entver = XH50|HT50;
+        preserveEntities = yes;
+    }
+    else
+    {
+        /* Lookup entity code and version
+        */
+        found = TY_(EntityInfo)( lexer->lexbuf+start, isXml, &ch, &entver );
+    }
 
     /* deal with unrecognized or invalid entities */
     /* #433012 - fix by Randy Waki 17 Feb 01 */

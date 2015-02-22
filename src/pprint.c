@@ -748,7 +748,8 @@ static void PPrintChar( TidyDocImpl* doc, uint c, uint mode )
           for XML where naked '&' are illegal.
         */
         if ( c == '&' && cfgBool(doc, TidyQuoteAmpersand)
-             && !cfgBool(doc, TidyPreserveEntities) )
+             && !cfgBool(doc, TidyPreserveEntities)
+             && ( mode != OtherNamespace) ) /* #130 MathML attr and entity fix! */
         {
             AddString( pprint, "&amp;" );
             return;
@@ -1955,6 +1956,21 @@ void TY_(PrintBody)( TidyDocImpl* doc )
     }
 }
 
+/* #130 MathML attr and entity fix! 
+   Support MathML namepsace */
+static void PPrintMathML( TidyDocImpl* doc, uint indent, Node *node )
+{
+    Node *content;
+    uint mode = OtherNamespace;
+
+    PPrintTag( doc, mode, indent, node );
+
+    for ( content = node->content; content; content = content->next )
+           TY_(PPrintTree)( doc, mode, indent, content );
+
+    PPrintEndTag( doc, mode, indent, node );
+}
+
 void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
 {
     Node *content, *last;
@@ -1993,6 +2009,8 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
         PPrintJste( doc, indent, node );
     else if ( node->type == PhpTag)
         PPrintPhp( doc, indent, node );
+    else if ( nodeIsMATHML(node) )
+        PPrintMathML( doc, indent, node ); /* #130 MathML attr and entity fix! */
     else if ( TY_(nodeCMIsEmpty)(node) ||
               (node->type == StartEndTag && !xhtml) )
     {

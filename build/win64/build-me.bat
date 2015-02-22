@@ -3,25 +3,27 @@
 @echo Build %TMPPRJ% project, in 64-bits
 @set TMPLOG=bldlog-1.txt
 @set BLDDIR=%CD%
+@set TMPROOT=F:\Projects
 @set SET_BAT=%ProgramFiles(x86)%\Microsoft Visual Studio 10.0\VC\vcvarsall.bat
 @if NOT EXIST "%SET_BAT%" goto NOBAT
+@if NOT EXIST %TMPROOT%\nul goto NOROOT
+@set TMPSRC=%TMPROOT%\tidy-html5
+@if NOT EXIST %TMPSRC%\CMakeLists.txt goto NOCM
+
+@if /I "%PROCESSOR_ARCHITECTURE%" EQU "AMD64" (
+@set TMPINST=%TMPROOT%\software.x64
+) ELSE (
+ @if /I "%PROCESSOR_ARCHITECTURE%" EQU "x86_64" (
+@set TMPINST=%TMPROOT%\software.x64
+ ) ELSE (
+@echo ERROR: Appears 64-bit is NOT available... aborting...
+@goto ISERR
+ )
+)
+@if NOT EXIST %TMPINST%\nul goto NOINST
 
 @echo Doing build output to %TMPLOG%
 @echo Doing build output to %TMPLOG% > %TMPLOG%
-
-@if /I "%PROCESSOR_ARCHITECTURE%" EQU "AMD64" (
-@set TMPINST=..\..\..\3rdParty.x64
-) ELSE (
- @if /I "%PROCESSOR_ARCHITECTURE%" EQU "x86_64" (
-@set TMPINST=..\..\..\3rdParty.x64
- ) ELSE (
-@set TMPINST=..\..\..\3rdParty
-@echo WARNING: Appears 64-bit is NOT available
-@echo Falling back to 32-bit build...
-@pause
-@goto DNARCH
- )
-)
 
 @echo Doing: 'call "%SET_BAT%" %PROCESSOR_ARCHITECTURE%'
 @echo Doing: 'call "%SET_BAT%" %PROCESSOR_ARCHITECTURE%' >> %TMPLOG%
@@ -32,7 +34,6 @@
 
 :DNARCH
 
-@set TMPSRC=..\..
 @REM ############################################
 @REM NOTE: SPECIAL INSTALL LOCATION
 @REM Adjust to suit your environment
@@ -40,6 +41,7 @@
 @REM set TMPINST=F:\Projects\software.x64
 @set TMPOPTS=-DCMAKE_INSTALL_PREFIX=%TMPINST%
 @set TMPOPTS=%TMPOPTS% -G "Visual Studio 10 Win64"
+
 :RPT
 @if "%~1x" == "x" goto GOTCMD
 @set TMPOPTS=%TMPOPTS% %1
@@ -70,14 +72,27 @@
 
 @echo Appears a successful build
 @echo.
-@echo No INSTALL configured at this time
-@goto END
+@REM echo No INSTALL configured at this time
+@REM goto END
 
 @echo Note install location %TMPINST%
-@echo *** CONTINUE with install? *** Only Ctrl+C aborts
+@ask *** CONTINUE with install? *** Only y continues
+@if ERRORLEVEL 2 goto NOASK
+@if ERRORLEVEL 1 goto DOINST
+@echo Skipping install to %TMPINST% at this time...
+@echo.
+@goto END
+:NOASK
+@echo ask not found in path...
+@echo *** CONTINUE with install? *** Only y continues
 @pause
 
+:DOINST
 @REM cmake -P cmake_install.cmake
+@echo Doing: 'cmake --build . --config debug --target INSTALL'
+@echo Doing: 'cmake --build . --config debug --target INSTALL' >> %TMPLOG%
+@cmake --build . --config debug --target INSTALL >> %TMPLOG% 2>&1
+
 @echo Doing: 'cmake --build . --config release --target INSTALL'
 @echo Doing: 'cmake --build . --config release --target INSTALL' >> %TMPLOG%
 @cmake --build . --config release --target INSTALL >> %TMPLOG% 2>&1
@@ -90,6 +105,18 @@
 
 :NOBAT
 @echo Can NOT locate MSVC setup batch "%SET_BAT%"! *** FIX ME ***
+@goto ISERR
+
+:NOROOT
+@echo Can NOT locate %TMPROOT%! *** FIX ME ***
+@goto ISERR
+
+:NOCM
+@echo Can NOT locate %TMPSRC%\CMakeLists.txt! *** FIX ME ***
+@goto ISERR
+
+:NOINST
+@echo Can NOT locate directory %TMPINST%! *** FIX ME ***
 @goto ISERR
 
 :ERR0

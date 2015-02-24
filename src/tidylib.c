@@ -1508,52 +1508,86 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
 /* END HTML5 STUFF
    ######################################################################################
  */
-#if !defined(NDEBUG) && defined(_MSC_VER)
-static void s_show_node( TidyDocImpl* doc, Node *node, int caller, int indent )
-{
-    tmbstr call = "";
-    tmbstr name = "blank";
-    tmbstr impl = node->implicit ? "implicit" : "";
-    switch ( caller )
-    {
-    case 1: call = "discard";   break;
-    case 2: call = "trim";      break;
-    case 3: call = "test";      break;
-    }
 
+#if !defined(NDEBUG) && defined(_MSC_VER)
+/* *** FOR DEBUG ONLY *** */
+const char *dbg_get_lexer_type( void *vp )
+{
+    Node *node = (Node *)vp;
     switch ( node->type )
     {
-    case TidyNode_Root:       name = "Root";                    break;
-    case TidyNode_DocType:    name = "DOCTYPE";                 break;
-    case TidyNode_Comment:    name = "Comment";                 break;
-    case TidyNode_ProcIns:    name = "Processing Instruction";  break;
-    case TidyNode_Text:       name = "Text";                    break;
-    case TidyNode_CDATA:      name = "CDATA";                   break;
-    case TidyNode_Section:    name = "XML Section";             break;
-    case TidyNode_Asp:        name = "ASP";                     break;
-    case TidyNode_Jste:       name = "JSTE";                    break;
-    case TidyNode_Php:        name = "PHP";                     break;
-    case TidyNode_XmlDecl:    name = "XML Declaration";         break;
+    case RootNode:      return "Root";
+    case DocTypeTag:    return "DocType";
+    case CommentTag:    return "Comment";
+    case ProcInsTag:    return "ProcIns";
+    case TextNode:      return "Text";
+    case StartTag:      return "StartTag";
+    case EndTag:        return "EndTag";
+    case StartEndTag:   return "StartEnd";
+    case CDATATag:      return "CDATA";
+    case SectionTag:    return "Section";
+    case AspTag:        return "Asp";
+    case JsteTag:       return "Jste";
+    case PhpTag:        return "Php";
+    case XmlDecl:       return "XmlDecl";
+    }
+    return "Uncased";
+}
+
+/* NOTE: THis matches the above lexer type, except when element has a name */
+const char *dbg_get_element_name( void *vp )
+{
+    Node *node = (Node *)vp;
+    switch ( node->type )
+    {
+    case TidyNode_Root:       return "Root";
+    case TidyNode_DocType:    return "DocType";
+    case TidyNode_Comment:    return "Comment";
+    case TidyNode_ProcIns:    return "ProcIns";
+    case TidyNode_Text:       return "Text";
+    case TidyNode_CDATA:      return "CDATA";
+    case TidyNode_Section:    return "Section";
+    case TidyNode_Asp:        return "Asp";
+    case TidyNode_Jste:       return "Jste";
+    case TidyNode_Php:        return "Php";
+    case TidyNode_XmlDecl:    return "XmlDecl";
 
     case TidyNode_Start:
     case TidyNode_End:
     case TidyNode_StartEnd:
     default:
         if (node->element)
-            name = node->element;
-      break;
+            return node->element;
+    }
+    return "Unknown";
+}
+
+void dbg_show_node( TidyDocImpl* doc, Node *node, int caller, int indent )
+{
+    ctmbstr call = "";
+    ctmbstr name = dbg_get_element_name(node);
+    ctmbstr type = dbg_get_lexer_type(node);
+    ctmbstr impl = node->implicit ? "implicit" : "";
+    switch ( caller )
+    {
+    case 1: call = "discard";   break;
+    case 2: call = "trim";      break;
+    case 3: call = "test";      break;
     }
     while (indent--)
         SPRTF(" ");
-    SPRTF("%s ele %s %s\n", call, name, impl );
+    if (strcmp(type,name))
+        SPRTF("%s %s %s %s\n", type, name, impl, call );
+    else
+        SPRTF("%s %s %s\n", name, impl, call );
 }
 
-void show_all_nodes( TidyDocImpl* doc, Node *node, int indent )
+void dbg_show_all_nodes( TidyDocImpl* doc, Node *node, int indent )
 {
     while (node)
     {
-        s_show_node( doc, node, 0, indent );
-        show_all_nodes( doc, node->content, indent + 1 );
+        dbg_show_node( doc, node, 0, indent );
+        dbg_show_all_nodes( doc, node->content, indent + 1 );
         node = node->next;
     }
 }
@@ -1579,7 +1613,8 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     Node* node;
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
-    show_all_nodes( doc, &doc->root, 0  );
+    SPRTF("All nodes BEFORE clean and repair\n");
+    dbg_show_all_nodes( doc, &doc->root, 0  );
 #endif
     if (tidyXmlTags)
        return tidyDocStatus( doc );
@@ -1687,7 +1722,8 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
         TY_(FixXmlDecl)( doc );
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
-    show_all_nodes( doc, &doc->root, 0  );
+    SPRTF("All nodes AFTER clean and repair\n");
+    dbg_show_all_nodes( doc, &doc->root, 0  );
 #endif
     return tidyDocStatus( doc );
 }

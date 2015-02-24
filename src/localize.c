@@ -1603,7 +1603,9 @@ void TY_(ReportError)(TidyDocImpl* doc, Node *element, Node *node, uint code)
         break;
 
     case DISCARDING_UNEXPECTED:
-        /* Force error if in a bad form */
+        /* Force error if in a bad form, or 
+           Issue #166 - repeated <main> element
+        */
         messageNode(doc, doc->badForm ? TidyError : TidyWarning, node, fmt, nodedesc);
         break;
 
@@ -1739,7 +1741,7 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
       }
     }
 
-    if (doc->badForm)
+    if (doc->badForm & flg_BadForm) /* Issue #166 - changed to BIT flag to support other errors */
     {
         tidy_out(doc, "You may need to move one or both of the <form> and </form>\n");
         tidy_out(doc, "tags. HTML elements should be properly nested and form elements\n");
@@ -1747,6 +1749,13 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
         tidy_out(doc, "in one table cell and the </form> in another. If the <form> is\n");
         tidy_out(doc, "placed before a table, the </form> cannot be placed inside the\n");
         tidy_out(doc, "table! Note that one form can't be nested inside another!\n\n");
+    }
+
+    if (doc->badForm & flg_BadMain) /* Issue #166 - repeated <main> element */
+    {
+        tidy_out(doc, "Only one <main> element is allowed in a document.\n");
+        tidy_out(doc, "Subsequent <main> elements have been discarded, which may\n");
+        tidy_out(doc, "render the document invalid.\n");
     }
     
     if (doc->badAccess)

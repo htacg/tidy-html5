@@ -373,10 +373,12 @@ Node* TY_(DropEmptyElements)(TidyDocImpl* doc, Node* node)
 /* 
   errors in positioning of form start or end tags
   generally require human intervention to fix
+  Issue #166 - repeated <main> element also uses this flag
+  to indicate duplicates, discarded
 */
 static void BadForm( TidyDocImpl* doc )
 {
-    doc->badForm = yes;
+    doc->badForm |= flg_BadForm;
     /* doc->errors++; */
 }
 
@@ -3694,6 +3696,39 @@ void TY_(ParseHead)(TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode))
 #endif
 }
 
+/*\ 
+ *  Issue #166 - repeated <main> element
+ *  But this service is generalised to check for other duplicate elements
+\*/
+Bool TY_(FindNodeWithId)( Node *node, TidyTagId tid )
+{
+    Node *content;
+    while (node)
+    {
+        if (TagIsId(node,tid))
+            return yes;
+        for (content = node->content; content; content = content->content)
+        {
+            if (TY_(FindNodeWithId)(content,tid))
+                return yes;
+        }
+        node = node->next;
+    }
+    return no;
+}
+
+
+/*\ 
+ *  Issue #166 - repeated <main> element
+ *  Do a global search for an element
+\*/
+Bool TY_(FindNodeById)( TidyDocImpl* doc, TidyTagId tid )
+{
+    Node *node = (doc ? doc->root.content : NULL);
+    return TY_(FindNodeWithId)(node,tid);
+}
+
+
 void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
 {
     Lexer* lexer = doc->lexer;
@@ -3934,6 +3969,18 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
 
         if (TY_(nodeIsElement)(node))
         {
+            if (nodeIsMAIN(node)) {
+                /*\ Issue #166 - repeated <main> element
+                 *  How to efficiently search for a previous main element?
+                \*/
+                if ( TY_(FindNodeById)(doc, TidyTag_MAIN) )
+                {
+                    doc->badForm |= flg_BadMain; /* this is an ERROR in format */
+                    TY_(ReportError)(doc, body, node, DISCARDING_UNEXPECTED);
+                    TY_(FreeNode)( doc, node);
+                    continue;
+                }
+            }
             /* Issue #20 - merging from Ger Hobbelt fork put back CM_MIXED, which had been
                removed to fix this issue - reverting to fix 880221e
              */

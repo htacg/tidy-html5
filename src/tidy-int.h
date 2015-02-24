@@ -23,6 +23,15 @@
 #define MIN(a,b) (((a) < (b))?(a):(b))
 #endif
 
+/*\
+ *  Issue #166 - repeated <main> element
+ *  Change the previous on/off uint flag badForm
+ *  to a BIT flag to support other than <form>
+ *  errors. This could be extended more...
+\*/
+#define flg_BadForm     0x00000001
+#define flg_BadMain     0x00000002
+
 struct _TidyDocImpl
 {
     /* The Document Tree (and backing store buffer) */
@@ -63,7 +72,7 @@ struct _TidyDocImpl
     uint                badAccess;   /* for accessibility errors */
     uint                badLayout;   /* for bad style errors */
     uint                badChars;    /* for bad char encodings */
-    uint                badForm;     /* for badly placed form tags */
+    uint                badForm;     /* bit field, for badly placed form tags, or other format errors */
 
     /* Memory allocator */
     TidyAllocator*      allocator;

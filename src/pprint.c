@@ -1306,6 +1306,69 @@ static Bool AfterSpace(Lexer *lexer, Node *node)
 static void PPrintEndTag( TidyDocImpl* doc, uint ARG_UNUSED(mode),
                           uint ARG_UNUSED(indent), Node *node );
 
+/*\
+ *  See Issue #162 - void elements also get a closing tag, like img, br, ...
+ *
+ *  from : http://www.w3.org/TR/html-markup/syntax.html#syntax-elements
+ *  A complete list of the void elements in HTML:
+ *  area, base, br, col, command, embed, hr, img, input, keygen, link, meta, param, source, track, wbr
+ *
+ *  This could be sped up by NOT using the macro nodeIsXXXX, since this repeatedly checks the node,
+ *  and then the node->tag, which here are checked at the beginning...
+ *
+ *  Some have already been done... at least where no macro yet exists.
+ *
+ *  And maybe a switch(id) case would be faster.
+\*/
+
+static Bool TY_(isVoidElement)( Node *node )
+{
+    TidyTagId id;
+    if ( !node )
+        return no;
+    if ( !node->tag )
+        return no;
+    id = node->tag->id;
+    if (nodeIsAREA(node))
+        return yes;
+    if (nodeIsBASE(node))
+        return yes;
+    if (nodeIsBR(node))
+        return yes;
+    if (nodeIsCOL(node))
+        return yes;
+    /* if (nodeIsCOMMAND(node)) */
+    if (id == TidyTag_COMMAND)
+        return yes;
+    if (nodeIsEMBED(node))
+        return yes;
+    if (nodeIsHR(node))
+        return yes;
+    if (nodeIsIMG(node))
+        return yes;
+    if (nodeIsINPUT(node))
+        return yes;
+    /* if (nodeIsKEYGEN(node)) */
+    if (id == TidyTag_KEYGEN )
+        return yes;
+    if (nodeIsLINK(node))
+        return yes;
+    if (nodeIsMETA(node))
+        return yes;
+    if (nodeIsPARAM(node))
+        return yes;
+    /* if (nodeIsSOURCE(node)) */
+    if (id == TidyTag_SOURCE )
+        return yes;
+    /* if (nodeIsTRACK(node)) */
+    if (id == TidyTag_TRACK )
+        return yes;
+    if (nodeIsWBR(node))
+        return yes;
+
+    return no;
+}
+
 static void PPrintTag( TidyDocImpl* doc,
                        uint mode, uint indent, Node *node )
 {
@@ -1348,7 +1411,14 @@ static void PPrintTag( TidyDocImpl* doc,
 
     AddChar( pprint, '>' );
 
-    if (node->type == StartEndTag && TY_(HTMLVersion)(doc) == HT50)
+    /*\
+     *  Appears this was added for Issue #111, #112, #113, but will now add an end tag
+     *  for elements like <img ...> which do NOT have an EndTag, even in html5
+     *  See Issue #162 - void elements also get a closing tag, like img, br, ...
+     *  A complete list of the void elements in HTML:
+     *  area, base, br, col, command, embed, hr, img, input, keygen, link, meta, param, source, track, wbr
+    \*/
+    if ((node->type == StartEndTag && TY_(HTMLVersion)(doc) == HT50) && !TY_(isVoidElement)(node) )
     {
         PPrintEndTag( doc, mode, indent, node );
     }

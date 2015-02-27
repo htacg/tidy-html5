@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>
+   align5.html - align attribute to css
+  </title>
+  <style>
+  strong { color: red }
+  </style>
+ </head>
+ <body>
+ <h1 align="center">Using align=&quot;center&quot;</h1>
+ <p>This file contains an element <strong>&lt;h1 align=&quot;center&quot;&gt;</strong>, but it also applies 
+  to any element, like &lt;p..., &lt;table, etc...
+</p>
+ <p>The 'experimental' Nu Markup Checker flags this as an <strong>HTML5 ERROR</strong> with the string <strong>
+  &quot;Error: The align attribute on the h1 element is obsolete. Use CSS instead.&quot;</strong>
+ </p>
+
+ <p>If 'clean' at present tidy 'silently' replaces this with CSS in TY_(CleanDocument)(doc), 
+  in Style2Rule( TidyDocImpl* doc, Node *node), using TY_(AttrGetById)(node, TidyAttr_STYLE);
+ </p>
+
+ <p>Q: <strong>Should this behaviour be modified?</strong>
+ </p>
+ <p>A: There are various possibilities<br>
+  <ul>
+   <li>If the document is configured (or found?) to be HTML5, then
+     <ul>
+      <li>If clean configured
+  	<ul>
+   		<li>Fix it silently, <strong>as now</strong>
+   		<li>Fix it with a warning
+		<li>No fix and flag as an error, like the validator
+        </ul>
+      <li>Clean not configured
+  	<ul>
+   		<li>No fix, with no warning or error, <strong>as now</strong>
+   		<li>Fix it with a warning
+		<li>No fix and flag as an error, like the validator
+        </ul>
+     </ul>
+   <li>Else if NOT configured (or found?) to be HTML5
+     <ul>
+      <li>If clean configured
+  	<ul>
+   		<li>Fix it silently, <strong>as now</strong>
+   		<li>Fix it with a warning
+        </ul>
+      <li>Clean not configured
+  	<ul>
+   		<li>Flag as a warning
+		<li>Flag as an error
+		<li>No warning or error, <strong>as now</strong>
+        </ul>
+     </ul>
+  </ul>
+ </body>
+</html>
+ 

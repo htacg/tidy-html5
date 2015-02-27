@@ -1,44 +1,44 @@
-# Important notice
+# HTML Tidy with HTML5 support
 
-Current development is taking place in the `develop-500` branch of this repository.
-_This is a temporay measure_, and the plan is move all current activity back to
-`Master` within a day or two (now=2015-02-12UTC+08:00).
+## Prerequisites
 
-# HTML Tidy for HTML5 (experimental)
+  1. git - http://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+  
+  2. cmake - http://www.cmake.org/download/
+  
+  3. appropriate build tools for the platform
+  
+CMake comes in two forms - command line and gui. Some installations only install one or the other, but sometimes both. The build commands below are only for the command line use.
 
-This repo is an experimental fork of the code from [tidy.sourceforge.net][1].
-This source code in this version supports processing of HTML5 documents. The
-changes for HTML5 support started from a [patch developed by Björn Höhrmann][2].
+Also the actual build tools vary for each platform. But that is one of the great features of cmake, it can generate variuous 'native' build files. Running cmake without any paramaters will list the generators available on that platform. For sure one of the common ones is "Unix Makefiles", which needs autotools make installed, but many other generators are supported.
 
-   [1]: http://tidy.sourceforge.net
+In windows cmake offers various versions of MSVC. Again below only the command line use of MSVC is shown, but the tiyd solution (*.sln) file can be loaded into the MSVC IDE, and the building done in there.
 
-   [2]: http://lists.w3.org/Archives/Public/www-archive/2011Nov/0007.html
 
-For more information, see [w3c.github.com/tidy-html5][3]
+## Build the tidy library and command line tool
 
-   [3]: http://w3c.github.com/tidy-html5/
+  1. `cd build/cmake`
 
-## Building the tidy command-line tool
+  2. `cmake ../.. [-DCMAKE_INSTALL_PREFIX=/path/for/install]`
 
-For Linux/BSD/OSX platforms, you can build and install the `tidy` command-line
-tool from the source code using the following steps.
+  3. Windows:  `cmake --build . --config Release`  
+     Unix/OS X: `make`
 
-  1. `make -C build/gmake/`
+  4. Install, if desired:  
+     Windows: `cmake --build . --config Release --target INSTALL`  
+     Unix/OS X: `[sudo] make install`
 
-  2. `make install -C build/gmake/`
 
-Note that you will either need to run `make install` as root, or with `sudo make
-install`.
+## History
 
-## Building the libtidy shared library
+This repository should be considered canonical for HTML Tidy as of 2015-January-15.
 
-For Linux/BSD/OSX platforms, you can build and install the `tidylib` shared
-library (for use in building other applications) from the source code using the
-following steps.
+ - This repository originally transferred from [w3c.github.com/tidy-html5][1].
+ 
+ - First moved to Github from [tidy.sourceforge.net][2].
 
-  1. `sh build/gnuauto/setup.sh && ./configure && make`
 
-  2. `make install`
+   [1]: http://w3c.github.com/tidy-html5/
 
-Note that you will either need to run `make install` as root, or with `sudo make
-install`.
+   [2]: http://tidy.sourceforge.net
+

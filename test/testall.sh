@@ -6,7 +6,7 @@
 # (c) 1998-2003 (W3C) MIT, ERCIM, Keio University
 # See tidy.c for the copyright notice.
 #
-# <URL:http://tidy.sourceforge.net/>
+# <URL:http://www.html-tidy.org/>
 #
 # set -x
 
@@ -25,6 +25,9 @@ BUGS="426885 427633 427662 427664 427671 427672 427675 427676 427677\
  620531 629885 634889 640473 640474 646946 647255 647900 649812 655338\
  656889 658230 660397 661606 676156 676205 688746 695408 696799"
 
+if [ -f testall.txt ]; then
+	rm -f testall.txt
+fi
 # for bugNo in ${BUGS}
 
 while read bugNo expected

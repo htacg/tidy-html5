@@ -1007,6 +1007,7 @@ static Bool Center2Div( TidyDocImpl* doc, Node *node, Node **pnode)
 {
     if ( nodeIsCENTER(node) )
     {
+#if 0 // 00000000 what is this doing inside an nodeIsCENTER(node)??? 0000000
         if ( cfgBool(doc, TidyDropFontTags) )
         {
             if (node->content)
@@ -1034,7 +1035,7 @@ static Bool Center2Div( TidyDocImpl* doc, Node *node, Node **pnode)
 
             return yes;
         }
-
+#endif // 00000000 what is this doing inside an nodeIsCENTER(node)??? 0000000
         RenameElem( doc, node, TidyTag_DIV );
         TY_(AddStyleProperty)( doc, node, "text-align: center" );
         return yes;
@@ -1241,6 +1242,7 @@ Bool FindCSSSpanEq( Node *node, ctmbstr *s, Bool deprecatedOnly )
 static Bool CanApplyBlockStyle( Node *node )
 {
     if (TY_(nodeHasCM)(node,CM_BLOCK | CM_LIST | CM_DEFLIST | CM_TABLE)
+        && !nodeIsDIV(node) && !nodeIsP(node)
         && !nodeIsTABLE(node) && !nodeIsTR(node) && !nodeIsLI(node) )
     {
         return yes;
@@ -2638,17 +2640,19 @@ void TY_(FixAnchors)(TidyDocImpl* doc, Node *node, Bool wantName, Bool wantId)
 
             if (id && !wantId
                 /* make sure that Name has been emitted if requested */
-                && (hadName || !wantName || NameEmitted) )
+                && (hadName || !wantName || NameEmitted) ) {
+                if (!wantId && !wantName)
+                    TY_(RemoveAnchorByNode)(doc, id->value, node);
                 TY_(RemoveAttribute)(doc, node, id);
+            }
 
             if (name && !wantName
                 /* make sure that Id has been emitted if requested */
-                && (hadId || !wantId || IdEmitted) )
+                && (hadId || !wantId || IdEmitted) ) {
+                if (!wantId && !wantName)
+                    TY_(RemoveAnchorByNode)(doc, name->value, node);
                 TY_(RemoveAttribute)(doc, node, name);
-
-            if (TY_(AttrGetById)(node, TidyAttr_NAME) == NULL &&
-                TY_(AttrGetById)(node, TidyAttr_ID) == NULL)
-                TY_(RemoveAnchorByNode)(doc, node);
+            }
         }
 
         if (node->content)

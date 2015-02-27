@@ -6,7 +6,7 @@
 # (c) 2005 (W3C) MIT, ERCIM, Keio University
 # See tidy.c for the copyright notice.
 #
-# <URL:http://tidy.sourceforge.net/>
+# <URL:http://www.html-tidy.org/>
 #
 # set -x
 
@@ -20,7 +20,7 @@ TESTNO=$1
 TESTEXPECTED=$2
 ACCESSLEVEL=$3
 
-TIDY=../bin/tidy
+TIDY=../build/cmake/tidy5
 INFILES=./accessTest/$1.*ml
 CFGFILE=./accessTest/cfg_$1.txt
 

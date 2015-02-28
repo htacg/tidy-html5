@@ -14,11 +14,7 @@ fa-icon:  cubes
 There are sometimes several branches, but in general **Master** is the most
 recently updated version. Note that as “cutting edge,” it may have bugs or other
 unstable behavior. If you prefer a stable, officially released version, be
-sure to have a look at **Branches** and **Releases** on the github page.
-
-Note: as of 2015-February-11 the cutting edge branch is `develop-500`. This is
-temporary and `Master` will be used shortly.
-{: .note}
+sure to have a look at **Releases** on the github page.
 
 In general you can use the **Download ZIP** button on the github page to
 download the most recent version of a branch. If you prefer Git then you can
@@ -38,11 +34,11 @@ tool from the source code using the following steps:
 
 2. `cmake ../.. [-DCMAKE_INSTALL_PREFIX=/path/for/install]`
 
-3. Windows:  `cmake --build . --config Release`
+3. Windows:  `cmake --build . --config Release`<br/>
    Unix/OS X: `make`
 
 4. Install, if desired:<br/>
-   Windows: `cmake --build . --config Release --target INSTALL`
+   Windows: `cmake --build . --config Release --target INSTALL`<br/>
    Unix/OS X: `[sudo] make install`
 
 Note that you will either need to run `make install` as root,

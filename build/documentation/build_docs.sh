@@ -106,7 +106,10 @@ hash doxygen 2>/dev/null || { echo "- doxygen not found. This script requires do
 
 if [ "$BUILD_API" -eq 1 ]; then
   echo "The following is doxygen's stderr output. It doesn't indicate errors with this script:\n"
-  ( cat "$DOXY_CFG"; echo "PROJECT_NUMBER=$TIDY_VERSION" ) | doxygen - > /dev/null
+  ( cat "$DOXY_CFG"; \
+    echo "PROJECT_NUMBER=$TIDY_VERSION"; \
+    echo "HTML_EXTRA_FILES=$OUTP_DIR/quickref.html"; ) \
+    | doxygen - > /dev/null
   echo "\nTidyLib API documentation has been built."
 else
   echo "* $OUTP_DIR/tidylib_api/ was skipped because not all dependencies were satisfied."

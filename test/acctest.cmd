@@ -1,17 +1,11 @@
-@echo off
-
-REM execute all test cases of the accessibility test suite
-REM
-REM (c) 2006 (W3C) MIT, ERCIM, Keio University
-REM See tidy.c for the copyright notice.
-REM
-REM <URL:http://www.html-tidy.org/>
-REM
+@setlocal
+@REM echo off
+@REM execute all test cases of the accessibility test suite
 
 @REM USER VARIABLES
 @REM ##############
 @REM set executable to be used
-@set TIDY=..\build\msvc\Release\tidy.exe
+@set TIDY=..\build\cmake\Release\tidy5.exe
 @REM set INPUT folder
 @set TIDYINPUT=accessTest
 @REM set OUTPUT folder
@@ -34,10 +28,10 @@ REM
 @echo Executable = %TIDY% >> ACCERR.TXT
 @echo Input Folder = %TIDYINPUT% >> ACCERR.TXT
 @echo Output Folder = %TIDYOUT% >> ACCERR.TXT
-set FAILEDACC=
-for /F "skip=1 tokens=1,2*" %%i in (%TIDYIN%) do call onetesta.cmd %%i %%j %%k
+@set FAILEDACC=
+@for /F "skip=1 tokens=1,2*" %%i in (%TIDYIN%) do call onetesta.cmd %%i %%j %%k
 @if "%FAILEDACC%." == "." goto SUCCESS
-echo FAILED [%FAILEDACC%] ...
+@echo FAILED [%FAILEDACC%] ...
 @goto END
 
 :SUCCESS

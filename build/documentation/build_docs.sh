@@ -9,6 +9,8 @@
 
 TIDY_PATH="./tidy5"         # Current directory.
 
+TIDY_VERSION=`cat ../../version.txt`
+
 
 cat << HEREDOC
 
@@ -104,7 +106,7 @@ hash doxygen 2>/dev/null || { echo "- doxygen not found. This script requires do
 
 if [ "$BUILD_API" -eq 1 ]; then
   echo "The following is doxygen's stderr output. It doesn't indicate errors with this script:\n"
-  doxygen "$DOXY_CFG" > /dev/null
+  ( cat "$DOXY_CFG"; echo "PROJECT_NUMBER=$TIDY_VERSION" ) | doxygen - > /dev/null
   echo "\nTidyLib API documentation has been built."
 else
   echo "* $OUTP_DIR/tidylib_api/ was skipped because not all dependencies were satisfied."

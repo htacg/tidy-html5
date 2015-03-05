@@ -106,9 +106,17 @@ hash doxygen 2>/dev/null || { echo "- doxygen not found. This script requires do
 
 if [ "$BUILD_API" -eq 1 ]; then
   echo "The following is doxygen's stderr output. It doesn't indicate errors with this script:\n"
+  
+  # echo the output of tidy5 --help so we can include
+  $TIDY_PATH -h > "./tidy5.cmd.txt"
+  
+  ## this lot 
+  # - echos and catches outputs the doxygen config
+  # - overwrites some vars but appending some to config an end
+  # - which are then passed to doxygen as stdin (instead of the path to a config.file)
   ( cat "$DOXY_CFG"; \
-    echo "PROJECT_NUMBER=$TIDY_VERSION"; \
-    echo "HTML_EXTRA_FILES=$OUTP_DIR/quickref.html"; ) \
+    echo "PROJECT_NUMBER=$TIDY_VERSION"; \ 
+    echo "HTML_EXTRA_FILES=$OUTP_DIR/quickref.html ./tidy5.cmd.txt"; ) \
     | doxygen - > /dev/null
   echo "\nTidyLib API documentation has been built."
 else

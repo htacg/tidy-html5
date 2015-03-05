@@ -1,4 +1,4 @@
-# Documentation HOW-TO
+# Documentation HOWTO
 
 **HTML Tidy** provides several types of documentation to suit different purposes. This
 document describes how to generate the following:

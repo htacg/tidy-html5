@@ -174,9 +174,9 @@ endif ()
 ### Create deb and RPM
 ##########################################################
 IF(WIN32)
-   set(CPACK_GENERATOR "NSIS;ZIP")
+   set(CPACK_GENERATOR "ZIP;NSIS")
 else(WIN32)
-   set(CPACK_GENERATOR "DEB;RPM")
+   set(CPACK_GENERATOR "TGZ;DEB;RPM")
 endif(WIN32)
 
 set(CPACK_PACKAGE_VENDOR "HTML Tidy Advocacy Community Group")

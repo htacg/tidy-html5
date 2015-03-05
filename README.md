@@ -1,6 +1,15 @@
 # HTML Tidy with HTML5 support
 
-[![Build Status](https://travis-ci.org/pedromorgan/tidy-html5.svg?branch=travis_setup)](https://travis-ci.org/pedromorgan/tidy-html5)
+`Tidy` tidies HTML and XML. It can tidy your documents by itself, and developers can easily integrate its features into even more powerful tools.
+
+This project includes:
+
+- `tidylib`
+   - A C static or dynamic library that developers can integrate into applications
+- `tidy`
+   -  A console application for processing files using `tidylib`
+
+[![Build Status](https://travis-ci.org/htacg/tidy-html5.svg?branch=travis_setup)](https://travis-ci.org/htacg/tidy-html5)
 
 ## Prerequisites
 

@@ -4,15 +4,19 @@ compiler:
   - gcc
   
 before_install:
+  - sudo apt-get update
   - echo $LANG
   - echo $LC_ALL
 
-
+s
 script: 
     - pwd
     - cd build/cmake
     - cmake ../../
     - make
+    - echo "Yippeee, build worked, now docs..."
+    - cd ../documentation
+    - ./build_docs.sh
     
 env:
   - FOO=BAR

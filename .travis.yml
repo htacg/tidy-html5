@@ -7,8 +7,9 @@ before_install:
   - echo $LANG
   - echo $LC_ALL
 
-install: make get-deps
+
 script: 
+    - pwd
     - cd build/cmake
     - cmake ../../
     - make

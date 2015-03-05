@@ -10,12 +10,13 @@ before_install:
   - echo $LC_ALL
 
 script: 
+    - echo "================================================="
     - pwd
-    - cd build/cmake
+    - cd $TRAVIS_BUILD_DIR/build/cmake
     - cmake ../../
     - make
-    - echo "Yippeee, build worked, now docs..."
-    - cd ../documentation
+    - echo "================================================="
+    - cd $TRAVIS_BUILD_DIR/documentation
     - ./build_docs.sh
     
 env:

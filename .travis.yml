@@ -1,0 +1,17 @@
+language: c
+compiler:
+  - clang
+  - gcc
+  
+before_install:
+  - echo $LANG
+  - echo $LC_ALL
+
+install: make get-deps
+script: 
+    - cd build/cmake
+    - cmake ../../
+    - make
+    
+env:
+  - FOO=BAR

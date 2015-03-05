@@ -2,7 +2,9 @@ language: c
 compiler:
   - clang
   - gcc
-  
+os:
+  - linux
+  - osx  
 before_install:
   - sudo apt-get update
   - sudo apt-get install xsltproc doxygen
@@ -16,6 +18,5 @@ script:
     - make
     - cd $TRAVIS_BUILD_DIR/build/documentation
     - ./build_docs.sh
-    
 env:
   - FOO=BAR

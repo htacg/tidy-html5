@@ -30,18 +30,19 @@
 \htmlinclude tidy5.cmd.txt
 </pre>
 
-\page tidy5_lib tidy5lib
+\page TidyLib TidyLib
 
-- \b TidyLib is easy to integrate. Because of the near universal adoption of C linkage, a C interface may be called from a great number of programming languages.
+- \b TidyLib - is easy to integrate. Because of the near universal adoption of C linkage, a C interface may be called from a great number of programming languages.
 
-- \b TidyLib was designed to use opaque types in the public interface. This allows the application to just pass an integer around and the need to transform data types in different languages is minimized. As a results it’s straight-forward to write very thin library wrappers for C++, Pascal, and COM/ATL.
+- \b TidyLib - is designed to use opaque types in the public interface. This allows the application to just pass an integer around and the need to transform data types in different languages is minimized. As a results it’s straight-forward to write very thin library wrappers for C++, Pascal, and COM/ATL.
 
-- \b TidyLib eats its own dogfood. HTML Tidy links directly to TidyLib.
+- \b TidyLib - eats its own dogfood. HTML Tidy links directly to TidyLib.
 
-- \b TidyLib is Thread Safe and Re-entrant. Because there are many uses for HTML Tidy - from content validation, content scraping, conversion to XHTML - it was important to make TidyLib run reasonably well within server applications as well as client side.
+- \b TidyLib - is Thread Safe and Re-entrant. Because there are many uses for HTML Tidy - from content validation, content scraping, conversion to XHTML - it was important to make TidyLib run reasonably well within server applications as well as client side.
 
-- \b TidyLib uses adaptable I/O. As part of the larger integration strategy it was decided to fully abstract all I/O. This means a (relatively) clean separation between character encoding processing and shovelling bytes back and forth. Internally, the library reads from sources and writes to sinks. This abstraction is used for both markup and configuration “files”. Concrete implementations are provided for file and memory I/O, and new sources and sinks may be provided via the public interface.
+- \b TidyLib - uses adaptable I/O. As part of the larger integration strategy it was decided to fully abstract all I/O. This means a (relatively) clean separation between character encoding processing and shovelling bytes back and forth. Internally, the library reads from sources and writes to sinks. This abstraction is used for both markup and configuration “files”. Concrete implementations are provided for file and memory I/O, and new sources and sinks may be provided via the public interface.
 
+\section example_hello Example
 \code{.c}
 #include <tidy.h>;
 #include <buffio.h>;
@@ -50,7 +51,7 @@
 
 int main(int argc, char **argv )
 {
-  const char* input = "<title>Foo</title><p>Foo!";
+  const char* input = "<title>Hello</title><p>World!";
   TidyBuffer output = {0};
   TidyBuffer errbuf = {0};
   int rc = -1;

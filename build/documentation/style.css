@@ -1,0 +1,182 @@
+
+body {
+    background-color: #efefef;
+}
+
+#projectname {
+    font-family: sans-serif;
+    font-size: 22pt; 
+    margin: 0 0 0 0;
+    padding: 2px 0px;
+    color: #333333;
+    text-shadow: 3px 3px 1px #cccccc;
+}
+
+#projectnumber {
+    font-size: 12pt; 
+}
+
+#projectbrief {
+    font-family: sans-serif;
+    font-size: 10pt; 
+    color: #666666;
+}
+
+
+.contents h1 {
+    font-size: 15pt;
+    font-family: monospace;
+    color: #4D4D74;
+    font-weight: bold;
+    border-left: none;
+    border-top: none;
+    border-bottom: 2px solid #cccccc;
+    margin: 30px 0px 10px 0px;
+    padding: 5px 0 5px 10px;
+}
+.contents h2 {
+    font-size: 12pt;
+    font-family: monospace;
+    color: #4D4D74;
+    font-weight: bold;
+    border-top: none;
+    border-bottom: 1px solid #dddddd;
+    margin: 20px 20% 20px 0px;
+    padding: 2px 0 2px 10px;
+}
+
+
+
+.contents p {
+    line-height: 130%;
+    font-size: 11pt;
+    font-family: sans-serif;
+    margin: 10px 20% 15px 10px;
+    padding: 0px;
+}
+
+.contents ul{
+    list-style-type: disc;
+    font-size: 11pt;
+    margin: 5px 20% 5px 40px;
+    padding: 0px;
+    line-height: 140%;
+}
+.contents ul ul{
+    list-style-type: circle;
+    margin-left: 30px;
+}
+.contents li{
+    padding: 2px 0 2px 0;
+    margin: 0;
+    ssbackground-color: pink;
+}
+
+.contents .textblock{
+    font-size: 10pt;
+    margin: 10px 50px 10px 50px;
+    line-height: 140%;
+}
+.contents .textblock code{
+    font-family: monospace;
+    font-size: 9pt;
+}
+.contents .todo{
+    font-size: 11pt;
+    margin: 10px 10% 20px 30px;
+}
+.contents .bug{
+    font-size: 11pt;
+    margin: 10px 10% 20px 30px;
+}
+
+dl
+{
+        padding: 0 0 0 10px;
+}
+
+/* dl.note, dl.warning, dl.attention, dl.pre, dl.post, dl.invariant, dl.deprecated, dl.todo, dl.test, dl.bug */
+dl.section
+{
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+dl.note
+{
+        margin: 5px 10% 5px 30px;
+        padding: 10px;
+        border-left: 4px solid;
+        border-color: #D0C000;
+        background-color: #FFFAC5;
+        border-radius: 10px;
+}
+
+ul dl.note{
+    margin-right: 0;
+}
+
+dl.warning, dl.attention
+{
+        margin: 5px 10% 5px 30px;
+        padding: 10px;
+        border-left: 4px solid;
+        border-color: #FF909F;
+        background-color: #FFE1E5;
+        border-radius: 10px;
+}
+
+dl.pre, dl.post, dl.invariant
+{
+        margin-left:-7px;
+        padding-left: 3px;
+        border-left:4px solid;
+        border-color: #00D000;
+}
+
+dl.deprecated
+{
+        margin: 5px 10% 5px 30px;
+        padding: 10px;
+        border-left:4px solid #B10BBF;
+        background-color: #FBC9FF;
+        border-radius: 10px;
+}
+
+dl.todo
+{
+        margin: 5px 10% 5px 30px;
+        padding: 10px;
+        border-left:4px solid #00C0E0;
+        background-color:  #DCFAFF ;
+        border-radius: 10px;
+}
+dl.bug
+{
+        margin: 5px 10% 5px 30px;
+        padding: 10px;
+        border-left:4px solid red;
+        background-color:  #FFC3B9 ;
+        border-radius: 10px;
+}
+dl.test
+{
+        margin-left:-7px;
+        padding-left: 3px;
+        border-left:4px solid;
+        border-color: #3030E0;
+}
+
+dl.bug
+{
+        margin-left:-7px;
+        padding-left: 3px;
+        border-left:4px solid;
+        border-color: #C08050;
+}
+
+
+
+dl.section dd {
+    margin-bottom: 6px;
+}

@@ -20,6 +20,7 @@
 - \ref tidy5_cmd
 - \ref tidylib
   - <a href="modules.html">Modules</a>
+  - \ref todo
 - \ref building_tidy
 - \ref history
 - \ref license    

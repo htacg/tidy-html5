@@ -20,7 +20,7 @@
 - \ref tidylib
 - \ref building_tidy
 - \ref history
-    
+- \ref license    
     
     
     
@@ -161,5 +161,12 @@ being developed and prepped for a new, stable, and modern release.</p>
 
 <p>HTACG is also working diligently with the SourceForge maintainers in an effort
 to harmonize <strong>HTML Tidy</strong> into a single, stable, solid release once again.</p>
+
+
+\page license License
+
+<pre>
+\htmlinclude LICENSE.md
+</pre>
 
 */

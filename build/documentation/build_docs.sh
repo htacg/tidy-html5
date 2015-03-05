@@ -7,7 +7,7 @@
 # documentation. Relative path is okay. You shouldn't have to change this
 # too often if your compiler always puts tidy in the same place.
 
-TIDY_PATH="./tidy5"         # Current directory.
+TIDY_PATH="../cmake/tidy5"         # Current directory.
 
 TIDY_VERSION=`cat ../../version.txt`
 
@@ -108,7 +108,10 @@ if [ "$BUILD_API" -eq 1 ]; then
   echo "The following is doxygen's stderr output. It doesn't indicate errors with this script:\n"
   
   # echo the output of tidy5 --help so we can include
-  $TIDY_PATH -h > "./tidy5.cmd.txt"
+  $TIDY_PATH -h > "./examples/tidy5.cmd.txt"
+  
+  ## copy license file to examples for includsing
+  cp ../../LICENSE.md ./examples/
   
   ## this lot 
   # - echos and catches outputs the doxygen config

@@ -1,0 +1,10 @@
+
+# file created during build_docs 
+# = tidy5 -h > tidy5.cmd.txt
+examples/tidy5.cmd.txt
+
+# The license file needs to copies to examples for \include
+examples/LICENSE.md
+
+
+

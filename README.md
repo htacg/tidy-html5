@@ -1,5 +1,7 @@
 # HTML Tidy with HTML5 support
 
+[![Build Status](https://travis-ci.org/pedromorgan/tidy-html5.svg?branch=travis_setup)](https://travis-ci.org/pedromorgan/tidy-html5)
+
 ## Prerequisites
 
   1. git - http://git-scm.com/book/en/v2/Getting-Started-Installing-Git

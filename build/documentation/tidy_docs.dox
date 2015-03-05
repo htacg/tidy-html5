@@ -17,7 +17,7 @@
 \section content Contents
 
 - \ref tidy5_cmd
-- \ref tidy5_lib
+- \ref tidylib
 - \ref building_tidy
 - \ref history
     
@@ -30,7 +30,7 @@
 \htmlinclude tidy5.cmd.txt
 </pre>
 
-\page TidyLib TidyLib
+\page tidylib tidylib
 
 - \b TidyLib - is easy to integrate. Because of the near universal adoption of C linkage, a C interface may be called from a great number of programming languages.
 

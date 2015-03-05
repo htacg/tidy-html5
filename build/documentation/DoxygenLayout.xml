@@ -21,6 +21,7 @@
       <tab type="globals" visible="yes" title="" intro=""/>
     </tab>
     <tab type="examples" visible="yes" title="" intro=""/>
+    <tab type="user" url="https://github.com/htacg/tidy-html5/issues" title="Bugs &amp; Issues"/>
     <tab type="user" url="https://github.com/htacg/tidy-html5" title="github"/>
     <tab type="user" url="http://www.htacg.org/" title="htacg.org"/>
     <tab type="user" url="http://www.html-tidy.org/" title="html-tidy.org"/>

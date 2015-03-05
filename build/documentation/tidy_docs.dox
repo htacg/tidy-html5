@@ -6,18 +6,20 @@
 
 <h4>What is tidy ?</h4>
 
--  \b `tidy` 
-        - is a console application for Mac OS X, Linux, Windows, UNIX, and more. 
-        - It corrects and cleans up HTML and XML documents by fixing markup errors and upgrading legacy code to modern standards.
--  \b  `tidylib` 
+-  \ref tidylib 
         - is a C static or dynamic library that developers can integrate into their applications 
           in order to bring all of Tidy’s power to your favorite tools. 
         - `tidylib` is used today in desktop applications, web servers, and more.
+        
+-  \ref tidy5_cmd 
+        - is a console application built on \ref tidylib for Mac OS X, Linux, Windows, UNIX, and more. 
+        - It corrects and cleans up HTML and XML documents by fixing markup errors and upgrading legacy code to modern standards.
 
 \section content Contents
 
 - \ref tidy5_cmd
 - \ref tidylib
+  - <a href="modules.html">Modules</a>
 - \ref building_tidy
 - \ref history
 - \ref license    

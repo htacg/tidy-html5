@@ -119,7 +119,7 @@ if [ "$BUILD_API" -eq 1 ]; then
   # - which are then passed to doxygen as stdin (instead of the path to a config.file)
   ( cat "$DOXY_CFG"; \
     echo "PROJECT_NUMBER=$TIDY_VERSION"; \ 
-    echo "HTML_EXTRA_FILES=$OUTP_DIR/quickref.html ./tidy5.cmd.txt"; ) \
+    echo "HTML_EXTRA_FILES=$OUTP_DIR/quickref.html ./examples/tidy5.cmd.txt"; ) \
     | doxygen - > /dev/null
   echo "\nTidyLib API documentation has been built."
 else

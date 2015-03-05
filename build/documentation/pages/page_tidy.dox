@@ -3,6 +3,9 @@
 
 \page tidy5_cmd `tidy5` command
 
+  - \subpage tidy_quickstart
+  - \subpage tidy_config
+  
 <pre>
 \htmlinclude tidy5.cmd.txt
 </pre>

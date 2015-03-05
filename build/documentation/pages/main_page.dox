@@ -36,7 +36,9 @@ is converted to
 \section content Contents
 
 - \ref tidy5_cmd
+  - \ref tidy_quickstart
   - \ref tidy_config
+  - \ref tidy_scripting
 - \ref tidylib
   - <a href="modules.html">Modules</a>
 - \ref building_tidy

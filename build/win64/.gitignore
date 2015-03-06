@@ -11,4 +11,12 @@ cmake_install.cmake
 x64/*
 ipch/*
 *.opensdf
-
+CPackConfig.cmake
+CPackSourceConfig.cmake
+*.wixobj
+install_manifest.txt
+*.zip
+*.exe
+*.msi
+_CPack_Packages/*
+dir

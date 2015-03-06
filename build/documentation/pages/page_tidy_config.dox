@@ -2,7 +2,7 @@
 
 \page tidy_config Configuration
 
-To get a list of all configuration settings, use:
+To get a list of all configuration settings, see \ref config_options below or use:
 \code{.sh}
 tidy -help-config
 \endcode
@@ -34,6 +34,9 @@ You can find documentation for full set of configuration options on the <a href=
 
 \include example_config.txt
 
-
+\section config_options Config Options
+<pre>
+\htmlinclude tidy5.config.txt
+</pre>
 
 */

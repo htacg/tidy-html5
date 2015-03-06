@@ -24,20 +24,21 @@ is converted to
 \endcode
 
 
-<h4>tidy and this project has two parts</h4>
+<h4>This project has two parts:</h4>
 
 -  \ref tidylib 
-        - is a C static or dynamic library that developers can integrate into their applications 
+        - a C static or dynamic library that developers can integrate into their applications 
           in order to bring all of Tidy’s power to your favorite tools. 
         
--  \ref tidy5_cmd 
-        - is a console application built on \ref tidylib for Mac OS X, Linux, Windows, UNIX, and more. 
+-  \ref tidy_cmd 
+        - a console application built on \ref tidylib for Mac OS X, Linux, Windows, UNIX, and more. 
 
 \section content Contents
 
-- \ref tidy5_cmd
+- \ref tidy_cmd
   - \ref tidy_quickstart
   - \ref tidy_config
+  - \ref featured_options
   - \ref tidy_scripting
 - \ref tidylib
   - <a href="modules.html">Modules</a>

@@ -108,7 +108,9 @@ if [ "$BUILD_API" -eq 1 ]; then
   echo "The following is doxygen's stderr output. It doesn't indicate errors with this script:\n"
   
   # echo the output of tidy5 --help so we can include
-  $TIDY_PATH -h > "./examples/tidy5.cmd.txt"
+  $TIDY_PATH -h > "./examples/tidy5.help.txt"
+  $TIDY_PATH -help-config > "./examples/tidy5.config.txt"
+  
   
   ## copy license file to examples for includsing
   cp ../../LICENSE.md ./examples/

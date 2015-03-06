@@ -188,6 +188,22 @@ dl.section dd {
 }
 
 
+
+table.directory tr {
+    border-bottom: 1px solid #cccccc !important;
+}
+
+table.directory  tr:hover {
+    background-color: #F6FF88 !important;
+}
+
+
+table.directory  td  {
+    padding: 5px;
+    font-family: sans-serif;
+}
+
+/*****************************************************/
 /* Quickref */
 table.quickref {
     font-size: 9pt;

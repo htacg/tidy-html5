@@ -29,9 +29,26 @@ being developed and prepped for a new, stable, and modern release.</p>
 to harmonize <strong>HTML Tidy</strong> into a single, stable, solid release once again.</p>
 
 
-
-- This repository originally transferred from w3c.github.com/tidy-html5.
-- First moved to <a href="https://github.com/htacg/tidy-html5">Github</a> from <a href="http://tidy.sourceforge.net/">tidy.sourceforge.net</a>
+\code
+                                                                                      
+  +-----------------------------+                                                     
+  | w3.org/People/Raggett/tidy/ |                                                     
+  ++-------------+--------------+                                                     
+   |             |                                                                    
+   |             |    +----------------------+                                        
+   |             +--> |tidy.sourceforge.net  |                                        
+   |                  +------------------+---+                                        
+   |                                     |                                            
+   |       +--------------------+------+ | Soon                                       
+   +-->    | github.com/w3c/tidy|html5 | |                                            
+           +-+------------------+------+ |                                            
+             |                           |                                            
+             |                           |    +-------------------------------+       
+             |                           +->  | You are here:                 |       
+             |                                | github.com/htacg/tidy-html5   |       
+             +----------------------------->  +----------------------+--------+       
+                                                                                      
+\endcode
 
 
 */

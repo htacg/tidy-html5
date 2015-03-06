@@ -2,7 +2,7 @@
 
 \mainpage Tidy home
 
-\note The repository <a href="https://github.com/htacg/tidy-html5">github.com/htacg/tidy-html5</a> and this documentation should be considered  canonical for HTML Tidy as of 2015-January-15.
+\note The repository <a href="https://github.com/htacg/tidy-html5">github.com/htacg/tidy-html5</a> and this documentation should be considered  canonical for HTML Tidy as of 2015-January-15. See \ref history
 
 
 \b Tidy corrects and cleans up HTML content by fixing markup errors such as mismatched, misnested and missing tags, missing end "/" tags, missing quotations et all, eg:

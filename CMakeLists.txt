@@ -169,5 +169,38 @@ if (BUILD_SAMPLE_CODE)
     # no INSTALL of this 'local' sample
 endif ()
 
+
+##########################################################
+### Create deb and RPM
+##########################################################
+IF(WIN32)
+   set(CPACK_GENERATOR "ZIP;NSIS")
+else(WIN32)
+   set(CPACK_GENERATOR "TGZ;DEB;RPM")
+endif(WIN32)
+
+set(CPACK_PACKAGE_VENDOR "HTML Tidy Advocacy Community Group")
+set(CPACK_PACKAGE_CONTACT "maintainer@htacg.org")
+
+set(CPACK_PACKAGE_VERSION ${LIBTIDY_VERSION})
+set(CPACK_PACKAGE_VERSION_MAJOR "${TIDY_MAJOR_VERSION}")
+set(CPACK_PACKAGE_VERSION_MINOR "${TIDY_MINOR_VERSION}")
+set(CPACK_PACKAGE_VERSION_PATCH "${TIDY_POINT_VERSION}")
+
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE.md")
+
+## debian config
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER ${CPACK_PACKAGE_CONTACT})
+set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "http://www.html-tidy.org/")
+#set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc")
+set(CPACK_DEBIAN_PACKAGE_SECTION "Libraries")
+
+set(BITNESS 32)
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+  set(BITNESS 64)
+endif()
+set( CPACK_PACKAGE_FILE_NAME "tidy5-${CPACK_PACKAGE_VERSION}-${BITNESS}bit" )
+
+INCLUDE(CPack)
 # eof
 

@@ -166,6 +166,8 @@ int TY_(HTMLVersion)(TidyDocImpl* doc)
 
     if (xhtml && dtver == VERS_UNKNOWN) return XH50;
     if (dtver == VERS_UNKNOWN) return HT50;
+    /* Issue #167 - if NOT XHTML, and doctype is default VERS_HTML5, then return HT50 */
+    if (!xhtml && (dtver == VERS_HTML5)) return HT50;
 
     for (i = 0; W3C_Doctypes[i].name; ++i)
     {
@@ -1747,6 +1749,13 @@ Bool TY_(FixDocType)( TidyDocImpl* doc )
     uint guessed = VERS_UNKNOWN;
     Bool hadSI = no;
 
+    /* Issue #167 - found doctype, and doctype is default VERS_HTML5, set VERS_HTML5 and return yes */
+    if (doctype && (dtmode == TidyDoctypeAuto) &&
+        (lexer->doctype == VERS_HTML5) )
+    {
+        lexer->versionEmitted = lexer->doctype;
+        return yes;
+    }
     if (dtmode == TidyDoctypeAuto &&
         lexer->versions & lexer->doctype &&
         !(VERS_XHTML & lexer->doctype && !lexer->isvoyager)

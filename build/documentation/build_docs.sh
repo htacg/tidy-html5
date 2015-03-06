@@ -133,7 +133,7 @@ if [ "$BUILD_API" -eq 1 ]; then
     
     ## create zip file of docs
     cd $OUTP_DIR;
-    zip  -r "tidy-docs-$TIDY_VERSION.zip" ./tidylib_api
+    #zip  -r "tidy-docs-$TIDY_VERSION.zip" ./tidylib_api
     
     
     

@@ -193,9 +193,20 @@ table.quickref {
     font-size: 10pt;
     font-family: monospace;
 }
+table.quickref td.qrow {
+    border-bottom: 1px solid #cccccc !important;
+}
 table td.h2 {
+    padding: 0;
+}
+.qh2 {
     background-color: #333333;
-    color: #eeeeee;
+    color: #eeeeee !important;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    margin: 0;
+    
 }
 table td.h3 {
     background-color: #333333;
@@ -216,4 +227,40 @@ table td.h3top {
 
 table td.tabletitle {
     background-color: #cccccc;
+    font-size: 8pt;
+}
+table td.qoptiontitle {
+    background-color: #cccccc;
+    font-size: 10pt;
+    font-weight: bold;
+    font-family: monospace;
+    padding-left: 5px;
+}
+
+
+.qlabel {
+    text-align: right;
+    font-size: 9pt;
+    width: 80px;
+    border-bottom: 1px solid #bbbbbb;
+
+    background-color: #dddddd;
+    font-family: sans-serif;
+}
+.qvalu {
+    font-size: 9pt;
+    font-weight: bold;
+    border-bottom: 1px solid #bbbbbb;
+    font-family: monospace;
+    border-left: 1px solid #bbbbbb;
+}
+
+.qdescription {
+    font-size: 11pt;
+    color: #333333;
+    margin: 0;
+    padding: 5px;
+    line-height: 140%;
+    border-left: 1px solid #bbbbbb;
+    border-bottom: 1px solid #bbbbbb;
 }

@@ -121,9 +121,9 @@
   <xsl:for-each select="/config/option[@class=$class]">
     <xsl:sort select="name" order="ascending" />
     <tr>
-      <td><a href="#{name}"><xsl:value-of select="name"/></a></td>
-      <td><xsl:apply-templates select="type"/></td>
-      <td><xsl:choose>
+      <td class="qrow"><a href="#{name}"><xsl:value-of select="name"/></a></td>
+      <td class="qrow"><xsl:apply-templates select="type"/></td>
+      <td class="qrow"><xsl:choose>
             <xsl:when test="string-length(default) &gt; 0 ">
               <xsl:apply-templates select="default" />
             </xsl:when>
@@ -150,59 +150,69 @@
   </tr>
   <tr valign="bottom">
     <td valign="top" colspan="2" class="h2" id="{$headerID}">
-       <xsl:value-of select="$header"/> Options Reference
+       <h2 class="qh2"><xsl:value-of select="$header"/></h2> 
     </td>
   </tr>
-  <tr>
-    <td>&#160;</td>
-  </tr>
+  
 
   <xsl:for-each select="/config/option[@class=$class]">
     <xsl:sort select="name" order="ascending" />
     <tr>
-      <td class="tabletitle" valign="top" id="{name}">
+      <td class="qoptiontitle" valign="top" id="{name}" colspan="2">
         <xsl:value-of select="name"/>
       </td>
       <td class="tabletitlelink" valign="top" align="right">
-      <a href="#top">Top</a></td>
-    </tr>
-    <tr>
-      <td valign="top">Type: <strong><xsl:value-of
-        select="type"/></strong><br />
-
-        <xsl:choose>
-          <xsl:when test="string-length(default) &gt; 0">
-            Default: <strong><xsl:apply-templates select="default" /></strong>
-          </xsl:when>
-          <xsl:otherwise>
-            Default: <strong>-</strong>
-          </xsl:otherwise>
-        </xsl:choose>
-
-        <xsl:choose>
-          <xsl:when test="string-length(example) &gt; 0">
-            <br />Example: <strong><xsl:apply-templates
-                select="example"/></strong>
-          </xsl:when>
-          <xsl:otherwise>
-            <br />Example: <strong>-</strong>
-          </xsl:otherwise>
-        </xsl:choose>
-      </td>
-      <td align="right" valign="top">
-        <xsl:for-each select="seealso">
-          <a href="#{.}"><xsl:apply-templates select="." /></a>
-          <xsl:if test="position() != last()">
-            <br />
-          </xsl:if>
-        </xsl:for-each>
+          <a href="#top">Top</a>
       </td>
     </tr>
-
     <tr>
-      <td colspan="2"><xsl:apply-templates select="description"/></td>
+        <td valign="top" class="qlabel">Type:</td>
+        <td  class="qvalu"><xsl:value-of select="type"/></td>
+    </tr>
+    <tr>
+        <td valign="top" class="qlabel">Default:</td>
+        <td class="qvalu">
+            <xsl:choose>
+              <xsl:when test="string-length(default) &gt; 0">
+                <xsl:apply-templates select="default" />
+              </xsl:when>
+              <xsl:otherwise>-</xsl:otherwise>
+            </xsl:choose>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" class="qlabel">Example:</td>
+        <td class="qvalu">
+            <xsl:choose>
+              <xsl:when test="string-length(example) &gt; 0">
+                <xsl:apply-templates select="example"/>
+              </xsl:when>
+              <xsl:otherwise>-</xsl:otherwise>
+            </xsl:choose>
+      </td>
+    </tr>
+   
+    <xsl:choose>
+        <xsl:when test="seealso">
+        <tr>
+            <td valign="top" class="qlabel">See Also:</td>
+            <td  valign="top" class="qvalu">
+                <xsl:for-each select="seealso">
+                  <a href="#{.}"><xsl:apply-templates select="." /></a>
+                  <xsl:if test="position() != last()">, </xsl:if>
+                </xsl:for-each>
+            </td>
+        </tr>
+        </xsl:when>
+    </xsl:choose>
+     
+    <tr>
+        <td></td>
+        <td colspan="1" class="qdescription"><xsl:apply-templates select="description"/></td>
     </tr>
 
+
+    
     <tr>
       <td>&#160;</td>
     </tr>

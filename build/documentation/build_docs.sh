@@ -121,6 +121,18 @@ if [ "$BUILD_API" -eq 1 ]; then
     echo "PROJECT_NUMBER=$TIDY_VERSION"; \ 
     echo "HTML_EXTRA_FILES=$OUTP_DIR/quickref.html ./examples/tidy5.cmd.txt"; ) \
     | doxygen - > /dev/null
+    
+    # cleanup
+    rm "./examples/tidy5.cmd.txt"
+    rm "./examples/LICENSE.md"
+    
+    ## create zip file of docs
+    cd $OUTP_DIR;
+    zip  -r "tidy-docs-$TIDY_VERSION.zip" ./tidylib_api
+    
+    
+    
+    
   echo "\nTidyLib API documentation has been built."
 else
   echo "* $OUTP_DIR/tidylib_api/ was skipped because not all dependencies were satisfied."

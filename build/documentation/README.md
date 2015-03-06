@@ -1,5 +1,7 @@
 # Documentation HOWTO
 
+\note For linking to these docs, the doxygen tag file is  `tidy.tags`
+
 **HTML Tidy** provides several types of documentation to suit different purposes. This
 document describes how to generate the following:
 

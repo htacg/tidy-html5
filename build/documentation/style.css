@@ -3,13 +3,18 @@ body {
     background-color: #efefef;
 }
 
+#titlearea {
+    background-image: url(http://www.html-tidy.org/assets/images/green-abstract-background.jpg);
+    background-size: cover;
+}
+
 #projectname {
     font-family: sans-serif;
     font-size: 22pt; 
     margin: 0 0 0 0;
+    margin-left: 150px;
     padding: 2px 0px;
-    color: #333333;
-    text-shadow: 3px 3px 1px #cccccc;
+    color: white;
 }
 
 #projectnumber {
@@ -19,7 +24,8 @@ body {
 #projectbrief {
     font-family: sans-serif;
     font-size: 10pt; 
-    color: #666666;
+    color: #dddddd;
+    margin-left: 150px;
 }
 
 

@@ -86,6 +86,7 @@ ctmbstr        TY_(GetNextDeclaredTag)( TidyDocImpl* doc, UserTagType tagType,
 
 void TY_(InitTags)( TidyDocImpl* doc );
 void TY_(FreeTags)( TidyDocImpl* doc );
+void TY_(AdjustTags)( TidyDocImpl *doc ); /* if NOT HTML5 DOCTYPE, fall back to HTML4 legacy mode */
 
 
 /* Parser methods for tags */

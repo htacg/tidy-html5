@@ -158,12 +158,18 @@ static CheckAttribs CheckHTML;
 #define VERS_ELEM_VIDEO      (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_WBR        (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 
-static const Dict tag_defs[] =
+/*\ 
+ * Issue #167 & #169
+ * Tody defaults to HTML5 mode
+ * but allow this table to be ADJUSTED if NOT HTML5
+ * was static const Dict tag_defs[] = 
+\*/
+static Dict tag_defs[] =
 {
   { TidyTag_UNKNOWN,    "unknown!",   VERS_UNKNOWN,         NULL,                       (0),                                           NULL,          NULL           },
 
   /* W3C defined elements */
-  { TidyTag_A,          "a",          VERS_ELEM_A,          &TY_(W3CAttrsFor_A)[0],          (CM_INLINE),                                   TY_(ParseInline),   NULL           },
+  { TidyTag_A,          "a",          VERS_ELEM_A,          &TY_(W3CAttrsFor_A)[0],          (CM_INLINE|CM_BLOCK|CM_MIXED),                 TY_(ParseBlock),    NULL           }, /* Issue #167 & #169 - default HTML5 */
   { TidyTag_ABBR,       "abbr",       VERS_ELEM_ABBR,       &TY_(W3CAttrsFor_ABBR)[0],       (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_ACRONYM,    "acronym",    VERS_ELEM_ACRONYM,    &TY_(W3CAttrsFor_ACRONYM)[0],    (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_ADDRESS,    "address",    VERS_ELEM_ADDRESS,    &TY_(W3CAttrsFor_ADDRESS)[0],    (CM_BLOCK),                                    TY_(ParseBlock),    NULL           },
@@ -718,6 +724,27 @@ void TY_(FreeDeclaredTags)( TidyDocImpl* doc, UserTagType tagType )
         }
         else
           prev = curr;
+    }
+}
+
+/*\
+ * Issue #167 & #169
+ * Tidy defaults to HTML5 mode
+ * If the <!DOCTYPE ...> is found to NOT be HTML5,
+ * then adjust tags to HTML4 mode
+ * At present only TidyTag_A, but could apply to others
+\*/
+void TY_(AdjustTags)( TidyDocImpl *doc )
+{
+    Dict *np = (Dict *)TY_(LookupTagDef)( TidyTag_A );
+    TidyTagImpl* tags = &doc->tags;
+    if (np) 
+    {
+        np->parser = TY_(ParseInline);
+        np->model  = CM_INLINE;
+#if ELEMENT_HASH_LOOKUP
+        tagsEmptyHash( doc, tags );
+#endif
     }
 }
 

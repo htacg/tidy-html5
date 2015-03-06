@@ -1519,15 +1519,27 @@ Bool TY_(AddGenerator)( TidyDocImpl* doc )
     return no;
 }
 
-/* examine <!DOCTYPE> to identify version */
+/*\ examine <!DOCTYPE ...> to identify version 
+ *  Issue #167 and #169
+ *   If HTML5
+ *        <!DOCTYPE html>
+ *       <!DOCTYPE html SYSTEM "about:legacy-compat">
+ *   else others
+\*/
 static uint FindGivenVersion( TidyDocImpl* doc, Node* doctype )
 {
     AttVal * fpi = TY_(GetAttrByName)(doctype, "PUBLIC");
     uint vers;
 
-    if (!fpi || !fpi->value)
+    if (!fpi || !fpi->value) 
+    {
+        if (doctype->element && (TY_(tmbstrcmp)(doctype->element,"html") == 0))
+        {
+            return VERS_HTML5;  /* TODO: do we need to check MORE? */
+        }
+        /* TODO: Consider warning, error message */
         return VERS_UNKNOWN;
-
+    }
     vers = GetVersFromFPI(fpi->value);
 
     if (VERS_XHTML & vers)
@@ -2693,7 +2705,13 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
 
                 /* make a note of the version named by the 1st doctype */
                 if (lexer->doctype == VERS_UNKNOWN && lexer->token && !cfgBool(doc, TidyXmlTags))
+                {
                     lexer->doctype = FindGivenVersion(doc, lexer->token);
+                    if (lexer->doctype != VERS_HTML5)
+                    {
+                        TY_(AdjustTags)(doc); /* Issue #167 & #169 - Adjust TidyTag_A back to legacy mode */
+                    }
+                }
                 node = lexer->token;
                 GTDBG(doc,"doctype", node);
                 return node;

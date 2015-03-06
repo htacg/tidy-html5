@@ -186,3 +186,34 @@ dl.bug
 dl.section dd {
     margin-bottom: 6px;
 }
+
+
+/* Quickref */
+table.quickref {
+    font-size: 10pt;
+    font-family: monospace;
+}
+table td.h2 {
+    background-color: #333333;
+    color: #eeeeee;
+}
+table td.h3 {
+    background-color: #333333;
+    color: #eeeeee;
+    padding: 8px;
+    border-top-left-radius: 8px;
+}
+table td.h3top {
+    background-color: #333333;
+    padding: 8px;
+    border-top-right-radius: 8px;
+    text-align: right;
+}
+.h3topa {
+    color: #333333;
+}
+
+
+table td.tabletitle {
+    background-color: #cccccc;
+}

@@ -71,6 +71,7 @@ if [ "$BUILD_XSLT" -eq 1 ]; then
 
 	# 'quickref.html'
 	xsltproc "quickref.xsl" "tidy-config.xml" > "$OUTP_DIR/quickref.html"
+	xsltproc "quickref.include.xsl" "tidy-config.xml" > ./examples/quickref_include.html
 
 	# 'tidy.1'
 	xsltproc "tidy1.xsl" "$tidy-help.xml" > "$OUTP_DIR/tidy.1"
@@ -121,11 +122,12 @@ if [ "$BUILD_API" -eq 1 ]; then
   # - which are then passed to doxygen as stdin (instead of the path to a config.file)
   ( cat "$DOXY_CFG"; \
     echo "PROJECT_NUMBER=$TIDY_VERSION"; \ 
-    echo "HTML_EXTRA_FILES=$OUTP_DIR/quickref.html ./examples/tidy5.help.txt ./examples/tidy5.config.txt"; ) \
+    echo "HTML_EXTRA_FILES= ./examples/tidy5.help.txt ./examples/tidy5.config.txt"; ) \
     | doxygen - > /dev/null
     
     # cleanup
-    rm "./examples/tidy5.cmd.txt"
+    rm "./examples/tidy5.help.txt"
+    rm "./examples/tidy5.config.txt"
     rm "./examples/LICENSE.md"
     
     ## create zip file of docs

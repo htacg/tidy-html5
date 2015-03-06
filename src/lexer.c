@@ -49,6 +49,33 @@
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
 static Bool show_attrs = yes;
+#define MX_TXT 5
+static char buffer[MX_TXT+8]; /* NOTE extra for '...'\0 tail */
+static tmbstr get_text_string(Lexer* lexer, Node *node)
+{
+    uint len = node->end - node->start;
+    tmbstr cp = lexer->lexbuf + node->start;
+    tmbstr end = lexer->lexbuf + node->end;
+    uint i = 0;
+    buffer[0] = (char)0;
+    while (cp < end ) {
+        buffer[i++] = *cp;
+        cp++;
+        if (i >= MX_TXT)
+            break;
+    }
+    if (i < len) {
+        buffer[i++] = '.';
+        if (i < len) {
+            buffer[i++] = '.';
+            if (i < len) {
+                buffer[i++] = '.';
+            }
+        }
+    }
+    buffer[i] = 0;
+    return buffer;
+}
 static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
 {
     Lexer* lexer = doc->lexer;
@@ -58,7 +85,9 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
     SPRTF("R=%d C=%d: ", line, col );
     if (lexer && lexer->token && (lexer->token->type == TextNode)) {
         if (show_attrs) {
-            SPRTF("Returning %s TextNode ... %s\n", msg,
+            uint len = node->end - node->start;
+            tmbstr cp = get_text_string( lexer, node );
+            SPRTF("Returning %s TextNode [%s]%u %s\n", msg, cp, len,
                 lex ? "lexer" : "stream");
         } else {
             SPRTF("Returning %s TextNode %p... %s\n", msg, node,

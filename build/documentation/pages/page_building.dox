@@ -3,6 +3,8 @@
 
 \page building_tidy Building Tidy
 
+How to compile and install Tidy from source code.
+
 \section Prerequisites
 
  - \b git - <a href="http://git-scm.com/book/en/v2/Getting-Started-Installing-Git">git-scm.com/book/en/v2/Getting-Started-Installing-Git</a>

@@ -171,13 +171,26 @@ endif ()
 
 
 ##########################################################
-### Create deb and RPM
+### Create MSI,EXE, DMG, DEB/RPM
+### TODO: Check each of these builds
 ##########################################################
-IF(WIN32)
-   set(CPACK_GENERATOR "ZIP;NSIS")
-else(WIN32)
-   set(CPACK_GENERATOR "TGZ;DEB;RPM")
-endif(WIN32)
+set(BITNESS 32)
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+  set(BITNESS 64)
+endif()
+if (WIN32)
+    # MSI - this needs WiX Tooset installed and a path to candle.exe
+    # EXE - this needs NSIS tools to be in path
+    set(CPACK_GENERATOR "NSIS;WIX")
+    set(CPACK_SOURCE_GENERATOR "ZIP")
+    set(CPACK_WIX_UPGRADE_GUID "D809598A-B513-4752-B268-0BAC403B00E4")
+elseif ( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin" )
+    set(CPACK_GENERATOR "PackageMake")
+    set(CPACK_SOURCE_GENERATOR "TGZ")
+else ()
+    set(CPACK_GENERATOR "DEB;RPM")
+    set(CPACK_SOURCE_GENERATOR "TGZ")
+endif ()
 
 set(CPACK_PACKAGE_VENDOR "HTML Tidy Advocacy Community Group")
 set(CPACK_PACKAGE_CONTACT "maintainer@htacg.org")
@@ -186,8 +199,11 @@ set(CPACK_PACKAGE_VERSION ${LIBTIDY_VERSION})
 set(CPACK_PACKAGE_VERSION_MAJOR "${TIDY_MAJOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_MINOR "${TIDY_MINOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_PATCH "${TIDY_POINT_VERSION}")
+set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/README.html")
 
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE.md")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE.txt")
+set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/README.html")
+set(CPACK_RESOURCE_FILE_WELCOME "${CMAKE_SOURCE_DIR}/README.html")
 
 ## debian config
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER ${CPACK_PACKAGE_CONTACT})
@@ -195,12 +211,12 @@ set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "http://www.html-tidy.org/")
 #set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc")
 set(CPACK_DEBIAN_PACKAGE_SECTION "Libraries")
 
-set(BITNESS 32)
-if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-  set(BITNESS 64)
-endif()
+set(CPACK_SOURCE_IGNORE_FILES "${CMAKE_SOURCE_DIR}/test/;${CMAKE_SOURCE_DIR}/build/;${CMAKE_SOURCE_DIR}/.git/")
+
+if (NOT WIN32 AND NOT APPLE)
 set( CPACK_PACKAGE_FILE_NAME "tidy5-${CPACK_PACKAGE_VERSION}-${BITNESS}bit" )
+endif ()
 
-INCLUDE(CPack)
+include(CPack)
+
 # eof
-

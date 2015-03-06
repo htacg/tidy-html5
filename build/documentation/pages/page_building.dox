@@ -5,6 +5,7 @@
 
 How to compile and install Tidy from source code.
 
+\tableofcontents
   
 \section Prerequisites
 
@@ -79,7 +80,10 @@ make
 cmake --build . --config Release
 \endcode
 
-<h4>Install</h4>
+
+\section compileOnstall Install
+Install the applicatio and library with
+
 \code{.sh}
 # *nix
 [sudo] make install

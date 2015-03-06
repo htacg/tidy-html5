@@ -2,6 +2,10 @@
 
 \page tidy_config Configuration
 
+Configuration settings and files
+
+\tableofcontents
+
 To get a list of all configuration settings, see \ref config_options below or use:
 \code{.sh}
 tidy -help-config

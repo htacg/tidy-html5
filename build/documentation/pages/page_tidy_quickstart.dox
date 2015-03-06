@@ -2,6 +2,8 @@
 
 \page tidy_quickstart tidy command quickstart
 
+\tableofcontents
+
 This is the syntax for invoking Tidy from the command line:
 \code{.sh}
 tidy [[options] filename]

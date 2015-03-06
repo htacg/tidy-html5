@@ -3,7 +3,7 @@
   <!-- Navigation index tabs for HTML output -->
   <navindex>
     <tab type="mainpage" visible="yes" title="Tidy Home"/>
-    <tab type="user" url="quickref.html" title="Quick Ref"/>
+    <tab type="user" url="@ref quick_ref" title="Quick Ref"/>
     <tab type="pages" visible="yes" title="Pages" intro=""/>
     <tab type="modules" visible="yes" title="" intro=""/>
     <tab type="namespaces" visible="yes" title="">

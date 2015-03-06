@@ -1,4 +1,6 @@
-# Documentation HOWTO
+Documentation HOWTO                 {#docs_howto}
+========================
+Instructions for generating documentation
 
 \note For linking to these docs, the doxygen tag file is  `tidy.tags`
 

@@ -34,7 +34,7 @@ is converted to
         - a console application built on \ref tidylib for Mac OS X, Linux, Windows, UNIX, and more. 
 
 \section content Contents
-
+- \ref quick_ref
 - \ref tidy_cmd
   - \ref tidy_quickstart
   - \ref tidy_config
@@ -43,14 +43,10 @@ is converted to
 - \ref tidylib
   - <a href="modules.html">Modules</a>
 - \ref building_tidy
-- \ref history
-- \ref license    
+-\ref docs_howto
+- \subpage history
+- \subpage license    
 - \ref todo    
     
-    
-\page quickref Quick Reference
-
-\htmlinclude quickref_include.html
-
 
 */

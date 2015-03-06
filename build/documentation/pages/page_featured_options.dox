@@ -3,6 +3,8 @@
 
 \page featured_options Featured Options
 
+Overview of common tasks
+
 \section indenting Indenting output for readability
 
 Indenting the source markup of an HTML document makes the markup easier to read. Tidy can indent the 

@@ -190,22 +190,29 @@ dl.section dd {
 
 /* Quickref */
 table.quickref {
-    font-size: 10pt;
+    font-size: 9pt;
     font-family: monospace;
+}
+table.quickref tr:hover{
+    background-color: #F6FF88;
 }
 table.quickref td.qrow {
     border-bottom: 1px solid #cccccc !important;
 }
 table td.h2 {
     padding: 0;
+    margin: 0;
 }
 .qh2 {
     background-color: #333333;
     color: #eeeeee !important;
     padding: 10px;
-    border-radius: 4px;
+    border-radius: 5px;
     border: none;
     margin: 0;
+    padding: 8px;
+    font-size: 15pt;
+    width: 100%;
     
 }
 table td.h3 {
@@ -219,8 +226,12 @@ table td.h3top {
     padding: 8px;
     border-top-right-radius: 8px;
     text-align: right;
+    font-size: 8pt;
 }
-.h3topa {
+table td.h3top a{
+       color: #dddddd !important;
+}
+.h3topssssa {
     color: #333333;
 }
 
@@ -229,12 +240,23 @@ table td.tabletitle {
     background-color: #cccccc;
     font-size: 8pt;
 }
-table td.qoptiontitle {
-    background-color: #cccccc;
-    font-size: 10pt;
+
+td.tabletitlelink {
+    font-size: 8pt;
+}
+td.qoptiontitletd {
+ padding: 0;
+ margin: 0;
+}
+h4.qoptiontitle {
+    background-color: #bbbbbb;
+    font-size: 11pt;
     font-weight: bold;
     font-family: monospace;
-    padding-left: 5px;
+    padding: 5px 5px 5px 10px;
+    margin: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 

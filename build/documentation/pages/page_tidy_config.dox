@@ -28,7 +28,7 @@ immediately (no intervening space) with the string “--”; for example:
 tidy --break-before-br true --show-warnings false
 \endcode
 
-You can find documentation for full set of configuration options on the <a href="quickref.html">Quick Reference</a> page.
+You can find documentation for full set of configuration options on the \ref quickref page.
 
 \section example_config Example Configuration File
 

@@ -21,8 +21,8 @@
 
 <xsl:template match="/">
 
-    <a name="top"></a>
-    <h1 id="top">Option Groups</h1>
+    <a name="qtop"></a>
+    <h2 id="top">Option Groups</h2>
     <ul>
         <li><a class="h3" href="#MarkupHeader">HTML, XHTML, XML</a></li>
         <li><a class="h3" href="#DiagnosticsHeader">Diagnostics</a></li>
@@ -115,7 +115,7 @@
   <tr valign="bottom">
     <td class="h3" colspan="2" id="{$headerID}">
       <xsl:value-of select="$header"/> Options</td>
-    <td valign="top" class="h3top"><a href="#top" class="h3topa">Top</a></td>
+    <td valign="top" class="h3top"><a href="#qtop" class="h3topa">Top</a></td>
   </tr>
   <xsl:call-template name="ClassHeaders" />
   <xsl:for-each select="/config/option[@class=$class]">
@@ -146,10 +146,10 @@
   <xsl:param name="headerID"/>
 
   <tr>
-    <td>&#160;</td>
+    <td colspan="3">&#160;</td>
   </tr>
   <tr valign="bottom">
-    <td valign="top" colspan="2" class="h2" id="{$headerID}">
+    <td valign="top" colspan="3" class="h2" id="{$headerID}">
        <h2 class="qh2"><xsl:value-of select="$header"/></h2> 
     </td>
   </tr>
@@ -158,11 +158,11 @@
   <xsl:for-each select="/config/option[@class=$class]">
     <xsl:sort select="name" order="ascending" />
     <tr>
-      <td class="qoptiontitle" valign="top" id="{name}" colspan="2">
-        <xsl:value-of select="name"/>
+      <td  valign="top" id="{name}" colspan="2" class="qoptiontitletd">
+        <h4 class="qoptiontitle"><xsl:value-of select="name"/></h4>
       </td>
       <td class="tabletitlelink" valign="top" align="right">
-          <a href="#top">Top</a>
+          <a href="#qtop">Top</a>
       </td>
     </tr>
     <tr>

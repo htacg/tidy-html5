@@ -178,7 +178,7 @@ if (UNIX)
         ## NOTE: man name must match exe ie currently `tidy5.1` not `tidy.1`
         ## also could use `manpath` command output to determine target install path
         message("*** Generating man ***")
-        set(TIDY1_MANFILE tidy5.1)
+        set(TIDY_MANFILE tidy5.1)
         set(TIDY1XSL ../documentation/tidy1.xsl)
         set(TIDYHELP ${CMAKE_BINARY_DIR}/tidy-help.xml)
         add_custom_target(man ALL)
@@ -195,17 +195,17 @@ if (UNIX)
         add_custom_command(
             TARGET man
             SOURCE ${TIDYHELP}
-            COMMAND xsltproc ARGS ${TIDY1XSL} ${TIDYHELP} > ${CMAKE_BINARY_DIR}/${TIDY1_MANFILE}
-            OUTPUTS ${CMAKE_BINARY_DIR}/${TIDY1_MANFILE}
+            COMMAND xsltproc ARGS ${TIDY1XSL} ${TIDYHELP} > ${CMAKE_BINARY_DIR}/${TIDY_MANFILE}
+            OUTPUTS ${CMAKE_BINARY_DIR}/${TIDY_MANFILE}
             VERBATIM
             )
         add_custom_command(
             TARGET man
             SOURCE man
-            DEPENDS ${CMAKE_BINARY_DIR}/${TIDY1_MANFILE}
+            DEPENDS ${CMAKE_BINARY_DIR}/${TIDY_MANFILE}
         )
         # repeated for quickref.html - may need different targets...
-        install(FILES ${CMAKE_BINARY_DIR}/${TIDY1_MANFILE} DESTINATION local/man/man1)
+        install(FILES ${CMAKE_BINARY_DIR}/${TIDY_MANFILE} DESTINATION local/man/man1)
         # add the quickref.html install
     endif ()
 endif ()

@@ -169,6 +169,45 @@ if (BUILD_SAMPLE_CODE)
     # no INSTALL of this 'local' sample
 endif ()
 
+#==========================================================
+# Create man pages
+#==========================================================
+if (UNIX)
+    find_program( XSLTPROC_FOUND xsltproc )
+    if (XSLTPROC_FOUND)
+        ## NOTE: man name must match exe ie currently `tidy5.`` not `tidy.1`
+        message("*** Generating man ***")
+        set(TIDY1XSL ../documentation/tidy1.xsl)
+        set(TIDYHELP ${CMAKE_BINARY_DIR}/tidy-help.xml)
+        add_custom_target(man ALL)
+        
+        # run built EXE to generate xml output 
+        add_custom_command(
+            OUTPUT ${TIDYHELP}
+            COMMAND ${CMAKE_BINARY_DIR}/tidy5 -xml-help > ${TIDYHELP}
+            COMMENT "Generate ${TIDYHELP}"
+            VERBATIM
+            )
+        # repeated for tidy-config.xml
+        # run xsltproc to generate the install files..
+        add_custom_command(
+            TARGET man
+            SOURCE ${TIDYHELP}
+            COMMAND xsltproc ARGS ${TIDY1XSL} ${TIDYHELP} > ${CMAKE_BINARY_DIR}/tidy5.1
+            OUTPUTS ${CMAKE_BINARY_DIR}/tidy5.1
+            VERBATIM
+            )
+        add_custom_command(
+            TARGET man
+            SOURCE man
+            DEPENDS ${CMAKE_BINARY_DIR}/tidy5.1
+        )
+        # repeated for quickref.html - may need different targets...
+        install(FILES ${CMAKE_BINARY_DIR}/tidy5.1 DESTINATION local/man/man1)
+        # add the quickref.html install
+    endif ()
+endif ()
+
 
 ##########################################################
 ### Create MSI,EXE, DMG, DEB/RPM
@@ -192,6 +231,8 @@ else ()
     set(CPACK_SOURCE_GENERATOR "TGZ")
 endif ()
 
+set(CPACK_PACKAGE_NAME "Tidy5")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Tidy5 - HTML syntax checker")
 set(CPACK_PACKAGE_VENDOR "HTML Tidy Advocacy Community Group")
 set(CPACK_PACKAGE_CONTACT "maintainer@htacg.org")
 

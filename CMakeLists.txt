@@ -176,6 +176,7 @@ if (UNIX)
     find_program( XSLTPROC_FOUND xsltproc )
     if (XSLTPROC_FOUND)
         ## NOTE: man name must match exe ie currently `tidy5.`` not `tidy.1`
+        ## also could use `manpath` command output to determine target install path
         message("*** Generating man ***")
         set(TIDY1XSL ../documentation/tidy1.xsl)
         set(TIDYHELP ${CMAKE_BINARY_DIR}/tidy-help.xml)

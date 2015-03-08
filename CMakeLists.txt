@@ -177,11 +177,11 @@ if (UNIX)
     if (XSLTPROC_FOUND)
         ## NOTE: man name must match exe ie currently `tidy5.1` not `tidy.1`
         ## also could use `manpath` command output to determine target install path
-        message("*** Generating man ***")
+        message(STATUS "*** Generating man ***")
         set(TIDY_MANFILE tidy5.1)
         set(TIDY1XSL ../documentation/tidy1.xsl)
         set(TIDYHELP ${CMAKE_BINARY_DIR}/tidy-help.xml)
-        set(TIDYCONFIG ../documentation/tidy-config.xml)
+        set(TIDYCONFIG ${CMAKE_BINARY_DIR}/tidy-config.xml)
         add_custom_target(man ALL DEPENDS "${CMAKE_BINARY_DIR}/tidy5")
  
         # run built EXE to generate xml output 
@@ -196,7 +196,7 @@ if (UNIX)
         add_custom_command(
             TARGET man
             COMMAND ${CMAKE_BINARY_DIR}/tidy5 -xml-config > ${TIDYCONFIG}
-            COMMENT "Generate ${TIDYHELP}"
+            COMMENT "Generate ${TIDYCONFIG}"
             VERBATIM
         )
 

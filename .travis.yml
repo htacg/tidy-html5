@@ -20,11 +20,13 @@ script:
 - make
 - cd $TRAVIS_BUILD_DIR/build/documentation
 - ./build_docs.sh
+- cd $TRAVIS_BUILD_DIR/build/documentation/temp/
+- zip -r tidy-docs.zip ./tidyapi_lib 
 deploy:
   provider: releases
-  api_key:
-    secure: QY9N7Kr91MMhHySD4C87ilyVwvwTr1QAFjRiFiM12aA3vFzI9XCaQfu8x7H1mPyBkVmck1D+yi2vDktBpBdTdkzISG3iDPEt1poUEsXe1CATTOlJh8bJj76nXFFOP74mXm3eS+XMbViA11WjW6NEPVvRa4dAAsJisP4MJnF1dz4=
-  file: ! '*.deb'
+  api-key: "GITHUB OAUTH TOKEN"
+  file:
+    - "$TRAVIS_BUILD_DIR/build/documentation/temp/tidy-docs.zip"
+  skip_cleanup: true
   on:
-    repo: pedromorgan/tidy-html5
-    branch: travis_setup
+    tags: true

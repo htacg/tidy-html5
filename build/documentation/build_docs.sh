@@ -7,7 +7,9 @@
 # documentation. Relative path is okay. You shouldn't have to change this
 # too often if your compiler always puts tidy in the same place.
 
-TIDY_PATH="./tidy5"         # Current directory.
+TIDY_PATH="../cmake/tidy5"         # Current directory.
+
+TIDY_VERSION=`cat ../../version.txt`
 
 
 cat << HEREDOC
@@ -69,6 +71,7 @@ if [ "$BUILD_XSLT" -eq 1 ]; then
 
 	# 'quickref.html'
 	xsltproc "quickref.xsl" "tidy-config.xml" > "$OUTP_DIR/quickref.html"
+	xsltproc "quickref.include.xsl" "tidy-config.xml" > ./examples/quickref_include.html
 
 	# 'tidy.1'
 	xsltproc "tidy1.xsl" "$tidy-help.xml" > "$OUTP_DIR/tidy.1"
@@ -104,7 +107,37 @@ hash doxygen 2>/dev/null || { echo "- doxygen not found. This script requires do
 
 if [ "$BUILD_API" -eq 1 ]; then
   echo "The following is doxygen's stderr output. It doesn't indicate errors with this script:\n"
-  doxygen "$DOXY_CFG" > /dev/null
+  
+  # echo the output of tidy5 --help so we can include
+  $TIDY_PATH -h > "./examples/tidy5.help.txt"
+  $TIDY_PATH -help-config > "./examples/tidy5.config.txt"
+  
+  
+  ## copy license file to examples for includsing
+  cp ../../LICENSE.md ./examples/
+  
+  ## this lot 
+  # - echos and catches outputs the doxygen config
+  # - overwrites some vars but appending some to config an end
+  # - which are then passed to doxygen as stdin (instead of the path to a config.file)
+  ( cat "$DOXY_CFG"; \
+    echo "PROJECT_NUMBER=$TIDY_VERSION"; \ 
+    echo "GENERATE_TAGFILE=$OUTP_DIR/tidylib_api/tidy.tags"; \
+    echo "HTML_EXTRA_FILES= ./examples/tidy5.help.txt ./examples/tidy5.config.txt"; ) \
+    | doxygen - > /dev/null
+    
+    # cleanup
+    rm "./examples/tidy5.help.txt"
+    rm "./examples/tidy5.config.txt"
+    rm "./examples/LICENSE.md"
+    
+    ## create zip file of docs
+    cd $OUTP_DIR;
+    #zip  -r "tidy-docs-$TIDY_VERSION.zip" ./tidylib_api
+    
+    
+    
+    
   echo "\nTidyLib API documentation has been built."
 else
   echo "* $OUTP_DIR/tidylib_api/ was skipped because not all dependencies were satisfied."

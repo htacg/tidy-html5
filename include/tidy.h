@@ -160,7 +160,7 @@ struct _TidyAllocator;
 /** The allocator **/
 typedef struct _TidyAllocator TidyAllocator;
 
-/** An allocator's function table.  All functions here must
+/**  An allocator's function table.  All functions here must
     be provided.
  */
 struct _TidyAllocatorVtbl {
@@ -187,7 +187,7 @@ struct _TidyAllocatorVtbl {
 
 /** An allocator.  To create your own allocator, do something like
     the following:
-    
+    \code
     typedef struct _MyAllocator {
        TidyAllocator base;
        ...other custom allocator state...
@@ -213,7 +213,7 @@ struct _TidyAllocatorVtbl {
     allocator.base.vtbl = &amp;MyAllocatorVtbl;
     ...initialise allocator specific state...
     doc = tidyCreateWithAllocator(&allocator);
-    ...
+    \endcode
 
     Although this looks slightly long winded, the advantage is that to create
     a custom allocator you simply need to set the vtbl pointer correctly.

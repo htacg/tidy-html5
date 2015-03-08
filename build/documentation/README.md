@@ -1,4 +1,8 @@
-# DOCUMENTATION HOW-TO
+Documentation HOWTO                 {#docs_howto}
+========================
+Instructions for generating documentation
+
+\note For linking to these docs, the doxygen tag file is  `tidy.tags`
 
 **HTML Tidy** provides several types of documentation to suit different purposes. This
 document describes how to generate the following:
@@ -92,7 +96,7 @@ but any XSLT processor of your choice should work, too.
  - This examples uses the `xsltproc` command to transform `tidy-help.xml` using the
    rules in the `tidy1.xsl` stylesheet, and output it to `tidy.1`.
    
-   Note that `tidy1.xls` includes the file `tidy-config.xml` as part of the stylesheet,
+   \note Note that `tidy1.xls` includes the file `tidy-config.xml` as part of the stylesheet,
    and so although it does not appear in the command invocation, it is indeed required.
 
 

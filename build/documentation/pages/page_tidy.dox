@@ -1,0 +1,18 @@
+/*!
+
+Running the tidy command
+
+\page tidy_cmd tidy command
+
+  - \subpage tidy_quickstart
+  - \subpage tidy_config
+  - \subpage featured_options
+  - \subpage tidy_scripting
+  
+<pre>
+\htmlinclude tidy5.help.txt
+</pre>
+
+
+
+*/

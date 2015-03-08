@@ -108,7 +108,7 @@ if [ "$BUILD_API" -eq 1 ]; then
   echo "The following is doxygen's stderr output. It doesn't indicate errors with this script:\n"
   
   # echo the output of tidy5 --help so we can include
-  $TIDY_PATH -h > "./tidy5.cmd.txt"
+  $TIDY_PATH -h > "./temp/tidy5.cmd.txt"
   
   ## this lot 
   # - echos and catches outputs the doxygen config
@@ -116,7 +116,7 @@ if [ "$BUILD_API" -eq 1 ]; then
   # - which are then passed to doxygen as stdin (instead of the path to a config.file)
   ( cat "$DOXY_CFG"; \
     echo "PROJECT_NUMBER=$TIDY_VERSION"; \ 
-    echo "HTML_EXTRA_FILES=$OUTP_DIR/quickref.html ./tidy5.cmd.txt"; ) \
+    echo "HTML_EXTRA_FILES=$OUTP_DIR/quickref.html ./temp/tidy5.cmd.txt"; ) \
     | doxygen - > /dev/null
   echo "\nTidyLib API documentation has been built."
 else

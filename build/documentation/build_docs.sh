@@ -73,7 +73,7 @@ if [ "$BUILD_XSLT" -eq 1 ]; then
 	xsltproc "quickref.xsl" "tidy-config.xml" > "$OUTP_DIR/quickref.html"
 
 	# 'tidy.1'
-	xsltproc "tidy1.xsl" "$tidy-help.xml" > "$OUTP_DIR/tidy.1"
+	xsltproc "tidy1.xsl" "tidy-help.xml" > "$OUTP_DIR/tidy.1"
 
 	# Cleanup - Note: to avoid issues with the tidy1.xsl finding the tidy-config.xml
 	# document, they are created and read from the source directory instead of temp.
@@ -108,15 +108,15 @@ if [ "$BUILD_API" -eq 1 ]; then
   echo "The following is doxygen's stderr output. It doesn't indicate errors with this script:\n"
   
   # echo the output of tidy5 --help so we can include
-  $TIDY_PATH -h > "./temp/tidy5.cmd.txt"
+  $TIDY_PATH -h > "./$OUTP_DIR/tidy5.cmd.txt"
   
   ## this lot 
   # - echos and catches outputs the doxygen config
   # - overwrites some vars but appending some to config an end
   # - which are then passed to doxygen as stdin (instead of the path to a config.file)
   ( cat "$DOXY_CFG"; \
-    echo "PROJECT_NUMBER=$TIDY_VERSION"; \ 
-    echo "HTML_EXTRA_FILES=$OUTP_DIR/quickref.html ./temp/tidy5.cmd.txt"; ) \
+    echo "PROJECT_NUMBER=$TIDY_VERSION"; \
+    echo "HTML_EXTRA_FILES=$OUTP_DIR/quickref.html ./$OUTP_DIR/tidy5.cmd.txt"; ) \
     | doxygen - > /dev/null
   echo "\nTidyLib API documentation has been built."
 else

@@ -6,7 +6,7 @@ Debug/*
 Release/*
 Win32/*
 bldlog-1.txt
-cmake_install.cmake
+*.cmake
 *.dir/
 *.sln
 temp*
@@ -18,4 +18,9 @@ tidy5
 libtidy5*
 install_manifest.txt
 test71
+_CPack_Packages/*
+*.deb
+*.rpm
+*.xml
+*.1
 

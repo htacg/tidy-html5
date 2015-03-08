@@ -1,25 +1,30 @@
 language: c
 compiler:
-  - clang
-  - gcc
+- clang
+- gcc
 os:
-  - linux
-  - osx 
+- linux
+- osx
 matrix:
   allow_failures:
-    - os: osx 
+  - os: osx
 before_install:
-  - sudo apt-get update
-  - sudo apt-get install xsltproc doxygen
-  - echo $LANG
-  - echo $LC_ALL
-
-script: 
-    - pwd
-    - cd $TRAVIS_BUILD_DIR/build/cmake
-    - cmake ../../
-    - make
-    - cd $TRAVIS_BUILD_DIR/build/documentation
-    - ./build_docs.sh
-env:
-  - FOO=BAR
+- sudo apt-get update
+- sudo apt-get install xsltproc doxygen
+- echo $LANG
+- echo $LC_ALL
+script:
+- pwd
+- cd $TRAVIS_BUILD_DIR/build/cmake
+- cmake ../../
+- make
+- cd $TRAVIS_BUILD_DIR/build/documentation
+- ./build_docs.sh
+deploy:
+  provider: releases
+  api_key:
+    secure: QY9N7Kr91MMhHySD4C87ilyVwvwTr1QAFjRiFiM12aA3vFzI9XCaQfu8x7H1mPyBkVmck1D+yi2vDktBpBdTdkzISG3iDPEt1poUEsXe1CATTOlJh8bJj76nXFFOP74mXm3eS+XMbViA11WjW6NEPVvRa4dAAsJisP4MJnF1dz4=
+  file: ! '*.deb'
+  on:
+    repo: pedromorgan/tidy-html5
+    branch: travis_setup

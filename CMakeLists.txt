@@ -181,12 +181,21 @@ if (UNIX)
         set(TIDY_MANFILE tidy5.1)
         set(TIDY1XSL ../documentation/tidy1.xsl)
         set(TIDYHELP ${CMAKE_BINARY_DIR}/tidy-help.xml)
-        add_custom_target(man ALL)
+        set(TIDYCONFIG ../documentation/tidy-config.xml)
+        add_custom_target(man ALL DEPENDS "${CMAKE_BINARY_DIR}/tidy5")
  
         # run built EXE to generate xml output 
         add_custom_command(
             TARGET man
             COMMAND ${CMAKE_BINARY_DIR}/tidy5 -xml-help > ${TIDYHELP}
+            COMMENT "Generate ${TIDYHELP}"
+            VERBATIM
+        )
+
+        # run built EXE to generate more xml output 
+        add_custom_command(
+            TARGET man
+            COMMAND ${CMAKE_BINARY_DIR}/tidy5 -xml-config > ${TIDYCONFIG}
             COMMENT "Generate ${TIDYHELP}"
             VERBATIM
         )

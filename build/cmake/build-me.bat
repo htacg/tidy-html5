@@ -52,29 +52,32 @@ cmake --build . --config Release  >> %TMPLOG% 2>&1
 :DNTINST
 
 @echo.
-@echo No install at this time, but there is a updexe.bat to copy the EXE to c:\MDOS...
-@goto END
-
+@REM echo No install at this time, but there is a updexe.bat to copy the EXE to c:\MDOS...
+@REM goto END
 
 @echo Continue with install? Only Ctrl+c aborts...
 
 @pause
 
 cmake --build . --config Debug  --target INSTALL >> %TMPLOG% 2>&1
-@if EXIST install_manifest.txt (
-@copy install_manifest.txt install_manifest_dbg.txt >nul
-@echo. >> %TMPINS%/installed.txt
-@echo = %TMPRJ% Debug install %DATE% %TIME% >> %TMPINS%/installed.txt
-@type install_manifest.txt >> %TMPINS%/installed.txt
-)
+@if ERRORLEVEL 1 goto ERR4
+@REM if EXIST install_manifest.txt (
+@REM copy install_manifest.txt install_manifest_dbg.txt >nul
+@REM echo. >> %TMPINS%/installed.txt
+@REM echo = %TMPRJ% Debug install %DATE% %TIME% >> %TMPINS%/installed.txt
+@REM type install_manifest.txt >> %TMPINS%/installed.txt
+@REM )
 
 cmake --build . --config Release  --target INSTALL >> %TMPLOG% 2>&1
-@if EXIST install_manifest.txt (
-@copy install_manifest.txt install_manifest_rel.txt >nul
-@echo. >> %TMPINS%/installed.txt
-@echo = %TMPRJ% Release install %DATE% %TIME% >> %TMPINS%/installed.txt
-@type install_manifest.txt >> %TMPINS%/installed.txt
-)
+@if ERRORLEVEL 1 goto ERR5
+@REM if EXIST install_manifest.txt (
+@REM copy install_manifest.txt install_manifest_rel.txt >nul
+@REM echo. >> %TMPINS%/installed.txt
+@REM echo = %TMPRJ% Release install %DATE% %TIME% >> %TMPINS%/installed.txt
+@REM type install_manifest.txt >> %TMPINS%/installed.txt
+@REM )
+
+@fa4 " -- " %TMPLOG%
 
 @call elapsed %TMPBGN%
 @echo All done... see %TMPLOG%
@@ -101,9 +104,19 @@ cmake --build . --config Release  --target INSTALL >> %TMPLOG% 2>&1
 @echo ERROR: Cmake build Debug FAILED! >> %TMPLOG%
 @goto ISERR
 
-:ERR1
+:ERR3
 @echo ERROR: Cmake build Release FAILED!
 @echo ERROR: Cmake build Release FAILED! >> %TMPLOG%
+@goto ISERR
+
+:ERR4
+@echo ERROR: Install Debug FAILED!
+@echo ERROR: Install Debug  FAILED! >> %TMPLOG%
+@goto ISERR
+
+:ERR5
+@echo ERROR: Install Release FAILED!
+@echo ERROR: Install Release  FAILED! >> %TMPLOG%
 @goto ISERR
 
 :ISERR

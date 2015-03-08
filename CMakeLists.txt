@@ -182,31 +182,25 @@ if (UNIX)
         set(TIDY1XSL ../documentation/tidy1.xsl)
         set(TIDYHELP ${CMAKE_BINARY_DIR}/tidy-help.xml)
         add_custom_target(man ALL)
-        
+ 
         # run built EXE to generate xml output 
         add_custom_command(
-            OUTPUT ${TIDYHELP}
+            TARGET man
             COMMAND ${CMAKE_BINARY_DIR}/tidy5 -xml-help > ${TIDYHELP}
             COMMENT "Generate ${TIDYHELP}"
             VERBATIM
-            )
-        # repeated for tidy-config.xml
+        )
+
         # run xsltproc to generate the install files..
         add_custom_command(
             TARGET man
-            SOURCE ${TIDYHELP}
+            DEPENDS ${TIDYHELP}
             COMMAND xsltproc ARGS ${TIDY1XSL} ${TIDYHELP} > ${CMAKE_BINARY_DIR}/${TIDY_MANFILE}
-            OUTPUTS ${CMAKE_BINARY_DIR}/${TIDY_MANFILE}
+            COMMENT "Generate ${TIDY_MANFILE}"
             VERBATIM
-            )
-        add_custom_command(
-            TARGET man
-            SOURCE man
-            DEPENDS ${CMAKE_BINARY_DIR}/${TIDY_MANFILE}
         )
-        # repeated for quickref.html - may need different targets...
+
         install(FILES ${CMAKE_BINARY_DIR}/${TIDY_MANFILE} DESTINATION local/man/man1)
-        # add the quickref.html install
     endif ()
 endif ()
 

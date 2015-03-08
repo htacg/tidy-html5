@@ -22,11 +22,11 @@ In windows cmake offers various versions of MSVC. Again below only the command l
   2. `cmake ../.. [-DCMAKE_INSTALL_PREFIX=/path/for/install]`
 
   3. Windows:  `cmake --build . --config Release`  
-     Unix/OS X: `make`
+     Unix/Mac OS X: `make`
 
   4. Install, if desired:  
      Windows: `cmake --build . --config Release --target INSTALL`  
-     Unix/OS X: `[sudo] make install`
+     Unix/Mac OS X: `[sudo] make install`
 
 By default cmake sets the install path to /usr/local in unix. If you wanted the binary in say /usr/bin instead, then in 2. above use -DCMAKE_INSTALL_PREFIX=/usr
 
@@ -37,6 +37,26 @@ If you need the tidy library built as a 'shared' (DLL) library, then in 2. add t
 ## Prebuilt Binaries
 
 An attempt is being made to publish pre-built binaries to http://www.htacg.org/binaries - This is still a work in progress, but getting there..
+
+## Build the documentation
+
+On Unix-Like operating systems CMake will install man pages for you. If you wish to
+generate the Doxygen documentation set, you can do so with CMake, too:
+
+  1. `cd build/cmake`
+
+  2. `cmake ../.. -DBUILD_DOCUMENTATION=ON`
+
+  3. Unix/Mac OS X: `make`
+
+There's no install location for these files, and as such `make install` is not required.
+The build Doxygen set will be found in `documentation/temp/`.
+
+Note: Building the documentation project requires having xsltproc installed.
+
+Note: Building the documentation project requires having doxygen installed.
+
+Note: As of 2015-March-08 these instructions have no been verified on Windows.
 
 ## History
 

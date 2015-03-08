@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html>
- <head>
+<head>
+  <meta name="generator" content="HTML Tidy (Balthisar Tidy) for HTML5 for Mac OS X dated 2014/11/22">
   <meta charset="UTF-8">
-  <title>
-  HTML Tidy with HTML5 support
-  </title>
+
+  <title>HTML Tidy with HTML5 support</title>
   <style>
-  h1 {
+h1 {
     background-color: #6495ed;
   }
   code {
@@ -16,109 +17,100 @@
     background-color: #b0c4de;
   }
   </style>
- </head>
- <body>
-  <h1>
-   HTML Tidy with HTML5 support
-  </h1>
-  <h2>
-   Prerequisites
-  </h2>
+</head>
+
+<body>
+  <h1 id="html-tidy-with-html5-support">HTML Tidy with HTML5 support</h1>
+
+  <h2 id="prerequisites">Prerequisites</h2>
+
   <ol>
-   <li>
-    <p>
-     git - http://git-scm.com/book/en/v2/Getting-Started-Installing-Git
-    </p>
-   </li>
-   <li>
-    <p>
-     cmake - http://www.cmake.org/download/
-    </p>
-   </li>
-   <li>
-    <p>
-     appropriate build tools for the platform
-    </p>
-   </li>
+    <li>
+      <p>git - http://git-scm.com/book/en/v2/Getting-Started-Installing-Git</p>
+    </li>
+
+    <li>
+      <p>cmake - http://www.cmake.org/download/</p>
+    </li>
+
+    <li>
+      <p>appropriate build tools for the platform</p>
+    </li>
   </ol>
-  <p>
-   CMake comes in two forms - command line and gui. Some installations only install one or the
-   other, but sometimes both. The build commands below are only for the command line use.
-  </p>
-  <p>
-   Also the actual build tools vary for each platform. But that is one of the great features of
-   cmake, it can generate variuous 'native' build files. Running cmake without any parameters will
-   list the generators available on that platform. For sure one of the common ones is "Unix
-   Makefiles", which needs autotools make installed, but many other generators are supported.
-  </p>
-  <p>
-   In windows cmake offers various versions of MSVC. Again below only the command line use of MSVC
-   is shown, but the tidy solution (*.sln) file can be loaded into the MSVC IDE, and the building
-   done in there.
-  </p>
-  <h2>
-   Build the tidy library and command line tool
-  </h2>
+
+  <p>CMake comes in two forms - command line and gui. Some installations only install one or the other, but sometimes both. The build commands below are only for the command line use.</p>
+
+  <p>Also the actual build tools vary for each platform. But that is one of the great features of cmake, it can generate variuous 'native' build files. Running cmake without any parameters will list the generators available on that platform. For sure one of the common ones is "Unix Makefiles", which needs autotools make installed, but many other generators are supported.</p>
+
+  <p>In windows cmake offers various versions of MSVC. Again below only the command line use of MSVC is shown, but the tidy solution (*.sln) file can be loaded into the MSVC IDE, and the building done in there.</p>
+
+  <h2 id="build-the-tidy-library-and-command-line-tool">Build the tidy library and command line tool</h2>
+
   <ol>
-   <li>
-    <p>
-     <code>cd build/cmake</code>
-    </p>
-   </li>
-   <li>
-    <p>
-     <code>cmake ../.. [-DCMAKE_INSTALL_PREFIX=/path/for/install]</code>
-    </p>
-   </li>
-   <li>
-    <p>
-     Windows: <code>cmake --build . --config Release</code>
-     <br>
-     Unix/OS X: <code>make</code>
-    </p>
-   </li>
-   <li>
-    <p>
-     Install, if desired:
-     <br>
-     Windows: <code>cmake --build . --config Release --target INSTALL</code>
-     <br>
-     Unix/OS X: <code>[sudo] make install</code>
-    </p>
-   </li>
+    <li>
+      <p><code>cd build/cmake</code></p>
+    </li>
+
+    <li>
+      <p><code>cmake ../.. [-DCMAKE_INSTALL_PREFIX=/path/for/install]</code></p>
+    </li>
+
+    <li>
+      <p>Windows: <code>cmake --build . --config Release</code><br></br>
+      Unix/Mac OS X: <code>make</code></p>
+    </li>
+
+    <li>
+      <p>Install, if desired:<br></br>
+      Windows: <code>cmake --build . --config Release --target INSTALL</code><br></br>
+      Unix/Mac OS X: <code>[sudo] make install</code></p>
+    </li>
   </ol>
-  <p>
-   By default cmake sets the install path to /usr/local in unix. If you wanted the binary in say
-   /usr/bin instead, then in 2. above use -DCMAKE<em>INSTALL</em>PREFIX=/usr
-  </p>
-  <p>
-   In windows the default install is to C:\Program Files\tidy5, or C:/Program Files (x86)/tidy5,
-   which is not very useful. After the build the tidy[n].exe is in the Release directory, and can
-   be copied to any directory in your PATH environment variable, for global use.
-  </p>
-  <p>
-   If you need the tidy library built as a 'shared' (DLL) library, then in 2. add the command
-   -DBUILD<em>SHARED</em>LIB:BOOL=ON. This option is OFF by default, so the static library is
-   built and linked with the command line tool for convenience.
-  </p>
-  <h2>
-   History
-  </h2>
-  <p>
-   This repository should be considered canonical for HTML Tidy as of 2015-January-15.
-  </p>
+
+  <p>By default cmake sets the install path to /usr/local in unix. If you wanted the binary in say /usr/bin instead, then in 2. above use -DCMAKE_INSTALL_PREFIX=/usr</p>
+
+  <p>In windows the default install is to C:\Program Files\tidy5, or C:/Program Files (x86)/tidy5, which is not very useful. After the build the tidy[n].exe is in the Release directory, and can be copied to any directory in your PATH environment variable, for global use.</p>
+
+  <p>If you need the tidy library built as a 'shared' (DLL) library, then in 2. add the command -DBUILD_SHARED_LIB:BOOL=ON. This option is OFF by default, so the static library is built and linked with the command line tool for convenience.</p>
+
+  <h2 id="build-the-documentation">Build the documentation</h2>
+
+  <p>On Unix-Like operating systems CMake will install man pages for you. If you wish to generate the Doxygen documentation set, you can do so with CMake, too:</p>
+
+  <ol>
+    <li>
+      <p><code>cd build/cmake</code></p>
+    </li>
+
+    <li>
+      <p><code>cmake ../.. -DBUILD_DOCUMENTATION=ON</code></p>
+    </li>
+
+    <li>
+      <p>Unix/Mac OS X: <code>make</code></p>
+    </li>
+  </ol>
+
+  <p>There's no install location for these files, and as such <code>make install</code> is not required. The build Doxygen set will be found in <code>documentation/temp/</code>.</p>
+
+  <p>Note: Building the documentation project requires having xsltproc installed.</p>
+
+  <p>Note: Building the documentation project requires having doxygen installed.</p>
+
+  <p>Note: As of 2015-March-08 these instructions have no been verified on Windows.</p>
+
+  <h2 id="history">History</h2>
+
+  <p>This repository should be considered canonical for HTML Tidy as of 2015-January-15.</p>
+
   <ul>
-   <li>
-    <p>
-     This repository originally transferred from <a href=
-     "http://w3c.github.com/tidy-html5/">w3c.github.com/tidy-html5</a>.
-    </p>
-   </li>
-   <li>
-    <p>
-     First moved to Github from <a href="http://tidy.sourceforge.net">tidy.sourceforge.net</a>.
-    </p>
-   </li>
+    <li>
+      <p>This repository originally transferred from <a href="http://w3c.github.com/tidy-html5/">w3c.github.com/tidy-html5</a>.</p>
+    </li>
+
+    <li>
+      <p>First moved to Github from <a href="http://tidy.sourceforge.net">tidy.sourceforge.net</a>.</p>
+    </li>
   </ul>
- </body>
+</body>
 </html>

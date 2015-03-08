@@ -121,7 +121,7 @@ if [ "$BUILD_API" -eq 1 ]; then
   # - overwrites some vars but appending some to config an end
   # - which are then passed to doxygen as stdin (instead of the path to a config.file)
   ( cat "$DOXY_CFG"; \
-    echo "PROJECT_NUMBER=$TIDY_VERSION"; \ 
+    echo "PROJECT_NUMBER=$TIDY_VERSION"; \
     echo "GENERATE_TAGFILE=$OUTP_DIR/tidylib_api/tidy.tags"; \
     echo "HTML_EXTRA_FILES= ./examples/tidy5.help.txt ./examples/tidy5.config.txt"; ) \
     | doxygen - > /dev/null

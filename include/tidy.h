@@ -261,10 +261,10 @@ TIDY_EXPORT Bool TIDY_CALL tidySetPanicCall( TidyPanic fpanic );
 The following is a short example program.
 
 <pre>
-#include &lt;tidy.h&gt;
-#include &lt;buffio.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;errno.h&gt;
+\#include &lt;tidy.h&gt;
+\#include &lt;buffio.h&gt;
+\#include &lt;stdio.h&gt;
+\#include &lt;errno.h&gt;
 
 
 int main(int argc, char **argv )

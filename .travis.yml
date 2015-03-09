@@ -1,0 +1,32 @@
+language: c
+compiler:
+- clang
+- gcc
+os:
+- linux
+- osx
+matrix:
+  allow_failures:
+  - os: osx
+before_install:
+- sudo apt-get update
+- sudo apt-get install xsltproc doxygen
+- echo $LANG
+- echo $LC_ALL
+script:
+- pwd
+- cd $TRAVIS_BUILD_DIR/build/cmake
+- cmake ../../
+- make
+- cd $TRAVIS_BUILD_DIR/build/documentation
+- ./build_docs.sh
+- cd $TRAVIS_BUILD_DIR/build/documentation/temp/
+- zip -r tidy-docs.zip ./tidyapi_lib 
+deploy:
+  provider: releases
+  api-key: "GITHUB OAUTH TOKEN"
+  file:
+    - "$TRAVIS_BUILD_DIR/build/documentation/temp/tidy-docs.zip"
+  skip_cleanup: true
+  on:
+    tags: true

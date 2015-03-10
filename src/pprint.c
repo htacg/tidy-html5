@@ -2220,7 +2220,13 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
                 contentIndent += spaces;
 
             PCondFlushLine( doc, indent );
-            if ( indsmart && node->prev != NULL )
+
+            /*\
+             *  Issue #180 - with the above PCondFlushLine, 
+             *  this adds an uneccessary additional line!
+             *  Maybe only if 'classic' ie --vertical-space yes 
+            \*/
+            if ( indsmart && node->prev != NULL && classic)
                 TY_(PFlushLine)( doc, indent );
 
             /* do not omit elements with attributes */

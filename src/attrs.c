@@ -979,12 +979,40 @@ static uint anchorNameHash(ctmbstr s)
     return hashval % ANCHOR_HASH_SIZE;
 }
 
-/* removes anchor for specific node */
+/*\
+ *  New Service for HTML5
+ *  Issue #185 - Treat elements ids as case-sensitive
+ *  if in HTML5 modes, make hash of value AS IS!
+\*/
+static uint anchorNameHash5(ctmbstr s)
+{
+    uint hashval = 0;
+    /* Issue #149 - an inferred name can be null. avoid crash */
+    if (s) 
+    {
+        for ( ; *s != '\0'; s++) {
+            tmbchar c = *s;
+            hashval = c + 31*hashval;
+        }
+    }
+    return hashval % ANCHOR_HASH_SIZE;
+}
+
+
+/*\ 
+ *  removes anchor for specific node 
+ *  Issue #185 - Treat elements ids as case-sensitive
+ *  if in HTML5 modes, make hash of value AS IS!
+\*/
 void TY_(RemoveAnchorByNode)( TidyDocImpl* doc, ctmbstr name, Node *node )
 {
     TidyAttribImpl* attribs = &doc->attribs;
     Anchor *delme = NULL, *curr, *prev = NULL;
-    uint h = anchorNameHash(name);
+    uint h;
+    if (TY_(HTMLVersion)(doc) == HT50)
+        h = anchorNameHash5(name);
+    else
+        h = anchorNameHash(name);
 
     for ( curr=attribs->anchor_hash[h]; curr!=NULL; curr=curr->next )
     {
@@ -1015,12 +1043,20 @@ static Anchor* NewAnchor( TidyDocImpl* doc, ctmbstr name, Node* node )
     return a;
 }
 
-/* add new anchor to namespace */
+/*\
+ *  add new anchor to namespace 
+ *  Issue #185 - Treat elements ids as case-sensitive
+ *  if in HTML5 modes, make hash of value AS IS!
+\*/
 static Anchor* AddAnchor( TidyDocImpl* doc, ctmbstr name, Node *node )
 {
     TidyAttribImpl* attribs = &doc->attribs;
     Anchor *a = NewAnchor( doc, name, node );
-    uint h = anchorNameHash(name);
+    uint h;
+    if (TY_(HTMLVersion)(doc) == HT50)
+        h = anchorNameHash5(name);
+    else
+        h = anchorNameHash(name);
 
     if ( attribs->anchor_hash[h] == NULL)
          attribs->anchor_hash[h] = a;
@@ -1035,14 +1071,25 @@ static Anchor* AddAnchor( TidyDocImpl* doc, ctmbstr name, Node *node )
     return attribs->anchor_hash[h];
 }
 
-/* return node associated with anchor */
+/*\
+ *  return node associated with anchor 
+ *  Issue #185 - Treat elements ids as case-sensitive
+ *  if in HTML5 modes, make hash of value AS IS!
+\*/
 static Node* GetNodeByAnchor( TidyDocImpl* doc, ctmbstr name )
 {
     TidyAttribImpl* attribs = &doc->attribs;
     Anchor *found;
-    uint h = anchorNameHash(name);
+    uint h;
     tmbstr lname = TY_(tmbstrdup)(doc->allocator, name);
-    lname = TY_(tmbstrtolower)(lname);
+    if (TY_(HTMLVersion)(doc) == HT50) {
+        h = anchorNameHash5(name);
+    }
+    else
+    {
+        h = anchorNameHash(name);
+        lname = TY_(tmbstrtolower)(lname);
+    }
 
     for ( found = attribs->anchor_hash[h]; found != NULL; found = found->next )
     {

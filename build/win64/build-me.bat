@@ -41,6 +41,8 @@
 @REM set TMPINST=F:\Projects\software.x64
 @set TMPOPTS=-DCMAKE_INSTALL_PREFIX=%TMPINST%
 @set TMPOPTS=%TMPOPTS% -G "Visual Studio 10 Win64"
+@REM set TMPOPTS=%TMPOPTS% -DTIDY_CONFIG_FILE="C:\MDOS\tidy5.cfg"
+@REM set TMPOPTS=%TMPOPTS% -DTIDY_USER_CONFIG_FILE="C:\MDOS\tidy5.cfg"
 
 :RPT
 @if "%~1x" == "x" goto GOTCMD

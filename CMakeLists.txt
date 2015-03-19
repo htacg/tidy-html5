@@ -70,6 +70,17 @@ add_definitions ( -DSUPPORT_ASIAN_ENCODINGS=1 )
 add_definitions ( -DSUPPORT_ACCESSIBILITY_CHECKS=1 )
 add_definitions ( -DLIBTIDY_VERSION="${LIBTIDY_VERSION}" )
 
+# Issue #188 - Support user items in platform.h
+if (TIDY_CONFIG_FILE)
+    add_definitions( -DTIDY_CONFIG_FILE="${TIDY_CONFIG_FILE}" )
+endif ()
+if (TIDY_USER_CONFIG_FILE)
+    add_definitions( -DTIDY_USER_CONFIG_FILE="${TIDY_USER_CONFIG_FILE}" )
+endif ()
+if (SUPPORT_GETPWNAM)
+    add_definitions( -DSUPPORT_GETPWNAM=1 )
+endif ()
+
 if(BUILD_SHARED_LIB)
    set(LIB_TYPE SHARED)
    message("*** Building DLL library ${LIB_TYPE}, version ${LIBTIDY_VERSION}")

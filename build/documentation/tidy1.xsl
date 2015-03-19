@@ -24,7 +24,7 @@
     the $CONFIG variable, declared here:
 -->
 
-<xsl:variable name="CONFIG" select="document('tidy-config.xml')"/>
+<xsl:variable name="CONFIG" select="document('../cmake/tidy-config.xml')"/>
 
 
 <!-- Main Template: -->

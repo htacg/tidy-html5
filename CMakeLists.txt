@@ -220,7 +220,7 @@ if (UNIX)
             VERBATIM
         )
 
-        install(FILES ${CMAKE_BINARY_DIR}/${TIDY_MANFILE} DESTINATION local/man/man1)
+        install(FILES ${CMAKE_BINARY_DIR}/${TIDY_MANFILE} DESTINATION man/man1)
     endif ()
 endif ()
 

@@ -171,7 +171,6 @@ void          tidyDocRelease( TidyDocImpl* doc )
         doc->errout = NULL;
 
         TY_(FreePrintBuf)( doc );
-        TY_(FreeLexer)( doc );
         TY_(FreeNode)(doc, &doc->root);
         TidyClearMemory(&doc->root, sizeof(Node));
 
@@ -181,6 +180,11 @@ void          tidyDocRelease( TidyDocImpl* doc )
         TY_(FreeConfig)( doc );
         TY_(FreeAttrTable)( doc );
         TY_(FreeTags)( doc );
+        /*\ 
+         *  Issue #186 - Now FreeNode depend on the doctype, so the lexer is needed
+         *  to determine which hash is to be used, so free it last.
+        \*/
+        TY_(FreeLexer)( doc );
         TidyDocFree( doc, doc );
     }
 }
@@ -1182,7 +1186,6 @@ int         TY_(DocParseStream)( TidyDocImpl* doc, StreamIn* in )
     doc->docIn = in;
 
     TY_(TakeConfigSnapshot)( doc );    /* Save config state */
-    TY_(FreeLexer)( doc );
     TY_(FreeAnchors)( doc );
 
     TY_(FreeNode)(doc, &doc->root);
@@ -1190,7 +1193,11 @@ int         TY_(DocParseStream)( TidyDocImpl* doc, StreamIn* in )
 
     if (doc->givenDoctype)
         TidyDocFree(doc, doc->givenDoctype);
-
+    /*\ 
+     *  Issue #186 - Now FreeNode depend on the doctype, so the lexer is needed
+     *  to determine which hash is to be used, so free it last.
+    \*/
+    TY_(FreeLexer)( doc );
     doc->givenDoctype = NULL;
 
     doc->lexer = TY_(NewLexer)( doc );

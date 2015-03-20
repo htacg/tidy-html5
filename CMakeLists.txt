@@ -236,7 +236,7 @@ endif()
 if (WIN32)
     # MSI - this needs WiX Tooset installed and a path to candle.exe
     # EXE - this needs NSIS tools to be in path
-    set(CPACK_GENERATOR "NSIS;WIX")
+    set(CPACK_GENERATOR "NSIS;WIX;ZIP")
     set(CPACK_SOURCE_GENERATOR "ZIP")
     set(CPACK_WIX_UPGRADE_GUID "D809598A-B513-4752-B268-0BAC403B00E4")
 elseif ( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin" )

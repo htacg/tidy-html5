@@ -1,7 +1,10 @@
-# CMakeLists.txt - 20150130 - 20140801 - for github htacg/tidy-html5
-cmake_minimum_required (VERSION 2.8)
+# CMakeLists.txt - 20150402 - 20150130 - 20140801 - for github htacg/tidy-html5
+# Prepare for changing the name to 'tidy'
+cmake_minimum_required (VERSION 2.8.8)
 
-project (tidy5)
+set(LIB_NAME tidy5)
+
+project (${LIB_NAME})
 
 # ### NOTE: *** Adjust version.txt when required ***
 # read 'version' file into a variable (stripping any newlines or spaces)
@@ -123,7 +126,7 @@ endif ()
 set(name lib-tidy)
 add_library ( ${name} ${LIB_TYPE} ${CFILES} ${HFILES} ${LIBHFILES} )
 set_target_properties( ${name} PROPERTIES 
-    OUTPUT_NAME tidy5
+    OUTPUT_NAME ${LIB_NAME}
     )
 set_target_properties( ${name} PROPERTIES
                                VERSION   ${LIBTIDY_VERSION}
@@ -146,7 +149,7 @@ install( FILES ${HFILES} DESTINATION include )
 
 ##########################################################
 ### main executable
-set(name tidy5)
+set(name ${LIB_NAME})
 set ( BINDIR console )
 add_executable( ${name} ${BINDIR}/tidy.c )
 target_link_libraries( ${name} ${add_LIBS} )
@@ -186,19 +189,19 @@ endif ()
 if (UNIX)
     find_program( XSLTPROC_FOUND xsltproc )
     if (XSLTPROC_FOUND)
-        ## NOTE: man name must match exe ie currently `tidy5.1` not `tidy.1`
+        ## NOTE: man name must match exe ie currently `${LIB_NAME}.1` not `tidy.1`
         ## also could use `manpath` command output to determine target install path
         message(STATUS "*** Generating man ***")
-        set(TIDY_MANFILE tidy5.1)
+        set(TIDY_MANFILE ${LIB_NAME}.1)
         set(TIDY1XSL ../documentation/tidy1.xsl)
         set(TIDYHELP ${CMAKE_BINARY_DIR}/tidy-help.xml)
         set(TIDYCONFIG ${CMAKE_BINARY_DIR}/tidy-config.xml)
-        add_custom_target(man ALL DEPENDS "${CMAKE_BINARY_DIR}/tidy5")
+        add_custom_target(man ALL DEPENDS "${CMAKE_BINARY_DIR}/${LIB_NAME}")
  
         # run built EXE to generate xml output 
         add_custom_command(
             TARGET man
-            COMMAND ${CMAKE_BINARY_DIR}/tidy5 -xml-help > ${TIDYHELP}
+            COMMAND ${CMAKE_BINARY_DIR}/${LIB_NAME} -xml-help > ${TIDYHELP}
             COMMENT "Generate ${TIDYHELP}"
             VERBATIM
         )
@@ -206,7 +209,7 @@ if (UNIX)
         # run built EXE to generate more xml output 
         add_custom_command(
             TARGET man
-            COMMAND ${CMAKE_BINARY_DIR}/tidy5 -xml-config > ${TIDYCONFIG}
+            COMMAND ${CMAKE_BINARY_DIR}/${LIB_NAME} -xml-config > ${TIDYCONFIG}
             COMMENT "Generate ${TIDYCONFIG}"
             VERBATIM
         )
@@ -247,8 +250,8 @@ else ()
     set(CPACK_SOURCE_GENERATOR "TGZ")
 endif ()
 
-set(CPACK_PACKAGE_NAME "Tidy5")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Tidy5 - HTML syntax checker")
+set(CPACK_PACKAGE_NAME "${LIB_NAME}")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${LIB_NAME} - HTML syntax checker")
 set(CPACK_PACKAGE_VENDOR "HTML Tidy Advocacy Community Group")
 set(CPACK_PACKAGE_CONTACT "maintainer@htacg.org")
 
@@ -271,7 +274,7 @@ set(CPACK_DEBIAN_PACKAGE_SECTION "Libraries")
 set(CPACK_SOURCE_IGNORE_FILES "${CMAKE_SOURCE_DIR}/test/;${CMAKE_SOURCE_DIR}/build/;${CMAKE_SOURCE_DIR}/.git/")
 
 if (NOT WIN32 AND NOT APPLE)
-set( CPACK_PACKAGE_FILE_NAME "tidy5-${CPACK_PACKAGE_VERSION}-${BITNESS}bit" )
+set( CPACK_PACKAGE_FILE_NAME "${LIB_NAME}-${CPACK_PACKAGE_VERSION}-${BITNESS}bit" )
 endif ()
 
 include(CPack)

@@ -4671,10 +4671,16 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
         else
             html = node;
 
-        /* #72, avoid MISSING_DOCTYPE if show-body-only. */
-        if (!TY_(FindDocType)(doc) && !showingBodyOnly(doc))
-            TY_(ReportError)(doc, NULL, NULL, MISSING_DOCTYPE);
-
+        /*\
+         *  #72, avoid MISSING_DOCTYPE if show-body-only. 
+         *  #191, also if --doctype omit, that is TidyDoctypeOmit
+        \*/
+        if (!TY_(FindDocType)(doc) && !showingBodyOnly(doc)) 
+        {
+            ulong dtmode = cfg( doc, TidyDoctypeMode );
+            if (dtmode != TidyDoctypeOmit)
+                TY_(ReportError)(doc, NULL, NULL, MISSING_DOCTYPE);
+        }
         TY_(InsertNodeAtEnd)( &doc->root, html);
         TY_(ParseHTML)( doc, html, IgnoreWhitespace );
         break;

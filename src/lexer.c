@@ -2747,7 +2747,13 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                     lexer->doctype = FindGivenVersion(doc, lexer->token);
                     if (lexer->doctype != VERS_HTML5)
                     {
-                        TY_(AdjustTags)(doc); /* Issue #167 & #169 - Adjust TidyTag_A back to legacy mode */
+                        /*\
+                         *  Back to legacy HTML4 mode for -
+                         *  Issue #167 & #169 - TidyTag_A
+                         *  Issue #196        - TidyTag_CAPTION
+                         *  others?
+                        \*/ 
+                        TY_(AdjustTags)(doc); /* Dynamically modify the tags table  */
                     }
                 }
                 node = lexer->token;

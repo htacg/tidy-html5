@@ -467,6 +467,7 @@ typedef enum
   TidyTag_SECTION,
   TidyTag_SOURCE,
   TidyTag_SUMMARY,
+  TidyTag_TEMPLATE,
   TidyTag_TIME,
   TidyTag_TRACK,
   TidyTag_VIDEO,

@@ -39,7 +39,9 @@ TMPOPTS=""
 # TMPOPTS="-DCMAKE_INSTALL_PREFIX=$TMPINST"
 #############################################
 # To build SHARED library
-# TMPOPTS="$TMPOPTS -DBUILD_SHARED_LIB:BOOL=TRUE"
+TMPOPTS="$TMPOPTS -DBUILD_SHARED_LIB:BOOL=TRUE"
+TMPINST="/usr"
+TMPOPTS="$TMPOPTS -DCMAKE_INSTALL_PREFIX=$TMPINST"
 
 for arg in $@; do
       case $arg in

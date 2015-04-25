@@ -34,6 +34,10 @@ In windows the default install is to C:\Program Files\tidy5, or C:/Program Files
 
 If you need the tidy library built as a 'shared' (DLL) library, then in 2. add the command -DBUILD_SHARED_LIB:BOOL=ON. This option is OFF by default, so the static library is built and linked with the command line tool for convenience.
 
+## Prebuilt Binaries
+
+An attempt is being made to publish pre-built binaries to http://www.htacg.org/binaries - This is still a work in progress, but getting there..
+
 ## History
 
 This repository should be considered canonical for HTML Tidy as of 2015-January-15.
@@ -47,3 +51,4 @@ This repository should be considered canonical for HTML Tidy as of 2015-January-
 
    [2]: http://tidy.sourceforge.net
 
+; eof

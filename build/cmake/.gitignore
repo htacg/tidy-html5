@@ -23,4 +23,9 @@ _CPack_Packages/*
 *.rpm
 *.xml
 *.1
+*.exe
+*.msi
+*.zip
+*.wixobj
+
 

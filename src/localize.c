@@ -904,7 +904,7 @@ static const TidyOptionDoc option_docs[] =
    "some CSS markup to avoid indentation to the right. "
   },
   {TidyPreserveEntities,
-   "This option specifies if Tidy should preserve the well-formed entitites "
+   "This option specifies if Tidy should preserve the well-formed entities "
    "as found in the input. "
   },
   {TidyAnchorAsName,

@@ -102,7 +102,7 @@ void TY_(freeFileSource)( TidyInputSource* inp, Bool closeIt )
 #include "message.h"
 
 #include <errno.h>
-#if _MSC_VER < 1300  /* less than msvc++ 7.0 */
+#if defined(_MSC_VER) && (_MSC_VER < 1300)  /* less than msvc++ 7.0 */
 #pragma warning(disable:4115) /* named type definition in parentheses in windows headers */
 #endif
 #include <windows.h>
@@ -192,7 +192,7 @@ static int initMappedFileSource( TidyAllocator *allocator, TidyInputSource* inp,
     if ( !fin )
         return -1;
     
-#if _MSC_VER < 1300  /* less than msvc++ 7.0 */
+#if defined(_MSC_VER) && (_MSC_VER < 1300)  /* less than msvc++ 7.0 */
     {
         LARGE_INTEGER* pli = (LARGE_INTEGER *)&fin->size;
         (DWORD)pli->LowPart = GetFileSize( fp, (DWORD *)&pli->HighPart );

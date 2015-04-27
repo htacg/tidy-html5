@@ -1,9 +1,0 @@
-// HTML Tidy configuration file created by TidyGUI
-indent: auto
-tidy-mark: no
-clean: yes
-drop-font-tags: yes
-logical-emphasis: yes
-indent-attributes: yes
-force-output: yes
-

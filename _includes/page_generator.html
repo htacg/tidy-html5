@@ -1,0 +1,22 @@
+{% for post in site.categories[page.category] reversed %}
+{% capture id %}{{ post.id | remove:'/' | downcase }}{% endcapture %}
+<div id="{{id}}" class="section p-{{id}}">
+    {% if post.icon %}
+    <div class="subtlecircle sectiondivider imaged">
+        <img src="{{post.icon}}" alt="section icon" />
+        <h5 class="icon-title">{{ post.title }}</h5>
+    </div>
+    {% elsif post.fa-icon %}
+    <div class="subtlecircle sectiondivider faicon">
+          <span class="fa-stack">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-{{ post.fa-icon }} fa-stack-1x"></i>
+          </span>
+        <h5 class="icon-title">{{ post.title }}</h5>
+    </div>
+    {% endif %}
+    <div class="container {{ post.style }}">
+        {{ post.content }}
+    </div>
+</div>
+{% endfor %}

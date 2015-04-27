@@ -47,3 +47,8 @@ This repository should be considered canonical for HTML Tidy as of 2015-January-
 
    [2]: http://tidy.sourceforge.net
 
+=======
+README
+======
+
+This repository consists of the HTML Tidy homepages.

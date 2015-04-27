@@ -1,3 +1,0 @@
-// Tidy configuration file for bug #537604
-input-xml: yes
-clean: no

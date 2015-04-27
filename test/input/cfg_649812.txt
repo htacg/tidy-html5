@@ -1,5 +1,0 @@
-char-encoding: utf16le
-newline: CR
-output-xhtml: yes
-indent: auto
-indent-attributes: yes

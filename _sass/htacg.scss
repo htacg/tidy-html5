@@ -1,0 +1,209 @@
+/*******************************************
+  htacg.scss
+
+	Builds upon the theme CSS.
+ *******************************************/
+
+@import "bourbon/bourbon";
+
+/**********************************
+	override the 960 px width
+ **********************************/
+
+.container.span
+{
+	width: 100%;
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+/**********************************
+	tiles
+ **********************************/
+
+.tiles
+{
+	max-width: 960px;
+	width: 90%;
+	margin: auto;
+	@include display(flex);
+	@include flex-direction(row);
+	@include flex-wrap(wrap);
+	@include justify-content(center);
+	@include align-items(stretch);
+
+	div
+	{
+		@include flex-basis(0);
+		@include flex-grow(1);
+		font-size: 0.5em;
+
+		> h2
+		{
+			font-size: 28px;
+			text-align: left;
+		}
+		> p
+		{
+			font-size: 15px;
+			margin-top: 0 !important;
+		}
+	}
+}
+
+/**********************************
+	big bright boxes that often
+	have images
+ **********************************/
+
+.page-lead
+{
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	text-align: center;
+
+	div
+	{
+		padding: 3em;
+
+		h1
+		{
+			//@include font-size(48);
+		}
+		h2
+		{
+			//@include font-size(20);
+		}
+	}
+}
+
+
+/**********************************
+	ugly h5 headers in dividers
+ **********************************/
+.sectiondivider h5
+{
+	display: none;
+}
+
+
+/**********************************
+	documentation
+ **********************************/
+#part_what,
+#part_running,
+#part_options_config,
+#part_features_notes,
+#part_faq,
+#part_building
+{
+	code,
+	pre
+	{
+		color: darkblue;
+		background: transparent;
+		font-size: 17px;
+	}
+}
+
+#part_what ul.tidy-features
+{
+	li p:first-child
+	{
+		font-weight: bold;
+		font-family: "PT Sans", "HelveticaNeue-Light", Arial, sans-serif;
+		padding-left: 0;
+	}
+}
+
+#part_faq,
+#part_implement
+{
+	dl {
+		font-size: 17px;
+	}
+
+	dt {
+		font-weight: bold;
+		font-family: "PT Sans", "HelveticaNeue-Light", Arial, sans-serif;
+		margin-top: 30px;
+		margin-bottom: 10px;
+		font-size: 22px;
+	}
+
+	dd p:first-child {
+		margin-top: 0;
+	}
+
+	code,
+	pre {
+		color: deepskyblue;
+		background-color: transparent;
+	}
+
+	li
+	{
+		line-height: 1.6;
+	}
+
+	.note,
+	.note a
+	{
+		color: #000000;
+	}
+}
+
+#part_design,
+#part_implement
+{
+	ul li p {
+		padding-left: 20px;
+		line-height: 1.5;
+	}
+
+	dl
+	{
+		padding-left: 48px;
+
+
+	}
+
+	code,
+	pre
+	{
+		color: darkblue;
+	}
+}
+
+
+/**********************************
+	notes
+ **********************************/
+p.note
+{
+	width: 80%;
+	background-color: yellow;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 1em;
+}
+
+
+/**********************************
+	page-specific styles
+ **********************************/
+
+
+.page-lead.home
+{
+	background: limegreen url(../images/green-abstract-background.jpg);
+	h1,
+	h2
+	{
+		//@include stroke(1px, darkred);
+		color: white;
+	}
+}
+

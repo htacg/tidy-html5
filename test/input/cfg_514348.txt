@@ -1,4 +1,0 @@
-// Tidy configuration file for bug #514348
-uppercase-tags: true
-indent: auto
-indent-spaces: 2

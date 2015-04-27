@@ -1,4 +1,0 @@
-indent: auto
-indent-attributes: yes
-tidy-mark: no
-clean: yes

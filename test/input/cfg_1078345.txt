@@ -1,2 +1,0 @@
-// Tidy configuration file for bug #540045
-enclose-block-text: yes

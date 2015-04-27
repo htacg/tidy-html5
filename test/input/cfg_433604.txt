@@ -1,2 +1,0 @@
-// Tidy configuration file for bug #433604
-input-xml: yes

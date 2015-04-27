@@ -1,0 +1,60 @@
+---
+
+port: 4000
+host: localhost
+safe: true
+
+
+### site serving configuration ###
+exclude: [CNAME, README.md, .gitignore]
+permalink: / ## disables post output
+timezone: null
+lsi: false
+markdown: kramdown
+highlighter: pygments
+
+
+### content configuration ###
+title:       "HTML Tidy"
+keywords:    "tidy, html tidy, html, htacg"
+description: "HTML Tidy Homepage"
+source_link: "https://github.com/htacg/tidy-html5/"
+favicon:     #put a path like: "img/favicon.ico"
+touch_icon:  #put a path like: "img/apple-touch-icon.png"
+google_analytics_key: ## put YOUR key here to enable tracking! (blank to disable)
+
+
+### template colors, used site-wide via css ###
+colors:
+  black:     '#111111'
+  white:     '#f8f8f8'
+  blue:      '#49a7e9'
+  green:     '#9bcf2f'
+  purple:    '#c869bf'
+  orange:    '#fab125'
+  turquoise: '#0fbfcf'
+
+
+### Defaults
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: posts
+    values:
+      layout: "default"
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: pages
+    values:
+      layout: "default"
+
+
+### file locations
+source:      .
+destination: ./_site
+#plugins:     ./_plugins
+layouts:     ./_layouts
+#data_source: ./_data
+#collections: null

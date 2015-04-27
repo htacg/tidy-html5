@@ -1,2 +1,0 @@
-accessibility-check: 3
-doctype: strict

@@ -79,9 +79,9 @@ endif ()
 
 if(BUILD_SHARED_LIB)
    set(LIB_TYPE SHARED)
-   message("*** Building DLL library ${LIB_TYPE}, version ${LIBTIDY_VERSION}")
+   message(STATUS "*** Building DLL library ${LIB_TYPE}, version ${LIBTIDY_VERSION}")
 else(BUILD_SHARED_LIB)
-   message("*** Building static library ${LIB_TYPE}, version ${LIBTIDY_VERSION}")
+   message(STATUS "*** Building static library ${LIB_TYPE}, version ${LIBTIDY_VERSION}")
 endif(BUILD_SHARED_LIB)
 
 include_directories ( "${PROJECT_SOURCE_DIR}/include" "${PROJECT_SOURCE_DIR}/src" )
@@ -184,9 +184,9 @@ if (UNIX)
     if (XSLTPROC_FOUND)
         ## NOTE: man name must match exe ie currently `${LIB_NAME}.1` not `tidy.1`
         ## also could use `manpath` command output to determine target install path
-        message(STATUS "*** Generating man ***")
         set(TIDY_MANFILE ${LIB_NAME}.1)
-        set(TIDY1XSL ../documentation/tidy1.xsl)
+        message(STATUS "*** Generating man ${TIDY_MANFILE} custom commands...")
+        set(TIDY1XSL ${CMAKE_SOURCE_DIR}/build/documentation/tidy1.xsl)
         set(TIDYHELP ${CMAKE_BINARY_DIR}/tidy-help.xml)
         set(TIDYCONFIG ${CMAKE_BINARY_DIR}/tidy-config.xml)
         add_custom_target(man ALL DEPENDS "${CMAKE_BINARY_DIR}/${LIB_NAME}")
@@ -217,6 +217,9 @@ if (UNIX)
         )
 
         install(FILES ${CMAKE_BINARY_DIR}/${TIDY_MANFILE} DESTINATION ${MAN_INSTALL_DIR})
+    else ()
+        message(STATUS "*** NOTE: xsltproc NOT FOUND! Can NOT generate man page.")
+        message(STATUS "*** You need to install xsltproc in your system.")
     endif ()
 endif ()
 

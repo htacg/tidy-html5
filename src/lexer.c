@@ -48,6 +48,7 @@
 #endif
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
+static void check_me(char *name);
 static Bool show_attrs = yes;
 #define MX_TXT 5
 static char buffer[MX_TXT+8]; /* NOTE extra for '...'\0 tail */
@@ -83,6 +84,10 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
     int line = ( doc->lexer ? doc->lexer->lines : 0 );
     int col  = ( doc->lexer ? doc->lexer->columns : 0 );
     SPRTF("R=%d C=%d: ", line, col );
+    // DEBUG: Be able to set a TRAP on a SPECIFIC row,col
+    if ((line == 6) && (col == 33)) {
+        check_me("Show_Node"); // just a debug trap
+    }
     if (lexer && lexer->token && (lexer->token->type == TextNode)) {
         if (show_attrs) {
             uint len = node->end - node->start;

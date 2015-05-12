@@ -23,6 +23,9 @@ set( LIB_TYPE STATIC )  # set default static
 option( BUILD_SHARED_LIB "Set ON to build Shared (DLL) Library"   OFF )
 option( BUILD_TAB2SPACE  "Set ON to build utility app, tab2space" OFF )
 option( BUILD_SAMPLE_CODE "Set ON to build the sample code"       OFF )
+if (NOT MAN_INSTALL_DIR)
+    set(MAN_INSTALL_DIR share/man/man1)
+endif ()
 
 if(CMAKE_COMPILER_IS_GNUCXX)
     set( WARNING_FLAGS -Wall )
@@ -213,7 +216,7 @@ if (UNIX)
             VERBATIM
         )
 
-        install(FILES ${CMAKE_BINARY_DIR}/${TIDY_MANFILE} DESTINATION share/man/man1)
+        install(FILES ${CMAKE_BINARY_DIR}/${TIDY_MANFILE} DESTINATION ${MAN_INSTALL_DIR})
     endif ()
 endif ()
 

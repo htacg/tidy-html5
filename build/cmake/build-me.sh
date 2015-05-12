@@ -30,27 +30,30 @@ if [ -f "$BLDLOG" ]; then
 	rm -f $BLDLOG
 fi
 
+BLDDBG=0
 TMPOPTS=""
 ##############################################
 ### ***** NOTE THIS INSTALL LOCATION ***** ###
 ### Change to suit your taste, environment ###
-##############################################
-# TMPINST="$HOME/projects/install/tidy"
-# TMPOPTS="-DCMAKE_INSTALL_PREFIX=$TMPINST"
-#############################################
-# To build SHARED library
-TMPOPTS="$TMPOPTS -DBUILD_SHARED_LIB:BOOL=TRUE"
 TMPINST="/usr"
 TMPOPTS="$TMPOPTS -DCMAKE_INSTALL_PREFIX=$TMPINST"
+##############################################
 
+### Accept user argument
 for arg in $@; do
       case $arg in
          VERBOSE) TMPOPTS="$TMPOPTS -DCMAKE_VERBOSE_MAKEFILE=ON" ;;
-         DEBUG) TMPOPTS="$TMPOPTS -DCMAKE_BUILD_TYPE=Debug -DENABLE_DEBUG_SYMBOLS:BOOL=TRUE" ;;
+         DEBUG) BLDDBG=1 ;;
          SHARED) TMPOPTS="$TMPOPTS -DBUILD_SHARED_LIB:BOOL=TRUE" ;;
          *) TMPOPTS="$TMPOPTS $arg" ;;
       esac
 done
+
+if [ "$BLDDBG" = "1" ]; then
+    TMPOPTS="$TMPOPTS -DCMAKE_BUILD_TYPE=Debug -DENABLE_DEBUG_SYMBOLS:BOOL=TRUE"
+else
+    TMPOPTS="$TMPOPTS -DCMAKE_BUILD_TYPE=Release"
+fi
 
 echo "$BN: Will do: 'cmake $TMPSRC $TMPOPTS' to $BLDLOG"
 wait_for_input

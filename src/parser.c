@@ -854,6 +854,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
 {
 #if !defined(NDEBUG) && defined(_MSC_VER)
     static int in_parse_block = 0;
+    static int parse_block_cnt = 0;
 #endif
     Lexer* lexer = doc->lexer;
     Node *node;
@@ -861,7 +862,8 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
     uint istackbase = 0;
 #if !defined(NDEBUG) && defined(_MSC_VER)
     in_parse_block++;
-    SPRTF("Entering ParseBlock %d...\n",in_parse_block);
+    parse_block_cnt++;
+    SPRTF("Entering ParseBlock %d... %d\n",in_parse_block,parse_block_cnt);
 #endif
 
     if ( element->tag->model & CM_EMPTY ) {

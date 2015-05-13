@@ -895,7 +895,17 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
     if (!(element->tag->model & CM_MIXED))
         TY_(InlineDup)( doc, NULL );
 
-    mode = IgnoreWhitespace;
+    /*\
+     *  Issue #212 - If it is likely that it may be necessary
+     *  to move a leading space into a text node before this
+     *  element, then keep the mode MixedContent to keep any
+     *  leading space
+    \*/
+    if ( !(element->tag->model & CM_INLINE) ||
+          (element->tag->model & CM_FIELD ) )
+    {
+        mode = IgnoreWhitespace;
+    }
 
     while ((node = TY_(GetToken)(doc, mode /*MixedContent*/)) != NULL)
     {

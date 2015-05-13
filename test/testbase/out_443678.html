@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>[ #443678 ] Unclosed &lt;script&gt; in &lt;head&gt; messes
+  Tidy</title>
+  <script src="bar.js">
+  function baz()
+  {
+  document.write( '<foo></foo>' );
+  document.write( "<bar>\"Some Text\"<\/bar>" );
+  }
+  </script>
+  <script src="foo.js">
+  </script>
+  <style type="text/css">
+  body {
+  color: #FF0000;
+  }
+  </style>
+</head>
+<body>
+  Just a test. 
+  <script>
+  test();
+  </script>
+</body>
+</html>

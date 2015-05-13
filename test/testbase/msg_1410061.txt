@@ -1,0 +1,26 @@
+line 1 column 1 - Warning: missing <!DOCTYPE> declaration
+line 6 column 319 - Warning: <li> isn't allowed in <body> elements
+line 5 column 1 - Info: <body> previously mentioned
+line 6 column 319 - Warning: inserting implicit <ul>
+line 6 column 1041 - Warning: discarding unexpected </li>
+line 6 column 1046 - Warning: discarding unexpected </li>
+line 6 column 1051 - Warning: discarding unexpected </li>
+line 6 column 1056 - Warning: discarding unexpected </li>
+line 6 column 1061 - Warning: discarding unexpected </li>
+line 6 column 1066 - Warning: discarding unexpected </li>
+line 6 column 1071 - Warning: discarding unexpected </li>
+line 6 column 1076 - Warning: discarding unexpected </li>
+line 6 column 1081 - Warning: discarding unexpected </li>
+line 6 column 1086 - Warning: discarding unexpected </li>
+line 7 column 1 - Warning: discarding unexpected </body>
+line 8 column 1 - Warning: discarding unexpected </html>
+line 6 column 319 - Warning: missing </ul>
+Info: Document content looks like HTML5
+16 warnings, 0 errors were found!
+
+About HTML Tidy: https://github.com/htacg/tidy-html5
+Bug reports and comments: https://github.com/htacg/tidy-html5/issues
+Or send questions and comments to: https://lists.w3.org/Archives/Public/public-htacg/
+Latest HTML specification: http://dev.w3.org/html5/spec-author-view/
+Validate your HTML documents: http://validator.w3.org/nu/
+Lobby your company to join the W3C: http://www.w3.org/Consortium

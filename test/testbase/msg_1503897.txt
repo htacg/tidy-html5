@@ -1,0 +1,27 @@
+line 1 column 1 - Warning: missing <!DOCTYPE> declaration
+line 7 column 15 - Warning: discarding unexpected </td>
+line 6 column 1 - Warning: missing </pre> before <tr>
+line 7 column 20 - Warning: <tr> isn't allowed in <body> elements
+line 5 column 1 - Info: <body> previously mentioned
+line 7 column 20 - Warning: inserting implicit <table>
+line 7 column 24 - Warning: plain text isn't allowed in <tr> elements
+line 7 column 20 - Info: <tr> previously mentioned
+line 8 column 1 - Warning: discarding unexpected </pre>
+line 9 column 1 - Warning: <pre> isn't allowed in <tr> elements
+line 7 column 20 - Info: <tr> previously mentioned
+line 10 column 15 - Warning: discarding unexpected </td>
+line 10 column 20 - Warning: missing <td>
+line 10 column 24 - Warning: plain text isn't allowed in <tr> elements
+line 10 column 20 - Info: <tr> previously mentioned
+line 11 column 1 - Warning: discarding unexpected </pre>
+line 7 column 20 - Warning: missing </table> before </body>
+line 10 column 20 - Warning: trimming empty <tr>
+Info: Document content looks like HTML5
+14 warnings, 0 errors were found!
+
+About HTML Tidy: https://github.com/htacg/tidy-html5
+Bug reports and comments: https://github.com/htacg/tidy-html5/issues
+Or send questions and comments to: https://lists.w3.org/Archives/Public/public-htacg/
+Latest HTML specification: http://dev.w3.org/html5/spec-author-view/
+Validate your HTML documents: http://validator.w3.org/nu/
+Lobby your company to join the W3C: http://www.w3.org/Consortium

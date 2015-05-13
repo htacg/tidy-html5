@@ -30,6 +30,8 @@ Another series of tests in this folder are the accessability tests, executed by 
 
 It uses onetesta.cmd to process each of the some 118 tests in accesscases.txt. 
 
+The test files for these accessability tests are in the `accessTest` directory.
+
 There is a similar unix tool chain of testaccess.sh, which uses testaccessone.sh for each test, from the same accesscases.txt list.
 
 #### Files: alltestc.bat

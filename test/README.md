@@ -20,7 +20,7 @@ And what about if there was NO current test existing to test what you were tryin
 
 The chain is alltest.cmd runs alltest1.cmd, which then uses onetest.cmd for each test. And a similar chain for unix stating with testall.sh which uses testone.sh.
 
-Both tool chans use the testcases.txt file for the list of some 227 cases.
+Both tool chains use the testcases.txt file for the list of some 227 cases. There is now a `testinfo.txt` file which give some desciption of the test. Well actually the title of the original bug report filed at https://sourceforge.net/p/tidy/bugs/#number/
 
 Additionally there are some 27 xml tests, runby xmltest.cmd, reading the test list from xmlcases.txt, and using the same onetest.cmd for each test...
 

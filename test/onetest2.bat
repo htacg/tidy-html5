@@ -10,6 +10,8 @@ REM
 @if NOT EXIST %TIDYOUT%\nul goto Err4
 @if NOT EXIST input\nul goto Err5
 @if NOT EXIST testbase\nul goto Err8
+@if "%1x" == "x" goto Err9
+@if "%2x" == "x" goto Err10
 
 set TESTNO=%1
 set EXPECTED=%2
@@ -135,6 +137,19 @@ if exist %TIDYFILE% del %TIDYFILE%
 @echo ERROR: Failed to find 'testbase' folder!!!
 @echo.
 @pause
+@goto done
+
+:Err9
+@echo.
+@echo ERROR: No input test number given as 1st parameter!
+:Err10
+@echo ERROR: No expected exit value given as 2nd parameter!
+@echo.
+@echo Essentially this bat is intended to be used by alltest2.bat,
+@echo which in turn is used by alltestc.bat, so try alltestc.bat.
+@echo It is not intended that this batch file be run in isolation,
+@echo even when TIDY and TIDYOUT have been set in the environent.
+@echo.
 @goto done
 
 :done

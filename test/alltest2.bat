@@ -59,7 +59,7 @@ goto END
 :ERR5
 echo	ERROR: Can not locate 'testbase' folder ... check name, and location ...
 goto END
-:ERR5
+:ERR6
 echo	ERROR: Seem unable to run 'diff'! Either intall 'diff' in your path,
 @echo   or *** FIX ME *** to use a some other file compare untility.
 goto END

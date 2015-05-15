@@ -204,6 +204,13 @@ static ParseProperty ParseDocType;
 /* keep-first or keep-last? */
 static ParseProperty ParseRepeatAttr;
 
+/*\
+ * 20150515 - support using tabs instead of spaces - Issue #108
+ * (a) parser for 't'/'f', 'true'/'false', 'y'/'n', 'yes'/'no' or '1'/'0' 
+ * (b) sets the TidyIndentSpaces to 1 if 'yes'
+ * (c) sets the indent_char to '\t' or ' '
+\*/
+static ParseProperty ParseTabs;
 
 static const TidyOptionImpl option_defs[] =
 {
@@ -313,6 +320,7 @@ static const TidyOptionImpl option_defs[] =
   { TidySortAttributes,          PP, "sort-attributes",             IN, TidySortAttrNone,ParseSorter,       sorterPicks     },
   { TidyMergeSpans,              MU, "merge-spans",                 IN, TidyAutoState,   ParseAutoBool,     autoBoolPicks   },
   { TidyAnchorAsName,            MU, "anchor-as-name",              BL, yes,             ParseBool,         boolPicks       },
+  { TidyPPrintTabs,              PP, "indent-with-tabs",            BL, no,              ParseTabs,         NULL            }, /* 20150515 - Issue #108 */
   { N_TIDY_OPTIONS,              XX, NULL,                          XY, 0,               NULL,              NULL            }
 };
 
@@ -1203,6 +1211,30 @@ Bool ParseCSS1Selector( TidyDocImpl* doc, const TidyOptionImpl* option )
     SetOptionValue( doc, option->id, buf );
     return yes;
 }
+
+/*\
+ * 20150515 - support using tabs instead of spaces - Issue #108
+ * Sets the indent character to a tab if on, and set indent space count to 1
+ * and sets indent character to a space if off.
+\*/
+Bool ParseTabs( TidyDocImpl* doc, const TidyOptionImpl* entry )
+{
+    ulong flag = 0;
+    Bool status = ParseTriState( TidyNoState, doc, entry, &flag );
+    if ( status ) {
+        Bool tabs = flag != 0 ? yes : no;
+        TY_(SetOptionBool)( doc, entry->id, tabs );
+        if (tabs) {
+            TY_(PPrintTabs)();
+            TY_(SetOptionInt)( doc, TidyIndentSpaces, 1 );
+        } else {
+            TY_(PPrintSpaces)();
+            /* optional - TY_(ResetOptionToDefault)( doc, TidyIndentSpaces ); */
+        }
+    }
+    return status;
+}
+
 
 /* Coordinates Config update and Tags data */
 static void DeclareUserTag( TidyDocImpl* doc, TidyOptionId optId,

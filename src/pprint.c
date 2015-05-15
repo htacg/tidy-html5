@@ -36,6 +36,21 @@ static int  TextStartsWithWhitespace( Lexer *lexer, Node *node, uint start, uint
 static Bool InsideHead( TidyDocImpl* doc, Node *node );
 static Bool ShouldIndent( TidyDocImpl* doc, Node *node );
 
+/*\
+ * 20150515 - support using tabs instead of spaces - Issue #108
+ * GH: https://github.com/htacg/tidy-html5/issues/108 - Keep indent with tabs #108
+ * SF: https://sourceforge.net/p/tidy/feature-requests/3/ - #3 tabs in place of spaces
+\*/
+static uint indent_char = ' ';
+void TY_(PPrintTabs)(void)
+{
+    indent_char = '\t';
+}
+void TY_(PPrintSpaces)(void)
+{
+    indent_char = ' ';
+}
+
 #if SUPPORT_ASIAN_ENCODINGS
 /* #431953 - start RJ Wraplen adjusted for smooth international ride */
 
@@ -582,7 +597,7 @@ static void WrapLine( TidyDocImpl* doc )
     {
         uint spaces = GetSpaces( pprint );
         for ( i = 0; i < spaces; ++i )
-            TY_(WriteChar)( ' ', doc->docOut );
+            TY_(WriteChar)( indent_char, doc->docOut ); /* 20150515 - Issue #108 */
     }
 
     for ( i = 0; i < pprint->wraphere; ++i )
@@ -633,7 +648,7 @@ static void WrapAttrVal( TidyDocImpl* doc )
     {
         uint spaces = GetSpaces( pprint );
         for ( i = 0; i < spaces; ++i )
-            TY_(WriteChar)( ' ', doc->docOut );
+            TY_(WriteChar)( indent_char, doc->docOut ); /* 20150515 - Issue #108 */
     }
 
     for ( i = 0; i < pprint->wraphere; ++i )
@@ -660,7 +675,7 @@ static void PFlushLineImpl( TidyDocImpl* doc )
     {
         uint spaces = GetSpaces( pprint );
         for ( i = 0; i < spaces; ++i )
-            TY_(WriteChar)( ' ', doc->docOut );
+            TY_(WriteChar)( indent_char, doc->docOut ); /* 20150515 - Issue #108 */
     }
 
     for ( i = 0; i < pprint->linelen; ++i )

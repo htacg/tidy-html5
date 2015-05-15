@@ -80,7 +80,7 @@ typedef enum
 typedef enum
 {
   TidyUnknownOption,   /**< Unknown option! */
-  TidyIndentSpaces,    /**< Indentation n spaces */
+  TidyIndentSpaces,    /**< Indentation n spaces/tabs */
   TidyWrapLen,         /**< Wrap margin */
   TidyTabSize,         /**< Expand tabs to n spaces */
 
@@ -204,6 +204,7 @@ typedef enum
   TidySortAttributes,      /**< Sort attributes */
   TidyMergeSpans,       /**< Merge multiple SPANs */
   TidyAnchorAsName,    /**< Define anchors as name attributes */
+  TidyPPrintTabs,       /**< Indent using tabs istead of spaces */
   N_TIDY_OPTIONS       /**< Must be last */
 } TidyOptionId;
 

@@ -745,7 +745,7 @@ static const TidyOptionDoc option_docs[] =
   {TidyTabSize,
    "This option specifies the number of columns that Tidy uses between "
    "successive tab stops. It is used to map tabs to spaces when reading the "
-   "input. Tidy never outputs tabs. "
+   "input. "
   },
   {TidyVertSpace,
    "This option specifies if Tidy should add some empty lines for "
@@ -914,6 +914,14 @@ static const TidyOptionDoc option_docs[] =
    "is added along an existing id attribute if the DTD allows it. "
    "If set to \"no\", any existing name attribute is removed "
    "if an id attribute exists or has been added. "
+  },
+   {TidyPPrintTabs,
+   "Set this option \"on\" to indent using tabs instead of the default "
+   "spaces. The option TidyIndentSpaces controls the number of tabs output "
+   "per level of indent, which is reset to 1, when this option is set on. "
+   "And of course, indent must be enabled for this to have any effect. "
+   "Note TidyTabSize controls converting input tabs to spaces. Set to zero "
+   "to retain input tabs. "
   },
   {N_TIDY_OPTIONS,
    NULL

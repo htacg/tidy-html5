@@ -84,5 +84,10 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node );
 
 void TY_(PPrintXMLTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node );
 
+/*\
+ * 20150515 - support using tabs instead of spaces
+\*/
+void TY_(PPrintTabs)(void);
+void TY_(PPrintSpaces)(void);
 
 #endif /* __PPRINT_H__ */

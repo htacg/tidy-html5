@@ -9,4 +9,7 @@ examples/LICENSE.md
 # file generates from xsl
 examples/quickref_include.html
 
+# not sure what these are
+html/*
+latex/*
 

@@ -1,0 +1,31 @@
+/*!
+
+\page tidy_scripting Running tidy in scripts
+
+If you want to run Tidy from a Perl, bash, or other scripting language you may find it of value to inspect the result returned 
+by Tidy when it exits: 
+
+- \b 0 = if everything is fine
+- \b 1 = if there were warnings and 
+- \b 2 = if there were errors. 
+
+\section perl_example_script Example Perl script
+
+\code{.pl}
+if (close(TIDY) == 0) {
+  my $exitcode = $? &gt;&gt; 8;
+  if ($exitcode == 1) {
+    printf STDERR "tidy issued warning messages\n";
+  } elsif ($exitcode == 2) {
+    printf STDERR "tidy issued error messages\n";
+  } else {
+    die "tidy exited with code: $exitcode\n";
+  }
+} else {
+  printf STDERR "tidy detected no errors\n";
+}
+\endcode
+
+
+
+*/

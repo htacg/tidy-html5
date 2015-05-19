@@ -1,0 +1,98 @@
+/*!
+
+
+\page building_tidy Building Tidy
+
+How to compile and install Tidy from source code.
+
+\tableofcontents
+  
+\section Prerequisites
+
+ - \b git - <a href="http://git-scm.com/book/en/v2/Getting-Started-Installing-Git">git-scm.com/book/en/v2/Getting-Started-Installing-Git</a>
+ - \b cmake - <a href="http://www.cmake.org/download/">cmake.org/download/</a>
+ - Appropriate build tools for the platform
+
+CMake comes in two forms - command line and gui. Some installations only install one or the other, but sometimes both. The build 
+commands below are only for the command line use.
+
+Also the actual build tools vary for each platform. But that is one of the great features of cmake, it can generate 
+variuous 'native' build files. Running cmake without any parameters will list the generators 
+available on that platform. For sure one of the common ones is "Unix Makefiles", which needs autotools 
+make installed, but many other generators are supported.
+
+In windows cmake offers various versions of MSVC. Again below only the command line use of MSVC is shown, but the 
+tidy solution (*.sln) file can be loaded into the MSVC IDE, and the building done in there.
+
+\section get_source Get the source code
+
+Tidy’s sourcecode can be found at <a href="https://github.com/htacg/tidy-html5">github.com/htacg/tidy-html5</a>. There are sometimes 
+several branches, but in general `master` is the most recently updated version. 
+
+\note Note that as “cutting edge,” it may have bugs or other 
+unstable behavior. If you prefer a stable, officially released version, be sure to have a look 
+at Releases on the github page.
+
+In general you can use the <b>Download ZIP</b> button on the github page to download the most recent version of a branch. If you prefer 
+Git then you can  clone the repository to a working machine with:
+
+
+\code{.sh}
+git clone git@github.com:htacg/tidy-html5.git
+\endcode
+
+\section compile Compile
+
+<h4>Enter the `build/cmake` directory</h4>
+\code{.sh}
+# *nix
+cd {your-tidy-html5-directory}/build/cmake
+
+# windows
+cd {your-tidy-html5-directory}\build\cmake
+\endcode
+
+<h4>Configure the build</h4>
+\code{.sh}
+# *nix
+cmake ../../ [-DCMAKE_INSTALL_PREFIX=/path/for/install]
+
+# windows
+cmake ..\..\ 
+\endcode
+By default cmake sets the install path to `/usr/local` in unix. 
+
+If you wanted the binary in say `/usr/bin` instead, then use `-DCMAKE_INSTALL_PREFIX=/usr`
+
+On windows the default install is to `C:\Program Files\tidy5`, or `C:/Program Files (x86)/tidy5`, which is not very useful. After 
+the build the `tidy[n].exe` is in the `Release\` directory, and can be copied to any directory in your `PATH` environment variable, for global use.
+
+If you need the tidy library built as a 'shared' (DLL) library, then in add the command `-DBUILD_SHARED_LIB:BOOL=ON`. 
+This option is `OFF` by default, so the static library is built and linked with the command line tool for convenience.
+
+
+<h4>Compile</h4>
+\code{.sh}
+# *nix
+make
+
+# windows
+cmake --build . --config Release
+\endcode
+
+
+\section compileOnstall Install
+Install the applicatio and library with
+
+\code{.sh}
+# *nix
+[sudo] make install
+
+# windows
+cmake --build . --config Release --target INSTALL
+\endcode
+
+
+
+
+*/

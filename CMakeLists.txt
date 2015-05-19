@@ -26,6 +26,7 @@ option( BUILD_SAMPLE_CODE "Set ON to build the sample code"       OFF )
 if (NOT MAN_INSTALL_DIR)
     set(MAN_INSTALL_DIR share/man/man1)
 endif ()
+option( BUILD_DOCUMENTATION "Set ON to build the documentation"   OFF )
 
 if(CMAKE_COMPILER_IS_GNUCXX)
     set( WARNING_FLAGS -Wall )
@@ -217,12 +218,70 @@ if (UNIX)
         )
 
         install(FILES ${CMAKE_BINARY_DIR}/${TIDY_MANFILE} DESTINATION ${MAN_INSTALL_DIR})
+        
+        if (BUILD_DOCUMENTATION)
+            find_program( DOXYGEN_FOUND doxygen )
+            if (DOXYGEN_FOUND)
+                set( WRK_DIR ${CMAKE_SOURCE_DIR}/documentation )
+                set( EXP_DIR ${WRK_DIR}/examples )
+                set( OUT_DIR ${WRK_DIR}/temp )
+                set( DXY_DIR ${WRK_DIR}/temp/tidylib_api )
+                set( DXY_CFG ${WRK_DIR}/temp_doxygen.cfg )
+                file( READ ${WRK_DIR}/doxygen.cfg PARAMS )
+                set( PARAMS "${PARAMS}PROJECT_NUMBER=${LIBTIDY_VERSION}\n" )
+                set( PARAMS "${PARAMS}GENERATE_TAGFILE=${DXY_DIR}/tidy.tags\n" )
+                set( PARAMS "${PARAMS}HTML_EXTRA_FILES=${EXP_DIR}/tidy5.help.txt ${EXP_DIR}/tidy5.config.txt\n" )    
+                set( PARAMS "${PARAMS}# eof\n" )
+                file( WRITE ${DXY_CFG} ${PARAMS} )
+                file( MAKE_DIRECTORY ${OUT_DIR} )
+                add_custom_target( documentation ALL )
+                #=========================================
+                # Generate files.
+                #=========================================
+                add_custom_command(
+                    TARGET documentation
+                    COMMENT "Build Documentation"
+                    VERBATIM
+                    WORKING_DIRECTORY ${WRK_DIR}
+                    COMMAND xsltproc ARGS quickref.xsl ${TIDYCONFIG} > ${OUT_DIR}/quickref.html
+                    COMMAND xsltproc ARGS quickref.include.xsl ${TIDYCONFIG} > ${EXP_DIR}/quickref_include.html # delete later
+                    COMMAND ${CMAKE_BINARY_DIR}/${LIB_NAME} -h > ${EXP_DIR}/tidy5.help.txt # delete later
+                    COMMAND ${CMAKE_BINARY_DIR}/${LIB_NAME} -help-config > ${EXP_DIR}/tidy5.config.txt   # delete later
+                    COMMAND cp ARGS ../LICENSE.md ${EXP_DIR}  # delete later
+                    )
+                #=========================================
+                # Run Doxygen.
+                #=========================================
+                add_custom_command(
+                    TARGET documentation
+                    COMMENT "Run Doxygen"
+                    VERBATIM
+                    WORKING_DIRECTORY ${WRK_DIR}
+                    COMMAND cat ${DXY_CFG} | doxygen - > /dev/null      
+                    )
+                #=========================================
+                # Cleanup.
+                #=========================================
+                add_custom_command(
+                    TARGET documentation
+                    COMMENT "Cleanup"
+                    VERBATIM
+                    WORKING_DIRECTORY ${WRK_DIR}
+                    COMMAND rm ${EXP_DIR}/quickref_include.html
+                    COMMAND rm ${EXP_DIR}/tidy5.help.txt
+                    COMMAND rm ${EXP_DIR}/tidy5.config.txt
+                    COMMAND rm ${EXP_DIR}/LICENSE.md
+                    )
+                install(CODE "MESSAGE(\"Build output can be found in ${OUT_DIR}.\")")
+            else ()
+                message(STATUS "*** NOTE: doxygen NOT FOUND! Can NOT generate documentation.")
+            endif ()
+        endif ()
     else ()
         message(STATUS "*** NOTE: xsltproc NOT FOUND! Can NOT generate man page.")
         message(STATUS "*** You need to install xsltproc in your system.")
     endif ()
 endif ()
-
 
 ##########################################################
 ### Create MSI,EXE, DMG, DEB/RPM

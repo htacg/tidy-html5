@@ -94,7 +94,7 @@
 }
 
 .ui-resizable-e {
-  background:url("splitbar.png") repeat scroll right center transparent;
+  background:url("ftv2splitbar.png") repeat scroll right center transparent;
   cursor:e-resize;
   height:100%;
   right:0;
@@ -116,7 +116,7 @@
 #nav-tree {
   background-image:url('nav_h.png');
   background-repeat:repeat-x;
-  background-color: #F9FAFC;
+  background-color: #F9F9FA;
   -webkit-overflow-scrolling : touch; /* iOS 5+ */
 }
 

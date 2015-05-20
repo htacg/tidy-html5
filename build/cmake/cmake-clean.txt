@@ -14,4 +14,7 @@ CPackSourceConfig.cmake
 tidy5-4.9.20-64bit.deb
 tidy5-4.9.20-64bit.rpm
 tidy5.1
-
+directories.wixobj
+features.wixobj
+files.wixobj
+main.wixobj

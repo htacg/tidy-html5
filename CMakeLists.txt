@@ -20,7 +20,7 @@ list(GET VERSION_LIST 2 TIDY_POINT_VERSION)
 
 # Allow developer to select is Dynamic or static library built
 set( LIB_TYPE STATIC )  # set default static
-option( BUILD_SHARED_LIB "Set ON to build Shared (DLL) Library"   OFF )
+option( BUILD_SHARED_LIB "Set ON to build Shared (DLL) Library"   ON )
 option( BUILD_TAB2SPACE  "Set ON to build utility app, tab2space" OFF )
 option( BUILD_SAMPLE_CODE "Set ON to build the sample code"       OFF )
 if (NOT MAN_INSTALL_DIR)
@@ -117,32 +117,43 @@ if (MSVC)
     list(APPEND CFILES ${SRCDIR}/sprtf.c)
     list(APPEND LIBHFILES ${SRCDIR}/sprtf.h)
 endif ()
-set(name lib-tidy)
-add_library ( ${name} ${LIB_TYPE} ${CFILES} ${HFILES} ${LIBHFILES} )
+#######################################
+# Always build the STATIC library
+set(name tidy-static)
+add_library ( ${name} STATIC ${CFILES} ${HFILES} ${LIBHFILES} )
 set_target_properties( ${name} PROPERTIES 
-    OUTPUT_NAME ${LIB_NAME}
+    OUTPUT_NAME ${LIB_NAME}s
     )
-set_target_properties( ${name} PROPERTIES
-                               VERSION   ${LIBTIDY_VERSION}
-                               SOVERSION ${TIDY_MAJOR_VERSION} )
-if (BUILD_SHARED_LIB)
-set_target_properties( ${name} PROPERTIES 
-    COMPILE_FLAGS "-DBUILD_SHARED_LIB"
-    )
-set_target_properties( ${name} PROPERTIES 
-    COMPILE_FLAGS "-DBUILDING_SHARED_LIB"
-    )
-endif ()                               
 list ( APPEND add_LIBS ${name} )
 install(TARGETS ${name}
-    RUNTIME DESTINATION bin
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
-    )
+        RUNTIME DESTINATION bin
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib
+        )
 install( FILES ${HFILES} DESTINATION include )
+########################################
+# if user option still on
+if (BUILD_SHARED_LIB)
+    set(name tidy-share)
+    add_library ( ${name} SHARED ${CFILES} ${HFILES} ${LIBHFILES} )
+    set_target_properties( ${name} PROPERTIES 
+                                    OUTPUT_NAME ${LIB_NAME} )
+    set_target_properties( ${name} PROPERTIES
+                                   VERSION   ${LIBTIDY_VERSION}
+                                   SOVERSION ${TIDY_MAJOR_VERSION} )
+    set_target_properties( ${name} PROPERTIES 
+                                   COMPILE_FLAGS "-DBUILD_SHARED_LIB" )
+    set_target_properties( ${name} PROPERTIES 
+                                   COMPILE_FLAGS "-DBUILDING_SHARED_LIB" )
+    install(TARGETS ${name}
+        RUNTIME DESTINATION bin
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib
+        )
+endif ()                               
 
 ##########################################################
-### main executable
+### main executable - linked with STATIC library
 set(name ${LIB_NAME})
 set ( BINDIR console )
 add_executable( ${name} ${BINDIR}/tidy.c )
@@ -150,11 +161,6 @@ target_link_libraries( ${name} ${add_LIBS} )
 if (MSVC)
     set_target_properties( ${name} PROPERTIES DEBUG_POSTFIX d )
 endif ()
-if (BUILD_SHARED_LIB)
-set_target_properties( ${name} PROPERTIES 
-    COMPILE_FLAGS "-DBUILD_SHARED_LIB"
-    )
-endif ()                               
 install (TARGETS ${name} DESTINATION bin)
 
 if (BUILD_TAB2SPACE)

@@ -20,7 +20,7 @@ list(GET VERSION_LIST 2 TIDY_POINT_VERSION)
 
 # Allow developer to select is Dynamic or static library built
 set( LIB_TYPE STATIC )  # set default static
-option( BUILD_SHARED_LIB "Set ON to build Shared (DLL) Library"   ON )
+option( BUILD_SHARED_LIB "Set OFF to NOT build shared library"    ON  )
 option( BUILD_TAB2SPACE  "Set ON to build utility app, tab2space" OFF )
 option( BUILD_SAMPLE_CODE "Set ON to build the sample code"       OFF )
 if (NOT MAN_INSTALL_DIR)

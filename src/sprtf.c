@@ -23,6 +23,9 @@
  *
  */
 
+#ifdef _MSC_VER
+#pragma warning( disable : 4995 )
+#endif
 // Module: sprtf.cxx
 // Debug log file output
 #include <stdio.h> // fopen()...
@@ -31,6 +34,9 @@
 #ifdef _MSC_VER
 #include <WinSock2.h>
 #include <sys/timeb.h>
+#if (defined(UNICODE) || defined(_UNICODE))
+#include <Strsafe.h>
+#endif
 #else /* !_MSC_VER */
 #include <sys/time.h> // gettimeoday(), struct timeval,...
 #endif /* _MSC_VER y/n */

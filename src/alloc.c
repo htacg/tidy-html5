@@ -5,8 +5,13 @@
 
 */
 
+/* #define DEBUG_MEMORY very NOISY extra DEBUG of memory allocation, reallocation and free */
+
 #include "tidy.h"
 #include "forward.h"
+#ifdef DEBUG_MEMORY
+#include "sprtf.h"
+#endif
 
 static TidyMalloc  g_malloc  = NULL;
 static TidyRealloc g_realloc = NULL;
@@ -54,6 +59,12 @@ static void* TIDY_CALL defaultAlloc( TidyAllocator* allocator, size_t size )
     void *p = ( g_malloc ? g_malloc(size) : malloc(size) );
     if ( !p )
         defaultPanic( allocator,"Out of memory!");
+#if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_MEMORY)
+    SPRTF("alloc   MEM %p, size %d\n", p, (int)size );
+    if (size == 0) {
+        SPRTF("NOTE: An allocation of ZERO bytes!!!!!!\n");
+    }
+#endif
     return p;
 }
 
@@ -66,6 +77,9 @@ static void* TIDY_CALL defaultRealloc( TidyAllocator* allocator, void* mem, size
     p = ( g_realloc ? g_realloc(mem, newsize) : realloc(mem, newsize) );
     if (!p)
         defaultPanic( allocator, "Out of memory!");
+#if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_MEMORY)
+    SPRTF("realloc MEM %p, size %d\n", p, (int)newsize );
+#endif
     return p;
 }
 
@@ -73,6 +87,9 @@ static void TIDY_CALL defaultFree( TidyAllocator* ARG_UNUSED(allocator), void* m
 {
     if ( mem )
     {
+#if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_MEMORY)
+        SPRTF("free    MEM %p\n", mem );
+#endif
         if ( g_free )
             g_free( mem );
         else

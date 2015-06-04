@@ -1572,6 +1572,7 @@ const char *dbg_get_element_name( void *vp )
 void dbg_show_node( TidyDocImpl* doc, Node *node, int caller, int indent )
 {
     AttVal* av;
+    Lexer* lexer = doc->lexer;
     ctmbstr call = "";
     ctmbstr name = dbg_get_element_name(node);
     ctmbstr type = dbg_get_lexer_type(node);
@@ -1588,6 +1589,29 @@ void dbg_show_node( TidyDocImpl* doc, Node *node, int caller, int indent )
         SPRTF("%s %s %s %s", type, name, impl, call );
     else
         SPRTF("%s %s %s", name, impl, call );
+    if (lexer && (strcmp("Text",name) == 0)) {
+        uint len = node->end - node->start;
+        uint i;
+        SPRTF(" (%d) '", len);
+        if (len < 40) {
+            /* show it all */
+            for (i = node->start; i < node->end; i++) {
+                SPRTF("%c", lexer->lexbuf[i]);
+            }
+        } else {
+            /* partial display */
+            uint max = 19;
+            for (i = node->start; i < max; i++) {
+                SPRTF("%c", lexer->lexbuf[i]);
+            }
+            SPRTF("...");
+            i = node->end - 19;
+            for (; i < node->end; i++) {
+                SPRTF("%c", lexer->lexbuf[i]);
+            }
+        }
+        SPRTF("'");
+    }
     for (av = node->attributes; av; av = av->next) {
         name = av->attribute;
         if (name) {
@@ -1597,6 +1621,7 @@ void dbg_show_node( TidyDocImpl* doc, Node *node, int caller, int indent )
             }
         }
     }
+
     SPRTF("\n");
 }
 

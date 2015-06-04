@@ -14,3 +14,4 @@ temp*
 *.bak
 .DS_Store
 .idea
+*.old

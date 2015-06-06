@@ -1,7 +1,7 @@
 ﻿---
 title:    "Intro"
 bg:       "#A0CCDA"
-color:    black    
+color:    black
 style:    left
 fa-icon:
 ---
@@ -15,10 +15,10 @@ Tidy**. If you’re on Mac OS X, Linux, or UNIX you can also use `man tidy` and
 read the purpose-built documentation for the version of **Tidy** that you have
 installed.
 
-You can find a [configuration quick reference here][1] (version: 4.9.28).
+You can find a [configuration quick reference here][1] (version 4.9.28).
 
 If you’re a developer using **TidyLib** please consult the
-[API Documentation][2] (version: 4.9.28) and the
+[API Documentation][2] (version 4.9.28) and the
 [TidyLib Introduction][3] page.
 
 And if you simply want to use **Tidy**, then please read on.

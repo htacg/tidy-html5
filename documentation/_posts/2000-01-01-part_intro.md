@@ -1,9 +1,9 @@
-﻿---
+---
 title:    "Intro"
 bg:       "#A0CCDA"
-color:    black
+color:    black    
 style:    left
-fa-icon:
+fa-icon:  intro
 ---
 
 # HTML Tidy

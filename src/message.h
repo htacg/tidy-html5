@@ -157,8 +157,9 @@ void TY_(ReportFatal)(TidyDocImpl* doc, Node* element, Node* node, uint code);
 #define REMOVED_HTML5                88 /* this element removed from HTML5 */
 #define BAD_BODY_HTML5               89 /* attr on body removed from HTML5 */
 #define BAD_ALIGN_HTML5              90 /* use of align attr removed from HTML5 */
+#define BAD_SUMMARY_HTML5            91 /* use of summary attr removed from HTML5 */
 
-#define PREVIOUS_LOCATION            91 /* last */
+#define PREVIOUS_LOCATION            92 /* last */
 
 /* character encoding errors */
 

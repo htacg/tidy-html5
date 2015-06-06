@@ -113,7 +113,8 @@ static struct _msgfmt
   /* HTML5 */
   { REMOVED_HTML5,                "%s element removed from HTML5"                                           }, /* Warning */
   { BAD_BODY_HTML5,               "Found attribute on body that is obsolete in HTML5. Use CSS"              }, /* Warning */
-  { BAD_ALIGN_HTML5,              "The align attribute on the %s element is obsolete, Use CSS"              }, /* Wanring */
+  { BAD_ALIGN_HTML5,              "The align attribute on the %s element is obsolete, Use CSS"              }, /* Warning */
+  { BAD_SUMMARY_HTML5,            "The summary attribute on the %s element is obsolete in HTML5"            }, /* Warning */
 
 /* ReportNotice */
   { TRIM_EMPTY_ELEMENT,           "trimming empty %s"                                                       }, /* Notice */
@@ -1499,6 +1500,7 @@ void TY_(ReportWarning)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     case REMOVED_HTML5:
     case BAD_BODY_HTML5:
     case BAD_ALIGN_HTML5:
+    case BAD_SUMMARY_HTML5:
         messageNode(doc, TidyWarning, rpt, fmt, nodedesc);
         break;
     case COERCE_TO_ENDTAG_WARN:

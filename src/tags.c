@@ -873,8 +873,28 @@ void CheckAREA( TidyDocImpl* doc, Node *node )
 void CheckTABLE( TidyDocImpl* doc, Node *node )
 {
     AttVal* attval;
+    Bool HasSummary = (TY_(AttrGetById)(node, TidyAttr_SUMMARY) != NULL) ? yes : no;
+    Bool isHTML5 = (TY_(HTMLVersion)(doc) == HT50) ? yes : no;
 
     TY_(CheckAttributes)(doc, node);
+
+    /* Issue #210 - a missing summary attribute is bad accessibility, no matter
+       what HTML version is involved; a document without is valid 
+       EXCEPT for HTML5, when to have a summary is wrong */
+    if (cfg(doc, TidyAccessibilityCheckLevel) == 0)
+    {
+        if (HasSummary && isHTML5)
+        {
+            /* #210 - has summary, and is HTML5, then report obsolete */
+            TY_(ReportWarning)(doc, node, node, BAD_SUMMARY_HTML5);
+        } 
+        else if (!HasSummary && !isHTML5) 
+        {
+            /* #210 - No summary, and NOT HTML5, then report as before */
+            doc->badAccess |= BA_MISSING_SUMMARY;
+            TY_(ReportMissingAttr)( doc, node, "summary");
+        }
+    }
 
     /* convert <table border> to <table border="1"> */
     if ( cfgBool(doc, TidyXmlOut) && (attval = TY_(AttrGetById)(node, TidyAttr_BORDER)) )

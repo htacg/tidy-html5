@@ -379,7 +379,10 @@ static Bool SetOptionValue( TidyDocImpl* doc, TidyOptionId optId, ctmbstr val )
    {
       assert( option->id == optId && option->type == TidyString );
       FreeOptionValue( doc, option, &doc->config.value[ optId ] );
-      doc->config.value[ optId ].p = TY_(tmbstrdup)( doc->allocator, val );
+      if ( TY_(tmbstrlen)(val)) /* Issue #218 - ONLY if it has LENGTH! */
+          doc->config.value[ optId ].p = TY_(tmbstrdup)( doc->allocator, val );
+      else
+          doc->config.value[ optId ].p = 0; /* should already be zero, but to be sure... */
    }
    return status;
 }

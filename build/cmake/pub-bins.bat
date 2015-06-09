@@ -4,8 +4,12 @@
 @set TMPFIL=%TMPSRC%\version.txt
 @if NOT EXIST %TMPFIL% goto NOFIL
 @set /p TMPVER=<%TMPFIL%
-
+@set DOPAUSE=pause
 @echo Version %TMPVER%
+
+if "%1x" == "NOPAUSEx" (
+    set DOPAUSE=echo No pause requested...
+)
 
 @set TMPBIN=F:\Projects\tidy-bins
 @set TMPBINS=%TMPBIN%\binaries
@@ -29,7 +33,7 @@
 @echo %TMPFIL3%
 @echo.
 @echo *** CONTINUE?%
-@pause
+@%DOPAUSE%
 
 @if NOT EXIST %TMPDD%\nul (
 @md %TMPDD%
@@ -79,11 +83,9 @@ copy %TMPSRC% %TMPDST%
 @echo.
 @goto :EOF
 
-
-
 :NODST
 @echo Error: Unable to create %TMPDD%
-
+@goto END
 
 :NOFIL1
 @echo Can NOT locate %TMPFIL1%! *** FIX ME ***

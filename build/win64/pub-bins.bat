@@ -3,6 +3,7 @@
 @set TMPFIL=%TMPSRC%\version.txt
 @if NOT EXIST %TMPFIL% goto NOFIL
 @set /p TMPVER=<%TMPFIL%
+@set DOPAUSE=pause
 
 @echo Version %TMPVER%
 
@@ -14,6 +15,10 @@
 @echo.
 @echo This is a NEW installation in %TMPDD%
 :GOTDST
+
+@if "%1x" == "NOPAUSEx" (
+@set DOPAUSE=echo No pause requested...
+)
 
 @set TMPFIL1=tidy5-%TMPVER%-win64.exe
 @set TMPFIL2=tidy5-%TMPVER%-win64.msi
@@ -28,7 +33,7 @@
 @echo %TMPFIL3%
 @echo.
 @echo *** CONTINUE?%
-@pause
+@%DOPAUSE%
 
 @if NOT EXIST %TMPDD%\nul (
 @md %TMPDD%

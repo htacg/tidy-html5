@@ -34,7 +34,7 @@ ctmbstr TY_(ReleaseDate)(void)
   return TY_(release_date);
 }
 
-ctmbstr tidyLibraryVersion(void)
+ctmbstr TIDY_CALL     tidyLibraryVersion(void)
 {
   return TY_(library_version);
 }

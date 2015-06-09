@@ -58,6 +58,7 @@
 
   Created 2001-05-20 by Charles Reitzel
   Updated 2002-07-01 by Charles Reitzel - 1st Implementation
+  Updated 2015-06-09 by Geoff R. McLane - Add more doxygen syntax
 
 */
 
@@ -312,8 +313,20 @@ int main(int argc, char **argv )
 ** @{
 */
 
+/** The primary creation of a TidyDoc.
+ ** This must be the first call before most of the Tidy API which require the TidyDoc parameter.
+ ** When completed tidyRelease( TidyDoc tdoc ); should be called to release all memory
+ */
 TIDY_EXPORT TidyDoc TIDY_CALL     tidyCreate(void);
+
+/** Create a Tidoc supplying the TidyAllocator.
+ ** See the TidyAllocator structure for creating an allocator
+ */
 TIDY_EXPORT TidyDoc TIDY_CALL     tidyCreateWithAllocator( TidyAllocator *allocator );
+
+/** Free all memory and release the TidyDoc.
+ ** TidyDoc can not be used after this call.
+ */
 TIDY_EXPORT void TIDY_CALL        tidyRelease( TidyDoc tdoc );
 
 /** Let application store a chunk of data w/ each Tidy instance.
@@ -332,7 +345,7 @@ TIDY_EXPORT void* TIDY_CALL       tidyGetAppData( TidyDoc tdoc );
 TIDY_EXPORT ctmbstr TIDY_CALL     tidyReleaseDate(void);
 
 /** Get version number for the current library */
-TIDY_EXPORT ctmbstr tidyLibraryVersion(void);
+TIDY_EXPORT ctmbstr TIDY_CALL     tidyLibraryVersion(void);
 
 /* Diagnostics and Repair
 */

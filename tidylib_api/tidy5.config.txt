@@ -53,6 +53,7 @@ indent                      AutoBool   auto, y/n, yes/no, t/f, true/false, 1/0
 indent-attributes           Boolean    y/n, yes/no, t/f, true/false, 1/0       
 indent-cdata                Boolean    y/n, yes/no, t/f, true/false, 1/0       
 indent-spaces               Integer    0, 1, 2, ...                            
+indent-with-tabs            Boolean    y/n, yes/no, t/f, true/false, 1/0       
 input-encoding              Encoding   raw, ascii, latin0, latin1, utf8,       
                                        iso2022, mac, win1252, ibm858, utf16le, 
                                        utf16be, utf16, big5, shiftjis          

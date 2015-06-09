@@ -411,6 +411,7 @@ var searchData=
   ['tidyoutcharencoding',['TidyOutCharEncoding',['../tidyenum_8h.html#a3a1401652599150188a168dade7dc150ab61af8594d7ec7e08c9cf8b9e8a55aed',1,'tidyenum.h']]],
   ['tidyoutfile',['TidyOutFile',['../tidyenum_8h.html#a3a1401652599150188a168dade7dc150a20c7d95bd32d82bbd1d05de170a83421',1,'tidyenum.h']]],
   ['tidyoutputbomnotused',['TidyOutputBOMNotUsed',['../tidyenum_8h.html#a3a1401652599150188a168dade7dc150a94d724b324c73dcafd2ddec07acf486e',1,'tidyenum.h']]],
+  ['tidypprinttabs',['TidyPPrintTabs',['../tidyenum_8h.html#a3a1401652599150188a168dade7dc150a3ddd0a4b9afc340dad637e4f60ace56b',1,'tidyenum.h']]],
   ['tidypreserveentities',['TidyPreserveEntities',['../tidyenum_8h.html#a3a1401652599150188a168dade7dc150a2fb0aa29d36ce68051daadb759c9cb8c',1,'tidyenum.h']]],
   ['tidypretags',['TidyPreTags',['../tidyenum_8h.html#a3a1401652599150188a168dade7dc150a96fcf40116bdcd24ff0187d8781ca497',1,'tidyenum.h']]],
   ['tidyprettyprint',['TidyPrettyPrint',['../tidyenum_8h.html#a3812a124fc3e26e59b5a4312dabcc4a7a879857baedc5eec0bfd690bbd6556a9e',1,'tidyenum.h']]],

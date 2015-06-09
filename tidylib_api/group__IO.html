@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">HTML Tidy
-   &#160;<span id="projectnumber">4.9.28</span>
+   &#160;<span id="projectnumber">4.9.35</span>
    </div>
    <div id="projectbrief">The HTACG Tidy HTML Project</div>
   </td>
@@ -195,6 +195,7 @@ Functions</h2></td></tr>
 <tr class="separator:ga0c8d46de315cabb0ac7d2cf01ca183d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>By default, Tidy will define, create and use instances of input and output handlers for standard C buffered I/O (i.e. </p>
 <p>FILE* stdin, FILE* stdout and FILE* stderr for content input, content output and diagnostic output, respectively. A FILE* cfgFile input handler will be used for config files. Command line options will just be set directly. </p>
 <hr/><h2 class="groupheader">Data Structure Documentation</h2>
 <a name="struct__TidyInputSource" id="struct__TidyInputSource"></a>
@@ -206,7 +207,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="textblock">
+<div class="textblock"><p>TidyInputSource - Delivers raw bytes of input. </p>
+
 <p>Definition at line <a class="el" href="tidy_8h_source.html#l00559">559</a> of file <a class="el" href="tidy_8h_source.html">tidy.h</a>.</p>
 </div><table class="fieldtable">
 <tr><th colspan="3">Data Fields</th></tr>
@@ -248,7 +250,8 @@ Pointer to "unget" callback. </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="textblock">
+<div class="textblock"><p>TidyOutputSink - accepts raw bytes of output. </p>
+
 <p>Definition at line <a class="el" href="tidy_8h_source.html#l00600">600</a> of file <a class="el" href="tidy_8h_source.html">tidy.h</a>.</p>
 </div><table class="fieldtable">
 <tr><th colspan="3">Data Fields</th></tr>
@@ -280,6 +283,8 @@ Output context. <p>Passed to callbacks </p>
       </table>
 </div><div class="memdoc">
 
+<p>End of input "character". </p>
+
 <p>Definition at line <a class="el" href="tidy_8h_source.html#l00554">554</a> of file <a class="el" href="tidy_8h_source.html">tidy.h</a>.</p>
 
 </div>
@@ -295,6 +300,8 @@ Output context. <p>Passed to callbacks </p>
       </table>
 </div><div class="memdoc">
 
+<p>Input Callback: is end of input? </p>
+
 <p>Definition at line <a class="el" href="tidy_8h_source.html#l00551">551</a> of file <a class="el" href="tidy_8h_source.html">tidy.h</a>.</p>
 
 </div>
@@ -308,6 +315,8 @@ Output context. <p>Passed to callbacks </p>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Input Callback: get next byte of input. </p>
 
 <p>Definition at line <a class="el" href="tidy_8h_source.html#l00545">545</a> of file <a class="el" href="tidy_8h_source.html">tidy.h</a>.</p>
 
@@ -323,6 +332,8 @@ Output context. <p>Passed to callbacks </p>
       </table>
 </div><div class="memdoc">
 
+<p>TidyInputSource - Delivers raw bytes of input. </p>
+
 </div>
 </div>
 <a class="anchor" id="ga6bdd15de48364d2b5dbf2141109d3f98"></a>
@@ -335,6 +346,8 @@ Output context. <p>Passed to callbacks </p>
       </table>
 </div><div class="memdoc">
 
+<p>TidyOutputSink - accepts raw bytes of output. </p>
+
 </div>
 </div>
 <a class="anchor" id="ga63bcce5aa5f52e4e2e22aedd750b8bbc"></a>
@@ -346,6 +359,8 @@ Output context. <p>Passed to callbacks </p>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Output callback: send a byte to output. </p>
 
 <p>Definition at line <a class="el" href="tidy_8h_source.html#l00594">594</a> of file <a class="el" href="tidy_8h_source.html">tidy.h</a>.</p>
 
@@ -360,6 +375,8 @@ Output context. <p>Passed to callbacks </p>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Callback to filter messages by diagnostic level: info, warning, etc. </p>
 <p>Just set diagnostic output handler to redirect all diagnostics output. Return true to proceed with output, false to cancel. </p>
 
 <p>Definition at line <a class="el" href="tidy_8h_source.html#l00626">626</a> of file <a class="el" href="tidy_8h_source.html">tidy.h</a>.</p>
@@ -390,6 +407,8 @@ Output context. <p>Passed to callbacks </p>
       </table>
 </div><div class="memdoc">
 
+<p>Input Callback: unget a byte of input. </p>
+
 <p>Definition at line <a class="el" href="tidy_8h_source.html#l00548">548</a> of file <a class="el" href="tidy_8h_source.html">tidy.h</a>.</p>
 
 </div>
@@ -408,6 +427,8 @@ Output context. <p>Passed to callbacks </p>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Helper: get next byte from input source. </p>
 
 </div>
 </div>
@@ -440,6 +461,8 @@ Output context. <p>Passed to callbacks </p>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Facilitates user defined sinks by providing an entry point to marshal pointers-to-functions. </p>
 <p>Needed by .NET and possibly other language bindings. </p>
 
 </div>
@@ -485,6 +508,8 @@ Output context. <p>Passed to callbacks </p>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Facilitates user defined source by providing an entry point to marshal pointers-to-functions. </p>
 <p>Needed by .NET and possibly other language bindings. </p>
 
 </div>
@@ -502,6 +527,8 @@ Output context. <p>Passed to callbacks </p>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Helper: check if input source at end. </p>
 
 </div>
 </div>
@@ -529,6 +556,8 @@ Output context. <p>Passed to callbacks </p>
       </table>
 </div><div class="memdoc">
 
+<p>Helper: send a byte to output. </p>
+
 </div>
 </div>
 <a class="anchor" id="ga5e5cffe93edf4bea0d3214be70d6f77b"></a>
@@ -554,6 +583,8 @@ Output context. <p>Passed to callbacks </p>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set error sink to given buffer. </p>
 
 </div>
 </div>
@@ -581,6 +612,8 @@ Output context. <p>Passed to callbacks </p>
       </table>
 </div><div class="memdoc">
 
+<p>Set error sink to named file. </p>
+
 </div>
 </div>
 <a class="anchor" id="gad47c75f3af85e7927e7ac18918ec6363"></a>
@@ -607,6 +640,8 @@ Output context. <p>Passed to callbacks </p>
       </table>
 </div><div class="memdoc">
 
+<p>Set error sink to given generic sink. </p>
+
 </div>
 </div>
 <a class="anchor" id="ga51e02523601388bb83c2555b995e68b0"></a>
@@ -632,6 +667,8 @@ Output context. <p>Passed to callbacks </p>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Give Tidy a filter callback to use. </p>
 
 </div>
 </div>
@@ -685,6 +722,8 @@ Output context. <p>Passed to callbacks </p>
       </table>
 </div><div class="memdoc">
 
+<p>Helper: unget byte back to input source. </p>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -692,7 +731,7 @@ Output context. <p>Passed to callbacks </p>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue May 19 2015 17:00:06 for HTML Tidy by
+    <li class="footer">Generated on Tue Jun 9 2015 15:54:14 for HTML Tidy by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

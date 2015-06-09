@@ -5503,6 +5503,13 @@
     </member>
     <member kind="enumvalue">
       <type>@</type>
+      <name>TidyPPrintTabs</name>
+      <anchorfile>tidyenum_8h.html</anchorfile>
+      <anchor>a3a1401652599150188a168dade7dc150a3ddd0a4b9afc340dad637e4f60ace56b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <type>@</type>
       <name>N_TIDY_OPTIONS</name>
       <anchorfile>tidyenum_8h.html</anchorfile>
       <anchor>a3a1401652599150188a168dade7dc150a6b389f13aa939c78b6e8335fe67a9c3a</anchor>

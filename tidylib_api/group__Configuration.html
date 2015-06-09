@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">HTML Tidy
-   &#160;<span id="projectnumber">4.9.28</span>
+   &#160;<span id="projectnumber">4.9.35</span>
    </div>
    <div id="projectbrief">The HTACG Tidy HTML Project</div>
   </td>
@@ -234,6 +234,7 @@ Functions</h2></td></tr>
 <tr class="separator:gab94961700088d2daf8dcc012a5e33e49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Functions for getting and setting Tidy configuration options. </p>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a class="anchor" id="gaee8a8bcb6091bd36f6fc20507a4544fc"></a>
 <div class="memitem">
@@ -244,6 +245,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Applications using TidyLib may want to augment command-line and configuration file options. </p>
 <p>Setting this callback allows an application developer to examine command-line and configuration file options after TidyLib has examined them and failed to recognize them. </p>
 
 <p>Definition at line <a class="el" href="tidy_8h_source.html#l00408">408</a> of file <a class="el" href="tidy_8h_source.html">tidy.h</a>.</p>
@@ -275,6 +278,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Get next Option. </p>
+
 </div>
 </div>
 <a class="anchor" id="ga030c695d6407b2756856eb1862642cfe"></a>
@@ -300,6 +305,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Lookup option by ID. </p>
 
 </div>
 </div>
@@ -327,6 +334,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Lookup option by name. </p>
+
 </div>
 </div>
 <a class="anchor" id="gab92a35ffbd3b0b668534d63f94d2486f"></a>
@@ -342,6 +351,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get iterator for list of option. </p>
 <p>Example: </p>
 <pre>
 TidyIterator itOpt = tidyGetOptionList( tdoc );
@@ -377,6 +388,8 @@ while ( itOpt )
       </table>
 </div><div class="memdoc">
 
+<p>Copy current configuration settings from one document to another. </p>
+
 </div>
 </div>
 <a class="anchor" id="ga083cb42d6f4413604240b5c1b3aa2070"></a>
@@ -393,6 +406,8 @@ while ( itOpt )
       </table>
 </div><div class="memdoc">
 
+<p>Any settings different than default? </p>
+
 </div>
 </div>
 <a class="anchor" id="ga793bc9e177aa90301802e44c4fc22e0e"></a>
@@ -408,6 +423,8 @@ while ( itOpt )
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Any settings different than snapshot? </p>
 
 </div>
 </div>
@@ -435,6 +452,8 @@ while ( itOpt )
       </table>
 </div><div class="memdoc">
 
+<p>Get current Option value as a Boolean flag. </p>
+
 </div>
 </div>
 <a class="anchor" id="ga1d8b72e64e4d949dc21599fa788e842f"></a>
@@ -450,6 +469,8 @@ while ( itOpt )
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get category of given Option. </p>
 
 </div>
 </div>
@@ -476,6 +497,8 @@ while ( itOpt )
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get current pick list value for option by ID. </p>
 <p>Useful for enum types. </p>
 
 </div>
@@ -494,6 +517,8 @@ while ( itOpt )
       </table>
 </div><div class="memdoc">
 
+<p>Iterate over user declared tags. </p>
+
 </div>
 </div>
 <a class="anchor" id="gab9e02c9927fe2c382ec5f81b4acf9cb4"></a>
@@ -509,6 +534,8 @@ while ( itOpt )
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get default value of given Option as a string. </p>
 
 </div>
 </div>
@@ -526,6 +553,8 @@ while ( itOpt )
       </table>
 </div><div class="memdoc">
 
+<p>Get default value of given Option as a Boolean value. </p>
+
 </div>
 </div>
 <a class="anchor" id="gafc8df35e864dd3a24f23aca3c2f8bd9d"></a>
@@ -541,6 +570,8 @@ while ( itOpt )
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get default value of given Option as an unsigned integer. </p>
 
 </div>
 </div>
@@ -568,6 +599,8 @@ while ( itOpt )
       </table>
 </div><div class="memdoc">
 
+<p>Get option description. </p>
+
 </div>
 </div>
 <a class="anchor" id="gaeed1ef5cb5329f3f5aca0a8ad7e8ea4f"></a>
@@ -594,6 +627,8 @@ while ( itOpt )
       </table>
 </div><div class="memdoc">
 
+<p>Iterate over a list of related options. </p>
+
 </div>
 </div>
 <a class="anchor" id="ga47f8502cc202fc7423937647957955a3"></a>
@@ -619,6 +654,8 @@ while ( itOpt )
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get character encoding name. </p>
 <p>Used with TidyCharEncoding, TidyOutCharEncoding, TidyInCharEncoding </p>
 
 </div>
@@ -637,6 +674,8 @@ while ( itOpt )
       </table>
 </div><div class="memdoc">
 
+<p>Get ID of given Option. </p>
+
 </div>
 </div>
 <a class="anchor" id="ga500f31ba81d015b8ce9dad6f2a6ade75"></a>
@@ -652,6 +691,8 @@ while ( itOpt )
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get option ID by name. </p>
 
 </div>
 </div>
@@ -679,6 +720,8 @@ while ( itOpt )
       </table>
 </div><div class="memdoc">
 
+<p>Get current Option value as an integer. </p>
+
 </div>
 </div>
 <a class="anchor" id="gaf370cd2ea113747f50da185fda24adcb"></a>
@@ -694,6 +737,8 @@ while ( itOpt )
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get name of given Option. </p>
 
 </div>
 </div>
@@ -727,6 +772,8 @@ while ( itOpt )
       </table>
 </div><div class="memdoc">
 
+<p>Get next declared tag of specified type: TidyInlineTags, TidyBlockTags, TidyEmptyTags, TidyPreTags. </p>
+
 </div>
 </div>
 <a class="anchor" id="ga1db79a95067d6364c02263d9492fa9e8"></a>
@@ -752,6 +799,8 @@ while ( itOpt )
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get next related option. </p>
 
 </div>
 </div>
@@ -779,6 +828,8 @@ while ( itOpt )
       </table>
 </div><div class="memdoc">
 
+<p>Get next string value of Option "pick list". </p>
+
 </div>
 </div>
 <a class="anchor" id="ga31f815fe2b5bf1e00d6b50be62edd0ab"></a>
@@ -795,6 +846,8 @@ while ( itOpt )
       </table>
 </div><div class="memdoc">
 
+<p>Iterate over Option "pick list". </p>
+
 </div>
 </div>
 <a class="anchor" id="ga06e2685cc2950b182ff2f7136d170a34"></a>
@@ -810,6 +863,8 @@ while ( itOpt )
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get datatype of given Option. </p>
 
 </div>
 </div>
@@ -837,6 +892,8 @@ while ( itOpt )
       </table>
 </div><div class="memdoc">
 
+<p>Get current Option value as a string. </p>
+
 </div>
 </div>
 <a class="anchor" id="ga6aba2ccdb1237a70f5fe1393fee0ce4d"></a>
@@ -852,6 +909,8 @@ while ( itOpt )
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Is Option read-only? </p>
 
 </div>
 </div>
@@ -884,6 +943,8 @@ while ( itOpt )
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set named Option value as a string. </p>
 <p>Good if not sure of type. </p>
 
 </div>
@@ -901,6 +962,8 @@ while ( itOpt )
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Reset all options to their default values. </p>
 
 </div>
 </div>
@@ -928,6 +991,8 @@ while ( itOpt )
       </table>
 </div><div class="memdoc">
 
+<p>Reset option to default value by ID. </p>
+
 </div>
 </div>
 <a class="anchor" id="gae6212b8f32990763cc18a6d3f05eb191"></a>
@@ -943,6 +1008,8 @@ while ( itOpt )
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Reset config settings to snapshot (after document processing) </p>
 
 </div>
 </div>
@@ -976,6 +1043,8 @@ while ( itOpt )
       </table>
 </div><div class="memdoc">
 
+<p>Set Option value as a Boolean flag. </p>
+
 </div>
 </div>
 <a class="anchor" id="gad9e75a64c8dcbc54e791959cf934e1ad"></a>
@@ -1007,6 +1076,8 @@ while ( itOpt )
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set Option value as an integer. </p>
 
 </div>
 </div>
@@ -1040,6 +1111,8 @@ while ( itOpt )
       </table>
 </div><div class="memdoc">
 
+<p>Set Option value as a string. </p>
+
 </div>
 </div>
 <a class="anchor" id="ga4beb2c73c90c3e2ae589c2642478cebd"></a>
@@ -1055,6 +1128,8 @@ while ( itOpt )
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Take a snapshot of current config settings. </p>
 
 </div>
 </div>
@@ -1089,7 +1164,7 @@ while ( itOpt )
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue May 19 2015 17:00:06 for HTML Tidy by
+    <li class="footer">Generated on Tue Jun 9 2015 15:54:14 for HTML Tidy by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">HTML Tidy
-   &#160;<span id="projectnumber">4.9.28</span>
+   &#160;<span id="projectnumber">4.9.35</span>
    </div>
    <div id="projectbrief">The HTACG Tidy HTML Project</div>
   </td>
@@ -188,7 +188,10 @@ Functions</h2></td></tr>
 <tr class="separator:a882a92590a9e6ecce16d5b8e8db19fbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>(c) 1998-2007 (W3C) MIT, ERCIM, Keio University See <a class="el" href="tidy_8h.html" title="Defines HTML Tidy API implemented by tidy library. ">tidy.h</a> for the copyright notice.</p>
+<div class="textblock"><ul>
+<li>Treat buffer as an I/O stream. </li>
+</ul>
+<p>(c) 1998-2007 (W3C) MIT, ERCIM, Keio University See <a class="el" href="tidy_8h.html" title="Defines HTML Tidy API implemented by tidy library. ">tidy.h</a> for the copyright notice.</p>
 <p>Requires buffer to automatically grow as bytes are added. Must keep track of current read and write points. </p>
 
 <p>Definition in file <a class="el" href="buffio_8h_source.html">buffio.h</a>.</p>
@@ -202,7 +205,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="textblock">
+<div class="textblock"><p>TidyBuffer - A chunk of memory. </p>
+
 <p>Definition at line <a class="el" href="buffio_8h_source.html#l00023">23</a> of file <a class="el" href="buffio_8h_source.html">buffio.h</a>.</p>
 </div><table class="fieldtable">
 <tr><th colspan="3">Data Fields</th></tr>
@@ -267,6 +271,8 @@ size</td>
       </table>
 </div><div class="memdoc">
 
+<p>Free current buffer, allocate given amount, reset input pointer, use the default allocator. </p>
+
 </div>
 </div>
 <a class="anchor" id="a57c832b4ddbc19a329a5ab9936eb5826"></a>
@@ -299,6 +305,8 @@ size</td>
       </table>
 </div><div class="memdoc">
 
+<p>Free current buffer, allocate given amount, reset input pointer, use the given custom allocator. </p>
+
 </div>
 </div>
 <a class="anchor" id="ad59b32f81789b634758274f34be4d25b"></a>
@@ -330,6 +338,8 @@ size</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Append bytes to buffer. </p>
 <p>Expand if necessary. </p>
 
 </div>
@@ -364,6 +374,8 @@ size</td>
       </table>
 </div><div class="memdoc">
 
+<p>Attach to existing buffer. </p>
+
 </div>
 </div>
 <a class="anchor" id="a7a66ba1f574955d1fc1de57476e849f2"></a>
@@ -395,6 +407,8 @@ size</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Expand buffer to given size. </p>
 <p>Chunk size is minimum growth. Pass 0 for default of 256 bytes. </p>
 
 </div>
@@ -413,6 +427,8 @@ size</td>
       </table>
 </div><div class="memdoc">
 
+<p>Set buffer bytes to 0. </p>
+
 </div>
 </div>
 <a class="anchor" id="a8da2bf473b14e6bdd5cd40fc47c29903"></a>
@@ -428,6 +444,8 @@ size</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Detach from buffer. </p>
 <p>Caller must free. </p>
 
 </div>
@@ -446,6 +464,8 @@ size</td>
       </table>
 </div><div class="memdoc">
 
+<p>At end of buffer? </p>
+
 </div>
 </div>
 <a class="anchor" id="a65aae9ae4b499e62038700f4792849fc"></a>
@@ -462,6 +482,8 @@ size</td>
       </table>
 </div><div class="memdoc">
 
+<p>Free current contents and zero out. </p>
+
 </div>
 </div>
 <a class="anchor" id="a5a2e0c47b4b14b5beb17ac982fa21eeb"></a>
@@ -477,6 +499,8 @@ size</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get byte from front of buffer. </p>
 <p>Increment input offset. </p>
 
 </div>
@@ -494,6 +518,8 @@ size</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initialize data structure using the default allocator. </p>
 
 </div>
 </div>
@@ -521,6 +547,8 @@ size</td>
       </table>
 </div><div class="memdoc">
 
+<p>Initialize data structure using the given custom allocator. </p>
+
 </div>
 </div>
 <a class="anchor" id="af8b1e8fbe3c29d08250794d7e4925ea6"></a>
@@ -536,6 +564,8 @@ size</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get byte from end of buffer. </p>
 
 </div>
 </div>
@@ -562,6 +592,8 @@ size</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Append one byte to buffer. </p>
 <p>Expand if necessary. </p>
 
 </div>
@@ -589,6 +621,8 @@ size</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Put a byte back into the buffer. </p>
 <p>Decrement input offset. </p>
 
 </div>
@@ -617,6 +651,8 @@ size</td>
       </table>
 </div><div class="memdoc">
 
+<p>Initialize a buffer input source. </p>
+
 </div>
 </div>
 <a class="anchor" id="a882a92590a9e6ecce16d5b8e8db19fbb"></a>
@@ -643,6 +679,8 @@ size</td>
       </table>
 </div><div class="memdoc">
 
+<p>Initialize a buffer output sink. </p>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -651,7 +689,7 @@ size</td>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="buffio_8h.html">buffio.h</a></li>
-    <li class="footer">Generated on Tue May 19 2015 17:00:06 for HTML Tidy by
+    <li class="footer">Generated on Tue Jun 9 2015 15:54:14 for HTML Tidy by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

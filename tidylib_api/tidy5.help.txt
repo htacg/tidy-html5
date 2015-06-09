@@ -2,7 +2,7 @@
 tidy5 [options...] [file...] [options...] [file...]
 Utility to clean up and pretty print HTML/XHTML/XML.
 
-This is modern HTML Tidy version 4.9.28.
+This is modern HTML Tidy version 4.9.35.
 
 Options for HTML Tidy for Linux:
 

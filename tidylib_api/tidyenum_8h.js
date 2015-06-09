@@ -454,6 +454,7 @@ var tidyenum_8h =
       [ "TidySortAttributes", "tidyenum_8h.html#a3a1401652599150188a168dade7dc150a3637f4378a8136b0c8ea72ca4aa7add0", null ],
       [ "TidyMergeSpans", "tidyenum_8h.html#a3a1401652599150188a168dade7dc150a619ee0aa6acf2ed9fa1aa35de350b9f3", null ],
       [ "TidyAnchorAsName", "tidyenum_8h.html#a3a1401652599150188a168dade7dc150aa75f0995044a068555108e89d891e251", null ],
+      [ "TidyPPrintTabs", "tidyenum_8h.html#a3a1401652599150188a168dade7dc150a3ddd0a4b9afc340dad637e4f60ace56b", null ],
       [ "N_TIDY_OPTIONS", "tidyenum_8h.html#a3a1401652599150188a168dade7dc150a6b389f13aa939c78b6e8335fe67a9c3a", null ]
     ] ],
     [ "TidyOptionType", "tidyenum_8h.html#af8dfd06ad560734d294fe8c9374fd11b", [

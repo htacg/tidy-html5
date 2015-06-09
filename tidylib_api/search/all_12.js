@@ -718,6 +718,7 @@ var searchData=
   ['tidyparsesource',['tidyParseSource',['../group__Parse.html#gaa65dad2a4ca5fa97d267ddefe1180e0e',1,'tidy.h']]],
   ['tidyparsestdin',['tidyParseStdin',['../group__Parse.html#ga96b41ff6e6a7f9d0b9b0e901e33ad31d',1,'tidy.h']]],
   ['tidyparsestring',['tidyParseString',['../group__Parse.html#ga50c02fa244dcd120ae339719c2132ff9',1,'tidy.h']]],
+  ['tidypprinttabs',['TidyPPrintTabs',['../tidyenum_8h.html#a3a1401652599150188a168dade7dc150a3ddd0a4b9afc340dad637e4f60ace56b',1,'tidyenum.h']]],
   ['tidypreserveentities',['TidyPreserveEntities',['../tidyenum_8h.html#a3a1401652599150188a168dade7dc150a2fb0aa29d36ce68051daadb759c9cb8c',1,'tidyenum.h']]],
   ['tidypretags',['TidyPreTags',['../tidyenum_8h.html#a3a1401652599150188a168dade7dc150a96fcf40116bdcd24ff0187d8781ca497',1,'tidyenum.h']]],
   ['tidyprettyprint',['TidyPrettyPrint',['../tidyenum_8h.html#a3812a124fc3e26e59b5a4312dabcc4a7a879857baedc5eec0bfd690bbd6556a9e',1,'tidyenum.h']]],

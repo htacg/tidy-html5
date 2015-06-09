@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">HTML Tidy
-   &#160;<span id="projectnumber">4.9.28</span>
+   &#160;<span id="projectnumber">4.9.35</span>
    </div>
    <div id="projectbrief">The HTACG Tidy HTML Project</div>
   </td>
@@ -188,6 +188,7 @@ Functions</h2></td></tr>
 <tr class="separator:ga29b0c36f75584a2a26422b021561f19c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Tidy public interface. </p>
 <p>Several functions return an integer document status:</p>
 <pre>
    0    -&gt; SUCCESS
@@ -246,6 +247,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Number of Tidy accessibility warnings encountered. </p>
+
 </div>
 </div>
 <a class="anchor" id="gac17c01a0dbb8f73bdee29df48e499988"></a>
@@ -261,6 +264,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Number of Tidy configuration errors encountered. </p>
 
 </div>
 </div>
@@ -310,6 +315,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Input is generic XML (not HTML or XHTML)? </p>
+
 </div>
 </div>
 <a class="anchor" id="ga8fbec4bc2b67c4f525440cfc7196b443"></a>
@@ -325,6 +332,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Detected HTML version: 0, 2, 3 or 4. </p>
 
 </div>
 </div>
@@ -342,6 +351,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Input is XHTML? </p>
+
 </div>
 </div>
 <a class="anchor" id="ga3617548e3669d00ad074daaaa8f3460d"></a>
@@ -357,6 +368,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Number of Tidy errors encountered. </p>
 <p>If &gt; 0, output is suppressed unless TidyForceOutput is set. </p>
 
 </div>
@@ -374,6 +387,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Write more complete information about errors to current error sink. </p>
 
 </div>
 </div>
@@ -417,6 +432,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Write more general information about markup to current error sink. </p>
+
 </div>
 </div>
 <a class="anchor" id="ga1319c9757d4f8c596615e0fdcfcf2504"></a>
@@ -433,6 +450,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Get application data set previously. </p>
+
 </div>
 </div>
 <a class="anchor" id="ga5f5a51c65b1e108a1f93d1bb946afab3"></a>
@@ -448,6 +467,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get version number for the current library. </p>
 
 </div>
 </div>
@@ -474,6 +495,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Load an ASCII Tidy configuration file. </p>
 
 </div>
 </div>
@@ -507,6 +530,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Load a Tidy configuration file with the specified character encoding. </p>
+
 </div>
 </div>
 <a class="anchor" id="gaaa6e0510b0d7ca0524c928143488c6ca"></a>
@@ -532,6 +557,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Save current settings to named file. </p>
 <p>Only non-default values are written. </p>
 
 </div>
@@ -559,6 +586,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Save current settings to given output sink. </p>
 <p>Only non-default values are written. </p>
 
 </div>
@@ -592,6 +621,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get release date (version) for current library. </p>
 <dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd><a class="el" href="group__Basic.html#gab7b404ada690635341d2e2d332102b36" title="Get release date (version) for current library. ">tidyReleaseDate()</a> is deprecated in favor of semantic versioning and should be replaced with <a class="el" href="group__Basic.html#ga5f5a51c65b1e108a1f93d1bb946afab3" title="Get version number for the current library. ">tidyLibraryVersion()</a>. </dd></dl>
 
 </div>
@@ -619,6 +650,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Let application store a chunk of data w/ each Tidy instance. </p>
 <p>Useful for callbacks. </p>
 
 </div>
@@ -646,6 +679,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the input/output character encoding for parsing markup. </p>
 <p>Values include: ascii, latin1, raw, utf8, iso2022, mac, win1252, utf16le, utf16be, utf16, big5 and shiftjis. Case in-sensitive. </p>
 
 </div>
@@ -673,6 +708,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the input encoding for parsing markup. </p>
 <p>As for tidySetCharEncoding but only affects the input encoding </p>
 
 </div>
@@ -701,6 +738,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Set the output encoding. </p>
+
 </div>
 </div>
 <a class="anchor" id="gaf45a8fb57fb9bfce89c42e1cc9d3e760"></a>
@@ -716,6 +755,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get status of current document. </p>
 
 </div>
 </div>
@@ -733,6 +774,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Number of Tidy warnings encountered. </p>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -740,7 +783,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue May 19 2015 17:00:06 for HTML Tidy by
+    <li class="footer">Generated on Tue Jun 9 2015 15:54:14 for HTML Tidy by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

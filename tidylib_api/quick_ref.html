@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">HTML Tidy
-   &#160;<span id="projectnumber">4.9.28</span>
+   &#160;<span id="projectnumber">4.9.35</span>
    </div>
    <div id="projectbrief">The HTACG Tidy HTML Project</div>
   </td>
@@ -614,6 +614,13 @@ $(document).ready(function(){initNavTree('quick_ref.html','');});
     </td>
     <td class="qrow">Integer</td>
     <td class="qrow">2</td>
+  </tr>
+  <tr>
+    <td class="qrow">
+      <a href="#indent-with-tabs">indent-with-tabs</a>
+    </td>
+    <td class="qrow">Boolean</td>
+    <td class="qrow">no</td>
   </tr>
   <tr>
     <td class="qrow">
@@ -2642,6 +2649,33 @@ $(document).ready(function(){initNavTree('quick_ref.html','');});
     <td>&#160;</td>
   </tr>
   <tr>
+    <td valign="top" id="indent-with-tabs" colspan="2" class="qoptiontitletd">
+      <h4 class="qoptiontitle">indent-with-tabs</h4>
+    </td>
+    <td class="tabletitlelink" valign="top" align="right">
+      <a href="#qtop">Top</a>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" class="qlabel">Type:</td>
+    <td class="qvalu">Boolean</td>
+  </tr>
+  <tr>
+    <td valign="top" class="qlabel">Default:</td>
+    <td class="qvalu">no</td>
+  </tr>
+  <tr>
+    <td valign="top" class="qlabel">Example:</td>
+    <td class="qvalu">y/n, yes/no, t/f, true/false, 1/0</td>
+  </tr>
+  <tr>
+    <td/>
+    <td colspan="1" class="qdescription">Set this option "on" to indent using tabs instead of the default spaces. The option TidyIndentSpaces controls the number of tabs output per level of indent, which is reset to 1, when this option is set on. And of course, indent must be enabled for this to have any effect. Note TidyTabSize controls converting input tabs to spaces. Set to zero to retain input tabs. </td>
+  </tr>
+  <tr>
+    <td>&#160;</td>
+  </tr>
+  <tr>
     <td valign="top" id="markup" colspan="2" class="qoptiontitletd">
       <h4 class="qoptiontitle">markup</h4>
     </td>
@@ -2771,7 +2805,7 @@ $(document).ready(function(){initNavTree('quick_ref.html','');});
   </tr>
   <tr>
     <td/>
-    <td colspan="1" class="qdescription">This option specifies the number of columns that Tidy uses between successive tab stops. It is used to map tabs to spaces when reading the input. Tidy never outputs tabs. </td>
+    <td colspan="1" class="qdescription">This option specifies the number of columns that Tidy uses between successive tab stops. It is used to map tabs to spaces when reading the input. </td>
   </tr>
   <tr>
     <td>&#160;</td>
@@ -3519,7 +3553,7 @@ $(document).ready(function(){initNavTree('quick_ref.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue May 19 2015 17:00:06 for HTML Tidy by
+    <li class="footer">Generated on Tue Jun 9 2015 15:54:14 for HTML Tidy by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

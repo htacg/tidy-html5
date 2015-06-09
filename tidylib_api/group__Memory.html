@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">HTML Tidy
-   &#160;<span id="projectnumber">4.9.28</span>
+   &#160;<span id="projectnumber">4.9.35</span>
    </div>
    <div id="projectbrief">The HTACG Tidy HTML Project</div>
   </td>
@@ -161,6 +161,7 @@ Functions</h2></td></tr>
 <tr class="separator:ga446b538da3ee3f2e5a3827b877665b30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Tidy uses a user provided allocator for all memory allocations. </p>
 <p>If this allocator is not provided, then a default allocator is used which simply wraps standard C malloc/free calls. These wrappers call the panic function upon any failure. The default panic function prints an out of memory message to stderr, and calls exit(2).</p>
 <p>For applications in which it is unacceptable to abort in the case of memory allocation, then the panic function can be replaced with one which longjmps() out of the tidy code. For this to clean up completely, you should be careful not to use any tidy methods that open files as these will not be closed before panic() is called.</p>
 <p>TODO: associate file handles with tidyDoc and ensure that tidyDocRelease() can close them all.</p>
@@ -179,7 +180,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="textblock"><p>To create your own allocator, do something like the following: </p>
+<div class="textblock"><p>An allocator. </p>
+<p>To create your own allocator, do something like the following: </p>
 <div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>_MyAllocator {</div>
 <div class="line">   <a class="code" href="group__Memory.html#struct__TidyAllocator">TidyAllocator</a> base;</div>
 <div class="line">   ...other custom allocator state...</div>
@@ -229,7 +231,8 @@ vtbl</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="textblock"><p>All functions here must be provided. </p>
+<div class="textblock"><p>An allocator's function table. </p>
+<p>All functions here must be provided. </p>
 
 <p>Definition at line <a class="el" href="tidy_8h_source.html#l00166">166</a> of file <a class="el" href="tidy_8h_source.html">tidy.h</a>.</p>
 </div><table class="memberdecls">
@@ -277,6 +280,8 @@ vtbl</td>
       </table>
 </div><div class="memdoc">
 
+<p>Called to allocate a block of nBytes of memory. </p>
+
 </div>
 </div>
 <a class="anchor" id="a0cad0dd2aa75a20573fc46f25460a5cc"></a>
@@ -308,6 +313,8 @@ vtbl</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Called to resize (grow, in general) a block of memory. </p>
 <p>Must support being called with NULL. </p>
 
 </div>
@@ -326,6 +333,8 @@ vtbl</td>
       </table>
 </div><div class="memdoc">
 
+<p>Called to free a previously allocated block of memory. </p>
+
 </div>
 </div>
 <a class="anchor" id="a4ecb749644f9253427eb53028363d01d"></a>
@@ -341,6 +350,8 @@ vtbl</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Called when a panic condition is detected. </p>
 <p>Must support block == NULL. This function is not called if either alloc or realloc fails; it is up to the allocator to do this. Currently this function can only be called if an error is detected in the tree integrity via the internal function CheckNodeIntegrity(). This is a situation that can only arise in the case of a programming error in tidylib. You can turn off node integrity checking by defining the constant NO_NODE_INTEGRITY_CHECK during the build. </p>
 
 </div>
@@ -388,6 +399,8 @@ vtbl</td>
       </table>
 </div><div class="memdoc">
 
+<p>The allocator. </p>
+
 <p>Definition at line <a class="el" href="tidy_8h_source.html#l00161">161</a> of file <a class="el" href="tidy_8h_source.html">tidy.h</a>.</p>
 
 </div>
@@ -401,6 +414,8 @@ vtbl</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The allocators function table. </p>
 
 <p>Definition at line <a class="el" href="tidy_8h_source.html#l00156">156</a> of file <a class="el" href="tidy_8h_source.html">tidy.h</a>.</p>
 
@@ -416,6 +431,8 @@ vtbl</td>
       </table>
 </div><div class="memdoc">
 
+<p>Callback for "free" replacement. </p>
+
 <p>Definition at line <a class="el" href="tidy_8h_source.html#l00233">233</a> of file <a class="el" href="tidy_8h_source.html">tidy.h</a>.</p>
 
 </div>
@@ -429,6 +446,8 @@ vtbl</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Callback for "malloc" replacement. </p>
 
 <p>Definition at line <a class="el" href="tidy_8h_source.html#l00229">229</a> of file <a class="el" href="tidy_8h_source.html">tidy.h</a>.</p>
 
@@ -444,6 +463,8 @@ vtbl</td>
       </table>
 </div><div class="memdoc">
 
+<p>Callback for "out of memory" panic state. </p>
+
 <p>Definition at line <a class="el" href="tidy_8h_source.html#l00235">235</a> of file <a class="el" href="tidy_8h_source.html">tidy.h</a>.</p>
 
 </div>
@@ -457,6 +478,8 @@ vtbl</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Callback for "realloc" replacement. </p>
 
 <p>Definition at line <a class="el" href="tidy_8h_source.html#l00231">231</a> of file <a class="el" href="tidy_8h_source.html">tidy.h</a>.</p>
 
@@ -477,6 +500,8 @@ vtbl</td>
       </table>
 </div><div class="memdoc">
 
+<p>Give Tidy a free() replacement. </p>
+
 </div>
 </div>
 <a class="anchor" id="gab55079374527525e3374ebc4d2a1e625"></a>
@@ -492,6 +517,8 @@ vtbl</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Give Tidy a malloc() replacement. </p>
 
 </div>
 </div>
@@ -509,6 +536,8 @@ vtbl</td>
       </table>
 </div><div class="memdoc">
 
+<p>Give Tidy an "out of memory" handler. </p>
+
 </div>
 </div>
 <a class="anchor" id="ga446b538da3ee3f2e5a3827b877665b30"></a>
@@ -525,6 +554,8 @@ vtbl</td>
       </table>
 </div><div class="memdoc">
 
+<p>Give Tidy a realloc() replacement. </p>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -532,7 +563,7 @@ vtbl</td>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue May 19 2015 17:00:06 for HTML Tidy by
+    <li class="footer">Generated on Tue Jun 9 2015 15:54:14 for HTML Tidy by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

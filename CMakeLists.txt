@@ -8,17 +8,35 @@ project (${LIB_NAME})
 
 # ### NOTE: *** Adjust version.txt when required ***
 # read 'version' file into a variable (stripping any newlines or spaces)
+# 20150609: Revert to supplying BOTH version and date, as we had back in Jan 2015
+# NOTE: Both version and date MUST be DOT separated, in two lines.
 file(READ version.txt versionFile)
 if (NOT versionFile)
     message(FATAL_ERROR "Unable to determine libtidy version. version.txt file is missing.")
 endif()
-string(STRIP "${versionFile}" LIBTIDY_VERSION)
-string(REPLACE "." ";" VERSION_LIST ${LIBTIDY_VERSION})
-list(GET VERSION_LIST 0 TIDY_MAJOR_VERSION)
-list(GET VERSION_LIST 1 TIDY_MINOR_VERSION)
-list(GET VERSION_LIST 2 TIDY_POINT_VERSION)
+string(STRIP "${versionFile}" VERSION_TEXT)
+string(REGEX REPLACE "(.*)[\r\n|\n](.*)" "\\1" LIBTIDY_VERSION ${VERSION_TEXT})
+string(REGEX REPLACE "(.*)[\r\n|\n](.*)" "\\2" LIBTIDY_DATE ${VERSION_TEXT})
+# establish version number
+if (LIBTIDY_VERSION)
+    string(REPLACE "." ";" VERSION_LIST ${LIBTIDY_VERSION})
+    list(GET VERSION_LIST 0 TIDY_MAJOR_VERSION)
+    list(GET VERSION_LIST 1 TIDY_MINOR_VERSION)
+    list(GET VERSION_LIST 2 TIDY_POINT_VERSION)
+else ()
+    message(FATAL_ERROR "*** FAILED to get a VERSION from version.txt!")
+endif ()    
+# establish version date
+if (LIBTIDY_DATE)
+    string(REPLACE "." ";" DATE_LIST ${LIBTIDY_DATE})
+    list(GET DATE_LIST 0 tidy_YEAR)
+    list(GET DATE_LIST 1 tidy_MONTH)
+    list(GET DATE_LIST 2 tidy_DAY)
+else ()
+    message(FATAL_ERROR "*** FAILED to get a DATE from version.txt!")
+endif ()
 
-# Allow developer to select is Dynamic or static library built
+# BY default, BOTH library types build, Allow turning OFF shared if not neede
 set( LIB_TYPE STATIC )  # set default static
 option( BUILD_SHARED_LIB "Set OFF to NOT build shared library"    ON  )
 option( BUILD_TAB2SPACE  "Set ON to build utility app, tab2space" OFF )
@@ -66,6 +84,7 @@ add_definitions ( -DSUPPORT_UTF16_ENCODINGS=1 )
 add_definitions ( -DSUPPORT_ASIAN_ENCODINGS=1 )
 add_definitions ( -DSUPPORT_ACCESSIBILITY_CHECKS=1 )
 add_definitions ( -DLIBTIDY_VERSION="${LIBTIDY_VERSION}" )
+add_definitions ( -DRELEASE_DATE="${tidy_YEAR}/${tidy_MONTH}/${tidy_DAY}" )
 
 # Issue #188 - Support user items in platform.h
 if (TIDY_CONFIG_FILE)
@@ -80,10 +99,10 @@ endif ()
 
 if(BUILD_SHARED_LIB)
    set(LIB_TYPE SHARED)
-   message(STATUS "*** Building DLL library ${LIB_TYPE}, version ${LIBTIDY_VERSION}")
-else(BUILD_SHARED_LIB)
-   message(STATUS "*** Building static library ${LIB_TYPE}, version ${LIBTIDY_VERSION}")
-endif(BUILD_SHARED_LIB)
+   message(STATUS "*** Also building DLL library ${LIB_TYPE}, version ${LIBTIDY_VERSION}, date ${LIBTIDY_DATE}")
+else()
+   message(STATUS "*** Only building static library ${LIB_TYPE}, version ${LIBTIDY_VERSION}, date ${LIBTIDY_DATE}")
+endif()
 
 include_directories ( "${PROJECT_SOURCE_DIR}/include" "${PROJECT_SOURCE_DIR}/src" )
 

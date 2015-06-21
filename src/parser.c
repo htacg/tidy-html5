@@ -1727,7 +1727,14 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
         else if ( TY_(IsPushed)(doc, node) && node->type == StartTag && 
                   nodeIsQ(node) )
         {
-            TY_(ReportWarning)(doc, element, node, NESTED_QUOTATION);
+            /*\
+             * Issue #215 - such nested quotes are NOT a problem if HTML5, so
+             * only issue this warning if NOT HTML5 mode.
+            \*/
+            if (TY_(HTMLVersion)(doc) != HT50) 
+            {
+                TY_(ReportWarning)(doc, element, node, NESTED_QUOTATION);
+            }
         }
 
         if ( TY_(nodeIsText)(node) )

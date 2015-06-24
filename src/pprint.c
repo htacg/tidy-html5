@@ -982,6 +982,14 @@ static void PPrintText( TidyDocImpl* doc, uint mode, uint indent,
             ixWS = TextStartsWithWhitespace( doc->lexer, node, ix+1, mode );
             ix = IncrWS( ix, end, indent, ixWS );
         }
+        else if (( c == '&' ) && (TY_(HTMLVersion)(doc) == HT50) &&
+            (((ix + 1) == end) || ((ix + 1) < end) && (isspace(doc->lexer->lexbuf[ix+1]))) )
+        {
+            /*\
+             * Issue #207 - This is an unambiguous ampersand need not be 'quoted' in HTML5
+            \*/
+            PPrintChar( doc, c, (mode | CDATA) );
+        }
         else
         {
             PPrintChar( doc, c, mode );

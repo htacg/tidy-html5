@@ -1055,9 +1055,17 @@ static void ParseEntity( TidyDocImpl* doc, GetTokenMode mode )
             if (semicolon)
                 TY_(AddCharToLexer)( lexer, ';' );
         }
-        else /* naked & */
-            TY_(ReportEntityError)( doc, UNESCAPED_AMPERSAND,
+        else
+        {
+            /*\ 
+             *  Issue #207 - A naked & is allowed in HTML5, as an unambiguous ampersand!
+            \*/
+            if (TY_(HTMLVersion)(doc) != HT50) 
+            {
+                TY_(ReportEntityError)( doc, UNESCAPED_AMPERSAND,
                                     lexer->lexbuf+start, ch );
+            }
+        }
     }
     else
     {

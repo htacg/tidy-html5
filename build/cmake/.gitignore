@@ -27,5 +27,6 @@ _CPack_Packages/*
 *.msi
 *.zip
 *.wixobj
-
+tidy
+libtidy*
 

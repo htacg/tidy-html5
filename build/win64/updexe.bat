@@ -1,7 +1,8 @@
 @setlocal
 @REM copy the EXE into C:\MDOS, IFF changed
 @set TMPDIR=C:\MDOS
-@set TMPFIL1=tidy5.exe
+@REM v5.0.0
+@set TMPFIL1=tidy.exe
 @set TMPFIL2=tidy5.exe
 @set TMPSRC=Release\%TMPFIL1%
 @if NOT EXIST %TMPSRC% goto ERR1
@@ -13,7 +14,7 @@
 
 @call :CHKCOPY
 
-@set TMPFIL1=tidy5d.exe
+@set TMPFIL1=tidyd.exe
 @set TMPFIL2=tidy5d.exe
 @set TMPSRC=Debug\%TMPFIL1%
 @if NOT EXIST %TMPSRC% goto ERR1

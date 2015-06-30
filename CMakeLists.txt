@@ -2,7 +2,7 @@
 # Prepare for changing the name to 'tidy'
 cmake_minimum_required (VERSION 2.8.8)
 
-set(LIB_NAME tidy5)
+set(LIB_NAME tidy)
 
 project (${LIB_NAME})
 
@@ -85,6 +85,7 @@ add_definitions ( -DSUPPORT_ASIAN_ENCODINGS=1 )
 add_definitions ( -DSUPPORT_ACCESSIBILITY_CHECKS=1 )
 add_definitions ( -DLIBTIDY_VERSION="${LIBTIDY_VERSION}" )
 add_definitions ( -DRELEASE_DATE="${tidy_YEAR}/${tidy_MONTH}/${tidy_DAY}" )
+add_definitions ( -DRC_NUMBER="RC1" )
 
 # Issue #188 - Support user items in platform.h
 if (TIDY_CONFIG_FILE)
@@ -122,8 +123,8 @@ set ( CFILES
         ${SRCDIR}/tagask.c       ${SRCDIR}/tmbstr.c       ${SRCDIR}/utf8.c
         ${SRCDIR}/tidylib.c      ${SRCDIR}/mappedio.c     ${SRCDIR}/gdoc.c )
 set ( HFILES
-        ${INCDIR}/platform.h     ${INCDIR}/tidy.h         ${INCDIR}/tidyenum.h
-        ${INCDIR}/buffio.h )
+        ${INCDIR}/tidyplatform.h ${INCDIR}/tidy.h         ${INCDIR}/tidyenum.h
+        ${INCDIR}/tidybuffio.h )
 set ( LIBHFILES
         ${SRCDIR}/access.h       ${SRCDIR}/attrs.h        ${SRCDIR}/attrdict.h ${SRCDIR}/charsets.h
         ${SRCDIR}/clean.h        ${SRCDIR}/config.h       ${SRCDIR}/entities.h

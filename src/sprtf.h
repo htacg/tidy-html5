@@ -27,7 +27,7 @@
 // Debug log file output
 #ifndef _SPRTF_HXX_
 #define _SPRTF_HXX_
-#include "platform.h"
+#include "tidyplatform.h"
 
 #ifdef   __cplusplus
 extern "C" {

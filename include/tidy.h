@@ -62,7 +62,7 @@
 
 */
 
-#include "platform.h"
+#include "tidyplatform.h"
 #include "tidyenum.h"
 
 #ifdef __cplusplus
@@ -263,7 +263,7 @@ The following is a short example program.
 
 <pre>
 \#include &lt;tidy.h&gt;
-\#include &lt;buffio.h&gt;
+\#include &lt;tidybuffio.h&gt;
 \#include &lt;stdio.h&gt;
 \#include &lt;errno.h&gt;
 

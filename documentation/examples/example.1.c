@@ -1,7 +1,7 @@
 
 
 #include <tidy.h>;
-#include <buffio.h>;
+#include <tidybuffio.h>;
 #include <stdio.h>;
 #include <errno.h>;
 

@@ -14,7 +14,7 @@
 */
 
 #include "forward.h"
-#include "buffio.h"
+#include "tidybuffio.h"
 #include "fileio.h"
 
 #ifdef __cplusplus

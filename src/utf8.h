@@ -8,8 +8,8 @@
 
 */
 
-#include "platform.h"
-#include "buffio.h"
+#include "tidyplatform.h"
+#include "tidybuffio.h"
 
 /* UTF-8 encoding/decoding support
 ** Does not convert character "codepoints", i.e. to/from 10646.

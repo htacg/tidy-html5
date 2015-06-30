@@ -15,7 +15,7 @@
 
 */
 
-#include "platform.h"
+#include "tidyplatform.h"
 #include "tidy.h"
 
 /* Internal symbols are prefixed to avoid clashes with other libraries */

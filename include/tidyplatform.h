@@ -1,7 +1,7 @@
 #ifndef __TIDY_PLATFORM_H__
 #define __TIDY_PLATFORM_H__
 
-/* platform.h -- Platform specifics
+/* tidyplatform.h -- Platform specifics
 
   (c) 1998-2008 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.

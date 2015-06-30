@@ -1,7 +1,7 @@
 #ifndef __TIDY_BUFFIO_H__
 #define __TIDY_BUFFIO_H__
 
-/** @file buffio.h - Treat buffer as an I/O stream.
+/** @file tidybuffio.h - Treat buffer as an I/O stream.
 
   (c) 1998-2007 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
@@ -11,7 +11,7 @@
 
 */
 
-#include "platform.h"
+#include "tidyplatform.h"
 #include "tidy.h"
 
 #ifdef __cplusplus

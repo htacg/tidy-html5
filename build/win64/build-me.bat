@@ -1,5 +1,5 @@
 @setlocal
-@set TMPPRJ=tidy5
+@set TMPPRJ=tidy
 @echo Build %TMPPRJ% project, in 64-bits
 @set TMPLOG=bldlog-1.txt
 @set BLDDIR=%CD%

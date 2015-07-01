@@ -1,6 +1,8 @@
 @setlocal
 @set TMPWV=win32
 @set TMPSRC=../..
+@set TMPNAME=tidy
+
 @set TMPFIL=%TMPSRC%\version.txt
 @if NOT EXIST %TMPFIL% goto NOFIL
 @set /p TMPVER=<%TMPFIL%
@@ -20,9 +22,9 @@ if "%1x" == "NOPAUSEx" (
 @echo This is a NEW installation in %TMPDD%
 :GOTDST
 
-@set TMPFIL1=tidy5-%TMPVER%-%TMPWV%.exe
-@set TMPFIL2=tidy5-%TMPVER%-%TMPWV%.msi
-@set TMPFIL3=tidy5-%TMPVER%-%TMPWV%.zip
+@set TMPFIL1=%TMPNAME%-%TMPVER%-%TMPWV%.exe
+@set TMPFIL2=%TMPNAME%-%TMPVER%-%TMPWV%.msi
+@set TMPFIL3=%TMPNAME%-%TMPVER%-%TMPWV%.zip
 @if NOT EXIST %TMPFIL1% goto NOFIL1
 @if NOT EXIST %TMPFIL2% goto NOFIL2
 @if NOT EXIST %TMPFIL3% goto NOFIL3

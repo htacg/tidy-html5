@@ -1,5 +1,6 @@
 @setlocal
 @set TMPSRC=../..
+@set TMPNAME=tidy
 @set TMPFIL=%TMPSRC%\version.txt
 @if NOT EXIST %TMPFIL% goto NOFIL
 @set /p TMPVER=<%TMPFIL%
@@ -20,9 +21,9 @@
 @set DOPAUSE=echo No pause requested...
 )
 
-@set TMPFIL1=tidy5-%TMPVER%-win64.exe
-@set TMPFIL2=tidy5-%TMPVER%-win64.msi
-@set TMPFIL3=tidy5-%TMPVER%-win64.zip
+@set TMPFIL1=%TMPNAME%-%TMPVER%-win64.exe
+@set TMPFIL2=%TMPNAME%-%TMPVER%-win64.msi
+@set TMPFIL3=%TMPNAME%-%TMPVER%-win64.zip
 @if NOT EXIST %TMPFIL1% goto NOFIL1
 @if NOT EXIST %TMPFIL2% goto NOFIL2
 @if NOT EXIST %TMPFIL3% goto NOFIL3

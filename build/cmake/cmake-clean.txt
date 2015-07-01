@@ -1,7 +1,9 @@
 bldlog-1.txt
 libtidy5.a
+libtidys.a
 tab2space
 tidy5
+libtidy5s.a
 libtidy5.so
 libtidy5.so.5
 libtidy5.so.5.0.0
@@ -18,3 +20,10 @@ directories.wixobj
 features.wixobj
 files.wixobj
 main.wixobj
+tidy
+libtidy.so
+libtidy.so.5
+libtidy.so.5.0.0
+tidy.1
+_CPack_Packages
+

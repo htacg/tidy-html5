@@ -823,6 +823,9 @@ TIDY_EXPORT TidyNode TIDY_CALL    tidyGetHtml( TidyDoc tdoc );
 TIDY_EXPORT TidyNode TIDY_CALL    tidyGetHead( TidyDoc tdoc );
 TIDY_EXPORT TidyNode TIDY_CALL    tidyGetBody( TidyDoc tdoc );
 
+/* remove a node */
+TIDY_EXPORT TidyNode TIDY_CALL    tidyDiscardElement( TidyDoc tdoc, TidyNode tnod );
+
 /* parent / child */
 TIDY_EXPORT TidyNode TIDY_CALL    tidyGetParent( TidyNode tnod );
 TIDY_EXPORT TidyNode TIDY_CALL    tidyGetChild( TidyNode tnod );
@@ -843,6 +846,8 @@ TIDY_EXPORT TidyAttr TIDY_CALL    tidyAttrNext( TidyAttr tattr );
 
 TIDY_EXPORT ctmbstr TIDY_CALL     tidyAttrName( TidyAttr tattr );
 TIDY_EXPORT ctmbstr TIDY_CALL     tidyAttrValue( TidyAttr tattr );
+
+TIDY_EXPORT void TIDY_CALL        tidyAttrDiscard( TidyDoc itdoc, TidyNode tnod, TidyAttr tattr );
 
 /* Null for pure HTML
 TIDY_EXPORT ctmbstr     tidyAttrNsLocal( TidyAttr tattr );

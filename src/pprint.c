@@ -1931,9 +1931,7 @@ void PPrintScriptStyle( TidyDocImpl* doc, uint mode, uint indent, Node *node )
 
     PPrintTag( doc, mode, indent, node );
 
-    /* use zero indent here, see http://tidy.sf.net/bug/729972 
-       WHY??? TY_(PFlushLine)(doc, 0); */
-    TY_(PFlushLine)(doc, indent);
+    TY_(PFlushLineSmart)(doc, indent);
 
     if ( xhtmlOut && node->content != NULL )
     {

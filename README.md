@@ -40,6 +40,16 @@ If you do **not** need the tidy library built as a 'shared' (DLL) library, then 
 
 An attempt is being made to publish pre-built binaries to http://www.htacg.org/binaries - This is still a work in progress, but getting there..
 
+## Development
+
+The default branch of this repository is `master`. This is the development branch, hopefully always `stable` source.
+
+It will identify as library version X.odd.X. Use it to help us on the forever `bug` quest, addition of new features, options, ..., etc.
+
+However, if you seek **release** code, then do `git branch -r`, and choose one of the `release/X.even.0` branches for your build and install...
+
+This will always be the latest release branch. Important `bug` fixes thought relevant to this release, pushed back, may bump the library version to X.even.1, ..., etc, but will be remain known as `X.even`...
+
 ## History
 
 This repository should be considered canonical for HTML Tidy as of 2015-January-15.

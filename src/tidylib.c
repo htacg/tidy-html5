@@ -1924,6 +1924,15 @@ TidyNode TIDY_CALL    tidyGetChild( TidyNode tnod )
   return tidyImplToNode( nimp->content );
 }
 
+/* remove a node */
+TidyNode TIDY_CALL    tidyDiscardElement( TidyDoc tdoc, TidyNode tnod )
+{
+  TidyDocImpl* doc = tidyDocToImpl( tdoc );
+  Node* nimp = tidyNodeToImpl( tnod );
+  Node* next = TY_(DiscardElement)( doc, nimp );
+  return tidyImplToNode( next );
+}
+
 /* siblings */
 TidyNode TIDY_CALL    tidyGetNext( TidyNode tnod )
 {
@@ -2133,6 +2142,14 @@ ctmbstr TIDY_CALL       tidyAttrValue( TidyAttr tattr )
   if ( attval )
     aval = attval->value;
   return aval;
+}
+
+void TIDY_CALL           tidyAttrDiscard( TidyDoc tdoc, TidyNode tnod, TidyAttr tattr )
+{
+  TidyDocImpl* impl = tidyDocToImpl( tdoc );
+  Node* nimp = tidyNodeToImpl( tnod );
+  AttVal* attval = tidyAttrToImpl( tattr );
+  TY_(RemoveAttribute)( impl, nimp, attval );
 }
 
 /* Null for pure HTML

@@ -37,6 +37,12 @@ static Bool InsideHead( TidyDocImpl* doc, Node *node );
 static Bool ShouldIndent( TidyDocImpl* doc, Node *node );
 
 /*\
+ * Issue #228 20150715 - macros to access --vertical-space tri state configuration parameter
+\*/
+#define TidyClassicVS ((cfgAutoBool( doc, TidyVertSpace ) == TidyYesState) ? yes : no)
+#define TidyAddVS ((cfgAutoBool( doc, TidyVertSpace ) == TidyAutoState) ? no : yes )
+
+/*\
  * 20150515 - support using tabs instead of spaces - Issue #108
  * GH: https://github.com/htacg/tidy-html5/issues/108 - Keep indent with tabs #108
  * SF: https://sourceforge.net/p/tidy/feature-requests/3/ - #3 tabs in place of spaces
@@ -724,9 +730,10 @@ void TY_(PFlushLineSmart)( TidyDocImpl* doc, uint indent )
     if ( pprint->linelen > 0 )
         PFlushLineImpl( doc );
 
-    Bool vertical = cfgBool( doc, TidyVertSpace );
-    if(vertical)
+    /* Issue #228 - cfgBool( doc, TidyVertSpace ); */
+    if(TidyAddVS) {
         TY_(WriteChar)( '\n', doc->docOut );
+    }
 
     pprint->indent[ 0 ].spaces = indent;
 }
@@ -739,9 +746,10 @@ static void PCondFlushLineSmart( TidyDocImpl* doc, uint indent )
     {
          PFlushLineImpl( doc );
 
-         Bool vertical = cfgBool( doc, TidyVertSpace );
-         if(vertical)
+         /* Issue #228 - cfgBool( doc, TidyVertSpace ); */
+         if(TidyAddVS) {
             TY_(WriteChar)( '\n', doc->docOut );
+         }
 
          pprint->indent[ 0 ].spaces = indent;
     }
@@ -2156,7 +2164,7 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
         if ( nodeIsHR(node) )
         {
             /* insert extra newline for classic formatting */
-            Bool classic = cfgBool( doc, TidyVertSpace );
+            Bool classic = TidyClassicVS; /* #228 - cfgBool( doc, TidyVertSpace ); */
             if (classic && node->parent && node->parent->content != node)
             {
                 TY_(PFlushLineSmart)( doc, indent );
@@ -2182,7 +2190,7 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
         if ( node->tag && 
              (node->tag->parser == TY_(ParsePre) || nodeIsTEXTAREA(node)) )
         {
-            Bool classic  = cfgBool( doc, TidyVertSpace );
+            Bool classic  = TidyClassicVS; /* #228 - cfgBool( doc, TidyVertSpace ); */
             uint indprev = indent;
             PCondFlushLineSmart( doc, indent );
 
@@ -2264,7 +2272,7 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
             Bool indsmart = ( cfgAutoBool(doc, TidyIndentContent) == TidyAutoState );
             Bool hideend  = cfgBool( doc, TidyHideEndTags ) ||
               cfgBool( doc, TidyOmitOptionalTags );
-            Bool classic  = cfgBool( doc, TidyVertSpace );
+            Bool classic  = TidyClassicVS; /* #228 - cfgBool( doc, TidyVertSpace ); */
             uint contentIndent = indent;
 
             /* insert extra newline for classic formatting */

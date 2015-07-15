@@ -2624,6 +2624,15 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 /* special check needed for CRLF sequence */
                 /* this doesn't apply to empty elements */
                 /* nor to preformatted content that needs escaping */
+                /*\
+                 * Issue #230: Need to KEEP this user newline character in certain 
+                 * circumstances, certainly for <pre>, <script>, <style>...
+                 * Any others?
+                \*/
+                if ( nodeIsPRE(lexer->token) || nodeIsSCRIPT(lexer->token) || nodeIsSTYLE(lexer->token))
+                {
+                    mode = Preformatted;
+                }
 
                 if ((mode != Preformatted && ExpectsContent(lexer->token))
                     || nodeIsBR(lexer->token) || nodeIsHR(lexer->token))

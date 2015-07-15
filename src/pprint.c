@@ -1931,7 +1931,6 @@ void PPrintScriptStyle( TidyDocImpl* doc, uint mode, uint indent, Node *node )
 
     PPrintTag( doc, mode, indent, node );
 
-    TY_(PFlushLineSmart)(doc, indent);
 
     if ( xhtmlOut && node->content != NULL )
     {
@@ -1986,7 +1985,6 @@ void PPrintScriptStyle( TidyDocImpl* doc, uint mode, uint indent, Node *node )
 
     if ( contentIndent < 0 )
     {
-        PCondFlushLineSmart( doc, indent );
         contentIndent = 0;
     }
 
@@ -2001,7 +1999,6 @@ void PPrintScriptStyle( TidyDocImpl* doc, uint mode, uint indent, Node *node )
             AddString( pprint, commentEnd );
 
             WrapOn( doc, saveWrap );
-            PCondFlushLineSmart( doc, indent );
         }
     }
 

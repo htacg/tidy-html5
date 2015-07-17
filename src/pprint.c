@@ -2192,26 +2192,27 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
         {
             Bool classic  = TidyClassicVS; /* #228 - cfgBool( doc, TidyVertSpace ); */
             uint indprev = indent;
-            PCondFlushLineSmart( doc, indent );
 
-            PCondFlushLineSmart( doc, indent );
+            PCondFlushLineSmart( doc, indent ); /* about to add <pre> tag - clear any previous */
 
             /* insert extra newline for classic formatting */
             if (classic && node->parent && node->parent->content != node)
             {
                 TY_(PFlushLineSmart)( doc, indent );
             }
-            PPrintTag( doc, mode, indent, node );
+
+            PPrintTag( doc, mode, indent, node );   /* add <pre> or <textarea> tag */
 
             indent = 0;
-            TY_(PFlushLineSmart)( doc, indent );
+            /* @camoy Fix #158 - remove inserted newlines in pre - TY_(PFlushLineSmart)( doc, indent ); */
 
             for ( content = node->content; content; content = content->next )
             {
                 TY_(PPrintTree)( doc, (mode | PREFORMATTED | NOWRAP),
                                  indent, content );
             }
-            PCondFlushLineSmart( doc, indent );
+
+            /* @camoy Fix #158 - remove inserted newlines in pre - PCondFlushLineSmart( doc, indent ); */
             indent = indprev;
             PPrintEndTag( doc, mode, indent, node );
 

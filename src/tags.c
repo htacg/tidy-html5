@@ -160,8 +160,8 @@ static CheckAttribs CheckHTML;
 #define VERS_ELEM_WBR        (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 
 /*\ 
- * Issue #167 & #169
- * Tody defaults to HTML5 mode
+ * Issue #167 & #169 & #232
+ * Tidy defaults to HTML5 mode
  * but allow this table to be ADJUSTED if NOT HTML5
  * was static const Dict tag_defs[] = 
 \*/
@@ -232,7 +232,7 @@ static Dict tag_defs[] =
   { TidyTag_META,       "meta",       VERS_ELEM_META,       &TY_(W3CAttrsFor_META)[0],       (CM_HEAD|CM_BLOCK|CM_EMPTY),                   TY_(ParseEmpty),    NULL           },
   { TidyTag_NOFRAMES,   "noframes",   VERS_ELEM_NOFRAMES,   &TY_(W3CAttrsFor_NOFRAMES)[0],   (CM_BLOCK|CM_FRAMES),                          TY_(ParseNoFrames), NULL           },
   { TidyTag_NOSCRIPT,   "noscript",   VERS_ELEM_NOSCRIPT,   &TY_(W3CAttrsFor_NOSCRIPT)[0],   (CM_HEAD|CM_BLOCK|CM_INLINE|CM_MIXED),         TY_(ParseBlock),    NULL           },
-  { TidyTag_OBJECT,     "object",     VERS_ELEM_OBJECT,     &TY_(W3CAttrsFor_OBJECT)[0],     (CM_OBJECT|CM_HEAD|CM_IMG|CM_INLINE|CM_PARAM), TY_(ParseBlock),    NULL           },
+  { TidyTag_OBJECT,     "object",     VERS_ELEM_OBJECT,     &TY_(W3CAttrsFor_OBJECT)[0],     (CM_OBJECT|CM_IMG|CM_INLINE|CM_PARAM),         TY_(ParseBlock),    NULL           },
   { TidyTag_OL,         "ol",         VERS_ELEM_OL,         &TY_(W3CAttrsFor_OL)[0],         (CM_BLOCK),                                    TY_(ParseList),     NULL           },
   { TidyTag_OPTGROUP,   "optgroup",   VERS_ELEM_OPTGROUP,   &TY_(W3CAttrsFor_OPTGROUP)[0],   (CM_FIELD|CM_OPT),                             TY_(ParseOptGroup), NULL           },
   { TidyTag_OPTION,     "option",     VERS_ELEM_OPTION,     &TY_(W3CAttrsFor_OPTION)[0],     (CM_FIELD|CM_OPT),                             TY_(ParseText),     NULL           },
@@ -758,6 +758,20 @@ void TY_(AdjustTags)( TidyDocImpl *doc )
     if (np)
     {
         np->parser = TY_(ParseInline);
+#if ELEMENT_HASH_LOOKUP
+        tagsEmptyHash( doc, tags );
+#endif
+    }
+
+/*\
+ * Issue #232
+ * TidyTag_OBJECT not in head in HTML5,
+ * but still allowed in HTML4
+\*/
+    np = (Dict *)TY_(LookupTagDef)( TidyTag_OBJECT );
+    if (np)
+    {
+        np->model |= CM_HEAD; /* add back allowed in head */
 #if ELEMENT_HASH_LOOKUP
         tagsEmptyHash( doc, tags );
 #endif

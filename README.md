@@ -36,6 +36,24 @@ In windows the default install is to C:\Program Files\tidy5, or C:/Program Files
 
 If you do **not** need the tidy library built as a 'shared' (DLL) library, then in 2. add the command -DBUILD_SHARED_LIB:BOOL=OFF. This option is ON by default. The static library is always built and linked with the command line tool for convenience in windows, and so the binary can be run as part of the man page build without the shared library being installed in unix.
 
+## Build PHP with the tidy-html5 library
+
+Due to API changes in the PHP source, "buffio.h" needs to be changed to "tidybuffio.h" in the file ext/tidy/tidy.c.
+
+That is - prior to configuring php run this in the php source directory:
+```
+sed -i 's/buffio.h/tidybuffio.h/' ext/tidy/*.c
+```
+
+And then continue with (just an example here, use your own php config options):
+
+```
+./configure --with-tidy=/usr/local
+make
+make test
+make install
+```
+
 ## Prebuilt Binaries
 
 An attempt is being made to publish pre-built binaries to http://www.htacg.org/binaries - This is still a work in progress, but getting there..

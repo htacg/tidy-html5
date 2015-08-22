@@ -983,7 +983,8 @@ static void ParseEntity( TidyDocImpl* doc, GetTokenMode mode )
     if ( TY_(tmbstrcmp)(lexer->lexbuf+start, "&apos") == 0
          && !cfgBool(doc, TidyXmlOut)
          && !lexer->isvoyager
-         && !cfgBool(doc, TidyXhtmlOut) )
+         && !cfgBool(doc, TidyXhtmlOut)
+         && !(TY_(HTMLVersion)(doc) == HT50) ) /* Issue #239 - no warning if in HTML5++ mode */
         TY_(ReportEntityError)( doc, APOS_UNDEFINED, lexer->lexbuf+start, 39 );
 
     if (( mode == OtherNamespace ) && ( c == ';' ))

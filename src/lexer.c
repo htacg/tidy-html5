@@ -2628,8 +2628,9 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                  * Issue #230: Need to KEEP this user newline character in certain 
                  * circumstances, certainly for <pre>, <script>, <style>...
                  * Any others?
+                 * Issue #238: maybe **ONLY** for <pre>
                 \*/
-                if ( nodeIsPRE(lexer->token) || nodeIsSCRIPT(lexer->token) || nodeIsSTYLE(lexer->token))
+                if ( nodeIsPRE(lexer->token) )
                 {
                     mode = Preformatted;
                 }

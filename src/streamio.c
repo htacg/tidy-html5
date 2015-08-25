@@ -49,7 +49,7 @@ static uint PopChar( StreamIn *in );
 ** Static (duration) Globals
 ******************************/
 
-static StreamOut stderrStreamOut = 
+static StreamOut stderrStreamOut =
 {
     ASCII,
     FSM_ASCII,
@@ -61,7 +61,7 @@ static StreamOut stderrStreamOut =
     { 0, TY_(filesink_putByte) }
 };
 
-static StreamOut stdoutStreamOut = 
+static StreamOut stdoutStreamOut =
 {
     ASCII,
     FSM_ASCII,
@@ -252,7 +252,7 @@ void TY_(AddCharToOriginalText)(StreamIn *in, tchar c)
 {
     int i, err, count = 0;
     tmbchar buf[10] = {0};
-    
+
     err = TY_(EncodeCharToUTF8Bytes)(c, buf, NULL, &count);
 
     if (err)
@@ -263,7 +263,7 @@ void TY_(AddCharToOriginalText)(StreamIn *in, tchar c)
         buf[2] = (byte) 0xBD;
         count = 3;
     }
-    
+
     for (i = 0; i < count; ++i)
         TY_(AddByteToOriginalText)(in, buf[i]);
 }
@@ -320,7 +320,7 @@ uint TY_(ReadChar)( StreamIn *in )
         in->tabs--;
         return ' ';
     }
-    
+
     for (;;)
     {
         c = ReadCharFromStream(in);
@@ -386,7 +386,7 @@ uint TY_(ReadChar)( StreamIn *in )
         /* Form Feed is allowed in HTML */
         if ( c == '\015' && !cfgBool(in->doc, TidyXmlTags) )
             break;
-            
+
         if ( c < 32 )
             continue; /* discard control char */
 
@@ -468,32 +468,32 @@ uint TY_(ReadChar)( StreamIn *in )
                                   TY_(ReplacementCharEncoding) == WIN1252 );
             Bool isMacChar    = ( in->encoding == MACROMAN ||
                                   TY_(ReplacementCharEncoding) == MACROMAN );
-            
+
             /* set error position just before offending character */
             if (in->doc->lexer)
             {
                 in->doc->lexer->lines = in->curline;
                 in->doc->lexer->columns = in->curcol;
             }
-                
+
             if ( isWinChar )
                 c1 = TY_(DecodeWin1252)( c );
             else if ( isMacChar )
                 c1 = TY_(DecodeMacRoman)( c );
             if ( c1 )
                 replMode = REPLACED_CHAR;
-                
+
             if ( c1 == 0 && isVendorChar )
                 TY_(ReportEncodingError)(in->doc, VENDOR_SPECIFIC_CHARS, c, replMode == DISCARDED_CHAR);
             else if ( ! isVendorChar )
                 TY_(ReportEncodingError)(in->doc, INVALID_SGML_CHARS, c, replMode == DISCARDED_CHAR);
-                
+
             c = c1;
         }
 
         if ( c == 0 )
             continue; /* illegal char is discarded */
-        
+
         in->curcol++;
         break;
     }
@@ -536,7 +536,7 @@ void TY_(UngetChar)( uint c, StreamIn *in )
         /* fprintf(stderr, "Attempt to UngetChar EOF\n"); */
         return;
     }
-    
+
     in->pushed = yes;
 
     if (in->bufpos + 1 >= in->bufsize)
@@ -619,7 +619,7 @@ void TY_(WriteChar)( uint c, StreamOut* out )
     else if (out->encoding == UTF8)
     {
         int count = 0;
-        
+
         TY_(EncodeCharToUTF8Bytes)( c, NULL, &out->sink, &count );
         if (count <= 0)
         {
@@ -681,7 +681,7 @@ void TY_(WriteChar)( uint c, StreamOut* out )
     {
         int i, numChars = 1;
         uint theChars[2];
-        
+
         if ( !TY_(IsValidUTF16FromUCS4)(c) )
         {
             /* invalid UTF-16 value */
@@ -705,21 +705,21 @@ void TY_(WriteChar)( uint c, StreamOut* out )
             /* just put the char out */
             theChars[0] = c;
         }
-        
+
         for (i = 0; i < numChars; i++)
         {
             c = theChars[i];
-            
+
             if (out->encoding == UTF16LE)
             {
-                uint ch = c & 0xFF; PutByte(ch, out); 
-                ch = (c >> 8) & 0xFF; PutByte(ch, out); 
+                uint ch = c & 0xFF; PutByte(ch, out);
+                ch = (c >> 8) & 0xFF; PutByte(ch, out);
             }
-    
+
             else if (out->encoding == UTF16BE || out->encoding == UTF16)
             {
-                uint ch = (c >> 8) & 0xFF; PutByte(ch, out); 
-                ch = c & 0xFF; PutByte(ch, out); 
+                uint ch = (c >> 8) & 0xFF; PutByte(ch, out);
+                ch = c & 0xFF; PutByte(ch, out);
             }
         }
     }
@@ -732,8 +732,8 @@ void TY_(WriteChar)( uint c, StreamOut* out )
             PutByte(c, out);
         else
         {
-            uint ch = (c >> 8) & 0xFF; PutByte(ch, out); 
-            ch = c & 0xFF; PutByte(ch, out); 
+            uint ch = (c >> 8) & 0xFF; PutByte(ch, out);
+            ch = c & 0xFF; PutByte(ch, out);
         }
     }
 #endif
@@ -755,7 +755,7 @@ void TY_(WriteChar)( uint c, StreamOut* out )
 const int TY_(ReplacementCharEncoding) = DFLT_REPL_CHARENC;
 
 
-/* Mapping for Windows Western character set CP 1252 
+/* Mapping for Windows Western character set CP 1252
 ** (chars 128-159/U+0080-U+009F) to Unicode.
 */
 static const uint Win2Unicode[32] =
@@ -771,7 +771,7 @@ uint TY_(DecodeWin1252)(uint c)
 {
     if (127 < c && c < 160)
         c = Win2Unicode[c - 128];
-        
+
     return c;
 }
 
@@ -798,10 +798,10 @@ static void EncodeWin1252( uint c, StreamOut* out )
 */
 
 /* modified to only need chars 128-255/U+0080-U+00FF - Terry Teague 19 Aug 01 */
-static const uint Mac2Unicode[128] = 
+static const uint Mac2Unicode[128] =
 {
     /* x7F = DEL */
-    
+
     0x00C4, 0x00C5, 0x00C7, 0x00C9, 0x00D1, 0x00D6, 0x00DC, 0x00E1,
     0x00E0, 0x00E2, 0x00E4, 0x00E3, 0x00E5, 0x00E7, 0x00E9, 0x00E8,
 
@@ -952,53 +952,53 @@ static void EncodeLatin0( uint c, StreamOut* out )
    Unicode equivalent are mapped to '?'. Is this appropriate?
 */
 
-static const uint Symbol2Unicode[] = 
+static const uint Symbol2Unicode[] =
 {
     0x0000, 0x0001, 0x0002, 0x0003, 0x0004, 0x0005, 0x0006, 0x0007,
     0x0008, 0x0009, 0x000A, 0x000B, 0x000C, 0x000D, 0x000E, 0x000F,
-    
+
     0x0010, 0x0011, 0x0012, 0x0013, 0x0014, 0x0015, 0x0016, 0x0017,
     0x0018, 0x0019, 0x001A, 0x001B, 0x001C, 0x001D, 0x001E, 0x001F,
-    
+
     0x0020, 0x0021, 0x2200, 0x0023, 0x2203, 0x0025, 0x0026, 0x220D,
     0x0028, 0x0029, 0x2217, 0x002B, 0x002C, 0x2212, 0x002E, 0x002F,
-    
+
     0x0030, 0x0031, 0x0032, 0x0033, 0x0034, 0x0035, 0x0036, 0x0037,
     0x0038, 0x0039, 0x003A, 0x003B, 0x003C, 0x003D, 0x003E, 0x003F,
-    
+
     0x2245, 0x0391, 0x0392, 0x03A7, 0x0394, 0x0395, 0x03A6, 0x0393,
     0x0397, 0x0399, 0x03D1, 0x039A, 0x039B, 0x039C, 0x039D, 0x039F,
-    
+
     0x03A0, 0x0398, 0x03A1, 0x03A3, 0x03A4, 0x03A5, 0x03C2, 0x03A9,
     0x039E, 0x03A8, 0x0396, 0x005B, 0x2234, 0x005D, 0x22A5, 0x005F,
-    
+
     0x00AF, 0x03B1, 0x03B2, 0x03C7, 0x03B4, 0x03B5, 0x03C6, 0x03B3,
     0x03B7, 0x03B9, 0x03D5, 0x03BA, 0x03BB, 0x03BC, 0x03BD, 0x03BF,
-    
+
     0x03C0, 0x03B8, 0x03C1, 0x03C3, 0x03C4, 0x03C5, 0x03D6, 0x03C9,
     0x03BE, 0x03C8, 0x03B6, 0x007B, 0x007C, 0x007D, 0x223C, 0x003F,
-    
+
     0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
     0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
-    
+
     0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
     0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
-    
+
     0x00A0, 0x03D2, 0x2032, 0x2264, 0x2044, 0x221E, 0x0192, 0x2663,
     0x2666, 0x2665, 0x2660, 0x2194, 0x2190, 0x2191, 0x2192, 0x2193,
-    
+
     0x00B0, 0x00B1, 0x2033, 0x2265, 0x00D7, 0x221D, 0x2202, 0x00B7,
     0x00F7, 0x2260, 0x2261, 0x2248, 0x2026, 0x003F, 0x003F, 0x21B5,
-    
+
     0x2135, 0x2111, 0x211C, 0x2118, 0x2297, 0x2295, 0x2205, 0x2229,
     0x222A, 0x2283, 0x2287, 0x2284, 0x2282, 0x2286, 0x2208, 0x2209,
-    
+
     0x2220, 0x2207, 0x00AE, 0x00A9, 0x2122, 0x220F, 0x221A, 0x22C5,
     0x00AC, 0x2227, 0x2228, 0x21D4, 0x21D0, 0x21D1, 0x21D2, 0x21D3,
-    
+
     0x25CA, 0x2329, 0x00AE, 0x00A9, 0x2122, 0x2211, 0x003F, 0x003F,
     0x003F, 0x003F, 0x003F, 0x003F, 0x003F, 0x003F, 0x003F, 0x003F,
-    
+
     0x20AC, 0x232A, 0x222B, 0x2320, 0x003F, 0x2321, 0x003F, 0x003F,
     0x003F, 0x003F, 0x003F, 0x003F, 0x003F, 0x003F, 0x003F, 0x003F
 };
@@ -1096,7 +1096,7 @@ static void PutByte( uint byteValue, StreamOut* out )
 static void UngetRawBytesToStream( StreamIn *in, byte* buf, int *count )
 {
     int i;
-    
+
     for (i = 0; i < *count; i++)
     {
         /* should never get here; testing for 0xFF, a valid char, is not a good idea */
@@ -1150,7 +1150,7 @@ static uint ReadCharFromStream( StreamIn* in )
 
     if ( TY_(IsEOF)(in) )
         return EndOfStream;
-    
+
     c = ReadByte( in );
 
     if (c == EndOfStream)
@@ -1247,7 +1247,7 @@ static uint ReadCharFromStream( StreamIn* in )
         /* deal with UTF-8 encoded char */
 
         int err, count = 0;
-        
+
         /* first byte "c" is passed in separately */
         err = TY_(DecodeUTF8BytesToChar)( &n, c, NULL, &in->source, &count );
         if (!err && (n == (uint)EndOfStream) && (count == 1)) /* EOF */
@@ -1261,13 +1261,13 @@ static uint ReadCharFromStream( StreamIn* in )
             TY_(ReportEncodingError)(in->doc, INVALID_UTF8, n, no);
             n = 0xFFFD; /* replacement char */
         }
-        
+
         return n;
     }
-    
+
 #if SUPPORT_ASIAN_ENCODINGS
     /*
-       This section is suitable for any "multibyte" variable-width 
+       This section is suitable for any "multibyte" variable-width
        character encoding in which a one-byte code is less than
        128, and the first byte of a two-byte code is greater or
        equal to 128. Note that Big5 and ShiftJIS fit into this
@@ -1307,7 +1307,7 @@ static uint ReadCharFromStream( StreamIn* in )
 
     else
         n = c;
-        
+
     return n;
 }
 

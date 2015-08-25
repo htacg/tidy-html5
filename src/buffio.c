@@ -118,7 +118,7 @@ void TIDY_CALL tidyBufCheckAlloc( TidyBuffer* buf, uint allocSize, uint chunkSiz
 
     if ( !buf->allocator )
         setDefaultAllocator( buf );
-        
+
     if ( 0 == chunkSize )
         chunkSize = 256;
     if ( allocSize+1 > buf->allocated )

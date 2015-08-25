@@ -44,7 +44,7 @@ static struct _msgfmt
 {
     uint code;
     ctmbstr fmt;
-} const msgFormat[] = 
+} const msgFormat[] =
 {
 /* ReportEncodingWarning */
   { ENCODING_MISMATCH,            "specified input encoding (%s) does not match actual input encoding (%s)" }, /* Warning */
@@ -171,7 +171,7 @@ static struct _msgfmt
 #if SUPPORT_ACCESSIBILITY_CHECKS
 
 /* ReportAccess */
-/* 
+/*
     List of error/warning messages.  The error code corresponds to
     the check that is listed in the AERT (HTML specifications).
 */
@@ -1017,7 +1017,7 @@ static char* ReportPosition(TidyDocImpl* doc, int line, int col, char* buf, size
 
     /* Change formatting to be parsable by GNU Emacs */
     if ( cfgBool(doc, TidyEmacs) && cfgStr(doc, TidyEmacsFile) )
-        TY_(tmbsnprintf)(buf, count, "%s:%d:%d: ", 
+        TY_(tmbsnprintf)(buf, count, "%s:%d:%d: ",
                          cfgStr(doc, TidyEmacsFile), line, col);
     else /* traditional format */
         TY_(tmbsnprintf)(buf, count, "line %d column %d - ", line, col);
@@ -1026,9 +1026,9 @@ static char* ReportPosition(TidyDocImpl* doc, int line, int col, char* buf, size
 
 /* General message writing routine.
 ** Each message is a single warning, error, etc.
-** 
+**
 ** This routine will keep track of counts and,
-** if the caller has set a filter, it will be 
+** if the caller has set a filter, it will be
 ** called.  The new preferred way of handling
 ** Tidy diagnostics output is either a) define
 ** a new output sink or b) install a message
@@ -1097,7 +1097,7 @@ static void messagePos( TidyDocImpl* doc, TidyReportLevel level,
     TidyDocFree(doc, messageBuf);
 }
 
-/* Reports error at current Lexer line/column. */ 
+/* Reports error at current Lexer line/column. */
 static
 void message( TidyDocImpl* doc, TidyReportLevel level, ctmbstr msg, ... )
 #ifdef __GNUC__
@@ -1105,7 +1105,7 @@ __attribute__((format(printf, 3, 4)))
 #endif
 ;
 
-/* Reports error at node line/column. */ 
+/* Reports error at node line/column. */
 static
 void messageNode( TidyDocImpl* doc, TidyReportLevel level,
                   Node* node, ctmbstr msg, ... )
@@ -1114,9 +1114,9 @@ __attribute__((format(printf, 4, 5)))
 #endif
 ;
 
-/* Reports error at given line/column. */ 
+/* Reports error at given line/column. */
 static
-void messageLexer( TidyDocImpl* doc, TidyReportLevel level, 
+void messageLexer( TidyDocImpl* doc, TidyReportLevel level,
                    ctmbstr msg, ... )
 #ifdef __GNUC__
 __attribute__((format(printf, 3, 4)))
@@ -1280,7 +1280,7 @@ void TY_(ReportEncodingWarning)(TidyDocImpl* doc, uint code, uint encoding)
     switch(code)
     {
     case ENCODING_MISMATCH:
-        messageLexer(doc, TidyWarning, GetFormatFromCode(code), 
+        messageLexer(doc, TidyWarning, GetFormatFromCode(code),
                      TY_(CharEncodingName)(doc->docIn->encoding),
                      TY_(CharEncodingName)(encoding));
         doc->badChars |= BC_ENCODING_MISMATCH;
@@ -1433,19 +1433,19 @@ void TY_(ReportMissingAttr)( TidyDocImpl* doc, Node* node, ctmbstr name )
 *
 * DisplayHTMLTableAlgorithm()
 *
-* If the table does contain 2 or more logical levels of 
-* row or column headers, the HTML 4 table algorithm 
-* to show the author how the headers are currently associated 
+* If the table does contain 2 or more logical levels of
+* row or column headers, the HTML 4 table algorithm
+* to show the author how the headers are currently associated
 * with the cells.
 *********************************************************/
- 
+
 void TY_(DisplayHTMLTableAlgorithm)( TidyDocImpl* doc )
 {
     tidy_out(doc, " \n");
     tidy_out(doc, "      - First, search left from the cell's position to find row header cells.\n");
     tidy_out(doc, "      - Then search upwards to find column header cells.\n");
     tidy_out(doc, "      - The search in a given direction stops when the edge of the table is\n");
-    tidy_out(doc, "        reached or when a data cell is found after a header cell.\n"); 
+    tidy_out(doc, "        reached or when a data cell is found after a header cell.\n");
     tidy_out(doc, "      - Row headers are inserted into the list in the order they appear in\n");
     tidy_out(doc, "        the table. \n");
     tidy_out(doc, "      - For left-to-right tables, headers are inserted from left to right.\n");
@@ -1613,7 +1613,7 @@ void TY_(ReportError)(TidyDocImpl* doc, Node *element, Node *node, uint code)
         break;
 
     case DISCARDING_UNEXPECTED:
-        /* Force error if in a bad form, or 
+        /* Force error if in a bad form, or
            Issue #166 - repeated <main> element
         */
         messageNode(doc, doc->badForm ? TidyError : TidyWarning, node, fmt, nodedesc);
@@ -1667,8 +1667,8 @@ void TY_(ReportFatal)( TidyDocImpl* doc, Node *element, Node *node, uint code)
 void TY_(ErrorSummary)( TidyDocImpl* doc )
 {
     ctmbstr encnam = "specified";
-    int charenc = cfg( doc, TidyCharEncoding ); 
-    if ( charenc == WIN1252 ) 
+    int charenc = cfg( doc, TidyCharEncoding );
+    if ( charenc == WIN1252 )
         encnam = "Windows-1252";
     else if ( charenc == MACROMAN )
         encnam = "MacRoman";
@@ -1767,7 +1767,7 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
         tidy_out(doc, "Subsequent <main> elements have been discarded, which may\n");
         tidy_out(doc, "render the document invalid.\n");
     }
-    
+
     if (doc->badAccess)
     {
         /* Tidy "classic" accessibility tests */
@@ -1873,7 +1873,7 @@ void TY_(UnknownOption)( TidyDocImpl* doc, char c )
 
 void TY_(UnknownFile)( TidyDocImpl* doc, ctmbstr program, ctmbstr file )
 {
-    message( doc, TidyConfig, 
+    message( doc, TidyConfig,
              "%s: can't open file \"%s\"\n", program, file );
 }
 #endif
@@ -1918,15 +1918,15 @@ void TY_(HelloMessage)( TidyDocImpl* doc, ctmbstr date, ctmbstr filename )
     platform = PLATFORM_NAME;
     helper = " for ";
 #endif
-    
+
     if ( TY_(tmbstrcmp)(filename, "stdin") == 0 )
     {
         /* Filename will be ignored at end of varargs */
         msgfmt = "\nHTML Tidy for %s (vers %s; built on %s, at %s)\n"
                  "Parsing console input (stdin)\n";
     }
-    
-    TY_(tmbsnprintf)(buf, sizeof(buf), msgfmt, helper, platform, 
+
+    TY_(tmbsnprintf)(buf, sizeof(buf), msgfmt, helper, platform,
                      date, __DATE__, __TIME__, filename);
     tidy_out( doc, buf );
 }

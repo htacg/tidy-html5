@@ -7,12 +7,12 @@
   on any globals.  Thus, thread-safety may be introduced w/out
   changing the interface.
 
-  Looking ahead to a C++ wrapper, C functions always pass 
+  Looking ahead to a C++ wrapper, C functions always pass
   this-equivalent as 1st arg.
 
 
   Copyright (c) 1998-2008 World Wide Web Consortium
-  (Massachusetts Institute of Technology, European Research 
+  (Massachusetts Institute of Technology, European Research
   Consortium for Informatics and Mathematics, Keio University).
   All Rights Reserved.
 
@@ -21,18 +21,18 @@
      Dave Raggett <dsr@w3.org>
 
   The contributing author(s) would like to thank all those who
-  helped with testing, bug fixes and suggestions for improvements. 
+  helped with testing, bug fixes and suggestions for improvements.
   This wouldn't have been possible without your help.
 
   COPYRIGHT NOTICE:
- 
+
   This software and documentation is provided "as is," and
   the copyright holders and contributing author(s) make no
   representations or warranties, express or implied, including
   but not limited to, warranties of merchantability or fitness
   for any particular purpose or that the use of the software or
   documentation will not infringe any third party patents,
-  copyrights, trademarks or other rights. 
+  copyrights, trademarks or other rights.
 
   The copyright holders and contributing author(s) will not be held
   liable for any direct, indirect, special or consequential damages
@@ -48,7 +48,7 @@
      not be misrepresented as being the original source.
   3. This Copyright notice may not be removed or altered from any
      source or altered source distribution.
- 
+
   The copyright holders and contributing author(s) specifically
   permit, without fee, and encourage the use of this source code
   as a component for supporting the Hypertext Markup Language in
@@ -145,7 +145,7 @@ typedef struct _TidyBuffer TidyBuffer;
 **
 ** In general, approximately 1/3rd of the memory
 ** used by tidy is freed during the parse, so if
-** memory usage is an issue then an allocator that 
+** memory usage is an issue then an allocator that
 ** can reuse this memory is a good idea.
 **
 ** @{
@@ -174,7 +174,7 @@ struct _TidyAllocatorVtbl {
     /** Called to free a previously allocated block of memory */
     void (TIDY_CALL *free)( TidyAllocator *self, void *block);
     /** Called when a panic condition is detected.  Must support
-        block == NULL.  This function is not called if either alloc 
+        block == NULL.  This function is not called if either alloc
         or realloc fails; it is up to the allocator to do this.
         Currently this function can only be called if an error is
         detected in the tree integrity via the internal function
@@ -193,7 +193,7 @@ struct _TidyAllocatorVtbl {
        TidyAllocator base;
        ...other custom allocator state...
     } MyAllocator;
-    
+
     void* MyAllocator_alloc(TidyAllocator *base, void *block, size_t nBytes)
     {
         MyAllocator *self = (MyAllocator*)base;
@@ -258,7 +258,7 @@ TIDY_EXPORT Bool TIDY_CALL tidySetPanicCall( TidyPanic fpanic );
 ** >0   -> 1 == TIDY WARNING, 2 == TIDY ERROR
 ** <0   -> SEVERE ERROR
 ** </pre>
-** 
+**
 The following is a short example program.
 
 <pre>
@@ -337,7 +337,7 @@ TIDY_EXPORT void TIDY_CALL        tidySetAppData( TidyDoc tdoc, void* appData );
 /** Get application data set previously */
 TIDY_EXPORT void* TIDY_CALL       tidyGetAppData( TidyDoc tdoc );
 
-/** Get release date (version) for current library 
+/** Get release date (version) for current library
  ** @deprecated tidyReleaseDate() is deprecated in favor of semantic
  ** versioning and should be replaced with tidyLibraryVersion().
  */
@@ -413,7 +413,7 @@ TIDY_EXPORT int TIDY_CALL         tidySetOutCharEncoding( TidyDoc tdoc, ctmbstr 
 */
 
 /** Applications using TidyLib may want to augment command-line and
-**  configuration file options.  Setting this callback allows an application 
+**  configuration file options.  Setting this callback allows an application
 **  developer to examine command-line and configuration file options after
 **  TidyLib has examined them and failed to recognize them.
 **/
@@ -426,7 +426,7 @@ TIDY_EXPORT Bool TIDY_CALL          tidySetOptionCallback( TidyDoc tdoc, TidyOpt
 TIDY_EXPORT TidyOptionId TIDY_CALL  tidyOptGetIdForName( ctmbstr optnam );
 
 /** Get iterator for list of option */
-/** 
+/**
 Example:
 <pre>
 TidyIterator itOpt = tidyGetOptionList( tdoc );
@@ -522,7 +522,7 @@ TIDY_EXPORT ctmbstr TIDY_CALL       tidyOptGetCurrPick( TidyDoc tdoc, TidyOption
 TIDY_EXPORT TidyIterator TIDY_CALL  tidyOptGetDeclTagList( TidyDoc tdoc );
 /** Get next declared tag of specified type: TidyInlineTags, TidyBlockTags,
 **  TidyEmptyTags, TidyPreTags */
-TIDY_EXPORT ctmbstr TIDY_CALL       tidyOptGetNextDeclTag( TidyDoc tdoc, 
+TIDY_EXPORT ctmbstr TIDY_CALL       tidyOptGetNextDeclTag( TidyDoc tdoc,
                                                           TidyOptionId optId,
                                                           TidyIterator* iter );
 /** Get option description */
@@ -539,8 +539,8 @@ TIDY_EXPORT TidyOption TIDY_CALL    tidyOptGetNextDocLinks( TidyDoc tdoc,
 
 /** @defgroup IO  I/O and Messages
 **
-** By default, Tidy will define, create and use 
-** instances of input and output handlers for 
+** By default, Tidy will define, create and use
+** instances of input and output handlers for
 ** standard C buffered I/O (i.e. FILE* stdin,
 ** FILE* stdout and FILE* stderr for content
 ** input, content output and diagnostic output,
@@ -623,7 +623,7 @@ typedef struct _TidyOutputSink
 **  an entry point to marshal pointers-to-functions.
 **  Needed by .NET and possibly other language bindings.
 */
-TIDY_EXPORT Bool TIDY_CALL tidyInitSink( TidyOutputSink* sink, 
+TIDY_EXPORT Bool TIDY_CALL tidyInitSink( TidyOutputSink* sink,
                                         void*           snkData,
                                         TidyPutByteFunc pbFunc );
 
@@ -632,7 +632,7 @@ TIDY_EXPORT void TIDY_CALL tidyPutByte( TidyOutputSink* sink, uint byteValue );
 
 
 /** Callback to filter messages by diagnostic level:
-**  info, warning, etc.  Just set diagnostic output 
+**  info, warning, etc.  Just set diagnostic output
 **  handler to redirect all diagnostics output.  Return true
 **  to proceed with output, false to cancel.
 */
@@ -666,7 +666,7 @@ TIDY_EXPORT ctmbstr     tidyLookupMessage( int errorNo );
 
 /** @defgroup Parse Document Parse
 **
-** Parse markup from a given input source.  String and filename 
+** Parse markup from a given input source.  String and filename
 ** functions added for convenience.  HTML/XHTML version determined
 ** from input.
 ** @{
@@ -697,7 +697,7 @@ TIDY_EXPORT int TIDY_CALL         tidyParseSource( TidyDoc tdoc, TidyInputSource
 /** Execute configured cleanup and repair operations on parsed markup */
 TIDY_EXPORT int TIDY_CALL         tidyCleanAndRepair( TidyDoc tdoc );
 
-/** Run configured diagnostics on parsed and repaired markup. 
+/** Run configured diagnostics on parsed and repaired markup.
 **  Must call tidyCleanAndRepair() first.
 */
 TIDY_EXPORT int TIDY_CALL         tidyRunDiagnostics( TidyDoc tdoc );
@@ -748,7 +748,7 @@ TIDY_EXPORT int TIDY_CALL         tidyOptSaveFile( TidyDoc tdoc, ctmbstr cfgfil 
 TIDY_EXPORT int TIDY_CALL         tidyOptSaveSink( TidyDoc tdoc, TidyOutputSink* sink );
 
 
-/* Error reporting functions 
+/* Error reporting functions
 */
 
 /** Write more complete information about errors to current error sink. */
@@ -885,7 +885,7 @@ TIDY_EXPORT uint TIDY_CALL tidyNodeColumn( TidyNode tnod );
 
 /** @defgroup NodeIsElementName Deprecated node interrogation per TagId
 **
-** @deprecated The functions tidyNodeIs{ElementName} are deprecated and 
+** @deprecated The functions tidyNodeIs{ElementName} are deprecated and
 ** should be replaced by tidyNodeGetId.
 ** @{
 */
@@ -991,7 +991,7 @@ TIDY_EXPORT Bool TIDY_CALL tidyAttrIsProp( TidyAttr tattr );
 
 /** @defgroup AttrIsAttributeName Deprecated attribute interrogation per AttrId
 **
-** @deprecated The functions  tidyAttrIs{AttributeName} are deprecated and 
+** @deprecated The functions  tidyAttrIs{AttributeName} are deprecated and
 ** should be replaced by tidyAttrGetId.
 ** @{
 */
@@ -1056,9 +1056,9 @@ TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetById( TidyNode tnod, TidyAttrId attId 
 
 /** @defgroup AttrGetAttributeName Deprecated attribute retrieval per AttrId
 **
-** @deprecated The functions tidyAttrGet{AttributeName} are deprecated and 
+** @deprecated The functions tidyAttrGet{AttributeName} are deprecated and
 ** should be replaced by tidyAttrGetById.
-** For instance, tidyAttrGetID( TidyNode tnod ) can be replaced by 
+** For instance, tidyAttrGetID( TidyNode tnod ) can be replaced by
 ** tidyAttrGetById( TidyNode tnod, TidyAttr_ID ). This avoids a potential
 ** name clash with tidyAttrGetId for case-insensitive languages.
 ** @{

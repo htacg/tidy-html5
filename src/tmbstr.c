@@ -93,7 +93,7 @@ int TY_(tmbstrcmp)( ctmbstr s1, ctmbstr s2 )
 uint TY_(tmbstrlen)( ctmbstr str )
 {
     uint len = 0;
-    if ( str ) 
+    if ( str )
     {
         while ( *str++ )
             ++len;

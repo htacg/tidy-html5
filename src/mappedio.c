@@ -191,7 +191,7 @@ static int initMappedFileSource( TidyAllocator *allocator, TidyInputSource* inp,
     fin = (MappedFileSource*) TidyAlloc( allocator, sizeof(MappedFileSource) );
     if ( !fin )
         return -1;
-    
+
 #if defined(_MSC_VER) && (_MSC_VER < 1300)  /* less than msvc++ 7.0 */
     {
         LARGE_INTEGER* pli = (LARGE_INTEGER *)&fin->size;

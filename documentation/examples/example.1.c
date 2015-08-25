@@ -1,9 +1,9 @@
 
 
-#include <tidy.h>;
-#include <tidybuffio.h>;
-#include <stdio.h>;
-#include <errno.h>;
+#include <tidy.h>
+#include <tidybuffio.h>
+#include <stdio.h>
+#include <errno.h>
 
 int main(int argc, char **argv )
 {

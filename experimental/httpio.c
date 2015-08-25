@@ -221,4 +221,3 @@ Bool HTTPIsEOF( HTTPInputSource *source )
     /* Nothing in the buffer, and the last receive failed, must be done.  */
     return yes;
 }
-

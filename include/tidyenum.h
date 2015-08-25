@@ -808,4 +808,3 @@ typedef enum
 }  /* extern "C" */
 #endif
 #endif /* __TIDYENUM_H__ */
-

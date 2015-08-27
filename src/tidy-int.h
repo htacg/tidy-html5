@@ -35,7 +35,7 @@
 struct _TidyDocImpl
 {
     /* The Document Tree (and backing store buffer) */
-    Node                root;       /* This MUST remain the first declared 
+    Node                root;       /* This MUST remain the first declared
                                        variable in this structure */
     Lexer*              lexer;
 

@@ -179,7 +179,7 @@ void TY_(ReportFatal)(TidyDocImpl* doc, Node* element, Node* node, uint code);
 #define BA_MISSING_IMAGE_MAP       8
 #define BA_USING_FRAMES            16
 #define BA_USING_NOFRAMES          32
-#define BA_INVALID_LINK_NOFRAMES   64  /* WAI [6.5.1.4] */  
+#define BA_INVALID_LINK_NOFRAMES   64  /* WAI [6.5.1.4] */
 #define BA_WAI                     (1 << 31)
 
 /* presentation flaws */

@@ -1,6 +1,6 @@
 /*
   config.c -- read config file and manage config properties
-  
+
   (c) 1998-2008 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
 
@@ -58,14 +58,14 @@ void TY_(FreeConfig)( TidyDocImpl* doc )
 
 /* Arrange so index can be cast to enum
 */
-static const ctmbstr boolPicks[] = 
+static const ctmbstr boolPicks[] =
 {
   "no",
   "yes",
   NULL
 };
 
-static const ctmbstr autoBoolPicks[] = 
+static const ctmbstr autoBoolPicks[] =
 {
   "no",
   "yes",
@@ -73,14 +73,14 @@ static const ctmbstr autoBoolPicks[] =
   NULL
 };
 
-static const ctmbstr repeatAttrPicks[] = 
+static const ctmbstr repeatAttrPicks[] =
 {
   "keep-first",
   "keep-last",
   NULL
 };
 
-static const ctmbstr accessPicks[] = 
+static const ctmbstr accessPicks[] =
 {
   "0 (Tidy Classic)",
   "1 (Priority 1 Checks)",
@@ -89,7 +89,7 @@ static const ctmbstr accessPicks[] =
   NULL
 };
 
-static const ctmbstr charEncPicks[] = 
+static const ctmbstr charEncPicks[] =
 {
   "raw",
   "ascii",
@@ -117,7 +117,7 @@ static const ctmbstr charEncPicks[] =
   NULL
 };
 
-static const ctmbstr newlinePicks[] = 
+static const ctmbstr newlinePicks[] =
 {
   "LF",
   "CRLF",
@@ -125,7 +125,7 @@ static const ctmbstr newlinePicks[] =
   NULL
 };
 
-static const ctmbstr doctypePicks[] = 
+static const ctmbstr doctypePicks[] =
 {
   "html5",
   "omit",
@@ -133,10 +133,10 @@ static const ctmbstr doctypePicks[] =
   "strict",
   "transitional",
   "user",
-  NULL 
+  NULL
 };
 
-static const ctmbstr sorterPicks[] = 
+static const ctmbstr sorterPicks[] =
 {
   "none",
   "alpha",
@@ -162,7 +162,7 @@ static const ctmbstr sorterPicks[] =
 #if SUPPORT_ACCESSIBILITY_CHECKS
 #define ParseAcc ParseInt
 #else
-#define ParseAcc NULL 
+#define ParseAcc NULL
 #endif
 
 static void AdjustConfig( TidyDocImpl* doc );
@@ -192,7 +192,7 @@ static ParseProperty ParseTagNames;
 /* alpha */
 static ParseProperty ParseSorter;
 
-/* RAW, ASCII, LATIN0, LATIN1, UTF8, ISO2022, MACROMAN, 
+/* RAW, ASCII, LATIN0, LATIN1, UTF8, ISO2022, MACROMAN,
    WIN1252, IBM858, UTF16LE, UTF16BE, UTF16, BIG5, SHIFTJIS
 */
 static ParseProperty ParseCharEnc;
@@ -206,7 +206,7 @@ static ParseProperty ParseRepeatAttr;
 
 /*\
  * 20150515 - support using tabs instead of spaces - Issue #108
- * (a) parser for 't'/'f', 'true'/'false', 'y'/'n', 'yes'/'no' or '1'/'0' 
+ * (a) parser for 't'/'f', 'true'/'false', 'y'/'n', 'yes'/'no' or '1'/'0'
  * (b) sets the TidyIndentSpaces to 1 if 'yes'
  * (c) sets the indent_char to '\t' or ' '
 \*/
@@ -551,7 +551,7 @@ void TY_(ResetConfigToSnapshot)( TidyDocImpl* doc )
     uint changedUserTags;
     Bool needReparseTagsDecls = NeedReparseTagDecls( value, snap,
                                                      &changedUserTags );
-    
+
     for ( ixVal=0; ixVal < N_TIDY_OPTIONS; ++option, ++ixVal )
     {
         assert( ixVal == (uint) option->id );
@@ -699,9 +699,9 @@ static uint NextProperty( TidyConfigImpl* config )
 /*
  Todd Lewis contributed this code for expanding
  ~/foo or ~your/foo according to $HOME and your
- user name. This will work partially on any system 
+ user name. This will work partially on any system
  which defines $HOME.  Support for ~user/foo will
- work on systems that support getpwnam(userid), 
+ work on systems that support getpwnam(userid),
  namely Unix/Linux.
 */
 static ctmbstr ExpandTilde( TidyDocImpl* doc, ctmbstr filename )
@@ -808,7 +808,7 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
         tchar c;
         cfg->cfgIn = TY_(FileInput)( doc, fin, enc );
         c = FirstChar( cfg );
-       
+
         for ( c = SkipWhite(cfg); c != EndOfStream; c = NextProperty(cfg) )
         {
             uint ix = 0;
@@ -889,7 +889,7 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
     AdjustConfig( doc );
 
     /* any new config errors? If so, return warning status. */
-    return (doc->optionErrors > opterrs ? 1 : 0); 
+    return (doc->optionErrors > opterrs ? 1 : 0);
 }
 
 /* returns false if unknown option, missing parameter,
@@ -901,14 +901,14 @@ Bool TY_(ParseConfigOption)( TidyDocImpl* doc, ctmbstr optnam, ctmbstr optval )
     Bool status = ( option != NULL );
     if ( !status )
     {
-        /* Not a standard tidy option.  Check to see if the user application 
+        /* Not a standard tidy option.  Check to see if the user application
            recognizes it  */
         if (NULL != doc->pOptCallback)
             status = (*doc->pOptCallback)( optnam, optval );
         if (!status)
             TY_(ReportUnknownOption)( doc, optnam );
     }
-    else 
+    else
         status = TY_(ParseConfigValue)( doc, option->id, optval );
     return status;
 }
@@ -946,7 +946,7 @@ Bool  TY_(AdjustCharEncoding)( TidyDocImpl* doc, int encoding )
 {
     int outenc = -1;
     int inenc = -1;
-    
+
     switch( encoding )
     {
     case MACROMAN:
@@ -1332,7 +1332,7 @@ Bool ParseTagNames( TidyDocImpl* doc, const TidyOptionImpl* option )
         buf[i] = '\0';
         if (i == 0)          /* Skip empty tag definition.  Possible when */
             continue;        /* there is a trailing space on the line. */
-            
+
         /* add tag to dictionary */
         DeclareUserTag( doc, option->id, ttyp, buf );
         i = 0;
@@ -1515,7 +1515,7 @@ Bool ParseDocType( TidyDocImpl* doc, const TidyOptionImpl* option )
         TY_(ReportBadArgument)( doc, option->name );
         status = no;
     }
-     
+
     if ( status )
         TY_(SetOptionInt)( doc, TidyDoctypeMode, dtmode );
     return status;
@@ -1705,16 +1705,16 @@ static int  SaveConfigToStream( TidyDocImpl* doc, StreamOut* out )
           if ( dtmode == TidyDoctypeUser )
           {
             tmbstr t;
-            
+
             /* add 2 double quotes */
             if (( t = (tmbstr)TidyDocAlloc( doc, TY_(tmbstrlen)( val->p ) + 2 ) ))
             {
               t[0] = '\"'; t[1] = 0;
-            
+
               TY_(tmbstrcat)( t, val->p );
               TY_(tmbstrcat)( t, "\"" );
               rc = WriteOptionString( option, t, out );
-            
+
               TidyDocFree( doc, t );
             }
           }

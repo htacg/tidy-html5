@@ -180,7 +180,7 @@ void          tidyDocRelease( TidyDocImpl* doc )
         TY_(FreeConfig)( doc );
         TY_(FreeAttrTable)( doc );
         TY_(FreeTags)( doc );
-        /*\ 
+        /*\
          *  Issue #186 - Now FreeNode depend on the doctype, so the lexer is needed
          *  to determine which hash is to be used, so free it last.
         \*/
@@ -1193,7 +1193,7 @@ int         TY_(DocParseStream)( TidyDocImpl* doc, StreamIn* in )
 
     if (doc->givenDoctype)
         TidyDocFree(doc, doc->givenDoctype);
-    /*\ 
+    /*\
      *  Issue #186 - Now FreeNode depend on the doctype, so the lexer is needed
      *  to determine which hash is to be used, so free it last.
     \*/
@@ -1380,21 +1380,21 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
         } else
         if ( nodeIsACRONYM(node) ) {
             if (clean) {
-                /* replace with 'abbr' with warning to that effect 
+                /* replace with 'abbr' with warning to that effect
                  * maybe should use static void RenameElem( TidyDocImpl* doc, Node* node, TidyTagId tid )
                  */
                 TY_(CoerceNode)(doc, node, TidyTag_ABBR, warn, no);
             } else {
                 /* sadly, this stops writing of the tidied document, unless 'forced'
-                   TY_(ReportError)(doc, node, node, REMOVED_HTML5); 
+                   TY_(ReportError)(doc, node, node, REMOVED_HTML5);
                    so go back to a 'warning' for now...
                 */
                 TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
             }
-        } else 
+        } else
         if ( nodeIsAPPLET(node) ) {
             if (clean) {
-                /* replace with 'object' with warning to that effect 
+                /* replace with 'object' with warning to that effect
                  * maybe should use static void RenameElem( TidyDocImpl* doc, Node* node, TidyTagId tid )
                  */
                 TY_(CoerceNode)(doc, node, TidyTag_OBJECT, warn, no);
@@ -1403,7 +1403,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
             }
         } else
         if ( nodeIsBASEFONT(node) ) {
-            /*\ 
+            /*\
              * basefont: CSS equivalen 'font-size', 'font-family' and 'color' on body or class on each subsequent element
              * Difficult - If it is the first body element, then could consider adding that
              *  to the <body> as a whole, else could perhaps apply it to all subsequent element.
@@ -1415,7 +1415,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
         if ( nodeIsBIG(node) ) {
             /*\
              * big: CSS equivalent	'font-size:larger'
-             * so could replace the <big> ... </big> with 
+             * so could replace the <big> ... </big> with
              * <span style="font-size: larger"> ... </span>
              * then replace <big> with <span>
              * Need to think about that...
@@ -1445,7 +1445,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
              * see: static Bool Center2Div( TidyDocImpl* doc, Node *node, Node **pnode)
             \*/
                 TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
-        } else 
+        } else
         if ( nodeIsDIR(node) ) {
             /*\
              *  dir: replace by <ul>
@@ -1457,7 +1457,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
         if ( nodeIsFONT(node) ) {
             /*\
              * Tidy already handles this -
-             * If 'clean' replaced by CSS, else 
+             * If 'clean' replaced by CSS, else
              * if is NOT clean, and doctype html5 then warnings issued
              * done in Bool Font2Span( TidyDocImpl* doc, Node *node, Node **pnode ) (I think?)
              *

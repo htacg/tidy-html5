@@ -26,7 +26,7 @@ Node *nextTidyNode( TidyNodeIter *pThis )
         // the next element, if any, is my first-born child
         pThis->pCurrent = pThis->pCurrent->content;
     }
-    else 
+    else
     {
         // no children, I guess my next younger brother inherits the throne.
         while (   NULL == pThis->pCurrent->next

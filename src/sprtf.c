@@ -51,7 +51,7 @@
 #pragma warning( disable:4996 )
 #else
 #define strcmpi strcasecmp
-#endif 
+#endif
 
 #ifndef MX_ONE_BUF
 #define MX_ONE_BUF 1024
@@ -312,7 +312,7 @@ static void oi( char * psin )
 #ifdef ADD_LISTVIEW
        if (add2listview) {
            LVInsertItem(ps);
-       } 
+       }
 #endif // ADD_LISTVIEW
 #ifdef ADD_SCREENOUT
        if (add2screen) {

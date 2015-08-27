@@ -1,5 +1,3 @@
-
-
 #include <tidy.h>
 #include <tidybuffio.h>
 #include <stdio.h>
@@ -18,7 +16,7 @@ int main(int argc, char **argv )
     printf( "Tidying:\t%s\n", input );
 
     // Convert to XHTML
-    ok = tidyOptSetBool( tdoc, TidyXhtmlOut, yes );  
+    ok = tidyOptSetBool( tdoc, TidyXhtmlOut, yes );
     if ( ok )
         rc = tidySetErrorBuffer( tdoc, &errbuf );    // Capture diagnostics
     if ( rc >= 0 )
@@ -46,4 +44,3 @@ int main(int argc, char **argv )
     tidyRelease( tdoc );
     return rc;
 }
-

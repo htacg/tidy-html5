@@ -2,7 +2,7 @@
   tidy.c - HTML TidyLib command line driver
 
   Copyright (c) 1998-2008 World Wide Web Consortium
-  (Massachusetts Institute of Technology, European Research 
+  (Massachusetts Institute of Technology, European Research
   Consortium for Informatics and Mathematics, Keio University).
   All Rights Reserved.
 
@@ -971,7 +971,7 @@ int main( int argc, char** argv )
     set_log_file((char *)"temptidy.txt", 0);
     // add_append_log(1);
 #endif
-    
+
 #ifdef TIDY_CONFIG_FILE
     if ( tidyFileExists( tdoc, TIDY_CONFIG_FILE) )
     {
@@ -1360,7 +1360,7 @@ int main( int argc, char** argv )
         errout == stderr && !contentErrors)
         fprintf(errout, "\n");
 
-    if (contentErrors + contentWarnings > 0 && 
+    if (contentErrors + contentWarnings > 0 &&
          !tidyOptGetBool(tdoc, TidyQuiet))
         tidyErrorSummary(tdoc);
 

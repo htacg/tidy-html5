@@ -24,17 +24,17 @@ extern "C" {
 /*
   Uncomment the following #define if you are on a system
   supporting the HOME environment variable.
-  It enables tidy to find config files named ~/.tidyrc if 
+  It enables tidy to find config files named ~/.tidyrc if
   the HTML_TIDY environment variable is not set.
 */
 /* #define TIDY_USER_CONFIG_FILE "~/.tidyrc" */
 
 /*
   Uncomment the following #define if your
-  system supports the call getpwnam(). 
+  system supports the call getpwnam().
   E.g. Unix and Linux.
 
-  It enables tidy to find files named 
+  It enables tidy to find files named
   ~your/foo for use in the HTML_TIDY environment
   variable or CONFIG_FILE or USER_CONFIGFILE or
   on the command line: -config ~joebob/tidy.cfg
@@ -98,7 +98,7 @@ extern "C" {
 #endif
 
 /* Convenience defines for BSD like platforms */
- 
+
 #if defined(__FreeBSD__)
 #define BSD_BASED_OS
 #ifndef PLATFORM_NAME
@@ -138,7 +138,7 @@ extern "C" {
 #endif
 
 /* Convenience defines for Windows platforms */
- 
+
 #if defined(WINDOWS) || defined(_WIN32)
 
 #define WINDOWS_OS
@@ -172,7 +172,7 @@ extern "C" {
 #endif
 
 /* Convenience defines for Linux platforms */
- 
+
 #if defined(linux) && defined(__alpha__)
 /* Linux on Alpha - gcc compiler */
 #define LINUX_OS
@@ -225,7 +225,7 @@ extern "C" {
 #endif
 
 /* Convenience defines for Solaris platforms */
- 
+
 #if defined(sun)
 #define SOLARIS_OS
 #ifndef PLATFORM_NAME
@@ -385,10 +385,10 @@ extern "C" {
   If your platform doesn't support <utime.h> and the
   utime() function, or <sys/futime> and the futime()
   function then set PRESERVE_FILE_TIMES to 0.
-  
+
   If your platform doesn't support <sys/utime.h> and the
   futime() function, then set HAS_FUTIME to 0.
-  
+
   If your platform supports <utime.h> and the
   utime() function requires the file to be
   closed first, then set UTIME_NEEDS_CLOSED_FILE to 1.
@@ -427,7 +427,7 @@ extern "C" {
 #endif
 
 #if defined(MAC_OS_X) || (!defined(MAC_OS_CLASSIC) && !defined(__MSL__))
-#include <sys/types.h> 
+#include <sys/types.h>
 #include <sys/stat.h>
 #else
 #include <stat.h>
@@ -442,7 +442,7 @@ extern "C" {
 /*
   MS Windows needs _ prefix for Unix file functions.
   Not required by Metrowerks Standard Library (MSL).
-  
+
   Tidy uses following for preserving the last modified time.
 
   WINDOWS automatically set by Win16 compilers.
@@ -463,7 +463,7 @@ extern "C" {
 /*
   MS Windows needs _ prefix for Unix file functions.
   Not required by Metrowerks Standard Library (MSL).
-  
+
   WINDOWS automatically set by Win16 compilers.
   _WIN32 automatically set by Win32 compilers.
 */
@@ -497,9 +497,9 @@ extern "C" {
 
 #if (defined(_USRDLL) || defined(_WINDLL) || defined(BUILD_SHARED_LIB)) && !defined(TIDY_EXPORT) && !defined(TIDY_STATIC)
 #ifdef BUILDING_SHARED_LIB
-#define TIDY_EXPORT __declspec( dllexport ) 
+#define TIDY_EXPORT __declspec( dllexport )
 #else
-#define TIDY_EXPORT __declspec( dllimport ) 
+#define TIDY_EXPORT __declspec( dllimport )
 #endif
 #else
 #define TIDY_EXPORT extern
@@ -530,7 +530,7 @@ typedef unsigned long ulong;
 #endif
 
 /*
-With GCC 4,  __attribute__ ((visibility("default"))) can be used along compiling with tidylib 
+With GCC 4,  __attribute__ ((visibility("default"))) can be used along compiling with tidylib
 with "-fvisibility=hidden". See http://gcc.gnu.org/wiki/Visibility and build/gmake/Makefile.
 */
 /*
@@ -540,7 +540,7 @@ with "-fvisibility=hidden". See http://gcc.gnu.org/wiki/Visibility and build/gma
 */
 
 #ifndef TIDY_EXPORT /* Define it away for most builds */
-#define TIDY_EXPORT 
+#define TIDY_EXPORT
 #endif
 
 #ifndef TIDY_STRUCT
@@ -596,7 +596,7 @@ typedef enum
    yes
 } Bool;
 
-/* for NULL pointers 
+/* for NULL pointers
 #define null ((const void*)0)
 extern void* null;
 */

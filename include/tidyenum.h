@@ -396,6 +396,8 @@ typedef enum
   TidyTag_NOLAYER,  /**< NOLAYER */
   TidyTag_NOSAVE,   /**< NOSAVE */
   TidyTag_NOSCRIPT, /**< NOSCRIPT */
+  TidyTag_NOINDEX,  /**< NOINDEX */
+  TidyTag_INDEX,    /**< INDEX */
   TidyTag_OBJECT,   /**< OBJECT */
   TidyTag_OL,       /**< OL */
   TidyTag_OPTGROUP, /**< OPTGROUP */
@@ -445,6 +447,7 @@ typedef enum
   TidyTag_NEXTID,   /**< NEXTID */
 
   TidyTag_ARTICLE,
+  TidyTag_AUTHOR,
   TidyTag_ASIDE,
   TidyTag_AUDIO,
   TidyTag_BDI,

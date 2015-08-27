@@ -82,7 +82,9 @@ static CheckAttribs CheckHTML;
 #define VERS_ELEM_META       (HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50)
 #define VERS_ELEM_NEXTID     (HT20|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx)
 #define VERS_ELEM_NOFRAMES   (xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx)
+#define VERS_ELEM_NOINDEX    (xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50)
 #define VERS_ELEM_NOSCRIPT   (xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50)
+#define VERS_ELEM_INDEX      (xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50)
 #define VERS_ELEM_OBJECT     (xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50)
 #define VERS_ELEM_OL         (HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50)
 #define VERS_ELEM_OPTGROUP   (xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50)
@@ -127,6 +129,7 @@ static CheckAttribs CheckHTML;
 #define VERS_ELEM_XMP        (HT20|HT32|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx)
 
 #define VERS_ELEM_ARTICLE    (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
+#define VERS_ELEM_AUTHOR     (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_ASIDE      (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_AUDIO      (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_BDI        (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
@@ -215,7 +218,7 @@ static Dict tag_defs[] =
   { TidyTag_HR,         "hr",         VERS_ELEM_HR,         &TY_(W3CAttrsFor_HR)[0],         (CM_BLOCK|CM_EMPTY),                           TY_(ParseEmpty),    NULL           },
   { TidyTag_HTML,       "html",       VERS_ELEM_HTML,       &TY_(W3CAttrsFor_HTML)[0],       (CM_HTML|CM_OPT|CM_OMITST),                    TY_(ParseHTML),     CheckHTML      },
   { TidyTag_I,          "i",          VERS_ELEM_I,          &TY_(W3CAttrsFor_I)[0],          (CM_INLINE),                                   TY_(ParseInline),   NULL           },
-  { TidyTag_IFRAME,     "iframe",     VERS_ELEM_IFRAME,     &TY_(W3CAttrsFor_IFRAME)[0],     (CM_INLINE),                                   TY_(ParseBlock),    NULL           },
+  { TidyTag_IFRAME,     "iframe",     VERS_ELEM_IFRAME,     &TY_(W3CAttrsFor_IFRAME)[0],     (CM_INLINE|CM_BLOCK),                          TY_(ParseBlock),    NULL           },
   { TidyTag_IMG,        "img",        VERS_ELEM_IMG,        &TY_(W3CAttrsFor_IMG)[0],        (CM_INLINE|CM_IMG|CM_EMPTY),                   TY_(ParseEmpty),    CheckIMG       },
   { TidyTag_INPUT,      "input",      VERS_ELEM_INPUT,      &TY_(W3CAttrsFor_INPUT)[0],      (CM_INLINE|CM_IMG|CM_EMPTY),                   TY_(ParseEmpty),    NULL           },
   { TidyTag_INS,        "ins",        VERS_ELEM_INS,        &TY_(W3CAttrsFor_INS)[0],        (CM_INLINE|CM_BLOCK|CM_MIXED),                 TY_(ParseInline),   NULL           },
@@ -232,6 +235,8 @@ static Dict tag_defs[] =
   { TidyTag_META,       "meta",       VERS_ELEM_META,       &TY_(W3CAttrsFor_META)[0],       (CM_HEAD|CM_BLOCK|CM_EMPTY),                   TY_(ParseEmpty),    NULL           },
   { TidyTag_NOFRAMES,   "noframes",   VERS_ELEM_NOFRAMES,   &TY_(W3CAttrsFor_NOFRAMES)[0],   (CM_BLOCK|CM_FRAMES),                          TY_(ParseNoFrames), NULL           },
   { TidyTag_NOSCRIPT,   "noscript",   VERS_ELEM_NOSCRIPT,   &TY_(W3CAttrsFor_NOSCRIPT)[0],   (CM_HEAD|CM_BLOCK|CM_INLINE|CM_MIXED),         TY_(ParseBlock),    NULL           },
+  { TidyTag_NOINDEX,    "noindex",    VERS_ELEM_NOINDEX,    NULL,                            (CM_HEAD|CM_BLOCK|CM_INLINE|CM_MIXED),         TY_(ParseBlock),    NULL           },
+  { TidyTag_INDEX,      "index",      VERS_ELEM_INDEX,      NULL,                            (CM_HEAD|CM_BLOCK|CM_INLINE|CM_MIXED),         TY_(ParseBlock),    NULL           },
   { TidyTag_OBJECT,     "object",     VERS_ELEM_OBJECT,     &TY_(W3CAttrsFor_OBJECT)[0],     (CM_OBJECT|CM_HEAD|CM_IMG|CM_INLINE|CM_PARAM), TY_(ParseBlock),    NULL           },
   { TidyTag_OL,         "ol",         VERS_ELEM_OL,         &TY_(W3CAttrsFor_OL)[0],         (CM_BLOCK),                                    TY_(ParseList),     NULL           },
   { TidyTag_OPTGROUP,   "optgroup",   VERS_ELEM_OPTGROUP,   &TY_(W3CAttrsFor_OPTGROUP)[0],   (CM_FIELD|CM_OPT),                             TY_(ParseOptGroup), NULL           },
@@ -295,6 +300,7 @@ static Dict tag_defs[] =
 
   /* HTML5 */
   { TidyTag_ARTICLE,     "article",      VERS_ELEM_ARTICLE,     &TY_(W3CAttrsFor_ARTICLE)[0],     (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
+  { TidyTag_AUTHOR,      "author",       VERS_ELEM_AUTHOR,      NULL,                             (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
   { TidyTag_ASIDE,       "aside",        VERS_ELEM_ASIDE,       &TY_(W3CAttrsFor_ASIDE)[0],       (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
   { TidyTag_AUDIO,       "audio",        VERS_ELEM_AUDIO,       &TY_(W3CAttrsFor_AUDIO)[0],       (CM_BLOCK|CM_INLINE),          TY_(ParseBlock),     NULL           },
   { TidyTag_BDI,         "bdi",          VERS_ELEM_BDI,         &TY_(W3CAttrsFor_BDI)[0],         (CM_BLOCK),                    TY_(ParseBlock),     NULL           },

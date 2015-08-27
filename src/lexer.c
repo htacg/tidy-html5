@@ -2008,9 +2008,13 @@ static Node *GetCDATA( TidyDocImpl* doc, Node *container )
             else if (c == '/')
             {
                 TY_(AddCharToLexer)(lexer, c);
-
-                c = TY_(ReadChar)(doc->docIn);
-                
+                /*incorrect tag end <script> </ script> */
+                /*incorrect tag end </![cdata */
+                while ((c = TY_(ReadChar)(doc->docIn)) &&
+                    (c != EndOfStream) &&
+                    (TY_(IsWhite)(c) || c == '!')){
+                    lexer->lexsize -= 2;
+                }
                 if (!TY_(IsLetter)(c))
                 {
                     TY_(UngetChar)(c, doc->docIn);
@@ -2505,6 +2509,13 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
 
                 if (c == '?')
                 {
+                    /*removes incorect <?> tags*/
+                    c = TY_(ReadChar)(doc->docIn);
+                    if (c == '>'){
+                        lexer->lexsize -= 4;
+                        lexer->state = LEX_CONTENT;
+                        continue;
+                    }
                     lexer->lexsize -= 2;
                     lexer->state = LEX_PROCINSTR;
                     lexer->txtend = lexer->lexsize;

@@ -2625,6 +2625,18 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 /* this doesn't apply to empty elements */
                 /* nor to preformatted content that needs escaping */
 
+
+                /*\
+                 * Issue #230: Need to KEEP this user newline character in certain 
+                 * circumstances, certainly for a <pre> startag...
+                 * Maybe this needs to be extended to other 'text' content nodes,
+                 * like style, script, ... if desired, required...
+                \*/
+                if ( nodeIsPRE(lexer->token) || nodeIsSCRIPT(lexer->token) || nodeIsSTYLE(lexer->token))
+                {
+                    mode = Preformatted;
+                }
+
                 if ((mode != Preformatted && ExpectsContent(lexer->token))
                     || nodeIsBR(lexer->token) || nodeIsHR(lexer->token))
                 {

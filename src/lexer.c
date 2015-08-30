@@ -983,7 +983,8 @@ static void ParseEntity( TidyDocImpl* doc, GetTokenMode mode )
     if ( TY_(tmbstrcmp)(lexer->lexbuf+start, "&apos") == 0
          && !cfgBool(doc, TidyXmlOut)
          && !lexer->isvoyager
-         && !cfgBool(doc, TidyXhtmlOut) )
+         && !cfgBool(doc, TidyXhtmlOut)
+         && !(TY_(HTMLVersion)(doc) == HT50) ) /* Issue #239 - no warning if in HTML5++ mode */
         TY_(ReportEntityError)( doc, APOS_UNDEFINED, lexer->lexbuf+start, 39 );
 
     if (( mode == OtherNamespace ) && ( c == ';' ))
@@ -2624,6 +2625,16 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 /* special check needed for CRLF sequence */
                 /* this doesn't apply to empty elements */
                 /* nor to preformatted content that needs escaping */
+                /*\
+                 * Issue #230: Need to KEEP this user newline character in certain 
+                 * circumstances, certainly for <pre>, <script>, <style>...
+                 * Any others?
+                 * Issue #238: maybe **ONLY** for <pre>
+                \*/
+                if ( nodeIsPRE(lexer->token) )
+                {
+                    mode = Preformatted;
+                }
 
                 if ((mode != Preformatted && ExpectsContent(lexer->token))
                     || nodeIsBR(lexer->token) || nodeIsHR(lexer->token))

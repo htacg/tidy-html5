@@ -16,7 +16,7 @@
 @REM call alltest1 ..\bin\tidy.exe .\tmp
 @REM ########################################################################
 @REM This is the location of the cmake build output using the MSVC Generator
-@set TMPEXE=..\build\cmake\Release\tidy5.exe
+@set TMPEXE=..\build\cmake\Release\tidy.exe
 @REM === some other test EXE I can use for compare ===
 @REM set TMPEXE=C:\Projects\tidy\tidy-cvs\build\msvc\Release\tidy.exe
 @REM set TMPEXE=C:\MDOS\tidydev.exe

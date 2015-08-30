@@ -748,9 +748,10 @@ static const TidyOptionDoc option_docs[] =
    "successive tab stops. It is used to map tabs to spaces when reading the "
    "input. "
   },
-  {TidyVertSpace,
-   "This option specifies if Tidy should add some empty lines for "
-   "readability. "
+  {TidyVertSpace,   /* Issue #228 - changed to tri-state */
+   "This option specifies if Tidy should add some extra empty lines for "
+   "readability. Default is 'no'. If set to 'auto', will eliminate nearly "
+   "all newline chars."
   },
   {TidyWrapLen,
    "This option specifies the right margin Tidy uses for line wrapping. Tidy "

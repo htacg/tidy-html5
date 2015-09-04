@@ -74,6 +74,10 @@ However, if you seek **release** code, then do `git branch -r`, and choose one o
 
 This will always be the latest release branch. Important `bug` fixes thought relevant to this release, pushed back, may bump the library version to X.even.1, ..., etc, but will be remain known as `X.even`...
 
+Some more details of the `Tidy Version` can be found in [VERSION.md](VERSION.md).
+
+Concerning the `Tidy Code Style`, some notes can be found in [CODESTYLE.md](CODESTYLE.md).
+
 ## History
 
 This repository should be considered canonical for HTML Tidy as of 2015-January-15.

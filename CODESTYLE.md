@@ -4,7 +4,7 @@ The source code of **libTidy**, and console app **tidy**, follow the preferences
 
 Developers adding code to **Tidy!** are urged to try to follow the existing code style. Code that does not follow these conventions may be accepted, but may be modified as time goes by to best fit the `Tidy Style`.
 
-There has been a suggestion of using available utilities to make the style consistent, like [Uncrusty](https://github/bengardener/uncrusty) - see issue #245 and maybe others...
+There has been a suggestion of using available utilities to make the style consistent, like [Uncrusty](https://github/bengardener/uncrusty) - see [issue #245](https://github.com/htacg/tidy-html5/issues/245), and maybe others...
 
 Others have suggested the [AStyle](http://astyle.sourceforge.net/) formatting program with say  '-taOHUKk3 -M8' arguments, to conform, but there are a few bugs in AStyle.
 

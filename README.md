@@ -54,9 +54,15 @@ make test
 make install
 ```
 
-## Prebuilt Binaries
+## Important Links
 
-An attempt is being made to publish pre-built binaries to http://www.htacg.org/binaries - This is still a work in progress, but getting there..
+ - site: http://www.html-tidy.org/
+ - source: https://github.com/htacg/tidy-html5
+ - binaries: http://www.htacg.org/binaries/
+ - bugs: https://github.com/htacg/tidy-html5/issues
+ - list: https://lists.w3.org/Archives/Public/html-tidy/
+ - api: http://www.htacg.org/tidy-html5/tidylib_api/
+ - quickref: http://www.htacg.org/tidy-html5/quickref.html
 
 ## Development
 

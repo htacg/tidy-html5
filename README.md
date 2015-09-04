@@ -78,6 +78,8 @@ Some more details of the `Tidy Version` can be found in [VERSION.md](VERSION.md)
 
 Concerning the `Tidy Code Style`, some notes can be found in [CODESTYLE.md](CODESTYLE.md).
 
+If you want to contribute to Tidy, then read [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## History
 
 This repository should be considered canonical for HTML Tidy as of 2015-January-15.

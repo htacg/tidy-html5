@@ -8,4 +8,6 @@ server/*
 test/*
 *.bak
 *~
+temp*
+*.old
 

@@ -11,11 +11,15 @@ fi
 echo "$BN: Read file $TMPFIL"
 ls -l $TMPFIL
 
-# while read LINE; do
-#    TMPVER="$LINE"
-#done <$TMPFIL
+TMPCNT=0
+while read LINE; do
+    if [ "$TMPCNT" = "0" ]; then
+        TMPVER="$LINE"
+    fi
+    TMPCNT=`expr $TMPCNT + 1`
+done <$TMPFIL
 #TMPVER=$(<$TMPFIL)
-TMPVER=$(cat $TMPFIL)
+#TMPVER=$(cat $TMPFIL)
 
 echo "$BN: Version $TMPVER"
 
@@ -28,20 +32,22 @@ ask()
 }
 
 
-TMPBIN="$HOME/projects/html_tidy/tidy-bin"
+TMPBIN="$HOME/projects/html_tidy/binaries"
 TMPBINS="$TMPBIN/binaries"
 if [ ! -d "$TMPBINS" ]; then
     echo "$BN: Can NOT location '$TMPBINS'! *** FIX ME ***"
     exit 1
 fi
 TMPDD="$TMPBINS/tidy-$TMPVER"
-if [ ! -d "$TMPDD" ]; then 
     echo ""
+if [ -d "$TMPDD" ]; then 
+    echo "$BN: Destination is $TMPDD"
+else
     echo "$BN: This is a NEW installation in $TMPDD"
 fi
 
-TMPFIL1="tidy5-$TMPVER-$TMPWV.deb"
-TMPFIL2="tidy5-$TMPVER-$TMPWV.rpm"
+TMPFIL1="tidy-$TMPVER-$TMPWV.deb"
+TMPFIL2="tidy-$TMPVER-$TMPWV.rpm"
 if [ ! -f "$TMPFIL1" ]; then
     echo "$BN: $TMPFIL1 does not exits"
     echo "$BN: Have you run '[sudo] make package'?"
@@ -56,6 +62,11 @@ echo ""
 echo "$BN: Will publish..."
 echo "$TMPFIL1"
 echo "$TMPFIL2"
+if [ ! -d "$TMPDD" ]; then 
+    echo "$BN: Will create dir $TMPDD"
+else
+    echo "$BN: Destination $TMPDD"
+fi
 echo ""
 echo "$BN: *** CONTINUE? ***"
 ask

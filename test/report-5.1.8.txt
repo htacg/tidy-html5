@@ -52,8 +52,18 @@ so are deemed all acceptable changes.
 
 Hence 'testbase' has been updated to this version.
 
+Oops, seems thre other files needed to be updated! Not 
+sure why they were missed in the first 'testbase' update.
+
+They were -
+
+testbase\msg_431895.txt
+testbase\msg_676205.txt
+testbase\out_676205.html
+
 Below is a FULL `diff -u` of the changes for further 
-reviewing (some non-utf-8 chars deleted) -
+reviewing (some non-utf-8 chars deleted), plus the 
+additional diff -
 
 =========================================================
 diff -u tempbase/msg_1053626.txt testbase/msg_1053626.txt
@@ -706,6 +716,65 @@ diff -u tempbase/out_676205.html testbase/out_676205.html
  <body>
 -  <img src="%3E%3C/body%3E%3C/html%3E" />
 +  <img src="%3E%20%3C/body%3E%20%3C/html%3E" />
+ </body>
+ </html>
+=======================================================
+diff -u testbase\msg_431895.txt temp-5\msg_431895.txt
+--- testbase\msg_431895.txt	Wed Sep 09 18:15:03 2015
++++ temp-5\msg_431895.txt	Wed Sep 09 18:27:24 2015
+@@ -1,2 +1,2 @@
+-./input/in_431895.html:17:14: Warning: adjacent hyphens within comment
+-./input/in_431895.html:32:1: Warning: trimming empty <p>
++input\in_431895.html:17:14: Warning: adjacent hyphens within comment
++input\in_431895.html:32:1: Warning: trimming empty <p>
+diff -u testbase\msg_676205.txt temp-5\msg_676205.txt
+--- testbase\msg_676205.txt	Wed Sep 09 18:15:03 2015
++++ temp-5\msg_676205.txt	Wed Sep 09 18:27:55 2015
+@@ -1,12 +1,12 @@
+-line 3 column 1 - Warning: missing <!DOCTYPE> declaration
+-line 8 column 3 - Warning: <img> discarding newline in URI reference
+-line 8 column 3 - Warning: <img> discarding newline in URI reference
+-line 8 column 3 - Warning: <img> discarding newline in URI reference
+-line 11 column 1 - Warning: <img> end of file while parsing attributes
+-line 8 column 3 - Warning: <img> escaping malformed URI reference
+-line 8 column 3 - Warning: <img> lacks "alt" attribute
+-Info: Document content looks like XHTML5
+-7 warnings, 0 errors were found!
++line 11 column 1 - Warning: <img> discarding newline in URI reference
++line 11 column 1 - Warning: <img> discarding newline in URI reference
++line 11 column 1 - Warning: <img> discarding newline in URI reference
++line 14 column 1 - Warning: <img> end of file while parsing attributes
++line 11 column 1 - Warning: <img> escaping malformed URI reference
++line 11 column 1 - Warning: <img> lacks "alt" attribute
++Info: Doctype given is "-//W3C//DTD XHTML 1.0 Transitional//EN"
++Info: Document content looks like XHTML 1.0 Transitional
++6 warnings, 0 errors were found!
+ 
+ URIs must be properly escaped, they must not contain unescaped
+ characters below U+0021 including the space character and not
+Binary files testbase\out_661606.html and temp-5\out_661606.html differ
+diff -u testbase\out_676205.html temp-5\out_676205.html
+--- testbase\out_676205.html	Wed Sep 09 18:15:04 2015
++++ temp-5\out_676205.html	Wed Sep 09 18:27:55 2015
+@@ -1,11 +1,14 @@
+-<!-- XHTML namespace declaration required to reproduce bug.
+--->
+-<!DOCTYPE html>
+-<html xmlns="http://www.w3.org/1999/xhtml">
++<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
++    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
++<html xmlns="http://www.w3.org/1999/xhtml"
++      xml:lang="en"
++      lang="en">
+ <head>
+-  <title>[676205] &lt;img src="&gt; crashes Tidy</title>
++  <title>[ 676205 ] &lt;img src="&gt; crashes Tidy</title>
++  <meta http-equiv="Content-Type"
++        content="text/html; charset=iso-8859-1" />
+ </head>
+ <body>
+-  <img src="%3E%20%3C/body%3E%20%3C/html%3E" />
++  <img src="%3E%3C/body%3E%3C/html%3E" />
  </body>
  </html>
 =========================================================

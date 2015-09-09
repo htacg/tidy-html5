@@ -3,8 +3,12 @@ line 19 column 5 - Warning: missing <tr>
 line 29 column 11 - Error: discarding unexpected </form>
 line 29 column 18 - Error: discarding unexpected </td>
 line 25 column 3 - Warning: missing </form>
+line 6 column 3 - Warning: The summary attribute on the <table> element is obsolete in HTML5
+line 13 column 3 - Warning: The summary attribute on the <table> element is obsolete in HTML5
+line 18 column 5 - Warning: The summary attribute on the <table> element is obsolete in HTML5
+line 26 column 5 - Warning: The summary attribute on the <table> element is obsolete in HTML5
 Info: Document content looks like HTML5
-3 warnings, 2 errors were found!
+7 warnings, 2 errors were found!
 
 You may need to move one or both of the <form> and </form>
 tags. HTML elements should be properly nested and form elements

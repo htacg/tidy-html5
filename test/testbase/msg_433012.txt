@@ -503,9 +503,7 @@ line 784 column 17 - Warning: unescaped & or unknown entity "&rsaquo"
 line 784 column 34 - Warning: unescaped & or unknown entity "&rsaquo"
 line 790 column 17 - Warning: unescaped & or unknown entity "&euro"
 line 790 column 32 - Warning: unescaped & or unknown entity "&euro"
-line 798 column 2 - Warning: named entity &apos; only defined in XML/XHTML
 line 798 column 17 - Warning: entity "&apos" doesn't end in ';'
-line 798 column 27 - Warning: named entity &apos; only defined in XML/XHTML
 line 798 column 32 - Warning: entity "&apos" doesn't end in ';'
 line 801 column 17 - Warning: unescaped & or unknown entity "&foo"
 line 801 column 31 - Warning: unescaped & or unknown entity "&foo"
@@ -608,7 +606,7 @@ line 300 column 2 - Warning: <a> escaping malformed URI reference
 line 695 column 2 - Warning: <a> escaping malformed URI reference
 line 698 column 2 - Warning: <a> escaping malformed URI reference
 Info: Document content looks like HTML5
-609 warnings, 0 errors were found!
+607 warnings, 0 errors were found!
 
 URIs must be properly escaped, they must not contain unescaped
 characters below U+0021 including the space character and not

@@ -1,7 +1,6 @@
 line 1 column 1 - Warning: missing <!DOCTYPE> declaration
-line 6 column 1 - Warning: nested q elements, possible typo.
 Info: Document content looks like HTML5
-2 warnings, 0 errors were found!
+1 warning, 0 errors were found!
 
 About HTML Tidy: https://github.com/htacg/tidy-html5
 Bug reports and comments: https://github.com/htacg/tidy-html5/issues

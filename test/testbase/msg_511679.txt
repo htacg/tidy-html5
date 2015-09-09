@@ -1,8 +1,9 @@
 line 1 column 1 - Warning: missing <!DOCTYPE> declaration
 line 2 column 1 - Warning: inserting implicit <body>
 line 4 column 7 - Warning: missing </pre> before </td>
+line 2 column 1 - Warning: The summary attribute on the <table> element is obsolete in HTML5
 Info: Document content looks like HTML5
-3 warnings, 0 errors were found!
+4 warnings, 0 errors were found!
 
 About HTML Tidy: https://github.com/htacg/tidy-html5
 Bug reports and comments: https://github.com/htacg/tidy-html5/issues

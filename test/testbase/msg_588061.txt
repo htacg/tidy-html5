@@ -7,7 +7,6 @@ line 20 column 9 - Warning: inserting implicit <strong>
 line 20 column 9 - Warning: missing </strong> before <h1>
 line 23 column 1 - Warning: inserting implicit <strong>
 line 25 column 96 - Warning: unescaped & or unknown entity "&body"
-line 43 column 128 - Warning: unescaped & which should be written as &amp;
 line 23 column 1 - Warning: replacing unexpected font by </font>
 line 66 column 104 - Warning: unescaped & or unknown entity "&city"
 line 66 column 5 - Warning: missing </strong> before <h2>
@@ -26,11 +25,8 @@ line 134 column 236 - Warning: unescaped & or unknown entity "&body"
 line 138 column 237 - Warning: unescaped & or unknown entity "&body"
 line 142 column 237 - Warning: unescaped & or unknown entity "&body"
 line 168 column 280 - Warning: unescaped & or unknown entity "&body"
-line 188 column 76 - Warning: unescaped & which should be written as &amp;
 line 196 column 153 - Warning: discarding unexpected </a>
 line 200 column 339 - Warning: unescaped & or unknown entity "&body"
-line 216 column 90 - Warning: unescaped & which should be written as &amp;
-line 240 column 67 - Warning: unescaped & which should be written as &amp;
 line 248 column 281 - Warning: unescaped & or unknown entity "&body"
 line 300 column 177 - Warning: discarding unexpected </a>
 line 314 column 1 - Warning: inserting implicit <strong>
@@ -101,7 +97,7 @@ line 168 column 131 - Warning: <a> cannot copy name attribute to id
 line 200 column 176 - Warning: <a> cannot copy name attribute to id
 line 248 column 94 - Warning: <a> cannot copy name attribute to id
 Info: Document content looks like HTML5
-100 warnings, 0 errors were found!
+96 warnings, 0 errors were found!
 
 URIs must be properly escaped, they must not contain unescaped
 characters below U+0021 including the space character and not

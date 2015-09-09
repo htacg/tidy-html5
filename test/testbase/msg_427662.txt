@@ -1,8 +1,9 @@
 line 1 column 1 - Warning: missing <!DOCTYPE> declaration
 line 7 column 1 - Warning: <a> isn't allowed in <table> elements
 line 6 column 1 - Info: <table> previously mentioned
+line 6 column 1 - Warning: The summary attribute on the <table> element is obsolete in HTML5
 Info: Document content looks like HTML5
-2 warnings, 0 errors were found!
+3 warnings, 0 errors were found!
 
 You are recommended to use CSS to specify the font and
 properties such as its size and color. This will reduce

@@ -2312,6 +2312,15 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
                           (TY_(nodeHasCM)(node, CM_HEAD) && !nodeIsTITLE(node)) )
                     TY_(PFlushLineSmart)( doc, contentIndent );
             }
+            else if ( ShouldIndent(doc, node) )
+            {
+                /*\
+                 * Issue #180 - If the tag was NOT printed due to the -omit option,
+                 * then reduce the bumped indent under the same ShouldIndent(doc, node) 
+                 * conditions that caused the indent to be bumped.
+                \*/
+                contentIndent -= spaces;
+            }
 
             last = NULL;
             for ( content = node->content; content; content = content->next )

@@ -14,6 +14,7 @@ REM    $Revision: 1.1 $
 
 @if "%1." == "." goto USE
 @if "%2." == "." goto USE
+@if "%TMPTEST%x" == "x" goto USE
 
 REM check for input file
 @if NOT EXIST testcases.txt goto Err0
@@ -32,10 +33,32 @@ set TIDYOUT=%2
 @md %TIDYOUT%
 @if NOT EXIST %TIDYOUT%\nul goto Err2
 :GOTDIR
+
+@set TMPCNT=0
+@for /F "tokens=1*" %%i in (testcases.txt) do @set /A TMPCNT+=1
+@echo =============================== > %TMPTEST%
+@echo Date %DATE% %TIME% >> %TMPTEST%
+@echo Tidy EXE %TIDY%, version >> %TMPTEST%
+@%TIDY% -v >> %TMPTEST%
+@echo Input list of %TMPCNT% tests from 'testcases.txt' file >> %TMPTEST%
+@echo Outut will be to the '%TIDYOUT%' folder >> %TMPTEST%
+@echo =============================== >> %TMPTEST%
+
+@echo Doing %TMPCNT% tests from 'testcases.txt' file...
 @set ERRTESTS=
-for /F "tokens=1*" %%i in (testcases.txt) do call onetest.cmd %%i %%j
-@if "%ERRTESTS%." == "." goto END
+@for /F "tokens=1*" %%i in (testcases.txt) do @call onetest.cmd %%i %%j
+@echo =============================== >> %TMPTEST%
+@if "%ERRTESTS%." == "." goto DONE
 @echo ERROR TESTS [%ERRTESTS%] ...
+@echo ERROR TESTS [%ERRTESTS%] ... >> %TMPTEST%
+:DONE
+@echo End %DATE% %TIME% >> %TMPTEST%
+@echo =============================== >> %TMPTEST%
+@echo.
+@echo See %TMPTEST% file for list of tests done...
+@echo And compare folders 'diff -u testbase %TIDYOUT% ^> temp.diff'
+@echo and check any differences carefully... If acceptable update 'testbase' accordingly...
+@echo.
 goto END
 
 :ERR0
@@ -56,6 +79,7 @@ goto END
 
 :USE
 @echo	Usage of ALLTEST1.CMD .........................................
+@echo   Env TMPTEST must be set to a log file name.
 @echo	AllTest1 tidy.exe Out_Folder
 @echo	tidy.exe - This is the Tidy.exe you want to use for the test.
 @echo	Out_Folder  - This is the FOLDER where you want the results put.

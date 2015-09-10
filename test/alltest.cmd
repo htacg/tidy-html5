@@ -1,8 +1,9 @@
 @setlocal
 
 @REM alltest.cmd - execute all test cases
+@REM It runs 'alltest1.cmd', which uses 'onetest.cmd'
 @REM
-@REM (c) 1998-2014 (W3C) MIT, ERCIM, Keio University
+@REM (c) 1998-2015 (W3C) MIT, ERCIM, Keio University
 @REM See include/tidy.h for the copyright notice.
 @REM
 @REM <URL:http://www.html-tidy.org/>
@@ -23,7 +24,8 @@
 @REM ########################################################################
 @if NOT EXIST %TMPEXE% goto NOEXE
 
-@set TMPTEST=temptests.txt
+@REM Set an output file - used in alltest1.cmd and onetest.cmd
+@set TMPTEST=temptest.txt
 @if EXIST %TMPTEST% @del %TMPTEST%
 
 @call alltest1 %TMPEXE% temp-5

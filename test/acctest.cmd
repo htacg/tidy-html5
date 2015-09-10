@@ -5,11 +5,11 @@
 @REM USER VARIABLES
 @REM ##############
 @REM set executable to be used
-@set TIDY=..\build\cmake\Release\tidy5.exe
+@set TIDY=..\build\cmake\Release\tidy.exe
 @REM set INPUT folder
 @set TIDYINPUT=accessTest
 @REM set OUTPUT folder
-@set TIDYOUT=tmp
+@set TIDYOUT=temp-acc
 @REM set input test list file
 @set TIDYIN=accesscases.txt
 @set TIDYLOG=tempacc.txt

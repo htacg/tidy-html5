@@ -8,7 +8,7 @@
 @REM ###           (for MS compiler users)                ###
 @REM ########################################################
 @REM This is the location of the cmake build output using the MSVC Generator
-@set TMPEXE=..\build\cmake\Release\tidy5.exe
+@set TMPEXE=..\build\cmake\Release\tidy.exe
 @if NOT EXIST %TMPEXE% goto NOEXE
 
 @set TMPTEST=temptests.txt

@@ -1,5 +1,4 @@
 @echo off
-@set TMPTEST=temptest.txt
 REM onetest.cmd - execute a single test case
 REM
 REM (c) 1998-2006 (W3C) MIT, ERCIM, Keio University
@@ -13,6 +12,8 @@ REM
 @if "%TIDYOUT%." == "." goto Err3
 @if NOT EXIST %TIDYOUT%\nul goto Err4
 @if NOT EXIST input\nul goto Err5
+@if "%TMPTEST%x" == "x" goto Err10
+
 @if "%1x" == "x" goto Err8
 @if "%2x" == "x" goto Err9
 
@@ -46,8 +47,8 @@ if exist %TIDYFILE% del %TIDYFILE%
 
 @%TIDY% -f %MSGFILE% -config %CFGFILE% %3 %4 %5 %6 %7 %8 %9 --tidy-mark no -o %TIDYFILE% %INFILE%
 @set STATUS=%ERRORLEVEL%
-@echo Testing %1, expect %EXPECTED%, got %STATUS%
-@echo Testing %1, expect %EXPECTED%, got %STATUS% >> %TMPTEST%
+@echo Testing %1, expect %EXPECTED%, got %STATUS%, msg %MSGFILE%
+@echo Testing %1, expect %EXPECTED%, got %STATUS%, msg %MSGFILE% >> %TMPTEST%
 
 @if %STATUS% EQU %EXPECTED% goto done
 @set ERRTESTS=%ERRTESTS% %TESTNO%
@@ -112,6 +113,11 @@ goto done
 @echo ERROR: No input test number given!
 :Err9
 @echo ERROR: No expected exit value given!
+@echo.
+@goto done
+
+:Err10
+@echo ERROR: TMPTEST not set in evironment!
 @echo.
 @goto done
 

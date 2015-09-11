@@ -1,6 +1,6 @@
 @setlocal
 
-@set TMPEXE=..\..\build\cmake\Release\tidy5.exe
+@set TMPEXE=..\..\build\cmake\Release\tidy.exe
 @if NOT EXIST %TMPEXE% goto NOEXE
 @set TMPINP=temphtml5.cfg
 @set TMPDIR=tempout

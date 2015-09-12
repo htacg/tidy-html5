@@ -1,4 +1,4 @@
-from ubuntu:14.04
+FROM ubuntu:14.04
 MAINTAINER Edward M. Vielmetti <edward.vielmetti@gmail.com>
 
 # install prerequisites

@@ -91,8 +91,8 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
     }
     if (lexer && lexer->token && (lexer->token->type == TextNode)) {
         if (show_attrs) {
-            uint len = node->end - node->start;
-            tmbstr cp = get_text_string( lexer, node );
+            uint len = node ? node->end - node->start : 0;
+            tmbstr cp = node ? get_text_string( lexer, node ) : "NULL";
             SPRTF("Returning %s TextNode [%s]%u %s\n", msg, cp, len,
                 lex ? "lexer" : "stream");
         } else {
@@ -102,14 +102,16 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
     } else {
         if (show_attrs) {
             AttVal* av;
-            tmbstr name = node->element ? node->element : "blank";
+            tmbstr name = node ? node->element ? node->element : "blank" : "NULL";
             SPRTF("Returning %s node <%s", msg, name);
-            for (av = node->attributes; av; av = av->next) {
-                name = av->attribute;
-                if (name) {
-                    SPRTF(" %s",name);
-                    if (av->value) {
-                        SPRTF("=\"%s\"", av->value);
+            if (node) {
+                for (av = node->attributes; av; av = av->next) {
+                    name = av->attribute;
+                    if (name) {
+                        SPRTF(" %s",name);
+                        if (av->value) {
+                            SPRTF("=\"%s\"", av->value);
+                        }
                     }
                 }
             }

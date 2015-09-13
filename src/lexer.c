@@ -133,7 +133,7 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
             SPRTF("> %s\n", lex ? "lexer" : "stream");
         } else {
             SPRTF("Returning %s node %p <%s>... %s\n", msg, node,
-                node->element ? node->element : "blank",
+                node ? node->element ? node->element : "blank" : "NULL",
                 lex ? "lexer" : "stream");
         }
     }

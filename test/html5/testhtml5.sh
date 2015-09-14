@@ -19,7 +19,7 @@ failed()
 	TMPCNT3=$((${TMPCNT3} + 1));
 }
 
-TMPEXE="../../build/cmake/tidy5"
+TMPEXE="../../build/cmake/tidy"
 [ -e ${TMPEXE} ] || noexe
 
 TMPINP=temphtml5.cfg

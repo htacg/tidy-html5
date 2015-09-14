@@ -20,7 +20,7 @@ TESTNO=$1
 TESTEXPECTED=$2
 ACCESSLEVEL=$3
 
-TIDY=../build/cmake/tidy5
+TIDY=../build/cmake/tidy
 INFILES=./accessTest/$1.*ml
 CFGFILE=./accessTest/cfg_$1.txt
 

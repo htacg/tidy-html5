@@ -925,6 +925,10 @@ static const TidyOptionDoc option_docs[] =
    "Note TidyTabSize controls converting input tabs to spaces. Set to zero "
    "to retain input tabs. "
   },
+  {TidySkipQuotes,
+   "This option specifies that Tidy should skip quotes, and comments "
+   "when parsing script data. "
+  },
   {N_TIDY_OPTIONS,
    NULL
   }

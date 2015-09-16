@@ -1947,6 +1947,73 @@ static Bool ExpectsContent(Node *node)
     return yes;
 }
 
+/*\
+ * Issue #65 - also see http://tidy.sf.net/issue/1642186
+ * Parser too gready over <script> blocks
+ *
+ * The idea is to scan the current lexer data, and
+ * return a Bool
+ * yes = we are in a javascript comment text, either type,
+ *       or are within quotes, either single or double
+ * no  = Not in any of the above.
+ *
+ * This is to avoid tidy finding tags in quoted or comment text.
+ *
+ * Controlled by option --skip-quotes yes|no, enum as
+ * TidySkipQuotes, off by default.
+\*/
+static Bool IsInQuotesorComment( Lexer * lexer )
+{
+    unsigned int i;
+    Bool inq, toeol, toec;
+    unsigned char prev, quot, c;
+    prev = quot = 0;
+    inq = toeol = toec = no;
+    for ( i = lexer->txtstart; i < lexer->lexsize; i++ )
+    {
+        c = lexer->lexbuf[i];
+        if ( toeol )
+        {
+            /* continue until END OF LINE */
+            if ( c == '\n' )
+            {
+                toeol = no;
+            }
+        }
+        else if ( toec )
+        {
+            /* continue until END OF COMMENT */
+            if ( ( c == '/' ) && ( prev == '*' ) )
+                toec = no;
+        }
+        else
+        {
+            if (( prev != '\\' ) && (( c == '"' ) || ( c == '\'')) )
+            {
+                if ( inq && ( c == quot ))
+                {
+                    inq = no;
+                }
+                else
+                {
+                    inq = yes;
+                    quot = c;   /* keep type of start quote - single or double */
+                }
+            }
+            else if ( !inq && ( c == '/' ) && (prev == '/') )
+            {
+                toeol = yes;   /* set in comment, until END OF LINE */
+            }
+            else if ( !inq && ( c == '*' ) && (prev == '/'))
+            {
+                toec = yes; /* set until END OF COMMENT */
+            }
+        }
+    prev = c;
+    }
+    return (inq | toeol | toec);
+}
+
 /*
   create a text node for the contents of
   a CDATA element like style or script
@@ -1971,6 +2038,7 @@ static Node *GetCDATA( TidyDocImpl* doc, Node *container )
     Bool matches = no;
     uint c;
     Bool hasSrc = TY_(AttrGetById)(container, TidyAttr_SRC) != NULL;
+    Bool skipquotes = cfgBool(doc, TidySkipQuotes); /* #65 - get CONFIG option */
 
     SetLexerLocus( doc, lexer );
     lexer->waswhite = no;
@@ -1990,6 +2058,13 @@ static Node *GetCDATA( TidyDocImpl* doc, Node *container )
                     isEmpty = no;
                 continue;
             }
+
+            /*\
+             *  Issue #65 - sf 1642186 - try to skip "...", '...', // ...\n, and
+             *  other C/C++ like comment blocks, if the option enabled 
+            \*/
+            if ( skipquotes && IsInQuotesorComment(lexer) )
+               continue;
 
             c = TY_(ReadChar)(doc->docIn);
 

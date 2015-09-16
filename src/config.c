@@ -321,6 +321,7 @@ static const TidyOptionImpl option_defs[] =
   { TidyMergeSpans,              MU, "merge-spans",                 IN, TidyAutoState,   ParseAutoBool,     autoBoolPicks   },
   { TidyAnchorAsName,            MU, "anchor-as-name",              BL, yes,             ParseBool,         boolPicks       },
   { TidyPPrintTabs,              PP, "indent-with-tabs",            BL, no,              ParseTabs,         boolPicks       }, /* 20150515 - Issue #108 */
+  { TidySkipQuotes,              MU, "skip-quotes",                 BL, no,              ParseBool,         boolPicks       }, /* 1642186 - Issue #65 */
   { N_TIDY_OPTIONS,              XX, NULL,                          XY, 0,               NULL,              NULL            }
 };
 

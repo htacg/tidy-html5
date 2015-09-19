@@ -86,7 +86,7 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
     int col  = ( doc->lexer ? doc->lexer->columns : 0 );
     SPRTF("R=%d C=%d: ", line, col );
     // DEBUG: Be able to set a TRAP on a SPECIFIC row,col
-    if ((line == 6) && (col == 33)) {
+    if ((line == 4) && (col == 1)) {
         check_me("Show_Node"); // just a debug trap
     }
     if (lexer && lexer->token && (lexer->token->type == TextNode)) {
@@ -1967,11 +1967,13 @@ static Bool IsInQuotesorComment( Lexer * lexer )
     unsigned int i;
     Bool inq, toeol, toec;
     unsigned char prev, quot, c;
+    tmbstr pnc;
     prev = quot = 0;
     inq = toeol = toec = no;
     for ( i = lexer->txtstart; i < lexer->lexsize; i++ )
     {
-        c = lexer->lexbuf[i];
+        pnc = &lexer->lexbuf[i];
+        c = *pnc;
         if ( toeol )
         {
             /* continue until END OF LINE */
@@ -1990,11 +1992,12 @@ static Bool IsInQuotesorComment( Lexer * lexer )
         {
             if (( prev != '\\' ) && (( c == '"' ) || ( c == '\'')) )
             {
+                /* deal with 'unescaped' quote chars " or ' */
                 if ( inq && ( c == quot ))
                 {
                     inq = no;
                 }
-                else
+                else if ( !inq ) /* 20150919: Oops no new 'quote' if already in a 'quote' */
                 {
                     inq = yes;
                     quot = c;   /* keep type of start quote - single or double */
@@ -2009,7 +2012,7 @@ static Bool IsInQuotesorComment( Lexer * lexer )
                 toec = yes; /* set until END OF COMMENT */
             }
         }
-    prev = c;
+        prev = c;
     }
     return (inq | toeol | toec);
 }

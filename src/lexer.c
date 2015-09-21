@@ -1990,6 +1990,10 @@ static Bool IsInQuotesorComment( Lexer * lexer )
         }
         else
         {
+            if (( c == '\\' ) && ( prev == '\\' )) {
+                prev = 0;   /* use up the escape */
+                continue;   /* 5.1.12 #65 (1642186): Ign 'escaped' escape ;=)) eg "+\\" */
+            }
             if (( prev != '\\' ) && (( c == '"' ) || ( c == '\'')) )
             {
                 /* deal with 'unescaped' quote chars " or ' */
@@ -2040,8 +2044,9 @@ static Node *GetCDATA( TidyDocImpl* doc, Node *container )
     Bool isEmpty = yes;
     Bool matches = no;
     uint c;
-    Bool hasSrc = TY_(AttrGetById)(container, TidyAttr_SRC) != NULL;
-    Bool skipquotes = cfgBool(doc, TidySkipQuotes); /* #65 - get CONFIG option */
+    Bool hasSrc = (TY_(AttrGetById)(container, TidyAttr_SRC) != NULL) ? yes : no;
+    Bool skipquotes = (nodeIsSCRIPT(container) && 
+        cfgBool(doc, TidySkipQuotes)) ? yes : no; /* #65 (1642186) - is script, and on */
 
     SetLexerLocus( doc, lexer );
     lexer->waswhite = no;

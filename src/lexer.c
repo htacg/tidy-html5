@@ -1962,18 +1962,56 @@ static Bool ExpectsContent(Node *node)
  * Controlled by option --skip-quotes yes|no, enum as
  * TidySkipQuotes, off by default.
 \*/
+#define MX_TAG_BUFF 16
 static Bool IsInQuotesorComment( Lexer * lexer )
 {
-    unsigned int i;
+    unsigned int i, cnt, off;
     Bool inq, toeol, toec;
     unsigned char prev, quot, c;
+    tmbchar buff[MX_TAG_BUFF];
     tmbstr pnc;
     prev = quot = 0;
     inq = toeol = toec = no;
+    cnt = 0;
+    off = 0;
     for ( i = lexer->txtstart; i < lexer->lexsize; i++ )
     {
         pnc = &lexer->lexbuf[i];
         c = *pnc;
+        if ( ! TY_(IsWhite)(c) ) {
+            if (c == '<') {
+                off = 0;
+                buff[off++] = c;
+            } else if (off && ((off + 1) < MX_TAG_BUFF)) {
+                buff[off++] = c;
+                if ( c == '[' ) {
+                    buff[off] = 0;
+                    if (TY_(tmbstrcmp)(buff,"<![CDATA[") == 0) {
+                        /* Ignore **EVERYTHING** until "]]>" */
+                        i++;
+                        off = 0;
+                        for ( ; i < lexer->lexsize; i++ )
+                        {
+                            pnc = &lexer->lexbuf[i];
+                            c = *pnc;
+                            if ( c == ']' ) {
+                                buff[off++] = c;
+                            } else if (off && ((off + 1) < MX_TAG_BUFF)) {
+                                buff[off++] = c;
+                                if ( c == '>' ) {
+                                    buff[off] = 0;
+                                    if (TY_(tmbstrcmp)(buff,"]]>") == 0) {
+                                        break;
+                                    }
+                                    off = 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            cnt++;
+        }
         if ( toeol )
         {
             /* continue until END OF LINE */
@@ -2009,7 +2047,9 @@ static Bool IsInQuotesorComment( Lexer * lexer )
             }
             else if ( !inq && ( c == '/' ) && (prev == '/') )
             {
-                toeol = yes;   /* set in comment, until END OF LINE */
+                /* except, if we have "//<!CDATA..." or "//]]>" */
+                if (cnt > 2)
+                    toeol = yes;   /* set in comment, until END OF LINE */
             }
             else if ( !inq && ( c == '*' ) && (prev == '/'))
             {

@@ -1990,21 +1990,12 @@ static Bool IsInQuotesorComment( Lexer * lexer )
                         /* Ignore **EVERYTHING** until "]]>" */
                         i++;
                         off = 0;
-                        for ( ; i < lexer->lexsize; i++ )
+                        for ( ; i <= lexer->lexsize - 3; i++ )
                         {
                             pnc = &lexer->lexbuf[i];
-                            c = *pnc;
-                            if ( c == ']' ) {
-                                buff[off++] = c;
-                            } else if (off && ((off + 1) < MX_TAG_BUFF)) {
-                                buff[off++] = c;
-                                if ( c == '>' ) {
-                                    buff[off] = 0;
-                                    if (TY_(tmbstrcmp)(buff,"]]>") == 0) {
-                                        break;
-                                    }
-                                    off = 0;
-                                }
+                            if (*pnc == ']' && *(pnc + 1) == ']' && *(pnc + 2) == '>')
+                            {
+                            break;
                             }
                         }
                     }

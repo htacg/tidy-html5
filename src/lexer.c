@@ -1771,6 +1771,16 @@ Bool TY_(SetXHTMLDocType)( TidyDocImpl* doc )
             TY_(RepairAttrValue)(doc, doctype, sys, GetSIFromVers(X10T));
             lexer->versionEmitted = X10T;
         }
+        else if (lexer->versions & VERS_HTML5)
+        {
+            /*\
+             *  Issue #273 - If still a html5/xhtml5 bit
+             *  existing, that is the 'ConstrainVersion' has
+             *  not eliminated all HTML5, then nothing to do here.
+             *  Certainly do **not** delete the DocType node!
+             *  see: http://www.w3.org/QA/Tips/Doctype
+            \*/
+        }
         else
         {
             if (doctype)

@@ -213,15 +213,15 @@ if (UNIX)
         ## also could use `manpath` command output to determine target install path
         set(TIDY_MANFILE ${LIB_NAME}.1)
         message(STATUS "*** Generating man ${TIDY_MANFILE} custom commands...")
-        set(TIDY1XSL ${CMAKE_SOURCE_DIR}/build/documentation/tidy1.xsl)
-        set(TIDYHELP ${CMAKE_BINARY_DIR}/tidy-help.xml)
-        set(TIDYCONFIG ${CMAKE_BINARY_DIR}/tidy-config.xml)
-        add_custom_target(man ALL DEPENDS "${CMAKE_BINARY_DIR}/${LIB_NAME}")
+        set(TIDY1XSL ${CMAKE_CURRENT_SOURCE_DIR}/build/documentation/tidy1.xsl)
+        set(TIDYHELP ${CMAKE_CURRENT_BINARY_DIR}/tidy-help.xml)
+        set(TIDYCONFIG ${CMAKE_CURRENT_BINARY_DIR}/tidy-config.xml)
+        add_custom_target(man ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}")
  
         # run built EXE to generate xml output 
         add_custom_command(
             TARGET man
-            COMMAND ${CMAKE_BINARY_DIR}/${LIB_NAME} -xml-help > ${TIDYHELP}
+            COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME} -xml-help > ${TIDYHELP}
             COMMENT "Generate ${TIDYHELP}"
             VERBATIM
         )
@@ -229,7 +229,7 @@ if (UNIX)
         # run built EXE to generate more xml output 
         add_custom_command(
             TARGET man
-            COMMAND ${CMAKE_BINARY_DIR}/${LIB_NAME} -xml-config > ${TIDYCONFIG}
+            COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME} -xml-config > ${TIDYCONFIG}
             COMMENT "Generate ${TIDYCONFIG}"
             VERBATIM
         )
@@ -238,17 +238,17 @@ if (UNIX)
         add_custom_command(
             TARGET man
             DEPENDS ${TIDYHELP}
-            COMMAND xsltproc ARGS ${TIDY1XSL} ${TIDYHELP} > ${CMAKE_BINARY_DIR}/${TIDY_MANFILE}
+            COMMAND xsltproc ARGS ${TIDY1XSL} ${TIDYHELP} > ${CMAKE_CURRENT_BINARY_DIR}/${TIDY_MANFILE}
             COMMENT "Generate ${TIDY_MANFILE}"
             VERBATIM
         )
 
-        install(FILES ${CMAKE_BINARY_DIR}/${TIDY_MANFILE} DESTINATION ${MAN_INSTALL_DIR})
+        install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${TIDY_MANFILE} DESTINATION ${MAN_INSTALL_DIR})
         
         if (BUILD_DOCUMENTATION)
             find_program( DOXYGEN_FOUND doxygen )
             if (DOXYGEN_FOUND)
-                set( WRK_DIR ${CMAKE_SOURCE_DIR}/documentation )
+                set( WRK_DIR ${CMAKE_CURRENT_SOURCE_DIR}/documentation )
                 set( EXP_DIR ${WRK_DIR}/examples )
                 set( OUT_DIR ${WRK_DIR}/temp )
                 set( DXY_DIR ${WRK_DIR}/temp/tidylib_api )
@@ -271,8 +271,8 @@ if (UNIX)
                     WORKING_DIRECTORY ${WRK_DIR}
                     COMMAND xsltproc ARGS quickref.xsl ${TIDYCONFIG} > ${OUT_DIR}/quickref.html
                     COMMAND xsltproc ARGS quickref.include.xsl ${TIDYCONFIG} > ${EXP_DIR}/quickref_include.html # delete later
-                    COMMAND ${CMAKE_BINARY_DIR}/${LIB_NAME} -h > ${EXP_DIR}/tidy5.help.txt # delete later
-                    COMMAND ${CMAKE_BINARY_DIR}/${LIB_NAME} -help-config > ${EXP_DIR}/tidy5.config.txt   # delete later
+                    COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME} -h > ${EXP_DIR}/tidy5.help.txt # delete later
+                    COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME} -help-config > ${EXP_DIR}/tidy5.config.txt   # delete later
                     COMMAND cp ARGS ../LICENSE.md ${EXP_DIR}  # delete later
                     )
                 #=========================================
@@ -340,11 +340,11 @@ set(CPACK_PACKAGE_VERSION ${LIBTIDY_VERSION})
 set(CPACK_PACKAGE_VERSION_MAJOR "${TIDY_MAJOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_MINOR "${TIDY_MINOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_PATCH "${TIDY_POINT_VERSION}")
-set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/README.html")
+set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.html")
 
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE.txt")
-set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/README.html")
-set(CPACK_RESOURCE_FILE_WELCOME "${CMAKE_SOURCE_DIR}/README.html")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt")
+set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README.html")
+set(CPACK_RESOURCE_FILE_WELCOME "${CMAKE_CURRENT_SOURCE_DIR}/README.html")
 
 ## debian config
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER ${CPACK_PACKAGE_CONTACT})
@@ -352,7 +352,7 @@ set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "http://www.html-tidy.org/")
 #set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc")
 set(CPACK_DEBIAN_PACKAGE_SECTION "Libraries")
 
-set(CPACK_SOURCE_IGNORE_FILES "${CMAKE_SOURCE_DIR}/test/;${CMAKE_SOURCE_DIR}/build/;${CMAKE_SOURCE_DIR}/.git/")
+set(CPACK_SOURCE_IGNORE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/test/;${CMAKE_CURRENT_SOURCE_DIR}/build/;${CMAKE_CURRENT_SOURCE_DIR}/.git/")
 
 if (NOT WIN32 AND NOT APPLE)
 set( CPACK_PACKAGE_FILE_NAME "${LIB_NAME}-${CPACK_PACKAGE_VERSION}-${BITNESS}bit" )

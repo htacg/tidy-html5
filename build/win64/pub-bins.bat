@@ -1,4 +1,5 @@
 @setlocal
+@set TMPWV=win64
 @set TMPSRC=../..
 @set TMPNAME=tidy
 @set TMPFIL=%TMPSRC%\version.txt
@@ -21,17 +22,26 @@
 @set DOPAUSE=echo No pause requested...
 )
 
-@set TMPFIL1=%TMPNAME%-%TMPVER%-win64.exe
-@set TMPFIL2=%TMPNAME%-%TMPVER%-win64.msi
-@set TMPFIL3=%TMPNAME%-%TMPVER%-win64.zip
-@if NOT EXIST %TMPFIL1% goto NOFIL1
-@if NOT EXIST %TMPFIL2% goto NOFIL2
-@if NOT EXIST %TMPFIL3% goto NOFIL3
-@echo.
 @echo Will publish...
+@set TMPCNT=0
+@set TMPFIL1=%TMPNAME%-%TMPVER%-%TMPWV%.exe
+@set TMPFIL2=%TMPNAME%-%TMPVER%-%TMPWV%.msi
+@set TMPFIL3=%TMPNAME%-%TMPVER%-%TMPWV%.zip
+@if EXIST %TMPFIL1% (
 @echo %TMPFIL1%
+@set /A TMPCNT+=1
+)
+@if EXIST %TMPFIL2% (
 @echo %TMPFIL2%
+@set /A TMPCNT+=1
+)
+@if EXIST %TMPFIL3% (
 @echo %TMPFIL3%
+@set /A TMPCNT+=1
+)
+@if "%TMPCNT%x" == "0x" goto NOPUB
+@echo.
+@echo Will publish %TMPCNT% files to %TMPDD%
 @echo.
 @echo *** CONTINUE?%
 @%DOPAUSE%
@@ -41,18 +51,25 @@
 @if NOT EXIST %TMPDD%\nul goto NODST
 )
 
+@if EXIST %TMPFIL1% (
 @set TMPSRC=%TMPFIL1%
 @set TMPDST=%TMPDD%\%TMPFIL1%
 @call :CHKCOPY
+)
+
+@if EXIST %TMPFIL2% (
 @set TMPSRC=%TMPFIL2%
 @set TMPDST=%TMPDD%\%TMPFIL2%
 @call :CHKCOPY
+)
+
+@if EXIST %TMPFIL3% (
 @set TMPSRC=%TMPFIL3%
 @set TMPDST=%TMPDD%\%TMPFIL3%
 @call :CHKCOPY
-
+)
 @echo.
-@echo Maybe time to run 'gentidyyml %TMPBIN%'
+@echo If done all bins, WIN32, WIN64, linux, ... maybe time to run 'gentidyyml %TMPBIN%'
 @echo.
 
 @goto END
@@ -88,16 +105,14 @@ copy %TMPSRC% %TMPDST%
 
 :NODST
 @echo Error: Unable to create %TMPDD%
+@goto END
 
-
+:NOPUB
+@echo Appears no files to PUBLISH!
 :NOFIL1
 @echo Can NOT locate %TMPFIL1%! *** FIX ME ***
-@goto END
-
 :NOFIL2
 @echo Can NOT locate %TMPFIL2%! *** FIX ME ***
-@goto END
-
 :NOFIL3
 @echo Can NOT locate %TMPFIL3%! *** FIX ME ***
 @goto END

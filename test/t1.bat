@@ -44,6 +44,7 @@
 @%TIDY% -v >> %TMPTEST%
 @if ERRORLEVEL 1 goto NOTIDY
 
+%TIDY% -v
 @echo.
 @echo Doing '@call onetest.cmd %1 %2'
 @echo Doing '@call onetest.cmd %1 %2' >> %TMPTEST%

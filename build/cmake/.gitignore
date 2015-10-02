@@ -29,4 +29,5 @@ _CPack_Packages/*
 *.wixobj
 tidy
 libtidy*
+tidy1.xsl
 

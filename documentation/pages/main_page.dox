@@ -43,7 +43,6 @@ is converted to
 - \ref tidylib
   - <a href="modules.html">Modules</a>
 - \ref building_tidy
--\ref docs_howto
 - \subpage history
 - \subpage license    
 - \ref todo    

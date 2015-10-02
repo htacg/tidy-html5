@@ -26,4 +26,5 @@ libtidy.so.5
 libtidy.so.5.0.0
 tidy.1
 _CPack_Packages
+tidy1.xsl
 

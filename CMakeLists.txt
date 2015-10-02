@@ -213,7 +213,7 @@ if (UNIX)
         ## also could use `manpath` command output to determine target install path
         set(TIDY_MANFILE ${LIB_NAME}.1)
         message(STATUS "*** Generating man ${TIDY_MANFILE} custom commands...")
-        set(TIDY1XSL ${CMAKE_CURRENT_BINARY_DIR}/documentation/tidy1.xsl)
+        set(TIDY1XSL ${CMAKE_CURRENT_BINARY_DIR}/tidy1.xsl)
         set(TIDYHELP ${CMAKE_CURRENT_BINARY_DIR}/tidy-help.xml)
         set(TIDYCONFIG ${CMAKE_CURRENT_BINARY_DIR}/tidy-config.xml)
         add_custom_target(man ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}")

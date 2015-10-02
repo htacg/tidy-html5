@@ -13,6 +13,6 @@ What is Tidy?
 It corrects and cleans up HTML and XML documents by fixing markup errors and
 upgrading legacy code to modern standards.
 
-**TidyLib** is a C static or dynamic library that developers can integrate into
+**TidyLib** is a C static and dynamic library that developers can integrate into
 their applications in order to bring all of Tidy’s power to your favorite tools.
 **TidyLib** is used today in desktop applications, web servers, and more.

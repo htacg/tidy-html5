@@ -6,3 +6,7 @@ build/*
 serve/*
 server/*
 test/*
+*.bak
+*~
+temp*
+*.old

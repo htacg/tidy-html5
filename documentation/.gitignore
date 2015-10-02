@@ -13,3 +13,7 @@ examples/quickref_include.html
 html/*
 latex/*
 
+# api document zips
+tidylib_api*.zip
+
+

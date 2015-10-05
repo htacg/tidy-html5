@@ -51,17 +51,31 @@
 /* #define DEBUG_ALLOCATION   special EXTRA allocation debug information - VERY NOISY */
 static void check_me(char *name);
 static Bool show_attrs = yes;
-#define MX_TXT 5
+#define MX_TXT 8
 static char buffer[MX_TXT+8]; /* NOTE extra for '...'\0 tail */
 static tmbstr get_text_string(Lexer* lexer, Node *node)
 {
     uint len = node->end - node->start;
     tmbstr cp = lexer->lexbuf + node->start;
     tmbstr end = lexer->lexbuf + node->end;
+    unsigned char c;
     uint i = 0;
+    Bool insp = no;
     buffer[0] = (char)0;
     while (cp < end ) {
-        buffer[i++] = *cp;
+        c = *cp;
+        if (c == '\n') {
+            buffer[i++] = '\\';
+            buffer[i++] = 'n';
+            insp = yes;
+        } else if (c == ' ') {
+            if (!insp)
+                buffer[i++] = c;
+            insp = yes;
+        } else {
+            buffer[i++] = c;
+            insp = no;
+        }
         cp++;
         if (i >= MX_TXT)
             break;
@@ -86,10 +100,11 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
     int col  = ( doc->lexer ? doc->lexer->columns : 0 );
     SPRTF("R=%d C=%d: ", line, col );
     // DEBUG: Be able to set a TRAP on a SPECIFIC row,col
-    if ((line == 4) && (col == 1)) {
+    if ((line == 60) && (col == 1)) {
         check_me("Show_Node"); // just a debug trap
     }
-    if (lexer && lexer->token && (lexer->token->type == TextNode)) {
+    if (lexer && lexer->token && 
+        ((lexer->token->type == TextNode)||(node && (node->type == TextNode)))) {
         if (show_attrs) {
             uint len = node ? node->end - node->start : 0;
             tmbstr cp = node ? get_text_string( lexer, node ) : "NULL";

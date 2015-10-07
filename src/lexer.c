@@ -2132,11 +2132,13 @@ static Node *GetCDATA( TidyDocImpl* doc, Node *container )
                 /* if the end tag is not already escaped using backslash */
                 SetLexerLocus( doc, lexer );
                 lexer->columns -= 3;
-                TY_(ReportError)(doc, NULL, NULL, BAD_CDATA_CONTENT);
 
                 /* if javascript insert backslash before / */
                 if (TY_(IsJavaScript)(container))
                 {
+                    /* Issue #281 - only warn if adding the escape! */
+                    TY_(ReportError)(doc, NULL, NULL, BAD_CDATA_CONTENT);
+
                     for (i = lexer->lexsize; i > start-1; --i)
                         lexer->lexbuf[i] = lexer->lexbuf[i-1];
 

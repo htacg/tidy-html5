@@ -2068,6 +2068,17 @@ static Node *GetCDATA( TidyDocImpl* doc, Node *container )
                 }
 
                 TY_(AddCharToLexer)(lexer, c);
+
+                if (nonested) {
+                    /*\ 
+                     *  Issue #65 - for version 5.1.14.EXP2
+                     *  If the nonested option is ON then the <script> 
+                     *  tag did not bump nested, so no need to treat this as 
+                     *  an end tag just to decrease nested, just continue!
+                    \*/
+                    continue;
+                }
+
                 c = TY_(ReadChar)(doc->docIn);
                 
                 if (!TY_(IsLetter)(c))

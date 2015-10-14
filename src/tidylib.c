@@ -1185,6 +1185,7 @@ int         TY_(DocParseStream)( TidyDocImpl* doc, StreamIn* in )
     assert( doc->docIn == NULL );
     doc->docIn = in;
 
+    TY_(ResetTags)(doc);    /* reset table to html5 mode */
     TY_(TakeConfigSnapshot)( doc );    /* Save config state */
     TY_(FreeAnchors)( doc );
 

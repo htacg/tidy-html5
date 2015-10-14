@@ -734,7 +734,9 @@ void TY_(FreeDeclaredTags)( TidyDocImpl* doc, UserTagType tagType )
  * Tidy defaults to HTML5 mode
  * If the <!DOCTYPE ...> is found to NOT be HTML5,
  * then adjust tags to HTML4 mode
- * At present only TidyTag_A, but could apply to others
+ *
+ * NOTE: For each change added to here, there must 
+ * be a RESET added in TY_(ResetTags) below!
 \*/
 void TY_(AdjustTags)( TidyDocImpl *doc )
 {
@@ -776,6 +778,37 @@ void TY_(AdjustTags)( TidyDocImpl *doc )
         tagsEmptyHash( doc, tags );
 #endif
     }
+}
+
+/*\
+ * Issue #285
+ * Reset the table to default HTML5 mode.
+ * For every change made in the above AdjustTags,
+ * the equivalent reset must be added here.
+\*/
+void TY_(ResetTags)( TidyDocImpl *doc )
+{
+    Dict *np = (Dict *)TY_(LookupTagDef)( TidyTag_A );
+    TidyTagImpl* tags = &doc->tags;
+    if (np) 
+    {
+        np->parser = TY_(ParseBlock);
+        np->model  = (CM_INLINE|CM_BLOCK|CM_MIXED);
+    }
+    np = (Dict *)TY_(LookupTagDef)( TidyTag_CAPTION );
+    if (np)
+    {
+        np->parser = TY_(ParseBlock);
+    }
+
+    np = (Dict *)TY_(LookupTagDef)( TidyTag_OBJECT );
+    if (np)
+    {
+        np->model = (CM_OBJECT|CM_IMG|CM_INLINE|CM_PARAM); /* reset */
+    }
+#if ELEMENT_HASH_LOOKUP
+    tagsEmptyHash( doc, tags ); /* not sure this is really required, but to be sure */
+#endif
 }
 
 void TY_(FreeTags)( TidyDocImpl* doc )

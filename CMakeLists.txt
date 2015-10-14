@@ -85,7 +85,7 @@ add_definitions ( -DSUPPORT_ASIAN_ENCODINGS=1 )
 add_definitions ( -DSUPPORT_ACCESSIBILITY_CHECKS=1 )
 add_definitions ( -DLIBTIDY_VERSION="${LIBTIDY_VERSION}" )
 add_definitions ( -DRELEASE_DATE="${tidy_YEAR}/${tidy_MONTH}/${tidy_DAY}" )
-add_definitions ( -DRC_NUMBER="EXP2" )
+add_definitions ( -DRC_NUMBER="EXP3" )
 
 # Issue #188 - Support user items in platform.h
 if (TIDY_CONFIG_FILE)

@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'github-pages'
+gem 'github-pages', 39
 gem 'jekyll-sitemap'
 gem 'jekyll-mentions'

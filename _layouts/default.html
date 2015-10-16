@@ -6,8 +6,8 @@
   <title>{{ page.title || site.title }}</title>
 	<meta name="keywords" content="{{ site.keywords }}">
 	<meta name="description" content="{{ site.description }}">
-  <link rel="stylesheet" href="../assets/stylesheets/base.css">
-    <link rel="stylesheet" href="../assets/stylesheets/site.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/stylesheets/base.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/stylesheets/site.css">
   <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -42,5 +42,5 @@
 {% include analytics.html %}
 </body>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="../assets/javascript/site.js"></script>
+<script src="{{ site.baseurl }}/assets/javascript/site.js"></script>
 </html>

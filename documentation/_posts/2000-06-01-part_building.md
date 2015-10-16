@@ -14,7 +14,7 @@ fa-icon:  cubes
 There are sometimes several branches, but in general **Master** is the most
 recently updated version. Note that as “cutting edge,” it may have bugs or other
 unstable behavior. If you prefer a stable, officially released version, be
-sure to have a look at **Releases** on the github page.
+sure to have a look at [**Releases**][2] on the github page.
 
 In general you can use the **Download ZIP** button on the github page to
 download the most recent version of a branch. If you prefer Git then you can
@@ -46,3 +46,5 @@ or with `sudo make install`.
 
 
  [1]: https://github.com/htacg/tidy-html5
+ [2]: https://github.com/htacg/tidy-html5/releases
+ 

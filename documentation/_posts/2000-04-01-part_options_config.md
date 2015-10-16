@@ -49,8 +49,8 @@ option immediately (no intervening space) with the string "`--`"; for example:
 
 `tidy --break-before-br true --show-warnings false`
 
-You can find documentation for full set of configuration options on the
-[Quick Reference](/quickref.html) page.
+You can find Quick Reference documentation for your version of **Tidy** that describe the
+full set of configuration options on our [API and Quick Reference Page][1].
 
 
 ## Sample Configuration File
@@ -82,3 +82,4 @@ new-blocklevel-tags: cfoutput, cfquery
 new-empty-tags: cfelse
 ~~~
 
+[1]: {{ site.baseurl }}/api/#part_quickref

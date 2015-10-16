@@ -98,7 +98,7 @@ non-graphical browsers.
 ## Cleaning up presentational markup
 
 Some tools generate HTML with presentational elements such as `<font>`,
-`<nobr>`, and `<center>`. **Tidy**'s `-clean` option will replace those elements
+`<nobr>`, and `<center>`. **Tidy**'s `‑clean` option will replace those elements
 with `<style>` elements and CSS.
 
 Some HTML documents rely on the presentational effects of `<p>` start

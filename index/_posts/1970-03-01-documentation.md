@@ -19,5 +19,5 @@ of the great things that **Tidy** can do.
 Are you a developer? Are you looking for **TidyLib** information? The feel
 free to get started with the [developer documentation][2].
 
- [1]: documentation/
- [2]: developer/
+ [1]: {{ site.baseurl }}documentation/
+ [2]: {{ site.baseurl }}developer/

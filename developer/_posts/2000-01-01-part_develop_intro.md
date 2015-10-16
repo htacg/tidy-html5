@@ -13,9 +13,6 @@ fa-icon:
 against **TidyLib**. It’s what powers **Tidy**, **mod-tidy**, and countless
 other applications that perform tidying.
 
-Please note that this [content is adapted from the original][3] on SourceForge.
+Please note that this [content is adapted from the original][1] on SourceForge.
 
-
- [1]: /quickref.html
- [2]: /tidylib_api/
- [3]: http://tidy.sourceforge.net/libintro.html
+ [1]: http://tidy.sourceforge.net/libintro.html

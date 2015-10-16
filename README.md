@@ -1,54 +1,64 @@
-# HTML Tidy with HTML5 support
-
-## Prerequisites
-
-  1. git - http://git-scm.com/book/en/v2/Getting-Started-Installing-Git
-  
-  2. cmake - http://www.cmake.org/download/
-  
-  3. appropriate build tools for the platform
-  
-CMake comes in two forms - command line and gui. Some installations only install one or the other, but sometimes both. The build commands below are only for the command line use.
-
-Also the actual build tools vary for each platform. But that is one of the great features of cmake, it can generate variuous 'native' build files. Running cmake without any parameters will list the generators available on that platform. For sure one of the common ones is "Unix Makefiles", which needs autotools make installed, but many other generators are supported.
-
-In windows cmake offers various versions of MSVC. Again below only the command line use of MSVC is shown, but the tidy solution (*.sln) file can be loaded into the MSVC IDE, and the building done in there.
-
-
-## Build the tidy library and command line tool
-
-  1. `cd build/cmake`
-
-  2. `cmake ../.. [-DCMAKE_INSTALL_PREFIX=/path/for/install]`
-
-  3. Windows:  `cmake --build . --config Release`  
-     Unix/OS X: `make`
-
-  4. Install, if desired:  
-     Windows: `cmake --build . --config Release --target INSTALL`  
-     Unix/OS X: `[sudo] make install`
-
-By default cmake sets the install path to /usr/local in unix. If you wanted the binary in say /usr/bin instead, then in 2. above use -DCMAKE_INSTALL_PREFIX=/usr
-
-In windows the default install is to C:\Program Files\tidy5, or C:/Program Files (x86)/tidy5, which is  not very useful. After the build the tidy[n].exe is in the Release directory, and can be copied to any directory in your PATH environment variable, for global use.
-
-If you need the tidy library built as a 'shared' (DLL) library, then in 2. add the command -DBUILD_SHARED_LIB:BOOL=ON. This option is OFF by default, so the static library is built and linked with the command line tool for convenience.
-
-## History
-
-This repository should be considered canonical for HTML Tidy as of 2015-January-15.
-
- - This repository originally transferred from [w3c.github.com/tidy-html5][1].
- 
- - First moved to Github from [tidy.sourceforge.net][2].
-
-
-   [1]: http://w3c.github.com/tidy-html5/
-
-   [2]: http://tidy.sourceforge.net
-
-=======
-README
-======
+=============================
+README for HTACG GitHub Pages
+=============================
 
 This repository consists of the HTML Tidy homepages.
+
+For ease of maintenance by multiple contributors HTACG's GitHub pages take advantage of
+GitHub’s Jekyll integration. Therefor it is necessary to be slightly familiar with Jekyll
+and GitHub’s implementation of Jekyll in order to make changes to our sites.
+
+
+References
+----------
+
+Everything you need to know about Jekyll can be found on
+[jekyllrb.com](http://jekyllrb.com).
+
+
+About Github and HTACG Pages
+----------------------------
+
+The HTAGC group main project page is served from files located in
+[https://github.com/htacg/htacg.github.io](https://github.com/htacg/htacg.github.io). It
+can be reached from [http://www.htacg.org](http://www.htacg.org) or 
+[http://htacg.github.io](http://htacg.github.io). The latter is the standard means of
+accessing the project page, however the former works because we've set up a domain name
+and configured GitHub to use the domain name via the `CNAME` file in the repository.
+
+HTACG Project pages are available as subdirectories of the HTACG domain, for example:
+
+- [http://www.htacg.org/html-tidy](http://www.htacg.org/html-tidy)
+- [http://www.htacg.org/binaries](http://www.htacg.org/binaries)
+- etc.
+
+In general this is intuitive behaviour of GitHub pages but it can cause some issues with
+relative paths used for project web pages. For example:
+
+The HTML-Tidy main project page is served from files located in
+[https://github.com/htacg/tidy-html5/tree/gh-pages](https://github.com/htacg/tidy-html5/tree/gh-pages).
+It can be reached from [http://www.html-tidy.org](http://www.html-tidy.org), or as above,
+from [http://www.htacg.org/html-tidy](http://www.htacg.org/html-tidy).
+
+This is where resource paths can be an issue. Thus it's important to follow the advice
+given on [Jekyll's](http://jekyllrb.com/docs/github-pages/#project-page-url-structure)
+site. This will ensure that resources such as stylesheets and images are served from the
+appropriate directory.
+
+In summary use the `site.baseurl` variable as described in the linked document, and when
+performing local previewing start Jekyll's server with:
+
+~~~
+jekyll serve --baseurl ''
+~~~
+
+or
+
+~~~
+bundle exec jekyll serve --baseurl ''
+~~~
+
+Specifying the `baseurl` on the command line will override the base URL set in
+`_config.yml`.
+
+

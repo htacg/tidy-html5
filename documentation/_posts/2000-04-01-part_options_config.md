@@ -82,4 +82,4 @@ new-blocklevel-tags: cfoutput, cfquery
 new-empty-tags: cfelse
 ~~~
 
-[1]: {{ site.baseurl }}/api/#part_quickref
+[1]: http://api.html-tidy.org/#part_quickref

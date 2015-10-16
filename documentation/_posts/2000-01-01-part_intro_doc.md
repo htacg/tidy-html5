@@ -15,13 +15,13 @@ Tidy**. If you’re on Mac OS X, Linux, or UNIX you can also use `man tidy` and
 read the purpose-built documentation for the version of **Tidy** that you have
 installed.
 
-You can find configuration quick references [in the API and Quick Reference Page][1].
+You can find configuration quick references [in the API and Quick Reference Site][1].
 
 If you’re a developer using **TidyLib** please consult the 
-[API and Quick Reference Page][1] here, and the [TidyLib Introduction][2] page.
+[API and Quick Reference Site][1] here, and the [TidyLib Introduction][2] page.
 
 And if you simply want to use **Tidy**, then please read on.
 
- [1]: {{ site.baseurl }}/api/
+ [1]: http://api.html-tidy.org
  [2]: {{ site.baseurl }}/developer/
 

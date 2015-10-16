@@ -19,5 +19,9 @@ of the great things that **Tidy** can do.
 Are you a developer? Are you looking for **TidyLib** information? The feel
 free to get started with the [developer documentation][2].
 
+Both users and developers of **Tidy** will find useful Quick Reference and API Reference
+documentation at our [API and Quick Reference][3] site.
+
  [1]: {{ site.baseurl }}/documentation/
  [2]: {{ site.baseurl }}/developer/
+ [3]: http://api.html-tidy.org/

@@ -14,5 +14,5 @@ source code commenting is. If necessary, you can become familiar with the
 source code.
 
 
- [1]: {{ site.baseurl }}/api/#part_apiref
+ [1]: http://api.html-tidy.org/#part_apiref
  [2]: http://www.doxygen.org

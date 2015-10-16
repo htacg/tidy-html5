@@ -30,7 +30,7 @@ return an integer almost universally adhere to the following convention:
 2 == Errors (and maybe warnings)
 
  : By default, Tidy will not produce output. You can force output with the
-   [`TidyForceOutput`][1] option. As with warnings, check the error buffer or
+   `TidyForceOutput` option. As with warnings, check the error buffer or
    track error messages for details.
 
 <0 == Severe error
@@ -41,6 +41,3 @@ return an integer almost universally adhere to the following convention:
 Also, by default, warning and error messages are sent to `stderr`.
 You can redirect diagnostic output using either `tidySetErrorFile()`
 or `tidySetErrorBuffer()`. See `tidy.h` for details.
-
-
- [1]: /quickref#force-output.html

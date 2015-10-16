@@ -62,3 +62,15 @@ Specifying the `baseurl` on the command line will override the base URL set in
 `_config.yml`.
 
 
+About Binaries
+--------------
+
+Coming Soon.
+
+
+About API and Quick Reference Documentation
+-------------------------------------------
+
+These are all now stored in the `tidy-html5-api` repository, and links to them should be
+to http://api.html-tidy.org. Documentation should be placed into the `tidy` directory, and
+entries can be added to the appropriate files in `index\_posts`.

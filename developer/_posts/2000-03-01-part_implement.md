@@ -12,7 +12,7 @@ Once you’ve built **TidyLib** following the README instructions for `cmake` in
 **HTML Tidy**’s repository, you can get started using **TidyLib**. `cmake` will
 have built both the console application and the library for you.
 
-Perhaps the easiest way to understand how to use **TidyLibe** is to see a simple
+Perhaps the easiest way to understand how to use **TidyLib** is to see a simple
 program that implements it. Such a simple program follows in the next section,
 and don't forget that you can also study `console/tidy.c`, too.
 
@@ -30,7 +30,7 @@ return an integer almost universally adhere to the following convention:
 2 == Errors (and maybe warnings)
 
  : By default, Tidy will not produce output. You can force output with the
-   [`TidyForceOutput`][1] option. As with warnings, check error buffer or
+   [`TidyForceOutput`][1] option. As with warnings, check the error buffer or
    track error messages for details.
 
 <0 == Severe error

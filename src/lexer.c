@@ -100,7 +100,7 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
     int col  = ( doc->lexer ? doc->lexer->columns : 0 );
     SPRTF("R=%d C=%d: ", line, col );
     // DEBUG: Be able to set a TRAP on a SPECIFIC row,col
-    if ((line == 7) && (col == 1)) {
+    if ((line == 9) && (col == 5)) {
         check_me("Show_Node"); // just a debug trap
     }
     if (lexer && lexer->token && 
@@ -1407,8 +1407,16 @@ static Node* NewToken(TidyDocImpl* doc, NodeType type)
 void TY_(AddStringLiteral)( Lexer* lexer, ctmbstr str )
 {
     byte c;
-    while(0 != (c = *str++) )
-        TY_(AddCharToLexer)( lexer, c );
+    while(0 != (c = *str++) ) {
+        /*\
+         *  Issue #286
+         *  Previously this used TY_(AddCharToLexer)( lexer, c );
+         *  which uses err = TY_(EncodeCharToUTF8Bytes)( c, buf, NULL, &count );
+         *  But this is transferring already 'translated' data from an
+         *  internal location to the lexer, so should use AddByte()
+        \*/
+        AddByte( lexer, c );
+    }
 }
 
 /*

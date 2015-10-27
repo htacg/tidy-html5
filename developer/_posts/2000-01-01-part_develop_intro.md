@@ -6,11 +6,11 @@ style:    left
 fa-icon:
 ---
 
-# TidyLib Introduction
+# `libtidy` Introduction
 
-**TidyLib** is the library version of **HTML Tidy**. In fact, **Tidy** _is_
-**TidyLib**; the console application is a very simple C application that links
-against **TidyLib**. It’s what powers **Tidy**, **mod-tidy**, and countless
+**`libtidy`** is the library version of **HTML Tidy**. In fact, **Tidy** _is_
+**`libtidy`**; the console application is a very simple C application that links
+against **`libtidy`**. It’s what powers **Tidy**, **mod-tidy**, and countless
 other applications that perform tidying.
 
 Please note that this [content is adapted from the original][1] on SourceForge.

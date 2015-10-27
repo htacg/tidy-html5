@@ -8,7 +8,7 @@ fa-icon:  lightbulb-o
 
 # mod_tidy
 
-`mod_tidy` uses HTML Tidy `tidylib` to make sure that Apache 2 serves clean, valid, and
+`mod_tidy` uses HTML Tidy `libtidy` to make sure that Apache 2 serves clean, valid, and
 pretty HTML.
 
 > `mod_tidy` is a `libtidy` based DSO module for the Apache HTTP Server Version 2 to parse,

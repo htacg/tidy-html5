@@ -6,13 +6,13 @@ style:    left
 fa-icon:  coffee
 ---
 
-## Implement TidyLib
+## Implement `libtidy`
 
-Once you’ve built **TidyLib** following the README instructions for `cmake` in
-**HTML Tidy**’s repository, you can get started using **TidyLib**. `cmake` will
+Once you’ve built **`libtidy`** following the README instructions for `cmake` in
+**HTML Tidy**’s repository, you can get started using **`libtidy`**. `cmake` will
 have built both the console application and the library for you.
 
-Perhaps the easiest way to understand how to use **TidyLib** is to see a simple
+Perhaps the easiest way to understand how to use **`libtidy`** is to see a simple
 program that implements it. Such a simple program follows in the next section,
 and don't forget that you can also study `console/tidy.c`, too.
 

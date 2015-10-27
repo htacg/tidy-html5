@@ -17,8 +17,8 @@ installed.
 
 You can find configuration quick references [in the API and Quick Reference Site][1].
 
-If you’re a developer using **TidyLib** please consult the 
-[API and Quick Reference Site][1] here, and the [TidyLib Introduction][2] page.
+If you’re a developer using **`libtidy`** please consult the 
+[API and Quick Reference Site][1] here, and the [libtidy Introduction][2] page.
 
 And if you simply want to use **Tidy**, then please read on.
 

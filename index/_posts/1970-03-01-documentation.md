@@ -16,7 +16,7 @@ There you will discover how to build the `tidy` console application for your
 operating system (if necessary), how to use it, and discover examples of all
 of the great things that **Tidy** can do.
 
-Are you a developer? Are you looking for **TidyLib** information? The feel
+Are you a developer? Are you looking for **`libtidy`** information? The feel
 free to get started with the [developer documentation][2].
 
 Both users and developers of **Tidy** will find useful Quick Reference and API Reference

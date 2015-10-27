@@ -25,7 +25,7 @@ use, e.g.:
 …to clone the repository to your working machine.
 
 
-## Build the `tidy` command-line tool and `tidylib` library
+## Build the `tidy` command-line tool and `libtidy` library
 
 For Linux/BSD/Mac platforms, you can build and install the `tidy` command-line
 tool from the source code using the following steps:

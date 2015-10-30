@@ -92,7 +92,8 @@ references.
 ## Accessibility
 
 **Tidy** offers advice on potential accessibility problems for people using
-non-graphical browsers.
+non-graphical browsers. Have a look at our rescued [HTML Tidy Accessibility
+Checker page][1].
 
 
 ## Cleaning up presentational markup
@@ -178,3 +179,6 @@ and `wrap-jste` config options.
 **Tidy** can help you to correct well-formedness errors in XML markup. **Tidy**
 doesn't yet recognize all XML features, though; for example, it doesn't
 understand CDATA sections or DTD subsets.
+
+
+ [1]: {{ site.baseurl }}/accessibility/

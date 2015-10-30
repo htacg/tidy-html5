@@ -22,7 +22,7 @@
 /* used to point to Web Accessibility Guidelines */
 #define ACCESS_URL  "http://www.w3.org/WAI/GL"
 
-/* points to Tidy's accessibility page, previous available
+/* points to Tidy's accessibility page, previously available
 ** at the Adaptive Technology Resource Centre at the
 ** University of Toronto
 */

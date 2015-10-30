@@ -212,7 +212,7 @@
     </tr>
 
     <tr>
-      <td colspan="2"><xsl:apply-templates select="description"/></td>
+      <td colspan="2"><xsl:copy-of select="description/node()"/></td>
     </tr>
 
     <tr>

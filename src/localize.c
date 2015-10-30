@@ -367,7 +367,11 @@ static const TidyOptionId TidyNumEntitiesLinks[] =
 static const TidyOptionId TidyDropFontTagsLinks[] =
   { TidyMakeClean, TidyUnknownOption };
 
-/* Documentation of options */
+/* Documentation of options 
+** As of 2015-October these descriptions are used uniquely by
+** printXMLDescription from which quickref.html and the Unix
+** man pages are generated.
+*/
 static const TidyOptionDoc option_docs[] =
 {
   {TidyXmlDecl,
@@ -450,7 +454,7 @@ static const TidyOptionDoc option_docs[] =
    "This option specifies if Tidy should discard empty paragraphs. "
   },
   {TidyDropFontTags,
-   "Deprecated; DO NOT USE. This option is destructive to &lt;font&gt; tags, "
+   "Deprecated; <strong>DO NOT USE</strong>. This option is destructive to &lt;font&gt; tags, "
    "and it will be removed from future versions of Tidy. Use the clean option "
    "instead. If you do set this option despite the warning it will perform "
    "as clean except styles will be inline instead of put into a CSS class. "

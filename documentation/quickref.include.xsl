@@ -208,7 +208,7 @@
      
     <tr>
         <td></td>
-        <td colspan="1" class="qdescription"><xsl:apply-templates select="description"/></td>
+        <td colspan="1" class="qdescription"><xsl:copy-of select="description/node()"/></td>
     </tr>
 
 

@@ -22,10 +22,11 @@
 /* used to point to Web Accessibility Guidelines */
 #define ACCESS_URL  "http://www.w3.org/WAI/GL"
 
-/* points to the Adaptive Technology Resource Centre at the
+/* points to Tidy's accessibility page, previous available
+** at the Adaptive Technology Resource Centre at the
 ** University of Toronto
 */
-#define ATRC_ACCESS_URL  "http://www.aprompt.ca/Tidy/accessibilitychecks.html"
+#define ATRC_ACCESS_URL  "http://www.html-tidy.org/accessibility/"
 
 #include "version.h"
 
@@ -365,10 +366,6 @@ static const TidyOptionId TidyNumEntitiesLinks[] =
   { TidyDoctype, TidyPreserveEntities, TidyUnknownOption };
 static const TidyOptionId TidyDropFontTagsLinks[] =
   { TidyMakeClean, TidyUnknownOption };
-static const TidyOptionId TidyMakeCleanTagsLinks[] =
-  { TidyDropFontTags, TidyUnknownOption };
-static const TidyOptionId TidyGDocCleanLinks[] =
-  { TidyMakeClean, TidyUnknownOption };
 
 /* Documentation of options */
 static const TidyOptionDoc option_docs[] =
@@ -689,9 +686,8 @@ static const TidyOptionDoc option_docs[] =
    "This option specifies what level of accessibility checking, if any, "
    "that Tidy should do. Level 0 is equivalent to Tidy Classic's "
    "accessibility checking. "
-   "For more information on Tidy's accessibility checking, visit the "
-   "<a href=\"http://www.aprompt.ca/Tidy/accessibilitychecks.html\" "
-   ">Adaptive Technology Resource Centre at the University of Toronto</a>. "
+   "For more information on Tidy's accessibility checking, visit "
+   "<a href=\"" ATRC_ACCESS_URL "\"> Tidy's Accessibility Page</a>. "
   },
   {TidyShowErrors,
    "This option specifies the number Tidy uses to determine if further errors "
@@ -1734,7 +1730,7 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
             tidy_out(doc, "UTF-8 as a transformation of Unicode characters. ISO/IEC 10646\n");
             tidy_out(doc, "does not allow mapping of unpaired surrogates, nor U+FFFE and U+FFFF\n");
             tidy_out(doc, "(but it does allow other noncharacters). For more information please refer to\n");
-            tidy_out(doc, "http://www.unicode.org/unicode and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n\n");
+            tidy_out(doc, "http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n\n");
         }
 
 #if SUPPORT_UTF16_ENCODINGS
@@ -1744,7 +1740,7 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
         tidy_out(doc, "Character codes for UTF-16 must be in the range: U+0000 to U+10FFFF.\n");
         tidy_out(doc, "The definition of UTF-16 in Annex C of ISO/IEC 10646-1:2000 does not allow the\n");
         tidy_out(doc, "mapping of unpaired surrogates. For more information please refer to\n");
-        tidy_out(doc, "http://www.unicode.org/unicode and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n\n");
+        tidy_out(doc, "http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n\n");
       }
 
 #endif
@@ -1832,9 +1828,6 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
         if ( cfg(doc, TidyAccessibilityCheckLevel) > 0 )
             tidy_out(doc, " and %s", ATRC_ACCESS_URL );
         tidy_out(doc, ".\n" );
-        tidy_out(doc, ". You may also want to try\n" );
-        tidy_out(doc, "\"http://www.cast.org/bobby/\" which is a free Web-based\n");
-        tidy_out(doc, "service for checking URLs for accessibility.\n\n");
     }
 
     if (doc->badLayout)

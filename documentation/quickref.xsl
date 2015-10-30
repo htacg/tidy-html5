@@ -212,7 +212,7 @@
     </tr>
 
     <tr>
-      <td colspan="2"><xsl:copy-of select="description/node()"/></td>
+      <td colspan="2" class="qdescription"><xsl:apply-templates select="description"/></td>
     </tr>
 
     <tr>
@@ -415,6 +415,14 @@
 		font-weight: normal;
 		background-color: #f5f5f5
 		}
+		
+		/* BR IN TABLE DATA DESCRIPTION */
+		td.qdescription br
+		{
+		    content: " ";
+		    display: block;
+		    margin: 10px 0;
+		}
 
 		/* GLOSSARY TERM */
 		td.term, font.term, .term, a:link.term, a:visited.term, a:active.term
@@ -565,7 +573,7 @@
 
 
 <!-- Regular Templates: -->
-<xsl:template match="a | code | em | strong | br">
+<xsl:template match="a | code | em | strong | br | p">
     <xsl:element name="{local-name(.)}">
         <xsl:copy-of select="@* | node()" />
     </xsl:element>

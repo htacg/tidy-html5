@@ -302,3 +302,9 @@ h4.qoptiontitle {
     border-left: 1px solid #bbbbbb;
     border-bottom: 1px solid #bbbbbb;
 }
+
+td.qdescription br {
+    content: " ";
+    display: block;
+    margin: 10px 0;
+}

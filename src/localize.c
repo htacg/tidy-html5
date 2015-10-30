@@ -370,7 +370,10 @@ static const TidyOptionId TidyDropFontTagsLinks[] =
 /* Documentation of options 
 ** As of 2015-October these descriptions are used uniquely by
 ** printXMLDescription from which quickref.html and the Unix
-** man pages are generated.
+** man pages are generated, and the xslt for building all
+** documentation now supports the following tags in descriptions:
+**    <code>, <em>, <strong>, <br />, <p>
+** Note that the xslt processor requires <br /> to be self closing!
 */
 static const TidyOptionDoc option_docs[] =
 {
@@ -454,14 +457,17 @@ static const TidyOptionDoc option_docs[] =
    "This option specifies if Tidy should discard empty paragraphs. "
   },
   {TidyDropFontTags,
-   "Deprecated; <strong>DO NOT USE</strong>. This option is destructive to &lt;font&gt; tags, "
-   "and it will be removed from future versions of Tidy. Use the clean option "
-   "instead. If you do set this option despite the warning it will perform "
-   "as clean except styles will be inline instead of put into a CSS class. "
-   "&lt;font&gt; tags will be dropped completely and their styles will not be "
-   "preserved. If both clean and this option are enabled, &lt;font&gt; tags "
-   "will still be dropped completely, and other styles will be preserved in a "
-   "CSS class instead of inline. See clean for more information. "
+   "Deprecated; <em>do not use</em>. This option is destructive to "
+   "&lt;font&gt; tags, and it will be removed from future versions of Tidy. "
+   "Use the <code>clean</code> option instead. "
+   "<br/>If you do set this option despite the warning it will perform "
+   "as <code>clean</code> except styles will be inline instead of put into "
+   "a CSS class. &lt;font&gt; tags will be dropped completely and their styles "
+   "will not be preserved. "
+   "<br />If both <code>clean</code> and this option are enabled, "
+   "&lt;font&gt; tags will still be dropped completely, and other styles will "
+   "be preserved in a CSS class instead of inline. "
+   "<br/>See <code>clean</code> for more information. "
    , TidyDropFontTagsLinks
   },
   {TidyDropPropAttrs,

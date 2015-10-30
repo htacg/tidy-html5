@@ -403,9 +403,26 @@ The sources for \fBHTML Tidy\fR are available at https://github.com/htacg/tidy-h
    <xsl:text />\fI<xsl:call-template name="escape-backslash" />\fR<xsl:text />
 </xsl:template>
 
+<xsl:template match="p[1]">
+   <xsl:text>
+.sp 1
+</xsl:text>
+   <xsl:text /><xsl:call-template name="escape-backslash" />
+</xsl:template>
+
+<xsl:template match="p[position() != 1]">
+   <xsl:text>
+.sp 1
+</xsl:text>
+   <xsl:text /><xsl:call-template name="escape-backslash" />
+   <xsl:text>
+.sp 1
+</xsl:text>
+</xsl:template>
+
 <xsl:template match="br">
    <xsl:text>
-.br
+.sp 1
 </xsl:text>
 </xsl:template>
 

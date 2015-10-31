@@ -7,9 +7,9 @@
 # documentation. Relative path is okay. You shouldn't have to change this
 # too often if your compiler always puts tidy in the same place.
 
-TIDY_PATH="../cmake/tidy"         # Current directory.
+TIDY_PATH="../build/cmake/tidy"         # Build directory.
 
-TIDY_VERSION=`cat ../../version.txt`
+TIDY_VERSION=`cat ../version.txt`       # Project root directory.
 
 
 cat << HEREDOC

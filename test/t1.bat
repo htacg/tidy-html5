@@ -31,7 +31,10 @@
 @if "%~1x" == "x" goto HELP
 @if "%~2x" == "x" goto HELP
 
-@set TMPFIL=input\in_%1.html
+@set TMPFIL=input\in_%1.xhtml
+@if NOT EXIST %TMPFIL% (
+@set TMPFIL==input\in_%1.html
+)
 @set TMPCFG=input\cfg_%1.txt
 @if NOT EXIST %TMPCFG% (
 @set TMPCFG=input\cfg_default.txt
@@ -163,6 +166,8 @@
 @echo - %0 1642186 1
 @if "%~1x" == "x" goto HELP2
 @echo - Missing expected value. See testcases.txt for list available...
+@echo Checking testcases.txt for test %1
+@fa4 "%~1" testcases.txt
 :HELP2
 @echo.
 

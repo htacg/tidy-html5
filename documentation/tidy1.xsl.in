@@ -258,7 +258,7 @@ For each option in one of the 5 categories/classes, provide its
 .TP
 \fB<xsl:apply-templates select="name" />\fR
 
-Type:    \fI<xsl:apply-templates select="type" />\fR
+Type:    <xsl:apply-templates select="type" />
 .br
 <xsl:call-template name="provide-default" />
 .br
@@ -298,11 +298,11 @@ doesn't exist, or it's empty, a single '-' is provided.
 -->
   <xsl:choose>
     <xsl:when test="string-length(default) &gt; 0 ">
-      <xsl:text />Default: \fI<xsl:apply-templates
-        select="default" />\fR<xsl:text />
+      <xsl:text />Default: <xsl:apply-templates
+        select="default" /><xsl:text />
     </xsl:when>
     <xsl:otherwise>
-      <xsl:text />Default: \fI-\fR<xsl:text />
+      <xsl:text />Default: -<xsl:text />
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
@@ -318,11 +318,11 @@ stylesheet-provided one. (Useful e.g. for `repeated-attributes`).
 -->
   <xsl:choose>
     <xsl:when test="string-length(example) &gt; 0">
-      <xsl:text />Example: \fI<xsl:apply-templates
-          select="example" />\fR<xsl:text />
+      <xsl:text />Example: <xsl:apply-templates
+          select="example" /><xsl:text />
     </xsl:when>
     <xsl:otherwise>
-      <xsl:text />Default: \fI-\fR<xsl:text />
+      <xsl:text />Default: -<xsl:text />
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>

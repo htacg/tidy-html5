@@ -426,7 +426,7 @@ static const TidyOptionDoc option_docs[] =
    "presentational tags (currently <code>&lt;i&gt;</code>, "
    "<code>&lt;b&gt;</code>, <code>&lt;center&gt;</code> when enclosed within "
    "appropriate inline tags, and <code>&lt;font&gt;</code>). If set to "
-   "<code>YES</code> then legacy tags will be replaced with CSS "
+   "<code>yes</code> then legacy tags will be replaced with CSS "
    "<code>&lt;style&gt;</code> tags and structural markup as appropriate. " 
    ,
   },
@@ -453,7 +453,7 @@ static const TidyOptionDoc option_docs[] =
    "<br/>"
    "Alternatively, you can supply a string for the formal public identifier "
    "(FPI)."
-   "<br />"
+   "<br/>"
    "For example: "
    "<br/>"
    "<code>doctype: \"-//ACME//DTD HTML 3.14159//EN\"</code>"
@@ -491,31 +491,36 @@ static const TidyOptionDoc option_docs[] =
   },
   {TidyDropPropAttrs,
    "This option specifies if Tidy should strip out proprietary attributes, "
-   "such as MS data binding attributes. "
+   "such as Microsoft data binding attributes. "
   },
   {TidyEncloseBlockText,
-   "This option specifies if Tidy should insert a &lt;P&gt; element to "
-   "enclose any text it finds in any element that allows mixed content for "
-   "HTML transitional but not HTML strict. "
+   "This option specifies if Tidy should insert a <code>&lt;P&gt;</code> "
+   "element to enclose any text it finds in any element that allows mixed "
+   "content for HTML transitional but not HTML strict. "
   },
   {TidyEncloseBodyText,
    "This option specifies if Tidy should enclose any text it finds in the "
-   "body element within a &lt;P&gt; element. This is useful when you want to "
-   "take existing HTML and use it with a style sheet. "
+   "body element within a <code>&lt;P&gt;</code> element."
+   "<br/>"
+   "This is useful when you want to take existing HTML and use it with a "
+   "style sheet. "
   },
   {TidyEscapeCdata,
-   "This option specifies if Tidy should convert &lt;![CDATA[]]&gt; "
-   "sections to normal text. "
+   "This option specifies if Tidy should convert "
+   "<code>&lt;![CDATA[]]&gt;</code> sections to normal text. "
   },
   {TidyFixComments,
    "This option specifies if Tidy should replace unexpected hyphens with "
-   "\"=\" characters when it comes across adjacent hyphens. The default is "
-   "yes. This option is provided for users of Cold Fusion which uses the "
-   "comment syntax: &lt;!--- ---&gt; "
+   "<code>=</code> characters when it comes across adjacent hyphens. "
+   "<br/>"
+   "The default is <code>yes</code>. "
+   "<br/>"
+   "This option is provided for users of Cold Fusion which uses the "
+   "comment syntax: <code>&lt;!--- ---&gt;</code>. "
   },
   {TidyFixUri,
    "This option specifies if Tidy should check attribute values that carry "
-   "URIs for illegal characters and if such are found, escape them as HTML 4 "
+   "URIs for illegal characters and if such are found, escape them as HTML4 "
    "recommends. "
   },
   {TidyHideComments,
@@ -524,22 +529,34 @@ static const TidyOptionDoc option_docs[] =
   {TidyCoerceEndTags,
    "This option specifies if Tidy should coerce a start tag into an end tag "
    "in cases where it looks like an end tag was probably intended; "
-   "for example, given &lt;span&gt;foo &lt;b&gt;bar&lt;b&gt; baz&lt;/span&gt;, "
-   "Tidy will output &lt;span&gt;foo &lt;b&gt;bar&lt;/b&gt; baz&lt;/span&gt;. "
+   "for example, given "
+   "<br/>"
+   "<code>&lt;span&gt;foo &lt;b&gt;bar&lt;b&gt; baz&lt;/span&gt;</code> "
+   "<br/>"
+   "Tidy will output "
+   "<br/>"
+   "<code>&lt;span&gt;foo &lt;b&gt;bar&lt;/b&gt; baz&lt;/span&gt;</code> "
   },
   {TidyOmitOptionalTags,
    "This option specifies if Tidy should omit optional start tags and end tags "
-   "when generating output. Setting this option causes all tags for the "
-   "html, head, and body elements to be omitted from output, as well as such "
-   "end tags as &lt;/p&gt;, &lt;/li&gt;, &lt;/dt&gt;, &lt;/dd&gt;, "
-   "&lt;/option&gt;, &lt;/tr&gt;, &lt;/td&gt;, and &lt;/th&gt;. "
+   "when generating output. "
+   "<br/>"
+   "Setting this option causes all tags for the <code>&lt;html&gt;</code>, "
+   "<code>&lt;head&gt;</code>, and <code>&lt;body&gt;</code> elements to be "
+   "omitted from output, as well as such end tags as <code>&lt;/p&gt;</code>, "
+   "<code>&lt;/li&gt;</code>, <code>&lt;/dt&gt;</code>, "
+   "<code>&lt;/dd&gt;</code>, <code>&lt;/option&gt;</code>, "
+   "<code>&lt;/tr&gt;</code>, <code>&lt;/td&gt;</code>, and "
+   "<code>&lt;/th&gt;</code>. "
+   "<br/>"
    "This option is ignored for XML output. "
   },
   {TidyHideEndTags,
    "This option is an alias for omit-optional-tags. "
   },
   {TidyIndentCdata,
-   "This option specifies if Tidy should indent &lt;![CDATA[]]&gt; sections. "
+   "This option specifies if Tidy should indent "
+   "<code>&lt;![CDATA[]]&gt;</code> sections. "
   },
   {TidyXmlTags,
    "This option specifies if Tidy should use the XML parser rather than the "
@@ -547,47 +564,62 @@ static const TidyOptionDoc option_docs[] =
   },
   {TidyJoinClasses,
    "This option specifies if Tidy should combine class names to generate "
-   "a single new class name, if multiple class assignments are detected on "
+   "a single new class name if multiple class assignments are detected on "
    "an element. "
    , TidyJoinClassesLinks
   },
   {TidyJoinStyles,
    "This option specifies if Tidy should combine styles to generate a single "
-   "new style, if multiple style values are detected on an element. "
+   "new style if multiple style values are detected on an element. "
    , TidyJoinStylesLinks
   },
   {TidyLogicalEmphasis,
-   "This option specifies if Tidy should replace any occurrence of &lt;I&gt; "
-   "by &lt;EM&gt; and any occurrence of &lt;B&gt; by &lt;STRONG&gt;. In both "
-   "cases, the attributes are preserved unchanged. This option can be set "
-   "independently of the clean and drop-font-tags options. "
+   "This option specifies if Tidy should replace any occurrence of "
+   "<code>&lt;i&gt;</code> with <code>&lt;em&gt;</code> and any occurrence of "
+   "<code>&lt;b&gt;</code> with <code>&lt;strong&gt;</code>. Any attributes "
+   "are preserved unchanged. "
+   "<br/>"
+   "This option can be set independently of the <code>clean</code> option. "
   },
   {TidyLowerLiterals,
    "This option specifies if Tidy should convert the value of an attribute "
-   "that takes a list of predefined values to lower case. This is required "
-   "for XHTML documents. "
+   "that takes a list of predefined values to lower case. "
+   "<br/>"
+   "This is required for XHTML documents. "
   },
   {TidyMergeEmphasis,
-   "This option specifies if Tidy should merge nested &lt;b&gt; and &lt;i&gt; "
-   "elements; for example, for the case "
-   "&lt;b class=\"rtop-2\"&gt;foo &lt;b class=\"r2-2\"&gt;bar&lt;/b&gt; baz&lt;/b&gt;, "
-   "Tidy will output  &lt;b class=\"rtop-2\"&gt;foo bar baz&lt;/b&gt;. "
+   "This option specifies if Tidy should merge nested <code>&lt;b&gt;</code> "
+   "and <code>&lt;i&gt;</code> elements; for example, for the case "
+   "<br/>"
+   "<code>&lt;b class=\"rtop-2\"&gt;foo &lt;b class=\"r2-2\"&gt;bar&lt;/b&gt; baz&lt;/b&gt;</code>, "
+   "<br/>"
+   "Tidy will output <code>&lt;b class=\"rtop-2\"&gt;foo bar baz&lt;/b&gt;</code>. "
   },
   {TidyMergeDivs,
-   "Can be used to modify behavior of -c (--clean yes) option. "
-   "This option specifies if Tidy should merge nested &lt;div&gt; such as "
-   "\"&lt;div&gt;&lt;div&gt;...&lt;/div&gt;&lt;/div&gt;\". If set to "
-   "\"auto\", the attributes of the inner &lt;div&gt; are moved to the "
-   "outer one. As well, nested &lt;div&gt; with ID attributes are not "
-   "merged. If set to \"yes\", the attributes of the inner &lt;div&gt; "
-   "are discarded with the exception of \"class\" and \"style\". "
+   "This option can be used to modify the behavior of <code>clean</code> when "
+   "set to <code>yes</code>."
+   "<br/>"
+   "This option specifies if Tidy should merge nested <code>&lt;div&gt;</code> "
+   "such as <code>&lt;div&gt;&lt;div&gt;...&lt;/div&gt;&lt;/div&gt;</code>. "
+   "<br/>"
+   "If set to <code>auto</code> the attributes of the inner "
+   "<code>&lt;div&gt;</code> are moved to the outer one. Nested "
+   "<code>&lt;div&gt;</code> with <code>id</code> attributes are <em>not</em> "
+   "merged. "
+   "<br/>"
+   "If set to <code>yes</code> the attributes of the inner "
+   "<code>&lt;div&gt;</code> are discarded with the exception of "
+   "<code>class</code> and <code>style</code>. "
    ,TidyMergeDivsLinks
   },
   {TidyMergeSpans,
-   "Can be used to modify behavior of -c (--clean yes) option. "
-   "This option specifies if Tidy should merge nested &lt;span&gt; such as "
-   "\"&lt;span&gt;&lt;span&gt;...&lt;/span&gt;&lt;/span&gt;\". The algorithm "
-   "is identical to the one used by --merge-divs. "
+   "This option can be used to modify the behavior of <code>clean</code> when "
+   "set to <code>yes</code>."
+   "<br/>"
+   "This option specifies if Tidy should merge nested <code>&lt;span&gt;</code> "
+   "such as <code>&lt;span&gt;&lt;span&gt;...&lt;/span&gt;&lt;/span&gt;</code>. "
+   "<br/>"
+   "The algorithm is identical to the one used by <code>merge-divs</code>. "
    ,TidyMergeSpansLinks
   },
 #if SUPPORT_ASIAN_ENCODINGS
@@ -597,35 +629,50 @@ static const TidyOptionDoc option_docs[] =
 #endif
   {TidyBlockTags,
    "This option specifies new block-level tags. This option takes a space or "
-   "comma separated list of tag names. Unless you declare new tags, Tidy will "
-   "refuse to generate a tidied file if the input includes previously unknown "
-   "tags. Note you can't change the content model for elements such as "
-   "&lt;TABLE&gt;, &lt;UL&gt;, &lt;OL&gt; and &lt;DL&gt;. This option is "
-   "ignored in XML mode. "
+   "comma separated list of tag names. "
+   "<br/>"
+   "Unless you declare new tags, Tidy will refuse to generate a tidied file if "
+   "the input includes previously unknown tags. "
+   "<br/>"
+   "Note you can't change the content model for elements such as "
+   "<code>&lt;table&gt;</code>, <code>&lt;ul&gt;</code>, "
+   "<code>&lt;ol&gt;</code> and <code>&lt;dl&gt;</code>. "
+   "<br/>"
+   "This option is ignored in XML mode. "
    ,TidyBlockTagsLinks
   },
   {TidyEmptyTags,
    "This option specifies new empty inline tags. This option takes a space "
-   "or comma separated list of tag names. Unless you declare new tags, Tidy "
-   "will refuse to generate a tidied file if the input includes previously "
-   "unknown tags. Remember to also declare empty tags as either inline or "
-   "blocklevel. This option is ignored in XML mode. "
+   "or comma separated list of tag names. "
+   "<br/>"
+   "Unless you declare new tags, Tidy will refuse to generate a tidied file if "
+   "the input includes previously unknown tags. "
+   "<br/>"
+   "Remember to also declare empty tags as either inline or blocklevel. "
+   "<br/>"
+   "This option is ignored in XML mode. "
    ,TidyEmptyTagsLinks
   },
   {TidyInlineTags,
    "This option specifies new non-empty inline tags. This option takes a "
-   "space or comma separated list of tag names. Unless you declare new tags, "
-   "Tidy will refuse to generate a tidied file if the input includes "
-   "previously unknown tags. This option is ignored in XML mode. "
+   "space or comma separated list of tag names. "
+   "<br/>"
+   "Unless you declare new tags, Tidy will refuse to generate a tidied file if "
+   "the input includes previously unknown tags. "
+   "<br/>"
+   "This option is ignored in XML mode. "
    ,TidyInlineTagsLinks
   },
   { TidyPreTags,
-    "This option specifies "
-    "new tags that are to be processed in exactly the same way as HTML's "
-    "&lt;PRE&gt; element. This option takes a space or comma separated list "
-    "of tag names. Unless you declare new tags, Tidy will refuse to generate "
-    "a tidied file if the input includes previously unknown tags. Note you "
-    "can not as yet add new CDATA elements (similar to &lt;SCRIPT&gt;). "
+    "This option specifies new tags that are to be processed in exactly the "
+    "same way as HTML's <code>&lt;pre&gt;</code> element. This option takes a "
+    "space or comma separated list of tag names. "
+    "<br/>"
+    "Unless you declare new tags, Tidy will refuse to generate a tidied file if "
+    "the input includes previously unknown tags. "
+    "<br/>"
+    "Note you can not as yet add new CDATA elements. "
+    "<br/>"
     "This option is ignored in XML mode. "
     ,TidyPreTagsLinks
   },

@@ -21,7 +21,9 @@
     command line to the XSLT processor, currently "tidy-help.xml".
     For the detailed config options section however, the template
     match is to the file "tidy-config.xml".  This is captured in
-    the $CONFIG variable, declared here:
+    the $CONFIG variable, declared here. CMAKE configure will
+    substitute TIDYCONFIG during the build. Shell scripts will
+    have to do the same.
 -->
 
 <xsl:variable name="CONFIG" select="document('@TIDYCONFIG@')"/>

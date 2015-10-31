@@ -458,16 +458,19 @@ static const TidyOptionDoc option_docs[] =
   },
   {TidyDropFontTags,
    "Deprecated; <em>do not use</em>. This option is destructive to "
-   "&lt;font&gt; tags, and it will be removed from future versions of Tidy. "
-   "Use the <code>clean</code> option instead. "
-   "<br/>If you do set this option despite the warning it will perform "
+   "<code>&lt;font&gt;</code> tags, and it will be removed from future "
+   "versions of Tidy. Use the <code>clean</code> option instead. "
+   "<br/>"
+   "If you do set this option despite the warning it will perform "
    "as <code>clean</code> except styles will be inline instead of put into "
-   "a CSS class. &lt;font&gt; tags will be dropped completely and their styles "
-   "will not be preserved. "
-   "<br />If both <code>clean</code> and this option are enabled, "
-   "&lt;font&gt; tags will still be dropped completely, and other styles will "
-   "be preserved in a CSS class instead of inline. "
-   "<br/>See <code>clean</code> for more information. "
+   "a CSS class. <code>&lt;font&gt;</code> tags will be dropped completely "
+   "and their styles will not be preserved. "
+   "<br/>"
+   "If both <code>clean</code> and this option are enabled, "
+   "<code>&lt;font&gt;</code> tags will still be dropped completely, and "
+   "other styles will be preserved in a CSS class instead of inline. "
+   "<br/>"
+   "See <code>clean</code> for more information. "
    , TidyDropFontTagsLinks
   },
   {TidyDropPropAttrs,

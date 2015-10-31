@@ -878,6 +878,26 @@ static void optionhelp( TidyDoc tdoc )
     ForEachSortedOption( tdoc, printOption );
 }
 
+static void optiondescribe( TidyDoc tdoc, char *tag )
+{
+    printf( "\nNote this help function is UNDOCUMENTED, and still needs work.\n" );
+
+    printf( "\n`%s`\n\n", tag );
+
+    TidyOptionId topt = tidyOptGetIdForName( tag );
+    
+    char *result = NULL;
+    if (topt < N_TIDY_OPTIONS)
+    {
+        result = (char*)tidyOptGetDoc( tdoc, tidyGetOption( tdoc, topt ) );
+    } else
+    {
+        result = "Unknown option.";
+    }
+    
+    printf( "%s\n\n", result );
+}
+
 static
 void printOptionValues( TidyDoc ARG_UNUSED(tdoc), TidyOption topt,
                         OptionDesc *d )
@@ -1093,6 +1113,19 @@ int main( int argc, char** argv )
             else if ( strcasecmp(arg, "help-config") == 0 )
             {
                 optionhelp( tdoc );
+                tidyRelease( tdoc );
+                return 0; /* success */
+            }
+            else if ( strcasecmp(arg, "help-option") == 0 )
+            {
+                if ( argc >= 3)
+                {
+                    optiondescribe( tdoc, argv[2] );
+                }
+                else
+                {
+                    printf( "%s", "Tidy option name must be specified.\n");
+                }
                 tidyRelease( tdoc );
                 return 0; /* success */
             }

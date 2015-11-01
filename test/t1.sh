@@ -67,7 +67,10 @@ if [ -z "$TMPEXIT" ]; then
     exit 1
 fi
 
+TMPFIL="input/in_$TMPCASE.xhtml"
+if [ ! -f "$TMPFIL" ]; then
 TMPFIL="input/in_$TMPCASE.html"
+fi
 TMPCFG="input/cfg_$TMPCASE.txt"
 if [ ! -f "$TMPCFG" ]; then
 TMPCFG="input/cfg_default.txt"

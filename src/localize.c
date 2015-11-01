@@ -678,10 +678,14 @@ static const TidyOptionDoc option_docs[] =
   },
   {TidyNumEntities,
    "This option specifies if Tidy should output entities other than the "
-   "built-in HTML entities (&amp;amp;, &amp;lt;, &amp;gt; and &amp;quot;) in "
-   "the numeric rather than the named entity form. Only entities compatible "
-   "with the DOCTYPE declaration generated are used. Entities that can be "
-   "represented in the output encoding are translated correspondingly. "
+   "built-in HTML entities (<code>&amp;amp;</code>, <code>&amp;lt;</code>, "
+   "<code>&amp;gt;</code>, and <code>&amp;quot;</code>) in the numeric rather "
+   "than the named entity form. "
+   "<br/>"
+   "Only entities compatible with the DOCTYPE declaration generated are used. "
+   "<br/>"
+   "Entities that can be represented in the output encoding are translated "
+   "correspondingly. "
     ,TidyNumEntitiesLinks
   },
   {TidyHtmlOut,
@@ -691,30 +695,38 @@ static const TidyOptionDoc option_docs[] =
   {TidyXhtmlOut,
    "This option specifies if Tidy should generate pretty printed output, "
    "writing it as extensible HTML. "
+   "<br/>"
    "This option causes Tidy to set the DOCTYPE and default namespace as "
-   "appropriate to XHTML. If a DOCTYPE or namespace is given they will "
-   "checked for consistency with the content of the document. In the case of "
-   "an inconsistency, the corrected values will appear in the output. For "
-   "XHTML, entities can be written as named or numeric entities according to "
-   "the setting of the \"numeric-entities\" option. The original case of tags "
-   "and attributes will be preserved, regardless of other options. "
+   "appropriate to XHTML, and will use the corrected value in output "
+   "regardless of other sources. "
+   "<br/>"
+   "For XHTML, entities can be written as named or numeric entities according "
+   "to the setting of <code>numeric-entities</code>. "
+   "<br/>"
+   "The original case of tags and attributes will be preserved, regardless of "
+   "other options. "
   },
   {TidyXmlOut,
    "This option specifies if Tidy should pretty print output, writing it as "
-   "well-formed XML. Any entities not defined in XML 1.0 will be written as "
-   "numeric entities to allow them to be parsed by a XML parser. The original "
-   "case of tags and attributes will be preserved, regardless of other "
-   "options. "
+   "well-formed XML. "
+   "<br/>"
+   "Any entities not defined in XML 1.0 will be written as numeric entities to "
+   "allow them to be parsed by an XML parser. "
+   "<br/>"
+   "The original case of tags and attributes will be preserved, regardless of "
+   "other options. "
   },
   {TidyQuoteAmpersand,
-   "This option specifies if Tidy should output unadorned &amp; characters as "
-   "&amp;amp;. "
+   "This option specifies if Tidy should output unadorned <code>&amp;</code> "
+   "characters as <code>&amp;amp;</code>. "
   },
   {TidyQuoteMarks,
-   "This option specifies if Tidy should output &quot; characters as "
-   "&amp;quot; as is preferred by some editing environments. The apostrophe "
-   "character ' is written out as &amp;#39; since many web browsers don't yet "
-   "support &amp;apos;. "
+   "This option specifies if Tidy should output <code>&quot;</code> characters "
+   "as <code>&amp;quot;</code> as is preferred by some editing environments. "
+   "<br/>"
+   "The apostrophe character <code>'</code> is written out as "
+   "<code>&amp;#39;</code> since many web browsers don't yet support "
+   "<code>&amp;apos;</code>. "
   },
   {TidyQuoteNbsp,
    "This option specifies if Tidy should output non-breaking space characters "
@@ -722,24 +734,29 @@ static const TidyOptionDoc option_docs[] =
   },
   {TidyDuplicateAttrs,
    "This option specifies if Tidy should keep the first or last attribute, if "
-   "an attribute is repeated, e.g. has two align attributes. "
+   "an attribute is repeated, e.g. has two <code>align</code> attributes. "
    , TidyDuplicateAttrsLinks
   },
   {TidySortAttributes,
    "This option specifies that tidy should sort attributes within an element "
-   "using the specified sort algorithm. If set to \"alpha\", the algorithm is "
-   "an ascending alphabetic sort. "
+   "using the specified sort algorithm. If set to <code>alpha</code>, the "
+   "algorithm is an ascending alphabetic sort. "
   },
   {TidyReplaceColor,
    "This option specifies if Tidy should replace numeric values in color "
-   "attributes by HTML/XHTML color names where defined, e.g. replace "
-   "\"#ffffff\" with \"white\". "
+   "attributes with HTML/XHTML color names where defined, e.g. replace "
+   "<code>#ffffff</code> with <code>white</code>. "
   },
   {TidyBodyOnly,
    "This option specifies if Tidy should print only the contents of the "
-   "body tag as an HTML fragment. If set to \"auto\", this is performed only "
-   "if the body tag has been inferred. Useful for incorporating "
-   "existing whole pages as a portion of another page. "
+   "body tag as an HTML fragment. "
+   "<br/>"
+   "If set to <code>auto</code>, this is performed only if the body tag has "
+   "been inferred. "
+   "<br/>"
+   "Useful for incorporating existing whole pages as a portion of another "
+   "page. "
+   "<br/>"
    "This option has no effect if XML output is requested. "
   },
   {TidyUpperCaseAttrs,

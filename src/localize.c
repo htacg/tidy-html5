@@ -761,30 +761,37 @@ static const TidyOptionDoc option_docs[] =
   },
   {TidyUpperCaseAttrs,
    "This option specifies if Tidy should output attribute names in upper "
-   "case. The default is no, which results in lower case attribute names, "
-   "except for XML input, where the original case is preserved. "
+   "case. "
+   "<br/>"
+   "The default is <code>no</code>, which results in lower case attribute "
+   "names, except for XML input, where the original case is preserved. "
   },
   {TidyUpperCaseTags,
    "This option specifies if Tidy should output tag names in upper case. "
-   "The default is no, which results in lower case tag names, except for XML "
-   "input, where the original case is preserved. "
+   "<br/>"
+   "The default is <code>no</code> which results in lower case tag names, "
+   "except for XML input where the original case is preserved. "
   },
   {TidyWord2000,
    "This option specifies if Tidy should go to great pains to strip out all "
    "the surplus stuff Microsoft Word 2000 inserts when you save Word "
-   "documents as \"Web pages\". Doesn't handle embedded images or VML. "
+   "documents as \"Web pages\". It doesn't handle embedded images or VML. "
+   "<br/>"
    "You should consider using Word's \"Save As: Web Page, Filtered\". "
   },
   {TidyAccessibilityCheckLevel,
    "This option specifies what level of accessibility checking, if any, "
-   "that Tidy should do. Level 0 is equivalent to Tidy Classic's "
-   "accessibility checking. "
+   "that Tidy should perform. "
+   "<br/>"
+   "Level <code>0 (Tidy Classic)</code> is equivalent to Tidy Classic's accessibility "
+   "checking. "
+   "<br/>"
    "For more information on Tidy's accessibility checking, visit "
    "<a href=\"" ATRC_ACCESS_URL "\"> Tidy's Accessibility Page</a>. "
   },
   {TidyShowErrors,
    "This option specifies the number Tidy uses to determine if further errors "
-   "should be shown. If set to 0, then no errors are shown. "
+   "should be shown. If set to <code>0</code>, then no errors are shown. "
   },
   {TidyShowInfo,
    "This option specifies if Tidy should display info-level messages. "
@@ -795,14 +802,18 @@ static const TidyOptionDoc option_docs[] =
   },
   {TidyBreakBeforeBR,
    "This option specifies if Tidy should output a line break before each "
-   "&lt;BR&gt; element. "
+   "<code>&lt;br&gt;</code> element. "
   },
   {TidyIndentContent,
-   "This option specifies if Tidy should indent block-level tags. If set to "
-   "\"auto\", this option causes Tidy to decide whether or not to indent the "
-   "content of tags such as TITLE, H1-H6, LI, TD, TD, or P depending on "
-   "whether or not the content includes a block-level element. You are "
-   "advised to avoid setting indent to yes as this can expose layout bugs in "
+   "This option specifies if Tidy should indent block-level tags. "
+   "<br/>"
+   "If set to <code>auto</code> Tidy will decide whether or not to indent the "
+   "content of tags such as <code>&lt;title&gt;</code>, "
+   "<code>&lt;h1&gt;</code>-<code>&lt;h6&gt;</code>, <code>&lt;li&gt;</code>, "
+   "<code>&lt;td&gt;</code>, or <code>&lt;p&gt;</code> "
+   "based on the content including a block-level element. "
+   "<br/>"
+   "Setting <code>indent</code> to <code>yes</code> can expose layout bugs in "
    "some browsers. "
    ,TidyIndentContentLinks
   },
@@ -816,18 +827,20 @@ static const TidyOptionDoc option_docs[] =
   },
   {TidyLiteralAttribs,
    "This option specifies how Tidy deals with whitespace characters within "
-   "attribute values. If the value is \"no\" (the default), Tidy \"munges\" "
-   "or \"normalizes\" attribute values by replacing any newline or tab "
-   "character with a single space character, and further by replacing "
-   "any sequences of multiple whitespace characters with a single space. "
-   "To force tidy to preserve the original, literal values of all attributes, "
-   "and ensure that whitespace characters within attribute values are passed "
-   "through unchanged, set this option to \"yes\". "
+   "attribute values. "
+   "<br/>"
+   "If the value is <code>no</code> Tidy normalizes attribute values by "
+   "replacing any newline or tab with a single space, and further by replacing "
+   "any contiguous whitespace with a single space. "
+   "<br/>"
+   "To force Tidy to preserve the original, literal values of all attributes "
+   "and ensure that whitespace within attribute values is passed "
+   "through unchanged, set this option to <code>yes</code>. "
   },
   {TidyShowMarkup,
    "This option specifies if Tidy should generate a pretty printed version "
    "of the markup. Note that Tidy won't generate a pretty printed version if "
-   "it finds significant errors (see force-output). "
+   "it finds significant errors (see <code>force-output</code>). "
   },
 #if SUPPORT_ASIAN_ENCODINGS
   {TidyPunctWrap,
@@ -836,40 +849,51 @@ static const TidyOptionDoc option_docs[] =
   },
 #endif
   {TidyBurstSlides,
-   "Currently not used. Tidy Classic only. "
+   "This option has no function and is deprecated. "
   },
   {TidyTabSize,
    "This option specifies the number of columns that Tidy uses between "
    "successive tab stops. It is used to map tabs to spaces when reading the "
    "input. "
+   "<br/>"
+   "Tidy never outputs tabs."
   },
   {TidyVertSpace,   /* Issue #228 - changed to tri-state */
    "This option specifies if Tidy should add some extra empty lines for "
-   "readability. Default is 'no'. If set to 'auto', will eliminate nearly "
-   "all newline chars."
+   "readability. "
+   "<br/>"
+   "The default is <code>no</code>. "
+   "<br/>"
+   "If set to <code>auto</code>' Tidy will eliminate nearly all newline "
+   "characters."
   },
   {TidyWrapLen,
-   "This option specifies the right margin Tidy uses for line wrapping. Tidy "
-   "tries to wrap lines so that they do not exceed this length. Set wrap to "
-   "zero if you want to disable line wrapping. "
+   "This option specifies the right margin Tidy uses for line wrapping. "
+   "<br/>"
+   "Tidy tries to wrap lines so that they do not exceed this length. "
+   "<br/>"
+   "Set <code>wrap</code> to <code>0</code>(zero) if you want to disable line "
+   "wrapping. "
   },
   {TidyWrapAsp,
    "This option specifies if Tidy should line wrap text contained within ASP "
-   "pseudo elements, which look like: &lt;% ... %&gt;. "
+   "pseudo elements, which look like: <code>&lt;% ... %&gt;</code>. "
   },
   {TidyWrapAttVals,
-   "This option specifies if Tidy should line-wrap attribute values, for "
-   "easier editing. Line wrapping means that if the value of an attribute "
-   "causes a line to exceed the width specified by the \"wrap\" option, "
-   "tidy will add one or more line breaks to the value, causing it to "
-   "wrapped into multiple lines. Note that this option can be set "
-   "independently of wrap-script-literals. Also note that by default, Tidy "
-   "\"munges\" or \"normalizes\" attribute values by replacing any newline "
-   "or tab character with a single space character, and further by replacing "
-   "any sequences of multiple whitespace characters with a single space. "
+   "This option specifies if Tidy should line-wrap attribute values, meaning "
+   "that if the value of an attribute causes a line to exceed the width "
+   "specified by <code>wrap</code>, Tidy will add one or more line breaks to "
+   "the value, causing it to be wrapped into multiple lines. "
+   "<br/>"
+   "Note that this option can be set independently of "
+   "<code>wrap-script-literals</code>. "
+   "By default Tidy replaces any newline or tab with a single space and "
+   "replaces any sequences of whitespace with a single space. "
+   "<br/>"
    "To force Tidy to preserve the original, literal values of all attributes, "
    "and ensure that whitespace characters within attribute values are passed "
-   "through unchanged, set the literal-attributes option to \"yes\". "
+   "through unchanged, set <code>literal-attributes</code> to "
+   "<code>yes</code>. "
    ,TidyWrapAttValsLinks
   },
   {TidyWrapJste,

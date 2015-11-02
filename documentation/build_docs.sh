@@ -73,6 +73,9 @@ if [ "$BUILD_XSLT" -eq 1 ]; then
 	xsltproc "./quickref.xsl" "$OUTP_DIR/tidy-config.xml" > "$OUTP_DIR/quickref.html"
 	xsltproc "./quickref.include.xsl" "$OUTP_DIR/tidy-config.xml" > ./examples/quickref_include.html
 
+	# Well, duh, we should tidy quickref.html
+	$TIDY_PATH -config "./tidy.cfg" -modify "$OUTP_DIR/quickref.html"
+
 	# 'tidy.1'; create a valid tidy1.xsl first by subbing CMAKE's variable.
 	sed "s|@TIDYCONFIG@|./tidy-config.xml|g" < ./tidy1.xsl.in > "$OUTP_DIR/tidy1.xsl"
 	xsltproc "$OUTP_DIR/tidy1.xsl" "$OUTP_DIR/tidy-help.xml" > "$OUTP_DIR/tidy.1"

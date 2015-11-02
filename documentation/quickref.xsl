@@ -31,7 +31,7 @@
   <body>
     <h1 id="top">HTML Tidy <xsl:value-of select="config/@version" /> Options Quick Reference</h1>
 
-    <h2 id="top">Option Groups</h2>
+    <h2>Option Groups</h2>
     <ul class="option_groups">
         <li><a href="#MarkupHeader">HTML, XHTML, XML</a></li>
         <li><a href="#DiagnosticsHeader">Diagnostics</a></li>
@@ -40,10 +40,10 @@
         <li><a href="#MiscellaneousHeader">Miscellaneous</a></li>
     </ul>
 
-    <h2 id="top">Option Index</h2>
+    <h2>Option Index</h2>
     <xsl:call-template name="link-section" />
 
-    <h2 id="top">Option Details</h2>
+    <h2>Option Details</h2>
     <xsl:call-template name="detail-section" />
 
   </body>

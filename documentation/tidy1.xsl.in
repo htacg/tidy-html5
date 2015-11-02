@@ -253,6 +253,8 @@ For each option in one of the 5 categories/classes, provide its
     6. description
 -->
   <xsl:param name="category" />
+.rs
+.sp 1
     <xsl:for-each select='$CONFIG/config/option[@class=$category]'>
        <xsl:sort select="name" order="ascending" />
 .TP

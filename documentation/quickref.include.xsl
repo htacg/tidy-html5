@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <!--
-    For generating the `quickref.html` web page from output of
-    `tidy -xml-config`
+    For generating the `quickref_include.html` web page from output of
+    `tidy -xml-config`, which is used in our Doxygen documentation
+    project.
 
     (c) 2005 (W3C) MIT, ERCIM, Keio University
     See tidy.h for the copyright notice.
@@ -15,7 +16,7 @@
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:output method="xml" indent="yes"
-     encoding="us-ascii"
+     encoding="UTF-8"
      omit-xml-declaration="yes"
      />
 
@@ -40,7 +41,7 @@
 <!-- Named Templates: -->
 
 <xsl:template name="link-section">
-  <table summary="Tidy Options Quick Reference Header Section" border="0"
+  <table summary="Options Quick Reference Index Section" border="0"
   cellpadding="3" cellspacing="0" class="quickref">
     <colgroup>
       <col width="33%" />
@@ -208,7 +209,7 @@
      
     <tr>
         <td></td>
-        <td colspan="1" class="qdescription"><xsl:apply-templates select="description"/></td>
+        <td colspan="1" class="qdescription"><xsl:copy-of select="description/node()"/></td>
     </tr>
 
 

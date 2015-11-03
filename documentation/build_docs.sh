@@ -7,9 +7,9 @@
 # documentation. Relative path is okay. You shouldn't have to change this
 # too often if your compiler always puts tidy in the same place.
 
-TIDY_PATH="../cmake/tidy"         # Current directory.
+TIDY_PATH="../build/cmake/tidy"          # Build directory.
 
-TIDY_VERSION=`cat ../../version.txt`
+TIDY_VERSION=`head -n 1 ../version.txt`  # In project root directory.
 
 
 cat << HEREDOC
@@ -31,8 +31,8 @@ HEREDOC
 
 
 # Output and flags' declarations.
-DOXY_CFG="doxygen.cfg"
-OUTP_DIR="temp"
+DOXY_CFG="./doxygen.cfg"
+OUTP_DIR="./temp"
 BUILD_XSLT=1
 BUILD_API=1
 
@@ -66,20 +66,24 @@ hash xsltproc 2>/dev/null || { echo "- xsltproc not found. You require an XSLT p
 if [ "$BUILD_XSLT" -eq 1 ]; then
 	# Use the designated tidy to get its config and help.
 	# These temporary files will be cleaned up later.
-	$TIDY_PATH -xml-config > "tidy-config.xml"
-	$TIDY_PATH -xml-help > "tidy-help.xml"
+	$TIDY_PATH -xml-config > "$OUTP_DIR/tidy-config.xml"
+	$TIDY_PATH -xml-help > "$OUTP_DIR/tidy-help.xml"
 
-	# 'quickref.html'
-	xsltproc "quickref.xsl" "tidy-config.xml" > "$OUTP_DIR/quickref.html"
-	xsltproc "quickref.include.xsl" "tidy-config.xml" > ./examples/quickref_include.html
+	# 'quickref.html' and 'quickref_include.html' for the Doxygen build.
+	xsltproc "./quickref.xsl" "$OUTP_DIR/tidy-config.xml" > "$OUTP_DIR/quickref.html"
+	xsltproc "./quickref.include.xsl" "$OUTP_DIR/tidy-config.xml" > ./examples/quickref_include.html
 
-	# 'tidy.1'
-	xsltproc "tidy1.xsl" "tidy-help.xml" > "$OUTP_DIR/tidy.1"
+	# Well, duh, we should tidy quickref.html
+	$TIDY_PATH -config "./tidy.cfg" -modify "$OUTP_DIR/quickref.html"
 
-	# Cleanup - Note: to avoid issues with the tidy1.xsl finding the tidy-config.xml
-	# document, they are created and read from the source directory instead of temp.
-	rm "tidy-config.xml"
-	rm "tidy-help.xml"
+	# 'tidy.1'; create a valid tidy1.xsl first by subbing CMAKE's variable.
+	sed "s|@TIDYCONFIG@|./tidy-config.xml|g" < ./tidy1.xsl.in > "$OUTP_DIR/tidy1.xsl"
+	xsltproc "$OUTP_DIR/tidy1.xsl" "$OUTP_DIR/tidy-help.xml" > "$OUTP_DIR/tidy.1"
+
+	# Cleanup
+	rm "$OUTP_DIR/tidy-config.xml"
+	rm "$OUTP_DIR/tidy-help.xml"
+	rm "$OUTP_DIR/tidy1.xsl"
 	
 	echo "'quickref.html' and 'tidy.1' have been built.\n"
 else
@@ -114,11 +118,11 @@ if [ "$BUILD_API" -eq 1 ]; then
   
   
   ## copy license file to examples for includsing
-  cp ../../LICENSE.md ./examples/
+  cp ../README/LICENSE.md ./examples/
   
   ## this lot 
-  # - echos and catches outputs the doxygen config
-  # - overwrites some vars but appending some to config an end
+  # - echoes and catches output of the doxygen config
+  # - overwrites some vars but appending some to config at end
   # - which are then passed to doxygen as stdin (instead of the path to a config.file)
   ( cat "$DOXY_CFG"; \
     echo "PROJECT_NUMBER=$TIDY_VERSION"; \
@@ -130,13 +134,6 @@ if [ "$BUILD_API" -eq 1 ]; then
     rm "./examples/tidy5.help.txt"
     rm "./examples/tidy5.config.txt"
     rm "./examples/LICENSE.md"
-    
-    ## create zip file of docs
-    cd $OUTP_DIR;
-    #zip  -r "tidy-docs-$TIDY_VERSION.zip" ./tidylib_api
-    
-    
-    
     
   echo "\nTidyLib API documentation has been built."
 else

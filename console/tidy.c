@@ -880,13 +880,15 @@ static void optionhelp( TidyDoc tdoc )
 
 static void optiondescribe( TidyDoc tdoc, char *tag )
 {
+    char *result = NULL;
+    TidyOptionId topt;
+
     printf( "\nNote this help function is UNDOCUMENTED, and still needs work.\n" );
 
     printf( "\n`%s`\n\n", tag );
 
-    TidyOptionId topt = tidyOptGetIdForName( tag );
+    topt = tidyOptGetIdForName( tag );
     
-    char *result = NULL;
     if (topt < N_TIDY_OPTIONS)
     {
         result = (char*)tidyOptGetDoc( tdoc, tidyGetOption( tdoc, topt ) );

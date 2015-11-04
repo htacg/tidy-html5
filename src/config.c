@@ -1229,10 +1229,8 @@ Bool ParseTabs( TidyDocImpl* doc, const TidyOptionImpl* entry )
         Bool tabs = flag != 0 ? yes : no;
         TY_(SetOptionBool)( doc, entry->id, tabs );
         if (tabs) {
-            TY_(PPrintTabs)();
             TY_(SetOptionInt)( doc, TidyIndentSpaces, 1 );
         } else {
-            TY_(PPrintSpaces)();
             /* optional - TY_(ResetOptionToDefault)( doc, TidyIndentSpaces ); */
         }
     }

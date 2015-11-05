@@ -205,7 +205,7 @@ typedef enum
   TidyMergeSpans,       /**< Merge multiple SPANs */
   TidyAnchorAsName,    /**< Define anchors as name attributes */
   TidyPPrintTabs,       /**< Indent using tabs istead of spaces */
-  TidySkipQuotes,      /**< Skip quotes and comments in script CDATA */
+  TidySkipNested,      /**< Skip nested tags in script and style CDATA */
   N_TIDY_OPTIONS       /**< Must be last */
 } TidyOptionId;
 

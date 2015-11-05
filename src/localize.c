@@ -1097,7 +1097,7 @@ static const TidyOptionDoc option_docs[] =
    "Note <code>tab-size</code> controls converting input tabs to spaces. Set "
    "it to zero to retain input tabs. "
   },
-  {TidySkipQuotes,
+  {TidySkipNested,
    "This option specifies that Tidy should skip nested tags when parsing "
    "script and style data. "
   },

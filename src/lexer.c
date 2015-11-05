@@ -2008,7 +2008,7 @@ static Node *GetCDATA( TidyDocImpl* doc, Node *container )
      *  If yes, then avoid incrementing nested...
     \*/
     Bool nonested = ((nodeIsSCRIPT(container) || (nodeIsSTYLE(container))) && 
-        cfgBool(doc, TidySkipQuotes)) ? yes : no;
+        cfgBool(doc, TidySkipNested)) ? yes : no;
 
     SetLexerLocus( doc, lexer );
     lexer->waswhite = no;

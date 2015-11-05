@@ -1,8 +1,8 @@
 @setlocal
 @REM copy the EXE into C:\MDOS, IFF changed
 @set TMPDIR=C:\MDOS
-@set TMPFIL1=tidy5.exe
-@set TMPFIL2=tidy5-32.exe
+@set TMPFIL1=tidy.exe
+@set TMPFIL2=tidy32.exe
 @set TMPSRC=Release\%TMPFIL1%
 @if NOT EXIST %TMPSRC% goto ERR1
 @echo Current source %TMPSRC%

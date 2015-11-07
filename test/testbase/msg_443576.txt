@@ -1,5 +1,5 @@
 line 1 column 1 - Warning: missing <!DOCTYPE> declaration
-line 8 column 31 - Warning: '<' + '/' + letter not allowed here
+line 10 column 1 - Warning: discarding unexpected </script>
 Info: Document content looks like HTML5
 2 warnings, 0 errors were found!
 

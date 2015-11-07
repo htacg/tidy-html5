@@ -12,7 +12,6 @@
 
 /* declaration for methods that check attribute values */
 typedef void (AttrCheck)(TidyDocImpl* doc, Node *node, AttVal *attval);
-typedef void (AttrCheckEx)(TidyDocImpl* doc, Node *node, AttVal *attval, uint limit);
 
 struct _Attribute
 {

@@ -470,12 +470,11 @@ static uint AttributeVersions(Node* node, AttVal* attval)
         /* Override the settings on these attributes because
          * they are allowed everywhere by RDFa */
         if (strcmp(attval->attribute,"content") == 0)
-            return (XH50 | HT50);
+            return (HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50) ;
         if (strcmp(attval->attribute,"rel") == 0)
-            return (XH50 | HT50);
+            return (HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50) ;
         if (strcmp(attval->attribute,"rev") == 0)
-            return (XH50 | HT50);
-
+            return (HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50) ;
     }
     /* TODO: maybe this should return VERS_PROPRIETARY instead? */
     if (!attval || !attval->dict)
@@ -2219,6 +2218,8 @@ void CheckRDFaPrefix ( TidyDocImpl* doc, Node *node, AttVal *attval)
 
     /* Copy the attribute value so we can split it */
     if (attval->value) {
+        tmbstr t, tPtr ;
+
         uint prefixCount = 0;
         /* isPrefix toggles - start at 1 and change to 0 as we
          * iterate over the components of the value */
@@ -2232,9 +2233,8 @@ void CheckRDFaPrefix ( TidyDocImpl* doc, Node *node, AttVal *attval)
         TY_(tmbstrcpy)( s, attval->value );
 
         /* iterate over value */
-        tmbstr tPtr = s;
+        tPtr = s;
 
-        tmbstr t;
         while ( ( t = strtok(tPtr, " ") ) != NULL ) {
             tPtr = NULL;
             if (isPrefix) {
@@ -2242,7 +2242,7 @@ void CheckRDFaPrefix ( TidyDocImpl* doc, Node *node, AttVal *attval)
                 /* prefix rules are that it can have any
                  * character except a colon - that one must be
                  * at the end */
-                tmbstr i = index(t, ':') ;
+                tmbstr i = strchr(t, ':') ;
                 if (i == NULL) {
                     /* no colon - bad! */
                     TY_(ReportAttrError)( doc, node, attval, BAD_ATTRIBUTE_VALUE);

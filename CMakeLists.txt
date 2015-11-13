@@ -147,6 +147,10 @@ if (NOT BIN_INSTALL_DIR)
     set(BIN_INSTALL_DIR bin)
 endif ()
 
+if (NOT INCLUDE_INSTALL_DIR)
+    set(INCLUDE_INSTALL_DIR include)
+endif ()
+
 # Always build the STATIC library
 set(name tidy-static)
 add_library ( ${name} STATIC ${CFILES} ${HFILES} ${LIBHFILES} )
@@ -159,7 +163,7 @@ install(TARGETS ${name}
         ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
         LIBRARY DESTINATION ${LIB_INSTALL_DIR}
         )
-install( FILES ${HFILES} DESTINATION include )
+install( FILES ${HFILES} DESTINATION ${INCLUDE_INSTALL_DIR} )
 ########################################
 # if user option still on
 if (BUILD_SHARED_LIB)

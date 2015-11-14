@@ -138,6 +138,19 @@ if (MSVC)
     list(APPEND LIBHFILES ${SRCDIR}/sprtf.h)
 endif ()
 #######################################
+
+if (NOT LIB_INSTALL_DIR)
+    set(LIB_INSTALL_DIR lib${LIB_SUFFIX})
+endif ()
+
+if (NOT BIN_INSTALL_DIR)
+    set(BIN_INSTALL_DIR bin)
+endif ()
+
+if (NOT INCLUDE_INSTALL_DIR)
+    set(INCLUDE_INSTALL_DIR include)
+endif ()
+
 # Always build the STATIC library
 set(name tidy-static)
 add_library ( ${name} STATIC ${CFILES} ${HFILES} ${LIBHFILES} )
@@ -146,11 +159,11 @@ set_target_properties( ${name} PROPERTIES
     )
 list ( APPEND add_LIBS ${name} )
 install(TARGETS ${name}
-        RUNTIME DESTINATION bin
-        ARCHIVE DESTINATION lib
-        LIBRARY DESTINATION lib
+        RUNTIME DESTINATION ${BIN_INSTALL_DIR}
+        ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
+        LIBRARY DESTINATION ${LIB_INSTALL_DIR}
         )
-install( FILES ${HFILES} DESTINATION include )
+install( FILES ${HFILES} DESTINATION ${INCLUDE_INSTALL_DIR} )
 ########################################
 # if user option still on
 if (BUILD_SHARED_LIB)
@@ -166,11 +179,11 @@ if (BUILD_SHARED_LIB)
     set_target_properties( ${name} PROPERTIES 
                                    COMPILE_FLAGS "-DBUILDING_SHARED_LIB" )
     install(TARGETS ${name}
-        RUNTIME DESTINATION bin
-        ARCHIVE DESTINATION lib
-        LIBRARY DESTINATION lib
+        RUNTIME DESTINATION ${BIN_INSTALL_DIR}
+        ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
+        LIBRARY DESTINATION ${LIB_INSTALL_DIR}
         )
-endif ()                               
+endif ()
 
 ##########################################################
 ### main executable - linked with STATIC library

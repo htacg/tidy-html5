@@ -1100,6 +1100,7 @@ int main( int argc, char** argv )
                 tidyOptSetBool( tdoc, TidyQuiet, yes );
 
             else if ( strcasecmp(arg, "help") == 0 ||
+                      strcasecmp(arg, "-help") == 0 ||
                       strcasecmp(arg,    "h") == 0 || *arg == '?' )
             {
                 help( prog );

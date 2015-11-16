@@ -1,8 +1,7 @@
 line 1 column 1 - Warning: missing <!DOCTYPE> declaration
-line 7 column 28 - Warning: '<' + '/' + letter not allowed here
 line 11 column 1 - Warning: missing </script>
 Info: Document content looks like HTML5
-3 warnings, 0 errors were found!
+2 warnings, 0 errors were found!
 
 You are recommended to use CSS to specify page and link colors
 About HTML Tidy: https://github.com/htacg/tidy-html5

@@ -47,6 +47,9 @@ static AttrCheck CheckScroll;
 static AttrCheck CheckTextDir;
 static AttrCheck CheckLang;
 static AttrCheck CheckType;
+static AttrCheck CheckRDFaSafeCURIE;
+static AttrCheck CheckRDFaTerm;
+static AttrCheck CheckRDFaPrefix;
 
 #define CH_PCDATA      NULL
 #define CH_CHARSET     NULL
@@ -85,6 +88,11 @@ static AttrCheck CheckType;
 #define CH_TARGET      CheckTarget
 #define CH_VTYPE       CheckVType
 #define CH_ACTION      CheckAction
+#define CH_RDFAPREFIX  CheckRDFaPrefix
+#define CH_RDFASCURIE  CheckRDFaSafeCURIE
+#define CH_RDFASCURIES CheckRDFaSafeCURIE
+#define CH_RDFATERM    CheckRDFaTerm
+#define CH_RDFATERMS   CheckRDFaTerm
 
 static const Attribute attribute_defs [] =
 {
@@ -417,6 +425,16 @@ static const Attribute attribute_defs [] =
 #endif
   { TidyAttr_DISPLAY,                  "display",                 CH_PCDATA   }, /* on MATH tag (html5) */
 
+  /* RDFa Attributes */
+  { TidyAttr_ABOUT,             "about",                 CH_RDFASCURIE },
+  { TidyAttr_DATATYPE,          "datatype",              CH_RDFATERM   },
+  { TidyAttr_INLIST,            "inlist",                CH_BOOL       },
+  { TidyAttr_PREFIX,            "prefix",                CH_RDFAPREFIX },
+  { TidyAttr_PROPERTY,          "property",              CH_RDFATERMS  },
+  { TidyAttr_RESOURCE,          "resource",              CH_RDFASCURIE },
+  { TidyAttr_TYPEOF,            "typeof",                CH_RDFATERMS  },
+  { TidyAttr_VOCAB,             "vocab",                 CH_URL        },
+
   /* this must be the final entry */
   { N_TIDY_ATTRIBS,             NULL,                    NULL         }
 };
@@ -432,6 +450,31 @@ static uint AttributeVersions(Node* node, AttVal* attval)
             return (XH50 | HT50);
         if (strcmp(attval->attribute,"allowfullscreen") == 0)
             return (XH50 | HT50);
+        /* RDFa global attributes */
+        if (strcmp(attval->attribute,"about") == 0)
+            return (XH50 | HT50);
+        if (strcmp(attval->attribute,"datatype") == 0)
+            return (XH50 | HT50);
+        if (strcmp(attval->attribute,"inlist") == 0)
+            return (XH50 | HT50);
+        if (strcmp(attval->attribute,"prefix") == 0)
+            return (XH50 | HT50);
+        if (strcmp(attval->attribute,"property") == 0)
+            return (XH50 | HT50);
+        if (strcmp(attval->attribute,"resource") == 0)
+            return (XH50 | HT50);
+        if (strcmp(attval->attribute,"typeof") == 0)
+            return (XH50 | HT50);
+        if (strcmp(attval->attribute,"vocab") == 0)
+            return (XH50 | HT50);
+        /* Override the settings on these attributes because
+         * they are allowed everywhere by RDFa */
+        if (strcmp(attval->attribute,"content") == 0)
+            return (HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50) ;
+        if (strcmp(attval->attribute,"rel") == 0)
+            return (HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50) ;
+        if (strcmp(attval->attribute,"rev") == 0)
+            return (HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50) ;
     }
     /* TODO: maybe this should return VERS_PROPRIETARY instead? */
     if (!attval || !attval->dict)
@@ -2151,6 +2194,98 @@ AttVal *SortAttVal( AttVal *list, TidyAttrSortStrategy strat)
         /* Otherwise repeat, merging lists twice the size */
         insize *= 2;
     }
+}
+
+/* RDFA support checkers
+ *
+ */
+
+/* CheckRDFAPrefix - ensure the prefix attribute value is
+ * correct
+ *
+ * @prefix takes prefix value pairs in the form:
+ * 
+ *      NCName ':' ' '+ AnyURI
+ */
+
+void CheckRDFaPrefix ( TidyDocImpl* doc, Node *node, AttVal *attval)
+{
+    if (!AttrHasValue(attval))
+    {
+        TY_(ReportAttrError)( doc, node, attval, MISSING_ATTR_VALUE);
+        return;
+    }
+
+    /* Copy the attribute value so we can split it */
+    if (attval->value) {
+        tmbstr t, tPtr ;
+
+        uint prefixCount = 0;
+        /* isPrefix toggles - start at 1 and change to 0 as we
+         * iterate over the components of the value */
+        uint isPrefix = 1;
+
+        /* Copy it over */
+
+        uint len = TY_(tmbstrlen)(attval->value);
+        tmbstr s = (tmbstr) TidyDocAlloc( doc, len );
+        s[0] = '\0';
+        TY_(tmbstrcpy)( s, attval->value );
+
+        /* iterate over value */
+        tPtr = s;
+
+        while ( ( t = strtok(tPtr, " ") ) != NULL ) {
+            tPtr = NULL;
+            if (isPrefix) {
+                /* this piece should be a prefix */
+                /* prefix rules are that it can have any
+                 * character except a colon - that one must be
+                 * at the end */
+                tmbstr i = strchr(t, ':') ;
+                if (i == NULL) {
+                    /* no colon - bad! */
+                    TY_(ReportAttrError)( doc, node, attval, BAD_ATTRIBUTE_VALUE);
+                } else if (i != ( t + TY_(tmbstrlen)(t) - 1) ) {
+                    /* not at the end - also bad */
+                    TY_(ReportAttrError)( doc, node, attval, BAD_ATTRIBUTE_VALUE);
+                }
+            } else {
+                /* this piece should be a URL */
+                prefixCount ++;
+            }
+            isPrefix = !isPrefix;
+        }
+        TidyDocFree( doc, s ) ;
+    }
+}
+
+/* CheckRDFaTerm - are terms valid
+ *
+ */
+
+void CheckRDFaTerm ( TidyDocImpl* doc, Node *node, AttVal *attval)
+{
+    if (!AttrHasValue(attval))
+    {
+        TY_(ReportAttrError)( doc, node, attval, MISSING_ATTR_VALUE);
+        return;
+    }
+
+}
+
+/* CheckRDFaSafeCURIE - is a CURIE legal
+ *
+ */
+
+void CheckRDFaSafeCURIE ( TidyDocImpl* doc, Node *node, AttVal *attval)
+{
+    if (!AttrHasValue(attval))
+    {
+        TY_(ReportAttrError)( doc, node, attval, MISSING_ATTR_VALUE);
+        return;
+    }
+
 }
 
 /*

@@ -946,6 +946,8 @@ static void EncodeLatin0( uint c, StreamOut* out )
     PutByte(c, out);
 }
 
+#if 0 /* 000000000000000000000000000000000000000 */
+
 /*
    Table to map symbol font characters to Unicode; undefined
    characters are mapped to 0x0000 and characters without any
@@ -1003,7 +1005,6 @@ static const uint Symbol2Unicode[] =
     0x003F, 0x003F, 0x003F, 0x003F, 0x003F, 0x003F, 0x003F, 0x003F
 };
 
-#if 0
 /* Function to convert from Symbol Font chars to Unicode */
 uint DecodeSymbolFont(uint c)
 {
@@ -1014,7 +1015,7 @@ uint DecodeSymbolFont(uint c)
 
     return Symbol2Unicode[c];
 }
-#endif
+#endif /* #if 0 000000000000000000000000000000000000000 */
 
 
 /* Facilitates user defined source by providing

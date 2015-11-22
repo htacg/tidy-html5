@@ -1337,6 +1337,8 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
          *  Issue #307 - an <A> tag to ends any open <A> element
          *  Like #427827 - fixed by Randy Waki and Bjoern Hoehrmann 23 Aug 00
          *  in ParseInline(), fix copied HERE to ParseBlock()
+         *  href: http://www.w3.org/TR/html-markup/a.html
+         *  The interactive element a must not appear as a descendant of the a element.
         \*/
         if ( nodeIsA(node) && !node->implicit && 
              (nodeIsA(element) || DescendantOf(element, TidyTag_A)) )

@@ -100,7 +100,7 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
     int col  = ( doc->lexer ? doc->lexer->columns : 0 );
     SPRTF("R=%d C=%d: ", line, col );
     // DEBUG: Be able to set a TRAP on a SPECIFIC row,col
-    if ((line == 9) && (col == 5)) {
+    if ((line == 8) && (col == 36)) {
         check_me("Show_Node"); // just a debug trap
     }
     if (lexer && lexer->token && 

@@ -1333,6 +1333,36 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
             }
         }
 
+        /*\
+         *  Issue #307 - an <A> tag to ends any open <A> element
+         *  Like #427827 - fixed by Randy Waki and Bjoern Hoehrmann 23 Aug 00
+         *  in ParseInline(), fix copied HERE to ParseBlock()
+        \*/
+        if ( nodeIsA(node) && !node->implicit && 
+             (nodeIsA(element) || DescendantOf(element, TidyTag_A)) )
+        {
+            if (node->type != EndTag && node->attributes == NULL
+                && cfgBool(doc, TidyCoerceEndTags) )
+            {
+                node->type = EndTag;
+                TY_(ReportError)(doc, element, node, COERCE_TO_ENDTAG);
+                TY_(UngetToken)( doc );
+                continue;
+            }
+
+            TY_(UngetToken)( doc );
+            TY_(ReportError)(doc, element, node, MISSING_ENDTAG_BEFORE);
+
+            if (!(mode & Preformatted))
+                TrimSpaces(doc, element);
+
+#if !defined(NDEBUG) && defined(_MSC_VER)
+            in_parse_block--;
+            SPRTF("Exit ParseBlock 9b %d...\n",in_parse_block);
+#endif
+            return;
+        }
+
         /* parse known element */
         if (TY_(nodeIsElement)(node))
         {

@@ -2228,7 +2228,7 @@ void CheckRDFaPrefix ( TidyDocImpl* doc, Node *node, AttVal *attval)
         /* Copy it over */
 
         uint len = TY_(tmbstrlen)(attval->value);
-        tmbstr s = (tmbstr) TidyDocAlloc( doc, len );
+        tmbstr s = (tmbstr) TidyDocAlloc( doc, len + 1 );
         s[0] = '\0';
         TY_(tmbstrcpy)( s, attval->value );
 

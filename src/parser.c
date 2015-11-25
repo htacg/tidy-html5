@@ -1352,7 +1352,10 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                 continue;
             }
 
-            TY_(UngetToken)( doc );
+            if (nodeIsA(element))
+            {
+                TY_(UngetToken)( doc );
+            }
             TY_(ReportError)(doc, element, node, MISSING_ENDTAG_BEFORE);
 
             if (!(mode & Preformatted))

@@ -1206,7 +1206,10 @@ Bool ParseCSS1Selector( TidyDocImpl* doc, const TidyOptionImpl* option )
     }
     buf[i] = '\0';
 
-    if ( i == 0 || !TY_(IsCSS1Selector)(buf) ) {
+    if ( i == 0 ) {
+        return no;
+    }
+    else if ( !TY_(IsCSS1Selector)(buf) ) {
         TY_(ReportBadArgument)( doc, option->name );
         return no;
     }

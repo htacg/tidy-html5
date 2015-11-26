@@ -120,25 +120,26 @@ void TY_(ReportFatal)(TidyDocImpl* doc, Node* element, Node* node, uint code);
 
 #define UNKNOWN_ATTRIBUTE            48
 #define INSERTING_ATTRIBUTE          49
-#define MISSING_ATTR_VALUE           50
-#define BAD_ATTRIBUTE_VALUE          51
-#define UNEXPECTED_GT                52
-#define PROPRIETARY_ATTRIBUTE        53
-#define PROPRIETARY_ATTR_VALUE       54
-#define REPEATED_ATTRIBUTE           55
-#define MISSING_IMAGEMAP             56
-#define XML_ATTRIBUTE_VALUE          57
-#define UNEXPECTED_QUOTEMARK         58
-#define MISSING_QUOTEMARK            59
-#define ID_NAME_MISMATCH             60
+#define INSERTING_AUTO_ATTRIBUTE     50
+#define MISSING_ATTR_VALUE           51
+#define BAD_ATTRIBUTE_VALUE          52
+#define UNEXPECTED_GT                53
+#define PROPRIETARY_ATTRIBUTE        54
+#define PROPRIETARY_ATTR_VALUE       55
+#define REPEATED_ATTRIBUTE           56
+#define MISSING_IMAGEMAP             57
+#define XML_ATTRIBUTE_VALUE          58
+#define UNEXPECTED_QUOTEMARK         59
+#define MISSING_QUOTEMARK            60
+#define ID_NAME_MISMATCH             61
 
-#define BACKSLASH_IN_URI             61
-#define FIXED_BACKSLASH              62
-#define ILLEGAL_URI_REFERENCE        63
-#define ESCAPED_ILLEGAL_URI          64
+#define BACKSLASH_IN_URI             62
+#define FIXED_BACKSLASH              63
+#define ILLEGAL_URI_REFERENCE        64
+#define ESCAPED_ILLEGAL_URI          65
 
-#define NEWLINE_IN_URI               65
-#define ANCHOR_NOT_UNIQUE            66
+#define NEWLINE_IN_URI               66
+#define ANCHOR_NOT_UNIQUE            67
 
 #define JOINING_ATTRIBUTE            68
 #define UNEXPECTED_EQUALSIGN         69

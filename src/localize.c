@@ -68,7 +68,7 @@ static struct _msgfmt
 
   /* attribute name */
   { INSERTING_ATTRIBUTE,          "%s inserting \"%s\" attribute"                                           }, /* Warning in CheckLINK, Error otherwise */
-  { INSERTING_AUTO_ATTRIBUTE,     "%s inserting \"%s\" attribute using value \"%s\""                        }, /* Error */
+  { INSERTING_AUTO_ATTRIBUTE,     "%s inserting \"%s\" attribute using value \"%s\""                        }, /* Warning */
   { MISSING_ATTR_VALUE,           "%s attribute \"%s\" lacks value"                                         }, /* Warning in CheckUrl, Error otherwise */
   { UNKNOWN_ATTRIBUTE,            "%s unknown attribute \"%s\""                                             }, /* Error */
   { PROPRIETARY_ATTRIBUTE,        "%s proprietary attribute \"%s\""                                         }, /* Error */

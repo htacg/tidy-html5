@@ -852,14 +852,15 @@ void CheckIMG( TidyDocImpl* doc, Node *node )
 
     if ( !HasAlt )
     {
-        if ( cfg(doc, TidyAccessibilityCheckLevel) == 0 && !cfgStr(doc, TidyAltText) )
+        ctmbstr alttext = cfgStr(doc, TidyAltText);
+        if ( ( cfg(doc, TidyAccessibilityCheckLevel) == 0 ) && ( !alttext ) )
         {
             doc->badAccess |= BA_MISSING_IMAGE_ALT;
             TY_(ReportMissingAttr)( doc, node, "alt" );
         }
 
-        if ( cfgStr(doc, TidyAltText) ) {
-            AttVal *attval = TY_(AddAttribute)( doc, node, "alt", cfgStr(doc, TidyAltText) );
+        if ( alttext ) {
+            AttVal *attval = TY_(AddAttribute)( doc, node, "alt", alttext );
             TY_(ReportAttrError)( doc, node, attval, INSERTING_AUTO_ATTRIBUTE);
         }
     }

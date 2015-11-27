@@ -68,6 +68,7 @@ static struct _msgfmt
 
   /* attribute name */
   { INSERTING_ATTRIBUTE,          "%s inserting \"%s\" attribute"                                           }, /* Warning in CheckLINK, Error otherwise */
+  { INSERTING_AUTO_ATTRIBUTE,     "%s inserting \"%s\" attribute using value \"%s\""                        }, /* Warning */
   { MISSING_ATTR_VALUE,           "%s attribute \"%s\" lacks value"                                         }, /* Warning in CheckUrl, Error otherwise */
   { UNKNOWN_ATTRIBUTE,            "%s unknown attribute \"%s\""                                             }, /* Error */
   { PROPRIETARY_ATTRIBUTE,        "%s proprietary attribute \"%s\""                                         }, /* Error */
@@ -400,9 +401,11 @@ static const TidyOptionDoc option_docs[] =
   },
   {TidyAltText,
    "This option specifies the default <code>alt=</code> text Tidy uses for "
-   "<code>&lt;img&gt;</code> attributes. "
+   "<code>&lt;img&gt;</code> attributes when the <code>alt=</code> attribute "
+   "is missing. "
    "<br/>"
-   "Use with care, as this feature suppresses further accessibility warnings. "
+   "Use with care, as it is your responsibility to make your documents accessible "
+   "to people who cannot see the images. "
   },
   {TidyXmlPIs,
    "This option specifies if Tidy should change the parsing of processing "
@@ -1549,6 +1552,7 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
     case BAD_ATTRIBUTE_VALUE:
     case BAD_ATTRIBUTE_VALUE_REPLACED:
     case INVALID_ATTRIBUTE:
+    case INSERTING_AUTO_ATTRIBUTE:
         messageNode(doc, TidyWarning, node, fmt, tagdesc, name, value);
         break;
 

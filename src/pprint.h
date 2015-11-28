@@ -53,6 +53,7 @@ typedef struct _TidyPrintImpl
     uint lbufsize;
     uint linelen;
     uint wraphere;
+    uint line;
   
     uint ixInd;
     TidyIndent indent[2];  /* Two lines worth of indent state */

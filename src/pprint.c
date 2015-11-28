@@ -2118,15 +2118,13 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
     Node *content, *last;
     uint spaces = cfg( doc, TidyIndentSpaces );
     Bool xhtml = cfgBool( doc, TidyXhtmlOut );
-    uint lastline = 0;
 
     if ( node == NULL )
         return;
 
     if (doc->progressCallback)
     {
-        if (doc->pprint.line > lastline)
-            doc->progressCallback( tidyImplToDoc(doc), node->line, node->column, doc->pprint.line );
+        doc->progressCallback( tidyImplToDoc(doc), node->line, node->column, doc->pprint.line );
     }
 
     if (node->type == TextNode)

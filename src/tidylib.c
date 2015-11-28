@@ -752,6 +752,19 @@ int TIDY_CALL    tidySetErrorSink( TidyDoc tdoc, TidyOutputSink* sink )
     return -EINVAL;
 }
 
+/* Use TidyPPProgress to monitor the progress of the pretty printer.
+ */
+Bool TIDY_CALL        tidySetPrettyPrinterCallback(TidyDoc tdoc, TidyPPProgress callback)
+{
+    TidyDocImpl* impl = tidyDocToImpl( tdoc );
+    if ( impl )
+    {
+        impl->progressCallback = callback;
+        return yes;
+    }
+    return no;
+}
+
 
 /* Document info */
 int TIDY_CALL        tidyStatus( TidyDoc tdoc )

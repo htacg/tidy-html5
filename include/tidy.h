@@ -666,7 +666,7 @@ TIDY_EXPORT int TIDY_CALL     tidySetErrorSink( TidyDoc tdoc, TidyOutputSink* si
 /** Callback to track the progress of the pretting printing process.
 **
 */
-typedef Bool (TIDY_CALL *TidyPPProgress)( TidyDoc tdoc, uint line, uint col, uint destLine );
+typedef void (TIDY_CALL *TidyPPProgress)( TidyDoc tdoc, uint line, uint col, uint destLine );
 
 TIDY_EXPORT Bool TIDY_CALL   tidySetPrettyPrinterCallback( TidyDoc tdoc,
                                                   TidyPPProgress callback );

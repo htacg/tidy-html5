@@ -469,7 +469,7 @@ extern "C" {
 */
 #if defined(_WIN32) && !defined(__MSL__) && !defined(__BORLANDC__)
 
-#ifndef __WATCOMC__
+#if !(defined(__WATCOMC__) || defined(__MINGW32__))
 #define fileno _fileno
 #define setmode _setmode
 #endif

@@ -191,41 +191,52 @@ typedef enum {
 typedef enum {
     ACCESS_URL = 2048,          /* Used to point to Web Accessibility Guidelines. */
     ATRC_ACCESS_URL,            /* Points to Tidy's accessibility page. */
-    LINE_COLUMN_STRING,         /* For retrieving localized `line %d column %d` text. */
     FILE_CANT_OPEN,             /* For retrieving a string when a file can't be opened. */
-    STRING_PLAIN_TEXT,          /* For retrieving a string `plain text`. */
-    STRING_XML_DECLARATION,     /* For retrieving a string `XML declaration`. */
-    STRING_UNKNOWN_OPTION,      /* For retrieving a string `unknown option: %s`. */
-    STRING_MISSING_MALFORMED,   /* For `missing or malformed argument for option: %s`. */
+    LINE_COLUMN_STRING,         /* For retrieving localized `line %d column %d` text. */
+    STRING_CONTENT_LOOKS,       /* `Document content looks like %s`. */
     STRING_DISCARDING,          /* For `discarding`. */
+    STRING_DOCTYPE_GIVEN,       /* `Doctype given is \"%s\". */
+    STRING_ERROR,               /* `error`. */
+    STRING_ERROR_COUNT,         /* `%u %s, %u %s were found!`. */
+    STRING_ERROR_PLURAL,        /* `errors`. */
+    STRING_HELLO_ACCESS,        /* Accessibility hello message. */
+    STRING_HTML_PROPRIETARY,    /* `HTML Proprietary`/ */
+    STRING_MISSING_MALFORMED,   /* For `missing or malformed argument for option: %s`. */
+    STRING_NO_ERRORS,           /* `No warnings or errors were found.\n\n`. */
+    STRING_NO_SYSID,            /* `No system identifier in emitted doctype`. */
+    STRING_NOT_ALL_SHOWN,       /* ` Not all warnings/errors were shown.\n\n`. */
+    STRING_PLAIN_TEXT,          /* For retrieving a string `plain text`. */
     STRING_REPLACING,           /* For `replacing`. */
     STRING_SPECIFIED,           /* For `specified`. */
-    STRING_UNRECZD_OPTION,      /* `unrecognized option -%c use -help to list options\n`. */
     STRING_UNKNOWN_FILE,        /* `%s: can't open file \"%s\"\n`. */
-    STRING_HELLO_ACCESS,        /* Accessibility hello message. */
-    TEXT_HTML_T_ALGORITHM,      /* Paragraph for describing the HTML table algorithm. */
-    TEXT_WINDOWS_CHARS,         /* Explanatory text. */
-    TEXT_VENDOR_CHARS,          /* Explanatory text. */
-    TEXT_SGML_CHARS,            /* Explanatory text. */
-    TEXT_INVALID_UTF8,          /* Explanatory text. */
-    TEXT_INVALID_UTF16,         /* Explanatory text. */
-    TEXT_INVALID_URI,           /* Explanatory text. */
+    STRING_UNKNOWN_OPTION,      /* For retrieving a string `unknown option: %s`. */
+    STRING_UNRECZD_OPTION,      /* `unrecognized option -%c use -help to list options\n`. */
+    STRING_WARNING,             /* `warning`. */
+    STRING_WARNING_PLURAL,      /* `warnings`. */
+    STRING_XML_DECLARATION,     /* For retrieving a string `XML declaration`. */
+    TEXT_ACCESS_ADVICE1,        /* Explanatory text. */
+    TEXT_ACCESS_ADVICE2,        /* Explanatory text. */
     TEXT_BAD_FORM,              /* Explanatory text. */
     TEXT_BAD_MAIN,              /* Explanatory text. */
-    TEXT_M_SUMMARY,             /* Explanatory text. */
+    TEXT_GENERAL_INFO,          /* Explanatory text. */
+    TEXT_HTML_T_ALGORITHM,      /* Paragraph for describing the HTML table algorithm. */
+    TEXT_INVALID_URI,           /* Explanatory text. */
+    TEXT_INVALID_UTF16,         /* Explanatory text. */
+    TEXT_INVALID_UTF8,          /* Explanatory text. */
     TEXT_M_IMAGE_ALT,           /* Explanatory text. */
     TEXT_M_IMAGE_MAP,           /* Explanatory text. */
     TEXT_M_LINK_ALT,            /* Explanatory text. */
-    TEXT_USING_FRAMES,          /* Explanatory text. */
-    TEXT_ACCESS_ADVICE1,        /* Explanatory text. */
-    TEXT_ACCESS_ADVICE2,        /* Explanatory text. */
-    TEXT_USING_LAYER,           /* Explanatory text. */
-    TEXT_USING_SPACER,          /* Explanatory text. */
-    TEXT_USING_FONT,            /* Explanatory text. */
-    TEXT_USING_NOBR,            /* Explanatory text. */
-    TEXT_USING_BODY,            /* Explanatory text. */
+    TEXT_M_SUMMARY,             /* Explanatory text. */
     TEXT_NEEDS_INTERVENTION,    /* Explanatory text. */
-    TEXT_GENERAL_INFO           /* Explanatory text. */
+    TEXT_SGML_CHARS,            /* Explanatory text. */
+    TEXT_USING_BODY,            /* Explanatory text. */
+    TEXT_USING_FONT,            /* Explanatory text. */
+    TEXT_USING_FRAMES,          /* Explanatory text. */
+    TEXT_USING_LAYER,           /* Explanatory text. */
+    TEXT_USING_NOBR,            /* Explanatory text. */
+    TEXT_USING_SPACER,          /* Explanatory text. */
+    TEXT_VENDOR_CHARS,          /* Explanatory text. */
+    TEXT_WINDOWS_CHARS          /* Explanatory text. */
 } tidyMessagesMisc;
 
 /* accessibility flaws */

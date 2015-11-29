@@ -988,7 +988,7 @@ void TY_(ReportMarkupVersion)( TidyDocImpl* doc )
     if (doc->givenDoctype)
     {
         /* todo: deal with non-ASCII characters in FPI */
-        message(doc, TidyInfo, "Doctype given is \"%s\"", doc->givenDoctype);
+        message(doc, TidyInfo, tidyLocalizedString(STRING_DOCTYPE_GIVEN), doc->givenDoctype);
     }
 
     if ( ! cfgBool(doc, TidyXmlTags) )
@@ -1002,13 +1002,13 @@ void TY_(ReportMarkupVersion)( TidyDocImpl* doc )
         vers = TY_(HTMLVersionNameFromCode)( apparentVers, isXhtml );
 
         if (!vers)
-            vers = "HTML Proprietary";
+            vers = tidyLocalizedString(STRING_HTML_PROPRIETARY);
 
-        message( doc, TidyInfo, "Document content looks like %s", vers );
+        message( doc, TidyInfo, tidyLocalizedString(STRING_CONTENT_LOOKS), vers );
 
         /* Warn about missing sytem identifier (SI) in emitted doctype */
         if ( TY_(WarnMissingSIInEmittedDocType)( doc ) )
-            message( doc, TidyInfo, "No system identifier in emitted doctype" );
+            message( doc, TidyInfo, "%s", tidyLocalizedString(STRING_NO_SYSID) );
     }
 }
 
@@ -1016,18 +1016,18 @@ void TY_(ReportNumWarnings)( TidyDocImpl* doc )
 {
     if ( doc->warnings > 0 || doc->errors > 0 )
     {
-        tidy_out( doc, "%u %s, %u %s were found!",
-                  doc->warnings, doc->warnings == 1 ? "warning" : "warnings",
-                  doc->errors, doc->errors == 1 ? "error" : "errors" );
+        tidy_out( doc, tidyLocalizedString(STRING_ERROR_COUNT),
+                  doc->warnings, tidyLocalizedString(doc->warnings == 1 ? STRING_WARNING : STRING_WARNING_PLURAL),
+                  doc->errors, tidyLocalizedString(doc->errors == 1 ? STRING_ERROR : STRING_ERROR_PLURAL) );
 
         if ( doc->errors > cfg(doc, TidyShowErrors) ||
              !cfgBool(doc, TidyShowWarnings) )
-            tidy_out( doc, " Not all warnings/errors were shown.\n\n" );
+            tidy_out( doc, "%s", tidyLocalizedString(STRING_NOT_ALL_SHOWN) );
         else
             tidy_out( doc, "\n\n" );
     }
     else
-        tidy_out( doc, "No warnings or errors were found.\n\n" );
+        tidy_out( doc, "%s", tidyLocalizedString(STRING_NO_ERRORS) );
 }
 
 /*

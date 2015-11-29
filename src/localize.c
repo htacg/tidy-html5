@@ -953,70 +953,35 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
 #if 0
 void TY_(UnknownOption)( TidyDocImpl* doc, char c )
 {
-    message( doc, TidyConfig,
-             "unrecognized option -%c use -help to list options\n", c );
+    message( doc, TidyConfig, tidyLocalizedString(STRING_UNRECZD_OPTION), c );
 }
 
 void TY_(UnknownFile)( TidyDocImpl* doc, ctmbstr program, ctmbstr file )
 {
-    message( doc, TidyConfig, 
-             "%s: can't open file \"%s\"\n", program, file );
+    message( doc, TidyConfig, tidyLocalizedString(STRING_UNKNOWN_FILE), program, file );
 }
 #endif
 
 void TY_(NeedsAuthorIntervention)( TidyDocImpl* doc )
 {
-    tidy_out(doc, "This document has errors that must be fixed before\n");
-    tidy_out(doc, "using HTML Tidy to generate a tidied up version.\n\n");
+    tidy_out(doc, "%s", tidyLocalizedString(TEXT_NEEDS_INTERVENTION));
 }
 
 void TY_(GeneralInfo)( TidyDocImpl* doc )
 {
     if (!cfgBool(doc, TidyShowInfo)) return;
-    tidy_out(doc, "About HTML Tidy: https://github.com/htacg/tidy-html5\n");
-    tidy_out(doc, "Bug reports and comments: https://github.com/htacg/tidy-html5/issues\n");
-    tidy_out(doc, "Or send questions and comments to: https://lists.w3.org/Archives/Public/public-htacg/\n");
-    tidy_out(doc, "Latest HTML specification: http://dev.w3.org/html5/spec-author-view/\n");
-    tidy_out(doc, "Validate your HTML documents: http://validator.w3.org/nu/\n");
-    tidy_out(doc, "Lobby your company to join the W3C: http://www.w3.org/Consortium\n");
+    tidy_out(doc, "%s", tidyLocalizedString(TEXT_GENERAL_INFO));
 }
 
 #if SUPPORT_ACCESSIBILITY_CHECKS
 
 void TY_(AccessibilityHelloMessage)( TidyDocImpl* doc )
 {
-    tidy_out( doc, "\n" );
-    tidy_out( doc, "Accessibility Checks: Version 0.1\n" );
-    tidy_out( doc, "\n" );
+    tidy_out(doc, "%s", tidyLocalizedString(STRING_HELLO_ACCESS));
 }
 
 #endif /* SUPPORT_ACCESSIBILITY_CHECKS */
 
-#if 0
-void TY_(HelloMessage)( TidyDocImpl* doc, ctmbstr date, ctmbstr filename )
-{
-    tmbchar buf[ 2048 ];
-    ctmbstr platform = "", helper = "";
-    ctmbstr msgfmt = "\nHTML Tidy for %s (vers %s; built on %s, at %s)\n"
-                  "Parsing \"%s\"\n";
-
-#ifdef PLATFORM_NAME
-    platform = PLATFORM_NAME;
-    helper = " for ";
-#endif
-    
-    if ( TY_(tmbstrcmp)(filename, "stdin") == 0 )
-    {
-        /* Filename will be ignored at end of varargs */
-        msgfmt = "\nHTML Tidy for %s (vers %s; built on %s, at %s)\n"
-                 "Parsing console input (stdin)\n";
-    }
-    
-    TY_(tmbsnprintf)(buf, sizeof(buf), msgfmt, helper, platform, 
-                     date, __DATE__, __TIME__, filename);
-    tidy_out( doc, buf );
-}
-#endif
 
 void TY_(ReportMarkupVersion)( TidyDocImpl* doc )
 {

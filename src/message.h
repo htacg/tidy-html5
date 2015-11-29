@@ -31,7 +31,6 @@ void TY_(ReportUnknownOption)( TidyDocImpl* doc, ctmbstr option );
 void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option );
 void TY_(NeedsAuthorIntervention)( TidyDocImpl* doc );
 
-/* void TY_(HelloMessage)( TidyDocImpl* doc, ctmbstr date, ctmbstr filename ); */
 void TY_(ReportMarkupVersion)( TidyDocImpl* doc );
 void TY_(ReportNumWarnings)( TidyDocImpl* doc );
 
@@ -201,6 +200,9 @@ typedef enum {
     STRING_DISCARDING,          /* For `discarding`. */
     STRING_REPLACING,           /* For `replacing`. */
     STRING_SPECIFIED,           /* For `specified`. */
+    STRING_UNRECZD_OPTION,      /* `unrecognized option -%c use -help to list options\n`. */
+    STRING_UNKNOWN_FILE,        /* `%s: can't open file \"%s\"\n`. */
+    STRING_HELLO_ACCESS,        /* Accessibility hello message. */
     TEXT_HTML_T_ALGORITHM,      /* Paragraph for describing the HTML table algorithm. */
     TEXT_WINDOWS_CHARS,         /* Explanatory text. */
     TEXT_VENDOR_CHARS,          /* Explanatory text. */
@@ -221,7 +223,9 @@ typedef enum {
     TEXT_USING_SPACER,          /* Explanatory text. */
     TEXT_USING_FONT,            /* Explanatory text. */
     TEXT_USING_NOBR,            /* Explanatory text. */
-    TEXT_USING_BODY             /* Explanatory text. */
+    TEXT_USING_BODY,            /* Explanatory text. */
+    TEXT_NEEDS_INTERVENTION,    /* Explanatory text. */
+    TEXT_GENERAL_INFO           /* Explanatory text. */
 } tidyMessagesMisc;
 
 /* accessibility flaws */

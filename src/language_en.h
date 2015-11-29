@@ -39,6 +39,10 @@ static languageDictionary language_en = {
     { STRING_DISCARDING,            "discarding"                                                              },
     { STRING_REPLACING,             "replacing"                                                               },
     { STRING_SPECIFIED,             "specified"                                                               },
+    { STRING_UNRECZD_OPTION,        "unrecognized option -%c use -help to list options\n"                     },
+    { STRING_UNKNOWN_FILE,          "%s: can't open file \"%s\"\n"                                            },
+    { STRING_HELLO_ACCESS,          "\nAccessibility Checks: Version 0.1\n\n"                                 },
+
     { TEXT_HTML_T_ALGORITHM,
         " \n"
         "      - First, search left from the cell's position to find row header cells.\n"
@@ -176,6 +180,18 @@ static languageDictionary language_en = {
     },
     { TEXT_USING_BODY,
         "You are recommended to use CSS to specify page and link colors\n"
+    },
+    { TEXT_NEEDS_INTERVENTION,
+        "This document has errors that must be fixed before\n"
+        "using HTML Tidy to generate a tidied up version.\n\n"
+    },
+    { TEXT_GENERAL_INFO,
+        "About HTML Tidy: https://github.com/htacg/tidy-html5\n"
+        "Bug reports and comments: https://github.com/htacg/tidy-html5/issues\n"
+        "Or send questions and comments to: https://lists.w3.org/Archives/Public/public-htacg/\n"
+        "Latest HTML specification: http://dev.w3.org/html5/spec-author-view/\n"
+        "Validate your HTML documents: http://validator.w3.org/nu/\n"
+        "Lobby your company to join the W3C: http://www.w3.org/Consortium\n"
     },
 
     /*****************************

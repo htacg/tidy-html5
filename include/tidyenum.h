@@ -288,7 +288,7 @@ typedef enum
 */
 
 /** Message severity level
- *  These TidyOptionId are used throughout libtidy, but don't
+ *  These TidyReportLevel are used throughout libtidy, but don't
  *  have associated localized strings to describe them because
  *  TidyReportLevel is externally-facing, and changing the enum
  *  starting int can break existing API's for poorly-written
@@ -306,11 +306,9 @@ typedef enum
 } TidyReportLevel;
 
 /** Message severity level - string lookup keys
- *  These TidyOptionId are used throughout libtidy, but don't
- *  have associated localized strings to describe them because
- *  TidyReportLevel is externally-facing, and changing the enum
- *  starting int can break existing API's for poorly-written
- *  applications using libtidy. See enum `TidyReportLevelKeys`.
+ *  These TidyReportLevelKeys are used throughout libtidy, and
+ *  have associated localized strings to describe them. They
+ *  correspond to enum `TidyReportLevel`.
 */
 typedef enum
 {

@@ -631,6 +631,9 @@ TIDY_EXPORT Bool TIDY_CALL tidyInitSink( TidyOutputSink* sink,
 TIDY_EXPORT void TIDY_CALL tidyPutByte( TidyOutputSink* sink, uint byteValue );
 
 
+/****************
+   Errors
+****************/
 /** Callback to filter messages by diagnostic level:
 **  info, warning, etc.  Just set diagnostic output 
 **  handler to redirect all diagnostics output.  Return true
@@ -655,6 +658,18 @@ TIDY_EXPORT FILE* TIDY_CALL   tidySetErrorFile( TidyDoc tdoc, ctmbstr errfilnam 
 TIDY_EXPORT int TIDY_CALL     tidySetErrorBuffer( TidyDoc tdoc, TidyBuffer* errbuf );
 /** Set error sink to given generic sink */
 TIDY_EXPORT int TIDY_CALL     tidySetErrorSink( TidyDoc tdoc, TidyOutputSink* sink );
+
+
+/****************
+   Printing
+****************/
+/** Callback to track the progress of the pretting printing process.
+**
+*/
+typedef void (TIDY_CALL *TidyPPProgress)( TidyDoc tdoc, uint line, uint col, uint destLine );
+
+TIDY_EXPORT Bool TIDY_CALL   tidySetPrettyPrinterCallback( TidyDoc tdoc,
+                                                  TidyPPProgress callback );
 
 /** @} end IO group */
 

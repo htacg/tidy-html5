@@ -312,6 +312,7 @@ void TY_(InitPrintBuf)( TidyDocImpl* doc )
     InitIndent( &doc->pprint.indent[0] );
     InitIndent( &doc->pprint.indent[1] );
     doc->pprint.allocator = doc->allocator;
+    doc->pprint.line = 0;
 }
 
 void TY_(FreePrintBuf)( TidyDocImpl* doc )
@@ -613,6 +614,7 @@ static void WrapLine( TidyDocImpl* doc )
         TY_(WriteChar)( '\\', doc->docOut );
 
     TY_(WriteChar)( '\n', doc->docOut );
+    pprint->line++;
     ResetLineAfterWrap( pprint );
 }
 
@@ -666,6 +668,7 @@ static void WrapAttrVal( TidyDocImpl* doc )
         TY_(WriteChar)( ' ', doc->docOut );
 
     TY_(WriteChar)( '\n', doc->docOut );
+    pprint->line++;
     ResetLineAfterWrap( pprint );
 }
 
@@ -686,7 +689,7 @@ static void PFlushLineImpl( TidyDocImpl* doc )
 
     for ( i = 0; i < pprint->linelen; ++i )
         TY_(WriteChar)( pprint->linebuf[i], doc->docOut );
-    
+
     if ( IsInString(pprint) )
         TY_(WriteChar)( '\\', doc->docOut );
     ResetLine( pprint );
@@ -701,6 +704,7 @@ void TY_(PFlushLine)( TidyDocImpl* doc, uint indent )
         PFlushLineImpl( doc );
 
     TY_(WriteChar)( '\n', doc->docOut );
+    pprint->line++;
     pprint->indent[ 0 ].spaces = indent;
 }
 
@@ -713,6 +717,7 @@ static void PCondFlushLine( TidyDocImpl* doc, uint indent )
          PFlushLineImpl( doc );
 
          TY_(WriteChar)( '\n', doc->docOut );
+         pprint->line++;
          pprint->indent[ 0 ].spaces = indent;
     }
 }
@@ -733,6 +738,7 @@ void TY_(PFlushLineSmart)( TidyDocImpl* doc, uint indent )
     /* Issue #228 - cfgBool( doc, TidyVertSpace ); */
     if(TidyAddVS) {
         TY_(WriteChar)( '\n', doc->docOut );
+        pprint->line++;
     }
 
     pprint->indent[ 0 ].spaces = indent;
@@ -749,6 +755,7 @@ static void PCondFlushLineSmart( TidyDocImpl* doc, uint indent )
          /* Issue #228 - cfgBool( doc, TidyVertSpace ); */
          if(TidyAddVS) {
             TY_(WriteChar)( '\n', doc->docOut );
+            pprint->line++;
          }
 
          pprint->indent[ 0 ].spaces = indent;
@@ -2115,6 +2122,11 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
     if ( node == NULL )
         return;
 
+    if (doc->progressCallback)
+    {
+        doc->progressCallback( tidyImplToDoc(doc), node->line, node->column, doc->pprint.line + 1 );
+    }
+
     if (node->type == TextNode)
     {
         PPrintText( doc, mode, indent, node );
@@ -2379,6 +2391,11 @@ void TY_(PPrintXMLTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
     if (node == NULL)
         return;
 
+    if (doc->progressCallback)
+    {
+        doc->progressCallback( tidyImplToDoc(doc), node->line, node->column, doc->pprint.line + 1 );
+    }
+    
     if ( node->type == TextNode)
     {
         PPrintText( doc, mode, indent, node );

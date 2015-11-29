@@ -59,6 +59,7 @@ struct _TidyDocImpl
     TidyReportFilter    mssgFilt;
     TidyReportFilter2   mssgFilt2;
     TidyOptCallback     pOptCallback;
+    TidyPPProgress      progressCallback;
 
     /* Parse + Repair Results */
     uint                optionErrors;

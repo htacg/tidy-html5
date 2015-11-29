@@ -18,16 +18,6 @@
 #if !defined(NDEBUG) && defined(_MSC_VER)
 #include "sprtf.h"
 #endif
-
-/* used to point to Web Accessibility Guidelines */
-#define ACCESS_URL  "http://www.w3.org/WAI/GL"
-
-/* points to Tidy's accessibility page, previously available
-** at the Adaptive Technology Resource Centre at the
-** University of Toronto
-*/
-#define ATRC_ACCESS_URL  "http://www.html-tidy.org/accessibility/"
-
 #include "version.h"
 
 ctmbstr TY_(ReleaseDate)(void)
@@ -58,7 +48,7 @@ static struct _msgfmt
   { INVALID_NCR,                  "%s invalid numeric character reference %s"                               }, /* Error */
 
 /* ReportEntityError */
-  { MISSING_SEMICOLON,            "entity \"%s\" doesn't end in ';'"                                        }, /* Warning in HTML, Error in XML/XHTML */
+//  { MISSING_SEMICOLON,            "entity \"%s\" doesn't end in ';'"                                        }, /* Warning in HTML, Error in XML/XHTML */
   { MISSING_SEMICOLON_NCR,        "numeric character reference \"%s\" doesn't end in ';'"                   }, /* Warning in HTML, Error in XML/XHTML */
   { UNESCAPED_AMPERSAND,          "unescaped & which should be written as &amp;"                            }, /* Warning in HTML, Error in XHTML */
   { UNKNOWN_ENTITY,               "unescaped & or unknown entity \"%s\""                                    }, /* Error */
@@ -793,7 +783,7 @@ static const TidyOptionDoc option_docs[] =
    "checking. "
    "<br/>"
    "For more information on Tidy's accessibility checking, visit "
-   "<a href=\"" ATRC_ACCESS_URL "\"> Tidy's Accessibility Page</a>. "
+   "<a href=\"http://www.html-tidy.org/accessibility/\"> Tidy's Accessibility Page</a>. "
   },
   {TidyShowErrors,
    "This option specifies the number Tidy uses to determine if further errors "
@@ -1513,8 +1503,13 @@ void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarde
 void TY_(ReportEntityError)( TidyDocImpl* doc, uint code, ctmbstr entity,
                              int ARG_UNUSED(c) )
 {
+    ctmbstr fmt;
     ctmbstr entityname = ( entity ? entity : "NULL" );
-    ctmbstr fmt = GetFormatFromCode(code);
+
+    /* Fall back to old string lookup method as interim. */
+    if (!(fmt = tidyLocalizedString(code))) {
+        fmt = GetFormatFromCode(code);
+    }
 
     if (fmt)
         messageLexer( doc, TidyWarning, fmt, entityname );
@@ -1998,9 +1993,9 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
         }
 
         tidy_out(doc, "For further advice on how to make your pages accessible\n");
-        tidy_out(doc, "see %s", ACCESS_URL );
+        tidy_out(doc, "see %s", tidyLocalizedString( ACCESS_URL ) );
         if ( cfg(doc, TidyAccessibilityCheckLevel) > 0 )
-            tidy_out(doc, " and %s", ATRC_ACCESS_URL );
+            tidy_out(doc, " and %s", tidyLocalizedString( ATRC_ACCESS_URL ) );
         tidy_out(doc, ".\n" );
     }
 

@@ -56,7 +56,19 @@ ctmbstr tidyLocalizedString( uint messageType )
             return (*current)[i].value;
         }
     }
+
+    /* Fallback to `en` in case a string is missing. */
+    current = &language_en;
+
+    for (i = 0; (*current)[i].value; ++i)
+    {
+        if ((*current)[i].key == messageType)
+        {
+            return (*current)[i].value;
+        }
+    }
     return NULL;
+
 }
 
 

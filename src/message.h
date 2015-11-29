@@ -27,7 +27,6 @@
 
 ctmbstr TY_(ReleaseDate)(void);
 
-/* void TY_(ShowVersion)( TidyDocImpl* doc ); */
 void TY_(ReportUnknownOption)( TidyDocImpl* doc, ctmbstr option );
 void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option );
 void TY_(NeedsAuthorIntervention)( TidyDocImpl* doc );
@@ -66,9 +65,9 @@ void TY_(ReportFatal)(TidyDocImpl* doc, Node* element, Node* node, uint code);
  *  These tidyErrorCodes are used throughout libtidy, and also
  *  have associated localized strings to describe them.
  */
-enum tidyErrorCodes {
+typedef enum {
     /* This MUST be present and first. */
-    CODES_TIDY_ERROR_FIRST = 1,
+    CODES_TIDY_ERROR_FIRST = 200,
 
     /* error codes for entities/numeric character references */
 
@@ -184,7 +183,7 @@ enum tidyErrorCodes {
 
     /* This MUST be present and last. */
     CODES_TIDY_ERROR_LAST
-};
+} tidyErrorCodes;
 
 
 /* accessibility flaws */

@@ -44,14 +44,15 @@ typedef languageDictionaryEntry const languageDictionary[600];
  *  is as follows:
  *    - `tidyMessageTypes` in this file,    start =  4096.
  *    - `accessErrorCodes` from `access.h`, start == 1000.
- *    - `tidyErrorCodes` from `message.h`,  start == 1.
+ *    - `tidyErrorCodes` from `message.h`,  start == 200.
+ *    - `TidyOptionId` from `tidyEnum.h`,   start == 0 (important!).
  *    - ...
  *  You should never count on the value of a label being
  *  constant. Accordingly feel free to arrange new enum
  *  values in the most appropriate grouping below.
  */
 
-enum tidyMessageTypes
+typedef enum
 {
     /* This MUST be present and first. */
     TIDY_MESSAGE_TYPE_FIRST = 4096,
@@ -66,7 +67,7 @@ enum tidyMessageTypes
 
     /* This MUST be present and last. */
     TIDY_MESSAGE_TYPE_LAST
-};
+} tidyMessageTypes;
 
 
 /**

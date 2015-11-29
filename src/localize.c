@@ -112,6 +112,13 @@ const TidyOptionDoc* TY_(OptGetDocDesc)( TidyOptionId optId )
 }
 
 
+/**
+ *  General message utility functions.
+ */
+
+/* Generates the prefix string for message reports based on each
+** message's TidyReportLevel.
+*/
 static char* LevelPrefix( TidyReportLevel level, char* buf, size_t count )
 {
   *buf = 0;
@@ -181,6 +188,10 @@ static Bool UpdateCount( TidyDocImpl* doc, TidyReportLevel level )
   return go;
 }
 
+
+/* Generates the string indicating the source document position for which
+** Tidy has generated a message.
+*/
 static char* ReportPosition(TidyDocImpl* doc, int line, int col, char* buf, size_t count)
 {
     *buf = 0;
@@ -190,16 +201,17 @@ static char* ReportPosition(TidyDocImpl* doc, int line, int col, char* buf, size
         TY_(tmbsnprintf)(buf, count, "%s:%d:%d: ", 
                          cfgStr(doc, TidyEmacsFile), line, col);
     else /* traditional format */
-        TY_(tmbsnprintf)(buf, count, "line %d column %d - ", line, col);
+        TY_(tmbsnprintf)(buf, count, tidyLocalizedString(LINE_COLUMN_STRING), line, col);
     return buf + TY_(tmbstrlen)( buf );
 }
 
-/* General message writing routine.
+
+/* General message writing routines.
 ** Each message is a single warning, error, etc.
 ** 
-** This routine will keep track of counts and,
+** These routines keep track of counts and,
 ** if the caller has set a filter, it will be 
-** called.  The new preferred way of handling
+** called. The new preferred way of handling
 ** Tidy diagnostics output is either a) define
 ** a new output sink or b) install a message
 ** filter routine.
@@ -364,7 +376,7 @@ void tidy_out( TidyDocImpl* doc, ctmbstr msg, ... )
 
 void TY_(FileError)( TidyDocImpl* doc, ctmbstr file, TidyReportLevel level )
 {
-    message( doc, level, "Can't open \"%s\"\n", file );
+    message( doc, level, tidyLocalizedString(FILE_CANT_OPEN), file );
 }
 
 static char* TagToString(Node* tag, char* buf, size_t count)
@@ -379,9 +391,9 @@ static char* TagToString(Node* tag, char* buf, size_t count)
         else if (tag->type == DocTypeTag)
             TY_(tmbsnprintf)(buf, count, "<!DOCTYPE>");
         else if (tag->type == TextNode)
-            TY_(tmbsnprintf)(buf, count, "plain text");
+            TY_(tmbsnprintf)(buf, count, "%s", tidyLocalizedString(STRING_PLAIN_TEXT));
         else if (tag->type == XmlDecl)
-            TY_(tmbsnprintf)(buf, count, "XML declaration");
+            TY_(tmbsnprintf)(buf, count, "%s", tidyLocalizedString(STRING_XML_DECLARATION));
         else if (tag->element)
             TY_(tmbsnprintf)(buf, count, "%s", tag->element);
     }
@@ -392,15 +404,14 @@ static char* TagToString(Node* tag, char* buf, size_t count)
 void TY_(ReportUnknownOption)( TidyDocImpl* doc, ctmbstr option )
 {
     assert( option != NULL );
-    message( doc, TidyConfig, "unknown option: %s", option );
+    message( doc, TidyConfig, tidyLocalizedString(STRING_UNKNOWN_OPTION), option );
 }
 
 /* lexer is not defined when this is called */
 void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option )
 {
     assert( option != NULL );
-    message( doc, TidyConfig,
-             "missing or malformed argument for option: %s", option );
+    message( doc, TidyConfig, tidyLocalizedString(STRING_MISSING_MALFORMED), option );
 }
 
 static void NtoS(int n, tmbstr str)
@@ -446,7 +457,7 @@ void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarde
 {
     char buf[ 32 ] = {'\0'};
 
-    ctmbstr action = discarded ? "discarding" : "replacing";
+    ctmbstr action = tidyLocalizedString(discarded ? STRING_DISCARDING : STRING_REPLACING);
     ctmbstr fmt = tidyLocalizedString(code);
 
     /* An encoding mismatch is currently treated as a non-fatal error */
@@ -598,21 +609,7 @@ void TY_(ReportMissingAttr)( TidyDocImpl* doc, Node* node, ctmbstr name )
  
 void TY_(DisplayHTMLTableAlgorithm)( TidyDocImpl* doc )
 {
-    tidy_out(doc, " \n");
-    tidy_out(doc, "      - First, search left from the cell's position to find row header cells.\n");
-    tidy_out(doc, "      - Then search upwards to find column header cells.\n");
-    tidy_out(doc, "      - The search in a given direction stops when the edge of the table is\n");
-    tidy_out(doc, "        reached or when a data cell is found after a header cell.\n"); 
-    tidy_out(doc, "      - Row headers are inserted into the list in the order they appear in\n");
-    tidy_out(doc, "        the table. \n");
-    tidy_out(doc, "      - For left-to-right tables, headers are inserted from left to right.\n");
-    tidy_out(doc, "      - Column headers are inserted after row headers, in \n");
-    tidy_out(doc, "        the order they appear in the table, from top to bottom. \n");
-    tidy_out(doc, "      - If a header cell has the headers attribute set, then the headers \n");
-    tidy_out(doc, "        referenced by this attribute are inserted into the list and the \n");
-    tidy_out(doc, "        search stops for the current direction.\n");
-    tidy_out(doc, "        TD cells that set the axis attribute are also treated as header cells.\n");
-    tidy_out(doc, " \n");
+    tidy_out(doc, "%s", tidyLocalizedString(TEXT_HTML_T_ALGORITHM));
 }
 
 void TY_(ReportAccessWarning)( TidyDocImpl* doc, Node* node, uint code )
@@ -823,7 +820,7 @@ void TY_(ReportFatal)( TidyDocImpl* doc, Node *element, Node *node, uint code)
 
 void TY_(ErrorSummary)( TidyDocImpl* doc )
 {
-    ctmbstr encnam = "specified";
+    ctmbstr encnam = tidyLocalizedString(STRING_SPECIFIED);
     int charenc = cfg( doc, TidyCharEncoding ); 
     if ( charenc == WIN1252 ) 
         encnam = "Windows-1252";

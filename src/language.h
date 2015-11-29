@@ -45,6 +45,7 @@ typedef languageDictionaryEntry const languageDictionary[600];
  *    - `tidyMessageTypes` in this file,         start == 4096.
  *    - `accessErrorCodes` from `access.h`,      start == 1000.
  *    - `tidyErrorCodes` from `message.h`,       start == 200.
+ *    - `tidyMessagesMisc` from `message.h`,     start == 2048.
  *    - `TidyOptionId` from `tidyEnum.h`,        start == 0 (important!).
  *    - `TidyReportLevelKeys` from `tidyEnum.h`, start == 500.
  *    - ...
@@ -62,8 +63,6 @@ typedef enum
     TIDY_LANGUAGE,              
 
     /* Miscelleneous Strings */
-    ACCESS_URL,                              /* Used to point to Web Accessibility Guidelines. */
-    ATRC_ACCESS_URL,                         /* Points to Tidy's accessibility page. */
 
 
     /* This MUST be present and last. */

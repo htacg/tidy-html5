@@ -15,14 +15,14 @@
 /* General message writing routines.
 ** Each message is a single warning, error, etc.
 **
-** This routine will keep track of counts and,
+** These routines keep track of counts and,
 ** if the caller has set a filter, it will be
-** called.  The new preferred way of handling
+** called. The new preferred way of handling
 ** Tidy diagnostics output is either a) define
 ** a new output sink or b) install a message
 ** filter routine.
 **
-** Keeps track of ShowWarnings, ShowErrors, etc.
+** Keep track of ShowWarnings, ShowErrors, etc.
 */
 
 ctmbstr TY_(ReleaseDate)(void);
@@ -185,6 +185,24 @@ typedef enum {
     CODES_TIDY_ERROR_LAST
 } tidyErrorCodes;
 
+/**
+ *  These tidyMessagesMisc are used throughout libtidy, and also
+ *  have associated localized strings to describe them.
+ */
+typedef enum {
+    ACCESS_URL = 2048,          /* Used to point to Web Accessibility Guidelines. */
+    ATRC_ACCESS_URL,            /* Points to Tidy's accessibility page. */
+    LINE_COLUMN_STRING,         /* For retrieving localized `line %d column %d` text. */
+    FILE_CANT_OPEN,             /* For retrieving a string when a file can't be opened. */
+    STRING_PLAIN_TEXT,          /* For retrieving a string `plain text`. */
+    STRING_XML_DECLARATION,     /* For retrieving a string `XML declaration`. */
+    STRING_UNKNOWN_OPTION,      /* For retrieving a string `unknown option: %s`. */
+    STRING_MISSING_MALFORMED,   /* For `missing or malformed argument for option: %s`. */
+    STRING_DISCARDING,          /* For `discarding`. */
+    STRING_REPLACING,           /* For `replacing`. */
+    STRING_SPECIFIED,           /* For `specified`. */
+    TEXT_HTML_T_ALGORITHM       /* Paragraph for describing the HTML table algorithm. */
+} tidyMessagesMisc;
 
 /* accessibility flaws */
 

@@ -30,6 +30,32 @@ static languageDictionary language_en = {
      *****************************/
     { ACCESS_URL,                   "http://www.w3.org/WAI/GL"                                                },
     { ATRC_ACCESS_URL,              "http://www.html-tidy.org/accessibility/"                                 },
+    { LINE_COLUMN_STRING,           "line %d column %d - "                                                    },
+    { FILE_CANT_OPEN,               "Can't open \"%s\"\n"                                                     },
+    { STRING_PLAIN_TEXT,            "plain text"                                                              },
+    { STRING_XML_DECLARATION,       "XML declaration"                                                         },
+    { STRING_UNKNOWN_OPTION,        "unknown option: %s"                                                      },
+    { STRING_MISSING_MALFORMED,     "missing or malformed argument for option: %s"                            },
+    { STRING_DISCARDING,            "discarding"                                                              },
+    { STRING_REPLACING,             "replacing"                                                               },
+    { STRING_SPECIFIED,             "specified"                                                               },
+    { TEXT_HTML_T_ALGORITHM,
+        " \n"
+        "      - First, search left from the cell's position to find row header cells.\n"
+        "      - Then search upwards to find column header cells.\n"
+        "      - The search in a given direction stops when the edge of the table is\n"
+        "        reached or when a data cell is found after a header cell.\n"
+        "      - Row headers are inserted into the list in the order they appear in\n"
+        "        the table. \n"
+        "      - For left-to-right tables, headers are inserted from left to right.\n"
+        "      - Column headers are inserted after row headers, in \n"
+        "        the order they appear in the table, from top to bottom. \n"
+        "      - If a header cell has the headers attribute set, then the headers \n"
+        "        referenced by this attribute are inserted into the list and the \n"
+        "        search stops for the current direction.\n"
+        "        TD cells that set the axis attribute are also treated as header cells.\n"
+        " \n"
+    },
 
     /*****************************
      ** Message Severity Level
@@ -41,6 +67,7 @@ static languageDictionary language_en = {
     { TidyErrorString,              "Error: ",                                                                },
     { TidyBadDocumentString,        "Document: ",                                                             },
     { TidyFatalString,              "Panic: ",                                                                },
+
     /*****************************
      ** Warnings and Errors
      *****************************/

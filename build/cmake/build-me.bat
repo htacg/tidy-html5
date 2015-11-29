@@ -1,7 +1,7 @@
 @setlocal
 
 @set TMPVER=1
-@set TMPPRJ=tidy5
+@set TMPPRJ=tidy
 @set TMPSRC=..\..
 @set TMPBGN=%TIME%
 @set TMPINS=..\..\..\software

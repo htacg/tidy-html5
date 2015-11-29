@@ -1,4 +1,6 @@
-/* localize.c -- text strings and routines to handle errors and general messages
+/* localize.c
+   Routines to handle messages and other output, as well as
+   various utility routines used to generate data for output.
 
   (c) 1998-2008 (W3C) MIT, ERCIM, Keio University
   Portions Copyright University of Toronto
@@ -95,6 +97,7 @@ static const TidyOptionDoc docs_xrefs[] =
 };
 
 
+/* Cross-reference retrieval. */
 const TidyOptionDoc* TY_(OptGetDocDesc)( TidyOptionId optId )
 {
     uint i = 0;
@@ -115,29 +118,30 @@ static char* LevelPrefix( TidyReportLevel level, char* buf, size_t count )
   switch ( level )
   {
   case TidyInfo:
-    TY_(tmbstrncpy)( buf, "Info: ", count );
+    TY_(tmbstrncpy)( buf, tidyLocalizedString(TidyInfoString), count );
     break;
   case TidyWarning:
-    TY_(tmbstrncpy)( buf, "Warning: ", count );
+    TY_(tmbstrncpy)( buf, tidyLocalizedString(TidyWarningString), count );
     break;
   case TidyConfig:
-    TY_(tmbstrncpy)( buf, "Config: ", count );
+    TY_(tmbstrncpy)( buf, tidyLocalizedString(TidyConfigString), count );
     break;
   case TidyAccess:
-    TY_(tmbstrncpy)( buf, "Access: ", count );
+    TY_(tmbstrncpy)( buf, tidyLocalizedString(TidyAccessString), count );
     break;
   case TidyError:
-    TY_(tmbstrncpy)( buf, "Error: ", count );
+    TY_(tmbstrncpy)( buf, tidyLocalizedString(TidyErrorString), count );
     break;
   case TidyBadDocument:
-    TY_(tmbstrncpy)( buf, "Document: ", count );
+    TY_(tmbstrncpy)( buf, tidyLocalizedString(TidyBadDocumentString), count );
     break;
   case TidyFatal:
-    TY_(tmbstrncpy)( buf, "panic: ", count );
+    TY_(tmbstrncpy)( buf, tidyLocalizedString(TidyFatalString), count );
     break;
   }
   return buf + TY_(tmbstrlen)( buf );
 }
+
 
 /* Updates document message counts and
 ** compares counts to options to see if message

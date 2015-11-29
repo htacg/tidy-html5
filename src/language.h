@@ -42,10 +42,11 @@ typedef languageDictionaryEntry const languageDictionary[600];
  *  with other enums that are used for retrieving strings. The
  *  comprehensive list of enums for which we provides strings
  *  is as follows:
- *    - `tidyMessageTypes` in this file,    start =  4096.
- *    - `accessErrorCodes` from `access.h`, start == 1000.
- *    - `tidyErrorCodes` from `message.h`,  start == 200.
- *    - `TidyOptionId` from `tidyEnum.h`,   start == 0 (important!).
+ *    - `tidyMessageTypes` in this file,         start == 4096.
+ *    - `accessErrorCodes` from `access.h`,      start == 1000.
+ *    - `tidyErrorCodes` from `message.h`,       start == 200.
+ *    - `TidyOptionId` from `tidyEnum.h`,        start == 0 (important!).
+ *    - `TidyReportLevelKeys` from `tidyEnum.h`, start == 500.
  *    - ...
  *  You should never count on the value of a label being
  *  constant. Accordingly feel free to arrange new enum

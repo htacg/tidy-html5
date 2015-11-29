@@ -274,6 +274,7 @@ typedef enum
     TidySortAttrAlpha
 } TidyAttrSortStrategy;
 
+
 /* I/O and Message handling interface
 **
 ** By default, Tidy will define, create and use
@@ -287,6 +288,11 @@ typedef enum
 */
 
 /** Message severity level
+ *  These TidyOptionId are used throughout libtidy, but don't
+ *  have associated localized strings to describe them because
+ *  TidyReportLevel is externally-facing, and changing the enum
+ *  starting int can break existing API's for poorly-written
+ *  applications using libtidy. See enum `TidyReportLevelKeys`.
 */
 typedef enum
 {
@@ -298,6 +304,24 @@ typedef enum
   TidyBadDocument,      /**< I/O or file system error */
   TidyFatal             /**< Crash! */
 } TidyReportLevel;
+
+/** Message severity level - string lookup keys
+ *  These TidyOptionId are used throughout libtidy, but don't
+ *  have associated localized strings to describe them because
+ *  TidyReportLevel is externally-facing, and changing the enum
+ *  starting int can break existing API's for poorly-written
+ *  applications using libtidy. See enum `TidyReportLevelKeys`.
+*/
+typedef enum
+{
+  TidyInfoString = 500,
+  TidyWarningString,
+  TidyConfigString,
+  TidyAccessString,
+  TidyErrorString,
+  TidyBadDocumentString,
+  TidyFatalString
+} TidyReportLevelKeys;
 
 
 /* Document tree traversal functions

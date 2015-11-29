@@ -32,6 +32,16 @@ static languageDictionary language_en = {
     { ATRC_ACCESS_URL,              "http://www.html-tidy.org/accessibility/"                                 },
 
     /*****************************
+     ** Message Severity Level
+     *****************************/
+    { TidyInfoString,               "Info: ",                                                                 },
+    { TidyWarningString,            "Warning: ",                                                              },
+    { TidyConfigString,             "Config: ",                                                               },
+    { TidyAccessString,             "Access: ",                                                               },
+    { TidyErrorString,              "Error: ",                                                                },
+    { TidyBadDocumentString,        "Document: ",                                                             },
+    { TidyFatalString,              "Panic: ",                                                                },
+    /*****************************
      ** Warnings and Errors
      *****************************/
 

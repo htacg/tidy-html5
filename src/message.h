@@ -201,7 +201,27 @@ typedef enum {
     STRING_DISCARDING,          /* For `discarding`. */
     STRING_REPLACING,           /* For `replacing`. */
     STRING_SPECIFIED,           /* For `specified`. */
-    TEXT_HTML_T_ALGORITHM       /* Paragraph for describing the HTML table algorithm. */
+    TEXT_HTML_T_ALGORITHM,      /* Paragraph for describing the HTML table algorithm. */
+    TEXT_WINDOWS_CHARS,         /* Explanatory text. */
+    TEXT_VENDOR_CHARS,          /* Explanatory text. */
+    TEXT_SGML_CHARS,            /* Explanatory text. */
+    TEXT_INVALID_UTF8,          /* Explanatory text. */
+    TEXT_INVALID_UTF16,         /* Explanatory text. */
+    TEXT_INVALID_URI,           /* Explanatory text. */
+    TEXT_BAD_FORM,              /* Explanatory text. */
+    TEXT_BAD_MAIN,              /* Explanatory text. */
+    TEXT_M_SUMMARY,             /* Explanatory text. */
+    TEXT_M_IMAGE_ALT,           /* Explanatory text. */
+    TEXT_M_IMAGE_MAP,           /* Explanatory text. */
+    TEXT_M_LINK_ALT,            /* Explanatory text. */
+    TEXT_USING_FRAMES,          /* Explanatory text. */
+    TEXT_ACCESS_ADVICE1,        /* Explanatory text. */
+    TEXT_ACCESS_ADVICE2,        /* Explanatory text. */
+    TEXT_USING_LAYER,           /* Explanatory text. */
+    TEXT_USING_SPACER,          /* Explanatory text. */
+    TEXT_USING_FONT,            /* Explanatory text. */
+    TEXT_USING_NOBR,            /* Explanatory text. */
+    TEXT_USING_BODY             /* Explanatory text. */
 } tidyMessagesMisc;
 
 /* accessibility flaws */

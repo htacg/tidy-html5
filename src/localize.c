@@ -843,83 +843,45 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
 #if 0
         if ( doc->badChars & WINDOWS_CHARS )
         {
-            tidy_out(doc, "Characters codes for the Microsoft Windows fonts in the range\n");
-            tidy_out(doc, "128 - 159 may not be recognized on other platforms. You are\n");
-            tidy_out(doc, "instead recommended to use named entities, e.g. &trade; rather\n");
-            tidy_out(doc, "than Windows character code 153 (0x2122 in Unicode). Note that\n");
-            tidy_out(doc, "as of February 1998 few browsers support the new entities.\n\n");
+            tidy_out(doc, "%s", tidyLocalizedString(TEXT_WINDOWS_CHARS));
         }
 #endif
         if (doc->badChars & BC_VENDOR_SPECIFIC_CHARS)
         {
-
-            tidy_out(doc, "It is unlikely that vendor-specific, system-dependent encodings\n");
-            tidy_out(doc, "work widely enough on the World Wide Web; you should avoid using the \n");
-            tidy_out(doc, "%s", encnam );
-            tidy_out(doc, " character encoding, instead you are recommended to\n" );
-            tidy_out(doc, "use named entities, e.g. &trade;.\n\n");
+            tidy_out(doc, tidyLocalizedString(TEXT_VENDOR_CHARS), encnam);
         }
         if ((doc->badChars & BC_INVALID_SGML_CHARS) || (doc->badChars & BC_INVALID_NCR))
         {
-            tidy_out(doc, "Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML;\n");
-            tidy_out(doc, "even if they were, they would likely be unprintable control characters.\n");
-            tidy_out(doc, "Tidy assumed you wanted to refer to a character with the same byte value in the \n");
-            tidy_out(doc, "%s", encnam );
-            tidy_out(doc, " encoding and replaced that reference with the Unicode equivalent.\n\n" );
+            tidy_out(doc, tidyLocalizedString(TEXT_SGML_CHARS), encnam);
         }
         if (doc->badChars & BC_INVALID_UTF8)
         {
-            tidy_out(doc, "Character codes for UTF-8 must be in the range: U+0000 to U+10FFFF.\n");
-            tidy_out(doc, "The definition of UTF-8 in Annex D of ISO/IEC 10646-1:2000 also\n");
-            tidy_out(doc, "allows for the use of five- and six-byte sequences to encode\n");
-            tidy_out(doc, "characters that are outside the range of the Unicode character set;\n");
-            tidy_out(doc, "those five- and six-byte sequences are illegal for the use of\n");
-            tidy_out(doc, "UTF-8 as a transformation of Unicode characters. ISO/IEC 10646\n");
-            tidy_out(doc, "does not allow mapping of unpaired surrogates, nor U+FFFE and U+FFFF\n");
-            tidy_out(doc, "(but it does allow other noncharacters). For more information please refer to\n");
-            tidy_out(doc, "http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n\n");
+            tidy_out(doc, "%s", tidyLocalizedString(TEXT_INVALID_UTF8));
         }
 
 #if SUPPORT_UTF16_ENCODINGS
 
       if (doc->badChars & BC_INVALID_UTF16)
       {
-        tidy_out(doc, "Character codes for UTF-16 must be in the range: U+0000 to U+10FFFF.\n");
-        tidy_out(doc, "The definition of UTF-16 in Annex C of ISO/IEC 10646-1:2000 does not allow the\n");
-        tidy_out(doc, "mapping of unpaired surrogates. For more information please refer to\n");
-        tidy_out(doc, "http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n\n");
+          tidy_out(doc, "%s", tidyLocalizedString(TEXT_INVALID_UTF16));
       }
 
 #endif
 
       if (doc->badChars & BC_INVALID_URI)
       {
-        tidy_out(doc, "URIs must be properly escaped, they must not contain unescaped\n");
-        tidy_out(doc, "characters below U+0021 including the space character and not\n");
-        tidy_out(doc, "above U+007E. Tidy escapes the URI for you as recommended by\n");
-        tidy_out(doc, "HTML 4.01 section B.2.1 and XML 1.0 section 4.2.2. Some user agents\n");
-        tidy_out(doc, "use another algorithm to escape such URIs and some server-sided\n");
-        tidy_out(doc, "scripts depend on that. If you want to depend on that, you must\n");
-        tidy_out(doc, "escape the URI by your own. For more information please refer to\n");
-        tidy_out(doc, "http://www.w3.org/International/O-URL-and-ident.html\n\n");
+          tidy_out(doc, "%s", tidyLocalizedString(TEXT_INVALID_URI));
       }
     }
 
     if (doc->badForm & flg_BadForm) /* Issue #166 - changed to BIT flag to support other errors */
     {
-        tidy_out(doc, "You may need to move one or both of the <form> and </form>\n");
-        tidy_out(doc, "tags. HTML elements should be properly nested and form elements\n");
-        tidy_out(doc, "are no exception. For instance you should not place the <form>\n");
-        tidy_out(doc, "in one table cell and the </form> in another. If the <form> is\n");
-        tidy_out(doc, "placed before a table, the </form> cannot be placed inside the\n");
-        tidy_out(doc, "table! Note that one form can't be nested inside another!\n\n");
+        tidy_out(doc, "%s", tidyLocalizedString(TEXT_BAD_FORM));
     }
 
     if (doc->badForm & flg_BadMain) /* Issue #166 - repeated <main> element */
     {
-        tidy_out(doc, "Only one <main> element is allowed in a document.\n");
-        tidy_out(doc, "Subsequent <main> elements have been discarded, which may\n");
-        tidy_out(doc, "render the document invalid.\n");
+        tidy_out(doc, "%s", tidyLocalizedString(TEXT_BAD_MAIN));
     }
     
     if (doc->badAccess)
@@ -929,51 +891,33 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
         {
             if (doc->badAccess & BA_MISSING_SUMMARY)
             {
-                tidy_out(doc, "The table summary attribute should be used to describe\n");
-                tidy_out(doc, "the table structure. It is very helpful for people using\n");
-                tidy_out(doc, "non-visual browsers. The scope and headers attributes for\n");
-                tidy_out(doc, "table cells are useful for specifying which headers apply\n");
-                tidy_out(doc, "to each table cell, enabling non-visual browsers to provide\n");
-                tidy_out(doc, "a meaningful context for each cell.\n\n");
+                tidy_out(doc, "%s", tidyLocalizedString(TEXT_M_SUMMARY));
             }
 
             if (doc->badAccess & BA_MISSING_IMAGE_ALT)
             {
-                tidy_out(doc, "The alt attribute should be used to give a short description\n");
-                tidy_out(doc, "of an image; longer descriptions should be given with the\n");
-                tidy_out(doc, "longdesc attribute which takes a URL linked to the description.\n");
-                tidy_out(doc, "These measures are needed for people using non-graphical browsers.\n\n");
+                tidy_out(doc, "%s", tidyLocalizedString(TEXT_M_IMAGE_ALT));
             }
 
             if (doc->badAccess & BA_MISSING_IMAGE_MAP)
             {
-                tidy_out(doc, "Use client-side image maps in preference to server-side image\n");
-                tidy_out(doc, "maps as the latter are inaccessible to people using non-\n");
-                tidy_out(doc, "graphical browsers. In addition, client-side maps are easier\n");
-                tidy_out(doc, "to set up and provide immediate feedback to users.\n\n");
+                tidy_out(doc, "%s", tidyLocalizedString(TEXT_M_IMAGE_MAP));
             }
 
             if (doc->badAccess & BA_MISSING_LINK_ALT)
             {
-                tidy_out(doc, "For hypertext links defined using a client-side image map, you\n");
-                tidy_out(doc, "need to use the alt attribute to provide a textual description\n");
-                tidy_out(doc, "of the link for people using non-graphical browsers.\n\n");
+                tidy_out(doc, "%s", tidyLocalizedString(TEXT_M_LINK_ALT));
             }
 
             if ((doc->badAccess & BA_USING_FRAMES) && !(doc->badAccess & BA_USING_NOFRAMES))
             {
-                tidy_out(doc, "Pages designed using frames presents problems for\n");
-                tidy_out(doc, "people who are either blind or using a browser that\n");
-                tidy_out(doc, "doesn't support frames. A frames-based page should always\n");
-                tidy_out(doc, "include an alternative layout inside a NOFRAMES element.\n\n");
+                tidy_out(doc, "%s", tidyLocalizedString(TEXT_USING_FRAMES));
             }
-
         }
 
-        tidy_out(doc, "For further advice on how to make your pages accessible\n");
-        tidy_out(doc, "see %s", tidyLocalizedString( ACCESS_URL ) );
+        tidy_out(doc, "%s", tidyLocalizedString(TEXT_ACCESS_ADVICE1));
         if ( cfg(doc, TidyAccessibilityCheckLevel) > 0 )
-            tidy_out(doc, " and %s", tidyLocalizedString( ATRC_ACCESS_URL ) );
+            tidy_out(doc, "%s", tidyLocalizedString(TEXT_ACCESS_ADVICE2));
         tidy_out(doc, ".\n" );
     }
 
@@ -981,36 +925,27 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
     {
         if (doc->badLayout & USING_LAYER)
         {
-            tidy_out(doc, "The Cascading Style Sheets (CSS) Positioning mechanism\n");
-            tidy_out(doc, "is recommended in preference to the proprietary <LAYER>\n");
-            tidy_out(doc, "element due to limited vendor support for LAYER.\n\n");
+            tidy_out(doc, "%s", tidyLocalizedString(TEXT_USING_LAYER));
         }
 
         if (doc->badLayout & USING_SPACER)
         {
-            tidy_out(doc, "You are recommended to use CSS for controlling white\n");
-            tidy_out(doc, "space (e.g. for indentation, margins and line spacing).\n");
-            tidy_out(doc, "The proprietary <SPACER> element has limited vendor support.\n\n");
+            tidy_out(doc, "%s", tidyLocalizedString(TEXT_USING_SPACER));
         }
 
         if (doc->badLayout & USING_FONT)
         {
-            tidy_out(doc, "You are recommended to use CSS to specify the font and\n");
-            tidy_out(doc, "properties such as its size and color. This will reduce\n");
-            tidy_out(doc, "the size of HTML files and make them easier to maintain\n");
-            tidy_out(doc, "compared with using <FONT> elements.\n\n");
+            tidy_out(doc, "%s", tidyLocalizedString(TEXT_USING_FONT));
         }
 
         if (doc->badLayout & USING_NOBR)
         {
-            tidy_out(doc, "You are recommended to use CSS to control line wrapping.\n");
-            tidy_out(doc, "Use \"white-space: nowrap\" to inhibit wrapping in place\n");
-            tidy_out(doc, "of inserting <NOBR>...</NOBR> into the markup.\n\n");
+            tidy_out(doc, "%s", tidyLocalizedString(TEXT_USING_NOBR));
         }
 
         if (doc->badLayout & USING_BODY)
         {
-            tidy_out(doc, "You are recommended to use CSS to specify page and link colors\n");
+            tidy_out(doc, "%s", tidyLocalizedString(TEXT_USING_BODY));
         }
     }
 }

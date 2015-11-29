@@ -56,6 +56,127 @@ static languageDictionary language_en = {
         "        TD cells that set the axis attribute are also treated as header cells.\n"
         " \n"
     },
+    { TEXT_WINDOWS_CHARS,
+        "Characters codes for the Microsoft Windows fonts in the range\n"
+        "128 - 159 may not be recognized on other platforms. You are\n"
+        "instead recommended to use named entities, e.g. &trade; rather\n"
+        "than Windows character code 153 (0x2122 in Unicode). Note that\n"
+        "as of February 1998 few browsers support the new entities.\n\n"
+    },
+    { TEXT_VENDOR_CHARS,
+        "It is unlikely that vendor-specific, system-dependent encodings\n"
+        "work widely enough on the World Wide Web; you should avoid using the \n"
+        "%s character encoding, instead you are recommended to\n"
+        "use named entities, e.g. &trade;.\n\n"
+    },
+    { TEXT_SGML_CHARS,
+        "Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML;\n"
+        "even if they were, they would likely be unprintable control characters.\n"
+        "Tidy assumed you wanted to refer to a character with the same byte value in the \n"
+        "%s  encoding and replaced that reference with the Unicode equivalent.\n\n"
+    },
+    { TEXT_INVALID_UTF8,
+        "Character codes for UTF-8 must be in the range: U+0000 to U+10FFFF.\n"
+        "The definition of UTF-8 in Annex D of ISO/IEC 10646-1:2000 also\n"
+        "allows for the use of five- and six-byte sequences to encode\n"
+        "characters that are outside the range of the Unicode character set;\n"
+        "those five- and six-byte sequences are illegal for the use of\n"
+        "UTF-8 as a transformation of Unicode characters. ISO/IEC 10646\n"
+        "does not allow mapping of unpaired surrogates, nor U+FFFE and U+FFFF\n"
+        "(but it does allow other noncharacters). For more information please refer to\n"
+        "http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n\n"
+    },
+    { TEXT_INVALID_UTF16,
+        "Character codes for UTF-16 must be in the range: U+0000 to U+10FFFF.\n"
+        "The definition of UTF-16 in Annex C of ISO/IEC 10646-1:2000 does not allow the\n"
+        "mapping of unpaired surrogates. For more information please refer to\n"
+        "http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n\n"
+    },
+    { TEXT_INVALID_URI,
+        "URIs must be properly escaped, they must not contain unescaped\n"
+        "characters below U+0021 including the space character and not\n"
+        "above U+007E. Tidy escapes the URI for you as recommended by\n"
+        "HTML 4.01 section B.2.1 and XML 1.0 section 4.2.2. Some user agents\n"
+        "use another algorithm to escape such URIs and some server-sided\n"
+        "scripts depend on that. If you want to depend on that, you must\n"
+        "escape the URI by your own. For more information please refer to\n"
+        "http://www.w3.org/International/O-URL-and-ident.html\n\n"
+    },
+    { TEXT_BAD_FORM,
+        "You may need to move one or both of the <form> and </form>\n"
+        "tags. HTML elements should be properly nested and form elements\n"
+        "are no exception. For instance you should not place the <form>\n"
+        "in one table cell and the </form> in another. If the <form> is\n"
+        "placed before a table, the </form> cannot be placed inside the\n"
+        "table! Note that one form can't be nested inside another!\n\n"
+    },
+    { TEXT_BAD_MAIN,
+        "Only one <main> element is allowed in a document.\n"
+        "Subsequent <main> elements have been discarded, which may\n"
+        "render the document invalid.\n"
+    },
+    { TEXT_M_SUMMARY,
+        "The table summary attribute should be used to describe\n"
+        "the table structure. It is very helpful for people using\n"
+        "non-visual browsers. The scope and headers attributes for\n"
+        "table cells are useful for specifying which headers apply\n"
+        "to each table cell, enabling non-visual browsers to provide\n"
+        "a meaningful context for each cell.\n\n"
+    },
+    { TEXT_M_IMAGE_ALT,
+        "The alt attribute should be used to give a short description\n"
+        "of an image; longer descriptions should be given with the\n"
+        "longdesc attribute which takes a URL linked to the description.\n"
+        "These measures are needed for people using non-graphical browsers.\n\n"
+    },
+    { TEXT_M_IMAGE_MAP,
+        "Use client-side image maps in preference to server-side image\n"
+        "maps as the latter are inaccessible to people using non-\n"
+        "graphical browsers. In addition, client-side maps are easier\n"
+        "to set up and provide immediate feedback to users.\n\n"
+    },
+    { TEXT_M_LINK_ALT,
+        "For hypertext links defined using a client-side image map, you\n"
+        "need to use the alt attribute to provide a textual description\n"
+        "of the link for people using non-graphical browsers.\n\n"
+    },
+    { TEXT_USING_FRAMES,
+        "Pages designed using frames presents problems for\n"
+        "people who are either blind or using a browser that\n"
+        "doesn't support frames. A frames-based page should always\n"
+        "include an alternative layout inside a NOFRAMES element.\n\n"
+    },
+    { TEXT_ACCESS_ADVICE1,
+        "For further advice on how to make your pages accessible\n"
+        "see http://www.w3.org/WAI/GL"
+    },
+    { TEXT_ACCESS_ADVICE2,
+        " and http://www.html-tidy.org/accessibility/"
+    },
+    { TEXT_USING_LAYER,
+        "The Cascading Style Sheets (CSS) Positioning mechanism\n"
+        "is recommended in preference to the proprietary <LAYER>\n"
+        "element due to limited vendor support for LAYER.\n\n"
+    },
+    { TEXT_USING_SPACER,
+        "You are recommended to use CSS for controlling white\n"
+        "space (e.g. for indentation, margins and line spacing).\n"
+        "The proprietary <SPACER> element has limited vendor support.\n\n"
+    },
+    { TEXT_USING_FONT,
+        "You are recommended to use CSS to specify the font and\n"
+        "properties such as its size and color. This will reduce\n"
+        "the size of HTML files and make them easier to maintain\n"
+        "compared with using <FONT> elements.\n\n"
+    },
+    { TEXT_USING_NOBR,
+        "You are recommended to use CSS to control line wrapping.\n"
+        "Use \"white-space: nowrap\" to inhibit wrapping in place\n"
+        "of inserting <NOBR>...</NOBR> into the markup.\n\n"
+    },
+    { TEXT_USING_BODY,
+        "You are recommended to use CSS to specify page and link colors\n"
+    },
 
     /*****************************
      ** Message Severity Level

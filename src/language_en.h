@@ -1189,9 +1189,68 @@ static languageDictionary language_en = {
         "This option specifies that Tidy should skip nested tags when parsing "
         "script and style data. "
     },
+	
+    /*****************************
+     ** Console Application
+     *****************************/
+	{ TC_LABEL_FILE,                "file"                                                                    },
+	{ TC_OPT_ACCESS,
+		"do additional accessibility checks (<level> = 0, 1, 2, 3). 0 is "
+		"assumed if <level> is missing."
+	},
+	{ TC_OPT_ASCII,                 "use ISO-8859-1 for input, US-ASCII for output"                           },
+	{ TC_OPT_ASHTML,                "force XHTML to well formed HTML"                                         },
+	{ TC_OPT_ASXML,                 "convert HTML to well formed XHTML"                                       },
+	{ TC_OPT_BARE,                  "strip out smart quotes and em dashes, etc."                              },
+	{ TC_OPT_BIG5,                  "use Big5 for both input and output"                                      },
+	{ TC_OPT_CLEAN,                 "replace FONT, NOBR and CENTER tags with CSS"                             },
+	{ TC_OPT_CONFIG,                "set configuration options from the specified <file>"                     },
+	{ TC_OPT_ERRORS,                "show only errors and warnings"                                           },
+	{ TC_OPT_FILE,                  "write errors and warnings to the specified <file>"                       },
+	{ TC_OPT_GDOC,                  "produce clean version of html exported by Google Docs"                   },
+	{ TC_OPT_HELP,                  "list the command line options"                                           },
+	{ TC_OPT_HELPCFG,               "list all configuration options"                                          },
+	{ TC_OPT_IBM858,                "use IBM-858 (CP850+Euro) for input, US-ASCII for output"                 },
+	{ TC_OPT_INDENT,                "indent element content"                                                  },
+	{ TC_OPT_ISO2022,               "use ISO-2022 for both input and output"                                  },
+	{ TC_OPT_LANGUAGE,              "set the two-letter language code <lang> (for future use)"                },
+	{ TC_OPT_LATIN0,                "use ISO-8859-15 for input, US-ASCII for output"                          },
+	{ TC_OPT_LATIN1,                "use ISO-8859-1 for both input and output"                                },
+	{ TC_OPT_MAC,                   "use MacRoman for input, US-ASCII for output"                             },
+	{ TC_OPT_MODIFY,                "modify the original input files"                                         },
+	{ TC_OPT_NUMERIC,               "output numeric rather than named entities"                               },
+	{ TC_OPT_OMIT,                  "omit optional start tags and end tags"                                   },
+	{ TC_OPT_OUTPUT,                "write output to the specified <file>"                                    },
+	{ TC_OPT_QUIET,                 "suppress nonessential output"                                            },
+	{ TC_OPT_RAW,                   "output values above 127 without conversion to entities"                  },
+	{ TC_OPT_SHIFTJIS,              "use Shift_JIS for both input and output"                                 },
+	{ TC_OPT_SHOWCFG,               "list the current configuration settings"                                 },
+	{ TC_OPT_UPPER,                 "force tags to upper case"                                                },
+	{ TC_OPT_UTF16,                 "use UTF-16 for both input and output"                                    },
+	{ TC_OPT_UTF16BE,               "use UTF-16BE for both input and output"                                  },
+	{ TC_OPT_UTF16LE,               "use UTF-16LE for both input and output"                                  },
+	{ TC_OPT_UTF8,                  "use UTF-8 for both input and output"                                     },
+	{ TC_OPT_VERSION,               "show the version of Tidy"                                                },
+	{ TC_OPT_WIN1252,               "use Windows-1252 for input, US-ASCII for output"                         },
+	{ TC_OPT_WRAP,
+		"wrap text at the specified <column>. 0 is assumed if <column> is "
+		"missing. When this option is omitted, the default of the "
+		"configuration option 'wrap' applies."
+	},
+	{ TC_OPT_XML,                   "specify the input is well formed XML"                                    },
+	{ TC_OPT_XMLCFG,                "list all configuration options in XML format"                            },
+	{ TC_OPT_XMLHELP,               "list the command line options in XML format"                             },
+	
+    { TC_STRING_OUT_OF_MEMORY,      "Out of memory. Bailing out."                                             },
+	{ TC_STRING_FILE_MANIP,         "File manipulation"                                                       },
+	{ TC_STRING_PROCESS_DIRECTIVES, "Processing directives"                                                   },
+	{ TC_STRING_CHAR_ENCODING,      "Character encodings"                                                     },
+	{ TC_STRING_MISC,               "Miscellaneous"                                                           },
+
+	
 
     /* This MUST be present and last. */
-    { TIDY_MESSAGE_TYPE_LAST,      NULL                                       }
+	{ TIDY_MESSAGE_TYPE_LAST,      NULL                                                                       }
 };
 
 

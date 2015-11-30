@@ -1587,10 +1587,11 @@ void TY_(ParseNamespace)(TidyDocImpl* doc, Node *basenode, GetTokenMode mode)
 			else
 			{
 				/* unmatched close tag: report an error and discard */
-				TY_(ReportError)(doc, parent, node, NON_MATCHING_ENDTAG);
+				/* TY_(ReportError)(doc, parent, node, NON_MATCHING_ENDTAG); Issue #308 - Seems wrong warning! */
 				TY_(ReportError)(doc, parent, node, DISCARDING_UNEXPECTED);
 				assert(parent);
-				assert(parent->tag != node->tag);
+				/* assert(parent->tag != node->tag); Issue #308 - Seems would always be true! */
+                TY_(FreeNode)( doc, node); /* Issue #308 - Discard unexpected end tag memory */
 			}
 		}
 		else if (node->type == StartTag)

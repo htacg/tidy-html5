@@ -1193,7 +1193,15 @@ static languageDictionary language_en = {
     /*****************************
      ** Console Application
      *****************************/
+	{ TC_CAT_DIAGNOSTICS,           "diagnostics"                                                             },
+	{ TC_CAT_ENCODING,              "encoding"                                                                },
+	{ TC_CAT_MARKUP,                "markup"                                                                  },
+	{ TC_CAT_MISC,                  "misc"                                                                    },
+	{ TC_CAT_PRETTYPRINT,           "print"                                                                   },
+	{ TC_LABEL_COL,                 "column"                                                                  },
 	{ TC_LABEL_FILE,                "file"                                                                    },
+	{ TC_LABEL_LANG,                "lang"                                                                    },
+	{ TC_LABEL_LEVL,                "level"                                                                   },
 	{ TC_OPT_ACCESS,
 		"do additional accessibility checks (<level> = 0, 1, 2, 3). 0 is "
 		"assumed if <level> is missing."
@@ -1242,12 +1250,68 @@ static languageDictionary language_en = {
 	{ TC_OPT_XMLHELP,               "list the command line options in XML format"                             },
 	
     { TC_STRING_OUT_OF_MEMORY,      "Out of memory. Bailing out."                                             },
+	{ TC_STRING_FATAL_ERROR,        "Fatal error: impossible value for id='%d'.\n"                            },
 	{ TC_STRING_FILE_MANIP,         "File manipulation"                                                       },
 	{ TC_STRING_PROCESS_DIRECTIVES, "Processing directives"                                                   },
 	{ TC_STRING_CHAR_ENCODING,      "Character encodings"                                                     },
 	{ TC_STRING_MISC,               "Miscellaneous"                                                           },
+	{ TC_STRING_UNKNOWN_OPTION,     "HTML Tidy: unknown option: %c\n"                                         },
+	{ TC_STRING_VERS_A,             "HTML Tidy for %s version %s\n"                                           },
+	{ TC_STRING_VERS_B,             "HTML Tidy version %s\n"                                                  },
+	{ TC_TXT_HELP_1,
+		"\n"
+		"%s [options...] [file...] [options...] [file...]\n"
+		"Utility to clean up and pretty print HTML/XHTML/XML.\n"
+		"\n"
+		"This is modern HTML Tidy version %s.\n"
+		"\n"
+	},
+	{ TC_TXT_HELP_2A,
+		"Options for HTML Tidy for %s:\n"
+	},
+	{ TC_TXT_HELP_2B,
+		"Options for HTML Tidy:\n"
+	},
+	{ TC_TXT_HELP_3,
+		"Use --optionX valueX for any configuration option \"optionX\" with argument\n"
+		"\"valueX\". For a list of the configuration options, use \"-help-config\" or refer\n"
+		"to the man page.\n\n"
 
-	
+		"Input/Output default to stdin/stdout respectively.\n"
+		"\n"
+		"Single letter options apart from -f may be combined\n"
+		"as in:  tidy -f errs.txt -imu foo.html\n"
+		"\n"
+		"For more information about HTML Tidy, see\n"
+		"  http://www.html-tidy.org/\n"
+		"\n"
+		"For more information on HTML, see the following:\n"
+		"\n"
+		"  HTML: Edition for Web Authors (the latest HTML specification)\n"
+		"  http://dev.w3.org/html5/spec-author-view\n"
+		"\n"
+		"  HTML: The Markup Language (an HTML language reference)\n"
+		"  http://dev.w3.org/html5/markup/\n"
+		"\n"
+		"File bug reports at https://github.com/htacg/tidy-html5/issues/\n"
+		"or send questions and comments to public-htacg@w3.org.\n"
+		"\n"
+		"Validate your HTML documents using the W3C Nu Markup Validator:\n"
+		"  http://validator.w3.org/nu/"
+		"\n\n"
+	},
+	{ TC_TXT_HELP_CONFIG,
+		"\nHTML Tidy Configuration Settings\n\n"
+		"Within a file, use the form:\n\n"
+		"wrap: 72\n"
+		"indent: no\n\n"
+		"When specified on the command line, use the form:\n\n"
+		"--wrap 72 --indent no\n\n"
+	},
+	{ TC_TXT_HELP_CONFIG_NAME,      "Name"                                                                    },
+	{ TC_TXT_HELP_CONFIG_TYPE,      "Type"                                                                    },
+	{ TC_TXT_HELP_CONFIG_ALLW,      "Allowable values"                                                        },
+
 
     /* This MUST be present and last. */
 	{ TIDY_MESSAGE_TYPE_LAST,      NULL                                                                       }

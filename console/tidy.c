@@ -62,22 +62,50 @@ static const char *cutToWhiteSpace(const char *s, uint offset, char *sbuf)
     }
     else
     {
-        uint j, l, n;
-        j = offset;
-        while(j && s[j] != ' ')
-            --j;
-        l = j;
-        n = j+1;
-        /* no white space */
-        if (j==0)
-        {
-            l = offset;
-            n = offset;
-        }
-        strncpy(sbuf,s,l);
-        sbuf[l] = '\0';
-        return s+n;
+		uint j, l, n;
+		/* scan forward looking for newline */
+		j = 0;
+		while(j < offset && s[j] != '\n')
+			++j;
+		if ( j == offset ) {
+			/* scan backward looking for first space */
+			j = offset;
+			while(j && s[j] != ' ')
+				--j;
+			l = j;
+			n = j+1;
+			/* no white space */
+			if (j==0)
+			{
+				l = offset;
+				n = offset;
+			}
+		} else
+		{
+			l = j;
+			n = j+1;
+		}
+		strncpy(sbuf,s,l);
+		sbuf[l] = '\0';
+		return s+n;
     }
+}
+
+/**
+ **  Outputs one column of text.
+ */
+static void print1Column( const char* fmt, uint l1, const char *c1 )
+{
+	const char *pc1=c1;
+	char *c1buf = (char *)malloc(l1+1);
+	if (!c1buf) outOfMemory();
+	
+	do
+	{
+		pc1 = cutToWhiteSpace(pc1, l1, c1buf);
+		printf(fmt, c1buf[0] !='\0' ? c1buf : "");
+	} while (pc1);
+	free(c1buf);
 }
 
 /**
@@ -136,7 +164,8 @@ static void print3Columns( const char* fmt, uint l1, uint l2, uint l3,
 /**
  **  Format strings and decorations used in output.
  */
-static const char helpfmt[] = " %-19.19s %-58.58s\n";
+//static const char helpfmt[] = " %-19.19s %-58.58s\n";
+static const char helpfmt[] = " %-25.25s %-52.52s\n";
 static const char helpul[]  = "-----------------------------------------------------------------";
 static const char fmt[]     = "%-27.27s %-9.9s  %-40.40s\n";
 static const char valfmt[]  = "%-27.27s %-9.9s %-1.1s%-39.39s\n";
@@ -171,7 +200,6 @@ static const struct {
 /**
  **  The struct and subsequent array keep the help output structured
  **  because we _also_ output all of this stuff as as XML.
- **  @todo: replace .desc with .key.
  */
 typedef struct {
     CmdOptCategory cat; /**< Category */
@@ -233,6 +261,7 @@ static const CmdOptDesc cmdopt_defs[] =  {
     { CmdOptMisc,      "-help-config",     TC_OPT_HELPCFG,  0,             NULL },
     { CmdOptMisc,      "-xml-config",      TC_OPT_XMLCFG,   0,             NULL },
     { CmdOptMisc,      "-show-config",     TC_OPT_SHOWCFG,  0,             NULL },
+	{ CmdOptMisc,      "-help-option <%s>",TC_OPT_HELPOPT,  TC_LABEL_OPT,  NULL },
     { CmdOptMisc,      NULL,               0,               0,             NULL }
 };
 
@@ -379,7 +408,7 @@ static void print_help_option( void )
             if (pos->cat != cat)
                 continue;
             name = get_option_names( pos );
-            print2Columns( helpfmt, 19, 58, name, tidyLocalizedString( pos->key ) );
+            print2Columns( helpfmt, 25, 52, name, tidyLocalizedString( pos->key ) );
             free(name);
         }
         printf("\n");
@@ -912,30 +941,124 @@ static void optionhelp( TidyDoc tdoc )
 }
 
 /**
+ **  Simple string replacement - lifted from admin@binarytides.com
+ */
+tmbstr replace_string(ctmbstr needle , ctmbstr replace , ctmbstr haystack)
+{
+	tmbstr p = NULL;
+	tmbstr old = NULL;
+	tmbstr result = NULL ;
+	int c = 0;
+	int search_size = strlen(needle);
+	
+	/* Count how many occurences */
+	for(p = strstr(haystack , needle) ; p != NULL ; p = strstr(p + search_size , needle))
+	{
+		c++;
+	}
+	
+	/* Final size */
+	c = ( strlen(replace) - search_size )*c + strlen(haystack) + 1;
+	
+	/* New subject with new size */
+	if (!( result = malloc( c ) ))
+		outOfMemory();
+	
+	/* Set it to blank */
+	strcpy(result , "");
+	
+	/* The start position */
+	old = (tmbstr)haystack;
+	
+	for(p = strstr(haystack , needle) ; p != NULL ; p = strstr(p + search_size , needle))
+	{
+		/* move ahead and copy some text from original subject, from a certain position */
+		strncpy(result + strlen(result) , old , p - old);
+		
+		/* move ahead and copy the replacement text */
+		strcpy(result + strlen(result) , replace);
+		
+		/* The new start position after this search match */
+		old = p + search_size;
+	}
+	
+	/* Copy the part after the last search match */
+	strcpy(result + strlen(result) , old);
+	
+	return result;
+}
+	
+/**
+ **  Option descriptions are HTML formatted, but we
+ **  want to display them in a console.
+ */
+static tmbstr get_prepared_content( ctmbstr content )
+{
+	tmbstr prepared = NULL;
+	tmbstr replacement = "";
+	int i = 0;
+	
+	/* Our generators allow <code>, <em>, <strong>, <br/>, and <p>,
+	   but <br/> will be taken care of specially. */
+	ctmbstr tags_open[] = { "<code>", "<em>", "<strong>", "<p>", NULL };
+	ctmbstr tags_close[] = { "</code>", "</em>", "</strong>", "</p>", NULL };
+	
+	prepared = replace_string( "<br/>", "\n\n", content );
+	
+	/* Use the string substitution method to consider the possibility
+	   of using ANSI escape sequences for styling. Not all terminals
+	   support ANSI colors, so for fun we'll demo with Mac OS X. */
+	
+#if defined(MAC_OS_X) && 0
+	replacement = "\x1b[36m";
+#endif
+	i = 0;
+	while (tags_open[i]) {
+		prepared = replace_string(tags_open[i], replacement, prepared);
+		++i;
+	};
+
+#if defined(MAC_OS_X) && 0
+	replacement = "\x1b[0m";
+#endif
+	i = 0;
+	while (tags_close[i]) {
+		prepared = replace_string(tags_close[i], replacement, prepared);
+		++i;
+	};
+
+	/* Add back proper angled brackets. */
+	prepared = replace_string("&lt;", "<", prepared);
+	prepared = replace_string("&gt;", ">", prepared);
+
+	return prepared;
+}
+
+
+/**
 **  Handles the -help-option service.
 **  @todo: format, remove tags, add localized strings.
 */
 static void optionDescribe( TidyDoc tdoc, char *tag )
 {
-    char *result = NULL;
+    tmbstr result = NULL;
     TidyOptionId topt;
-
-    printf( "\nNote this help function is UNDOCUMENTED, and still needs work.\n" );
-
-    printf( "\n`%s`\n\n", tag );
 
     topt = tidyOptGetIdForName( tag );
 
     if (topt < N_TIDY_OPTIONS)
     {
-        result = (char*)tidyOptGetDoc( tdoc, tidyGetOption( tdoc, topt ) );
+		result = get_prepared_content( tidyOptGetDoc( tdoc, tidyGetOption( tdoc, topt ) ) );
     }
 	else
     {
-        result = "Unknown option.";
+		result = (tmbstr)tidyLocalizedString(TC_STRING_UNKNOWN_OPTION_B);
     }
 
-    printf( "%s\n\n", result );
+	printf( "\n" );
+	printf( "`--%s`\n\n", tag );
+	print1Column( "%-68.68s\n", 68, result );
+    printf( "\n" );
 }
 
 /**

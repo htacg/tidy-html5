@@ -1202,6 +1202,7 @@ static languageDictionary language_en = {
 	{ TC_LABEL_FILE,                "file"                                                                    },
 	{ TC_LABEL_LANG,                "lang"                                                                    },
 	{ TC_LABEL_LEVL,                "level"                                                                   },
+	{ TC_LABEL_OPT,                 "option"                                                                  },
 	{ TC_MAIN_ERROR_LOAD_CONFIG,    "Loading config file \"%s\" failed, err = %d\n"                           },
 	{ TC_OPT_ACCESS,
 		"do additional accessibility checks (<level> = 0, 1, 2, 3). 0 is "
@@ -1219,6 +1220,7 @@ static languageDictionary language_en = {
 	{ TC_OPT_GDOC,                  "produce clean version of html exported by Google Docs"                   },
 	{ TC_OPT_HELP,                  "list the command line options"                                           },
 	{ TC_OPT_HELPCFG,               "list all configuration options"                                          },
+	{ TC_OPT_HELPOPT,               "show a description of the <option>"                                      },
 	{ TC_OPT_IBM858,                "use IBM-858 (CP850+Euro) for input, US-ASCII for output"                 },
 	{ TC_OPT_INDENT,                "indent element content"                                                  },
 	{ TC_OPT_ISO2022,               "use ISO-2022 for both input and output"                                  },
@@ -1257,6 +1259,7 @@ static languageDictionary language_en = {
 	{ TC_STRING_CHAR_ENCODING,      "Character encodings"                                                     },
 	{ TC_STRING_MISC,               "Miscellaneous"                                                           },
 	{ TC_STRING_UNKNOWN_OPTION,     "HTML Tidy: unknown option: %c\n"                                         },
+	{ TC_STRING_UNKNOWN_OPTION_B,   "HTML Tidy: unknown option."                                              },
 	{ TC_STRING_VERS_A,             "HTML Tidy for %s version %s\n"                                           },
 	{ TC_STRING_VERS_B,             "HTML Tidy version %s\n"                                                  },
 	{ TC_TXT_HELP_1,

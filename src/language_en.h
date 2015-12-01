@@ -1202,6 +1202,7 @@ static languageDictionary language_en = {
 	{ TC_LABEL_FILE,                "file"                                                                    },
 	{ TC_LABEL_LANG,                "lang"                                                                    },
 	{ TC_LABEL_LEVL,                "level"                                                                   },
+	{ TC_MAIN_ERROR_LOAD_CONFIG,    "Loading config file \"%s\" failed, err = %d\n"                           },
 	{ TC_OPT_ACCESS,
 		"do additional accessibility checks (<level> = 0, 1, 2, 3). 0 is "
 		"assumed if <level> is missing."

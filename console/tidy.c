@@ -1061,7 +1061,7 @@ int main( int argc, char** argv )
     {
         status = tidyLoadConfig( tdoc, TIDY_CONFIG_FILE );
         if ( status != 0 )
-            fprintf(errout, "Loading config file \"%s\" failed, err = %d\n", TIDY_CONFIG_FILE, status);
+			fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), TIDY_CONFIG_FILE, status);
     }
 #endif /* TIDY_CONFIG_FILE */
 
@@ -1072,14 +1072,14 @@ int main( int argc, char** argv )
     {
         status = tidyLoadConfig( tdoc, cfgfil );
         if ( status != 0 )
-            fprintf(errout, "Loading config file \"%s\" failed, err = %d\n", cfgfil, status);
+            fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), cfgfil, status);
     }
 #ifdef TIDY_USER_CONFIG_FILE
     else if ( tidyFileExists( tdoc, TIDY_USER_CONFIG_FILE) )
     {
         status = tidyLoadConfig( tdoc, TIDY_USER_CONFIG_FILE );
         if ( status != 0 )
-            fprintf(errout, "Loading config file \"%s\" failed, err = %d\n", TIDY_USER_CONFIG_FILE, status);
+            fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), TIDY_USER_CONFIG_FILE, status);
     }
 #endif /* TIDY_USER_CONFIG_FILE */
 
@@ -1189,6 +1189,7 @@ int main( int argc, char** argv )
                 }
                 else
                 {
+					/* @todo: localize this when service is finished. */
                     printf( "%s", "Tidy option name must be specified.\n");
                 }
                 tidyRelease( tdoc );

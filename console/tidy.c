@@ -1037,7 +1037,6 @@ static tmbstr get_prepared_content( ctmbstr content )
 
 /**
 **  Handles the -help-option service.
-**  @todo: format, remove tags, add localized strings.
 */
 static void optionDescribe( TidyDoc tdoc, char *tag )
 {
@@ -1312,8 +1311,7 @@ int main( int argc, char** argv )
                 }
                 else
                 {
-					/* @todo: localize this when service is finished. */
-                    printf( "%s", "Tidy option name must be specified.\n");
+                    printf( "%s\n", tidyLocalizedString(TC_STRING_MUST_SPECIFY));
                 }
                 tidyRelease( tdoc );
                 return 0; /* success */

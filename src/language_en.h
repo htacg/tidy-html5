@@ -1258,6 +1258,7 @@ static languageDictionary language_en = {
 	{ TC_STRING_PROCESS_DIRECTIVES, "Processing directives"                                                   },
 	{ TC_STRING_CHAR_ENCODING,      "Character encodings"                                                     },
 	{ TC_STRING_MISC,               "Miscellaneous"                                                           },
+	{ TC_STRING_MUST_SPECIFY,       "A Tidy option name must be specified."                                   },
 	{ TC_STRING_UNKNOWN_OPTION,     "HTML Tidy: unknown option: %c\n"                                         },
 	{ TC_STRING_UNKNOWN_OPTION_B,   "HTML Tidy: unknown option."                                              },
 	{ TC_STRING_VERS_A,             "HTML Tidy for %s version %s\n"                                           },

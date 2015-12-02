@@ -23,15 +23,7 @@
  */
 static languageDictionary language_en_gb = {
     /* Specify the code for this language. */
-    { TIDY_LANGUAGE,               "en"                                       },
-
-
-    /* Miscelleneous Strings */
-    { ACCESS_URL,                  "http://www.w3.org/WAI/GL"                 },
-    { ATRC_ACCESS_URL,             "http://www.html-tidy.org/accessibility/"  },
-
-    /* ReportEntityError */
-    { MISSING_SEMICOLON,           "entity \"%s\" doesn't end in ';'"         }, /* Warning in HTML, Error in XML/XHTML */
+    { TIDY_LANGUAGE,               "en_gb"                                    },
 
 
     /* This MUST be present and last. */

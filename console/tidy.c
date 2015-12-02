@@ -10,6 +10,7 @@
 
 #include "tidy.h"
 #include "language.h"
+#include "locale.h"
 #if !defined(NDEBUG) && defined(_MSC_VER)
 #include "sprtf.h"
 #endif
@@ -1148,12 +1149,38 @@ static void unknownOption( uint c )
 
 /**
 **  Handles pretty-printing callbacks.
-**/
+*/
 void progressTester( TidyDoc tdoc, uint srcLine, uint srcCol, uint dstLine)
 {
     //   fprintf(stderr, "srcLine = %u, srcCol = %u, dstLine = %u\n", srcLine, srcCol, dstLine);
 }
 
+/**
+**  Determines the current locale without affecting the C locale.
+*/
+ctmbstr currentLocale()
+{
+	ctmbstr result;
+	tmbstr ret_val;
+	
+	const struct lconv * const currentlocale = localeconv();
+	
+	/* This should set the OS locale. */
+	result = setlocale( LC_ALL, "en_US" );
+	
+	/* This should read the current locale. */
+	result = setlocale( LC_ALL, NULL);
+	
+	/* Make a new copy of the string. */
+	if (!( ret_val = malloc( strlen( result )+1 ) ))
+		outOfMemory();
+	strcpy(ret_val, result);
+
+	/* This should restore the OS locale. */
+	setlocale( LC_ALL, "C" );
+
+	return ret_val;
+}
 
 /**
 **  MAIN --  let's do something here.
@@ -1172,7 +1199,20 @@ int main( int argc, char** argv )
     errout = stderr;  /* initialize to stderr */
 
     tidySetPrettyPrinterCallback(tdoc, progressTester);
-
+	
+	/* language testing */
+	printf("\nOS locale = %s\n\n", currentLocale());
+	
+//	ctmbstr lang = "en";
+//	ctmbstr lang = "en_gb";
+//	ctmbstr lang = "russian";
+	ctmbstr lang = "Russian";
+	if (! tidySetLanguage( lang ) )
+		printf("\nCould not set language to %s\n", lang);
+	else
+		printf("\nSuccess setting language to %s\n", lang);
+	
+	
 #if !defined(NDEBUG) && defined(_MSC_VER)
     set_log_file((char *)"temptidy.txt", 0);
     // add_append_log(1);

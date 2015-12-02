@@ -1202,15 +1202,17 @@ int main( int argc, char** argv )
 	
 	/* language testing */
 	printf("\nOS locale = %s\n\n", currentLocale());
-	
+
+//    ctmbstr lang = NULL;
 //	ctmbstr lang = "en";
+	ctmbstr lang = "en_US";
 //	ctmbstr lang = "en_gb";
 //	ctmbstr lang = "russian";
-	ctmbstr lang = "Russian";
+//	ctmbstr lang = "Russian";
 	if (! tidySetLanguage( lang ) )
 		printf("\nCould not set language to %s\n", lang);
 	else
-		printf("\nSuccess setting language to %s\n", lang);
+		printf("\nWanted %s, success setting language to %s\n", lang, tidyGetLanguage());
 	
 	
 #if !defined(NDEBUG) && defined(_MSC_VER)

@@ -149,13 +149,16 @@ ctmbstr tidyLocalizedString( uint messageType );
 /**
  *  Tells Tidy to use a different language for output. The
  *  parameter `languageCode` must match the TIDY_LANGUAGE for
- *  an included language. The result indicates the result of this
- *  setting.
- *  @todo: this will eventually be set via tidy's `--language`
- *  option, and the `console` app will set this based on user
- *  locale.
+ *  an included language. The result indicates that a setting
+ *  was applied, but not necessarily the specific request, i.e.,
+ *  true indicates the language and/or region was applied.
  */
 Bool tidySetLanguage( ctmbstr languageCode );
 
+
+/**
+ *  Gets the current language used by Tidy.
+ */
+ctmbstr tidyGetLanguage();
 
 #endif /* language_h */

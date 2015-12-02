@@ -248,8 +248,7 @@ ctmbstr tidyLocalizedString( uint messageType )
 
 
 /**
- *  Retrieves the POSIX components for a string. We accept
- *  POSIX names and Windows legacy names.
+ *  Retrieves the POSIX name for a string.
  */
 ctmbstr tidyNormalizedLocaleName( ctmbstr locale )
 {
@@ -287,31 +286,24 @@ ctmbstr tidyNormalizedLocaleName( ctmbstr locale )
 	return result;
 }
 
+
 /**
- *  Tells Tidy to use a different language for output. The
- *  parameter `languageCode` must match the TIDY_LANGUAGE for
- *  an included language. The result indicates the success of
- *  this setting.
+ *  Actually sets the language with a guaranteed, good languageCode.
  */
-Bool tidySetLanguage( ctmbstr languageCode )
+Bool TY_(tidySetLanguage)( ctmbstr languageCode )
 {
     uint i;
     languageDictionary *testLang;
     languageDictionaryEntry testEntry;
-	ctmbstr wantCode;
     ctmbstr testCode;
 
-	/* @todo: we want to do this twice: once to set the language,
-	 * and then again to set the langage+region. This way the
-	 * language will be set even when the region cannot be. */
-	wantCode = tidyNormalizedLocaleName( languageCode );
     for (i = 0; tidyLanguages.languages[i]; ++i)
     {
         testLang = tidyLanguages.languages[i];
         testEntry = (*testLang)[0];
         testCode = testEntry.value;
 
-        if ( strcmp(testCode, wantCode) == 0 )
+        if ( strcmp(testCode, languageCode) == 0 )
         {
             tidyLanguages.currentLanguage = testLang;
             return yes;
@@ -322,3 +314,45 @@ Bool tidySetLanguage( ctmbstr languageCode )
 }
 
 
+/**
+ *  Tells Tidy to use a different language for output. The
+ *  parameter `languageCode` must match the TIDY_LANGUAGE for
+ *  an included language. The result indicates that a setting
+ *  was applied, but not necessarily the specific request, i.e.,
+ *  true indicates the language and/or region was applied.
+ */
+Bool tidySetLanguage( ctmbstr languageCode )
+{
+    Bool result;
+	ctmbstr wantCode;
+    char lang[3] = "";
+
+    if ( !languageCode || !(wantCode = tidyNormalizedLocaleName( languageCode )) )
+        return no;
+
+    /* We should have a two or five character string at this point, so
+       we will first set with the two character ID to get the right
+       language, then try again with the five character ID to set the
+       region. If the region fails, at least the language is set.
+     */
+
+    if ( strlen( wantCode ) > 2 )
+    {
+        strncpy(lang, wantCode, 2);
+        lang[2] = '\0';
+        result = TY_(tidySetLanguage( lang ) );
+    }
+
+    result = result || TY_(tidySetLanguage( wantCode ));
+
+    return result;
+}
+
+
+/**
+ *  Gets the current language used by Tidy.
+ */
+ctmbstr tidyGetLanguage()
+{
+    return (*tidyLanguages.currentLanguage)[0].value;
+}

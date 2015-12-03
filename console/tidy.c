@@ -1214,6 +1214,10 @@ int main( int argc, char** argv )
 //	tidySetPrettyPrinterCallback(tdoc, progressTester);
 //	testLocale();
 	
+	tmbstr locale = NULL;
+	tidySetLanguage(tidySystemLocale(locale));
+	locale = NULL;
+	
 #if !defined(NDEBUG) && defined(_MSC_VER)
 	set_log_file((char *)"temptidy.txt", 0);
 	// add_append_log(1);

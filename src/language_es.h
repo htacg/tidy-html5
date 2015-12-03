@@ -32,6 +32,29 @@ static languageDictionary language_es = {
 	{ TEST_PRESENT_IN_BASE,         "This is es base language (TEST_PRESENT_IN_BASE)."                        },
 	
 	
+	/*****************************
+	 ** Options Documentation
+	 *****************************/
+	/*
+	 * As of 2015-November these descriptions are used uniquely by
+	 * printXMLDescription from which quickref.html and the Unix
+	 * man pages are generated. The xslt for building all
+	 * documentation now supports the following tags in descriptions:
+	 *    <code>, <em>, <strong>, <br />, <p>
+	 * Note that the xslt processor requires <br /> to be self closing!
+	 */
+	{ TidyMakeClean,
+		"Esta opción especifica si Tidy debe realizar la limpieza de algún "
+		"legado etiquetas de presentación (actualmente <code>&lt;i&gt;</code>, "
+		"<code>&lt;b&gt;</code>, <code>&lt;center&gt;</code> cuando encerrados "
+		"dentro de las etiquetas apropiadas en línea y "
+		"<code>&lt;font&gt;</code>). Si se establece en <code>yes</code>, "
+		"entonces etiquetas existentes serán reemplazados con CSS "
+		"<code>&lt;style&gt;</code> y estructural markup según corresponda. "
+		,
+	},
+
+	
 	/* This MUST be present and last. */
 	{ TIDY_MESSAGE_TYPE_LAST,       NULL                                                                      }
 };

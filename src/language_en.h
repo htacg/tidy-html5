@@ -94,7 +94,7 @@ static languageDictionary language_en = {
 		"Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML;\n"
 		"even if they were, they would likely be unprintable control characters.\n"
 		"Tidy assumed you wanted to refer to a character with the same byte value in the \n"
-		"%s  encoding and replaced that reference with the Unicode equivalent.\n\n"
+		"%s encoding and replaced that reference with the Unicode equivalent.\n\n"
 	},
 	{ TEXT_INVALID_UTF8,
 		"Character codes for UTF-8 must be in the range: U+0000 to U+10FFFF.\n"

@@ -1,5 +1,5 @@
-#ifndef language_en_gb_h
-#define language_en_gb_h
+#ifndef language_es_mx_h
+#define language_es_mx_h
 /*
  * language_en_gb.h
  * Localization support for HTML Tidy.
@@ -21,14 +21,20 @@
  *  easy to include and exclude languages without tinkering with
  *  the build system.
  */
-static languageDictionary language_en_gb = {
+static languageDictionary language_es_mx = {
 	/* Specify the code for this language. */
-	{ TIDY_LANGUAGE,                "en_gb"                                                                   },
+	{ TIDY_LANGUAGE,               "es_mx"                                                                    },
+	
+	
+	/*****************************
+	 ** Localization test strings
+	 *****************************/
+	{ TEST_PRESENT_IN_REGION,      "This is es_mx region langauge (TEST_PRESENT_IN_REGION)."                  },
 	
 	
 	/* This MUST be present and last. */
-	{ TIDY_MESSAGE_TYPE_LAST,       NULL                                                                      }
+	{ TIDY_MESSAGE_TYPE_LAST,      NULL                                                                       }
 };
 
 
-#endif /* language_en_gb_h */
+#endif /* language_es_mx_h */

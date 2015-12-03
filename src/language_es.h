@@ -1,7 +1,7 @@
-#ifndef language_en_gb_h
-#define language_en_gb_h
+#ifndef language_es_h
+#define language_es_h
 /*
- * language_en_gb.h
+ * language_es.h
  * Localization support for HTML Tidy.
  *
  * (c) 2015 HTACG
@@ -21,9 +21,15 @@
  *  easy to include and exclude languages without tinkering with
  *  the build system.
  */
-static languageDictionary language_en_gb = {
+static languageDictionary language_es = {
 	/* Specify the code for this language. */
-	{ TIDY_LANGUAGE,                "en_gb"                                                                   },
+	{ TIDY_LANGUAGE,                "es"                                                                      },
+	
+	
+	/*****************************
+	 ** Localization test strings
+	 *****************************/
+	{ TEST_PRESENT_IN_BASE,         "This is es base language (TEST_PRESENT_IN_BASE)."                        },
 	
 	
 	/* This MUST be present and last. */
@@ -31,4 +37,4 @@ static languageDictionary language_en_gb = {
 };
 
 
-#endif /* language_en_gb_h */
+#endif /* language_es_h */

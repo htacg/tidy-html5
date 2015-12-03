@@ -11,15 +11,19 @@
 #include "language.h"
 #include "language_en.h"
 #include "language_en_gb.h"
+#include "language_es.h"
+#include "language_es_mx.h"
 #include "tmbstr.h"
+#include "locale.h"
 
 
 /**
  *  This structure type provides universal access to all of Tidy's strings.
  */
 typedef struct {
-    languageDictionary *currentLanguage;
-    languageDictionary *languages[];
+	languageDictionary *currentLanguage;
+	languageDictionary *fallbackLanguage;
+	languageDictionary *languages[];
 } tidyLanguagesType;
 
 
@@ -28,12 +32,15 @@ typedef struct {
  *  `.currentLanguage` to language_en, which is Tidy's default language.
  */
 static tidyLanguagesType tidyLanguages = {
-    .currentLanguage = &language_en,
-    .languages = {
-        &language_en,
-        &language_en_gb,
-        NULL /* This array MUST be null terminated. */
-    }
+	.currentLanguage = &language_en,
+	.fallbackLanguage = &language_en,
+	.languages = {
+		&language_en,
+		&language_en_gb,
+		&language_es,
+		&language_es_mx,
+		NULL /* This array MUST be null terminated. */
+	}
 };
 
 
@@ -212,6 +219,22 @@ static struct _localeMap {
 
 
 /**
+ *  The real string lookup function.
+ */
+ctmbstr TY_(tidyLocalizedString)( uint messageType, languageDictionary *dictionary )
+{
+	int i;
+	for (i = 0; (*dictionary)[i].value; ++i)
+	{
+		if ((*dictionary)[i].key == messageType)
+		{
+			return (*dictionary)[i].value;
+		}
+	}
+	return NULL;
+}
+
+/**
  *  Provides a string given `messageType` in the current
  *  localization.
  *
@@ -221,29 +244,52 @@ static struct _localeMap {
  */
 ctmbstr tidyLocalizedString( uint messageType )
 {
-    uint i;
-    languageDictionary *current = tidyLanguages.currentLanguage;
+	ctmbstr result;
+	
+	result  = TY_(tidyLocalizedString)( messageType, tidyLanguages.currentLanguage);
+	
+	if (!result && tidyLanguages.fallbackLanguage )
+	{
+		result = TY_(tidyLocalizedString)( messageType, tidyLanguages.fallbackLanguage);
+	}
+	
+	if (!result)
+	{
+		/* Fallback to en which is built in. */
+		result = TY_(tidyLocalizedString)( messageType, &language_en);
+	}
+	
+	return result;
+}
 
-    for (i = 0; (*current)[i].value; ++i)
-    {
-        if ((*current)[i].key == messageType)
-        {
-            return (*current)[i].value;
-        }
-    }
 
-    /* Fallback to `en` in case a string is missing. */
-    current = &language_en;
-
-    for (i = 0; (*current)[i].value; ++i)
-    {
-        if ((*current)[i].key == messageType)
-        {
-            return (*current)[i].value;
-        }
-    }
-    return NULL;
-
+/**
+ **  Determines the current locale without affecting the C locale.
+ **  Tidy has always used the default C locale, and at this point
+ **  in its development we're not going to tamper with that.
+ **  @param  result The buffer to use to return the string.
+ **          Returns NULL on failure.
+ **  @return The same buffer for convenience.
+ */
+tmbstr tidySystemLocale(tmbstr result)
+{
+	ctmbstr temp;
+	
+	/* This should set the OS locale. */
+	setlocale( LC_ALL, "" );
+	
+	/* This should read the current locale. */
+	temp = setlocale( LC_ALL, NULL);
+	
+	/* Make a new copy of the string. */
+	result = NULL;
+	if (( result = malloc( strlen( temp )+1 ) ))
+		strcpy(result, temp);
+	
+	/* This should restore the OS locale. */
+	setlocale( LC_ALL, "C" );
+	
+	return result;
 }
 
 
@@ -268,49 +314,55 @@ ctmbstr tidyNormalizedLocaleName( ctmbstr locale )
 		}
 	}
 	
-	/* We're going to be stupid about this and trust the
-	   user, and return just the first two characters
-	   if they exist and the 4th and 5th if they exist. */
+	/* We're going to be stupid about this and trust the user, and
+	 return just the first two characters if they exist and the
+	 4th and 5th if they exist. The worst that can happen is a
+	 junk language that doesn't exist and won't be set. */
+	
 	len = strlen( search );
-	if ( len >= 5 )
-		strncpy( result+3, search+3, 2 );
-	else
-		result[2] = '\0';
+	len = len <= 5 ? len : 5;
 	
-	if ( len >= 2 )
-		strncpy( result, search, 2 );
-	
-	for ( i = 0; i < 6; i++ )
-		result[i] = tolower(result[i]);
+	for ( i = 0; i < len; i++ )
+	{
+		if ( i == 2 )
+		{
+			/* Either terminate the string or ensure there's an underscore */
+			strncpy( result + i, strlen( search ) >= 5 ? "_" : '\0', 1 );
+		}
+		else
+		{
+			strncpy( result + i, search + i, 1);
+			result[i] = tolower( result[i] );
+		}
+	}
 	
 	return result;
 }
 
 
 /**
- *  Actually sets the language with a guaranteed, good languageCode.
+ *  Actually sets the language with a sanitized languageCode.
  */
-Bool TY_(tidySetLanguage)( ctmbstr languageCode )
+languageDictionary *TY_(tidySetLanguage)( ctmbstr languageCode )
 {
-    uint i;
-    languageDictionary *testLang;
-    languageDictionaryEntry testEntry;
-    ctmbstr testCode;
-
-    for (i = 0; tidyLanguages.languages[i]; ++i)
-    {
-        testLang = tidyLanguages.languages[i];
-        testEntry = (*testLang)[0];
-        testCode = testEntry.value;
-
-        if ( strcmp(testCode, languageCode) == 0 )
-        {
-            tidyLanguages.currentLanguage = testLang;
-            return yes;
-        }
-    }
-
-    return no;
+	uint i;
+	languageDictionary *testLang;
+	ctmbstr testCode;
+	
+	for (i = 0; tidyLanguages.languages[i]; ++i)
+	{
+		testLang = tidyLanguages.languages[i];
+		testCode = (*testLang)[0].value;
+		
+		if ( strcmp(testCode, languageCode) == 0 )
+		{
+			tidyLanguages.currentLanguage = testLang;
+			if ( strlen(testCode) == 2 )
+				return testLang;
+		}
+	}
+	
+	return NULL;
 }
 
 
@@ -323,29 +375,40 @@ Bool TY_(tidySetLanguage)( ctmbstr languageCode )
  */
 Bool tidySetLanguage( ctmbstr languageCode )
 {
-    Bool result;
-	ctmbstr wantCode;
-    char lang[3] = "";
-
-    if ( !languageCode || !(wantCode = tidyNormalizedLocaleName( languageCode )) )
-        return no;
-
-    /* We should have a two or five character string at this point, so
-       we will first set with the two character ID to get the right
-       language, then try again with the five character ID to set the
-       region. If the region fails, at least the language is set.
-     */
-
-    if ( strlen( wantCode ) > 2 )
-    {
-        strncpy(lang, wantCode, 2);
-        lang[2] = '\0';
-        result = TY_(tidySetLanguage( lang ) );
-    }
-
-    result = result || TY_(tidySetLanguage( wantCode ));
-
-    return result;
+	languageDictionary *dict1 = NULL;
+	languageDictionary *dict2 = NULL;
+	ctmbstr wantCode = NULL;
+	char lang[3] = "";
+	
+	if ( !languageCode || !(wantCode = tidyNormalizedLocaleName( languageCode )) )
+		return no;
+	
+	/* We should have a two or five character string at this point, so
+	 we will first set with the two character ID to get the right
+	 language, then try again with the five character ID to set the
+	 region. If the region fails, at least the language is set.
+	 */
+	
+	if ( strlen( wantCode ) > 2 )
+	{
+		strncpy(lang, wantCode, 2);
+		lang[2] = '\0';
+		dict1 = TY_(tidySetLanguage( lang ) );
+	}
+	
+	dict2 = TY_(tidySetLanguage( wantCode ));
+	
+	/* Set a fallback dictionary if applicable. If dict1 is assigned,
+	 it means we wanted a xx_yy dict, but the xx worked, making it
+	 eligible as a fallback. If !dict1, then there is no eligible
+	 fallback so make sure to NULL it out.
+	 */
+	if ( dict1 )
+		tidyLanguages.fallbackLanguage = dict1;
+	if ( !dict1 && dict2 )
+		tidyLanguages.fallbackLanguage = NULL;
+	
+	return dict1 || dict2;
 }
 
 
@@ -354,5 +417,5 @@ Bool tidySetLanguage( ctmbstr languageCode )
  */
 ctmbstr tidyGetLanguage()
 {
-    return (*tidyLanguages.currentLanguage)[0].value;
+	return (*tidyLanguages.currentLanguage)[0].value;
 }

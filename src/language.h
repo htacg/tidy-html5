@@ -12,7 +12,7 @@
  * See tidy.h and access.h for the copyright notice.
  *
  * Created by Jim Derry on 11/28/15.
-*/
+ */
 
 #include "tidyplatform.h"
 
@@ -23,8 +23,8 @@
  *  below).
  */
 typedef struct languageDictionaryEntry {
-    uint key;
-    ctmbstr value;
+	uint key;
+	ctmbstr value;
 } languageDictionaryEntry;
 
 
@@ -56,13 +56,17 @@ typedef languageDictionaryEntry const languageDictionary[600];
 
 typedef enum
 {
-    /* This MUST be present and first. */
-    TIDY_MESSAGE_TYPE_FIRST = 4096,
-
-    /* Specify the code for this language. */
-    TIDY_LANGUAGE,              
-
-    /* Strings for the console application. */
+	/* This MUST be present and first. */
+	TIDY_MESSAGE_TYPE_FIRST = 4096,
+	
+	/* Specify the code for this language. */
+	TIDY_LANGUAGE,
+	
+	/* Localization test strings. */
+	TEST_PRESENT_IN_BASE,
+	TEST_PRESENT_IN_REGION,
+	
+	/* Strings for the console application. */
 	TC_CAT_DIAGNOSTICS,
 	TC_CAT_ENCODING,
 	TC_CAT_MARKUP,
@@ -112,11 +116,13 @@ typedef enum
 	TC_OPT_WIN1252,
 	TC_OPT_WRAP,
 	TC_OPT_XML,
-	TC_OPT_XMLCFG,   
-	TC_OPT_XMLHELP,  
+	TC_OPT_XMLCFG,
+	TC_OPT_XMLHELP,
 	TC_STRING_OUT_OF_MEMORY,
 	TC_STRING_FATAL_ERROR,
 	TC_STRING_FILE_MANIP,
+	TC_STRING_LANG_MUST_SPECIFY,
+	TC_STRING_LANG_NOT_FOUND,
 	TC_STRING_MUST_SPECIFY,
 	TC_STRING_PROCESS_DIRECTIVES,
 	TC_STRING_CHAR_ENCODING,
@@ -133,9 +139,9 @@ typedef enum
 	TC_TXT_HELP_CONFIG_NAME,
 	TC_TXT_HELP_CONFIG_TYPE,
 	TC_TXT_HELP_CONFIG_ALLW,
-
-    /* This MUST be present and last. */
-    TIDY_MESSAGE_TYPE_LAST
+	
+	/* This MUST be present and last. */
+	TIDY_MESSAGE_TYPE_LAST
 } tidyMessageTypes;
 
 
@@ -144,6 +150,17 @@ typedef enum
  *  localization.
  */
 ctmbstr tidyLocalizedString( uint messageType );
+
+
+/**
+ **  Determines the current locale without affecting the C locale.
+ **  Tidy has always used the default C locale, and at this point
+ **  in its development we're not going to tamper with that.
+ **  @param  result The buffer to use to return the string.
+ **          Returns NULL on failure.
+ **  @return The same buffer for convenience.
+ */
+tmbstr tidySystemLocale(tmbstr result);
 
 
 /**

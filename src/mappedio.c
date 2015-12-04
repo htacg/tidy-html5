@@ -191,7 +191,21 @@ static int initMappedFileSource( TidyAllocator *allocator, TidyInputSource* inp,
     fin = (MappedFileSource*) TidyAlloc( allocator, sizeof(MappedFileSource) );
     if ( !fin )
         return -1;
-    
+
+#if defined(__MINGW32__)
+    {
+        DWORD lowVal, highVal;
+        lowVal = GetFileSize(fp, &highVal);
+        if ((lowVal == INVALID_FILE_SIZE) && (GetLastError() != NO_ERROR))
+        {
+            TidyFree(allocator, fin);
+            return -1;
+        }
+        fin->size = highVal;
+        fin->size = (fin->size << 32);
+        fin->size += lowVal;
+    }
+#else /* NOT a MinGW build */
 #if defined(_MSC_VER) && (_MSC_VER < 1300)  /* less than msvc++ 7.0 */
     {
         LARGE_INTEGER* pli = (LARGE_INTEGER *)&fin->size;
@@ -210,6 +224,7 @@ static int initMappedFileSource( TidyAllocator *allocator, TidyInputSource* inp,
         return -1;
     }
 #endif
+#endif /* MinGW y/n */
 
     fin->map = CreateFileMapping( fp, NULL, PAGE_READONLY, 0, 0, NULL );
 

@@ -120,7 +120,7 @@ static languageDictionary language_en = {
 		"HTML 4.01 section B.2.1 and XML 1.0 section 4.2.2. Some user agents\n"
 		"use another algorithm to escape such URIs and some server-sided\n"
 		"scripts depend on that. If you want to depend on that, you must\n"
-		"escape the URI by your own. For more information please refer to\n"
+		"escape the URI on your own. For more information please refer to\n"
 		"http://www.w3.org/International/O-URL-and-ident.html\n\n"
 	},
 	{ TEXT_BAD_FORM,
@@ -210,6 +210,13 @@ static languageDictionary language_en = {
 		"Validate your HTML documents: http://validator.w3.org/nu/\n"
 		"Lobby your company to join the W3C: http://www.w3.org/Consortium\n"
 	},
+	{ TEXT_GENERAL_INFO_PLEA,
+		"\n"
+		"Do you speak a language other than English, or a different variant of \n"
+		"English? Consider helping us to localize HTML Tidy. For details please see \n"
+		"https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md\n"
+	},
+
 	
 	/*****************************
 	 ** Message Severity Level
@@ -289,29 +296,29 @@ static languageDictionary language_en = {
 	/* ReportWarning */
 	{ NESTED_EMPHASIS,              "nested emphasis %s"                                                      }, /* Warning */
 	{ NESTED_QUOTATION,             "nested q elements, possible typo."                                       }, /* Warning */
-	{ OBSOLETE_ELEMENT,             "replacing obsolete element %s by %s"                                     }, /* Warning */
+	{ OBSOLETE_ELEMENT,             "replacing obsolete element %s with %s"                                   }, /* Warning */
 	{ COERCE_TO_ENDTAG_WARN,        "<%s> is probably intended as </%s>"                                      }, /* Warning */
 	/* HTML5 */
 	{ REMOVED_HTML5,                "%s element removed from HTML5"                                           }, /* Warning */
 	{ BAD_BODY_HTML5,               "Found attribute on body that is obsolete in HTML5. Use CSS"              }, /* Warning */
-	{ BAD_ALIGN_HTML5,              "The align attribute on the %s element is obsolete, Use CSS"              }, /* Warning */
+	{ BAD_ALIGN_HTML5,              "The align attribute on the %s element is obsolete. Use CSS"              }, /* Warning */
 	{ BAD_SUMMARY_HTML5,            "The summary attribute on the %s element is obsolete in HTML5"            }, /* Warning */
 	
 	/* ReportNotice */
 	{ TRIM_EMPTY_ELEMENT,           "trimming empty %s"                                                       }, /* Notice */
-	{ REPLACING_ELEMENT,            "replacing %s by %s"                                                      }, /* Notice */
+	{ REPLACING_ELEMENT,            "replacing %s with %s"                                                    }, /* Notice */
 	
 	/* ReportError */
 	{ COERCE_TO_ENDTAG,             "<%s> is probably intended as </%s>"                                      }, /* Error */
-	{ REPLACING_UNEX_ELEMENT,       "replacing unexpected %s by %s"                                           }, /* Error */
+	{ REPLACING_UNEX_ELEMENT,       "replacing unexpected %s with %s"                                         }, /* Error */
 	{ MISSING_ENDTAG_FOR,           "missing </%s>"                                                           }, /* Error */
 	{ MISSING_ENDTAG_BEFORE,        "missing </%s> before %s"                                                 }, /* Error */
 	{ DISCARDING_UNEXPECTED,        "discarding unexpected %s"                                                }, /* Error */
-	{ NON_MATCHING_ENDTAG,          "replacing unexpected %s by </%s>"                                        }, /* Error */
+	{ NON_MATCHING_ENDTAG,          "replacing unexpected %s with </%s>"                                      }, /* Error */
 	{ TAG_NOT_ALLOWED_IN,           "%s isn't allowed in <%s> elements"                                       }, /* Error */
 	{ MISSING_STARTTAG,             "missing <%s>"                                                            }, /* Error */
-	{ UNEXPECTED_ENDTAG,            "unexpected </%s>"                                                }, /* Error */
-	{ TOO_MANY_ELEMENTS,            "too many %s elements"                                            }, /* Error */
+	{ UNEXPECTED_ENDTAG,            "unexpected </%s>"                                                        }, /* Error */
+	{ TOO_MANY_ELEMENTS,            "too many %s elements"                                                    }, /* Error */
 	{ USING_BR_INPLACE_OF,          "using <br> in place of %s"                                               }, /* Error */
 	{ INSERTING_TAG,                "inserting implicit <%s>"                                                 }, /* Error */
 	{ CANT_BE_NESTED,               "%s can't be nested"                                                      }, /* Error */

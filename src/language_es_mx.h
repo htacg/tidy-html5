@@ -32,6 +32,18 @@ static languageDictionary language_es_mx = {
 	{ TEST_PRESENT_IN_REGION,      "This is es_mx region langauge (TEST_PRESENT_IN_REGION)."                  },
 	
 	
+	/*****************************
+	 ** Miscellaneous Strings
+	 *****************************/
+	
+	{ TEXT_GENERAL_INFO_PLEA,
+		"\n"
+		"¿Le gustaría ver Tidy en adecuada, español mexicano? Por favor considere \n"
+		"ayudarnos a localizar HTML Tidy. Para más detalles consulte \n"
+		"https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md \n"
+	},
+
+	
 	/* This MUST be present and last. */
 	{ TIDY_MESSAGE_TYPE_LAST,      NULL                                                                       }
 };

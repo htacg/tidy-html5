@@ -33,6 +33,18 @@ static languageDictionary language_es = {
 	
 	
 	/*****************************
+	 ** Miscellaneous Strings
+	 *****************************/
+	
+	{ TEXT_GENERAL_INFO_PLEA,
+		"\n"
+		"¿Le gustaría ver Tidy en un español correcto? Por favor considere \n"
+		"ayudarnos a localizar HTML Tidy. Para más detalles consulte \n"
+		"https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md \n"
+	},
+
+	
+	/*****************************
 	 ** Options Documentation
 	 *****************************/
 	/*

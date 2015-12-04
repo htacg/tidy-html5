@@ -29,258 +29,64 @@ static languageDictionary language_en_gb = {
 	 ** Miscellaneous Strings
 	 *****************************/
 	
-	{ TEXT_INVALID_UTF8,
-		"Character codes for UTF-8 must be in the range: U+0000 to U+10FFFF.\n"
-		"The definition of UTF-8 in Annex D of ISO/IEC 10646-1:2000 also\n"
-		"allows for the use of five- and six-byte sequences to encode\n"
-		"characters that are outside the range of the Unicode character set;\n"
-		"those five- and six-byte sequences are illegal for the use of\n"
-		"UTF-8 as a transformation of Unicode characters. ISO/IEC 10646\n"
-		"does not allow mapping of unpaired surrogates, nor U+FFFE and U+FFFF\n"
-		"(but it does allow other noncharacters). For more information please refer to\n"
-		"http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n\n"
-	},
-	{ TEXT_INVALID_UTF16,
-		"Character codes for UTF-16 must be in the range: U+0000 to U+10FFFF.\n"
-		"The definition of UTF-16 in Annex C of ISO/IEC 10646-1:2000 does not allow the\n"
-		"mapping of unpaired surrogates. For more information please refer to\n"
-		"http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n\n"
-	},
-	{ TEXT_INVALID_URI,
-		"URIs must be properly escaped, they must not contain unescaped\n"
-		"characters below U+0021 including the space character and not\n"
-		"above U+007E. Tidy escapes the URI for you as recommended by\n"
-		"HTML 4.01 section B.2.1 and XML 1.0 section 4.2.2. Some user agents\n"
-		"use another algorithm to escape such URIs and some server-sided\n"
-		"scripts depend on that. If you want to depend on that, you must\n"
-		"escape the URI by your own. For more information please refer to\n"
-		"http://www.w3.org/International/O-URL-and-ident.html\n\n"
-	},
-	{ TEXT_BAD_FORM,
-		"You may need to move one or both of the <form> and </form>\n"
-		"tags. HTML elements should be properly nested and form elements\n"
-		"are no exception. For instance you should not place the <form>\n"
-		"in one table cell and the </form> in another. If the <form> is\n"
-		"placed before a table, the </form> cannot be placed inside the\n"
-		"table! Note that one form can't be nested inside another!\n\n"
-	},
-	{ TEXT_BAD_MAIN,
-		"Only one <main> element is allowed in a document.\n"
-		"Subsequent <main> elements have been discarded, which may\n"
-		"render the document invalid.\n"
-	},
-	{ TEXT_M_SUMMARY,
-		"The table summary attribute should be used to describe\n"
-		"the table structure. It is very helpful for people using\n"
-		"non-visual browsers. The scope and headers attributes for\n"
-		"table cells are useful for specifying which headers apply\n"
-		"to each table cell, enabling non-visual browsers to provide\n"
-		"a meaningful context for each cell.\n\n"
-	},
-	{ TEXT_M_IMAGE_ALT,
-		"The alt attribute should be used to give a short description\n"
-		"of an image; longer descriptions should be given with the\n"
-		"longdesc attribute which takes a URL linked to the description.\n"
-		"These measures are needed for people using non-graphical browsers.\n\n"
-	},
-	{ TEXT_M_IMAGE_MAP,
-		"Use client-side image maps in preference to server-side image\n"
-		"maps as the latter are inaccessible to people using non-\n"
-		"graphical browsers. In addition, client-side maps are easier\n"
-		"to set up and provide immediate feedback to users.\n\n"
-	},
-	{ TEXT_M_LINK_ALT,
-		"For hypertext links defined using a client-side image map, you\n"
-		"need to use the alt attribute to provide a textual description\n"
-		"of the link for people using non-graphical browsers.\n\n"
-	},
-	{ TEXT_USING_FRAMES,
-		"Pages designed using frames presents problems for\n"
-		"people who are either blind or using a browser that\n"
-		"doesn't support frames. A frames-based page should always\n"
-		"include an alternative layout inside a NOFRAMES element.\n\n"
-	},
-	{ TEXT_ACCESS_ADVICE1,
-		"For further advice on how to make your pages accessible\n"
-		"see http://www.w3.org/WAI/GL"
-	},
-	{ TEXT_ACCESS_ADVICE2,
-		" and http://www.html-tidy.org/accessibility/"
-	},
-	{ TEXT_USING_LAYER,
-		"The Cascading Style Sheets (CSS) Positioning mechanism\n"
-		"is recommended in preference to the proprietary <LAYER>\n"
-		"element due to limited vendor support for LAYER.\n\n"
-	},
-	{ TEXT_USING_SPACER,
-		"You are recommended to use CSS for controlling white\n"
-		"space (e.g. for indentation, margins and line spacing).\n"
-		"The proprietary <SPACER> element has limited vendor support.\n\n"
-	},
 	{ TEXT_USING_FONT,
 		"You are recommended to use CSS to specify the font and\n"
 		"properties such as its size and colour. This will reduce\n"
 		"the size of HTML files and make them easier to maintain\n"
 		"compared with using <FONT> elements.\n\n"
 	},
-	{ TEXT_USING_NOBR,
-		"You are recommended to use CSS to control line wrapping.\n"
-		"Use \"white-space: nowrap\" to inhibit wrapping in place\n"
-		"of inserting <NOBR>...</NOBR> into the markup.\n\n"
-	},
 	{ TEXT_USING_BODY,
 		"You are recommended to use CSS to specify page and link colours\n"
 	},
-	{ TEXT_NEEDS_INTERVENTION,
-		"This document has errors that must be fixed before\n"
-		"using HTML Tidy to generate a tidied up version.\n\n"
-	},
-	{ TEXT_GENERAL_INFO,
-		"About HTML Tidy: https://github.com/htacg/tidy-html5\n"
-		"Bug reports and comments: https://github.com/htacg/tidy-html5/issues\n"
-		"Or send questions and comments to: https://lists.w3.org/Archives/Public/public-htacg/\n"
-		"Latest HTML specification: http://dev.w3.org/html5/spec-author-view/\n"
-		"Validate your HTML documents: http://validator.w3.org/nu/\n"
-		"Lobby your company to join the W3C: http://www.w3.org/Consortium\n"
+	{ TEXT_GENERAL_INFO_PLEA,
+		"\n"
+		"Would you like to see Tidy in proper, British English? Please consider \n"
+		"helping us to localise HTML Tidy. For details please see \n"
+		"https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md\n"
 	},
 	
 	/*****************************
 	 ** Message Severity Level
 	 *****************************/
-	{ TidyInfoString,               "Info: ",                                                                 },
-	{ TidyWarningString,            "Warning: ",                                                              },
-	{ TidyConfigString,             "Config: ",                                                               },
-	{ TidyAccessString,             "Access: ",                                                               },
-	{ TidyErrorString,              "Error: ",                                                                },
-	{ TidyBadDocumentString,        "Document: ",                                                             },
-	{ TidyFatalString,              "Panic: ",                                                                },
+
 	
 	/*****************************
 	 ** Warnings and Errors
 	 *****************************/
 	
 	/* ReportEncodingWarning */
-	{ ENCODING_MISMATCH,            "specified input encoding (%s) does not match actual input encoding (%s)" }, /* Warning */
 	
 	/* ReportEncodingError */
-	{ VENDOR_SPECIFIC_CHARS,        "%s invalid character code %s"                                            }, /* Error */
-	{ INVALID_SGML_CHARS,           "%s invalid character code %s"                                            }, /* Error */
-	{ INVALID_UTF8,                 "%s invalid UTF-8 bytes (char. code %s)"                                  }, /* Error */
-	{ INVALID_UTF16,                "%s invalid UTF-16 surrogate pair (char. code %s)"                        }, /* Error */
-	{ INVALID_NCR,                  "%s invalid numeric character reference %s"                               }, /* Error */
 	
 	/* ReportEntityError */
-	{ MISSING_SEMICOLON,            "entity \"%s\" doesn't end in ';'"                                        }, /* Warning in HTML, Error in XML/XHTML */
-	{ MISSING_SEMICOLON_NCR,        "numeric character reference \"%s\" doesn't end in ';'"                   }, /* Warning in HTML, Error in XML/XHTML */
-	{ UNESCAPED_AMPERSAND,          "unescaped & which should be written as &amp;"                            }, /* Warning in HTML, Error in XHTML */
-	{ UNKNOWN_ENTITY,               "unescaped & or unknown entity \"%s\""                                    }, /* Error */
-	{ APOS_UNDEFINED,               "named entity &apos; only defined in XML/XHTML"                           }, /* Error in HTML (should only occur for HTML input) */
-	
+
 	/* ReportAttrError */
 	
 	/* attribute name */
-	{ INSERTING_ATTRIBUTE,          "%s inserting \"%s\" attribute"                                           }, /* Warning in CheckLINK, Error otherwise */
-	{ INSERTING_AUTO_ATTRIBUTE,     "%s inserting \"%s\" attribute using value \"%s\""                        }, /* Warning */
-	{ MISSING_ATTR_VALUE,           "%s attribute \"%s\" lacks value"                                         }, /* Warning in CheckUrl, Error otherwise */
-	{ UNKNOWN_ATTRIBUTE,            "%s unknown attribute \"%s\""                                             }, /* Error */
-	{ PROPRIETARY_ATTRIBUTE,        "%s proprietary attribute \"%s\""                                         }, /* Error */
-	{ JOINING_ATTRIBUTE,            "%s joining values of repeated attribute \"%s\""                          }, /* Error */
-	{ XML_ATTRIBUTE_VALUE,          "%s has XML attribute \"%s\""                                             }, /* Error (but deprecated) */
 	
 	/* attribute value */
-	{ XML_ID_SYNTAX,                "%s ID \"%s\" uses XML ID syntax"                                         }, /* Warning if XHTML, Error if HTML */
-	{ ATTR_VALUE_NOT_LCASE,         "%s attribute value \"%s\" must be lower case for XHTML"                  }, /* Error if XHTML input, Notice if HTML input and XHTML outout */
-	{ PROPRIETARY_ATTR_VALUE,       "%s proprietary attribute value \"%s\""                                   }, /* Error */
-	{ ANCHOR_NOT_UNIQUE,            "%s anchor \"%s\" already defined"                                        }, /* Error */
 	
 	/* attribute name, attribute value */
-	{ BAD_ATTRIBUTE_VALUE,          "%s attribute \"%s\" has invalid value \"%s\""                            }, /* Error */
-	{ BAD_ATTRIBUTE_VALUE_REPLACED, "%s attribute \"%s\" had invalid value \"%s\" and has been replaced"      }, /* Error */
-	{ INVALID_ATTRIBUTE,            "%s attribute name \"%s\" (value=\"%s\") is invalid"                      }, /* Error */
 	
 	/* attribute value, attribute name */
-	{ REPEATED_ATTRIBUTE,           "%s dropping value \"%s\" for repeated attribute \"%s\""                  }, /* Error */
 	
 	/* no arguments */
-	{ INVALID_XML_ID,               "%s cannot copy name attribute to id"                                     }, /* Warning */
-	{ UNEXPECTED_GT,                "%s missing '>' for end of tag"                                           }, /* Warning if HTML, Error if XML/XHTML */
-	{ UNEXPECTED_QUOTEMARK,         "%s unexpected or duplicate quote mark"                                   }, /* Error */
-	{ MISSING_QUOTEMARK,            "%s attribute with missing trailing quote mark"                           }, /* Error */
-	{ UNEXPECTED_END_OF_FILE_ATTR,  "%s end of file while parsing attributes"                                 }, /* Error */
-	{ ID_NAME_MISMATCH,             "%s id and name attribute value mismatch"                                 }, /* Error */
-	{ BACKSLASH_IN_URI,             "%s URI reference contains backslash. Typo?"                              }, /* Error */
-	{ FIXED_BACKSLASH,              "%s converting backslash in URI to slash"                                 }, /* Error */
-	{ ILLEGAL_URI_REFERENCE,        "%s improperly escaped URI reference"                                     }, /* Error */
-	{ ESCAPED_ILLEGAL_URI,          "%s escaping malformed URI reference"                                     }, /* Error */
-	{ NEWLINE_IN_URI,               "%s discarding newline in URI reference"                                  }, /* Error */
-	{ WHITE_IN_URI,                 "%s discarding whitespace in URI reference"                               }, /* Error */
-	{ UNEXPECTED_EQUALSIGN,         "%s unexpected '=', expected attribute name"                              }, /* Error */
-	{ MISSING_IMAGEMAP,             "%s should use client-side image map"                                     }, /* Warning (but deprecated) */
 	
 	/* ReportMissingAttr */
-	{ MISSING_ATTRIBUTE,            "%s lacks \"%s\" attribute"                                               }, /* Error */
+
 	/* ReportWarning */
-	{ NESTED_EMPHASIS,              "nested emphasis %s"                                                      }, /* Warning */
-	{ NESTED_QUOTATION,             "nested q elements, possible typo."                                       }, /* Warning */
-	{ OBSOLETE_ELEMENT,             "replacing obsolete element %s by %s"                                     }, /* Warning */
-	{ COERCE_TO_ENDTAG_WARN,        "<%s> is probably intended as </%s>"                                      }, /* Warning */
+
 	/* HTML5 */
-	{ REMOVED_HTML5,                "%s element removed from HTML5"                                           }, /* Warning */
-	{ BAD_BODY_HTML5,               "Found attribute on body that is obsolete in HTML5. Use CSS"              }, /* Warning */
-	{ BAD_ALIGN_HTML5,              "The align attribute on the %s element is obsolete, Use CSS"              }, /* Warning */
-	{ BAD_SUMMARY_HTML5,            "The summary attribute on the %s element is obsolete in HTML5"            }, /* Warning */
 	
 	/* ReportNotice */
-	{ TRIM_EMPTY_ELEMENT,           "trimming empty %s"                                                       }, /* Notice */
-	{ REPLACING_ELEMENT,            "replacing %s by %s"                                                      }, /* Notice */
 	
 	/* ReportError */
-	{ COERCE_TO_ENDTAG,             "<%s> is probably intended as </%s>"                                      }, /* Error */
-	{ REPLACING_UNEX_ELEMENT,       "replacing unexpected %s by %s"                                           }, /* Error */
-	{ MISSING_ENDTAG_FOR,           "missing </%s>"                                                           }, /* Error */
-	{ MISSING_ENDTAG_BEFORE,        "missing </%s> before %s"                                                 }, /* Error */
-	{ DISCARDING_UNEXPECTED,        "discarding unexpected %s"                                                }, /* Error */
-	{ NON_MATCHING_ENDTAG,          "replacing unexpected %s by </%s>"                                        }, /* Error */
-	{ TAG_NOT_ALLOWED_IN,           "%s isn't allowed in <%s> elements"                                       }, /* Error */
-	{ MISSING_STARTTAG,             "missing <%s>"                                                            }, /* Error */
-	{ UNEXPECTED_ENDTAG,            "unexpected </%s>"                                                }, /* Error */
-	{ TOO_MANY_ELEMENTS,            "too many %s elements"                                            }, /* Error */
-	{ USING_BR_INPLACE_OF,          "using <br> in place of %s"                                               }, /* Error */
-	{ INSERTING_TAG,                "inserting implicit <%s>"                                                 }, /* Error */
-	{ CANT_BE_NESTED,               "%s can't be nested"                                                      }, /* Error */
-	{ PROPRIETARY_ELEMENT,          "%s is not approved by W3C"                                               }, /* Error */
-	{ ILLEGAL_NESTING,              "%s shouldn't be nested"                                                  }, /* Error */
-	{ NOFRAMES_CONTENT,             "%s not inside 'noframes' element"                                        }, /* Error */
-	{ UNEXPECTED_END_OF_FILE,       "unexpected end of file %s"                                               }, /* Error */
-	{ ELEMENT_NOT_EMPTY,            "%s element not empty or not closed"                                      }, /* Error */
-	{ UNEXPECTED_ENDTAG_IN,         "unexpected </%s> in <%s>"                                                }, /* Error */
-	{ TOO_MANY_ELEMENTS_IN,         "too many %s elements in <%s>"                                            }, /* Error */
-	{ UNESCAPED_ELEMENT,            "unescaped %s in pre content"                                             }, /* Error (but deprecated) */
 	
 	/* no arguments */
-	{ DOCTYPE_AFTER_TAGS,           "<!DOCTYPE> isn't allowed after elements"                                 }, /* Error */
-	{ MISSING_TITLE_ELEMENT,        "inserting missing 'title' element"                                       }, /* Error */
-	{ INCONSISTENT_VERSION,         "HTML DOCTYPE doesn't match content"                                      }, /* Error */
-	{ MISSING_DOCTYPE,              "missing <!DOCTYPE> declaration"                                          }, /* Error */
-	{ CONTENT_AFTER_BODY,           "content occurs after end of body"                                        }, /* Error */
-	{ MALFORMED_COMMENT,            "adjacent hyphens within comment"                                         }, /* Error */
-	{ BAD_COMMENT_CHARS,            "expecting -- or >"                                                       }, /* Error */
-	{ BAD_CDATA_CONTENT,            "'<' + '/' + letter not allowed here"                                     }, /* Error */
-	{ INCONSISTENT_NAMESPACE,       "HTML namespace doesn't match content"                                    }, /* Error */
-	{ SPACE_PRECEDING_XMLDECL,      "removing whitespace preceding XML Declaration"                           }, /* Error */
-	{ MALFORMED_DOCTYPE,            "discarding malformed <!DOCTYPE>"                                         }, /* Error */
-	{ BAD_XML_COMMENT,              "XML comments can't contain --"                                           }, /* Error (but deprecated) */
-	{ DTYPE_NOT_UPPER_CASE,         "SYSTEM, PUBLIC, W3C, DTD, EN must be upper case"                         }, /* Error (but deprecated) */
-	{ ENCODING_IO_CONFLICT,         "Output encoding does not work with standard output"                      }, /* Error (but deprecated) */
 	
 	/* ReportFatal */
-	{ SUSPECTED_MISSING_QUOTE,      "missing quote mark for attribute value"                                  }, /* Error? (not really sometimes) */
-	{ DUPLICATE_FRAMESET,           "repeated FRAMESET element"                                               }, /* Error */
-	{ UNKNOWN_ELEMENT,              "%s is not recognized!"                                                   }, /* Error */
-	{ UNEXPECTED_ENDTAG,            "unexpected </%s>"                                                }, /* Error */
 	
 	/* */
-	{ PREVIOUS_LOCATION,            "<%s> previously mentioned"                                               }, /* Info */
 	
 #if SUPPORT_ACCESSIBILITY_CHECKS
 	
@@ -289,30 +95,6 @@ static languageDictionary language_en_gb = {
 	 List of error/warning messages.  The error code corresponds to
 	 the check that is listed in the AERT (HTML specifications).
 	 */
-	{ IMG_MISSING_ALT,                               "[1.1.1.1]: <img> missing 'alt' text."                                     }, /* Access */
-	{ IMG_ALT_SUSPICIOUS_FILENAME,                   "[1.1.1.2]: suspicious 'alt' text (filename)."                             }, /* Access */
-	{ IMG_ALT_SUSPICIOUS_FILE_SIZE,                  "[1.1.1.3]: suspicious 'alt' text (file size)."                            }, /* Access */
-	{ IMG_ALT_SUSPICIOUS_PLACEHOLDER,                "[1.1.1.4]: suspicious 'alt' text (placeholder)."                          }, /* Access */
-	{ IMG_ALT_SUSPICIOUS_TOO_LONG,                   "[1.1.1.10]: suspicious 'alt' text (too long)."                            }, /* Access */
-	{ IMG_MISSING_LONGDESC_DLINK,                    "[1.1.2.1]: <img> missing 'longdesc' and d-link."                          }, /* Access */
-	{ IMG_MISSING_DLINK,                             "[1.1.2.2]: <img> missing d-link."                                         }, /* Access */
-	{ IMG_MISSING_LONGDESC,                          "[1.1.2.3]: <img> missing 'longdesc'."                                     }, /* Access */
-	{ IMG_BUTTON_MISSING_ALT,                        "[1.1.3.1]: <img> (button) missing 'alt' text."                            }, /* Access */
-	{ APPLET_MISSING_ALT,                            "[1.1.4.1]: <applet> missing alternate content."                           }, /* Access */
-	{ OBJECT_MISSING_ALT,                            "[1.1.5.1]: <object> missing alternate content."                           }, /* Access */
-	{ AUDIO_MISSING_TEXT_WAV,                        "[1.1.6.1]: audio missing text transcript (wav)."                          }, /* Access */
-	{ AUDIO_MISSING_TEXT_AU,                         "[1.1.6.2]: audio missing text transcript (au)."                           }, /* Access */
-	{ AUDIO_MISSING_TEXT_AIFF,                       "[1.1.6.3]: audio missing text transcript (aiff)."                         }, /* Access */
-	{ AUDIO_MISSING_TEXT_SND,                        "[1.1.6.4]: audio missing text transcript (snd)."                          }, /* Access */
-	{ AUDIO_MISSING_TEXT_RA,                         "[1.1.6.5]: audio missing text transcript (ra)."                           }, /* Access */
-	{ AUDIO_MISSING_TEXT_RM,                         "[1.1.6.6]: audio missing text transcript (rm)."                           }, /* Access */
-	{ FRAME_MISSING_LONGDESC,                        "[1.1.8.1]: <frame> may require 'longdesc'."                               }, /* Access */
-	{ AREA_MISSING_ALT,                              "[1.1.9.1]: <area> missing 'alt' text."                                    }, /* Access */
-	{ SCRIPT_MISSING_NOSCRIPT,                       "[1.1.10.1]: <script> missing <noscript> section."                         }, /* Access */
-	{ ASCII_REQUIRES_DESCRIPTION,                    "[1.1.12.1]: ascii art requires description."                              }, /* Access */
-	{ IMG_MAP_SERVER_REQUIRES_TEXT_LINKS,            "[1.2.1.1]: image map (server-side) requires text links."                  }, /* Access */
-	{ MULTIMEDIA_REQUIRES_TEXT,                      "[1.4.1.1]: multimedia requires synchronized text equivalents."            }, /* Access */
-	{ IMG_MAP_CLIENT_MISSING_TEXT_LINKS,             "[1.5.1.1]: image map (client-side) missing text links."                   }, /* Access */
 	{ INFORMATION_NOT_CONVEYED_IMAGE,                "[2.1.1.1]: ensure information not conveyed through colour alone (image)." }, /* Access */
 	{ INFORMATION_NOT_CONVEYED_APPLET,               "[2.1.1.2]: ensure information not conveyed through colour alone (applet)."}, /* Access */
 	{ INFORMATION_NOT_CONVEYED_OBJECT,               "[2.1.1.3]: ensure information not conveyed through colour alone (object)."}, /* Access */
@@ -322,96 +104,6 @@ static languageDictionary language_en_gb = {
 	{ COLOR_CONTRAST_LINK,                           "[2.2.1.2]: poor colour contrast (link)."                                  }, /* Access */
 	{ COLOR_CONTRAST_ACTIVE_LINK,                    "[2.2.1.3]: poor colour contrast (active link)."                           }, /* Access */
 	{ COLOR_CONTRAST_VISITED_LINK,                   "[2.2.1.4]: poor colour contrast (visited link)."                          }, /* Access */
-	{ DOCTYPE_MISSING,                               "[3.2.1.1]: <doctype> missing."                                            }, /* Access */
-	{ STYLE_SHEET_CONTROL_PRESENTATION,              "[3.3.1.1]: use style sheets to control presentation."                     }, /* Access */
-	{ HEADERS_IMPROPERLY_NESTED,                     "[3.5.1.1]: headers improperly nested."                                    }, /* Access */
-	{ POTENTIAL_HEADER_BOLD,                         "[3.5.2.1]: potential header (bold)."                                      }, /* Access */
-	{ POTENTIAL_HEADER_ITALICS,                      "[3.5.2.2]: potential header (italics)."                                   }, /* Access */
-	{ POTENTIAL_HEADER_UNDERLINE,                    "[3.5.2.3]: potential header (underline)."                                 }, /* Access */
-	{ HEADER_USED_FORMAT_TEXT,                       "[3.5.3.1]: header used to format text."                                   }, /* Access */
-	{ LIST_USAGE_INVALID_UL,                         "[3.6.1.1]: list usage invalid <ul>."                                      }, /* Access */
-	{ LIST_USAGE_INVALID_OL,                         "[3.6.1.2]: list usage invalid <ol>."                                      }, /* Access */
-	{ LIST_USAGE_INVALID_LI,                         "[3.6.1.4]: list usage invalid <li>."                                      }, /* Access */
-	{ INDICATE_CHANGES_IN_LANGUAGE,                  "[4.1.1.1]: indicate changes in language."                                 }, /* Access */
-	{ LANGUAGE_NOT_IDENTIFIED,                       "[4.3.1.1]: language not identified."                                      }, /* Access */
-	{ LANGUAGE_INVALID,                              "[4.3.1.2]: language attribute invalid."                                   }, /* Access */
-	{ DATA_TABLE_MISSING_HEADERS,                    "[5.1.2.1]: data <table> missing row/column headers (all)."                }, /* Access */
-	{ DATA_TABLE_MISSING_HEADERS_COLUMN,             "[5.1.2.2]: data <table> missing row/column headers (1 col)."              }, /* Access */
-	{ DATA_TABLE_MISSING_HEADERS_ROW,                "[5.1.2.3]: data <table> missing row/column headers (1 row)."              }, /* Access */
-	{ DATA_TABLE_REQUIRE_MARKUP_COLUMN_HEADERS,      "[5.2.1.1]: data <table> may require markup (column headers)."             }, /* Access */
-	{ DATA_TABLE_REQUIRE_MARKUP_ROW_HEADERS,         "[5.2.1.2]: data <table> may require markup (row headers)."                }, /* Access */
-	{ LAYOUT_TABLES_LINEARIZE_PROPERLY,              "[5.3.1.1]: verify layout tables linearize properly."                      }, /* Access */
-	{ LAYOUT_TABLE_INVALID_MARKUP,                   "[5.4.1.1]: invalid markup used in layout <table>."                        }, /* Access */
-	{ TABLE_MISSING_SUMMARY,                         "[5.5.1.1]: <table> missing summary."                                      }, /* Access */
-	{ TABLE_SUMMARY_INVALID_NULL,                    "[5.5.1.2]: <table> summary invalid (null)."                               }, /* Access */
-	{ TABLE_SUMMARY_INVALID_SPACES,                  "[5.5.1.3]: <table> summary invalid (spaces)."                             }, /* Access */
-	{ TABLE_SUMMARY_INVALID_PLACEHOLDER,             "[5.5.1.6]: <table> summary invalid (placeholder text)."                   }, /* Access */
-	{ TABLE_MISSING_CAPTION,                         "[5.5.2.1]: <table> missing <caption>."                                    }, /* Access */
-	{ TABLE_MAY_REQUIRE_HEADER_ABBR,                 "[5.6.1.1]: <table> may require header abbreviations."                     }, /* Access */
-	{ TABLE_MAY_REQUIRE_HEADER_ABBR_NULL,            "[5.6.1.2]: <table> header abbreviations invalid (null)."                  }, /* Access */
-	{ TABLE_MAY_REQUIRE_HEADER_ABBR_SPACES,          "[5.6.1.3]: <table> header abbreviations invalid (spaces)."                }, /* Access */
-	{ STYLESHEETS_REQUIRE_TESTING_LINK,              "[6.1.1.1]: style sheets require testing (link)."                          }, /* Access */
-	{ STYLESHEETS_REQUIRE_TESTING_STYLE_ELEMENT,     "[6.1.1.2]: style sheets require testing (style element)."                 }, /* Access */
-	{ STYLESHEETS_REQUIRE_TESTING_STYLE_ATTR,        "[6.1.1.3]: style sheets require testing (style attribute)."               }, /* Access */
-	{ FRAME_SRC_INVALID,                             "[6.2.1.1]: <frame> source invalid."                                       }, /* Access */
-	{ TEXT_EQUIVALENTS_REQUIRE_UPDATING_APPLET,      "[6.2.2.1]: text equivalents require updating (applet)."                   }, /* Access */
-	{ TEXT_EQUIVALENTS_REQUIRE_UPDATING_SCRIPT,      "[6.2.2.2]: text equivalents require updating (script)."                   }, /* Access */
-	{ TEXT_EQUIVALENTS_REQUIRE_UPDATING_OBJECT,      "[6.2.2.3]: text equivalents require updating (object)."                   }, /* Access */
-	{ PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_SCRIPT,   "[6.3.1.1]: programmatic objects require testing (script)."                }, /* Access */
-	{ PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_OBJECT,   "[6.3.1.2]: programmatic objects require testing (object)."                }, /* Access */
-	{ PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_EMBED,    "[6.3.1.3]: programmatic objects require testing (embed)."                 }, /* Access */
-	{ PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_APPLET,   "[6.3.1.4]: programmatic objects require testing (applet)."                }, /* Access */
-	{ FRAME_MISSING_NOFRAMES,                        "[6.5.1.1]: <frameset> missing <noframes> section."                        }, /* Access */
-	{ NOFRAMES_INVALID_NO_VALUE,                     "[6.5.1.2]: <noframes> section invalid (no value)."                        }, /* Access */
-	{ NOFRAMES_INVALID_CONTENT,                      "[6.5.1.3]: <noframes> section invalid (content)."                         }, /* Access */
-	{ NOFRAMES_INVALID_LINK,                         "[6.5.1.4]: <noframes> section invalid (link)."                            }, /* Access */
-	{ REMOVE_FLICKER_SCRIPT,                         "[7.1.1.1]: remove flicker (script)."                                      }, /* Access */
-	{ REMOVE_FLICKER_OBJECT,                         "[7.1.1.2]: remove flicker (object)."                                      }, /* Access */
-	{ REMOVE_FLICKER_EMBED,                          "[7.1.1.3]: remove flicker (embed)."                                       }, /* Access */
-	{ REMOVE_FLICKER_APPLET,                         "[7.1.1.4]: remove flicker (applet)."                                      }, /* Access */
-	{ REMOVE_FLICKER_ANIMATED_GIF,                   "[7.1.1.5]: remove flicker (animated gif)."                                }, /* Access */
-	{ REMOVE_BLINK_MARQUEE,                          "[7.2.1.1]: remove blink/marquee."                                         }, /* Access */
-	{ REMOVE_AUTO_REFRESH,                           "[7.4.1.1]: remove auto-refresh."                                          }, /* Access */
-	{ REMOVE_AUTO_REDIRECT,                          "[7.5.1.1]: remove auto-redirect."                                         }, /* Access */
-	{ ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_SCRIPT, "[8.1.1.1]: ensure programmatic objects are accessible (script)."          }, /* Access */
-	{ ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_OBJECT, "[8.1.1.2]: ensure programmatic objects are accessible (object)."          }, /* Access */
-	{ ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_APPLET, "[8.1.1.3]: ensure programmatic objects are accessible (applet)."          }, /* Access */
-	{ ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_EMBED,  "[8.1.1.4]: ensure programmatic objects are accessible (embed)."           }, /* Access */
-	{ IMAGE_MAP_SERVER_SIDE_REQUIRES_CONVERSION,     "[9.1.1.1]: image map (server-side) requires conversion."                  }, /* Access */
-	{ SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_DOWN,  "[9.3.1.1]: <script> not keyboard accessible (onMouseDown)."               }, /* Access */
-	{ SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_UP,    "[9.3.1.2]: <script> not keyboard accessible (onMouseUp)."                 }, /* Access */
-	{ SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_CLICK,       "[9.3.1.3]: <script> not keyboard accessible (onClick)."                   }, /* Access */
-	{ SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OVER,  "[9.3.1.4]: <script> not keyboard accessible (onMouseOver)."               }, /* Access */
-	{ SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OUT,   "[9.3.1.5]: <script> not keyboard accessible (onMouseOut)."                }, /* Access */
-	{ SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_MOVE,  "[9.3.1.6]: <script> not keyboard accessible (onMouseMove)."               }, /* Access */
-	{ NEW_WINDOWS_REQUIRE_WARNING_NEW,               "[10.1.1.1]: new windows require warning (_new)."                          }, /* Access */
-	{ NEW_WINDOWS_REQUIRE_WARNING_BLANK,             "[10.1.1.2]: new windows require warning (_blank)."                        }, /* Access */
-	{ FORM_CONTROL_REQUIRES_DEFAULT_TEXT,            "[10.4.1.1]: form control requires default text."                          }, /* Access */
-	{ FORM_CONTROL_DEFAULT_TEXT_INVALID_NULL,        "[10.4.1.2]: form control default text invalid (null)."                    }, /* Access */
-	{ FORM_CONTROL_DEFAULT_TEXT_INVALID_SPACES,      "[10.4.1.3]: form control default text invalid (spaces)."                  }, /* Access */
-	{ REPLACE_DEPRECATED_HTML_APPLET,                "[11.2.1.1]: replace deprecated html <applet>."                            }, /* Access */
-	{ REPLACE_DEPRECATED_HTML_BASEFONT,              "[11.2.1.2]: replace deprecated html <basefont>."                          }, /* Access */
-	{ REPLACE_DEPRECATED_HTML_CENTER,                "[11.2.1.3]: replace deprecated html <center>."                            }, /* Access */
-	{ REPLACE_DEPRECATED_HTML_DIR,                   "[11.2.1.4]: replace deprecated html <dir>."                               }, /* Access */
-	{ REPLACE_DEPRECATED_HTML_FONT,                  "[11.2.1.5]: replace deprecated html <font>."                              }, /* Access */
-	{ REPLACE_DEPRECATED_HTML_ISINDEX,               "[11.2.1.6]: replace deprecated html <isindex>."                           }, /* Access */
-	{ REPLACE_DEPRECATED_HTML_MENU,                  "[11.2.1.7]: replace deprecated html <menu>."                              }, /* Access */
-	{ REPLACE_DEPRECATED_HTML_S,                     "[11.2.1.8]: replace deprecated html <s>."                                 }, /* Access */
-	{ REPLACE_DEPRECATED_HTML_STRIKE,                "[11.2.1.9]: replace deprecated html <strike>."                            }, /* Access */
-	{ REPLACE_DEPRECATED_HTML_U,                     "[11.2.1.10]: replace deprecated html <u>."                                }, /* Access */
-	{ FRAME_MISSING_TITLE,                           "[12.1.1.1]: <frame> missing title."                                       }, /* Access */
-	{ FRAME_TITLE_INVALID_NULL,                      "[12.1.1.2]: <frame> title invalid (null)."                                }, /* Access */
-	{ FRAME_TITLE_INVALID_SPACES,                    "[12.1.1.3]: <frame> title invalid (spaces)."                              }, /* Access */
-	{ ASSOCIATE_LABELS_EXPLICITLY,                   "[12.4.1.1]: associate labels explicitly with form controls."              }, /* Access */
-	{ ASSOCIATE_LABELS_EXPLICITLY_FOR,               "[12.4.1.2]: associate labels explicitly with form controls (for)."        }, /* Access */
-	{ ASSOCIATE_LABELS_EXPLICITLY_ID,                "[12.4.1.3]: associate labels explicitly with form controls (id)."         }, /* Access */
-	{ LINK_TEXT_NOT_MEANINGFUL,                      "[13.1.1.1]: link text not meaningful."                                    }, /* Access */
-	{ LINK_TEXT_MISSING,                             "[13.1.1.2]: link text missing."                                           }, /* Access */
-	{ LINK_TEXT_TOO_LONG,                            "[13.1.1.3]: link text too long."                                          }, /* Access */
-	{ LINK_TEXT_NOT_MEANINGFUL_CLICK_HERE,           "[13.1.1.4]: link text not meaningful (click here)."                       }, /* Access */
-	{ METADATA_MISSING,                              "[13.2.1.1]: Metadata missing."                                            }, /* Access */
-	{ METADATA_MISSING_REDIRECT_AUTOREFRESH,         "[13.2.1.3]: Metadata missing (redirect/auto-refresh)."                    }, /* Access */
-	{ SKIPOVER_ASCII_ART,                            "[13.10.1.1]: skip over ascii art."                                        }, /* Access */
 #endif /* SUPPORT_ACCESSIBILITY_CHECKS */
 	
 	/*****************************
@@ -425,26 +117,6 @@ static languageDictionary language_en_gb = {
 	 *    <code>, <em>, <strong>, <br />, <p>
 	 * Note that the xslt processor requires <br /> to be self closing!
 	 */
-	{ TidyXmlDecl,
-		"This option specifies if Tidy should add the XML declaration when "
-		"outputting XML or XHTML. "
-		"<br/>"
-		"Note that if the input already includes an <code>&lt;?xml ... ?&gt;</code> "
-		"declaration then this option will be ignored. "
-		"<br/>"
-		"If the encoding for the output is different from <code>ascii</code>, one "
-		"of the utf encodings or <code>raw</code>, the declaration is always added "
-		"as required by the XML standard. "
-	},
-	{ TidyXmlSpace,
-		"This option specifies if Tidy should add "
-		"<code>xml:space=\"preserve\"</code> to elements such as "
-		"<code>&lt;pre&gt;</code>, <code>&lt;style&gt;</code> and "
-		"<code>&lt;script&gt;</code> when generating XML. "
-		"<br/>"
-		"This is needed if the whitespace in such elements is to "
-		"be parsed appropriately without having access to the DTD. "
-	},
 	{ TidyAltText,
 		"This option specifies the default <code>alt=</code> text Tidy uses for "
 		"<code>&lt;img&gt;</code> attributes when the <code>alt=</code> attribute "

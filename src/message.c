@@ -971,6 +971,7 @@ void TY_(GeneralInfo)( TidyDocImpl* doc )
 {
     if (!cfgBool(doc, TidyShowInfo)) return;
     tidy_out(doc, "%s", tidyLocalizedString(TEXT_GENERAL_INFO));
+	tidy_out(doc, "%s", tidyLocalizedString(TEXT_GENERAL_INFO_PLEA));
 }
 
 #if SUPPORT_ACCESSIBILITY_CHECKS

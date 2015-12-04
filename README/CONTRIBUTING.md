@@ -8,12 +8,13 @@ If you are having trouble running console `Tidy`, or using the `Tidy Library` AP
 
 ### What to change
 
-Here's some examples of things you might want to make a pull request for:
+Here are some examples of things you might want to make a pull request for:
 
  - New features
  - Bug fixes
  - Inefficient blocks of code
  - Memory problems
+ - Language translations
 
 If you have a more deeply-rooted problem with how the program is built or some of the stylistic decisions made in the code, it is best to [create an issue](https://github.com/htacg/tidy-html5/issues/new) before putting the effort into a pull request. The same goes for new features - it might be best to check the project's direction, existing pull requests, and currently open and closed issues first.
 

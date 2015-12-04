@@ -67,6 +67,12 @@ Because of this inheritance we hope to localize base languages first, as the
 only strings then required for regional variants are the strings that differ.
 This will help us keep HTML Tidy and `libtidy` small.
 
+### Regional variants
+
+If you are working on a regional variation (such as “us_CA”) please remove all
+of the non-locale-specific strings and let the inheritance system work. This
+will help us keep the size of HTML Tidy and `libtidy` small.
+
 ### Works in Progress (WIP)
 
 In general we can accept WIPs but we would hope that you can submit complete
@@ -110,4 +116,4 @@ temporarily with:
 ## Help Tidy Get Better
 
 It goes without saying **all help is appreciated**. We need to work together to
-make Tidy! better...
+make Tidy better!

@@ -1,15 +1,8 @@
-line 35 column 4 - Warning: <img> lacks "alt" attribute
+line 35 column 4 - Warning: <img> inserting "alt" attribute using value "Alternate"
 Info: Doctype given is "-//W3C//DTD HTML 4.01//EN"
 Info: Document content looks like HTML 4.01 Strict
 1 warning, 0 errors were found!
 
-The alt attribute should be used to give a short description
-of an image; longer descriptions should be given with the
-longdesc attribute which takes a URL linked to the description.
-These measures are needed for people using non-graphical browsers.
-
-For further advice on how to make your pages accessible
-see http://www.w3.org/WAI/GL.
 About HTML Tidy: https://github.com/htacg/tidy-html5
 Bug reports and comments: https://github.com/htacg/tidy-html5/issues
 Or send questions and comments to: https://lists.w3.org/Archives/Public/public-htacg/

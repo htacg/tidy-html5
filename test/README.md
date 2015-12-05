@@ -1,18 +1,20 @@
-# test directory 20150513
+# test directory 20151205
 
-It seems very little has been written about what is in this directory!
+All of the test input files, some with their own config file, are in the `input` directory. These tests can be run using the various cmd/bat and sh script files supplied. 
 
-All of the test input files, some with their own config file, are in the `'input` directory. These tests can be run using the various cmd/bat and sh script files supplied.
+And there is a `testbase` directory containing the expected output of all tests.
 
 #### Files: alltest.cmd / testall.sh
 
-In essence it was/is an attempt to automate some regression testing. The idea is/was that before making a code change to tidy, the alltest.cmd would be run using the current executable. This would produce a 'base' set of outputs in the temp-5 folder.
+In essence it is an attempt to automate some regression testing. The idea is that after making a code change to tidy, the alltest.cmd can be run using the new executable. This would produce an output in the `temp-5` folder.
 
-This folder should then be renamed say 'testbase'. Now you can make the desired code changes, and build a new executable, and run the alltest.cmd again, getting a 'new' output into the temp-5 folder.
+Comparing the `testbase` folder with the new `temp-5` folder will show you what file output was changed by your code modification, if any. In WIN32 there should be none.
 
-Comparing the 'testbase' folder with the new 'temp-5' folder will show you what file output was changed by your code modification.
+If unix the `$ diff -ua testbase tmp` will normally yield 3 changes, tests 431895, 500236 and 616606. 431895 is because it uses the `gnu-emacs: yes` option and we can thus expect the path separator in the file names to change.
 
-Difficult, and tedious! Yes, but is a sure way to see if your changes adversely effected tidy. Unfortunately, only such a visual comparison would show the results. If the output changes are fully acceptable, then this would become the new base.
+The other two 500236 and 616606 just seem to have some spaces changes. Not sure exactly why. If `-w` or `-b` option is use there should be no difference. So these 3 tests must be especially checked.
+
+Difficult, and tedious! Yes, but is a sure way to see if your changes adversely effected tidy. Unfortunately, only such a visual comparison would show the results. If the output changes are fully acceptable, like a warning message changed, then this should become the new base file for that test.
 
 Of course some of the tests were to say avoid a segfault found. Other tests were to visually compare the original input test file in a browser, with how the new output displayed in a browser. This is a purely VISUAL compare, and can not be done in code.
 
@@ -40,11 +42,11 @@ This is essentially similar to the above, except it includes a COMPARE of the pr
 
 As indicated above, this is an attempt to create such a BASE set of output files when tidy is run on the input test cases.
 
-Then when alltestc.bat is run, it runs alltest2.bat, whihc like the above it reads the tests from testcases.txt, and uses onetest2.bat for each test.
+Then when alltestc.bat is run, it runs alltest2.bat, which like the above it reads the tests from testcases.txt, and uses onetest2.bat for each test.
 
 So the difference between this and the above is, it further immediately compares the output of tidy, if there is one, with the equivalent file in the `testbase` directory using a windows port of diff.
 
-It is a success if there is NO diff! A difference means this newer version of tidy has modified the output. That modification needs to be carefully inspected, and if it is though exact and suitable, then that new output should be copied to the `testbase` folder for future compares.
+It is a success if there is **NO** diff! A difference means this newer version of tidy has modified the output. That modification needs to be carefully inspected, and if it is thought exact and suitable, then that new output should be copied to the `testbase` folder for future compares.
 
 #### Directory html5:
 

@@ -69,6 +69,9 @@ fi
 
 TMPFIL="input/in_$TMPCASE.xhtml"
 if [ ! -f "$TMPFIL" ]; then
+TMPFIL="input/in_$TMPCASE.xml"
+fi
+if [ ! -f "$TMPFIL" ]; then
 TMPFIL="input/in_$TMPCASE.html"
 fi
 TMPCFG="input/cfg_$TMPCASE.txt"

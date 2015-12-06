@@ -36,8 +36,8 @@ else ()
     message(FATAL_ERROR "*** FAILED to get a DATE from version.txt!")
 endif ()
 
-# BY default, BOTH library types build, Allow turning OFF shared if not neede
-set( LIB_TYPE STATIC )  # set default static
+# By default, BOTH library types built, Allow turning OFF shared if not needed
+set( LIB_TYPE STATIC )  # set default message
 option( BUILD_SHARED_LIB "Set OFF to NOT build shared library"    ON  )
 option( BUILD_TAB2SPACE  "Set ON to build utility app, tab2space" OFF )
 option( BUILD_SAMPLE_CODE "Set ON to build the sample code"       OFF )
@@ -45,6 +45,13 @@ if (NOT MAN_INSTALL_DIR)
     set(MAN_INSTALL_DIR share/man/man1)
 endif ()
 option( BUILD_DOCUMENTATION "Set ON to build the documentation"   OFF )
+# Issue #326 - Allow linkage choice of console app tidy
+option( TIDY_CONSOLE_SHARED "Set ON to link with shared(DLL) lib." OFF )
+if (TIDY_CONSOLE_SHARED)
+    if (NOT BUILD_SHARED_LIB)
+        message(FATAL_ERROR "Enable shared build for this tidy linkage!")
+    endif ()
+endif ()
 
 if(CMAKE_COMPILER_IS_GNUCXX)
     set( WARNING_FLAGS -Wall )
@@ -158,7 +165,9 @@ add_library ( ${name} STATIC ${CFILES} ${HFILES} ${LIBHFILES} )
 set_target_properties( ${name} PROPERTIES 
     OUTPUT_NAME ${LIB_NAME}s
     )
-list ( APPEND add_LIBS ${name} )
+if (NOT TIDY_CONSOLE_SHARED) # user wants default static linkage
+    list ( APPEND add_LIBS ${name} )
+endif ()    
 install(TARGETS ${name}
         RUNTIME DESTINATION ${BIN_INSTALL_DIR}
         ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
@@ -184,16 +193,23 @@ if (BUILD_SHARED_LIB)
         ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
         LIBRARY DESTINATION ${LIB_INSTALL_DIR}
         )
+    if (TIDY_CONSOLE_SHARED)    # user wants shared/dll linkage
+        list ( APPEND add_LIBS ${name} )
+    endif ()    
 endif ()
 
 ##########################################################
-### main executable - linked with STATIC library
+### main executable - linked with STATIC/SHARED library
 set(name ${LIB_NAME})
 set ( BINDIR console )
 add_executable( ${name} ${BINDIR}/tidy.c )
 target_link_libraries( ${name} ${add_LIBS} )
 if (MSVC)
     set_target_properties( ${name} PROPERTIES DEBUG_POSTFIX d )
+endif ()
+if (NOT TIDY_CONSOLE_SHARED)
+    set_target_properties( ${name} PROPERTIES 
+                                   COMPILE_FLAGS "-DTIDY_STATIC" )
 endif ()
 install (TARGETS ${name} DESTINATION bin)
 
@@ -203,7 +219,7 @@ if (BUILD_TAB2SPACE)
     if (MSVC)
         set_target_properties( ${name} PROPERTIES DEBUG_POSTFIX d )
     endif ()
-    # no INSTALL of this 'local' tool
+    # no INSTALL of this 'local' tool - use depreciated
 endif ()
 
 if (BUILD_SAMPLE_CODE)

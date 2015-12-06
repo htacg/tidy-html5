@@ -3759,10 +3759,6 @@ void TY_(ParseHead)(TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode))
         TY_(ReportError)(doc, head, node, DISCARDING_UNEXPECTED);
         TY_(FreeNode)( doc, node);
     }
-
-    if (!head->closed)
-        TY_(ReportError)(doc, head, node, MISSING_ENDTAG_FOR);
-
 #if !defined(NDEBUG) && defined(_MSC_VER)
     SPRTF("Exit ParseHead 1...\n");
 #endif

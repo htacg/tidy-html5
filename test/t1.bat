@@ -33,6 +33,9 @@
 
 @set TMPFIL=input\in_%1.xhtml
 @if NOT EXIST %TMPFIL% (
+@set TMPFIL==input\in_%1.xml
+)
+@if NOT EXIST %TMPFIL% (
 @set TMPFIL==input\in_%1.html
 )
 @set TMPCFG=input\cfg_%1.txt

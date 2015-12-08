@@ -26,12 +26,6 @@ static languageDictionary language_en = {
 	{ TIDY_LANGUAGE,                "en"                                                                      },
 	
 	/*****************************
-	 ** Localization test strings
-	 *****************************/
-	{ TEST_PRESENT_IN_BASE,         "This is en base language (TEST_PRESENT_IN_BASE)."                        },
-	{ TEST_PRESENT_IN_REGION,       "This is en base langauge (TEST_PRESENT_IN_REGION)."                      },
-	
-	/*****************************
 	 ** Miscellaneous Strings
 	 *****************************/
 	{ ACCESS_URL,                   "http://www.w3.org/WAI/GL"                                                },

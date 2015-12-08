@@ -27,12 +27,6 @@ static languageDictionary language_es_mx = {
 	
 	
 	/*****************************
-	 ** Localization test strings
-	 *****************************/
-	{ TEST_PRESENT_IN_REGION,      "This is es_mx region langauge (TEST_PRESENT_IN_REGION)."                  },
-	
-	
-	/*****************************
 	 ** Miscellaneous Strings
 	 *****************************/
 	

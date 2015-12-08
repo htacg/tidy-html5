@@ -1155,45 +1155,6 @@ void progressTester( TidyDoc tdoc, uint srcLine, uint srcCol, uint dstLine)
 	//   fprintf(stderr, "srcLine = %u, srcCol = %u, dstLine = %u\n", srcLine, srcCol, dstLine);
 }
 
-/**
- **  Language testing module.
- */
-void testLocale()
-{
-	int i;
-	
-	/* Will try these language strings */
-	ctmbstr langs[] = {
-		"en",          // Language only.
-		"en_us",       // Language and region.
-		"Spanish",     // Windows name with caps.
-		"spanish",     // Windows name.
-		"mexico" ,     // Windows nam, including region.
-		"en_GB",       // A language that's included.
-		"hello_world", // A garbage value.
-		"",            // A zero length string.
-		NULL           // End of list.
-	};
-	
-	/* Fetch and display current locale. It might be C in debuggers. */
-	tmbstr currentLocale = NULL;
-	printf( "OS locale = %s\n", tidySystemLocale(currentLocale) );
-	
-	/* Loop through our list. */
-	
-	for ( i = 0; langs[i]; ++i )
-	{
-		if (! tidySetLanguage( langs[i] ) )
-			printf( "Could not set language to %s, still using %s.\n", langs[i],tidyGetLanguage() );
-		else
-			printf( "Wanted %s, success setting language to %s.\n", langs[i], tidyGetLanguage() );
-		printf("   Here are some localized strings: %s\n", tidyLocalizedString(TIDY_LANGUAGE));
-		printf("   %s\n", tidyLocalizedString(TIDY_LANGUAGE));
-		printf("   %s\n", tidyLocalizedString(TEST_PRESENT_IN_BASE));
-		printf("   %s\n", tidyLocalizedString(TEST_PRESENT_IN_REGION));
-	}
-	printf("\n");
-}
 
 /**
  **  MAIN --  let's do something here.

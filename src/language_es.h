@@ -27,12 +27,6 @@ static languageDictionary language_es = {
 	
 	
 	/*****************************
-	 ** Localization test strings
-	 *****************************/
-	{ TEST_PRESENT_IN_BASE,         "This is es base language (TEST_PRESENT_IN_BASE)."                        },
-	
-	
-	/*****************************
 	 ** Miscellaneous Strings
 	 *****************************/
 	

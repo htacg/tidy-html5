@@ -8,6 +8,8 @@ If you are having trouble running console `Tidy`, or using the `Tidy Library` AP
 
 In either place please start with a short subject to describe the issue. If it involves running tidy on a html file, or an API question, make sure to include the version: `$ tidy -v`; what was the configuration used; a small sample input; the output, and the output expected; some sample code, to make quick testing easy.
 
+If you do add a sample html input, then it can also be very helpful if that sample **passes** the W3C [validation](https://validator.w3.org/#validate_by_upload)... tidy attempts to follow all current W3C standards...
+
 If you are able to build tidy from [source](https://github.com/htacg/tidy-html5), requires [CMake](https://cmake.org/download/), and can find the problem in the code, then read on about how you can create a `Pull Request`... share your code, ideas, ....
 
 ### What to change

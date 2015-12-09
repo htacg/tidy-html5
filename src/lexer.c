@@ -100,7 +100,7 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
     int col  = ( doc->lexer ? doc->lexer->columns : 0 );
     SPRTF("R=%d C=%d: ", line, col );
     // DEBUG: Be able to set a TRAP on a SPECIFIC row,col
-    if ((line == 8) && (col == 36)) {
+    if ((line == 8) && (col == 4)) {
         check_me("Show_Node"); // just a debug trap
     }
     if (lexer && lexer->token && 
@@ -2694,7 +2694,9 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 {
                     c = TY_(ReadChar)(doc->docIn);
 
-                    if (c != '\n' && c != '\f')
+                    if ((c == '\n') && (mode != IgnoreWhitespace)) /* Issue #329 - Can NOT afford to lose this newline */
+                        TY_(UngetChar)(c, doc->docIn);  /* Issue #329 - make sure the newline is maintained for now */
+                    else if (c != '\n' && c != '\f')
                         TY_(UngetChar)(c, doc->docIn);
 
                     lexer->waswhite = yes;  /* to swallow leading whitespace */

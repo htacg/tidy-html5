@@ -1,4 +1,4 @@
-/* localize.c
+/* message.c
    Routines to handle messages and other output, as well as
    various utility routines used to generate data for output.
 

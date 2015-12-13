@@ -941,98 +941,260 @@ static void optionhelp( TidyDoc tdoc )
 	ForEachSortedOption( tdoc, printOption );
 }
 
-/**
- **  Simple string replacement - lifted from admin@binarytides.com
- */
-tmbstr replace_string(ctmbstr needle , ctmbstr replace , ctmbstr haystack)
-{
-	tmbstr p = NULL;
-	tmbstr old = NULL;
-	tmbstr result = NULL ;
-	int c = 0;
-	int search_size = strlen(needle);
-	
-	/* Count how many occurences */
-	for(p = strstr(haystack , needle) ; p != NULL ; p = strstr(p + search_size , needle))
-	{
-		c++;
-	}
-	
-	/* Final size */
-	c = ( strlen(replace) - search_size )*c + strlen(haystack) + 1;
-	
-	/* New subject with new size */
-	if (!( result = malloc( c ) ))
-		outOfMemory();
-	
-	/* Set it to blank */
-	strcpy(result , "");
-	
-	/* The start position */
-	old = (tmbstr)haystack;
-	
-	for(p = strstr(haystack , needle) ; p != NULL ; p = strstr(p + search_size , needle))
-	{
-		/* move ahead and copy some text from original subject, from a certain position */
-		strncpy(result + strlen(result) , old , p - old);
-		
-		/* move ahead and copy the replacement text */
-		strcpy(result + strlen(result) , replace);
-		
-		/* The new start position after this search match */
-		old = p + search_size;
-	}
-	
-	/* Copy the part after the last search match */
-	strcpy(result + strlen(result) , old);
-	
-	return result;
-}
 
 /**
- **  Option descriptions are HTML formatted, but we
- **  want to display them in a console.
+ **  Cleans up the HTML-laden option descriptions for console
+ **  output. It's just a simple HTML filtering/replacement function.
+ **  Will return an allocated string.
  */
-static tmbstr get_prepared_content( ctmbstr content )
+static tmbstr cleanup_description( ctmbstr description )
 {
-	tmbstr prepared = NULL;
-	tmbstr replacement = "";
+	/* Substitutions - this might be a good spot to introduce platform
+	 dependent definitions for colorized output on different terminals
+	 that support, for example, ANSI escape sequences. The assumption
+	 is made the Mac and Linux targets support ANSI colors, but even
+	 so debugger terminals may not. Note that the line-wrapping
+	 function also doesn't account for non-printing characters. */
+	static struct {
+		ctmbstr tag;
+		ctmbstr replacement;
+	} const replacements[] = {
+		{ "lt",		  "<"		   },
+		{ "gt",		  ">"		   },
+		{ "br/",	  "\n\n"	   },
+#if defined(LINUX_OS) || defined(MAC_OS_X)
+		{ "code",	  "\x1b[36m"   },
+		{ "/code",	  "\x1b[0m"	   },
+		{ "em",		  "\x1b[4m"	  },
+		{ "/em",	  "\x1b[0m"	   },
+		{ "strong",	  "\x1b[31m"   },
+		{ "/strong",  "\x1b[0m"	   },
+#endif
+		/* MUST be last */
+		{ NULL,		  NULL		   },
+	};
+
+	/* State Machine Setup */
+	typedef enum {
+		s_DONE,
+		s_DATA,
+		s_WRITING,
+		s_TAG_OPEN,
+		s_TAG_NAME,
+		s_ERROR,
+		s_LAST /* MUST be last */
+	} states;
+
+	typedef enum {
+		c_NIL,
+		c_EOF,
+		c_BRACKET_CLOSE,
+		c_BRACKET_OPEN,
+		c_OTHER
+	} charstates;
+
+	typedef enum {
+		a_NIL,
+		a_BUILD_NAME,
+		a_CONSUME,
+		a_EMIT,
+		a_EMIT_SUBS,
+		a_WRITE,
+		a_ERROR
+	} actions;
+
+	typedef struct {
+		states state;
+		charstates charstate;
+		actions action;
+		states next_state;
+	} transitionType;
+
+	const transitionType transitions[] = {
+		{ s_DATA,			c_EOF,			 a_NIL,		   s_DONE			},
+		{ s_DATA,			c_BRACKET_OPEN,	 a_CONSUME,	   s_TAG_OPEN		},
+		/* special case allows ; */
+		{ s_DATA,			c_BRACKET_CLOSE, a_EMIT,	   s_WRITING		},
+		{ s_DATA,			c_OTHER,		 a_EMIT,	   s_WRITING		},
+		{ s_WRITING,		c_OTHER,		 a_WRITE,	   s_DATA			},
+		{ s_WRITING,		c_BRACKET_CLOSE, a_WRITE,	   s_DATA			},
+		{ s_TAG_OPEN,		c_EOF,			 a_ERROR,	   s_DONE			},
+		{ s_TAG_OPEN,		c_OTHER,		 a_NIL,		   s_TAG_NAME		},
+		{ s_TAG_NAME,		c_BRACKET_OPEN,	 a_ERROR,	   s_DONE			},
+		{ s_TAG_NAME,		c_EOF,			 a_ERROR,	   s_DONE			},
+		{ s_TAG_NAME,		c_BRACKET_CLOSE, a_EMIT_SUBS,  s_WRITING		},
+		{ s_TAG_NAME,		c_OTHER,		 a_BUILD_NAME, s_TAG_NAME		},
+		{ s_ERROR,			0,				 a_ERROR,	   s_DONE			},
+		{ s_DONE,			0,				 a_NIL,		   0				},
+		/* MUST be last: */
+		{ s_LAST,			0,				 0,			   0				},
+	};
+
+	/* Output Setup */
+	tmbstr result = NULL;
+	int g_result = 100;	 // minimum buffer grow size
+	int l_result = 0;	 // buffer current size
+	int i_result = 0;	 // current string position
+	int writer_len = 0;	 // writer length
+
+	ctmbstr writer = NULL;
+
+	/* Current tag name setup */
+	tmbstr name = NULL; // tag name
+	int g_name = 10;	// buffer grow size
+	int l_name = 0;		// buffer current size
+	int i_name = 0;		// current string position
+
+	/* Pump Setup */
 	int i = 0;
-	
-	/* Our generators allow <code>, <em>, <strong>, <br/>, and <p>,
-	 but <br/> will be taken care of specially. */
-	ctmbstr tags_open[] = { "<code>", "<em>", "<strong>", "<p>", NULL };
-	ctmbstr tags_close[] = { "</code>", "</em>", "</strong>", "</p>", NULL };
-	
-	prepared = replace_string( "<br/>", "\n\n", content );
-	
-	/* Use the string substitution method to consider the possibility
-	 of using ANSI escape sequences for styling. Not all terminals
-	 support ANSI colors, so for fun we'll demo with Mac OS X. */
-	
-#if defined(MAC_OS_X) && 0
-	replacement = "\x1b[36m";
-#endif
-	i = 0;
-	while (tags_open[i]) {
-		prepared = replace_string(tags_open[i], replacement, prepared);
-		++i;
-	};
-	
-#if defined(MAC_OS_X) && 0
-	replacement = "\x1b[0m";
-#endif
-	i = 0;
-	while (tags_close[i]) {
-		prepared = replace_string(tags_close[i], replacement, prepared);
-		++i;
-	};
-	
-	/* Add back proper angled brackets. */
-	prepared = replace_string("&lt;", "<", prepared);
-	prepared = replace_string("&gt;", ">", prepared);
-	
-	return prepared;
+	states state = s_DATA;
+	charstates charstate;
+	char c;
+
+	/* Process the HTML Snippet */
+	do {
+		c = description[i];
+
+		/* Determine secondary state. */
+		switch (c)
+		{
+			case '\0':
+				charstate = c_EOF;
+				break;
+
+			case '<':
+			case '&':
+				charstate = c_BRACKET_OPEN;
+				break;
+
+			case '>':
+			case ';':
+				charstate = c_BRACKET_CLOSE;
+				break;
+
+			default:
+				charstate = c_OTHER;
+				break;
+		}
+
+		/* Find the correct instruction */
+		int j = 0;
+		transitionType transition;
+
+		while (transitions[j].state != s_LAST)
+		{
+			transition = transitions[j];
+			if ( transition.state == state && transition.charstate == charstate ) {
+				switch ( transition.action )
+				{
+						/* This action is building the name of an HTML tag. */
+					case a_BUILD_NAME:
+						if ( !name )
+						{
+							l_name = g_name;
+							name = calloc(l_name, 1);
+						}
+
+						if ( i_name >= l_name )
+						{
+							l_name = l_name + g_name;
+							name = realloc(name, l_name);
+						}
+
+						strncpy(name + i_name, &c, 1);
+						i_name++;
+						i++;
+						break;
+
+						/* This character will be emitted into the output
+						 stream. The only purpose of this action is to
+						 ensure that `writer` is NULL as a flag that we
+						 will output the current `c` */
+					case a_EMIT:
+						writer = NULL; // flag to use c
+						break;
+
+						/* Now that we've consumed a tag, we will emit the
+						 substitution if any has been specified in
+						 `replacements`. */
+					case a_EMIT_SUBS:
+						name[i_name] = '\0';
+						i_name = 0;
+						int k = 0;
+						writer = "";
+						while ( replacements[k].tag )
+						{
+							if ( strcmp( replacements[k].tag, name ) == 0 )
+							{
+								writer = replacements[k].replacement;
+							}
+							k++;
+						}
+						break;
+
+						/* This action will add to our `result` string, expanding
+						 the buffer as necessary in reasonable chunks. */
+					case a_WRITE:
+						if ( !writer )
+							writer_len = 1;
+						else
+							writer_len = strlen( writer );
+						/* Lazy buffer creation */
+						if ( !result )
+						{
+							l_result = writer_len + g_result;
+							result = calloc(l_result, 1);
+						}
+						/* Grow the buffer if needed */
+						if ( i_result + writer_len >= l_result )
+						{
+							l_result = l_result + writer_len + g_result;
+							result = realloc(result, l_result);
+						}
+						/* Add current writer to the buffer */
+						if ( !writer )
+						{
+							result[i_result] = c;
+							result[i_result +1] = '\0';
+						}
+						else
+						{
+							strncpy( result + i_result, writer, writer_len );
+						}
+
+						i_result += writer_len;
+						i++;
+						break;
+
+						/* This action could be more robust but it serves the
+						 current purpose. Cross our fingers and count on our
+						 localizers not to give bad HTML descriptions. */
+					case a_ERROR:
+						printf("<Error> The localized string probably has bad HTML.\n");
+						goto EXIT_CLEANLY;
+
+						/* Just a NOP. */
+					case a_NIL:
+						break;
+
+						/* The default case also handles the CONSUME action. */
+					default:
+						i++;
+						break;
+				}
+
+				state = transition.next_state;
+				break;
+			}
+			j++;
+		}
+	} while ( description[i] );
+
+EXIT_CLEANLY:
+
+	if ( name )
+		free(name);
+	return result;
 }
 
 
@@ -1043,23 +1205,26 @@ static void optionDescribe( TidyDoc tdoc, char *tag )
 {
 	tmbstr result = NULL;
 	TidyOptionId topt;
-	
+
 	topt = tidyOptGetIdForName( tag );
-	
+
 	if (topt < N_TIDY_OPTIONS)
 	{
-		result = get_prepared_content( tidyOptGetDoc( tdoc, tidyGetOption( tdoc, topt ) ) );
+		result = cleanup_description( tidyOptGetDoc( tdoc, tidyGetOption( tdoc, topt ) ) );
 	}
 	else
 	{
 		result = (tmbstr)tidyLocalizedString(TC_STRING_UNKNOWN_OPTION_B);
 	}
-	
+
 	printf( "\n" );
 	printf( "`--%s`\n\n", tag );
 	print1Column( "%-68.68s\n", 68, result );
 	printf( "\n" );
+	if ( (topt < N_TIDY_OPTIONS) && ( result ) )
+		free ( result );
 }
+
 
 /**
  *  Prints the option value for a given option.
@@ -1152,7 +1317,7 @@ static void unknownOption( uint c )
  */
 void progressTester( TidyDoc tdoc, uint srcLine, uint srcCol, uint dstLine)
 {
-	//   fprintf(stderr, "srcLine = %u, srcCol = %u, dstLine = %u\n", srcLine, srcCol, dstLine);
+	fprintf(stderr, "srcLine = %u, srcCol = %u, dstLine = %u\n", srcLine, srcCol, dstLine);
 }
 
 
@@ -1173,12 +1338,14 @@ int main( int argc, char** argv )
 	errout = stderr;  /* initialize to stderr */
 	
 //	tidySetPrettyPrinterCallback(tdoc, progressTester);
-//	testLocale();
-	
-	tmbstr locale = NULL;
-	tidySetLanguage(tidySystemLocale(locale));
-	locale = NULL;
-	
+
+	/* Set the locale for tidy's output. */
+	tmbstr locale;
+	locale = tidySystemLocale(locale);
+	tidySetLanguage(locale);
+	if ( locale )
+		free( locale );
+
 #if !defined(NDEBUG) && defined(_MSC_VER)
 	set_log_file((char *)"temptidy.txt", 0);
 	// add_append_log(1);

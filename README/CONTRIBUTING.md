@@ -6,6 +6,12 @@ So you want to contribute to Tidy? Fantastic! Here's a brief overview on how bes
 
 If you are having trouble running console `Tidy`, or using the `Tidy Library` API in your own project, then maybe the best places to get help is either via a comment in [Tidy Issues](https://github.com/htacg/tidy-html5/issues), or on the [Tidy Mail Archive](https://lists.w3.org/Archives/Public/html-tidy/) list.
 
+In either place please start with a short subject to describe the issue. If it involves running tidy on a html file, or an API question, make sure to include the version: `$ tidy -v`; what was the configuration used; a small sample input; the output, and the output expected; some sample code, to make quick testing easy.
+
+If you do add a sample html input, then it can also be very helpful if that sample **passes** the W3C [validation](https://validator.w3.org/#validate_by_upload)... tidy attempts to follow all current W3C standards...
+
+If you are able to build tidy from [source](https://github.com/htacg/tidy-html5), requires [CMake](https://cmake.org/download/), and can find the problem in the code, then read on about how you can create a `Pull Request`... share your code, ideas, ....
+
 ### What to change
 
 Here are some examples of things you might want to make a pull request for:
@@ -32,6 +38,21 @@ you're doing, such as "feature/add-new-lines"...
 
 Please note - if you want to change multiple things that don't depend on each
 other, it is better to use `branches`, and make sure you check the master branch back out before making more changes - that way we can take in each change seperate. Else github has a tendancy to combine your requests into one.
+
+If you are a continuing contributor then you will need to `rebase` your fork, to htacg `master`, **before** doing any more work, and likewise branches, otherwise we may not be able to cleanly merge your PR. This is a simple process -
+
+```
+$ git remote add upstream git@github.com:htacg/tidy-html5.git # once only
+$ git checkout master
+$ git status
+$ git stash # if not clean
+$ git fetch upstream
+$ git rebase upstream/master
+$ git stash pop # if required, and fix conflicts
+$ git push      # update the fork master
+```
+
+This can be repeated for `branches`.
 
 ### Help Tidy Get Better
 

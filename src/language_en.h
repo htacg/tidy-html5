@@ -555,7 +555,7 @@ static languageDictionary language_en = {
 		"<br/>"
 		"If set to <code>omit</code> the output won't contain a DOCTYPE "
 		"declaration. Note this this also implies <code>numeric-entities</code> is "
-		"set to <code>yes</code>"
+		"set to <code>yes</code>."
 		"<br/>"
 		"If set to <code>html5</code> the DOCTYPE is set to "
 		"<code>&lt;!DOCTYPE html&gt;</code>."

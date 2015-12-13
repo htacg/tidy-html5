@@ -267,6 +267,7 @@ ctmbstr tidyLocalizedString( uint messageType )
  **  Determines the current locale without affecting the C locale.
  **  Tidy has always used the default C locale, and at this point
  **  in its development we're not going to tamper with that.
+ **  We have to return a new string, so don't forget to free it.
  **  @param  result The buffer to use to return the string.
  **          Returns NULL on failure.
  **  @return The same buffer for convenience.
@@ -281,12 +282,12 @@ tmbstr tidySystemLocale(tmbstr result)
 	/* This should read the current locale. */
 	temp = setlocale( LC_ALL, NULL);
 	
-	/* Make a new copy of the string. */
-	result = NULL;
-	if (( result = malloc( strlen( temp )+1 ) ))
+	/* Make a new copy of the string, because temp
+       always points to the current locale. */
+	if (( result = malloc( strlen( temp ) + 1 ) ))
 		strcpy(result, temp);
 	
-	/* This should restore the OS locale. */
+	/* This should restore the C locale. */
 	setlocale( LC_ALL, "C" );
 	
 	return result;
@@ -294,9 +295,10 @@ tmbstr tidySystemLocale(tmbstr result)
 
 
 /**
- *  Retrieves the POSIX name for a string.
+ *  Retrieves the POSIX name for a string. Result is a
+ *  static char so please don't try to free it.
  */
-ctmbstr tidyNormalizedLocaleName( ctmbstr locale )
+tmbstr tidyNormalizedLocaleName( ctmbstr locale )
 {
 	uint i;
 	uint len;
@@ -309,7 +311,8 @@ ctmbstr tidyNormalizedLocaleName( ctmbstr locale )
 	{
 		if ( strcmp( localeMappings[i].winName, search ) == 0 )
 		{
-			search = (tmbstr)localeMappings[i].POSIXName;
+            free(search);
+            search = strdup(localeMappings[i].POSIXName);
 			break;
 		}
 	}
@@ -335,7 +338,8 @@ ctmbstr tidyNormalizedLocaleName( ctmbstr locale )
 			result[i] = tolower( result[i] );
 		}
 	}
-	
+
+    if ( search ) free( search );
 	return result;
 }
 
@@ -377,12 +381,14 @@ Bool tidySetLanguage( ctmbstr languageCode )
 {
 	languageDictionary *dict1 = NULL;
 	languageDictionary *dict2 = NULL;
-	ctmbstr wantCode = NULL;
+	tmbstr wantCode = NULL;
 	char lang[3] = "";
 	
 	if ( !languageCode || !(wantCode = tidyNormalizedLocaleName( languageCode )) )
+    {
 		return no;
-	
+    }
+
 	/* We should have a two or five character string at this point, so
 	 we will first set with the two character ID to get the right
 	 language, then try again with the five character ID to set the
@@ -407,7 +413,7 @@ Bool tidySetLanguage( ctmbstr languageCode )
 		tidyLanguages.fallbackLanguage = dict1;
 	if ( !dict1 && dict2 )
 		tidyLanguages.fallbackLanguage = NULL;
-	
+
 	return dict1 || dict2;
 }
 

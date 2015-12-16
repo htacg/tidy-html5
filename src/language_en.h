@@ -1172,7 +1172,7 @@ static languageDictionary language_en = {
 		"existing, is added along an existing <code>id</code> attribute if the DTD "
 		"allows it. "
 		"<br/>"
-		"If set to <code>no</code> any existing name attribute is removed if an"
+		"If set to <code>no</code> any existing name attribute is removed if an "
 		"<code>id</code> attribute exists or has been added. "
 	},
 	{ TidyPPrintTabs,

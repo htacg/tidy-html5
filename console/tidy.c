@@ -488,13 +488,18 @@ static ctmbstr get_final_name( ctmbstr prog )
  */
 static void help( ctmbstr prog )
 {
+	tmbstr title_line = NULL;
+	
 	printf( tidyLocalizedString(TC_TXT_HELP_1), get_final_name(prog),tidyLibraryVersion() );
 	
 #ifdef PLATFORM_NAME
-	printf( tidyLocalizedString(TC_TXT_HELP_2A), PLATFORM_NAME );
+	title_line = stringWithFormat( tidyLocalizedString(TC_TXT_HELP_2A), PLATFORM_NAME);
 #else
-	printf( tidyLocalizedString(TC_TXT_HELP_2B) );
+	title_line = stringWithFormat( tidyLocalizedString(TC_TXT_HELP_2B) );
 #endif
+	printf( "%s", title_line );
+	printf("%*.*s\n", (int)strlen(title_line), (int)strlen(title_line), ul );
+	free( title_line );
 	printf( "\n");
 	
 	print_help_option();
@@ -550,7 +555,7 @@ static ctmbstr ConfigCategoryName( TidyConfigCategory id )
 }
 
 /**
- ** Structure maintain a description of an option.
+ ** Structure maintains a description of an option.
  */
 typedef struct {
 	ctmbstr name;  /**< Name */

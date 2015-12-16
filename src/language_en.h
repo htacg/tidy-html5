@@ -1286,21 +1286,36 @@ static languageDictionary language_en = {
 		"\n"
 	},
 	{ TC_TXT_HELP_2A,
-		"Options for HTML Tidy for %s:\n"
+		"Command Line Arguments for HTML Tidy for %s:\n"
 	},
 	{ TC_TXT_HELP_2B,
-		"Options for HTML Tidy:\n"
+		"Command Line Arguments for HTML Tidy:\n"
 	},
 	{ TC_TXT_HELP_3,
-		"Use --optionX valueX for any configuration option \"optionX\" with argument\n"
-		"\"valueX\". For a list of the configuration options, use \"-help-config\" or refer\n"
-		"to the man page.\n\n"
-		
+		"\n"
+		"Tidy Configuration Options\n"
+		"==========================\n"
+		"Use Tidy's configuration options as command line arguments in the form\n"
+		"of \"--some-option <value>\", for example, \"--indent-with-tabs yes\".\n"
+		"\n"
+		"For a list of all configuration options, use \"-help-config\" or refer\n"
+		"to the man page (if your OS has one).\n"
+		"\n"
+		"If your environment has an $HTML_TIDY variable set point to a Tidy \n"
+		"configuration file then Tidy will attempt to use it.\n"
+		"\n"
+		"On some platforms Tidy will also attempt to use a configuration specified \n"
+		"in /etc/tidy.conf or ~/.tidy.conf.\n"
+		"\n"
+		"Other\n"
+		"=====\n"
 		"Input/Output default to stdin/stdout respectively.\n"
 		"\n"
 		"Single letter options apart from -f may be combined\n"
 		"as in:  tidy -f errs.txt -imu foo.html\n"
 		"\n"
+		"Information\n"
+		"===========\n"
 		"For more information about HTML Tidy, see\n"
 		"  http://www.html-tidy.org/\n"
 		"\n"

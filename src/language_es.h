@@ -61,6 +61,34 @@ static languageDictionary language_es = {
 	},
 
 	
+	/*****************************
+	 ** Console Application
+	 *****************************/
+	{ TC_TXT_HELP_LANG_1,
+		"\nLa opción --language (o --lang) indica el lenguaje Tidy debe \n"
+		"utilizar para comunicar su salida. Tenga en cuenta que esto no es \n"
+		"un servicio de traducción de documentos, y sólo afecta a los mensajes \n"
+		"que Tidy comunica a usted. \n"
+		"\nCuando se utiliza la línea de comandos el argumento --language debe \n"
+		"utilizarse antes de cualquier argumento que dan lugar a la producción, \n"
+		"de lo contrario Tidy producirá la salida antes de que se conozca el \n"
+		"idioma a utilizar. \n"
+		"\nAdemás de los códigos de idioma estándar POSIX, Tidy es capaz de \n"
+		"entender códigos de idioma legados de Windows. Tenga en cuenta que \n"
+		"este lista indica los códigos Tidy entiende, y no indica que \n"
+		"actualmente el idioma está instalado. \n"
+		"\nLa columna más a la derecha indica cómo Tidy comprenderá el \n"
+		"legado nombre de Windows.\n\n"
+	},
+	{ TC_TXT_HELP_LANG_2,
+		"\nLos siguientes idiomas están instalados actualmente en Tidy. Tenga \n"
+		"en cuenta que no hay garantía de que están completos; sólo quiere decir \n"
+		"que un desarrollador u otro comenzaron a añadir el idioma indicado. \n"
+		"\nLocalizaciones incompletas por defecto se usan \"en\" cuando sea \n"
+		"necesario. ¡Favor de informar los desarrolladores de estes casos! \n\n"
+	},
+	
+	
 	/* This MUST be present and last. */
 	{ TIDY_MESSAGE_TYPE_LAST,       NULL                                                                      }
 };

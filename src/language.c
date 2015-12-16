@@ -498,3 +498,38 @@ uint tidyLastStringKey()
 {
 	return language_en[TY_(tidyLanguageArraySize)()].key;
 }
+
+/**
+ *  Prints the Windows language names that Tidy recognizes,
+ *  using the specified format string.
+ */
+void tidyPrintWindowsLanguageNames( ctmbstr format )
+{
+	uint i;
+	
+	for ( i = 0; localeMappings[i].winName; ++i )
+	{
+		if ( format )
+			printf( format, localeMappings[i].winName, localeMappings[i].POSIXName );
+		else
+			printf( "%-20s -> %s\n", localeMappings[i].winName, localeMappings[i].POSIXName );
+	}
+}
+
+/**
+ *  Prints the languages the are currently built into Tidy,
+ *  using the specified format string.
+ */
+void tidyPrintTidyLanguageNames( ctmbstr format )
+{
+	uint i;
+	
+	for ( i = 0; (*tidyLanguages.languages[i]); ++i )
+	{
+		if ( format )
+			printf( format, (*tidyLanguages.languages[i])[0].value );
+		else
+			printf( "%s\n", (*tidyLanguages.languages[i])[0].value );
+	}
+}
+

@@ -1231,7 +1231,8 @@ static languageDictionary language_en = {
 	{ TC_OPT_ISO2022,               "use ISO-2022 for both input and output"                                  },
 	{ TC_OPT_LANGUAGE,
 		"set tidy's output language to <lang>. Specify '-language help' for more help. "
-		"Use before output-causing arguments to ensure the language takes effect."
+		"Use before output-causing arguments to ensure the language takes effect, e.g.,"
+		"`tidy -lang es -lang help`."
 	},
 	{ TC_OPT_LATIN0,                "use ISO-8859-15 for input, US-ASCII for output"                          },
 	{ TC_OPT_LATIN1,                "use ISO-8859-1 for both input and output"                                },
@@ -1329,6 +1330,28 @@ static languageDictionary language_en = {
 	{ TC_TXT_HELP_CONFIG_NAME,      "Name"                                                                    },
 	{ TC_TXT_HELP_CONFIG_TYPE,      "Type"                                                                    },
 	{ TC_TXT_HELP_CONFIG_ALLW,      "Allowable values"                                                        },
+	{ TC_TXT_HELP_LANG_1,
+		"\nThe --language (or --lang) option indicates which language Tidy \n"
+		"should use to communicate its output. Please note that this is not \n"
+		"a document translation service, and only affects the messages that \n"
+		"Tidy communicates to you. \n"
+		"\nWhen used from the command line the --language argument must \n"
+		"be used before any arguments that result in output, otherwise Tidy \n"
+		"will produce output before it knows which language to use. \n"
+		"\nIn addition to standard POSIX language codes, Tidy is capable of \n"
+		"understanding legacy Windows language codes. Please note that this \n"
+		"list indicates codes Tidy understands, and does not indicate that \n"
+		"the language is currently installed. \n"
+		"\nThe rightmost column indicates how Tidy will understand the \n"
+		"legacy Windows name.\n\n"
+	},
+	{ TC_TXT_HELP_LANG_2,
+		"\nThe following languages are currently installed in Tidy. Please \n"
+		"note that there's no guarantee that they are complete; only that \n"
+		"one developer or another started to add the language indicated. \n"
+		"\nIncomplete localizations will default to \"en\" when necessary. \n"
+		"Please report instances of incorrect strings to the Tidy team. \n\n"
+	},
 	
 	
 	/* This MUST be present and last. */

@@ -142,6 +142,8 @@ typedef enum
 	TC_TXT_HELP_CONFIG_NAME,
 	TC_TXT_HELP_CONFIG_TYPE,
 	TC_TXT_HELP_CONFIG_ALLW,
+	TC_TXT_HELP_LANG_1,
+	TC_TXT_HELP_LANG_2,
 	
 	/* This MUST be present and last. */
 	TIDY_MESSAGE_TYPE_LAST
@@ -215,6 +217,18 @@ uint tidyNextStringKey();
  *  libtidy implementors.
  */
 uint tidyLastStringKey();
+
+/**
+ *  Prints the Windows language names that Tidy recognizes, 
+ *  using the specified format string.
+ */
+void tidyPrintWindowsLanguageNames( ctmbstr format );
+
+/**
+ *  Prints the languages the are currently built into Tidy,
+ *  using the specified format string.
+ */
+void tidyPrintTidyLanguageNames( ctmbstr format );
 
 /** @} */
 

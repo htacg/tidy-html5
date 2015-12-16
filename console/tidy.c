@@ -256,13 +256,13 @@ static const CmdOptDesc cmdopt_defs[] =  {
 #if SUPPORT_ASIAN_ENCODINGS /* #431953 - RJ */
 	{ CmdOptCharEnc,   "-big5",                TC_OPT_BIG5,     0,             NULL },
 	{ CmdOptCharEnc,   "-shiftjis",            TC_OPT_SHIFTJIS, 0,             NULL },
-	{ CmdOptCharEnc,   "-language <%s>",       TC_OPT_LANGUAGE, TC_LABEL_LANG, "language: <%s>" },
 #endif
 	{ CmdOptMisc,      "-version",             TC_OPT_VERSION,  0,             NULL,  "-v" },
 	{ CmdOptMisc,      "-help",                TC_OPT_HELP,     0,             NULL,  "-h", "-?" },
 	{ CmdOptMisc,      "-help-config",         TC_OPT_HELPCFG,  0,             NULL },
 	{ CmdOptMisc,      "-show-config",         TC_OPT_SHOWCFG,  0,             NULL },
 	{ CmdOptMisc,      "-help-option <%s>",    TC_OPT_HELPOPT,  TC_LABEL_OPT,  NULL },
+	{ CmdOptMisc,      "-language <%s>",       TC_OPT_LANGUAGE, TC_LABEL_LANG, "language: <%s>" },
 	{ CmdOptXML,       "-xml-help",            TC_OPT_XMLHELP,  0,             NULL },
 	{ CmdOptXML,       "-xml-config",          TC_OPT_XMLCFG,   0,             NULL },
 	{ CmdOptXML,       "-xml-strings",         TC_OPT_XMLSTRG,  0,             NULL },
@@ -1379,6 +1379,19 @@ static void xml_strings( void )
 
 
 /**
+ **  Handles the -lang help service.
+ */
+static void lang_help( void )
+{
+	printf( "%s", tidyLocalizedString(TC_TXT_HELP_LANG_1) );
+	tidyPrintWindowsLanguageNames("  %-20s -> %s\n");
+	printf( "%s", tidyLocalizedString(TC_TXT_HELP_LANG_2) );
+	tidyPrintTidyLanguageNames("  %s\n");
+	printf( "\n" );
+}
+
+
+/**
  **  Provides the `unknown option` output.
  */
 static void unknownOption( uint c )
@@ -1545,6 +1558,11 @@ int main( int argc, char** argv )
 					 strcasecmp(arg,     "lang") == 0 )
 				if ( argc >= 3)
 				{
+					if ( strcasecmp(argv[2], "help") == 0 )
+					{
+						lang_help();
+						exit(0);
+					}
 					if ( !tidySetLanguage( argv[2] ) )
 					{
 						printf(tidyLocalizedString(TC_STRING_LANG_NOT_FOUND),

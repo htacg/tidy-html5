@@ -1333,7 +1333,7 @@ static void xml_strings( void )
 		i = tidyNextStringKey();
 	} while ( i != tidyLastStringKey() );
 	
-	printf( "</localized_strings" );
+	printf( "</localized_strings>\n" );
 }
 
 

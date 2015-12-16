@@ -219,6 +219,12 @@ static struct _localeMap {
 
 
 /**
+ *  Current index of tidyNextStringKey iterator.
+ */
+static uint tidyStringKeyIndex = 0;
+
+
+/**
  *  The real string lookup function.
  */
 ctmbstr TY_(tidyLocalizedString)( uint messageType, languageDictionary *dictionary )
@@ -424,4 +430,71 @@ Bool tidySetLanguage( ctmbstr languageCode )
 ctmbstr tidyGetLanguage()
 {
 	return (*tidyLanguages.currentLanguage)[0].value;
+}
+
+
+/**
+ *  Provides a string given `messageType` in the default
+ *  localization (which is `en`).
+ */
+ctmbstr tidyDefaultString( uint messageType )
+{
+	return TY_(tidyLocalizedString)( messageType, &language_en);
+}
+
+
+/**
+ *  Determines the size of the base en language array.
+ */
+uint TY_(tidyLanguageArraySize)()
+{
+	static uint array_size = 0;
+	
+	if ( array_size == 0 )
+	{
+		do {
+			array_size++;
+		} while ( language_en[array_size].value );
+	}
+	
+	return array_size;
+}
+
+
+/**
+ *  Provides the first key value in the localized strings
+ *  list. Note that these are provided for documentation
+ *  generation purposes and probably aren't useful to
+ *  libtidy implementors.
+ */
+uint tidyFirstStringKey()
+{
+	tidyStringKeyIndex = 0;
+	return language_en[tidyStringKeyIndex].key;
+}
+
+/**
+ *  Provides the next key value in the localized strings
+ *  list. This current position is static so don't count
+ *  on multiple iterators running concurrently. Note that
+ *  these are provided for documentation generation purposes
+ *   and probably aren't useful to libtidy implementors.
+ */
+uint tidyNextStringKey()
+{
+	if ( tidyStringKeyIndex < tidyLastStringKey() )
+		tidyStringKeyIndex++;
+	
+	return language_en[tidyStringKeyIndex].key;
+}
+
+/**
+ *  Provides the last key value in the localized strings
+ *  list. Note that these are provided for documentation
+ *  generation purposes and probably aren't useful to
+ *  libtidy implementors.
+ */
+uint tidyLastStringKey()
+{
+	return language_en[TY_(tidyLanguageArraySize)()].key;
 }

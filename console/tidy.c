@@ -1304,6 +1304,39 @@ static void version( void )
 #endif
 }
 
+
+/**
+ **  Handles the -xml-strings service.
+ */
+static void xml_strings( void )
+{
+	ctmbstr current_language = tidyGetLanguage();
+	Bool skip_current = strcmp( current_language, "en" ) == 0;
+	Bool matches_base;
+	
+	printf( "<?xml version=\"1.0\"?>\n"
+		   "<localized_strings version=\"%s\">\n", tidyLibraryVersion());
+
+	uint i = tidyFirstStringKey();
+	do	{
+		printf( "<localized_string id=\"%u\">\n", i );
+		printf( " <string class=\"%s\">", "en" );
+		printf("%s", tidyDefaultString(i));
+		printf( "</string>\n" );
+		if ( !skip_current ) {
+			matches_base = strcmp( tidyLocalizedString(i), tidyDefaultString(i) ) == 0;
+			printf( " <string class=\"%s\" same_as_base=\"%s\">", tidyGetLanguage(), matches_base ? "yes" : "no" );
+			printf("%s", tidyLocalizedString(i));
+			printf( "</string>\n" );
+		}
+		printf( "</localized_string>\n");
+		i = tidyNextStringKey();
+	} while ( i != tidyLastStringKey() );
+	
+	printf( "</localized_strings" );
+}
+
+
 /**
  **  Provides the `unknown option` output.
  */
@@ -1351,6 +1384,14 @@ int main( int argc, char** argv )
 	// add_append_log(1);
 #endif
 	
+	/* 
+	 * Look for default configuration files using any of
+	 * the following possibilities:
+	 *  - TIDY_CONFIG_FILE - from tidyplatform.h, typically /etc/tidy.conf
+	 *  - HTML_TIDY        - environment variable
+	 *  - TIDY_USER_CONFIG_FILE - from tidyplatform.h, typically ~/tidy.conf
+	 */
+	
 #ifdef TIDY_CONFIG_FILE
 	if ( tidyFileExists( tdoc, TIDY_CONFIG_FILE) )
 	{
@@ -1359,9 +1400,6 @@ int main( int argc, char** argv )
 			fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), TIDY_CONFIG_FILE, status);
 	}
 #endif /* TIDY_CONFIG_FILE */
-	
-	/* look for env var "HTML_TIDY" */
-	/* then for ~/.tidyrc (on platforms defining $HOME) */
 	
 	if ( (cfgfil = getenv("HTML_TIDY")) != NULL )
 	{
@@ -1377,8 +1415,12 @@ int main( int argc, char** argv )
 			fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), TIDY_USER_CONFIG_FILE, status);
 	}
 #endif /* TIDY_USER_CONFIG_FILE */
-	
-	/* read command line */
+
+
+	/* 
+	 * Read command line
+	 */
+
 	while ( argc > 0 )
 	{
 		if (argc > 1 && argv[1][0] == '-')
@@ -1418,7 +1460,7 @@ int main( int argc, char** argv )
 			else if ( strcasecmp(arg, "bare") == 0 )
 				tidyOptSetBool( tdoc, TidyMakeBare, yes );
 			
-			else if ( strcasecmp(arg, "raw") == 0      ||
+			else if ( strcasecmp(arg, "raw") == 0     ||
 					 strcasecmp(arg, "ascii") == 0    ||
 					 strcasecmp(arg, "latin0") == 0   ||
 					 strcasecmp(arg, "latin1") == 0   ||
@@ -1456,6 +1498,8 @@ int main( int argc, char** argv )
 			else if ( strcasecmp(arg, "quiet") == 0 )
 				tidyOptSetBool( tdoc, TidyQuiet, yes );
 			
+			/* Currenly user must specify a language
+			   prior to anything that causes output */
 			else if ( strcasecmp(arg, "language") == 0 ||
 					 strcasecmp(arg,     "lang") == 0 )
 				if ( argc >= 3)
@@ -1484,6 +1528,12 @@ int main( int argc, char** argv )
 			else if ( strcasecmp(arg, "xml-help") == 0)
 			{
 				xml_help( );
+				tidyRelease( tdoc );
+				return 0; /* success */
+			}
+			else if ( strcasecmp(arg, "xml-strings") == 0)
+			{
+				xml_strings( );
 				tidyRelease( tdoc );
 				return 0; /* success */
 			}
@@ -1538,19 +1588,6 @@ int main( int argc, char** argv )
 					++argv;
 				}
 			}
-			
-//#if SUPPORT_ASIAN_ENCODINGS
-//			else if ( strcasecmp(arg, "language") == 0 ||
-//					 strcasecmp(arg,     "lang") == 0 )
-//			{
-//				if ( argc >= 3 )
-//				{
-//					tidyOptSetValue( tdoc, TidyLanguage, argv[2] );
-//					--argc;
-//					++argv;
-//				}
-//			}
-//#endif
 			
 			else if ( strcasecmp(arg, "output") == 0 ||
 					 strcasecmp(arg, "-output-file") == 0 ||
@@ -1764,7 +1801,8 @@ int main( int argc, char** argv )
 		
 		if ( argc <= 1 )
 			break;
-	}
+	} /* read command line loop */
+
 	
 	if (!tidyOptGetBool(tdoc, TidyQuiet) &&
 		errout == stderr && !contentErrors)

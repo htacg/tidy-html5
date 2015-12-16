@@ -146,13 +146,6 @@ typedef enum
 
 
 /**
- *  Provides a string given `messageType` in the current
- *  localization.
- */
-ctmbstr tidyLocalizedString( uint messageType );
-
-
-/**
  **  Determines the current locale without affecting the C locale.
  **  Tidy has always used the default C locale, and at this point
  **  in its development we're not going to tamper with that.
@@ -177,5 +170,49 @@ Bool tidySetLanguage( ctmbstr languageCode );
  *  Gets the current language used by Tidy.
  */
 ctmbstr tidyGetLanguage();
+
+/**
+ *  Provides a string given `messageType` in the current
+ *  localization.
+ */
+ctmbstr tidyLocalizedString( uint messageType );
+
+
+/** @name Documentation Generation */
+/** @{ */
+
+/**
+ *  Provides a string given `messageType` in the default
+ *  localization (which is `en`).
+ */
+ctmbstr tidyDefaultString( uint messageType );
+
+
+/**
+ *  Provides the first key value in the localized strings
+ *  list. Note that these are provided for documentation
+ *  generation purposes and probably aren't useful to
+ *  libtidy implementors.
+ */
+uint tidyFirstStringKey();
+
+/**
+ *  Provides the next key value in the localized strings
+ *  list. This current position is static so don't count
+ *  on multiple iterators running concurrently. Note that
+ *  these are provided for documentation generation purposes
+ *   and probably aren't useful to libtidy implementors.
+ */
+uint tidyNextStringKey();
+
+/**
+ *  Provides the last key value in the localized strings
+ *  list. Note that these are provided for documentation
+ *  generation purposes and probably aren't useful to
+ *  libtidy implementors.
+ */
+uint tidyLastStringKey();
+
+/** @} */
 
 #endif /* language_h */

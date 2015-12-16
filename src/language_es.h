@@ -87,6 +87,13 @@ static languageDictionary language_es = {
 		"\nLocalizaciones incompletas por defecto se usan \"en\" cuando sea \n"
 		"necesario. ¡Favor de informar los desarrolladores de estes casos! \n\n"
 	},
+	{ TC_TXT_HELP_LANG_3,
+		"\nSi Tidy es capaz de determinar la configuración regional entonces \n"
+		"Tidy utilizará el lenguaje de forma automática de la configuración \n"
+		"regional. Por ejemplo los sistemas de tipo Unix utilizan los variables \n"
+		"$LANG y/o $LC_ALL. Consulte a su documentación del sistema para \n"
+		"obtener más información.\n\n"
+	},
 	
 	
 	/* This MUST be present and last. */

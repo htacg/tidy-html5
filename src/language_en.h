@@ -1352,6 +1352,12 @@ static languageDictionary language_en = {
 		"\nIncomplete localizations will default to \"en\" when necessary. \n"
 		"Please report instances of incorrect strings to the Tidy team. \n\n"
 	},
+	{ TC_TXT_HELP_LANG_3,
+		"\nIf Tidy is able to determine your locale then Tidy will use the \n"
+		"locale's language automatically. For example Unix-like systems use a \n"
+		"$LANG and/or $LC_ALL environment variable. Consult your operating \n"
+		"system documentation for more information. \n\n"
+	},
 	
 	
 	/* This MUST be present and last. */

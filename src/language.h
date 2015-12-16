@@ -144,6 +144,7 @@ typedef enum
 	TC_TXT_HELP_CONFIG_ALLW,
 	TC_TXT_HELP_LANG_1,
 	TC_TXT_HELP_LANG_2,
+	TC_TXT_HELP_LANG_3,
 	
 	/* This MUST be present and last. */
 	TIDY_MESSAGE_TYPE_LAST

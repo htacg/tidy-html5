@@ -273,21 +273,21 @@ static const CmdOptDesc cmdopt_defs[] =  {
 /**
  **  Create a new string with a format and arguments.
  */
-static ctmbstr stringWithFormat( const ctmbstr fmt, ... )
+static tmbstr stringWithFormat( const ctmbstr fmt, ... )
 {
 	va_list argList = {};
-	char *result = NULL;
+	tmbstr result = NULL;
 	int len = 0;
 	
 	va_start(argList, fmt);
 	len = vsnprintf( result, 0, fmt, argList );
 	va_end(argList);
 	
-	if (!(result = malloc((len + 1) * sizeof(char))))
+	if (!(result = malloc( len + 1) ))
 		outOfMemory();
 	
 	va_start(argList, fmt);
-	/*len =*/ vsnprintf( result, len + 1, fmt, argList);
+	vsnprintf( result, len + 1, fmt, argList);
 	va_end(argList);
 	
 	return result;
@@ -305,8 +305,6 @@ static void localize_option_names( CmdOptDesc *pos)
 		pos->name2 = stringWithFormat(pos->name2, fileString);
 	if ( pos->name3 )
 		pos->name3 = stringWithFormat(pos->name3, fileString);
-	if ( pos->eqconfig )
-		pos->eqconfig = stringWithFormat(pos->eqconfig, fileString);
 }
 
 /**
@@ -330,15 +328,18 @@ static tmbstr get_option_names( const CmdOptDesc* pos )
 	name = (tmbstr)malloc(len+1);
 	if (!name) outOfMemory();
 	strcpy(name, localPos.name1);
+	free((tmbstr)localPos.name1);
 	if (localPos.name2)
 	{
 		strcat(name, ", ");
 		strcat(name, localPos.name2);
+		free((tmbstr)localPos.name2);
 	}
 	if (localPos.name3)
 	{
 		strcat(name, ", ");
 		strcat(name, localPos.name3);
+		free((tmbstr)localPos.name3);
 	}
 	return name;
 }

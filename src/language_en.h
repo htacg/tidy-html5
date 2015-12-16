@@ -1229,7 +1229,10 @@ static languageDictionary language_en = {
 	{ TC_OPT_IBM858,                "use IBM-858 (CP850+Euro) for input, US-ASCII for output"                 },
 	{ TC_OPT_INDENT,                "indent element content"                                                  },
 	{ TC_OPT_ISO2022,               "use ISO-2022 for both input and output"                                  },
-	{ TC_OPT_LANGUAGE,              "set the two-letter language code <lang> (for future use)"                },
+	{ TC_OPT_LANGUAGE,
+		"set tidy's output language to <lang>. Specify '-language help' for more help. "
+		"Use before output-causing arguments to ensure the language takes effect."
+	},
 	{ TC_OPT_LATIN0,                "use ISO-8859-15 for input, US-ASCII for output"                          },
 	{ TC_OPT_LATIN1,                "use ISO-8859-1 for both input and output"                                },
 	{ TC_OPT_MAC,                   "use MacRoman for input, US-ASCII for output"                             },
@@ -1256,6 +1259,8 @@ static languageDictionary language_en = {
 	{ TC_OPT_XML,                   "specify the input is well formed XML"                                    },
 	{ TC_OPT_XMLCFG,                "list all configuration options in XML format"                            },
 	{ TC_OPT_XMLHELP,               "list the command line options in XML format"                             },
+	{ TC_OPT_XMLSTRG,               "output all of tidy's strings in XML format"                              },
+	{ TC_OPT_XMLOPTS,               "output all option descriptions cleaned XML format"                       },
 	
 	{ TC_STRING_OUT_OF_MEMORY,      "Out of memory. Bailing out."                                             },
 	{ TC_STRING_FATAL_ERROR,        "Fatal error: impossible value for id='%d'.\n"                            },
@@ -1265,6 +1270,7 @@ static languageDictionary language_en = {
 	{ TC_STRING_LANG_MUST_SPECIFY,  "A POSIX or Windows locale must be specified.\n"                          },
 	{ TC_STRING_LANG_NOT_FOUND,     "Tidy doesn't have language '%s,' will use '%s' instead.\n"               },
 	{ TC_STRING_MISC,               "Miscellaneous"                                                           },
+	{ TC_STRING_XML,                "XML"                                                                     },
 	{ TC_STRING_MUST_SPECIFY,       "A Tidy option name must be specified."                                   },
 	{ TC_STRING_UNKNOWN_OPTION,     "HTML Tidy: unknown option: %c\n"                                         },
 	{ TC_STRING_UNKNOWN_OPTION_B,   "HTML Tidy: unknown option."                                              },

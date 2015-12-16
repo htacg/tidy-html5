@@ -182,6 +182,7 @@ typedef enum
 	CmdOptProcDir,
 	CmdOptCharEnc,
 	CmdOptMisc,
+	CmdOptXML,
 	CmdOptCatLAST
 } CmdOptCategory;
 
@@ -195,7 +196,8 @@ static const struct {
 	{ "file-manip", TC_STRING_FILE_MANIP },
 	{ "process-directives", TC_STRING_PROCESS_DIRECTIVES },
 	{ "char-encoding", TC_STRING_CHAR_ENCODING },
-	{ "misc", TC_STRING_MISC }
+	{ "misc", TC_STRING_MISC },
+	{ "xml", TC_STRING_XML }
 };
 
 /**
@@ -215,55 +217,57 @@ typedef struct {
 /* All instances of %s will be substituted with localized string
  specified by the subKey field. */
 static const CmdOptDesc cmdopt_defs[] =  {
-	{ CmdOptFileManip, "-output <%s>",     TC_OPT_OUTPUT,   TC_LABEL_FILE, "output-file: <%s>", "-o <%s>" },
-	{ CmdOptFileManip, "-config <%s>",     TC_OPT_CONFIG,   TC_LABEL_FILE, NULL },
-	{ CmdOptFileManip, "-file <%s>",       TC_OPT_FILE,     TC_LABEL_FILE, "error-file: <%s>", "-f <%s>" },
-	{ CmdOptFileManip, "-modify",          TC_OPT_MODIFY,   0,             "write-back: yes", "-m" },
-	{ CmdOptProcDir,   "-indent",          TC_OPT_INDENT,   0,             "indent: auto", "-i" },
-	{ CmdOptProcDir,   "-wrap <%s>",       TC_OPT_WRAP,     TC_LABEL_COL,  "wrap: <%s>", "-w <%s>" },
-	{ CmdOptProcDir,   "-upper",           TC_OPT_UPPER,    0,             "uppercase-tags: yes", "-u" },
-	{ CmdOptProcDir,   "-clean",           TC_OPT_CLEAN,    0,             "clean: yes", "-c" },
-	{ CmdOptProcDir,   "-bare",            TC_OPT_BARE,     0,             "bare: yes", "-b" },
-	{ CmdOptProcDir,   "-gdoc",            TC_OPT_GDOC,     0,             "gdoc: yes", "-g" },
-	{ CmdOptProcDir,   "-numeric",         TC_OPT_NUMERIC,  0,             "numeric-entities: yes", "-n" },
-	{ CmdOptProcDir,   "-errors",          TC_OPT_ERRORS,   0,             "markup: no", "-e" },
-	{ CmdOptProcDir,   "-quiet",           TC_OPT_QUIET,    0,             "quiet: yes", "-q" },
-	{ CmdOptProcDir,   "-omit",            TC_OPT_OMIT,     0,             "omit-optional-tags: yes" },
-	{ CmdOptProcDir,   "-xml",             TC_OPT_XML,      0,             "input-xml: yes" },
-	{ CmdOptProcDir,   "-asxml",           TC_OPT_ASXML,    0,             "output-xhtml: yes", "-asxhtml" },
-	{ CmdOptProcDir,   "-ashtml",          TC_OPT_ASHTML,   0,             "output-html: yes" },
+	{ CmdOptFileManip, "-output <%s>",         TC_OPT_OUTPUT,   TC_LABEL_FILE, "output-file: <%s>", "-o <%s>" },
+	{ CmdOptFileManip, "-config <%s>",         TC_OPT_CONFIG,   TC_LABEL_FILE, NULL },
+	{ CmdOptFileManip, "-file <%s>",           TC_OPT_FILE,     TC_LABEL_FILE, "error-file: <%s>", "-f <%s>" },
+	{ CmdOptFileManip, "-modify",              TC_OPT_MODIFY,   0,             "write-back: yes", "-m" },
+	{ CmdOptProcDir,   "-indent",              TC_OPT_INDENT,   0,             "indent: auto", "-i" },
+	{ CmdOptProcDir,   "-wrap <%s>",           TC_OPT_WRAP,     TC_LABEL_COL,  "wrap: <%s>", "-w <%s>" },
+	{ CmdOptProcDir,   "-upper",               TC_OPT_UPPER,    0,             "uppercase-tags: yes", "-u" },
+	{ CmdOptProcDir,   "-clean",               TC_OPT_CLEAN,    0,             "clean: yes", "-c" },
+	{ CmdOptProcDir,   "-bare",                TC_OPT_BARE,     0,             "bare: yes", "-b" },
+	{ CmdOptProcDir,   "-gdoc",                TC_OPT_GDOC,     0,             "gdoc: yes", "-g" },
+	{ CmdOptProcDir,   "-numeric",             TC_OPT_NUMERIC,  0,             "numeric-entities: yes", "-n" },
+	{ CmdOptProcDir,   "-errors",              TC_OPT_ERRORS,   0,             "markup: no", "-e" },
+	{ CmdOptProcDir,   "-quiet",               TC_OPT_QUIET,    0,             "quiet: yes", "-q" },
+	{ CmdOptProcDir,   "-omit",                TC_OPT_OMIT,     0,             "omit-optional-tags: yes" },
+	{ CmdOptProcDir,   "-xml",                 TC_OPT_XML,      0,             "input-xml: yes" },
+	{ CmdOptProcDir,   "-asxml",               TC_OPT_ASXML,    0,             "output-xhtml: yes", "-asxhtml" },
+	{ CmdOptProcDir,   "-ashtml",              TC_OPT_ASHTML,   0,             "output-html: yes" },
 #if SUPPORT_ACCESSIBILITY_CHECKS
-	{ CmdOptProcDir,   "-access <%s>",     TC_OPT_ACCESS,   TC_LABEL_LEVL, "accessibility-check: <%s>" },
+	{ CmdOptProcDir,   "-access <%s>",         TC_OPT_ACCESS,   TC_LABEL_LEVL, "accessibility-check: <%s>" },
 #endif
-	{ CmdOptCharEnc,   "-raw",             TC_OPT_RAW,      0,             NULL },
-	{ CmdOptCharEnc,   "-ascii",           TC_OPT_ASCII,    0,             NULL },
-	{ CmdOptCharEnc,   "-latin0",          TC_OPT_LATIN0,   0,             NULL },
-	{ CmdOptCharEnc,   "-latin1",          TC_OPT_LATIN1,   0,             NULL },
+	{ CmdOptCharEnc,   "-raw",                 TC_OPT_RAW,      0,             NULL },
+	{ CmdOptCharEnc,   "-ascii",               TC_OPT_ASCII,    0,             NULL },
+	{ CmdOptCharEnc,   "-latin0",              TC_OPT_LATIN0,   0,             NULL },
+	{ CmdOptCharEnc,   "-latin1",              TC_OPT_LATIN1,   0,             NULL },
 #ifndef NO_NATIVE_ISO2022_SUPPORT
-	{ CmdOptCharEnc,   "-iso2022",         TC_OPT_ISO2022,  0,             NULL },
+	{ CmdOptCharEnc,   "-iso2022",             TC_OPT_ISO2022,  0,             NULL },
 #endif
-	{ CmdOptCharEnc,   "-utf8",            TC_OPT_UTF8,     0,             NULL },
-	{ CmdOptCharEnc,   "-mac",             TC_OPT_MAC,      0,             NULL },
-	{ CmdOptCharEnc,   "-win1252",         TC_OPT_WIN1252,  0,             NULL },
-	{ CmdOptCharEnc,   "-ibm858",          TC_OPT_IBM858,   0,             NULL },
+	{ CmdOptCharEnc,   "-utf8",                TC_OPT_UTF8,     0,             NULL },
+	{ CmdOptCharEnc,   "-mac",                 TC_OPT_MAC,      0,             NULL },
+	{ CmdOptCharEnc,   "-win1252",             TC_OPT_WIN1252,  0,             NULL },
+	{ CmdOptCharEnc,   "-ibm858",              TC_OPT_IBM858,   0,             NULL },
 #if SUPPORT_UTF16_ENCODINGS
-	{ CmdOptCharEnc,   "-utf16le",         TC_OPT_UTF16LE,  0,             NULL },
-	{ CmdOptCharEnc,   "-utf16be",         TC_OPT_UTF16BE,  0,             NULL },
-	{ CmdOptCharEnc,   "-utf16",           TC_OPT_UTF16,    0,             NULL },
+	{ CmdOptCharEnc,   "-utf16le",             TC_OPT_UTF16LE,  0,             NULL },
+	{ CmdOptCharEnc,   "-utf16be",             TC_OPT_UTF16BE,  0,             NULL },
+	{ CmdOptCharEnc,   "-utf16",               TC_OPT_UTF16,    0,             NULL },
 #endif
 #if SUPPORT_ASIAN_ENCODINGS /* #431953 - RJ */
-	{ CmdOptCharEnc,   "-big5",            TC_OPT_BIG5,     0,             NULL },
-	{ CmdOptCharEnc,   "-shiftjis",        TC_OPT_SHIFTJIS, 0,             NULL },
-	{ CmdOptCharEnc,   "-language <%s>",   TC_OPT_LANGUAGE, TC_LABEL_LANG, "language: <%s>" },
+	{ CmdOptCharEnc,   "-big5",                TC_OPT_BIG5,     0,             NULL },
+	{ CmdOptCharEnc,   "-shiftjis",            TC_OPT_SHIFTJIS, 0,             NULL },
+	{ CmdOptCharEnc,   "-language <%s>",       TC_OPT_LANGUAGE, TC_LABEL_LANG, "language: <%s>" },
 #endif
-	{ CmdOptMisc,      "-version",         TC_OPT_VERSION,  0,             NULL,  "-v" },
-	{ CmdOptMisc,      "-help",            TC_OPT_HELP,     0,             NULL,  "-h", "-?" },
-	{ CmdOptMisc,      "-xml-help",        TC_OPT_XMLHELP,  0,             NULL },
-	{ CmdOptMisc,      "-help-config",     TC_OPT_HELPCFG,  0,             NULL },
-	{ CmdOptMisc,      "-xml-config",      TC_OPT_XMLCFG,   0,             NULL },
-	{ CmdOptMisc,      "-show-config",     TC_OPT_SHOWCFG,  0,             NULL },
-	{ CmdOptMisc,      "-help-option <%s>",TC_OPT_HELPOPT,  TC_LABEL_OPT,  NULL },
-	{ CmdOptMisc,      NULL,               0,               0,             NULL }
+	{ CmdOptMisc,      "-version",             TC_OPT_VERSION,  0,             NULL,  "-v" },
+	{ CmdOptMisc,      "-help",                TC_OPT_HELP,     0,             NULL,  "-h", "-?" },
+	{ CmdOptMisc,      "-help-config",         TC_OPT_HELPCFG,  0,             NULL },
+	{ CmdOptMisc,      "-show-config",         TC_OPT_SHOWCFG,  0,             NULL },
+	{ CmdOptMisc,      "-help-option <%s>",    TC_OPT_HELPOPT,  TC_LABEL_OPT,  NULL },
+	{ CmdOptXML,       "-xml-help",            TC_OPT_XMLHELP,  0,             NULL },
+	{ CmdOptXML,       "-xml-config",          TC_OPT_XMLCFG,   0,             NULL },
+	{ CmdOptXML,       "-xml-strings",         TC_OPT_XMLSTRG,  0,             NULL },
+	{ CmdOptXML,       "-xml-options-strings", TC_OPT_XMLOPTS,  0,             NULL },
+	{ CmdOptMisc,      NULL,                   0,               0,             NULL }
 };
 
 /**

@@ -1306,7 +1306,44 @@ static void version( void )
 
 
 /**
+ **  Handles the printing of option description for
+ **  -xml-options-strings service.
+ **/
+static void printXMLOptionString( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
+{
+	tmbstr description;
+	
+	if ( tidyOptIsReadOnly(topt) )
+		return;
+
+	description = cleanup_description( tidyOptGetDoc( tdoc, topt ) );
+	
+	printf( " <option>\n" );
+	printf( "  <name>%s</name>\n",d->name);
+	printf( "  <description class=\"%s\">%s</description>\n", tidyGetLanguage(), description );
+	printf( " </option>\n" );
+	free( description );
+}
+
+/**
+ **  Handles the -xml-options-strings service.
+ **  This service is primarily helppful to developers and localizers to test
+ **  that option description strings as represented on screen output are
+ **  correct and do not break tidy.
+ **/
+static void xml_options_strings( TidyDoc tdoc )
+{
+	printf( "<?xml version=\"1.0\"?>\n"
+		   "<options_strings version=\"%s\">\n", tidyLibraryVersion());
+	ForEachOption( tdoc, printXMLOptionString);
+	printf( "</options_strings>\n" );
+}
+
+
+/**
  **  Handles the -xml-strings service.
+ **  This service is primarily helpful to developers and localizers to
+ **  compare localized strings to the built in `en` strings.
  */
 static void xml_strings( void )
 {
@@ -1528,6 +1565,12 @@ int main( int argc, char** argv )
 			else if ( strcasecmp(arg, "xml-help") == 0)
 			{
 				xml_help( );
+				tidyRelease( tdoc );
+				return 0; /* success */
+			}
+			else if ( strcasecmp(arg, "xml-options-strings") == 0)
+			{
+				xml_options_strings( tdoc );
 				tidyRelease( tdoc );
 				return 0; /* success */
 			}

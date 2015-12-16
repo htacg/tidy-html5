@@ -1433,7 +1433,7 @@ int main( int argc, char** argv )
 //	tidySetPrettyPrinterCallback(tdoc, progressTester);
 
 	/* Set the locale for tidy's output. */
-	tmbstr locale;
+	tmbstr locale = NULL;
 	locale = tidySystemLocale(locale);
 	tidySetLanguage(locale);
 	if ( locale )

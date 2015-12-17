@@ -1,0 +1,20 @@
+line 1 column 1 - Warning: <embed> dropping value "never" for repeated attribute "allowscriptaccess"
+line 1 column 1 - Warning: missing <!DOCTYPE> declaration
+line 1 column 1 - Warning: inserting implicit <body>
+line 1 column 1 - Warning: inserting missing 'title' element
+line 1 column 1 - Warning: <embed> proprietary attribute "quality"
+line 1 column 1 - Warning: <embed> proprietary attribute "mode"
+line 1 column 1 - Warning: <embed> attribute "bgcolor" had invalid value "FFFFFF" and has been replaced
+line 1 column 1 - Warning: <embed> proprietary attribute "bgcolor"
+line 1 column 1 - Warning: <embed> proprietary attribute "lign"
+line 1 column 1 - Warning: <embed> proprietary attribute "allowscriptaccess"
+line 1 column 1 - Warning: <embed> proprietary attribute "pluginspage"
+Info: Document content looks like HTML5
+11 warnings, 0 errors were found!
+
+About HTML Tidy: https://github.com/htacg/tidy-html5
+Bug reports and comments: https://github.com/htacg/tidy-html5/issues
+Or send questions and comments to: https://lists.w3.org/Archives/Public/public-htacg/
+Latest HTML specification: http://dev.w3.org/html5/spec-author-view/
+Validate your HTML documents: http://validator.w3.org/nu/
+Lobby your company to join the W3C: http://www.w3.org/Consortium

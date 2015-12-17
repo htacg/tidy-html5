@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>test whether xx&lt;...&gt;yy&lt;/...&gt; is wrapped properly</title>
+</head>
+<body>
+<p>test 1.1 (no space)</p>
+<p>xx<span id="qqqqqqqqqqqq11" title="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">yy</span></p>
+
+<p>test 1.2 (with space)</p>
+<p>xx <span id="qqqqqqqqqqqq12" title="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">yy</span></p>
+
+<p>test 1.3 (with non breaking space)</p>
+<p>xx&nbsp;<span id="qqqqqqqqqqqq13" title="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">yy</span></p>
+
+<p>test 2.1 (no space)</p>
+<p>xx<span id="qqqqqqqqqqqq21" title="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"><cite>yy</cite></span></p>
+
+<p>test 2.2 (with space)</p>
+<p>xx <span id="qqqqqqqqqqqq22" title="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"><cite>yy</cite></span></p>
+
+<p>test 2.3 (with non breaking space)</p>
+<p>xx&nbsp;<span id="qqqqqqqqqqqq23" title="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"><cite>yy</cite></span></p>
+
+<p>test 3 (no space)</p>
+<p><img src="http://www.w3.org/Icons/w3c_main" alt="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />x</p>
+<p><span><img src="http://www.w3.org/Icons/w3c_main" alt="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />x</span></p>
+
+<p>test 4 (&lt;br&gt;)</p>
+<p><a href="mailto:xxxxxxxxxxxxxxxx@yyyyyyyyyyyyyyyyyyyyy">zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz</a><br />xx</p>
+
+<p>test 5 (no space in the front)</p>
+<p><span title="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">      aa</span></p>
+
+<p>test 6 (no space in the front)</p>
+<p><span title="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">      aa</span><img src="http://www.w3.org/Icons/w3c_main" alt="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" /></p>
+
+</body>
+</html>

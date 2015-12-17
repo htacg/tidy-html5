@@ -1,0 +1,625 @@
+line 1 column 1 - Warning: missing <!DOCTYPE> declaration
+line 15 column 17 - Warning: entity "&nbsp" doesn't end in ';'
+line 15 column 32 - Warning: entity "&nbsp" doesn't end in ';'
+line 18 column 17 - Warning: entity "&iexcl" doesn't end in ';'
+line 18 column 33 - Warning: entity "&iexcl" doesn't end in ';'
+line 21 column 17 - Warning: entity "&cent" doesn't end in ';'
+line 21 column 32 - Warning: entity "&cent" doesn't end in ';'
+line 24 column 17 - Warning: entity "&pound" doesn't end in ';'
+line 24 column 33 - Warning: entity "&pound" doesn't end in ';'
+line 27 column 17 - Warning: entity "&curren" doesn't end in ';'
+line 27 column 34 - Warning: entity "&curren" doesn't end in ';'
+line 30 column 17 - Warning: entity "&yen" doesn't end in ';'
+line 30 column 31 - Warning: entity "&yen" doesn't end in ';'
+line 33 column 17 - Warning: entity "&brvbar" doesn't end in ';'
+line 33 column 34 - Warning: entity "&brvbar" doesn't end in ';'
+line 36 column 17 - Warning: entity "&sect" doesn't end in ';'
+line 36 column 32 - Warning: entity "&sect" doesn't end in ';'
+line 39 column 17 - Warning: entity "&uml" doesn't end in ';'
+line 39 column 31 - Warning: entity "&uml" doesn't end in ';'
+line 42 column 17 - Warning: entity "&copy" doesn't end in ';'
+line 42 column 32 - Warning: entity "&copy" doesn't end in ';'
+line 45 column 17 - Warning: entity "&ordf" doesn't end in ';'
+line 45 column 32 - Warning: entity "&ordf" doesn't end in ';'
+line 48 column 17 - Warning: entity "&laquo" doesn't end in ';'
+line 48 column 33 - Warning: entity "&laquo" doesn't end in ';'
+line 51 column 17 - Warning: entity "&not" doesn't end in ';'
+line 51 column 31 - Warning: entity "&not" doesn't end in ';'
+line 54 column 17 - Warning: entity "&shy" doesn't end in ';'
+line 54 column 31 - Warning: entity "&shy" doesn't end in ';'
+line 57 column 17 - Warning: entity "&reg" doesn't end in ';'
+line 57 column 31 - Warning: entity "&reg" doesn't end in ';'
+line 60 column 17 - Warning: entity "&macr" doesn't end in ';'
+line 60 column 32 - Warning: entity "&macr" doesn't end in ';'
+line 63 column 17 - Warning: entity "&deg" doesn't end in ';'
+line 63 column 31 - Warning: entity "&deg" doesn't end in ';'
+line 66 column 17 - Warning: entity "&plusmn" doesn't end in ';'
+line 66 column 34 - Warning: entity "&plusmn" doesn't end in ';'
+line 69 column 17 - Warning: entity "&sup2" doesn't end in ';'
+line 69 column 32 - Warning: entity "&sup2" doesn't end in ';'
+line 72 column 17 - Warning: entity "&sup3" doesn't end in ';'
+line 72 column 32 - Warning: entity "&sup3" doesn't end in ';'
+line 75 column 17 - Warning: entity "&acute" doesn't end in ';'
+line 75 column 33 - Warning: entity "&acute" doesn't end in ';'
+line 78 column 17 - Warning: entity "&micro" doesn't end in ';'
+line 78 column 33 - Warning: entity "&micro" doesn't end in ';'
+line 81 column 17 - Warning: entity "&para" doesn't end in ';'
+line 81 column 32 - Warning: entity "&para" doesn't end in ';'
+line 84 column 17 - Warning: entity "&middot" doesn't end in ';'
+line 84 column 34 - Warning: entity "&middot" doesn't end in ';'
+line 87 column 17 - Warning: entity "&cedil" doesn't end in ';'
+line 87 column 33 - Warning: entity "&cedil" doesn't end in ';'
+line 90 column 17 - Warning: entity "&sup1" doesn't end in ';'
+line 90 column 32 - Warning: entity "&sup1" doesn't end in ';'
+line 93 column 17 - Warning: entity "&ordm" doesn't end in ';'
+line 93 column 32 - Warning: entity "&ordm" doesn't end in ';'
+line 96 column 17 - Warning: entity "&raquo" doesn't end in ';'
+line 96 column 33 - Warning: entity "&raquo" doesn't end in ';'
+line 99 column 17 - Warning: entity "&frac14" doesn't end in ';'
+line 99 column 34 - Warning: entity "&frac14" doesn't end in ';'
+line 102 column 17 - Warning: entity "&frac12" doesn't end in ';'
+line 102 column 34 - Warning: entity "&frac12" doesn't end in ';'
+line 105 column 17 - Warning: entity "&frac34" doesn't end in ';'
+line 105 column 34 - Warning: entity "&frac34" doesn't end in ';'
+line 108 column 17 - Warning: entity "&iquest" doesn't end in ';'
+line 108 column 34 - Warning: entity "&iquest" doesn't end in ';'
+line 111 column 17 - Warning: entity "&Agrave" doesn't end in ';'
+line 111 column 34 - Warning: entity "&Agrave" doesn't end in ';'
+line 114 column 17 - Warning: entity "&Aacute" doesn't end in ';'
+line 114 column 34 - Warning: entity "&Aacute" doesn't end in ';'
+line 117 column 17 - Warning: entity "&Acirc" doesn't end in ';'
+line 117 column 33 - Warning: entity "&Acirc" doesn't end in ';'
+line 120 column 17 - Warning: entity "&Atilde" doesn't end in ';'
+line 120 column 34 - Warning: entity "&Atilde" doesn't end in ';'
+line 123 column 17 - Warning: entity "&Auml" doesn't end in ';'
+line 123 column 32 - Warning: entity "&Auml" doesn't end in ';'
+line 126 column 17 - Warning: entity "&Aring" doesn't end in ';'
+line 126 column 33 - Warning: entity "&Aring" doesn't end in ';'
+line 129 column 17 - Warning: entity "&AElig" doesn't end in ';'
+line 129 column 33 - Warning: entity "&AElig" doesn't end in ';'
+line 132 column 17 - Warning: entity "&Ccedil" doesn't end in ';'
+line 132 column 34 - Warning: entity "&Ccedil" doesn't end in ';'
+line 135 column 17 - Warning: entity "&Egrave" doesn't end in ';'
+line 135 column 34 - Warning: entity "&Egrave" doesn't end in ';'
+line 138 column 17 - Warning: entity "&Eacute" doesn't end in ';'
+line 138 column 34 - Warning: entity "&Eacute" doesn't end in ';'
+line 141 column 17 - Warning: entity "&Ecirc" doesn't end in ';'
+line 141 column 33 - Warning: entity "&Ecirc" doesn't end in ';'
+line 144 column 17 - Warning: entity "&Euml" doesn't end in ';'
+line 144 column 32 - Warning: entity "&Euml" doesn't end in ';'
+line 147 column 17 - Warning: entity "&Igrave" doesn't end in ';'
+line 147 column 34 - Warning: entity "&Igrave" doesn't end in ';'
+line 150 column 17 - Warning: entity "&Iacute" doesn't end in ';'
+line 150 column 34 - Warning: entity "&Iacute" doesn't end in ';'
+line 153 column 17 - Warning: entity "&Icirc" doesn't end in ';'
+line 153 column 33 - Warning: entity "&Icirc" doesn't end in ';'
+line 156 column 17 - Warning: entity "&Iuml" doesn't end in ';'
+line 156 column 32 - Warning: entity "&Iuml" doesn't end in ';'
+line 159 column 17 - Warning: entity "&ETH" doesn't end in ';'
+line 159 column 31 - Warning: entity "&ETH" doesn't end in ';'
+line 162 column 17 - Warning: entity "&Ntilde" doesn't end in ';'
+line 162 column 34 - Warning: entity "&Ntilde" doesn't end in ';'
+line 165 column 17 - Warning: entity "&Ograve" doesn't end in ';'
+line 165 column 34 - Warning: entity "&Ograve" doesn't end in ';'
+line 168 column 17 - Warning: entity "&Oacute" doesn't end in ';'
+line 168 column 34 - Warning: entity "&Oacute" doesn't end in ';'
+line 171 column 17 - Warning: entity "&Ocirc" doesn't end in ';'
+line 171 column 33 - Warning: entity "&Ocirc" doesn't end in ';'
+line 174 column 17 - Warning: entity "&Otilde" doesn't end in ';'
+line 174 column 34 - Warning: entity "&Otilde" doesn't end in ';'
+line 177 column 17 - Warning: entity "&Ouml" doesn't end in ';'
+line 177 column 32 - Warning: entity "&Ouml" doesn't end in ';'
+line 180 column 17 - Warning: entity "&times" doesn't end in ';'
+line 180 column 33 - Warning: entity "&times" doesn't end in ';'
+line 183 column 17 - Warning: entity "&Oslash" doesn't end in ';'
+line 183 column 34 - Warning: entity "&Oslash" doesn't end in ';'
+line 186 column 17 - Warning: entity "&Ugrave" doesn't end in ';'
+line 186 column 34 - Warning: entity "&Ugrave" doesn't end in ';'
+line 189 column 17 - Warning: entity "&Uacute" doesn't end in ';'
+line 189 column 34 - Warning: entity "&Uacute" doesn't end in ';'
+line 192 column 17 - Warning: entity "&Ucirc" doesn't end in ';'
+line 192 column 33 - Warning: entity "&Ucirc" doesn't end in ';'
+line 195 column 17 - Warning: entity "&Uuml" doesn't end in ';'
+line 195 column 32 - Warning: entity "&Uuml" doesn't end in ';'
+line 198 column 17 - Warning: entity "&Yacute" doesn't end in ';'
+line 198 column 34 - Warning: entity "&Yacute" doesn't end in ';'
+line 201 column 17 - Warning: entity "&THORN" doesn't end in ';'
+line 201 column 33 - Warning: entity "&THORN" doesn't end in ';'
+line 204 column 17 - Warning: entity "&szlig" doesn't end in ';'
+line 204 column 33 - Warning: entity "&szlig" doesn't end in ';'
+line 207 column 17 - Warning: entity "&agrave" doesn't end in ';'
+line 207 column 34 - Warning: entity "&agrave" doesn't end in ';'
+line 210 column 17 - Warning: entity "&aacute" doesn't end in ';'
+line 210 column 34 - Warning: entity "&aacute" doesn't end in ';'
+line 213 column 17 - Warning: entity "&acirc" doesn't end in ';'
+line 213 column 33 - Warning: entity "&acirc" doesn't end in ';'
+line 216 column 17 - Warning: entity "&atilde" doesn't end in ';'
+line 216 column 34 - Warning: entity "&atilde" doesn't end in ';'
+line 219 column 17 - Warning: entity "&auml" doesn't end in ';'
+line 219 column 32 - Warning: entity "&auml" doesn't end in ';'
+line 222 column 17 - Warning: entity "&aring" doesn't end in ';'
+line 222 column 33 - Warning: entity "&aring" doesn't end in ';'
+line 225 column 17 - Warning: entity "&aelig" doesn't end in ';'
+line 225 column 33 - Warning: entity "&aelig" doesn't end in ';'
+line 228 column 17 - Warning: entity "&ccedil" doesn't end in ';'
+line 228 column 34 - Warning: entity "&ccedil" doesn't end in ';'
+line 231 column 17 - Warning: entity "&egrave" doesn't end in ';'
+line 231 column 34 - Warning: entity "&egrave" doesn't end in ';'
+line 234 column 17 - Warning: entity "&eacute" doesn't end in ';'
+line 234 column 34 - Warning: entity "&eacute" doesn't end in ';'
+line 237 column 17 - Warning: entity "&ecirc" doesn't end in ';'
+line 237 column 33 - Warning: entity "&ecirc" doesn't end in ';'
+line 240 column 17 - Warning: entity "&euml" doesn't end in ';'
+line 240 column 32 - Warning: entity "&euml" doesn't end in ';'
+line 243 column 17 - Warning: entity "&igrave" doesn't end in ';'
+line 243 column 34 - Warning: entity "&igrave" doesn't end in ';'
+line 246 column 17 - Warning: entity "&iacute" doesn't end in ';'
+line 246 column 34 - Warning: entity "&iacute" doesn't end in ';'
+line 249 column 17 - Warning: entity "&icirc" doesn't end in ';'
+line 249 column 33 - Warning: entity "&icirc" doesn't end in ';'
+line 252 column 17 - Warning: entity "&iuml" doesn't end in ';'
+line 252 column 32 - Warning: entity "&iuml" doesn't end in ';'
+line 255 column 17 - Warning: entity "&eth" doesn't end in ';'
+line 255 column 31 - Warning: entity "&eth" doesn't end in ';'
+line 258 column 17 - Warning: entity "&ntilde" doesn't end in ';'
+line 258 column 34 - Warning: entity "&ntilde" doesn't end in ';'
+line 261 column 17 - Warning: entity "&ograve" doesn't end in ';'
+line 261 column 34 - Warning: entity "&ograve" doesn't end in ';'
+line 264 column 17 - Warning: entity "&oacute" doesn't end in ';'
+line 264 column 34 - Warning: entity "&oacute" doesn't end in ';'
+line 267 column 17 - Warning: entity "&ocirc" doesn't end in ';'
+line 267 column 33 - Warning: entity "&ocirc" doesn't end in ';'
+line 270 column 17 - Warning: entity "&otilde" doesn't end in ';'
+line 270 column 34 - Warning: entity "&otilde" doesn't end in ';'
+line 273 column 17 - Warning: entity "&ouml" doesn't end in ';'
+line 273 column 32 - Warning: entity "&ouml" doesn't end in ';'
+line 276 column 17 - Warning: entity "&divide" doesn't end in ';'
+line 276 column 34 - Warning: entity "&divide" doesn't end in ';'
+line 279 column 17 - Warning: entity "&oslash" doesn't end in ';'
+line 279 column 34 - Warning: entity "&oslash" doesn't end in ';'
+line 282 column 17 - Warning: entity "&ugrave" doesn't end in ';'
+line 282 column 34 - Warning: entity "&ugrave" doesn't end in ';'
+line 285 column 17 - Warning: entity "&uacute" doesn't end in ';'
+line 285 column 34 - Warning: entity "&uacute" doesn't end in ';'
+line 288 column 17 - Warning: entity "&ucirc" doesn't end in ';'
+line 288 column 33 - Warning: entity "&ucirc" doesn't end in ';'
+line 291 column 17 - Warning: entity "&uuml" doesn't end in ';'
+line 291 column 32 - Warning: entity "&uuml" doesn't end in ';'
+line 294 column 17 - Warning: entity "&yacute" doesn't end in ';'
+line 294 column 34 - Warning: entity "&yacute" doesn't end in ';'
+line 297 column 17 - Warning: entity "&thorn" doesn't end in ';'
+line 297 column 33 - Warning: entity "&thorn" doesn't end in ';'
+line 300 column 17 - Warning: entity "&yuml" doesn't end in ';'
+line 300 column 32 - Warning: entity "&yuml" doesn't end in ';'
+line 308 column 17 - Warning: unescaped & or unknown entity "&fnof"
+line 308 column 32 - Warning: unescaped & or unknown entity "&fnof"
+line 311 column 17 - Warning: unescaped & or unknown entity "&Alpha"
+line 311 column 33 - Warning: unescaped & or unknown entity "&Alpha"
+line 314 column 17 - Warning: unescaped & or unknown entity "&Beta"
+line 314 column 32 - Warning: unescaped & or unknown entity "&Beta"
+line 317 column 17 - Warning: unescaped & or unknown entity "&Gamma"
+line 317 column 33 - Warning: unescaped & or unknown entity "&Gamma"
+line 320 column 17 - Warning: unescaped & or unknown entity "&Delta"
+line 320 column 33 - Warning: unescaped & or unknown entity "&Delta"
+line 323 column 17 - Warning: unescaped & or unknown entity "&Epsilon"
+line 323 column 35 - Warning: unescaped & or unknown entity "&Epsilon"
+line 326 column 17 - Warning: unescaped & or unknown entity "&Zeta"
+line 326 column 32 - Warning: unescaped & or unknown entity "&Zeta"
+line 329 column 17 - Warning: unescaped & or unknown entity "&Eta"
+line 329 column 31 - Warning: unescaped & or unknown entity "&Eta"
+line 332 column 17 - Warning: unescaped & or unknown entity "&Theta"
+line 332 column 33 - Warning: unescaped & or unknown entity "&Theta"
+line 335 column 17 - Warning: unescaped & or unknown entity "&Iota"
+line 335 column 32 - Warning: unescaped & or unknown entity "&Iota"
+line 338 column 17 - Warning: unescaped & or unknown entity "&Kappa"
+line 338 column 33 - Warning: unescaped & or unknown entity "&Kappa"
+line 341 column 17 - Warning: unescaped & or unknown entity "&Lambda"
+line 341 column 34 - Warning: unescaped & or unknown entity "&Lambda"
+line 344 column 17 - Warning: unescaped & or unknown entity "&Mu"
+line 344 column 30 - Warning: unescaped & or unknown entity "&Mu"
+line 347 column 17 - Warning: unescaped & or unknown entity "&Nu"
+line 347 column 30 - Warning: unescaped & or unknown entity "&Nu"
+line 350 column 17 - Warning: unescaped & or unknown entity "&Xi"
+line 350 column 30 - Warning: unescaped & or unknown entity "&Xi"
+line 353 column 17 - Warning: unescaped & or unknown entity "&Omicron"
+line 353 column 35 - Warning: unescaped & or unknown entity "&Omicron"
+line 356 column 17 - Warning: unescaped & or unknown entity "&Pi"
+line 356 column 30 - Warning: unescaped & or unknown entity "&Pi"
+line 359 column 17 - Warning: unescaped & or unknown entity "&Rho"
+line 359 column 31 - Warning: unescaped & or unknown entity "&Rho"
+line 362 column 17 - Warning: unescaped & or unknown entity "&Sigma"
+line 362 column 33 - Warning: unescaped & or unknown entity "&Sigma"
+line 365 column 17 - Warning: unescaped & or unknown entity "&Tau"
+line 365 column 31 - Warning: unescaped & or unknown entity "&Tau"
+line 368 column 17 - Warning: unescaped & or unknown entity "&Upsilon"
+line 368 column 35 - Warning: unescaped & or unknown entity "&Upsilon"
+line 371 column 17 - Warning: unescaped & or unknown entity "&Phi"
+line 371 column 31 - Warning: unescaped & or unknown entity "&Phi"
+line 374 column 17 - Warning: unescaped & or unknown entity "&Chi"
+line 374 column 31 - Warning: unescaped & or unknown entity "&Chi"
+line 377 column 17 - Warning: unescaped & or unknown entity "&Psi"
+line 377 column 31 - Warning: unescaped & or unknown entity "&Psi"
+line 380 column 17 - Warning: unescaped & or unknown entity "&Omega"
+line 380 column 33 - Warning: unescaped & or unknown entity "&Omega"
+line 383 column 17 - Warning: unescaped & or unknown entity "&alpha"
+line 383 column 33 - Warning: unescaped & or unknown entity "&alpha"
+line 386 column 17 - Warning: unescaped & or unknown entity "&beta"
+line 386 column 32 - Warning: unescaped & or unknown entity "&beta"
+line 389 column 17 - Warning: unescaped & or unknown entity "&gamma"
+line 389 column 33 - Warning: unescaped & or unknown entity "&gamma"
+line 392 column 17 - Warning: unescaped & or unknown entity "&delta"
+line 392 column 33 - Warning: unescaped & or unknown entity "&delta"
+line 395 column 17 - Warning: unescaped & or unknown entity "&epsilon"
+line 395 column 35 - Warning: unescaped & or unknown entity "&epsilon"
+line 398 column 17 - Warning: unescaped & or unknown entity "&zeta"
+line 398 column 32 - Warning: unescaped & or unknown entity "&zeta"
+line 401 column 17 - Warning: unescaped & or unknown entity "&eta"
+line 401 column 31 - Warning: unescaped & or unknown entity "&eta"
+line 404 column 17 - Warning: unescaped & or unknown entity "&theta"
+line 404 column 33 - Warning: unescaped & or unknown entity "&theta"
+line 407 column 17 - Warning: unescaped & or unknown entity "&iota"
+line 407 column 32 - Warning: unescaped & or unknown entity "&iota"
+line 410 column 17 - Warning: unescaped & or unknown entity "&kappa"
+line 410 column 33 - Warning: unescaped & or unknown entity "&kappa"
+line 413 column 17 - Warning: unescaped & or unknown entity "&lambda"
+line 413 column 34 - Warning: unescaped & or unknown entity "&lambda"
+line 416 column 17 - Warning: unescaped & or unknown entity "&mu"
+line 416 column 30 - Warning: unescaped & or unknown entity "&mu"
+line 419 column 17 - Warning: unescaped & or unknown entity "&nu"
+line 419 column 30 - Warning: unescaped & or unknown entity "&nu"
+line 422 column 17 - Warning: unescaped & or unknown entity "&xi"
+line 422 column 30 - Warning: unescaped & or unknown entity "&xi"
+line 425 column 17 - Warning: unescaped & or unknown entity "&omicron"
+line 425 column 35 - Warning: unescaped & or unknown entity "&omicron"
+line 428 column 17 - Warning: unescaped & or unknown entity "&pi"
+line 428 column 30 - Warning: unescaped & or unknown entity "&pi"
+line 431 column 17 - Warning: unescaped & or unknown entity "&rho"
+line 431 column 31 - Warning: unescaped & or unknown entity "&rho"
+line 434 column 17 - Warning: unescaped & or unknown entity "&sigmaf"
+line 434 column 34 - Warning: unescaped & or unknown entity "&sigmaf"
+line 437 column 17 - Warning: unescaped & or unknown entity "&sigma"
+line 437 column 33 - Warning: unescaped & or unknown entity "&sigma"
+line 440 column 17 - Warning: unescaped & or unknown entity "&tau"
+line 440 column 31 - Warning: unescaped & or unknown entity "&tau"
+line 443 column 17 - Warning: unescaped & or unknown entity "&upsilon"
+line 443 column 35 - Warning: unescaped & or unknown entity "&upsilon"
+line 446 column 17 - Warning: unescaped & or unknown entity "&phi"
+line 446 column 31 - Warning: unescaped & or unknown entity "&phi"
+line 449 column 17 - Warning: unescaped & or unknown entity "&chi"
+line 449 column 31 - Warning: unescaped & or unknown entity "&chi"
+line 452 column 17 - Warning: unescaped & or unknown entity "&psi"
+line 452 column 31 - Warning: unescaped & or unknown entity "&psi"
+line 455 column 17 - Warning: unescaped & or unknown entity "&omega"
+line 455 column 33 - Warning: unescaped & or unknown entity "&omega"
+line 458 column 17 - Warning: unescaped & or unknown entity "&thetasym"
+line 458 column 36 - Warning: unescaped & or unknown entity "&thetasym"
+line 461 column 17 - Warning: unescaped & or unknown entity "&upsih"
+line 461 column 33 - Warning: unescaped & or unknown entity "&upsih"
+line 464 column 17 - Warning: unescaped & or unknown entity "&piv"
+line 464 column 31 - Warning: unescaped & or unknown entity "&piv"
+line 467 column 17 - Warning: unescaped & or unknown entity "&bull"
+line 467 column 32 - Warning: unescaped & or unknown entity "&bull"
+line 470 column 17 - Warning: unescaped & or unknown entity "&hellip"
+line 470 column 34 - Warning: unescaped & or unknown entity "&hellip"
+line 473 column 17 - Warning: unescaped & or unknown entity "&prime"
+line 473 column 33 - Warning: unescaped & or unknown entity "&prime"
+line 476 column 17 - Warning: unescaped & or unknown entity "&Prime"
+line 476 column 33 - Warning: unescaped & or unknown entity "&Prime"
+line 479 column 17 - Warning: unescaped & or unknown entity "&oline"
+line 479 column 33 - Warning: unescaped & or unknown entity "&oline"
+line 482 column 17 - Warning: unescaped & or unknown entity "&frasl"
+line 482 column 33 - Warning: unescaped & or unknown entity "&frasl"
+line 485 column 17 - Warning: unescaped & or unknown entity "&weierp"
+line 485 column 34 - Warning: unescaped & or unknown entity "&weierp"
+line 488 column 17 - Warning: unescaped & or unknown entity "&image"
+line 488 column 33 - Warning: unescaped & or unknown entity "&image"
+line 491 column 17 - Warning: unescaped & or unknown entity "&real"
+line 491 column 32 - Warning: unescaped & or unknown entity "&real"
+line 494 column 17 - Warning: unescaped & or unknown entity "&trade"
+line 494 column 33 - Warning: unescaped & or unknown entity "&trade"
+line 497 column 17 - Warning: unescaped & or unknown entity "&alefsym"
+line 497 column 35 - Warning: unescaped & or unknown entity "&alefsym"
+line 500 column 17 - Warning: unescaped & or unknown entity "&larr"
+line 500 column 32 - Warning: unescaped & or unknown entity "&larr"
+line 503 column 17 - Warning: unescaped & or unknown entity "&uarr"
+line 503 column 32 - Warning: unescaped & or unknown entity "&uarr"
+line 506 column 17 - Warning: unescaped & or unknown entity "&rarr"
+line 506 column 32 - Warning: unescaped & or unknown entity "&rarr"
+line 509 column 17 - Warning: unescaped & or unknown entity "&darr"
+line 509 column 32 - Warning: unescaped & or unknown entity "&darr"
+line 512 column 17 - Warning: unescaped & or unknown entity "&harr"
+line 512 column 32 - Warning: unescaped & or unknown entity "&harr"
+line 515 column 17 - Warning: unescaped & or unknown entity "&crarr"
+line 515 column 33 - Warning: unescaped & or unknown entity "&crarr"
+line 518 column 17 - Warning: unescaped & or unknown entity "&lArr"
+line 518 column 32 - Warning: unescaped & or unknown entity "&lArr"
+line 521 column 17 - Warning: unescaped & or unknown entity "&uArr"
+line 521 column 32 - Warning: unescaped & or unknown entity "&uArr"
+line 524 column 17 - Warning: unescaped & or unknown entity "&rArr"
+line 524 column 32 - Warning: unescaped & or unknown entity "&rArr"
+line 527 column 17 - Warning: unescaped & or unknown entity "&dArr"
+line 527 column 32 - Warning: unescaped & or unknown entity "&dArr"
+line 530 column 17 - Warning: unescaped & or unknown entity "&hArr"
+line 530 column 32 - Warning: unescaped & or unknown entity "&hArr"
+line 533 column 17 - Warning: unescaped & or unknown entity "&forall"
+line 533 column 34 - Warning: unescaped & or unknown entity "&forall"
+line 536 column 17 - Warning: unescaped & or unknown entity "&part"
+line 536 column 32 - Warning: unescaped & or unknown entity "&part"
+line 539 column 17 - Warning: unescaped & or unknown entity "&exist"
+line 539 column 33 - Warning: unescaped & or unknown entity "&exist"
+line 542 column 17 - Warning: unescaped & or unknown entity "&empty"
+line 542 column 33 - Warning: unescaped & or unknown entity "&empty"
+line 545 column 17 - Warning: unescaped & or unknown entity "&nabla"
+line 545 column 33 - Warning: unescaped & or unknown entity "&nabla"
+line 548 column 17 - Warning: unescaped & or unknown entity "&isin"
+line 548 column 32 - Warning: unescaped & or unknown entity "&isin"
+line 554 column 17 - Warning: unescaped & or unknown entity "&notin"
+line 554 column 33 - Warning: unescaped & or unknown entity "&notin"
+line 557 column 17 - Warning: unescaped & or unknown entity "&ni"
+line 557 column 30 - Warning: unescaped & or unknown entity "&ni"
+line 560 column 17 - Warning: unescaped & or unknown entity "&prod"
+line 560 column 32 - Warning: unescaped & or unknown entity "&prod"
+line 563 column 17 - Warning: unescaped & or unknown entity "&sum"
+line 563 column 31 - Warning: unescaped & or unknown entity "&sum"
+line 566 column 17 - Warning: unescaped & or unknown entity "&minus"
+line 566 column 33 - Warning: unescaped & or unknown entity "&minus"
+line 569 column 17 - Warning: unescaped & or unknown entity "&lowast"
+line 569 column 34 - Warning: unescaped & or unknown entity "&lowast"
+line 572 column 17 - Warning: unescaped & or unknown entity "&radic"
+line 572 column 33 - Warning: unescaped & or unknown entity "&radic"
+line 575 column 17 - Warning: unescaped & or unknown entity "&prop"
+line 575 column 32 - Warning: unescaped & or unknown entity "&prop"
+line 578 column 17 - Warning: unescaped & or unknown entity "&infin"
+line 578 column 33 - Warning: unescaped & or unknown entity "&infin"
+line 581 column 17 - Warning: unescaped & or unknown entity "&ang"
+line 581 column 31 - Warning: unescaped & or unknown entity "&ang"
+line 584 column 17 - Warning: unescaped & or unknown entity "&and"
+line 584 column 31 - Warning: unescaped & or unknown entity "&and"
+line 587 column 17 - Warning: unescaped & or unknown entity "&or"
+line 587 column 30 - Warning: unescaped & or unknown entity "&or"
+line 590 column 17 - Warning: unescaped & or unknown entity "&cap"
+line 590 column 31 - Warning: unescaped & or unknown entity "&cap"
+line 593 column 17 - Warning: unescaped & or unknown entity "&cup"
+line 593 column 31 - Warning: unescaped & or unknown entity "&cup"
+line 596 column 17 - Warning: unescaped & or unknown entity "&int"
+line 596 column 31 - Warning: unescaped & or unknown entity "&int"
+line 599 column 17 - Warning: unescaped & or unknown entity "&there4"
+line 599 column 34 - Warning: unescaped & or unknown entity "&there4"
+line 602 column 17 - Warning: unescaped & or unknown entity "&sim"
+line 602 column 31 - Warning: unescaped & or unknown entity "&sim"
+line 605 column 17 - Warning: unescaped & or unknown entity "&cong"
+line 605 column 32 - Warning: unescaped & or unknown entity "&cong"
+line 608 column 17 - Warning: unescaped & or unknown entity "&asymp"
+line 608 column 33 - Warning: unescaped & or unknown entity "&asymp"
+line 611 column 17 - Warning: unescaped & or unknown entity "&ne"
+line 611 column 30 - Warning: unescaped & or unknown entity "&ne"
+line 614 column 17 - Warning: unescaped & or unknown entity "&equiv"
+line 614 column 33 - Warning: unescaped & or unknown entity "&equiv"
+line 617 column 17 - Warning: unescaped & or unknown entity "&le"
+line 617 column 30 - Warning: unescaped & or unknown entity "&le"
+line 620 column 17 - Warning: unescaped & or unknown entity "&ge"
+line 620 column 30 - Warning: unescaped & or unknown entity "&ge"
+line 623 column 17 - Warning: unescaped & or unknown entity "&sub"
+line 623 column 31 - Warning: unescaped & or unknown entity "&sub"
+line 626 column 17 - Warning: unescaped & or unknown entity "&sup"
+line 626 column 31 - Warning: unescaped & or unknown entity "&sup"
+line 629 column 17 - Warning: unescaped & or unknown entity "&nsub"
+line 629 column 32 - Warning: unescaped & or unknown entity "&nsub"
+line 632 column 17 - Warning: unescaped & or unknown entity "&sube"
+line 632 column 32 - Warning: unescaped & or unknown entity "&sube"
+line 635 column 17 - Warning: unescaped & or unknown entity "&supe"
+line 635 column 32 - Warning: unescaped & or unknown entity "&supe"
+line 638 column 17 - Warning: unescaped & or unknown entity "&oplus"
+line 638 column 33 - Warning: unescaped & or unknown entity "&oplus"
+line 641 column 17 - Warning: unescaped & or unknown entity "&otimes"
+line 641 column 34 - Warning: unescaped & or unknown entity "&otimes"
+line 644 column 17 - Warning: unescaped & or unknown entity "&perp"
+line 644 column 32 - Warning: unescaped & or unknown entity "&perp"
+line 647 column 17 - Warning: unescaped & or unknown entity "&sdot"
+line 647 column 32 - Warning: unescaped & or unknown entity "&sdot"
+line 650 column 17 - Warning: unescaped & or unknown entity "&lceil"
+line 650 column 33 - Warning: unescaped & or unknown entity "&lceil"
+line 653 column 17 - Warning: unescaped & or unknown entity "&rceil"
+line 653 column 33 - Warning: unescaped & or unknown entity "&rceil"
+line 656 column 17 - Warning: unescaped & or unknown entity "&lfloor"
+line 656 column 34 - Warning: unescaped & or unknown entity "&lfloor"
+line 659 column 17 - Warning: unescaped & or unknown entity "&rfloor"
+line 659 column 34 - Warning: unescaped & or unknown entity "&rfloor"
+line 662 column 17 - Warning: unescaped & or unknown entity "&lang"
+line 662 column 32 - Warning: unescaped & or unknown entity "&lang"
+line 665 column 17 - Warning: unescaped & or unknown entity "&rang"
+line 665 column 32 - Warning: unescaped & or unknown entity "&rang"
+line 668 column 17 - Warning: unescaped & or unknown entity "&loz"
+line 668 column 31 - Warning: unescaped & or unknown entity "&loz"
+line 671 column 17 - Warning: unescaped & or unknown entity "&spades"
+line 671 column 34 - Warning: unescaped & or unknown entity "&spades"
+line 674 column 17 - Warning: unescaped & or unknown entity "&clubs"
+line 674 column 33 - Warning: unescaped & or unknown entity "&clubs"
+line 677 column 17 - Warning: unescaped & or unknown entity "&hearts"
+line 677 column 34 - Warning: unescaped & or unknown entity "&hearts"
+line 680 column 17 - Warning: unescaped & or unknown entity "&diams"
+line 680 column 33 - Warning: unescaped & or unknown entity "&diams"
+line 689 column 17 - Warning: entity "&quot" doesn't end in ';'
+line 689 column 32 - Warning: entity "&quot" doesn't end in ';'
+line 692 column 17 - Warning: entity "&amp" doesn't end in ';'
+line 692 column 31 - Warning: entity "&amp" doesn't end in ';'
+line 695 column 17 - Warning: entity "&lt" doesn't end in ';'
+line 695 column 30 - Warning: entity "&lt" doesn't end in ';'
+line 698 column 17 - Warning: entity "&gt" doesn't end in ';'
+line 698 column 30 - Warning: entity "&gt" doesn't end in ';'
+line 706 column 17 - Warning: unescaped & or unknown entity "&OElig"
+line 706 column 33 - Warning: unescaped & or unknown entity "&OElig"
+line 709 column 17 - Warning: unescaped & or unknown entity "&oelig"
+line 709 column 33 - Warning: unescaped & or unknown entity "&oelig"
+line 712 column 17 - Warning: unescaped & or unknown entity "&Scaron"
+line 712 column 34 - Warning: unescaped & or unknown entity "&Scaron"
+line 715 column 17 - Warning: unescaped & or unknown entity "&scaron"
+line 715 column 34 - Warning: unescaped & or unknown entity "&scaron"
+line 718 column 17 - Warning: unescaped & or unknown entity "&Yuml"
+line 718 column 32 - Warning: unescaped & or unknown entity "&Yuml"
+line 721 column 17 - Warning: unescaped & or unknown entity "&circ"
+line 721 column 32 - Warning: unescaped & or unknown entity "&circ"
+line 724 column 17 - Warning: unescaped & or unknown entity "&tilde"
+line 724 column 33 - Warning: unescaped & or unknown entity "&tilde"
+line 727 column 17 - Warning: unescaped & or unknown entity "&ensp"
+line 727 column 32 - Warning: unescaped & or unknown entity "&ensp"
+line 730 column 17 - Warning: unescaped & or unknown entity "&emsp"
+line 730 column 32 - Warning: unescaped & or unknown entity "&emsp"
+line 733 column 17 - Warning: unescaped & or unknown entity "&thinsp"
+line 733 column 34 - Warning: unescaped & or unknown entity "&thinsp"
+line 736 column 17 - Warning: unescaped & or unknown entity "&zwnj"
+line 736 column 32 - Warning: unescaped & or unknown entity "&zwnj"
+line 739 column 17 - Warning: unescaped & or unknown entity "&zwj"
+line 739 column 31 - Warning: unescaped & or unknown entity "&zwj"
+line 742 column 17 - Warning: unescaped & or unknown entity "&lrm"
+line 742 column 31 - Warning: unescaped & or unknown entity "&lrm"
+line 745 column 17 - Warning: unescaped & or unknown entity "&rlm"
+line 745 column 31 - Warning: unescaped & or unknown entity "&rlm"
+line 748 column 17 - Warning: unescaped & or unknown entity "&ndash"
+line 748 column 33 - Warning: unescaped & or unknown entity "&ndash"
+line 751 column 17 - Warning: unescaped & or unknown entity "&mdash"
+line 751 column 33 - Warning: unescaped & or unknown entity "&mdash"
+line 754 column 17 - Warning: unescaped & or unknown entity "&lsquo"
+line 754 column 33 - Warning: unescaped & or unknown entity "&lsquo"
+line 757 column 17 - Warning: unescaped & or unknown entity "&rsquo"
+line 757 column 33 - Warning: unescaped & or unknown entity "&rsquo"
+line 760 column 17 - Warning: unescaped & or unknown entity "&sbquo"
+line 760 column 33 - Warning: unescaped & or unknown entity "&sbquo"
+line 763 column 17 - Warning: unescaped & or unknown entity "&ldquo"
+line 763 column 33 - Warning: unescaped & or unknown entity "&ldquo"
+line 766 column 17 - Warning: unescaped & or unknown entity "&rdquo"
+line 766 column 33 - Warning: unescaped & or unknown entity "&rdquo"
+line 769 column 17 - Warning: unescaped & or unknown entity "&bdquo"
+line 769 column 33 - Warning: unescaped & or unknown entity "&bdquo"
+line 772 column 17 - Warning: unescaped & or unknown entity "&dagger"
+line 772 column 34 - Warning: unescaped & or unknown entity "&dagger"
+line 775 column 17 - Warning: unescaped & or unknown entity "&Dagger"
+line 775 column 34 - Warning: unescaped & or unknown entity "&Dagger"
+line 778 column 17 - Warning: unescaped & or unknown entity "&permil"
+line 778 column 34 - Warning: unescaped & or unknown entity "&permil"
+line 781 column 17 - Warning: unescaped & or unknown entity "&lsaquo"
+line 781 column 34 - Warning: unescaped & or unknown entity "&lsaquo"
+line 784 column 17 - Warning: unescaped & or unknown entity "&rsaquo"
+line 784 column 34 - Warning: unescaped & or unknown entity "&rsaquo"
+line 790 column 17 - Warning: unescaped & or unknown entity "&euro"
+line 790 column 32 - Warning: unescaped & or unknown entity "&euro"
+line 798 column 17 - Warning: entity "&apos" doesn't end in ';'
+line 798 column 32 - Warning: entity "&apos" doesn't end in ';'
+line 801 column 17 - Warning: unescaped & or unknown entity "&foo"
+line 801 column 31 - Warning: unescaped & or unknown entity "&foo"
+line 15 column 2 - Warning: <a> escaping malformed URI reference
+line 18 column 2 - Warning: <a> escaping malformed URI reference
+line 21 column 2 - Warning: <a> escaping malformed URI reference
+line 24 column 2 - Warning: <a> escaping malformed URI reference
+line 27 column 2 - Warning: <a> escaping malformed URI reference
+line 30 column 2 - Warning: <a> escaping malformed URI reference
+line 33 column 2 - Warning: <a> escaping malformed URI reference
+line 36 column 2 - Warning: <a> escaping malformed URI reference
+line 39 column 2 - Warning: <a> escaping malformed URI reference
+line 42 column 2 - Warning: <a> escaping malformed URI reference
+line 45 column 2 - Warning: <a> escaping malformed URI reference
+line 48 column 2 - Warning: <a> escaping malformed URI reference
+line 51 column 2 - Warning: <a> escaping malformed URI reference
+line 54 column 2 - Warning: <a> escaping malformed URI reference
+line 57 column 2 - Warning: <a> escaping malformed URI reference
+line 60 column 2 - Warning: <a> escaping malformed URI reference
+line 63 column 2 - Warning: <a> escaping malformed URI reference
+line 66 column 2 - Warning: <a> escaping malformed URI reference
+line 69 column 2 - Warning: <a> escaping malformed URI reference
+line 72 column 2 - Warning: <a> escaping malformed URI reference
+line 75 column 2 - Warning: <a> escaping malformed URI reference
+line 78 column 2 - Warning: <a> escaping malformed URI reference
+line 81 column 2 - Warning: <a> escaping malformed URI reference
+line 84 column 2 - Warning: <a> escaping malformed URI reference
+line 87 column 2 - Warning: <a> escaping malformed URI reference
+line 90 column 2 - Warning: <a> escaping malformed URI reference
+line 93 column 2 - Warning: <a> escaping malformed URI reference
+line 96 column 2 - Warning: <a> escaping malformed URI reference
+line 99 column 2 - Warning: <a> escaping malformed URI reference
+line 102 column 2 - Warning: <a> escaping malformed URI reference
+line 105 column 2 - Warning: <a> escaping malformed URI reference
+line 108 column 2 - Warning: <a> escaping malformed URI reference
+line 111 column 2 - Warning: <a> escaping malformed URI reference
+line 114 column 2 - Warning: <a> escaping malformed URI reference
+line 117 column 2 - Warning: <a> escaping malformed URI reference
+line 120 column 2 - Warning: <a> escaping malformed URI reference
+line 123 column 2 - Warning: <a> escaping malformed URI reference
+line 126 column 2 - Warning: <a> escaping malformed URI reference
+line 129 column 2 - Warning: <a> escaping malformed URI reference
+line 132 column 2 - Warning: <a> escaping malformed URI reference
+line 135 column 2 - Warning: <a> escaping malformed URI reference
+line 138 column 2 - Warning: <a> escaping malformed URI reference
+line 141 column 2 - Warning: <a> escaping malformed URI reference
+line 144 column 2 - Warning: <a> escaping malformed URI reference
+line 147 column 2 - Warning: <a> escaping malformed URI reference
+line 150 column 2 - Warning: <a> escaping malformed URI reference
+line 153 column 2 - Warning: <a> escaping malformed URI reference
+line 156 column 2 - Warning: <a> escaping malformed URI reference
+line 159 column 2 - Warning: <a> escaping malformed URI reference
+line 162 column 2 - Warning: <a> escaping malformed URI reference
+line 165 column 2 - Warning: <a> escaping malformed URI reference
+line 168 column 2 - Warning: <a> escaping malformed URI reference
+line 171 column 2 - Warning: <a> escaping malformed URI reference
+line 174 column 2 - Warning: <a> escaping malformed URI reference
+line 177 column 2 - Warning: <a> escaping malformed URI reference
+line 180 column 2 - Warning: <a> escaping malformed URI reference
+line 183 column 2 - Warning: <a> escaping malformed URI reference
+line 186 column 2 - Warning: <a> escaping malformed URI reference
+line 189 column 2 - Warning: <a> escaping malformed URI reference
+line 192 column 2 - Warning: <a> escaping malformed URI reference
+line 195 column 2 - Warning: <a> escaping malformed URI reference
+line 198 column 2 - Warning: <a> escaping malformed URI reference
+line 201 column 2 - Warning: <a> escaping malformed URI reference
+line 204 column 2 - Warning: <a> escaping malformed URI reference
+line 207 column 2 - Warning: <a> escaping malformed URI reference
+line 210 column 2 - Warning: <a> escaping malformed URI reference
+line 213 column 2 - Warning: <a> escaping malformed URI reference
+line 216 column 2 - Warning: <a> escaping malformed URI reference
+line 219 column 2 - Warning: <a> escaping malformed URI reference
+line 222 column 2 - Warning: <a> escaping malformed URI reference
+line 225 column 2 - Warning: <a> escaping malformed URI reference
+line 228 column 2 - Warning: <a> escaping malformed URI reference
+line 231 column 2 - Warning: <a> escaping malformed URI reference
+line 234 column 2 - Warning: <a> escaping malformed URI reference
+line 237 column 2 - Warning: <a> escaping malformed URI reference
+line 240 column 2 - Warning: <a> escaping malformed URI reference
+line 243 column 2 - Warning: <a> escaping malformed URI reference
+line 246 column 2 - Warning: <a> escaping malformed URI reference
+line 249 column 2 - Warning: <a> escaping malformed URI reference
+line 252 column 2 - Warning: <a> escaping malformed URI reference
+line 255 column 2 - Warning: <a> escaping malformed URI reference
+line 258 column 2 - Warning: <a> escaping malformed URI reference
+line 261 column 2 - Warning: <a> escaping malformed URI reference
+line 264 column 2 - Warning: <a> escaping malformed URI reference
+line 267 column 2 - Warning: <a> escaping malformed URI reference
+line 270 column 2 - Warning: <a> escaping malformed URI reference
+line 273 column 2 - Warning: <a> escaping malformed URI reference
+line 276 column 2 - Warning: <a> escaping malformed URI reference
+line 279 column 2 - Warning: <a> escaping malformed URI reference
+line 282 column 2 - Warning: <a> escaping malformed URI reference
+line 285 column 2 - Warning: <a> escaping malformed URI reference
+line 288 column 2 - Warning: <a> escaping malformed URI reference
+line 291 column 2 - Warning: <a> escaping malformed URI reference
+line 294 column 2 - Warning: <a> escaping malformed URI reference
+line 297 column 2 - Warning: <a> escaping malformed URI reference
+line 300 column 2 - Warning: <a> escaping malformed URI reference
+line 695 column 2 - Warning: <a> escaping malformed URI reference
+line 698 column 2 - Warning: <a> escaping malformed URI reference
+Info: Document content looks like HTML5
+607 warnings, 0 errors were found!
+
+URIs must be properly escaped, they must not contain unescaped
+characters below U+0021 including the space character and not
+above U+007E. Tidy escapes the URI for you as recommended by
+HTML 4.01 section B.2.1 and XML 1.0 section 4.2.2. Some user agents
+use another algorithm to escape such URIs and some server-sided
+scripts depend on that. If you want to depend on that, you must
+escape the URI by your own. For more information please refer to
+http://www.w3.org/International/O-URL-and-ident.html
+
+About HTML Tidy: https://github.com/htacg/tidy-html5
+Bug reports and comments: https://github.com/htacg/tidy-html5/issues
+Or send questions and comments to: https://lists.w3.org/Archives/Public/public-htacg/
+Latest HTML specification: http://dev.w3.org/html5/spec-author-view/
+Validate your HTML documents: http://validator.w3.org/nu/
+Lobby your company to join the W3C: http://www.w3.org/Consortium

@@ -1,0 +1,30 @@
+
+Accessibility Checks: Version 0.1
+
+line 7 column 1 - Access: [5.2.1.2]: data <table> may require markup (row headers).
+ 
+      - First, search left from the cell's position to find row header cells.
+      - Then search upwards to find column header cells.
+      - The search in a given direction stops when the edge of the table is
+        reached or when a data cell is found after a header cell.
+      - Row headers are inserted into the list in the order they appear in
+        the table. 
+      - For left-to-right tables, headers are inserted from left to right.
+      - Column headers are inserted after row headers, in 
+        the order they appear in the table, from top to bottom. 
+      - If a header cell has the headers attribute set, then the headers 
+        referenced by this attribute are inserted into the list and the 
+        search stops for the current direction.
+        TD cells that set the axis attribute are also treated as header cells.
+ 
+Info: Doctype given is "-//W3C//DTD HTML 4.01//EN"
+Info: Document content looks like HTML 4.01 Strict
+Info: No system identifier in emitted doctype
+No warnings or errors were found.
+
+About HTML Tidy: https://github.com/htacg/tidy-html5
+Bug reports and comments: https://github.com/htacg/tidy-html5/issues
+Or send questions and comments to: https://lists.w3.org/Archives/Public/public-htacg/
+Latest HTML specification: http://dev.w3.org/html5/spec-author-view/
+Validate your HTML documents: http://validator.w3.org/nu/
+Lobby your company to join the W3C: http://www.w3.org/Consortium

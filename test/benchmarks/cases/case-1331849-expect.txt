@@ -1,0 +1,25 @@
+line 9 column 1 - Warning: <tr> isn't allowed in <body> elements
+line 6 column 1 - Info: <body> previously mentioned
+line 9 column 1 - Warning: inserting implicit <table>
+line 9 column 1 - Warning: <table> lacks "summary" attribute
+line 29 column 1 - Warning: <table> lacks "summary" attribute
+Info: Doctype given is "-//W3C//DTD HTML 4.0 Transitional//EN"
+Info: Document content looks like HTML 4.01 Transitional
+Info: No system identifier in emitted doctype
+4 warnings, 0 errors were found!
+
+The table summary attribute should be used to describe
+the table structure. It is very helpful for people using
+non-visual browsers. The scope and headers attributes for
+table cells are useful for specifying which headers apply
+to each table cell, enabling non-visual browsers to provide
+a meaningful context for each cell.
+
+For further advice on how to make your pages accessible
+see http://www.w3.org/WAI/GL.
+About HTML Tidy: https://github.com/htacg/tidy-html5
+Bug reports and comments: https://github.com/htacg/tidy-html5/issues
+Or send questions and comments to: https://lists.w3.org/Archives/Public/public-htacg/
+Latest HTML specification: http://dev.w3.org/html5/spec-author-view/
+Validate your HTML documents: http://validator.w3.org/nu/
+Lobby your company to join the W3C: http://www.w3.org/Consortium

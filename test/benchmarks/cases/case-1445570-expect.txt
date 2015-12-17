@@ -1,0 +1,23 @@
+line 7 column 1 - Warning: <a> discarding whitespace in URI reference
+line 8 column 1 - Warning: <img> discarding whitespace in URI reference
+line 7 column 1 - Warning: <a> escaping malformed URI reference
+line 8 column 1 - Warning: <img> escaping malformed URI reference
+Info: Doctype given is "-//W3C//DTD HTML 3.2//EN"
+Info: Document content looks like HTML 3.2
+4 warnings, 0 errors were found!
+
+URIs must be properly escaped, they must not contain unescaped
+characters below U+0021 including the space character and not
+above U+007E. Tidy escapes the URI for you as recommended by
+HTML 4.01 section B.2.1 and XML 1.0 section 4.2.2. Some user agents
+use another algorithm to escape such URIs and some server-sided
+scripts depend on that. If you want to depend on that, you must
+escape the URI by your own. For more information please refer to
+http://www.w3.org/International/O-URL-and-ident.html
+
+About HTML Tidy: https://github.com/htacg/tidy-html5
+Bug reports and comments: https://github.com/htacg/tidy-html5/issues
+Or send questions and comments to: https://lists.w3.org/Archives/Public/public-htacg/
+Latest HTML specification: http://dev.w3.org/html5/spec-author-view/
+Validate your HTML documents: http://validator.w3.org/nu/
+Lobby your company to join the W3C: http://www.w3.org/Consortium

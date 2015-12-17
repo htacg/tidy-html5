@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+"http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>HTML NOHREF - HTML Code Tutorial</title>
+</head>
+<body>
+  <div align="center">
+    <map name="map1"
+         id="map1">
+      <!-- this area is missing a 'alt' -->
+      <!-- href is also not mandatory -->
+      <area nohref
+            shape="circle"
+            coords="79,79, 56"
+            alt="ohoh">
+      <area href="thecircle.html"
+            alt="The Circle"
+            title="The Circle"
+            shape="circle"
+            coords="79,79, 78">
+    </map> <img src="circleincircle.gif"
+         height="158"
+         width="158"
+         alt="Click the O!"
+         border="0"
+         usemap="#map1"><br>
+    [ <a href="thecircle.html">The O</a> ]
+  </div>
+</body>
+</html>

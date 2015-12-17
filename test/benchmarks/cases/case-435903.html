@@ -1,0 +1,19 @@
+<html>
+  <title>[ #435903 ] Script element w/body child to table bug></title>
+  <body>
+    <table>
+      <tr>
+        <td>
+        </td>
+      </tr>
+      <tr>
+        <script language=JavaScript>
+function email()
+{
+address=document.emailform.emailinput.value;
+location='http://www.cnn.com/EMAIL/index.html?'+address;
+}
+        </script>
+    </table>
+  </body>
+</html>

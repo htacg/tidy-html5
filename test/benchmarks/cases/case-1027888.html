@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head><title>div merging tests</title></head>
+
+<div><div id="id1">
+<p>1</p>
+</div></div>
+
+<div id="id2_1">
+<div id="id2_2">
+<p>2</p>
+</div>
+</div>
+
+<div title="div1">
+<div title="div2">
+<p>3</p>
+</div>
+</div>
+
+<div title="div1" class="cl1">
+<div title="div2" class="cl2">
+<p>4</p>
+</div>
+</div>
+
+<div title="div1" onclick="g()">
+<div title="div2" onclick="f()" id="id5">
+<p>5</p>
+</div>
+</div>
+
+<div title="div1" onclick="g()">
+<div>
+<div title="div2" onclick="f()" id="id6">
+<p>6</p>
+</div>
+</div>
+</div>
+
+</body>
+</html>

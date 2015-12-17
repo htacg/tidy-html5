@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<entities init="">
+
+<entity>
+    <pattern><re><![CDATA[.pt/200[6789]]]> </re></pattern>
+    <outputs>
+      <output unique="yes"><attribute>hostname</attribute><separator>; </separator><format eval="no"><![CDATA[Jornal de Notícias]]></format></output>
+    </outputs>
+</entity>
+
+</entities>

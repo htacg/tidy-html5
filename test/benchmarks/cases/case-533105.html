@@ -1,0 +1,20 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/REC-html401/loose.dtd">
+<head>
+<title>[ 533105 ] Tidy confused: HTML in VBScript</title>
+</head>
+<body>
+<script type="text/vbscript">
+'these are the run-once items:
+Top.MySubFrame.document.close
+MyString=MyString & "<html>" & vbCrLf & "<head>" & vbCrLf & "<link rel="&Chr(34)&"stylesheet"&Chr(34)&" type="&Chr(34)&"text/css"&Chr(34)&" href="
+MyString=MyString & Chr(34) &"/scripts/menubar.css"&Chr(34)&">" & vbCrLf
+MyString=MyString & "</head>" & vbCrLf & "<body><i>No Data Requested.</i><p><b>Instructions:</b><ul><li>Select a Tester in the drop-down box above" & vbCrLf 
+MyString=MyString & "<li>Click the Select button.<li>Select a feature from the next drop- downbox.<li>Click the next select button.<li>You can then work on the requirements for that feature in this window.</body>" & vbCrLf & "</html>"
+Top.MySubFrame.document.write(MyString)
+MyString=""
+'Now that we have all that loaded...
+DoInit
+</script>
+</body>
+</html>

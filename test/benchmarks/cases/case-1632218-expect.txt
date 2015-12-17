@@ -1,0 +1,29 @@
+line 1 column 1 - Warning: missing <!DOCTYPE> declaration
+line 7 column 17 - Warning: numeric character reference "&#128" doesn't end in ';'
+line 7 column 17 - Warning: replacing invalid numeric character reference 128
+line 8 column 17 - Warning: unescaped & or unknown entity "&#x128"
+line 9 column 17 - Warning: unescaped & or unknown entity "&#X128"
+line 7 column 1 - Warning: <a> escaping malformed URI reference
+Info: Document content looks like HTML5
+6 warnings, 0 errors were found!
+
+Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML;
+even if they were, they would likely be unprintable control characters.
+Tidy assumed you wanted to refer to a character with the same byte value in the 
+specified encoding and replaced that reference with the Unicode equivalent.
+
+URIs must be properly escaped, they must not contain unescaped
+characters below U+0021 including the space character and not
+above U+007E. Tidy escapes the URI for you as recommended by
+HTML 4.01 section B.2.1 and XML 1.0 section 4.2.2. Some user agents
+use another algorithm to escape such URIs and some server-sided
+scripts depend on that. If you want to depend on that, you must
+escape the URI by your own. For more information please refer to
+http://www.w3.org/International/O-URL-and-ident.html
+
+About HTML Tidy: https://github.com/htacg/tidy-html5
+Bug reports and comments: https://github.com/htacg/tidy-html5/issues
+Or send questions and comments to: https://lists.w3.org/Archives/Public/public-htacg/
+Latest HTML specification: http://dev.w3.org/html5/spec-author-view/
+Validate your HTML documents: http://validator.w3.org/nu/
+Lobby your company to join the W3C: http://www.w3.org/Consortium

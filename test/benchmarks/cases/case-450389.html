@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>[ #450389 ] Color attval check allows only black/#</title>
+</head>
+<body>
+<!--
+    {"black",   "#000000"}, {"green",  "#008000"},
+    {"silver",  "#C0C0C0"}, {"lime",   "#00FF00"},
+    {"gray",    "#808080"}, {"olive",  "#808000"},
+    {"white",   "#FFFFFF"}, {"yellow", "#FFFF00"},
+    {"maroon",  "#800000"}, {"navy",   "#000080"},
+    {"red",     "#FF0000"}, {"blue",   "#0000FF"},
+    {"purple",  "#800080"}, {"teal",   "#008080"},
+    {"fuchsia", "#FF00FF"}, {"aqua",   "#00FFFF"},
+-->
+
+<!-- Bjoern says you can have any valid color, as long as it is black! -->
+
+<p>
+<font color = "black">Test black</font><br>
+<font color = "green">Test green</font><br>
+<font color = "silver">Test silver</font><br>
+<font color = "lime">Test lime</font><br>
+<font color = "gray">Test gray</font><br>
+<font color = "olive">Test olive</font><br>
+<font color = "white">Test white</font><br>
+<font color = "yellow">Test yellow</font><br>
+<font color = "maroon">Test maroon</font><br>
+<font color = "navy">Test navy</font><br>
+<font color = "red">Test red</font><br>
+<font color = "blue">Test blue</font><br>
+<font color = "purple">Test purple</font><br>
+<font color = "teal">Test teal</font><br>
+<font color = "fuchsia">Test fuchsia</font><br>
+<font color = "aqua">Test aqua</font><br>
+</p>
+
+<p>
+<font color = "Red">Test Red</font><br>
+<font color = "RED">Test RED</font><br>
+</p>
+
+<p>
+<font color = "reddish">Test invalid reddish</font><br>
+</p>
+
+<p>
+<font color = "#000000">Test black #000000</font><br>
+<font color = "#008000">Test green #008000</font><br>
+<font color = "#C0C0C0">Test silver #C0C0C0</font><br>
+<font color = "#00FF00">Test lime #00FF00</font><br>
+<font color = "#808080">Test gray #808080</font><br>
+<font color = "#808000">Test olive #808000</font><br>
+<font color = "#FFFFFF">Test white #FFFFFF</font><br>
+<font color = "#FFFF00">Test yellow #FFFF00</font><br>
+<font color = "#800000">Test maroon #800000</font><br>
+<font color = "#000080">Test navy #000080</font><br>
+<font color = "#FF0000">Test red #FF0000</font><br>
+<font color = "#0000FF">Test blue #0000FF</font><br>
+<font color = "#800080">Test purple #800080</font><br>
+<font color = "#008080">Test teal #008080</font><br>
+<font color = "#FF00FF">Test fuchsia #FF00FF</font><br>
+<font color = "#00FFFF">Test aqua #00FFFF</font><br>
+</p>
+
+<p>
+<font color = "#ff0000">Test red #ff0000</font><br>
+<font color = "#fF0000">Test red #fF0000</font><br>
+</p>
+
+<p>
+<font color = "#FF">Test invalid red #FF</font><br>
+</p>
+
+<p>
+<font color = "grurple">Test invalid grurple</font><br>
+<font color = "#grurple">Test invalid #grurple</font><br>
+<font color = "#1234567">Test invalid #1234567</font><br>
+</p>
+
+</body>
+</html>

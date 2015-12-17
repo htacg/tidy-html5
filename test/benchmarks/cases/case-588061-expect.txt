@@ -1,0 +1,128 @@
+line 1 column 1 - Warning: missing <!DOCTYPE> declaration
+line 14 column 9 - Warning: missing </strong> before <h1>
+line 14 column 21 - Warning: inserting implicit <strong>
+line 18 column 1 - Warning: inserting implicit <strong>
+line 18 column 1 - Warning: missing </strong> before <center>
+line 20 column 9 - Warning: inserting implicit <strong>
+line 20 column 9 - Warning: missing </strong> before <h1>
+line 23 column 1 - Warning: inserting implicit <strong>
+line 25 column 96 - Warning: unescaped & or unknown entity "&body"
+line 23 column 1 - Warning: replacing unexpected font by </font>
+line 66 column 104 - Warning: unescaped & or unknown entity "&city"
+line 66 column 5 - Warning: missing </strong> before <h2>
+line 66 column 1 - Warning: missing </h3> before <h2>
+line 74 column 1 - Warning: inserting implicit <strong>
+line 74 column 263 - Warning: unescaped & or unknown entity "&body"
+line 102 column 257 - Warning: unescaped & or unknown entity "&body"
+line 106 column 254 - Warning: unescaped & or unknown entity "&body"
+line 110 column 251 - Warning: unescaped & or unknown entity "&body"
+line 114 column 245 - Warning: unescaped & or unknown entity "&body"
+line 118 column 242 - Warning: unescaped & or unknown entity "&body"
+line 122 column 227 - Warning: unescaped & or unknown entity "&body"
+line 126 column 231 - Warning: unescaped & or unknown entity "&body"
+line 130 column 233 - Warning: unescaped & or unknown entity "&body"
+line 134 column 236 - Warning: unescaped & or unknown entity "&body"
+line 138 column 237 - Warning: unescaped & or unknown entity "&body"
+line 142 column 237 - Warning: unescaped & or unknown entity "&body"
+line 168 column 280 - Warning: unescaped & or unknown entity "&body"
+line 196 column 153 - Warning: discarding unexpected </a>
+line 200 column 339 - Warning: unescaped & or unknown entity "&body"
+line 248 column 281 - Warning: unescaped & or unknown entity "&body"
+line 300 column 177 - Warning: discarding unexpected </a>
+line 314 column 1 - Warning: inserting implicit <strong>
+line 314 column 1 - Warning: missing </strong> before <center>
+line 318 column 9 - Warning: inserting implicit <strong>
+line 318 column 9 - Warning: missing </strong> before <h1>
+line 318 column 13 - Warning: inserting implicit <strong>
+line 328 column 1 - Warning: missing </a>
+line 328 column 70 - Warning: discarding unexpected </a>
+line 339 column 1 - Warning: <center> isn't allowed in <h3> elements
+line 332 column 1 - Info: <h3> previously mentioned
+line 339 column 68 - Warning: discarding unexpected </center>
+line 353 column 1 - Warning: <center> isn't allowed in <h3> elements
+line 339 column 1 - Info: <h3> previously mentioned
+line 353 column 1 - Warning: missing </h3> before <h1>
+line 353 column 92 - Warning: discarding unexpected </center>
+line 363 column 268 - Warning: discarding unexpected </h3>
+line 383 column 5 - Warning: missing </a>
+line 383 column 57 - Warning: discarding unexpected </strong>
+line 383 column 66 - Warning: discarding unexpected </a>
+line 414 column 76 - Warning: unescaped & or unknown entity "&font"
+line 414 column 92 - Warning: unescaped & or unknown entity "&base"
+line 424 column 1 - Warning: discarding unexpected </strong>
+line 25 column 29 - Warning: <a> escaping malformed URI reference
+line 74 column 210 - Warning: <a> escaping malformed URI reference
+line 102 column 190 - Warning: <a> escaping malformed URI reference
+line 106 column 188 - Warning: <a> escaping malformed URI reference
+line 110 column 186 - Warning: <a> escaping malformed URI reference
+line 114 column 184 - Warning: <a> escaping malformed URI reference
+line 118 column 182 - Warning: <a> escaping malformed URI reference
+line 122 column 176 - Warning: <a> escaping malformed URI reference
+line 126 column 174 - Warning: <a> escaping malformed URI reference
+line 130 column 176 - Warning: <a> escaping malformed URI reference
+line 134 column 177 - Warning: <a> escaping malformed URI reference
+line 138 column 178 - Warning: <a> escaping malformed URI reference
+line 142 column 178 - Warning: <a> escaping malformed URI reference
+line 168 column 218 - Warning: <a> escaping malformed URI reference
+line 200 column 263 - Warning: <a> escaping malformed URI reference
+line 248 column 223 - Warning: <a> escaping malformed URI reference
+line 339 column 9 - Warning: <img> lacks "alt" attribute
+line 341 column 1 - Warning: <img> lacks "alt" attribute
+line 345 column 1 - Warning: <img> lacks "alt" attribute
+line 349 column 1 - Warning: <a> escaping malformed URI reference
+line 371 column 79 - Warning: <img> lacks "alt" attribute
+line 383 column 5 - Warning: <a> proprietary attribute "alt"
+line 399 column 7 - Warning: <input> proprietary attribute "border"
+line 414 column 1 - Warning: <img> lacks "alt" attribute
+line 14 column 9 - Warning: trimming empty <strong>
+line 296 column 120 - Warning: trimming empty <font>
+line 300 column 193 - Warning: trimming empty <font>
+line 318 column 9 - Warning: trimming empty <strong>
+line 353 column 1 - Warning: trimming empty <h3>
+line 353 column 1 - Warning: trimming empty <center>
+line 74 column 115 - Warning: <a> cannot copy name attribute to id
+line 102 column 103 - Warning: <a> cannot copy name attribute to id
+line 106 column 101 - Warning: <a> cannot copy name attribute to id
+line 110 column 99 - Warning: <a> cannot copy name attribute to id
+line 114 column 97 - Warning: <a> cannot copy name attribute to id
+line 118 column 95 - Warning: <a> cannot copy name attribute to id
+line 122 column 89 - Warning: <a> cannot copy name attribute to id
+line 126 column 87 - Warning: <a> cannot copy name attribute to id
+line 130 column 89 - Warning: <a> cannot copy name attribute to id
+line 134 column 89 - Warning: <a> cannot copy name attribute to id
+line 138 column 90 - Warning: <a> cannot copy name attribute to id
+line 142 column 90 - Warning: <a> cannot copy name attribute to id
+line 163 column 1 - Warning: <a> cannot copy name attribute to id
+line 168 column 131 - Warning: <a> cannot copy name attribute to id
+line 200 column 176 - Warning: <a> cannot copy name attribute to id
+line 248 column 94 - Warning: <a> cannot copy name attribute to id
+Info: Document content looks like HTML5
+96 warnings, 0 errors were found!
+
+URIs must be properly escaped, they must not contain unescaped
+characters below U+0021 including the space character and not
+above U+007E. Tidy escapes the URI for you as recommended by
+HTML 4.01 section B.2.1 and XML 1.0 section 4.2.2. Some user agents
+use another algorithm to escape such URIs and some server-sided
+scripts depend on that. If you want to depend on that, you must
+escape the URI by your own. For more information please refer to
+http://www.w3.org/International/O-URL-and-ident.html
+
+The alt attribute should be used to give a short description
+of an image; longer descriptions should be given with the
+longdesc attribute which takes a URL linked to the description.
+These measures are needed for people using non-graphical browsers.
+
+For further advice on how to make your pages accessible
+see http://www.w3.org/WAI/GL.
+You are recommended to use CSS to specify the font and
+properties such as its size and color. This will reduce
+the size of HTML files and make them easier to maintain
+compared with using <FONT> elements.
+
+About HTML Tidy: https://github.com/htacg/tidy-html5
+Bug reports and comments: https://github.com/htacg/tidy-html5/issues
+Or send questions and comments to: https://lists.w3.org/Archives/Public/public-htacg/
+Latest HTML specification: http://dev.w3.org/html5/spec-author-view/
+Validate your HTML documents: http://validator.w3.org/nu/
+Lobby your company to join the W3C: http://www.w3.org/Consortium

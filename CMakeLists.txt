@@ -124,11 +124,12 @@ set ( CFILES
         ${SRCDIR}/access.c       ${SRCDIR}/attrs.c        ${SRCDIR}/istack.c
         ${SRCDIR}/parser.c       ${SRCDIR}/tags.c         ${SRCDIR}/entities.c
         ${SRCDIR}/lexer.c        ${SRCDIR}/pprint.c       ${SRCDIR}/charsets.c ${SRCDIR}/clean.c
-        ${SRCDIR}/localize.c     ${SRCDIR}/config.c       ${SRCDIR}/alloc.c
+        ${SRCDIR}/message.c      ${SRCDIR}/config.c       ${SRCDIR}/alloc.c
         ${SRCDIR}/attrask.c      ${SRCDIR}/attrdict.c     ${SRCDIR}/attrget.c
         ${SRCDIR}/buffio.c       ${SRCDIR}/fileio.c       ${SRCDIR}/streamio.c
         ${SRCDIR}/tagask.c       ${SRCDIR}/tmbstr.c       ${SRCDIR}/utf8.c
-        ${SRCDIR}/tidylib.c      ${SRCDIR}/mappedio.c     ${SRCDIR}/gdoc.c )
+        ${SRCDIR}/tidylib.c      ${SRCDIR}/mappedio.c     ${SRCDIR}/gdoc.c
+        ${SRCDIR}/language.c  )
 set ( HFILES
         ${INCDIR}/tidyplatform.h ${INCDIR}/tidy.h         ${INCDIR}/tidyenum.h
         ${INCDIR}/tidybuffio.h )
@@ -139,7 +140,7 @@ set ( LIBHFILES
         ${SRCDIR}/mappedio.h     ${SRCDIR}/message.h      ${SRCDIR}/parser.h
         ${SRCDIR}/pprint.h       ${SRCDIR}/streamio.h     ${SRCDIR}/tags.h
         ${SRCDIR}/tmbstr.h       ${SRCDIR}/utf8.h         ${SRCDIR}/tidy-int.h
-        ${SRCDIR}/version.h      ${SRCDIR}/gdoc.h  )
+        ${SRCDIR}/version.h      ${SRCDIR}/gdoc.h         ${SRCDIR}/language.h  )
 if (MSVC)
     list(APPEND CFILES ${SRCDIR}/sprtf.c)
     list(APPEND LIBHFILES ${SRCDIR}/sprtf.h)

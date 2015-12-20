@@ -32,9 +32,9 @@ typedef struct {
  *  `.currentLanguage` to language_en, which is Tidy's default language.
  */
 static tidyLanguagesType tidyLanguages = {
-	.currentLanguage = &language_en,
-	.fallbackLanguage = &language_en,
-	.languages = {
+	&language_en,
+	&language_en,
+	{
 		&language_en,
 		&language_en_gb,
 		&language_es,

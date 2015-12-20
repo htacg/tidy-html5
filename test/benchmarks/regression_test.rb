@@ -51,6 +51,7 @@ module TidyRegressionTesting
       @cases = nil
       @results = nil
       @tidy = nil
+      @replace = false
     end # initialize
 
 
@@ -129,6 +130,70 @@ module TidyRegressionTesting
       "#{IO.popen("#{tidy} -v").readline.split.last.scan(/\d+/).join('.')}"
     end
   end
+
+    #########################################################
+    # property replace
+    #  Indicates the state of the --replace command line
+    #  option, and specifies whether canonical files will
+    #  be overwritten during the process.
+    #########################################################
+    def replace
+      @replace
+    end
+
+    def replace=( value )
+      @replace = value
+      puts value = false ? "FALSE!!!" : "TRUE!!!!"
+    end
+
+    #########################################################
+    # canonize_case( file )
+    #  Generates the -expects information for a single file,
+    #  and places them into the designated `results`
+    #  directory. Existing files will NOT be replaced unless
+    #  the --replace command line option is used.
+    #  If multiple configuration files are present then the
+    #  new files will be written using each configuration.
+    #########################################################
+    def canonize_case( file )
+
+    end
+
+
+    #########################################################
+    # canonize_all
+    #  Runs all HTML, XHTML, and XML files in the designated
+    #  `cases` directory through the canonization process.
+    #  Files will not be overwritten unless --replace is
+    #  used on the command line.
+    #########################################################
+    def canonize_all
+
+    end
+
+    #########################################################
+    # test_case( file )
+    #  Runs a single file through regression testing. If
+    #  multiple configuration files are present, then the
+    #  single test case will be run for each configuration.
+    #  Note that only the file basename will be taken into
+    #  account. All tests must reside in the specified (or
+    # default) cases directory.
+    #########################################################
+    def test_case(file)
+
+    end
+
+
+    #########################################################
+    # test_all
+    #  Runs all HTML, XHTML, and XML files in the designated
+    #  `cases` directory through the testing process.
+    #########################################################
+    def test_all
+
+    end
+
 
   end # TidyRegression
 
@@ -210,22 +275,6 @@ Complete Help:
     def rtest(name = nil)
 
       set_options
-      if name == nil
-        puts 'All tests'
-      else
-        puts "Testing #{name}"
-      end
-
-      if options[:cases]
-        @regression.cases = options[:cases]
-      end
-
-      if @regression.cases
-        puts "Success with #{@regression.cases}."
-      else
-        puts "Fail with #{options[:cases]}"
-      end
-
 
     end # rtest
 
@@ -247,11 +296,7 @@ Complete Help:
     def canonize(name = nil)
 
       set_options
-      if name == nil
-        puts 'All files generated.'
-      else
-        puts "Generating #{name}"
-      end
+      @regression.replace = options[:replace] unless options[:replace].nil?
 
     end # canonize
 

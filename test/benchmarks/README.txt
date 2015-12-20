@@ -79,4 +79,38 @@ Case names shall not consist of hyphens, which are used exclusively to delimit
 test cases.
 
 
+HTML Tidy Regression Testing Exception Log
+==========================================
+
+Test conducted using `/usr/local/bin/tidy`, version 5.1.12
+Started on 2015-December-20, 12:15 pm, Finished on 2015-December-20 12:17 pm.
+
+ Test cases requested: 510
+    Test cases tested: 500
+Configurations tested: 625
+   Test cases aborted:  10
+   
+Configurations passed: 610
+Configurations failed:  15
+
+Missing Expectations Files:
+===========================
+
+Case File           Config File           Missing .txt             Missing Markup
+---------
+case-9743.html      default_config.conf   case-9743-expects.txt 
+case-5656.html      case-5656.conf        case-5656-expects.txt    case-5656-expects.html 
+
+Failed tests:
+=============
+
+Case File           Config File            Output   Errors
+---------           ------------           ------   ------
+case-1234.html      default_config.conf    PASSED   FAILED
+case-2345.xml       case-2345-1.conf       FAILED   FAILED
+
+See files in directory results-5.1.12/ for failed results.
+  
+
+
 

@@ -9,8 +9,9 @@
 #  canonize
 #  canonize my_file.html
 #  --cases=<directory>, -c
-#  --output=<directory>, -o
+#  --results=<directory>, -r
 #  --tidy=<path>, -t
+#  --replace, -f
 #
 ###############################################################################
 
@@ -18,6 +19,8 @@ require 'rubygems'
 require 'bundler/setup'
 require 'thor'           # thor provides robust command line parameter parsing.
 require 'ptools'         # provides additions to File:: we need for x-platform.
+require 'logger'
+require 'open3'
 
 
 ###############################################################################
@@ -33,12 +36,139 @@ module TidyRegressionTesting
   ###########################################################
   @@default_cases = 'cases'
   @@default_results = 'results'
+  @@default_conf = 'config_default.conf'
+
+  ###########################################################
+  # Logging
+  ###########################################################
+  @@log = Logger.new(STDOUT)
+  @@log.level = Logger::DEBUG
+  @@log.datetime_format = '%Y-%m-%d %H:%M:%S'
+
+  #############################################################################
+  # class TidyTestRecord
+  #  This class defines a single Tidy test record and provides an interface
+  #  for managing multiple instances of itself.
+  #############################################################################
+  class TidyTestRecord
+
+    attr_accessor :tidy_path            # The path of the requested Tidy executable.
+    attr_accessor :tidy_version         # The tidy version, if it was valid.
+    attr_accessor :tidy_valid           # Indicates that requested tidy was valid.
+    attr_accessor :cases_valid          # Indicates that the cases dir was valid.
+    attr_accessor :case_file            # The path of the file being requested.
+    attr_accessor :case_file_valid      # Indicates that the request case was valid.
+    attr_accessor :config_file          # The path of the config file requested.
+    attr_accessor :config_file_valid    # Indicates the requested config file was valid.
+    attr_accessor :missing_txt          # The path of the missing -expect.txt file.
+    attr_accessor :missing_htm          # The path of the missing -expect.xxx markup
+    attr_accessor :tested               # Indicates that this test was executed.
+    attr_accessor :passed_output        # Indicates the output test matched.
+    attr_accessor :passed_errout        # Indicates the error output test matched.
+
+    @@test_records = [] # Array of test records.
+
+
+    #########################################################
+    # initialize
+    #########################################################
+    def initialize
+      @tidy_path = nil
+      @tidy_version = '0.0.0.'
+      @tidy_valid = true
+      @cases_valid = true
+      @case_file = nil
+      @case_file_valid = true
+      @config_file = nil
+      @config_file_valid = true
+      @missing_txt = nil
+      @missing_htm = nil
+      @tested = false
+      @passed_output = false
+      @passed_errout = false
+    end # initialize
+
+
+    #########################################################
+    # + test_records
+    #     The singleton array of test records.
+    #########################################################
+    def self.test_records
+      @@test_records
+    end
+
+
+    #########################################################
+    # + make_report
+    #     returns a test report.
+    #########################################################
+    def self.make_report
+      @@test_records.each do | record |
+        puts "Tidy path = #{record.tidy_path}"
+        puts "Tidy version = #{record.tidy_version}"
+        puts "File requested = #{record.case_file}"
+        puts "Passed Output = #{record.passed_output}"
+        puts "Passed Errors = #{record.passed_errout}"
+        puts "Passed Test = #{record.passed_test?}"
+      end
+    end
+
+
+    #########################################################
+    # + count_of_cases_requested
+    #    returns the number of HTML/XML/XHTML files that
+    #    were requested for testing.
+    #########################################################
+    def self.count_of_cases_requested
+
+    end
+
+
+    #########################################################
+    # + count_of_cases_tested
+    #     returns the number of HTML/XML/XHTML files that
+    #     were actually run through a test.
+    #########################################################
+    def self.count_of_cases_tested
+
+    end
+
+
+    #########################################################
+    # + count_of_configs_tested
+    #     returns the number of actual tests performed,
+    #     considering multiple configurations.
+    #########################################################
+    def self.count_of_configs_tested
+
+    end
+
+
+    #########################################################
+    # + count_of_configs_aborted
+    #     returns the number of tests that were aborted due
+    #     to missing requirements.
+    #########################################################
+    def self.count_of_configs_aborted
+
+    end
+
+
+    #########################################################
+    # passed_test?
+    #  Indicates tests were run and all tests matched.
+    #########################################################
+    def passed_test?
+      @tested && @passed_errout && passed_output
+    end
+
+
+  end # TidyTestRecord
 
 
   #############################################################################
   # class TidyRegression
-  #  The class that performs the core work of the testing
-  #  suite.
+  #  The class that performs the core work of the testing suite.
   #############################################################################
   class TidyRegression
 
@@ -52,6 +182,7 @@ module TidyRegressionTesting
       @results = nil
       @tidy = nil
       @replace = false
+      @reporter = TidyTestRecord.test_records
     end # initialize
 
 
@@ -96,6 +227,18 @@ module TidyRegressionTesting
 
 
     #########################################################
+    # property conf_default
+    #  Returns the path and file for the default
+    #  configuration file used when no config file is
+    #  specified for a test.
+    #  nil value indicates that tidy is not found.
+    #########################################################
+    def conf_default
+      File.join(cases, @@default_conf)
+    end
+
+
+    #########################################################
     # property tidy
     #  Indicates the complete path to the tidy executable
     #  to use for running tests and generating canonical
@@ -131,6 +274,7 @@ module TidyRegressionTesting
     end
   end
 
+
     #########################################################
     # property replace
     #  Indicates the state of the --replace command line
@@ -143,8 +287,101 @@ module TidyRegressionTesting
 
     def replace=( value )
       @replace = value
-      puts value = false ? "FALSE!!!" : "TRUE!!!!"
     end
+
+
+    #########################################################
+    # property reporter
+    #  Provides access to the TidyTestRecord instance.
+    #########################################################
+    def reporter
+      @reporter
+    end
+
+
+    #########################################################
+    # check_cases_dir
+    #########################################################
+    def check_cases_dir
+      if File.exists?(cases) && File.readable?(cases)
+        @@log.info "Will uses cases in #{cases}"
+        true
+      else
+        @@log.fatal "Directory #{cases} does not exist or could not be read."
+        false
+      end
+    end
+
+
+    #########################################################
+    # check_test_file( file )
+    #########################################################
+    def check_test_file( file )
+      if File.exists?(file) && File.readable?(file)
+        @@log.info "Will use file #{file}"
+        true
+      else
+        @@log.fatal "File #{file} does not exist or could not be read."
+        false
+      end
+    end
+
+
+    #########################################################
+    # check_conf_default
+    #########################################################
+    def check_conf_default
+      if File.exists?(conf_default) && File.readable?(conf_default)
+        @@log.info "Will use default configuration file #{conf_default}"
+        true
+      else
+        @@log.fatal "Default configuration file #{conf_default} does not exist or could not be read."
+        false
+      end
+    end
+
+
+    #########################################################
+    # check_tidy
+    #########################################################
+    def check_tidy
+      if tidy.nil?
+        @@log.fatal "Tidy at #{tidy} was not found or is not executable."
+        false
+      else
+        @@log.info "Will use Tidy located at #{tidy}"
+        true
+      end
+    end
+
+
+    #########################################################
+    # check_expect_htm( expect )
+    #########################################################
+    def check_expect_htm( expect )
+      if File.exists?( expect )
+        @@log.info "Expectation file #{expect} was found."
+        true
+      else
+        @@log.fatal "Missing expectation file #{expect}."
+        false
+      end
+    end
+
+
+    #########################################################
+    # check_expect_txt( expect )
+    #########################################################
+    def check_expect_txt( expect )
+      if File.exists?(expect)
+        @@log.info "Expectation file #{expect} was found."
+        true
+      else
+        @@log.fatal "Missing expectation file #{expect}."
+        false
+      end
+    end
+
 
     #########################################################
     # canonize_case( file )
@@ -182,6 +419,82 @@ module TidyRegressionTesting
     #########################################################
     def test_case(file)
 
+      file = File.join( cases, file )
+      basename = File.basename( file, '.*' )
+
+      # Start a new testing record for this test iteration.
+      record = TidyTestRecord.new
+
+      # These are all showstoppers, but let's get as much information
+      # for the test record as we can before aborting.
+      record.tidy_path = tidy
+      record.tidy_valid = check_tidy
+      record.tidy_version = tidy_version
+      record.cases_valid = check_cases_dir
+      record.case_file = file
+      record.case_file_valid = check_test_file( file )
+
+      unless record.tidy_valid && record.cases_valid && record.case_file_valid
+        reporter << record
+        return false
+      end
+
+      # Get a list of all configuration files (if any) to use.
+      # Use the default configuration file if required.
+      configs = Dir.glob(File.join(cases, "#{basename}*.conf") )
+
+      # If there are no configs for the test, attempt to use the default.
+      if configs.count < 1
+        record.config_file = conf_default
+        record.config_file_valid = check_conf_default
+        unless record.config_file_valid
+          reporter << record
+          return false
+        end
+        configs << conf_default
+      end
+
+      # Run through all of the configurations.
+      configs.each do | config_file |
+        @@log.info "Testing with config file #{config_file}"
+
+        # Duplicate the record so we have a new one each run of this inner loop
+        inner_record = record.dup
+
+        # Make sure that the expectations are available for this config.
+        if config_file == conf_default
+          base_conf = File.join(cases, basename)
+        else
+          base_conf = File.join(cases, File.basename(config_file, '.*'))
+        end
+        expects_txt = "#{base_conf}-expect.txt"
+        expects_htm = "#{base_conf}-expect#{File.extname(file)}"
+        inner_record.missing_txt = expects_txt unless check_expect_txt(expects_txt)
+        inner_record.missing_htm = expects_htm unless check_expect_htm(expects_htm)
+        unless check_expect_txt(expects_txt) && check_expect_htm(expects_htm)
+          reporter << inner_record
+          return false
+        end
+
+        expects_txt_txt = IO.read(expects_txt)
+        expects_htm_txt = IO.read(expects_htm)
+
+        # Let's run tidy
+        execute = "#{tidy} -config #{config_file} --tidy-mark no -quiet #{file}"
+        tidy_out, tidy_err, tidy_status = Open3.capture3(execute)
+        inner_record.tested = true
+
+        # Set comparison flags
+        inner_record.passed_output = tidy_out == expects_htm_txt
+        inner_record.passed_errout = tidy_err == expects_txt_txt
+
+        # Write the final record
+        reporter << inner_record
+
+      end
+
+      true
+
     end
 
 
@@ -191,7 +504,9 @@ module TidyRegressionTesting
     #  `cases` directory through the testing process.
     #########################################################
     def test_all
-
+      pattern = File.join(cases, "*.{html,xml,xhtml}")
+      tests = Dir[pattern].reject { |f| f[%r{-expect}] }
+      tests.each { |file| test_case(File.basename(file)) }
     end
 
 
@@ -276,6 +591,19 @@ Complete Help:
 
       set_options
 
+      if name.nil?
+        @regression.test_all
+      else
+        if @regression.test_case(name)
+          puts "\nThe test ended without any execution errors."
+          puts "See #{@regression.results} for testing results.\n\n"
+        else
+          puts "\nThe test ended with one or more execution errors.\n\n"
+        end
+      end
+
+      TidyTestRecord.make_report
+
     end # rtest
 
 
@@ -286,7 +614,7 @@ Complete Help:
     option :replace,
            :type => :boolean,
            :desc => 'Indicates whether or not canonize replaces existing files.',
-           :aliases => '-r'
+           :aliases => '-f'
     desc 'canonize [<file>]', 'Builds expected output for <file>.'
     long_desc <<-LONG_DESC
       Will build the canonical output for <file> and put it into the default
@@ -297,6 +625,12 @@ Complete Help:
 
       set_options
       @regression.replace = options[:replace] unless options[:replace].nil?
+
+      if name.nil?
+        @regression.canonize_all
+      else
+        @regression.canonize_case(name)
+      end
 
     end # canonize
 

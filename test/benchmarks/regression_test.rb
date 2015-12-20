@@ -2,25 +2,28 @@
 
 ###############################################################################
 # Tidy Regression Test Suite
-#  Look for the heredoc below, or run this script with help for more info.
+#  Run this script with help for more information (or examine this file.)
 #
-#  rtest
-#  rtest my_file.html
-#  canonize
-#  canonize my_file.html
-#  --cases=<directory>, -c
-#  --results=<directory>, -r
-#  --tidy=<path>, -t
-#  --replace, -f
+#  Commands:
+#    rtest
+#    rtest my_file.html
+#    canonize
+#    canonize my_file.html
 #
+#  Options:
+#    --cases=<directory>, -c
+#    --results=<directory>, -r
+#    --tidy=<path>, -t
+#    --replace, -f
+#    --verbose, -v
 ###############################################################################
 
 require 'rubygems'
 require 'bundler/setup'
 require 'thor'           # thor provides robust command line parameter parsing.
 require 'ptools'         # provides additions to File:: we need for x-platform.
-require 'logger'
-require 'open3'
+require 'logger'         # Log output simplified.
+require 'open3'          # Run executables and capture output.
 
 
 ###############################################################################
@@ -111,7 +114,7 @@ module TidyRegressionTesting
         puts "Passed Errors = #{record.passed_errout}"
         puts "Passed Test = #{record.passed_test?}"
       end
-      puts "===================="
+      puts '===================='
       puts "Number of case files = #{self.count_of_cases_requested}"
       puts "Total Configs requested = #{self.count_of_configs_requested}"
       puts "Case files tested = #{self.count_of_cases_tested}"
@@ -546,7 +549,7 @@ module TidyRegressionTesting
     #  `cases` directory through the testing process.
     #########################################################
     def test_all
-      pattern = File.join(cases, "*.{html,xml,xhtml}")
+      pattern = File.join(cases, '*.{html,xml,xhtml}')
       tests = Dir[pattern].reject { |f| f[%r{-expect}] }
       tests.each { |file| test_case(File.basename(file)) }
     end

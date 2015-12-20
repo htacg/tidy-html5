@@ -111,6 +111,14 @@ module TidyRegressionTesting
         puts "Passed Errors = #{record.passed_errout}"
         puts "Passed Test = #{record.passed_test?}"
       end
+      puts "===================="
+      puts "Number of case files = #{self.count_of_cases_requested}"
+      puts "Total Configs requested = #{self.count_of_configs_requested}"
+      puts "Case files tested = #{self.count_of_cases_tested}"
+      puts "Configs tested = #{self.count_of_configs_tested}"
+      puts "Configs aborted = #{self.count_of_configs_aborted}"
+      puts "Configs passed = #{self.count_of_configs_passed}"
+      puts "Configs failed = #{self.count_of_configs_failed}"
     end
 
 
@@ -120,7 +128,18 @@ module TidyRegressionTesting
     #    were requested for testing.
     #########################################################
     def self.count_of_cases_requested
+      temp = @@test_records.map { |record| record.case_file }
+      temp.uniq.count
+    end
 
+
+    #########################################################
+    # + count_of_configs_requested
+    #    returns the number of total configurations
+    #    requested for testing.
+    #########################################################
+    def self.count_of_configs_requested
+      @@test_records.count
     end
 
 
@@ -130,7 +149,9 @@ module TidyRegressionTesting
     #     were actually run through a test.
     #########################################################
     def self.count_of_cases_tested
-
+      temp = @@test_records.select { |record| record.tested }
+      temp = temp.map { |record| record.case_file }
+      temp.uniq.count
     end
 
 
@@ -140,7 +161,8 @@ module TidyRegressionTesting
     #     considering multiple configurations.
     #########################################################
     def self.count_of_configs_tested
-
+      temp = @@test_records.select { |record| record.tested }
+      temp.count
     end
 
 
@@ -150,9 +172,29 @@ module TidyRegressionTesting
     #     to missing requirements.
     #########################################################
     def self.count_of_configs_aborted
-
+      temp = @@test_records.select { |record| !record.tested }
+      temp.count
     end
 
+
+    #########################################################
+    # + count_of_configs_passed
+    #     returns the number of tests that passed.
+    #########################################################
+    def self.count_of_configs_passed
+      temp = @@test_records.select { |record| record.tested && record.passed_test? }
+      temp.count
+    end
+
+
+    #########################################################
+    # + count_of_configs_failed
+    #     returns the number of tests that failed.
+    #########################################################
+    def self.count_of_configs_failed
+      temp = @@test_records.select { |record| record.tested && !record.passed_test? }
+      temp.count
+    end
 
     #########################################################
     # passed_test?

@@ -86,9 +86,10 @@ Test conducted using `/usr/local/bin/tidy`, version 5.1.12
 Started on 2015-December-20, 12:15 pm, Finished on 2015-December-20 12:17 pm.
 
  Test cases requested: 510
+ Total configs requested: 600
     Test cases tested: 500
 Configurations tested: 625
-   Test cases aborted:  10
+ Test configs aborted:  10
    
 Configurations passed: 610
 Configurations failed:  15
@@ -98,8 +99,8 @@ Missing Expectations Files:
 
 Case File           Config File           Missing .txt             Missing Markup
 ---------
-case-9743.html      default_config.conf   case-9743-expects.txt 
-case-5656.html      case-5656.conf        case-5656-expects.txt    case-5656-expects.html 
+case-9743.html      default_config.conf   case-9743-expect.txt 
+case-5656.html      case-5656.conf        case-5656-expect.txt     case-5656-expects.html 
 
 Failed tests:
 =============

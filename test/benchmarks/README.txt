@@ -53,14 +53,16 @@ The RESULT and/or ERROR shall be logged. Results not meeting expectations shall
 be saved into a directory results-5.x.x/, where 5.x.x indicates the version
 number of Tidy.
 
-results-5.x.x
+results-5.x.x/
 		all_results.txt       A summary of the entire test process.
-		case-xxx-fail.html    The Tidy'd OUTPUT.
-		case-xxx-fail.txt     The Tidy'd MESSAGES.
+		case-xxx-fail.html    The Tidy's OUTPUT.
+		case-xxx-fail.txt     The Tidy's MESSAGES.
 		case-xxx-diff.txt     The DIFF of the test case and failed result. Optional.
 		case-xxx-report.txt   A description of the test failure. Optional.
-		case-xxx-n-fail.html
-		case-xxx-n-fail.txt
+		case-xxx-n-fail.html  Multiple-config pattern for Tidy's OUTPUT.
+		case-xxx-n-fail.txt   Multiple-config pattern for Tidy's MESSAGES.
+		(original files)      Option. Original files can be copied here for easy,
+		                      quick reference.
 
 
 Additional Specifications

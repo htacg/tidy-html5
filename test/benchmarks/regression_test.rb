@@ -2,9 +2,10 @@
 
 ###############################################################################
 # Tidy Regression Test Suite
-#  Run this script with help for more information (or examine this file.)
+#  Run this script with `help` for more information (or examine this file.)
 #
 #  Commands:
+#    help
 #    rtest
 #    rtest my_file.html
 #    canonize
@@ -16,6 +17,7 @@
 #    --tidy=<path>, -t
 #    --replace, -f
 #    --verbose, -v
+#    --debug, -d
 ###############################################################################
 
 require 'rubygems'
@@ -36,10 +38,12 @@ module TidyRegressionTesting
 
   ###########################################################
   # Setup
-  #  Change these variables to specify different defaults.
+  #  Change these variables to specify different defaults,
+  #  although there's probably no good reason to change
+  #  them.
   ###########################################################
   @@default_cases = 'cases'
-  @@default_results = 'results'
+  @@default_results = 'results'           # prefix only!
   @@default_conf = 'config_default.conf'
 
   ###########################################################
@@ -50,15 +54,16 @@ module TidyRegressionTesting
   @@log.datetime_format = '%Y-%m-%d %H:%M:%S'
 
   ###########################################################
-  # log_level=
+  # log_level
   ###########################################################
+  def self.log_level
+    @@log.level
+  end
+
   def self.log_level=(level)
     @@log.level = level
   end
 
-  def self.log_level
-    @@log.level
-  end
 
   #############################################################################
   # class TidyTestRecord
@@ -278,7 +283,7 @@ Missing Expectations Files:
 
 
     #########################################################
-    # width_of_cases
+    # + width_of_cases
     #  Indicates the length of the longest file name.
     #########################################################
     def self.width_of_cases
@@ -288,7 +293,7 @@ Missing Expectations Files:
 
 
     #########################################################
-    # width_of_configs
+    # + width_of_configs
     #  Indicates the length of the longest file name.
     #########################################################
     def self.width_of_configs
@@ -299,7 +304,7 @@ Missing Expectations Files:
 
 
     #########################################################
-    # width_of_errors
+    # + width_of_errors
     #  Indicates the length of the longest file name.
     #########################################################
     def self.width_of_errors
@@ -310,7 +315,7 @@ Missing Expectations Files:
 
 
     #########################################################
-    # width_of_markup
+    # + width_of_markup
     #  Indicates the length of the longest file name.
     #########################################################
     def self.width_of_markup
@@ -321,7 +326,7 @@ Missing Expectations Files:
 
 
     #########################################################
-    # column( item, width )
+    # + column( item, width )
     #  Implements .ljustify taking into account nil strings.
     #########################################################
     def self.column( item, width )
@@ -340,7 +345,6 @@ Missing Expectations Files:
     def passed_test?
       @tested && @passed_errout && passed_output
     end
-
 
   end # TidyTestRecord
 
@@ -592,7 +596,7 @@ Missing Expectations Files:
     #  - were found!
     #  I wonder if we'd be happy with the --quiet output so
     #  that we can avoid this. It means regenerating the test
-    #  cases, but they all seem to pass anyway.
+    #  cases, but they mostly seem to pass anyway.
     #########################################################
     def clean_error_text( text )
       terminator_1 = 'No warnings or errors were found.'
@@ -618,8 +622,9 @@ Missing Expectations Files:
 
     #########################################################
     # process_case( file )
-    # canonize_case and test_case are nearly identical, so we'll
-    # do most of the heavy lifting here.
+    #   Will either run a test against file, or generate the
+    #   canonical reference files for `file`, depending on
+    #   the value of `canonize`.
     #########################################################
     def process_case( file, canonize=false )
       file = File.join( cases, file )
@@ -761,59 +766,17 @@ Missing Expectations Files:
 
 
     #########################################################
-    # canonize_case( file )
-    #  Generates the -expects information for a single file,
-    #  and places them into the designated `results`
-    #  directory. Existing files will NOT be replaced unless
-    #  the --replace command line option is used.
-    #  If multiple configuration files are present then the
-    #  new files will be written using each configuration.
-    #########################################################
-    def canonize_case( file )
-      process_case( file, true )
-    end
-
-
-    #########################################################
-    # canonize_all
+    # process_all
     #  Runs all HTML, XHTML, and XML files in the designated
-    #  `cases` directory through the canonization process.
-    #  Files will not be overwritten unless --replace is
-    #  used on the command line.
+    #  `cases` directory through the process_case process,
+    #  performing canonization based on `canonize`.
     #########################################################
-    def canonize_all
+    def process_all(canonize=false)
       pattern = File.join(cases, '*.{html,xml,xhtml}')
       tests = Dir[pattern].reject { |f| f[%r{-expect}] }.sort
-      tests.each { |file| canonize_case(File.basename(file)) }
+      tests.each { |file| process_case(File.basename(file), canonize) }
       puts "\n"
     end
-
-    #########################################################
-    # test_case( file )
-    #  Runs a single file through regression testing. If
-    #  multiple configuration files are present, then the
-    #  single test case will be run for each configuration.
-    #  Note that only the file basename will be taken into
-    #  account. All tests must reside in the specified (or
-    # default) cases directory.
-    #########################################################
-    def test_case(file)
-      process_case( file, false )
-    end
-
-
-    #########################################################
-    # test_all
-    #  Runs all HTML, XHTML, and XML files in the designated
-    #  `cases` directory through the testing process.
-    #########################################################
-    def test_all
-      pattern = File.join(cases, '*.{html,xml,xhtml}')
-      tests = Dir[pattern].reject { |f| f[%r{-expect}] }.sort
-      tests.each { |file| test_case(File.basename(file)) }
-      puts "\n"
-    end
-
 
   end # TidyRegression
 
@@ -906,9 +869,9 @@ Complete Help:
       set_options
 
       if name.nil?
-        @regression.test_all
+        @regression.process_all(false)
       else
-        if @regression.test_case(name)
+        if @regression.process_case(name, false)
           puts "\nThe test ended without any execution errors."
           puts "See #{@regression.results} for testing results.\n\n"
         else
@@ -941,9 +904,9 @@ Complete Help:
       @regression.replace = options[:replace] unless options[:replace].nil?
 
       if name.nil?
-        @regression.canonize_all
+        @regression.process_all(true)
       else
-        @regression.canonize_case(name)
+        @regression.process_case(name, true)
       end
 
     end # canonize

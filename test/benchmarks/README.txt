@@ -58,7 +58,9 @@ results-5.x.x
 		case-xxx-fail.html    The Tidy'd OUTPUT.
 		case-xxx-fail.txt     The Tidy'd MESSAGES.
 		case-xxx-diff.txt     The DIFF of the test case and failed result. Optional.
-		case-xxx-report.txt   A description of the test failure.
+		case-xxx-report.txt   A description of the test failure. Optional.
+		case-xxx-n-fail.html
+		case-xxx-n-fail.txt
 
 
 Additional Specifications
@@ -83,30 +85,35 @@ HTML Tidy Regression Testing Exception Log
 ==========================================
 
 Test conducted using `/usr/local/bin/tidy`, version 5.1.12
-Started on 2015-December-20, 12:15 pm, Finished on 2015-December-20 12:17 pm.
+Results generated on DATE.
 
- Test cases requested: 510
- Total configs requested: 600
-    Test cases tested: 500
-Configurations tested: 625
- Test configs aborted:  10
-   
-Configurations passed: 610
-Configurations failed:  15
+Summary:
+========
+
+     Number of case files: 458
+Total test configurations: 461
+
+        Case files tested: 209
+    Configurations tested: 211
+   Configurations aborted: 250
+    Configurations passed: 4 of 211
+           Configs failed: 207 of 211
+
 
 Missing Expectations Files:
 ===========================
 
-Case File           Config File           Missing .txt             Missing Markup
----------
+Case File           For Configuration     Requires Errors          Requires Markup
+---------           -----------------     ---------------          ---------------
 case-9743.html      default_config.conf   case-9743-expect.txt 
 case-5656.html      case-5656.conf        case-5656-expect.txt     case-5656-expects.html 
 
-Failed tests:
+
+Failed Tests:
 =============
 
-Case File           Config File            Output   Errors
----------           ------------           ------   ------
+Case File           For Configuration      Markup   Errors
+---------           -----------------      ------   ------
 case-1234.html      default_config.conf    PASSED   FAILED
 case-2345.xml       case-2345-1.conf       FAILED   FAILED
 

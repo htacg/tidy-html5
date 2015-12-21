@@ -45,8 +45,19 @@ module TidyRegressionTesting
   # Logging
   ###########################################################
   @@log = Logger.new(STDOUT)
-  @@log.level = Logger::DEBUG
+  @@log.level = Logger::ERROR
   @@log.datetime_format = '%Y-%m-%d %H:%M:%S'
+
+  ###########################################################
+  # log_level=
+  ###########################################################
+  def self.log_level=(level)
+    @@log.level = level
+  end
+
+  def self.log_level
+    @@log.level
+  end
 
   #############################################################################
   # class TidyTestRecord
@@ -59,6 +70,8 @@ module TidyRegressionTesting
     attr_accessor :tidy_version         # The tidy version, if it was valid.
     attr_accessor :tidy_valid           # Indicates that requested tidy was valid.
     attr_accessor :cases_valid          # Indicates that the cases dir was valid.
+    attr_accessor :results_dir          # The requested results directory.
+    attr_accessor :results_valid        # Indicates that the results dir was valid.
     attr_accessor :case_file            # The path of the file being requested.
     attr_accessor :case_file_valid      # Indicates that the request case was valid.
     attr_accessor :config_file          # The path of the config file requested.
@@ -80,6 +93,8 @@ module TidyRegressionTesting
       @tidy_version = '0.0.0.'
       @tidy_valid = true
       @cases_valid = true
+      @results_dir = nil
+      @results_valid = true
       @case_file = nil
       @case_file_valid = true
       @config_file = nil
@@ -106,22 +121,83 @@ module TidyRegressionTesting
     #     returns a test report.
     #########################################################
     def self.make_report
-      @@test_records.each do | record |
-        puts "Tidy path = #{record.tidy_path}"
-        puts "Tidy version = #{record.tidy_version}"
-        puts "File requested = #{record.case_file}"
-        puts "Passed Output = #{record.passed_output}"
-        puts "Passed Errors = #{record.passed_errout}"
-        puts "Passed Test = #{record.passed_test?}"
+      record0 = @@test_records[0]
+      max_case = [9, self.width_of_cases].max + 3
+      max_conf = [17, self.width_of_configs].max + 3
+      max_errs = [15, self.width_of_errors].max + 3
+      max_mkup = [15, self.width_of_markup].max + 3
+      output = <<-HEREDOC
+HTML Tidy Regression Testing Exception Log
+==========================================
+
+Test conducted using #{record0.tidy_path}, version #{record0.tidy_version}
+Results generated on #{DateTime.now}.
+
+Summary:
+========
+
+     Number of case files: #{self.count_of_cases_requested}
+Total test configurations: #{self.count_of_configs_requested}
+
+        Case files tested: #{self.count_of_cases_tested}
+    Configurations tested: #{self.count_of_configs_tested}
+   Configurations aborted: #{self.count_of_configs_aborted}
+    Configurations passed: #{self.count_of_configs_passed} of #{self.count_of_configs_tested}
+    Configurations failed: #{self.count_of_configs_failed} of #{self.count_of_configs_tested}
+
+
+Missing Expectations Files:
+===========================
+
+      HEREDOC
+
+      # Show cases that are missing critical inputs:
+      output << 'Case File'.ljust(max_case)
+      output << 'For Configuration'.ljust(max_conf)
+      output << 'Requires Errors'.ljust(max_errs)
+      output << 'Requires Markup'.ljust(max_mkup)
+      output << "\n"
+      output << '---------'.ljust(max_case)
+      output << '-----------------'.ljust(max_conf)
+      output << '---------------'.ljust(max_errs)
+      output << '---------------'.ljust(max_mkup)
+      output << "\n"
+
+      @@test_records.select { |record| !record.missing_txt.nil? || !record.missing_htm.nil? }.each do | record |
+        output << column(record.case_file, max_case)
+        output << column(record.config_file, max_conf)
+        output << column(record.missing_txt, max_errs)
+        output << column(record.missing_htm, max_mkup)
+        output << "\n"
       end
-      puts '===================='
-      puts "Number of case files = #{self.count_of_cases_requested}"
-      puts "Total Configs requested = #{self.count_of_configs_requested}"
-      puts "Case files tested = #{self.count_of_cases_tested}"
-      puts "Configs tested = #{self.count_of_configs_tested}"
-      puts "Configs aborted = #{self.count_of_configs_aborted}"
-      puts "Configs passed = #{self.count_of_configs_passed}"
-      puts "Configs failed = #{self.count_of_configs_failed}"
+
+      # Show cases that have failed.
+      output << "\n\nFailed Tests:\n"
+      output << "=============\n\n"
+      output << 'Case File'.ljust(max_case)
+      output << 'For Configuration'.ljust(max_conf)
+      output << 'Markup'.ljust(9)
+      output << 'Errors'.ljust(9)
+      output << "\n"
+      output << '---------'.ljust(max_case)
+      output << '-----------------'.ljust(max_conf)
+      output << '------'.ljust(9)
+      output << '-------'.ljust(9)
+      output << "\n"
+
+      @@test_records.select { |record| record.tested && !record.passed_test? }.each do | record |
+        output << column(record.case_file, max_case)
+        output << column(record.config_file, max_conf)
+        output << (record.passed_output ? "PASSED" : "FAILED").ljust(9)
+        output << (record.passed_errout ? "PASSED" : "FAILED").ljust(9)
+        output << "\n"
+      end
+
+      output << "\nSee files in directory #{record0.results_dir} for failed results.\n\n"
+      puts output
+      outpath = File.join(record0.results_dir, 'all_results.txt')
+      File.open(outpath, 'w') { |file| file.write(output)}
+
     end
 
 
@@ -198,6 +274,63 @@ module TidyRegressionTesting
       temp = @@test_records.select { |record| record.tested && !record.passed_test? }
       temp.count
     end
+
+
+    #########################################################
+    # width_of_cases
+    #  Indicates the length of the longest file name.
+    #########################################################
+    def self.width_of_cases
+      temp = @@test_records.map { |record| File.basename(record.case_file)}
+      temp.count > 0 ? temp.max_by(&:length).size : 0
+    end
+
+
+    #########################################################
+    # width_of_configs
+    #  Indicates the length of the longest file name.
+    #########################################################
+    def self.width_of_configs
+      temp = @@test_records.select { |record| !record.config_file.nil? }
+      temp = temp.map { |record| File.basename(record.config_file)}
+      temp.count > 0 ? temp.max_by(&:length).size : 0
+    end
+
+
+    #########################################################
+    # width_of_errors
+    #  Indicates the length of the longest file name.
+    #########################################################
+    def self.width_of_errors
+      temp = @@test_records.select { |record| !record.missing_txt.nil? }
+      temp = temp.map { |record| File.basename(record.missing_txt)}
+      temp.count > 0 ? temp.max_by(&:length).size : 0
+    end
+
+
+    #########################################################
+    # width_of_markup
+    #  Indicates the length of the longest file name.
+    #########################################################
+    def self.width_of_markup
+      temp = @@test_records.select { |record| !record.missing_htm.nil? }
+      temp = temp.map { |record| File.basename(record.missing_htm)}
+      temp.count > 0 ? temp.max_by(&:length).size : 0
+    end
+
+
+    #########################################################
+    # column( item, width )
+    #  Implements .ljustify taking into account nil strings.
+    #########################################################
+    def self.column( item, width )
+      if item.nil?
+        ' '.ljust(width)
+      else
+        File.basename(item).ljust(width)
+      end
+    end
+
 
     #########################################################
     # passed_test?
@@ -352,7 +485,30 @@ module TidyRegressionTesting
         @@log.info "Will uses cases in #{cases}"
         true
       else
-        @@log.fatal "Directory #{cases} does not exist or could not be read."
+        @@log.error "Directory #{cases} does not exist or could not be read."
+        false
+      end
+    end
+
+
+    #########################################################
+    # check_results_dir
+    #########################################################
+    def check_results_dir
+      unless File.exists?(results)
+        begin
+          Dir.mkdir(results)
+        rescue SystemCallError
+          @@log.error "Directory #{results} could not be created."
+          return false
+        end
+        @@log.info "Created results directory #{results}"
+      end
+      if File.readable?(results)
+        @@log.info "Will place results into #{results}"
+        true
+      else
+        @@log.error "Directory #{results} could not be read."
         false
       end
     end
@@ -366,7 +522,7 @@ module TidyRegressionTesting
         @@log.info "Will use file #{file}"
         true
       else
-        @@log.fatal "File #{file} does not exist or could not be read."
+        @@log.error "File #{file} does not exist or could not be read."
         false
       end
     end
@@ -380,7 +536,7 @@ module TidyRegressionTesting
         @@log.info "Will use default configuration file #{conf_default}"
         true
       else
-        @@log.fatal "Default configuration file #{conf_default} does not exist or could not be read."
+        @@log.warn "Default configuration file #{conf_default} does not exist or could not be read."
         false
       end
     end
@@ -391,7 +547,7 @@ module TidyRegressionTesting
     #########################################################
     def check_tidy
       if tidy.nil?
-        @@log.fatal "Tidy at #{tidy} was not found or is not executable."
+        @@log.error "Tidy at #{tidy} was not found or is not executable."
         false
       else
         @@log.info "Will use Tidy located at #{tidy}"
@@ -408,7 +564,7 @@ module TidyRegressionTesting
         @@log.info "Expectation file #{expect} was found."
         true
       else
-        @@log.fatal "Missing expectation file #{expect}."
+        @@log.warn "Missing expectation file #{expect}."
         false
       end
     end
@@ -422,9 +578,36 @@ module TidyRegressionTesting
         @@log.info "Expectation file #{expect} was found."
         true
       else
-        @@log.fatal "Missing expectation file #{expect}."
+        @@log.warn "Missing expectation file #{expect}."
         false
       end
+    end
+
+
+    #########################################################
+    # clean_error_text( text )
+    #  We want to discard everything after:
+    #  - No warnings or errors were found.
+    #  - were found!
+    #  I wonder if we'd be happy with the --quiet output so
+    #  that we can avoid this. It means regenerating the test
+    #  cases, but they all seem to pass anyway.
+    #########################################################
+    def clean_error_text( text )
+      terminator_1 = 'No warnings or errors were found.'
+      terminator_2 = 'were found!'
+
+      return nil if text.nil? || text = ''
+
+      if text.index(terminator_1)
+        terminator = terminator_1
+      else
+        terminator = terminator_2
+      end
+
+
+      text.slice(0, text.index(terminator) + terminator.size + 1)
+
     end
 
 
@@ -478,8 +661,10 @@ module TidyRegressionTesting
       record.cases_valid = check_cases_dir
       record.case_file = file
       record.case_file_valid = check_test_file( file )
+      record.results_dir = results
+      record.results_valid = check_results_dir
 
-      unless record.tidy_valid && record.cases_valid && record.case_file_valid
+      unless record.tidy_valid && record.cases_valid && record.case_file_valid && record.results_valid
         reporter << record
         return false
       end
@@ -500,11 +685,14 @@ module TidyRegressionTesting
       end
 
       # Run through all of the configurations.
-      configs.each do | config_file |
+      configs.sort.each do | config_file |
         @@log.info "Testing with config file #{config_file}"
 
         # Duplicate the record so we have a new one each run of this inner loop
-        inner_record = record.dup
+        inner_record = record.clone
+
+        # Log the config file.
+        inner_record.config_file = config_file
 
         # Make sure that the expectations are available for this config.
         if config_file == conf_default
@@ -512,31 +700,52 @@ module TidyRegressionTesting
         else
           base_conf = File.join(cases, File.basename(config_file, '.*'))
         end
+
         expects_txt = "#{base_conf}-expect.txt"
         expects_htm = "#{base_conf}-expect#{File.extname(file)}"
-        inner_record.missing_txt = expects_txt unless check_expect_txt(expects_txt)
-        inner_record.missing_htm = expects_htm unless check_expect_htm(expects_htm)
-        unless check_expect_txt(expects_txt) && check_expect_htm(expects_htm)
-          reporter << inner_record
-          return false
+        m_expect_txt = check_expect_txt(expects_txt)
+        m_expect_htm = check_expect_htm(expects_htm)
+        inner_record.missing_txt = expects_txt unless m_expect_txt
+        inner_record.missing_htm = expects_htm unless m_expect_htm
+
+        if m_expect_htm && m_expect_txt
+          expects_txt_txt = clean_error_text(IO.read(expects_txt))
+          expects_htm_txt = IO.read(expects_htm)
+
+          # Let's run tidy
+          execute = "#{tidy} -config #{config_file} --tidy-mark no #{file}"
+          tidy_out, tidy_err, tidy_status = Open3.capture3(execute)
+          tidy_err = clean_error_text(tidy_err)
+          inner_record.tested = true
+
+          # Set comparison flags
+          inner_record.passed_output = tidy_out == expects_htm_txt
+          inner_record.passed_errout = tidy_err == expects_txt_txt
+
+          # Write failing files.
+          unless inner_record.passed_test?
+            # In the case of multiple configurations, we need to get
+            # the configuration number to append to the markup file.
+            config_number = File.basename(config_file, '.*').match(/.*-.*-(.*)/)
+            config_number = config_number.nil? ? nil : "-#{config_number[1]}"
+            file_err = "#{File.basename(file, '.*')}#{config_number}.txt"
+            file_htm = "#{File.basename(file, '.*')}#{config_number}#{File.extname(file)}"
+
+            File.open(File.join(results, file_err), 'w') { |the_file| the_file.write(tidy_err)}
+            File.open(File.join(results, file_htm), 'w') { |the_file| the_file.write(tidy_out)}
+
+          end
+
         end
-
-        expects_txt_txt = IO.read(expects_txt)
-        expects_htm_txt = IO.read(expects_htm)
-
-        # Let's run tidy
-        execute = "#{tidy} -config #{config_file} --tidy-mark no -quiet #{file}"
-        tidy_out, tidy_err, tidy_status = Open3.capture3(execute)
-        inner_record.tested = true
-
-        # Set comparison flags
-        inner_record.passed_output = tidy_out == expects_htm_txt
-        inner_record.passed_errout = tidy_err == expects_txt_txt
 
         # Write the final record
         reporter << inner_record
+        if TidyRegressionTesting::log_level >= Logger::ERROR
+          print '.'
+          STDOUT.flush
+        end
 
-      end
+      end # config loop
 
       true
 
@@ -550,8 +759,9 @@ module TidyRegressionTesting
     #########################################################
     def test_all
       pattern = File.join(cases, '*.{html,xml,xhtml}')
-      tests = Dir[pattern].reject { |f| f[%r{-expect}] }
+      tests = Dir[pattern].reject { |f| f[%r{-expect}] }.sort
       tests.each { |file| test_case(File.basename(file)) }
+      puts "\n"
     end
 
 
@@ -581,6 +791,15 @@ module TidyRegressionTesting
                  :desc => 'Specifies the <path> to the Tidy executable to use.',
                  :aliases => '-t'
 
+    class_option :verbose,
+                 :type => :boolean,
+                 :desc => 'Provides verbose output.',
+                 :aliases => '-v'
+
+    class_option :debug,
+                 :type => :boolean,
+                 :desc => 'Provides really, really verbose output.',
+                 :aliases => '-d'
 
     #########################################################
     # initialize
@@ -689,6 +908,9 @@ Complete Help:
         @regression.tidy = options[:tidy] unless options[:tidy].nil?
         @regression.cases = options[:cases] unless options[:cases].nil?
         @regression.results = options[:results] unless options[:results].nil?
+
+        TidyRegressionTesting::log_level = Logger::WARN if options[:verbose]
+        TidyRegressionTesting::log_level = Logger::DEBUG if options[:debug]
     end # set_options
 
 

@@ -24,6 +24,7 @@ require 'thor'           # thor provides robust command line parameter parsing.
 require 'ptools'         # provides additions to File:: we need for x-platform.
 require 'logger'         # Log output simplified.
 require 'open3'          # Run executables and capture output.
+require 'fileutils'      # File utilities.
 
 
 ###############################################################################
@@ -597,12 +598,16 @@ Missing Expectations Files:
       terminator_1 = 'No warnings or errors were found.'
       terminator_2 = 'were found!'
 
-      return nil if text.nil? || text = ''
+      return nil if text.nil? || text == ''
 
       if text.index(terminator_1)
         terminator = terminator_1
       else
-        terminator = terminator_2
+        if text.index(terminator_2)
+          terminator = terminator_2
+        else
+          return text
+        end
       end
 
 
@@ -612,41 +617,11 @@ Missing Expectations Files:
 
 
     #########################################################
-    # canonize_case( file )
-    #  Generates the -expects information for a single file,
-    #  and places them into the designated `results`
-    #  directory. Existing files will NOT be replaced unless
-    #  the --replace command line option is used.
-    #  If multiple configuration files are present then the
-    #  new files will be written using each configuration.
+    # process_case( file )
+    # canonize_case and test_case are nearly identical, so we'll
+    # do most of the heavy lifting here.
     #########################################################
-    def canonize_case( file )
-
-    end
-
-
-    #########################################################
-    # canonize_all
-    #  Runs all HTML, XHTML, and XML files in the designated
-    #  `cases` directory through the canonization process.
-    #  Files will not be overwritten unless --replace is
-    #  used on the command line.
-    #########################################################
-    def canonize_all
-
-    end
-
-    #########################################################
-    # test_case( file )
-    #  Runs a single file through regression testing. If
-    #  multiple configuration files are present, then the
-    #  single test case will be run for each configuration.
-    #  Note that only the file basename will be taken into
-    #  account. All tests must reside in the specified (or
-    # default) cases directory.
-    #########################################################
-    def test_case(file)
-
+    def process_case( file, canonize=false )
       file = File.join( cases, file )
       basename = File.basename( file, '.*' )
 
@@ -694,49 +669,82 @@ Missing Expectations Files:
         # Log the config file.
         inner_record.config_file = config_file
 
-        # Make sure that the expectations are available for this config.
+        # Build the expect filenames for this configuration
         if config_file == conf_default
           base_conf = File.join(cases, basename)
         else
           base_conf = File.join(cases, File.basename(config_file, '.*'))
         end
-
         expects_txt = "#{base_conf}-expect.txt"
         expects_htm = "#{base_conf}-expect#{File.extname(file)}"
-        m_expect_txt = check_expect_txt(expects_txt)
-        m_expect_htm = check_expect_htm(expects_htm)
-        inner_record.missing_txt = expects_txt unless m_expect_txt
-        inner_record.missing_htm = expects_htm unless m_expect_htm
 
-        if m_expect_htm && m_expect_txt
-          expects_txt_txt = clean_error_text(IO.read(expects_txt))
-          expects_htm_txt = IO.read(expects_htm)
+        # Build the
+
+        if canonize
+          #################
+          # CANONIZE
+          #################
 
           # Let's run tidy
           execute = "#{tidy} -config #{config_file} --tidy-mark no #{file}"
           tidy_out, tidy_err, tidy_status = Open3.capture3(execute)
-          tidy_err = clean_error_text(tidy_err)
-          inner_record.tested = true
 
-          # Set comparison flags
-          inner_record.passed_output = tidy_out == expects_htm_txt
-          inner_record.passed_errout = tidy_err == expects_txt_txt
-
-          # Write failing files.
-          unless inner_record.passed_test?
-            # In the case of multiple configurations, we need to get
-            # the configuration number to append to the markup file.
-            config_number = File.basename(config_file, '.*').match(/.*-.*-(.*)/)
-            config_number = config_number.nil? ? nil : "-#{config_number[1]}"
-            file_err = "#{File.basename(file, '.*')}#{config_number}.txt"
-            file_htm = "#{File.basename(file, '.*')}#{config_number}#{File.extname(file)}"
-
-            File.open(File.join(results, file_err), 'w') { |the_file| the_file.write(tidy_err)}
-            File.open(File.join(results, file_htm), 'w') { |the_file| the_file.write(tidy_out)}
-
+          # Write the results
+          if File.exists?(expects_txt) && !replace
+            @@log.warn "#{expects_txt} already exists and won't be replaced."
+          else
+            File.open(expects_txt, 'w') { |the_file| the_file.write(tidy_err)}
           end
 
-        end
+          if File.exists?(expects_htm) && !replace
+            @@log.warn "#{expects_htm} already exists and won't be replaced."
+          else
+            File.open(expects_htm, 'w') { |the_file| the_file.write(tidy_out)}
+          end
+
+        else
+          #################
+          # TEST
+          #################
+
+          # Make sure that the expectations are available for this config.
+          m_expect_txt = check_expect_txt(expects_txt)
+          m_expect_htm = check_expect_htm(expects_htm)
+          inner_record.missing_txt = expects_txt unless m_expect_txt
+          inner_record.missing_htm = expects_htm unless m_expect_htm
+
+          if m_expect_htm && m_expect_txt
+            expects_txt_txt = clean_error_text(IO.read(expects_txt))
+            expects_htm_txt = IO.read(expects_htm)
+
+            # Let's run tidy
+            execute = "#{tidy} -config #{config_file} --tidy-mark no #{file}"
+            tidy_out, tidy_err, tidy_status = Open3.capture3(execute)
+            tidy_err = clean_error_text(tidy_err)
+            inner_record.tested = true
+
+            # Set comparison flags
+            inner_record.passed_output = tidy_out == expects_htm_txt
+            inner_record.passed_errout = tidy_err == expects_txt_txt
+
+            # Write failing files.
+            unless inner_record.passed_test?
+              # In the case of multiple configurations, we need to get
+              # the configuration number to append to the markup file.
+              config_number = File.basename(config_file, '.*').match(/.*-.*-(.*)/)
+              config_number = config_number.nil? ? nil : "-#{config_number[1]}"
+              file_err = "#{File.basename(file, '.*')}#{config_number}-fail.txt"
+              file_htm = "#{File.basename(file, '.*')}#{config_number}-fail#{File.extname(file)}"
+
+              # Write results and copy the originals for convenience.
+              File.open(File.join(results, file_err), 'w') { |the_file| the_file.write(tidy_err)}
+              File.open(File.join(results, file_htm), 'w') { |the_file| the_file.write(tidy_out)}
+              FileUtils.cp(expects_htm, results, { preserve: true })
+              FileUtils.cp(expects_txt, results, { preserve: true })
+              FileUtils.cp(file, results, { preserve: true })
+            end # unless
+          end # if
+        end # if canonize
 
         # Write the final record
         reporter << inner_record
@@ -749,6 +757,48 @@ Missing Expectations Files:
 
       true
 
+    end
+
+
+    #########################################################
+    # canonize_case( file )
+    #  Generates the -expects information for a single file,
+    #  and places them into the designated `results`
+    #  directory. Existing files will NOT be replaced unless
+    #  the --replace command line option is used.
+    #  If multiple configuration files are present then the
+    #  new files will be written using each configuration.
+    #########################################################
+    def canonize_case( file )
+      process_case( file, true )
+    end
+
+
+    #########################################################
+    # canonize_all
+    #  Runs all HTML, XHTML, and XML files in the designated
+    #  `cases` directory through the canonization process.
+    #  Files will not be overwritten unless --replace is
+    #  used on the command line.
+    #########################################################
+    def canonize_all
+      pattern = File.join(cases, '*.{html,xml,xhtml}')
+      tests = Dir[pattern].reject { |f| f[%r{-expect}] }.sort
+      tests.each { |file| canonize_case(File.basename(file)) }
+      puts "\n"
+    end
+
+    #########################################################
+    # test_case( file )
+    #  Runs a single file through regression testing. If
+    #  multiple configuration files are present, then the
+    #  single test case will be run for each configuration.
+    #  Note that only the file basename will be taken into
+    #  account. All tests must reside in the specified (or
+    # default) cases directory.
+    #########################################################
+    def test_case(file)
+      process_case( file, false )
     end
 
 

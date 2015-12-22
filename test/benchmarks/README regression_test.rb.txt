@@ -4,8 +4,18 @@ About the `regression_test.rb` Script
 This Ruby command line script implements the requirement described in
 README.txt and serves as a good example of a regression testing application
 for HTML Tidy. Complete documentation on how to use the script can be seen
-by invoking the script in your terminal: `./regression_test.rb` (or the
-equivalent on your OS).
+by invoking the script in your terminal:
+
+Linux, Mac, and Windows with Git BASH or similar
+------------------------------------------------
+
+`./regression_test.rb`
+
+Windows standard command line
+-----------------------------
+
+`ruby regression_test.rb`
+
 
 Prerequisites
 =============
@@ -20,4 +30,4 @@ Prerequisites
 
 4. `bundle install` to make sure the script's dependencies are met.
 
-5. `./regression_test.rb` (or your OS' equivalent) for usage instructions.
+5. Run the script as described above.

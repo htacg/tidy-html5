@@ -20,13 +20,92 @@
 #    --debug, -d
 ###############################################################################
 
-require 'rubygems'
-require 'bundler/setup'
-require 'thor'           # thor provides robust command line parameter parsing.
-require 'ptools'         # provides additions to File:: we need for x-platform.
+require 'bundler/setup'  # Provides environment for this script.
 require 'logger'         # Log output simplified.
 require 'open3'          # Run executables and capture output.
 require 'fileutils'      # File utilities.
+require 'thor'           # thor provides robust command line parameter parsing.
+
+
+###############################################################################
+# module Which
+#  Cross-platform "which" utility for Ruby.
+#  https://gist.github.com/steakknife/88b6c3837a5e90a08296
+###############################################################################
+module Which
+  # similar to `which {{cmd}}`, except relative paths *are* always expanded
+  # returns: first match absolute path (String) to cmd (no symlinks followed),
+  #          or nil if no executable found
+  def which(cmd)
+    which0(cmd) do |abs_exe|
+      return abs_exe
+    end
+    nil
+  end
+
+  # similar to `which -a {{cmd}}`, except relative paths *are* always expanded
+  # returns: always an array, or [] if none found
+  def which_all(cmd)
+    results = []
+    which0(cmd) do |abs_exe|
+      results << abs_exe
+    end
+    results
+  end
+
+  def real_executable?(f)
+    File.executable?(f) && !File.directory?(f)
+  end
+
+  def executable_file_extensions
+    ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
+  end
+
+  def search_paths
+    ENV['PATH'].split(File::PATH_SEPARATOR)
+  end
+
+  def find_executable(path, cmd, &_block)
+    executable_file_extensions.each do |ext|
+      # rubocop:disable Lint/AssignmentInCondition
+      if real_executable?(abs_exe = File.expand_path(cmd + ext, path))
+        yield(abs_exe)
+      end
+      # rubocop:enable Lint/AssignmentInCondition
+    end
+  end
+
+  # internal use only
+  # +_found_exe+ is yielded to on *all* successful match(es),
+  #              with path to absolute file (String)
+  def which0(cmd, &found_exe)
+    # call expand_path(f, nil) == expand_path(f) for relative/abs path cmd
+    find_executable(nil, cmd, &found_exe) if File.basename(cmd) != cmd
+
+    search_paths.each do |path|
+      find_executable(path, cmd, &found_exe)
+    end
+  end
+
+  module_function(*public_instance_methods) # `extend self`, sorta
+end
+
+# make Which() and WhichAll() work
+module Kernel
+  # rubocop:disable Style/MethodName
+  # return abs-path to +cmd+
+  def Which(cmd)
+    Which.which cmd
+  end
+  module_function :Which
+
+  # return all abs-path(s) to +cmd+ or [] if none
+  def WhichAll(cmd)
+    Which.which_all cmd
+  end
+  module_function :WhichAll
+  # rubocop:enable Style/MethodName
+end # module
 
 
 ###############################################################################
@@ -430,7 +509,7 @@ Missing Expectations Files:
     #########################################################
     def tidy
       if @tidy.nil?
-        self.tidy = File.which('tidy')
+        self.tidy = Which::which('tidy')
       end
       @tidy
     end
@@ -449,13 +528,18 @@ Missing Expectations Files:
     #  Returns the tidy version string of the executable.
     #  nil value indicates that tidy is not found.
     #########################################################
-  def tidy_version
-    if tidy.nil?
-      nil
-    else
-      "#{IO.popen("#{tidy} -v").readline.split.last.scan(/\d+/).join('.')}"
+    def tidy_version
+      if tidy.nil?
+        nil
+      else
+        pwd = Dir.pwd
+        Dir.chdir(File.dirname(tidy))
+        execute = "#{File.basename(tidy)} -v"
+        tidy_out, tidy_err, tidy_status = Open3.capture3(execute)
+        Dir.chdir(pwd)
+        tidy_out.split.last.scan(/\d+/).join('.')
+      end
     end
-  end
 
 
     #########################################################
@@ -691,8 +775,11 @@ Missing Expectations Files:
           #################
 
           # Let's run tidy
-          execute = "#{tidy} -config #{config_file} --tidy-mark no #{file}"
+          pwd = Dir.pwd
+          Dir.chdir(File.dirname(tidy))
+          execute = "#{File.basename(tidy)} -config #{config_file} --tidy-mark no #{file}"
           tidy_out, tidy_err, tidy_status = Open3.capture3(execute)
+          Dir.chdir(pwd)
 
           # Write the results
           if File.exists?(expects_txt) && !replace
@@ -723,8 +810,11 @@ Missing Expectations Files:
             expects_htm_txt = IO.read(expects_htm)
 
             # Let's run tidy
-            execute = "#{tidy} -config #{config_file} --tidy-mark no #{file}"
+            pwd = Dir.pwd
+            Dir.chdir(File.dirname(tidy))
+            execute = "#{File.basename(tidy)} -config #{config_file} --tidy-mark no #{file}"
             tidy_out, tidy_err, tidy_status = Open3.capture3(execute)
+            Dir.chdir(pwd)
             tidy_err = clean_error_text(tidy_err)
             inner_record.tested = true
 
@@ -918,12 +1008,12 @@ Complete Help:
     #########################################################
     protected
     def set_options
-        @regression.tidy = options[:tidy] unless options[:tidy].nil?
-        @regression.cases = options[:cases] unless options[:cases].nil?
-        @regression.results = options[:results] unless options[:results].nil?
+      @regression.tidy = options[:tidy] unless options[:tidy].nil?
+      @regression.cases = options[:cases] unless options[:cases].nil?
+      @regression.results = options[:results] unless options[:results].nil?
 
-        TidyRegressionTesting::log_level = Logger::WARN if options[:verbose]
-        TidyRegressionTesting::log_level = Logger::DEBUG if options[:debug]
+      TidyRegressionTesting::log_level = Logger::WARN if options[:verbose]
+      TidyRegressionTesting::log_level = Logger::DEBUG if options[:debug]
     end # set_options
 
 

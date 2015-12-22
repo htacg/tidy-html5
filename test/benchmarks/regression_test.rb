@@ -948,7 +948,7 @@ Complete Help:
     # rtest
     #  Tests a single file or all files.
     #########################################################
-    desc 'rtest [<file>]', 'Performs a regression test on <file>.'
+    desc 'rtest [<file>] [options]', 'Performs a regression test on <file>.'
     long_desc <<-LONG_DESC
       Will run a regression test for <file>. Use this command without <file>
       to run all of the regression tests. Output will be placed into the
@@ -982,7 +982,7 @@ Complete Help:
            :type => :boolean,
            :desc => 'Indicates whether or not canonize replaces existing files.',
            :aliases => '-f'
-    desc 'canonize [<file>]', 'Builds expected output for <file>.'
+    desc 'canonize [<file>] [options]', 'Builds expected output for <file>.'
     long_desc <<-LONG_DESC
       Will build the canonical output for <file> and put it into the default
       directory. Use without <file> to generate canonical reference material for

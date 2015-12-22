@@ -1,6 +1,3 @@
 source 'https://rubygems.org'
 
-# Known working set.
 gem 'thor'
-gem 'ptools'
-gem 'win32-file', platforms: [:mswin, :mingw]

@@ -1,6 +1,6 @@
 # CMakeLists.txt - 20150402 - 20150130 - 20140801 - for github htacg/tidy-html5
 # Prepare for changing the name to 'tidy'
-cmake_minimum_required (VERSION 2.8.8)
+cmake_minimum_required (VERSION 2.8.7)
 
 set(LIB_NAME tidy)
 

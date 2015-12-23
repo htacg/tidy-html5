@@ -146,15 +146,17 @@ module TidyRegressionTesting
   
   
   ###########################################################
-  # capture_3( execute )
+  # capture_3( execute, params )
   #  A cross platform implementor of open3::capture3, which
   #  does not work properly on Windows (i.e., it only works
-  #  in the present working directory).
+  #  in the present working directory). It is necessary to
+  #  supply the executable path and the command line params
+  #  separately.
   ###########################################################
-  def capture3( execute )
+  def capture3( execute, params )
     pwd = Dir.pwd
-    Dir.chdir(File.dirname(execute.split.first))
-    result = Open3.capture3(execute)
+    Dir.chdir(File.dirname(execute))
+    result = Open3.capture3("#{execute} #{params}")
     Dir.chdir(pwd)
     result
   end  
@@ -606,8 +608,7 @@ replaced. You can use the `replace` option for overwrite existing files.
       if tidy.nil?
         nil
       else
-        execute = "#{tidy} -v"
-        tidy_out, tidy_err, tidy_status = capture3(execute)
+        tidy_out, tidy_err, tidy_status = capture3(tidy, "-v")
         tidy_out.split.last
       end
     end
@@ -846,8 +847,8 @@ replaced. You can use the `replace` option for overwrite existing files.
           #################
 
           # Let's run tidy
-          execute = "#{tidy} -config #{config_file} --tidy-mark no #{file}"
-          tidy_out, tidy_err, tidy_status = capture3(execute)
+          params = "-config #{config_file} --tidy-mark no #{file}"
+          tidy_out, tidy_err, tidy_status = capture3(tidy, params)
 
           # Write the results
           if File.exists?(expects_txt) && !replace
@@ -880,8 +881,8 @@ replaced. You can use the `replace` option for overwrite existing files.
             expects_htm_txt = IO.read(expects_htm)
 
             # Let's run tidy
-            execute = "#{tidy} -config #{config_file} --tidy-mark no #{file}"
-            tidy_out, tidy_err, tidy_status = capture3(execute)
+            params = "-config #{config_file} --tidy-mark no #{file}"
+            tidy_out, tidy_err, tidy_status = capture3(tidy, params)
             tidy_err = clean_error_text(tidy_err)
             inner_record.tested = true
 

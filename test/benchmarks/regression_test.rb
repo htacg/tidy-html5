@@ -111,8 +111,8 @@ end # module
 
 ###############################################################################
 # module TidyRegressionTesting
-#  This module encapsulates module-level variables, the CLI handling class,
-#  and the regression testing class.
+#  This module encapsulates module-level variables, utilities, logging,
+#  the CLI handling class, and the regression testing class.
 ###############################################################################
 module TidyRegressionTesting
 
@@ -143,6 +143,21 @@ module TidyRegressionTesting
   def self.log_level=(level)
     @@log.level = level
   end
+  
+  
+  ###########################################################
+  # capture_3( execute )
+  #  A cross platform implementor of open3::capture3, which
+  #  does not work properly on Windows (i.e., it only works
+  #  in the present working directory).
+  ###########################################################
+  def capture3( execute )
+    pwd = Dir.pwd
+    Dir.chdir(File.dirname(execute.split.first))
+    result = Open3.capture3(execute)
+    Dir.chdir(pwd)
+    result
+  end  
 
 
   #############################################################################
@@ -533,12 +548,9 @@ Missing Expectations Files:
       if tidy.nil?
         nil
       else
-        pwd = Dir.pwd
-        Dir.chdir(File.dirname(tidy))
-        execute = "#{File.basename(tidy)} -v"
-        tidy_out, tidy_err, tidy_status = Open3.capture3(execute)
-        Dir.chdir(pwd)
-        tidy_out.split.last.scan(/\d+/).join('.')
+        execute = "#{tidy} -v"
+        tidy_out, tidy_err, tidy_status = capture3(execute)
+        tidy_out.split.last
       end
     end
 
@@ -776,11 +788,8 @@ Missing Expectations Files:
           #################
 
           # Let's run tidy
-          pwd = Dir.pwd
-          Dir.chdir(File.dirname(tidy))
-          execute = "#{File.basename(tidy)} -config #{config_file} --tidy-mark no #{file}"
-          tidy_out, tidy_err, tidy_status = Open3.capture3(execute)
-          Dir.chdir(pwd)
+          execute = "#{tidy} -config #{config_file} --tidy-mark no #{file}"
+          tidy_out, tidy_err, tidy_status = capture3(execute)
 
           # Write the results
           if File.exists?(expects_txt) && !replace
@@ -811,11 +820,8 @@ Missing Expectations Files:
             expects_htm_txt = IO.read(expects_htm)
 
             # Let's run tidy
-            pwd = Dir.pwd
-            Dir.chdir(File.dirname(tidy))
-            execute = "#{File.basename(tidy)} -config #{config_file} --tidy-mark no #{file}"
-            tidy_out, tidy_err, tidy_status = Open3.capture3(execute)
-            Dir.chdir(pwd)
+            execute = "#{tidy} -config #{config_file} --tidy-mark no #{file}"
+            tidy_out, tidy_err, tidy_status = capture3(execute)
             tidy_err = clean_error_text(tidy_err)
             inner_record.tested = true
 

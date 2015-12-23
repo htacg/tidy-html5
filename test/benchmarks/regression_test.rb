@@ -303,6 +303,64 @@ Missing Expectations Files:
 
 
     #########################################################
+    # + make_canon_report
+    #     returns a canonize process report.
+    #########################################################
+    def self.make_canon_report
+      record0 = @@test_records[0]
+      max_case = [9, self.width_of_cases].max + 3
+      max_conf = [17, self.width_of_configs].max + 3
+      max_errs = [14, self.width_of_errors].max + 3
+      max_mkup = [14, self.width_of_markup].max + 3
+      output = <<-HEREDOC
+HTML Tidy Canonization Log
+==========================
+
+Records generated using #{record0.tidy_path}, version #{record0.tidy_version}
+Report generated on #{DateTime.now}.
+
+Summary:
+========
+
+     Number of case files: #{self.count_of_cases_requested}
+Total test configurations: #{self.count_of_configs_requested}
+
+
+Generated Expectations Files:
+=============================
+
+Note that blank filenames indicate files that already existed and were not
+replaced. You can use the `replace` option for overwrite existing files.
+
+      HEREDOC
+
+      # Show all case-config combinations and status:
+      output << 'Case File'.ljust(max_case)
+      output << 'For Configuration'.ljust(max_conf)
+      output << 'Created Errors'.ljust(max_errs)
+      output << 'Created Markup'.ljust(max_mkup)
+      output << "\n"
+      output << '---------'.ljust(max_case)
+      output << '-----------------'.ljust(max_conf)
+      output << '--------------'.ljust(max_errs)
+      output << '--------------'.ljust(max_mkup)
+      output << "\n"
+
+      @@test_records.each do | record |
+        output << column(record.case_file, max_case)
+        output << column(record.config_file, max_conf)
+        output << column(record.missing_txt, max_errs)
+        output << column(record.missing_htm, max_mkup)
+        output << "\n"
+      end
+
+      output << "\nFiles were written into directory #{File.dirname(record0.case_file)}.\n\n"
+      puts output
+
+    end
+
+
+    #########################################################
     # + count_of_cases_requested
     #    returns the number of HTML/XML/XHTML files that
     #    were requested for testing.
@@ -796,12 +854,14 @@ Missing Expectations Files:
             @@log.warn "#{expects_txt} already exists and won't be replaced."
           else
             File.open(expects_txt, 'w') { |the_file| the_file.write(tidy_err)}
+            inner_record.missing_txt = expects_txt
           end
 
           if File.exists?(expects_htm) && !replace
             @@log.warn "#{expects_htm} already exists and won't be replaced."
           else
             File.open(expects_htm, 'w') { |the_file| the_file.write(tidy_out)}
+            inner_record.missing_htm = expects_htm
           end
 
         else
@@ -1005,6 +1065,8 @@ Complete Help:
       else
         @regression.process_case(name, true)
       end
+      
+      TidyTestRecord.make_canon_report
 
     end # canonize
 

@@ -24,6 +24,7 @@ require 'bundler/setup'  # Provides environment for this script.
 require 'logger'         # Log output simplified.
 require 'open3'          # Run executables and capture output.
 require 'fileutils'      # File utilities.
+require 'date'           # Make sure DateTime works.
 require 'thor'           # thor provides robust command line parameter parsing.
 
 

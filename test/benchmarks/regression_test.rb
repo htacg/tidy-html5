@@ -156,7 +156,7 @@ module TidyRegressionTesting
   def capture3( execute, params )
     pwd = Dir.pwd
     Dir.chdir(File.dirname(execute))
-    result = Open3.capture3("#{execute} #{params}")
+    result = Open3.capture3("#{File.basename(execute)} #{params}")
     Dir.chdir(pwd)
     result
   end  

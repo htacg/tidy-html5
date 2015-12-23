@@ -1,0 +1,24 @@
+language: c
+compiler:
+    -gcc
+rvm:
+    - 2.0.0
+addons:
+  apt:
+    packages:
+    - cmake
+    - xsltproc
+
+sudo: false
+
+install:
+    - bundle install --gemfile=test/benchmarks/Gemfile
+before_script:
+    - cd build/cmake
+    - cmake ../..
+    - make
+    - cd ../../test/
+    - ls -l ../build/cmake/tidy
+    - ls -l ../build/cmake/
+script:
+    ./testall.sh

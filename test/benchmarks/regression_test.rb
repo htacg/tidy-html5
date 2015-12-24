@@ -183,6 +183,7 @@ module TidyRegressionTesting
     attr_accessor :tested               # Indicates that this test was executed.
     attr_accessor :passed_output        # Indicates the output test matched.
     attr_accessor :passed_errout        # Indicates the error output test matched.
+    attr_accessor :info_text_file       # Indicates explanatory text for a test config.
 
     @@test_records = [] # Array of test records.
 
@@ -205,6 +206,7 @@ module TidyRegressionTesting
       @tested = false
       @passed_output = false
       @passed_errout = false
+      @info_text_file = nil
     end # initialize
 
 
@@ -293,12 +295,41 @@ Missing Expectations Files:
         output << (record.passed_output ? "PASSED" : "FAILED").ljust(9)
         output << (record.passed_errout ? "PASSED" : "FAILED").ljust(9)
         output << "\n"
+
+        # Add explanatory notes (if any) for failing tests.
+        unless record.info_text_file.nil?
+          output << "\n"
+          IO.readlines(record.info_text_file).each do |line|
+            output << "     #{line}"
+            output << "\n" if line[-1] != "\n"
+          end
+          output << "\n"
+        end
+      end
+
+      # if there are notes for records that did pass a test, then display them.
+      if @@test_records.select { |record| record.tested && record.passed_test? && record.info_text_file}.count > 0
+        output << "\n\n"
+        output << "Notes about passing tests:\n"
+        output << "==========================\n"
+        output << "Some of the passing tests have notes about them that may affect how you\n"
+        output << "wish to interpret the results, such as OS-specific concerns, etc.\n"
+        output << "\n"
+
+        @@test_records.select { |record| record.tested && record.passed_test? && record.info_text_file }.each do | record |
+          output << "\n#{File.basename(record.case_file)}:\n\n"
+          IO.readlines(record.info_text_file).each do |line|
+            output << "     #{line}"
+            output << "\n" if line[-1] != "\n"
+          end
+          output << "\n"
+        end
       end
 
       output << "\nSee files in directory #{record0.results_dir} for failed results.\n\n"
       puts output
-      outpath = File.join(record0.results_dir, 'all_results.txt')
-      File.open(outpath, 'w') { |file| file.write(output)}
+      out_path = File.join(record0.results_dir, 'all_results.txt')
+      File.open(out_path, 'w') { |file| file.write(output)}
 
     end
 
@@ -883,21 +914,29 @@ replaced. You can use the `replace` option for overwrite existing files.
             inner_record.passed_output = tidy_out == expects_htm_txt
             inner_record.passed_errout = tidy_err == expects_txt_txt
 
-            # Write failing files.
-            unless inner_record.passed_test?
-              # In the case of multiple configurations, we need to get
-              # the configuration number to append to the markup file.
-              config_number = File.basename(config_file, '.*').match(/.*-.*-(.*)/)
-              config_number = config_number.nil? ? nil : "-#{config_number[1]}"
-              file_err = "#{File.basename(file, '.*')}#{config_number}-fail.txt"
-              file_htm = "#{File.basename(file, '.*')}#{config_number}-fail#{File.extname(file)}"
+            ## Build file names
 
-              # Write results and copy the originals for convenience.
+            # In the case of multiple configurations, we need to get
+            # the configuration number to append to the markup file.
+            config_number = File.basename(config_file, '.*').match(/.*-.*-(.*)/)
+            config_number = config_number.nil? ? nil : "-#{config_number[1]}"
+            file_err = "#{File.basename(file, '.*')}#{config_number}-fail.txt"
+            file_htm = "#{File.basename(file, '.*')}#{config_number}-fail#{File.extname(file)}"
+
+            # Log an information file if it exists.
+            file_nfo = File.join(case_dir, "#{File.basename(file, '.*')}#{config_number}-expect.nfo")
+            if File.exists?(file_nfo)
+              inner_record.info_text_file = file_nfo if File.exists?(file_nfo)
+            end
+
+            # Write results and copy the originals for convenience.
+            unless inner_record.passed_test?
               File.open(File.join(results, file_err), 'w') { |the_file| the_file.write(tidy_err)}
               File.open(File.join(results, file_htm), 'w') { |the_file| the_file.write(tidy_out)}
               FileUtils.cp(expects_htm, results, { preserve: true })
               FileUtils.cp(expects_txt, results, { preserve: true })
               FileUtils.cp(file, results, { preserve: true })
+              FileUtils.cp(file_nfo, results, { preserve: true }) if File.exists?(file_nfo)
             end # unless
           end # if
         end # if canonize
@@ -1056,7 +1095,6 @@ Complete Help:
       if execution_ok
         TidyTestRecord.make_report
         puts "\nThe test ended without any execution errors."
-        puts "See #{@regression.results} for testing results.\n\n"
       else
         puts "\nThe test ended with one or more execution errors."
         puts "Try to run again with --verbose or --debug for details.\n\n"

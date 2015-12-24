@@ -146,14 +146,14 @@ module TidyRegressionTesting
   
   
   ###########################################################
-  # capture_3( execute, params )
-  #  A cross platform implementor of open3::capture3, which
-  #  does not work properly on Windows (i.e., it only works
+  # capture( execute, params )
+  #  A cross platform implementor of open3::capture3 (which
+  #  does not work properly on Windows, i.e., it only works
   #  in the present working directory). It is necessary to
   #  supply the executable path and the command line params
   #  separately.
   ###########################################################
-  def capture3( execute, params )
+  def capture( execute, params )
     pwd = Dir.pwd
     Dir.chdir(File.dirname(execute))
     result = Open3.capture3("#{File.basename(execute)} #{params}")
@@ -172,7 +172,6 @@ module TidyRegressionTesting
     attr_accessor :tidy_path            # The path of the requested Tidy executable.
     attr_accessor :tidy_version         # The tidy version, if it was valid.
     attr_accessor :tidy_valid           # Indicates that requested tidy was valid.
-    attr_accessor :cases_valid          # Indicates that the cases dir was valid.
     attr_accessor :results_dir          # The requested results directory.
     attr_accessor :results_valid        # Indicates that the results dir was valid.
     attr_accessor :case_file            # The path of the file being requested.
@@ -195,7 +194,6 @@ module TidyRegressionTesting
       @tidy_path = nil
       @tidy_version = '0.0.0.'
       @tidy_valid = true
-      @cases_valid = true
       @results_dir = nil
       @results_valid = true
       @case_file = nil
@@ -225,6 +223,7 @@ module TidyRegressionTesting
     #########################################################
     def self.make_report
       record0 = @@test_records[0]
+      return false if record0.nil?
       max_case = [9, self.width_of_cases].max + 3
       max_conf = [17, self.width_of_configs].max + 3
       max_errs = [15, self.width_of_errors].max + 3
@@ -310,6 +309,7 @@ Missing Expectations Files:
     #########################################################
     def self.make_canon_report
       record0 = @@test_records[0]
+      return false if record0.nil?
       max_case = [9, self.width_of_cases].max + 3
       max_conf = [17, self.width_of_configs].max + 3
       max_errs = [14, self.width_of_errors].max + 3
@@ -608,7 +608,7 @@ replaced. You can use the `replace` option for overwrite existing files.
       if tidy.nil?
         nil
       else
-        tidy_out, tidy_err, tidy_status = capture3(tidy, "-v")
+        tidy_out, tidy_err, tidy_status = capture(tidy, "-v")
         tidy_out.split.last
       end
     end
@@ -769,24 +769,19 @@ replaced. You can use the `replace` option for overwrite existing files.
           return text
         end
       end
-
-
       text.slice(0, text.index(terminator) + terminator.size + 1)
-
     end
 
 
     #########################################################
-    # process_case( file )
+    # process_case( file, canonize )
     #   Will either run a test against file, or generate the
     #   canonical reference files for `file`, depending on
     #   the value of `canonize`.
     #########################################################
     def process_case( file, canonize=false )
-      file = File.join( cases, file )
       basename = File.basename( file, '.*' )
-
-      # Start a new testing record for this test iteration.
+      case_dir = File.dirname( file )
       record = TidyTestRecord.new
 
       # These are all showstoppers, but let's get as much information
@@ -794,20 +789,19 @@ replaced. You can use the `replace` option for overwrite existing files.
       record.tidy_path = tidy
       record.tidy_valid = check_tidy
       record.tidy_version = tidy_version
-      record.cases_valid = check_cases_dir
       record.case_file = file
       record.case_file_valid = check_test_file( file )
       record.results_dir = results
       record.results_valid = check_results_dir
 
-      unless record.tidy_valid && record.cases_valid && record.case_file_valid && record.results_valid
+      unless record.tidy_valid && record.case_file_valid && record.results_valid
         reporter << record
         return false
       end
 
       # Get a list of all configuration files (if any) to use.
       # Use the default configuration file if required.
-      configs = Dir.glob(File.join(cases, "#{basename}*.conf") )
+      configs = Dir.glob(File.join(case_dir, "#{basename}*.conf") )
 
       # If there are no configs for the test, attempt to use the default.
       if configs.count < 1
@@ -830,16 +824,15 @@ replaced. You can use the `replace` option for overwrite existing files.
         # Log the config file.
         inner_record.config_file = config_file
 
-        # Build the expect filenames for this configuration
+        # Build the expect filenames for this configuration.
         if config_file == conf_default
-          base_conf = File.join(cases, basename)
+          base_conf = File.join(case_dir, basename)  # e.g., path/hello
         else
-          base_conf = File.join(cases, File.basename(config_file, '.*'))
+          base_conf = File.join(case_dir, File.basename(config_file, '.*')) # e.g., path/hello-1
         end
         expects_txt = "#{base_conf}-expect.txt"
         expects_htm = "#{base_conf}-expect#{File.extname(file)}"
 
-        # Build the
 
         if canonize
           #################
@@ -848,7 +841,7 @@ replaced. You can use the `replace` option for overwrite existing files.
 
           # Let's run tidy
           params = "-config #{config_file} --tidy-mark no #{file}"
-          tidy_out, tidy_err, tidy_status = capture3(tidy, params)
+          tidy_out, tidy_err, tidy_status = capture(tidy, params)
 
           # Write the results
           if File.exists?(expects_txt) && !replace
@@ -871,18 +864,18 @@ replaced. You can use the `replace` option for overwrite existing files.
           #################
 
           # Make sure that the expectations are available for this config.
-          m_expect_txt = check_expect_txt(expects_txt)
-          m_expect_htm = check_expect_htm(expects_htm)
-          inner_record.missing_txt = expects_txt unless m_expect_txt
-          inner_record.missing_htm = expects_htm unless m_expect_htm
+          expect_txt_ok = check_expect_txt(expects_txt)
+          expect_htm_ok = check_expect_htm(expects_htm)
+          inner_record.missing_txt = expects_txt unless expect_txt_ok
+          inner_record.missing_htm = expects_htm unless expect_htm_ok
 
-          if m_expect_htm && m_expect_txt
+          if expect_htm_ok && expect_txt_ok
             expects_txt_txt = clean_error_text(IO.read(expects_txt))
             expects_htm_txt = IO.read(expects_htm)
 
             # Let's run tidy
             params = "-config #{config_file} --tidy-mark no #{file}"
-            tidy_out, tidy_err, tidy_status = capture3(tidy, params)
+            tidy_out, tidy_err, tidy_status = capture(tidy, params)
             tidy_err = clean_error_text(tidy_err)
             inner_record.tested = true
 
@@ -924,17 +917,45 @@ replaced. You can use the `replace` option for overwrite existing files.
 
 
     #########################################################
-    # process_all
+    # process_all( canonize )
     #  Runs all HTML, XHTML, and XML files in the designated
     #  `cases` directory through the process_case process,
     #  performing canonization based on `canonize`.
     #########################################################
     def process_all(canonize=false)
-      pattern = File.join(cases, '*.{html,xml,xhtml}')
+      return false unless check_cases_dir
+      result = true
+      pattern = File.join(self.cases, '**', '*.{html,xml,xhtml}')
       tests = Dir[pattern].reject { |f| f[%r{-expect}] }.sort
-      tests.each { |file| process_case(File.basename(file), canonize) }
-      puts "\n"
+      tests.each { |file| result = (process_case(file, canonize) && result) }
+      print "\n" # clear the final period.
+      result
     end
+
+    #########################################################
+    # process_one( canonize )
+    #  Process a single HTML, XHTML, or XML file, either in
+    #  the designated cases directory (if only a filename is)
+    #  given, or using the path of the given file.
+    #########################################################
+    def process_one(file, canonize=false)
+      # We will assume that unless a full path is provided, then the case
+      # file should exist in `cases`, otherwise the case file and its
+      # supporting files are in the full path provided.
+      dirname = File.dirname(file)
+      if dirname.nil? || dirname == '.'
+        if check_cases_dir
+          file = File.join(self.cases, file)
+        else
+          return false
+        end
+      end
+      # If the file doesn't actually exist, process_case will deal with it.
+      result = process_case(file, canonize)
+      print "\n" # clear the final period.
+      result
+    end
+
 
   end # TidyRegression
 
@@ -1027,17 +1048,19 @@ Complete Help:
       set_options
 
       if name.nil?
-        @regression.process_all(false)
+        execution_ok = @regression.process_all(false)
       else
-        if @regression.process_case(name, false)
-          puts "\nThe test ended without any execution errors."
-          puts "See #{@regression.results} for testing results.\n\n"
-        else
-          puts "\nThe test ended with one or more execution errors.\n\n"
-        end
+        execution_ok = @regression.process_one(name, false)
       end
 
-      TidyTestRecord.make_report
+      if execution_ok
+        TidyTestRecord.make_report
+        puts "\nThe test ended without any execution errors."
+        puts "See #{@regression.results} for testing results.\n\n"
+      else
+        puts "\nThe test ended with one or more execution errors."
+        puts "Try to run again with --verbose or --debug for details.\n\n"
+      end
 
     end # rtest
 
@@ -1064,7 +1087,7 @@ Complete Help:
       if name.nil?
         @regression.process_all(true)
       else
-        @regression.process_case(name, true)
+        @regression.process_one(name, true)
       end
       
       TidyTestRecord.make_canon_report

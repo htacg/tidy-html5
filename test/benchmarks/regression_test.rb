@@ -249,72 +249,94 @@ Total test configurations: #{self.count_of_configs_requested}
     Configurations passed: #{self.count_of_configs_passed} of #{self.count_of_configs_tested}
     Configurations failed: #{self.count_of_configs_failed} of #{self.count_of_configs_tested}
 
+      HEREDOC
+
+      readme = File.join(File.dirname(record0.case_file), 'README.txt')
+      if File.exists?( readme )
+        output << "\n"
+        IO.readlines(readme).each do |line|
+          output << "#{line}"
+          output << "\n" if line[-1] != "\n"
+        end
+        output << "\n"
+      end
+
+      if self.count_of_configs_aborted > 0
+        output << <<-HEREDOC
 
 Missing Expectations Files:
 ===========================
+Tests for these files were not performed because they are missing files against
+which to compare, as indicated below:
 
-      HEREDOC
+        HEREDOC
 
-      # Show cases that are missing critical inputs:
-      output << 'Case File'.ljust(max_case)
-      output << 'For Configuration'.ljust(max_conf)
-      output << 'Requires Errors'.ljust(max_errs)
-      output << 'Requires Markup'.ljust(max_mkup)
-      output << "\n"
-      output << '---------'.ljust(max_case)
-      output << '-----------------'.ljust(max_conf)
-      output << '---------------'.ljust(max_errs)
-      output << '---------------'.ljust(max_mkup)
-      output << "\n"
-
-      @@test_records.select { |record| !record.missing_txt.nil? || !record.missing_htm.nil? }.each do | record |
-        output << column(record.case_file, max_case)
-        output << column(record.config_file, max_conf)
-        output << column(record.missing_txt, max_errs)
-        output << column(record.missing_htm, max_mkup)
+        # Show cases that are missing critical inputs:
+        output << 'Case File'.ljust(max_case)
+        output << 'For Configuration'.ljust(max_conf)
+        output << 'Requires Errors'.ljust(max_errs)
+        output << 'Requires Markup'.ljust(max_mkup)
         output << "\n"
-      end
-
-      # Show cases that have failed.
-      output << "\n\nFailed Tests:\n"
-      output << "=============\n\n"
-      output << 'Case File'.ljust(max_case)
-      output << 'For Configuration'.ljust(max_conf)
-      output << 'Markup'.ljust(9)
-      output << 'Errors'.ljust(9)
-      output << "\n"
-      output << '---------'.ljust(max_case)
-      output << '-----------------'.ljust(max_conf)
-      output << '------'.ljust(9)
-      output << '-------'.ljust(9)
-      output << "\n"
-
-      @@test_records.select { |record| record.tested && !record.passed_test? }.each do | record |
-        output << column(record.case_file, max_case)
-        output << column(record.config_file, max_conf)
-        output << (record.passed_output ? "PASSED" : "FAILED").ljust(9)
-        output << (record.passed_errout ? "PASSED" : "FAILED").ljust(9)
+        output << '---------'.ljust(max_case)
+        output << '-----------------'.ljust(max_conf)
+        output << '---------------'.ljust(max_errs)
+        output << '---------------'.ljust(max_mkup)
         output << "\n"
 
-        # Add explanatory notes (if any) for failing tests.
-        unless record.info_text_file.nil?
-          output << "\n"
-          IO.readlines(record.info_text_file).each do |line|
-            output << "     #{line}"
-            output << "\n" if line[-1] != "\n"
-          end
+        @@test_records.select { |record| !record.missing_txt.nil? || !record.missing_htm.nil? }.each do | record |
+          output << column(record.case_file, max_case)
+          output << column(record.config_file, max_conf)
+          output << column(record.missing_txt, max_errs)
+          output << column(record.missing_htm, max_mkup)
           output << "\n"
         end
-      end
+        end # if count_of_configs_aborted
+
+      if self.count_of_configs_failed > 0
+        # Show cases that have failed.
+        output << "\n\nFailed Tests:\n"
+        output << "=============\n\n"
+        output << 'Case File'.ljust(max_case)
+        output << 'For Configuration'.ljust(max_conf)
+        output << 'Markup'.ljust(9)
+        output << 'Errors'.ljust(9)
+        output << "\n"
+        output << '---------'.ljust(max_case)
+        output << '-----------------'.ljust(max_conf)
+        output << '------'.ljust(9)
+        output << '-------'.ljust(9)
+        output << "\n"
+
+        @@test_records.select { |record| record.tested && !record.passed_test? }.each do | record |
+          output << column(record.case_file, max_case)
+          output << column(record.config_file, max_conf)
+          output << (record.passed_output ? "PASSED" : "FAILED").ljust(9)
+          output << (record.passed_errout ? "PASSED" : "FAILED").ljust(9)
+          output << "\n"
+
+          # Add explanatory notes (if any) for failing tests.
+          unless record.info_text_file.nil?
+            output << "\n"
+            IO.readlines(record.info_text_file).each do |line|
+              output << "     #{line}"
+              output << "\n" if line[-1] != "\n"
+            end
+            output << "\n"
+          end
+        end
+      end # count_of_configs_failed
 
       # if there are notes for records that did pass a test, then display them.
       if @@test_records.select { |record| record.tested && record.passed_test? && record.info_text_file}.count > 0
-        output << "\n\n"
-        output << "Notes about passing tests:\n"
-        output << "==========================\n"
-        output << "Some of the passing tests have notes about them that may affect how you\n"
-        output << "wish to interpret the results, such as OS-specific concerns, etc.\n"
-        output << "\n"
+        output << <<-HEREDOC
+
+
+Notes about passing tests:
+==========================
+Some of the passing tests have notes about them that may affect how you wish
+to interpret the results, such as operating-specific results, etc.
+
+        HEREDOC
 
         @@test_records.select { |record| record.tested && record.passed_test? && record.info_text_file }.each do | record |
           output << "\n#{File.basename(record.case_file)}:\n\n"

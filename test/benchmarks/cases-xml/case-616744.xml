@@ -1,0 +1,12 @@
+<refentry>
+        <para> This is some stuff in a para.
+        There's a "<literal>command</literal>"
+in it.
+        </para>
+        <blockquote><programlisting>
+        This line is indented 4 spaces.
+
+            This (3rd) line is indented 8 spaces.
+        </programlisting></blockquote>
+</refentry>
+

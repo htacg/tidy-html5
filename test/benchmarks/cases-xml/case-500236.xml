@@ -1,0 +1,10 @@
+<!-- use "--word-2000 yes -xml" on command line -->
+
+<!-- Test case for MS Access files failing with Error: missing quote mark for attribute value -->
+
+
+
+<PARAM NAME="XMLData" VALUE="<xml xmlns:a=&quot;urn:schemas-microsoft-com:office:access&quot;>&#13;&#10; 
+
+<a:something></a:something><a:something></a:something></xml>'&quot;">
+

@@ -895,6 +895,7 @@ replaced. You can use the `replace` option for overwrite existing files.
           # Let's run tidy
           params = "-config #{config_file} --tidy-mark no #{file}"
           tidy_out, tidy_err, tidy_status = capture(tidy, params)
+          tidy_err.encode!(tidy_err.encoding, :universal_newline => true) if tidy_err
 
           # Write the results
           if File.exists?(expects_txt) && !replace
@@ -929,6 +930,7 @@ replaced. You can use the `replace` option for overwrite existing files.
             # Let's run tidy
             params = "-config #{config_file} --tidy-mark no #{file}"
             tidy_out, tidy_err, tidy_status = capture(tidy, params)
+            tidy_err.encode!(tidy_err.encoding, :universal_newline => true) if tidy_err
             tidy_err = clean_error_text(tidy_err)
             inner_record.tested = true
 

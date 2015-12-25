@@ -275,7 +275,7 @@ static const CmdOptDesc cmdopt_defs[] =  {
  */
 static tmbstr stringWithFormat( const ctmbstr fmt, ... )
 {
-	va_list argList = {};
+	va_list argList;
 	tmbstr result = NULL;
 	int len = 0;
 	
@@ -1060,6 +1060,8 @@ static tmbstr cleanup_description( ctmbstr description )
 	states state = s_DATA;
 	charstates charstate;
 	char c;
+	int j = 0, k = 0;
+	transitionType transition;
 
 	/* Process the HTML Snippet */
 	do {
@@ -1088,9 +1090,6 @@ static tmbstr cleanup_description( ctmbstr description )
 		}
 
 		/* Find the correct instruction */
-		int j = 0;
-		transitionType transition;
-
 		while (transitions[j].state != s_LAST)
 		{
 			transition = transitions[j];
@@ -1130,7 +1129,7 @@ static tmbstr cleanup_description( ctmbstr description )
 					case a_EMIT_SUBS:
 						name[i_name] = '\0';
 						i_name = 0;
-						int k = 0;
+						k = 0;
 						writer = "";
 						while ( replacements[k].tag )
 						{
@@ -1357,6 +1356,7 @@ static void xml_options_strings( TidyDoc tdoc )
  */
 static void xml_strings( void )
 {
+    uint i;
 	ctmbstr current_language = tidyGetLanguage();
 	Bool skip_current = strcmp( current_language, "en" ) == 0;
 	Bool matches_base;
@@ -1364,7 +1364,7 @@ static void xml_strings( void )
 	printf( "<?xml version=\"1.0\"?>\n"
 		   "<localized_strings version=\"%s\">\n", tidyLibraryVersion());
 
-	uint i = tidyFirstStringKey();
+	i = tidyFirstStringKey();
 	do	{
 		printf( "<localized_string id=\"%u\">\n", i );
 		printf( " <string class=\"%s\">", "en" );
@@ -1423,6 +1423,7 @@ int main( int argc, char** argv )
 	ctmbstr cfgfil = NULL, errfil = NULL, htmlfil = NULL;
 	TidyDoc tdoc = tidyCreate();
 	int status = 0;
+	tmbstr locale = NULL;
 	
 	uint contentErrors = 0;
 	uint contentWarnings = 0;
@@ -1433,7 +1434,6 @@ int main( int argc, char** argv )
 //	tidySetPrettyPrinterCallback(tdoc, progressTester);
 
 	/* Set the locale for tidy's output. */
-	tmbstr locale = NULL;
 	locale = tidySystemLocale(locale);
 	tidySetLanguage(locale);
 	if ( locale )

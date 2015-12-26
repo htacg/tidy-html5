@@ -151,16 +151,39 @@ module TidyRegressionTesting
   #  does not work properly on Windows, i.e., it only works
   #  in the present working directory). It is necessary to
   #  supply the executable path and the command line params
-  #  separately.
+  #  (as a string) separately.
   ###########################################################
   def capture( execute, params )
     pwd = Dir.pwd
     Dir.chdir(File.dirname(execute))
-    result = Open3.capture3("#{File.basename(execute)} #{params}")
+    result = Open3.capture3("#{File.basename(execute)} #{params}", :binmode => true)
     Dir.chdir(pwd)
     result
-  end  
+  end
 
+
+  ###########################################################
+  # capture_tidy( execute, params )
+  #  Earlier versions of Tidy have a stderr output bug on
+  #  Windows wherein CRLF words are mangled. Here we'll
+  #  simulate ::capture, but write and read a temporary file
+  #  to get the tidy error messages. Do NOT include the -f
+  #  parameter, which we'll manage ourselves. Result is an
+  #  array with stdout, stderr (using temp file), status.
+  ###########################################################
+  def capture_tidy( execute, params )
+    r_out, r_err, r_status = nil
+    pwd = Dir.pwd
+    Dir.chdir(File.dirname(execute))
+    Dir.mktmpdir do |dir|
+      result_path = "#{File.join(dir, 'tidy_rtest.tmp')}"
+      params = "-f #{result_path} #{params}"
+      r_out, r_err, r_status = Open3.capture3("#{File.basename(execute)} #{params}", :binmode => true)
+      r_err = IO.read(result_path)
+    end
+    Dir.chdir(pwd)
+    [r_out, r_err, r_status]
+  end
 
   #############################################################################
   # class TidyTestRecord
@@ -310,8 +333,8 @@ which to compare, as indicated below:
         @@test_records.select { |record| record.tested && !record.passed_test? }.each do | record |
           output << column(record.case_file, max_case)
           output << column(record.config_file, max_conf)
-          output << (record.passed_output ? "PASSED" : "FAILED").ljust(9)
-          output << (record.passed_errout ? "PASSED" : "FAILED").ljust(9)
+          output << (record.passed_output ? 'PASSED' : 'FAILED').ljust(9)
+          output << (record.passed_errout ? 'PASSED' : 'FAILED').ljust(9)
           output << "\n"
 
           # Add explanatory notes (if any) for failing tests.
@@ -661,7 +684,7 @@ replaced. You can use the `replace` option for overwrite existing files.
       if tidy.nil?
         nil
       else
-        tidy_out, tidy_err, tidy_status = capture(tidy, "-v")
+        tidy_out, tidy_err, tidy_status = capture(tidy, '-v')
         tidy_out.split.last
       end
     end
@@ -894,8 +917,7 @@ replaced. You can use the `replace` option for overwrite existing files.
 
           # Let's run tidy
           params = "-config #{config_file} --tidy-mark no #{file}"
-          tidy_out, tidy_err, tidy_status = capture(tidy, params)
-          tidy_err.encode!(tidy_err.encoding, :universal_newline => true) if tidy_err
+          tidy_out, tidy_err, tidy_status = capture_tidy(tidy, params)
 
           # Write the results
           if File.exists?(expects_txt) && !replace
@@ -929,8 +951,7 @@ replaced. You can use the `replace` option for overwrite existing files.
 
             # Let's run tidy
             params = "-config #{config_file} --tidy-mark no #{file}"
-            tidy_out, tidy_err, tidy_status = capture(tidy, params)
-            tidy_err.encode!(tidy_err.encoding, :universal_newline => true) if tidy_err
+            tidy_out, tidy_err, tidy_status = capture_tidy(tidy, params)
             tidy_err = clean_error_text(tidy_err)
             inner_record.tested = true
 

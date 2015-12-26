@@ -25,6 +25,7 @@ require 'logger'         # Log output simplified.
 require 'open3'          # Run executables and capture output.
 require 'fileutils'      # File utilities.
 require 'date'           # Make sure DateTime works.
+require 'fileutils'      # compare_file, etc.
 require 'thor'           # thor provides robust command line parameter parsing.
 
 
@@ -69,7 +70,7 @@ module Which
   def find_executable(path, cmd, &_block)
     executable_file_extensions.each do |ext|
       # rubocop:disable Lint/AssignmentInCondition
-      if real_executable?(abs_exe = File.expand_path(cmd + ext, path))
+      if real_executable?( (abs_exe = File.expand_path(cmd + ext, path) ))
         yield(abs_exe)
       end
       # rubocop:enable Lint/AssignmentInCondition
@@ -89,27 +90,10 @@ module Which
   end
 
   module_function(*public_instance_methods) # `extend self`, sorta
-end
-
-# make Which() and WhichAll() work
-module Kernel
-  # rubocop:disable Style/MethodName
-  # return abs-path to +cmd+
-  def Which(cmd)
-    Which.which cmd
-  end
-  module_function :Which
-
-  # return all abs-path(s) to +cmd+ or [] if none
-  def WhichAll(cmd)
-    Which.which_all cmd
-  end
-  module_function :WhichAll
-  # rubocop:enable Style/MethodName
-end # module
+end # module Which
 
 
-###############################################################################
+################################################################################
 # module TidyRegressionTesting
 #  This module encapsulates module-level variables, utilities, logging,
 #  the CLI handling class, and the regression testing class.
@@ -126,6 +110,7 @@ module TidyRegressionTesting
   @@default_results = 'results'           # prefix only!
   @@default_conf = 'config_default.conf'
 
+
   ###########################################################
   # Logging
   ###########################################################
@@ -133,8 +118,9 @@ module TidyRegressionTesting
   @@log.level = Logger::ERROR
   @@log.datetime_format = '%Y-%m-%d %H:%M:%S'
 
+
   ###########################################################
-  # log_level
+  # property log_level
   ###########################################################
   def self.log_level
     @@log.level
@@ -145,46 +131,6 @@ module TidyRegressionTesting
   end
   
   
-  ###########################################################
-  # capture( execute, params )
-  #  A cross platform implementor of open3::capture3 (which
-  #  does not work properly on Windows, i.e., it only works
-  #  in the present working directory). It is necessary to
-  #  supply the executable path and the command line params
-  #  (as a string) separately.
-  ###########################################################
-  def capture( execute, params )
-    pwd = Dir.pwd
-    Dir.chdir(File.dirname(execute))
-    result = Open3.capture3("#{File.basename(execute)} #{params}", :binmode => true)
-    Dir.chdir(pwd)
-    result
-  end
-
-
-  ###########################################################
-  # capture_tidy( execute, params )
-  #  Earlier versions of Tidy have a stderr output bug on
-  #  Windows wherein CRLF words are mangled. Here we'll
-  #  simulate ::capture, but write and read a temporary file
-  #  to get the tidy error messages. Do NOT include the -f
-  #  parameter, which we'll manage ourselves. Result is an
-  #  array with stdout, stderr (using temp file), status.
-  ###########################################################
-  def capture_tidy( execute, params )
-    r_out, r_err, r_status = nil
-    pwd = Dir.pwd
-    Dir.chdir(File.dirname(execute))
-    Dir.mktmpdir do |dir|
-      result_path = "#{File.join(dir, 'tidy_rtest.tmp')}"
-      params = "-f #{result_path} #{params}"
-      r_out, r_err, r_status = Open3.capture3("#{File.basename(execute)} #{params}", :binmode => true)
-      r_err = IO.read(result_path)
-    end
-    Dir.chdir(pwd)
-    [r_out, r_err, r_status]
-  end
-
   #############################################################################
   # class TidyTestRecord
   #  This class defines a single Tidy test record and provides an interface
@@ -206,6 +152,7 @@ module TidyRegressionTesting
     attr_accessor :tested               # Indicates that this test was executed.
     attr_accessor :passed_output        # Indicates the output test matched.
     attr_accessor :passed_errout        # Indicates the error output test matched.
+    attr_accessor :passed_status        # Indicates tidy's exit code, 0, 1, or 2.
     attr_accessor :info_text_file       # Indicates explanatory text for a test config.
 
     @@test_records = [] # Array of test records.
@@ -229,6 +176,7 @@ module TidyRegressionTesting
       @tested = false
       @passed_output = false
       @passed_errout = false
+      @passed_status = false
       @info_text_file = nil
     end # initialize
 
@@ -323,11 +271,13 @@ which to compare, as indicated below:
         output << 'For Configuration'.ljust(max_conf)
         output << 'Markup'.ljust(9)
         output << 'Errors'.ljust(9)
+        output << 'Exit Status'.ljust(14)
         output << "\n"
         output << '---------'.ljust(max_case)
         output << '-----------------'.ljust(max_conf)
         output << '------'.ljust(9)
         output << '-------'.ljust(9)
+        output << '-----------'.ljust(14)
         output << "\n"
 
         @@test_records.select { |record| record.tested && !record.passed_test? }.each do | record |
@@ -335,6 +285,7 @@ which to compare, as indicated below:
           output << column(record.config_file, max_conf)
           output << (record.passed_output ? 'PASSED' : 'FAILED').ljust(9)
           output << (record.passed_errout ? 'PASSED' : 'FAILED').ljust(9)
+          output << (record.passed_status ? 'PASSED' : 'FAILED').ljust(14)
           output << "\n"
 
           # Add explanatory notes (if any) for failing tests.
@@ -574,10 +525,239 @@ replaced. You can use the `replace` option for overwrite existing files.
     #  Indicates tests were run and all tests matched.
     #########################################################
     def passed_test?
-      @tested && @passed_errout && passed_output
+      @tested && @passed_errout && @passed_output && @passed_status
     end
 
-  end # TidyTestRecord
+  end # class TidyTestRecord
+
+
+  #############################################################################
+  # class TidyExe
+  #  The class abstracts the tidy command line executable and provides its
+  #  services within Ruby.
+  #############################################################################
+  class TidyExe
+
+    include TidyRegressionTesting
+
+    #########################################################
+    # initialize
+    #########################################################
+    def initialize
+      @path = nil
+      @version = nil
+      @source_file = nil
+      @config_file = nil
+    end
+
+
+    #########################################################
+    # property path
+    #  Indicates the complete path to the tidy executable.
+    #  If not set then the default is the OS default, if
+    #  found. Value is nil when the path is not valid.
+    #########################################################
+    def path
+      if @path.nil?
+        self.path = Which::which('tidy')
+      end
+      @path
+    end
+
+    def path=(value)
+      if !value.nil? && File.basename(value, '.*').start_with?('tidy') && File.executable?(value)
+        @path = File.expand_path(value)
+        @@log.info "#{__method__}: Will use Tidy at #{value}"
+      else
+        @path = nil
+        @@log.error "#{__method__}: No valid Tidy at #{value}"
+      end
+      @version = nil
+    end
+
+    def path?
+      !self.path.nil?
+    end
+
+
+    #########################################################
+    # property version
+    #  Returns the tidy version string of the executable.
+    #  nil value indicates that tidy is not found.
+    #########################################################
+    def version
+      if path.nil?
+        @@log.info "#{__method__}: Tried to get Tidy version with no valid Tidy specified."
+        nil
+      else
+        if @version.nil?
+          pwd = Dir.pwd
+          Dir.chdir(File.dirname(path))
+          result = Open3.capture3("#{File.basename(path)} -v")
+          Dir.chdir(pwd)
+          result[0].split.last if result
+        else
+          @version
+        end
+      end
+    end
+
+    def version?
+      !self.version.nil?
+    end
+
+
+    #########################################################
+    # property source_file
+    #  Indicates the path to the input file to be processed.
+    #  If the file is not present or readable then value
+    #  will be nil.
+    #########################################################
+    def source_file
+      @source_file
+    end
+
+    def source_file=( file )
+      if File.exists?(file) && File.readable?(file)
+        @@log.info "#{__method__}: Source file is #{file}"
+        @source_file = file
+      else
+        @@log.error "#{__method__}: Source file #{file} does not exist or could not be read."
+        @source_file = nil
+        false
+      end
+    end
+
+
+    #########################################################
+    # property config_file
+    #  Indicates the path to the config file to be used.
+    #  If the file is not present or readable then value
+    #  will be nil.
+    #########################################################
+      def config_file
+        @config_file
+      end
+
+      def config_file=(file)
+        if File.exists?(file) && File.readable?(file)
+          @@log.info "#{__method__}: Config file is #{file}"
+          @config_file = file
+        else
+          @@log.error "#{__method__}: Config file #{file} does not exist or could not be read."
+          @config_file = nil
+          false
+        end
+      end
+
+
+    #########################################################
+    # execute( file, config ) | output_file, error_file, status |
+    # execute | output_file, error_file, status |
+    #  Sets source_file to file and config_file to config,
+    #  and then executes tidy using a block for the results.
+    #########################################################
+    def execute( file = nil, config = nil )
+      self.source_file = file unless file.nil?
+      if self.source_file.nil?
+        @@log.error "#{__method__}: Source file is nil or invalid."
+        return false
+      end
+
+      self.config_file = config unless config.nil?
+      if self.config_file.nil?
+        @@log.error "#{__method__}: Config file is nil or invalid."
+        return false
+      end
+
+      if self.path.nil?
+        @@log.error "#{__method__}: No valid Tidy has been set or could be found."
+        return false
+      end
+
+      Dir.mktmpdir do | tmp | # temp stuff cleaned up automatically.
+        err_path = "#{File.join(tmp, 'tidy_err.tmp')}"
+        tdy_path = "#{File.join(tmp, 'tidy_out.tmp')}"
+        command = "#{File.basename(self.path)} -o #{tdy_path} -f #{err_path} -config #{self.config_file} --tidy-mark no #{self.source_file}"
+        pwd = Dir.pwd
+        Dir.chdir(File.dirname(self.path))
+        @@log.info "#{__method__}: performing #{command}"
+        tidy_result = Open3.capture3(command)
+        Dir.chdir(pwd)
+        yield tdy_path, err_path, tidy_result[2].exitstatus if block_given?
+      end
+      true
+    end
+
+
+    #########################################################
+    # self.compare_html
+    #  Tries to compare HTML files without respect to line
+    #  endings.
+    #  @todo: I'm worried about Ruby obscuring encoding.
+    #########################################################
+    def self.compare_html( file1, file2 )
+      content1 = File.exists?(file1) ? File.open(file1) { |f| f.readlines } : nil
+      content2 = File.exists?(file2) ? File.open(file2) { |f| f.readlines } : nil
+      content1 == content2
+    end
+
+
+    #########################################################
+    # self.compare_errs( file1, file2 )
+    #  Tries to compare error output without respect to
+    #  line endings, and ignoring everything after the
+    #  error summary output line.
+    #########################################################
+    def self.compare_errs( file1, file2 )
+      pattern = /^(No warnings or errors were found\.)|(\d warnings?, \d errors? were found!)/
+      content1 = nil
+      content2 = nil
+
+      if File.exists?(file1)
+        tmp = File.open(file1) { |f| f.readlines }
+        content1 = tmp.take_while { |line| line !~ pattern }
+        content1 << tmp[content1.count]
+      end
+
+      if File.exists?(file2)
+        tmp = File.open(file2) { |f| f.readlines }
+        content2 = tmp.take_while { |line| line !~ pattern }
+        content2 << tmp[content2.count]
+      end
+
+      content1 == content2
+    end
+
+
+    #########################################################
+    # self.status_from_err_file( file )
+    #  Given a path to an error output file, will return the
+    #  Tidy exit status. This avoids having to create a
+    #  database of Tidy exits codes and avoids having to
+    #  create extra files.
+    #########################################################
+    def self.status_from_err_file(file)
+      pattern1 = /No warnings or errors were found\./
+      pattern2 = /(\d) warnings?, (\d) errors? were found!/
+
+      content = File.exists?(file) ? File.open(file).readlines.to_s : nil
+
+      return 0 if content =~ pattern1
+
+      if ( matches = content.match(pattern2) )
+        if ( matches = matches.captures.to_a )
+          if matches.count > 1
+            return 1 if matches[1].to_i == 0 # no errors, so only warnings.
+            return 2 if matches[1].to_i > 0 # errors.
+          end
+        end
+      end
+      nil
+    end
+
+  end # class TidyExe
+
 
 
   #############################################################################
@@ -588,55 +768,87 @@ replaced. You can use the `replace` option for overwrite existing files.
 
     include TidyRegressionTesting
 
+    attr_accessor :tidy       # local instance of TidyExe class
+    attr_accessor :replace    # value of the --replace command line option.
+    attr_reader   :reporter   # Provides access to the TidyTestRecord instance.
+
     #########################################################
     # initialize
     #########################################################
     def initialize
-      @cases = nil
-      @results = nil
-      @tidy = nil
+      @dir_cases = nil
+      @dir_results = nil
+      @tidy = TidyExe.new
       @replace = false
       @reporter = TidyTestRecord.test_records
     end # initialize
 
 
     #########################################################
-    # property cases
+    # property dir_cases
     #  Indicates the directory from which to read the test
     #  cases.
     #########################################################
-    def cases
-      if @cases.nil?
-        self.cases = @@default_cases
+    def dir_cases
+      if @dir_cases.nil?
+        self.dir_cases = @@default_cases
       end
-      @cases
-    end # cases
-
-    def cases=( value )
-      @cases = File.expand_path(value)
+      @dir_cases
     end
 
+    def dir_cases=( value )
+      @dir_cases = File.expand_path(value)
+    end
+
+    def dir_cases?
+      if File.exists?(dir_cases) && File.readable?(dir_cases)
+        @@log.info "#{__method__}: Will uses cases directory #{dir_cases}"
+        true
+      else
+        @@log.error "#{__method__}: Cases directory #{dir_cases} does not exist or could not be read."
+        false
+      end
+    end
 
     #########################################################
-    # property results
+    # property dir_results
     #  Indicates the directory in which to write test pass
     #  and failure information. The value will be modified
     #  with the current tidy_version upon setting.
     #########################################################
-    def results
-      if @results.nil?
-        self.results = @@default_results
+    def dir_results
+      if @dir_results.nil?
+        self.dir_results = @@default_results
       end
-      @results
+      @dir_results
     end
 
-    def results=( value )
-      if tidy_version.nil?
-        result = "#{value}-0.0.0"
+    def dir_results=( value )
+      if self.tidy.version?
+        result = "#{value}-#{self.tidy.version}"
       else
-        result = "#{value}-#{tidy_version}"
+        result = "#{value}-0.0.0"
       end
-      @results = File.expand_path(result)
+      @dir_results = File.expand_path(result)
+    end
+
+    def dir_results?
+      unless File.exists?(dir_results)
+        begin
+          Dir.mkdir(dir_results)
+        rescue SystemCallError
+          @@log.error "#{__method__}: Directory #{dir_results} could not be created."
+          return false
+        end
+        @@log.info "#{__method__}: Created results directory #{dir_results}"
+      end
+      if File.readable?(dir_results)
+        @@log.info "#{__method__}: Will place results into #{dir_results}"
+        true
+      else
+        @@log.error "#{__method__}: Directory #{dir_results} could not be read."
+        false
+      end
     end
 
 
@@ -648,204 +860,45 @@ replaced. You can use the `replace` option for overwrite existing files.
     #  nil value indicates that tidy is not found.
     #########################################################
     def conf_default
-      File.join(cases, @@default_conf)
+      File.join(dir_cases, @@default_conf)
     end
 
-
-    #########################################################
-    # property tidy
-    #  Indicates the complete path to the tidy executable
-    #  to use for running tests and generating canonical
-    #  reference material.
-    #  nil value indicates that tidy is not found.
-    #########################################################
-    def tidy
-      if @tidy.nil?
-        self.tidy = Which::which('tidy')
-      end
-      @tidy
-    end
-
-    def tidy=( value )
-      if !value.nil? && File.basename( value, '.*').start_with?('tidy') && File.executable?( value )
-        @tidy = File.expand_path(value)
-      else
-        @tidy = nil
-      end
-    end
-
-
-    #########################################################
-    # property tidy_version
-    #  Returns the tidy version string of the executable.
-    #  nil value indicates that tidy is not found.
-    #########################################################
-    def tidy_version
-      if tidy.nil?
-        nil
-      else
-        tidy_out, tidy_err, tidy_status = capture(tidy, '-v')
-        tidy_out.split.last
-      end
-    end
-
-
-    #########################################################
-    # property replace
-    #  Indicates the state of the --replace command line
-    #  option, and specifies whether canonical files will
-    #  be overwritten during the process.
-    #########################################################
-    def replace
-      @replace
-    end
-
-    def replace=( value )
-      @replace = value
-    end
-
-
-    #########################################################
-    # property reporter
-    #  Provides access to the TidyTestRecord instance.
-    #########################################################
-    def reporter
-      @reporter
-    end
-
-
-    #########################################################
-    # check_cases_dir
-    #########################################################
-    def check_cases_dir
-      if File.exists?(cases) && File.readable?(cases)
-        @@log.info "Will uses cases in #{cases}"
-        true
-      else
-        @@log.error "Directory #{cases} does not exist or could not be read."
-        false
-      end
-    end
-
-
-    #########################################################
-    # check_results_dir
-    #########################################################
-    def check_results_dir
-      unless File.exists?(results)
-        begin
-          Dir.mkdir(results)
-        rescue SystemCallError
-          @@log.error "Directory #{results} could not be created."
-          return false
-        end
-        @@log.info "Created results directory #{results}"
-      end
-      if File.readable?(results)
-        @@log.info "Will place results into #{results}"
-        true
-      else
-        @@log.error "Directory #{results} could not be read."
-        false
-      end
-    end
-
-
-    #########################################################
-    # check_test_file( file )
-    #########################################################
-    def check_test_file( file )
-      if File.exists?(file) && File.readable?(file)
-        @@log.info "Will use file #{file}"
-        true
-      else
-        @@log.error "File #{file} does not exist or could not be read."
-        false
-      end
-    end
-
-
-    #########################################################
-    # check_conf_default
-    #########################################################
-    def check_conf_default
+    def conf_default?
       if File.exists?(conf_default) && File.readable?(conf_default)
-        @@log.info "Will use default configuration file #{conf_default}"
+        @@log.info "#{__method__}: Will use default configuration file #{conf_default}"
         true
       else
-        @@log.warn "Default configuration file #{conf_default} does not exist or could not be read."
+        @@log.warn "#{__method__}: Default configuration file #{conf_default} does not exist or could not be read."
         false
       end
     end
 
 
     #########################################################
-    # check_tidy
+    # case_file?( file )
     #########################################################
-    def check_tidy
-      if tidy.nil?
-        @@log.error "Tidy at #{tidy} was not found or is not executable."
-        false
-      else
-        @@log.info "Will use Tidy located at #{tidy}"
-        true
-      end
-    end
-
-
-    #########################################################
-    # check_expect_htm( expect )
-    #########################################################
-    def check_expect_htm( expect )
-      if File.exists?( expect )
-        @@log.info "Expectation file #{expect} was found."
+    def case_file?( file )
+      if File.exists?(file) && File.readable?(file)
+        @@log.info "#{__method__}: Will use file #{file}"
         true
       else
-        @@log.warn "Missing expectation file #{expect}."
+        @@log.error "#{__method__}: File #{file} does not exist or could not be read."
         false
       end
     end
 
 
     #########################################################
-    # check_expect_txt( expect )
+    # expects_file?( file )
     #########################################################
-    def check_expect_txt( expect )
-      if File.exists?(expect)
-        @@log.info "Expectation file #{expect} was found."
+    def expects_file?( file )
+      if File.exists?(file )
+        @@log.info "#{__method__}: Expectation file #{file} was found."
         true
       else
-        @@log.warn "Missing expectation file #{expect}."
+        @@log.warn "#{__method__}: Missing expectation file #{file}."
         false
       end
-    end
-
-
-    #########################################################
-    # clean_error_text( text )
-    #  We want to discard everything after:
-    #  - No warnings or errors were found.
-    #  - were found!
-    #  I wonder if we'd be happy with the --quiet output so
-    #  that we can avoid this. It means regenerating the test
-    #  cases, but they mostly seem to pass anyway.
-    #########################################################
-    def clean_error_text( text )
-      terminator_1 = 'No warnings or errors were found.'
-      terminator_2 = 'were found!'
-
-      return nil if text.nil? || text == ''
-
-      if text.index(terminator_1)
-        terminator = terminator_1
-      else
-        if text.index(terminator_2)
-          terminator = terminator_2
-        else
-          return text
-        end
-      end
-      text.slice(0, text.index(terminator) + terminator.size + 1)
     end
 
 
@@ -860,29 +913,27 @@ replaced. You can use the `replace` option for overwrite existing files.
       case_dir = File.dirname( file )
       record = TidyTestRecord.new
 
-      # These are all showstoppers, but let's get as much information
-      # for the test record as we can before aborting.
-      record.tidy_path = tidy
-      record.tidy_valid = check_tidy
-      record.tidy_version = tidy_version
+      ### These are all showstoppers, but let's get as much information
+      ### for the test record as we can before aborting.
+      record.tidy_path = tidy.path
+      record.tidy_valid = tidy.path?
+      record.tidy_version = tidy.version
+      record.results_dir = dir_results
+      record.results_valid = dir_results?
       record.case_file = file
-      record.case_file_valid = check_test_file( file )
-      record.results_dir = results
-      record.results_valid = check_results_dir
-
-      unless record.tidy_valid && record.case_file_valid && record.results_valid
+      record.case_file_valid = case_file?(file)
+      unless tidy.path? && case_file?(file) && dir_results?
         reporter << record
         return false
       end
 
-      # Get a list of all configuration files (if any) to use.
-      # Use the default configuration file if required.
+      ### Get a list of all configuration files (if any) to use.
       configs = Dir.glob(File.join(case_dir, "#{basename}*.conf") )
 
       # If there are no configs for the test, attempt to use the default.
       if configs.count < 1
         record.config_file = conf_default
-        record.config_file_valid = check_conf_default
+        record.config_file_valid = conf_default?
         unless record.config_file_valid
           reporter << record
           return false
@@ -890,14 +941,11 @@ replaced. You can use the `replace` option for overwrite existing files.
         configs << conf_default
       end
 
-      # Run through all of the configurations.
+      ### Run through all of the configurations.
       configs.sort.each do | config_file |
-        @@log.info "Testing with config file #{config_file}"
+        @@log.info "Processing with config file #{config_file}"
 
-        # Duplicate the record so we have a new one each run of this inner loop
         inner_record = record.clone
-
-        # Log the config file.
         inner_record.config_file = config_file
 
         # Build the expect filenames for this configuration.
@@ -906,8 +954,8 @@ replaced. You can use the `replace` option for overwrite existing files.
         else
           base_conf = File.join(case_dir, File.basename(config_file, '.*')) # e.g., path/hello-1
         end
-        expects_txt = "#{base_conf}-expect.txt"
-        expects_htm = "#{base_conf}-expect#{File.extname(file)}"
+        expects_txt_path = "#{base_conf}-expect.txt"
+        expects_htm_path = "#{base_conf}-expect#{File.extname(file)}"
 
 
         if canonize
@@ -916,74 +964,77 @@ replaced. You can use the `replace` option for overwrite existing files.
           #################
 
           # Let's run tidy
-          params = "-config #{config_file} --tidy-mark no #{file}"
-          tidy_out, tidy_err, tidy_status = capture_tidy(tidy, params)
+          self.tidy.source_file = file
+          self.tidy.config_file = config_file
+          self.tidy.execute do |output_htm_path, output_txt_path, exit_status|
 
-          # Write the results
-          if File.exists?(expects_txt) && !replace
-            @@log.warn "#{expects_txt} already exists and won't be replaced."
-          else
-            File.open(expects_txt, 'w') { |the_file| the_file.write(tidy_err)}
-            inner_record.missing_txt = expects_txt
-          end
+            if File.exists?(expects_htm_path) && !replace
+              @@log.warn "#{expects_htm_path} already exists and won't be replaced."
+            else
+              FileUtils.cp(output_htm_path, expects_htm_path, :preserve => true) if File.exists?(output_htm_path)
+              inner_record.missing_htm = expects_htm_path
+            end
 
-          if File.exists?(expects_htm) && !replace
-            @@log.warn "#{expects_htm} already exists and won't be replaced."
-          else
-            File.open(expects_htm, 'w') { |the_file| the_file.write(tidy_out)}
-            inner_record.missing_htm = expects_htm
-          end
+            if File.exists?(expects_txt_path) && !replace
+              @@log.warn "#{expects_txt_path} already exists and won't be replaced."
+            else
+              FileUtils.cp(output_txt_path, expects_txt_path, :preserve => true) if File.exists?(output_txt_path)
+              inner_record.missing_txt = expects_txt_path
+            end
+
+          end # tidy.execute
 
         else
           #################
           # TEST
           #################
 
-          # Make sure that the expectations are available for this config.
-          expect_txt_ok = check_expect_txt(expects_txt)
-          expect_htm_ok = check_expect_htm(expects_htm)
-          inner_record.missing_txt = expects_txt unless expect_txt_ok
-          inner_record.missing_htm = expects_htm unless expect_htm_ok
+          # Make sure that the expectations are available for this config...
+          inner_record.missing_txt = expects_file?(expects_txt_path) ? nil : expects_txt_path
+          inner_record.missing_htm = expects_file?(expects_htm_path) ? nil : expects_htm_path
 
-          if expect_htm_ok && expect_txt_ok
-            expects_txt_txt = clean_error_text(IO.read(expects_txt))
-            expects_htm_txt = IO.read(expects_htm)
+          # ...and only go through the process if they are available.
+          if expects_file?(expects_txt_path) && expects_file?(expects_htm_path)
 
             # Let's run tidy
-            params = "-config #{config_file} --tidy-mark no #{file}"
-            tidy_out, tidy_err, tidy_status = capture_tidy(tidy, params)
-            tidy_err = clean_error_text(tidy_err)
-            inner_record.tested = true
+            self.tidy.source_file = file
+            self.tidy.config_file = config_file
+            self.tidy.execute do | output_htm_path, output_txt_path, exit_status |
 
-            # Set comparison flags
-            inner_record.passed_output = tidy_out == expects_htm_txt
-            inner_record.passed_errout = tidy_err == expects_txt_txt
+              ## Make comparisons and set report flags
+              inner_record.tested = true
+              inner_record.passed_output = TidyExe.compare_html(output_htm_path, expects_htm_path)
+              inner_record.passed_errout = TidyExe.compare_errs(output_txt_path, expects_txt_path)
+              inner_record.passed_status = exit_status == TidyExe.status_from_err_file(expects_txt_path)
 
-            ## Build file names
+              ## Build file names
+              # In the case of multiple configurations, we need to get
+              # the configuration number to append to the markup file.
+              config_number = File.basename(config_file, '.*').match(/.*-.*-(.*)/)
+              config_number = config_number.nil? ? nil : "-#{config_number[1]}"
+              file_htm = "#{File.basename(file, '.*')}#{config_number}-fail#{File.extname(file)}"
+              file_err = "#{File.basename(file, '.*')}#{config_number}-fail.txt"
+              file_nfo = File.join(case_dir, "#{File.basename(file, '.*')}#{config_number}-expect.nfo")
 
-            # In the case of multiple configurations, we need to get
-            # the configuration number to append to the markup file.
-            config_number = File.basename(config_file, '.*').match(/.*-.*-(.*)/)
-            config_number = config_number.nil? ? nil : "-#{config_number[1]}"
-            file_err = "#{File.basename(file, '.*')}#{config_number}-fail.txt"
-            file_htm = "#{File.basename(file, '.*')}#{config_number}-fail#{File.extname(file)}"
+              ## Log an information file if it exists.
+              if File.exists?(file_nfo)
+                inner_record.info_text_file = file_nfo if File.exists?(file_nfo)
+              end
 
-            # Log an information file if it exists.
-            file_nfo = File.join(case_dir, "#{File.basename(file, '.*')}#{config_number}-expect.nfo")
-            if File.exists?(file_nfo)
-              inner_record.info_text_file = file_nfo if File.exists?(file_nfo)
-            end
+              ## Write results and copy the originals for convenience.
+              unless inner_record.passed_test?
+                FileUtils.cp( output_htm_path, File.join(dir_results, file_err), :preserve => true ) if File.exists?(output_htm_path)
+                FileUtils.cp( output_txt_path, File.join(dir_results, file_htm), :preserve => true ) if File.exists?(output_txt_path)
+                FileUtils.cp( expects_htm_path, dir_results, :preserve => true )
+                FileUtils.cp( expects_txt_path, dir_results, :preserve => true )
+                FileUtils.cp( file, dir_results, :preserve => true )
+                FileUtils.cp( file_nfo, dir_results, :preserve => true ) if File.exists?(file_nfo)
+              end # unless
 
-            # Write results and copy the originals for convenience.
-            unless inner_record.passed_test?
-              File.open(File.join(results, file_err), 'w') { |the_file| the_file.write(tidy_err)}
-              File.open(File.join(results, file_htm), 'w') { |the_file| the_file.write(tidy_out)}
-              FileUtils.cp(expects_htm, results, { preserve: true })
-              FileUtils.cp(expects_txt, results, { preserve: true })
-              FileUtils.cp(file, results, { preserve: true })
-              FileUtils.cp(file_nfo, results, { preserve: true }) if File.exists?(file_nfo)
-            end # unless
-          end # if
+            end # self.tidy.execute
+
+          end # if expects_file?
+
         end # if canonize
 
         # Write the final record
@@ -1007,9 +1058,9 @@ replaced. You can use the `replace` option for overwrite existing files.
     #  performing canonization based on `canonize`.
     #########################################################
     def process_all(canonize=false)
-      return false unless check_cases_dir
+      return false unless dir_cases?
       result = true
-      pattern = File.join(self.cases, '**', '*.{html,xml,xhtml}')
+      pattern = File.join(self.dir_cases, '**', '*.{html,xml,xhtml}')
       tests = Dir[pattern].reject { |f| f[%r{-expect}] }.sort
       tests.each { |file| result = (process_case(file, canonize) && result) }
       print "\n" # clear the final period.
@@ -1028,8 +1079,8 @@ replaced. You can use the `replace` option for overwrite existing files.
       # supporting files are in the full path provided.
       dirname = File.dirname(file)
       if dirname.nil? || dirname == '.'
-        if check_cases_dir
-          file = File.join(self.cases, file)
+        if dir_cases?
+          file = File.join(self.dir_cases, file)
         else
           return false
         end
@@ -1094,9 +1145,9 @@ replaced. You can use the `replace` option for overwrite existing files.
     def help(*args)
       if args.count == 0
         set_options
-        message_tidy = "version #{ @regression.tidy_version}"
-        message_cases = File.exists?(@regression.cases) ? '' : '(directory not found; test will not run)'
-        message_results = File.exists?(@regression.results) ? '(will try to use)' : '(will try to create)'
+        message_tidy = "version #{ @regression.tidy.version}"
+        message_cases = File.exists?(@regression.dir_cases) ? '' : '(directory not found; test will not run)'
+        message_results = File.exists?(@regression.dir_results) ? '(will try to use)' : '(will try to create)'
         puts <<-HEREDOC
 
 This script (#{File.basename($0)}) is a Tidy regression testing script that will
@@ -1105,9 +1156,9 @@ generate new benchmark files into the suite.
 
 Default Locations:
 ------------------
-  Tidy:    #{ @regression.tidy }, #{ message_tidy }
-  Cases:   #{ @regression.cases } #{ message_cases }
-  Results: #{ @regression.results } #{ message_results }
+  Tidy:    #{ @regression.tidy.path }, #{ message_tidy }
+  Cases:   #{ @regression.dir_cases } #{ message_cases }
+  Results: #{ @regression.dir_results } #{ message_results }
 
 Complete Help:
 --------------
@@ -1165,7 +1216,6 @@ Complete Help:
     def canonize(name = nil)
 
       set_options
-      @regression.replace = options[:replace] unless options[:replace].nil?
 
       if name.nil?
         @regression.process_all(true)
@@ -1184,9 +1234,10 @@ Complete Help:
     #########################################################
     protected
     def set_options
-      @regression.tidy = options[:tidy] unless options[:tidy].nil?
-      @regression.cases = options[:cases] unless options[:cases].nil?
-      @regression.results = options[:results] unless options[:results].nil?
+      @regression.tidy.path = options[:tidy] unless options[:tidy].nil?
+      @regression.dir_cases = options[:cases] unless options[:cases].nil?
+      @regression.dir_results = options[:results] unless options[:results].nil?
+      @regression.replace = options[:replace] unless options[:replace].nil?
 
       TidyRegressionTesting::log_level = Logger::WARN if options[:verbose]
       TidyRegressionTesting::log_level = Logger::DEBUG if options[:debug]

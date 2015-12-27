@@ -989,7 +989,7 @@ replaced. You can use the `replace` option for overwrite existing files.
           # Let's run tidy
           self.tidy.source_file = file
           self.tidy.config_file = config_file
-          self.tidy.execute do |output_htm_path, output_txt_path|
+          self.tidy.execute do |output_htm_path, output_txt_path, tidy_exit_code|
 
             if File.exists?(expects_htm_path) && !replace
               @@log.warn "#{expects_htm_path} already exists and won't be replaced."
@@ -1005,9 +1005,18 @@ replaced. You can use the `replace` option for overwrite existing files.
             if File.exists?(expects_txt_path) && !replace
               @@log.warn "#{expects_txt_path} already exists and won't be replaced."
             else
-              FileUtils.cp(output_txt_path, expects_txt_path, :preserve => true) if File.exists?(output_txt_path)
-              inner_record.missing_txt = expects_txt_path
+              if File.exists?(output_txt_path)
+                FileUtils.cp(output_txt_path, expects_txt_path, :preserve => true)
+                inner_record.missing_txt = expects_txt_path
+              end
             end
+
+            if File.exists?(expects_txt_path) && File.zero?(expects_txt_path)
+              err_file = File.join(File.dirname(expects_txt_path), "#{File.basename(expects_txt_path, '.*')}.err")
+              File.open(err_file, 'w') { |f| f.write tidy_exit_code.to_s }
+            end
+
+
 
           end # tidy.execute
 

@@ -156,7 +156,7 @@ module TidyRegressionTesting
     attr_accessor :info_text_file       # Indicates explanatory text for a test config.
 
     @@test_records = [] # Array of test records.
-
+    @@show_notes = true
 
     #########################################################
     # initialize
@@ -187,6 +187,18 @@ module TidyRegressionTesting
     #########################################################
     def self.test_records
       @@test_records
+    end
+
+    #########################################################
+    # + show_notes
+    #     The command line parameter backing setter/getter.
+    #########################################################
+    def self.show_notes
+      @@show_notes
+    end
+
+    def self.show_notes=( value )
+      @@show_notes = value
     end
 
 
@@ -289,7 +301,7 @@ which to compare, as indicated below:
           output << "\n"
 
           # Add explanatory notes (if any) for failing tests.
-          unless record.info_text_file.nil?
+          unless record.info_text_file.nil? || !self.show_notes
             output << "\n"
             IO.readlines(record.info_text_file).each do |line|
               output << "     #{line}"
@@ -301,7 +313,7 @@ which to compare, as indicated below:
       end # count_of_configs_failed
 
       # if there are notes for records that did pass a test, then display them.
-      if @@test_records.select { |record| record.tested && record.passed_test? && record.info_text_file}.count > 0
+      if @@test_records.select { |record| record.tested && record.passed_test? && record.info_text_file}.count > 0 && self.show_notes
         output << <<-HEREDOC
 
 
@@ -691,7 +703,7 @@ replaced. You can use the `replace` option for overwrite existing files.
 
 
     #########################################################
-    # self.compare_html
+    # + compare_html
     #  Tries to compare HTML files without respect to line
     #  endings.
     #  @todo: I'm worried about Ruby obscuring encoding.
@@ -699,12 +711,14 @@ replaced. You can use the `replace` option for overwrite existing files.
     def self.compare_html( file1, file2 )
       content1 = File.exists?(file1) ? File.open(file1) { |f| f.readlines } : nil
       content2 = File.exists?(file2) ? File.open(file2) { |f| f.readlines } : nil
+      content1 = content1.empty? ? nil : content1 unless content1.nil?
+      content2 = content2.empty? ? nil : content2 unless content2.nil?
       content1 == content2
     end
 
 
     #########################################################
-    # self.compare_errs( file1, file2 )
+    # + compare_errs( file1, file2 )
     #  Tries to compare error output without respect to
     #  line endings, and ignoring everything after the
     #  error summary output line.
@@ -731,17 +745,26 @@ replaced. You can use the `replace` option for overwrite existing files.
 
 
     #########################################################
-    # self.status_from_err_file( file )
+    # + status_from_err_file( file )
     #  Given a path to an error output file, will return the
     #  Tidy exit status. This avoids having to create a
     #  database of Tidy exits codes and avoids having to
-    #  create extra files.
+    #  create extra files, although the fallback/override
+    #  .err file is checked here, too.
     #########################################################
     def self.status_from_err_file(file)
+      # The -expect.txt file may be empty for certain tests based
+      # on the configuration used, so we will reluctantly support
+      # the use of -expect.err to contain Tidy's expected exit status.
+      err_file = File.join(File.dirname(file), "#{File.basename(file, '.*')}.err")
+      if File.exists?(err_file)
+        return File.open(err_file) { |f| f.read }.to_i
+      end
+
       pattern1 = /No warnings or errors were found\./
       pattern2 = /(\d) warnings?, (\d) errors? were found!/
 
-      content = File.exists?(file) ? File.open(file).readlines.to_s : nil
+      content = File.exists?(file) ? File.open(file) { |f| f.read } : nil
 
       return 0 if content =~ pattern1
 
@@ -973,10 +996,10 @@ replaced. You can use the `replace` option for overwrite existing files.
             else
               if File.exists?(output_htm_path)
                 FileUtils.cp(output_htm_path, expects_htm_path, :preserve => true) if File.exists?(output_htm_path)
-                inner_record.missing_htm = expects_htm_path
               else
-                inner_record.missing_htm = '(produced no output)'
+                FileUtils.touch(expects_htm_path)
               end
+              inner_record.missing_htm = expects_htm_path
             end
 
             if File.exists?(expects_txt_path) && !replace
@@ -1027,8 +1050,16 @@ replaced. You can use the `replace` option for overwrite existing files.
 
               ## Write results and copy the originals for convenience.
               unless inner_record.passed_test?
-                FileUtils.cp( output_htm_path, File.join(dir_results, file_err), :preserve => true ) if File.exists?(output_htm_path)
-                FileUtils.cp( output_txt_path, File.join(dir_results, file_htm), :preserve => true ) if File.exists?(output_txt_path)
+                if File.exists?(output_htm_path)
+                  FileUtils.cp(output_htm_path, File.join(dir_results, file_htm), :preserve => true)
+                else
+                  FileUtils.touch(File.join(dir_results, file_htm))
+                end
+                if File.exists?(output_txt_path)
+                  FileUtils.cp(output_txt_path, File.join(dir_results, file_err), :preserve => true)
+                else
+                  FileUtils.touch(File.join(dir_results, file_err))
+                end
                 FileUtils.cp( expects_htm_path, dir_results, :preserve => true )
                 FileUtils.cp( expects_txt_path, dir_results, :preserve => true )
                 FileUtils.cp( file, dir_results, :preserve => true )
@@ -1071,6 +1102,7 @@ replaced. You can use the `replace` option for overwrite existing files.
       result
     end
 
+
     #########################################################
     # process_one( canonize )
     #  Process a single HTML, XHTML, or XML file, either in
@@ -1094,7 +1126,6 @@ replaced. You can use the `replace` option for overwrite existing files.
       print "\n" # clear the final period.
       result
     end
-
 
   end # TidyRegression
 
@@ -1176,6 +1207,10 @@ Complete Help:
     # rtest
     #  Tests a single file or all files.
     #########################################################
+    option :notes,
+           :type => :boolean,
+           :desc => 'Indicates whether or not to display notes in the test report.',
+           :aliases => '-n'
     desc 'rtest [<file>] [options]', 'Performs a regression test on <file>.'
     long_desc <<-LONG_DESC
       Will run a regression test for <file>. Use this command without <file>
@@ -1242,6 +1277,8 @@ Complete Help:
       @regression.dir_cases = options[:cases] unless options[:cases].nil?
       @regression.dir_results = options[:results] unless options[:results].nil?
       @regression.replace = options[:replace] unless options[:replace].nil?
+
+      TidyTestRecord::show_notes = options[:notes] unless options[:notes].nil?
 
       TidyRegressionTesting::log_level = Logger::WARN if options[:verbose]
       TidyRegressionTesting::log_level = Logger::DEBUG if options[:debug]

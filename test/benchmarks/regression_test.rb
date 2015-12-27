@@ -1125,6 +1125,14 @@ replaced. You can use the `replace` option for overwrite existing files.
       dirname = File.dirname(file)
       if dirname.nil? || dirname == '.'
         if dir_cases?
+          # No dirname, so there's the possibility we've asked for a case name
+          # without the cases-*.*ml qualifier. If that's the case, we'll try
+          # to find a matching cases-case_name-*.ml file to use.
+          if file !~ /case-.*\..*ml/
+            %w[xml xhtml html].each do |ext|
+              file = "case-#{file}.#{ext}" if File.exists?(File.join(self.dir_cases, "case-#{file}.#{ext}"))
+            end
+          end
           file = File.join(self.dir_cases, file)
         else
           return false

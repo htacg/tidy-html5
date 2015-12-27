@@ -1228,11 +1228,12 @@ Complete Help:
            :type => :boolean,
            :desc => 'Indicates whether or not to display notes in the test report.',
            :aliases => '-n'
-    desc 'rtest [<file>] [options]', 'Performs a regression test on <file>.'
+    desc 'rtest [<file>|<case_name>] [options]', 'Performs a regression test on <file> or <case_name>.'
     long_desc <<-LONG_DESC
-      Will run a regression test for <file>. Use this command without <file>
-      to run all of the regression tests. Output will be placed into the
-      default directory unless an alternate is specified with --output.
+      Will run a regression test for <file> or <case_name>. Use this command without
+      <file> or <case_name> to run all of the regression tests. Output will be placed
+      into the default directory unless an alternate is specified with --output.
+      <case_name> indicates the filename portion between "case-" and the file extension.
     LONG_DESC
     def rtest(name = nil)
 
@@ -1263,11 +1264,12 @@ Complete Help:
            :type => :boolean,
            :desc => 'Indicates whether or not canonize replaces existing files.',
            :aliases => '-f'
-    desc 'canonize [<file>] [options]', 'Builds expected output for <file>.'
+    desc 'canonize [<file>|<case_name>] [options]', 'Builds expected output for <file> or <case_name>.'
     long_desc <<-LONG_DESC
-      Will build the canonical output for <file> and put it into the default
-      directory. Use without <file> to generate canonical reference material for
+      Will build the canonical output for <file> or <case_name> and put it into the default
+      directory. Use without <file> or <case_name> to generate canonical reference material for
       all files. Use with --replace to force replacement of existing files.
+      <case_name> indicates the filename portion between "case-" and the file extension.
     LONG_DESC
     def canonize(name = nil)
 

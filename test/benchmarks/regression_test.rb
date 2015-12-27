@@ -966,13 +966,17 @@ replaced. You can use the `replace` option for overwrite existing files.
           # Let's run tidy
           self.tidy.source_file = file
           self.tidy.config_file = config_file
-          self.tidy.execute do |output_htm_path, output_txt_path, exit_status|
+          self.tidy.execute do |output_htm_path, output_txt_path|
 
             if File.exists?(expects_htm_path) && !replace
               @@log.warn "#{expects_htm_path} already exists and won't be replaced."
             else
-              FileUtils.cp(output_htm_path, expects_htm_path, :preserve => true) if File.exists?(output_htm_path)
-              inner_record.missing_htm = expects_htm_path
+              if File.exists?(output_htm_path)
+                FileUtils.cp(output_htm_path, expects_htm_path, :preserve => true) if File.exists?(output_htm_path)
+                inner_record.missing_htm = expects_htm_path
+              else
+                inner_record.missing_htm = '(produced no output)'
+              end
             end
 
             if File.exists?(expects_txt_path) && !replace

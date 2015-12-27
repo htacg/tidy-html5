@@ -1,8 +1,0 @@
-case-427664: When tested on different OS these are the results, using the latest
-tagged release of Tidy (5.1.25):
-
-OS               Markup   Errors
---------------   ------   ------
-Mac OS X 10.11   pass     fail
-Ubunutu 14.04    pass     fail
-Windows 10       pass     fail

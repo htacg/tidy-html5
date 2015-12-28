@@ -966,7 +966,9 @@ replaced. You can use the `replace` option for overwrite existing files.
       end
 
       ### Get a list of all configuration files (if any) to use.
-      configs = Dir.glob(File.join(case_dir, "#{basename}*.conf") )
+      configs = []
+      Dir.glob(File.join(case_dir, "#{basename}.conf") ).each { |entry| configs << entry }
+      Dir.glob(File.join(case_dir, "#{basename}-*.conf") ).each { |entry| configs << entry }
 
       # If there are no configs for the test, attempt to use the default.
       if configs.count < 1

@@ -1,2 +1,4 @@
-case-431895: The success of this test is platform and user dependent,
-as the use of --gnu-emacs includes path information in the error output.
+case-431895: This test uses --gnu-emacs: yes, which returns user-dependent path
+information as part of the error result. The regression testing script removes
+all of the path information except for the case filename during testing, and so
+you may want to manually verify the result of this passing test.

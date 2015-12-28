@@ -17,3 +17,6 @@ Case    Exit Code  Duplicates
 
 These files are candidates for being included in the default `cases` testing
 suite. This can be easily done by simply moving this directory into `cases`.
+
+The original XML testing script only checked Tidy's exit status. All of the
+current testing checks exit status as well as performs an output comparison.

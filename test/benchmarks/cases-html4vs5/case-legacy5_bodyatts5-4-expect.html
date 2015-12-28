@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>bodyatts5.html - body attribute to css</title>
+
+<style>
+  strong { color: red }
+</style>
+</head>
+<body background="images/non-existing.jpg">
+<p>This file contains a body element <strong>&lt;body
+background="images/non-existing.jpg"&gt;</strong></p>
+<p>The 'experimental' Markup Validation Service flags this as an
+HTML5 <strong>ERROR</strong> with the string <strong>"The
+background attribute on the body element is obsolete. Use CSS
+instead."</strong></p>
+<p>If 'clean' at present tidy 'silently' replaces this with CSS in
+CleanBodyAttrs( TidyDocImpl* doc, Node* body ), called from
+CreateStyleElement( doc ), in void TY_(CleanDocument)( TidyDocImpl*
+doc )</p>
+<p>Q: <strong>Should this behaviour be modified?</strong></p>
+<p>A: There are various possibilities<br></p>
+<ul>
+<li>If the document is configured (or found?) to be HTML5, then
+<ul>
+<li>If clean configured
+<ul>
+<li>Fix it silently, <strong>as now</strong></li>
+<li>Fix it with a warning</li>
+<li>No fix and flag as an error, like the validator</li>
+</ul>
+</li>
+<li>Clean not configured
+<ul>
+<li>No fix, with no warning or error, <strong>as now</strong></li>
+<li>Fix it with a warning</li>
+<li>No fix and flag as an error, like the validator</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>If NOT configured (or found?) to be HTML5
+<ul>
+<li>If clean configured
+<ul>
+<li>Fix it silently, <strong>as now</strong></li>
+<li>Fix it with a warning</li>
+</ul>
+</li>
+<li>Clean not configured
+<ul>
+<li>Flag as a warning</li>
+<li>Flag as an error</li>
+<li>No warning or error, <strong>as now</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</body>
+</html>

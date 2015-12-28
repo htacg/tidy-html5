@@ -8,3 +8,7 @@ proper output.
 
 As these functions are largely stable they're not included in the standard
 set of regression tests, but are still available for sanity checking.
+
+Each case file targets primarily a single element that is treated differently
+in HTML5 versus older HTML. Each case file has multiple configurations for
+which regressions are tested, ensuring that Tidy treats them properly.

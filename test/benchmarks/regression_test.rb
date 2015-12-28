@@ -724,10 +724,10 @@ replaced. You can use the `replace` option for overwrite existing files.
     #  @todo: I'm worried about Ruby obscuring encoding.
     #########################################################
     def self.compare_html( file1, file2 )
-      content1 = File.exists?(file1) ? File.open(file1) { |f| f.readlines } : nil
-      content2 = File.exists?(file2) ? File.open(file2) { |f| f.readlines } : nil
-      content1 = content1.empty? ? nil : content1 unless content1.nil?
-      content2 = content2.empty? ? nil : content2 unless content2.nil?
+      content1 = File.exists?(file1) ? File.open(file1) { |f| f.read } : nil
+      content2 = File.exists?(file2) ? File.open(file2) { |f| f.read } : nil
+      content1 = content1.empty? ? nil : content1.encode(content1.encoding, :universal_newline => true) unless content1.nil?
+      content2 = content2.empty? ? nil : content2.encode(content2.encoding, :universal_newline => true) unless content2.nil?
       content1 == content2
     end
 

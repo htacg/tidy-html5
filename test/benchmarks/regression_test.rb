@@ -689,7 +689,7 @@ replaced. You can use the `replace` option for overwrite existing files.
 
       # Check the config_file for cases of write-back: yes, in which case we
       # will create a backup for restoration after the Tidy process.
-      writes_back = !(File.open(config_file) { |f| f.read } =~ /^write-back: *?yes.*?/i).nil?
+      writes_back = config_matches?('write-back', 'yes')
 
       Dir.mktmpdir do | tmp | # temp stuff cleaned up automatically.
         if writes_back
@@ -718,12 +718,11 @@ replaced. You can use the `replace` option for overwrite existing files.
 
 
     #########################################################
-    # + compare_html
+    # compare_html
     #  Tries to compare HTML files without respect to line
     #  endings.
-    #  @todo: I'm worried about Ruby obscuring encoding.
     #########################################################
-    def self.compare_html( file1, file2 )
+    def compare_html( file1, file2 )
       content1 = File.exists?(file1) ? File.open(file1) { |f| f.read } : nil
       content2 = File.exists?(file2) ? File.open(file2) { |f| f.read } : nil
       content1 = content1.empty? ? nil : content1.encode(content1.encoding, :universal_newline => true) unless content1.nil?
@@ -733,26 +732,39 @@ replaced. You can use the `replace` option for overwrite existing files.
 
 
     #########################################################
-    # + compare_errs( file1, file2 )
+    # compare_errs( file1, file2 )
     #  Tries to compare error output without respect to
     #  line endings, and ignoring everything after the
     #  error summary output line.
     #########################################################
-    def self.compare_errs( file1, file2 )
+    def compare_errs( file1, file2 )
       pattern = /^(No warnings or errors were found\.)|(\d warnings?, \d errors? were found!)/
       content1 = nil
       content2 = nil
 
+      gnu_emacs = config_matches?('gnu-emacs', 'yes')
+      emacs_pattern = /^.*(#{File.basename(self.source_file)}:.*)/i
+
       if File.exists?(file1)
         tmp = File.open(file1) { |f| f.readlines }
         content1 = tmp.take_while { |line| line !~ pattern }
-        content1 << tmp[content1.count]
+        content1 << tmp[content1.count] unless tmp[content1.count].nil?
+        if gnu_emacs
+          content1.map! do |line|
+            line.match(emacs_pattern) { |m| m[1] }
+          end
+        end
       end
 
       if File.exists?(file2)
         tmp = File.open(file2) { |f| f.readlines }
         content2 = tmp.take_while { |line| line !~ pattern }
-        content2 << tmp[content2.count]
+        content2 << tmp[content2.count] unless tmp[content2.count].nil?
+        if gnu_emacs
+          content2.map! do |line|
+            line.match(emacs_pattern) { |m| m[1] }
+          end
+        end
       end
 
       content1 == content2
@@ -760,14 +772,14 @@ replaced. You can use the `replace` option for overwrite existing files.
 
 
     #########################################################
-    # + status_from_err_file( file )
+    # status_from_err_file( file )
     #  Given a path to an error output file, will return the
     #  Tidy exit status. This avoids having to create a
     #  database of Tidy exits codes and avoids having to
     #  create extra files, although the fallback/override
     #  .err file is checked here, too.
     #########################################################
-    def self.status_from_err_file(file)
+    def status_from_err_file(file)
       # The -expect.txt file may be empty for certain tests based
       # on the configuration used, so we will reluctantly support
       # the use of -expect.err to contain Tidy's expected exit status.
@@ -792,6 +804,18 @@ replaced. You can use the `replace` option for overwrite existing files.
         end
       end
       nil
+    end
+
+    private
+
+    #########################################################
+    # property config_matches?( option, value )
+    #  Returns true if the current config file contains the
+    #  specified option with the value (as string).
+    #########################################################
+    def config_matches?(option, value)
+      pattern = /^#{option}: *?#{value}.*?/i
+      !(File.open(self.config_file) { |f| f.read } =~ pattern).nil?
     end
 
   end # class TidyExe
@@ -1057,9 +1081,9 @@ replaced. You can use the `replace` option for overwrite existing files.
 
               ## Make comparisons and set report flags
               inner_record.tested = true
-              inner_record.passed_output = TidyExe.compare_html(output_htm_path, expects_htm_path)
-              inner_record.passed_errout = TidyExe.compare_errs(output_txt_path, expects_txt_path)
-              inner_record.passed_status = exit_status == TidyExe.status_from_err_file(expects_txt_path)
+              inner_record.passed_output = self.tidy.compare_html(output_htm_path, expects_htm_path)
+              inner_record.passed_errout = self.tidy.compare_errs(output_txt_path, expects_txt_path)
+              inner_record.passed_status = exit_status == self.tidy.status_from_err_file(expects_txt_path)
 
               ## Build file names
               # In the case of multiple configurations, we need to get

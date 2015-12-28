@@ -687,7 +687,15 @@ replaced. You can use the `replace` option for overwrite existing files.
         return false
       end
 
+      # Check the config_file for cases of write-back: yes, in which case we
+      # will create a backup for restoration after the Tidy process.
+      writes_back = !(File.open(config_file) { |f| f.read } =~ /^write-back: *?yes.*?/i).nil?
+
       Dir.mktmpdir do | tmp | # temp stuff cleaned up automatically.
+        if writes_back
+          @@log.info "#{__method__}: Dealing with write-back: yes by creating backup of original file."
+          FileUtils.cp(self.source_file, "#{self.source_file}.bak")
+        end
         err_path = "#{File.join(tmp, 'tidy_err.tmp')}"
         tdy_path = "#{File.join(tmp, 'tidy_out.tmp')}"
         command = "#{File.basename(self.path)} -o #{tdy_path} -f #{err_path} -config #{self.config_file} --tidy-mark no #{self.source_file}"
@@ -696,6 +704,13 @@ replaced. You can use the `replace` option for overwrite existing files.
         @@log.info "#{__method__}: performing #{command}"
         tidy_result = Open3.capture3(command)
         Dir.chdir(pwd)
+        if writes_back
+          # The original source_file is now tidy'd, so put it where the rest of the
+          # test suite expects to find tidy results files, and restore the original.
+          @@log.info "#{__method__}: Restoring original source file after write-back: yes."
+          FileUtils.mv(self.source_file, tdy_path)
+          FileUtils.mv("#{self.source_file}.bak", self.source_file)
+        end
         yield tdy_path, err_path, tidy_result[2].exitstatus if block_given?
       end
       true
@@ -984,6 +999,7 @@ replaced. You can use the `replace` option for overwrite existing files.
         if canonize
           #################
           # CANONIZE
+          # @todo look through the configuration for write-back to handle specially.
           #################
 
           # Let's run tidy

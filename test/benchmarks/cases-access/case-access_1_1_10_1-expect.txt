@@ -1,0 +1,19 @@
+
+Accessibility Checks: Version 0.1
+
+line 7 column 1 - Access: [6.2.2.2]: text equivalents require updating (script).
+line 7 column 1 - Access: [6.3.1.1]: programmatic objects require testing (script).
+line 7 column 1 - Access: [8.1.1.1]: ensure programmatic objects are accessible (script).
+line 7 column 1 - Access: [7.1.1.1]: remove flicker (script).
+line 7 column 1 - Access: [2.1.1.4]: ensure information not conveyed through color alone (script).
+line 7 column 1 - Access: [1.1.10.1]: <script> missing <noscript> section.
+Info: Doctype given is "-//W3C//DTD HTML 4.0 Transitional//EN"
+Info: Document content looks like HTML 4.01 Transitional
+No warnings or errors were found.
+
+About HTML Tidy: https://github.com/htacg/tidy-html5
+Bug reports and comments: https://github.com/htacg/tidy-html5/issues
+Or send questions and comments to: https://lists.w3.org/Archives/Public/public-htacg/
+Latest HTML specification: http://dev.w3.org/html5/spec-author-view/
+Validate your HTML documents: http://validator.w3.org/nu/
+Lobby your company to join the W3C: http://www.w3.org/Consortium

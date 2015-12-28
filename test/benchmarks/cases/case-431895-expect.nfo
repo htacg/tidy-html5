@@ -1,0 +1,2 @@
+case-431895: The success of this test is platform and user dependent,
+as the use of --gnu-emacs includes path information in the error output.

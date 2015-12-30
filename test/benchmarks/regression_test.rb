@@ -605,7 +605,7 @@ replaced. You can use the `replace` option for overwrite existing files.
         if @version.nil?
           pwd = Dir.pwd
           Dir.chdir(File.dirname(path))
-          result = Open3.capture3("#{File.basename(path)} -v")
+          result = Open3.capture3("#{File.join('.',File.basename(path))} -v")
           Dir.chdir(pwd)
           result[0].split.last if result
         else
@@ -698,7 +698,7 @@ replaced. You can use the `replace` option for overwrite existing files.
         end
         err_path = "#{File.join(tmp, 'tidy_err.tmp')}"
         tdy_path = "#{File.join(tmp, 'tidy_out.tmp')}"
-        command = "#{File.basename(self.path)} -o #{tdy_path} -f #{err_path} -config #{self.config_file} --tidy-mark no #{self.source_file}"
+        command = "#{File.join('.', File.basename(self.path))} -o #{tdy_path} -f #{err_path} -config #{self.config_file} --tidy-mark no #{self.source_file}"
         pwd = Dir.pwd
         Dir.chdir(File.dirname(self.path))
         @@log.info "#{__method__}: performing #{command}"

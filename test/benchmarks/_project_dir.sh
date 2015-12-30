@@ -8,10 +8,10 @@
 #####################################
 # Change these:
 #####################################
-project_root="../../"          # Relative path from this script to project root.
+project_root="../../"             # Relative path from this script to project root.
 build_dir="build/cmake/"          # Relative path from project_root.
 test_dir="test/"                  # Relative path from project_root.
-benchmarks_dir="test/benchmarks/" # Relative path from project_root.
+this_dir="test/benchmarks/"       # Relative path from project_root.
 
 
 #####################################
@@ -29,11 +29,11 @@ case $1 in
   test)
     cd "${project_root}${test_dir}"
     ;;
-  benchmarks)
-    cd "${project_root}${benchmarks_dir}"
+  this)
+    cd "${project_root}${this_dir}"
     ;;
   *)
-    echo "Usage: $0 {project|build|test|benchmarks}"
+    echo "Usage: $0 {project|build|test|this}"
     exit 1
     ;;
 esac

@@ -1037,10 +1037,8 @@ static void ParseEntity( TidyDocImpl* doc, GetTokenMode mode )
                 uint c1 = 0;
                 int replaceMode = DISCARDED_CHAR;
             
-                if ( TY_(ReplacementCharEncoding) == WIN1252 )
-                    c1 = TY_(DecodeWin1252)( ch );
-                else if ( TY_(ReplacementCharEncoding) == MACROMAN )
-                    c1 = TY_(DecodeMacRoman)( ch );
+                /* Always assume Win1252 in this circumstance. */
+				c1 = TY_(DecodeWin1252)( ch );
 
                 if ( c1 )
                     replaceMode = REPLACED_CHAR;

@@ -92,9 +92,6 @@ extern "C" {
 #define MAC_OS
 #define FILENAMES_CASE_SENSITIVE 0
 #define strcasecmp strcmp
-#ifndef DFLT_REPL_CHARENC
-#define DFLT_REPL_CHARENC MACROMAN
-#endif
 #endif
 
 /* Convenience defines for BSD like platforms */
@@ -360,13 +357,6 @@ extern "C" {
 
 #ifdef NEEDS_UNISTD_H
 #include <unistd.h>  /* needed for unlink on some Unix systems */
-#endif
-
-/* This can be set at compile time.  Usually Windows,
-** except for Macintosh builds.
-*/
-#ifndef DFLT_REPL_CHARENC
-#define DFLT_REPL_CHARENC WIN1252
 #endif
 
 /* By default, use case-sensitive filename comparison.

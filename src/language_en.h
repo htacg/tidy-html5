@@ -215,13 +215,13 @@ static languageDictionary language_en = {
 	/*****************************
 	 ** Message Severity Level
 	 *****************************/
-	{ TidyInfoString,               "Info: ",                                                                 },
-	{ TidyWarningString,            "Warning: ",                                                              },
-	{ TidyConfigString,             "Config: ",                                                               },
-	{ TidyAccessString,             "Access: ",                                                               },
-	{ TidyErrorString,              "Error: ",                                                                },
-	{ TidyBadDocumentString,        "Document: ",                                                             },
-	{ TidyFatalString,              "Panic: ",                                                                },
+	{ TidyInfoString,               "Info: "                                                                  },
+	{ TidyWarningString,            "Warning: "                                                               },
+	{ TidyConfigString,             "Config: "                                                                },
+	{ TidyAccessString,             "Access: "                                                                },
+	{ TidyErrorString,              "Error: "                                                                 },
+	{ TidyBadDocumentString,        "Document: "                                                              },
+	{ TidyFatalString,              "Panic: "                                                                 },
 	
 	/*****************************
 	 ** Warnings and Errors

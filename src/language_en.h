@@ -345,7 +345,6 @@ static languageDictionary language_en = {
 	{ SUSPECTED_MISSING_QUOTE,      "missing quote mark for attribute value"                                  }, /* Error? (not really sometimes) */
 	{ DUPLICATE_FRAMESET,           "repeated FRAMESET element"                                               }, /* Error */
 	{ UNKNOWN_ELEMENT,              "%s is not recognized!"                                                   }, /* Error */
-	{ UNEXPECTED_ENDTAG,            "unexpected </%s>"                                                }, /* Error */
 	
 	/* */
 	{ PREVIOUS_LOCATION,            "<%s> previously mentioned"                                               }, /* Info */

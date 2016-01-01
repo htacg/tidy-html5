@@ -560,6 +560,7 @@ replaced. You can use the `replace` option for overwrite existing files.
       @version = nil
       @source_file = nil
       @config_file = nil
+      @config_file_content = nil
     end
 
 
@@ -655,9 +656,12 @@ replaced. You can use the `replace` option for overwrite existing files.
         if File.exists?(file) && File.readable?(file)
           @@log.info "#{__method__}: Config file is #{file}"
           @config_file = file
+          # Buffer this in memory, because we read from it twice.
+          @config_file_content = File.open(self.config_file) { |f| f.read }
         else
           @@log.error "#{__method__}: Config file #{file} does not exist or could not be read."
           @config_file = nil
+          @config_file_content = nil
           false
         end
       end
@@ -812,10 +816,11 @@ replaced. You can use the `replace` option for overwrite existing files.
     # property config_matches?( option, value )
     #  Returns true if the current config file contains the
     #  specified option with the value (as string).
+    #  @todo: match synonyms, e.g., yes, true, etc.
     #########################################################
     def config_matches?(option, value)
       pattern = /^#{option}: *?#{value}.*?/i
-      !(File.open(self.config_file) { |f| f.read } =~ pattern).nil?
+      !(@config_file_content =~ pattern).nil?
     end
 
   end # class TidyExe

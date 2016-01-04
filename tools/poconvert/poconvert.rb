@@ -213,6 +213,22 @@ module PoConvertModule
 
 
     #########################################################
+    # property safe_backup_name( file )
+    #  Determines a safe name for a backup file name.
+    #########################################################
+    def safe_backup_name( filename )
+      file = filename
+      orig_file = filename
+      index = 1
+      while File.exists?(file)
+        index = index + 1
+        file = "#{File.basename(orig_file, '.*')}-#{index}#{File.extname(orig_file)}"
+      end
+      file
+    end
+
+
+    #########################################################
     # parse_po( file )
     #  Parses a PO file and returns an array of records.
     #########################################################
@@ -237,7 +253,7 @@ module PoConvertModule
       item = ''
 
       content = File.open(file) { |f| f.readlines }
-      content << "\n" # cheat a final transition.
+      content << "\n" # ensure that we have a final transition.
       content.each do |line|
 
         # Determine the input condition
@@ -351,6 +367,9 @@ msgstr ""
         report << "\n"
       end
       output_file = "language_#{translate_to}.po"
+      if File.exists?(output_file)
+        File.rename(output_file, safe_backup_name(output_file))
+      end
       File.open(output_file, 'w') { |f| f.write(report) }
       @@log.info "#{__method__}: Results written to #{output_file}"
       puts "Wrote a new PO file to #{File.expand_path(output_file)}"
@@ -376,20 +395,90 @@ msgstr ""
       # Parse the file and make it the same format as our other structures.
       final_items = normalize_po(parse_po(source_file))
 
+      # Capture the language just in case it's purged below.
+      dest_lang = final_items[:TIDY_LANGUAGE][1..-2]
+
       # Eliminate items matching English, the base language (if any) and nil
       # items, since we don't need them inflating Tidy's executable size.
       final_items.reject! do |key, value|
         (target_items.has_key?(key) && target_items[key] == value) || value == ''
       end
 
-      template = File.open('header_template.h.erb') { |f| f.read }
+      # Gather some information to format this nicely.
+      longest_key = 22
+      longest_value = 0
+      final_items.each do |key, value|
+        longest_key = key.length if key.length > longest_key
+        longest_value = value.length if value.length > longest_value && !value.start_with?("\n")
+      end
 
-      header_guard = "language_#{}_h"
-      header_filename = File.basename(source_file)
+      # Report TOP SECTION
+      report = <<-HEREDOC
+#ifndef language_#{dest_lang}_h
+#define language_#{dest_lang}_h
+/*
+ * #{File.basename(source_file, '.*')}.h
+ * Localization support for HTML Tidy.
+ *
+ * (c) 2015 HTACG
+ * See tidy.h and access.h for the copyright notice.
+ *
+ * This file generated on #{DateTime.now.strftime('%Y-%m-%d %H:%M:%S')} by #{ENV['USER']}#{ENV['USERNAME']}.
+*/
 
-      renderer = ERB.new(template)
-      output = renderer.result(binding)
-      puts output
+#include "language.h"
+#include "access.h"
+#include "message.h"
+
+/**
+ *  IMPORTANT NOTE:
+ *  This file was automatically generated with the `poconvert.rb` tool from
+ *  a GNU gettext PO format. As such it is missing all of the commentary that
+ *  is typically included in a Tidy language localization header file.
+ */
+
+static languageDictionary language_#{dest_lang} = {
+
+  /*
+   * BEGIN AUTOMATIC CONTENT
+   */
+
+      HEREDOC
+
+      # Report MID SECTION
+      final_items.each do |key, value|
+        if value.start_with?("\n")
+          report << "  { #{key},"
+          value.lines.each do |line|
+            report << "      #{line}"
+          end
+          report << "\n  },\n"
+        else
+          report << "  { #{(key.to_s + ',').ljust(longest_key+2)}#{value.ljust(longest_value+2)} },\n"
+        end
+      end
+
+      # Report BOTTOM SECTION
+      report << <<-HEREDOC
+
+  /*
+   * END AUTOMATIC CONTENT
+   */
+
+  /* This MUST be present and last. */
+   { #{'TIDY_MESSAGE_TYPE_LAST,'.ljust(longest_key+2)}#{'NULL'.ljust(longest_value+2)} },\n"
+};
+
+#endif /* language_#{dest_lang}_h */
+      HEREDOC
+
+      output_file = "language_#{dest_lang}.h"
+      if File.exists?(output_file)
+        File.rename(output_file, safe_backup_name(output_file))
+      end
+      File.open(output_file, 'w') { |f| f.write(report) }
+      @@log.info "#{__method__}: Results written to #{output_file}"
+      puts "Wrote a new header file to #{File.expand_path(output_file)}"
 
     end # convert_to_h
 

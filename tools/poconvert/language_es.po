@@ -1,199 +1,199 @@
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
-"Language: es_mx\n"
+"Language: es\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2016-01-01 15:39:34\n"
+"PO-Revision-Date: 2016-01-04 16:48:00\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TIDY_LANGUAGE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TIDY_LANGUAGE
 msgctxt "TIDY_LANGUAGE"
-msgid "es"
-msgstr "es_mx"
+msgid "en"
+msgstr "es"
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ACCESS_URL
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ACCESS_URL
 msgctxt "ACCESS_URL"
 msgid "http://www.w3.org/WAI/GL"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ATRC_ACCESS_URL
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ATRC_ACCESS_URL
 msgctxt "ATRC_ACCESS_URL"
 msgid "http://www.html-tidy.org/accessibility/"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:FILE_CANT_OPEN
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:FILE_CANT_OPEN
 msgctxt "FILE_CANT_OPEN"
 msgid "Can't open \"%s\"\n"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:LINE_COLUMN_STRING
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:LINE_COLUMN_STRING
 msgctxt "LINE_COLUMN_STRING"
 msgid "line %d column %d - "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_CONTENT_LOOKS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_CONTENT_LOOKS
 msgctxt "STRING_CONTENT_LOOKS"
 msgid "Document content looks like %s"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_DISCARDING
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_DISCARDING
 msgctxt "STRING_DISCARDING"
 msgid "discarding"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_DOCTYPE_GIVEN
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_DOCTYPE_GIVEN
 msgctxt "STRING_DOCTYPE_GIVEN"
 msgid "Doctype given is \"%s\""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_ERROR
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_ERROR
 msgctxt "STRING_ERROR"
 msgid "error"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_ERROR_COUNT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_ERROR_COUNT
 msgctxt "STRING_ERROR_COUNT"
 msgid "%u %s, %u %s were found!"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_ERROR_PLURAL
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_ERROR_PLURAL
 msgctxt "STRING_ERROR_PLURAL"
 msgid "errors"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_HELLO_ACCESS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_HELLO_ACCESS
 msgctxt "STRING_HELLO_ACCESS"
 msgid "\nAccessibility Checks: Version 0.1\n\n"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_HTML_PROPRIETARY
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_HTML_PROPRIETARY
 msgctxt "STRING_HTML_PROPRIETARY"
 msgid "HTML Proprietary"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_MISSING_MALFORMED
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_MISSING_MALFORMED
 msgctxt "STRING_MISSING_MALFORMED"
 msgid "missing or malformed argument for option: %s"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_NO_ERRORS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_NO_ERRORS
 msgctxt "STRING_NO_ERRORS"
 msgid "No warnings or errors were found.\n\n"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_NO_SYSID
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_NO_SYSID
 msgctxt "STRING_NO_SYSID"
 msgid "No system identifier in emitted doctype"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_NOT_ALL_SHOWN
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_NOT_ALL_SHOWN
 msgctxt "STRING_NOT_ALL_SHOWN"
 msgid " Not all warnings/errors were shown.\n\n"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_PLAIN_TEXT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_PLAIN_TEXT
 msgctxt "STRING_PLAIN_TEXT"
 msgid "plain text"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_REPLACING
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_REPLACING
 msgctxt "STRING_REPLACING"
 msgid "replacing"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_SPECIFIED
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_SPECIFIED
 msgctxt "STRING_SPECIFIED"
 msgid "specified"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_UNKNOWN_FILE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_UNKNOWN_FILE
 msgctxt "STRING_UNKNOWN_FILE"
 msgid "%s: can't open file \"%s\"\n"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_UNKNOWN_OPTION
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_UNKNOWN_OPTION
 msgctxt "STRING_UNKNOWN_OPTION"
 msgid "unknown option: %s"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_UNRECZD_OPTION
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_UNRECZD_OPTION
 msgctxt "STRING_UNRECZD_OPTION"
 msgid "unrecognized option -%c use -help to list options\n"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_WARNING
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_WARNING
 msgctxt "STRING_WARNING"
 msgid "warning"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_WARNING_PLURAL
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_WARNING_PLURAL
 msgctxt "STRING_WARNING_PLURAL"
 msgid "warnings"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STRING_XML_DECLARATION
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STRING_XML_DECLARATION
 msgctxt "STRING_XML_DECLARATION"
 msgid "XML declaration"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_HTML_T_ALGORITHM
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_HTML_T_ALGORITHM
 msgctxt "TEXT_HTML_T_ALGORITHM"
 msgid ""
 " \n"
@@ -214,8 +214,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_WINDOWS_CHARS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_WINDOWS_CHARS
 msgctxt "TEXT_WINDOWS_CHARS"
 msgid ""
 "Characters codes for the Microsoft Windows fonts in the range\n"
@@ -226,8 +226,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_VENDOR_CHARS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_VENDOR_CHARS
 msgctxt "TEXT_VENDOR_CHARS"
 msgid ""
 "It is unlikely that vendor-specific, system-dependent encodings\n"
@@ -237,8 +237,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_SGML_CHARS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_SGML_CHARS
 msgctxt "TEXT_SGML_CHARS"
 msgid ""
 "Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML;\n"
@@ -248,8 +248,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_INVALID_UTF8
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_INVALID_UTF8
 msgctxt "TEXT_INVALID_UTF8"
 msgid ""
 "Character codes for UTF-8 must be in the range: U+0000 to U+10FFFF.\n"
@@ -264,8 +264,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_INVALID_UTF16
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_INVALID_UTF16
 msgctxt "TEXT_INVALID_UTF16"
 msgid ""
 "Character codes for UTF-16 must be in the range: U+0000 to U+10FFFF.\n"
@@ -275,8 +275,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_INVALID_URI
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_INVALID_URI
 msgctxt "TEXT_INVALID_URI"
 msgid ""
 "URIs must be properly escaped, they must not contain unescaped\n"
@@ -290,8 +290,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_BAD_FORM
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_BAD_FORM
 msgctxt "TEXT_BAD_FORM"
 msgid ""
 "You may need to move one or both of the <form> and </form>\n"
@@ -303,8 +303,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_BAD_MAIN
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_BAD_MAIN
 msgctxt "TEXT_BAD_MAIN"
 msgid ""
 "Only one <main> element is allowed in a document.\n"
@@ -313,8 +313,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_M_SUMMARY
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_M_SUMMARY
 msgctxt "TEXT_M_SUMMARY"
 msgid ""
 "The table summary attribute should be used to describe\n"
@@ -326,8 +326,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_M_IMAGE_ALT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_M_IMAGE_ALT
 msgctxt "TEXT_M_IMAGE_ALT"
 msgid ""
 "The alt attribute should be used to give a short description\n"
@@ -337,8 +337,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_M_IMAGE_MAP
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_M_IMAGE_MAP
 msgctxt "TEXT_M_IMAGE_MAP"
 msgid ""
 "Use client-side image maps in preference to server-side image\n"
@@ -348,8 +348,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_M_LINK_ALT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_M_LINK_ALT
 msgctxt "TEXT_M_LINK_ALT"
 msgid ""
 "For hypertext links defined using a client-side image map, you\n"
@@ -358,8 +358,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_USING_FRAMES
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_USING_FRAMES
 msgctxt "TEXT_USING_FRAMES"
 msgid ""
 "Pages designed using frames presents problems for\n"
@@ -369,8 +369,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_ACCESS_ADVICE1
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_ACCESS_ADVICE1
 msgctxt "TEXT_ACCESS_ADVICE1"
 msgid ""
 "For further advice on how to make your pages accessible\n"
@@ -378,15 +378,15 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_ACCESS_ADVICE2
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_ACCESS_ADVICE2
 msgctxt "TEXT_ACCESS_ADVICE2"
 msgid " and http://www.html-tidy.org/accessibility/"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_USING_LAYER
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_USING_LAYER
 msgctxt "TEXT_USING_LAYER"
 msgid ""
 "The Cascading Style Sheets (CSS) Positioning mechanism\n"
@@ -395,8 +395,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_USING_SPACER
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_USING_SPACER
 msgctxt "TEXT_USING_SPACER"
 msgid ""
 "You are recommended to use CSS for controlling white\n"
@@ -405,8 +405,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_USING_FONT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_USING_FONT
 msgctxt "TEXT_USING_FONT"
 msgid ""
 "You are recommended to use CSS to specify the font and\n"
@@ -416,8 +416,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_USING_NOBR
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_USING_NOBR
 msgctxt "TEXT_USING_NOBR"
 msgid ""
 "You are recommended to use CSS to control line wrapping.\n"
@@ -426,15 +426,15 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_USING_BODY
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_USING_BODY
 msgctxt "TEXT_USING_BODY"
 msgid "You are recommended to use CSS to specify page and link colors\n"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_NEEDS_INTERVENTION
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_NEEDS_INTERVENTION
 msgctxt "TEXT_NEEDS_INTERVENTION"
 msgid ""
 "This document has errors that must be fixed before\n"
@@ -442,8 +442,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_GENERAL_INFO
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_GENERAL_INFO
 msgctxt "TEXT_GENERAL_INFO"
 msgid ""
 "About HTML Tidy: https://github.com/htacg/tidy-html5\n"
@@ -455,1562 +455,1562 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_GENERAL_INFO_PLEA
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_GENERAL_INFO_PLEA
 msgctxt "TEXT_GENERAL_INFO_PLEA"
 msgid ""
+"\n"
+"Do you speak a language other than English, or a different variant of \n"
+"English? Consider helping us to localize HTML Tidy. For details please see \n"
+"https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md\n"
+msgstr ""
 "\n"
 "¿Le gustaría ver Tidy en un español correcto? Por favor considere \n"
 "ayudarnos a localizar HTML Tidy. Para más detalles consulte \n"
 "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md \n"
-msgstr ""
-"\n"
-"¿Le gustaría ver Tidy en adecuada, español mexicano? Por favor considere \n"
-"ayudarnos a localizar HTML Tidy. Para más detalles consulte \n"
-"https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md \n"
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyInfoString
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyInfoString
 msgctxt "TidyInfoString"
 msgid "Info: "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyWarningString
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyWarningString
 msgctxt "TidyWarningString"
 msgid "Warning: "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyConfigString
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyConfigString
 msgctxt "TidyConfigString"
 msgid "Config: "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyAccessString
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyAccessString
 msgctxt "TidyAccessString"
 msgid "Access: "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyErrorString
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyErrorString
 msgctxt "TidyErrorString"
 msgid "Error: "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyBadDocumentString
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyBadDocumentString
 msgctxt "TidyBadDocumentString"
 msgid "Document: "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyFatalString
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyFatalString
 msgctxt "TidyFatalString"
 msgid "Panic: "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ENCODING_MISMATCH
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ENCODING_MISMATCH
 msgctxt "ENCODING_MISMATCH"
 msgid "specified input encoding (%s) does not match actual input encoding (%s)"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:VENDOR_SPECIFIC_CHARS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:VENDOR_SPECIFIC_CHARS
 msgctxt "VENDOR_SPECIFIC_CHARS"
 msgid "%s invalid character code %s"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:INVALID_SGML_CHARS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:INVALID_SGML_CHARS
 msgctxt "INVALID_SGML_CHARS"
 msgid "%s invalid character code %s"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:INVALID_UTF8
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:INVALID_UTF8
 msgctxt "INVALID_UTF8"
 msgid "%s invalid UTF-8 bytes (char. code %s)"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:INVALID_UTF16
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:INVALID_UTF16
 msgctxt "INVALID_UTF16"
 msgid "%s invalid UTF-16 surrogate pair (char. code %s)"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:INVALID_NCR
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:INVALID_NCR
 msgctxt "INVALID_NCR"
 msgid "%s invalid numeric character reference %s"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:MISSING_SEMICOLON
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:MISSING_SEMICOLON
 msgctxt "MISSING_SEMICOLON"
 msgid "entity \"%s\" doesn't end in ';'"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:MISSING_SEMICOLON_NCR
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:MISSING_SEMICOLON_NCR
 msgctxt "MISSING_SEMICOLON_NCR"
 msgid "numeric character reference \"%s\" doesn't end in ';'"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:UNESCAPED_AMPERSAND
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:UNESCAPED_AMPERSAND
 msgctxt "UNESCAPED_AMPERSAND"
 msgid "unescaped & which should be written as &amp;"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:UNKNOWN_ENTITY
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:UNKNOWN_ENTITY
 msgctxt "UNKNOWN_ENTITY"
 msgid "unescaped & or unknown entity \"%s\""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:APOS_UNDEFINED
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:APOS_UNDEFINED
 msgctxt "APOS_UNDEFINED"
 msgid "named entity &apos; only defined in XML/XHTML"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:INSERTING_ATTRIBUTE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:INSERTING_ATTRIBUTE
 msgctxt "INSERTING_ATTRIBUTE"
 msgid "%s inserting \"%s\" attribute"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:INSERTING_AUTO_ATTRIBUTE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:INSERTING_AUTO_ATTRIBUTE
 msgctxt "INSERTING_AUTO_ATTRIBUTE"
 msgid "%s inserting \"%s\" attribute using value \"%s\""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:MISSING_ATTR_VALUE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:MISSING_ATTR_VALUE
 msgctxt "MISSING_ATTR_VALUE"
 msgid "%s attribute \"%s\" lacks value"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:UNKNOWN_ATTRIBUTE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:UNKNOWN_ATTRIBUTE
 msgctxt "UNKNOWN_ATTRIBUTE"
 msgid "%s unknown attribute \"%s\""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:PROPRIETARY_ATTRIBUTE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:PROPRIETARY_ATTRIBUTE
 msgctxt "PROPRIETARY_ATTRIBUTE"
 msgid "%s proprietary attribute \"%s\""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:JOINING_ATTRIBUTE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:JOINING_ATTRIBUTE
 msgctxt "JOINING_ATTRIBUTE"
 msgid "%s joining values of repeated attribute \"%s\""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:XML_ATTRIBUTE_VALUE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:XML_ATTRIBUTE_VALUE
 msgctxt "XML_ATTRIBUTE_VALUE"
 msgid "%s has XML attribute \"%s\""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:XML_ID_SYNTAX
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:XML_ID_SYNTAX
 msgctxt "XML_ID_SYNTAX"
 msgid "%s ID \"%s\" uses XML ID syntax"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ATTR_VALUE_NOT_LCASE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ATTR_VALUE_NOT_LCASE
 msgctxt "ATTR_VALUE_NOT_LCASE"
 msgid "%s attribute value \"%s\" must be lower case for XHTML"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:PROPRIETARY_ATTR_VALUE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:PROPRIETARY_ATTR_VALUE
 msgctxt "PROPRIETARY_ATTR_VALUE"
 msgid "%s proprietary attribute value \"%s\""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ANCHOR_NOT_UNIQUE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ANCHOR_NOT_UNIQUE
 msgctxt "ANCHOR_NOT_UNIQUE"
 msgid "%s anchor \"%s\" already defined"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:BAD_ATTRIBUTE_VALUE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:BAD_ATTRIBUTE_VALUE
 msgctxt "BAD_ATTRIBUTE_VALUE"
 msgid "%s attribute \"%s\" has invalid value \"%s\""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:BAD_ATTRIBUTE_VALUE_REPLACED
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:BAD_ATTRIBUTE_VALUE_REPLACED
 msgctxt "BAD_ATTRIBUTE_VALUE_REPLACED"
 msgid "%s attribute \"%s\" had invalid value \"%s\" and has been replaced"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:INVALID_ATTRIBUTE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:INVALID_ATTRIBUTE
 msgctxt "INVALID_ATTRIBUTE"
 msgid "%s attribute name \"%s\" (value=\"%s\") is invalid"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REPEATED_ATTRIBUTE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REPEATED_ATTRIBUTE
 msgctxt "REPEATED_ATTRIBUTE"
 msgid "%s dropping value \"%s\" for repeated attribute \"%s\""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:INVALID_XML_ID
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:INVALID_XML_ID
 msgctxt "INVALID_XML_ID"
 msgid "%s cannot copy name attribute to id"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:UNEXPECTED_GT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:UNEXPECTED_GT
 msgctxt "UNEXPECTED_GT"
 msgid "%s missing '>' for end of tag"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:UNEXPECTED_QUOTEMARK
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:UNEXPECTED_QUOTEMARK
 msgctxt "UNEXPECTED_QUOTEMARK"
 msgid "%s unexpected or duplicate quote mark"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:MISSING_QUOTEMARK
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:MISSING_QUOTEMARK
 msgctxt "MISSING_QUOTEMARK"
 msgid "%s attribute with missing trailing quote mark"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:UNEXPECTED_END_OF_FILE_ATTR
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:UNEXPECTED_END_OF_FILE_ATTR
 msgctxt "UNEXPECTED_END_OF_FILE_ATTR"
 msgid "%s end of file while parsing attributes"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ID_NAME_MISMATCH
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ID_NAME_MISMATCH
 msgctxt "ID_NAME_MISMATCH"
 msgid "%s id and name attribute value mismatch"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:BACKSLASH_IN_URI
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:BACKSLASH_IN_URI
 msgctxt "BACKSLASH_IN_URI"
 msgid "%s URI reference contains backslash. Typo?"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:FIXED_BACKSLASH
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:FIXED_BACKSLASH
 msgctxt "FIXED_BACKSLASH"
 msgid "%s converting backslash in URI to slash"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ILLEGAL_URI_REFERENCE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ILLEGAL_URI_REFERENCE
 msgctxt "ILLEGAL_URI_REFERENCE"
 msgid "%s improperly escaped URI reference"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ESCAPED_ILLEGAL_URI
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ESCAPED_ILLEGAL_URI
 msgctxt "ESCAPED_ILLEGAL_URI"
 msgid "%s escaping malformed URI reference"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:NEWLINE_IN_URI
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:NEWLINE_IN_URI
 msgctxt "NEWLINE_IN_URI"
 msgid "%s discarding newline in URI reference"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:WHITE_IN_URI
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:WHITE_IN_URI
 msgctxt "WHITE_IN_URI"
 msgid "%s discarding whitespace in URI reference"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:UNEXPECTED_EQUALSIGN
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:UNEXPECTED_EQUALSIGN
 msgctxt "UNEXPECTED_EQUALSIGN"
 msgid "%s unexpected '=', expected attribute name"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:MISSING_IMAGEMAP
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:MISSING_IMAGEMAP
 msgctxt "MISSING_IMAGEMAP"
 msgid "%s should use client-side image map"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:MISSING_ATTRIBUTE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:MISSING_ATTRIBUTE
 msgctxt "MISSING_ATTRIBUTE"
 msgid "%s lacks \"%s\" attribute"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:NESTED_EMPHASIS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:NESTED_EMPHASIS
 msgctxt "NESTED_EMPHASIS"
 msgid "nested emphasis %s"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:NESTED_QUOTATION
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:NESTED_QUOTATION
 msgctxt "NESTED_QUOTATION"
 msgid "nested q elements, possible typo."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:OBSOLETE_ELEMENT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:OBSOLETE_ELEMENT
 msgctxt "OBSOLETE_ELEMENT"
 msgid "replacing obsolete element %s with %s"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:COERCE_TO_ENDTAG_WARN
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:COERCE_TO_ENDTAG_WARN
 msgctxt "COERCE_TO_ENDTAG_WARN"
 msgid "<%s> is probably intended as </%s>"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REMOVED_HTML5
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REMOVED_HTML5
 msgctxt "REMOVED_HTML5"
 msgid "%s element removed from HTML5"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:BAD_BODY_HTML5
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:BAD_BODY_HTML5
 msgctxt "BAD_BODY_HTML5"
 msgid "Found attribute on body that is obsolete in HTML5. Use CSS"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:BAD_ALIGN_HTML5
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:BAD_ALIGN_HTML5
 msgctxt "BAD_ALIGN_HTML5"
 msgid "The align attribute on the %s element is obsolete. Use CSS"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:BAD_SUMMARY_HTML5
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:BAD_SUMMARY_HTML5
 msgctxt "BAD_SUMMARY_HTML5"
 msgid "The summary attribute on the %s element is obsolete in HTML5"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TRIM_EMPTY_ELEMENT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TRIM_EMPTY_ELEMENT
 msgctxt "TRIM_EMPTY_ELEMENT"
 msgid "trimming empty %s"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REPLACING_ELEMENT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REPLACING_ELEMENT
 msgctxt "REPLACING_ELEMENT"
 msgid "replacing %s with %s"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:COERCE_TO_ENDTAG
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:COERCE_TO_ENDTAG
 msgctxt "COERCE_TO_ENDTAG"
 msgid "<%s> is probably intended as </%s>"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REPLACING_UNEX_ELEMENT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REPLACING_UNEX_ELEMENT
 msgctxt "REPLACING_UNEX_ELEMENT"
 msgid "replacing unexpected %s with %s"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:MISSING_ENDTAG_FOR
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:MISSING_ENDTAG_FOR
 msgctxt "MISSING_ENDTAG_FOR"
 msgid "missing </%s>"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:MISSING_ENDTAG_BEFORE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:MISSING_ENDTAG_BEFORE
 msgctxt "MISSING_ENDTAG_BEFORE"
 msgid "missing </%s> before %s"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:DISCARDING_UNEXPECTED
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:DISCARDING_UNEXPECTED
 msgctxt "DISCARDING_UNEXPECTED"
 msgid "discarding unexpected %s"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:NON_MATCHING_ENDTAG
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:NON_MATCHING_ENDTAG
 msgctxt "NON_MATCHING_ENDTAG"
 msgid "replacing unexpected %s with </%s>"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TAG_NOT_ALLOWED_IN
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TAG_NOT_ALLOWED_IN
 msgctxt "TAG_NOT_ALLOWED_IN"
 msgid "%s isn't allowed in <%s> elements"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:MISSING_STARTTAG
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:MISSING_STARTTAG
 msgctxt "MISSING_STARTTAG"
 msgid "missing <%s>"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:UNEXPECTED_ENDTAG
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:UNEXPECTED_ENDTAG
 msgctxt "UNEXPECTED_ENDTAG"
 msgid "unexpected </%s>"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TOO_MANY_ELEMENTS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TOO_MANY_ELEMENTS
 msgctxt "TOO_MANY_ELEMENTS"
 msgid "too many %s elements"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:USING_BR_INPLACE_OF
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:USING_BR_INPLACE_OF
 msgctxt "USING_BR_INPLACE_OF"
 msgid "using <br> in place of %s"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:INSERTING_TAG
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:INSERTING_TAG
 msgctxt "INSERTING_TAG"
 msgid "inserting implicit <%s>"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:CANT_BE_NESTED
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:CANT_BE_NESTED
 msgctxt "CANT_BE_NESTED"
 msgid "%s can't be nested"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:PROPRIETARY_ELEMENT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:PROPRIETARY_ELEMENT
 msgctxt "PROPRIETARY_ELEMENT"
 msgid "%s is not approved by W3C"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ILLEGAL_NESTING
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ILLEGAL_NESTING
 msgctxt "ILLEGAL_NESTING"
 msgid "%s shouldn't be nested"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:NOFRAMES_CONTENT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:NOFRAMES_CONTENT
 msgctxt "NOFRAMES_CONTENT"
 msgid "%s not inside 'noframes' element"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:UNEXPECTED_END_OF_FILE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:UNEXPECTED_END_OF_FILE
 msgctxt "UNEXPECTED_END_OF_FILE"
 msgid "unexpected end of file %s"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ELEMENT_NOT_EMPTY
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ELEMENT_NOT_EMPTY
 msgctxt "ELEMENT_NOT_EMPTY"
 msgid "%s element not empty or not closed"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:UNEXPECTED_ENDTAG_IN
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:UNEXPECTED_ENDTAG_IN
 msgctxt "UNEXPECTED_ENDTAG_IN"
 msgid "unexpected </%s> in <%s>"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TOO_MANY_ELEMENTS_IN
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TOO_MANY_ELEMENTS_IN
 msgctxt "TOO_MANY_ELEMENTS_IN"
 msgid "too many %s elements in <%s>"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:UNESCAPED_ELEMENT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:UNESCAPED_ELEMENT
 msgctxt "UNESCAPED_ELEMENT"
 msgid "unescaped %s in pre content"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:DOCTYPE_AFTER_TAGS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:DOCTYPE_AFTER_TAGS
 msgctxt "DOCTYPE_AFTER_TAGS"
 msgid "<!DOCTYPE> isn't allowed after elements"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:MISSING_TITLE_ELEMENT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:MISSING_TITLE_ELEMENT
 msgctxt "MISSING_TITLE_ELEMENT"
 msgid "inserting missing 'title' element"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:INCONSISTENT_VERSION
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:INCONSISTENT_VERSION
 msgctxt "INCONSISTENT_VERSION"
 msgid "HTML DOCTYPE doesn't match content"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:MISSING_DOCTYPE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:MISSING_DOCTYPE
 msgctxt "MISSING_DOCTYPE"
 msgid "missing <!DOCTYPE> declaration"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:CONTENT_AFTER_BODY
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:CONTENT_AFTER_BODY
 msgctxt "CONTENT_AFTER_BODY"
 msgid "content occurs after end of body"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:MALFORMED_COMMENT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:MALFORMED_COMMENT
 msgctxt "MALFORMED_COMMENT"
 msgid "adjacent hyphens within comment"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:BAD_COMMENT_CHARS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:BAD_COMMENT_CHARS
 msgctxt "BAD_COMMENT_CHARS"
 msgid "expecting -- or >"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:BAD_CDATA_CONTENT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:BAD_CDATA_CONTENT
 msgctxt "BAD_CDATA_CONTENT"
 msgid "'<' + '/' + letter not allowed here"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:INCONSISTENT_NAMESPACE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:INCONSISTENT_NAMESPACE
 msgctxt "INCONSISTENT_NAMESPACE"
 msgid "HTML namespace doesn't match content"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:SPACE_PRECEDING_XMLDECL
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:SPACE_PRECEDING_XMLDECL
 msgctxt "SPACE_PRECEDING_XMLDECL"
 msgid "removing whitespace preceding XML Declaration"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:MALFORMED_DOCTYPE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:MALFORMED_DOCTYPE
 msgctxt "MALFORMED_DOCTYPE"
 msgid "discarding malformed <!DOCTYPE>"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:BAD_XML_COMMENT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:BAD_XML_COMMENT
 msgctxt "BAD_XML_COMMENT"
 msgid "XML comments can't contain --"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:DTYPE_NOT_UPPER_CASE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:DTYPE_NOT_UPPER_CASE
 msgctxt "DTYPE_NOT_UPPER_CASE"
 msgid "SYSTEM, PUBLIC, W3C, DTD, EN must be upper case"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ENCODING_IO_CONFLICT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ENCODING_IO_CONFLICT
 msgctxt "ENCODING_IO_CONFLICT"
 msgid "Output encoding does not work with standard output"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:SUSPECTED_MISSING_QUOTE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:SUSPECTED_MISSING_QUOTE
 msgctxt "SUSPECTED_MISSING_QUOTE"
 msgid "missing quote mark for attribute value"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:DUPLICATE_FRAMESET
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:DUPLICATE_FRAMESET
 msgctxt "DUPLICATE_FRAMESET"
 msgid "repeated FRAMESET element"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:UNKNOWN_ELEMENT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:UNKNOWN_ELEMENT
 msgctxt "UNKNOWN_ELEMENT"
 msgid "%s is not recognized!"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:PREVIOUS_LOCATION
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:PREVIOUS_LOCATION
 msgctxt "PREVIOUS_LOCATION"
 msgid "<%s> previously mentioned"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:IMG_MISSING_ALT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:IMG_MISSING_ALT
 msgctxt "IMG_MISSING_ALT"
 msgid "[1.1.1.1]: <img> missing 'alt' text."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:IMG_ALT_SUSPICIOUS_FILENAME
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:IMG_ALT_SUSPICIOUS_FILENAME
 msgctxt "IMG_ALT_SUSPICIOUS_FILENAME"
 msgid "[1.1.1.2]: suspicious 'alt' text (filename)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:IMG_ALT_SUSPICIOUS_FILE_SIZE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:IMG_ALT_SUSPICIOUS_FILE_SIZE
 msgctxt "IMG_ALT_SUSPICIOUS_FILE_SIZE"
 msgid "[1.1.1.3]: suspicious 'alt' text (file size)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:IMG_ALT_SUSPICIOUS_PLACEHOLDER
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:IMG_ALT_SUSPICIOUS_PLACEHOLDER
 msgctxt "IMG_ALT_SUSPICIOUS_PLACEHOLDER"
 msgid "[1.1.1.4]: suspicious 'alt' text (placeholder)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:IMG_ALT_SUSPICIOUS_TOO_LONG
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:IMG_ALT_SUSPICIOUS_TOO_LONG
 msgctxt "IMG_ALT_SUSPICIOUS_TOO_LONG"
 msgid "[1.1.1.10]: suspicious 'alt' text (too long)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:IMG_MISSING_LONGDESC_DLINK
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:IMG_MISSING_LONGDESC_DLINK
 msgctxt "IMG_MISSING_LONGDESC_DLINK"
 msgid "[1.1.2.1]: <img> missing 'longdesc' and d-link."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:IMG_MISSING_DLINK
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:IMG_MISSING_DLINK
 msgctxt "IMG_MISSING_DLINK"
 msgid "[1.1.2.2]: <img> missing d-link."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:IMG_MISSING_LONGDESC
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:IMG_MISSING_LONGDESC
 msgctxt "IMG_MISSING_LONGDESC"
 msgid "[1.1.2.3]: <img> missing 'longdesc'."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:IMG_BUTTON_MISSING_ALT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:IMG_BUTTON_MISSING_ALT
 msgctxt "IMG_BUTTON_MISSING_ALT"
 msgid "[1.1.3.1]: <img> (button) missing 'alt' text."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:APPLET_MISSING_ALT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:APPLET_MISSING_ALT
 msgctxt "APPLET_MISSING_ALT"
 msgid "[1.1.4.1]: <applet> missing alternate content."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:OBJECT_MISSING_ALT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:OBJECT_MISSING_ALT
 msgctxt "OBJECT_MISSING_ALT"
 msgid "[1.1.5.1]: <object> missing alternate content."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:AUDIO_MISSING_TEXT_WAV
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:AUDIO_MISSING_TEXT_WAV
 msgctxt "AUDIO_MISSING_TEXT_WAV"
 msgid "[1.1.6.1]: audio missing text transcript (wav)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:AUDIO_MISSING_TEXT_AU
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:AUDIO_MISSING_TEXT_AU
 msgctxt "AUDIO_MISSING_TEXT_AU"
 msgid "[1.1.6.2]: audio missing text transcript (au)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:AUDIO_MISSING_TEXT_AIFF
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:AUDIO_MISSING_TEXT_AIFF
 msgctxt "AUDIO_MISSING_TEXT_AIFF"
 msgid "[1.1.6.3]: audio missing text transcript (aiff)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:AUDIO_MISSING_TEXT_SND
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:AUDIO_MISSING_TEXT_SND
 msgctxt "AUDIO_MISSING_TEXT_SND"
 msgid "[1.1.6.4]: audio missing text transcript (snd)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:AUDIO_MISSING_TEXT_RA
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:AUDIO_MISSING_TEXT_RA
 msgctxt "AUDIO_MISSING_TEXT_RA"
 msgid "[1.1.6.5]: audio missing text transcript (ra)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:AUDIO_MISSING_TEXT_RM
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:AUDIO_MISSING_TEXT_RM
 msgctxt "AUDIO_MISSING_TEXT_RM"
 msgid "[1.1.6.6]: audio missing text transcript (rm)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:FRAME_MISSING_LONGDESC
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:FRAME_MISSING_LONGDESC
 msgctxt "FRAME_MISSING_LONGDESC"
 msgid "[1.1.8.1]: <frame> may require 'longdesc'."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:AREA_MISSING_ALT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:AREA_MISSING_ALT
 msgctxt "AREA_MISSING_ALT"
 msgid "[1.1.9.1]: <area> missing 'alt' text."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:SCRIPT_MISSING_NOSCRIPT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:SCRIPT_MISSING_NOSCRIPT
 msgctxt "SCRIPT_MISSING_NOSCRIPT"
 msgid "[1.1.10.1]: <script> missing <noscript> section."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ASCII_REQUIRES_DESCRIPTION
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ASCII_REQUIRES_DESCRIPTION
 msgctxt "ASCII_REQUIRES_DESCRIPTION"
 msgid "[1.1.12.1]: ascii art requires description."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:IMG_MAP_SERVER_REQUIRES_TEXT_LINKS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:IMG_MAP_SERVER_REQUIRES_TEXT_LINKS
 msgctxt "IMG_MAP_SERVER_REQUIRES_TEXT_LINKS"
 msgid "[1.2.1.1]: image map (server-side) requires text links."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:MULTIMEDIA_REQUIRES_TEXT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:MULTIMEDIA_REQUIRES_TEXT
 msgctxt "MULTIMEDIA_REQUIRES_TEXT"
 msgid "[1.4.1.1]: multimedia requires synchronized text equivalents."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:IMG_MAP_CLIENT_MISSING_TEXT_LINKS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:IMG_MAP_CLIENT_MISSING_TEXT_LINKS
 msgctxt "IMG_MAP_CLIENT_MISSING_TEXT_LINKS"
 msgid "[1.5.1.1]: image map (client-side) missing text links."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:INFORMATION_NOT_CONVEYED_IMAGE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:INFORMATION_NOT_CONVEYED_IMAGE
 msgctxt "INFORMATION_NOT_CONVEYED_IMAGE"
 msgid "[2.1.1.1]: ensure information not conveyed through color alone (image)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:INFORMATION_NOT_CONVEYED_APPLET
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:INFORMATION_NOT_CONVEYED_APPLET
 msgctxt "INFORMATION_NOT_CONVEYED_APPLET"
 msgid "[2.1.1.2]: ensure information not conveyed through color alone (applet)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:INFORMATION_NOT_CONVEYED_OBJECT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:INFORMATION_NOT_CONVEYED_OBJECT
 msgctxt "INFORMATION_NOT_CONVEYED_OBJECT"
 msgid "[2.1.1.3]: ensure information not conveyed through color alone (object)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:INFORMATION_NOT_CONVEYED_SCRIPT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:INFORMATION_NOT_CONVEYED_SCRIPT
 msgctxt "INFORMATION_NOT_CONVEYED_SCRIPT"
 msgid "[2.1.1.4]: ensure information not conveyed through color alone (script)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:INFORMATION_NOT_CONVEYED_INPUT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:INFORMATION_NOT_CONVEYED_INPUT
 msgctxt "INFORMATION_NOT_CONVEYED_INPUT"
 msgid "[2.1.1.5]: ensure information not conveyed through color alone (input)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:COLOR_CONTRAST_TEXT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:COLOR_CONTRAST_TEXT
 msgctxt "COLOR_CONTRAST_TEXT"
 msgid "[2.2.1.1]: poor color contrast (text)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:COLOR_CONTRAST_LINK
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:COLOR_CONTRAST_LINK
 msgctxt "COLOR_CONTRAST_LINK"
 msgid "[2.2.1.2]: poor color contrast (link)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:COLOR_CONTRAST_ACTIVE_LINK
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:COLOR_CONTRAST_ACTIVE_LINK
 msgctxt "COLOR_CONTRAST_ACTIVE_LINK"
 msgid "[2.2.1.3]: poor color contrast (active link)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:COLOR_CONTRAST_VISITED_LINK
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:COLOR_CONTRAST_VISITED_LINK
 msgctxt "COLOR_CONTRAST_VISITED_LINK"
 msgid "[2.2.1.4]: poor color contrast (visited link)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:DOCTYPE_MISSING
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:DOCTYPE_MISSING
 msgctxt "DOCTYPE_MISSING"
 msgid "[3.2.1.1]: <doctype> missing."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STYLE_SHEET_CONTROL_PRESENTATION
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STYLE_SHEET_CONTROL_PRESENTATION
 msgctxt "STYLE_SHEET_CONTROL_PRESENTATION"
 msgid "[3.3.1.1]: use style sheets to control presentation."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:HEADERS_IMPROPERLY_NESTED
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:HEADERS_IMPROPERLY_NESTED
 msgctxt "HEADERS_IMPROPERLY_NESTED"
 msgid "[3.5.1.1]: headers improperly nested."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:POTENTIAL_HEADER_BOLD
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:POTENTIAL_HEADER_BOLD
 msgctxt "POTENTIAL_HEADER_BOLD"
 msgid "[3.5.2.1]: potential header (bold)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:POTENTIAL_HEADER_ITALICS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:POTENTIAL_HEADER_ITALICS
 msgctxt "POTENTIAL_HEADER_ITALICS"
 msgid "[3.5.2.2]: potential header (italics)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:POTENTIAL_HEADER_UNDERLINE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:POTENTIAL_HEADER_UNDERLINE
 msgctxt "POTENTIAL_HEADER_UNDERLINE"
 msgid "[3.5.2.3]: potential header (underline)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:HEADER_USED_FORMAT_TEXT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:HEADER_USED_FORMAT_TEXT
 msgctxt "HEADER_USED_FORMAT_TEXT"
 msgid "[3.5.3.1]: header used to format text."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:LIST_USAGE_INVALID_UL
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:LIST_USAGE_INVALID_UL
 msgctxt "LIST_USAGE_INVALID_UL"
 msgid "[3.6.1.1]: list usage invalid <ul>."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:LIST_USAGE_INVALID_OL
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:LIST_USAGE_INVALID_OL
 msgctxt "LIST_USAGE_INVALID_OL"
 msgid "[3.6.1.2]: list usage invalid <ol>."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:LIST_USAGE_INVALID_LI
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:LIST_USAGE_INVALID_LI
 msgctxt "LIST_USAGE_INVALID_LI"
 msgid "[3.6.1.4]: list usage invalid <li>."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:INDICATE_CHANGES_IN_LANGUAGE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:INDICATE_CHANGES_IN_LANGUAGE
 msgctxt "INDICATE_CHANGES_IN_LANGUAGE"
 msgid "[4.1.1.1]: indicate changes in language."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:LANGUAGE_NOT_IDENTIFIED
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:LANGUAGE_NOT_IDENTIFIED
 msgctxt "LANGUAGE_NOT_IDENTIFIED"
 msgid "[4.3.1.1]: language not identified."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:LANGUAGE_INVALID
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:LANGUAGE_INVALID
 msgctxt "LANGUAGE_INVALID"
 msgid "[4.3.1.2]: language attribute invalid."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:DATA_TABLE_MISSING_HEADERS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:DATA_TABLE_MISSING_HEADERS
 msgctxt "DATA_TABLE_MISSING_HEADERS"
 msgid "[5.1.2.1]: data <table> missing row/column headers (all)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:DATA_TABLE_MISSING_HEADERS_COLUMN
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:DATA_TABLE_MISSING_HEADERS_COLUMN
 msgctxt "DATA_TABLE_MISSING_HEADERS_COLUMN"
 msgid "[5.1.2.2]: data <table> missing row/column headers (1 col)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:DATA_TABLE_MISSING_HEADERS_ROW
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:DATA_TABLE_MISSING_HEADERS_ROW
 msgctxt "DATA_TABLE_MISSING_HEADERS_ROW"
 msgid "[5.1.2.3]: data <table> missing row/column headers (1 row)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:DATA_TABLE_REQUIRE_MARKUP_COLUMN_HEADERS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:DATA_TABLE_REQUIRE_MARKUP_COLUMN_HEADERS
 msgctxt "DATA_TABLE_REQUIRE_MARKUP_COLUMN_HEADERS"
 msgid "[5.2.1.1]: data <table> may require markup (column headers)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:DATA_TABLE_REQUIRE_MARKUP_ROW_HEADERS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:DATA_TABLE_REQUIRE_MARKUP_ROW_HEADERS
 msgctxt "DATA_TABLE_REQUIRE_MARKUP_ROW_HEADERS"
 msgid "[5.2.1.2]: data <table> may require markup (row headers)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:LAYOUT_TABLES_LINEARIZE_PROPERLY
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:LAYOUT_TABLES_LINEARIZE_PROPERLY
 msgctxt "LAYOUT_TABLES_LINEARIZE_PROPERLY"
 msgid "[5.3.1.1]: verify layout tables linearize properly."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:LAYOUT_TABLE_INVALID_MARKUP
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:LAYOUT_TABLE_INVALID_MARKUP
 msgctxt "LAYOUT_TABLE_INVALID_MARKUP"
 msgid "[5.4.1.1]: invalid markup used in layout <table>."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TABLE_MISSING_SUMMARY
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TABLE_MISSING_SUMMARY
 msgctxt "TABLE_MISSING_SUMMARY"
 msgid "[5.5.1.1]: <table> missing summary."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TABLE_SUMMARY_INVALID_NULL
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TABLE_SUMMARY_INVALID_NULL
 msgctxt "TABLE_SUMMARY_INVALID_NULL"
 msgid "[5.5.1.2]: <table> summary invalid (null)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TABLE_SUMMARY_INVALID_SPACES
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TABLE_SUMMARY_INVALID_SPACES
 msgctxt "TABLE_SUMMARY_INVALID_SPACES"
 msgid "[5.5.1.3]: <table> summary invalid (spaces)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TABLE_SUMMARY_INVALID_PLACEHOLDER
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TABLE_SUMMARY_INVALID_PLACEHOLDER
 msgctxt "TABLE_SUMMARY_INVALID_PLACEHOLDER"
 msgid "[5.5.1.6]: <table> summary invalid (placeholder text)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TABLE_MISSING_CAPTION
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TABLE_MISSING_CAPTION
 msgctxt "TABLE_MISSING_CAPTION"
 msgid "[5.5.2.1]: <table> missing <caption>."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TABLE_MAY_REQUIRE_HEADER_ABBR
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TABLE_MAY_REQUIRE_HEADER_ABBR
 msgctxt "TABLE_MAY_REQUIRE_HEADER_ABBR"
 msgid "[5.6.1.1]: <table> may require header abbreviations."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TABLE_MAY_REQUIRE_HEADER_ABBR_NULL
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TABLE_MAY_REQUIRE_HEADER_ABBR_NULL
 msgctxt "TABLE_MAY_REQUIRE_HEADER_ABBR_NULL"
 msgid "[5.6.1.2]: <table> header abbreviations invalid (null)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TABLE_MAY_REQUIRE_HEADER_ABBR_SPACES
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TABLE_MAY_REQUIRE_HEADER_ABBR_SPACES
 msgctxt "TABLE_MAY_REQUIRE_HEADER_ABBR_SPACES"
 msgid "[5.6.1.3]: <table> header abbreviations invalid (spaces)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STYLESHEETS_REQUIRE_TESTING_LINK
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STYLESHEETS_REQUIRE_TESTING_LINK
 msgctxt "STYLESHEETS_REQUIRE_TESTING_LINK"
 msgid "[6.1.1.1]: style sheets require testing (link)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STYLESHEETS_REQUIRE_TESTING_STYLE_ELEMENT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STYLESHEETS_REQUIRE_TESTING_STYLE_ELEMENT
 msgctxt "STYLESHEETS_REQUIRE_TESTING_STYLE_ELEMENT"
 msgid "[6.1.1.2]: style sheets require testing (style element)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:STYLESHEETS_REQUIRE_TESTING_STYLE_ATTR
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:STYLESHEETS_REQUIRE_TESTING_STYLE_ATTR
 msgctxt "STYLESHEETS_REQUIRE_TESTING_STYLE_ATTR"
 msgid "[6.1.1.3]: style sheets require testing (style attribute)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:FRAME_SRC_INVALID
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:FRAME_SRC_INVALID
 msgctxt "FRAME_SRC_INVALID"
 msgid "[6.2.1.1]: <frame> source invalid."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_EQUIVALENTS_REQUIRE_UPDATING_APPLET
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_EQUIVALENTS_REQUIRE_UPDATING_APPLET
 msgctxt "TEXT_EQUIVALENTS_REQUIRE_UPDATING_APPLET"
 msgid "[6.2.2.1]: text equivalents require updating (applet)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_EQUIVALENTS_REQUIRE_UPDATING_SCRIPT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_EQUIVALENTS_REQUIRE_UPDATING_SCRIPT
 msgctxt "TEXT_EQUIVALENTS_REQUIRE_UPDATING_SCRIPT"
 msgid "[6.2.2.2]: text equivalents require updating (script)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TEXT_EQUIVALENTS_REQUIRE_UPDATING_OBJECT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TEXT_EQUIVALENTS_REQUIRE_UPDATING_OBJECT
 msgctxt "TEXT_EQUIVALENTS_REQUIRE_UPDATING_OBJECT"
 msgid "[6.2.2.3]: text equivalents require updating (object)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_SCRIPT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_SCRIPT
 msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_SCRIPT"
 msgid "[6.3.1.1]: programmatic objects require testing (script)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_OBJECT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_OBJECT
 msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_OBJECT"
 msgid "[6.3.1.2]: programmatic objects require testing (object)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_EMBED
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_EMBED
 msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_EMBED"
 msgid "[6.3.1.3]: programmatic objects require testing (embed)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_APPLET
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_APPLET
 msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_APPLET"
 msgid "[6.3.1.4]: programmatic objects require testing (applet)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:FRAME_MISSING_NOFRAMES
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:FRAME_MISSING_NOFRAMES
 msgctxt "FRAME_MISSING_NOFRAMES"
 msgid "[6.5.1.1]: <frameset> missing <noframes> section."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:NOFRAMES_INVALID_NO_VALUE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:NOFRAMES_INVALID_NO_VALUE
 msgctxt "NOFRAMES_INVALID_NO_VALUE"
 msgid "[6.5.1.2]: <noframes> section invalid (no value)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:NOFRAMES_INVALID_CONTENT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:NOFRAMES_INVALID_CONTENT
 msgctxt "NOFRAMES_INVALID_CONTENT"
 msgid "[6.5.1.3]: <noframes> section invalid (content)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:NOFRAMES_INVALID_LINK
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:NOFRAMES_INVALID_LINK
 msgctxt "NOFRAMES_INVALID_LINK"
 msgid "[6.5.1.4]: <noframes> section invalid (link)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REMOVE_FLICKER_SCRIPT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REMOVE_FLICKER_SCRIPT
 msgctxt "REMOVE_FLICKER_SCRIPT"
 msgid "[7.1.1.1]: remove flicker (script)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REMOVE_FLICKER_OBJECT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REMOVE_FLICKER_OBJECT
 msgctxt "REMOVE_FLICKER_OBJECT"
 msgid "[7.1.1.2]: remove flicker (object)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REMOVE_FLICKER_EMBED
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REMOVE_FLICKER_EMBED
 msgctxt "REMOVE_FLICKER_EMBED"
 msgid "[7.1.1.3]: remove flicker (embed)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REMOVE_FLICKER_APPLET
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REMOVE_FLICKER_APPLET
 msgctxt "REMOVE_FLICKER_APPLET"
 msgid "[7.1.1.4]: remove flicker (applet)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REMOVE_FLICKER_ANIMATED_GIF
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REMOVE_FLICKER_ANIMATED_GIF
 msgctxt "REMOVE_FLICKER_ANIMATED_GIF"
 msgid "[7.1.1.5]: remove flicker (animated gif)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REMOVE_BLINK_MARQUEE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REMOVE_BLINK_MARQUEE
 msgctxt "REMOVE_BLINK_MARQUEE"
 msgid "[7.2.1.1]: remove blink/marquee."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REMOVE_AUTO_REFRESH
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REMOVE_AUTO_REFRESH
 msgctxt "REMOVE_AUTO_REFRESH"
 msgid "[7.4.1.1]: remove auto-refresh."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REMOVE_AUTO_REDIRECT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REMOVE_AUTO_REDIRECT
 msgctxt "REMOVE_AUTO_REDIRECT"
 msgid "[7.5.1.1]: remove auto-redirect."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_SCRIPT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_SCRIPT
 msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_SCRIPT"
 msgid "[8.1.1.1]: ensure programmatic objects are accessible (script)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_OBJECT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_OBJECT
 msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_OBJECT"
 msgid "[8.1.1.2]: ensure programmatic objects are accessible (object)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_APPLET
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_APPLET
 msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_APPLET"
 msgid "[8.1.1.3]: ensure programmatic objects are accessible (applet)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_EMBED
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_EMBED
 msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_EMBED"
 msgid "[8.1.1.4]: ensure programmatic objects are accessible (embed)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:IMAGE_MAP_SERVER_SIDE_REQUIRES_CONVERSION
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:IMAGE_MAP_SERVER_SIDE_REQUIRES_CONVERSION
 msgctxt "IMAGE_MAP_SERVER_SIDE_REQUIRES_CONVERSION"
 msgid "[9.1.1.1]: image map (server-side) requires conversion."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_DOWN
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_DOWN
 msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_DOWN"
 msgid "[9.3.1.1]: <script> not keyboard accessible (onMouseDown)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_UP
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_UP
 msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_UP"
 msgid "[9.3.1.2]: <script> not keyboard accessible (onMouseUp)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_CLICK
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_CLICK
 msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_CLICK"
 msgid "[9.3.1.3]: <script> not keyboard accessible (onClick)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OVER
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OVER
 msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OVER"
 msgid "[9.3.1.4]: <script> not keyboard accessible (onMouseOver)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OUT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OUT
 msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OUT"
 msgid "[9.3.1.5]: <script> not keyboard accessible (onMouseOut)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_MOVE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_MOVE
 msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_MOVE"
 msgid "[9.3.1.6]: <script> not keyboard accessible (onMouseMove)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:NEW_WINDOWS_REQUIRE_WARNING_NEW
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:NEW_WINDOWS_REQUIRE_WARNING_NEW
 msgctxt "NEW_WINDOWS_REQUIRE_WARNING_NEW"
 msgid "[10.1.1.1]: new windows require warning (_new)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:NEW_WINDOWS_REQUIRE_WARNING_BLANK
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:NEW_WINDOWS_REQUIRE_WARNING_BLANK
 msgctxt "NEW_WINDOWS_REQUIRE_WARNING_BLANK"
 msgid "[10.1.1.2]: new windows require warning (_blank)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:FORM_CONTROL_REQUIRES_DEFAULT_TEXT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:FORM_CONTROL_REQUIRES_DEFAULT_TEXT
 msgctxt "FORM_CONTROL_REQUIRES_DEFAULT_TEXT"
 msgid "[10.4.1.1]: form control requires default text."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:FORM_CONTROL_DEFAULT_TEXT_INVALID_NULL
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:FORM_CONTROL_DEFAULT_TEXT_INVALID_NULL
 msgctxt "FORM_CONTROL_DEFAULT_TEXT_INVALID_NULL"
 msgid "[10.4.1.2]: form control default text invalid (null)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:FORM_CONTROL_DEFAULT_TEXT_INVALID_SPACES
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:FORM_CONTROL_DEFAULT_TEXT_INVALID_SPACES
 msgctxt "FORM_CONTROL_DEFAULT_TEXT_INVALID_SPACES"
 msgid "[10.4.1.3]: form control default text invalid (spaces)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REPLACE_DEPRECATED_HTML_APPLET
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REPLACE_DEPRECATED_HTML_APPLET
 msgctxt "REPLACE_DEPRECATED_HTML_APPLET"
 msgid "[11.2.1.1]: replace deprecated html <applet>."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REPLACE_DEPRECATED_HTML_BASEFONT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REPLACE_DEPRECATED_HTML_BASEFONT
 msgctxt "REPLACE_DEPRECATED_HTML_BASEFONT"
 msgid "[11.2.1.2]: replace deprecated html <basefont>."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REPLACE_DEPRECATED_HTML_CENTER
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REPLACE_DEPRECATED_HTML_CENTER
 msgctxt "REPLACE_DEPRECATED_HTML_CENTER"
 msgid "[11.2.1.3]: replace deprecated html <center>."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REPLACE_DEPRECATED_HTML_DIR
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REPLACE_DEPRECATED_HTML_DIR
 msgctxt "REPLACE_DEPRECATED_HTML_DIR"
 msgid "[11.2.1.4]: replace deprecated html <dir>."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REPLACE_DEPRECATED_HTML_FONT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REPLACE_DEPRECATED_HTML_FONT
 msgctxt "REPLACE_DEPRECATED_HTML_FONT"
 msgid "[11.2.1.5]: replace deprecated html <font>."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REPLACE_DEPRECATED_HTML_ISINDEX
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REPLACE_DEPRECATED_HTML_ISINDEX
 msgctxt "REPLACE_DEPRECATED_HTML_ISINDEX"
 msgid "[11.2.1.6]: replace deprecated html <isindex>."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REPLACE_DEPRECATED_HTML_MENU
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REPLACE_DEPRECATED_HTML_MENU
 msgctxt "REPLACE_DEPRECATED_HTML_MENU"
 msgid "[11.2.1.7]: replace deprecated html <menu>."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REPLACE_DEPRECATED_HTML_S
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REPLACE_DEPRECATED_HTML_S
 msgctxt "REPLACE_DEPRECATED_HTML_S"
 msgid "[11.2.1.8]: replace deprecated html <s>."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REPLACE_DEPRECATED_HTML_STRIKE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REPLACE_DEPRECATED_HTML_STRIKE
 msgctxt "REPLACE_DEPRECATED_HTML_STRIKE"
 msgid "[11.2.1.9]: replace deprecated html <strike>."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:REPLACE_DEPRECATED_HTML_U
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:REPLACE_DEPRECATED_HTML_U
 msgctxt "REPLACE_DEPRECATED_HTML_U"
 msgid "[11.2.1.10]: replace deprecated html <u>."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:FRAME_MISSING_TITLE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:FRAME_MISSING_TITLE
 msgctxt "FRAME_MISSING_TITLE"
 msgid "[12.1.1.1]: <frame> missing title."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:FRAME_TITLE_INVALID_NULL
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:FRAME_TITLE_INVALID_NULL
 msgctxt "FRAME_TITLE_INVALID_NULL"
 msgid "[12.1.1.2]: <frame> title invalid (null)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:FRAME_TITLE_INVALID_SPACES
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:FRAME_TITLE_INVALID_SPACES
 msgctxt "FRAME_TITLE_INVALID_SPACES"
 msgid "[12.1.1.3]: <frame> title invalid (spaces)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ASSOCIATE_LABELS_EXPLICITLY
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ASSOCIATE_LABELS_EXPLICITLY
 msgctxt "ASSOCIATE_LABELS_EXPLICITLY"
 msgid "[12.4.1.1]: associate labels explicitly with form controls."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ASSOCIATE_LABELS_EXPLICITLY_FOR
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ASSOCIATE_LABELS_EXPLICITLY_FOR
 msgctxt "ASSOCIATE_LABELS_EXPLICITLY_FOR"
 msgid "[12.4.1.2]: associate labels explicitly with form controls (for)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:ASSOCIATE_LABELS_EXPLICITLY_ID
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:ASSOCIATE_LABELS_EXPLICITLY_ID
 msgctxt "ASSOCIATE_LABELS_EXPLICITLY_ID"
 msgid "[12.4.1.3]: associate labels explicitly with form controls (id)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:LINK_TEXT_NOT_MEANINGFUL
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:LINK_TEXT_NOT_MEANINGFUL
 msgctxt "LINK_TEXT_NOT_MEANINGFUL"
 msgid "[13.1.1.1]: link text not meaningful."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:LINK_TEXT_MISSING
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:LINK_TEXT_MISSING
 msgctxt "LINK_TEXT_MISSING"
 msgid "[13.1.1.2]: link text missing."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:LINK_TEXT_TOO_LONG
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:LINK_TEXT_TOO_LONG
 msgctxt "LINK_TEXT_TOO_LONG"
 msgid "[13.1.1.3]: link text too long."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:LINK_TEXT_NOT_MEANINGFUL_CLICK_HERE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:LINK_TEXT_NOT_MEANINGFUL_CLICK_HERE
 msgctxt "LINK_TEXT_NOT_MEANINGFUL_CLICK_HERE"
 msgid "[13.1.1.4]: link text not meaningful (click here)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:METADATA_MISSING
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:METADATA_MISSING
 msgctxt "METADATA_MISSING"
 msgid "[13.2.1.1]: Metadata missing."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:METADATA_MISSING_REDIRECT_AUTOREFRESH
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:METADATA_MISSING_REDIRECT_AUTOREFRESH
 msgctxt "METADATA_MISSING_REDIRECT_AUTOREFRESH"
 msgid "[13.2.1.3]: Metadata missing (redirect/auto-refresh)."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:SKIPOVER_ASCII_ART
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:SKIPOVER_ASCII_ART
 msgctxt "SKIPOVER_ASCII_ART"
 msgid "[13.10.1.1]: skip over ascii art."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyXmlDecl
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyXmlDecl
 msgctxt "TidyXmlDecl"
 msgid ""
 "This option specifies if Tidy should add the XML declaration when "
@@ -2025,8 +2025,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyXmlSpace
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyXmlSpace
 msgctxt "TidyXmlSpace"
 msgid ""
 "This option specifies if Tidy should add "
@@ -2039,8 +2039,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyAltText
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyAltText
 msgctxt "TidyAltText"
 msgid ""
 "This option specifies the default <code>alt=</code> text Tidy uses for "
@@ -2052,8 +2052,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyXmlPIs
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyXmlPIs
 msgctxt "TidyXmlPIs"
 msgid ""
 "This option specifies if Tidy should change the parsing of processing "
@@ -2064,8 +2064,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyMakeBare
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyMakeBare
 msgctxt "TidyMakeBare"
 msgid ""
 "This option specifies if Tidy should strip Microsoft specific HTML "
@@ -2074,8 +2074,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyCSSPrefix
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyCSSPrefix
 msgctxt "TidyCSSPrefix"
 msgid ""
 "This option specifies the prefix that Tidy uses for styles rules. "
@@ -2084,10 +2084,17 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyMakeClean
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyMakeClean
 msgctxt "TidyMakeClean"
 msgid ""
+"This option specifies if Tidy should perform cleaning of some legacy "
+"presentational tags (currently <code>&lt;i&gt;</code>, "
+"<code>&lt;b&gt;</code>, <code>&lt;center&gt;</code> when enclosed within "
+"appropriate inline tags, and <code>&lt;font&gt;</code>). If set to "
+"<code>yes</code> then legacy tags will be replaced with CSS "
+"<code>&lt;style&gt;</code> tags and structural markup as appropriate. "
+msgstr ""
 "Esta opción especifica si Tidy debe realizar la limpieza de algún "
 "legado etiquetas de presentación (actualmente <code>&lt;i&gt;</code>, "
 "<code>&lt;b&gt;</code>, <code>&lt;center&gt;</code> cuando encerrados "
@@ -2096,11 +2103,9 @@ msgid ""
 "entonces etiquetas existentes serán reemplazados con CSS "
 "<code>&lt;style&gt;</code> y estructural markup según corresponda. "
 
-msgstr ""
-
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyGDocClean
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyGDocClean
 msgctxt "TidyGDocClean"
 msgid ""
 "This option specifies if Tidy should enable specific behavior for "
@@ -2108,8 +2113,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyDoctype
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyDoctype
 msgctxt "TidyDoctype"
 msgid ""
 "This option specifies the DOCTYPE declaration generated by Tidy. "
@@ -2147,22 +2152,22 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyDropEmptyElems
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyDropEmptyElems
 msgctxt "TidyDropEmptyElems"
 msgid "This option specifies if Tidy should discard empty elements. "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyDropEmptyParas
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyDropEmptyParas
 msgctxt "TidyDropEmptyParas"
 msgid "This option specifies if Tidy should discard empty paragraphs. "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyDropFontTags
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyDropFontTags
 msgctxt "TidyDropFontTags"
 msgid ""
 "Deprecated; <em>do not use</em>. This option is destructive to "
@@ -2182,8 +2187,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyDropPropAttrs
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyDropPropAttrs
 msgctxt "TidyDropPropAttrs"
 msgid ""
 "This option specifies if Tidy should strip out proprietary attributes, "
@@ -2191,8 +2196,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyEncloseBlockText
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyEncloseBlockText
 msgctxt "TidyEncloseBlockText"
 msgid ""
 "This option specifies if Tidy should insert a <code>&lt;p&gt;</code> "
@@ -2201,8 +2206,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyEncloseBodyText
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyEncloseBodyText
 msgctxt "TidyEncloseBodyText"
 msgid ""
 "This option specifies if Tidy should enclose any text it finds in the "
@@ -2213,8 +2218,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyEscapeCdata
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyEscapeCdata
 msgctxt "TidyEscapeCdata"
 msgid ""
 "This option specifies if Tidy should convert "
@@ -2222,8 +2227,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyFixComments
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyFixComments
 msgctxt "TidyFixComments"
 msgid ""
 "This option specifies if Tidy should replace unexpected hyphens with "
@@ -2236,8 +2241,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyFixUri
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyFixUri
 msgctxt "TidyFixUri"
 msgid ""
 "This option specifies if Tidy should check attribute values that carry "
@@ -2246,15 +2251,15 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyHideComments
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyHideComments
 msgctxt "TidyHideComments"
 msgid "This option specifies if Tidy should print out comments. "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyCoerceEndTags
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyCoerceEndTags
 msgctxt "TidyCoerceEndTags"
 msgid ""
 "This option specifies if Tidy should coerce a start tag into an end tag "
@@ -2269,8 +2274,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyOmitOptionalTags
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyOmitOptionalTags
 msgctxt "TidyOmitOptionalTags"
 msgid ""
 "This option specifies if Tidy should omit optional start tags and end tags "
@@ -2288,15 +2293,15 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyHideEndTags
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyHideEndTags
 msgctxt "TidyHideEndTags"
 msgid "This option is an alias for <code>omit-optional-tags</code>. "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyIndentCdata
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyIndentCdata
 msgctxt "TidyIndentCdata"
 msgid ""
 "This option specifies if Tidy should indent "
@@ -2304,8 +2309,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyXmlTags
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyXmlTags
 msgctxt "TidyXmlTags"
 msgid ""
 "This option specifies if Tidy should use the XML parser rather than the "
@@ -2313,8 +2318,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyJoinClasses
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyJoinClasses
 msgctxt "TidyJoinClasses"
 msgid ""
 "This option specifies if Tidy should combine class names to generate "
@@ -2323,8 +2328,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyJoinStyles
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyJoinStyles
 msgctxt "TidyJoinStyles"
 msgid ""
 "This option specifies if Tidy should combine styles to generate a single, "
@@ -2332,8 +2337,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyLogicalEmphasis
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyLogicalEmphasis
 msgctxt "TidyLogicalEmphasis"
 msgid ""
 "This option specifies if Tidy should replace any occurrence of "
@@ -2345,8 +2350,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyLowerLiterals
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyLowerLiterals
 msgctxt "TidyLowerLiterals"
 msgid ""
 "This option specifies if Tidy should convert the value of an attribute "
@@ -2356,8 +2361,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyMergeEmphasis
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyMergeEmphasis
 msgctxt "TidyMergeEmphasis"
 msgid ""
 "This option specifies if Tidy should merge nested <code>&lt;b&gt;</code> "
@@ -2369,8 +2374,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyMergeDivs
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyMergeDivs
 msgctxt "TidyMergeDivs"
 msgid ""
 "This option can be used to modify the behavior of <code>clean</code> when "
@@ -2390,8 +2395,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyMergeSpans
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyMergeSpans
 msgctxt "TidyMergeSpans"
 msgid ""
 "This option can be used to modify the behavior of <code>clean</code> when "
@@ -2404,15 +2409,15 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyNCR
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyNCR
 msgctxt "TidyNCR"
 msgid "This option specifies if Tidy should allow numeric character references. "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyBlockTags
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyBlockTags
 msgctxt "TidyBlockTags"
 msgid ""
 "This option specifies new block-level tags. This option takes a space or "
@@ -2429,8 +2434,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyEmptyTags
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyEmptyTags
 msgctxt "TidyEmptyTags"
 msgid ""
 "This option specifies new empty inline tags. This option takes a space "
@@ -2445,8 +2450,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyInlineTags
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyInlineTags
 msgctxt "TidyInlineTags"
 msgid ""
 "This option specifies new non-empty inline tags. This option takes a "
@@ -2459,8 +2464,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyPreTags
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyPreTags
 msgctxt "TidyPreTags"
 msgid ""
 "This option specifies new tags that are to be processed in exactly the "
@@ -2476,8 +2481,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyNumEntities
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyNumEntities
 msgctxt "TidyNumEntities"
 msgid ""
 "This option specifies if Tidy should output entities other than the "
@@ -2492,8 +2497,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyHtmlOut
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyHtmlOut
 msgctxt "TidyHtmlOut"
 msgid ""
 "This option specifies if Tidy should generate pretty printed output, "
@@ -2501,8 +2506,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyXhtmlOut
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyXhtmlOut
 msgctxt "TidyXhtmlOut"
 msgid ""
 "This option specifies if Tidy should generate pretty printed output, "
@@ -2520,8 +2525,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyXmlOut
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyXmlOut
 msgctxt "TidyXmlOut"
 msgid ""
 "This option specifies if Tidy should pretty print output, writing it as "
@@ -2535,8 +2540,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyQuoteAmpersand
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyQuoteAmpersand
 msgctxt "TidyQuoteAmpersand"
 msgid ""
 "This option specifies if Tidy should output unadorned <code>&amp;</code> "
@@ -2544,8 +2549,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyQuoteMarks
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyQuoteMarks
 msgctxt "TidyQuoteMarks"
 msgid ""
 "This option specifies if Tidy should output <code>&quot;</code> characters "
@@ -2557,8 +2562,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyQuoteNbsp
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyQuoteNbsp
 msgctxt "TidyQuoteNbsp"
 msgid ""
 "This option specifies if Tidy should output non-breaking space characters "
@@ -2566,8 +2571,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyDuplicateAttrs
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyDuplicateAttrs
 msgctxt "TidyDuplicateAttrs"
 msgid ""
 "This option specifies if Tidy should keep the first or last attribute, if "
@@ -2575,8 +2580,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidySortAttributes
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidySortAttributes
 msgctxt "TidySortAttributes"
 msgid ""
 "This option specifies that Tidy should sort attributes within an element "
@@ -2585,8 +2590,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyReplaceColor
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyReplaceColor
 msgctxt "TidyReplaceColor"
 msgid ""
 "This option specifies if Tidy should replace numeric values in color "
@@ -2595,8 +2600,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyBodyOnly
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyBodyOnly
 msgctxt "TidyBodyOnly"
 msgid ""
 "This option specifies if Tidy should print only the contents of the "
@@ -2612,8 +2617,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyUpperCaseAttrs
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyUpperCaseAttrs
 msgctxt "TidyUpperCaseAttrs"
 msgid ""
 "This option specifies if Tidy should output attribute names in upper "
@@ -2624,8 +2629,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyUpperCaseTags
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyUpperCaseTags
 msgctxt "TidyUpperCaseTags"
 msgid ""
 "This option specifies if Tidy should output tag names in upper case. "
@@ -2635,8 +2640,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyWord2000
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyWord2000
 msgctxt "TidyWord2000"
 msgid ""
 "This option specifies if Tidy should go to great pains to strip out all "
@@ -2647,8 +2652,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyAccessibilityCheckLevel
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyAccessibilityCheckLevel
 msgctxt "TidyAccessibilityCheckLevel"
 msgid ""
 "This option specifies what level of accessibility checking, if any, "
@@ -2662,8 +2667,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyShowErrors
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyShowErrors
 msgctxt "TidyShowErrors"
 msgid ""
 "This option specifies the number Tidy uses to determine if further errors "
@@ -2671,15 +2676,15 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyShowInfo
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyShowInfo
 msgctxt "TidyShowInfo"
 msgid "This option specifies if Tidy should display info-level messages. "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyShowWarnings
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyShowWarnings
 msgctxt "TidyShowWarnings"
 msgid ""
 "This option specifies if Tidy should suppress warnings. This can be "
@@ -2687,8 +2692,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyBreakBeforeBR
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyBreakBeforeBR
 msgctxt "TidyBreakBeforeBR"
 msgid ""
 "This option specifies if Tidy should output a line break before each "
@@ -2696,8 +2701,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyIndentContent
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyIndentContent
 msgctxt "TidyIndentContent"
 msgid ""
 "This option specifies if Tidy should indent block-level tags. "
@@ -2717,15 +2722,15 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyIndentAttributes
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyIndentAttributes
 msgctxt "TidyIndentAttributes"
 msgid "This option specifies if Tidy should begin each attribute on a new line. "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyIndentSpaces
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyIndentSpaces
 msgctxt "TidyIndentSpaces"
 msgid ""
 "This option specifies the number of spaces or tabs that Tidy uses to "
@@ -2736,8 +2741,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyLiteralAttribs
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyLiteralAttribs
 msgctxt "TidyLiteralAttribs"
 msgid ""
 "This option specifies how Tidy deals with whitespace characters within "
@@ -2753,8 +2758,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyShowMarkup
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyShowMarkup
 msgctxt "TidyShowMarkup"
 msgid ""
 "This option specifies if Tidy should generate a pretty printed version "
@@ -2763,8 +2768,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyPunctWrap
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyPunctWrap
 msgctxt "TidyPunctWrap"
 msgid ""
 "This option specifies if Tidy should line wrap after some Unicode or "
@@ -2772,15 +2777,15 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyBurstSlides
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyBurstSlides
 msgctxt "TidyBurstSlides"
 msgid "This option has no function and is deprecated. "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyTabSize
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyTabSize
 msgctxt "TidyTabSize"
 msgid ""
 "This option specifies the number of columns that Tidy uses between "
@@ -2789,11 +2794,10 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyVertSpace
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyVertSpace
 msgctxt "TidyVertSpace"
 msgid ""
-/* Issue #228 - changed to tri-state */
 "This option specifies if Tidy should add some extra empty lines for "
 "readability. "
 "<br/>"
@@ -2804,8 +2808,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyWrapLen
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyWrapLen
 msgctxt "TidyWrapLen"
 msgid ""
 "This option specifies the right margin Tidy uses for line wrapping. "
@@ -2817,8 +2821,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyWrapAsp
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyWrapAsp
 msgctxt "TidyWrapAsp"
 msgid ""
 "This option specifies if Tidy should line wrap text contained within ASP "
@@ -2826,8 +2830,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyWrapAttVals
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyWrapAttVals
 msgctxt "TidyWrapAttVals"
 msgid ""
 "This option specifies if Tidy should line-wrap attribute values, meaning "
@@ -2847,8 +2851,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyWrapJste
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyWrapJste
 msgctxt "TidyWrapJste"
 msgid ""
 "This option specifies if Tidy should line wrap text contained within "
@@ -2856,8 +2860,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyWrapPhp
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyWrapPhp
 msgctxt "TidyWrapPhp"
 msgid ""
 "This option specifies if Tidy should line wrap text contained within PHP "
@@ -2865,8 +2869,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyWrapScriptlets
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyWrapScriptlets
 msgctxt "TidyWrapScriptlets"
 msgid ""
 "This option specifies if Tidy should line wrap string literals that "
@@ -2877,8 +2881,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyWrapSection
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyWrapSection
 msgctxt "TidyWrapSection"
 msgid ""
 "This option specifies if Tidy should line wrap text contained within "
@@ -2886,8 +2890,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyAsciiChars
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyAsciiChars
 msgctxt "TidyAsciiChars"
 msgid ""
 "Can be used to modify behavior of the <code>clean</code> option when set "
@@ -2899,8 +2903,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyCharEncoding
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyCharEncoding
 msgctxt "TidyCharEncoding"
 msgid ""
 "This option specifies the character encoding Tidy uses for both the input "
@@ -2929,8 +2933,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyInCharEncoding
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyInCharEncoding
 msgctxt "TidyInCharEncoding"
 msgid ""
 "This option specifies the character encoding Tidy uses for the input. See "
@@ -2938,8 +2942,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyLanguage
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyLanguage
 msgctxt "TidyLanguage"
 msgid ""
 "Currently not used, but this option specifies the language Tidy would use "
@@ -2947,8 +2951,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyOutputBOM
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyOutputBOM
 msgctxt "TidyOutputBOM"
 msgid ""
 "This option specifies if Tidy should write a Unicode Byte Order Mark "
@@ -2964,8 +2968,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyOutCharEncoding
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyOutCharEncoding
 msgctxt "TidyOutCharEncoding"
 msgid ""
 "This option specifies the character encoding Tidy uses for the output. "
@@ -2979,8 +2983,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyNewline
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyNewline
 msgctxt "TidyNewline"
 msgid ""
 "The default is appropriate to the current platform. "
@@ -2990,8 +2994,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyErrFile
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyErrFile
 msgctxt "TidyErrFile"
 msgid ""
 "This option specifies the error file Tidy uses for errors and warnings. "
@@ -2999,8 +3003,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyFixBackslash
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyFixBackslash
 msgctxt "TidyFixBackslash"
 msgid ""
 "This option specifies if Tidy should replace backslash characters "
@@ -3008,8 +3012,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyForceOutput
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyForceOutput
 msgctxt "TidyForceOutput"
 msgid ""
 "This option specifies if Tidy should produce output even if errors are "
@@ -3021,8 +3025,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyEmacs
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyEmacs
 msgctxt "TidyEmacs"
 msgid ""
 "This option specifies if Tidy should change the format for reporting "
@@ -3030,15 +3034,15 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyEmacsFile
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyEmacsFile
 msgctxt "TidyEmacsFile"
 msgid "Used internally. "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyKeepFileTimes
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyKeepFileTimes
 msgctxt "TidyKeepFileTimes"
 msgid ""
 "This option specifies if Tidy should keep the original modification time "
@@ -3053,8 +3057,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyOutFile
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyOutFile
 msgctxt "TidyOutFile"
 msgid ""
 "This option specifies the output file Tidy uses for markup. Normally "
@@ -3062,8 +3066,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyQuiet
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyQuiet
 msgctxt "TidyQuiet"
 msgid ""
 "This option specifies if Tidy should output the summary of the numbers "
@@ -3071,15 +3075,15 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidySlideStyle
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidySlideStyle
 msgctxt "TidySlideStyle"
 msgid "This option has no function and is deprecated. "
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyMark
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyMark
 msgctxt "TidyMark"
 msgid ""
 "This option specifies if Tidy should add a <code>meta</code> element to "
@@ -3089,8 +3093,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyWriteBack
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyWriteBack
 msgctxt "TidyWriteBack"
 msgid ""
 "This option specifies if Tidy should write back the tidied markup to the "
@@ -3101,8 +3105,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyDecorateInferredUL
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyDecorateInferredUL
 msgctxt "TidyDecorateInferredUL"
 msgid ""
 "This option specifies if Tidy should decorate inferred "
@@ -3111,8 +3115,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyPreserveEntities
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyPreserveEntities
 msgctxt "TidyPreserveEntities"
 msgid ""
 "This option specifies if Tidy should preserve well-formed entities "
@@ -3120,8 +3124,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyAnchorAsName
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyAnchorAsName
 msgctxt "TidyAnchorAsName"
 msgid ""
 "This option controls the deletion or addition of the <code>name</code> "
@@ -3136,8 +3140,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidyPPrintTabs
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidyPPrintTabs
 msgctxt "TidyPPrintTabs"
 msgid ""
 "This option specifies if Tidy should indent with tabs instead of spaces, "
@@ -3156,8 +3160,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TidySkipNested
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TidySkipNested
 msgctxt "TidySkipNested"
 msgid ""
 "This option specifies that Tidy should skip nested tags when parsing "
@@ -3165,85 +3169,85 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_CAT_DIAGNOSTICS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_CAT_DIAGNOSTICS
 msgctxt "TC_CAT_DIAGNOSTICS"
 msgid "diagnostics"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_CAT_ENCODING
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_CAT_ENCODING
 msgctxt "TC_CAT_ENCODING"
 msgid "encoding"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_CAT_MARKUP
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_CAT_MARKUP
 msgctxt "TC_CAT_MARKUP"
 msgid "markup"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_CAT_MISC
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_CAT_MISC
 msgctxt "TC_CAT_MISC"
 msgid "misc"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_CAT_PRETTYPRINT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_CAT_PRETTYPRINT
 msgctxt "TC_CAT_PRETTYPRINT"
 msgid "print"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_LABEL_COL
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_LABEL_COL
 msgctxt "TC_LABEL_COL"
 msgid "column"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_LABEL_FILE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_LABEL_FILE
 msgctxt "TC_LABEL_FILE"
 msgid "file"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_LABEL_LANG
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_LABEL_LANG
 msgctxt "TC_LABEL_LANG"
 msgid "lang"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_LABEL_LEVL
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_LABEL_LEVL
 msgctxt "TC_LABEL_LEVL"
 msgid "level"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_LABEL_OPT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_LABEL_OPT
 msgctxt "TC_LABEL_OPT"
 msgid "option"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_MAIN_ERROR_LOAD_CONFIG
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_MAIN_ERROR_LOAD_CONFIG
 msgctxt "TC_MAIN_ERROR_LOAD_CONFIG"
 msgid "Loading config file \"%s\" failed, err = %d\n"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_ACCESS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_ACCESS
 msgctxt "TC_OPT_ACCESS"
 msgid ""
 "do additional accessibility checks (<level> = 0, 1, 2, 3). 0 is "
@@ -3251,120 +3255,120 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_ASCII
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_ASCII
 msgctxt "TC_OPT_ASCII"
 msgid "use ISO-8859-1 for input, US-ASCII for output"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_ASHTML
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_ASHTML
 msgctxt "TC_OPT_ASHTML"
 msgid "force XHTML to well formed HTML"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_ASXML
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_ASXML
 msgctxt "TC_OPT_ASXML"
 msgid "convert HTML to well formed XHTML"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_BARE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_BARE
 msgctxt "TC_OPT_BARE"
 msgid "strip out smart quotes and em dashes, etc."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_BIG5
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_BIG5
 msgctxt "TC_OPT_BIG5"
 msgid "use Big5 for both input and output"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_CLEAN
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_CLEAN
 msgctxt "TC_OPT_CLEAN"
 msgid "replace FONT, NOBR and CENTER tags with CSS"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_CONFIG
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_CONFIG
 msgctxt "TC_OPT_CONFIG"
 msgid "set configuration options from the specified <file>"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_ERRORS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_ERRORS
 msgctxt "TC_OPT_ERRORS"
 msgid "show only errors and warnings"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_FILE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_FILE
 msgctxt "TC_OPT_FILE"
 msgid "write errors and warnings to the specified <file>"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_GDOC
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_GDOC
 msgctxt "TC_OPT_GDOC"
 msgid "produce clean version of html exported by Google Docs"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_HELP
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_HELP
 msgctxt "TC_OPT_HELP"
 msgid "list the command line options"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_HELPCFG
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_HELPCFG
 msgctxt "TC_OPT_HELPCFG"
 msgid "list all configuration options"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_HELPOPT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_HELPOPT
 msgctxt "TC_OPT_HELPOPT"
 msgid "show a description of the <option>"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_IBM858
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_IBM858
 msgctxt "TC_OPT_IBM858"
 msgid "use IBM-858 (CP850+Euro) for input, US-ASCII for output"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_INDENT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_INDENT
 msgctxt "TC_OPT_INDENT"
 msgid "indent element content"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_ISO2022
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_ISO2022
 msgctxt "TC_OPT_ISO2022"
 msgid "use ISO-2022 for both input and output"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_LANGUAGE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_LANGUAGE
 msgctxt "TC_OPT_LANGUAGE"
 msgid ""
 "set tidy's output language to <lang>. Specify '-language help' for more help. "
@@ -3373,134 +3377,134 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_LATIN0
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_LATIN0
 msgctxt "TC_OPT_LATIN0"
 msgid "use ISO-8859-15 for input, US-ASCII for output"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_LATIN1
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_LATIN1
 msgctxt "TC_OPT_LATIN1"
 msgid "use ISO-8859-1 for both input and output"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_MAC
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_MAC
 msgctxt "TC_OPT_MAC"
 msgid "use MacRoman for input, US-ASCII for output"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_MODIFY
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_MODIFY
 msgctxt "TC_OPT_MODIFY"
 msgid "modify the original input files"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_NUMERIC
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_NUMERIC
 msgctxt "TC_OPT_NUMERIC"
 msgid "output numeric rather than named entities"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_OMIT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_OMIT
 msgctxt "TC_OPT_OMIT"
 msgid "omit optional start tags and end tags"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_OUTPUT
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_OUTPUT
 msgctxt "TC_OPT_OUTPUT"
 msgid "write output to the specified <file>"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_QUIET
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_QUIET
 msgctxt "TC_OPT_QUIET"
 msgid "suppress nonessential output"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_RAW
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_RAW
 msgctxt "TC_OPT_RAW"
 msgid "output values above 127 without conversion to entities"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_SHIFTJIS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_SHIFTJIS
 msgctxt "TC_OPT_SHIFTJIS"
 msgid "use Shift_JIS for both input and output"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_SHOWCFG
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_SHOWCFG
 msgctxt "TC_OPT_SHOWCFG"
 msgid "list the current configuration settings"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_UPPER
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_UPPER
 msgctxt "TC_OPT_UPPER"
 msgid "force tags to upper case"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_UTF16
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_UTF16
 msgctxt "TC_OPT_UTF16"
 msgid "use UTF-16 for both input and output"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_UTF16BE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_UTF16BE
 msgctxt "TC_OPT_UTF16BE"
 msgid "use UTF-16BE for both input and output"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_UTF16LE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_UTF16LE
 msgctxt "TC_OPT_UTF16LE"
 msgid "use UTF-16LE for both input and output"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_UTF8
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_UTF8
 msgctxt "TC_OPT_UTF8"
 msgid "use UTF-8 for both input and output"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_VERSION
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_VERSION
 msgctxt "TC_OPT_VERSION"
 msgid "show the version of Tidy"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_WIN1252
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_WIN1252
 msgctxt "TC_OPT_WIN1252"
 msgid "use Windows-1252 for input, US-ASCII for output"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_WRAP
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_WRAP
 msgctxt "TC_OPT_WRAP"
 msgid ""
 "wrap text at the specified <column>. 0 is assumed if <column> is "
@@ -3509,141 +3513,141 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_XML
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_XML
 msgctxt "TC_OPT_XML"
 msgid "specify the input is well formed XML"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_XMLCFG
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_XMLCFG
 msgctxt "TC_OPT_XMLCFG"
 msgid "list all configuration options in XML format"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_XMLHELP
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_XMLHELP
 msgctxt "TC_OPT_XMLHELP"
 msgid "list the command line options in XML format"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_XMLSTRG
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_XMLSTRG
 msgctxt "TC_OPT_XMLSTRG"
 msgid "output all of tidy's strings in XML format"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_OPT_XMLOPTS
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_OPT_XMLOPTS
 msgctxt "TC_OPT_XMLOPTS"
 msgid "output all option descriptions cleaned XML format"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_STRING_OUT_OF_MEMORY
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_STRING_OUT_OF_MEMORY
 msgctxt "TC_STRING_OUT_OF_MEMORY"
 msgid "Out of memory. Bailing out."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_STRING_FATAL_ERROR
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_STRING_FATAL_ERROR
 msgctxt "TC_STRING_FATAL_ERROR"
 msgid "Fatal error: impossible value for id='%d'.\n"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_STRING_FILE_MANIP
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_STRING_FILE_MANIP
 msgctxt "TC_STRING_FILE_MANIP"
 msgid "File manipulation"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_STRING_PROCESS_DIRECTIVES
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_STRING_PROCESS_DIRECTIVES
 msgctxt "TC_STRING_PROCESS_DIRECTIVES"
 msgid "Processing directives"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_STRING_CHAR_ENCODING
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_STRING_CHAR_ENCODING
 msgctxt "TC_STRING_CHAR_ENCODING"
 msgid "Character encodings"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_STRING_LANG_MUST_SPECIFY
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_STRING_LANG_MUST_SPECIFY
 msgctxt "TC_STRING_LANG_MUST_SPECIFY"
 msgid "A POSIX or Windows locale must be specified.\n"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_STRING_LANG_NOT_FOUND
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_STRING_LANG_NOT_FOUND
 msgctxt "TC_STRING_LANG_NOT_FOUND"
 msgid "Tidy doesn't have language '%s,' will use '%s' instead.\n"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_STRING_MISC
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_STRING_MISC
 msgctxt "TC_STRING_MISC"
 msgid "Miscellaneous"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_STRING_XML
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_STRING_XML
 msgctxt "TC_STRING_XML"
 msgid "XML"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_STRING_MUST_SPECIFY
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_STRING_MUST_SPECIFY
 msgctxt "TC_STRING_MUST_SPECIFY"
 msgid "A Tidy option name must be specified."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_STRING_UNKNOWN_OPTION
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_STRING_UNKNOWN_OPTION
 msgctxt "TC_STRING_UNKNOWN_OPTION"
 msgid "HTML Tidy: unknown option: %c\n"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_STRING_UNKNOWN_OPTION_B
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_STRING_UNKNOWN_OPTION_B
 msgctxt "TC_STRING_UNKNOWN_OPTION_B"
 msgid "HTML Tidy: unknown option."
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_STRING_VERS_A
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_STRING_VERS_A
 msgctxt "TC_STRING_VERS_A"
 msgid "HTML Tidy for %s version %s\n"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_STRING_VERS_B
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_STRING_VERS_B
 msgctxt "TC_STRING_VERS_B"
 msgid "HTML Tidy version %s\n"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_TXT_HELP_1
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_TXT_HELP_1
 msgctxt "TC_TXT_HELP_1"
 msgid ""
 "\n"
@@ -3655,22 +3659,22 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_TXT_HELP_2A
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_TXT_HELP_2A
 msgctxt "TC_TXT_HELP_2A"
 msgid "Command Line Arguments for HTML Tidy for %s:\n"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_TXT_HELP_2B
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_TXT_HELP_2B
 msgctxt "TC_TXT_HELP_2B"
 msgid "Command Line Arguments for HTML Tidy:\n"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_TXT_HELP_3
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_TXT_HELP_3
 msgctxt "TC_TXT_HELP_3"
 msgid ""
 "\n"
@@ -3717,8 +3721,8 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_TXT_HELP_CONFIG
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_TXT_HELP_CONFIG
 msgctxt "TC_TXT_HELP_CONFIG"
 msgid ""
 "\nHTML Tidy Configuration Settings\n\n"
@@ -3730,31 +3734,45 @@ msgid ""
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_TXT_HELP_CONFIG_NAME
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_TXT_HELP_CONFIG_NAME
 msgctxt "TC_TXT_HELP_CONFIG_NAME"
 msgid "Name"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_TXT_HELP_CONFIG_TYPE
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_TXT_HELP_CONFIG_TYPE
 msgctxt "TC_TXT_HELP_CONFIG_TYPE"
 msgid "Type"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_TXT_HELP_CONFIG_ALLW
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_TXT_HELP_CONFIG_ALLW
 msgctxt "TC_TXT_HELP_CONFIG_ALLW"
 msgid "Allowable values"
 msgstr ""
 
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_TXT_HELP_LANG_1
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_TXT_HELP_LANG_1
 msgctxt "TC_TXT_HELP_LANG_1"
 msgid ""
+"\nThe --language (or --lang) option indicates which language Tidy \n"
+"should use to communicate its output. Please note that this is not \n"
+"a document translation service, and only affects the messages that \n"
+"Tidy communicates to you. \n"
+"\nWhen used from the command line the --language argument must \n"
+"be used before any arguments that result in output, otherwise Tidy \n"
+"will produce output before it knows which language to use. \n"
+"\nIn addition to standard POSIX language codes, Tidy is capable of \n"
+"understanding legacy Windows language codes. Please note that this \n"
+"list indicates codes Tidy understands, and does not indicate that \n"
+"the language is currently installed. \n"
+"\nThe rightmost column indicates how Tidy will understand the \n"
+"legacy Windows name.\n\n"
+msgstr ""
 "\nLa opción --language (o --lang) indica el lenguaje Tidy debe \n"
 "utilizar para comunicar su salida. Tenga en cuenta que esto no es \n"
 "un servicio de traducción de documentos, y sólo afecta a los mensajes \n"
@@ -3769,36 +3787,34 @@ msgid ""
 "actualmente el idioma está instalado. \n"
 "\nLa columna más a la derecha indica cómo Tidy comprenderá el \n"
 "legado nombre de Windows.\n\n"
-msgstr ""
-
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_TXT_HELP_LANG_2
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_TXT_HELP_LANG_2
 msgctxt "TC_TXT_HELP_LANG_2"
 msgid ""
+"\nThe following languages are currently installed in Tidy. Please \n"
+"note that there's no guarantee that they are complete; only that \n"
+"one developer or another started to add the language indicated. \n"
+"\nIncomplete localizations will default to \"en\" when necessary. \n"
+"Please report instances of incorrect strings to the Tidy team. \n\n"
+msgstr ""
 "\nLos siguientes idiomas están instalados actualmente en Tidy. Tenga \n"
 "en cuenta que no hay garantía de que están completos; sólo quiere decir \n"
 "que un desarrollador u otro comenzaron a añadir el idioma indicado. \n"
 "\nLocalizaciones incompletas por defecto se usan \"en\" cuando sea \n"
 "necesario. ¡Favor de informar los desarrolladores de estes casos! \n\n"
-msgstr ""
-
 #
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TC_TXT_HELP_LANG_3
+#. Translate from en to es.
+#: /Users/jderry/Development/tidy-xcode/tidy-html5/src/language_es.h:TC_TXT_HELP_LANG_3
 msgctxt "TC_TXT_HELP_LANG_3"
 msgid ""
+"\nIf Tidy is able to determine your locale then Tidy will use the \n"
+"locale's language automatically. For example Unix-like systems use a \n"
+"$LANG and/or $LC_ALL environment variable. Consult your operating \n"
+"system documentation for more information. \n\n"
+msgstr ""
 "\nSi Tidy es capaz de determinar la configuración regional entonces \n"
 "Tidy utilizará el lenguaje de forma automática de la configuración \n"
 "regional. Por ejemplo los sistemas de tipo Unix utilizan los variables \n"
 "$LANG y/o $LC_ALL. Consulte a su documentación del sistema para \n"
 "obtener más información.\n\n"
-msgstr ""
-
-#
-#. Translate from es to es_mx.
-#: /Users/jderry/Development/tidy-xcode/po/language_es_mx.h:TIDY_MESSAGE_TYPE_LAST
-msgctxt "TIDY_MESSAGE_TYPE_LAST"
-msgid NULL
-msgstr NULL
-

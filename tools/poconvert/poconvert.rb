@@ -101,7 +101,7 @@ module PoConvertModule
       end
       lang_name = match[1]
 
-      items = content.scan(/^\s*\{\s*(.*?),\s*(.*?),?\s*\},?/m).to_h
+      items = content.scan(%r!^\s*\{\s*(.*?),\s*(?:/\*.*?\*/)?\s*(.*?),?\s*\},?!m).to_h
       if !items || items.empty?
         @@log.error "#{__method__}: Could not match language contents. Something wrong with source file?"
         return nil, nil
@@ -213,56 +213,83 @@ module PoConvertModule
 
 
     #########################################################
-    # parse_po
-    #  Parses a PO file.
+    # parse_po( file )
+    #  Parses a PO file and returns an array of records.
     #########################################################
-    def parse_po
+    def parse_po( file )
 
+      # Maybe this is a bit of overkill, but it's easy
+      # to extend if we want to capture more PO stuff
+      # in the future.
       map = [
-        [ :DECIDING,         :DECIDE,         nil              ],
-        [ :PARSING_GARBAGE,  :CONSUME,        :DECIDING        ],
-        [ :START_CONTEXT,    :START_CONTEXT,  :PARSING_CONTEXT ],
-        [ :PARSING_CONTEXT,  :ADD_CONTEXT,    :PARSING_CONTEXT ],
-        [ :START_ID,         :START_ID,       :PARSING_ID      ],
-        [ :PARSING_ID,       :ADD_ID,         :PARSING_ID      ],
-        [ :START_STR,        :START_STR,      :PARSING_STR     ],
-        [ :PARSING_STR,      :ADD_STR,        :PARSING_STR     ],
-      ]
+        [ :START,   :EOF,     :DONE,        nil    ],
+        [ :START,   :JUNK,    :CONSUME,     :START ],
+        [ :START,   :KEEP,    :SET_INIT,    :OPEN  ],
+        [ :OPEN,    :KEEP,    :SET_FINAL,   :OPEN  ],
+        [ :OPEN,    :JUNK,    :SET_FINAL,   :START ],
+        [ :OPEN,    :OTHER,   :ADD_TO,      :OPEN  ],
+      ].collect { |item| [:STATE, :CONDITION, :ACTION, :NEXT].zip(item).to_h }
 
-      items = {}
-      state = :DECIDING
-      File.open(source_file).each do |line|
-        context = ''
-        id = ''
-        str = ''
+      all_items = []
+      current_record = {}
+      state = :START
+      buffer = ''
+      item = ''
 
-        # READ A LINE
+      content = File.open(file) { |f| f.readlines }
+      content << "\n" # cheat a final transition.
+      content.each do |line|
 
+        # Determine the input condition
+        input = :OTHER
+        input = :JUNK if line.start_with?('#', '/*') || line == "\n"
+        input = :KEEP if line.start_with?('msgctxt', 'msgid', 'msgstr')
 
+        # Find our current state-input pair
+        map.each do | transition |
 
-
-        new_state = :SKIP if line.start_with?('#') || line.empty?
-        new_state = :IN_CONTEXT if line.start_with('msgctxt')
-        new_state = :IN_ID if line.start_with('msgid')
-        new_state = :IN_STR if line.start_with?('msgstr')
-
-        # Finish off the old state.
-        unless state == new_state
-
-
-          buffer << line
-          items[buffer] =
-
-
-        end
-
-        if new_state == :IN_CONTEXT
-          key = line.match(/(".*")/)[1]
-
-        end
-
+          if transition[:STATE] == state && transition[:CONDITION] == input
+            case transition[:ACTION]
+              when :SET_INIT
+                regex = line[/".*"/]
+                buffer = regex unless regex == '""'
+                item = line[/^(.*?)\s/, 1]
+              when :ADD_TO
+                buffer << "\n#{line[/".*"/]}"
+              when :SET_FINAL
+                current_record[item.to_sym] = buffer
+                all_items << current_record.clone if item == 'msgstr'
+                buffer = ''
+                regex = line[/".*"/]
+                buffer = regex unless regex == '""'
+                item = line[/^(.*?)\s/, 1]
+              else
+                # consume, other
+            end
+            state = transition[:NEXT]
+            break
+          end # if
+        end # do
 
       end # File.open
+      all_items
+    end
+
+
+    #########################################################
+    # normalize_po( records )
+    #  Normalizes the records provided by ::parse_po so that
+    #  they are key:value pairs. While we could do this as
+    #  part of ::parse_po, this second stages keeps
+    #  ::parse_po flexible and adaptable, which getting what
+    #  we really need here.
+    #########################################################
+    def normalize_po( records )
+      result = {}
+      records.each do | record |
+        result[record[:msgctxt][1..-2].to_sym] = record[:msgstr] if record.include?(:msgctxt)
+      end
+      result
     end
 
 
@@ -299,6 +326,7 @@ msgstr ""
 
       HEREDOC
 
+      target_items.delete(:TIDY_MESSAGE_TYPE_LAST)
       target_items.each do |key, value|
         report << "#\n"
         report << "#. Translate from #{translate_from} to #{translate_to}.\n"
@@ -322,7 +350,10 @@ msgstr ""
         end
         report << "\n"
       end
-      puts report
+      output_file = "language_#{translate_to}.po"
+      File.open(output_file, 'w') { |f| f.write(report) }
+      @@log.info "#{__method__}: Results written to #{output_file}"
+      puts "Wrote a new PO file to #{File.expand_path(output_file)}"
     end # convert_to_po
 
 
@@ -333,19 +364,25 @@ msgstr ""
     def convert_to_h
       return false unless source_file && english_header?
 
-      # Read the PO and convert it to a hash.
-      File.open(source_file).each do |line|
+      language_english = PoHeaderFile.new(@@default_en)
+      target_items = language_english.items.clone
 
+      if base_file
+        language_base = PoHeaderFile.new(base_file)
+        target_items.merge!(language_base.items)
+      end
+      target_items.delete(:TIDY_MESSAGE_TYPE_LAST)
 
+      # Parse the file and make it the same format as our other structures.
+      final_items = normalize_po(parse_po(source_file))
+
+      # Eliminate items matching English, the base language (if any) and nil
+      # items, since we don't need them inflating Tidy's executable size.
+      final_items.reject! do |key, value|
+        (target_items.has_key?(key) && target_items[key] == value) || value == ''
       end
 
-
-
-
-      # Filter out the English and base stuff that's the same, and the nil items.
-
       template = File.open('header_template.h.erb') { |f| f.read }
-
 
       header_guard = "language_#{}_h"
       header_filename = File.basename(source_file)
@@ -354,59 +391,6 @@ msgstr ""
       output = renderer.result(binding)
       puts output
 
-
-      return
-
-      language_base = nil
-      language_english = PoHeaderFile.new(@@default_en)
-      language_target = PoHeaderFile.new(source_file)
-      target_items = language_english.items.clone
-
-      if base_file
-        language_base = PoHeaderFile.new(base_file)
-        target_items.merge!(language_base.items)
-      end
-
-      translate_from = (language_base ? language_base.items[:TIDY_LANGUAGE] : language_english.items[:TIDY_LANGUAGE]).tr('"', '')
-      translate_to = language_target.items[:TIDY_LANGUAGE].tr('"', '')
-      report = <<-HEREDOC
-msgid ""
-msgstr ""
-"Content-Type: text/plain; charset=UTF-8\\n"
-"Language: #{translate_to}\\n"
-"X-Generator: HTML Tidy poconvert.rb\\n"
-"Project-Id-Version: \\n"
-"POT-Creation-Date: \\n"
-"PO-Revision-Date: #{DateTime.now.strftime('%Y-%m-%d %H:%M:%S')}\\n"
-"Last-Translator: #{ENV['USER']}#{ENV['USERNAME']}\\n"
-"Language-Team: \\n"
-
-      HEREDOC
-
-      target_items.each do |key, value|
-        report << "#\n"
-        report << "#. Translate from #{translate_from} to #{translate_to}.\n"
-        report << "#: #{source_file}:#{key.to_s}\n"
-        report << "msgctxt \"#{key.to_s}\"\n"
-        if value.lines.count > 1
-          report << "msgid \"\"\n"
-          report << "#{value}\n"
-        else
-          report << "msgid #{value}\n"
-        end
-        if language_target.items[key]
-          if language_target.items[key].lines.count > 1
-            report << "msgstr \"\"\n"
-            report << "#{language_target.items[key]}"
-          else
-            report << "msgstr #{language_target.items[key]}\n"
-          end
-        else
-          report << "msgstr \"\"\n"
-        end
-        report << "\n"
-      end
-      puts report
     end # convert_to_h
 
 

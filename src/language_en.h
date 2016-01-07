@@ -56,7 +56,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
 	{ STRING_CONTENT_LOOKS,         0,   "Document content looks like %s"                                          },
 	{ STRING_DISCARDING,            0,   "discarding"                                                              },
 	{ STRING_DOCTYPE_GIVEN,         0,   "Doctype given is \"%s\""                                                 },
-	{ STRING_ERROR_COUNT,           0,   "%u %s, %u %s were found!"                                                },
+	{ STRING_ERROR_COUNT,           0,   "%1$u %2$s, %3$u %4$s were found!"                                        },
 	{ STRING_ERROR_COUNT_ERROR,     0,   "error"                                                                   },
 	{ STRING_ERROR_COUNT_ERROR,     1,   "errors"                                                                  },
 	{ STRING_ERROR_COUNT_WARNING,   0,   "warning"                                                                 },

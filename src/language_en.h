@@ -4,12 +4,13 @@
  * language_en.h
  * Localization support for HTML Tidy.
  *
- * This file consists of the strings for Tidy'd base language and is a
+ * This file consists of the strings for Tidy's base language and is a
  * required localization for Tidy to compile and work. Unlike the other
- * localization files this file is NOT machine-generated. Additionally
- * this file serves as the template for generating additional localizations;
- * please follow the correct commenting guidelines when making changes to
- * this file so that our localization tools will continue to work.
+ * localization files this file is NOT machine-generated.
+ * 
+ * This file also serves as the master template for generating additional
+ * language localizations. As such do not edit PO files for this language;
+ * modify this file directly.
  *
  * (c) 2015 HTACG
  * See tidy.h and access.h for the copyright notice.
@@ -39,12 +40,15 @@ static uint whichPluralForm_en(uint n) {
  *  the build system.
  */
 static languageDefinition language_en = { whichPluralForm_en, {
-	/* Specify the code for this language. */
+	/***************************************
+	 ** This MUST be present and first. 
+	 ** Specify the code for this language.
+	 ***************************************/
 	{ TIDY_LANGUAGE,                0,   "en"                                                                      },
 	
-	/*****************************
+	/***************************************
 	 ** Miscellaneous Strings
-	 *****************************/
+	 ***************************************/
 	{ ACCESS_URL,                   0,   "http://www.w3.org/WAI/GL"                                                },
 	{ ATRC_ACCESS_URL,              0,   "http://www.html-tidy.org/accessibility/"                                 },
 	{ FILE_CANT_OPEN,               0,   "Can't open \"%s\"\n"                                                     },
@@ -229,9 +233,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
 	},
 	
 	
-	/*****************************
+	/***************************************
 	 ** Message Severity Level
-	 *****************************/
+	 ***************************************/
 	{ TidyInfoString,               0,   "Info: "                                                                  },
 	{ TidyWarningString,            0,   "Warning: "                                                               },
 	{ TidyConfigString,             0,   "Config: "                                                                },
@@ -240,9 +244,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
 	{ TidyBadDocumentString,        0,   "Document: "                                                              },
 	{ TidyFatalString,              0,   "Panic: "                                                                 },
 	
-	/*****************************
+	/***************************************
 	 ** Warnings and Errors
-	 *****************************/
+	 ***************************************/
 	
 	/* ReportEncodingWarning */
 	{ ENCODING_MISMATCH,            0,   "specified input encoding (%s) does not match actual input encoding (%s)" }, /* Warning */
@@ -261,9 +265,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
 	{ UNKNOWN_ENTITY,               0,   "unescaped & or unknown entity \"%s\""                                    }, /* Error */
 	{ APOS_UNDEFINED,               0,   "named entity &apos; only defined in XML/XHTML"                           }, /* Error in HTML (should only occur for HTML input) */
 	
-	/* ReportAttrError */
-	
-	/* attribute name */
+	/* ReportAttrError - attribute name */
 	{ INSERTING_ATTRIBUTE,          0,   "%s inserting \"%s\" attribute"                                           }, /* Warning in CheckLINK, Error otherwise */
 	{ INSERTING_AUTO_ATTRIBUTE,     0,   "%s inserting \"%s\" attribute using value \"%s\""                        }, /* Warning */
 	{ MISSING_ATTR_VALUE,           0,   "%s attribute \"%s\" lacks value"                                         }, /* Warning in CheckUrl, Error otherwise */
@@ -272,21 +274,21 @@ static languageDefinition language_en = { whichPluralForm_en, {
 	{ JOINING_ATTRIBUTE,            0,   "%s joining values of repeated attribute \"%s\""                          }, /* Error */
 	{ XML_ATTRIBUTE_VALUE,          0,   "%s has XML attribute \"%s\""                                             }, /* Error (but deprecated) */
 	
-	/* attribute value */
+	/* ReportAttrError - attribute value */
 	{ XML_ID_SYNTAX,                0,   "%s ID \"%s\" uses XML ID syntax"                                         }, /* Warning if XHTML, Error if HTML */
 	{ ATTR_VALUE_NOT_LCASE,         0,   "%s attribute value \"%s\" must be lower case for XHTML"                  }, /* Error if XHTML input, Notice if HTML input and XHTML outpout */
 	{ PROPRIETARY_ATTR_VALUE,       0,   "%s proprietary attribute value \"%s\""                                   }, /* Error */
 	{ ANCHOR_NOT_UNIQUE,            0,   "%s anchor \"%s\" already defined"                                        }, /* Error */
 	
-	/* attribute name, attribute value */
+	/* ReportAttrError - attribute name, attribute value */
 	{ BAD_ATTRIBUTE_VALUE,          0,   "%s attribute \"%s\" has invalid value \"%s\""                            }, /* Error */
 	{ BAD_ATTRIBUTE_VALUE_REPLACED, 0,   "%s attribute \"%s\" had invalid value \"%s\" and has been replaced"      }, /* Error */
 	{ INVALID_ATTRIBUTE,            0,   "%s attribute name \"%s\" (value=\"%s\") is invalid"                      }, /* Error */
 	
-	/* attribute value, attribute name */
+	/* ReportAttrError - attribute value, attribute name */
 	{ REPEATED_ATTRIBUTE,           0,   "%s dropping value \"%s\" for repeated attribute \"%s\""                  }, /* Error */
 	
-	/* no arguments */
+	/* ReportAttrError - no arguments */
 	{ INVALID_XML_ID,               0,   "%s cannot copy name attribute to id"                                     }, /* Warning */
 	{ UNEXPECTED_GT,                0,   "%s missing '>' for end of tag"                                           }, /* Warning if HTML, Error if XML/XHTML */
 	{ UNEXPECTED_QUOTEMARK,         0,   "%s unexpected or duplicate quote mark"                                   }, /* Error */
@@ -304,12 +306,12 @@ static languageDefinition language_en = { whichPluralForm_en, {
 	
 	/* ReportMissingAttr */
 	{ MISSING_ATTRIBUTE,            0,   "%s lacks \"%s\" attribute"                                               }, /* Error */
+	
 	/* ReportWarning */
 	{ NESTED_EMPHASIS,              0,   "nested emphasis %s"                                                      }, /* Warning */
 	{ NESTED_QUOTATION,             0,   "nested q elements, possible typo."                                       }, /* Warning */
 	{ OBSOLETE_ELEMENT,             0,   "replacing obsolete element %s with %s"                                   }, /* Warning */
 	{ COERCE_TO_ENDTAG_WARN,        0,   "<%s> is probably intended as </%s>"                                      }, /* Warning */
-	/* HTML5 */
 	{ REMOVED_HTML5,                0,   "%s element removed from HTML5"                                           }, /* Warning */
 	{ BAD_BODY_HTML5,               0,   "Found attribute on body that is obsolete in HTML5. Use CSS"              }, /* Warning */
 	{ BAD_ALIGN_HTML5,              0,   "The align attribute on the %s element is obsolete. Use CSS"              }, /* Warning */
@@ -342,7 +344,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
 	{ TOO_MANY_ELEMENTS_IN,         0,   "too many %s elements in <%s>"                                            }, /* Error */
 	{ UNESCAPED_ELEMENT,            0,   "unescaped %s in pre content"                                             }, /* Error (but deprecated) */
 	
-	/* no arguments */
+	/* ReportError - no arguments */
 	{ DOCTYPE_AFTER_TAGS,           0,   "<!DOCTYPE> isn't allowed after elements"                                 }, /* Error */
 	{ MISSING_TITLE_ELEMENT,        0,   "inserting missing 'title' element"                                       }, /* Error */
 	{ INCONSISTENT_VERSION,         0,   "HTML DOCTYPE doesn't match content"                                      }, /* Error */
@@ -363,16 +365,18 @@ static languageDefinition language_en = { whichPluralForm_en, {
 	{ DUPLICATE_FRAMESET,           0,   "repeated FRAMESET element"                                               }, /* Error */
 	{ UNKNOWN_ELEMENT,              0,   "%s is not recognized!"                                                   }, /* Error */
 	
-	/* */
+	/* Info */
 	{ PREVIOUS_LOCATION,            0,   "<%s> previously mentioned"                                               }, /* Info */
 	
 #if SUPPORT_ACCESSIBILITY_CHECKS
 	
-	/* ReportAccess */
-	/*
-	 List of error/warning messages.  The error code corresponds to
-	 the check that is listed in the AERT (HTML specifications).
-	 */
+	/***************************************
+	 ** ReportAccess
+	 ** List of error/warning messages. The 
+	 ** error code corresponds to the check
+	 ** that is listed in the AERT (HTML 
+	 ** specifications).
+	 ***************************************/
 	{ IMG_MISSING_ALT,                               0,   "[1.1.1.1]: <img> missing 'alt' text."                                     }, /* Access */
 	{ IMG_ALT_SUSPICIOUS_FILENAME,                   0,   "[1.1.1.2]: suspicious 'alt' text (filename)."                             }, /* Access */
 	{ IMG_ALT_SUSPICIOUS_FILE_SIZE,                  0,   "[1.1.1.3]: suspicious 'alt' text (file size)."                            }, /* Access */
@@ -498,17 +502,16 @@ static languageDefinition language_en = { whichPluralForm_en, {
 	{ SKIPOVER_ASCII_ART,                            0,   "[13.10.1.1]: skip over ascii art."                                        }, /* Access */
 #endif /* SUPPORT_ACCESSIBILITY_CHECKS */
 	
-	/*****************************
+	
+	/*********************************************************************
 	 ** Options Documentation
-	 *****************************/
-	/*
-	 * As of 2015-November these descriptions are used uniquely by
-	 * printXMLDescription from which quickref.html and the Unix
-	 * man pages are generated. The xslt for building all
-	 * documentation now supports the following tags in descriptions:
-	 *    <code>, <em>, <strong>, <br />, <p>
-	 * Note that the xslt processor requires <br /> to be self closing!
-	 */
+	 **  As of 2016-January these descriptions are used uniquely by the
+	 **  console application but are made available for LibTidy users as
+     **  well. Because we generate documentation from these descriptions
+	 **  it's important to use ONLY the following tags:
+	 **    <code>, <em>, <strong>, <br />, <p>
+	 **  Note that the xslt processor requires <br /> to be self closing!
+	 *********************************************************************/
 	{ TidyXmlDecl,                  0,
 		"This option specifies if Tidy should add the XML declaration when "
 		"outputting XML or XHTML. "
@@ -1211,9 +1214,13 @@ static languageDefinition language_en = { whichPluralForm_en, {
 		"script and style data. "
 	},
 	
-	/*****************************
+	/********************************************************
 	 ** Console Application
-	 *****************************/
+	 **  Although these strings are not used within LibTidy
+	 **  and only for the console application, they are
+	 **  provided as part of LibTidy for convenience to
+	 **  developers.
+	 ********************************************************/
 	{ TC_CAT_DIAGNOSTICS,           0,   "diagnostics"                                                             },
 	{ TC_CAT_ENCODING,              0,   "encoding"                                                                },
 	{ TC_CAT_MARKUP,                0,   "markup"                                                                  },

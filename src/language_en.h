@@ -12,6 +12,8 @@
  * language localizations. As such do not edit PO files for this language;
  * modify this file directly.
  *
+ * Comments
+ *
  * (c) 2015 HTACG
  * See tidy.h and access.h for the copyright notice.
  *
@@ -49,8 +51,12 @@ static languageDefinition language_en = { whichPluralForm_en, {
 	/***************************************
 	 ** Miscellaneous Strings
 	 ***************************************/
-	{ ACCESS_URL,                   0,   "http://www.w3.org/WAI/GL"                                                },
-	{ ATRC_ACCESS_URL,              0,   "http://www.html-tidy.org/accessibility/"                                 },
+	{/* Only translate if a URL to the target language can be found. */
+		ACCESS_URL,                   0,   "http://www.w3.org/WAI/GL"
+	},
+	{/* Only translate if a URL to the target language can be found. */
+		ATRC_ACCESS_URL,              0,   "http://www.html-tidy.org/accessibility/"
+	},
 	{ FILE_CANT_OPEN,               0,   "Can't open \"%s\"\n"                                                     },
 	{ LINE_COLUMN_STRING,           0,   "line %d column %d - "                                                    },
 	{ STRING_CONTENT_LOOKS,         0,   "Document content looks like %s"                                          },

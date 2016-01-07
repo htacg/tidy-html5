@@ -261,9 +261,10 @@ Bool TY_(tmbsamefile)( ctmbstr filename1, ctmbstr filename2 )
 }
 #endif
 
+#if defined(_WIN32)
 /* Adapted from FFmpeg -- LGPL
-   Provides a proper vsnprintf for Windows with positional
-   argument support. */
+ Provides a proper vsnprintf for Windows with positional
+ argument support. */
 int TY_(win_vsnprintf)(char *s, size_t n, const char *fmt, va_list ap)
 {
 	int ret;
@@ -287,6 +288,7 @@ int TY_(win_vsnprintf)(char *s, size_t n, const char *fmt, va_list ap)
 
 	return ret;
 }
+#endif
 
 int TY_(tmbvsnprintf)(tmbstr buffer, size_t count, ctmbstr format, va_list args)
 {

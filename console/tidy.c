@@ -1063,6 +1063,11 @@ static tmbstr cleanup_description( ctmbstr description )
 	int j = 0, k = 0;
 	transitionType transition;
 
+	if ( !description || (strlen(description) < 1) )
+	{
+		return NULL;
+	}
+	
 	/* Process the HTML Snippet */
 	do {
 		c = description[i];
@@ -1090,6 +1095,7 @@ static tmbstr cleanup_description( ctmbstr description )
 		}
 
 		/* Find the correct instruction */
+		j = 0;
 		while (transitions[j].state != s_LAST)
 		{
 			transition = transitions[j];

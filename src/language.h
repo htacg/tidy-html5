@@ -195,7 +195,13 @@ ctmbstr tidyGetLanguage();
 
 /**
  *  Provides a string given `messageType` in the current
- *  localization.
+ *  localization for `quantity`.
+ */
+ctmbstr tidyLocalizedStringN( uint messageType, uint quantity );
+
+/**
+ *  Provides a string given `messageType` in the current
+ *  localization for the single case.
  */
 ctmbstr tidyLocalizedString( uint messageType );
 

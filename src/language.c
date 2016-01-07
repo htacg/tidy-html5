@@ -244,6 +244,43 @@ ctmbstr TY_(tidyLocalizedString)( uint messageType, languageDefinition *definiti
 	return NULL;
 }
 
+
+/**
+ *  Provides a string given `messageType` in the current
+ *  localization, returning the correct plural form given
+ *  `quantity`.
+ *
+ *  This isn't currently highly optimized; rewriting some
+ *  of infrastructure to use hash lookups is a preferred
+ *  future optimization.
+ */
+ctmbstr tidyLocalizedStringN( uint messageType, uint quantity )
+{
+	ctmbstr result;
+	
+	result  = TY_(tidyLocalizedString)( messageType, tidyLanguages.currentLanguage, quantity);
+	
+	if (!result && tidyLanguages.fallbackLanguage )
+	{
+		result = TY_(tidyLocalizedString)( messageType, tidyLanguages.fallbackLanguage, quantity);
+	}
+	
+	if (!result)
+	{
+		/* Fallback to en which is built in. */
+		result = TY_(tidyLocalizedString)( messageType, &language_en, quantity);
+	}
+	
+	if (!result)
+	{
+		/* Last resort: Fallback to en singular which is built in. */
+		result = TY_(tidyLocalizedString)( messageType, &language_en, 1);
+	}
+	
+	return result;
+}
+
+
 /**
  *  Provides a string given `messageType` in the current
  *  localization, in the non-plural form.
@@ -254,22 +291,7 @@ ctmbstr TY_(tidyLocalizedString)( uint messageType, languageDefinition *definiti
  */
 ctmbstr tidyLocalizedString( uint messageType )
 {
-	ctmbstr result;
-	
-	result  = TY_(tidyLocalizedString)( messageType, tidyLanguages.currentLanguage, 1);
-	
-	if (!result && tidyLanguages.fallbackLanguage )
-	{
-		result = TY_(tidyLocalizedString)( messageType, tidyLanguages.fallbackLanguage, 1);
-	}
-	
-	if (!result)
-	{
-		/* Fallback to en which is built in. */
-		result = TY_(tidyLocalizedString)( messageType, &language_en, 1);
-	}
-	
-	return result;
+	return tidyLocalizedStringN( messageType, 1 );
 }
 
 

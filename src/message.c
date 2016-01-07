@@ -1015,8 +1015,8 @@ void TY_(ReportNumWarnings)( TidyDocImpl* doc )
     if ( doc->warnings > 0 || doc->errors > 0 )
     {
         tidy_out( doc, tidyLocalizedString(STRING_ERROR_COUNT),
-                  doc->warnings, tidyLocalizedString(doc->warnings == 1 ? STRING_WARNING : STRING_WARNING_PLURAL),
-                  doc->errors, tidyLocalizedString(doc->errors == 1 ? STRING_ERROR : STRING_ERROR_PLURAL) );
+                  doc->warnings, tidyLocalizedStringN( STRING_ERROR_COUNT_WARNING, doc->warnings ),
+				 doc->errors, tidyLocalizedStringN( STRING_ERROR_COUNT_ERROR, doc->errors ) );
 
         if ( doc->errors > cfg(doc, TidyShowErrors) ||
              !cfgBool(doc, TidyShowWarnings) )

@@ -464,10 +464,7 @@ uint TY_(ReadChar)( StreamIn *in )
             uint c1 = 0, replMode = DISCARDED_CHAR;
             Bool isVendorChar = ( in->encoding == WIN1252 ||
                                   in->encoding == MACROMAN );
-            Bool isWinChar    = ( in->encoding == WIN1252 ||
-                                  TY_(ReplacementCharEncoding) == WIN1252 );
-            Bool isMacChar    = ( in->encoding == MACROMAN ||
-                                  TY_(ReplacementCharEncoding) == MACROMAN );
+            Bool isMacChar    = ( in->encoding == MACROMAN );
             
             /* set error position just before offending character */
             if (in->doc->lexer)
@@ -476,10 +473,10 @@ uint TY_(ReadChar)( StreamIn *in )
                 in->doc->lexer->columns = in->curcol;
             }
                 
-            if ( isWinChar )
-                c1 = TY_(DecodeWin1252)( c );
-            else if ( isMacChar )
-                c1 = TY_(DecodeMacRoman)( c );
+            if ( isMacChar )
+				c1 = TY_(DecodeMacRoman)( c );
+            else
+				c1 = TY_(DecodeWin1252)( c );
             if ( c1 )
                 replMode = REPLACED_CHAR;
                 
@@ -748,14 +745,7 @@ void TY_(WriteChar)( uint c, StreamOut* out )
 ** Miscellaneous / Helpers
 ****************************/
 
-/* char encoding used when replacing illegal SGML chars,
-** regardless of specified encoding.  Set at compile time
-** to either Windows or Mac.
-*/
-const int TY_(ReplacementCharEncoding) = DFLT_REPL_CHARENC;
-
-
-/* Mapping for Windows Western character set CP 1252 
+/* Mapping for Windows Western character set CP 1252
 ** (chars 128-159/U+0080-U+009F) to Unicode.
 */
 static const uint Win2Unicode[32] =

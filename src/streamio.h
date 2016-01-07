@@ -181,12 +181,6 @@ int TY_(GetCharEncodingFromOptName)(ctmbstr charenc);
 #endif
 
 
-/* char encoding used when replacing illegal SGML chars,
-** regardless of specified encoding.  Set at compile time
-** to either Windows or Mac.
-*/
-extern const int TY_(ReplacementCharEncoding);
-
 /* Function for conversion from Windows-1252 to Unicode */
 uint TY_(DecodeWin1252)(uint c);
 

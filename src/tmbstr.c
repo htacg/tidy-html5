@@ -261,13 +261,43 @@ Bool TY_(tmbsamefile)( ctmbstr filename1, ctmbstr filename2 )
 }
 #endif
 
+/* Adapted from FFmpeg -- LGPL
+   Provides a proper vsnprintf for Windows with positional
+   argument support. */
+int TY_(win_vsnprintf)(char *s, size_t n, const char *fmt, va_list ap)
+{
+	int ret;
+	va_list ap_copy;
+
+	if (n == 0)
+		return _vscprintf(fmt, ap);
+
+	/* we use n - 1 here because if the buffer is not big enough, the MS
+	 * runtime libraries don't add a terminating zero at the end. MSDN
+	 * recommends to provide _snprintf/_vsnprintf() a buffer size that
+	 * is one less than the actual buffer, and zero it before calling
+	 * _snprintf/_vsnprintf() to workaround this problem.
+	 * See http://msdn.microsoft.com/en-us/library/1kt27hek(v=vs.80).aspx */
+	memset(s, 0, n);
+	va_copy(ap_copy, ap);
+	ret = _vsprintf_p(s, n - 1, fmt, ap_copy);
+	va_end(ap_copy);
+	if (ret == -1)
+		ret = _vscprintf(fmt, ap);
+
+	return ret;
+}
+
 int TY_(tmbvsnprintf)(tmbstr buffer, size_t count, ctmbstr format, va_list args)
 {
     int retval;
-#if HAS_VSNPRINTF
+
+#if HAS_VSNPRINTF && !defined(_WIN32)
     retval = vsnprintf(buffer, count - 1, format, args);
     /* todo: conditionally null-terminate the string? */
     buffer[count - 1] = 0;
+#elif HAS_VSNPRINTF
+	return TY_(win_vsnprintf)(buffer, count, format, args);
 #else
     retval = vsprintf(buffer, format, args);
 #endif /* HAS_VSNPRINTF */
@@ -279,13 +309,7 @@ int TY_(tmbsnprintf)(tmbstr buffer, size_t count, ctmbstr format, ...)
     int retval;
     va_list args;
     va_start(args, format);
-#if HAS_VSNPRINTF
-    retval = vsnprintf(buffer, count - 1, format, args);
-    /* todo: conditionally null-terminate the string? */
-    buffer[count - 1] = 0;
-#else
-    retval = vsprintf(buffer, format, args);
-#endif /* HAS_VSNPRINTF */
+	retval = TY_(tmbvsnprintf)(buffer, count, format, args);
     va_end(args);
     return retval;
 }

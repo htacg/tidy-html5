@@ -21,9 +21,9 @@
  *  This structure type provides universal access to all of Tidy's strings.
  */
 typedef struct {
-	languageDictionary *currentLanguage;
-	languageDictionary *fallbackLanguage;
-	languageDictionary *languages[];
+	languageDefinition *currentLanguage;
+	languageDefinition *fallbackLanguage;
+	languageDefinition *languages[];
 } tidyLanguagesType;
 
 
@@ -32,9 +32,10 @@ typedef struct {
  *  `.currentLanguage` to language_en, which is Tidy's default language.
  */
 static tidyLanguagesType tidyLanguages = {
-	&language_en,
-	&language_en,
+	&language_en, /* current language */
+	&language_en, /* first fallback language */
 	{
+		/* These languages are installed. */
 		&language_en,
 		&language_en_gb,
 		&language_es,
@@ -227,12 +228,15 @@ static uint tidyStringKeyIndex = 0;
 /**
  *  The real string lookup function.
  */
-ctmbstr TY_(tidyLocalizedString)( uint messageType, languageDictionary *dictionary )
+ctmbstr TY_(tidyLocalizedString)( uint messageType, languageDefinition *definition, uint plural )
 {
 	int i;
+	languageDictionary *dictionary = &definition->messages;
+	uint pluralForm = definition->whichPluralForm(plural);
+	
 	for (i = 0; (*dictionary)[i].value; ++i)
 	{
-		if ((*dictionary)[i].key == messageType)
+		if ( (*dictionary)[i].key == messageType && (*dictionary)[i].pluralForm == pluralForm )
 		{
 			return (*dictionary)[i].value;
 		}
@@ -242,7 +246,7 @@ ctmbstr TY_(tidyLocalizedString)( uint messageType, languageDictionary *dictiona
 
 /**
  *  Provides a string given `messageType` in the current
- *  localization.
+ *  localization, in the non-plural form.
  *
  *  This isn't currently highly optimized; rewriting some
  *  of infrastructure to use hash lookups is a preferred
@@ -252,17 +256,17 @@ ctmbstr tidyLocalizedString( uint messageType )
 {
 	ctmbstr result;
 	
-	result  = TY_(tidyLocalizedString)( messageType, tidyLanguages.currentLanguage);
+	result  = TY_(tidyLocalizedString)( messageType, tidyLanguages.currentLanguage, 1);
 	
 	if (!result && tidyLanguages.fallbackLanguage )
 	{
-		result = TY_(tidyLocalizedString)( messageType, tidyLanguages.fallbackLanguage);
+		result = TY_(tidyLocalizedString)( messageType, tidyLanguages.fallbackLanguage, 1);
 	}
 	
 	if (!result)
 	{
 		/* Fallback to en which is built in. */
-		result = TY_(tidyLocalizedString)( messageType, &language_en);
+		result = TY_(tidyLocalizedString)( messageType, &language_en, 1);
 	}
 	
 	return result;
@@ -353,16 +357,18 @@ tmbstr tidyNormalizedLocaleName( ctmbstr locale )
 /**
  *  Actually sets the language with a sanitized languageCode.
  */
-languageDictionary *TY_(tidySetLanguage)( ctmbstr languageCode )
+languageDefinition *TY_(tidySetLanguage)( ctmbstr languageCode )
 {
 	uint i;
-	languageDictionary *testLang;
+	languageDefinition *testLang;
+	languageDictionary *testDict;
 	ctmbstr testCode;
 	
 	for (i = 0; tidyLanguages.languages[i]; ++i)
 	{
 		testLang = tidyLanguages.languages[i];
-		testCode = (*testLang)[0].value;
+		testDict = &testLang->messages;
+		testCode = (*testDict)[0].value;
 		
 		if ( strcmp(testCode, languageCode) == 0 )
 		{
@@ -385,8 +391,8 @@ languageDictionary *TY_(tidySetLanguage)( ctmbstr languageCode )
  */
 Bool tidySetLanguage( ctmbstr languageCode )
 {
-	languageDictionary *dict1 = NULL;
-	languageDictionary *dict2 = NULL;
+	languageDefinition *dict1 = NULL;
+	languageDefinition *dict2 = NULL;
 	tmbstr wantCode = NULL;
 	char lang[3] = "";
 	
@@ -429,17 +435,19 @@ Bool tidySetLanguage( ctmbstr languageCode )
  */
 ctmbstr tidyGetLanguage()
 {
-	return (*tidyLanguages.currentLanguage)[0].value;
+	languageDefinition *langDef = tidyLanguages.currentLanguage;
+	languageDictionary *langDict = &langDef->messages;
+	return (*langDict)[0].value;
 }
 
 
 /**
  *  Provides a string given `messageType` in the default
- *  localization (which is `en`).
+ *  localization (which is `en`), for single plural form.
  */
 ctmbstr tidyDefaultString( uint messageType )
 {
-	return TY_(tidyLocalizedString)( messageType, &language_en);
+	return TY_(tidyLocalizedString)( messageType, &language_en, 1);
 }
 
 
@@ -454,7 +462,7 @@ uint TY_(tidyLanguageArraySize)()
 	{
 		do {
 			array_size++;
-		} while ( language_en[array_size].value );
+		} while ( language_en.messages[array_size].value );
 	}
 	
 	return array_size;
@@ -470,7 +478,7 @@ uint TY_(tidyLanguageArraySize)()
 uint tidyFirstStringKey()
 {
 	tidyStringKeyIndex = 0;
-	return language_en[tidyStringKeyIndex].key;
+	return language_en.messages[tidyStringKeyIndex].key;
 }
 
 /**
@@ -485,7 +493,7 @@ uint tidyNextStringKey()
 	if ( tidyStringKeyIndex < tidyLastStringKey() )
 		tidyStringKeyIndex++;
 	
-	return language_en[tidyStringKeyIndex].key;
+	return language_en.messages[tidyStringKeyIndex].key;
 }
 
 /**
@@ -496,7 +504,7 @@ uint tidyNextStringKey()
  */
 uint tidyLastStringKey()
 {
-	return language_en[TY_(tidyLanguageArraySize)()].key;
+	return language_en.messages[TY_(tidyLanguageArraySize)()].key;
 }
 
 /**
@@ -523,13 +531,14 @@ void tidyPrintWindowsLanguageNames( ctmbstr format )
 void tidyPrintTidyLanguageNames( ctmbstr format )
 {
 	uint i;
+
 	
-	for ( i = 0; (*tidyLanguages.languages[i]); ++i )
+	for ( i = 0; (tidyLanguages.languages[i]); ++i )
 	{
 		if ( format )
-			printf( format, (*tidyLanguages.languages[i])[0].value );
+			printf( format, tidyLanguages.languages[i]->messages[0].value );
 		else
-			printf( "%s\n", (*tidyLanguages.languages[i])[0].value );
+			printf( "%s\n", tidyLanguages.languages[i]->messages[0].value );
 	}
 }
 

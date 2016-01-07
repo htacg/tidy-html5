@@ -5,8 +5,8 @@
  * Localization support for HTML Tidy.
  * This header provides the public (within libtidy) interface
  * to basic localization support. To add your own localization
- * create a new `language_xx.h` file copied from an existing
- * localization, and add it to the struct in `language.c`.
+ * create a new `language_xx.h` file and add it to the struct
+ * in `language.c`.
  *
  * (c) 2015 HTACG
  * See tidy.h and access.h for the copyright notice.
@@ -18,12 +18,16 @@
 
 
 /**
- *  Describes a record for a localization string. They key must
- *  correspond with one of Tidy's enums (see `tidyMessageTypes`
- *  below).
+ *  Describes a record for a localization string.
+ *  - key must correspond with one of Tidy's enums (see `tidyMessageTypes`
+ *    below)
+ *  - pluralForm corresponds to gettext plural forms case (not singularity).
+ *    Most entries should be case 0, representing the single case.:
+ *    https://www.gnu.org/software/gettext/manual/html_node/Plural-forms.html
  */
 typedef struct languageDictionaryEntry {
 	uint key;
+	uint pluralForm;
 	ctmbstr value;
 } languageDictionaryEntry;
 
@@ -34,6 +38,18 @@ typedef struct languageDictionaryEntry {
  *  which will make looking up strings faster.
  */
 typedef languageDictionaryEntry const languageDictionary[600];
+
+
+/**
+ *  Finally, a complete language definition. The item `pluralForm`
+ *  is a function pointer that will provide the correct plural
+ *  form given the value `n`. The actual function is present in
+ *  each language header and is language dependent.
+ */
+typedef struct languageDefinition {
+	uint (*whichPluralForm)(uint n);
+	languageDictionary messages;
+} languageDefinition;
 
 
 /**

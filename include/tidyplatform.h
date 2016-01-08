@@ -445,7 +445,9 @@ extern "C" {
 #define utimbuf _utimbuf /* Windows seems to want utimbuf */
 #define stat _stat
 #define utime _utime
-#define vsnprintf _vsnprintf
+#define vsnprintf TY_(win_vsnprintf)
+#define printf TY_(win_printf)
+#define fprintf TY_(win_fprintf)
 #endif /* _WIN32 */
 
 #endif /* PRESERVE_FILE_TIMES */

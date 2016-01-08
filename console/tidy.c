@@ -11,6 +11,9 @@
 #include "tidy.h"
 #include "language.h"
 #include "locale.h"
+#if defined(_WIN32)
+#include "win_vsnprintf.h"
+#endif
 #if !defined(NDEBUG) && defined(_MSC_VER)
 #include "sprtf.h"
 #endif

@@ -8,6 +8,9 @@
 #include "forward.h"
 #include "tmbstr.h"
 #include "lexer.h"
+#if defined(_WIN32)
+#include "win_vsnprintf.h"
+#endif
 
 /* like strdup but using an allocator */
 tmbstr TY_(tmbstrdup)( TidyAllocator *allocator, ctmbstr str )
@@ -258,35 +261,6 @@ Bool TY_(tmbsamefile)( ctmbstr filename1, ctmbstr filename2 )
 #else
     return ( TY_(tmbstrcasecmp)( filename1, filename2 ) == 0 );
 #endif
-}
-#endif
-
-#if defined(_WIN32)
-/* Adapted from FFmpeg -- LGPL
- Provides a proper vsnprintf for Windows with positional
- argument support. */
-int TY_(win_vsnprintf)(char *s, size_t n, const char *fmt, va_list ap)
-{
-	int ret;
-	va_list ap_copy;
-
-	if (n == 0)
-		return _vscprintf(fmt, ap);
-
-	/* we use n - 1 here because if the buffer is not big enough, the MS
-	 * runtime libraries don't add a terminating zero at the end. MSDN
-	 * recommends to provide _snprintf/_vsnprintf() a buffer size that
-	 * is one less than the actual buffer, and zero it before calling
-	 * _snprintf/_vsnprintf() to workaround this problem.
-	 * See http://msdn.microsoft.com/en-us/library/1kt27hek(v=vs.80).aspx */
-	memset(s, 0, n);
-	va_copy(ap_copy, ap);
-	ret = _vsprintf_p(s, n - 1, fmt, ap_copy);
-	va_end(ap_copy);
-	if (ret == -1)
-		ret = _vscprintf(fmt, ap);
-
-	return ret;
 }
 #endif
 

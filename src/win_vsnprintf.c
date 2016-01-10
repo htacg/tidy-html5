@@ -25,7 +25,7 @@ int TY_(win_vsnprintf)(char *s, uint n, const char *fmt, va_list ap)
 	va_list ap_copy;
 
 	if (n == 0)
-		return _vscprintf(fmt, ap);
+		return _vscprintf_p(fmt, ap);
 		
 	memset(s, 0, n);
 	va_copy(ap_copy, ap);

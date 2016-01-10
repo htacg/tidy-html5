@@ -214,13 +214,13 @@ static char* ReportPosition(TidyDocImpl* doc, int line, int col, char* buf, size
 ** filter routine.
 */
 
-static void messagePos( TidyDocImpl* doc, TidyReportLevel level,
+static void messagePos( TidyDocImpl* doc, TidyReportLevel level, uint code,
                         int line, int col, ctmbstr msg, va_list args )
 #ifdef __GNUC__
-__attribute__((format(printf, 5, 0)))
+__attribute__((format(printf, 6, 0)))
 #endif
 ;
-static void messagePos( TidyDocImpl* doc, TidyReportLevel level,
+static void messagePos( TidyDocImpl* doc, TidyReportLevel level, uint code,
                         int line, int col, ctmbstr msg, va_list args )
 {
     enum { sizeMessageBuf=2048 };
@@ -239,8 +239,13 @@ static void messagePos( TidyDocImpl* doc, TidyReportLevel level,
         }
         if ( doc->mssgFilt2 )
         {
+			/* mssgFilt2 is intended to allow LibTidy users to localize
+			   messages via their own means by providing a key string and
+			   the parameters to fill it. For the key string to remain
+			   consistent, we have to ensure that we only ever return the
+			   built-in English version of this string. */
             TidyDoc tdoc = tidyImplToDoc( doc );
-            go = go | doc->mssgFilt2( tdoc, level, line, col, msg, args_copy );
+            go = go | doc->mssgFilt2( tdoc, level, line, col, tidyDefaultString(code), args_copy );
         }
     }
 
@@ -278,27 +283,28 @@ static void messagePos( TidyDocImpl* doc, TidyReportLevel level,
 
 /* Reports error at current Lexer line/column. */ 
 static
-void message( TidyDocImpl* doc, TidyReportLevel level, ctmbstr msg, ... )
-#ifdef __GNUC__
-__attribute__((format(printf, 3, 4)))
-#endif
-;
-
-/* Reports error at node line/column. */ 
-static
-void messageNode( TidyDocImpl* doc, TidyReportLevel level,
-                  Node* node, ctmbstr msg, ... )
+void message( TidyDocImpl* doc, TidyReportLevel level, uint code,
+			 ctmbstr msg, ... )
 #ifdef __GNUC__
 __attribute__((format(printf, 4, 5)))
 #endif
 ;
 
+/* Reports error at node line/column. */ 
+static
+void messageNode( TidyDocImpl* doc, TidyReportLevel level, uint code,
+                  Node* node, ctmbstr msg, ... )
+#ifdef __GNUC__
+__attribute__((format(printf, 5, 6)))
+#endif
+;
+
 /* Reports error at given line/column. */ 
 static
-void messageLexer( TidyDocImpl* doc, TidyReportLevel level, 
+void messageLexer( TidyDocImpl* doc, TidyReportLevel level, uint code,
                    ctmbstr msg, ... )
 #ifdef __GNUC__
-__attribute__((format(printf, 3, 4)))
+__attribute__((format(printf, 4, 5)))
 #endif
 ;
 
@@ -311,29 +317,31 @@ __attribute__((format(printf, 2, 3)))
 ;
 
 
-void message( TidyDocImpl* doc, TidyReportLevel level, ctmbstr msg, ... )
+void message( TidyDocImpl* doc, TidyReportLevel level, uint code,
+			 ctmbstr msg, ... )
 {
     va_list args;
     if (level == TidyInfo && !cfgBool(doc, TidyShowInfo)) return;
     va_start( args, msg );
-    messagePos( doc, level, 0, 0, msg, args );
+    messagePos( doc, level, code, 0, 0, msg, args );
     va_end( args );
 }
 
 
-void messageLexer( TidyDocImpl* doc, TidyReportLevel level, ctmbstr msg, ... )
+void messageLexer( TidyDocImpl* doc, TidyReportLevel level, uint code,
+				  ctmbstr msg, ... )
 {
     int line = ( doc->lexer ? doc->lexer->lines : 0 );
     int col  = ( doc->lexer ? doc->lexer->columns : 0 );
 
     va_list args;
     va_start( args, msg );
-    messagePos( doc, level, line, col, msg, args );
+    messagePos( doc, level, code, line, col, msg, args );
     va_end( args );
 }
 
-void messageNode( TidyDocImpl* doc, TidyReportLevel level, Node* node,
-                  ctmbstr msg, ... )
+void messageNode( TidyDocImpl* doc, TidyReportLevel level, uint code,
+				 Node* node, ctmbstr msg, ... )
 {
     int line = ( node ? node->line :
                  ( doc->lexer ? doc->lexer->lines : 0 ) );
@@ -342,7 +350,7 @@ void messageNode( TidyDocImpl* doc, TidyReportLevel level, Node* node,
 
     va_list args;
     va_start( args, msg );
-    messagePos( doc, level, line, col, msg, args );
+    messagePos( doc, level, code, line, col, msg, args );
     va_end( args );
 }
 
@@ -373,7 +381,7 @@ void tidy_out( TidyDocImpl* doc, ctmbstr msg, ... )
 
 void TY_(FileError)( TidyDocImpl* doc, ctmbstr file, TidyReportLevel level )
 {
-    message( doc, level, tidyLocalizedString(FILE_CANT_OPEN), file );
+    message( doc, level, FILE_CANT_OPEN, tidyLocalizedString(FILE_CANT_OPEN), file );
 }
 
 static char* TagToString(Node* tag, char* buf, size_t count)
@@ -401,14 +409,14 @@ static char* TagToString(Node* tag, char* buf, size_t count)
 void TY_(ReportUnknownOption)( TidyDocImpl* doc, ctmbstr option )
 {
     assert( option != NULL );
-    message( doc, TidyConfig, tidyLocalizedString(STRING_UNKNOWN_OPTION), option );
+    message( doc, TidyConfig, STRING_UNKNOWN_OPTION, tidyLocalizedString(STRING_UNKNOWN_OPTION), option );
 }
 
 /* lexer is not defined when this is called */
 void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option )
 {
     assert( option != NULL );
-    message( doc, TidyConfig, tidyLocalizedString(STRING_MISSING_MALFORMED), option );
+    message( doc, TidyConfig, STRING_MISSING_MALFORMED, tidyLocalizedString(STRING_MISSING_MALFORMED), option );
 }
 
 static void NtoS(int n, tmbstr str)
@@ -442,7 +450,7 @@ void TY_(ReportEncodingWarning)(TidyDocImpl* doc, uint code, uint encoding)
     switch(code)
     {
     case ENCODING_MISMATCH:
-        messageLexer(doc, TidyWarning, tidyLocalizedString(code),
+        messageLexer(doc, TidyWarning, code, tidyLocalizedString(code),
                      TY_(CharEncodingName)(doc->docIn->encoding),
                      TY_(CharEncodingName)(encoding));
         doc->badChars |= BC_ENCODING_MISMATCH;
@@ -489,7 +497,7 @@ void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarde
     }
 
     if (fmt)
-        messageLexer( doc, TidyWarning, fmt, action, buf );
+        messageLexer( doc, TidyWarning, code, fmt, action, buf );
 }
 
 void TY_(ReportEntityError)( TidyDocImpl* doc, uint code, ctmbstr entity,
@@ -501,7 +509,7 @@ void TY_(ReportEntityError)( TidyDocImpl* doc, uint code, ctmbstr entity,
     fmt = tidyLocalizedString(code);
 
     if (fmt)
-        messageLexer( doc, TidyWarning, fmt, entityname );
+        messageLexer( doc, TidyWarning, code, fmt, entityname );
 }
 
 void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
@@ -530,14 +538,14 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
     case XML_ATTRIBUTE_VALUE:
     case PROPRIETARY_ATTRIBUTE:
     case JOINING_ATTRIBUTE:
-        messageNode(doc, TidyWarning, node, fmt, tagdesc, name);
+        messageNode(doc, TidyWarning, code, node, fmt, tagdesc, name);
         break;
 
     case BAD_ATTRIBUTE_VALUE:
     case BAD_ATTRIBUTE_VALUE_REPLACED:
     case INVALID_ATTRIBUTE:
     case INSERTING_AUTO_ATTRIBUTE:
-        messageNode(doc, TidyWarning, node, fmt, tagdesc, name, value);
+        messageNode(doc, TidyWarning, code, node, fmt, tagdesc, name, value);
         break;
 
     case UNEXPECTED_QUOTEMARK:
@@ -552,31 +560,31 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
     case UNEXPECTED_GT:
     case INVALID_XML_ID:
     case UNEXPECTED_EQUALSIGN:
-        messageNode(doc, TidyWarning, node, fmt, tagdesc);
+        messageNode(doc, TidyWarning, code, node, fmt, tagdesc);
         break;
 
     case XML_ID_SYNTAX:
     case PROPRIETARY_ATTR_VALUE:
     case ANCHOR_NOT_UNIQUE:
     case ATTR_VALUE_NOT_LCASE:
-        messageNode(doc, TidyWarning, node, fmt, tagdesc, value);
+        messageNode(doc, TidyWarning, code, node, fmt, tagdesc, value);
         break;
 
 
     case MISSING_IMAGEMAP:
-        messageNode(doc, TidyWarning, node, fmt, tagdesc);
+        messageNode(doc, TidyWarning, code, node, fmt, tagdesc);
         doc->badAccess |= BA_MISSING_IMAGE_MAP;
         break;
 
     case REPEATED_ATTRIBUTE:
-        messageNode(doc, TidyWarning, node, fmt, tagdesc, value, name);
+        messageNode(doc, TidyWarning, code, node, fmt, tagdesc, value, name);
         break;
 
     case UNEXPECTED_END_OF_FILE_ATTR:
         /* on end of file adjust reported position to end of input */
         doc->lexer->lines   = doc->docIn->curline;
         doc->lexer->columns = doc->docIn->curcol;
-        messageLexer(doc, TidyWarning, fmt, tagdesc);
+        messageLexer(doc, TidyWarning, code, fmt, tagdesc);
         break;
     }
 }
@@ -588,7 +596,7 @@ void TY_(ReportMissingAttr)( TidyDocImpl* doc, Node* node, ctmbstr name )
 
     assert( fmt != NULL );
     TagToString(node, tagdesc, sizeof(tagdesc));
-    messageNode( doc, TidyWarning, node, fmt, tagdesc, name );
+    messageNode( doc, TidyWarning, MISSING_ATTRIBUTE, node, fmt, tagdesc, name );
 }
 
 #if SUPPORT_ACCESSIBILITY_CHECKS
@@ -613,14 +621,14 @@ void TY_(ReportAccessWarning)( TidyDocImpl* doc, Node* node, uint code )
 {
     ctmbstr fmt = tidyLocalizedString(code);
     doc->badAccess |= BA_WAI;
-    messageNode( doc, TidyAccess, node, "%s", fmt );
+    messageNode( doc, TidyAccess, code, node, "%s", fmt );
 }
 
 void TY_(ReportAccessError)( TidyDocImpl* doc, Node* node, uint code )
 {
     ctmbstr fmt = tidyLocalizedString(code);
     doc->badAccess |= BA_WAI;
-    messageNode( doc, TidyAccess, node, "%s", fmt );
+    messageNode( doc, TidyAccess, code, node, "%s", fmt );
 }
 
 #endif /* SUPPORT_ACCESSIBILITY_CHECKS */
@@ -639,12 +647,12 @@ void TY_(ReportWarning)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     switch (code)
     {
     case NESTED_QUOTATION:
-        messageNode(doc, TidyWarning, rpt, "%s", fmt);
+        messageNode(doc, TidyWarning, code, rpt, "%s", fmt);
         break;
 
     case OBSOLETE_ELEMENT:
         TagToString(element, elemdesc, sizeof(elemdesc));
-        messageNode(doc, TidyWarning, rpt, fmt, elemdesc, nodedesc);
+        messageNode(doc, TidyWarning, code, rpt, fmt, elemdesc, nodedesc);
         break;
 
     case NESTED_EMPHASIS:
@@ -652,10 +660,10 @@ void TY_(ReportWarning)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     case BAD_BODY_HTML5:
     case BAD_ALIGN_HTML5:
     case BAD_SUMMARY_HTML5:
-        messageNode(doc, TidyWarning, rpt, fmt, nodedesc);
+        messageNode(doc, TidyWarning, code, rpt, fmt, nodedesc);
         break;
     case COERCE_TO_ENDTAG_WARN:
-        messageNode(doc, TidyWarning, rpt, fmt, node->element, node->element);
+        messageNode(doc, TidyWarning, code, rpt, fmt, node->element, node->element);
         break;
     }
 }
@@ -675,12 +683,12 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     {
     case TRIM_EMPTY_ELEMENT:
         TagToString(element, elemdesc, sizeof(nodedesc));
-        messageNode(doc, TidyWarning, element, fmt, elemdesc);
+        messageNode(doc, TidyWarning, code, element, fmt, elemdesc);
         break;
 
     case REPLACING_ELEMENT:
         TagToString(element, elemdesc, sizeof(elemdesc));
-        messageNode(doc, TidyWarning, rpt, fmt, elemdesc, nodedesc);
+        messageNode(doc, TidyWarning, code, rpt, fmt, elemdesc, nodedesc);
         break;
     }
 }
@@ -702,7 +710,7 @@ void TY_(ReportError)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     case UNEXPECTED_ENDTAG:
     case TOO_MANY_ELEMENTS:
     case INSERTING_TAG:
-        messageNode(doc, TidyWarning, node, fmt, node->element);
+        messageNode(doc, TidyWarning, code, node, fmt, node->element);
         break;
 
     case USING_BR_INPLACE_OF:
@@ -710,7 +718,7 @@ void TY_(ReportError)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     case PROPRIETARY_ELEMENT:
     case UNESCAPED_ELEMENT:
     case NOFRAMES_CONTENT:
-        messageNode(doc, TidyWarning, node, fmt, nodedesc);
+        messageNode(doc, TidyWarning, code, node, fmt, nodedesc);
         break;
 
     case MISSING_TITLE_ELEMENT:
@@ -724,26 +732,26 @@ void TY_(ReportError)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     case INCONSISTENT_NAMESPACE:
     case DOCTYPE_AFTER_TAGS:
     case DTYPE_NOT_UPPER_CASE:
-        messageNode(doc, TidyWarning, rpt, "%s", fmt);
+        messageNode(doc, TidyWarning, code, rpt, "%s", fmt);
         break;
 
     case COERCE_TO_ENDTAG:
     case NON_MATCHING_ENDTAG:
-        messageNode(doc, TidyWarning, rpt, fmt, node->element, node->element);
+        messageNode(doc, TidyWarning, code, rpt, fmt, node->element, node->element);
         break;
 
     case UNEXPECTED_ENDTAG_IN:
     case TOO_MANY_ELEMENTS_IN:
-        messageNode(doc, TidyWarning, node, fmt, node->element, element->element);
+        messageNode(doc, TidyWarning, code, node, fmt, node->element, element->element);
         if (cfgBool( doc, TidyShowWarnings ))
-            messageNode(doc, TidyInfo, node, tidyLocalizedString(PREVIOUS_LOCATION),
+            messageNode(doc, TidyInfo, PREVIOUS_LOCATION, node, tidyLocalizedString(PREVIOUS_LOCATION),
                         element->element);
         break;
 
     case ENCODING_IO_CONFLICT:
     case MISSING_DOCTYPE:
     case SPACE_PRECEDING_XMLDECL:
-        messageNode(doc, TidyWarning, node, "%s", fmt);
+        messageNode(doc, TidyWarning, code, node, "%s", fmt);
         break;
 
     case TRIM_EMPTY_ELEMENT:
@@ -751,38 +759,38 @@ void TY_(ReportError)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     case UNEXPECTED_END_OF_FILE:
     case ELEMENT_NOT_EMPTY:
         TagToString(element, elemdesc, sizeof(elemdesc));
-        messageNode(doc, TidyWarning, element, fmt, elemdesc);
+        messageNode(doc, TidyWarning, code, element, fmt, elemdesc);
         break;
 
 
     case MISSING_ENDTAG_FOR:
-        messageNode(doc, TidyWarning, rpt, fmt, element->element);
+        messageNode(doc, TidyWarning, code, rpt, fmt, element->element);
         break;
 
     case MISSING_ENDTAG_BEFORE:
-        messageNode(doc, TidyWarning, rpt, fmt, element->element, nodedesc);
+        messageNode(doc, TidyWarning, code, rpt, fmt, element->element, nodedesc);
         break;
 
     case DISCARDING_UNEXPECTED:
         /* Force error if in a bad form, or 
            Issue #166 - repeated <main> element
         */
-        messageNode(doc, doc->badForm ? TidyError : TidyWarning, node, fmt, nodedesc);
+        messageNode(doc, doc->badForm ? TidyError : TidyWarning, code, node, fmt, nodedesc);
         break;
 
     case TAG_NOT_ALLOWED_IN:
-        messageNode(doc, TidyWarning, node, fmt, nodedesc, element->element);
+        messageNode(doc, TidyWarning, code, node, fmt, nodedesc, element->element);
         if (cfgBool( doc, TidyShowWarnings ))
-            messageNode(doc, TidyInfo, element,
+            messageNode(doc, TidyInfo, PREVIOUS_LOCATION, element,
                         tidyLocalizedString(PREVIOUS_LOCATION), element->element);
         break;
 
     case REPLACING_UNEX_ELEMENT:
         TagToString(element, elemdesc, sizeof(elemdesc));
-        messageNode(doc, TidyWarning, rpt, fmt, elemdesc, nodedesc);
+        messageNode(doc, TidyWarning, code, rpt, fmt, elemdesc, nodedesc);
         break;
     case REMOVED_HTML5:
-        messageNode(doc, TidyError, rpt, fmt, nodedesc);
+        messageNode(doc, TidyError, code, rpt, fmt, nodedesc);
         break;
     }
 }
@@ -797,20 +805,20 @@ void TY_(ReportFatal)( TidyDocImpl* doc, Node *element, Node *node, uint code)
     {
     case SUSPECTED_MISSING_QUOTE:
     case DUPLICATE_FRAMESET:
-        messageNode(doc, TidyError, rpt, "%s", fmt);
+        messageNode(doc, TidyError, code, rpt, "%s", fmt);
         break;
 
     case UNKNOWN_ELEMENT:
         TagToString(node, nodedesc, sizeof(nodedesc));
-        messageNode( doc, TidyError, node, fmt, nodedesc );
+        messageNode( doc, TidyError, code, node, fmt, nodedesc );
         break;
 
     case UNEXPECTED_ENDTAG_IN:
-        messageNode(doc, TidyError, node, fmt, node->element, element->element);
+        messageNode(doc, TidyError, code, node, fmt, node->element, element->element);
         break;
 
     case UNEXPECTED_ENDTAG:  /* generated by XML docs */
-        messageNode(doc, TidyError, node, fmt, node->element);
+        messageNode(doc, TidyError, code, node, fmt, node->element);
         break;
     }
 }
@@ -986,7 +994,7 @@ void TY_(ReportMarkupVersion)( TidyDocImpl* doc )
     if (doc->givenDoctype)
     {
         /* todo: deal with non-ASCII characters in FPI */
-        message(doc, TidyInfo, tidyLocalizedString(STRING_DOCTYPE_GIVEN), doc->givenDoctype);
+        message(doc, TidyInfo, STRING_DOCTYPE_GIVEN, tidyLocalizedString(STRING_DOCTYPE_GIVEN), doc->givenDoctype);
     }
 
     if ( ! cfgBool(doc, TidyXmlTags) )
@@ -1002,11 +1010,11 @@ void TY_(ReportMarkupVersion)( TidyDocImpl* doc )
         if (!vers)
             vers = tidyLocalizedString(STRING_HTML_PROPRIETARY);
 
-        message( doc, TidyInfo, tidyLocalizedString(STRING_CONTENT_LOOKS), vers );
+        message( doc, TidyInfo, STRING_CONTENT_LOOKS, tidyLocalizedString(STRING_CONTENT_LOOKS), vers );
 
         /* Warn about missing sytem identifier (SI) in emitted doctype */
         if ( TY_(WarnMissingSIInEmittedDocType)( doc ) )
-            message( doc, TidyInfo, "%s", tidyLocalizedString(STRING_NO_SYSID) );
+            message( doc, TidyInfo, STRING_NO_SYSID, "%s", tidyLocalizedString(STRING_NO_SYSID) );
     }
 }
 
@@ -1015,8 +1023,8 @@ void TY_(ReportNumWarnings)( TidyDocImpl* doc )
     if ( doc->warnings > 0 || doc->errors > 0 )
     {
         tidy_out( doc, tidyLocalizedString(STRING_ERROR_COUNT),
-                  doc->warnings, tidyLocalizedString(doc->warnings == 1 ? STRING_WARNING : STRING_WARNING_PLURAL),
-                  doc->errors, tidyLocalizedString(doc->errors == 1 ? STRING_ERROR : STRING_ERROR_PLURAL) );
+                  doc->warnings, tidyLocalizedStringN( STRING_ERROR_COUNT_WARNING, doc->warnings ),
+				 doc->errors, tidyLocalizedStringN( STRING_ERROR_COUNT_ERROR, doc->errors ) );
 
         if ( doc->errors > cfg(doc, TidyShowErrors) ||
              !cfgBool(doc, TidyShowWarnings) )

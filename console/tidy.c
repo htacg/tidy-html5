@@ -11,6 +11,13 @@
 #include "tidy.h"
 #include "language.h"
 #include "locale.h"
+#if defined(_WIN32)
+/* Windows requires special help for printf positional format specifiers. */
+#include "win_vsnprintf.h"
+#define nest_(x) TY_(x)
+#define printf nest_(win_printf)
+#define fprint nest_(win_fprintf)
+#endif
 #if !defined(NDEBUG) && defined(_MSC_VER)
 #include "sprtf.h"
 #endif
@@ -40,7 +47,7 @@ static Bool samefile( ctmbstr filename1, ctmbstr filename2 )
  */
 static void outOfMemory(void)
 {
-	fprintf(stderr,"%s", tidyLocalizedString(TC_STRING_OUT_OF_MEMORY));
+	fprintf(stderr, "%s", tidyLocalizedString(TC_STRING_OUT_OF_MEMORY));
 	exit(1);
 }
 
@@ -497,8 +504,8 @@ static void help( ctmbstr prog )
 #else
 	title_line = stringWithFormat( tidyLocalizedString(TC_TXT_HELP_2B) );
 #endif
-	printf( "%s", title_line );
-	printf("%*.*s\n", (int)strlen(title_line), (int)strlen(title_line), ul );
+	printf( "%s\n", title_line );
+	printf("%*.*s\n", (int)strlen(title_line), (int)strlen(title_line), ul);
 	free( title_line );
 	printf( "\n");
 	

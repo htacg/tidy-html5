@@ -196,9 +196,9 @@ typedef enum {
     STRING_CONTENT_LOOKS,       /* `Document content looks like %s`. */
     STRING_DISCARDING,          /* For `discarding`. */
     STRING_DOCTYPE_GIVEN,       /* `Doctype given is \"%s\". */
-    STRING_ERROR,               /* `error`. */
     STRING_ERROR_COUNT,         /* `%u %s, %u %s were found!`. */
-    STRING_ERROR_PLURAL,        /* `errors`. */
+	STRING_ERROR_COUNT_ERROR,   /* `error` and `errors`. */
+    STRING_ERROR_COUNT_WARNING, /* `warning` and `warnings`. */
     STRING_HELLO_ACCESS,        /* Accessibility hello message. */
     STRING_HTML_PROPRIETARY,    /* `HTML Proprietary`/ */
     STRING_MISSING_MALFORMED,   /* For `missing or malformed argument for option: %s`. */
@@ -211,8 +211,6 @@ typedef enum {
     STRING_UNKNOWN_FILE,        /* `%s: can't open file \"%s\"\n`. */
     STRING_UNKNOWN_OPTION,      /* For retrieving a string `unknown option: %s`. */
     STRING_UNRECZD_OPTION,      /* `unrecognized option -%c use -help to list options\n`. */
-    STRING_WARNING,             /* `warning`. */
-    STRING_WARNING_PLURAL,      /* `warnings`. */
     STRING_XML_DECLARATION,     /* For retrieving a string `XML declaration`. */
     TEXT_ACCESS_ADVICE1,        /* Explanatory text. */
     TEXT_ACCESS_ADVICE2,        /* Explanatory text. */

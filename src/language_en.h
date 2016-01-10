@@ -1315,10 +1315,10 @@ static languageDefinition language_en = { whichPluralForm_en, {
 		"\n"
 	},
 	{ TC_TXT_HELP_2A,               0,
-		"Command Line Arguments for HTML Tidy for %s:\n"
+		"Command Line Arguments for HTML Tidy for %s:"
 	},
 	{ TC_TXT_HELP_2B,               0,
-		"Command Line Arguments for HTML Tidy:\n"
+		"Command Line Arguments for HTML Tidy:"
 	},
 	{ TC_TXT_HELP_3,                0,
 		"\n"

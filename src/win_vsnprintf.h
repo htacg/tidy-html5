@@ -13,6 +13,7 @@
 
 #include <stdio.h>
 #include "tidyplatform.h"
+#include "forward.h"
 
 
 /* Provides a proper `vsnprintf` for Windows including correct return
@@ -24,15 +25,15 @@ int TY_(win_vsnprintf)(char *s, uint n, const char *fmt, va_list ap);
 /* Provides a proper `snprintf` for Windows including correct return
  * values and with support for positional arguments.
  */
-int TY_(win_snprintf)(char *s, uint n, const char *fmt, ...)
+int TY_(win_snprintf)(char *s, uint n, const char *fmt, ...);
 
 
 /* Provides a wrapper for `printf` using the improved `vsnprintf`. */
-int	TY(win_printf)(char *s, ...);
+int	TY_(win_printf)(const char *s, ...);
 
 
 /* Provides a wrapper for `fprintf` using the improved `vsnprintf`. */
-int	TY(win_fprintf)(FILE *f, char *s, ...);
+int	TY_(win_fprintf)(FILE *f, const char *s, ...);
 
 
 #endif /* defined(_WIN32) */

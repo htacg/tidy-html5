@@ -12,7 +12,7 @@
 
 #if defined(_WIN32)
 
-static char* TY(new_string)( const ctmbstr fmt, va_list args );
+static char* TY_(new_string)( const ctmbstr fmt, va_list args );
 
 
 /* Provides a proper `vsnprintf` for Windows including correct return
@@ -23,24 +23,18 @@ int TY_(win_vsnprintf)(char *s, uint n, const char *fmt, va_list ap)
 {
 	int ret;
 	va_list ap_copy;
-	
+
 	if (n == 0)
 		return _vscprintf(fmt, ap);
 		
-	/* we use n - 1 here because if the buffer is not big enough, the MS
-	 * runtime libraries don't add a terminating zero at the end. MSDN
-	 * recommends to provide _snprintf/_vsnprintf() a buffer size that
-	 * is one less than the actual buffer, and zero it before calling
-	 * _snprintf/_vsnprintf() to workaround this problem.
-	 * See http://msdn.microsoft.com/en-us/library/1kt27hek(v=vs.80).aspx */
-		memset(s, 0, n);
-		va_copy(ap_copy, ap);
-		ret = _vsprintf_p(s, n - 1, fmt, ap_copy);
-		va_end(ap_copy);
-		if (ret == -1)
-			ret = _vscprintf(fmt, ap);
+	memset(s, 0, n);
+	va_copy(ap_copy, ap);
+	ret = _vsprintf_p(s, n, fmt, ap_copy);
+	va_end(ap_copy);
+	if (ret == -1)
+		ret = _vscprintf(fmt, ap);
 			
-			return ret;
+		return ret;
 }
 
 
@@ -59,36 +53,36 @@ int TY_(win_snprintf)(char *s, uint n, const char *fmt, ...)
 
 
 /* Provides a wrapper for `printf` using the improved `vsnprintf`. */
-int	TY(win_printf)(char *s, ...)
+int	TY_(win_printf)(const char *s, ...)
 {
 	int result;
 	va_list args;
-	va_start(args, s)
+	va_start(args, s);
 	char *out_string = TY_(new_string)( s, args );
 	va_end(args);
 	
-	result = printf(out_string);
+	result = printf("%s", out_string);
 	
 	if (out_string)
-		free(out_string)
+		free(out_string);
 	
 		return result;
 }
 
 
 /* Provides a wrapper for `fprintf` using the improved `vsnprintf`. */
-int	TY(win_fprintf)(FILE *f, char *s, ...)
+int	TY_(win_fprintf)(FILE *f, const char *s, ...)
 {
 	int result;
 	va_list args;
-	va_start(args, s)
+	va_start(args, s);
 	char *out_string = TY_(new_string)( s, args );
 	va_end(args);
 	
-	result = fprintf(out_string);
+	result = fprintf(f, "%s", out_string);
 	
 	if (out_string)
-		free(out_string)
+		free(out_string);
 		
 		return result;
 }
@@ -96,20 +90,19 @@ int	TY(win_fprintf)(FILE *f, char *s, ...)
 
 /* Convenience to create a new string with a format and arguments.
  */
-static char* TY(new_string)( const ctmbstr fmt, va_list args )
+static char* TY_(new_string)( const ctmbstr fmt, va_list args )
 {
 	char *result = NULL;
 	int len = 0;
 	
-	len = TY_(win_vsnprintf)( result, 0, fmt, argList );
-	
+	len = TY_(win_vsnprintf)( result, 0, fmt, args );
 	if (!(result = malloc( len + 1) ))
 	{	/* @todo */
-		printf("MALLOC FAILED!");
+		fprintf(stderr, "MALLOC FAILED in win_vsnprintf.c creating a new string!");
 		exit(2);
 	}
 	
-	TY_(win_vsnprintf)( result, len + 1, fmt, argList);
+	TY_(win_vsnprintf)( result, len + 1, fmt, args );
 	
 	return result;
 }

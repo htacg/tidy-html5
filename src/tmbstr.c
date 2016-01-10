@@ -268,12 +268,10 @@ int TY_(tmbvsnprintf)(tmbstr buffer, size_t count, ctmbstr format, va_list args)
 {
     int retval;
 
-#if HAS_VSNPRINTF && !defined(_WIN32)
+#if HAS_VSNPRINTF
     retval = vsnprintf(buffer, count - 1, format, args);
     /* todo: conditionally null-terminate the string? */
     buffer[count - 1] = 0;
-#elif HAS_VSNPRINTF
-	return TY_(win_vsnprintf)(buffer, count, format, args);
 #else
     retval = vsprintf(buffer, format, args);
 #endif /* HAS_VSNPRINTF */

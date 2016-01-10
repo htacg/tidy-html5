@@ -31,6 +31,7 @@
  *  definition.
  */
 static uint whichPluralForm_en(uint n) {
+	/* Plural-Forms: nplurals=2; */
 	return n != 1;
 }
 
@@ -52,10 +53,10 @@ static languageDefinition language_en = { whichPluralForm_en, {
 	 ** Miscellaneous Strings
 	 ***************************************/
 	{/* Only translate if a URL to the target language can be found. */
-		ACCESS_URL,                   0,   "http://www.w3.org/WAI/GL"
+		ACCESS_URL,                 0,   "http://www.w3.org/WAI/GL"
 	},
 	{/* Only translate if a URL to the target language can be found. */
-		ATRC_ACCESS_URL,              0,   "http://www.html-tidy.org/accessibility/"
+		ATRC_ACCESS_URL,            0,   "http://www.html-tidy.org/accessibility/"
 	},
 	{ FILE_CANT_OPEN,               0,   "Can't open \"%1$s\"\n"                                                   },
 	{ LINE_COLUMN_STRING,           0,   "line %1$d column %2$d - "                                                },

@@ -58,6 +58,8 @@ module PoConvertModule
 
     attr_accessor :lang_name
     attr_accessor :items
+    attr_accessor :plural_count
+    attr_accessor :plural_form
 
 
     #########################################################
@@ -67,6 +69,8 @@ module PoConvertModule
       @source_file = nil # File path of the header file
       @lang_name = nil   # Name of the languageDictionary instance in C.
       @items = nil
+      @plural_count = 0
+      @plural_form = nil
 
       self.source_file = file if file
     end
@@ -80,7 +84,7 @@ module PoConvertModule
     end
 
     def source_file=( value )
-      @lang_name, @items = parse_header( value )
+      @plural_count, @plural_form, @lang_name, @items = parse_header( value )
       @source_file = value
     end
 
@@ -88,33 +92,60 @@ module PoConvertModule
     #########################################################
     # parse_header( file )
     #  Parses a given header file and returns the language
-    # name and a hash of strings:
-    #  :keyword => string
+    #  plural count, form, name, and a hash of strings:
+    #  :keyword => hash { :comment, :if_group, :case, :string }
     #########################################################
     def parse_header(file)
       content = File.open(file) { |f| f.read }
 
-      match = content.match(/^static languageDictionary (.*) =.*$/)
+      # Get the plural form data from the correct location in the header.
+      # These will be written to the header area of the PO/POT file.
+      match = content.match(%r!^static uint whichPluralForm.*?\{.*?/\* Plural-Forms: nplurals=(.*?);.*?\*/.*return (.*?;).*?\}!m)
+      unless match
+        @@log.error "#{__method__}: Could not determine the plural form. Something wrong with source file?"
+      end
+      plural_num = match[1]
+      plural_form = match[2]
+
+      # The language name is used for file names and setting PO information.
+      match = content.match(/^static languageDefinition (.*) =.*$/)
       unless match
         @@log.error "#{__method__}: Could not determine the language name. Something wrong with source file?"
         return nil
       end
       lang_name = match[1]
 
-      items = content.scan(%r!^\s*\{\s*(.*?),\s*(?:/\*.*?\*/)?\s*(.*?),?\s*\},?!m).to_h
+      # Build a catalogue of all items.
+      items = {}
+      content.scan(%r!^\s*\{(?:/\* (.*?) \*/)?\s*(.*?),\s*(.*?),\s*(.*?)\s*\},?!m) do | comment, key, num_case, string |
+        items[key] = {}
+        items[key][:comment] = comment
+        items[key][:case] = num_case
+        items[key][:string] = string
+      end
       if !items || items.empty?
         @@log.error "#{__method__}: Could not match language contents. Something wrong with source file?"
         return nil, nil
       end
 
-      stripped_items = {}
-      items.each do |key, value|
+      # Strip any space from the left side of multiline strings.
+      items.each_value do | value |
         tmp = ''
-        value.each_line { |line| tmp << line.lstrip }
-        stripped_items[key.to_sym] = tmp
+        value[:string].each_line { |line| tmp << line.lstrip }
+        value[:string] = tmp
       end
 
-      [lang_name, stripped_items]
+      # Post-process things that are in #if blocks. This second pass is still
+      # simpler than building a state machine to process the file line by line.
+      # We'll have to group this hash by :if_group when we write it out, and
+      # store it in a special developer comment in the PO file.
+      content.scan(%r!^#if (.*?)#endif!m) do | found_block |
+        found_block[0].scan(%r!^\s*\{(?:/\* .*? \*/)?\s*(.*?),\s*.*?,\s*.*?\s*\},?!m) do | item |
+          items[item[0]][:if_group] = found_block[0].lines[0].rstrip
+        end
+      end
+
+      [plural_num, plural_form, lang_name, items]
     end
 
   end # PoHeaderFile
@@ -521,9 +552,12 @@ static languageDictionary language_#{dest_lang} = {
       if args.count == 0
         puts <<-HEREDOC
 
-This script (#{File.basename($0)}) converts back and fort between GNU gettext
-.po files preferred by localizers and Tidy's language header .h files which
+This script (#{File.basename($0)}) converts back and forth between GNU gettext
+PO files preferred by localizers and Tidy's language header H files which
 ensure that Tidy stays small and cross-platform.
+
+All output files are placed into the current working directory using a file name
+appropriate to the operation being performed.
 
 Complete Help:
 --------------
@@ -532,6 +566,96 @@ Complete Help:
 
       super
     end # help
+
+
+    #########################################################
+    # xgettext
+    #  See long_desc
+    #########################################################
+    desc 'xgettext [input_file.h]', 'Creates a POT file for use with HTML Tidy.'
+    long_desc <<-LONG_DESC
+      Creates an empty POT from Tidy's native English header, or optionally from
+      a specified language using English as a backup source. POT files have no
+      translated strings; they are empty templates.
+
+      Use case: in the Tidy localization process there's probably no real reason
+      to use this unless you prefer to set the header manually compared to how
+      #{File.basename($0)} msginit does it.
+    LONG_DESC
+    def xgettext(input_file = nil)
+
+    end # xgettext
+
+
+    #########################################################
+    # msginit
+    #  See long_desc
+    #########################################################
+    option :locale,
+           :type => :string,
+           :desc => 'Specifies the locale in ll or ll_CC format for the generated PO file.',
+           :aliases => '-l'
+    desc 'msginit [input_file.h]', 'Creates a blank PO file for the current or specified locale.'
+    long_desc <<-LONG_DESC
+      Creates an empty PO file and tries to set locale-specific header
+      information. The untranslated strings are Tidy's native English strings
+      unless [input_file.h] is specified (English will still be used as a
+      backup). This tool will try to use the current locale to generate the PO
+      file unless the --locale option specifies a different locale.
+
+      Use case: use this to generate a PO file for a language that Tidy has not
+      yet been translated to.
+    LONG_DESC
+    def msginit(input_file = nil)
+
+    end # msginit
+
+
+    #########################################################
+    # msgunfmt
+    #  See long_desc
+    #########################################################
+    option :baselang,
+           :type => :string,
+           :desc => 'Specifies a base language <file.h> from which to include untranslated strings.',
+           :aliases => '-b'
+    desc 'msgunfmt <input_file.h>', 'Converts an existing Tidy header H file to PO format.'
+    long_desc <<-LONG_DESC
+      Converts an existing Tidy header H file to a PO file using the locale
+      specified in the H file. Specifying <input_file.h> is required. The
+      resulting file will consist of English original strings, the translated
+      strings from the header, and blank translated strings if not specified in
+      the header.
+
+      You can use the --baselang option to gather the untranslated strings from
+      a different header file. This may be useful for translators that want to
+      implement a region-specific localization, for example, translating `es`
+      to `es_mx`.
+
+      Use case: create a PO file from an existing Tidy header H file using a
+      combination of languages that are suitable to you.
+    LONG_DESC
+    def msgunfmt(input_file = nil)
+
+    end # msgunfmt
+
+
+    #########################################################
+    # msgfmt
+    #  See long_desc
+    #########################################################
+    desc 'msgfmt <input_file.po>', 'Creates a Tidy header H file from the given PO file.'
+    long_desc <<-LONG_DESC
+      Creates a Tidy header H file from the specified <input_file.po> PO file,
+      which is a required argument.
+
+      Use case: Tidy can only build H files, and so this command will convert
+      PO files to something useful.
+    LONG_DESC
+
+    def msgfmt(input_file = nil)
+
+    end # msgfmt
 
 
     #########################################################

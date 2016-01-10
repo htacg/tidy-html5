@@ -1,3 +1,0 @@
-case-431889: This test fails on all platforms using Tidy 5.1.26 or older because
-we updated a string. This is a passing test on all platforms using 5.1.27 or
-newer because the case file has already been updated.

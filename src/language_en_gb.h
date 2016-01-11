@@ -10,6 +10,10 @@
  * Created by Jim Derry on 11/28/15.
  */
 
+#ifdef _MSC_VER
+#pragma execution_character_set("utf-8")
+#endif
+
 #include "language.h"
 #include "access.h"
 #include "message.h"
@@ -21,6 +25,7 @@
  *  definition.
  */
 static uint whichPluralForm_en_gb(uint n) {
+	/* Plural-Forms: nplurals=2; */
 	return n != 1;
 }
 

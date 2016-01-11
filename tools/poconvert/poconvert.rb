@@ -545,22 +545,58 @@ msgstr ""
           report << "#, c-format\n"
         end
         report << "msgctxt \"#{key.to_s}\"\n"
+
+        # Handle the untranslated strings, with the possibility that there
+        # are two forms. PO/POT is English-based and supports only a singular
+        # and plural form.
         if value[:string].lines.count > 1
           report << "msgid \"\"\n"
           report << "#{value[:string]}\n"
         else
           report << "msgid #{value[:string]}\n"
         end
-
-        if lang_source && lang_source.items[key]
-          if lang_source.items[key].lines.count > 1
-            report << "msgstr \"\"\n"
-            report << "#{lang_source.items[key][:string]}"
-          else
-            report << "msgstr #{lang_source.items[key][:string]}\n"
-          end
+        if value[:plurals].empty?
+          plural_source = 0
         else
-          report << "msgstr \"\"\n"
+          plural_source = value[:plurals].count
+          if value[:plurals]['1'][:string].lines.count > 1
+            report << "msgid_plural \"\"\n"
+            report << "#{value[:plurals]['1'][:string]}\n"
+          else
+            report << "msgid_plural #{value[:plurals]['1'][:string]}\n"
+          end
+        end
+
+        # Handle translated strings, with the possibility that there
+        # are multiple plural forms for them.
+        if lang_source && lang_source.items[key]
+          # Outputting translated strings.
+          if plural_source == 0
+            if lang_source.items[key].lines.count > 1
+              report << "msgstr \"\"\n"
+              report << "#{lang_source.items[key][:string]}"
+            else
+              report << "msgstr #{lang_source.items[key][:string]}\n"
+            end
+          else
+            if lang_source.items[key].lines.count > 1
+              report << "msgstr[0] \"\"\n"
+              report << "#{lang_source.items[key][:string]}"
+            else
+              report << "msgstr[0] #{lang_source.items[key][:string]}\n"
+            end
+            
+          end
+
+        else
+          # Not outputting translated strings.
+          if plural_source == 0
+            report << "msgstr \"\"\n"
+          else
+            for i in 0..plural_source
+              report << "msgstr[#{i}] \"\"\n"
+              end
+          end
         end
         report << "\n"
       end

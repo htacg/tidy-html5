@@ -56,9 +56,10 @@ int TY_(win_snprintf)(char *s, uint n, const char *fmt, ...)
 int	TY_(win_printf)(const char *s, ...)
 {
 	int result;
+    char *out_string;
 	va_list args;
 	va_start(args, s);
-	char *out_string = TY_(new_string)( s, args );
+	out_string = TY_(new_string)( s, args );
 	va_end(args);
 	
 	result = printf("%s", out_string);
@@ -74,9 +75,10 @@ int	TY_(win_printf)(const char *s, ...)
 int	TY_(win_fprintf)(FILE *f, const char *s, ...)
 {
 	int result;
+    char *out_string;
 	va_list args;
 	va_start(args, s);
-	char *out_string = TY_(new_string)( s, args );
+	out_string = TY_(new_string)( s, args );
 	va_end(args);
 	
 	result = fprintf(f, "%s", out_string);

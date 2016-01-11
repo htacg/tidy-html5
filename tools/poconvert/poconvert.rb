@@ -12,6 +12,7 @@ require 'date'           # Make sure DateTime works.
 require 'fileutils'      # compare_file, etc.
 require 'erb'            # Needed for templating.
 require 'thor'           # thor provides robust command line parameter parsing.
+require 'i18n'           # Cross-platform access to `locale`.
 
 
 ################################################################################
@@ -93,39 +94,54 @@ module PoConvertModule
     # parse_header( file )
     #  Parses a given header file and returns the language
     #  plural count, form, name, and a hash of strings:
-    #  :keyword => hash { :comment, :if_group, :case, :string }
+    #  :keyword => hash { :comment, :if_group, :case, :string, :plurals[:case] }
+    #  We don't want to set instance variables directly.
     #########################################################
     def parse_header(file)
+      plural_num = 0
+      plural_form = nil
+      lang_name = nil
+      items = {}
+
       content = File.open(file) { |f| f.read }
 
       # Get the plural form data from the correct location in the header.
       # These will be written to the header area of the PO/POT file.
       match = content.match(%r!^static uint whichPluralForm.*?\{.*?/\* Plural-Forms: nplurals=(.*?);.*?\*/.*return (.*?;).*?\}!m)
-      unless match
+      if match
+        plural_num = match[1]
+        plural_form = match[2]
+      else
         @@log.error "#{__method__}: Could not determine the plural form. Something wrong with source file?"
       end
-      plural_num = match[1]
-      plural_form = match[2]
 
       # The language name is used for file names and setting PO information.
       match = content.match(/^static languageDefinition (.*) =.*$/)
-      unless match
+      if match
+        lang_name = match[1]
+      else
         @@log.error "#{__method__}: Could not determine the language name. Something wrong with source file?"
-        return nil
       end
-      lang_name = match[1]
 
       # Build a catalogue of all items.
-      items = {}
       content.scan(%r!^\s*\{(?:/\* (.*?) \*/)?\s*(.*?),\s*(.*?),\s*(.*?)\s*\},?!m) do | comment, key, num_case, string |
-        items[key] = {}
-        items[key][:comment] = comment
-        items[key][:case] = num_case
-        items[key][:string] = string
+        lkey = key.to_sym
+        if items.has_key?(lkey)
+          items[lkey][:plurals][num_case] = {}
+          items[lkey][:plurals][num_case][:comment] = comment
+          items[lkey][:plurals][num_case][:case] = num_case
+          items[lkey][:plurals][num_case][:string] = string
+        else
+          items[lkey] = {}
+          items[lkey][:comment] = comment
+          items[lkey][:case] = num_case
+          items[lkey][:string] = string
+          items[lkey][:plurals] = {}
+        end
       end
       if !items || items.empty?
         @@log.error "#{__method__}: Could not match language contents. Something wrong with source file?"
-        return nil, nil
+        items = {}
       end
 
       # Strip any space from the left side of multiline strings.
@@ -141,14 +157,14 @@ module PoConvertModule
       # store it in a special developer comment in the PO file.
       content.scan(%r!^#if (.*?)#endif!m) do | found_block |
         found_block[0].scan(%r!^\s*\{(?:/\* .*? \*/)?\s*(.*?),\s*.*?,\s*.*?\s*\},?!m) do | item |
-          items[item[0]][:if_group] = found_block[0].lines[0].rstrip
+          items[item[0].to_sym][:if_group] = found_block[0].lines[0].rstrip
         end
       end
 
       [plural_num, plural_form, lang_name, items]
     end
 
-  end # PoHeaderFile
+  end # class PoHeaderFile
 
 
   #############################################################################
@@ -164,27 +180,30 @@ module PoConvertModule
     # initialize
     #########################################################
     def initialize
-      @source_file = nil      # File path of the source file
-      @base_file = nil        # File path of the base language header file.
+      @source_file_h = nil      # File path of the source file (h)
+      @source_file_po = nil     # File path of the source file (po)
+      @base_file = nil          # File path of the base language header file.
+      @po_locale = nil          # The locale to use to generate PO files.
+      @known_locales = {}       # The locales we know about.
     end
 
 
     #########################################################
-    # property source_file
+    # property source_file_h
     #  Property will be nil if invalid.
     #########################################################
-    def source_file
-      @source_file
+    def source_file_h
+      @source_file_h
     end
 
-    def source_file=( value )
-      @source_file = nil
+    def source_file_h=( value )
+      @source_file_h = nil
       unless value
         @@log.error "#{__method__}: A source file must be specified."
         return
       end
-      unless value && %w[.po .h].include?(File.extname(value))
-        @@log.error "#{__method__}: Source file must be a *.po or *.h file."
+      unless value && %w[.h].include?(File.extname(value))
+        @@log.error "#{__method__}: Source file must be a *.h file."
         return
       end
       unless value && File.exists?(value)
@@ -192,7 +211,34 @@ module PoConvertModule
         return
       end
       @@log.info "#{__method__}: Source file #{value} will be used."
-      @source_file = value
+      @source_file_h = value
+    end
+
+
+    #########################################################
+    # property source_file_po
+    #  Property will be nil if invalid.
+    #########################################################
+    def source_file_po
+      @source_file_po
+    end
+
+    def source_file_po=( value )
+      @source_file_po = nil
+      unless value
+        @@log.error "#{__method__}: A source file must be specified."
+        return
+      end
+      unless value && %w[.po].include?(File.extname(value))
+        @@log.error "#{__method__}: Source file must be a *.po file."
+        return
+      end
+      unless value && File.exists?(value)
+        @@log.error "#{__method__}: Source file #{value} not found."
+        return
+      end
+      @@log.info "#{__method__}: Source file #{value} will be used."
+      @source_file_po = value
     end
 
 
@@ -224,6 +270,95 @@ module PoConvertModule
       end
       @@log.info "#{__method__}: Base language file #{value} will be used."
       @base_file = value
+    end
+
+
+    #########################################################
+    # property po_locale
+    #  The locale to use when generating msginit PO files.
+    #  Returns nil if the set locale is invalid.
+    #########################################################
+    def po_locale
+      @po_locale
+    end
+
+    def po_locale=(value)
+      proposed_locale = value
+      # Is the locale something we recognize?
+        unless known_locales.has_key?(proposed_locale)
+          if known_locales.has_key?(proposed_locale[0..2])
+            proposed_locale = proposed_locale[0..2]
+          else
+            proposed_locale = '' # not nil! We still use this flag!
+          end
+        end
+
+      if proposed_locale
+        @@log.info "#{__method__}: Will use #{proposed_locale} as locale."
+      else
+        @@log.error "#{__method__}: Cannot set locale #{proposed_locale}."
+        @@log.error "#{__method__}: We will still generate a PO file but be sure to edit the header manually."
+      end
+
+      @po_locale = proposed_locale
+    end
+
+
+    #########################################################
+    # property known_locales
+    #  A hash of known locales.
+    #########################################################
+    def known_locales
+      if @known_locales.empty?
+        [
+            [ 'ja', 'Japanese',          'nplurals=1; plural=0;' ],
+            [ 'vi', 'Vietnamese',        'nplurals=1; plural=0;' ],
+            [ 'ko', 'Korean',            'nplurals=1; plural=0;' ],
+            [ 'en', 'English',           'nplurals=2; plural=(n != 1);' ],
+            [ 'de', 'German',            'nplurals=2; plural=(n != 1);' ],
+            [ 'nl', 'Dutch',             'nplurals=2; plural=(n != 1);' ],
+            [ 'sv', 'Swedish',           'nplurals=2; plural=(n != 1);' ],
+            [ 'da', 'Danish',            'nplurals=2; plural=(n != 1);' ],
+            [ 'no', 'Norwegian',         'nplurals=2; plural=(n != 1);' ],
+            [ 'nb', 'Norwegian Bokmal',  'nplurals=2; plural=(n != 1);' ],
+            [ 'nn', 'Norwegian Nynorsk', 'nplurals=2; plural=(n != 1);' ],
+            [ 'fo', 'Faroese',           'nplurals=2; plural=(n != 1);' ],
+            [ 'es', 'Spanish',           'nplurals=2; plural=(n != 1);' ],
+            [ 'pt', 'Portuguese',        'nplurals=2; plural=(n != 1);' ],
+            [ 'it', 'Italian',           'nplurals=2; plural=(n != 1);' ],
+            [ 'bg', 'Bulgarian',         'nplurals=2; plural=(n != 1);' ],
+            [ 'el', 'Greek',             'nplurals=2; plural=(n != 1);' ],
+            [ 'fi', 'Finnish',           'nplurals=2; plural=(n != 1);' ],
+            [ 'et', 'Estonian',          'nplurals=2; plural=(n != 1);' ],
+            [ 'he', 'Hebrew',            'nplurals=2; plural=(n != 1);' ],
+            [ 'eo', 'Esperanto',         'nplurals=2; plural=(n != 1);' ],
+            [ 'hu', 'Hungarian',         'nplurals=2; plural=(n != 1);' ],
+            [ 'tr', 'Turkish',           'nplurals=2; plural=(n != 1);' ],
+            [ 'pt_BR', 'Brazilian',      'nplurals=2; plural=(n > 1);' ],
+            [ 'fr', 'French',            'nplurals=2; plural=(n > 1);' ],
+            [ 'lv', 'Latvian',           'nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);' ],
+            [ 'ga', 'Irish',             'nplurals=3; plural=n==1 ? 0 : n==2 ? 1 : 2;' ],
+            [ 'ro', 'Romanian',          'nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;' ],
+            [ 'lt', 'Lithuanian',        'nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);' ],
+            [ 'ru', 'Russian',           'nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);' ],
+            [ 'uk', 'Ukrainian',         'nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);' ],
+            [ 'be', 'Belarusian',        'nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);' ],
+            [ 'sr', 'Serbian',           'nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);' ],
+            [ 'hr', 'Croatian',          'nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);' ],
+            [ 'cs', 'Czech',             'nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;' ],
+            [ 'sk', 'Slovak',            'nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;' ],
+            [ 'pl', 'Polish',            'nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);' ],
+            [ 'sl', 'Slovenian',         'nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);' ]
+        ].each do | array_item |
+          key = array_item[0].to_sym
+          lang = array_item[1]
+          plural_form = array_item[2]
+          @known_locales[key] = {}
+          @known_locales[key][:lang] = lang
+          @known_locales[key][:plural_form] = plural_form
+        end
+      end
+      @known_locales
     end
 
 
@@ -342,68 +477,101 @@ module PoConvertModule
 
     #########################################################
     # convert_to_po
-    #  Perform the conversion.
+    #  Perform the conversion for xgettext, msginit, and
+    #  msgunfmt.
     #########################################################
     def convert_to_po
-      return false unless source_file && english_header?
+      # What we actually do depends on what was setup for us.
+      # If source_file_h is nil and po_locale is nil, we are xgettext.
+      # If source_file_h is nil and we have po_locale, we are msginit.
+      # If we have a source_file_h, then we are msgunfmt.
+      action = :msgunfmt
+      action = :msginit if source_file_h.nil? && po_locale
+      action = :xgettext if source_file_h.nil? && po_locale.nil?
 
-      language_base = nil
-      language_english = PoHeaderFile.new(@@default_en)
-      language_target = PoHeaderFile.new(source_file)
-      target_items = language_english.items.clone
+      # Untranslated Items form the basis of all output. For convenience
+      # we can use some non-English strings as an "untranslated" string,
+      # e.g., to help translate regional formats.
+      lang_en = PoHeaderFile.new(@@default_en)
+      lang_base = base_file ? PoHeaderFile.new(base_file) : nil
+      untranslated_items = lang_en.items.clone
+      untranslated_items.merge!(lang_base.items) if lang_base
 
-      if base_file
-        language_base = PoHeaderFile.new(base_file)
-        target_items.merge!(language_base.items)
+      # We will use lang_source if we have a source_file_h, i.e., msgunfmt,
+      # as the source for translated strings.
+      lang_source = source_file_h.nil? ? nil : PoHeaderFile.new(source_file_h)
+
+      # The information in the PO header can come from a few different sources
+      # depending on what we're doing.
+      header_plural_forms = nil
+      header_pot_line = nil
+      translate_to = nil
+      if action == :xgettext
+        header_plural_forms = "Plural-Forms: nplurals=#{lang_en.plural_count}; plural=#{lang_en.plural_form}"
+        header_pot_line = "POT-Creation-Date: #{DateTime.now.strftime('%Y-%m-%d %H:%M:%S')}"
+        translate_to = lang_en.items[:TIDY_LANGUAGE][:string].tr('"', '')
+      end
+      if action == :msginit
+        header_plural_forms = "Plural-Forms: #{known_locales[po_locale][:plural_form]}"
+        header_pot_line = "PO-Revision-Date: #{DateTime.now.strftime('%Y-%m-%d %H:%M:%S')}"
+        translate_to = po_locale
+      end
+      if action == :msgunfmt
+        header_plural_forms = "Plural-Forms: nplurals=#{lang_source.plural_count}; plural=#{lang_source.plural_form}"
+        header_pot_line = "PO-Revision-Date: #{DateTime.now.strftime('%Y-%m-%d %H:%M:%S')}"
+        translate_to = lang_source.items[:TIDY_LANGUAGE][:string].tr('"', '')
       end
 
-      translate_from = (language_base ? language_base.items[:TIDY_LANGUAGE] : language_english.items[:TIDY_LANGUAGE]).tr('"', '')
-      translate_to = language_target.items[:TIDY_LANGUAGE].tr('"', '')
       report = <<-HEREDOC
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\\n"
 "Language: #{translate_to}\\n"
-"X-Generator: HTML Tidy poconvert.rb\\n"
+"#{header_plural_forms}\\n"
+"X-Generator: HTML Tidy #{File.basename($0)}\\n"
 "Project-Id-Version: \\n"
-"POT-Creation-Date: \\n"
-"PO-Revision-Date: #{DateTime.now.strftime('%Y-%m-%d %H:%M:%S')}\\n"
+"#{header_pot_line}\\n"
 "Last-Translator: #{ENV['USER']}#{ENV['USERNAME']}\\n"
 "Language-Team: \\n"
 
       HEREDOC
 
-      target_items.delete(:TIDY_MESSAGE_TYPE_LAST)
-      target_items.each do |key, value|
+      untranslated_items.delete(:TIDY_MESSAGE_TYPE_LAST)
+      untranslated_items.each do |key, value|
+
         report << "#\n"
-        report << "#. Translate from #{translate_from} to #{translate_to}.\n"
-        report << "#: #{source_file}:#{key.to_s}\n"
-        report << "msgctxt \"#{key.to_s}\"\n"
-        if value.lines.count > 1
-          report << "msgid \"\"\n"
-          report << "#{value}\n"
-        else
-          report << "msgid #{value}\n"
+        report << "#. #{value[:comment]}\n"
+        if ['$u', '$s', '$d'].any? { | find | value[:string].include?(find) }
+          report << "#, c-format\n"
         end
-        if language_target.items[key]
-          if language_target.items[key].lines.count > 1
+        report << "msgctxt \"#{key.to_s}\"\n"
+        if value[:string].lines.count > 1
+          report << "msgid \"\"\n"
+          report << "#{value[:string]}\n"
+        else
+          report << "msgid #{value[:string]}\n"
+        end
+
+        if lang_source && lang_source.items[key]
+          if lang_source.items[key].lines.count > 1
             report << "msgstr \"\"\n"
-            report << "#{language_target.items[key]}"
+            report << "#{lang_source.items[key][:string]}"
           else
-            report << "msgstr #{language_target.items[key]}\n"
+            report << "msgstr #{lang_source.items[key][:string]}\n"
           end
         else
           report << "msgstr \"\"\n"
         end
         report << "\n"
       end
-      output_file = "language_#{translate_to}.po"
+
+      output_file = action == :xgettext ? 'tidy.pot' : "language_#{translate_to}.po"
       if File.exists?(output_file)
         File.rename(output_file, safe_backup_name(output_file))
       end
       File.open(output_file, 'w') { |f| f.write(report) }
       @@log.info "#{__method__}: Results written to #{output_file}"
-      puts "Wrote a new PO file to #{File.expand_path(output_file)}"
+      puts "Wrote a new file to #{File.expand_path(output_file)}"
     end # convert_to_po
 
 
@@ -583,7 +751,11 @@ Complete Help:
       #{File.basename($0)} msginit does it.
     LONG_DESC
     def xgettext(input_file = nil)
-
+      converter = PoConverter.new
+      set_options
+      converter.base_file = input_file if input_file
+      exit 1 unless converter.english_header?
+      converter.convert_to_po
     end # xgettext
 
 
@@ -607,6 +779,13 @@ Complete Help:
       yet been translated to.
     LONG_DESC
     def msginit(input_file = nil)
+      converter = PoConverter.new
+      set_options
+      converter.base_file = input_file if input_file
+      converter.po_locale = options[:locale] ? options[:locale] : I18n.locale
+      exit 1 unless po_locale && converter.english_header?
+
+
 
     end # msginit
 
@@ -636,6 +815,12 @@ Complete Help:
       combination of languages that are suitable to you.
     LONG_DESC
     def msgunfmt(input_file = nil)
+      converter = PoConverter.new
+      set_options
+      converter.source_file_h = input_file
+      exit 1 unless converter.source_file_h
+      converter.base_file = options[:baselang] if options[:baselang]
+      exit 1 unless converter.english_header?
 
     end # msgunfmt
 
@@ -652,83 +837,13 @@ Complete Help:
       Use case: Tidy can only build H files, and so this command will convert
       PO files to something useful.
     LONG_DESC
-
     def msgfmt(input_file = nil)
+      converter = PoConverter.new
+      set_options
+      converter.source_file_po = input_file
+      exit 1 unless converter.source_file_po
 
     end # msgfmt
-
-
-    #########################################################
-    # h2po
-    #  Converts a Tidy language header to gettext po format.
-    #########################################################
-    option :baselang,
-           :type => :string,
-           :desc => 'Specifies a base language <file.h> from which to translate.',
-           :aliases => '-b'
-    desc 'h2po <file.h> [options]', 'Converts an *.h file to a *.po file.'
-    long_desc <<-LONG_DESC
-      Will convert a Tidy language header file into a gettext PO file, using
-      Tidy's built-in English as the base language to translate from. Optionally
-      specify a base language header file using --base-language.
-
-      The PO file will be placed into the current working directory.
-    LONG_DESC
-    def h2po(name = nil)
-
-      converter = PoConverter.new
-      set_options
-      converter.source_file = name
-      converter.base_file = options[:baselang] if options[:baselang]
-      converter.convert_to_po
-
-    end # h2po
-
-
-    #########################################################
-    # po2h
-    #  Converts a gettext po file to Tidy language header.
-    #########################################################
-    option :baselang,
-           :type => :string,
-           :desc => 'Specifies a base language <file.h> that the translation is based upon.',
-           :aliases => '-b'
-    desc 'po2h <file.po> [options]', 'Converts a *.po file to an *.h file.'
-    long_desc <<-LONG_DESC
-      Will convert a gettext PO file into a Tidy language header file, optionally
-      specifying a base language header file using --base-language. Certain strings
-      will be discarded before writing them to the header. If the translated
-      string matches Tidy's built-in English, the base language, or is empty
-      they will not be written in order to reduce Tidy's executable size.
-
-      The header file will be placed into the current working directory.
-    LONG_DESC
-    def po2h(name = nil)
-
-      converter = PoConverter.new
-      set_options
-      converter.source_file = name
-      converter.base_file = options[:baselang] if options[:baselang]
-      converter.convert_to_h
-
-    end # po2h
-
-
-    #########################################################
-    # newpo
-    #  Creates a new po based on a specified base-language.
-    #########################################################
-    desc 'newpo <lang_code> <base_language.h>', 'Creates a new PO file using <base_language.h>.'
-    long_desc <<-LONG_DESC
-      Will create a new gettext PO file based on <base_language.h>, for language
-      code <lang_code>.
-
-      The new PO file will be placed into the current working directory.
-    LONG_DESC
-    def newpo(lang_code = nil, base_file = nil)
-
-
-    end # newpo
 
 
     #########################################################

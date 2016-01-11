@@ -798,7 +798,7 @@ static void printXMLDescription( TidyDoc tdoc, TidyOption topt )
 	else
 	{
 		printf("  <description />\n");
-		fprintf(stderr, "Warning: option `%s' is not documented.\n",
+		fprintf(stderr, tidyLocalizedString(TC_STRING_OPT_NOT_DOCUMENTED),
 				tidyOptGetName( topt ));
 	}
 }
@@ -1304,14 +1304,15 @@ static void printOptionValues( TidyDoc ARG_UNUSED(tdoc), TidyOption topt,
  */
 static void optionvalues( TidyDoc tdoc )
 {
-	printf( "\nConfiguration File Settings:\n\n" );
-	printf( fmt, "Name", "Type", "Current Value" );
+	printf( "%s", tidyLocalizedString(TC_STRING_CONF_HEADER) );
+	printf( fmt, tidyLocalizedString(TC_STRING_CONF_NAME),
+		   tidyLocalizedString(TC_STRING_CONF_TYPE),
+		   tidyLocalizedString(TC_STRING_CONF_VALUE) );
 	printf( fmt, ul, ul, ul );
 	
 	ForEachSortedOption( tdoc, printOptionValues );
 	
-	printf( "\n\nValues marked with an *asterisk are calculated \n"
-		   "internally by HTML Tidy\n\n" );
+	printf( "%s", tidyLocalizedString(TC_STRING_CONF_NOTE) );
 }
 
 /**

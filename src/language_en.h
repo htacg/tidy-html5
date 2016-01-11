@@ -20,6 +20,10 @@
  * Created by Jim Derry on 11/28/15.
  */
 
+#ifdef _MSC_VER
+#pragma execution_character_set("utf-8")
+#endif
+
 #include "language.h"
 #include "access.h"
 #include "message.h"
@@ -1293,6 +1297,19 @@ static languageDefinition language_en = { whichPluralForm_en, {
 	{ TC_OPT_XMLSTRG,               0,   "output all of tidy's strings in XML format"                              },
 	{ TC_OPT_XMLOPTS,               0,   "output all option descriptions cleaned XML format"                       },
 	
+	{ TC_STRING_CONF_HEADER,        0,   "\nConfiguration File Settings:\n\n"                                      },
+	{/* Must be 27 characters or fewer. */
+		TC_STRING_CONF_NAME,          0,   "Name"                                                                  },
+	{/* Must be 9 characters or fewer. */
+		TC_STRING_CONF_TYPE,          0,   "Type"                                                                  },
+	{/* Must be 40 characters or fewer. */
+		TC_STRING_CONF_VALUE,         0,   "Current Value"                                                         },
+	{ TC_STRING_CONF_NOTE,          0,
+		"\n\nValues marked with an *asterisk are calculated \n"
+		"internally by HTML Tidy\n\n"
+	},
+
+	{ TC_STRING_OPT_NOT_DOCUMENTED, 0,   "Warning: option `%1$s' is not documented.\n"                             },
 	{ TC_STRING_OUT_OF_MEMORY,      0,   "Out of memory. Bailing out."                                             },
 	{ TC_STRING_FATAL_ERROR,        0,   "Fatal error: impossible value for id='%1$d'.\n"                          },
 	{ TC_STRING_FILE_MANIP,         0,   "File manipulation"                                                       },

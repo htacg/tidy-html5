@@ -145,7 +145,9 @@ module PoConvertModule
       # store it in a special developer comment in the PO file.
       content.scan(%r!^#if (.*?)#endif!m) do | found_block |
         found_block[0].scan(%r!^\s*\{(?:/\* .*? \*/)?\s*(.*?),\s*.*?,\s*.*?\s*\},?!m) do | item |
-          items[item[0].to_sym][:if_group] = found_block[0].lines[0].rstrip
+          items[item[0].to_sym].each_value do  | plural |
+            plural[:if_group] = found_block[0].lines[0].rstrip
+          end
         end
       end
 
@@ -511,7 +513,7 @@ module PoConvertModule
       end
 
       # We'll use this closure to perform a repetitive task in the report.
-      item_output = proc do | label, string |
+      item_output = lambda do | label, string |
         result = ''
         if string.lines.count > 1
           result << "#{label} \"\"\n"
@@ -541,7 +543,12 @@ msgstr ""
       untranslated_items.each do |key, value|
 
         report << "#\n"
-        report << "#. #{value['0'][:comment]}\n"
+        if value['0'][:comment]
+          report << "#. #{value['0'][:comment]}\n"
+        end
+        if value['0'][:if_group]
+          report << "#. ###{value['0'][:if_group]}## (Translator ignore)\n"
+        end
         if %w($u $s $d).any? { | find | value['0'][:string].include?(find) }
           report << "#, c-format\n"
         end
@@ -551,7 +558,6 @@ msgstr ""
         # are two forms. PO/POT is English-based and supports only a singular
         # and plural form.
         value.each_value do | subitem |
-          puts subitem[:string]
           label = subitem[:case] == '0' ? 'msgid' : 'msgid_plural'
           report << item_output.(label, subitem[:string])
         end

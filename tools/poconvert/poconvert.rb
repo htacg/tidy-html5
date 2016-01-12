@@ -50,8 +50,169 @@ module PoConvertModule
 
 
   #############################################################################
+  # class PoPoFile
+  #  This class contains information about a parsed PO file.
+  #############################################################################
+  class PoPoFile
+
+    include PoConvertModule
+
+    attr_accessor :language
+    attr_accessor :plural_forms
+    attr_accessor :plural_formula
+    attr_accessor :po_revision_date
+    attr_accessor :last_translator
+    attr_accessor :items
+
+
+    #########################################################
+    # initialize
+    #########################################################
+    def initialize( file = nil )
+      @source_file = nil       # File path of the header file
+      @language = nil          # From the header
+      @plural_forms = nil      # From the header
+      @plural_formula = nil    # From the header
+      @po_revision_date = nil  # String, from the header
+      @last_translator = nil   # From the header
+      @items = {}
+
+      self.source_file = file if file
+    end
+
+
+    #########################################################
+    # property source_file
+    #########################################################
+    def source_file
+      @source_file
+    end
+
+    def source_file=( value )
+      parse_po( value )
+      @source_file = value
+    end
+
+
+    #########################################################
+    # parse_po( file )
+    #  Parses a given PO file.
+    #########################################################
+    def parse_po(file)
+      content = File.open(file) { |f| f.read }
+
+      # Get the stuff we want to keep from the PO header.
+      tmp = content.match(/"Language: (.*?)\\n"/i)
+      self.language = tmp[1] if tmp
+
+      tmp = content.match(/"(Plural-Forms: .*?;)\s*?plural=\s*?(.*?)\\n"/i)
+      self.plural_forms = tmp[1] if tmp
+      self.plural_formula = tmp[2] if tmp
+
+      tmp = content.match(/"PO-Revision-Date: (.*?)\\n"/i)
+      self.po_revision_date = tmp[1] if tmp
+
+      tmp = content.match(/"Last-Translator: (.*?)\\n"/i)
+      self.last_translator = tmp[1] if tmp
+
+      # Build a catalogue of all items. Note that whitespace around blocks
+      # is required in the PO files.
+      content.scan(%r!((?:^#|^msgctxt).*?)(?:\z|^\n)!im) do | section |
+        parse_po_section(section[0])
+      end
+    end # parse_po
+
+
+    #########################################################
+    # parse_po_section( content )
+    #  Parses a single PO section.
+    #########################################################
+    def parse_po_section( content )
+
+      # Maybe this is a bit of overkill, but it's easy to extend
+      # if we want to capture more PO stuff in the future.
+      map = [
+          [ :START,    :COMMENT,   :SET_COMMENT,  :START    ],
+          [ :START,    :IFGROUP,   :SET_GROUP,    :START    ],
+          [ :START,    :NEW_ITEM,  :SET_INIT,     :CONTINUE ],
+          [ :START,    :OTHER,     :NOOP,         :START    ],
+          [ :START,    :EMPTY,     :ERROR,        nil       ],
+          [ :CONTINUE, :COMMENT,   :ERROR,        nil       ],
+          [ :CONTINUE, :IFGROUP,   :ERROR,        nil       ],
+          [ :CONTINUE, :NEW_ITEM,  :SET_FINAL,    :START    ],
+          [ :CONTINUE, :EMPTY,     :SET_FINAL,    :START    ],
+          [ :CONTINUE, :OTHER,     :ADD_TO,       :CONTINUE ],
+      ].collect { |item| [:STATE, :CONDITION, :ACTION, :NEXT].zip(item).to_h }
+
+      current_label = nil
+      current_comment = nil
+      current_if_group = nil
+      current_cases = {}     # 'case' => string
+      state = :START
+      buffer = ''
+      item = ''
+
+      content << "\n" # ensure that we have a final transition.
+      content.each_line do |line|
+
+        # Determine the input condition
+        input = :OTHER
+        input = :EMPTY if line == "\n"
+        input = :COMMENT if line.start_with?('#.')
+        input = :IFGROUP if line[/^#\..*##.*##/]
+        input = :NEW_ITEM if line.start_with?('msgctxt', 'msgid', 'msgstr')
+
+        # Find our current state-input pair
+        map.each do | transition |
+
+          if transition[:STATE] == state && transition[:CONDITION] == input
+            case transition[:ACTION]
+              when :SET_INIT
+                regex = line[/".*"/]
+                buffer = regex unless regex == '""'
+                item = line[/^(.*?)\s/, 1]
+              when :ADD_TO
+                buffer << "\n#{line[/".*"/]}"
+              when :SET_FINAL
+                if item == 'msgctxt'
+                  current_label = buffer.tr('"', '')
+                elsif item == 'msgstr'
+                  current_cases['0'] = buffer
+                elsif item.start_with?('msgstr')
+                  subscript = item.match(/msgstr\[(.*)\]/)[1]
+                  current_cases[subscript] = buffer
+                end
+                buffer = ''
+                regex = line[/".*"/]
+                buffer = regex unless regex == '""'
+                item = line[/^(.*?)\s/, 1]
+              when :SET_COMMENT
+                current_comment = line.match(/#\.\s*(.*?)$/)[1]
+              when :SET_GROUP
+                current_if_group = line.match(/## (.*)\s##/)[1]
+              when :ERROR
+                @@log.error "#{__method__}: Could NOT parse part of the PO file. Aborting!\n"
+                @@log.error "#{__method__}: Last known label was \"#{current_label}\".\n"
+                exit 1
+              else
+                # consume, other
+            end
+            state = transition[:NEXT]
+            break
+          end # if
+        end # do
+
+      end # content.each
+      puts "break here"
+    end # parse_po_section
+
+
+  end # class PoPoFile
+
+
+  #############################################################################
   # class PoHeaderFile
-  #  This class contains information about a header file.
+  #  This class contains information about a parsed header file.
   #############################################################################
   class PoHeaderFile
 
@@ -385,70 +546,6 @@ module PoConvertModule
 
 
     #########################################################
-    # parse_po( file )
-    #  Parses a PO file and returns an array of records.
-    #########################################################
-    def parse_po( file )
-
-      # Maybe this is a bit of overkill, but it's easy
-      # to extend if we want to capture more PO stuff
-      # in the future.
-      map = [
-        [ :START,   :EOF,     :DONE,        nil    ],
-        [ :START,   :JUNK,    :CONSUME,     :START ],
-        [ :START,   :KEEP,    :SET_INIT,    :OPEN  ],
-        [ :OPEN,    :KEEP,    :SET_FINAL,   :OPEN  ],
-        [ :OPEN,    :JUNK,    :SET_FINAL,   :START ],
-        [ :OPEN,    :OTHER,   :ADD_TO,      :OPEN  ],
-      ].collect { |item| [:STATE, :CONDITION, :ACTION, :NEXT].zip(item).to_h }
-
-      all_items = []
-      current_record = {}
-      state = :START
-      buffer = ''
-      item = ''
-
-      content = File.open(file) { |f| f.readlines }
-      content << "\n" # ensure that we have a final transition.
-      content.each do |line|
-
-        # Determine the input condition
-        input = :OTHER
-        input = :JUNK if line.start_with?('#', '/*') || line == "\n"
-        input = :KEEP if line.start_with?('msgctxt', 'msgid', 'msgstr')
-
-        # Find our current state-input pair
-        map.each do | transition |
-
-          if transition[:STATE] == state && transition[:CONDITION] == input
-            case transition[:ACTION]
-              when :SET_INIT
-                regex = line[/".*"/]
-                buffer = regex unless regex == '""'
-                item = line[/^(.*?)\s/, 1]
-              when :ADD_TO
-                buffer << "\n#{line[/".*"/]}"
-              when :SET_FINAL
-                current_record[item.to_sym] = buffer
-                all_items << current_record.clone if item == 'msgstr'
-                buffer = ''
-                regex = line[/".*"/]
-                buffer = regex unless regex == '""'
-                item = line[/^(.*?)\s/, 1]
-              else
-                # consume, other
-            end
-            state = transition[:NEXT]
-            break
-          end # if
-        end # do
-
-      end # File.open
-      all_items
-    end
-
-
-    #########################################################
     # normalize_po( records )
     #  Normalizes the records provided by ::parse_po so that
     #  they are key:value pairs. While we could do this as
@@ -594,35 +691,9 @@ msgstr ""
             end
           end
         end
-        # if lang_source && lang_source.items[key]
-        #   # Outputting translated strings.
-        #   if plural_source == 0
-        #     if lang_source.items[key].lines.count > 1
-        #       report << "msgstr \"\"\n"
-        #       report << "#{lang_source.items[key][:string]}"
-        #     else
-        #       report << "msgstr #{lang_source.items[key][:string]}\n"
-        #     end
-        #   else
-        #     if lang_source.items[key].lines.count > 1
-        #       report << "msgstr[0] \"\"\n"
-        #       report << "#{lang_source.items[key][:string]}"
-        #     else
-        #       report << "msgstr[0] #{lang_source.items[key][:string]}\n"
-        #     end
-        #
-        #   end
-        #
-        # else
-        #   # Not outputting translated strings.
-        #   if plural_source == 0
-        #     report << "msgstr \"\"\n"
-        #   else
-        #     (0..plural_source).each { |i| report << "msgstr[#{i}] \"\"\n" }
-        #   end
-        # end
+
         report << "\n"
-      end
+      end # do
 
       output_file = action == :xgettext ? 'tidy.pot' : "language_#{header_translate_to}.po"
       if File.exists?(output_file)
@@ -639,6 +710,11 @@ msgstr ""
     #  Perform the conversion.
     #########################################################
     def convert_to_h
+
+      po_content = PoPoFile.new(source_file_po)
+
+      exit 0
+
       return false unless source_file && english_header?
 
       language_english = PoHeaderFile.new(@@default_en)
@@ -875,9 +951,8 @@ Complete Help:
       converter = PoConverter.new
       set_options
       converter.source_file_h = input_file
-      exit 1 unless converter.source_file_h
       converter.base_file = options[:baselang] if options[:baselang]
-      exit 1 unless converter.english_header?
+      exit 1 unless converter.source_file_h &&  converter.english_header?
       converter.convert_to_po
     end # msgunfmt
 
@@ -898,8 +973,8 @@ Complete Help:
       converter = PoConverter.new
       set_options
       converter.source_file_po = input_file
-      exit 1 unless converter.source_file_po
-
+      exit 1 unless converter.source_file_po && converter.english_header?
+      converter.convert_to_h
     end # msgfmt
 
 

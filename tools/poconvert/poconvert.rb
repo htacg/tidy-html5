@@ -275,8 +275,8 @@ module PoConvertModule
     def po_locale=(value)
       proposed_locale = value
       # Is the locale something we recognize?
-        unless known_locales.has_key?(proposed_locale)
-          if known_locales.has_key?(proposed_locale[0..2])
+        unless known_locales.has_key?(proposed_locale.to_sym)
+          if known_locales.has_key?(proposed_locale[0..2].to_sym)
             proposed_locale = proposed_locale[0..2]
           else
             proposed_locale = '' # not nil! We still use this flag!
@@ -495,22 +495,26 @@ module PoConvertModule
       # depending on what we're doing.
       header_plural_forms = nil
       header_pot_line = nil
-      translate_to = nil
+      header_translate_to = nil
+
       if action == :xgettext
         header_plural_forms = "Plural-Forms: nplurals=#{lang_en.plural_count}; plural=#{lang_en.plural_form}"
         header_pot_line = "POT-Creation-Date: #{DateTime.now.strftime('%Y-%m-%d %H:%M:%S')}"
-        translate_to = lang_en.items[:TIDY_LANGUAGE]['0'][:string].tr('"', '')
+        header_translate_to = lang_en.items[:TIDY_LANGUAGE]['0'][:string].tr('"', '')
+
       end
       if action == :msginit
-        header_plural_forms = "Plural-Forms: #{known_locales[po_locale][:plural_form]}"
+        header_plural_forms = "Plural-Forms: #{known_locales[po_locale.to_sym][:plural_form]}"
         header_pot_line = "PO-Revision-Date: #{DateTime.now.strftime('%Y-%m-%d %H:%M:%S')}"
-        translate_to = po_locale
+        header_translate_to = po_locale
       end
       if action == :msgunfmt
         header_plural_forms = "Plural-Forms: nplurals=#{lang_source.plural_count}; plural=#{lang_source.plural_form}"
         header_pot_line = "PO-Revision-Date: #{DateTime.now.strftime('%Y-%m-%d %H:%M:%S')}"
-        translate_to = lang_source.items[:TIDY_LANGUAGE]['0'][:string].tr('"', '')
+        header_translate_to = lang_source.items[:TIDY_LANGUAGE]['0'][:string].tr('"', '')
       end
+
+      header_plural_count = header_plural_forms.match(/nplurals=(.*?);/i)[1].to_i - 1
 
       # We'll use this closure to perform a repetitive task in the report.
       item_output = lambda do | label, string |
@@ -529,7 +533,7 @@ module PoConvertModule
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\\n"
-"Language: #{translate_to}\\n"
+"Language: #{header_translate_to}\\n"
 "#{header_plural_forms}\\n"
 "X-Generator: HTML Tidy #{File.basename($0)}\\n"
 "Project-Id-Version: \\n"
@@ -542,12 +546,12 @@ msgstr ""
       untranslated_items.delete(:TIDY_MESSAGE_TYPE_LAST)
       untranslated_items.each do |key, value|
 
-        report << "#\n"
+        #report << "#\n"
         if value['0'][:comment]
           report << "#. #{value['0'][:comment]}\n"
         end
         if value['0'][:if_group]
-          report << "#. ###{value['0'][:if_group]}## (Translator ignore)\n"
+          report << "#. Translator, please ignore following: ###{value['0'][:if_group]}##\n"
         end
         if %w($u $s $d).any? { | find | value['0'][:string].include?(find) }
           report << "#, c-format\n"
@@ -564,6 +568,32 @@ msgstr ""
 
         # Handle translated strings, with the possibility that there
         # are multiple plural forms for them.
+        en_is_singular = value.count == 1
+
+        if lang_source && lang_source.items[key]
+          # Print translated strings.
+          if header_plural_count == 0 || en_is_singular
+            report << item_output.( 'msgstr', lang_source.items[key]['0'][:string])
+          else
+            # Print available plural forms and write blanks for the rest.
+            (0..header_plural_count).each do |i|
+              if lang_source.items[key].has_key?(i.to_s)
+                report << item_output.( "msgstr[#{i}]", lang_source.items[key][i.to_s][:string])
+              else
+                report << "msgstr[#{i}] \"\"\n"
+              end
+            end
+          end
+        else
+          # Print empty translated strings.
+          if header_plural_count == 0 || en_is_singular
+            report << "msgstr \"\"\n"
+          else
+            (0..header_plural_count).each do |i|
+              report << "msgstr[#{i}] \"\"\n"
+            end
+          end
+        end
         # if lang_source && lang_source.items[key]
         #   # Outputting translated strings.
         #   if plural_source == 0
@@ -594,7 +624,7 @@ msgstr ""
         report << "\n"
       end
 
-      output_file = action == :xgettext ? 'tidy.pot' : "language_#{translate_to}.po"
+      output_file = action == :xgettext ? 'tidy.pot' : "language_#{header_translate_to}.po"
       if File.exists?(output_file)
         File.rename(output_file, safe_backup_name(output_file))
       end
@@ -812,10 +842,8 @@ Complete Help:
       set_options
       converter.base_file = input_file if input_file
       converter.po_locale = options[:locale] ? options[:locale] : I18n.locale
-      exit 1 unless po_locale && converter.english_header?
-
-
-
+      exit 1 unless converter.po_locale && converter.english_header?
+      converter.convert_to_po
     end # msginit
 
 
@@ -850,7 +878,7 @@ Complete Help:
       exit 1 unless converter.source_file_h
       converter.base_file = options[:baselang] if options[:baselang]
       exit 1 unless converter.english_header?
-
+      converter.convert_to_po
     end # msgunfmt
 
 

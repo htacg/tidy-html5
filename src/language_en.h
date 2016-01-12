@@ -18,6 +18,9 @@
  * See tidy.h and access.h for the copyright notice.
  *
  * Created by Jim Derry on 11/28/15.
+ *
+ * PO_LAST_TRANSLATOR=jderry
+ * PO_REVISION_DATE=2016-01-12
  */
 
 #ifdef _MSC_VER

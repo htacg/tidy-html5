@@ -72,7 +72,6 @@ static languageDefinition language_es = { whichPluralForm_es, {
 		"<code>&lt;font&gt;</code>). Si se establece en <code>yes</code>, "
 		"entonces etiquetas existentes serán reemplazados con CSS "
 		"<code>&lt;style&gt;</code> y estructural markup según corresponda. "
-		,
 	},
 	
 	

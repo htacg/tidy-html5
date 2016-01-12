@@ -94,7 +94,7 @@ module PoConvertModule
     # parse_header( file )
     #  Parses a given header file and returns the language
     #  plural count, form, name, and a hash of strings:
-    #  :keyword => hash { :comment, :if_group, :case, :string, :plurals[:case] }
+    #  :keyword => { '#' => { :comment, :if_group, :case, :string } }
     #  We don't want to set instance variables directly.
     #########################################################
     def parse_header(file)
@@ -125,30 +125,18 @@ module PoConvertModule
 
       # Build a catalogue of all items.
       content.scan(%r!^\s*\{(?:/\* (.*?) \*/)?\s*(.*?),\s*(.*?),\s*(.*?)\s*\},?!m) do | comment, key, num_case, string |
-        lkey = key.to_sym
-        if items.has_key?(lkey)
-          items[lkey][:plurals][num_case] = {}
-          items[lkey][:plurals][num_case][:comment] = comment
-          items[lkey][:plurals][num_case][:case] = num_case
-          items[lkey][:plurals][num_case][:string] = string
-        else
-          items[lkey] = {}
-          items[lkey][:comment] = comment
-          items[lkey][:case] = num_case
-          items[lkey][:string] = string
-          items[lkey][:plurals] = {}
-        end
+        l_key = key.to_sym
+        items[l_key] = {} unless items.has_key?(l_key)
+        items[l_key][num_case] = {}
+        items[l_key][num_case][:comment] = comment
+        items[l_key][num_case][:case] = num_case
+        tmp = ''
+        string.each_line { |line| tmp << line.lstrip }
+        items[l_key][num_case][:string] = tmp
       end
       if !items || items.empty?
         @@log.error "#{__method__}: Could not match language contents. Something wrong with source file?"
         items = {}
-      end
-
-      # Strip any space from the left side of multiline strings.
-      items.each_value do | value |
-        tmp = ''
-        value[:string].each_line { |line| tmp << line.lstrip }
-        value[:string] = tmp
       end
 
       # Post-process things that are in #if blocks. This second pass is still
@@ -157,7 +145,9 @@ module PoConvertModule
       # store it in a special developer comment in the PO file.
       content.scan(%r!^#if (.*?)#endif!m) do | found_block |
         found_block[0].scan(%r!^\s*\{(?:/\* .*? \*/)?\s*(.*?),\s*.*?,\s*.*?\s*\},?!m) do | item |
-          items[item[0].to_sym][:if_group] = found_block[0].lines[0].rstrip
+          items[item[0].to_sym].each_value do  | plural |
+            plural[:if_group] = found_block[0].lines[0].rstrip
+          end
         end
       end
 
@@ -509,7 +499,7 @@ module PoConvertModule
       if action == :xgettext
         header_plural_forms = "Plural-Forms: nplurals=#{lang_en.plural_count}; plural=#{lang_en.plural_form}"
         header_pot_line = "POT-Creation-Date: #{DateTime.now.strftime('%Y-%m-%d %H:%M:%S')}"
-        translate_to = lang_en.items[:TIDY_LANGUAGE][:string].tr('"', '')
+        translate_to = lang_en.items[:TIDY_LANGUAGE]['0'][:string].tr('"', '')
       end
       if action == :msginit
         header_plural_forms = "Plural-Forms: #{known_locales[po_locale][:plural_form]}"
@@ -519,8 +509,21 @@ module PoConvertModule
       if action == :msgunfmt
         header_plural_forms = "Plural-Forms: nplurals=#{lang_source.plural_count}; plural=#{lang_source.plural_form}"
         header_pot_line = "PO-Revision-Date: #{DateTime.now.strftime('%Y-%m-%d %H:%M:%S')}"
-        translate_to = lang_source.items[:TIDY_LANGUAGE][:string].tr('"', '')
+        translate_to = lang_source.items[:TIDY_LANGUAGE]['0'][:string].tr('"', '')
       end
+
+      # We'll use this closure to perform a repetitive task in the report.
+      item_output = lambda do | label, string |
+        result = ''
+        if string.lines.count > 1
+          result << "#{label} \"\"\n"
+          result << "#{string}\n"
+        else
+          result << "#{label} #{string}\n"
+        end
+        result
+      end
+
 
       report = <<-HEREDOC
 msgid ""
@@ -540,8 +543,13 @@ msgstr ""
       untranslated_items.each do |key, value|
 
         report << "#\n"
-        report << "#. #{value[:comment]}\n"
-        if ['$u', '$s', '$d'].any? { | find | value[:string].include?(find) }
+        if value['0'][:comment]
+          report << "#. #{value['0'][:comment]}\n"
+        end
+        if value['0'][:if_group]
+          report << "#. ###{value['0'][:if_group]}## (Translator ignore)\n"
+        end
+        if %w($u $s $d).any? { | find | value['0'][:string].include?(find) }
           report << "#, c-format\n"
         end
         report << "msgctxt \"#{key.to_s}\"\n"
@@ -549,55 +557,40 @@ msgstr ""
         # Handle the untranslated strings, with the possibility that there
         # are two forms. PO/POT is English-based and supports only a singular
         # and plural form.
-        if value[:string].lines.count > 1
-          report << "msgid \"\"\n"
-          report << "#{value[:string]}\n"
-        else
-          report << "msgid #{value[:string]}\n"
-        end
-        if value[:plurals].empty?
-          plural_source = 0
-        else
-          plural_source = value[:plurals].count
-          if value[:plurals]['1'][:string].lines.count > 1
-            report << "msgid_plural \"\"\n"
-            report << "#{value[:plurals]['1'][:string]}\n"
-          else
-            report << "msgid_plural #{value[:plurals]['1'][:string]}\n"
-          end
+        value.each_value do | subitem |
+          label = subitem[:case] == '0' ? 'msgid' : 'msgid_plural'
+          report << item_output.(label, subitem[:string])
         end
 
         # Handle translated strings, with the possibility that there
         # are multiple plural forms for them.
-        if lang_source && lang_source.items[key]
-          # Outputting translated strings.
-          if plural_source == 0
-            if lang_source.items[key].lines.count > 1
-              report << "msgstr \"\"\n"
-              report << "#{lang_source.items[key][:string]}"
-            else
-              report << "msgstr #{lang_source.items[key][:string]}\n"
-            end
-          else
-            if lang_source.items[key].lines.count > 1
-              report << "msgstr[0] \"\"\n"
-              report << "#{lang_source.items[key][:string]}"
-            else
-              report << "msgstr[0] #{lang_source.items[key][:string]}\n"
-            end
-            
-          end
-
-        else
-          # Not outputting translated strings.
-          if plural_source == 0
-            report << "msgstr \"\"\n"
-          else
-            for i in 0..plural_source
-              report << "msgstr[#{i}] \"\"\n"
-              end
-          end
-        end
+        # if lang_source && lang_source.items[key]
+        #   # Outputting translated strings.
+        #   if plural_source == 0
+        #     if lang_source.items[key].lines.count > 1
+        #       report << "msgstr \"\"\n"
+        #       report << "#{lang_source.items[key][:string]}"
+        #     else
+        #       report << "msgstr #{lang_source.items[key][:string]}\n"
+        #     end
+        #   else
+        #     if lang_source.items[key].lines.count > 1
+        #       report << "msgstr[0] \"\"\n"
+        #       report << "#{lang_source.items[key][:string]}"
+        #     else
+        #       report << "msgstr[0] #{lang_source.items[key][:string]}\n"
+        #     end
+        #
+        #   end
+        #
+        # else
+        #   # Not outputting translated strings.
+        #   if plural_source == 0
+        #     report << "msgstr \"\"\n"
+        #   else
+        #     (0..plural_source).each { |i| report << "msgstr[#{i}] \"\"\n" }
+        #   end
+        # end
         report << "\n"
       end
 

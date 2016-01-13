@@ -54,7 +54,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
 	 ** This MUST be present and first. 
 	 ** Specify the code for this language.
 	 ***************************************/
-	{ TIDY_LANGUAGE,                0,   "en"                                                                      },
+	{/* Specify the ll or ll_cc language code here. */
+		TIDY_LANGUAGE,                0,   "en"                                                                    },
 	
 	/***************************************
 	 ** Miscellaneous Strings

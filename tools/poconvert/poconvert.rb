@@ -355,6 +355,7 @@ module PoConvertModule
         self.items[l_key][num_case] = {}
         self.items[l_key][num_case][:comment] = comment
         self.items[l_key][num_case][:case] = num_case
+        self.items[l_key][num_case][:if_group] = nil
         tmp = ''
         string.each_line { |line| tmp << line.lstrip }
         self.items[l_key][num_case][:string] = tmp
@@ -716,26 +717,30 @@ msgstr ""
       # official source. Therefore all plurals are accounted for, #IF groups,
       # and comments.
       po_content.items.reject! do |key, value|
-        result = false
-        if filter_items.has_key?(key)
-          po_content
-        end
-
+        # result = false
+        # if filter_items.has_key?(key)
+        #   po_content
+        # end
+        #
         (filter_items.has_key?(key) && filter_items[key] == value)
       end
 
       # Gather some information to format this nicely.
-      longest_key = 22
-      longest_value = 0
-      final_items.each do |key, value|
+      longest_key = 22   # length of TIDY_MESSAGE_TYPE_LAST.
+      longest_value = 10 # reasonable default in case no single-line strings are found.
+      po_content.items.each do |key, value|
         longest_key = key.length if key.length > longest_key
-        longest_value = value.length if value.length > longest_value && !value.start_with?("\n")
+        value.each_value do |value_inner|
+          length = value_inner[:string].length
+          longest_value = length if length > longest_value && !value_inner[:string].start_with?("\n")
+          puts longest_value
+        end
       end
 
       # Report TOP SECTION
       report = <<-HEREDOC
-#ifndef language_#{dest_lang}_h
-#define language_#{dest_lang}_h
+#ifndef language_#{report_lang}_h
+#define language_#{report_lang}_h
 /*
  * #{File.basename(source_file, '.*')}.h
  * Localization support for HTML Tidy.
@@ -757,7 +762,7 @@ msgstr ""
  *  is typically included in a Tidy language localization header file.
  */
 
-static languageDictionary language_#{dest_lang} = {
+static languageDictionary language_#{report_lang} = {
 
   /*
    * BEGIN AUTOMATIC CONTENT
@@ -789,10 +794,10 @@ static languageDictionary language_#{dest_lang} = {
    { #{'TIDY_MESSAGE_TYPE_LAST,'.ljust(longest_key+2)}#{'NULL'.ljust(longest_value+2)} },\n"
 };
 
-#endif /* language_#{dest_lang}_h */
+#endif /* language_#{report_lang}_h */
       HEREDOC
 
-      output_file = "language_#{dest_lang}.h"
+      output_file = "language_#{report_lang}.h"
       if File.exists?(output_file)
         File.rename(output_file, safe_backup_name(output_file))
       end

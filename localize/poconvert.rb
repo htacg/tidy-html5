@@ -13,6 +13,7 @@ require 'fileutils'      # compare_file, etc.
 require 'erb'            # Needed for templating.
 require 'thor'           # thor provides robust command line parameter parsing.
 require 'i18n'           # Cross-platform access to `locale`.
+require 'digest'         # For computing checksums.
 
 
 ################################################################################
@@ -26,8 +27,9 @@ module PoConvertModule
   # Setup
   #  Change these variables in case directories are changed.
   ###########################################################
-  @@default_en = File.expand_path(File.join('..', '..', 'src', 'language_en.h' ))
+  @@default_en = File.expand_path(File.join('..', 'src', 'language_en.h' ))
   @@header_template = File.expand_path(File.join('.', 'language_ll_cc.h.erb'))
+  @@header_digest = 'b6b869b67a80a86d216c7080ac3d1a62aa3de82bbea37599b30160f22aa78d6c'
 
 
   ###########################################################
@@ -511,7 +513,7 @@ module PoConvertModule
     #########################################################
     # property header_template?
     #  Indicates whether or not the header template file
-    #  can be found.
+    #  can be found and hasn't been tampered with.
     #########################################################
     def header_template?
       result = File.exists?(@@header_template)
@@ -519,6 +521,16 @@ module PoConvertModule
         @@log.info "#{__method__}: The header template was found at #{@@header_template}"
       else
         @@log.error "#{__method__}: Cannot find the header teamplate file. Check the value of @@header_template in this script."
+        return false
+      end
+
+      digest = Digest::SHA256.file(@@header_template.to_s)
+      result = digest == @@header_digest
+      unless result
+        @@log.error "#{__method__}: Did someone tamper with the header template? If you"
+        @@log.error "#{__method__}: meant to change the template and know what you're doing,"
+        @@log.error "#{__method__}: then the new digest is:"
+        @@log.error "#{__method__}: #{digest}"
       end
       result
     end
@@ -777,9 +789,9 @@ msgstr ""
             # Format a multiline value.
             if entry_value[:comment]
               report_body << "    {/* #{entry_value[:comment]} */\n"
-              report_body << "      #{item_key},"
+              report_body << "      #{(item_key.to_s + ',').ljust(longest_key+2)}#{entry_value[:case]},"
             else
-              report_body << "    { #{item_key},"
+              report_body << "    { #{(item_key.to_s + ',').ljust(longest_key+2)}#{entry_value[:case]},"
             end
             entry_value[:string].lines.each do |line|
               report_body << "        #{line}"
@@ -789,10 +801,10 @@ msgstr ""
             # Format a single line value.
             if entry_value[:comment]
               report_body << "    {/* #{entry_value[:comment]} */\n"
-              report_body << "      #{(item_key.to_s + ',').ljust(longest_key+2)}#{entry_value[:string]}\n"
+              report_body << "      #{(item_key.to_s + ',').ljust(longest_key+2)}#{entry_value[:case]}, #{entry_value[:string]}\n"
               report_body << "    },\n"
             else
-              report_body << "    { #{(item_key.to_s + ',').ljust(longest_key+2)}#{entry_value[:string].ljust(longest_value+2)} },\n"
+              report_body << "    { #{(item_key.to_s + ',').ljust(longest_key+2)}#{entry_value[:case]}, #{entry_value[:string].ljust(longest_value+2)} },\n"
             end
           end
         end
@@ -808,7 +820,7 @@ msgstr ""
       # could add this to the template, but let's give it the same
       # pretty-printing as the other items.
       report_body_last = "    {/* This MUST be present and last. */\n"
-      report_body_last << "      #{'TIDY_MESSAGE_TYPE_LAST,'.ljust(longest_key+2)}NULL\n"
+      report_body_last << "      #{'TIDY_MESSAGE_TYPE_LAST,'.ljust(longest_key+2)}0, NULL\n"
       report_body_last << "    }\n"
 
       # We are going to use an external ERB template to build the report file.

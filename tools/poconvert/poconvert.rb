@@ -27,6 +27,7 @@ module PoConvertModule
   #  Change these variables in case directories are changed.
   ###########################################################
   @@default_en = File.expand_path(File.join('..', '..', 'src', 'language_en.h' ))
+  @@header_template = File.expand_path(File.join('.', 'language_ll_cc.h.erb'))
 
 
   ###########################################################
@@ -508,6 +509,22 @@ module PoConvertModule
 
 
     #########################################################
+    # property header_template?
+    #  Indicates whether or not the header template file
+    #  can be found.
+    #########################################################
+    def header_template?
+      result = File.exists?(@@header_template)
+      if result
+        @@log.info "#{__method__}: The header template was found at #{@@header_template}"
+      else
+        @@log.error "#{__method__}: Cannot find the header teamplate file. Check the value of @@header_template in this script."
+      end
+      result
+    end
+
+
+    #########################################################
     # property safe_backup_name( file )
     #  Determines a safe name for a backup file name.
     #########################################################
@@ -687,7 +704,7 @@ msgstr ""
     def convert_to_h( file, base_file )
 
       po_content = PoPoFile.new(file)
-      return false unless po_content.source_file && english_header?
+      return false unless po_content.source_file && english_header? && header_template?
 
       # We will use English to ensure that no English strings are
       # included in the translation.
@@ -712,17 +729,13 @@ msgstr ""
       # Capture the language just in case it's purged below.
       report_lang = po_content.items[:TIDY_LANGUAGE]['0'][:string][1..-2]
 
-      # Eliminate PO items if they match inherited items (in the filter).
+      # Eliminate PO items if they match inherited items (in the filter), or
+      # if they're not included in English (i.e., entries not used by Tidy).
       # We are comparing _complete entries_ right here, with the PO as the
       # official source. Therefore all plurals are accounted for, #IF groups,
       # and comments.
       po_content.items.reject! do |key, value|
-        # result = false
-        # if filter_items.has_key?(key)
-        #   po_content
-        # end
-        #
-        (filter_items.has_key?(key) && filter_items[key] == value)
+        ( (filter_items.has_key?(key) && filter_items[key] == value) ) || !filter_items.has_key?(key)
       end
 
       # Gather some information to format this nicely.
@@ -733,70 +746,79 @@ msgstr ""
         value.each_value do |value_inner|
           length = value_inner[:string].length
           longest_value = length if length > longest_value && !value_inner[:string].start_with?("\n")
-          puts longest_value
         end
       end
 
-      # Report TOP SECTION
-      report = <<-HEREDOC
-#ifndef language_#{report_lang}_h
-#define language_#{report_lang}_h
-/*
- * #{File.basename(source_file, '.*')}.h
- * Localization support for HTML Tidy.
- *
- * (c) 2015 HTACG
- * See tidy.h and access.h for the copyright notice.
- *
- * This file generated on #{DateTime.now.strftime('%Y-%m-%d %H:%M:%S')} by #{ENV['USER']}#{ENV['USERNAME']}.
-*/
-
-#include "language.h"
-#include "access.h"
-#include "message.h"
-
-/**
- *  IMPORTANT NOTE:
- *  This file was automatically generated with the `poconvert.rb` tool from
- *  a GNU gettext PO format. As such it is missing all of the commentary that
- *  is typically included in a Tidy language localization header file.
- */
-
-static languageDictionary language_#{report_lang} = {
-
-  /*
-   * BEGIN AUTOMATIC CONTENT
-   */
-
-      HEREDOC
-
-      # Report MID SECTION
-      final_items.each do |key, value|
-        if value.start_with?("\n")
-          report << "  { #{key},"
-          value.lines.each do |line|
-            report << "      #{line}"
+      # Generate the main header body. Although it's a machine-generated
+      # document we still care that it's pretty-printed and readable. In
+      # this respect we have four output formats: single line values;
+      # single line values with developer comment; multiline values; and
+      # multiline values with developer comment.
+      report_body = ''
+      if_group = nil
+      po_content.items.each do |item_key, item_value|
+        item_group = item_value[item_value.keys[0]][:if_group]
+        unless item_group == if_group
+          # The current if grouping has changed.
+          unless if_group.nil?
+            # Close current group.
+            report_body << "#endif /* #{if_group} */\n\n"
           end
-          report << "\n  },\n"
-        else
-          report << "  { #{(key.to_s + ',').ljust(longest_key+2)}#{value.ljust(longest_value+2)} },\n"
+          if_group = item_group
+          unless if_group.nil?
+            # Open new group.
+            report_body << "\n#if #{if_group}\n"
+          end
         end
+
+        # Handle each entry individually.
+        item_value.each_value do |entry_value|
+          if entry_value[:string].start_with?("\n")
+            # Format a multiline value.
+            if entry_value[:comment]
+              report_body << "    {/* #{entry_value[:comment]} */\n"
+              report_body << "      #{item_key},"
+            else
+              report_body << "    { #{item_key},"
+            end
+            entry_value[:string].lines.each do |line|
+              report_body << "        #{line}"
+            end
+            report_body << "\n    },\n"
+          else
+            # Format a single line value.
+            if entry_value[:comment]
+              report_body << "    {/* #{entry_value[:comment]} */\n"
+              report_body << "      #{(item_key.to_s + ',').ljust(longest_key+2)}#{entry_value[:string]}\n"
+              report_body << "    },\n"
+            else
+              report_body << "    { #{(item_key.to_s + ',').ljust(longest_key+2)}#{entry_value[:string].ljust(longest_value+2)} },\n"
+            end
+          end
+        end
+      end # po_content.items.each
+
+      # Close off current if_group if any, because there will
+      # not be another state change to do so.
+      unless if_group.nil?
+        report_body << "#endif /* #{if_group} */\n"
       end
 
-      # Report BOTTOM SECTION
-      report << <<-HEREDOC
+      # Force the final closing line manually; can't count on PO. We
+      # could add this to the template, but let's give it the same
+      # pretty-printing as the other items.
+      report_body_last = "    {/* This MUST be present and last. */\n"
+      report_body_last << "      #{'TIDY_MESSAGE_TYPE_LAST,'.ljust(longest_key+2)}NULL\n"
+      report_body_last << "    }\n"
 
-  /*
-   * END AUTOMATIC CONTENT
-   */
+      # We are going to use an external ERB template to build the report file.
+      # Although it's trivial to hard-code all of the required text into this
+      # method directly, it will be more convenient to keep an external file
+      # synchronized with changes to language_en.h if we make changes.
+      header_file = File.open(@@header_template) { |f| f.read }
+      report = ERB.new(header_file).result(binding) # will use in-context vars.
 
-  /* This MUST be present and last. */
-   { #{'TIDY_MESSAGE_TYPE_LAST,'.ljust(longest_key+2)}#{'NULL'.ljust(longest_value+2)} },\n"
-};
-
-#endif /* language_#{report_lang}_h */
-      HEREDOC
-
+      # Save
       output_file = "language_#{report_lang}.h"
       if File.exists?(output_file)
         File.rename(output_file, safe_backup_name(output_file))
@@ -804,7 +826,7 @@ static languageDictionary language_#{report_lang} = {
       File.open(output_file, 'w') { |f| f.write(report) }
       @@log.info "#{__method__}: Results written to #{output_file}"
       puts "Wrote a new header file to #{File.expand_path(output_file)}"
-
+      true
     end # convert_to_h
 
 

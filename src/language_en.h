@@ -1425,8 +1425,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
     },
     
     
-    /* This MUST be present and last. */
-    { TIDY_MESSAGE_TYPE_LAST,      0,   NULL                                                                       }
+    {/* This MUST be present and last. */
+      TIDY_MESSAGE_TYPE_LAST,      0,   NULL
+    }
 }};
 
 

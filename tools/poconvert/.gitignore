@@ -1,0 +1,5 @@
+# In this directory only, ignore user-generated files:
+*.pot
+*.po
+*.h
+

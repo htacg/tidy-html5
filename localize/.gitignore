@@ -1,0 +1,8 @@
+# Ignore user-generated files:
+Gemfile.lock
+*.pot
+*.po
+*.h
+translations/*.*
+!translations/tidy.pot
+!translations/*.po

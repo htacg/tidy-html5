@@ -62,11 +62,10 @@ typedef struct _tidy_config
 } TidyConfigImpl;
 
 
+/* Used to build a table of documentation cross-references. */
 typedef struct {
   TidyOptionId opt;          /**< Identifier. */
-  ctmbstr doc;               /**< HTML text */
-  TidyOptionId const *links; /**< Cross references.
-                             Last element must be 'TidyUnknownOption'. */
+  TidyOptionId const *links; /**< Cross references. Last element must be 'TidyUnknownOption'. */
 } TidyOptionDoc;
 
 

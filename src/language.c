@@ -10,9 +10,11 @@
 
 #include "language.h"
 #include "language_en.h"
+#if SUPPORT_LOCALIZATIONS
 #include "language_en_gb.h"
 #include "language_es.h"
 #include "language_es_mx.h"
+#endif
 #include "tmbstr.h"
 #include "locale.h"
 #if defined(_WIN32)
@@ -41,11 +43,14 @@ static tidyLanguagesType tidyLanguages = {
 	&language_en, /* current language */
 	&language_en, /* first fallback language */
 	{
-		/* These languages are installed. */
-		&language_en,
+        /* Required localization! */
+        &language_en,
+#if SUPPORT_LOCALIZATIONS
+		/* These additional languages are installed. */
 		&language_en_gb,
 		&language_es,
 		&language_es_mx,
+#endif
 		NULL /* This array MUST be null terminated. */
 	}
 };

@@ -53,6 +53,14 @@ if (TIDY_CONSOLE_SHARED)
     endif ()
 endif ()
 
+# Allow building without extra language support
+option( SUPPORT_LOCALIZATIONS "Set OFF to build without additional languages." ON )
+if (SUPPORT_LOCALIZATIONS)
+add_definitions ( -DSUPPORT_LOCALIZATIONS=1 )
+else ()
+add_definitions ( -DSUPPORT_LOCALIZATIONS=0 )
+endif ()
+
 if(CMAKE_COMPILER_IS_GNUCXX)
     set( WARNING_FLAGS -Wall )
 endif(CMAKE_COMPILER_IS_GNUCXX)

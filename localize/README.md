@@ -6,7 +6,7 @@ throughout the world will thank you.
 The document describes Tidy's localization philosophy and instructs you on how
 you can use standard `gettext` tools to generate language and region
 localizations that will work with Tidy. Optionally instructions are included in
-the even that you want to build Tidy with your new language.
+the event that you want to build Tidy with your new language.
 
 ## How to Contribute
 
@@ -85,22 +85,24 @@ Although we don't require you to follow these steps to contribute a language
 to Tidy, you may want to add the language to Tidy yourself to test the
 translation, or to save one of the developer team a few extra steps.
 
-- Generate the header files.
-  - Convert your PO file to a Tidy header file by executing
-    `potool.rb msgfmt <path_to_your_file.po>`. Note that on Windows you will
-    likely have to preface this line with `ruby`.
-  - The tool should generate a file named `language_ll_cc.h` in the working
-    directory, where `ll_cc` will be replaced with the language/region of your
-    translation.
-  - Copy this `.h` file into `src\`.
-  - Edit the file `src\language.c` to ensure that the new `.h` file you added
-    is in the `#include` section.
-  - Look for the `static tidyLanguagesType tidyLanguages` structure starting
-    near line 40, and look for the comment `These languages are installed.`.
-    You can add your new language to the list along with the other languages
-    present, following the same format.
-  - Build Tidy per the usual instructions, and try it out using the `-lang`
-    option.
+  - Generte the header files:
+    - Convert your PO file to a Tidy header file by executing
+      `potool.rb msgfmt <path_to_your_file.po>`. Note that on Windows you will
+      likely have to preface this line with `ruby`.
+    - The tool should generate a file named `language_ll_cc.h` in the working
+      directory, where `ll_cc` will be replaced with the language/region of your
+      translation.
+    - Copy this `.h` file into `src\`.
+  - Modify Tidy's source:
+    - Edit the file `src\language.c` to ensure that the new `.h` file you added
+      is in the `#include` section.
+    - Look for the `static tidyLanguagesType tidyLanguages` structure starting
+      near line 40, and look for the comment `These languages are installed.`.
+      You can add your new language to the list along with the other languages
+      present, following the same format.
+  - Build Tidy:
+    - Build Tidy per the usual instructions, and try it out using the `-lang`
+      option.
     
 
 ## Best Practices
@@ -156,11 +158,28 @@ temporarily with:
 
 ## gettext
 
+Although HTML Tidy uses `gettext`-compatible tools and PO files for language
+localization, Tidy itself does _not_ use `gettext`. Tidy's build philosophy is
+build it anywhere and build it with anything. As `gettext` is not univerally
+available on every platform under the sun, Tidy cannot count on `gettext`.
 
+Instead Tidy builds all translations into its library (and command line
+executable if built monolithically), and can run on virtually any general
+purpose computer with any operating system.
+
+While this does not pose a significant problem for storage or execution space
+on modern PC's, we understand that certain applications may still be space
+critical. As such it's trivial to build Tidy without this extra language
+support.
 
 
 ## potool.rb
 
+Tidy's source code includes a Ruby batch file called `potool.rb` which can be
+used to generate POT, PO, and H files, and convert them back and forth. It has
+been designed to work in a similar fashion as `gettext`'s tools, and includes
+conveniences that let translators work in different source languages. Please
+use `potool.rb help` for more information (`ruby potool.rb help` on Windows).
 
 
 ## Help Tidy Get Better

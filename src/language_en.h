@@ -75,12 +75,12 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { STRING_ERROR_COUNT_ERROR,     1,   "errors"                                                                  },
     { STRING_ERROR_COUNT_WARNING,   0,   "warning"                                                                 },
     { STRING_ERROR_COUNT_WARNING,   1,   "warnings"                                                                },
-    { STRING_HELLO_ACCESS,          0,   "\nAccessibility Checks: Version 0.1\n\n"                                 },
+    { STRING_HELLO_ACCESS,          0,   "Accessibility Checks: Version 0.1"                                       },
     { STRING_HTML_PROPRIETARY,      0,   "HTML Proprietary"                                                        },
     { STRING_MISSING_MALFORMED,     0,   "missing or malformed argument for option: %1$s"                          },
-    { STRING_NO_ERRORS,             0,   "No warnings or errors were found.\n\n"                                   },
+    { STRING_NO_ERRORS,             0,   "No warnings or errors were found."                                       },
     { STRING_NO_SYSID,              0,   "No system identifier in emitted doctype"                                 },
-    { STRING_NOT_ALL_SHOWN,         0,   " Not all warnings/errors were shown.\n\n"                                },
+    { STRING_NOT_ALL_SHOWN,         0,   "Not all warnings/errors were shown."                                     },
     { STRING_PLAIN_TEXT,            0,   "plain text"                                                              },
     { STRING_REPLACING,             0,   "replacing"                                                               },
     { STRING_SPECIFIED,             0,   "specified"                                                               },
@@ -89,8 +89,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { STRING_UNRECZD_OPTION,        0,   "unrecognized option -%1$c use -help to list options\n"                   },
     { STRING_XML_DECLARATION,       0,   "XML declaration"                                                         },
     
-    { TEXT_HTML_T_ALGORITHM,        0,
-        " \n"
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_HTML_T_ALGORITHM,        0,
+        "\n"
         "      - First, search left from the cell's position to find row header cells.\n"
         "      - Then search upwards to find column header cells.\n"
         "      - The search in a given direction stops when the edge of the table is\n"
@@ -106,26 +107,30 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "        TD cells that set the axis attribute are also treated as header cells.\n"
         " \n"
     },
-    { TEXT_WINDOWS_CHARS,           0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_WINDOWS_CHARS,           0,
         "Characters codes for the Microsoft Windows fonts in the range\n"
         "128 - 159 may not be recognized on other platforms. You are\n"
         "instead recommended to use named entities, e.g. &trade; rather\n"
         "than Windows character code 153 (0x2122 in Unicode). Note that\n"
         "as of February 1998 few browsers support the new entities.\n\n"
     },
-    { TEXT_VENDOR_CHARS,            0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_VENDOR_CHARS,            0,
         "It is unlikely that vendor-specific, system-dependent encodings\n"
         "work widely enough on the World Wide Web; you should avoid using the \n"
         "%1$s character encoding, instead you are recommended to\n"
         "use named entities, e.g. &trade;.\n\n"
     },
-    { TEXT_SGML_CHARS,              0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_SGML_CHARS,              0,
         "Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML;\n"
         "even if they were, they would likely be unprintable control characters.\n"
         "Tidy assumed you wanted to refer to a character with the same byte value in the \n"
         "%1$s encoding and replaced that reference with the Unicode equivalent.\n\n"
     },
-    { TEXT_INVALID_UTF8,            0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_INVALID_UTF8,            0,
         "Character codes for UTF-8 must be in the range: U+0000 to U+10FFFF.\n"
         "The definition of UTF-8 in Annex D of ISO/IEC 10646-1:2000 also\n"
         "allows for the use of five- and six-byte sequences to encode\n"
@@ -136,13 +141,15 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "(but it does allow other noncharacters). For more information please refer to\n"
         "http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n\n"
     },
-    { TEXT_INVALID_UTF16,           0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_INVALID_UTF16,           0,
         "Character codes for UTF-16 must be in the range: U+0000 to U+10FFFF.\n"
         "The definition of UTF-16 in Annex C of ISO/IEC 10646-1:2000 does not allow the\n"
         "mapping of unpaired surrogates. For more information please refer to\n"
         "http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n\n"
     },
-    { TEXT_INVALID_URI,             0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_INVALID_URI,             0,
         "URIs must be properly escaped, they must not contain unescaped\n"
         "characters below U+0021 including the space character and not\n"
         "above U+007E. Tidy escapes the URI for you as recommended by\n"
@@ -152,7 +159,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "escape the URI on your own. For more information please refer to\n"
         "http://www.w3.org/International/O-URL-and-ident.html\n\n"
     },
-    { TEXT_BAD_FORM,                0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_BAD_FORM,                0,
         "You may need to move one or both of the <form> and </form>\n"
         "tags. HTML elements should be properly nested and form elements\n"
         "are no exception. For instance you should not place the <form>\n"
@@ -160,7 +168,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "placed before a table, the </form> cannot be placed inside the\n"
         "table! Note that one form can't be nested inside another!\n\n"
     },
-    { TEXT_BAD_MAIN,                0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_BAD_MAIN,                0,
         "Only one <main> element is allowed in a document.\n"
         "Subsequent <main> elements have been discarded, which may\n"
         "render the document invalid.\n"
@@ -173,73 +182,87 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "to each table cell, enabling non-visual browsers to provide\n"
         "a meaningful context for each cell.\n\n"
     },
-    { TEXT_M_IMAGE_ALT,             0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_M_IMAGE_ALT,             0,
         "The alt attribute should be used to give a short description\n"
         "of an image; longer descriptions should be given with the\n"
         "longdesc attribute which takes a URL linked to the description.\n"
         "These measures are needed for people using non-graphical browsers.\n\n"
     },
-    { TEXT_M_IMAGE_MAP,             0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_M_IMAGE_MAP,             0,
         "Use client-side image maps in preference to server-side image\n"
         "maps as the latter are inaccessible to people using non-\n"
         "graphical browsers. In addition, client-side maps are easier\n"
         "to set up and provide immediate feedback to users.\n\n"
     },
-    { TEXT_M_LINK_ALT,              0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_M_LINK_ALT,              0,
         "For hypertext links defined using a client-side image map, you\n"
         "need to use the alt attribute to provide a textual description\n"
         "of the link for people using non-graphical browsers.\n\n"
     },
-    { TEXT_USING_FRAMES,            0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_USING_FRAMES,            0,
         "Pages designed using frames presents problems for\n"
         "people who are either blind or using a browser that\n"
         "doesn't support frames. A frames-based page should always\n"
         "include an alternative layout inside a NOFRAMES element.\n\n"
     },
-    { TEXT_ACCESS_ADVICE1,          0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_ACCESS_ADVICE1,          0,
         "For further advice on how to make your pages accessible\n"
         "see http://www.w3.org/WAI/GL"
     },
-    { TEXT_ACCESS_ADVICE2,          0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_ACCESS_ADVICE2,          0,
         " and http://www.html-tidy.org/accessibility/"
     },
-    { TEXT_USING_LAYER,             0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_USING_LAYER,             0,
         "The Cascading Style Sheets (CSS) Positioning mechanism\n"
         "is recommended in preference to the proprietary <LAYER>\n"
         "element due to limited vendor support for LAYER.\n\n"
     },
-    { TEXT_USING_SPACER,            0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_USING_SPACER,            0,
         "You are recommended to use CSS for controlling white\n"
         "space (e.g. for indentation, margins and line spacing).\n"
         "The proprietary <SPACER> element has limited vendor support.\n\n"
     },
-    { TEXT_USING_FONT,              0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_USING_FONT,              0,
         "You are recommended to use CSS to specify the font and\n"
         "properties such as its size and color. This will reduce\n"
         "the size of HTML files and make them easier to maintain\n"
         "compared with using <FONT> elements.\n\n"
     },
-    { TEXT_USING_NOBR,              0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_USING_NOBR,              0,
         "You are recommended to use CSS to control line wrapping.\n"
         "Use \"white-space: nowrap\" to inhibit wrapping in place\n"
         "of inserting <NOBR>...</NOBR> into the markup.\n\n"
     },
-    { TEXT_USING_BODY,              0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_USING_BODY,              0,
         "You are recommended to use CSS to specify page and link colors\n"
     },
-    { TEXT_NEEDS_INTERVENTION,      0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_NEEDS_INTERVENTION,      0,
         "This document has errors that must be fixed before\n"
         "using HTML Tidy to generate a tidied up version.\n\n"
     },
-    { TEXT_GENERAL_INFO,            0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_GENERAL_INFO,            0,
         "About HTML Tidy: https://github.com/htacg/tidy-html5\n"
         "Bug reports and comments: https://github.com/htacg/tidy-html5/issues\n"
-        "Or send questions and comments to: https://lists.w3.org/Archives/Public/public-htacg/\n"
+        "Official mailing list: https://lists.w3.org/Archives/Public/public-htacg/\n"
         "Latest HTML specification: http://dev.w3.org/html5/spec-author-view/\n"
         "Validate your HTML documents: http://validator.w3.org/nu/\n"
         "Lobby your company to join the W3C: http://www.w3.org/Consortium\n"
     },
-    { TEXT_GENERAL_INFO_PLEA,       0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_GENERAL_INFO_PLEA,       0,
         "\n"
         "Do you speak a language other than English, or a different variant of \n"
         "English? Consider helping us to localize HTML Tidy. For details please see \n"
@@ -1300,25 +1323,21 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TC_OPT_XMLSTRG,               0,   "output all of tidy's strings in XML format"                              },
     { TC_OPT_XMLOPTS,               0,   "output all option descriptions cleaned XML format"                       },
     
-    { TC_STRING_CONF_HEADER,        0,   "\nConfiguration File Settings:\n\n"                                      },
+    { TC_STRING_CONF_HEADER,        0,   "Configuration File Settings:"                                            },
     {/* Must be 27 characters or fewer. */
-        TC_STRING_CONF_NAME,          0,   "Name"                                                                  },
+      TC_STRING_CONF_NAME,          0,   "Name"                                                                    },
     {/* Must be 9 characters or fewer. */
-        TC_STRING_CONF_TYPE,          0,   "Type"                                                                  },
+      TC_STRING_CONF_TYPE,          0,   "Type"                                                                    },
     {/* Must be 40 characters or fewer. */
-        TC_STRING_CONF_VALUE,         0,   "Current Value"                                                         },
-    { TC_STRING_CONF_NOTE,          0,
-        "\n\nValues marked with an *asterisk are calculated \n"
-        "internally by HTML Tidy\n\n"
-    },
-    
+      TC_STRING_CONF_VALUE,         0,   "Current Value"                                                           },
+    { TC_STRING_CONF_NOTE,          0,   "Values marked with an *asterisk are calculated internally by HTML Tidy"  },
     { TC_STRING_OPT_NOT_DOCUMENTED, 0,   "Warning: option `%1$s' is not documented.\n"                             },
     { TC_STRING_OUT_OF_MEMORY,      0,   "Out of memory. Bailing out."                                             },
     { TC_STRING_FATAL_ERROR,        0,   "Fatal error: impossible value for id='%1$d'.\n"                          },
     { TC_STRING_FILE_MANIP,         0,   "File manipulation"                                                       },
     { TC_STRING_PROCESS_DIRECTIVES, 0,   "Processing directives"                                                   },
     { TC_STRING_CHAR_ENCODING,      0,   "Character encodings"                                                     },
-    { TC_STRING_LANG_MUST_SPECIFY,  0,   "A POSIX or Windows locale must be specified.\n"                          },
+    { TC_STRING_LANG_MUST_SPECIFY,  0,   "A POSIX or Windows locale must be specified."                            },
     { TC_STRING_LANG_NOT_FOUND,     0,   "Tidy doesn't have language '%1$s,' will use '%2$s' instead.\n"           },
     { TC_STRING_MISC,               0,   "Miscellaneous"                                                           },
     { TC_STRING_XML,                0,   "XML"                                                                     },

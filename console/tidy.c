@@ -1304,7 +1304,7 @@ static void printOptionValues( TidyDoc ARG_UNUSED(tdoc), TidyOption topt,
  */
 static void optionvalues( TidyDoc tdoc )
 {
-	printf( "%s", tidyLocalizedString(TC_STRING_CONF_HEADER) );
+	printf( "\n%s\n\n", tidyLocalizedString(TC_STRING_CONF_HEADER) );
 	printf( fmt, tidyLocalizedString(TC_STRING_CONF_NAME),
 		   tidyLocalizedString(TC_STRING_CONF_TYPE),
 		   tidyLocalizedString(TC_STRING_CONF_VALUE) );
@@ -1312,7 +1312,7 @@ static void optionvalues( TidyDoc tdoc )
 	
 	ForEachSortedOption( tdoc, printOptionValues );
 	
-	printf( "%s", tidyLocalizedString(TC_STRING_CONF_NOTE) );
+	printf( "\n\n%s\n\n", tidyLocalizedString(TC_STRING_CONF_NOTE) );
 }
 
 /**
@@ -1593,7 +1593,7 @@ int main( int argc, char** argv )
 				}
 				else
 				{
-					printf( "%s", tidyLocalizedString(TC_STRING_LANG_MUST_SPECIFY));
+					printf( "%s\n", tidyLocalizedString(TC_STRING_LANG_MUST_SPECIFY));
 				}
 
 			else if ( strcasecmp(arg, "help") == 0 ||

@@ -983,7 +983,7 @@ void TY_(GeneralInfo)( TidyDocImpl* doc )
 
 void TY_(AccessibilityHelloMessage)( TidyDocImpl* doc )
 {
-    tidy_out(doc, "%s", tidyLocalizedString(STRING_HELLO_ACCESS));
+    tidy_out(doc, "\n%s\n\n", tidyLocalizedString(STRING_HELLO_ACCESS));
 }
 
 #endif /* SUPPORT_ACCESSIBILITY_CHECKS */
@@ -1028,12 +1028,12 @@ void TY_(ReportNumWarnings)( TidyDocImpl* doc )
 
         if ( doc->errors > cfg(doc, TidyShowErrors) ||
              !cfgBool(doc, TidyShowWarnings) )
-            tidy_out( doc, "%s", tidyLocalizedString(STRING_NOT_ALL_SHOWN) );
+            tidy_out( doc, " %s\n\n", tidyLocalizedString(STRING_NOT_ALL_SHOWN) );
         else
             tidy_out( doc, "\n\n" );
     }
     else
-        tidy_out( doc, "%s", tidyLocalizedString(STRING_NO_ERRORS) );
+        tidy_out( doc, "%s\n\n", tidyLocalizedString(STRING_NO_ERRORS) );
 }
 
 /*

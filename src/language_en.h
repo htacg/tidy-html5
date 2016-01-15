@@ -105,7 +105,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "        referenced by this attribute are inserted into the list and the \n"
         "        search stops for the current direction.\n"
         "        TD cells that set the axis attribute are also treated as header cells.\n"
-        " \n"
+        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_WINDOWS_CHARS,           0,
@@ -120,14 +120,16 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "It is unlikely that vendor-specific, system-dependent encodings\n"
         "work widely enough on the World Wide Web; you should avoid using the \n"
         "%1$s character encoding, instead you are recommended to\n"
-        "use named entities, e.g. &trade;.\n\n"
+        "use named entities, e.g. &trade;.\n"
+        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_SGML_CHARS,              0,
         "Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML;\n"
         "even if they were, they would likely be unprintable control characters.\n"
         "Tidy assumed you wanted to refer to a character with the same byte value in the \n"
-        "%1$s encoding and replaced that reference with the Unicode equivalent.\n\n"
+        "%1$s encoding and replaced that reference with the Unicode equivalent.\n"
+        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_INVALID_UTF8,            0,
@@ -139,14 +141,16 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "UTF-8 as a transformation of Unicode characters. ISO/IEC 10646\n"
         "does not allow mapping of unpaired surrogates, nor U+FFFE and U+FFFF\n"
         "(but it does allow other noncharacters). For more information please refer to\n"
-        "http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n\n"
+        "http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_INVALID_UTF16,           0,
         "Character codes for UTF-16 must be in the range: U+0000 to U+10FFFF.\n"
         "The definition of UTF-16 in Annex C of ISO/IEC 10646-1:2000 does not allow the\n"
         "mapping of unpaired surrogates. For more information please refer to\n"
-        "http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n\n"
+        "http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_INVALID_URI,             0,
@@ -157,7 +161,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "use another algorithm to escape such URIs and some server-sided\n"
         "scripts depend on that. If you want to depend on that, you must\n"
         "escape the URI on your own. For more information please refer to\n"
-        "http://www.w3.org/International/O-URL-and-ident.html\n\n"
+        "http://www.w3.org/International/O-URL-and-ident.html\n"
+        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_BAD_FORM,                0,
@@ -166,7 +171,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "are no exception. For instance you should not place the <form>\n"
         "in one table cell and the </form> in another. If the <form> is\n"
         "placed before a table, the </form> cannot be placed inside the\n"
-        "table! Note that one form can't be nested inside another!\n\n"
+        "table! Note that one form can't be nested inside another!\n"
+        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_BAD_MAIN,                0,
@@ -174,40 +180,46 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "Subsequent <main> elements have been discarded, which may\n"
         "render the document invalid.\n"
     },
-    { TEXT_M_SUMMARY,               0,
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_M_SUMMARY,               0,
         "The table summary attribute should be used to describe\n"
         "the table structure. It is very helpful for people using\n"
         "non-visual browsers. The scope and headers attributes for\n"
         "table cells are useful for specifying which headers apply\n"
         "to each table cell, enabling non-visual browsers to provide\n"
-        "a meaningful context for each cell.\n\n"
+        "a meaningful context for each cell.\n"
+        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_M_IMAGE_ALT,             0,
         "The alt attribute should be used to give a short description\n"
         "of an image; longer descriptions should be given with the\n"
         "longdesc attribute which takes a URL linked to the description.\n"
-        "These measures are needed for people using non-graphical browsers.\n\n"
+        "These measures are needed for people using non-graphical browsers.\n"
+        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_M_IMAGE_MAP,             0,
         "Use client-side image maps in preference to server-side image\n"
         "maps as the latter are inaccessible to people using non-\n"
         "graphical browsers. In addition, client-side maps are easier\n"
-        "to set up and provide immediate feedback to users.\n\n"
+        "to set up and provide immediate feedback to users.\n"
+        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_M_LINK_ALT,              0,
         "For hypertext links defined using a client-side image map, you\n"
         "need to use the alt attribute to provide a textual description\n"
-        "of the link for people using non-graphical browsers.\n\n"
+        "of the link for people using non-graphical browsers.\n"
+        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_USING_FRAMES,            0,
         "Pages designed using frames presents problems for\n"
         "people who are either blind or using a browser that\n"
         "doesn't support frames. A frames-based page should always\n"
-        "include an alternative layout inside a NOFRAMES element.\n\n"
+        "include an alternative layout inside a NOFRAMES element.\n"
+        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_ACCESS_ADVICE1,          0,
@@ -222,26 +234,30 @@ static languageDefinition language_en = { whichPluralForm_en, {
       TEXT_USING_LAYER,             0,
         "The Cascading Style Sheets (CSS) Positioning mechanism\n"
         "is recommended in preference to the proprietary <LAYER>\n"
-        "element due to limited vendor support for LAYER.\n\n"
+        "element due to limited vendor support for LAYER.\n"
+        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_USING_SPACER,            0,
         "You are recommended to use CSS for controlling white\n"
         "space (e.g. for indentation, margins and line spacing).\n"
-        "The proprietary <SPACER> element has limited vendor support.\n\n"
+        "The proprietary <SPACER> element has limited vendor support.\n"
+        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_USING_FONT,              0,
         "You are recommended to use CSS to specify the font and\n"
         "properties such as its size and color. This will reduce\n"
         "the size of HTML files and make them easier to maintain\n"
-        "compared with using <FONT> elements.\n\n"
+        "compared with using <FONT> elements.\n"
+        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_USING_NOBR,              0,
         "You are recommended to use CSS to control line wrapping.\n"
         "Use \"white-space: nowrap\" to inhibit wrapping in place\n"
-        "of inserting <NOBR>...</NOBR> into the markup.\n\n"
+        "of inserting <NOBR>...</NOBR> into the markup.\n"
+        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_USING_BODY,              0,
@@ -250,7 +266,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
     {/* This console output should be limited to 78 characters per line. */
       TEXT_NEEDS_INTERVENTION,      0,
         "This document has errors that must be fixed before\n"
-        "using HTML Tidy to generate a tidied up version.\n\n"
+        "using HTML Tidy to generate a tidied up version.\n"
+        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_GENERAL_INFO,            0,
@@ -1346,7 +1363,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TC_STRING_UNKNOWN_OPTION_B,   0,   "HTML Tidy: unknown option."                                              },
     { TC_STRING_VERS_A,             0,   "HTML Tidy for %1$s version %2$s\n"                                       },
     { TC_STRING_VERS_B,             0,   "HTML Tidy version %1$s\n"                                                },
-    { TC_TXT_HELP_1,                0,
+    {/* This console output should be limited to 78 characters per line. */
+      TC_TXT_HELP_1,                0,
         "\n"
         "%1$s [options...] [file...] [options...] [file...]\n"
         "Utility to clean up and pretty print HTML/XHTML/XML.\n"
@@ -1360,7 +1378,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TC_TXT_HELP_2B,               0,
         "Command Line Arguments for HTML Tidy:"
     },
-    { TC_TXT_HELP_3,                0,
+    {/* This console output should be limited to 78 characters per line. */
+      TC_TXT_HELP_3,                0,
         "\n"
         "Tidy Configuration Options\n"
         "==========================\n"
@@ -1400,47 +1419,67 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "or send questions and comments to public-htacg@w3.org.\n"
         "\n"
         "Validate your HTML documents using the W3C Nu Markup Validator:\n"
-        "  http://validator.w3.org/nu/"
-        "\n\n"
+        "  http://validator.w3.org/nu/\n"
+        "\n"
     },
-    { TC_TXT_HELP_CONFIG,           0,
-        "\nHTML Tidy Configuration Settings\n\n"
-        "Within a file, use the form:\n\n"
+    {/* This console output should be limited to 78 characters per line. */
+      TC_TXT_HELP_CONFIG,           0,
+        "\n"
+        "HTML Tidy Configuration Settings\n"
+        "\n"
+        "Within a file, use the form:\n"
+        "\n"
         "wrap: 72\n"
-        "indent: no\n\n"
-        "When specified on the command line, use the form:\n\n"
-        "--wrap 72 --indent no\n\n"
+        "indent: no\n"
+        "\n"
+        "When specified on the command line, use the form:\n"
+        "\n"
+        "--wrap 72 --indent no\n"
+        "\n"
     },
     { TC_TXT_HELP_CONFIG_NAME,      0,   "Name"                                                                    },
     { TC_TXT_HELP_CONFIG_TYPE,      0,   "Type"                                                                    },
     { TC_TXT_HELP_CONFIG_ALLW,      0,   "Allowable values"                                                        },
-    { TC_TXT_HELP_LANG_1,           0,
-        "\nThe --language (or --lang) option indicates which language Tidy \n"
+    {/* This console output should be limited to 78 characters per line. */
+      TC_TXT_HELP_LANG_1,           0,
+        "\n"
+        "The --language (or --lang) option indicates which language Tidy \n"
         "should use to communicate its output. Please note that this is not \n"
         "a document translation service, and only affects the messages that \n"
         "Tidy communicates to you. \n"
-        "\nWhen used from the command line the --language argument must \n"
+        "\n"
+        "When used from the command line the --language argument must \n"
         "be used before any arguments that result in output, otherwise Tidy \n"
         "will produce output before it knows which language to use. \n"
-        "\nIn addition to standard POSIX language codes, Tidy is capable of \n"
+        "\n"
+        "In addition to standard POSIX language codes, Tidy is capable of \n"
         "understanding legacy Windows language codes. Please note that this \n"
         "list indicates codes Tidy understands, and does not indicate that \n"
         "the language is currently installed. \n"
-        "\nThe rightmost column indicates how Tidy will understand the \n"
-        "legacy Windows name.\n\n"
+        "\n"
+        "The rightmost column indicates how Tidy will understand the \n"
+        "legacy Windows name.\n"
+        "\n"
     },
-    { TC_TXT_HELP_LANG_2,           0,
-        "\nThe following languages are currently installed in Tidy. Please \n"
+    {/* This console output should be limited to 78 characters per line. */
+      TC_TXT_HELP_LANG_2,           0,
+        "\n"
+        "The following languages are currently installed in Tidy. Please \n"
         "note that there's no guarantee that they are complete; only that \n"
         "one developer or another started to add the language indicated. \n"
-        "\nIncomplete localizations will default to \"en\" when necessary. \n"
-        "Please report instances of incorrect strings to the Tidy team. \n\n"
+        "\n"
+        "Incomplete localizations will default to \"en\" when necessary. \n"
+        "Please report instances of incorrect strings to the Tidy team. \n"
+        "\n"
     },
-    { TC_TXT_HELP_LANG_3,           0,
-        "\nIf Tidy is able to determine your locale then Tidy will use the \n"
+    {/* This console output should be limited to 78 characters per line. */
+      TC_TXT_HELP_LANG_3,           0,
+        "\n"
+        "If Tidy is able to determine your locale then Tidy will use the \n"
         "locale's language automatically. For example Unix-like systems use a \n"
         "$LANG and/or $LC_ALL environment variable. Consult your operating \n"
-        "system documentation for more information. \n\n"
+        "system documentation for more information. \n"
+        "\n"
     },
     
     

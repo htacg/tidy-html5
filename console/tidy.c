@@ -300,6 +300,7 @@ static tmbstr stringWithFormat( const ctmbstr fmt, ... )
 	return result;
 }
 
+
 /**
  **  Option names aren't localized, but the  sample fields
  **  are, for example <file> should be <archivo> in Spanish.
@@ -1444,9 +1445,7 @@ int main( int argc, char** argv )
 	uint accessWarnings = 0;
 	
 	errout = stderr;  /* initialize to stderr */
-	
-//	tidySetPrettyPrinterCallback(tdoc, progressTester);
-
+    
 	/* Set the locale for tidy's output. */
 	locale = tidySystemLocale(locale);
 	tidySetLanguage(locale);

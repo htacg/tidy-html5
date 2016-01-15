@@ -1285,7 +1285,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TC_LABEL_LANG,                0,   "lang"                                                                    },
     { TC_LABEL_LEVL,                0,   "level"                                                                   },
     { TC_LABEL_OPT,                 0,   "option"                                                                  },
-    { TC_MAIN_ERROR_LOAD_CONFIG,    0,   "Loading config file \"%1$s\" failed, err = %2$d\n"                       },
+    { TC_MAIN_ERROR_LOAD_CONFIG,    0,   "Loading config file \"%1$s\" failed, err = %2$d"                         },
     { TC_OPT_ACCESS,                0,
         "do additional accessibility checks (<level> = 0, 1, 2, 3). 0 is "
         "assumed if <level> is missing."
@@ -1348,21 +1348,21 @@ static languageDefinition language_en = { whichPluralForm_en, {
     {/* Must be 40 characters or fewer. */
       TC_STRING_CONF_VALUE,         0,   "Current Value"                                                           },
     { TC_STRING_CONF_NOTE,          0,   "Values marked with an *asterisk are calculated internally by HTML Tidy"  },
-    { TC_STRING_OPT_NOT_DOCUMENTED, 0,   "Warning: option `%1$s' is not documented.\n"                             },
+    { TC_STRING_OPT_NOT_DOCUMENTED, 0,   "Warning: option `%1$s' is not documented."                               },
     { TC_STRING_OUT_OF_MEMORY,      0,   "Out of memory. Bailing out."                                             },
-    { TC_STRING_FATAL_ERROR,        0,   "Fatal error: impossible value for id='%1$d'.\n"                          },
+    { TC_STRING_FATAL_ERROR,        0,   "Fatal error: impossible value for id='%1$d'."                            },
     { TC_STRING_FILE_MANIP,         0,   "File manipulation"                                                       },
     { TC_STRING_PROCESS_DIRECTIVES, 0,   "Processing directives"                                                   },
     { TC_STRING_CHAR_ENCODING,      0,   "Character encodings"                                                     },
     { TC_STRING_LANG_MUST_SPECIFY,  0,   "A POSIX or Windows locale must be specified."                            },
-    { TC_STRING_LANG_NOT_FOUND,     0,   "Tidy doesn't have language '%1$s,' will use '%2$s' instead.\n"           },
+    { TC_STRING_LANG_NOT_FOUND,     0,   "Tidy doesn't have language '%1$s,' will use '%2$s' instead."             },
     { TC_STRING_MISC,               0,   "Miscellaneous"                                                           },
     { TC_STRING_XML,                0,   "XML"                                                                     },
     { TC_STRING_MUST_SPECIFY,       0,   "A Tidy option name must be specified."                                   },
-    { TC_STRING_UNKNOWN_OPTION,     0,   "HTML Tidy: unknown option: %1$c\n"                                       },
+    { TC_STRING_UNKNOWN_OPTION,     0,   "HTML Tidy: unknown option: %1$c"                                         },
     { TC_STRING_UNKNOWN_OPTION_B,   0,   "HTML Tidy: unknown option."                                              },
-    { TC_STRING_VERS_A,             0,   "HTML Tidy for %1$s version %2$s\n"                                       },
-    { TC_STRING_VERS_B,             0,   "HTML Tidy version %1$s\n"                                                },
+    { TC_STRING_VERS_A,             0,   "HTML Tidy for %1$s version %2$s"                                         },
+    { TC_STRING_VERS_B,             0,   "HTML Tidy version %1$s"                                                  },
     {/* This console output should be limited to 78 characters per line. */
       TC_TXT_HELP_1,                0,
         "\n"

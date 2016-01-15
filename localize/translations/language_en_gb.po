@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2016-01-15 11:20:42\n"
+"PO-Revision-Date: 2016-01-15 11:38:56\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -2386,7 +2386,7 @@ msgstr ""
 
 #, c-format
 msgctxt "TC_MAIN_ERROR_LOAD_CONFIG"
-msgid "Loading config file \"%1$s\" failed, err = %2$d\n"
+msgid "Loading config file \"%1$s\" failed, err = %2$d"
 msgstr ""
 
 msgctxt "TC_OPT_ACCESS"
@@ -2590,7 +2590,7 @@ msgstr ""
 
 #, c-format
 msgctxt "TC_STRING_OPT_NOT_DOCUMENTED"
-msgid "Warning: option `%1$s' is not documented.\n"
+msgid "Warning: option `%1$s' is not documented."
 msgstr ""
 
 msgctxt "TC_STRING_OUT_OF_MEMORY"
@@ -2599,7 +2599,7 @@ msgstr ""
 
 #, c-format
 msgctxt "TC_STRING_FATAL_ERROR"
-msgid "Fatal error: impossible value for id='%1$d'.\n"
+msgid "Fatal error: impossible value for id='%1$d'."
 msgstr ""
 
 msgctxt "TC_STRING_FILE_MANIP"
@@ -2620,7 +2620,7 @@ msgstr ""
 
 #, c-format
 msgctxt "TC_STRING_LANG_NOT_FOUND"
-msgid "Tidy doesn't have language '%1$s,' will use '%2$s' instead.\n"
+msgid "Tidy doesn't have language '%1$s,' will use '%2$s' instead."
 msgstr ""
 
 msgctxt "TC_STRING_MISC"
@@ -2636,7 +2636,7 @@ msgid "A Tidy option name must be specified."
 msgstr ""
 
 msgctxt "TC_STRING_UNKNOWN_OPTION"
-msgid "HTML Tidy: unknown option: %1$c\n"
+msgid "HTML Tidy: unknown option: %1$c"
 msgstr ""
 
 msgctxt "TC_STRING_UNKNOWN_OPTION_B"
@@ -2645,12 +2645,12 @@ msgstr ""
 
 #, c-format
 msgctxt "TC_STRING_VERS_A"
-msgid "HTML Tidy for %1$s version %2$s\n"
+msgid "HTML Tidy for %1$s version %2$s"
 msgstr ""
 
 #, c-format
 msgctxt "TC_STRING_VERS_B"
-msgid "HTML Tidy version %1$s\n"
+msgid "HTML Tidy version %1$s"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.

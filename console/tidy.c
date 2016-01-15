@@ -557,6 +557,8 @@ static ctmbstr ConfigCategoryName( TidyConfigCategory id )
 			return tidyLocalizedString( TC_CAT_MISC );
 	}
 	fprintf(stderr, tidyLocalizedString(TC_STRING_FATAL_ERROR), (int)id);
+    fprintf(stderr, "\n");
+
 	assert(0);
 	abort();
 	return "never_here"; /* only for the compiler warning */
@@ -801,6 +803,8 @@ static void printXMLDescription( TidyDoc tdoc, TidyOption topt )
 		printf("  <description />\n");
 		fprintf(stderr, tidyLocalizedString(TC_STRING_OPT_NOT_DOCUMENTED),
 				tidyOptGetName( topt ));
+        fprintf(stderr, "\n");
+
 	}
 }
 
@@ -1324,8 +1328,9 @@ static void version( void )
 #ifdef PLATFORM_NAME
 	printf( tidyLocalizedString( TC_STRING_VERS_A ), PLATFORM_NAME, tidyLibraryVersion() );
 #else
-	printf( tidyLocalizedString( TC_STRING_VERS_A ), tidyLibraryVersion() );
+	printf( tidyLocalizedString( TC_STRING_VERS_B ), tidyLibraryVersion() );
 #endif
+    printf("\n");
 }
 
 
@@ -1418,6 +1423,7 @@ static void lang_help( void )
 static void unknownOption( uint c )
 {
 	fprintf( errout, tidyLocalizedString( TC_STRING_UNKNOWN_OPTION ), (char)c );
+    fprintf( errout, "\n");
 }
 
 /**
@@ -1469,23 +1475,29 @@ int main( int argc, char** argv )
 	if ( tidyFileExists( tdoc, TIDY_CONFIG_FILE) )
 	{
 		status = tidyLoadConfig( tdoc, TIDY_CONFIG_FILE );
-		if ( status != 0 )
+        if ( status != 0 ) {
 			fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), TIDY_CONFIG_FILE, status);
+            fprintf(errout, "\n");
+        }
 	}
 #endif /* TIDY_CONFIG_FILE */
 	
 	if ( (cfgfil = getenv("HTML_TIDY")) != NULL )
 	{
 		status = tidyLoadConfig( tdoc, cfgfil );
-		if ( status != 0 )
+        if ( status != 0 ) {
 			fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), cfgfil, status);
+            fprintf(errout, "\n");
+        }
 	}
 #ifdef TIDY_USER_CONFIG_FILE
 	else if ( tidyFileExists( tdoc, TIDY_USER_CONFIG_FILE) )
 	{
 		status = tidyLoadConfig( tdoc, TIDY_USER_CONFIG_FILE );
-		if ( status != 0 )
+        if ( status != 0 ) {
 			fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), TIDY_USER_CONFIG_FILE, status);
+            fprintf(errout, "\n");
+        }
 	}
 #endif /* TIDY_USER_CONFIG_FILE */
 
@@ -1586,6 +1598,7 @@ int main( int argc, char** argv )
 					{
 						printf(tidyLocalizedString(TC_STRING_LANG_NOT_FOUND),
 							   argv[2], tidyGetLanguage());
+                        printf("\n");
 					}
 					--argc;
 					++argv;

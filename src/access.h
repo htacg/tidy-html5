@@ -114,8 +114,11 @@ struct _TidyAccessImpl
 
     Offset accessibility error codes by FIRST_ACCESS_ERR to avoid conflict with
     other error codes defined in message.h and used in localize.c.
-*/
-enum accessErrorCodes
+  
+    These accessErrorCodes are used throughout libtidy, and also
+    have associated localized strings to describe them.
+ */
+typedef enum
 {
                            FIRST_ACCESS_ERR = 1000,    /* must be first */
  
@@ -252,7 +255,7 @@ enum accessErrorCodes
     /* [13.10.1.1] */      SKIPOVER_ASCII_ART,
     
     LAST_ACCESS_ERR    /* must be last */
-};
+} accessErrorCodes;
 
 
 void TY_(AccessibilityHelloMessage)( TidyDocImpl* doc );

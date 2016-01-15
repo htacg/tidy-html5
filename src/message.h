@@ -10,28 +10,27 @@
 
 #include "forward.h"
 #include "tidy.h"  /* For TidyReportLevel */
+#include "language.h"
 
 /* General message writing routines.
 ** Each message is a single warning, error, etc.
 **
-** This routine will keep track of counts and,
+** These routines keep track of counts and,
 ** if the caller has set a filter, it will be
-** called.  The new preferred way of handling
+** called. The new preferred way of handling
 ** Tidy diagnostics output is either a) define
 ** a new output sink or b) install a message
 ** filter routine.
 **
-** Keeps track of ShowWarnings, ShowErrors, etc.
+** Keep track of ShowWarnings, ShowErrors, etc.
 */
 
 ctmbstr TY_(ReleaseDate)(void);
 
-/* void TY_(ShowVersion)( TidyDocImpl* doc ); */
 void TY_(ReportUnknownOption)( TidyDocImpl* doc, ctmbstr option );
 void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option );
 void TY_(NeedsAuthorIntervention)( TidyDocImpl* doc );
 
-/* void TY_(HelloMessage)( TidyDocImpl* doc, ctmbstr date, ctmbstr filename ); */
 void TY_(ReportMarkupVersion)( TidyDocImpl* doc );
 void TY_(ReportNumWarnings)( TidyDocImpl* doc );
 
@@ -60,117 +59,184 @@ void TY_(ReportWarning)(TidyDocImpl* doc, Node *element, Node *node, uint code);
 void TY_(ReportError)(TidyDocImpl* doc, Node* element, Node* node, uint code);
 void TY_(ReportFatal)(TidyDocImpl* doc, Node* element, Node* node, uint code);
 
-/* error codes for entities/numeric character references */
 
-#define MISSING_SEMICOLON            1
-#define MISSING_SEMICOLON_NCR        2
-#define UNKNOWN_ENTITY               3
-#define UNESCAPED_AMPERSAND          4
-#define APOS_UNDEFINED               5
+/**
+ *  These tidyErrorCodes are used throughout libtidy, and also
+ *  have associated localized strings to describe them.
+ */
+typedef enum {
+    /* This MUST be present and first. */
+    CODES_TIDY_ERROR_FIRST = 200,
 
-/* error codes for element messages */
+    /* error codes for entities/numeric character references */
 
-#define MISSING_ENDTAG_FOR           6
-#define MISSING_ENDTAG_BEFORE        7
-#define DISCARDING_UNEXPECTED        8
-#define NESTED_EMPHASIS              9
-#define NON_MATCHING_ENDTAG          10
-#define TAG_NOT_ALLOWED_IN           11
-#define MISSING_STARTTAG             12
-#define UNEXPECTED_ENDTAG            13
-#define USING_BR_INPLACE_OF          14
-#define INSERTING_TAG                15
-#define SUSPECTED_MISSING_QUOTE      16
-#define MISSING_TITLE_ELEMENT        17
-#define DUPLICATE_FRAMESET           18
-#define CANT_BE_NESTED               19
-#define OBSOLETE_ELEMENT             20
-#define PROPRIETARY_ELEMENT          21
-#define UNKNOWN_ELEMENT              22
-#define TRIM_EMPTY_ELEMENT           23
-#define COERCE_TO_ENDTAG             24
-#define ILLEGAL_NESTING              25
-#define NOFRAMES_CONTENT             26
-#define CONTENT_AFTER_BODY           27
-#define INCONSISTENT_VERSION         28
-#define MALFORMED_COMMENT            29
-#define BAD_COMMENT_CHARS            30
-#define BAD_XML_COMMENT              31
-#define BAD_CDATA_CONTENT            32
-#define INCONSISTENT_NAMESPACE       33
-#define DOCTYPE_AFTER_TAGS           34
-#define MALFORMED_DOCTYPE            35
-#define UNEXPECTED_END_OF_FILE       36
-#define DTYPE_NOT_UPPER_CASE         37
-#define TOO_MANY_ELEMENTS            38
-#define UNESCAPED_ELEMENT            39
-#define NESTED_QUOTATION             40
-#define ELEMENT_NOT_EMPTY            41
-#define ENCODING_IO_CONFLICT         42
-#define MIXED_CONTENT_IN_BLOCK       43
-#define MISSING_DOCTYPE              44
-#define SPACE_PRECEDING_XMLDECL      45
-#define TOO_MANY_ELEMENTS_IN         46
-#define UNEXPECTED_ENDTAG_IN         47
-#define REPLACING_ELEMENT            83
-#define REPLACING_UNEX_ELEMENT       84
-#define COERCE_TO_ENDTAG_WARN        85
+    MISSING_SEMICOLON,
+    MISSING_SEMICOLON_NCR,
+    UNKNOWN_ENTITY,
+    UNESCAPED_AMPERSAND,
+    APOS_UNDEFINED,
 
-/* error codes used for attribute messages */
+    /* error codes for element messages */
 
-#define UNKNOWN_ATTRIBUTE            48
-#define INSERTING_ATTRIBUTE          49
-#define INSERTING_AUTO_ATTRIBUTE     50
-#define MISSING_ATTR_VALUE           51
-#define BAD_ATTRIBUTE_VALUE          52
-#define UNEXPECTED_GT                53
-#define PROPRIETARY_ATTRIBUTE        54
-#define PROPRIETARY_ATTR_VALUE       55
-#define REPEATED_ATTRIBUTE           56
-#define MISSING_IMAGEMAP             57
-#define XML_ATTRIBUTE_VALUE          58
-#define UNEXPECTED_QUOTEMARK         59
-#define MISSING_QUOTEMARK            60
-#define ID_NAME_MISMATCH             61
+    MISSING_ENDTAG_FOR,
+    MISSING_ENDTAG_BEFORE,
+    DISCARDING_UNEXPECTED,
+    NESTED_EMPHASIS,
+    NON_MATCHING_ENDTAG,
+    TAG_NOT_ALLOWED_IN,
+    MISSING_STARTTAG,
+    UNEXPECTED_ENDTAG,
+    USING_BR_INPLACE_OF,
+    INSERTING_TAG,
+    SUSPECTED_MISSING_QUOTE,
+    MISSING_TITLE_ELEMENT,
+    DUPLICATE_FRAMESET,
+    CANT_BE_NESTED,
+    OBSOLETE_ELEMENT,
+    PROPRIETARY_ELEMENT,
+    UNKNOWN_ELEMENT,
+    TRIM_EMPTY_ELEMENT,
+    COERCE_TO_ENDTAG,
+    ILLEGAL_NESTING,
+    NOFRAMES_CONTENT,
+    CONTENT_AFTER_BODY,
+    INCONSISTENT_VERSION,
+    MALFORMED_COMMENT,
+    BAD_COMMENT_CHARS,
+    BAD_XML_COMMENT,
+    BAD_CDATA_CONTENT,
+    INCONSISTENT_NAMESPACE,
+    DOCTYPE_AFTER_TAGS,
+    MALFORMED_DOCTYPE,
+    UNEXPECTED_END_OF_FILE,
+    DTYPE_NOT_UPPER_CASE,
+    TOO_MANY_ELEMENTS,
+    UNESCAPED_ELEMENT,
+    NESTED_QUOTATION,
+    ELEMENT_NOT_EMPTY,
+    ENCODING_IO_CONFLICT,
+    MIXED_CONTENT_IN_BLOCK,
+    MISSING_DOCTYPE,
+    SPACE_PRECEDING_XMLDECL,
+    TOO_MANY_ELEMENTS_IN,
+    UNEXPECTED_ENDTAG_IN,
+    REPLACING_ELEMENT,
+    REPLACING_UNEX_ELEMENT,
+    COERCE_TO_ENDTAG_WARN,
 
-#define BACKSLASH_IN_URI             62
-#define FIXED_BACKSLASH              63
-#define ILLEGAL_URI_REFERENCE        64
-#define ESCAPED_ILLEGAL_URI          65
+    /* error codes used for attribute messages */
 
-#define NEWLINE_IN_URI               66
-#define ANCHOR_NOT_UNIQUE            67
+    UNKNOWN_ATTRIBUTE,
+    INSERTING_ATTRIBUTE,
+    INSERTING_AUTO_ATTRIBUTE,
+    MISSING_ATTR_VALUE,
+    BAD_ATTRIBUTE_VALUE,
+    UNEXPECTED_GT,
+    PROPRIETARY_ATTRIBUTE,
+    PROPRIETARY_ATTR_VALUE,
+    REPEATED_ATTRIBUTE,
+    MISSING_IMAGEMAP,
+    XML_ATTRIBUTE_VALUE,
+    UNEXPECTED_QUOTEMARK,
+    MISSING_QUOTEMARK,
+    ID_NAME_MISMATCH,
 
-#define JOINING_ATTRIBUTE            68
-#define UNEXPECTED_EQUALSIGN         69
-#define ATTR_VALUE_NOT_LCASE         70
-#define XML_ID_SYNTAX                71
+    BACKSLASH_IN_URI,
+    FIXED_BACKSLASH,
+    ILLEGAL_URI_REFERENCE,
+    ESCAPED_ILLEGAL_URI,
 
-#define INVALID_ATTRIBUTE            72
+    NEWLINE_IN_URI,
+    ANCHOR_NOT_UNIQUE,
 
-#define BAD_ATTRIBUTE_VALUE_REPLACED 73
+    JOINING_ATTRIBUTE,
+    UNEXPECTED_EQUALSIGN,
+    ATTR_VALUE_NOT_LCASE,
+    XML_ID_SYNTAX,
 
-#define INVALID_XML_ID               74
-#define UNEXPECTED_END_OF_FILE_ATTR  75
-#define MISSING_ATTRIBUTE            86
-#define WHITE_IN_URI                 87
+    INVALID_ATTRIBUTE,
 
-#define REMOVED_HTML5                88 /* this element removed from HTML5 */
-#define BAD_BODY_HTML5               89 /* attr on body removed from HTML5 */
-#define BAD_ALIGN_HTML5              90 /* use of align attr removed from HTML5 */
-#define BAD_SUMMARY_HTML5            91 /* use of summary attr removed from HTML5 */
+    BAD_ATTRIBUTE_VALUE_REPLACED,
 
-#define PREVIOUS_LOCATION            92 /* last */
+    INVALID_XML_ID,
+    UNEXPECTED_END_OF_FILE_ATTR,
+    MISSING_ATTRIBUTE,
+    WHITE_IN_URI,
 
-/* character encoding errors */
+    REMOVED_HTML5,                 /* this element removed from HTML5 */
+    BAD_BODY_HTML5,                /* attr on body removed from HTML5 */
+    BAD_ALIGN_HTML5,               /* use of align attr removed from HTML5 */
+    BAD_SUMMARY_HTML5,             /* use of summary attr removed from HTML5 */
 
-#define VENDOR_SPECIFIC_CHARS        76
-#define INVALID_SGML_CHARS           77
-#define INVALID_UTF8                 78
-#define INVALID_UTF16                79
-#define ENCODING_MISMATCH            80
-#define INVALID_URI                  81
-#define INVALID_NCR                  82
+    PREVIOUS_LOCATION,             /* last */
+
+    /* character encoding errors */
+
+    VENDOR_SPECIFIC_CHARS,
+    INVALID_SGML_CHARS,
+    INVALID_UTF8,
+    INVALID_UTF16,
+    ENCODING_MISMATCH,
+    INVALID_URI,
+    INVALID_NCR,
+
+    /* This MUST be present and last. */
+    CODES_TIDY_ERROR_LAST
+} tidyErrorCodes;
+
+/**
+ *  These tidyMessagesMisc are used throughout libtidy, and also
+ *  have associated localized strings to describe them.
+ */
+typedef enum {
+    ACCESS_URL = 2048,          /* Used to point to Web Accessibility Guidelines. */
+    ATRC_ACCESS_URL,            /* Points to Tidy's accessibility page. */
+    FILE_CANT_OPEN,             /* For retrieving a string when a file can't be opened. */
+    LINE_COLUMN_STRING,         /* For retrieving localized `line %d column %d` text. */
+    STRING_CONTENT_LOOKS,       /* `Document content looks like %s`. */
+    STRING_DISCARDING,          /* For `discarding`. */
+    STRING_DOCTYPE_GIVEN,       /* `Doctype given is \"%s\". */
+    STRING_ERROR_COUNT,         /* `%u %s, %u %s were found!`. */
+	STRING_ERROR_COUNT_ERROR,   /* `error` and `errors`. */
+    STRING_ERROR_COUNT_WARNING, /* `warning` and `warnings`. */
+    STRING_HELLO_ACCESS,        /* Accessibility hello message. */
+    STRING_HTML_PROPRIETARY,    /* `HTML Proprietary`/ */
+    STRING_MISSING_MALFORMED,   /* For `missing or malformed argument for option: %s`. */
+    STRING_NO_ERRORS,           /* `No warnings or errors were found.\n\n`. */
+    STRING_NO_SYSID,            /* `No system identifier in emitted doctype`. */
+    STRING_NOT_ALL_SHOWN,       /* ` Not all warnings/errors were shown.\n\n`. */
+    STRING_PLAIN_TEXT,          /* For retrieving a string `plain text`. */
+    STRING_REPLACING,           /* For `replacing`. */
+    STRING_SPECIFIED,           /* For `specified`. */
+    STRING_UNKNOWN_FILE,        /* `%s: can't open file \"%s\"\n`. */
+    STRING_UNKNOWN_OPTION,      /* For retrieving a string `unknown option: %s`. */
+    STRING_UNRECZD_OPTION,      /* `unrecognized option -%c use -help to list options\n`. */
+    STRING_XML_DECLARATION,     /* For retrieving a string `XML declaration`. */
+    TEXT_ACCESS_ADVICE1,        /* Explanatory text. */
+    TEXT_ACCESS_ADVICE2,        /* Explanatory text. */
+    TEXT_BAD_FORM,              /* Explanatory text. */
+    TEXT_BAD_MAIN,              /* Explanatory text. */
+    TEXT_GENERAL_INFO,          /* Explanatory text. */
+	TEXT_GENERAL_INFO_PLEA,     /* Explanatory text. */
+    TEXT_HTML_T_ALGORITHM,      /* Paragraph for describing the HTML table algorithm. */
+    TEXT_INVALID_URI,           /* Explanatory text. */
+    TEXT_INVALID_UTF16,         /* Explanatory text. */
+    TEXT_INVALID_UTF8,          /* Explanatory text. */
+    TEXT_M_IMAGE_ALT,           /* Explanatory text. */
+    TEXT_M_IMAGE_MAP,           /* Explanatory text. */
+    TEXT_M_LINK_ALT,            /* Explanatory text. */
+    TEXT_M_SUMMARY,             /* Explanatory text. */
+    TEXT_NEEDS_INTERVENTION,    /* Explanatory text. */
+    TEXT_SGML_CHARS,            /* Explanatory text. */
+    TEXT_USING_BODY,            /* Explanatory text. */
+    TEXT_USING_FONT,            /* Explanatory text. */
+    TEXT_USING_FRAMES,          /* Explanatory text. */
+    TEXT_USING_LAYER,           /* Explanatory text. */
+    TEXT_USING_NOBR,            /* Explanatory text. */
+    TEXT_USING_SPACER,          /* Explanatory text. */
+    TEXT_VENDOR_CHARS,          /* Explanatory text. */
+    TEXT_WINDOWS_CHARS          /* Explanatory text. */
+} tidyMessagesMisc;
 
 /* accessibility flaws */
 
@@ -191,9 +257,6 @@ void TY_(ReportFatal)(TidyDocImpl* doc, Node* element, Node* node, uint code);
 #define USING_FONT              8
 #define USING_BODY              16
 
-#define REPLACED_CHAR           0
-#define DISCARDED_CHAR          1
-
 /* badchar bit field */
 
 #define BC_VENDOR_SPECIFIC_CHARS   1
@@ -203,5 +266,11 @@ void TY_(ReportFatal)(TidyDocImpl* doc, Node* element, Node* node, uint code);
 #define BC_ENCODING_MISMATCH       16 /* fatal error */
 #define BC_INVALID_URI             32
 #define BC_INVALID_NCR             64
+
+/* Lexer and I/O Macros */
+
+#define REPLACED_CHAR           0
+#define DISCARDED_CHAR          1
+
 
 #endif /* __MESSAGE_H__ */

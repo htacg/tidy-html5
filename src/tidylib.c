@@ -516,8 +516,7 @@ ctmbstr TIDY_CALL       tidyOptGetNextDeclTag( TidyDoc tdoc, TidyOptionId optId,
 ctmbstr TIDY_CALL tidyOptGetDoc( TidyDoc ARG_UNUSED(tdoc), TidyOption opt )
 {
     const TidyOptionId optId = tidyOptGetId( opt );
-    const TidyOptionDoc* docDesc = TY_(OptGetDocDesc)( optId );
-    return docDesc ? docDesc->doc : NULL;
+    return tidyLocalizedString(optId);
 }
 
 TidyIterator TIDY_CALL tidyOptGetDocLinksList( TidyDoc ARG_UNUSED(tdoc), TidyOption opt )
@@ -657,6 +656,11 @@ Bool TIDY_CALL        tidySetReportFilter( TidyDoc tdoc, TidyReportFilter filt )
   return no;
 }
 
+/* TidyReportFilter2 functions similar to TidyReportFilter, but provides the
+** built-in English format string and va_list so that LibTidy users can use
+** the format string as a lookup key for providing their own error 
+** localizations.
+*/
 Bool TIDY_CALL        tidySetReportFilter2( TidyDoc tdoc, TidyReportFilter2 filt )
 {
   TidyDocImpl* impl = tidyDocToImpl( tdoc );

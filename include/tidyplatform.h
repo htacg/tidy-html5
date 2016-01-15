@@ -60,6 +60,11 @@ extern "C" {
 #define SUPPORT_ACCESSIBILITY_CHECKS 1
 #endif
 
+/* Enable/disable support for additional languages */
+#ifndef SUPPORT_LOCALIZATIONS
+#define SUPPORT_LOCALIZATIONS 1
+#endif
+
 
 /* Convenience defines for Mac platforms */
 
@@ -445,7 +450,7 @@ extern "C" {
 #define utimbuf _utimbuf /* Windows seems to want utimbuf */
 #define stat _stat
 #define utime _utime
-#define vsnprintf _vsnprintf
+#define vsnprintf prvTidywin_vsnprintf
 #endif /* _WIN32 */
 
 #endif /* PRESERVE_FILE_TIMES */

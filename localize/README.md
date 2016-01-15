@@ -170,7 +170,7 @@ purpose computer with any operating system.
 While this does not pose a significant problem for storage or execution space
 on modern PC's, we understand that certain applications may still be space
 critical. As such it's trivial to build Tidy without this extra language
-support.
+support using the `-DSUPPORT_LOCALIZATIONS=NO` switch.
 
 
 ## potool.rb

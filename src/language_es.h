@@ -19,8 +19,8 @@
  * Template Created by Jim Derry on 01/14/2016.
  *
  * Orginating PO file metadata:
- *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2016-01-14 17:18:31
+ *   PO_LAST_TRANSLATOR=Jim Derry <balthisar@gmail.com>
+ *   PO_REVISION_DATE=2016-01-18 11:40+0800
  */
 
 #ifdef _MSC_VER
@@ -57,50 +57,67 @@ static languageDefinition language_es = { whichPluralForm_es, {
     {/* Specify the ll or ll_cc language code here. */
       TIDY_LANGUAGE,          0, "es"
     },
-    { TEXT_GENERAL_INFO_PLEA, 0,        
+    {/* This console output should be limited to 78 characters per line. */
+      TEXT_GENERAL_INFO_PLEA, 0,        
         "\n"
         "¿Le gustaría ver Tidy en un español correcto? Por favor considere \n"
         "ayudarnos a localizar HTML Tidy. Para más detalles consulte \n"
         "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md \n"
     },
     { TidyMakeClean,          0,        
-        "Esta opción especifica si Tidy debe realizar la limpieza de algún "
-        "legado etiquetas de presentación (actualmente <code>&lt;i&gt;</code>, "
-        "<code>&lt;b&gt;</code>, <code>&lt;center&gt;</code> cuando encerrados "
-        "dentro de las etiquetas apropiadas en línea y "
-        "<code>&lt;font&gt;</code>). Si se establece en <code>yes</code>, "
-        "entonces etiquetas existentes serán reemplazados con CSS "
-        "<code>&lt;style&gt;</code> y estructural markup según corresponda. "
+        "Esta opción especifica si Tidy debe realizar la limpieza de algún legado etiquetas de "
+        "presentación (actualmente <code>&lt;i&gt;</code>, <code>&lt;b&gt;</code>, <code>&lt;center&gt;</"
+        "code> cuando encerrados dentro de las etiquetas apropiadas en línea y <code>&lt;font&gt;</"
+        "code>). Si se establece en <code>yes</code>, entonces etiquetas existentes serán reemplazados "
+        "con CSS <code>&lt;style&gt;</code> y estructural markup según corresponda. "
     },
-    { TC_TXT_HELP_LANG_1,     0,        
-        "\nLa opción --language (o --lang) indica el lenguaje Tidy debe \n"
+
+#if SUPPORT_ASIAN_ENCODINGS
+    { TidyNCR,                0, "Esta opción especifica si Tidy debe permitir referencias de caracteres numéricos. "   },
+#endif /* SUPPORT_ASIAN_ENCODINGS */
+
+    {/* This console output should be limited to 78 characters per line. */
+      TC_TXT_HELP_LANG_1,     0,        
+        "\n"
+        "La opción --language (o --lang) indica el lenguaje Tidy debe \n"
         "utilizar para comunicar su salida. Tenga en cuenta que esto no es \n"
         "un servicio de traducción de documentos, y sólo afecta a los mensajes \n"
         "que Tidy comunica a usted. \n"
-        "\nCuando se utiliza la línea de comandos el argumento --language debe \n"
+        "\n"
+        "Cuando se utiliza la línea de comandos el argumento --language debe \n"
         "utilizarse antes de cualquier argumento que dan lugar a la producción, \n"
         "de lo contrario Tidy producirá la salida antes de que se conozca el \n"
         "idioma a utilizar. \n"
-        "\nAdemás de los códigos de idioma estándar POSIX, Tidy es capaz de \n"
+        "\n"
+        "Además de los códigos de idioma estándar POSIX, Tidy es capaz de \n"
         "entender códigos de idioma legados de Windows. Tenga en cuenta que \n"
         "este lista indica los códigos Tidy entiende, y no indica que \n"
         "actualmente el idioma está instalado. \n"
-        "\nLa columna más a la derecha indica cómo Tidy comprenderá el \n"
-        "legado nombre de Windows.\n\n"
+        "\n"
+        "La columna más a la derecha indica cómo Tidy comprenderá el \n"
+        "legado nombre de Windows.\n"
+        "\n"
     },
-    { TC_TXT_HELP_LANG_2,     0,        
-        "\nLos siguientes idiomas están instalados actualmente en Tidy. Tenga \n"
+    {/* This console output should be limited to 78 characters per line. */
+      TC_TXT_HELP_LANG_2,     0,        
+        "\n"
+        "Los siguientes idiomas están instalados actualmente en Tidy. Tenga \n"
         "en cuenta que no hay garantía de que están completos; sólo quiere decir \n"
         "que un desarrollador u otro comenzaron a añadir el idioma indicado. \n"
-        "\nLocalizaciones incompletas por defecto se usan \"en\" cuando sea \n"
-        "necesario. ¡Favor de informar los desarrolladores de estes casos! \n\n"
+        "\n"
+        "Localizaciones incompletas por defecto se usan \"en\" cuando sea \n"
+        "necesario. ¡Favor de informar los desarrolladores de estes casos! \n"
+        "\n"
     },
-    { TC_TXT_HELP_LANG_3,     0,        
-        "\nSi Tidy es capaz de determinar la configuración regional entonces \n"
+    {/* This console output should be limited to 78 characters per line. */
+      TC_TXT_HELP_LANG_3,     0,        
+        "\n"
+        "Si Tidy es capaz de determinar la configuración regional entonces \n"
         "Tidy utilizará el lenguaje de forma automática de la configuración \n"
         "regional. Por ejemplo los sistemas de tipo Unix utilizan los variables \n"
         "$LANG y/o $LC_ALL. Consulte a su documentación del sistema para \n"
-        "obtener más información.\n\n"
+        "obtener más información.\n"
+        "\n"
     },
 
     {/* This MUST be present and last. */

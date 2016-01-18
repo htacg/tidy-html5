@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2016-01-15 11:38:56\n"
+"PO-Revision-Date: 2016-01-18 11:28:37\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -830,617 +830,494 @@ msgctxt "PREVIOUS_LOCATION"
 msgid "<%1$s> previously mentioned"
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "IMG_MISSING_ALT"
 msgid "[1.1.1.1]: <img> missing 'alt' text."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "IMG_ALT_SUSPICIOUS_FILENAME"
 msgid "[1.1.1.2]: suspicious 'alt' text (filename)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "IMG_ALT_SUSPICIOUS_FILE_SIZE"
 msgid "[1.1.1.3]: suspicious 'alt' text (file size)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "IMG_ALT_SUSPICIOUS_PLACEHOLDER"
 msgid "[1.1.1.4]: suspicious 'alt' text (placeholder)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "IMG_ALT_SUSPICIOUS_TOO_LONG"
 msgid "[1.1.1.10]: suspicious 'alt' text (too long)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "IMG_MISSING_LONGDESC_DLINK"
 msgid "[1.1.2.1]: <img> missing 'longdesc' and d-link."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "IMG_MISSING_DLINK"
 msgid "[1.1.2.2]: <img> missing d-link."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "IMG_MISSING_LONGDESC"
 msgid "[1.1.2.3]: <img> missing 'longdesc'."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "IMG_BUTTON_MISSING_ALT"
 msgid "[1.1.3.1]: <img> (button) missing 'alt' text."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "APPLET_MISSING_ALT"
 msgid "[1.1.4.1]: <applet> missing alternate content."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "OBJECT_MISSING_ALT"
 msgid "[1.1.5.1]: <object> missing alternate content."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "AUDIO_MISSING_TEXT_WAV"
 msgid "[1.1.6.1]: audio missing text transcript (wav)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "AUDIO_MISSING_TEXT_AU"
 msgid "[1.1.6.2]: audio missing text transcript (au)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "AUDIO_MISSING_TEXT_AIFF"
 msgid "[1.1.6.3]: audio missing text transcript (aiff)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "AUDIO_MISSING_TEXT_SND"
 msgid "[1.1.6.4]: audio missing text transcript (snd)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "AUDIO_MISSING_TEXT_RA"
 msgid "[1.1.6.5]: audio missing text transcript (ra)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "AUDIO_MISSING_TEXT_RM"
 msgid "[1.1.6.6]: audio missing text transcript (rm)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "FRAME_MISSING_LONGDESC"
 msgid "[1.1.8.1]: <frame> may require 'longdesc'."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "AREA_MISSING_ALT"
 msgid "[1.1.9.1]: <area> missing 'alt' text."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "SCRIPT_MISSING_NOSCRIPT"
 msgid "[1.1.10.1]: <script> missing <noscript> section."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "ASCII_REQUIRES_DESCRIPTION"
 msgid "[1.1.12.1]: ascii art requires description."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "IMG_MAP_SERVER_REQUIRES_TEXT_LINKS"
 msgid "[1.2.1.1]: image map (server-side) requires text links."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "MULTIMEDIA_REQUIRES_TEXT"
 msgid "[1.4.1.1]: multimedia requires synchronized text equivalents."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "IMG_MAP_CLIENT_MISSING_TEXT_LINKS"
 msgid "[1.5.1.1]: image map (client-side) missing text links."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "INFORMATION_NOT_CONVEYED_IMAGE"
 msgid "[2.1.1.1]: ensure information not conveyed through color alone (image)."
 msgstr "[2.1.1.1]: ensure information not conveyed through colour alone (image)."
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "INFORMATION_NOT_CONVEYED_APPLET"
 msgid "[2.1.1.2]: ensure information not conveyed through color alone (applet)."
 msgstr "[2.1.1.2]: ensure information not conveyed through colour alone (applet)."
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "INFORMATION_NOT_CONVEYED_OBJECT"
 msgid "[2.1.1.3]: ensure information not conveyed through color alone (object)."
 msgstr "[2.1.1.3]: ensure information not conveyed through colour alone (object)."
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "INFORMATION_NOT_CONVEYED_SCRIPT"
 msgid "[2.1.1.4]: ensure information not conveyed through color alone (script)."
 msgstr "[2.1.1.4]: ensure information not conveyed through colour alone (script)."
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "INFORMATION_NOT_CONVEYED_INPUT"
 msgid "[2.1.1.5]: ensure information not conveyed through color alone (input)."
 msgstr "[2.1.1.5]: ensure information not conveyed through colour alone (input)."
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "COLOR_CONTRAST_TEXT"
 msgid "[2.2.1.1]: poor color contrast (text)."
 msgstr "[2.2.1.1]: poor colour contrast (text)."
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "COLOR_CONTRAST_LINK"
 msgid "[2.2.1.2]: poor color contrast (link)."
 msgstr "[2.2.1.2]: poor colour contrast (link)."
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "COLOR_CONTRAST_ACTIVE_LINK"
 msgid "[2.2.1.3]: poor color contrast (active link)."
 msgstr "[2.2.1.3]: poor colour contrast (active link)."
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "COLOR_CONTRAST_VISITED_LINK"
 msgid "[2.2.1.4]: poor color contrast (visited link)."
 msgstr "[2.2.1.4]: poor colour contrast (visited link)."
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "DOCTYPE_MISSING"
 msgid "[3.2.1.1]: <doctype> missing."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "STYLE_SHEET_CONTROL_PRESENTATION"
 msgid "[3.3.1.1]: use style sheets to control presentation."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "HEADERS_IMPROPERLY_NESTED"
 msgid "[3.5.1.1]: headers improperly nested."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "POTENTIAL_HEADER_BOLD"
 msgid "[3.5.2.1]: potential header (bold)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "POTENTIAL_HEADER_ITALICS"
 msgid "[3.5.2.2]: potential header (italics)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "POTENTIAL_HEADER_UNDERLINE"
 msgid "[3.5.2.3]: potential header (underline)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "HEADER_USED_FORMAT_TEXT"
 msgid "[3.5.3.1]: header used to format text."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "LIST_USAGE_INVALID_UL"
 msgid "[3.6.1.1]: list usage invalid <ul>."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "LIST_USAGE_INVALID_OL"
 msgid "[3.6.1.2]: list usage invalid <ol>."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "LIST_USAGE_INVALID_LI"
 msgid "[3.6.1.4]: list usage invalid <li>."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "INDICATE_CHANGES_IN_LANGUAGE"
 msgid "[4.1.1.1]: indicate changes in language."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "LANGUAGE_NOT_IDENTIFIED"
 msgid "[4.3.1.1]: language not identified."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "LANGUAGE_INVALID"
 msgid "[4.3.1.2]: language attribute invalid."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "DATA_TABLE_MISSING_HEADERS"
 msgid "[5.1.2.1]: data <table> missing row/column headers (all)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "DATA_TABLE_MISSING_HEADERS_COLUMN"
 msgid "[5.1.2.2]: data <table> missing row/column headers (1 col)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "DATA_TABLE_MISSING_HEADERS_ROW"
 msgid "[5.1.2.3]: data <table> missing row/column headers (1 row)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "DATA_TABLE_REQUIRE_MARKUP_COLUMN_HEADERS"
 msgid "[5.2.1.1]: data <table> may require markup (column headers)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "DATA_TABLE_REQUIRE_MARKUP_ROW_HEADERS"
 msgid "[5.2.1.2]: data <table> may require markup (row headers)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "LAYOUT_TABLES_LINEARIZE_PROPERLY"
 msgid "[5.3.1.1]: verify layout tables linearize properly."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "LAYOUT_TABLE_INVALID_MARKUP"
 msgid "[5.4.1.1]: invalid markup used in layout <table>."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "TABLE_MISSING_SUMMARY"
 msgid "[5.5.1.1]: <table> missing summary."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "TABLE_SUMMARY_INVALID_NULL"
 msgid "[5.5.1.2]: <table> summary invalid (null)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "TABLE_SUMMARY_INVALID_SPACES"
 msgid "[5.5.1.3]: <table> summary invalid (spaces)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "TABLE_SUMMARY_INVALID_PLACEHOLDER"
 msgid "[5.5.1.6]: <table> summary invalid (placeholder text)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "TABLE_MISSING_CAPTION"
 msgid "[5.5.2.1]: <table> missing <caption>."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "TABLE_MAY_REQUIRE_HEADER_ABBR"
 msgid "[5.6.1.1]: <table> may require header abbreviations."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "TABLE_MAY_REQUIRE_HEADER_ABBR_NULL"
 msgid "[5.6.1.2]: <table> header abbreviations invalid (null)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "TABLE_MAY_REQUIRE_HEADER_ABBR_SPACES"
 msgid "[5.6.1.3]: <table> header abbreviations invalid (spaces)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "STYLESHEETS_REQUIRE_TESTING_LINK"
 msgid "[6.1.1.1]: style sheets require testing (link)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "STYLESHEETS_REQUIRE_TESTING_STYLE_ELEMENT"
 msgid "[6.1.1.2]: style sheets require testing (style element)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "STYLESHEETS_REQUIRE_TESTING_STYLE_ATTR"
 msgid "[6.1.1.3]: style sheets require testing (style attribute)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "FRAME_SRC_INVALID"
 msgid "[6.2.1.1]: <frame> source invalid."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "TEXT_EQUIVALENTS_REQUIRE_UPDATING_APPLET"
 msgid "[6.2.2.1]: text equivalents require updating (applet)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "TEXT_EQUIVALENTS_REQUIRE_UPDATING_SCRIPT"
 msgid "[6.2.2.2]: text equivalents require updating (script)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "TEXT_EQUIVALENTS_REQUIRE_UPDATING_OBJECT"
 msgid "[6.2.2.3]: text equivalents require updating (object)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_SCRIPT"
 msgid "[6.3.1.1]: programmatic objects require testing (script)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_OBJECT"
 msgid "[6.3.1.2]: programmatic objects require testing (object)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_EMBED"
 msgid "[6.3.1.3]: programmatic objects require testing (embed)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_APPLET"
 msgid "[6.3.1.4]: programmatic objects require testing (applet)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "FRAME_MISSING_NOFRAMES"
 msgid "[6.5.1.1]: <frameset> missing <noframes> section."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "NOFRAMES_INVALID_NO_VALUE"
 msgid "[6.5.1.2]: <noframes> section invalid (no value)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "NOFRAMES_INVALID_CONTENT"
 msgid "[6.5.1.3]: <noframes> section invalid (content)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "NOFRAMES_INVALID_LINK"
 msgid "[6.5.1.4]: <noframes> section invalid (link)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REMOVE_FLICKER_SCRIPT"
 msgid "[7.1.1.1]: remove flicker (script)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REMOVE_FLICKER_OBJECT"
 msgid "[7.1.1.2]: remove flicker (object)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REMOVE_FLICKER_EMBED"
 msgid "[7.1.1.3]: remove flicker (embed)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REMOVE_FLICKER_APPLET"
 msgid "[7.1.1.4]: remove flicker (applet)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REMOVE_FLICKER_ANIMATED_GIF"
 msgid "[7.1.1.5]: remove flicker (animated gif)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REMOVE_BLINK_MARQUEE"
 msgid "[7.2.1.1]: remove blink/marquee."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REMOVE_AUTO_REFRESH"
 msgid "[7.4.1.1]: remove auto-refresh."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REMOVE_AUTO_REDIRECT"
 msgid "[7.5.1.1]: remove auto-redirect."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_SCRIPT"
 msgid "[8.1.1.1]: ensure programmatic objects are accessible (script)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_OBJECT"
 msgid "[8.1.1.2]: ensure programmatic objects are accessible (object)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_APPLET"
 msgid "[8.1.1.3]: ensure programmatic objects are accessible (applet)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_EMBED"
 msgid "[8.1.1.4]: ensure programmatic objects are accessible (embed)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "IMAGE_MAP_SERVER_SIDE_REQUIRES_CONVERSION"
 msgid "[9.1.1.1]: image map (server-side) requires conversion."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_DOWN"
 msgid "[9.3.1.1]: <script> not keyboard accessible (onMouseDown)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_UP"
 msgid "[9.3.1.2]: <script> not keyboard accessible (onMouseUp)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_CLICK"
 msgid "[9.3.1.3]: <script> not keyboard accessible (onClick)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OVER"
 msgid "[9.3.1.4]: <script> not keyboard accessible (onMouseOver)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OUT"
 msgid "[9.3.1.5]: <script> not keyboard accessible (onMouseOut)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_MOVE"
 msgid "[9.3.1.6]: <script> not keyboard accessible (onMouseMove)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "NEW_WINDOWS_REQUIRE_WARNING_NEW"
 msgid "[10.1.1.1]: new windows require warning (_new)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "NEW_WINDOWS_REQUIRE_WARNING_BLANK"
 msgid "[10.1.1.2]: new windows require warning (_blank)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "FORM_CONTROL_REQUIRES_DEFAULT_TEXT"
 msgid "[10.4.1.1]: form control requires default text."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "FORM_CONTROL_DEFAULT_TEXT_INVALID_NULL"
 msgid "[10.4.1.2]: form control default text invalid (null)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "FORM_CONTROL_DEFAULT_TEXT_INVALID_SPACES"
 msgid "[10.4.1.3]: form control default text invalid (spaces)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REPLACE_DEPRECATED_HTML_APPLET"
 msgid "[11.2.1.1]: replace deprecated html <applet>."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REPLACE_DEPRECATED_HTML_BASEFONT"
 msgid "[11.2.1.2]: replace deprecated html <basefont>."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REPLACE_DEPRECATED_HTML_CENTER"
 msgid "[11.2.1.3]: replace deprecated html <center>."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REPLACE_DEPRECATED_HTML_DIR"
 msgid "[11.2.1.4]: replace deprecated html <dir>."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REPLACE_DEPRECATED_HTML_FONT"
 msgid "[11.2.1.5]: replace deprecated html <font>."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REPLACE_DEPRECATED_HTML_ISINDEX"
 msgid "[11.2.1.6]: replace deprecated html <isindex>."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REPLACE_DEPRECATED_HTML_MENU"
 msgid "[11.2.1.7]: replace deprecated html <menu>."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REPLACE_DEPRECATED_HTML_S"
 msgid "[11.2.1.8]: replace deprecated html <s>."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REPLACE_DEPRECATED_HTML_STRIKE"
 msgid "[11.2.1.9]: replace deprecated html <strike>."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "REPLACE_DEPRECATED_HTML_U"
 msgid "[11.2.1.10]: replace deprecated html <u>."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "FRAME_MISSING_TITLE"
 msgid "[12.1.1.1]: <frame> missing title."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "FRAME_TITLE_INVALID_NULL"
 msgid "[12.1.1.2]: <frame> title invalid (null)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "FRAME_TITLE_INVALID_SPACES"
 msgid "[12.1.1.3]: <frame> title invalid (spaces)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "ASSOCIATE_LABELS_EXPLICITLY"
 msgid "[12.4.1.1]: associate labels explicitly with form controls."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "ASSOCIATE_LABELS_EXPLICITLY_FOR"
 msgid "[12.4.1.2]: associate labels explicitly with form controls (for)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "ASSOCIATE_LABELS_EXPLICITLY_ID"
 msgid "[12.4.1.3]: associate labels explicitly with form controls (id)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "LINK_TEXT_NOT_MEANINGFUL"
 msgid "[13.1.1.1]: link text not meaningful."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "LINK_TEXT_MISSING"
 msgid "[13.1.1.2]: link text missing."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "LINK_TEXT_TOO_LONG"
 msgid "[13.1.1.3]: link text too long."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "LINK_TEXT_NOT_MEANINGFUL_CLICK_HERE"
 msgid "[13.1.1.4]: link text not meaningful (click here)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "METADATA_MISSING"
 msgid "[13.2.1.1]: Metadata missing."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "METADATA_MISSING_REDIRECT_AUTOREFRESH"
 msgid "[13.2.1.3]: Metadata missing (redirect/auto-refresh)."
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ACCESSIBILITY_CHECKS##
 msgctxt "SKIPOVER_ASCII_ART"
 msgid "[13.10.1.1]: skip over ascii art."
 msgstr ""
@@ -1766,7 +1643,6 @@ msgstr ""
 "<br/>"
 "The algorithm is identical to the one used by <code>merge-divs</code>. "
 
-#. Translator, please ignore following: ##SUPPORT_ASIAN_ENCODINGS##
 msgctxt "TidyNCR"
 msgid "This option specifies if Tidy should allow numeric character references. "
 msgstr ""
@@ -2042,7 +1918,6 @@ msgid ""
 "it finds significant errors (see <code>force-output</code>). "
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ASIAN_ENCODINGS##
 msgctxt "TidyPunctWrap"
 msgid ""
 "This option specifies if Tidy should line wrap after some Unicode or "
@@ -2175,14 +2050,12 @@ msgid ""
 "<code>char-encoding</code> for more info. "
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_ASIAN_ENCODINGS##
 msgctxt "TidyLanguage"
 msgid ""
 "Currently not used, but this option specifies the language Tidy would use "
 "if it were properly localized. For example: <code>en</code>. "
 msgstr ""
 
-#. Translator, please ignore following: ##SUPPORT_UTF16_ENCODINGS##
 msgctxt "TidyOutputBOM"
 msgid ""
 "This option specifies if Tidy should write a Unicode Byte Order Mark "

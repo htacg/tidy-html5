@@ -10,7 +10,7 @@ the event that you want to build Tidy with your new language.
 
 ## How to Contribute
 
-### Find or Create the Tranlation Files
+### Find or Create the Translation Files
 If you've not already cloned the HTML Tidy source code repository that will be
 your first step.
 
@@ -25,22 +25,29 @@ If the language that you want to work on is already present:
   - Simply open the file in your favorite PO editor and then get to work.
   - Note that although you can use a text editor, we recommend that you use a
     dedicated PO editor so that you don't accidentally make the file illegible
-    to our translating utility.
+    to our conversion utility.
     
 If the language that you want to work on is _not_ already present:
 
   - You can open `tidy.pot` in your favorite PO editor and use its functions
-    to begin a new translation into your desired langauge.
+    to begin a new translation into your desired language.
   - Note that although you can use a text editor, we recommend that you use a
     dedicated PO editor so that you don't accidentally make the file illegible
-    to our translating utility.
-    - To perform the work manually, copy `tidy.pot` to `language_ll.po` (for
-      a non-regional variant, or base language), or to `language_ll_cc.po`
-      (for a region-specific variant), where `ll` indicates the two letter
-      language code and `cc` indicates the two letter region or country code.
+    to our conversion utility.
+  - To perform the work manually:
+    - Copy `tidy.pot` to `language_ll.po` (for a non-regional variant, or base
+      language), or to `language_ll_cc.po` (for a region-specific variant),
+      where `ll` indicates the two letter language code and `cc` indicates the
+      two letter region or country code.
     - Change the pertinent PO header section accordingly.
-    - See GNU's [The Format of PO Files](https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html)
-      for more specific instructions and important information.
+  - Use `poconvert.rb` to generate a PO:
+    - `poconvert.rb msginit --locale ll`, where `ll` indicates the language
+      code for the language you want to translate to. The tool recognizes the
+      same languages as `gettext`' `msginit`. If your chosen language is not
+      supported, then please see the manual method, above.
+    - See also `poconvert.rb help` for more options.
+  - See GNU's [The Format of PO Files](https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html)
+    for more specific instructions and important information.
 
 ### Issue a Pull Request to HTML Tidy
 
@@ -55,7 +62,7 @@ Tidy, and issue a PR for the whole change.
 ### Using Git appropriately
 
  1. Fork the repository to your GitHub account.
- 2. Optionally create a **topical branch** - a branch whose name is succint but
+ 2. Optionally create a **topical branch** - a branch whose name is succinct but
     explains what you're doing, such as "localize Portuguese".
  3. Make your changes, committing at logical breaks.
  4. Push your work to your personal account.
@@ -69,14 +76,15 @@ Please **only** commit PO files with _English_ `msgid` fields. The `gettext`
 convention specifies only English `msgid`, and other translators may not
 understand the original strings.
 
-Our `potool.rb` script can generate PO files using another language as `msgid`.
-This can be very useful if it's easier for you to translate from another
-language instead of English. It can also be useful for translating from a
-base language to a regional variant, such as from Spanish to Mexican Spanish.
+Our `poconvert.rb` script can generate PO files using another language as
+`msgid`. This can be very useful if it's easier for you to translate from
+another language instead of English. It can also be useful for translating from
+a base language to a regional variant, such as from Spanish to Mexican Spanish.
 
 If you choose to work locally with a non-English PO, you can easily convert
 your PO to a Tidy header file and back to an English-based PO using our
-`potool.rb` script. See its documentation (`ptool.rb help`) for instructions.
+`poconvert.rb` script. See its documentation (`poconvert.rb help`) for
+instructions.
 
 
 ## Adding Languages to Tidy
@@ -85,10 +93,10 @@ Although we don't require you to follow these steps to contribute a language
 to Tidy, you may want to add the language to Tidy yourself to test the
 translation, or to save one of the developer team a few extra steps.
 
-  - Generte the header files:
+  - Generate the header files:
     - Convert your PO file to a Tidy header file by executing
-      `potool.rb msgfmt <path_to_your_file.po>`. Note that on Windows you will
-      likely have to preface this line with `ruby`.
+      `poconvert.rb msgfmt <path_to_your_file.po>`. Note that on Windows you
+      will likely have to preface this line with `ruby`.
     - The tool should generate a file named `language_ll_cc.h` in the working
       directory, where `ll_cc` will be replaced with the language/region of your
       translation.
@@ -160,7 +168,7 @@ temporarily with:
 
 Although HTML Tidy uses `gettext`-compatible tools and PO files for language
 localization, Tidy itself does _not_ use `gettext`. Tidy's build philosophy is
-build it anywhere and build it with anything. As `gettext` is not univerally
+build it anywhere and build it with anything. As `gettext` is not universally
 available on every platform under the sun, Tidy cannot count on `gettext`.
 
 Instead Tidy builds all translations into its library (and command line
@@ -173,13 +181,14 @@ critical. As such it's trivial to build Tidy without this extra language
 support using the `-DSUPPORT_LOCALIZATIONS=NO` switch.
 
 
-## potool.rb
+## poconvert.rb
 
-Tidy's source code includes a Ruby batch file called `potool.rb` which can be
+Tidy's source code includes a Ruby batch file called `poconvert.rb` which can be
 used to generate POT, PO, and H files, and convert them back and forth. It has
 been designed to work in a similar fashion as `gettext`'s tools, and includes
 conveniences that let translators work in different source languages. Please
-use `potool.rb help` for more information (`ruby potool.rb help` on Windows).
+use `poconvert.rb help` for more information (`ruby poconvert.rb help` on
+Windows).
 
 
 ## Help Tidy Get Better

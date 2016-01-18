@@ -155,7 +155,11 @@ module PoConvertModule
 
     #########################################################
     # parse_po_section( content )
-    #  Parses a single PO section.
+    #  Parses a single PO section. Note that will will still
+    #  parse and accept ##BLAH## as #if groups; they just
+    #  won't be used. We'll get the information live from
+    #  the English header instead of trying to store meta-
+    #  data in the PO/POT.
     #########################################################
     def parse_po_section( content )
 
@@ -650,9 +654,6 @@ msgstr ""
         if value['0'][:comment]
           report << "#. #{value['0'][:comment]}\n"
         end
-        if value['0'][:if_group]
-          report << "#. Translator, please ignore following: ###{value['0'][:if_group]}##\n"
-        end
         if %w($u $s $d).any? { | find | value['0'][:string].include?(find) }
           report << "#, c-format\n"
         end
@@ -748,6 +749,15 @@ msgstr ""
       # and comments.
       po_content.items.reject! do |key, value|
         ( (filter_items.has_key?(key) && filter_items[key] == value) ) || !filter_items.has_key?(key)
+      end
+
+      # We need to know which translated items belong in #if groups. Since we
+      # don't store this metadata in the PO, find out which #if groups they
+      # belong to from the original language_en.h.
+      po_content.items.each do |key, value|
+        value.each_value do |item_entry|
+          item_entry[:if_group] = lang_en.items[key]['0'][:if_group]
+        end
       end
 
       # Gather some information to format this nicely.

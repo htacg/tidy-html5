@@ -531,8 +531,10 @@ static Bool AttributeIsProprietary(Node* node, AttVal* attval)
 /* considering it a mismatch if the document version    */
 /* does not allow the attribute as called out in its    */
 /* AttrVersion structure.                               */
-static Bool AttributeIsMismatched(Node* node, AttVal* attval, uint doctype)
+static Bool AttributeIsMismatched(Node* node, AttVal* attval, TidyDocImpl* doc)
 {
+    uint doctype;
+    
     if (!node || !attval)
         return no;
     
@@ -541,6 +543,10 @@ static Bool AttributeIsMismatched(Node* node, AttVal* attval, uint doctype)
     
     if (!(node->tag->versions & VERS_ALL))
         return no;
+    
+    doctype = doc->lexer->doctype;
+    if ( doctype == 0 )
+        doctype = TY_(ApparentVersion)( doc );
     
     if (AttributeVersions(node, attval) & doctype)
         return no;
@@ -1416,10 +1422,10 @@ const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attv
     
     /* @todo: Once we merge in `localize` we will add a separate message. */
     /* @todo: should we respect TidyDropPropAttrs? */
-    if (AttributeIsMismatched(node, attval, doc->lexer->doctype))
+    if (AttributeIsMismatched(node, attval, doc))
     {
         TY_(ReportAttrError)(doc, node, attval, PROPRIETARY_ATTRIBUTE);
-        
+
         if (cfgBool(doc, TidyDropPropAttrs))
             TY_(RemoveAttribute)( doc, node, attval );
     }

@@ -245,6 +245,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_TEXT,              "text",                  CH_COLOR     }, /* BODY */
   { TidyAttr_TITLE,             "title",                 CH_PCDATA    }, /* text tool tip */
   { TidyAttr_TOPMARGIN,         "topmargin",             CH_NUMBER    }, /* used on BODY */
+  { TidyAttr_TRANSLATE,         "translate",             CH_BOOL      }, /* HTML5 global attribute */
   { TidyAttr_TYPE,              "type",                  CH_TYPE      }, /* also used by SPACER */
   { TidyAttr_USEMAP,            "usemap",                CH_URL       }, /* things with images */
   { TidyAttr_VALIGN,            "valign",                CH_VALIGN    }, 

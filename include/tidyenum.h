@@ -633,6 +633,7 @@ typedef enum
   TidyAttr_TEXT,              /**< TEXT= */
   TidyAttr_TITLE,             /**< TITLE= */
   TidyAttr_TOPMARGIN,         /**< TOPMARGIN= */
+  TidyAttr_TRANSLATE,         /**< TRANSLATE= */
   TidyAttr_TYPE,              /**< TYPE= */
   TidyAttr_USEMAP,            /**< USEMAP= */
   TidyAttr_VALIGN,            /**< VALIGN= */

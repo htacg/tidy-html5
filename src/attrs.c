@@ -506,7 +506,9 @@ uint TY_(NodeAttributeVersions)( Node* node, TidyAttrId id )
 }
 
 /* returns true if the element is a W3C defined element */
-/* but the element/attribute combination is not         */
+/* but the element/attribute combination is not. We're  */
+/* only defining as "proprietary" items that are not in */
+/* the element's AttrVersion structure.                 */
 static Bool AttributeIsProprietary(Node* node, AttVal* attval)
 {
     if (!node || !attval)
@@ -521,6 +523,28 @@ static Bool AttributeIsProprietary(Node* node, AttVal* attval)
     if (AttributeVersions(node, attval) & VERS_ALL)
         return no;
 
+    return yes;
+}
+
+/* returns true if the element is a W3C defined element */
+/* but the element/attribute combination is not. We're  */
+/* considering it a mismatch if the document version    */
+/* does not allow the attribute as called out in its    */
+/* AttrVersion structure.                               */
+static Bool AttributeIsMismatched(Node* node, AttVal* attval, uint doctype)
+{
+    if (!node || !attval)
+        return no;
+    
+    if (!node->tag)
+        return no;
+    
+    if (!(node->tag->versions & VERS_ALL))
+        return no;
+    
+    if (AttributeVersions(node, attval) & doctype)
+        return no;
+    
     return yes;
 }
 
@@ -1386,6 +1410,16 @@ const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attv
     {
         TY_(ReportAttrError)(doc, node, attval, PROPRIETARY_ATTRIBUTE);
 
+        if (cfgBool(doc, TidyDropPropAttrs))
+            TY_(RemoveAttribute)( doc, node, attval );
+    }
+    
+    /* @todo: Once we merge in `localize` we will add a separate message. */
+    /* @todo: should we respect TidyDropPropAttrs? */
+    if (AttributeIsMismatched(node, attval, doc->lexer->doctype))
+    {
+        TY_(ReportAttrError)(doc, node, attval, PROPRIETARY_ATTRIBUTE);
+        
         if (cfgBool(doc, TidyDropPropAttrs))
             TY_(RemoveAttribute)( doc, node, attval );
     }

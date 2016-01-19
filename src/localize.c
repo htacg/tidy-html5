@@ -71,7 +71,7 @@ static struct _msgfmt
   { INSERTING_AUTO_ATTRIBUTE,     "%s inserting \"%s\" attribute using value \"%s\""                        }, /* Warning */
   { MISSING_ATTR_VALUE,           "%s attribute \"%s\" lacks value"                                         }, /* Warning in CheckUrl, Error otherwise */
   { UNKNOWN_ATTRIBUTE,            "%s unknown attribute \"%s\""                                             }, /* Error */
-  { PROPRIETARY_ATTRIBUTE,        "%s proprietary attribute \"%s\""                                         }, /* Error */
+  { PROPRIETARY_ATTRIBUTE,        "%s attribute \"%s\" is proprietary or not permitted for current doctype" }, /* Error */
   { JOINING_ATTRIBUTE,            "%s joining values of repeated attribute \"%s\""                          }, /* Error */
   { XML_ATTRIBUTE_VALUE,          "%s has XML attribute \"%s\""                                             }, /* Error (but deprecated) */
 
@@ -497,7 +497,8 @@ static const TidyOptionDoc option_docs[] =
   },
   {TidyDropPropAttrs,
    "This option specifies if Tidy should strip out proprietary attributes, "
-   "such as Microsoft data binding attributes. "
+   "such as Microsoft data binding attributes, as well as attributes that "
+   "do not match the current doctype."
   },
   {TidyEncloseBlockText,
    "This option specifies if Tidy should insert a <code>&lt;p&gt;</code> "

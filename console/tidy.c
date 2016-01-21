@@ -12,6 +12,7 @@
 #include "language.h"
 #include "locale.h"
 #if defined(_WIN32)
+#include <windows.h> /* Force console to UTF8. */
 /* Windows requires special help for printf positional format specifiers. */
 #include "win_vsnprintf.h"
 #define nest_(x) TY_(x)
@@ -1451,18 +1452,18 @@ int main( int argc, char** argv )
 	uint accessWarnings = 0;
 	
 	errout = stderr;  /* initialize to stderr */
-    
+
 	/* Set the locale for tidy's output. */
 	locale = tidySystemLocale(locale);
 	tidySetLanguage(locale);
 	if ( locale )
 		free( locale );
-
+    
 #if !defined(NDEBUG) && defined(_MSC_VER)
 	set_log_file((char *)"temptidy.txt", 0);
 	// add_append_log(1);
 #endif
-	
+
 	/* 
 	 * Look for default configuration files using any of
 	 * the following possibilities:
@@ -1470,34 +1471,34 @@ int main( int argc, char** argv )
 	 *  - HTML_TIDY        - environment variable
 	 *  - TIDY_USER_CONFIG_FILE - from tidyplatform.h, typically ~/tidy.conf
 	 */
-	
+
 #ifdef TIDY_CONFIG_FILE
 	if ( tidyFileExists( tdoc, TIDY_CONFIG_FILE) )
 	{
 		status = tidyLoadConfig( tdoc, TIDY_CONFIG_FILE );
-        if ( status != 0 ) {
+		if ( status != 0 ) {
 			fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), TIDY_CONFIG_FILE, status);
-            fprintf(errout, "\n");
-        }
+			fprintf(errout, "\n");
+		}
 	}
 #endif /* TIDY_CONFIG_FILE */
 	
 	if ( (cfgfil = getenv("HTML_TIDY")) != NULL )
 	{
 		status = tidyLoadConfig( tdoc, cfgfil );
-        if ( status != 0 ) {
+		if ( status != 0 ) {
 			fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), cfgfil, status);
-            fprintf(errout, "\n");
-        }
+			fprintf(errout, "\n");
+		}
 	}
 #ifdef TIDY_USER_CONFIG_FILE
 	else if ( tidyFileExists( tdoc, TIDY_USER_CONFIG_FILE) )
 	{
 		status = tidyLoadConfig( tdoc, TIDY_USER_CONFIG_FILE );
-        if ( status != 0 ) {
+		if ( status != 0 ) {
 			fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), TIDY_USER_CONFIG_FILE, status);
-            fprintf(errout, "\n");
-        }
+			fprintf(errout, "\n");
+		}
 	}
 #endif /* TIDY_USER_CONFIG_FILE */
 
@@ -1546,25 +1547,25 @@ int main( int argc, char** argv )
 				tidyOptSetBool( tdoc, TidyMakeBare, yes );
 			
 			else if ( strcasecmp(arg, "raw") == 0     ||
-					 strcasecmp(arg, "ascii") == 0    ||
-					 strcasecmp(arg, "latin0") == 0   ||
-					 strcasecmp(arg, "latin1") == 0   ||
-					 strcasecmp(arg, "utf8") == 0     ||
+					strcasecmp(arg, "ascii") == 0    ||
+					strcasecmp(arg, "latin0") == 0   ||
+					strcasecmp(arg, "latin1") == 0   ||
+					strcasecmp(arg, "utf8") == 0     ||
 #ifndef NO_NATIVE_ISO2022_SUPPORT
-					 strcasecmp(arg, "iso2022") == 0  ||
+					strcasecmp(arg, "iso2022") == 0  ||
 #endif
 #if SUPPORT_UTF16_ENCODINGS
-					 strcasecmp(arg, "utf16le") == 0  ||
-					 strcasecmp(arg, "utf16be") == 0  ||
-					 strcasecmp(arg, "utf16") == 0    ||
+					strcasecmp(arg, "utf16le") == 0  ||
+					strcasecmp(arg, "utf16be") == 0  ||
+					strcasecmp(arg, "utf16") == 0    ||
 #endif
 #if SUPPORT_ASIAN_ENCODINGS
-					 strcasecmp(arg, "shiftjis") == 0 ||
-					 strcasecmp(arg, "big5") == 0     ||
+					strcasecmp(arg, "shiftjis") == 0 ||
+					strcasecmp(arg, "big5") == 0     ||
 #endif
-					 strcasecmp(arg, "mac") == 0      ||
-					 strcasecmp(arg, "win1252") == 0  ||
-					 strcasecmp(arg, "ibm858") == 0 )
+					strcasecmp(arg, "mac") == 0      ||
+					strcasecmp(arg, "win1252") == 0  ||
+					strcasecmp(arg, "ibm858") == 0 )
 			{
 				tidySetCharEncoding( tdoc, arg );
 			}
@@ -1598,7 +1599,16 @@ int main( int argc, char** argv )
 					{
 						printf(tidyLocalizedString(TC_STRING_LANG_NOT_FOUND),
 							   argv[2], tidyGetLanguage());
-                        printf("\n");
+						printf("\n");
+					} else {
+#if defined(_WIN32)
+						/* If we set a language then force Windows console to use UTF,
+             * otherwise many characters will be garbage. @todo: aggregate
+             * all of this application's exits and returns so that we can
+             * reset the original code page upon termination.
+             */
+						SetConsoleOutputCP(65001);
+#endif
 					}
 					--argc;
 					++argv;

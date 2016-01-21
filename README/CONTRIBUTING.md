@@ -56,5 +56,3 @@ This can be repeated for `branches`.
 ### Help Tidy Get Better
 
 It goes without saying **all help is appreciated**. We need to work together to make Tidy! better...
-
-; eof

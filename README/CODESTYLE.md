@@ -22,5 +22,3 @@ From reading of the Tidy source, some things are self evident... in no particula
 Look forward to this document being filled out in detail...
 
 Date: 20150904
-
-; eof

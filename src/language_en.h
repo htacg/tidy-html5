@@ -68,22 +68,28 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { FILE_CANT_OPEN,               0,   "Can't open \"%1$s\"\n"                                                   },
     { LINE_COLUMN_STRING,           0,   "line %1$d column %2$d - "                                                },
     { STRING_CONTENT_LOOKS,         0,   "Document content looks like %1$s"                                        },
-    { STRING_DISCARDING,            0,   "discarding"                                                              },
+    {/* For example, "discarding unexpected <p>" */
+      STRING_DISCARDING,            0,   "discarding"
+    },
     { STRING_DOCTYPE_GIVEN,         0,   "Doctype given is \"%1$s\""                                               },
-    { STRING_ERROR_COUNT,           0,   "%1$u %2$s, %3$u %4$s were found!"                                        },
+    { STRING_ERROR_COUNT,           0,   "Tidy found %1$u %2$s and %3$u %4$s!"                                     },
     { STRING_ERROR_COUNT_ERROR,     0,   "error"                                                                   },
     { STRING_ERROR_COUNT_ERROR,     1,   "errors"                                                                  },
     { STRING_ERROR_COUNT_WARNING,   0,   "warning"                                                                 },
     { STRING_ERROR_COUNT_WARNING,   1,   "warnings"                                                                },
-    { STRING_HELLO_ACCESS,          0,   "Accessibility Checks: Version 0.1"                                       },
-    { STRING_HTML_PROPRIETARY,      0,   "HTML Proprietary"                                                        },
+    { STRING_HELLO_ACCESS,          0,   "Accessibility Checks:"                                                   },
+    {/* This is not a formal name and can be translated. */
+      STRING_HTML_PROPRIETARY,      0,   "HTML Proprietary"                                                        },
     { STRING_MISSING_MALFORMED,     0,   "missing or malformed argument for option: %1$s"                          },
     { STRING_NO_ERRORS,             0,   "No warnings or errors were found."                                       },
     { STRING_NO_SYSID,              0,   "No system identifier in emitted doctype"                                 },
     { STRING_NOT_ALL_SHOWN,         0,   "Not all warnings/errors were shown."                                     },
     { STRING_PLAIN_TEXT,            0,   "plain text"                                                              },
-    { STRING_REPLACING,             0,   "replacing"                                                               },
-    { STRING_SPECIFIED,             0,   "specified"                                                               },
+    {/* For example, "replacing </h2> with </h1>" */
+      STRING_REPLACING,             0,   "replacing"                                                               },
+    {/* For example, "you should avoid using the specified encoding." */
+      STRING_SPECIFIED,             0,   "specified"
+    },
     { STRING_UNKNOWN_FILE,          0,   "%1$s: can't open file \"%2$s\"\n"                                        },
     { STRING_UNKNOWN_OPTION,        0,   "unknown option: %1$s"                                                    },
     { STRING_UNRECZD_OPTION,        0,   "unrecognized option -%1$c use -help to list options\n"                   },
@@ -123,12 +129,13 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "use named entities, e.g. &trade;.\n"
         "\n"
     },
-    {/* This console output should be limited to 78 characters per line. */
+    {/* This console output should be limited to 78 characters per line. %1$s may be 15 characters.*/
       TEXT_SGML_CHARS,              0,
         "Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML;\n"
         "even if they were, they would likely be unprintable control characters.\n"
         "Tidy assumed you wanted to refer to a character with the same byte value in the \n"
-        "%1$s encoding and replaced that reference with the Unicode equivalent.\n"
+        "%1$s encoding and replaced that reference with the Unicode \n"
+        "equivalent.\n"
         "\n"
     },
     {/* This console output should be limited to 78 characters per line. */

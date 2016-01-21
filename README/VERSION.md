@@ -63,5 +63,3 @@ And throughout this, every effort will be made to keep `master` **stable** at al
 In cases of significant code re-writes, major featues added, these would be done in branches until they are `stable` enought, and tested enough, to be merge back to `master`.
 
 Date: 20150904
-
-; eof

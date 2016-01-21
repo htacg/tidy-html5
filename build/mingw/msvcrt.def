@@ -1,0 +1,4 @@
+LIBRARY msvcrt.dll
+EXPORTS
+_vscprintf_p_l
+_vsprintf_p

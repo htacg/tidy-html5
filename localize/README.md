@@ -35,6 +35,7 @@ the event that you want to build Tidy with your new language.
   - [Convert an existing H to PO using a different `msgid` language](#convert-an-existing-h-to-po-using-a-different-msgid-language)
   - [Create a blank PO file for a particular region](#create-a-blank-po-file-for-a-particular-region)
   - [Create a Tidy Language Header H file](#create-a-tidy-language-header-h-file)
+  - [Prepare your non-English PO for a PR](#prepare-your-non-english-po-for-a-pr)
   - [Update your PO to match the new POT](#update-your-po-to-match-the-new-pot)
 - [Help Tidy Get Better](#help-tidy-get-better)
 
@@ -367,6 +368,20 @@ translation to `es_mx` to include it, too. You can tell `poconvert.rb` to
 exclude strings matching another localization like so:
 
 `./poconvert.rb msgfmt <language_cc_ll.po> --baselang=<other-language_cc_ll.h>`
+
+
+### Prepare your non-English PO for a PR
+
+Although we have provided tools to allow you to work in languages other than
+English, we can only accept PO's in the repository that have English `msgid` 
+fields. It's easy to convert your PO back to English:
+
+`./poconvert msgfmt <language_cc_ll.po>`
+`./poconvert msgunfmt <language_cc_ll.h>`
+
+The first command converts your non-standard PO into a Tidy Language Header
+file, and the second will create a fresh, new PO file from the header that
+you've just created.
 
 
 ### Update your PO to match the new POT

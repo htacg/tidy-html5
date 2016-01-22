@@ -358,7 +358,7 @@ you can use:
 When you're ready to include the language in Tidy, you can generate its header
 file with:
 
-`./poconvert.rb msgfmt <language_cc_ll.po>
+`./poconvert.rb msgfmt <language_cc_ll.po>`
 
 In the event you are creating a regional variant of a language, it's an
 excellent idea to have Tidy exclude strings that are already present in the
@@ -376,7 +376,8 @@ Although we have provided tools to allow you to work in languages other than
 English, we can only accept PO's in the repository that have English `msgid` 
 fields. It's easy to convert your PO back to English:
 
-`./poconvert msgfmt <language_cc_ll.po>`
+`./poconvert msgfmt <language_cc_ll.po>` 
+
 `./poconvert msgunfmt <language_cc_ll.h>`
 
 The first command converts your non-standard PO into a Tidy Language Header
@@ -390,7 +391,8 @@ If Tidy's POT changes, e.g., new strings are added, new comments, etc., the
 simplest way to update your PO is to convert it to a header (which normalizes
 it to the latest Tidy standard), and then convert the header to a new PO again.
 
-`./poconvert msgfmt <language_cc_ll.po>`
+`./poconvert msgfmt <language_cc_ll.po>` 
+
 `./poconvert msgunfmt <language_cc_ll.h>`
 
 

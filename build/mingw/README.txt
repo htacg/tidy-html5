@@ -17,8 +17,8 @@ This file was generated with `gcc-dumpspecs > specs`, and then modified to add
 `-lmsvcrt_tidy` to the `*libgcc:` linking section.
 
 
-**Copy the file `libmsvcrt.a` into `C:\MinGW\lib\`** (or someplace else you know
-is included in gcc's library search path).
+**Copy the file `libmsvcrt_tidy.a` into `C:\MinGW\lib\`** (or someplace else you
+know is included in gcc's library search path).
 
 This file is the import library for `msvcrt.dll` that includes the missing
 definitions not included in MinGW's own import library. It was generated via

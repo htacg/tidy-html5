@@ -8,6 +8,90 @@ you can use standard `gettext` tools to generate language and region
 localizations that will work with Tidy. Optionally instructions are included in
 the event that you want to build Tidy with your new language.
 
+## Contents:
+- [Introduction](#introduction)
+  - [PO and POT files](#po-and-pot-files)
+  - [H files](#h-files)
+  - [Differences for translators](#differences-for-translators)
+  - [`poconvert.rb` versus `gettext`' tools](#poconvertrb-versus-gettext-tools)
+- [How to Contribute](#how-to-contribute)
+  - [Find or Create the Translation Files](#find-or-create-the-translation-files)
+  - [Issue a Pull Request to HTML Tidy](#issue-a-pull-request-to-html-tidy)
+  - [Using Git appropriately](#using-git-appropriately)
+  - [Repository Notes](#repository-notes)
+- [Adding Languages to Tidy](#adding-languages-to-tidy)
+- [Best Practices](#best-practices)
+  - [Language Inheritance](#language-inheritance)
+  - [String Inheritance](#string-inheritance)
+  - [Base Language First and Regional Variants](#base-language-first-and-regional-variants)
+- [Testing](#testing)
+  - [Command line option](#command-line-option)
+  - [Changing your locale](#changing-your-locale)
+- [gettext](#gettext)
+- [poconvert.rb](#poconvertrb)
+  - [Create a new POT file](#create-a-new-pot-file)
+  - [Create a new POT file with non-English `msgid` strings](#create-a-new-pot-file-with-non-english-msgid-strings)
+  - [Convert an existing H to PO](#convert-an-existing-h-to-po)
+  - [Convert an existing H to PO using a different `msgid` language](#convert-an-existing-h-to-po-using-a-different-msgid-language)
+  - [Create a blank PO file for a particular region](#create-a-blank-po-file-for-a-particular-region)
+  - [Create a Tidy Language Header H file](#create-a-tidy-language-header-h-file)
+  - [Update your PO to match the new POT](#update-your-po-to-match-the-new-pot)
+- [Help Tidy Get Better](#help-tidy-get-better)
+
+  
+## Introduction
+
+### PO and POT files
+HTML Tidy uses PO and POT files for language translations. The file `tidy.pot`
+is the correct template to use as a basis for translations. In a typical
+`gettext` workflow a translator will use the `tidy.pot` file to create a
+language translation PO file that contains original English strings and the
+translated strings.
+
+If a language has already been translated (or if the translation has begun) then
+PO files may already exist. These files are named `language_ll.po` or
+`langage_ll_CC.po`, where `ll` represents the language code, and optionally,
+`CC` represents the region code of the translation.
+
+Tidy does not use MO files that `gettext` tools generate from PO files.
+
+
+### H files
+
+Tidy does not use `gettext` to display strings and so `gettext`-generated MO
+files are not necessary. Instead translated PO files must be converted to Tidy's
+language header H file format. Translators are not required to perform this
+step, but we provide a tool to perform this function if desired.
+
+
+### Differences for translators
+
+Experienced users and translators of PO files may note that we use the PO file's
+`msgctxt` field a bit uniquely. Rather than point to a line in the source code
+it contains a reference to the string's identifier. Because the PO format does
+not allow for arbitrary metadata this is a requirement for generating our
+header files.
+
+If you're the type of translator the does dig into the source code, then this
+`msgtext` symbol is still useful to you and adds a single extra step to finding
+where a string is in context: a symbol or string search using the `msgctxt`
+value will reveal the context in source code.
+
+Finally the `msgid` field is a throwaway; Tidy's language tools do not use this
+value and so it's only for the translator's convenience. This fact makes it
+convenient for translators to translate from languages other than English,
+which is fully supported by our tools.
+
+
+### `poconvert.rb` versus `gettext`' tools
+
+Please don't use `gettext`' tools with our PO and POT files (unless you are
+using our strings for a different project). Instead all workflows can be
+accomplished with our `poconvert.rb` tool.
+
+More information about this tool can be found below.
+
+
 ## How to Contribute
 
 ### Find or Create the Translation Files
@@ -70,7 +154,7 @@ Tidy, and issue a PR for the whole change.
  6. Watch for comments or acceptance.
 
 
-#### Repository Notes
+### Repository Notes
 
 Please **only** commit PO files with _English_ `msgid` fields. The `gettext`
 convention specifies only English `msgid`, and other translators may not
@@ -187,8 +271,112 @@ Tidy's source code includes a Ruby batch file called `poconvert.rb` which can be
 used to generate POT, PO, and H files, and convert them back and forth. It has
 been designed to work in a similar fashion as `gettext`'s tools, and includes
 conveniences that let translators work in different source languages. Please
-use `poconvert.rb help` for more information (`ruby poconvert.rb help` on
+use `poconvert.rb help` for complete information (`ruby poconvert.rb help` on
 Windows).
+
+Note that you must install Ruby on your system, as well as install the required
+dependencies. These can be manually installed with `[sudo] gem install xxx`,
+where `xxx` represents the packages listed in `Gemfile`. For convenience, if you
+have the Bundler gem installed, you can `bundle install` for automated
+dependency installation.
+
+Also take note of these two important characteristics:
+
+- `poconvert.rb` is currently dependent on its current path. You can move it
+  from its current location, but you will have to change the values of the
+  `@@default_en` and `@@header_template` variables within the script.
+- All files will be output in the current working directory. This will prevent
+  accidental overwrites of important files while we all get used to the
+  workflows.
+
+Below are some sample workflows.
+
+
+### Create a new POT file
+
+Although we provide `tidy.pot` in the source, you can generate your own.
+
+`./poconvert.rb xgettext`
+
+This will put a fresh, new copy of `tidy.pot` in the working directory.
+
+
+### Create a new POT file with non-English `msgid` strings
+
+Although `gettext` officially recognizes English as the one, true source
+language for PO and POT files, if you're more comfortable translating from a
+non-English language, we can support you.
+
+`./poconvert.rb xgettext <language_cc_ll.h>`
+
+Where `<language_cc_ll.h>` is the path to an existing Tidy language header file.
+This will produce a `tidy.pot` using the translated strings as `msgid`, using
+English as a backup when translated strings are not present.
+
+This can be valuable in producing regional variant translations, e.g., when
+translating from `es` to `es_mx`.
+
+
+### Convert an existing H to PO
+
+In many cases you may want to have a fresh PO generated from a Tidy H file.
+This can be accomplished with:
+
+`./poconvert.rb msgunfmt <language_cc_ll.h>`
+
+
+### Convert an existing H to PO using a different `msgid` language
+
+If you want to generate a fresh PO file from a Tidy H file, but _also_ want to
+have untranslated strings from a language other than English, try:
+
+`./poconvert.rb msgunfmt <language_cc_ll.h> --baselang=<other-language_cc_ll.h>`
+
+
+### Create a blank PO file for a particular region
+
+`./poconvert.rb msginit`
+or
+`./poconvert.rb msginit --locale=LOCALE`
+
+The first example will try to guess your current region, and the second will
+use a region specified.
+
+Tidy only knows about the same regions that `gettext` knows; if our `msginit`
+does not recognize the region you specify, you will have to create a new PO
+and modify the region settings yourself.
+
+To create the blank PO using `msgid` strings from a different Tidy language,
+you can use:
+
+`./poconvert.rb msginit <language_cc_ll.h> [--locale=LOCALE]`
+
+
+### Create a Tidy Language Header H file
+
+When you're ready to include the language in Tidy, you can generate its header
+file with:
+
+`./poconvert.rb msgfmt <language_cc_ll.po>
+
+In the event you are creating a regional variant of a language, it's an
+excellent idea to have Tidy exclude strings that are already present in the
+parent language in order to reduce library and executable size. For example
+if `es` already includes the string "archivo" there is no reason for your
+translation to `es_mx` to include it, too. You can tell `poconvert.rb` to
+exclude strings matching another localization like so:
+
+`./poconvert.rb msgfmt <language_cc_ll.po> --baselang=<other-language_cc_ll.h>`
+
+
+### Update your PO to match the new POT
+
+If Tidy's POT changes, e.g., new strings are added, new comments, etc., the
+simplest way to update your PO is to convert it to a header (which normalizes
+it to the latest Tidy standard), and then convert the header to a new PO again.
+
+`./poconvert msgfmt <language_cc_ll.po>`
+`./poconvert msgunfmt <language_cc_ll.h>`
 
 
 ## Help Tidy Get Better

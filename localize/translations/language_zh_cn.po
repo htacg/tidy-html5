@@ -1,18 +1,18 @@
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: zh_cn\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2016-01-23 15:23:16\n"
+"PO-Revision-Date: 2016-01-23 15:23:30\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
 #. Specify the ll or ll_cc language code here.
 msgctxt "TIDY_LANGUAGE"
 msgid "en"
-msgstr "es"
+msgstr "cn"
 
 #. Only translate if a URL to the target language can be found.
 msgctxt "ACCESS_URL"
@@ -27,17 +27,17 @@ msgstr ""
 #, c-format
 msgctxt "FILE_CANT_OPEN"
 msgid "Can't open \"%1$s\"\n"
-msgstr ""
+msgstr "无法打开”%1$s”\n"
 
 #, c-format
 msgctxt "LINE_COLUMN_STRING"
 msgid "line %1$d column %2$d - "
-msgstr ""
+msgstr "行 %1$d 列 %2$d - "
 
 #, c-format
 msgctxt "STRING_CONTENT_LOOKS"
 msgid "Document content looks like %1$s"
-msgstr ""
+msgstr "文档内容看起来像 %1$s"
 
 #. For example, "discarding invalid UTF-16 surrogate pair"
 msgctxt "STRING_DISCARDING"
@@ -58,14 +58,12 @@ msgstr ""
 msgctxt "STRING_ERROR_COUNT_ERROR"
 msgid "error"
 msgid_plural "errors"
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
 
 msgctxt "STRING_ERROR_COUNT_WARNING"
 msgid "warning"
 msgid_plural "warnings"
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
 
 msgctxt "STRING_HELLO_ACCESS"
 msgid "Accessibility Checks:"
@@ -376,10 +374,6 @@ msgid ""
 "English? Consider helping us to localize HTML Tidy. For details please see \n"
 "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md\n"
 msgstr ""
-"\n"
-"¿Le gustaría ver Tidy en un español correcto? Por favor considere \n"
-"ayudarnos a localizar HTML Tidy. Para más detalles consulte \n"
-"https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md \n"
 
 msgctxt "TidyInfoString"
 msgid "Info: "
@@ -1416,11 +1410,6 @@ msgid ""
 "<code>yes</code> then legacy tags will be replaced with CSS "
 "<code>&lt;style&gt;</code> tags and structural markup as appropriate. "
 msgstr ""
-"Esta opción especifica si Tidy debe realizar la limpieza de algún legado etiquetas de "
-"presentación (actualmente <code>&lt;i&gt;</code>, <code>&lt;b&gt;</code>, <code>&lt;center&gt;</"
-"code> cuando encerrados dentro de las etiquetas apropiadas en línea y <code>&lt;font&gt;</"
-"code>). Si se establece en <code>yes</code>, entonces etiquetas existentes serán reemplazados "
-"con CSS <code>&lt;style&gt;</code> y estructural markup según corresponda. "
 
 #. Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
 #. It's very important that <br/> be self-closing in this manner!
@@ -1732,7 +1721,7 @@ msgstr ""
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 msgctxt "TidyNCR"
 msgid "This option specifies if Tidy should allow numeric character references. "
-msgstr "Esta opción especifica si Tidy debe permitir referencias de caracteres numéricos. "
+msgstr ""
 
 #. Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
 #. It's very important that <br/> be self-closing in this manner!
@@ -2797,13 +2786,13 @@ msgstr ""
 #, c-format
 msgctxt "TC_STRING_VERS_A"
 msgid "HTML Tidy for %1$s version %2$s"
-msgstr ""
+msgstr "HTML Tidy 版本 %2$s 用于 %1$s"
 
 #. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 #, c-format
 msgctxt "TC_STRING_VERS_B"
 msgid "HTML Tidy version %1$s"
-msgstr ""
+msgstr "HTML Tidy 版本 %1$s"
 
 #. This console output should be limited to 78 characters per line.
 #. - %1$n represents the name of the executable from the file system, and is mostly like going to be "tidy".
@@ -2932,25 +2921,6 @@ msgid ""
 "legacy Windows name.\n"
 "\n"
 msgstr ""
-"\n"
-"La opción --language (o --lang) indica el lenguaje Tidy debe \n"
-"utilizar para comunicar su salida. Tenga en cuenta que esto no es \n"
-"un servicio de traducción de documentos, y sólo afecta a los mensajes \n"
-"que Tidy comunica a usted. \n"
-"\n"
-"Cuando se utiliza la línea de comandos el argumento --language debe \n"
-"utilizarse antes de cualquier argumento que dan lugar a la producción, \n"
-"de lo contrario Tidy producirá la salida antes de que se conozca el \n"
-"idioma a utilizar. \n"
-"\n"
-"Además de los códigos de idioma estándar POSIX, Tidy es capaz de \n"
-"entender códigos de idioma legados de Windows. Tenga en cuenta que \n"
-"este lista indica los códigos Tidy entiende, y no indica que \n"
-"actualmente el idioma está instalado. \n"
-"\n"
-"La columna más a la derecha indica cómo Tidy comprenderá el \n"
-"legado nombre de Windows.\n"
-"\n"
 
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
@@ -2965,14 +2935,6 @@ msgid ""
 "Please report instances of incorrect strings to the Tidy team. \n"
 "\n"
 msgstr ""
-"\n"
-"Los siguientes idiomas están instalados actualmente en Tidy. Tenga \n"
-"en cuenta que no hay garantía de que están completos; sólo quiere decir \n"
-"que un desarrollador u otro comenzaron a añadir el idioma indicado. \n"
-"\n"
-"Localizaciones incompletas por defecto se usan \"en\" cuando sea \n"
-"necesario. ¡Favor de informar los desarrolladores de estes casos! \n"
-"\n"
 
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
@@ -2985,11 +2947,4 @@ msgid ""
 "system documentation for more information. \n"
 "\n"
 msgstr ""
-"\n"
-"Si Tidy es capaz de determinar la configuración regional entonces \n"
-"Tidy utilizará el lenguaje de forma automática de la configuración \n"
-"regional. Por ejemplo los sistemas de tipo Unix utilizan los variables \n"
-"$LANG y/o $LC_ALL. Consulte a su documentación del sistema para \n"
-"obtener más información.\n"
-"\n"
 

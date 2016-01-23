@@ -142,7 +142,7 @@ module PoConvertModule
       content.scan(%r!((?:^#|^msgctxt).*?)(?:\z|^\n)!im) do | section |
         item = parse_po_section(section[0])
         if item
-          self.items.merge!(item) unless item[item.keys[0]].empty?
+          self.items.merge!(item) unless item[item.keys[0]].empty? unless item.empty?
         else
           return false
         end
@@ -242,16 +242,18 @@ module PoConvertModule
       # just like PoHeader file uses:
       # :keyword => { '#' => { :comment, :if_group, :case, :string } }
       # We will also reject items that have no string value.
-      current_label = current_label.to_sym
       result = {}
-      result[current_label] = {}
-      current_cases.each do | key, value |
-        unless value == ''
-          result[current_label][key] = {}
-          result[current_label][key][:comment] = current_comment
-          result[current_label][key][:if_group] = current_if_group
-          result[current_label][key][:case] = key
-          result[current_label][key][:string] = value
+      if current_label
+        current_label = current_label.to_sym
+        result[current_label] = {}
+        current_cases.each do | key, value |
+          unless value == ''
+            result[current_label][key] = {}
+            result[current_label][key][:comment] = current_comment
+            result[current_label][key][:if_group] = current_if_group
+            result[current_label][key][:case] = key
+            result[current_label][key][:string] = value
+          end
         end
       end
       result
@@ -400,12 +402,15 @@ module PoConvertModule
 
     include PoConvertModule
 
+    attr_accessor :emacs_footer
+
     #########################################################
     # initialize
     #########################################################
     def initialize
-      @po_locale = nil          # The locale to use to generate PO files.
-      @known_locales = {}       # The locales we know about.
+      @po_locale = nil       # The locale to use to generate PO files.
+      @known_locales = {}    # The locales we know about.
+      @emacs_footer = false  # Indicates whether or not to add emacs instructions.
     end
 
 
@@ -650,9 +655,8 @@ msgstr ""
       untranslated_items.delete(:TIDY_MESSAGE_TYPE_LAST)
       untranslated_items.each do |key, value|
 
-        #report << "#\n"
         if value['0'][:comment]
-          report << "#. #{value['0'][:comment]}\n"
+          value['0'][:comment].each_line { |line| report << "#. #{line.strip}\n"}
         end
         if %w($u $s $d).any? { | find | value['0'][:string].include?(find) }
           report << "#, c-format\n"
@@ -698,6 +702,15 @@ msgstr ""
 
         report << "\n"
       end # do
+
+      if emacs_footer
+        report << <<-HEREDOC
+# Local Variables:
+# mode: po
+# eval: (add-hook 'po-subedit-mode-hook '(lambda () (setq fill-column 78)))
+# End:
+        HEREDOC
+      end
 
       output_file = action == :xgettext ? 'tidy.pot' : "language_#{header_translate_to}.po"
       if File.exists?(output_file)
@@ -751,12 +764,17 @@ msgstr ""
         ( (filter_items.has_key?(key) && filter_items[key] == value) ) || !filter_items.has_key?(key)
       end
 
+      # #if groups and comments:
       # We need to know which translated items belong in #if groups. Since we
-      # don't store this metadata in the PO, find out which #if groups they
-      # belong to from the original language_en.h.
+      #  don't store this metadata in the PO, find out which #if groups they
+      #  belong to from the original language_en.h.
+      # Additionally we will only use comments from language_en.h. Besides
+      #  preventing us from having to format them, we ensure that only the
+      #  canonical comments are put into the H file in the event of changes.
       po_content.items.each do |key, value|
         value.each_value do |item_entry|
           item_entry[:if_group] = lang_en.items[key]['0'][:if_group]
+          item_entry[:comment] = lang_en.items[key]['0'][:comment]
         end
       end
 
@@ -911,6 +929,10 @@ Complete Help:
     #  See long_desc
     #########################################################
     desc 'xgettext [input_file.h]', 'Creates a POT file for use with HTML Tidy.'
+    option :emacs,
+           :type => :boolean,
+           :desc => 'Appends emacs editor information to the end of the PO file.',
+           :aliases => '-e'
     long_desc <<-LONG_DESC
       Creates an empty POT from Tidy's native English header, or optionally from
       a specified language using English as a backup source. POT files have no
@@ -922,6 +944,7 @@ Complete Help:
     LONG_DESC
     def xgettext(input_file = nil)
       converter = PoConverter.new
+      converter.emacs_footer = options[:emacs]
       set_options
       if converter.convert_to_po( nil, input_file)
         puts 'xgettext exited without errors.'
@@ -941,6 +964,10 @@ Complete Help:
            :type => :string,
            :desc => 'Specifies the locale in ll or ll_CC format for the generated PO file.',
            :aliases => '-l'
+    option :emacs,
+           :type => :boolean,
+           :desc => 'Appends emacs editor information to the end of the PO file.',
+           :aliases => '-e'
     desc 'msginit [input_file.h]', 'Creates a blank PO file for the current or specified locale.'
     long_desc <<-LONG_DESC
       Creates an empty PO file and tries to set locale-specific header
@@ -954,6 +981,7 @@ Complete Help:
     LONG_DESC
     def msginit(input_file = nil)
       converter = PoConverter.new
+      converter.emacs_footer = options[:emacs]
       set_options
       unless (converter.po_locale = options[:locale] ? options[:locale] : I18n.locale)
         puts 'msginit exited with errors. Consider using the --verbose or --debug options.'
@@ -977,6 +1005,10 @@ Complete Help:
            :type => :string,
            :desc => 'Specifies a base language <file.h> from which to include untranslated strings.',
            :aliases => '-b'
+    option :emacs,
+           :type => :boolean,
+           :desc => 'Appends emacs editor information to the end of the PO file.',
+           :aliases => '-e'
     desc 'msgunfmt <input_file.h>', 'Converts an existing Tidy header H file to PO format.'
     long_desc <<-LONG_DESC
       Converts an existing Tidy header H file to a PO file using the locale
@@ -995,6 +1027,7 @@ Complete Help:
     LONG_DESC
     def msgunfmt(input_file = nil)
       converter = PoConverter.new
+      converter.emacs_footer = options[:emacs]
       set_options
       if converter.convert_to_po( input_file, options[:baselang] )
         puts 'msgunfmt exited without errors.'

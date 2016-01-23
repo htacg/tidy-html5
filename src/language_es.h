@@ -19,8 +19,8 @@
  * Template Created by Jim Derry on 01/14/2016.
  *
  * Orginating PO file metadata:
- *   PO_LAST_TRANSLATOR=Jim Derry <balthisar@gmail.com>
- *   PO_REVISION_DATE=2016-01-18 11:40+0800
+ *   PO_LAST_TRANSLATOR=jderry
+ *   PO_REVISION_DATE=2016-01-23 16:04:55
  */
 
 #ifdef _MSC_VER
@@ -57,14 +57,18 @@ static languageDefinition language_es = { whichPluralForm_es, {
     {/* Specify the ll or ll_cc language code here. */
       TIDY_LANGUAGE,          0, "es"
     },
-    {/* This console output should be limited to 78 characters per line. */
+    {/* This console output should be limited to 78 characters per line. 
+      - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TEXT_GENERAL_INFO_PLEA, 0,        
         "\n"
         "¿Le gustaría ver Tidy en un español correcto? Por favor considere \n"
         "ayudarnos a localizar HTML Tidy. Para más detalles consulte \n"
         "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md \n"
     },
-    { TidyMakeClean,          0,        
+    {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
+	    It's very important that <br/> be self-closing in this manner! 
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+      TidyMakeClean,          0,        
         "Esta opción especifica si Tidy debe realizar la limpieza de algún legado etiquetas de "
         "presentación (actualmente <code>&lt;i&gt;</code>, <code>&lt;b&gt;</code>, <code>&lt;center&gt;</"
         "code> cuando encerrados dentro de las etiquetas apropiadas en línea y <code>&lt;font&gt;</"
@@ -73,10 +77,15 @@ static languageDefinition language_es = { whichPluralForm_es, {
     },
 
 #if SUPPORT_ASIAN_ENCODINGS
-    { TidyNCR,                0, "Esta opción especifica si Tidy debe permitir referencias de caracteres numéricos. "   },
+    {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
+	    It's very important that <br/> be self-closing in this manner! 
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+      TidyNCR,                0, "Esta opción especifica si Tidy debe permitir referencias de caracteres numéricos. "
+    },
 #endif /* SUPPORT_ASIAN_ENCODINGS */
 
-    {/* This console output should be limited to 78 characters per line. */
+    {/* This console output should be limited to 78 characters per line.
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TC_TXT_HELP_LANG_1,     0,        
         "\n"
         "La opción --language (o --lang) indica el lenguaje Tidy debe \n"
@@ -98,7 +107,8 @@ static languageDefinition language_es = { whichPluralForm_es, {
         "legado nombre de Windows.\n"
         "\n"
     },
-    {/* This console output should be limited to 78 characters per line. */
+    {/* This console output should be limited to 78 characters per line.
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TC_TXT_HELP_LANG_2,     0,        
         "\n"
         "Los siguientes idiomas están instalados actualmente en Tidy. Tenga \n"
@@ -109,7 +119,8 @@ static languageDefinition language_es = { whichPluralForm_es, {
         "necesario. ¡Favor de informar los desarrolladores de estes casos! \n"
         "\n"
     },
-    {/* This console output should be limited to 78 characters per line. */
+    {/* This console output should be limited to 78 characters per line.
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TC_TXT_HELP_LANG_3,     0,        
         "\n"
         "Si Tidy es capaz de determinar la configuración regional entonces \n"

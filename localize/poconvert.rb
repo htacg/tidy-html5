@@ -125,7 +125,7 @@ module PoConvertModule
 
       # Get the stuff we want to keep from the PO header.
       tmp = content.match(/"Language: (.*?)\\n"/i)
-      self.language = tmp[1] if tmp
+      self.language = tmp[1].downcase if tmp
 
       tmp = content.match(/"(Plural-Forms: .*?;)\s*?plural=\s*?(.*?)\\n"/i)
       self.plural_forms = tmp[1] if tmp
@@ -652,6 +652,7 @@ msgstr ""
 
       HEREDOC
 
+      untranslated_items.delete(:TIDY_LANGUAGE)
       untranslated_items.delete(:TIDY_MESSAGE_TYPE_LAST)
       untranslated_items.each do |key, value|
 
@@ -749,11 +750,9 @@ msgstr ""
         filter_items.merge!(lang_base.items)
       end
 
-      # We will hard code this into the generated file.
+      # We will hard code these into the generated file.
+      filter_items.delete(:TIDY_LANGUAGE)
       filter_items.delete(:TIDY_MESSAGE_TYPE_LAST)
-
-      # Capture the language just in case it's purged below.
-      report_lang = po_content.items[:TIDY_LANGUAGE]['0'][:string][1..-2]
 
       # Eliminate PO items if they match inherited items (in the filter), or
       # if they're not included in English (i.e., entries not used by Tidy).
@@ -789,12 +788,16 @@ msgstr ""
         end
       end
 
+      # Manually build the first line with the proper language code.
+      report_body = "    {/* Specify the ll or ll_cc language code here. */\n"
+      report_body << "      #{'TIDY_LANGUAGE,'.ljust(longest_key+2)}0, \"#{po_content.language}\"\n"
+      report_body << "    },\n"
+
       # Generate the main header body. Although it's a machine-generated
       # document we still care that it's pretty-printed and readable. In
       # this respect we have four output formats: single line values;
       # single line values with developer comment; multiline values; and
       # multiline values with developer comment.
-      report_body = ''
       if_group = nil
       po_content.items.each do |item_key, item_value|
         item_group = item_value[item_value.keys[0]][:if_group]
@@ -832,6 +835,7 @@ msgstr ""
               report_body << "      #{(item_key.to_s + ',').ljust(longest_key+2)}#{entry_value[:case]}, #{entry_value[:string]}\n"
               report_body << "    },\n"
             else
+              # known issue: ljust doesn't work for certain unicode characters, so no pretty-printing, e.g., Chinese.
               report_body << "    { #{(item_key.to_s + ',').ljust(longest_key+2)}#{entry_value[:case]}, #{entry_value[:string].ljust(longest_value+2)} },\n"
             end
           end
@@ -859,7 +863,7 @@ msgstr ""
       report = ERB.new(header_file).result(binding) # will use in-context vars.
 
       # Save
-      output_file = "language_#{report_lang}.h"
+      output_file = "language_#{po_content.language}.h"
       if File.exists?(output_file)
         File.rename(output_file, safe_backup_name(output_file))
       end

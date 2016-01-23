@@ -5,14 +5,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2016-01-23 15:21:15\n"
+"POT-Creation-Date: 2016-01-23 16:02:36\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
-
-#. Specify the ll or ll_cc language code here.
-msgctxt "TIDY_LANGUAGE"
-msgid "en"
-msgstr ""
 
 #. Only translate if a URL to the target language can be found.
 msgctxt "ACCESS_URL"

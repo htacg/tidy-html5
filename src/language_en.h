@@ -1,4 +1,4 @@
-#ifndef language_en_h
+﻿#ifndef language_en_h
 #define language_en_h
 /*
  * language_en.h

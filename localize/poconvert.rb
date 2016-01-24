@@ -678,7 +678,7 @@ msgstr ""
 
         if lang_source && lang_source.items[key]
           # Print translated strings.
-          if header_plural_count == 0 || en_is_singular
+          if en_is_singular
             report << item_output.( 'msgstr', lang_source.items[key]['0'][:string])
           else
             # Print available plural forms and write blanks for the rest.
@@ -692,8 +692,8 @@ msgstr ""
           end
         else
           # Print empty translated strings.
-          if header_plural_count == 0 || en_is_singular
-            report << "msgstr \"\"\n"
+          if en_is_singular
+          report << "msgstr \"\"\n"
           else
             (0..header_plural_count).each do |i|
               report << "msgstr[#{i}] \"\"\n"
@@ -867,7 +867,10 @@ msgstr ""
       if File.exists?(output_file)
         File.rename(output_file, safe_backup_name(output_file))
       end
-      File.open(output_file, 'w') { |f| f.write(report) }
+      File.open(output_file, 'w') do |f|
+        f.write "\uFEFF" # MSVC requires a BOM.
+        f.write(report)
+      end
       @@log.info "#{__method__}: Results written to #{output_file}"
       puts "Wrote a new header file to #{File.expand_path(output_file)}"
       true

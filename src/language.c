@@ -340,8 +340,9 @@ tmbstr tidySystemLocale(tmbstr result)
 
 
 /**
- *  Retrieves the POSIX name for a string. Result is a
- *  static char so please don't try to free it.
+ *  Retrieves the POSIX name for a string. Result is a static char so please
+ *  don't try to free it. If the name looks like a cc_ll identifier, we will
+ *  return it if there's no other match.
  */
 tmbstr tidyNormalizedLocaleName( ctmbstr locale )
 {
@@ -390,9 +391,10 @@ tmbstr tidyNormalizedLocaleName( ctmbstr locale )
 
 
 /**
- *  Actually sets the language with a sanitized languageCode.
+ *  Returns the languageDefinition if the languageCode is installed in Tidy,
+ *  otherwise return NULL
  */
-languageDefinition *TY_(tidySetLanguage)( ctmbstr languageCode )
+languageDefinition *TY_(tidyTestLanguage)( ctmbstr languageCode )
 {
 	uint i;
 	languageDefinition *testLang;
@@ -406,11 +408,7 @@ languageDefinition *TY_(tidySetLanguage)( ctmbstr languageCode )
 		testCode = (*testDict)[0].value;
 		
 		if ( strcmp(testCode, languageCode) == 0 )
-		{
-			tidyLanguages.currentLanguage = testLang;
-			if ( strlen(testCode) == 2 )
-				return testLang;
-		}
+            return testLang;
 	}
 	
 	return NULL;
@@ -423,6 +421,12 @@ languageDefinition *TY_(tidySetLanguage)( ctmbstr languageCode )
  *  an included language. The result indicates that a setting
  *  was applied, but not necessarily the specific request, i.e.,
  *  true indicates the language and/or region was applied.
+ *  The user first choice will be respected if possible. If es_mx
+ *  is requested, it will be set with es backup. If es_mx is not
+ *  available, but es is, then es will be set. However if es is
+ *  requested and not installed, but es_mx is installed, then it
+ *  will NOT be set. Tidy cannot predict which regional variant
+ *  should be used.
  */
 Bool tidySetLanguage( ctmbstr languageCode )
 {
@@ -436,30 +440,39 @@ Bool tidySetLanguage( ctmbstr languageCode )
 		return no;
     }
 
-	/* We should have a two or five character string at this point, so
-	 we will first set with the two character ID to get the right
-	 language, then try again with the five character ID to set the
-	 region. If the region fails, at least the language is set.
-	 */
-	
-	if ( strlen( wantCode ) > 2 )
-	{
-		strncpy(lang, wantCode, 2);
-		lang[2] = '\0';
-		dict1 = TY_(tidySetLanguage( lang ) );
-	}
-	
-	dict2 = TY_(tidySetLanguage( wantCode ));
-	
-	/* Set a fallback dictionary if applicable. If dict1 is assigned,
-	 it means we wanted a xx_yy dict, but the xx worked, making it
-	 eligible as a fallback. If !dict1, then there is no eligible
-	 fallback so make sure to NULL it out.
-	 */
-	if ( dict1 )
-		tidyLanguages.fallbackLanguage = dict1;
-	if ( !dict1 && dict2 )
-		tidyLanguages.fallbackLanguage = NULL;
+    /* We want to use the specified language as the currentLanguage, and set
+     fallback language as necessary. We have either a two or five digit code,
+     either or both of which might be installed. Let's test both of them:
+     */
+
+    dict1 = TY_(tidyTestLanguage( wantCode ));  /* WANTED language */
+
+    if ( strlen( wantCode ) > 2 )
+    {
+        strncpy(lang, wantCode, 2);
+        lang[2] = '\0';
+        dict2 = TY_(tidyTestLanguage( lang ) ); /* BACKUP language? */
+    }
+
+    if ( dict1 && dict2 )
+    {
+        tidyLanguages.currentLanguage = dict1;
+        tidyLanguages.fallbackLanguage = dict2;
+    }
+    if ( dict1 && !dict2 )
+    {
+        tidyLanguages.currentLanguage = dict1;
+        tidyLanguages.fallbackLanguage = NULL;
+    }
+    if ( !dict1 && dict2 )
+    {
+        tidyLanguages.currentLanguage = dict2;
+        tidyLanguages.fallbackLanguage = NULL;
+    }
+    if ( !dict1 && !dict2 )
+    {
+        /* No change. */
+    }
 
 	return dict1 || dict2;
 }

@@ -32,6 +32,7 @@
 
 
 #include "forward.h"
+#include "message.h"
 
 #if SUPPORT_ACCESSIBILITY_CHECKS
 
@@ -120,7 +121,7 @@ struct _TidyAccessImpl
  */
 typedef enum
 {
-                           FIRST_ACCESS_ERR = 1000,    /* must be first */
+                           FIRST_ACCESS_ERR = CODES_TIDY_ERROR_LAST + 1,    /* must be first */
  
     /* [1.1.1.1] */        IMG_MISSING_ALT,
     /* [1.1.1.2] */        IMG_ALT_SUSPICIOUS_FILENAME,

@@ -312,7 +312,7 @@ typedef enum
 */
 typedef enum
 {
-  TidyInfoString = 500,
+  TidyInfoString = 600,
   TidyWarningString,
   TidyConfigString,
   TidyAccessString,

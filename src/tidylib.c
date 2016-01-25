@@ -672,6 +672,22 @@ Bool TIDY_CALL        tidySetReportFilter2( TidyDoc tdoc, TidyReportFilter2 filt
   return no;
 }
 
+/* TidyReportFilter3 functions similar to TidyReportFilter, but provides the
+ * string version of the internal enum name so that LibTidy users can use
+** the string as a lookup key for providing their own error localizations.
+** See the string definitions in language.h
+*/
+Bool TIDY_CALL        tidySetReportFilter3( TidyDoc tdoc, TidyReportFilter3 filt )
+{
+  TidyDocImpl* impl = tidyDocToImpl( tdoc );
+  if ( impl )
+  {
+    impl->mssgFilt3 = filt;
+    return yes;
+  }
+  return no;
+}
+
 #if 0   /* Not yet */
 int         tidySetContentOutputSink( TidyDoc tdoc, TidyOutputSink* outp )
 {

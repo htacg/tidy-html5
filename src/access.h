@@ -118,6 +118,10 @@ struct _TidyAccessImpl
   
     These accessErrorCodes are used throughout libtidy, and also
     have associated localized strings to describe them.
+ 
+    IMPORTANT: to maintain compatability with TidyMessageFilter3, if you add
+    or remove keys from this enum, ALSO add/remove the corresponding key
+    in language.c:tidyErrorFilterKeysStruct[]!
  */
 typedef enum
 {

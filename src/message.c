@@ -247,6 +247,14 @@ static void messagePos( TidyDocImpl* doc, TidyReportLevel level, uint code,
             TidyDoc tdoc = tidyImplToDoc( doc );
             go = go | doc->mssgFilt2( tdoc, level, line, col, tidyDefaultString(code), args_copy );
         }
+        if ( doc->mssgFilt3 )
+        {
+			/* mssgFilt3 is intended to allow LibTidy users to localize
+			   messages via their own means by providing a key string and
+			   the parameters to fill it. */
+            TidyDoc tdoc = tidyImplToDoc( doc );
+            go = go | doc->mssgFilt3( tdoc, level, line, col, tidyErrorCodeAsString(code), args_copy );
+        }
     }
 
     if ( go )

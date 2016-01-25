@@ -497,9 +497,9 @@ const uint TY_(tidyStringKeyListSize)()
     
     if ( array_size == 0 )
     {
-        do {
+        while ( language_en.messages[array_size].value != NULL ) {
             array_size++;
-        } while ( language_en.messages[array_size].value );
+        }
     }
     
     return array_size;
@@ -533,7 +533,7 @@ uint getNextStringKey( TidyIterator* iter )
     
     if ( itemIndex > 0 && itemIndex <= TY_(tidyStringKeyListSize)() )
     {
-        item = language_en.messages[itemIndex].key;
+        item = language_en.messages[ itemIndex - 1 ].key;
         itemIndex++;
     }
     
@@ -552,9 +552,9 @@ const uint TY_(tidyLanguageListSize)()
 	
 	if ( array_size == 0 )
 	{
-		do {
-			array_size++;
-		} while ( localeMappings[array_size].winName );
+        while ( localeMappings[array_size].winName ) {
+            array_size++;
+        }
 	}
 	
 	return array_size;
@@ -602,9 +602,9 @@ const uint TY_(tidyInstalledLanguageListSize)()
 	
 	if ( array_size == 0 )
 	{
-		do {
+		while ( tidyLanguages.languages[array_size] ) {
 			array_size++;
-		} while ( tidyLanguages.languages[array_size] );
+		}
 	}
 	
 	return array_size;

@@ -823,6 +823,7 @@ static void printXMLCrossRef( TidyDoc tdoc, TidyOption topt )
 	}
 }
 
+
 /**
  **  Prints for XML an option.
  **/
@@ -853,6 +854,7 @@ static void printXMLOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
 	printf( " </option>\n" );
 }
 
+
 /**
  **  Handles the -xml-config service.
  **/
@@ -863,6 +865,44 @@ static void XMLoptionhelp( TidyDoc tdoc )
 	ForEachOption( tdoc, printXMLOption );
 	printf( "</config>\n" );
 }
+
+/**
+ *  Prints the Windows language names that Tidy recognizes,
+ *  using the specified format string.
+ */
+void tidyPrintWindowsLanguageNames( ctmbstr format )
+{
+    const tidyLocaleMapItem *item;
+    TidyIterator i = getWindowsLanguageList();
+    
+    while (i) {
+        item = getNextWindowsLanguage(&i);
+        if ( format )
+            printf( format, item->winName, item->POSIXName );
+        else
+            printf( "%-20s -> %s\n", item->winName, item->POSIXName );
+    }
+}
+
+
+/**
+ *  Prints the languages the are currently built into Tidy,
+ *  using the specified format string.
+ */
+void tidyPrintTidyLanguageNames( ctmbstr format )
+{
+    ctmbstr item;
+    TidyIterator i = getInstalledLanguageList();
+    
+    while (i) {
+        item = getNextInstalledLanguage(&i);
+        if ( format )
+            printf( format, item );
+        else
+            printf( "%s\n", item );
+    }
+}
+
 
 /**
  **  Retrieves allowed values from an option's pick list.
@@ -1378,6 +1418,8 @@ static void xml_options_strings( TidyDoc tdoc )
 static void xml_strings( void )
 {
     uint i;
+    TidyIterator j;
+    
 	ctmbstr current_language = tidyGetLanguage();
 	Bool skip_current = strcmp( current_language, "en" ) == 0;
 	Bool matches_base;
@@ -1385,8 +1427,9 @@ static void xml_strings( void )
 	printf( "<?xml version=\"1.0\"?>\n"
 		   "<localized_strings version=\"%s\">\n", tidyLibraryVersion());
 
-	i = tidyFirstStringKey();
-	do	{
+	j = getStringKeyList();
+    while (j) {
+        i = getNextStringKey(&j);
 		printf( "<localized_string id=\"%u\">\n", i );
 		printf( " <string class=\"%s\">", "en" );
 		printf("%s", tidyDefaultString(i));
@@ -1398,8 +1441,7 @@ static void xml_strings( void )
 			printf( "</string>\n" );
 		}
 		printf( "</localized_string>\n");
-		i = tidyNextStringKey();
-	} while ( i != tidyLastStringKey() );
+	}
 	
 	printf( "</localized_strings>\n" );
 }

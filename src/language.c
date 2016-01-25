@@ -63,10 +63,7 @@ static tidyLanguagesType tidyLanguages = {
  *  to proper POSIX names (modern Windows already uses
  *  POSIX names).
  */
-static struct _localeMap {
-	ctmbstr winName;
-	ctmbstr POSIXName;
-} const localeMappings[] = {
+static const tidyLocaleMapItem localeMappings[] = {
 	{ "america",                "en_us" },
 	{ "american english",       "en_us" },
 	{ "american-english",       "en_us" },
@@ -233,12 +230,6 @@ static struct _localeMap {
 
 
 /**
- *  Current index of tidyNextStringKey iterator.
- */
-static uint tidyStringKeyIndex = 0;
-
-
-/**
  *  The real string lookup function.
  */
 ctmbstr TY_(tidyLocalizedString)( uint messageType, languageDefinition *definition, uint plural )
@@ -312,7 +303,6 @@ ctmbstr tidyLocalizedString( uint messageType )
  **  Determines the current locale without affecting the C locale.
  **  Tidy has always used the default C locale, and at this point
  **  in its development we're not going to tamper with that.
- **  We have to return a new string, so don't forget to free it.
  **  @param  result The buffer to use to return the string.
  **          Returns NULL on failure.
  **  @return The same buffer for convenience.
@@ -416,17 +406,15 @@ languageDefinition *TY_(tidyTestLanguage)( ctmbstr languageCode )
 
 
 /**
- *  Tells Tidy to use a different language for output. The
- *  parameter `languageCode` must match the TIDY_LANGUAGE for
- *  an included language. The result indicates that a setting
- *  was applied, but not necessarily the specific request, i.e.,
- *  true indicates the language and/or region was applied.
- *  The user first choice will be respected if possible. If es_mx
- *  is requested, it will be set with es backup. If es_mx is not
- *  available, but es is, then es will be set. However if es is
- *  requested and not installed, but es_mx is installed, then it
- *  will NOT be set. Tidy cannot predict which regional variant
- *  should be used.
+ *  Tells Tidy to use a different language for output.
+ *  @param  languageCode A Windows or POSIX language code, and must match
+ *          a TIDY_LANGUAGE for an installed language.
+ *  @result Indicates that a setting was applied, but not necessarily the
+ *          specific request, i.e., true indicates a language and/or region
+ *          was applied. If es_mx is requested but not installed, and es is
+ *          installed, then es will be selected and this function will return
+ *          true. However the opposite is not true; if es is requested but
+ *          not present, Tidy will not try to select from the es_XX variants.
  */
 Bool tidySetLanguage( ctmbstr languageCode )
 {
@@ -500,9 +488,65 @@ ctmbstr tidyDefaultString( uint messageType )
 
 
 /**
- *  Determines the size of the base en language array.
+ *  Determines the true size of the `language_en` array indicating the
+ *  number of items in the array, _not_ the highest index.
  */
-uint TY_(tidyLanguageArraySize)()
+const uint TY_(tidyStringKeyListSize)()
+{
+    static uint array_size = 0;
+    
+    if ( array_size == 0 )
+    {
+        do {
+            array_size++;
+        } while ( language_en.messages[array_size].value );
+    }
+    
+    return array_size;
+}
+
+
+/*
+ *  Initializes the TidyIterator to point to the first item
+ *  in Tidy's list of localization string keys. Note that
+ *  these are provided for documentation generation purposes
+ *  and probably aren't useful for LibTidy implementors.
+ */
+TidyIterator getStringKeyList()
+{
+    return (TidyIterator)(size_t)1;
+}
+
+/*
+ *  Provides the next key value in Tidy's list of localized
+ *  strings. Note that these are provided for documentation
+ *  generation purposes and probably aren't useful to
+ *  libtidy implementors.
+ */
+uint getNextStringKey( TidyIterator* iter )
+{
+    uint item = 0;
+    size_t itemIndex;
+    assert( iter != NULL );
+    
+    itemIndex = (size_t)*iter;
+    
+    if ( itemIndex > 0 && itemIndex <= TY_(tidyStringKeyListSize)() )
+    {
+        item = language_en.messages[itemIndex].key;
+        itemIndex++;
+    }
+    
+    *iter = (TidyIterator)( itemIndex <= TY_(tidyStringKeyListSize)() ? itemIndex : (size_t)0 );
+    return item;
+}
+
+
+/**
+ *  Determines the true size of the `localeMappings` array indicating the
+ *  number of items in the array, _not_ the highest index.
+ */
+const uint TY_(tidyLanguageListSize)()
 {
 	static uint array_size = 0;
 	
@@ -510,83 +554,89 @@ uint TY_(tidyLanguageArraySize)()
 	{
 		do {
 			array_size++;
-		} while ( language_en.messages[array_size].value );
+		} while ( localeMappings[array_size].winName );
 	}
 	
 	return array_size;
 }
 
-
 /**
- *  Provides the first key value in the localized strings
- *  list. Note that these are provided for documentation
- *  generation purposes and probably aren't useful to
- *  libtidy implementors.
+ *  Initializes the TidyIterator to point to the first item
+ *  in Tidy's structure of Windows<->POSIX local mapping.
+ *  Items can be retrieved with getNextWindowsLanguage();
  */
-uint tidyFirstStringKey()
+TidyIterator getWindowsLanguageList()
 {
-	tidyStringKeyIndex = 0;
-	return language_en.messages[tidyStringKeyIndex].key;
+    return (TidyIterator)(size_t)1;
 }
 
 /**
- *  Provides the next key value in the localized strings
- *  list. This current position is static so don't count
- *  on multiple iterators running concurrently. Note that
- *  these are provided for documentation generation purposes
- *   and probably aren't useful to libtidy implementors.
+ *  Returns the next record of type `localeMapItem` in
+ *  Tidy's structure of Windows<->POSIX local mapping.
  */
-uint tidyNextStringKey()
+const tidyLocaleMapItem *getNextWindowsLanguage( TidyIterator *iter )
 {
-	if ( tidyStringKeyIndex < tidyLastStringKey() )
-		tidyStringKeyIndex++;
+    const tidyLocaleMapItem *item = NULL;
+    size_t itemIndex;
+    assert( iter != NULL );
+    
+    itemIndex = (size_t)*iter;
+    
+    if ( itemIndex > 0 && itemIndex <= TY_(tidyLanguageListSize)() )
+    {
+        item = &localeMappings[ itemIndex -1 ];
+        itemIndex++;
+    }
+    
+    *iter = (TidyIterator)( itemIndex <= TY_(tidyLanguageListSize)() ? itemIndex : (size_t)0 );
+    return item;
+}
+
+
+/**
+ *  Determines the number of languages installed in Tidy.
+ */
+const uint TY_(tidyInstalledLanguageListSize)()
+{
+	static uint array_size = 0;
 	
-	return language_en.messages[tidyStringKeyIndex].key;
-}
-
-/**
- *  Provides the last key value in the localized strings
- *  list. Note that these are provided for documentation
- *  generation purposes and probably aren't useful to
- *  libtidy implementors.
- */
-uint tidyLastStringKey()
-{
-	return language_en.messages[TY_(tidyLanguageArraySize)()].key;
-}
-
-/**
- *  Prints the Windows language names that Tidy recognizes,
- *  using the specified format string.
- */
-void tidyPrintWindowsLanguageNames( ctmbstr format )
-{
-	uint i;
-	
-	for ( i = 0; localeMappings[i].winName; ++i )
+	if ( array_size == 0 )
 	{
-		if ( format )
-			printf( format, localeMappings[i].winName, localeMappings[i].POSIXName );
-		else
-			printf( "%-20s -> %s\n", localeMappings[i].winName, localeMappings[i].POSIXName );
+		do {
+			array_size++;
+		} while ( tidyLanguages.languages[array_size] );
 	}
+	
+	return array_size;
 }
 
 /**
- *  Prints the languages the are currently built into Tidy,
- *  using the specified format string.
+ *  Initializes the TidyIterator to point to the first item
+ *  in Tidy's list of installed language codes.
+ *  Items can be retrieved with getNextInstalledLanguage();
  */
-void tidyPrintTidyLanguageNames( ctmbstr format )
+TidyIterator getInstalledLanguageList()
 {
-	uint i;
-
-	
-	for ( i = 0; (tidyLanguages.languages[i]); ++i )
-	{
-		if ( format )
-			printf( format, tidyLanguages.languages[i]->messages[0].value );
-		else
-			printf( "%s\n", tidyLanguages.languages[i]->messages[0].value );
-	}
+    return (TidyIterator)(size_t)1;
 }
 
+/**
+ *  Returns the next installed language.
+ */
+ctmbstr getNextInstalledLanguage( TidyIterator* iter )
+{
+    ctmbstr item = NULL;
+    size_t itemIndex;
+    assert( iter != NULL );
+    
+    itemIndex = (size_t)*iter;
+    
+    if ( itemIndex > 0 && itemIndex <= TY_(tidyInstalledLanguageListSize)() )
+    {
+        item = tidyLanguages.languages[itemIndex - 1]->messages[0].value;
+        itemIndex++;
+    }
+    
+    *iter = (TidyIterator)( itemIndex <= TY_(tidyInstalledLanguageListSize)() ? itemIndex : (size_t)0 );
+    return item;
+}

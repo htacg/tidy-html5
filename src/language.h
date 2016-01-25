@@ -17,6 +17,10 @@
 #include "tidyplatform.h"
 
 
+
+/** @name Exposed Data Structures */
+/** @{ */
+
 /**
  *  Describes a record for a localization string.
  *  - key must correspond with one of Tidy's enums (see `tidyMessageTypes`
@@ -52,6 +56,18 @@ typedef struct languageDefinition {
 } languageDefinition;
 
 
+
+/**
+ *  The function getNextWindowsLanguage() returns pointers to this type;
+ *  it gives LibTidy implementors the ability to determine how Windows
+ *  locale names are mapped to POSIX language codes.
+ */
+typedef struct tidyLocaleMapItem {
+	ctmbstr winName;
+	ctmbstr POSIXName;
+} tidyLocaleMapItem;
+
+
 /**
  *  Defines all of the possible dictionary keys.
  *  The starting value is arbitrary but must prevent overlaps
@@ -69,7 +85,6 @@ typedef struct languageDefinition {
  *  constant. Accordingly feel free to arrange new enum
  *  values in the most appropriate grouping below.
  */
-
 typedef enum
 {
 	/* This MUST be present and first. */
@@ -173,6 +188,11 @@ typedef enum
 } tidyMessageTypes;
 
 
+/** @} */
+/** @name Localization Related Functions */
+/** @{ */
+
+
 /**
  **  Determines the current locale without affecting the C locale.
  **  Tidy has always used the default C locale, and at this point
@@ -183,16 +203,18 @@ typedef enum
  */
 tmbstr tidySystemLocale(tmbstr result);
 
-
 /**
- *  Tells Tidy to use a different language for output. The
- *  parameter `languageCode` must match the TIDY_LANGUAGE for
- *  an included language. The result indicates that a setting
- *  was applied, but not necessarily the specific request, i.e.,
- *  true indicates the language and/or region was applied.
+ *  Tells Tidy to use a different language for output.
+ *  @param  languageCode A Windows or POSIX language code, and must match
+ *          a TIDY_LANGUAGE for an installed language.
+ *  @result Indicates that a setting was applied, but not necessarily the
+ *          specific request, i.e., true indicates a language and/or region
+ *          was applied. If es_mx is requested but not installed, and es is
+ *          installed, then es will be selected and this function will return
+ *          true. However the opposite is not true; if es is requested but
+ *          not present, Tidy will not try to select from the es_XX variants.
  */
 Bool tidySetLanguage( ctmbstr languageCode );
-
 
 /**
  *  Gets the current language used by Tidy.
@@ -212,6 +234,7 @@ ctmbstr tidyLocalizedStringN( uint messageType, uint quantity );
 ctmbstr tidyLocalizedString( uint messageType );
 
 
+/** @} */
 /** @name Documentation Generation */
 /** @{ */
 
@@ -221,43 +244,47 @@ ctmbstr tidyLocalizedString( uint messageType );
  */
 ctmbstr tidyDefaultString( uint messageType );
 
-
-/**
- *  Provides the first key value in the localized strings
- *  list. Note that these are provided for documentation
- *  generation purposes and probably aren't useful to
- *  libtidy implementors.
- */
-uint tidyFirstStringKey();
-
-/**
- *  Provides the next key value in the localized strings
- *  list. This current position is static so don't count
- *  on multiple iterators running concurrently. Note that
+/*
+ *  Initializes the TidyIterator to point to the first item
+ *  in Tidy's list of localization string keys. Note that
  *  these are provided for documentation generation purposes
- *   and probably aren't useful to libtidy implementors.
+ *  and probably aren't useful for LibTidy implementors.
  */
-uint tidyNextStringKey();
+TidyIterator getStringKeyList();
 
-/**
- *  Provides the last key value in the localized strings
- *  list. Note that these are provided for documentation
+/*
+ *  Provides the next key value in Tidy's list of localized
+ *  strings. Note that these are provided for documentation
  *  generation purposes and probably aren't useful to
  *  libtidy implementors.
  */
-uint tidyLastStringKey();
+uint getNextStringKey( TidyIterator* iter );
 
 /**
- *  Prints the Windows language names that Tidy recognizes, 
- *  using the specified format string.
+ *  Initializes the TidyIterator to point to the first item
+ *  in Tidy's structure of Windows<->POSIX local mapping.
+ *  Items can be retrieved with getNextWindowsLanguage();
  */
-void tidyPrintWindowsLanguageNames( ctmbstr format );
+TidyIterator getWindowsLanguageList();
 
 /**
- *  Prints the languages the are currently built into Tidy,
- *  using the specified format string.
+ *  Returns the next record of type `localeMapItem` in
+ *  Tidy's structure of Windows<->POSIX local mapping.
  */
-void tidyPrintTidyLanguageNames( ctmbstr format );
+const tidyLocaleMapItem *getNextWindowsLanguage( TidyIterator* iter );
+
+/**
+ *  Initializes the TidyIterator to point to the first item
+ *  in Tidy's list of installed language codes.
+ *  Items can be retrieved with getNextInstalledLanguage();
+ */
+TidyIterator getInstalledLanguageList();
+
+/**
+ *  Returns the next installed language.
+ */
+ctmbstr getNextInstalledLanguage( TidyIterator* iter );
+
 
 /** @} */
 

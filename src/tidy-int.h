@@ -58,6 +58,7 @@ struct _TidyDocImpl
     StreamOut*          errout;
     TidyReportFilter    mssgFilt;
     TidyReportFilter2   mssgFilt2;
+    TidyReportFilter3   mssgFilt3;
     TidyOptCallback     pOptCallback;
     TidyPPProgress      progressCallback;
 

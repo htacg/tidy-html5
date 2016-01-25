@@ -17,7 +17,6 @@
 #include "tidyplatform.h"
 
 
-
 /** @name Exposed Data Structures */
 /** @{ */
 
@@ -56,7 +55,6 @@ typedef struct languageDefinition {
 } languageDefinition;
 
 
-
 /**
  *  The function getNextWindowsLanguage() returns pointers to this type;
  *  it gives LibTidy implementors the ability to determine how Windows
@@ -75,11 +73,11 @@ typedef struct tidyLocaleMapItem {
  *  comprehensive list of enums for which we provides strings
  *  is as follows:
  *    - `tidyMessageTypes` in this file,         start == 4096.
- *    - `accessErrorCodes` from `access.h`,      start == 1000.
  *    - `tidyErrorCodes` from `message.h`,       start == 200.
+ *    - `accessErrorCodes` from `access.h`,      start == CODES_TIDY_ERROR_LAST+1.
  *    - `tidyMessagesMisc` from `message.h`,     start == 2048.
  *    - `TidyOptionId` from `tidyEnum.h`,        start == 0 (important!).
- *    - `TidyReportLevelKeys` from `tidyEnum.h`, start == 500.
+ *    - `TidyReportLevelKeys` from `tidyEnum.h`, start == 600.
  *    - ...
  *  You should never count on the value of a label being
  *  constant. Accordingly feel free to arrange new enum
@@ -186,6 +184,18 @@ typedef enum
 	/* This MUST be present and last. */
 	TIDY_MESSAGE_TYPE_LAST
 } tidyMessageTypes;
+
+
+/**
+ *  LibTidy users may want to use `TidyReportFilter3` to enable their own
+ *  localization lookup features. Because Tidy's errors codes are enums the
+ *  specific values can change over time. This function returns a string
+ *  representing the enum value name that can be used as a lookup key
+ *  independent of changing string values (TidyReportFiler2 is vulnerable
+ *  to changing strings). `TidyReportFilter3` will return this general
+ *  string as the error message indicator.
+ */
+ctmbstr tidyErrorCodeAsString(uint code);
 
 
 /** @} */

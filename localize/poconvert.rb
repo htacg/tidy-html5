@@ -783,6 +783,13 @@ msgstr ""
       po_content.items.each do |key, value|
         longest_key = key.length if key.length > longest_key
         value.each_value do |value_inner|
+          value_inner[:string].gsub!(/[^\u0000-\u007e][0-9a-fA-F]?/) do |c|
+            esc = c[0].bytes.map{ |b| '\\x' + b.to_s(16) }.join('')
+            if c[1]
+              esc += '""' + c[1]
+            end
+            esc
+          end
           length = value_inner[:string].length
           longest_value = length if length > longest_value && !value_inner[:string].start_with?("\n")
         end
@@ -868,7 +875,7 @@ msgstr ""
         File.rename(output_file, safe_backup_name(output_file))
       end
       File.open(output_file, 'w') do |f|
-        f.write "\uFEFF" # MSVC requires a BOM.
+        #f.write "\uFEFF" # MSVC requires a BOM.
         f.write(report)
       end
       @@log.info "#{__method__}: Results written to #{output_file}"

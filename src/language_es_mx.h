@@ -1,4 +1,4 @@
-﻿#ifndef language_es_mx_h
+#ifndef language_es_mx_h
 #define language_es_mx_h
 /*
  * language_es_mx.h
@@ -61,8 +61,8 @@ static languageDefinition language_es_mx = { whichPluralForm_es_mx, {
       - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TEXT_GENERAL_INFO_PLEA, 0,        
         "\n"
-        "¿Le gustaría ver Tidy en adecuada, español mexicano? Por favor considere \n"
-        "ayudarnos a localizar HTML Tidy. Para más detalles consulte \n"
+        "\xc2\xbfLe gustar\xc3\xad""a ver Tidy en adecuada, espa\xc3\xb1ol mexicano? Por favor considere \n"
+        "ayudarnos a localizar HTML Tidy. Para m\xc3\xa1s detalles consulte \n"
         "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md \n"
     },
 

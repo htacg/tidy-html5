@@ -365,8 +365,12 @@ module PoConvertModule
         self.items[l_key][num_case][:comment] = comment
         self.items[l_key][num_case][:case] = num_case
         self.items[l_key][num_case][:if_group] = nil
-        tmp = ''
-        string.each_line { |line| tmp << line.lstrip }
+        # Reconstitute Hex Escapes
+        tmp = string.each_line.collect do |line|
+          line.lstrip.gsub(/\\x(..)/) { |g| [$1.hex].pack('c*').force_encoding('UTF-8') }
+        end
+        # Eliminate C double-double-quotes.
+        tmp = tmp.join.gsub(/""/) { |g| }
         self.items[l_key][num_case][:string] = tmp
       end
       if !self.items || self.items.empty?
@@ -403,6 +407,7 @@ module PoConvertModule
     include PoConvertModule
 
     attr_accessor :emacs_footer
+    attr_accessor :plaintext
 
     #########################################################
     # initialize
@@ -411,6 +416,7 @@ module PoConvertModule
       @po_locale = nil       # The locale to use to generate PO files.
       @known_locales = {}    # The locales we know about.
       @emacs_footer = false  # Indicates whether or not to add emacs instructions.
+      @plaintext = false     # Indicates whether or not we should stick to plaintext.
     end
 
 
@@ -777,18 +783,23 @@ msgstr ""
         end
       end
 
-      # Gather some information to format this nicely.
+
+      # Gather some information to format this nicely, and perform
+      # UTF escaping if necessary.
       longest_key = 22   # length of TIDY_MESSAGE_TYPE_LAST.
       longest_value = 10 # reasonable default in case no single-line strings are found.
       po_content.items.each do |key, value|
         longest_key = key.length if key.length > longest_key
         value.each_value do |value_inner|
-          value_inner[:string].gsub!(/[^\u0000-\u007e][0-9a-fA-F]?/) do |c|
-            esc = c[0].bytes.map{ |b| '\\x' + b.to_s(16) }.join('')
-            if c[1]
-              esc += '""' + c[1]
+          # If we're not plaintext then escape UTF sequences.
+          unless plaintext
+            value_inner[:string].gsub!(/[^\u0000-\u007e][0-9a-fA-F]?/) do |c|
+              esc = c[0].bytes.map{ |b| '\\x' + b.to_s(16) }.join('')
+              if c[1]
+                esc += '""' + c[1]
+              end
+              esc
             end
-            esc
           end
           length = value_inner[:string].length
           longest_value = length if length > longest_value && !value_inner[:string].start_with?("\n")
@@ -875,7 +886,7 @@ msgstr ""
         File.rename(output_file, safe_backup_name(output_file))
       end
       File.open(output_file, 'w') do |f|
-        #f.write "\uFEFF" # MSVC requires a BOM.
+        f.write "\uFEFF" if plaintext # MSVC requires a BOM.
         f.write(report)
       end
       @@log.info "#{__method__}: Results written to #{output_file}"
@@ -1026,10 +1037,12 @@ Complete Help:
     desc 'msgunfmt <input_file.h>', 'Converts an existing Tidy header H file to PO format.'
     long_desc <<-LONG_DESC
       Converts an existing Tidy header H file to a PO file using the locale
-      specified in the H file. Specifying <input_file.h> is required. The
-      resulting file will consist of English original strings, the translated
-      strings from the header, and blank translated strings if not specified in
-      the header.
+      specified in the H file. Specifying <input_file.h> is required, and
+      multiple input files may be specified.
+
+      The resulting file will consist of English original strings, the
+      translated strings from the header, and blank translated strings if not
+      specified in the header.
 
       You can use the --baselang option to gather the untranslated strings from
       a different header file. This may be useful for translators that want to
@@ -1039,14 +1052,20 @@ Complete Help:
       Use case: create a PO file from an existing Tidy header H file using a
       combination of languages that are suitable to you.
     LONG_DESC
-    def msgunfmt(input_file = nil)
-      converter = PoConverter.new
-      converter.emacs_footer = options[:emacs]
-      set_options
-      if converter.convert_to_po( input_file, options[:baselang] )
+    def msgunfmt(*args)
+      error_count = 0
+
+      args.each do |input_file|
+        converter = PoConverter.new
+        converter.emacs_footer = options[:emacs]
+        set_options
+        error_count = converter.convert_to_po(input_file, options[:baselang]) ? error_count : error_count + 1
+      end
+
+      if error_count == 0
         puts 'msgunfmt exited without errors.'
       else
-        puts 'msgunfmt exited with errors. Consider using the --verbose or --debug options.'
+        puts "msgunfmt exited with errors #{error_count} time(s). Consider using the --verbose or --debug options."
         exit 1
       end
     end # msgunfmt
@@ -1060,10 +1079,14 @@ Complete Help:
            :type => :string,
            :desc => 'Specifies a base language <file.h> from which to exclude translated strings.',
            :aliases => '-b'
+    option :plaintext,
+           :type => :boolean,
+           :desc => 'Specifies that the generated file contain plain text instead of hex escaped characters.',
+           :aliases => '-p'
     desc 'msgfmt <input_file.po>', 'Creates a Tidy header H file from the given PO file.'
     long_desc <<-LONG_DESC
       Creates a Tidy header H file from the specified <input_file.po> PO file,
-      which is a required argument.
+      which is a required argument. Multiple input files may be specified.
 
       You can use the --baselang option to exclude already translated strings from an
       inherited base language. This will help keep Tidy's library and executable size
@@ -1075,13 +1098,20 @@ Complete Help:
       Use case: Tidy can only build H files, and so this command will convert
       PO files to something useful.
     LONG_DESC
-    def msgfmt(input_file)
-      converter = PoConverter.new
-      set_options
-      if converter.convert_to_h( input_file, options[:baselang] )
+    def msgfmt(*args)
+      error_count = 0
+
+      args.each do |input_file|
+        converter = PoConverter.new
+        converter.plaintext = options[:plaintext]
+        set_options
+        error_count = converter.convert_to_h( input_file, options[:baselang] ) ? error_count : error_count + 1
+      end
+
+      if error_count == 0
         puts 'msgfmt exited without errors.'
       else
-        puts 'msgfmt exited with errors. Consider using the --verbose or --debug options.'
+        puts "msgfmt exited with errors #{error_count} time(s). Consider using the --verbose or --debug options."
         exit 1
       end
     end # msgfmt

@@ -13,11 +13,9 @@
 #include "locale.h"
 #if defined(_WIN32)
 #include <windows.h> /* Force console to UTF8. */
-/* Windows requires special help for printf positional format specifiers. */
-#include "win_vsnprintf.h"
-#define nest_(x) TY_(x)
-#define printf nest_(win_printf)
-#define fprint nest_(win_fprintf)
+//#define nest_(x) TY_(x)
+//#define printf nest_(win_printf)
+//#define fprint nest_(win_fprintf)
 #endif
 #if !defined(NDEBUG) && defined(_MSC_VER)
 #include "sprtf.h"

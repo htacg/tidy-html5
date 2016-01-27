@@ -137,7 +137,7 @@ set ( CFILES
         ${SRCDIR}/buffio.c       ${SRCDIR}/fileio.c       ${SRCDIR}/streamio.c
         ${SRCDIR}/tagask.c       ${SRCDIR}/tmbstr.c       ${SRCDIR}/utf8.c
         ${SRCDIR}/tidylib.c      ${SRCDIR}/mappedio.c     ${SRCDIR}/gdoc.c
-        ${SRCDIR}/language.c     ${SRCDIR}/win_vsnprintf.c  )
+        ${SRCDIR}/language.c  )
 set ( HFILES
         ${INCDIR}/tidyplatform.h ${INCDIR}/tidy.h         ${INCDIR}/tidyenum.h
         ${INCDIR}/tidybuffio.h )

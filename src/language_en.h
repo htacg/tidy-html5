@@ -1,4 +1,4 @@
-﻿#ifndef language_en_h
+#ifndef language_en_h
 #define language_en_h
 /*
  * language_en.h
@@ -16,9 +16,6 @@
  * See tidy.h and access.h for the copyright notice.
  *
  * Created by Jim Derry on 11/28/15.
- *
- * PO_LAST_TRANSLATOR=jderry
- * PO_REVISION_DATE=2016-01-12
  */
 
 #ifdef _MSC_VER
@@ -72,16 +69,16 @@ static languageDefinition language_en = { whichPluralForm_en, {
     {/* Only translate if a URL to the target language can be found. */
       ATRC_ACCESS_URL,              0,   "http://www.html-tidy.org/accessibility/"
     },
-    { FILE_CANT_OPEN,               0,   "Can't open \"%1$s\"\n"                                                   },
-    { LINE_COLUMN_STRING,           0,   "line %1$d column %2$d - "                                                },
-    { STRING_CONTENT_LOOKS,         0,   "Document content looks like %1$s"                                        },
+    { FILE_CANT_OPEN,               0,   "Can't open \"%s\"\n"                                                     },
+    { LINE_COLUMN_STRING,           0,   "line %d column %d - "                                                    },
+    { STRING_CONTENT_LOOKS,         0,   "Document content looks like %s"                                          },
     {/* For example, "discarding invalid UTF-16 surrogate pair" */
       STRING_DISCARDING,            0,   "discarding"
     },
-    { STRING_DOCTYPE_GIVEN,         0,   "Doctype given is \"%1$s\""                                               },
+    { STRING_DOCTYPE_GIVEN,         0,   "Doctype given is \"%s\""                                                 },
 
     {/* The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  STRING_ERROR_COUNT,           0,   "Tidy found %1$u %2$s and %3$u %4$s!"
+	  STRING_ERROR_COUNT,           0,   "Tidy found %u %s and %u %s!"
 	},
     { STRING_ERROR_COUNT_ERROR,     0,   "error"                                                                   },
     { STRING_ERROR_COUNT_ERROR,     1,   "errors"                                                                  },
@@ -91,7 +88,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     {/* This is not a formal name and can be translated. */
       STRING_HTML_PROPRIETARY,      0,   "HTML Proprietary"
 	},
-    { STRING_MISSING_MALFORMED,     0,   "missing or malformed argument for option: %1$s"                          },
+    { STRING_MISSING_MALFORMED,     0,   "missing or malformed argument for option: %s"                            },
     { STRING_NO_ERRORS,             0,   "No warnings or errors were found."                                       },
     { STRING_NO_SYSID,              0,   "No system identifier in emitted doctype"                                 },
     { STRING_NOT_ALL_SHOWN,         0,   "Not all warnings/errors were shown."                                     },
@@ -102,9 +99,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
     {/* For example, "you should avoid using the specified encoding." */
       STRING_SPECIFIED,             0,   "specified"
     },
-    { STRING_UNKNOWN_FILE,          0,   "%1$s: can't open file \"%2$s\"\n"                                        },
-    { STRING_UNKNOWN_OPTION,        0,   "unknown option: %1$s"                                                    },
-    { STRING_UNRECZD_OPTION,        0,   "unrecognized option -%1$c use -help to list options\n"                   },
+    { STRING_UNKNOWN_FILE,          0,   "%s: can't open file \"%s\"\n"                                            },
+    { STRING_UNKNOWN_OPTION,        0,   "unknown option: %s"                                                      },
+    { STRING_UNRECZD_OPTION,        0,   "unrecognized option -%c use -help to list options\n"                     },
     { STRING_XML_DECLARATION,       0,   "XML declaration"                                                         },
     
     {/* This console output should be limited to 78 characters per line. */
@@ -133,22 +130,23 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "than Windows character code 153 (0x2122 in Unicode). Note that\n"
         "as of February 1998 few browsers support the new entities.\n\n"
     },
-    {/* This console output should be limited to 78 characters per line. */
+    {/* This console output should be limited to 78 characters per line.
+	    - %s represents a string-encoding name which may be localized in your language. */
       TEXT_VENDOR_CHARS,            0,
         "It is unlikely that vendor-specific, system-dependent encodings\n"
         "work widely enough on the World Wide Web; you should avoid using the \n"
-        "%1$s character encoding, instead you are recommended to\n"
+        "%s character encoding, instead you are recommended to\n"
         "use named entities, e.g. &trade;.\n"
         "\n"
     },
     {/* This console output should be limited to 78 characters per line.
-	    - %1$s represents a string-encoding name which may be localized in your language.
+	    - %s represents a string-encoding name which may be localized in your language.
 	    - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TEXT_SGML_CHARS,              0,
         "Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML;\n"
         "even if they were, they would likely be unprintable control characters.\n"
         "Tidy assumed you wanted to refer to a character with the same byte value in the \n"
-        "%1$s encoding and replaced that reference with the Unicode \n"
+        "%s encoding and replaced that reference with the Unicode \n"
         "equivalent.\n"
         "\n"
     },
@@ -330,100 +328,100 @@ static languageDefinition language_en = { whichPluralForm_en, {
     
     /* ReportEncodingWarning */
     {
-      ENCODING_MISMATCH,            0,   "specified input encoding (%1$s) does not match actual input encoding (%2$s)" }, /* Warning */
+      ENCODING_MISMATCH,            0,   "specified input encoding (%s) does not match actual input encoding (%s)" }, /* Warning */
     
     /* ReportEncodingError */
-    { VENDOR_SPECIFIC_CHARS,        0,   "%1$s invalid character code %2$s"                                        }, /* Error */
-    { INVALID_SGML_CHARS,           0,   "%1$s invalid character code %2$s"                                        }, /* Error */
-    { INVALID_UTF8,                 0,   "%1$s invalid UTF-8 bytes (char. code %2$s)"                              }, /* Error */
-    { INVALID_UTF16,                0,   "%1$s invalid UTF-16 surrogate pair (char. code %2$s)"                    }, /* Error */
-    { INVALID_NCR,                  0,   "%1$s invalid numeric character reference %2$s"                           }, /* Error */
+    { VENDOR_SPECIFIC_CHARS,        0,   "%s invalid character code %s"                                            }, /* Error */
+    { INVALID_SGML_CHARS,           0,   "%s invalid character code %s"                                            }, /* Error */
+    { INVALID_UTF8,                 0,   "%s invalid UTF-8 bytes (char. code %s)"                                  }, /* Error */
+    { INVALID_UTF16,                0,   "%s invalid UTF-16 surrogate pair (char. code %s)"                        }, /* Error */
+    { INVALID_NCR,                  0,   "%s invalid numeric character reference %s"                               }, /* Error */
     
     /* ReportEntityError */
-    { MISSING_SEMICOLON,            0,   "entity \"%1$s\" doesn't end in ';'"                                      }, /* Warning in HTML, Error in XML/XHTML */
-    { MISSING_SEMICOLON_NCR,        0,   "numeric character reference \"%1$s\" doesn't end in ';'"                 }, /* Warning in HTML, Error in XML/XHTML */
+    { MISSING_SEMICOLON,            0,   "entity \"%s\" doesn't end in ';'"                                        }, /* Warning in HTML, Error in XML/XHTML */
+    { MISSING_SEMICOLON_NCR,        0,   "numeric character reference \"%s\" doesn't end in ';'"                   }, /* Warning in HTML, Error in XML/XHTML */
     { UNESCAPED_AMPERSAND,          0,   "unescaped & which should be written as &amp;"                            }, /* Warning in HTML, Error in XHTML */
-    { UNKNOWN_ENTITY,               0,   "unescaped & or unknown entity \"%1$s\""                                  }, /* Error */
+    { UNKNOWN_ENTITY,               0,   "unescaped & or unknown entity \"%s\""                                    }, /* Error */
     { APOS_UNDEFINED,               0,   "named entity &apos; only defined in XML/XHTML"                           }, /* Error in HTML (should only occur for HTML input) */
     
     /* ReportAttrError - attribute name */
-    { INSERTING_ATTRIBUTE,          0,   "%1$s inserting \"%2$s\" attribute"                                       }, /* Warning in CheckLINK, Error otherwise */
-    { INSERTING_AUTO_ATTRIBUTE,     0,   "%1$s inserting \"%2$s\" attribute using value \"%3$s\""                  }, /* Warning */
-    { MISSING_ATTR_VALUE,           0,   "%1$s attribute \"%2$s\" lacks value"                                     }, /* Warning in CheckUrl, Error otherwise */
-    { UNKNOWN_ATTRIBUTE,            0,   "%1$s unknown attribute \"%2$s\""                                         }, /* Error */
-    { PROPRIETARY_ATTRIBUTE,        0,   "%1$s proprietary attribute \"%2$s\""                                     }, /* Error */
-    { JOINING_ATTRIBUTE,            0,   "%1$s joining values of repeated attribute \"%2$s\""                      }, /* Error */
-    { XML_ATTRIBUTE_VALUE,          0,   "%1$s has XML attribute \"%2$s\""                                         }, /* Error (but deprecated) */
+    { INSERTING_ATTRIBUTE,          0,   "%s inserting \"%s\" attribute"                                           }, /* Warning in CheckLINK, Error otherwise */
+    { INSERTING_AUTO_ATTRIBUTE,     0,   "%s inserting \"%s\" attribute using value \"%s\""                        }, /* Warning */
+    { MISSING_ATTR_VALUE,           0,   "%s attribute \"%s\" lacks value"                                         }, /* Warning in CheckUrl, Error otherwise */
+    { UNKNOWN_ATTRIBUTE,            0,   "%s unknown attribute \"%s\""                                             }, /* Error */
+    { PROPRIETARY_ATTRIBUTE,        0,   "%s proprietary attribute \"%s\""                                         }, /* Error */
+    { JOINING_ATTRIBUTE,            0,   "%s joining values of repeated attribute \"%s\""                          }, /* Error */
+    { XML_ATTRIBUTE_VALUE,          0,   "%s has XML attribute \"%s\""                                             }, /* Error (but deprecated) */
     
     /* ReportAttrError - attribute value */
-    { XML_ID_SYNTAX,                0,   "%1$s ID \"%2$s\" uses XML ID syntax"                                     }, /* Warning if XHTML, Error if HTML */
-    { ATTR_VALUE_NOT_LCASE,         0,   "%1$s attribute value \"%2$s\" must be lower case for XHTML"              }, /* Error if XHTML input, Notice if HTML input and XHTML outpout */
-    { PROPRIETARY_ATTR_VALUE,       0,   "%1$s proprietary attribute value \"%2$s\""                               }, /* Error */
-    { ANCHOR_NOT_UNIQUE,            0,   "%1$s anchor \"%2$s\" already defined"                                    }, /* Error */
+    { XML_ID_SYNTAX,                0,   "%s ID \"%s\" uses XML ID syntax"                                         }, /* Warning if XHTML, Error if HTML */
+    { ATTR_VALUE_NOT_LCASE,         0,   "%s attribute value \"%s\" must be lower case for XHTML"                  }, /* Error if XHTML input, Notice if HTML input and XHTML outpout */
+    { PROPRIETARY_ATTR_VALUE,       0,   "%s proprietary attribute value \"%s\""                                   }, /* Error */
+    { ANCHOR_NOT_UNIQUE,            0,   "%s anchor \"%s\" already defined"                                        }, /* Error */
     
     /* ReportAttrError - attribute name, attribute value */
-    { BAD_ATTRIBUTE_VALUE,          0,   "%1$s attribute \"%2$s\" has invalid value \"%3$s\""                       }, /* Error */
-    { BAD_ATTRIBUTE_VALUE_REPLACED, 0,   "%1$s attribute \"%2$s\" had invalid value \"%3$s\" and has been replaced" }, /* Error */
-    { INVALID_ATTRIBUTE,            0,   "%1$s attribute name \"%2$s\" (value=\"%3$s\") is invalid"                 }, /* Error */
+    { BAD_ATTRIBUTE_VALUE,          0,   "%s attribute \"%s\" has invalid value \"%s\""                            }, /* Error */
+    { BAD_ATTRIBUTE_VALUE_REPLACED, 0,   "%s attribute \"%s\" had invalid value \"%s\" and has been replaced"      }, /* Error */
+    { INVALID_ATTRIBUTE,            0,   "%s attribute name \"%s\" (value=\"%s\") is invalid"                      }, /* Error */
     
     /* ReportAttrError - attribute value, attribute name */
-    { REPEATED_ATTRIBUTE,           0,   "%1$s dropping value \"%2$s\" for repeated attribute \"%3$s\""            }, /* Error */
+    { REPEATED_ATTRIBUTE,           0,   "%s dropping value \"%s\" for repeated attribute \"%s\""                  }, /* Error */
     
     /* ReportAttrError - no arguments */
-    { INVALID_XML_ID,               0,   "%1$s cannot copy name attribute to id"                                   }, /* Warning */
-    { UNEXPECTED_GT,                0,   "%1$s missing '>' for end of tag"                                         }, /* Warning if HTML, Error if XML/XHTML */
-    { UNEXPECTED_QUOTEMARK,         0,   "%1$s unexpected or duplicate quote mark"                                 }, /* Error */
-    { MISSING_QUOTEMARK,            0,   "%1$s attribute with missing trailing quote mark"                         }, /* Error */
-    { UNEXPECTED_END_OF_FILE_ATTR,  0,   "%1$s end of file while parsing attributes"                               }, /* Error */
-    { ID_NAME_MISMATCH,             0,   "%1$s id and name attribute value mismatch"                               }, /* Error */
-    { BACKSLASH_IN_URI,             0,   "%1$s URI reference contains backslash. Typo?"                            }, /* Error */
-    { FIXED_BACKSLASH,              0,   "%1$s converting backslash in URI to slash"                               }, /* Error */
-    { ILLEGAL_URI_REFERENCE,        0,   "%1$s improperly escaped URI reference"                                   }, /* Error */
-    { ESCAPED_ILLEGAL_URI,          0,   "%1$s escaping malformed URI reference"                                   }, /* Error */
-    { NEWLINE_IN_URI,               0,   "%1$s discarding newline in URI reference"                                }, /* Error */
-    { WHITE_IN_URI,                 0,   "%1$s discarding whitespace in URI reference"                             }, /* Error */
-    { UNEXPECTED_EQUALSIGN,         0,   "%1$s unexpected '=', expected attribute name"                            }, /* Error */
-    { MISSING_IMAGEMAP,             0,   "%1$s should use client-side image map"                                   }, /* Warning (but deprecated) */
+    { INVALID_XML_ID,               0,   "%s cannot copy name attribute to id"                                     }, /* Warning */
+    { UNEXPECTED_GT,                0,   "%s missing '>' for end of tag"                                           }, /* Warning if HTML, Error if XML/XHTML */
+    { UNEXPECTED_QUOTEMARK,         0,   "%s unexpected or duplicate quote mark"                                   }, /* Error */
+    { MISSING_QUOTEMARK,            0,   "%s attribute with missing trailing quote mark"                           }, /* Error */
+    { UNEXPECTED_END_OF_FILE_ATTR,  0,   "%s end of file while parsing attributes"                                 }, /* Error */
+    { ID_NAME_MISMATCH,             0,   "%s id and name attribute value mismatch"                                 }, /* Error */
+    { BACKSLASH_IN_URI,             0,   "%s URI reference contains backslash. Typo?"                              }, /* Error */
+    { FIXED_BACKSLASH,              0,   "%s converting backslash in URI to slash"                                 }, /* Error */
+    { ILLEGAL_URI_REFERENCE,        0,   "%s improperly escaped URI reference"                                     }, /* Error */
+    { ESCAPED_ILLEGAL_URI,          0,   "%s escaping malformed URI reference"                                     }, /* Error */
+    { NEWLINE_IN_URI,               0,   "%s discarding newline in URI reference"                                  }, /* Error */
+    { WHITE_IN_URI,                 0,   "%s discarding whitespace in URI reference"                               }, /* Error */
+    { UNEXPECTED_EQUALSIGN,         0,   "%s unexpected '=', expected attribute name"                              }, /* Error */
+    { MISSING_IMAGEMAP,             0,   "%s should use client-side image map"                                     }, /* Warning (but deprecated) */
     
     /* ReportMissingAttr */
-    { MISSING_ATTRIBUTE,            0,   "%1$s lacks \"%2$s\" attribute"                                           }, /* Error */
+    { MISSING_ATTRIBUTE,            0,   "%s lacks \"%s\" attribute"                                               }, /* Error */
     
     /* ReportWarning */
-    { NESTED_EMPHASIS,              0,   "nested emphasis %1$s"                                                    }, /* Warning */
+    { NESTED_EMPHASIS,              0,   "nested emphasis %s"                                                      }, /* Warning */
     { NESTED_QUOTATION,             0,   "nested q elements, possible typo."                                       }, /* Warning */
-    { OBSOLETE_ELEMENT,             0,   "replacing obsolete element %1$s with %2$s"                               }, /* Warning */
-    { COERCE_TO_ENDTAG_WARN,        0,   "<%1$s> is probably intended as </%2$s>"                                  }, /* Warning */
-    { REMOVED_HTML5,                0,   "%1$s element removed from HTML5"                                         }, /* Warning */
+    { OBSOLETE_ELEMENT,             0,   "replacing obsolete element %s with %s"                                   }, /* Warning */
+    { COERCE_TO_ENDTAG_WARN,        0,   "<%s> is probably intended as </%s>"                                      }, /* Warning */
+    { REMOVED_HTML5,                0,   "%s element removed from HTML5"                                           }, /* Warning */
     { BAD_BODY_HTML5,               0,   "Found attribute on body that is obsolete in HTML5. Use CSS"              }, /* Warning */
-    { BAD_ALIGN_HTML5,              0,   "The align attribute on the %1$s element is obsolete. Use CSS"            }, /* Warning */
-    { BAD_SUMMARY_HTML5,            0,   "The summary attribute on the %1$s element is obsolete in HTML5"          }, /* Warning */
+    { BAD_ALIGN_HTML5,              0,   "The align attribute on the %s element is obsolete. Use CSS"              }, /* Warning */
+    { BAD_SUMMARY_HTML5,            0,   "The summary attribute on the %s element is obsolete in HTML5"            }, /* Warning */
     
     /* ReportNotice */
-    { TRIM_EMPTY_ELEMENT,           0,   "trimming empty %1$s"                                                     }, /* Notice */
-    { REPLACING_ELEMENT,            0,   "replacing %1$s with %2$s"                                                }, /* Notice */
+    { TRIM_EMPTY_ELEMENT,           0,   "trimming empty %s"                                                       }, /* Notice */
+    { REPLACING_ELEMENT,            0,   "replacing %s with %s"                                                    }, /* Notice */
     
     /* ReportError */
-    { COERCE_TO_ENDTAG,             0,   "<%1$s> is probably intended as </%2$s>"                                  }, /* Error */
-    { REPLACING_UNEX_ELEMENT,       0,   "replacing unexpected %1$s with %2$s"                                     }, /* Error */
-    { MISSING_ENDTAG_FOR,           0,   "missing </%1$s>"                                                         }, /* Error */
-    { MISSING_ENDTAG_BEFORE,        0,   "missing </%1$s> before %2$s"                                             }, /* Error */
-    { DISCARDING_UNEXPECTED,        0,   "discarding unexpected %1$s"                                              }, /* Error */
-    { NON_MATCHING_ENDTAG,          0,   "replacing unexpected %1$s with </%2$s>"                                  }, /* Error */
-    { TAG_NOT_ALLOWED_IN,           0,   "%1$s isn't allowed in <%2$s> elements"                                   }, /* Error */
-    { MISSING_STARTTAG,             0,   "missing <%1$s>"                                                          }, /* Error */
-    { UNEXPECTED_ENDTAG,            0,   "unexpected </%1$s>"                                                      }, /* Error */
-    { TOO_MANY_ELEMENTS,            0,   "too many %1$s elements"                                                  }, /* Error */
-    { USING_BR_INPLACE_OF,          0,   "using <br> in place of %1$s"                                             }, /* Error */
-    { INSERTING_TAG,                0,   "inserting implicit <%1$s>"                                               }, /* Error */
-    { CANT_BE_NESTED,               0,   "%1$s can't be nested"                                                    }, /* Error */
-    { PROPRIETARY_ELEMENT,          0,   "%1$s is not approved by W3C"                                             }, /* Error */
-    { ILLEGAL_NESTING,              0,   "%1$s shouldn't be nested"                                                }, /* Error */
-    { NOFRAMES_CONTENT,             0,   "%1$s not inside 'noframes' element"                                      }, /* Error */
-    { UNEXPECTED_END_OF_FILE,       0,   "unexpected end of file %1$s"                                             }, /* Error */
-    { ELEMENT_NOT_EMPTY,            0,   "%1$s element not empty or not closed"                                    }, /* Error */
-    { UNEXPECTED_ENDTAG_IN,         0,   "unexpected </%1$s> in <%2$s>"                                            }, /* Error */
-    { TOO_MANY_ELEMENTS_IN,         0,   "too many %1$s elements in <%2$s>"                                        }, /* Error */
-    { UNESCAPED_ELEMENT,            0,   "unescaped %1$s in pre content"                                           }, /* Error (but deprecated) */
+    { COERCE_TO_ENDTAG,             0,   "<%s> is probably intended as </%s>"                                      }, /* Error */
+    { REPLACING_UNEX_ELEMENT,       0,   "replacing unexpected %s with %s"                                         }, /* Error */
+    { MISSING_ENDTAG_FOR,           0,   "missing </%s>"                                                           }, /* Error */
+    { MISSING_ENDTAG_BEFORE,        0,   "missing </%s> before %s"                                                 }, /* Error */
+    { DISCARDING_UNEXPECTED,        0,   "discarding unexpected %s"                                                }, /* Error */
+    { NON_MATCHING_ENDTAG,          0,   "replacing unexpected %s with </%s>"                                      }, /* Error */
+    { TAG_NOT_ALLOWED_IN,           0,   "%s isn't allowed in <%s> elements"                                       }, /* Error */
+    { MISSING_STARTTAG,             0,   "missing <%s>"                                                            }, /* Error */
+    { UNEXPECTED_ENDTAG,            0,   "unexpected </%s>"                                                        }, /* Error */
+    { TOO_MANY_ELEMENTS,            0,   "too many %s elements"                                                    }, /* Error */
+    { USING_BR_INPLACE_OF,          0,   "using <br> in place of %s"                                               }, /* Error */
+    { INSERTING_TAG,                0,   "inserting implicit <%s>"                                                 }, /* Error */
+    { CANT_BE_NESTED,               0,   "%s can't be nested"                                                      }, /* Error */
+    { PROPRIETARY_ELEMENT,          0,   "%s is not approved by W3C"                                               }, /* Error */
+    { ILLEGAL_NESTING,              0,   "%s shouldn't be nested"                                                  }, /* Error */
+    { NOFRAMES_CONTENT,             0,   "%s not inside 'noframes' element"                                        }, /* Error */
+    { UNEXPECTED_END_OF_FILE,       0,   "unexpected end of file %s"                                               }, /* Error */
+    { ELEMENT_NOT_EMPTY,            0,   "%s element not empty or not closed"                                      }, /* Error */
+    { UNEXPECTED_ENDTAG_IN,         0,   "unexpected </%s> in <%s>"                                                }, /* Error */
+    { TOO_MANY_ELEMENTS_IN,         0,   "too many %s elements in <%s>"                                            }, /* Error */
+    { UNESCAPED_ELEMENT,            0,   "unescaped %s in pre content"                                             }, /* Error (but deprecated) */
     
     /* ReportError - no arguments */
     { DOCTYPE_AFTER_TAGS,           0,   "<!DOCTYPE> isn't allowed after elements"                                 }, /* Error */
@@ -444,10 +442,10 @@ static languageDefinition language_en = { whichPluralForm_en, {
     /* ReportFatal */
     { SUSPECTED_MISSING_QUOTE,      0,   "missing quote mark for attribute value"                                  }, /* Error? (not really sometimes) */
     { DUPLICATE_FRAMESET,           0,   "repeated FRAMESET element"                                               }, /* Error */
-    { UNKNOWN_ELEMENT,              0,   "%1$s is not recognized!"                                                 }, /* Error */
+    { UNKNOWN_ELEMENT,              0,   "%s is not recognized!"                                                   }, /* Error */
     
     /* Info */
-    { PREVIOUS_LOCATION,            0,   "<%1$s> previously mentioned"                                             }, /* Info */
+    { PREVIOUS_LOCATION,            0,   "<%s> previously mentioned"                                               }, /* Info */
     
 #if SUPPORT_ACCESSIBILITY_CHECKS
     
@@ -1594,7 +1592,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TC_LABEL_LANG,                0,   "lang"                                                                    },
     { TC_LABEL_LEVL,                0,   "level"                                                                   },
     { TC_LABEL_OPT,                 0,   "option"                                                                  },
-    { TC_MAIN_ERROR_LOAD_CONFIG,    0,   "Loading config file \"%1$s\" failed, err = %2$d"                         },
+    { TC_MAIN_ERROR_LOAD_CONFIG,    0,   "Loading config file \"%s\" failed, err = %d"                             },
     { TC_OPT_ACCESS,                0,
         "do additional accessibility checks (<level> = 0, 1, 2, 3). 0 is "
         "assumed if <level> is missing."
@@ -1675,16 +1673,16 @@ static languageDefinition language_en = { whichPluralForm_en, {
       TC_STRING_CONF_NOTE,          0,   "Values marked with an *asterisk are calculated internally by HTML Tidy"
     },
 
-    { TC_STRING_OPT_NOT_DOCUMENTED, 0,   "Warning: option `%1$s' is not documented."                               },
+    { TC_STRING_OPT_NOT_DOCUMENTED, 0,   "Warning: option `%s' is not documented."                                 },
     { TC_STRING_OUT_OF_MEMORY,      0,   "Out of memory. Bailing out."                                             },
-    { TC_STRING_FATAL_ERROR,        0,   "Fatal error: impossible value for id='%1$d'."                            },
+    { TC_STRING_FATAL_ERROR,        0,   "Fatal error: impossible value for id='%d'."                              },
     { TC_STRING_FILE_MANIP,         0,   "File manipulation"                                                       },
     { TC_STRING_PROCESS_DIRECTIVES, 0,   "Processing directives"                                                   },
     { TC_STRING_CHAR_ENCODING,      0,   "Character encodings"                                                     },
     { TC_STRING_LANG_MUST_SPECIFY,  0,   "A POSIX or Windows locale must be specified."                            },
 
     {/* The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-      TC_STRING_LANG_NOT_FOUND,     0,   "Tidy doesn't have language '%1$s,' will use '%2$s' instead."
+      TC_STRING_LANG_NOT_FOUND,     0,   "Tidy doesn't have language '%s,' will use '%s' instead."
     },
 
     { TC_STRING_MISC,               0,   "Miscellaneous"                                                           },
@@ -1692,34 +1690,34 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TC_STRING_MUST_SPECIFY,       0,   "A Tidy option name must be specified."                                   },
 
     {/* The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-      TC_STRING_UNKNOWN_OPTION,     0,   "HTML Tidy: unknown option: %1$c"
+      TC_STRING_UNKNOWN_OPTION,     0,   "HTML Tidy: unknown option: %c"
     },
     {/* The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TC_STRING_UNKNOWN_OPTION_B,   0,   "HTML Tidy: unknown option."
     },
     {/* The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-      TC_STRING_VERS_A,             0,   "HTML Tidy for %1$s version %2$s"
+      TC_STRING_VERS_A,             0,   "HTML Tidy for %s version %s"
     },
     {/* The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-      TC_STRING_VERS_B,             0,   "HTML Tidy version %1$s"
+      TC_STRING_VERS_B,             0,   "HTML Tidy version %s"
     },
 
     {/* This console output should be limited to 78 characters per line.
-	    - %1$n represents the name of the executable from the file system, and is mostly like going to be "tidy".
-        - %2$2 represents a version number, typically x.x.xx.
+	    - %n represents the name of the executable from the file system, and is mostly like going to be "tidy".
+        - %2 represents a version number, typically x.x.xx.
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TC_TXT_HELP_1,                0,
         "\n"
-        "%1$s [options...] [file...] [options...] [file...]\n"
+        "%s [options...] [file...] [options...] [file...]\n"
         "Utility to clean up and pretty print HTML/XHTML/XML.\n"
         "\n"
-        "This is modern HTML Tidy version %2$s.\n"
+        "This is modern HTML Tidy version %s.\n"
         "\n"
     },
     {/* The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
-        - %1$s represents the platform, for example, "Mac OS X" or "Windows". */
+        - %s represents the platform, for example, "Mac OS X" or "Windows". */
       TC_TXT_HELP_2A,               0,
-        "Command Line Arguments for HTML Tidy for %1$s:"
+        "Command Line Arguments for HTML Tidy for %s:"
     },
     {/* The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TC_TXT_HELP_2B,               0,

@@ -57,6 +57,7 @@ static languageDefinition language_es = { whichPluralForm_es, {
     {/* Specify the ll or ll_cc language code here. */
       TIDY_LANGUAGE,          0, "es"
     },
+    { FILE_CANT_OPEN,         0, "N\xc3\xb3 s\xc3\xa9 puede \xc3\xa1""brir \"%1$s\"\n"                                                },
     {/* This console output should be limited to 78 characters per line. 
       - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TEXT_GENERAL_INFO_PLEA, 0,        

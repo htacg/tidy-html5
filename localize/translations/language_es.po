@@ -22,7 +22,7 @@ msgstr ""
 #, c-format
 msgctxt "FILE_CANT_OPEN"
 msgid "Can't open \"%1$s\"\n"
-msgstr ""
+msgstr "No se puede abrir \"%1$s\"\n"
 
 #, c-format
 msgctxt "LINE_COLUMN_STRING"

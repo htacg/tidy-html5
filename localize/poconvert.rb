@@ -365,8 +365,12 @@ module PoConvertModule
         self.items[l_key][num_case][:comment] = comment
         self.items[l_key][num_case][:case] = num_case
         self.items[l_key][num_case][:if_group] = nil
-        tmp = ''
-        string.each_line { |line| tmp << line.lstrip }
+        # Reconstitute Hex Escapes
+        tmp = string.each_line.collect do |line|
+          line.lstrip.gsub(/\\x(..)/) { |g| [$1.hex].pack('c*').force_encoding('UTF-8') }
+        end
+        # Eliminate C double-double-quotes.
+        tmp = tmp.join.gsub(/\"\"/) { |g| }
         self.items[l_key][num_case][:string] = tmp
       end
       if !self.items || self.items.empty?

@@ -38,8 +38,8 @@
  *  definition.
  */
 static uint whichPluralForm_<%= po_content.language %>(uint n) {
-	/* <%= po_content.plural_forms %> */
-	return <%= po_content.plural_formula %>
+    /* <%= po_content.plural_forms %> */
+    return <%= po_content.plural_formula %>
 }
 
 
@@ -50,10 +50,10 @@ static uint whichPluralForm_<%= po_content.language %>(uint n) {
  *  the build system.
  */
 static languageDefinition language_<%= po_content.language %> = { whichPluralForm_<%= po_content.language %>, {
-	/***************************************
-	 ** This MUST be present and first. 
-	 ** Specify the code for this language.
-	 ***************************************/
+    /***************************************
+     ** This MUST be present and first. 
+     ** Specify the code for this language.
+     ***************************************/
 <%= report_body %>
 <%= report_body_last %>
 }};

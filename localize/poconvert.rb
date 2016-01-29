@@ -29,7 +29,7 @@ module PoConvertModule
   ###########################################################
   @@default_en = File.expand_path(File.join('..', 'src', 'language_en.h' ))
   @@header_template = File.expand_path(File.join('.', 'language_ll_cc.h.erb'))
-  @@header_digest = '76c35f0568a8b3544afa9b840c850a47682e1d300deefb3fa738684b2a62db69'
+  @@header_digest = 'b597e5948de1611ab6cde11934df6fc792c7ec4d21f3cd2030fb2e9bcfb94991'
 
 
   ###########################################################

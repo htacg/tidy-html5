@@ -4,14 +4,22 @@
  * language_es.h
  * Localization support for HTML Tidy.
  *
- * THIS FILE IS MACHINE GENERATED. It is a localization file for the
- * language (and maybe region) "es" and it should not be
- * edited manually. The source of these strings is a gettext PO file,
- * probably called "language_es.po" in Tidy's source.
  *
- * Tidy's source distribution also includes a script to convert PO files
- * into this file. Because PO files are friendly to translators and a
- * standard industry tool, please translate ONLY the PO files.
+ * This file is a localization file for HTML Tidy. It will have been machine
+ * generated or created and/or edited by hand. Both are valid options, but
+ * please help keep our localization efforts simple to maintain by maintaining
+ * the structure of this file, and changing the check box below if you make
+ * changes (so others know the file origin):
+ *
+ * [X] THIS FILE IS MACHINE GENERATED. It is a localization file for the
+ *     language (and maybe region) "es". The source of
+ *     these strings is a gettext PO file in Tidy's source, probably called 
+ *     "language_es.po".
+ *
+ * [ ] THIS FILE WAS HAND MODIFIED. Translators, please feel to edit this file
+ *     directly (and check this box). If you prefer to edit PO files then use
+ *     `poconvert.rb msgunfmt language_es.h` (our own
+ *     conversion tool) to generate a fresh PO from this file first!
  *
  * (c) 2015 HTACG
  * See tidy.h and access.h for the copyright notice.

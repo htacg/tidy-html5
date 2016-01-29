@@ -24,9 +24,11 @@ the event that you want to build Tidy with your new language.
   - [Language Inheritance](#language-inheritance)
   - [String Inheritance](#string-inheritance)
   - [Base Language First and Regional Variants](#base-language-first-and-regional-variants)
+  - [Positional Parameters](#positional-parameters)
 - [Testing](#testing)
   - [Command line option](#command-line-option)
   - [Changing your locale](#changing-your-locale)
+  - [East Asian Languages](#east-asian-languages)
 - [gettext](#gettext)
 - [poconvert.rb](#poconvertrb)
   - [Create a new POT file](#create-a-new-pot-file)
@@ -43,9 +45,9 @@ the event that you want to build Tidy with your new language.
 ## Introduction
 
 ### PO and POT files
-HTML Tidy uses PO and POT files for language translations. The file `tidy.pot`
-is the correct template to use as a basis for translations. In a typical
-`gettext` workflow a translator will use the `tidy.pot` file to create a
+HTML Tidy provides PO and POT files for language translations. The file 
+`tidy.pot` is the correct template to use as a basis for new translations. In a
+typical `gettext` workflow a translator will use the `tidy.pot` file to create a
 language translation PO file that contains original English strings and the
 translated strings.
 
@@ -55,6 +57,10 @@ PO files may already exist. These files are named `language_ll.po` or
 `CC` represents the region code of the translation.
 
 Tidy does not use MO files that `gettext` tools generate from PO files.
+
+Please note that these PO and POT files are provided for translator convenience
+only. Tidy's [header files](#h-files) constitute the true, controlled source
+code for Tidy.
 
 
 ### H files
@@ -68,7 +74,7 @@ step, but we provide a tool to perform this function if desired.
 ### Differences for translators
 
 Experienced users and translators of PO files may note that we use the PO file's
-`msgctxt` field a bit uniquely. Rather than point to a line in the source code
+`msgctxt` field a bit uniquely. Rather than point to a line in the source code,
 it contains a reference to the string's identifier. Because the PO format does
 not allow for arbitrary metadata this is a requirement for generating our
 header files.
@@ -90,7 +96,7 @@ Please don't use `gettext`' tools with our PO and POT files (unless you are
 using our strings for a different project). Instead all workflows can be
 accomplished with our `poconvert.rb` tool.
 
-More information about this tool can be found below.
+[More information about this tool](#h-files) can be found below.
 
 
 ## How to Contribute
@@ -99,11 +105,22 @@ More information about this tool can be found below.
 If you've not already cloned the HTML Tidy source code repository that will be
 your first step.
 
-In the `localize\translations` directory you can find existing languages, e.g.,
+In the `localize\translations\` directory you can find existing languages, e.g.,
 
   - `tidy.pot` (Tidy's POT template for translations).
   - `language_en_gb.po` (British English variants for the built in language)
   - …and perhaps more.
+  
+In the `src\` directory you can find the master files for existing languages,
+e.g.,
+
+ - `language_en.h` (Tidy's native, built-in language, mostly U.S. English)
+ - `language_en_gb.po` (British English variants for the built in language)
+ - …and perhaps more.
+ 
+Although the header files are the master files for HTML Tidy, we understand that
+not all potential translators want to edit C files directly. Therefore as an
+option, the following workflow to use POT and PO files is offered.
 
 If the language that you want to work on is already present:
 
@@ -138,9 +155,11 @@ If the language that you want to work on is _not_ already present:
 
 Once your translation is complete commit your entire HTML Tidy repository to
 GitHub and issue a pull request (PR) against the `master` branch. If accepted a
-friendly developer will convert your PO into a format useful to Tidy.
+friendly developer will convert your PO into a format useful to Tidy if your
+PR is a PO, or will simply merge your changed header file if you changed it
+directly.
 
-You are also welcome to perform the conversion yourself, add the language to
+You are also welcome to perform any conversions yourself, add new languages to
 Tidy, and issue a PR for the whole change.
 
 
@@ -157,9 +176,9 @@ Tidy, and issue a PR for the whole change.
 
 ### Repository Notes
 
-Please **only** commit PO files with _English_ `msgid` fields. The `gettext`
-convention specifies only English `msgid`, and other translators may not
-understand the original strings.
+If you are working with PO files then please **only** commit PO files with 
+_English_ `msgid` fields. The `gettext` convention specifies only English 
+`msgid`, and other translators may not understand the original strings.
 
 Our `poconvert.rb` script can generate PO files using another language as
 `msgid`. This can be very useful if it's easier for you to translate from
@@ -178,7 +197,7 @@ Although we don't require you to follow these steps to contribute a language
 to Tidy, you may want to add the language to Tidy yourself to test the
 translation, or to save one of the developer team a few extra steps.
 
-  - Generate the header files:
+  - Generate the header files if necessary:
     - Convert your PO file to a Tidy header file by executing
       `poconvert.rb msgfmt <path_to_your_file.po>`. Note that on Windows you
       will likely have to preface this line with `ruby`.
@@ -227,6 +246,14 @@ If you are working on a regional variation (such as “us_CA”) please only
 localize strings that are actually _different_ from the base language!
 
 
+### Positional Parameters
+
+Please note that HTML Tidy does not current support positional parameters. Due
+to the nature of most of Tidy's output, it's not expected that they will be
+required. In any case, please translate strings so that substitution values are
+in the same order as the original string.
+
+
 ## Testing
 
 We hope to develop a comprehensive test suite in the future, but in the meantime
@@ -247,6 +274,14 @@ temporarily with:
 `export LC_ALL=en_GB`
 
 …substituting, of course the language of your choice.
+
+### East Asian Languages
+
+East Asian languages are completely supported and have been tested on Linux,
+Mac OS X, and Windows, although Windows requires you to set your operating
+system (not the console locale!) to an East Asian locale to enable this in
+Windows Console and PowerShell. Note that PowerShell ISE always supports East
+Asian languages without requiring you to change your operating system locale.
 
 
 ## gettext

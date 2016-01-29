@@ -280,7 +280,7 @@ int TY_(tmbsnprintf)(tmbstr buffer, size_t count, ctmbstr format, ...)
     int retval;
     va_list args;
     va_start(args, format);
-	retval = TY_(tmbvsnprintf)(buffer, count, format, args);
+    retval = TY_(tmbvsnprintf)(buffer, count, format, args);
     va_end(args);
     return retval;
 }

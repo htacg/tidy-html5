@@ -29,9 +29,9 @@
  *    https://www.gnu.org/software/gettext/manual/html_node/Plural-forms.html
  */
 typedef struct languageDictionaryEntry {
-	uint key;
-	uint pluralForm;
-	ctmbstr value;
+    uint key;
+    uint pluralForm;
+    ctmbstr value;
 } languageDictionaryEntry;
 
 
@@ -50,8 +50,8 @@ typedef languageDictionaryEntry const languageDictionary[600];
  *  each language header and is language dependent.
  */
 typedef struct languageDefinition {
-	uint (*whichPluralForm)(uint n);
-	languageDictionary messages;
+    uint (*whichPluralForm)(uint n);
+    languageDictionary messages;
 } languageDefinition;
 
 
@@ -61,8 +61,8 @@ typedef struct languageDefinition {
  *  locale names are mapped to POSIX language codes.
  */
 typedef struct tidyLocaleMapItem {
-	ctmbstr winName;
-	ctmbstr POSIXName;
+    ctmbstr winName;
+    ctmbstr POSIXName;
 } tidyLocaleMapItem;
 
 
@@ -85,104 +85,104 @@ typedef struct tidyLocaleMapItem {
  */
 typedef enum
 {
-	/* This MUST be present and first. */
-	TIDY_MESSAGE_TYPE_FIRST = 4096,
-	
-	/* Specify the code for this language. */
-	TIDY_LANGUAGE,
-	
-	/* Localization test strings. */
-	TEST_PRESENT_IN_BASE,
-	TEST_PRESENT_IN_REGION,
-	
-	/* Strings for the console application. */
-	TC_CAT_DIAGNOSTICS,
-	TC_CAT_ENCODING,
-	TC_CAT_MARKUP,
-	TC_CAT_MISC,
-	TC_CAT_PRETTYPRINT,
-	TC_LABEL_COL,
-	TC_LABEL_FILE,
-	TC_LABEL_LANG,
-	TC_LABEL_LEVL,
-	TC_LABEL_OPT,
-	TC_MAIN_ERROR_LOAD_CONFIG,
-	TC_OPT_ACCESS,
-	TC_OPT_ASCII,
-	TC_OPT_ASHTML,
-	TC_OPT_ASXML,
-	TC_OPT_BARE,
-	TC_OPT_BIG5,
-	TC_OPT_CLEAN,
-	TC_OPT_CONFIG,
-	TC_OPT_ERRORS,
-	TC_OPT_FILE,
-	TC_OPT_GDOC,
-	TC_OPT_HELP,
-	TC_OPT_HELPCFG,
-	TC_OPT_HELPOPT,
-	TC_OPT_IBM858,
-	TC_OPT_INDENT,
-	TC_OPT_ISO2022,
-	TC_OPT_LANGUAGE,
-	TC_OPT_LATIN0,
-	TC_OPT_LATIN1,
-	TC_OPT_MAC,
-	TC_OPT_MODIFY,
-	TC_OPT_NUMERIC,
-	TC_OPT_OMIT,
-	TC_OPT_OUTPUT,
-	TC_OPT_QUIET,
-	TC_OPT_RAW,
-	TC_OPT_SHIFTJIS,
-	TC_OPT_SHOWCFG,
-	TC_OPT_UPPER,
-	TC_OPT_UTF16,
-	TC_OPT_UTF16BE,
-	TC_OPT_UTF16LE,
-	TC_OPT_UTF8,
-	TC_OPT_VERSION,
-	TC_OPT_WIN1252,
-	TC_OPT_WRAP,
-	TC_OPT_XML,
-	TC_OPT_XMLCFG,
-	TC_OPT_XMLSTRG,
-	TC_OPT_XMLOPTS,
-	TC_OPT_XMLHELP,
-	TC_STRING_CONF_HEADER,
-	TC_STRING_CONF_NAME,
-	TC_STRING_CONF_TYPE,
-	TC_STRING_CONF_VALUE,
-	TC_STRING_CONF_NOTE,
-	TC_STRING_OPT_NOT_DOCUMENTED,
-	TC_STRING_OUT_OF_MEMORY,
-	TC_STRING_FATAL_ERROR,
-	TC_STRING_FILE_MANIP,
-	TC_STRING_LANG_MUST_SPECIFY,
-	TC_STRING_LANG_NOT_FOUND,
-	TC_STRING_MUST_SPECIFY,
-	TC_STRING_PROCESS_DIRECTIVES,
-	TC_STRING_CHAR_ENCODING,
-	TC_STRING_MISC,
-	TC_STRING_XML,
-	TC_STRING_UNKNOWN_OPTION,
-	TC_STRING_UNKNOWN_OPTION_B,
-	TC_STRING_VERS_A,
-	TC_STRING_VERS_B,
-	TC_TXT_HELP_1,
-	TC_TXT_HELP_2A,
-	TC_TXT_HELP_2B,
-	TC_TXT_HELP_3,
-	TC_TXT_HELP_CONFIG,
-	TC_TXT_HELP_CONFIG_NAME,
-	TC_TXT_HELP_CONFIG_TYPE,
-	TC_TXT_HELP_CONFIG_ALLW,
-	TC_TXT_HELP_LANG_1,
-	TC_TXT_HELP_LANG_2,
-	TC_TXT_HELP_LANG_3,
-	
-	/* This MUST be present and last. */
-	TIDY_MESSAGE_TYPE_LAST
+    /* This MUST be present and first. */
+    TIDY_MESSAGE_TYPE_FIRST = 4096,
+    
+    /* Specify the code for this language. */
+    TIDY_LANGUAGE,
+    
+    /* Localization test strings. */
+    TEST_PRESENT_IN_BASE,
+    TEST_PRESENT_IN_REGION,
+    
+    /* Strings for the console application. */
+    TC_CAT_DIAGNOSTICS,
+    TC_CAT_ENCODING,
+    TC_CAT_MARKUP,
+    TC_CAT_MISC,
+    TC_CAT_PRETTYPRINT,
+    TC_LABEL_COL,
+    TC_LABEL_FILE,
+    TC_LABEL_LANG,
+    TC_LABEL_LEVL,
+    TC_LABEL_OPT,
+    TC_MAIN_ERROR_LOAD_CONFIG,
+    TC_OPT_ACCESS,
+    TC_OPT_ASCII,
+    TC_OPT_ASHTML,
+    TC_OPT_ASXML,
+    TC_OPT_BARE,
+    TC_OPT_BIG5,
+    TC_OPT_CLEAN,
+    TC_OPT_CONFIG,
+    TC_OPT_ERRORS,
+    TC_OPT_FILE,
+    TC_OPT_GDOC,
+    TC_OPT_HELP,
+    TC_OPT_HELPCFG,
+    TC_OPT_HELPOPT,
+    TC_OPT_IBM858,
+    TC_OPT_INDENT,
+    TC_OPT_ISO2022,
+    TC_OPT_LANGUAGE,
+    TC_OPT_LATIN0,
+    TC_OPT_LATIN1,
+    TC_OPT_MAC,
+    TC_OPT_MODIFY,
+    TC_OPT_NUMERIC,
+    TC_OPT_OMIT,
+    TC_OPT_OUTPUT,
+    TC_OPT_QUIET,
+    TC_OPT_RAW,
+    TC_OPT_SHIFTJIS,
+    TC_OPT_SHOWCFG,
+    TC_OPT_UPPER,
+    TC_OPT_UTF16,
+    TC_OPT_UTF16BE,
+    TC_OPT_UTF16LE,
+    TC_OPT_UTF8,
+    TC_OPT_VERSION,
+    TC_OPT_WIN1252,
+    TC_OPT_WRAP,
+    TC_OPT_XML,
+    TC_OPT_XMLCFG,
+    TC_OPT_XMLSTRG,
+    TC_OPT_XMLOPTS,
+    TC_OPT_XMLHELP,
+    TC_STRING_CONF_HEADER,
+    TC_STRING_CONF_NAME,
+    TC_STRING_CONF_TYPE,
+    TC_STRING_CONF_VALUE,
+    TC_STRING_CONF_NOTE,
+    TC_STRING_OPT_NOT_DOCUMENTED,
+    TC_STRING_OUT_OF_MEMORY,
+    TC_STRING_FATAL_ERROR,
+    TC_STRING_FILE_MANIP,
+    TC_STRING_LANG_MUST_SPECIFY,
+    TC_STRING_LANG_NOT_FOUND,
+    TC_STRING_MUST_SPECIFY,
+    TC_STRING_PROCESS_DIRECTIVES,
+    TC_STRING_CHAR_ENCODING,
+    TC_STRING_MISC,
+    TC_STRING_XML,
+    TC_STRING_UNKNOWN_OPTION,
+    TC_STRING_UNKNOWN_OPTION_B,
+    TC_STRING_VERS_A,
+    TC_STRING_VERS_B,
+    TC_TXT_HELP_1,
+    TC_TXT_HELP_2A,
+    TC_TXT_HELP_2B,
+    TC_TXT_HELP_3,
+    TC_TXT_HELP_CONFIG,
+    TC_TXT_HELP_CONFIG_NAME,
+    TC_TXT_HELP_CONFIG_TYPE,
+    TC_TXT_HELP_CONFIG_ALLW,
+    TC_TXT_HELP_LANG_1,
+    TC_TXT_HELP_LANG_2,
+    TC_TXT_HELP_LANG_3,
+    
+    /* This MUST be present and last. */
+    TIDY_MESSAGE_TYPE_LAST
 } tidyMessageTypes;
 
 

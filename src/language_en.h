@@ -78,8 +78,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { STRING_DOCTYPE_GIVEN,         0,   "Doctype given is \"%s\""                                                 },
 
     {/* The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  STRING_ERROR_COUNT,           0,   "Tidy found %u %s and %u %s!"
-	},
+      STRING_ERROR_COUNT,           0,   "Tidy found %u %s and %u %s!"
+    },
     { STRING_ERROR_COUNT_ERROR,     0,   "error"                                                                   },
     { STRING_ERROR_COUNT_ERROR,     1,   "errors"                                                                  },
     { STRING_ERROR_COUNT_WARNING,   0,   "warning"                                                                 },
@@ -87,7 +87,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { STRING_HELLO_ACCESS,          0,   "Accessibility Checks:"                                                   },
     {/* This is not a formal name and can be translated. */
       STRING_HTML_PROPRIETARY,      0,   "HTML Proprietary"
-	},
+    },
     { STRING_MISSING_MALFORMED,     0,   "missing or malformed argument for option: %s"                            },
     { STRING_NO_ERRORS,             0,   "No warnings or errors were found."                                       },
     { STRING_NO_SYSID,              0,   "No system identifier in emitted doctype"                                 },
@@ -95,7 +95,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { STRING_PLAIN_TEXT,            0,   "plain text"                                                              },
     {/* For example, "replacing invalid UTF-8 bytes" */
       STRING_REPLACING,             0,   "replacing"
-	},
+    },
     {/* For example, "you should avoid using the specified encoding." */
       STRING_SPECIFIED,             0,   "specified"
     },
@@ -131,7 +131,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "as of February 1998 few browsers support the new entities.\n\n"
     },
     {/* This console output should be limited to 78 characters per line.
-	    - %s represents a string-encoding name which may be localized in your language. */
+        - %s represents a string-encoding name which may be localized in your language. */
       TEXT_VENDOR_CHARS,            0,
         "It is unlikely that vendor-specific, system-dependent encodings\n"
         "work widely enough on the World Wide Web; you should avoid using the \n"
@@ -140,8 +140,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "\n"
     },
     {/* This console output should be limited to 78 characters per line.
-	    - %s represents a string-encoding name which may be localized in your language.
-	    - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+        - %s represents a string-encoding name which may be localized in your language.
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TEXT_SGML_CHARS,              0,
         "Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML;\n"
         "even if they were, they would likely be unprintable control characters.\n"
@@ -172,7 +172,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "\n"
     },
     {/* This console output should be limited to 78 characters per line.
-	    - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TEXT_INVALID_URI,             0,
         "URIs must be properly escaped, they must not contain unescaped\n"
         "characters below U+0021 including the space character and not\n"
@@ -247,7 +247,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "see http://www.w3.org/WAI/GL"
     },
     {/* This console output should be limited to 78 characters per line.
-	    - The URL should not be translated unless you find a matching URL in your language. */
+        - The URL should not be translated unless you find a matching URL in your language. */
       TEXT_ACCESS_ADVICE2,          0,
         " and http://www.html-tidy.org/accessibility/"
     },
@@ -592,9 +592,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
      **  Note that the xslt processor requires <br/> to be self closing!
      *********************************************************************/
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyXmlDecl,                  0,
+      TidyXmlDecl,                  0,
         "This option specifies if Tidy should add the XML declaration when "
         "outputting XML or XHTML. "
         "<br/>"
@@ -606,9 +606,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "as required by the XML standard. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner!
+        It's very important that <br/> be self-closing in this manner!
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.*/
-	  TidyXmlSpace,                 0,
+      TidyXmlSpace,                 0,
         "This option specifies if Tidy should add "
         "<code>xml:space=\"preserve\"</code> to elements such as "
         "<code>&lt;pre&gt;</code>, <code>&lt;style&gt;</code> and "
@@ -618,9 +618,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "be parsed appropriately without having access to the DTD. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner!
+        It's very important that <br/> be self-closing in this manner!
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyAltText,                  0,
+      TidyAltText,                  0,
         "This option specifies the default <code>alt=</code> text Tidy uses for "
         "<code>&lt;img&gt;</code> attributes when the <code>alt=</code> attribute "
         "is missing. "
@@ -629,9 +629,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "to people who cannot see the images. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyXmlPIs,                   0,
+      TidyXmlPIs,                   0,
         "This option specifies if Tidy should change the parsing of processing "
         "instructions to require <code>?&gt;</code> as the terminator rather than "
         "<code>&gt;</code>. "
@@ -639,25 +639,25 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option is automatically set if the input is in XML. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyMakeBare,                 0,
+      TidyMakeBare,                 0,
         "This option specifies if Tidy should strip Microsoft specific HTML "
         "from Word 2000 documents, and output spaces rather than non-breaking "
         "spaces where they exist in the input. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyCSSPrefix,                0,
+      TidyCSSPrefix,                0,
         "This option specifies the prefix that Tidy uses for styles rules. "
         "<br/>"
         "By default, <code>c</code> will be used. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyMakeClean,                0,
+      TidyMakeClean,                0,
         "This option specifies if Tidy should perform cleaning of some legacy "
         "presentational tags (currently <code>&lt;i&gt;</code>, "
         "<code>&lt;b&gt;</code>, <code>&lt;center&gt;</code> when enclosed within "
@@ -666,16 +666,16 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "<code>&lt;style&gt;</code> tags and structural markup as appropriate. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyGDocClean,                0,
+      TidyGDocClean,                0,
         "This option specifies if Tidy should enable specific behavior for "
         "cleaning up HTML exported from Google Docs. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyDoctype,                  0,
+      TidyDoctype,                  0,
         "This option specifies the DOCTYPE declaration generated by Tidy. "
         "<br/>"
         "If set to <code>omit</code> the output won't contain a DOCTYPE "
@@ -710,21 +710,21 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option does not offer a validation of document conformance. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyDropEmptyElems,           0,
+      TidyDropEmptyElems,           0,
         "This option specifies if Tidy should discard empty elements. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyDropEmptyParas,           0,
+      TidyDropEmptyParas,           0,
         "This option specifies if Tidy should discard empty paragraphs. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyDropFontTags,             0,
+      TidyDropFontTags,             0,
         "Deprecated; <em>do not use</em>. This option is destructive to "
         "<code>&lt;font&gt;</code> tags, and it will be removed from future "
         "versions of Tidy. Use the <code>clean</code> option instead. "
@@ -741,24 +741,24 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "See <code>clean</code> for more information. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyDropPropAttrs,            0,
+      TidyDropPropAttrs,            0,
         "This option specifies if Tidy should strip out proprietary attributes, "
         "such as Microsoft data binding attributes. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyEncloseBlockText,         0,
+      TidyEncloseBlockText,         0,
         "This option specifies if Tidy should insert a <code>&lt;p&gt;</code> "
         "element to enclose any text it finds in any element that allows mixed "
         "content for HTML transitional but not HTML strict. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyEncloseBodyText,          0,
+      TidyEncloseBodyText,          0,
         "This option specifies if Tidy should enclose any text it finds in the "
         "body element within a <code>&lt;p&gt;</code> element."
         "<br/>"
@@ -766,16 +766,16 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "style sheet. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyEscapeCdata,              0,
+      TidyEscapeCdata,              0,
         "This option specifies if Tidy should convert "
         "<code>&lt;![CDATA[]]&gt;</code> sections to normal text. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyFixComments,              0,
+      TidyFixComments,              0,
         "This option specifies if Tidy should replace unexpected hyphens with "
         "<code>=</code> characters when it comes across adjacent hyphens. "
         "<br/>"
@@ -785,23 +785,23 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "comment syntax: <code>&lt;!--- ---&gt;</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyFixUri,                   0,
+      TidyFixUri,                   0,
         "This option specifies if Tidy should check attribute values that carry "
         "URIs for illegal characters and if such are found, escape them as HTML4 "
         "recommends. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyHideComments,             0,
+      TidyHideComments,             0,
         "This option specifies if Tidy should print out comments. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyCoerceEndTags,            0,
+      TidyCoerceEndTags,            0,
         "This option specifies if Tidy should coerce a start tag into an end tag "
         "in cases where it looks like an end tag was probably intended; "
         "for example, given "
@@ -813,9 +813,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "<code>&lt;span&gt;foo &lt;b&gt;bar&lt;/b&gt; baz&lt;/span&gt;</code> "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyOmitOptionalTags,         0,
+      TidyOmitOptionalTags,         0,
         "This option specifies if Tidy should omit optional start tags and end tags "
         "when generating output. "
         "<br/>"
@@ -830,44 +830,44 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option is ignored for XML output. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyHideEndTags,              0,
+      TidyHideEndTags,              0,
         "This option is an alias for <code>omit-optional-tags</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyIndentCdata,              0,
+      TidyIndentCdata,              0,
         "This option specifies if Tidy should indent "
         "<code>&lt;![CDATA[]]&gt;</code> sections. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyXmlTags,                  0,
+      TidyXmlTags,                  0,
         "This option specifies if Tidy should use the XML parser rather than the "
         "error correcting HTML parser. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyJoinClasses,              0,
+      TidyJoinClasses,              0,
         "This option specifies if Tidy should combine class names to generate "
         "a single, new class name if multiple class assignments are detected on "
         "an element. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyJoinStyles,               0,
+      TidyJoinStyles,               0,
         "This option specifies if Tidy should combine styles to generate a single, "
         "new style if multiple style values are detected on an element. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyLogicalEmphasis,          0,
+      TidyLogicalEmphasis,          0,
         "This option specifies if Tidy should replace any occurrence of "
         "<code>&lt;i&gt;</code> with <code>&lt;em&gt;</code> and any occurrence of "
         "<code>&lt;b&gt;</code> with <code>&lt;strong&gt;</code>. Any attributes "
@@ -876,18 +876,18 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option can be set independently of the <code>clean</code> option. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyLowerLiterals,            0,
+      TidyLowerLiterals,            0,
         "This option specifies if Tidy should convert the value of an attribute "
         "that takes a list of predefined values to lower case. "
         "<br/>"
         "This is required for XHTML documents. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyMergeEmphasis,            0,
+      TidyMergeEmphasis,            0,
         "This option specifies if Tidy should merge nested <code>&lt;b&gt;</code> "
         "and <code>&lt;i&gt;</code> elements; for example, for the case "
         "<br/>"
@@ -896,9 +896,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "Tidy will output <code>&lt;b class=\"rtop-2\"&gt;foo bar baz&lt;/b&gt;</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyMergeDivs,                0,
+      TidyMergeDivs,                0,
         "This option can be used to modify the behavior of <code>clean</code> when "
         "set to <code>yes</code>."
         "<br/>"
@@ -915,9 +915,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "<code>class</code> and <code>style</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyMergeSpans,               0,
+      TidyMergeSpans,               0,
         "This option can be used to modify the behavior of <code>clean</code> when "
         "set to <code>yes</code>."
         "<br/>"
@@ -928,16 +928,16 @@ static languageDefinition language_en = { whichPluralForm_en, {
     },
 #if SUPPORT_ASIAN_ENCODINGS
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyNCR,                      0,
+      TidyNCR,                      0,
         "This option specifies if Tidy should allow numeric character references. "
     },
 #endif
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyBlockTags,                0,
+      TidyBlockTags,                0,
         "This option specifies new block-level tags. This option takes a space or "
         "comma separated list of tag names. "
         "<br/>"
@@ -951,9 +951,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option is ignored in XML mode. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyEmptyTags,                0,
+      TidyEmptyTags,                0,
         "This option specifies new empty inline tags. This option takes a space "
         "or comma separated list of tag names. "
         "<br/>"
@@ -965,9 +965,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option is ignored in XML mode. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyInlineTags,               0,
+      TidyInlineTags,               0,
         "This option specifies new non-empty inline tags. This option takes a "
         "space or comma separated list of tag names. "
         "<br/>"
@@ -977,9 +977,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option is ignored in XML mode. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyPreTags,                  0,
+      TidyPreTags,                  0,
         "This option specifies new tags that are to be processed in exactly the "
         "same way as HTML's <code>&lt;pre&gt;</code> element. This option takes a "
         "space or comma separated list of tag names. "
@@ -992,9 +992,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option is ignored in XML mode. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyNumEntities,              0,
+      TidyNumEntities,              0,
         "This option specifies if Tidy should output entities other than the "
         "built-in HTML entities (<code>&amp;amp;</code>, <code>&amp;lt;</code>, "
         "<code>&amp;gt;</code>, and <code>&amp;quot;</code>) in the numeric rather "
@@ -1006,16 +1006,16 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "correspondingly. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyHtmlOut,                  0,
+      TidyHtmlOut,                  0,
         "This option specifies if Tidy should generate pretty printed output, "
         "writing it as HTML. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyXhtmlOut,                 0,
+      TidyXhtmlOut,                 0,
         "This option specifies if Tidy should generate pretty printed output, "
         "writing it as extensible HTML. "
         "<br/>"
@@ -1030,9 +1030,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "other options. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyXmlOut,                   0,
+      TidyXmlOut,                   0,
         "This option specifies if Tidy should pretty print output, writing it as "
         "well-formed XML. "
         "<br/>"
@@ -1043,16 +1043,16 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "other options. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyQuoteAmpersand,           0,
+      TidyQuoteAmpersand,           0,
         "This option specifies if Tidy should output unadorned <code>&amp;</code> "
         "characters as <code>&amp;amp;</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyQuoteMarks,               0,
+      TidyQuoteMarks,               0,
         "This option specifies if Tidy should output <code>&quot;</code> characters "
         "as <code>&amp;quot;</code> as is preferred by some editing environments. "
         "<br/>"
@@ -1061,39 +1061,39 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "<code>&amp;apos;</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyQuoteNbsp,                0,
+      TidyQuoteNbsp,                0,
         "This option specifies if Tidy should output non-breaking space characters "
         "as entities, rather than as the Unicode character value 160 (decimal). "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyDuplicateAttrs,           0,
+      TidyDuplicateAttrs,           0,
         "This option specifies if Tidy should keep the first or last attribute, if "
         "an attribute is repeated, e.g. has two <code>align</code> attributes. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidySortAttributes,           0,
+      TidySortAttributes,           0,
         "This option specifies that Tidy should sort attributes within an element "
         "using the specified sort algorithm. If set to <code>alpha</code>, the "
         "algorithm is an ascending alphabetic sort. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyReplaceColor,             0,
+      TidyReplaceColor,             0,
         "This option specifies if Tidy should replace numeric values in color "
         "attributes with HTML/XHTML color names where defined, e.g. replace "
         "<code>#ffffff</code> with <code>white</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyBodyOnly,                 0,
+      TidyBodyOnly,                 0,
         "This option specifies if Tidy should print only the contents of the "
         "body tag as an HTML fragment. "
         "<br/>"
@@ -1106,9 +1106,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option has no effect if XML output is requested. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyUpperCaseAttrs,           0,
+      TidyUpperCaseAttrs,           0,
         "This option specifies if Tidy should output attribute names in upper "
         "case. "
         "<br/>"
@@ -1116,18 +1116,18 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "names, except for XML input, where the original case is preserved. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyUpperCaseTags,            0,
+      TidyUpperCaseTags,            0,
         "This option specifies if Tidy should output tag names in upper case. "
         "<br/>"
         "The default is <code>no</code> which results in lower case tag names, "
         "except for XML input where the original case is preserved. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyWord2000,                 0,
+      TidyWord2000,                 0,
         "This option specifies if Tidy should go to great pains to strip out all "
         "the surplus stuff Microsoft Word 2000 inserts when you save Word "
         "documents as \"Web pages\". It doesn't handle embedded images or VML. "
@@ -1135,9 +1135,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "You should consider using Word's \"Save As: Web Page, Filtered\". "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyAccessibilityCheckLevel,  0,
+      TidyAccessibilityCheckLevel,  0,
         "This option specifies what level of accessibility checking, if any, "
         "that Tidy should perform. "
         "<br/>"
@@ -1148,36 +1148,36 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "<a href=\"http://www.html-tidy.org/accessibility/\"> Tidy's Accessibility Page</a>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyShowErrors,               0,
+      TidyShowErrors,               0,
         "This option specifies the number Tidy uses to determine if further errors "
         "should be shown. If set to <code>0</code>, then no errors are shown. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyShowInfo,                 0,
+      TidyShowInfo,                 0,
         "This option specifies if Tidy should display info-level messages. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyShowWarnings,             0,
+      TidyShowWarnings,             0,
         "This option specifies if Tidy should suppress warnings. This can be "
         "useful when a few errors are hidden in a flurry of warnings. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyBreakBeforeBR,            0,
+      TidyBreakBeforeBR,            0,
         "This option specifies if Tidy should output a line break before each "
         "<code>&lt;br&gt;</code> element. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyIndentContent,            0,
+      TidyIndentContent,            0,
         "This option specifies if Tidy should indent block-level tags. "
         "<br/>"
         "If set to <code>auto</code> Tidy will decide whether or not to indent the "
@@ -1194,15 +1194,15 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "specify whether spaces or tabs are used. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyIndentAttributes,         0,
+      TidyIndentAttributes,         0,
         "This option specifies if Tidy should begin each attribute on a new line. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyIndentSpaces,             0,
+      TidyIndentSpaces,             0,
         "This option specifies the number of spaces or tabs that Tidy uses to "
         "indent content when <code>indent</code> is enabled. "
         "<br/>"
@@ -1210,9 +1210,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "<code>indent-with-tabs</code> (see also). "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyLiteralAttribs,           0,
+      TidyLiteralAttribs,           0,
         "This option specifies how Tidy deals with whitespace characters within "
         "attribute values. "
         "<br/>"
@@ -1225,40 +1225,40 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "through unchanged, set this option to <code>yes</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyShowMarkup,               0,
+      TidyShowMarkup,               0,
         "This option specifies if Tidy should generate a pretty printed version "
         "of the markup. Note that Tidy won't generate a pretty printed version if "
         "it finds significant errors (see <code>force-output</code>). "
     },
 #if SUPPORT_ASIAN_ENCODINGS
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyPunctWrap,                0,
+      TidyPunctWrap,                0,
         "This option specifies if Tidy should line wrap after some Unicode or "
         "Chinese punctuation characters. "
     },
 #endif
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyBurstSlides,              0,
+      TidyBurstSlides,              0,
         "This option has no function and is deprecated. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyTabSize,                  0,
+      TidyTabSize,                  0,
         "This option specifies the number of columns that Tidy uses between "
         "successive tab stops. It is used to map tabs to spaces when reading the "
         "input. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyVertSpace,                0,
+      TidyVertSpace,                0,
         "This option specifies if Tidy should add some extra empty lines for "
         "readability. "
         "<br/>"
@@ -1268,9 +1268,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "characters."
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyWrapLen,                  0,
+      TidyWrapLen,                  0,
         "This option specifies the right margin Tidy uses for line wrapping. "
         "<br/>"
         "Tidy tries to wrap lines so that they do not exceed this length. "
@@ -1279,16 +1279,16 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "wrapping. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyWrapAsp,                  0,
+      TidyWrapAsp,                  0,
         "This option specifies if Tidy should line wrap text contained within ASP "
         "pseudo elements, which look like: <code>&lt;% ... %&gt;</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyWrapAttVals,              0,
+      TidyWrapAttVals,              0,
         "This option specifies if Tidy should line-wrap attribute values, meaning "
         "that if the value of an attribute causes a line to exceed the width "
         "specified by <code>wrap</code>, Tidy will add one or more line breaks to "
@@ -1305,23 +1305,23 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "<code>yes</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyWrapJste,                 0,
+      TidyWrapJste,                 0,
         "This option specifies if Tidy should line wrap text contained within "
         "JSTE pseudo elements, which look like: <code>&lt;# ... #&gt;</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyWrapPhp,                  0,
+      TidyWrapPhp,                  0,
         "This option specifies if Tidy should line wrap text contained within PHP "
         "pseudo elements, which look like: <code>&lt;?php ... ?&gt;</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyWrapScriptlets,           0,
+      TidyWrapScriptlets,           0,
         "This option specifies if Tidy should line wrap string literals that "
         "appear in script attributes. "
         "<br/>"
@@ -1329,16 +1329,16 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "before the line break. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyWrapSection,              0,
+      TidyWrapSection,              0,
         "This option specifies if Tidy should line wrap text contained within "
         "<code>&lt;![ ... ]&gt;</code> section tags. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyAsciiChars,               0,
+      TidyAsciiChars,               0,
         "Can be used to modify behavior of the <code>clean</code> option when set "
         "to <code>yes</code>. "
         "<br/>"
@@ -1347,9 +1347,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "character entities are downgraded to their closest ASCII equivalents. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyCharEncoding,             0,
+      TidyCharEncoding,             0,
         "This option specifies the character encoding Tidy uses for both the input "
         "and output. "
         "<br/>"
@@ -1375,26 +1375,26 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "UTF-8. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyInCharEncoding,           0,
+      TidyInCharEncoding,           0,
         "This option specifies the character encoding Tidy uses for the input. See "
         "<code>char-encoding</code> for more info. "
     },
 #if SUPPORT_ASIAN_ENCODINGS
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyLanguage,                 0,
+      TidyLanguage,                 0,
         "Currently not used, but this option specifies the language Tidy would use "
         "if it were properly localized. For example: <code>en</code>. "
     },
 #endif
 #if SUPPORT_UTF16_ENCODINGS
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyOutputBOM,                0,
+      TidyOutputBOM,                0,
         "This option specifies if Tidy should write a Unicode Byte Order Mark "
         "character (BOM; also known as Zero Width No-Break Space; has value of "
         "U+FEFF) to the beginning of the output, and only applies to UTF-8 and "
@@ -1408,9 +1408,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
     },
 #endif
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyOutCharEncoding,          0,
+      TidyOutCharEncoding,          0,
         "This option specifies the character encoding Tidy uses for the output. "
         "<br/>"
         "Note that this may only be different from <code>input-encoding</code> for "
@@ -1421,32 +1421,32 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "See <code>char-encoding</code> for more information"
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyNewline,                  0,
+      TidyNewline,                  0,
         "The default is appropriate to the current platform. "
         "<br/>"
         "Genrally CRLF on PC-DOS, Windows and OS/2; CR on Classic Mac OS; and LF "
         "everywhere else (Linux, Mac OS X, and Unix). "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyErrFile,                  0,
+      TidyErrFile,                  0,
         "This option specifies the error file Tidy uses for errors and warnings. "
         "Normally errors and warnings are output to <code>stderr</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyFixBackslash,             0,
+      TidyFixBackslash,             0,
         "This option specifies if Tidy should replace backslash characters "
         "<code>\\</code> in URLs with forward slashes <code>/</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyForceOutput,              0,
+      TidyForceOutput,              0,
         "This option specifies if Tidy should produce output even if errors are "
         "encountered. "
         "<br/>"
@@ -1455,22 +1455,22 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "resulting output may not reflect your intention. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyEmacs,                    0,
+      TidyEmacs,                    0,
         "This option specifies if Tidy should change the format for reporting "
         "errors and warnings to a format that is more easily parsed by GNU Emacs. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyEmacsFile,                0,
+      TidyEmacsFile,                0,
         "Used internally. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyKeepFileTimes,            0,
+      TidyKeepFileTimes,            0,
         "This option specifies if Tidy should keep the original modification time "
         "of files that Tidy modifies in place. "
         "<br/>"
@@ -1482,38 +1482,38 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "Note this feature is not supported on some platforms. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyOutFile,                  0,
+      TidyOutFile,                  0,
         "This option specifies the output file Tidy uses for markup. Normally "
         "markup is written to <code>stdout</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyQuiet,                    0,
+      TidyQuiet,                    0,
         "This option specifies if Tidy should output the summary of the numbers "
         "of errors and warnings, or the welcome or informational messages. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidySlideStyle,               0,
+      TidySlideStyle,               0,
         "This option has no function and is deprecated. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyMark,                     0,
+      TidyMark,                     0,
         "This option specifies if Tidy should add a <code>meta</code> element to "
         "the document head to indicate that the document has been tidied. "
         "<br/>"
         "Tidy won't add a meta element if one is already present. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyWriteBack,                0,
+      TidyWriteBack,                0,
         "This option specifies if Tidy should write back the tidied markup to the "
         "same file it read from. "
         "<br/>"
@@ -1521,24 +1521,24 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "on rare occasions the result may not be what you expect. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyDecorateInferredUL,       0,
+      TidyDecorateInferredUL,       0,
         "This option specifies if Tidy should decorate inferred "
         "<code>&lt;ul&gt;</code> elements with some CSS markup to avoid indentation "
         "to the right. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyPreserveEntities,         0,
+      TidyPreserveEntities,         0,
         "This option specifies if Tidy should preserve well-formed entities "
         "as found in the input. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyAnchorAsName,             0,
+      TidyAnchorAsName,             0,
         "This option controls the deletion or addition of the <code>name</code> "
         "attribute in elements where it can serve as anchor. "
         "<br/>"
@@ -1550,9 +1550,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "<code>id</code> attribute exists or has been added. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidyPPrintTabs,               0,
+      TidyPPrintTabs,               0,
         "This option specifies if Tidy should indent with tabs instead of spaces, "
         "assuming <code>indent</code> is <code>yes</code>. "
         "<br/>"
@@ -1568,9 +1568,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "it to zero to retain input tabs. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-	  TidySkipNested,               0,
+      TidySkipNested,               0,
         "This option specifies that Tidy should skip nested tags when parsing "
         "script and style data. "
     },
@@ -1703,7 +1703,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     },
 
     {/* This console output should be limited to 78 characters per line.
-	    - %n represents the name of the executable from the file system, and is mostly like going to be "tidy".
+        - %n represents the name of the executable from the file system, and is mostly like going to be "tidy".
         - %2 represents a version number, typically x.x.xx.
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TC_TXT_HELP_1,                0,

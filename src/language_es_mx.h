@@ -4,14 +4,22 @@
  * language_es_mx.h
  * Localization support for HTML Tidy.
  *
- * THIS FILE IS MACHINE GENERATED. It is a localization file for the
- * language (and maybe region) "es_mx" and it should not be
- * edited manually. The source of these strings is a gettext PO file,
- * probably called "language_es_mx.po" in Tidy's source.
  *
- * Tidy's source distribution also includes a script to convert PO files
- * into this file. Because PO files are friendly to translators and a
- * standard industry tool, please translate ONLY the PO files.
+ * This file is a localization file for HTML Tidy. It will have been machine
+ * generated or created and/or edited by hand. Both are valid options, but
+ * please help keep our localization efforts simple to maintain by maintaining
+ * the structure of this file, and changing the check box below if you make
+ * changes (so others know the file origin):
+ *
+ * [X] THIS FILE IS MACHINE GENERATED. It is a localization file for the
+ *     language (and maybe region) "es_mx". The source of
+ *     these strings is a gettext PO file in Tidy's source, probably called 
+ *     "language_es_mx.po".
+ *
+ * [ ] THIS FILE WAS HAND MODIFIED. Translators, please feel to edit this file
+ *     directly (and check this box). If you prefer to edit PO files then use
+ *     `poconvert.rb msgunfmt language_es_mx.h` (our own
+ *     conversion tool) to generate a fresh PO from this file first!
  *
  * (c) 2015 HTACG
  * See tidy.h and access.h for the copyright notice.
@@ -20,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2016-01-26 14:38:30
+ *   PO_REVISION_DATE=2016-01-29 10:54:42
  */
 
 #ifdef _MSC_VER
@@ -38,8 +46,8 @@
  *  definition.
  */
 static uint whichPluralForm_es_mx(uint n) {
-	/* Plural-Forms: nplurals=2; */
-	return n != 1;
+    /* Plural-Forms: nplurals=2; */
+    return n != 1;
 }
 
 
@@ -50,10 +58,10 @@ static uint whichPluralForm_es_mx(uint n) {
  *  the build system.
  */
 static languageDefinition language_es_mx = { whichPluralForm_es_mx, {
-	/***************************************
-	 ** This MUST be present and first. 
-	 ** Specify the code for this language.
-	 ***************************************/
+    /***************************************
+     ** This MUST be present and first. 
+     ** Specify the code for this language.
+     ***************************************/
     {/* Specify the ll or ll_cc language code here. */
       TIDY_LANGUAGE,          0, "es_mx"
     },

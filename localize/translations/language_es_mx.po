@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2016-01-23 16:04:41\n"
+"PO-Revision-Date: 2016-01-29 10:54:42\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -19,19 +19,16 @@ msgctxt "ATRC_ACCESS_URL"
 msgid "http://www.html-tidy.org/accessibility/"
 msgstr ""
 
-#, c-format
 msgctxt "FILE_CANT_OPEN"
-msgid "Can't open \"%1$s\"\n"
+msgid "Can't open \"%s\"\n"
 msgstr ""
 
-#, c-format
 msgctxt "LINE_COLUMN_STRING"
-msgid "line %1$d column %2$d - "
+msgid "line %d column %d - "
 msgstr ""
 
-#, c-format
 msgctxt "STRING_CONTENT_LOOKS"
-msgid "Document content looks like %1$s"
+msgid "Document content looks like %s"
 msgstr ""
 
 #. For example, "discarding invalid UTF-16 surrogate pair"
@@ -39,15 +36,13 @@ msgctxt "STRING_DISCARDING"
 msgid "discarding"
 msgstr ""
 
-#, c-format
 msgctxt "STRING_DOCTYPE_GIVEN"
-msgid "Doctype given is \"%1$s\""
+msgid "Doctype given is \"%s\
 msgstr ""
 
 #. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
-#, c-format
 msgctxt "STRING_ERROR_COUNT"
-msgid "Tidy found %1$u %2$s and %3$u %4$s!"
+msgid "Tidy found %u %s and %u %s!"
 msgstr ""
 
 msgctxt "STRING_ERROR_COUNT_ERROR"
@@ -71,9 +66,8 @@ msgctxt "STRING_HTML_PROPRIETARY"
 msgid "HTML Proprietary"
 msgstr ""
 
-#, c-format
 msgctxt "STRING_MISSING_MALFORMED"
-msgid "missing or malformed argument for option: %1$s"
+msgid "missing or malformed argument for option: %s"
 msgstr ""
 
 msgctxt "STRING_NO_ERRORS"
@@ -102,18 +96,16 @@ msgctxt "STRING_SPECIFIED"
 msgid "specified"
 msgstr ""
 
-#, c-format
 msgctxt "STRING_UNKNOWN_FILE"
-msgid "%1$s: can't open file \"%2$s\"\n"
+msgid "%s: can't open file \"%s\"\n"
 msgstr ""
 
-#, c-format
 msgctxt "STRING_UNKNOWN_OPTION"
-msgid "unknown option: %1$s"
+msgid "unknown option: %s"
 msgstr ""
 
 msgctxt "STRING_UNRECZD_OPTION"
-msgid "unrecognized option -%1$c use -help to list options\n"
+msgid "unrecognized option -%c use -help to list options\n"
 msgstr ""
 
 msgctxt "STRING_XML_DECLARATION"
@@ -151,26 +143,25 @@ msgid ""
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
-#, c-format
+#. - %s represents a string-encoding name which may be localized in your language.
 msgctxt "TEXT_VENDOR_CHARS"
 msgid ""
 "It is unlikely that vendor-specific, system-dependent encodings\n"
 "work widely enough on the World Wide Web; you should avoid using the \n"
-"%1$s character encoding, instead you are recommended to\n"
+"%s character encoding, instead you are recommended to\n"
 "use named entities, e.g. &trade;.\n"
 "\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
-#. - %1$s represents a string-encoding name which may be localized in your language.
+#. - %s represents a string-encoding name which may be localized in your language.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
-#, c-format
 msgctxt "TEXT_SGML_CHARS"
 msgid ""
 "Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML;\n"
 "even if they were, they would likely be unprintable control characters.\n"
 "Tidy assumed you wanted to refer to a character with the same byte value in the \n"
-"%1$s encoding and replaced that reference with the Unicode \n"
+"%s encoding and replaced that reference with the Unicode \n"
 "equivalent.\n"
 "\n"
 msgstr ""
@@ -404,360 +395,292 @@ msgctxt "TidyFatalString"
 msgid "Panic: "
 msgstr ""
 
-#, c-format
 msgctxt "ENCODING_MISMATCH"
-msgid "specified input encoding (%1$s) does not match actual input encoding (%2$s)"
+msgid "specified input encoding (%s) does not match actual input encoding (%s)"
 msgstr ""
 
-#, c-format
 msgctxt "VENDOR_SPECIFIC_CHARS"
-msgid "%1$s invalid character code %2$s"
+msgid "%s invalid character code %s"
 msgstr ""
 
-#, c-format
 msgctxt "INVALID_SGML_CHARS"
-msgid "%1$s invalid character code %2$s"
+msgid "%s invalid character code %s"
 msgstr ""
 
-#, c-format
 msgctxt "INVALID_UTF8"
-msgid "%1$s invalid UTF-8 bytes (char. code %2$s)"
+msgid "%s invalid UTF-8 bytes (char. code %s)"
 msgstr ""
 
-#, c-format
 msgctxt "INVALID_UTF16"
-msgid "%1$s invalid UTF-16 surrogate pair (char. code %2$s)"
+msgid "%s invalid UTF-16 surrogate pair (char. code %s)"
 msgstr ""
 
-#, c-format
 msgctxt "INVALID_NCR"
-msgid "%1$s invalid numeric character reference %2$s"
+msgid "%s invalid numeric character reference %s"
 msgstr ""
 
-#, c-format
 msgctxt "MISSING_SEMICOLON"
-msgid "entity \"%1$s\" doesn't end in ';'"
+msgid "entity \"%s\" doesn't end in ';'"
 msgstr ""
 
-#, c-format
 msgctxt "MISSING_SEMICOLON_NCR"
-msgid "numeric character reference \"%1$s\" doesn't end in ';'"
+msgid "numeric character reference \"%s\" doesn't end in ';'"
 msgstr ""
 
 msgctxt "UNESCAPED_AMPERSAND"
 msgid "unescaped & which should be written as &amp;"
 msgstr ""
 
-#, c-format
 msgctxt "UNKNOWN_ENTITY"
-msgid "unescaped & or unknown entity \"%1$s\""
+msgid "unescaped & or unknown entity \"%s\
 msgstr ""
 
 msgctxt "APOS_UNDEFINED"
 msgid "named entity &apos; only defined in XML/XHTML"
 msgstr ""
 
-#, c-format
 msgctxt "INSERTING_ATTRIBUTE"
-msgid "%1$s inserting \"%2$s\" attribute"
+msgid "%s inserting \"%s\" attribute"
 msgstr ""
 
-#, c-format
 msgctxt "INSERTING_AUTO_ATTRIBUTE"
-msgid "%1$s inserting \"%2$s\" attribute using value \"%3$s\""
+msgid "%s inserting \"%s\" attribute using value \"%s\
 msgstr ""
 
-#, c-format
 msgctxt "MISSING_ATTR_VALUE"
-msgid "%1$s attribute \"%2$s\" lacks value"
+msgid "%s attribute \"%s\" lacks value"
 msgstr ""
 
-#, c-format
 msgctxt "UNKNOWN_ATTRIBUTE"
-msgid "%1$s unknown attribute \"%2$s\""
+msgid "%s unknown attribute \"%s\
 msgstr ""
 
-#, c-format
 msgctxt "PROPRIETARY_ATTRIBUTE"
-msgid "%1$s proprietary attribute \"%2$s\""
+msgid "%s proprietary attribute \"%s\
 msgstr ""
 
-#, c-format
 msgctxt "JOINING_ATTRIBUTE"
-msgid "%1$s joining values of repeated attribute \"%2$s\""
+msgid "%s joining values of repeated attribute \"%s\
 msgstr ""
 
-#, c-format
 msgctxt "XML_ATTRIBUTE_VALUE"
-msgid "%1$s has XML attribute \"%2$s\""
+msgid "%s has XML attribute \"%s\
 msgstr ""
 
-#, c-format
 msgctxt "XML_ID_SYNTAX"
-msgid "%1$s ID \"%2$s\" uses XML ID syntax"
+msgid "%s ID \"%s\" uses XML ID syntax"
 msgstr ""
 
-#, c-format
 msgctxt "ATTR_VALUE_NOT_LCASE"
-msgid "%1$s attribute value \"%2$s\" must be lower case for XHTML"
+msgid "%s attribute value \"%s\" must be lower case for XHTML"
 msgstr ""
 
-#, c-format
 msgctxt "PROPRIETARY_ATTR_VALUE"
-msgid "%1$s proprietary attribute value \"%2$s\""
+msgid "%s proprietary attribute value \"%s\
 msgstr ""
 
-#, c-format
 msgctxt "ANCHOR_NOT_UNIQUE"
-msgid "%1$s anchor \"%2$s\" already defined"
+msgid "%s anchor \"%s\" already defined"
 msgstr ""
 
-#, c-format
 msgctxt "BAD_ATTRIBUTE_VALUE"
-msgid "%1$s attribute \"%2$s\" has invalid value \"%3$s\""
+msgid "%s attribute \"%s\" has invalid value \"%s\
 msgstr ""
 
-#, c-format
 msgctxt "BAD_ATTRIBUTE_VALUE_REPLACED"
-msgid "%1$s attribute \"%2$s\" had invalid value \"%3$s\" and has been replaced"
+msgid "%s attribute \"%s\" had invalid value \"%s\" and has been replaced"
 msgstr ""
 
-#, c-format
 msgctxt "INVALID_ATTRIBUTE"
-msgid "%1$s attribute name \"%2$s\" (value=\"%3$s\") is invalid"
+msgid "%s attribute name \"%s\" (value=\"%s\") is invalid"
 msgstr ""
 
-#, c-format
 msgctxt "REPEATED_ATTRIBUTE"
-msgid "%1$s dropping value \"%2$s\" for repeated attribute \"%3$s\""
+msgid "%s dropping value \"%s\" for repeated attribute \"%s\
 msgstr ""
 
-#, c-format
 msgctxt "INVALID_XML_ID"
-msgid "%1$s cannot copy name attribute to id"
+msgid "%s cannot copy name attribute to id"
 msgstr ""
 
-#, c-format
 msgctxt "UNEXPECTED_GT"
-msgid "%1$s missing '>' for end of tag"
+msgid "%s missing '>' for end of tag"
 msgstr ""
 
-#, c-format
 msgctxt "UNEXPECTED_QUOTEMARK"
-msgid "%1$s unexpected or duplicate quote mark"
+msgid "%s unexpected or duplicate quote mark"
 msgstr ""
 
-#, c-format
 msgctxt "MISSING_QUOTEMARK"
-msgid "%1$s attribute with missing trailing quote mark"
+msgid "%s attribute with missing trailing quote mark"
 msgstr ""
 
-#, c-format
 msgctxt "UNEXPECTED_END_OF_FILE_ATTR"
-msgid "%1$s end of file while parsing attributes"
+msgid "%s end of file while parsing attributes"
 msgstr ""
 
-#, c-format
 msgctxt "ID_NAME_MISMATCH"
-msgid "%1$s id and name attribute value mismatch"
+msgid "%s id and name attribute value mismatch"
 msgstr ""
 
-#, c-format
 msgctxt "BACKSLASH_IN_URI"
-msgid "%1$s URI reference contains backslash. Typo?"
+msgid "%s URI reference contains backslash. Typo?"
 msgstr ""
 
-#, c-format
 msgctxt "FIXED_BACKSLASH"
-msgid "%1$s converting backslash in URI to slash"
+msgid "%s converting backslash in URI to slash"
 msgstr ""
 
-#, c-format
 msgctxt "ILLEGAL_URI_REFERENCE"
-msgid "%1$s improperly escaped URI reference"
+msgid "%s improperly escaped URI reference"
 msgstr ""
 
-#, c-format
 msgctxt "ESCAPED_ILLEGAL_URI"
-msgid "%1$s escaping malformed URI reference"
+msgid "%s escaping malformed URI reference"
 msgstr ""
 
-#, c-format
 msgctxt "NEWLINE_IN_URI"
-msgid "%1$s discarding newline in URI reference"
+msgid "%s discarding newline in URI reference"
 msgstr ""
 
-#, c-format
 msgctxt "WHITE_IN_URI"
-msgid "%1$s discarding whitespace in URI reference"
+msgid "%s discarding whitespace in URI reference"
 msgstr ""
 
-#, c-format
 msgctxt "UNEXPECTED_EQUALSIGN"
-msgid "%1$s unexpected '=', expected attribute name"
+msgid "%s unexpected '=', expected attribute name"
 msgstr ""
 
-#, c-format
 msgctxt "MISSING_IMAGEMAP"
-msgid "%1$s should use client-side image map"
+msgid "%s should use client-side image map"
 msgstr ""
 
-#, c-format
 msgctxt "MISSING_ATTRIBUTE"
-msgid "%1$s lacks \"%2$s\" attribute"
+msgid "%s lacks \"%s\" attribute"
 msgstr ""
 
-#, c-format
 msgctxt "NESTED_EMPHASIS"
-msgid "nested emphasis %1$s"
+msgid "nested emphasis %s"
 msgstr ""
 
 msgctxt "NESTED_QUOTATION"
 msgid "nested q elements, possible typo."
 msgstr ""
 
-#, c-format
 msgctxt "OBSOLETE_ELEMENT"
-msgid "replacing obsolete element %1$s with %2$s"
+msgid "replacing obsolete element %s with %s"
 msgstr ""
 
-#, c-format
 msgctxt "COERCE_TO_ENDTAG_WARN"
-msgid "<%1$s> is probably intended as </%2$s>"
+msgid "<%s> is probably intended as </%s>"
 msgstr ""
 
-#, c-format
 msgctxt "REMOVED_HTML5"
-msgid "%1$s element removed from HTML5"
+msgid "%s element removed from HTML5"
 msgstr ""
 
 msgctxt "BAD_BODY_HTML5"
 msgid "Found attribute on body that is obsolete in HTML5. Use CSS"
 msgstr ""
 
-#, c-format
 msgctxt "BAD_ALIGN_HTML5"
-msgid "The align attribute on the %1$s element is obsolete. Use CSS"
+msgid "The align attribute on the %s element is obsolete. Use CSS"
 msgstr ""
 
-#, c-format
 msgctxt "BAD_SUMMARY_HTML5"
-msgid "The summary attribute on the %1$s element is obsolete in HTML5"
+msgid "The summary attribute on the %s element is obsolete in HTML5"
 msgstr ""
 
-#, c-format
 msgctxt "TRIM_EMPTY_ELEMENT"
-msgid "trimming empty %1$s"
+msgid "trimming empty %s"
 msgstr ""
 
-#, c-format
 msgctxt "REPLACING_ELEMENT"
-msgid "replacing %1$s with %2$s"
+msgid "replacing %s with %s"
 msgstr ""
 
-#, c-format
 msgctxt "COERCE_TO_ENDTAG"
-msgid "<%1$s> is probably intended as </%2$s>"
+msgid "<%s> is probably intended as </%s>"
 msgstr ""
 
-#, c-format
 msgctxt "REPLACING_UNEX_ELEMENT"
-msgid "replacing unexpected %1$s with %2$s"
+msgid "replacing unexpected %s with %s"
 msgstr ""
 
-#, c-format
 msgctxt "MISSING_ENDTAG_FOR"
-msgid "missing </%1$s>"
+msgid "missing </%s>"
 msgstr ""
 
-#, c-format
 msgctxt "MISSING_ENDTAG_BEFORE"
-msgid "missing </%1$s> before %2$s"
+msgid "missing </%s> before %s"
 msgstr ""
 
-#, c-format
 msgctxt "DISCARDING_UNEXPECTED"
-msgid "discarding unexpected %1$s"
+msgid "discarding unexpected %s"
 msgstr ""
 
-#, c-format
 msgctxt "NON_MATCHING_ENDTAG"
-msgid "replacing unexpected %1$s with </%2$s>"
+msgid "replacing unexpected %s with </%s>"
 msgstr ""
 
-#, c-format
 msgctxt "TAG_NOT_ALLOWED_IN"
-msgid "%1$s isn't allowed in <%2$s> elements"
+msgid "%s isn't allowed in <%s> elements"
 msgstr ""
 
-#, c-format
 msgctxt "MISSING_STARTTAG"
-msgid "missing <%1$s>"
+msgid "missing <%s>"
 msgstr ""
 
-#, c-format
 msgctxt "UNEXPECTED_ENDTAG"
-msgid "unexpected </%1$s>"
+msgid "unexpected </%s>"
 msgstr ""
 
-#, c-format
 msgctxt "TOO_MANY_ELEMENTS"
-msgid "too many %1$s elements"
+msgid "too many %s elements"
 msgstr ""
 
-#, c-format
 msgctxt "USING_BR_INPLACE_OF"
-msgid "using <br> in place of %1$s"
+msgid "using <br> in place of %s"
 msgstr ""
 
-#, c-format
 msgctxt "INSERTING_TAG"
-msgid "inserting implicit <%1$s>"
+msgid "inserting implicit <%s>"
 msgstr ""
 
-#, c-format
 msgctxt "CANT_BE_NESTED"
-msgid "%1$s can't be nested"
+msgid "%s can't be nested"
 msgstr ""
 
-#, c-format
 msgctxt "PROPRIETARY_ELEMENT"
-msgid "%1$s is not approved by W3C"
+msgid "%s is not approved by W3C"
 msgstr ""
 
-#, c-format
 msgctxt "ILLEGAL_NESTING"
-msgid "%1$s shouldn't be nested"
+msgid "%s shouldn't be nested"
 msgstr ""
 
-#, c-format
 msgctxt "NOFRAMES_CONTENT"
-msgid "%1$s not inside 'noframes' element"
+msgid "%s not inside 'noframes' element"
 msgstr ""
 
-#, c-format
 msgctxt "UNEXPECTED_END_OF_FILE"
-msgid "unexpected end of file %1$s"
+msgid "unexpected end of file %s"
 msgstr ""
 
-#, c-format
 msgctxt "ELEMENT_NOT_EMPTY"
-msgid "%1$s element not empty or not closed"
+msgid "%s element not empty or not closed"
 msgstr ""
 
-#, c-format
 msgctxt "UNEXPECTED_ENDTAG_IN"
-msgid "unexpected </%1$s> in <%2$s>"
+msgid "unexpected </%s> in <%s>"
 msgstr ""
 
-#, c-format
 msgctxt "TOO_MANY_ELEMENTS_IN"
-msgid "too many %1$s elements in <%2$s>"
+msgid "too many %s elements in <%s>"
 msgstr ""
 
-#, c-format
 msgctxt "UNESCAPED_ELEMENT"
-msgid "unescaped %1$s in pre content"
+msgid "unescaped %s in pre content"
 msgstr ""
 
 msgctxt "DOCTYPE_AFTER_TAGS"
@@ -824,14 +747,12 @@ msgctxt "DUPLICATE_FRAMESET"
 msgid "repeated FRAMESET element"
 msgstr ""
 
-#, c-format
 msgctxt "UNKNOWN_ELEMENT"
-msgid "%1$s is not recognized!"
+msgid "%s is not recognized!"
 msgstr ""
 
-#, c-format
 msgctxt "PREVIOUS_LOCATION"
-msgid "<%1$s> previously mentioned"
+msgid "<%s> previously mentioned"
 msgstr ""
 
 msgctxt "IMG_MISSING_ALT"
@@ -2517,9 +2438,8 @@ msgctxt "TC_LABEL_OPT"
 msgid "option"
 msgstr ""
 
-#, c-format
 msgctxt "TC_MAIN_ERROR_LOAD_CONFIG"
-msgid "Loading config file \"%1$s\" failed, err = %2$d"
+msgid "Loading config file \"%s\" failed, err = %d"
 msgstr ""
 
 msgctxt "TC_OPT_ACCESS"
@@ -2725,18 +2645,16 @@ msgctxt "TC_STRING_CONF_NOTE"
 msgid "Values marked with an *asterisk are calculated internally by HTML Tidy"
 msgstr ""
 
-#, c-format
 msgctxt "TC_STRING_OPT_NOT_DOCUMENTED"
-msgid "Warning: option `%1$s' is not documented."
+msgid "Warning: option `%s' is not documented."
 msgstr ""
 
 msgctxt "TC_STRING_OUT_OF_MEMORY"
 msgid "Out of memory. Bailing out."
 msgstr ""
 
-#, c-format
 msgctxt "TC_STRING_FATAL_ERROR"
-msgid "Fatal error: impossible value for id='%1$d'."
+msgid "Fatal error: impossible value for id='%d'."
 msgstr ""
 
 msgctxt "TC_STRING_FILE_MANIP"
@@ -2756,9 +2674,8 @@ msgid "A POSIX or Windows locale must be specified."
 msgstr ""
 
 #. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
-#, c-format
 msgctxt "TC_STRING_LANG_NOT_FOUND"
-msgid "Tidy doesn't have language '%1$s,' will use '%2$s' instead."
+msgid "Tidy doesn't have language '%s,' will use '%s' instead."
 msgstr ""
 
 msgctxt "TC_STRING_MISC"
@@ -2775,7 +2692,7 @@ msgstr ""
 
 #. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 msgctxt "TC_STRING_UNKNOWN_OPTION"
-msgid "HTML Tidy: unknown option: %1$c"
+msgid "HTML Tidy: unknown option: %c"
 msgstr ""
 
 #. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
@@ -2784,37 +2701,33 @@ msgid "HTML Tidy: unknown option."
 msgstr ""
 
 #. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
-#, c-format
 msgctxt "TC_STRING_VERS_A"
-msgid "HTML Tidy for %1$s version %2$s"
+msgid "HTML Tidy for %s version %s"
 msgstr ""
 
 #. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
-#, c-format
 msgctxt "TC_STRING_VERS_B"
-msgid "HTML Tidy version %1$s"
+msgid "HTML Tidy version %s"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
-#. - %1$n represents the name of the executable from the file system, and is mostly like going to be "tidy".
-#. - %2$2 represents a version number, typically x.x.xx.
+#. - %n represents the name of the executable from the file system, and is mostly like going to be "tidy".
+#. - %2 represents a version number, typically x.x.xx.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
-#, c-format
 msgctxt "TC_TXT_HELP_1"
 msgid ""
 "\n"
-"%1$s [options...] [file...] [options...] [file...]\n"
+"%s [options...] [file...] [options...] [file...]\n"
 "Utility to clean up and pretty print HTML/XHTML/XML.\n"
 "\n"
-"This is modern HTML Tidy version %2$s.\n"
+"This is modern HTML Tidy version %s.\n"
 "\n"
 msgstr ""
 
 #. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
-#. - %1$s represents the platform, for example, "Mac OS X" or "Windows".
-#, c-format
+#. - %s represents the platform, for example, "Mac OS X" or "Windows".
 msgctxt "TC_TXT_HELP_2A"
-msgid "Command Line Arguments for HTML Tidy for %1$s:"
+msgid "Command Line Arguments for HTML Tidy for %s:"
 msgstr ""
 
 #. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.

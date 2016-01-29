@@ -29,7 +29,7 @@ module PoConvertModule
   ###########################################################
   @@default_en = File.expand_path(File.join('..', 'src', 'language_en.h' ))
   @@header_template = File.expand_path(File.join('.', 'language_ll_cc.h.erb'))
-  @@header_digest = 'b6b869b67a80a86d216c7080ac3d1a62aa3de82bbea37599b30160f22aa78d6c'
+  @@header_digest = 'b597e5948de1611ab6cde11934df6fc792c7ec4d21f3cd2030fb2e9bcfb94991'
 
 
   ###########################################################
@@ -1079,10 +1079,10 @@ Complete Help:
            :type => :string,
            :desc => 'Specifies a base language <file.h> from which to exclude translated strings.',
            :aliases => '-b'
-    option :plaintext,
+    option :hex,
            :type => :boolean,
-           :desc => 'Specifies that the generated file contain plain text instead of hex escaped characters.',
-           :aliases => '-p'
+           :desc => 'Specifies that the generated file contain hex escaped characters.',
+           :aliases => '-h'
     desc 'msgfmt <input_file.po>', 'Creates a Tidy header H file from the given PO file.'
     long_desc <<-LONG_DESC
       Creates a Tidy header H file from the specified <input_file.po> PO file,
@@ -1103,7 +1103,7 @@ Complete Help:
 
       args.each do |input_file|
         converter = PoConverter.new
-        converter.plaintext = options[:plaintext]
+        converter.plaintext = !options[:hex]
         set_options
         error_count = converter.convert_to_h( input_file, options[:baselang] ) ? error_count : error_count + 1
       end

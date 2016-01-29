@@ -239,19 +239,19 @@ static void messagePos( TidyDocImpl* doc, TidyReportLevel level, uint code,
         }
         if ( doc->mssgFilt2 )
         {
-			/* mssgFilt2 is intended to allow LibTidy users to localize
-			   messages via their own means by providing a key string and
-			   the parameters to fill it. For the key string to remain
-			   consistent, we have to ensure that we only ever return the
-			   built-in English version of this string. */
+            /* mssgFilt2 is intended to allow LibTidy users to localize
+               messages via their own means by providing a key string and
+               the parameters to fill it. For the key string to remain
+               consistent, we have to ensure that we only ever return the
+               built-in English version of this string. */
             TidyDoc tdoc = tidyImplToDoc( doc );
             go = go | doc->mssgFilt2( tdoc, level, line, col, tidyDefaultString(code), args_copy );
         }
         if ( doc->mssgFilt3 )
         {
-			/* mssgFilt3 is intended to allow LibTidy users to localize
-			   messages via their own means by providing a key string and
-			   the parameters to fill it. */
+            /* mssgFilt3 is intended to allow LibTidy users to localize
+               messages via their own means by providing a key string and
+               the parameters to fill it. */
             TidyDoc tdoc = tidyImplToDoc( doc );
             go = go | doc->mssgFilt3( tdoc, level, line, col, tidyErrorCodeAsString(code), args_copy );
         }
@@ -292,7 +292,7 @@ static void messagePos( TidyDocImpl* doc, TidyReportLevel level, uint code,
 /* Reports error at current Lexer line/column. */ 
 static
 void message( TidyDocImpl* doc, TidyReportLevel level, uint code,
-			 ctmbstr msg, ... )
+              ctmbstr msg, ... )
 #ifdef __GNUC__
 __attribute__((format(printf, 4, 5)))
 #endif
@@ -326,7 +326,7 @@ __attribute__((format(printf, 2, 3)))
 
 
 void message( TidyDocImpl* doc, TidyReportLevel level, uint code,
-			 ctmbstr msg, ... )
+              ctmbstr msg, ... )
 {
     va_list args;
     if (level == TidyInfo && !cfgBool(doc, TidyShowInfo)) return;
@@ -337,7 +337,7 @@ void message( TidyDocImpl* doc, TidyReportLevel level, uint code,
 
 
 void messageLexer( TidyDocImpl* doc, TidyReportLevel level, uint code,
-				  ctmbstr msg, ... )
+                   ctmbstr msg, ... )
 {
     int line = ( doc->lexer ? doc->lexer->lines : 0 );
     int col  = ( doc->lexer ? doc->lexer->columns : 0 );
@@ -349,7 +349,7 @@ void messageLexer( TidyDocImpl* doc, TidyReportLevel level, uint code,
 }
 
 void messageNode( TidyDocImpl* doc, TidyReportLevel level, uint code,
-				 Node* node, ctmbstr msg, ... )
+                  Node* node, ctmbstr msg, ... )
 {
     int line = ( node ? node->line :
                  ( doc->lexer ? doc->lexer->lines : 0 ) );
@@ -984,7 +984,7 @@ void TY_(GeneralInfo)( TidyDocImpl* doc )
 {
     if (!cfgBool(doc, TidyShowInfo)) return;
     tidy_out(doc, "%s", tidyLocalizedString(TEXT_GENERAL_INFO));
-	tidy_out(doc, "%s", tidyLocalizedString(TEXT_GENERAL_INFO_PLEA));
+    tidy_out(doc, "%s", tidyLocalizedString(TEXT_GENERAL_INFO_PLEA));
 }
 
 #if SUPPORT_ACCESSIBILITY_CHECKS
@@ -1032,7 +1032,7 @@ void TY_(ReportNumWarnings)( TidyDocImpl* doc )
     {
         tidy_out( doc, tidyLocalizedString(STRING_ERROR_COUNT),
                   doc->warnings, tidyLocalizedStringN( STRING_ERROR_COUNT_WARNING, doc->warnings ),
-				 doc->errors, tidyLocalizedStringN( STRING_ERROR_COUNT_ERROR, doc->errors ) );
+                  doc->errors, tidyLocalizedStringN( STRING_ERROR_COUNT_ERROR, doc->errors ) );
 
         if ( doc->errors > cfg(doc, TidyShowErrors) ||
              !cfgBool(doc, TidyShowWarnings) )

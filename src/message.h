@@ -201,7 +201,7 @@ typedef enum {
     STRING_DISCARDING,          /* For `discarding`. */
     STRING_DOCTYPE_GIVEN,       /* `Doctype given is \"%s\". */
     STRING_ERROR_COUNT,         /* `%u %s, %u %s were found!`. */
-	STRING_ERROR_COUNT_ERROR,   /* `error` and `errors`. */
+    STRING_ERROR_COUNT_ERROR,   /* `error` and `errors`. */
     STRING_ERROR_COUNT_WARNING, /* `warning` and `warnings`. */
     STRING_HELLO_ACCESS,        /* Accessibility hello message. */
     STRING_HTML_PROPRIETARY,    /* `HTML Proprietary`/ */
@@ -221,7 +221,7 @@ typedef enum {
     TEXT_BAD_FORM,              /* Explanatory text. */
     TEXT_BAD_MAIN,              /* Explanatory text. */
     TEXT_GENERAL_INFO,          /* Explanatory text. */
-	TEXT_GENERAL_INFO_PLEA,     /* Explanatory text. */
+    TEXT_GENERAL_INFO_PLEA,     /* Explanatory text. */
     TEXT_HTML_T_ALGORITHM,      /* Paragraph for describing the HTML table algorithm. */
     TEXT_INVALID_URI,           /* Explanatory text. */
     TEXT_INVALID_UTF16,         /* Explanatory text. */

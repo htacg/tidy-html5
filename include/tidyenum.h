@@ -820,7 +820,7 @@ typedef enum
   TidyAttr_ARIA_VALUETEXT,
 
   /* SVG attributes (SVG 1.1) */
-  TidyAttr_X,					/**< X= */
+  TidyAttr_X,                   /**< X= */
   TidyAttr_Y,                   /**< Y= */
   TidyAttr_VIEWBOX,             /**< VIEWBOX= */
   TidyAttr_PRESERVEASPECTRATIO, /**< PRESERVEASPECTRATIO= */

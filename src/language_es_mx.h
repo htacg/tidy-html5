@@ -1,4 +1,4 @@
-﻿#ifndef language_es_mx_h
+#ifndef language_es_mx_h
 #define language_es_mx_h
 /*
  * language_es_mx.h
@@ -20,7 +20,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2016-01-26 14:38:30
+ *   PO_REVISION_DATE=2016-01-29 10:54:42
  */
 
 #ifdef _MSC_VER
@@ -38,8 +38,8 @@
  *  definition.
  */
 static uint whichPluralForm_es_mx(uint n) {
-	/* Plural-Forms: nplurals=2; */
-	return n != 1;
+    /* Plural-Forms: nplurals=2; */
+    return n != 1;
 }
 
 
@@ -50,10 +50,10 @@ static uint whichPluralForm_es_mx(uint n) {
  *  the build system.
  */
 static languageDefinition language_es_mx = { whichPluralForm_es_mx, {
-	/***************************************
-	 ** This MUST be present and first. 
-	 ** Specify the code for this language.
-	 ***************************************/
+    /***************************************
+     ** This MUST be present and first. 
+     ** Specify the code for this language.
+     ***************************************/
     {/* Specify the ll or ll_cc language code here. */
       TIDY_LANGUAGE,          0, "es_mx"
     },
@@ -61,8 +61,8 @@ static languageDefinition language_es_mx = { whichPluralForm_es_mx, {
       - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TEXT_GENERAL_INFO_PLEA, 0,        
         "\n"
-        "¿Le gustaría ver Tidy en adecuada, español mexicano? Por favor considere \n"
-        "ayudarnos a localizar HTML Tidy. Para más detalles consulte \n"
+        "\xc2\xbfLe gustar\xc3\xad""a ver Tidy en adecuada, espa\xc3\xb1ol mexicano? Por favor considere \n"
+        "ayudarnos a localizar HTML Tidy. Para m\xc3\xa1s detalles consulte \n"
         "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md \n"
     },
 

@@ -1,4 +1,4 @@
-﻿#ifndef language_en_gb_h
+#ifndef language_en_gb_h
 #define language_en_gb_h
 /*
  * language_en_gb.h
@@ -20,7 +20,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2016-01-26 14:38:30
+ *   PO_REVISION_DATE=2016-01-29 10:54:42
  */
 
 #ifdef _MSC_VER
@@ -38,8 +38,8 @@
  *  definition.
  */
 static uint whichPluralForm_en_gb(uint n) {
-	/* Plural-Forms: nplurals=2; */
-	return n != 1;
+    /* Plural-Forms: nplurals=2; */
+    return n != 1;
 }
 
 
@@ -50,10 +50,10 @@ static uint whichPluralForm_en_gb(uint n) {
  *  the build system.
  */
 static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
-	/***************************************
-	 ** This MUST be present and first. 
-	 ** Specify the code for this language.
-	 ***************************************/
+    /***************************************
+     ** This MUST be present and first. 
+     ** Specify the code for this language.
+     ***************************************/
     {/* Specify the ll or ll_cc language code here. */
       TIDY_LANGUAGE,                   0, "en_gb"
     },
@@ -89,7 +89,7 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
 #endif /* SUPPORT_ACCESSIBILITY_CHECKS */
 
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TidyMergeDivs,                   0,        
         "This option can be used to modify the behaviour of <code>clean</code> when "
@@ -108,7 +108,7 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
         "<code>class</code> and <code>style</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TidyMergeSpans,                  0,        
         "This option can be used to modify the behaviour of <code>clean</code> when "
@@ -120,7 +120,7 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
         "The algorithm is identical to the one used by <code>merge-divs</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-	    It's very important that <br/> be self-closing in this manner! 
+        It's very important that <br/> be self-closing in this manner! 
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TidyReplaceColor,                0,        
         "This option specifies if Tidy should replace numeric values in colour "

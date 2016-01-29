@@ -18,12 +18,6 @@
 #endif
 #include "tmbstr.h"
 #include "locale.h"
-#if defined(_WIN32)
-#include "win_vsnprintf.h"
-#define nest_(x) TY_(x)
-#define printf nest_(win_printf)
-#define fprint nest_(win_fprintf)
-#endif
 
 
 /**

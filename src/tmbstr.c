@@ -8,9 +8,6 @@
 #include "forward.h"
 #include "tmbstr.h"
 #include "lexer.h"
-#if defined(_WIN32)
-#include "win_vsnprintf.h"
-#endif
 
 /* like strdup but using an allocator */
 tmbstr TY_(tmbstrdup)( TidyAllocator *allocator, ctmbstr str )

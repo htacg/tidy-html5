@@ -1,4 +1,4 @@
-#ifndef language_en_gb_h
+﻿#ifndef language_en_gb_h
 #define language_en_gb_h
 /*
  * language_en_gb.h
@@ -20,7 +20,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2016-01-23 16:04:27
+ *   PO_REVISION_DATE=2016-01-26 14:38:30
  */
 
 #ifdef _MSC_VER

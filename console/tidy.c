@@ -13,9 +13,6 @@
 #include "locale.h"
 #if defined(_WIN32)
 #include <windows.h> /* Force console to UTF8. */
-//#define nest_(x) TY_(x)
-//#define printf nest_(win_printf)
-//#define fprint nest_(win_fprintf)
 #endif
 #if !defined(NDEBUG) && defined(_MSC_VER)
 #include "sprtf.h"
@@ -27,6 +24,10 @@
 
 static FILE* errout = NULL;  /* set to stderr */
 /* static FILE* txtout = NULL; */  /* set to stdout */
+
+#if defined(_WIN32)
+static uint win_cp; /* original Windows code page */
+#endif
 
 /**
  **  Indicates whether or not two filenames are the same.
@@ -40,6 +41,17 @@ static Bool samefile( ctmbstr filename1, ctmbstr filename2 )
 #endif
 }
 
+
+/**
+ **  Handles exit cleanup.
+ */
+static void tidy_cleanup()
+{
+#if defined(_WIN32)
+    /* Restore original Windows code page. */
+    SetConsoleOutputCP(win_cp);
+#endif
+}
 
 /**
  **  Exits with an error in the event of an out of memory condition.
@@ -1466,14 +1478,6 @@ static void unknownOption( uint c )
     fprintf( errout, "\n");
 }
 
-/**
- **  Handles pretty-printing callbacks.
- */
-void progressTester( TidyDoc tdoc, uint srcLine, uint srcCol, uint dstLine)
-{
-    fprintf(stderr, "srcLine = %u, srcCol = %u, dstLine = %u\n", srcLine, srcCol, dstLine);
-}
-
 
 /**
  **  MAIN --  let's do something here.
@@ -1492,11 +1496,24 @@ int main( int argc, char** argv )
 
     errout = stderr;  /* initialize to stderr */
 
+    /* Set an atexit handler. */
+    atexit( tidy_cleanup );
+    
     /* Set the locale for tidy's output. */
     locale = tidySystemLocale(locale);
     tidySetLanguage(locale);
     if ( locale )
         free( locale );
+
+#if defined(_WIN32)
+    /* Force Windows console to use UTF, otherwise many characters will
+     * be garbage. Note that East Asian languages *are* supported, but
+     * only when Windows OS locale (not console only!) is set to an
+     * East Asian language.
+     */
+    win_cp = GetConsoleOutputCP();
+    SetConsoleOutputCP(CP_UTF8);
+#endif
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
     set_log_file((char *)"temptidy.txt", 0);
@@ -1639,15 +1656,6 @@ int main( int argc, char** argv )
                         printf(tidyLocalizedString(TC_STRING_LANG_NOT_FOUND),
                                argv[2], tidyGetLanguage());
                         printf("\n");
-                    } else {
-#if defined(_WIN32)
-                        /* If we set a language then force Windows console to use UTF,
-                         * otherwise many characters will be garbage. @todo: aggregate
-                         * all of this application's exits and returns so that we can
-                         * reset the original code page upon termination.
-                         */
-                        SetConsoleOutputCP(65001);
-#endif
                     }
                     --argc;
                     ++argv;

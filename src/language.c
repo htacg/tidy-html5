@@ -24,9 +24,9 @@
  *  This structure type provides universal access to all of Tidy's strings.
  */
 typedef struct {
-	languageDefinition *currentLanguage;
-	languageDefinition *fallbackLanguage;
-	languageDefinition *languages[];
+    languageDefinition *currentLanguage;
+    languageDefinition *fallbackLanguage;
+    languageDefinition *languages[];
 } tidyLanguagesType;
 
 
@@ -35,20 +35,20 @@ typedef struct {
  *  `.currentLanguage` to language_en, which is Tidy's default language.
  */
 static tidyLanguagesType tidyLanguages = {
-	&language_en, /* current language */
-	&language_en, /* first fallback language */
-	{
+    &language_en, /* current language */
+    &language_en, /* first fallback language */
+    {
         /* Required localization! */
         &language_en,
 #if SUPPORT_LOCALIZATIONS
-		/* These additional languages are installed. */
-		&language_en_gb,
-		&language_es,
-		&language_es_mx,
+        /* These additional languages are installed. */
+        &language_en_gb,
+        &language_es,
+        &language_es_mx,
         &language_zh_cn,
 #endif
-		NULL /* This array MUST be null terminated. */
-	}
+        NULL /* This array MUST be null terminated. */
+    }
 };
 
 
@@ -58,168 +58,168 @@ static tidyLanguagesType tidyLanguages = {
  *  POSIX names).
  */
 static const tidyLocaleMapItem localeMappings[] = {
-	{ "america",                "en_us" },
-	{ "american english",       "en_us" },
-	{ "american-english",       "en_us" },
-	{ "american",               "en_us" },
-	{ "aus",                    "en_au" },
-	{ "australia",              "en_au" },
-	{ "australian",             "en_au" },
-	{ "austria",                "de_at" },
-	{ "aut",                    "de_at" },
-	{ "bel",                    "nl_be" },
-	{ "belgian",                "nl_be" },
-	{ "belgium",                "nl_be" },
-	{ "bra",                    "pt-br" },
-	{ "brazil",                 "pt-br" },
-	{ "britain",                "en_gb" },
-	{ "can",                    "en_ca" },
-	{ "canada",                 "en_ca" },
-	{ "canadian",               "en_ca" },
-	{ "che",                    "de_ch" },
-	{ "china",                  "zh_cn" },
-	{ "chinese-simplified",     "zh"    },
-	{ "chinese-traditional",    "zh_tw" },
-	{ "chinese",                "zh"    },
-	{ "chn",                    "zh_cn" },
-	{ "chs",                    "zh"    },
-	{ "cht",                    "zh_tw" },
-	{ "csy",                    "cs"    },
-	{ "cze",                    "cs_cz" },
-	{ "czech",                  "cs_cz" },
-	{ "dan",                    "da"    },
-	{ "danish",                 "da"    },
-	{ "dea",                    "de_at" },
-	{ "denmark",                "da_dk" },
-	{ "des",                    "de_ch" },
-	{ "deu",                    "de"    },
-	{ "dnk",                    "da_dk" },
-	{ "dutch-belgian",          "nl_be" },
-	{ "dutch",                  "nl"    },
-	{ "ell",                    "el"    },
-	{ "ena",                    "en_au" },
-	{ "enc",                    "en_ca" },
-	{ "eng",                    "eb_gb" },
-	{ "england",                "en_gb" },
-	{ "english-american",       "en_us" },
-	{ "english-aus",            "en_au" },
-	{ "english-can",            "en_ca" },
-	{ "english-nz",             "en_nz" },
-	{ "english-uk",             "eb_gb" },
-	{ "english-us",             "en_us" },
-	{ "english-usa",            "en_us" },
-	{ "english",                "en"    },
-	{ "enu",                    "en_us" },
-	{ "enz",                    "en_nz" },
-	{ "esm",                    "es-mx" },
-	{ "esn",                    "es"    },
-	{ "esp",                    "es"    },
-	{ "fin",                    "fi"    },
-	{ "finland",                "fi_fi" },
-	{ "finnish",                "fi"    },
-	{ "fra",                    "fr"    },
-	{ "france",                 "fr_fr" },
-	{ "frb",                    "fr_be" },
-	{ "frc",                    "fr_ca" },
-	{ "french-belgian",         "fr_be" },
-	{ "french-canadian",        "fr_ca" },
-	{ "french-swiss",           "fr_ch" },
-	{ "french",                 "fr"    },
-	{ "frs",                    "fr_ch" },
-	{ "gbr",                    "en_gb" },
-	{ "german-austrian",        "de_at" },
-	{ "german-swiss",           "de_ch" },
-	{ "german",                 "de"    },
-	{ "germany",                "de_de" },
-	{ "grc",                    "el_gr" },
-	{ "great britain",          "en_gb" },
-	{ "greece",                 "el_gr" },
-	{ "greek",                  "el"    },
-	{ "hkg",                    "zh_hk" },
-	{ "holland",                "nl_nl" },
-	{ "hong kong",              "zh_hk" },
-	{ "hong-kong",              "zh_hk" },
-	{ "hun",                    "hu"    },
-	{ "hungarian",              "hu"    },
-	{ "hungary",                "hu_hu" },
-	{ "iceland",                "is_is" },
-	{ "icelandic",              "is"    },
-	{ "ireland",                "en_ie" },
-	{ "irl",                    "en_ie" },
-	{ "isl",                    "is"    },
-	{ "ita",                    "it"    },
-	{ "ita",                    "it_it" },
-	{ "italian-swiss",          "it_ch" },
-	{ "italian",                "it"    },
-	{ "italy",                  "it_it" },
-	{ "its",                    "it_ch" },
-	{ "japan",                  "ja_jp" },
-	{ "japanese",               "ja"    },
-	{ "jpn",                    "ja"    },
-	{ "kor",                    "ko"    },
-	{ "korea",                  "ko_kr" },
-	{ "korean",                 "ko"    },
-	{ "mex",                    "es-mx" },
-	{ "mexico",                 "es-mx" },
-	{ "netherlands",            "nl_nl" },
-	{ "new zealand",            "en_nz" },
-	{ "new-zealand",            "en_nz" },
-	{ "nlb",                    "nl_be" },
-	{ "nld",                    "nl"    },
-	{ "non",                    "nn"    },
-	{ "nor",                    "nb"    },
-	{ "norway",                 "no"    },
-	{ "norwegian-bokmal",       "nb"    },
-	{ "norwegian-nynorsk",      "nn"    },
-	{ "norwegian",              "no"    },
-	{ "nz",                     "en_nz" },
-	{ "nzl",                    "en_nz" },
-	{ "plk",                    "pl"    },
-	{ "pol",                    "pl-pl" },
-	{ "poland",                 "pl-pl" },
-	{ "polish",                 "pl"    },
-	{ "portugal",               "pt-pt" },
-	{ "portuguese-brazil",      "pt-br" },
-	{ "portuguese",             "pt"    },
-	{ "pr china",               "zh_cn" },
-	{ "pr-china",               "zh_cn" },
-	{ "prt",                    "pt-pt" },
-	{ "ptb",                    "pt-br" },
-	{ "ptg",                    "pt"    },
-	{ "rus",                    "ru"    },
-	{ "russia",                 "ru-ru" },
-	{ "russian",                "ru"    },
-	{ "sgp",                    "zh_sg" },
-	{ "singapore",              "zh_sg" },
-	{ "sky",                    "sk"    },
-	{ "slovak",                 "sk"    },
-	{ "spain",                  "es-es" },
-	{ "spanish-mexican",        "es-mx" },
-	{ "spanish-modern",         "es"    },
-	{ "spanish",                "es"    },
-	{ "sve",                    "sv"    },
-	{ "svk",                    "sk-sk" },
-	{ "swe",                    "sv-se" },
-	{ "sweden",                 "sv-se" },
-	{ "swedish",                "sv"    },
-	{ "swiss",                  "de_ch" },
-	{ "switzerland",            "de_ch" },
-	{ "taiwan",                 "zh_tw" },
-	{ "trk",                    "tr"    },
-	{ "tur",                    "tr-tr" },
-	{ "turkey",                 "tr-tr" },
-	{ "turkish",                "tr"    },
-	{ "twn",                    "zh_tw" },
-	{ "uk",                     "en_gb" },
-	{ "united kingdom",         "en_gb" },
-	{ "united states",          "en_us" },
-	{ "united-kingdom",         "en_gb" },
-	{ "united-states",          "en_us" },
-	{ "us",                     "en_us" },
-	{ "usa",                    "en_us" },
-	
-	/* MUST be last. */
-	{ NULL,                     NULL    }
+    { "america",                "en_us" },
+    { "american english",       "en_us" },
+    { "american-english",       "en_us" },
+    { "american",               "en_us" },
+    { "aus",                    "en_au" },
+    { "australia",              "en_au" },
+    { "australian",             "en_au" },
+    { "austria",                "de_at" },
+    { "aut",                    "de_at" },
+    { "bel",                    "nl_be" },
+    { "belgian",                "nl_be" },
+    { "belgium",                "nl_be" },
+    { "bra",                    "pt-br" },
+    { "brazil",                 "pt-br" },
+    { "britain",                "en_gb" },
+    { "can",                    "en_ca" },
+    { "canada",                 "en_ca" },
+    { "canadian",               "en_ca" },
+    { "che",                    "de_ch" },
+    { "china",                  "zh_cn" },
+    { "chinese-simplified",     "zh"    },
+    { "chinese-traditional",    "zh_tw" },
+    { "chinese",                "zh"    },
+    { "chn",                    "zh_cn" },
+    { "chs",                    "zh"    },
+    { "cht",                    "zh_tw" },
+    { "csy",                    "cs"    },
+    { "cze",                    "cs_cz" },
+    { "czech",                  "cs_cz" },
+    { "dan",                    "da"    },
+    { "danish",                 "da"    },
+    { "dea",                    "de_at" },
+    { "denmark",                "da_dk" },
+    { "des",                    "de_ch" },
+    { "deu",                    "de"    },
+    { "dnk",                    "da_dk" },
+    { "dutch-belgian",          "nl_be" },
+    { "dutch",                  "nl"    },
+    { "ell",                    "el"    },
+    { "ena",                    "en_au" },
+    { "enc",                    "en_ca" },
+    { "eng",                    "eb_gb" },
+    { "england",                "en_gb" },
+    { "english-american",       "en_us" },
+    { "english-aus",            "en_au" },
+    { "english-can",            "en_ca" },
+    { "english-nz",             "en_nz" },
+    { "english-uk",             "eb_gb" },
+    { "english-us",             "en_us" },
+    { "english-usa",            "en_us" },
+    { "english",                "en"    },
+    { "enu",                    "en_us" },
+    { "enz",                    "en_nz" },
+    { "esm",                    "es-mx" },
+    { "esn",                    "es"    },
+    { "esp",                    "es"    },
+    { "fin",                    "fi"    },
+    { "finland",                "fi_fi" },
+    { "finnish",                "fi"    },
+    { "fra",                    "fr"    },
+    { "france",                 "fr_fr" },
+    { "frb",                    "fr_be" },
+    { "frc",                    "fr_ca" },
+    { "french-belgian",         "fr_be" },
+    { "french-canadian",        "fr_ca" },
+    { "french-swiss",           "fr_ch" },
+    { "french",                 "fr"    },
+    { "frs",                    "fr_ch" },
+    { "gbr",                    "en_gb" },
+    { "german-austrian",        "de_at" },
+    { "german-swiss",           "de_ch" },
+    { "german",                 "de"    },
+    { "germany",                "de_de" },
+    { "grc",                    "el_gr" },
+    { "great britain",          "en_gb" },
+    { "greece",                 "el_gr" },
+    { "greek",                  "el"    },
+    { "hkg",                    "zh_hk" },
+    { "holland",                "nl_nl" },
+    { "hong kong",              "zh_hk" },
+    { "hong-kong",              "zh_hk" },
+    { "hun",                    "hu"    },
+    { "hungarian",              "hu"    },
+    { "hungary",                "hu_hu" },
+    { "iceland",                "is_is" },
+    { "icelandic",              "is"    },
+    { "ireland",                "en_ie" },
+    { "irl",                    "en_ie" },
+    { "isl",                    "is"    },
+    { "ita",                    "it"    },
+    { "ita",                    "it_it" },
+    { "italian-swiss",          "it_ch" },
+    { "italian",                "it"    },
+    { "italy",                  "it_it" },
+    { "its",                    "it_ch" },
+    { "japan",                  "ja_jp" },
+    { "japanese",               "ja"    },
+    { "jpn",                    "ja"    },
+    { "kor",                    "ko"    },
+    { "korea",                  "ko_kr" },
+    { "korean",                 "ko"    },
+    { "mex",                    "es-mx" },
+    { "mexico",                 "es-mx" },
+    { "netherlands",            "nl_nl" },
+    { "new zealand",            "en_nz" },
+    { "new-zealand",            "en_nz" },
+    { "nlb",                    "nl_be" },
+    { "nld",                    "nl"    },
+    { "non",                    "nn"    },
+    { "nor",                    "nb"    },
+    { "norway",                 "no"    },
+    { "norwegian-bokmal",       "nb"    },
+    { "norwegian-nynorsk",      "nn"    },
+    { "norwegian",              "no"    },
+    { "nz",                     "en_nz" },
+    { "nzl",                    "en_nz" },
+    { "plk",                    "pl"    },
+    { "pol",                    "pl-pl" },
+    { "poland",                 "pl-pl" },
+    { "polish",                 "pl"    },
+    { "portugal",               "pt-pt" },
+    { "portuguese-brazil",      "pt-br" },
+    { "portuguese",             "pt"    },
+    { "pr china",               "zh_cn" },
+    { "pr-china",               "zh_cn" },
+    { "prt",                    "pt-pt" },
+    { "ptb",                    "pt-br" },
+    { "ptg",                    "pt"    },
+    { "rus",                    "ru"    },
+    { "russia",                 "ru-ru" },
+    { "russian",                "ru"    },
+    { "sgp",                    "zh_sg" },
+    { "singapore",              "zh_sg" },
+    { "sky",                    "sk"    },
+    { "slovak",                 "sk"    },
+    { "spain",                  "es-es" },
+    { "spanish-mexican",        "es-mx" },
+    { "spanish-modern",         "es"    },
+    { "spanish",                "es"    },
+    { "sve",                    "sv"    },
+    { "svk",                    "sk-sk" },
+    { "swe",                    "sv-se" },
+    { "sweden",                 "sv-se" },
+    { "swedish",                "sv"    },
+    { "swiss",                  "de_ch" },
+    { "switzerland",            "de_ch" },
+    { "taiwan",                 "zh_tw" },
+    { "trk",                    "tr"    },
+    { "tur",                    "tr-tr" },
+    { "turkey",                 "tr-tr" },
+    { "turkish",                "tr"    },
+    { "twn",                    "zh_tw" },
+    { "uk",                     "en_gb" },
+    { "united kingdom",         "en_gb" },
+    { "united states",          "en_us" },
+    { "united-kingdom",         "en_gb" },
+    { "united-states",          "en_us" },
+    { "us",                     "en_us" },
+    { "usa",                    "en_us" },
+    
+    /* MUST be last. */
+    { NULL,                     NULL    }
 };
 
 
@@ -493,18 +493,18 @@ ctmbstr tidyErrorCodeAsString(uint code)
  */
 ctmbstr TY_(tidyLocalizedString)( uint messageType, languageDefinition *definition, uint plural )
 {
-	int i;
-	languageDictionary *dictionary = &definition->messages;
-	uint pluralForm = definition->whichPluralForm(plural);
-	
-	for (i = 0; (*dictionary)[i].value; ++i)
-	{
-		if ( (*dictionary)[i].key == messageType && (*dictionary)[i].pluralForm == pluralForm )
-		{
-			return (*dictionary)[i].value;
-		}
-	}
-	return NULL;
+    int i;
+    languageDictionary *dictionary = &definition->messages;
+    uint pluralForm = definition->whichPluralForm(plural);
+    
+    for (i = 0; (*dictionary)[i].value; ++i)
+    {
+        if ( (*dictionary)[i].key == messageType && (*dictionary)[i].pluralForm == pluralForm )
+        {
+            return (*dictionary)[i].value;
+        }
+    }
+    return NULL;
 }
 
 
@@ -519,28 +519,28 @@ ctmbstr TY_(tidyLocalizedString)( uint messageType, languageDefinition *definiti
  */
 ctmbstr tidyLocalizedStringN( uint messageType, uint quantity )
 {
-	ctmbstr result;
-	
-	result  = TY_(tidyLocalizedString)( messageType, tidyLanguages.currentLanguage, quantity);
-	
-	if (!result && tidyLanguages.fallbackLanguage )
-	{
-		result = TY_(tidyLocalizedString)( messageType, tidyLanguages.fallbackLanguage, quantity);
-	}
-	
-	if (!result)
-	{
-		/* Fallback to en which is built in. */
-		result = TY_(tidyLocalizedString)( messageType, &language_en, quantity);
-	}
-	
-	if (!result)
-	{
-		/* Last resort: Fallback to en singular which is built in. */
-		result = TY_(tidyLocalizedString)( messageType, &language_en, 1);
-	}
-	
-	return result;
+    ctmbstr result;
+    
+    result  = TY_(tidyLocalizedString)( messageType, tidyLanguages.currentLanguage, quantity);
+    
+    if (!result && tidyLanguages.fallbackLanguage )
+    {
+        result = TY_(tidyLocalizedString)( messageType, tidyLanguages.fallbackLanguage, quantity);
+    }
+    
+    if (!result)
+    {
+        /* Fallback to en which is built in. */
+        result = TY_(tidyLocalizedString)( messageType, &language_en, quantity);
+    }
+    
+    if (!result)
+    {
+        /* Last resort: Fallback to en singular which is built in. */
+        result = TY_(tidyLocalizedString)( messageType, &language_en, 1);
+    }
+    
+    return result;
 }
 
 
@@ -554,7 +554,7 @@ ctmbstr tidyLocalizedStringN( uint messageType, uint quantity )
  */
 ctmbstr tidyLocalizedString( uint messageType )
 {
-	return tidyLocalizedStringN( messageType, 1 );
+    return tidyLocalizedStringN( messageType, 1 );
 }
 
 
@@ -568,23 +568,23 @@ ctmbstr tidyLocalizedString( uint messageType )
  */
 tmbstr tidySystemLocale(tmbstr result)
 {
-	ctmbstr temp;
-	
-	/* This should set the OS locale. */
-	setlocale( LC_ALL, "" );
-	
-	/* This should read the current locale. */
-	temp = setlocale( LC_ALL, NULL);
-	
-	/* Make a new copy of the string, because temp
-       always points to the current locale. */
-	if (( result = malloc( strlen( temp ) + 1 ) ))
-		strcpy(result, temp);
-	
-	/* This should restore the C locale. */
-	setlocale( LC_ALL, "C" );
-	
-	return result;
+    ctmbstr temp;
+    
+    /* This should set the OS locale. */
+    setlocale( LC_ALL, "" );
+    
+    /* This should read the current locale. */
+    temp = setlocale( LC_ALL, NULL);
+    
+    /* Make a new copy of the string, because temp
+     always points to the current locale. */
+    if (( result = malloc( strlen( temp ) + 1 ) ))
+        strcpy(result, temp);
+    
+    /* This should restore the C locale. */
+    setlocale( LC_ALL, "C" );
+    
+    return result;
 }
 
 
@@ -595,47 +595,52 @@ tmbstr tidySystemLocale(tmbstr result)
  */
 tmbstr tidyNormalizedLocaleName( ctmbstr locale )
 {
-	uint i;
-	uint len;
-	static char result[6] = "xx_yy";
-	tmbstr search = strdup(locale);
-	search = TY_(tmbstrtolower)(search);
-	
-	/* See if our string matches a Windows name. */
-	for (i = 0; localeMappings[i].winName; ++i)
-	{
-		if ( strcmp( localeMappings[i].winName, search ) == 0 )
-		{
+    uint i;
+    uint len;
+    static char result[6] = "xx_yy";
+    char character[1];
+    tmbstr search = strdup(locale);
+    search = TY_(tmbstrtolower)(search);
+    
+    /* See if our string matches a Windows name. */
+    for (i = 0; localeMappings[i].winName; ++i)
+    {
+        if ( strcmp( localeMappings[i].winName, search ) == 0 )
+        {
             free(search);
             search = strdup(localeMappings[i].POSIXName);
-			break;
-		}
-	}
-	
-	/* We're going to be stupid about this and trust the user, and
-	 return just the first two characters if they exist and the
-	 4th and 5th if they exist. The worst that can happen is a
-	 junk language that doesn't exist and won't be set. */
-	
-	len = strlen( search );
-	len = len <= 5 ? len : 5;
-	
-	for ( i = 0; i < len; i++ )
-	{
-		if ( i == 2 )
-		{
-			/* Either terminate the string or ensure there's an underscore */
-			strncpy( result + i, strlen( search ) >= 5 ? "_" : '\0', 1 );
-		}
-		else
-		{
-			strncpy( result + i, search + i, 1);
-			result[i] = tolower( result[i] );
-		}
-	}
-
+            break;
+        }
+    }
+    
+    /* We're going to be stupid about this and trust the user, and
+     return just the first two characters if they exist and the
+     4th and 5th if they exist. The worst that can happen is a
+     junk language that doesn't exist and won't be set. */
+    
+    len = strlen( search );
+    len = len <= 5 ? len : 5;
+    
+    for ( i = 0; i < len; i++ )
+    {
+        if ( i == 2 )
+        {
+            /* Either terminate the string or ensure there's an underscore */
+            if (strlen( search) >= 5)
+                character[0] = '_';
+            else
+                character[0] = '\0';
+            strncpy( result + i, character, 1 );
+        }
+        else
+        {
+            strncpy( result + i, search + i, 1);
+            result[i] = tolower( result[i] );
+        }
+    }
+    
     if ( search ) free( search );
-	return result;
+    return result;
 }
 
 
@@ -645,22 +650,22 @@ tmbstr tidyNormalizedLocaleName( ctmbstr locale )
  */
 languageDefinition *TY_(tidyTestLanguage)( ctmbstr languageCode )
 {
-	uint i;
-	languageDefinition *testLang;
-	languageDictionary *testDict;
-	ctmbstr testCode;
-	
-	for (i = 0; tidyLanguages.languages[i]; ++i)
-	{
-		testLang = tidyLanguages.languages[i];
-		testDict = &testLang->messages;
-		testCode = (*testDict)[0].value;
-		
-		if ( strcmp(testCode, languageCode) == 0 )
+    uint i;
+    languageDefinition *testLang;
+    languageDictionary *testDict;
+    ctmbstr testCode;
+    
+    for (i = 0; tidyLanguages.languages[i]; ++i)
+    {
+        testLang = tidyLanguages.languages[i];
+        testDict = &testLang->messages;
+        testCode = (*testDict)[0].value;
+        
+        if ( strcmp(testCode, languageCode) == 0 )
             return testLang;
-	}
-	
-	return NULL;
+    }
+    
+    return NULL;
 }
 
 
@@ -677,30 +682,30 @@ languageDefinition *TY_(tidyTestLanguage)( ctmbstr languageCode )
  */
 Bool tidySetLanguage( ctmbstr languageCode )
 {
-	languageDefinition *dict1 = NULL;
-	languageDefinition *dict2 = NULL;
-	tmbstr wantCode = NULL;
-	char lang[3] = "";
-	
-	if ( !languageCode || !(wantCode = tidyNormalizedLocaleName( languageCode )) )
+    languageDefinition *dict1 = NULL;
+    languageDefinition *dict2 = NULL;
+    tmbstr wantCode = NULL;
+    char lang[3] = "";
+    
+    if ( !languageCode || !(wantCode = tidyNormalizedLocaleName( languageCode )) )
     {
-		return no;
+        return no;
     }
-
+    
     /* We want to use the specified language as the currentLanguage, and set
      fallback language as necessary. We have either a two or five digit code,
      either or both of which might be installed. Let's test both of them:
      */
-
+    
     dict1 = TY_(tidyTestLanguage( wantCode ));  /* WANTED language */
-
+    
     if ( strlen( wantCode ) > 2 )
     {
         strncpy(lang, wantCode, 2);
         lang[2] = '\0';
         dict2 = TY_(tidyTestLanguage( lang ) ); /* BACKUP language? */
     }
-
+    
     if ( dict1 && dict2 )
     {
         tidyLanguages.currentLanguage = dict1;
@@ -720,8 +725,8 @@ Bool tidySetLanguage( ctmbstr languageCode )
     {
         /* No change. */
     }
-
-	return dict1 || dict2;
+    
+    return dict1 || dict2;
 }
 
 
@@ -730,9 +735,9 @@ Bool tidySetLanguage( ctmbstr languageCode )
  */
 ctmbstr tidyGetLanguage()
 {
-	languageDefinition *langDef = tidyLanguages.currentLanguage;
-	languageDictionary *langDict = &langDef->messages;
-	return (*langDict)[0].value;
+    languageDefinition *langDef = tidyLanguages.currentLanguage;
+    languageDictionary *langDict = &langDef->messages;
+    return (*langDict)[0].value;
 }
 
 
@@ -742,7 +747,7 @@ ctmbstr tidyGetLanguage()
  */
 ctmbstr tidyDefaultString( uint messageType )
 {
-	return TY_(tidyLocalizedString)( messageType, &language_en, 1);
+    return TY_(tidyLocalizedString)( messageType, &language_en, 1);
 }
 
 
@@ -807,16 +812,16 @@ uint getNextStringKey( TidyIterator* iter )
  */
 const uint TY_(tidyLanguageListSize)()
 {
-	static uint array_size = 0;
-	
-	if ( array_size == 0 )
-	{
+    static uint array_size = 0;
+    
+    if ( array_size == 0 )
+    {
         while ( localeMappings[array_size].winName ) {
             array_size++;
         }
-	}
-	
-	return array_size;
+    }
+    
+    return array_size;
 }
 
 /**
@@ -857,16 +862,16 @@ const tidyLocaleMapItem *getNextWindowsLanguage( TidyIterator *iter )
  */
 const uint TY_(tidyInstalledLanguageListSize)()
 {
-	static uint array_size = 0;
-	
-	if ( array_size == 0 )
-	{
-		while ( tidyLanguages.languages[array_size] ) {
-			array_size++;
-		}
-	}
-	
-	return array_size;
+    static uint array_size = 0;
+    
+    if ( array_size == 0 )
+    {
+        while ( tidyLanguages.languages[array_size] ) {
+            array_size++;
+        }
+    }
+    
+    return array_size;
 }
 
 /**

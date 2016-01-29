@@ -156,12 +156,16 @@ Below is a summary and brief description of each of the options. They are listed
   <xsl:call-template name="cmdline-detail">
      <xsl:with-param name="category">misc</xsl:with-param>
   </xsl:call-template>
+.SS XML
+  <xsl:call-template name="cmdline-detail">
+     <xsl:with-param name="category">xml</xsl:with-param>
+  </xsl:call-template>
 </xsl:template>
 
 
 <xsl:template name="cmdline-detail">
 <!--
-For each option in one of the 3 categories/classes, provide its
+For each option in one of the categories/classes, provide its
     1. names
     2. description
     3. equivalent configuration option

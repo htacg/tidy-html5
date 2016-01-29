@@ -516,8 +516,7 @@ ctmbstr TIDY_CALL       tidyOptGetNextDeclTag( TidyDoc tdoc, TidyOptionId optId,
 ctmbstr TIDY_CALL tidyOptGetDoc( TidyDoc ARG_UNUSED(tdoc), TidyOption opt )
 {
     const TidyOptionId optId = tidyOptGetId( opt );
-    const TidyOptionDoc* docDesc = TY_(OptGetDocDesc)( optId );
-    return docDesc ? docDesc->doc : NULL;
+    return tidyLocalizedString(optId);
 }
 
 TidyIterator TIDY_CALL tidyOptGetDocLinksList( TidyDoc ARG_UNUSED(tdoc), TidyOption opt )
@@ -657,12 +656,33 @@ Bool TIDY_CALL        tidySetReportFilter( TidyDoc tdoc, TidyReportFilter filt )
   return no;
 }
 
+/* TidyReportFilter2 functions similar to TidyReportFilter, but provides the
+** built-in English format string and va_list so that LibTidy users can use
+** the format string as a lookup key for providing their own error 
+** localizations.
+*/
 Bool TIDY_CALL        tidySetReportFilter2( TidyDoc tdoc, TidyReportFilter2 filt )
 {
   TidyDocImpl* impl = tidyDocToImpl( tdoc );
   if ( impl )
   {
     impl->mssgFilt2 = filt;
+    return yes;
+  }
+  return no;
+}
+
+/* TidyReportFilter3 functions similar to TidyReportFilter, but provides the
+ * string version of the internal enum name so that LibTidy users can use
+** the string as a lookup key for providing their own error localizations.
+** See the string definitions in language.h
+*/
+Bool TIDY_CALL        tidySetReportFilter3( TidyDoc tdoc, TidyReportFilter3 filt )
+{
+  TidyDocImpl* impl = tidyDocToImpl( tdoc );
+  if ( impl )
+  {
+    impl->mssgFilt3 = filt;
     return yes;
   }
   return no;
@@ -1428,7 +1448,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
         } else
         if ( nodeIsBIG(node) ) {
             /*\
-             * big: CSS equivalent	'font-size:larger'
+             * big: CSS equivalent 'font-size:larger'
              * so could replace the <big> ... </big> with 
              * <span style="font-size: larger"> ... </span>
              * then replace <big> with <span>
@@ -1452,7 +1472,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
         } else
         if ( nodeIsCENTER(node) ) {
             /*\
-             * center: CSS equivalent	'text-align:center'
+             * center: CSS equivalent 'text-align:center'
              *  and 'margin-left:auto; margin-right:auto' on descendant blocks
              * Tidy already handles this if 'clean' by SILENTLY generating the <style>
              * and adding a <div class="c1"> around the elements.
@@ -1486,7 +1506,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
         } else
         if ( nodeIsSTRIKE(node) ) {
             /*\
-             * strike: CSS equivalent	'text-decoration:line-through'
+             * strike: CSS equivalent 'text-decoration:line-through'
              * maybe should use static void RenameElem( TidyDocImpl* doc, Node* node, TidyTagId tid )
             \*/
             if (clean) {
@@ -1498,7 +1518,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
         } else
         if ( nodeIsTT(node) ) {
             /*\
-             * tt: CSS equivalent	'font-family:monospace'
+             * tt: CSS equivalent 'font-family:monospace'
              * Tidy presently does nothing. Tidy5 issues a warning
              * But like the 'clean' <font> replacement this could also be replaced with CSS
              * maybe should use static void RenameElem( TidyDocImpl* doc, Node* node, TidyTagId tid )

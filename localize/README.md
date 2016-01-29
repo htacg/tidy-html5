@@ -44,6 +44,17 @@ the event that you want to build Tidy with your new language.
   
 ## Introduction
 
+HTML Tidy is built around the localization file `language_en.h`; without this
+file HTML Tidy will not work. As such _all_ language localization work
+originates from this single file.
+
+Language localizations use header files that are identical to `language_en.h`,
+except that they have different strings. For the convenience of language
+translators, though, Tidy source code includes a Ruby `poconvert.rb` script
+that enables _optional_ gettext PO/POT work streams that may be more comfortable
+to them.
+
+
 ### PO and POT files
 HTML Tidy provides PO and POT files for language translations. The file 
 `tidy.pot` is the correct template to use as a basis for new translations. In a

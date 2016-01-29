@@ -1,4 +1,4 @@
-#ifndef language_zh_cn_h
+﻿#ifndef language_zh_cn_h
 #define language_zh_cn_h
 /*
  * language_zh_cn.h
@@ -65,14 +65,14 @@ static languageDefinition language_zh_cn = { whichPluralForm_zh_cn, {
     {/* Specify the ll or ll_cc language code here. */
       TIDY_LANGUAGE,          0, "zh_cn"
     },
-    { FILE_CANT_OPEN,         0, "\xe6\x97\xa0\xe6\xb3\x95\xe6\x89\x93\xe5\xbc\x80\xe2\x80\x9d%s\xe2\x80\x9d\n"                          },
-    { LINE_COLUMN_STRING,     0, "\xe8\xa1\x8c %d \xe5\x88\x97 %d - "                                                                    },
-    { STRING_CONTENT_LOOKS,   0, "\xe6\x96\x87\xe6\xa1\xa3\xe5\x86\x85\xe5\xae\xb9\xe7\x9c\x8b\xe8\xb5\xb7\xe6\x9d\xa5\xe5\x83\x8f %s"   },
+    { FILE_CANT_OPEN,         0, "无法打开”%s”\n"              },
+    { LINE_COLUMN_STRING,     0, "行 %d 列 %d - "            },
+    { STRING_CONTENT_LOOKS,   0, "文档内容看起来像 %s"             },
     {/* The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-      TC_STRING_VERS_A,       0, "HTML Tidy \xe7\x94\xa8\xe4\xba\x8e %s \xe7\x89\x88\xe6\x9c\xac %s"
+      TC_STRING_VERS_A,       0, "HTML Tidy 用于 %s 版本 %s"
     },
     {/* The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-      TC_STRING_VERS_B,       0, "HTML Tidy \xe7\x89\x88\xe6\x9c\xac %s"
+      TC_STRING_VERS_B,       0, "HTML Tidy 版本 %s"
     },
 
     {/* This MUST be present and last. */

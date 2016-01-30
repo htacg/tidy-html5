@@ -60,6 +60,11 @@ extern "C" {
 #define SUPPORT_ACCESSIBILITY_CHECKS 1
 #endif
 
+/* Enable/disable support for additional languages */
+#ifndef SUPPORT_LOCALIZATIONS
+#define SUPPORT_LOCALIZATIONS 1
+#endif
+
 
 /* Convenience defines for Mac platforms */
 

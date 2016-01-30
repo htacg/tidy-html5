@@ -1,0 +1,70 @@
+#ifndef language_<%= po_content.language %>_h
+#define language_<%= po_content.language %>_h
+/*
+ * language_<%= po_content.language %>.h
+ * Localization support for HTML Tidy.
+ *
+ *
+ * This file is a localization file for HTML Tidy. It will have been machine
+ * generated or created and/or edited by hand. Both are valid options, but
+ * please help keep our localization efforts simple to maintain by maintaining
+ * the structure of this file, and changing the check box below if you make
+ * changes (so others know the file origin):
+ *
+ * [X] THIS FILE IS MACHINE GENERATED. It is a localization file for the
+ *     language (and maybe region) "<%= po_content.language %>". The source of
+ *     these strings is a gettext PO file in Tidy's source, probably called 
+ *     "language_<%= po_content.language %>.po".
+ *
+ * [ ] THIS FILE WAS HAND MODIFIED. Translators, please feel to edit this file
+ *     directly (and check this box). If you prefer to edit PO files then use
+ *     `poconvert.rb msgunfmt language_<%= po_content.language %>.h` (our own
+ *     conversion tool) to generate a fresh PO from this file first!
+ *
+ * (c) 2015 HTACG
+ * See tidy.h and access.h for the copyright notice.
+ *
+ * Template Created by Jim Derry on 01/14/2016.
+ *
+ * Orginating PO file metadata:
+ *   PO_LAST_TRANSLATOR=<%= po_content.last_translator %>
+ *   PO_REVISION_DATE=<%= po_content.po_revision_date %>
+ */
+
+#ifdef _MSC_VER
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "language.h"
+#include "access.h"
+#include "message.h"
+
+
+/**
+ *  This language-specific function returns the correct pluralForm
+ *  to use given n items, and is used as a member of each language
+ *  definition.
+ */
+static uint whichPluralForm_<%= po_content.language %>(uint n) {
+    /* <%= po_content.plural_forms %> */
+    return <%= po_content.plural_formula %>
+}
+
+
+/**
+ *  This structure specifies all of the strings needed by Tidy for a
+ *  single language. Static definition in a header file makes it
+ *  easy to include and exclude languages without tinkering with
+ *  the build system.
+ */
+static languageDefinition language_<%= po_content.language %> = { whichPluralForm_<%= po_content.language %>, {
+    /***************************************
+     ** This MUST be present and first. 
+     ** Specify the code for this language.
+     ***************************************/
+<%= report_body %>
+<%= report_body_last %>
+}};
+
+
+#endif /* language_<%= po_content.language %>_h */

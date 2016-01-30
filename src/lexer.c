@@ -1038,7 +1038,7 @@ static void ParseEntity( TidyDocImpl* doc, GetTokenMode mode )
                 int replaceMode = DISCARDED_CHAR;
             
                 /* Always assume Win1252 in this circumstance. */
-				c1 = TY_(DecodeWin1252)( ch );
+                c1 = TY_(DecodeWin1252)( ch );
 
                 if ( c1 )
                     replaceMode = REPLACED_CHAR;

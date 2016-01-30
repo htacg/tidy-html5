@@ -92,5 +92,3 @@ This repository should be considered canonical for HTML Tidy as of 2015-January-
    [1]: http://w3c.github.com/tidy-html5/
 
    [2]: http://tidy.sourceforge.net
-
-; eof

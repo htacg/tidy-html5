@@ -474,9 +474,9 @@ uint TY_(ReadChar)( StreamIn *in )
             }
                 
             if ( isMacChar )
-				c1 = TY_(DecodeMacRoman)( c );
+                c1 = TY_(DecodeMacRoman)( c );
             else
-				c1 = TY_(DecodeWin1252)( c );
+                c1 = TY_(DecodeWin1252)( c );
             if ( c1 )
                 replMode = REPLACED_CHAR;
                 

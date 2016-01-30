@@ -14,12 +14,13 @@ If you are able to build tidy from [source](https://github.com/htacg/tidy-html5)
 
 ### What to change
 
-Here's some examples of things you might want to make a pull request for:
+Here are some examples of things you might want to make a pull request for:
 
  - New features
  - Bug fixes
  - Inefficient blocks of code
  - Memory problems
+ - Language translations
 
 If you have a more deeply-rooted problem with how the program is built or some of the stylistic decisions made in the code, it is best to [create an issue](https://github.com/htacg/tidy-html5/issues/new) before putting the effort into a pull request. The same goes for new features - it might be best to check the project's direction, existing pull requests, and currently open and closed issues first.
 
@@ -56,5 +57,3 @@ This can be repeated for `branches`.
 ### Help Tidy Get Better
 
 It goes without saying **all help is appreciated**. We need to work together to make Tidy! better...
-
-; eof

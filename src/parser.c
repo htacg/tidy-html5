@@ -4743,12 +4743,21 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
         /*\
          *  #72, avoid MISSING_DOCTYPE if show-body-only. 
          *  #191, also if --doctype omit, that is TidyDoctypeOmit
+         *  #342, adjust tags to html4-- if not 'auto' or 'html5'
         \*/
-        if (!TY_(FindDocType)(doc) && !showingBodyOnly(doc)) 
+        if (!TY_(FindDocType)(doc)) 
         {
             ulong dtmode = cfg( doc, TidyDoctypeMode );
-            if (dtmode != TidyDoctypeOmit)
+            if ((dtmode != TidyDoctypeOmit) && !showingBodyOnly(doc))
                 TY_(ReportError)(doc, NULL, NULL, MISSING_DOCTYPE);
+            if ((dtmode != TidyDoctypeAuto) && (dtmode != TidyDoctypeHtml5))
+            {
+                /*\
+                 *  Issue #342 - if not doctype 'auto', or 'html5'
+                 *  then reset mode htm4-- parsing
+                \*/
+                TY_(AdjustTags)(doc); /* Dynamically modify the tags table to html4-- mode */
+            }
         }
         TY_(InsertNodeAtEnd)( &doc->root, html);
         TY_(ParseHTML)( doc, html, IgnoreWhitespace );

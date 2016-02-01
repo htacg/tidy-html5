@@ -148,7 +148,8 @@ set ( LIBHFILES
         ${SRCDIR}/mappedio.h     ${SRCDIR}/message.h      ${SRCDIR}/parser.h
         ${SRCDIR}/pprint.h       ${SRCDIR}/streamio.h     ${SRCDIR}/tags.h
         ${SRCDIR}/tmbstr.h       ${SRCDIR}/utf8.h         ${SRCDIR}/tidy-int.h
-        ${SRCDIR}/version.h      ${SRCDIR}/gdoc.h         ${SRCDIR}/language.h  )
+        ${SRCDIR}/version.h      ${SRCDIR}/gdoc.h         ${SRCDIR}/language.h
+        ${SRCDIR}/language_en.h  ${SRCDIR}/win32tc.h )
 if (MSVC)
     list(APPEND CFILES ${SRCDIR}/sprtf.c)
     list(APPEND LIBHFILES ${SRCDIR}/sprtf.h)

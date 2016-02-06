@@ -1538,18 +1538,34 @@ void TY_(CheckUrl)( TidyDocImpl* doc, Node *node, AttVal *attval)
         else if ((c > 0x7e) || (c <= 0x20) || (strchr("<>", c)))
             ++escape_count;
     }
-    
+
     if ( cfgBool(doc, TidyFixUri) && escape_count )
     {
+        Bool hadnonspace = no;
         len = TY_(tmbstrlen)(p) + escape_count * 2 + 1;
         dest = (tmbstr) TidyDocAlloc(doc, len);
-        
+ 
         for (i = 0; 0 != (c = p[i]); ++i)
         {
             if ((c > 0x7e) || (c <= 0x20) || (strchr("<>", c)))
-                pos += sprintf( dest + pos, "%%%02X", (byte)c );
+            {
+                if (c == 0x20)
+                {
+                    /* #345 - special case for leading spaces - discard */
+                    if (hadnonspace)
+                        pos += sprintf( dest + pos, "%%%02X", (byte)c );
+                }
+                else
+                {
+                    pos += sprintf( dest + pos, "%%%02X", (byte)c );
+                    hadnonspace = yes;
+                }
+            }
             else
+            {
+                hadnonspace = yes;
                 dest[pos++] = c;
+            }
         }
         dest[pos] = 0;
 

@@ -98,6 +98,7 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
     Bool lex = ((msg[0] == 'l')&&(msg[1] == 'e')) ? yes : no;
     int line = ( doc->lexer ? doc->lexer->lines : 0 );
     int col  = ( doc->lexer ? doc->lexer->columns : 0 );
+    tmbstr src = lex ? "lexer" : "stream";
     SPRTF("R=%d C=%d: ", line, col );
     // DEBUG: Be able to set a TRAP on a SPECIFIC row,col
     if ((line == 8) && (col == 36)) {
@@ -108,16 +109,14 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
         if (show_attrs) {
             uint len = node ? node->end - node->start : 0;
             tmbstr cp = node ? get_text_string( lexer, node ) : "NULL";
-            SPRTF("Returning %s TextNode [%s]%u %s\n", msg, cp, len,
-                lex ? "lexer" : "stream");
+            SPRTF("Returning %s TextNode [%s]%u %s\n", msg, cp, len, src );
         } else {
-            SPRTF("Returning %s TextNode %p... %s\n", msg, node,
-                lex ? "lexer" : "stream");
+            SPRTF("Returning %s TextNode %p... %s\n", msg, node, src );
         }
     } else {
+        tmbstr name = node ? node->element ? node->element : "blank" : "NULL";
         if (show_attrs) {
             AttVal* av;
-            tmbstr name = node ? node->element ? node->element : "blank" : "NULL";
             SPRTF("Returning %s node <%s", msg, name);
             if (node) {
                 for (av = node->attributes; av; av = av->next) {
@@ -130,11 +129,10 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
                     }
                 }
             }
-            SPRTF("> %s\n", lex ? "lexer" : "stream");
+            SPRTF("> %s\n", src);
         } else {
             SPRTF("Returning %s node %p <%s>... %s\n", msg, node,
-                node->element ? node->element : "blank",
-                lex ? "lexer" : "stream");
+                name, src );
         }
     }
 }

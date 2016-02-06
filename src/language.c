@@ -298,6 +298,7 @@ static const tidyErrorFilterKeyItem tidyErrorFilterKeysStruct[] = {
     { "BAD_ATTRIBUTE_VALUE",                           BAD_ATTRIBUTE_VALUE                           },
     { "UNEXPECTED_GT",                                 UNEXPECTED_GT                                 },
     { "PROPRIETARY_ATTRIBUTE",                         PROPRIETARY_ATTRIBUTE                         },
+    { "MISMATCHED_ATTRIBUTE",                          MISMATCHED_ATTRIBUTE                          },
     { "PROPRIETARY_ATTR_VALUE",                        PROPRIETARY_ATTR_VALUE                        },
     { "REPEATED_ATTRIBUTE",                            REPEATED_ATTRIBUTE                            },
     { "MISSING_IMAGEMAP",                              MISSING_IMAGEMAP                              },

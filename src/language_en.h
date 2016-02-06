@@ -350,6 +350,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { MISSING_ATTR_VALUE,           0,   "%s attribute \"%s\" lacks value"                                         }, /* Warning in CheckUrl, Error otherwise */
     { UNKNOWN_ATTRIBUTE,            0,   "%s unknown attribute \"%s\""                                             }, /* Error */
     { PROPRIETARY_ATTRIBUTE,        0,   "%s proprietary attribute \"%s\""                                         }, /* Error */
+    { MISMATCHED_ATTRIBUTE,         0,   "%s attribute \"%s\" not allowed for this version of HTML"                }, /* Error */
     { JOINING_ATTRIBUTE,            0,   "%s joining values of repeated attribute \"%s\""                          }, /* Error */
     { XML_ATTRIBUTE_VALUE,          0,   "%s has XML attribute \"%s\""                                             }, /* Error (but deprecated) */
     

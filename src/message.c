@@ -545,6 +545,7 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
     case MISSING_ATTR_VALUE:
     case XML_ATTRIBUTE_VALUE:
     case PROPRIETARY_ATTRIBUTE:
+    case MISMATCHED_ATTRIBUTE:
     case JOINING_ATTRIBUTE:
         messageNode(doc, TidyWarning, code, node, fmt, tagdesc, name);
         break;

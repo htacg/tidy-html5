@@ -708,6 +708,8 @@ void TY_(ReportError)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     char elemdesc[ 256 ] = {0};
     Node* rpt = ( element ? element : node );
     ctmbstr fmt = tidyLocalizedString(code);
+    ctmbstr extra_string = NULL;
+    uint likely_version;
 
     assert( fmt != NULL );
 
@@ -725,10 +727,18 @@ void TY_(ReportError)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     case USING_BR_INPLACE_OF:
     case CANT_BE_NESTED:
     case PROPRIETARY_ELEMENT:
-    case ELEMENT_VERSION_MISMATCH:
     case UNESCAPED_ELEMENT:
     case NOFRAMES_CONTENT:
         messageNode(doc, TidyWarning, code, node, fmt, nodedesc);
+        break;
+
+    case ELEMENT_VERSION_MISMATCH:
+        likely_version = TY_(ApparentVersion)( doc ) == xxxx ? doc->lexer->doctype : TY_(ApparentVersion)( doc );
+        extra_string = TY_(HTMLVersionNameFromCode)(likely_version, 0);
+        if (!extra_string)
+            extra_string = tidyLocalizedString(STRING_HTML_PROPRIETARY);
+        /* @todo: Should be TidyError, but here for troubleshooting */
+        messageNode(doc, TidyWarning, code, node, fmt, nodedesc, extra_string);
         break;
 
     case MISSING_TITLE_ELEMENT:

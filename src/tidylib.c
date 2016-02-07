@@ -1550,6 +1550,58 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
    ######################################################################################
  */
 
+/*
+ * Check and report HTML tags that are not supported in the current version of
+ * HTML. As of 2016-February this is new behavior, and this behavior overrides
+ * previous behavior for proprietary tags.
+ *
+ * @todo: I'm not sure ApparentVersion is correct here. We really want to depend
+ *        on the declared version.
+ */
+void TY_(CheckHTMLTagsVersions)( TidyDocImpl* doc, Node* node )
+{
+    uint likely_version;
+
+    while (node)
+    {
+        if ( TY_(nodeIsElement)(node) && node->tag ) {
+
+            if ( !cfgBool(doc, TidyXmlTags) )
+            {
+                TY_(ConstrainVersion)( doc, node->tag->versions );
+
+                likely_version = TY_(ApparentVersion)( doc ) == xxxx ? doc->lexer->doctype : TY_(ApparentVersion)( doc );
+
+                if ( !(node->tag->versions & likely_version) )
+                {
+                    TY_(ReportError)(doc, NULL, node, ELEMENT_VERSION_MISMATCH );
+                }
+                else if ( node->tag->versions & VERS_PROPRIETARY )
+                {
+                    if ( !cfgBool(doc, TidyMakeClean) ||
+                        ( !nodeIsNOBR(node) && !nodeIsWBR(node) ) )
+                    {
+                        TY_(ReportError)(doc, NULL, node, PROPRIETARY_ELEMENT );
+
+                        if ( nodeIsLAYER(node) )
+                            doc->badLayout |= USING_LAYER;
+                        else if ( nodeIsSPACER(node) )
+                            doc->badLayout |= USING_SPACER;
+                        else if ( nodeIsNOBR(node) )
+                            doc->badLayout |= USING_NOBR;
+                    }
+                }
+            }
+        }
+
+        if (node->content)
+            TY_(CheckHTMLTagsVersions)( doc, node->content );
+        
+        node = node->next;
+    }
+}
+
+
 #if !defined(NDEBUG) && defined(_MSC_VER)
 /* *** FOR DEBUG ONLY *** */
 const char *dbg_get_lexer_type( void *vp )
@@ -1753,6 +1805,9 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     if (sdef && (strcmp(sdef,"html5") == 0)) {
         TY_(CheckHTML5)( doc, &doc->root );
     }
+
+    TY_(CheckHTMLTagsVersions)( doc, &doc->root );
+
     if (node)
     {
         AttVal* fpi = TY_(GetAttrByName)(node, "PUBLIC");

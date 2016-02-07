@@ -552,7 +552,7 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
         break;
 
     case MISMATCHED_ATTRIBUTE:
-        likely_version = TY_(ApparentVersion)( doc ) == xxxx ? doc->lexer->doctype : TY_(ApparentVersion)( doc );
+        likely_version = doc->lexer->doctype == 0 ? TY_(ApparentVersion)( doc ) : doc->lexer->doctype;
         extra_string = TY_(HTMLVersionNameFromCode)(likely_version, 0);
         if (!extra_string)
             extra_string = tidyLocalizedString(STRING_HTML_PROPRIETARY);

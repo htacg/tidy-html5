@@ -544,9 +544,7 @@ static Bool AttributeIsMismatched(Node* node, AttVal* attval, TidyDocImpl* doc)
     if (!(node->tag->versions & VERS_ALL))
         return no;
     
-    doctype = doc->lexer->doctype;
-    if ( doctype == 0 )
-        doctype = TY_(ApparentVersion)( doc );
+    doctype = doc->lexer->doctype == 0 ? doctype = TY_(ApparentVersion)( doc ) : doc->lexer->doctype;
     
     if (AttributeVersions(node, attval) & doctype)
         return no;

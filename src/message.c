@@ -525,6 +525,8 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
     char const *name = "NULL", *value = "NULL";
     char tagdesc[64];
     ctmbstr fmt = tidyLocalizedString(code);
+    uint likely_version;
+    ctmbstr extra_string;
 
     assert( fmt != NULL );
 
@@ -545,9 +547,16 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
     case MISSING_ATTR_VALUE:
     case XML_ATTRIBUTE_VALUE:
     case PROPRIETARY_ATTRIBUTE:
-    case MISMATCHED_ATTRIBUTE:
     case JOINING_ATTRIBUTE:
         messageNode(doc, TidyWarning, code, node, fmt, tagdesc, name);
+        break;
+
+    case MISMATCHED_ATTRIBUTE:
+        likely_version = TY_(ApparentVersion)( doc ) == xxxx ? doc->lexer->doctype : TY_(ApparentVersion)( doc );
+        extra_string = TY_(HTMLVersionNameFromCode)(likely_version, 0);
+        if (!extra_string)
+            extra_string = tidyLocalizedString(STRING_HTML_PROPRIETARY);
+        messageNode(doc, TidyWarning, code, node, fmt, tagdesc, name, extra_string);
         break;
 
     case BAD_ATTRIBUTE_VALUE:

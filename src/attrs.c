@@ -1390,6 +1390,9 @@ void TY_(RepairDuplicateAttributes)( TidyDocImpl* doc, Node *node, Bool isXml )
 /* ignore unknown attributes for proprietary elements */
 const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attval )
 {
+    Bool isProprietary;
+    Bool isMismatched;
+
     const Attribute* attribute = attval->dict;
 
     if ( attribute != NULL )
@@ -1410,23 +1413,19 @@ const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attv
             attribute->attrchk( doc, node, attval );
     }
 
-    if (AttributeIsProprietary(node, attval))
-    {
-        TY_(ReportAttrError)(doc, node, attval, PROPRIETARY_ATTRIBUTE);
+    isProprietary = AttributeIsProprietary(node, attval);
+    isMismatched = AttributeIsMismatched(node, attval, doc);
 
-        if (cfgBool(doc, TidyDropPropAttrs))
-            TY_(RemoveAttribute)( doc, node, attval );
-    }
-    
-    /* @todo: Once we merge in `localize` we will add a separate message. */
-    /* @todo: should we respect TidyDropPropAttrs? */
-    if (AttributeIsMismatched(node, attval, doc))
-    {
+    /* Let the PROPRIETARY_ATTRIBUTE warning have precedence. */
+    if ( isProprietary )
+        TY_(ReportAttrError)(doc, node, attval, PROPRIETARY_ATTRIBUTE);
+    else if ( isMismatched )
         TY_(ReportAttrError)(doc, node, attval, MISMATCHED_ATTRIBUTE);
 
-        if (cfgBool(doc, TidyDropPropAttrs))
-            TY_(RemoveAttribute)( doc, node, attval );
-    }
+    /* @todo: do we need a new option to drop mismatches? Or should we
+       simply drop them? */
+    if ( ( isProprietary || isMismatched ) && cfgBool(doc, TidyDropPropAttrs) )
+        TY_(RemoveAttribute)( doc, node, attval );
 
     return attribute;
 }

@@ -2724,6 +2724,10 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                                 doc->badLayout |= USING_NOBR;
                         }
                     }
+                    else if ( !(curr->tag->versions & TY_(ApparentVersion)( doc )) )
+                    {
+                        TY_(ReportError)(doc, NULL, curr, ELEMENT_VERSION_MISMATCH );
+                    }
 
                     TY_(RepairDuplicateAttributes)( doc, curr, no );
                 } else 

@@ -262,6 +262,7 @@ static const tidyErrorFilterKeyItem tidyErrorFilterKeysStruct[] = {
     { "CANT_BE_NESTED",                                CANT_BE_NESTED                                },
     { "OBSOLETE_ELEMENT",                              OBSOLETE_ELEMENT                              },
     { "PROPRIETARY_ELEMENT",                           PROPRIETARY_ELEMENT                           },
+    { "ELEMENT_VERSION_MISMATCH",                      ELEMENT_VERSION_MISMATCH                      },
     { "UNKNOWN_ELEMENT",                               UNKNOWN_ELEMENT                               },
     { "TRIM_EMPTY_ELEMENT",                            TRIM_EMPTY_ELEMENT                            },
     { "COERCE_TO_ENDTAG",                              COERCE_TO_ENDTAG                              },

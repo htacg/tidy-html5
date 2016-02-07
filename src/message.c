@@ -725,6 +725,7 @@ void TY_(ReportError)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     case USING_BR_INPLACE_OF:
     case CANT_BE_NESTED:
     case PROPRIETARY_ELEMENT:
+    case ELEMENT_VERSION_MISMATCH:
     case UNESCAPED_ELEMENT:
     case NOFRAMES_CONTENT:
         messageNode(doc, TidyWarning, code, node, fmt, nodedesc);

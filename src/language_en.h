@@ -416,6 +416,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { INSERTING_TAG,                0,   "inserting implicit <%s>"                                                 }, /* Error */
     { CANT_BE_NESTED,               0,   "%s can't be nested"                                                      }, /* Error */
     { PROPRIETARY_ELEMENT,          0,   "%s is not approved by W3C"                                               }, /* Error */
+    { ELEMENT_VERSION_MISMATCH,     0,   "%s element not available in this HTML version"                           }, /* Error */
     { ILLEGAL_NESTING,              0,   "%s shouldn't be nested"                                                  }, /* Error */
     { NOFRAMES_CONTENT,             0,   "%s not inside 'noframes' element"                                        }, /* Error */
     { UNEXPECTED_END_OF_FILE,       0,   "unexpected end of file %s"                                               }, /* Error */

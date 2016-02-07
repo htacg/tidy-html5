@@ -1423,7 +1423,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
                    TY_(ReportError)(doc, node, node, REMOVED_HTML5); 
                    so go back to a 'warning' for now...
                 */
-                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
             }
         } else 
         if ( nodeIsAPPLET(node) ) {
@@ -1433,7 +1433,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
                  */
                 TY_(CoerceNode)(doc, node, TidyTag_OBJECT, warn, no);
             } else {
-                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
             }
         } else
         if ( nodeIsBASEFONT(node) ) {
@@ -1444,7 +1444,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
              *  But also in consideration is the fact that it was NOT supported in many browsers
              *  For now just report a warning
             \*/
-                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
         } else
         if ( nodeIsBIG(node) ) {
             /*\
@@ -1467,7 +1467,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
                 TY_(AddStyleProperty)( doc, node, "font-size: larger" );
                 TY_(CoerceNode)(doc, node, TidyTag_SPAN, warn, no);
             } else {
-                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
             }
         } else
         if ( nodeIsCENTER(node) ) {
@@ -1478,15 +1478,15 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
              * and adding a <div class="c1"> around the elements.
              * see: static Bool Center2Div( TidyDocImpl* doc, Node *node, Node **pnode)
             \*/
-                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
-        } else 
+//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+        } else
         if ( nodeIsDIR(node) ) {
             /*\
              *  dir: replace by <ul>
              *  Tidy already actions this and issues a warning
              *  Should this be CHANGED???
             \*/
-                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
         } else
         if ( nodeIsFONT(node) ) {
             /*\
@@ -1496,13 +1496,13 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
              * done in Bool Font2Span( TidyDocImpl* doc, Node *node, Node **pnode ) (I think?)
              *
             \*/
-                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
         } else
         if (( nodesIsFRAME(node) ) || ( nodeIsFRAMESET(node) ) || ( nodeIsNOFRAMES(node) )) {
             /*\
              * YOW: What to do here?????? Maybe <iframe>????
             \*/
-                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
         } else
         if ( nodeIsSTRIKE(node) ) {
             /*\
@@ -1513,7 +1513,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
                 TY_(AddStyleProperty)( doc, node, "text-decoration: line-through" );
                 TY_(CoerceNode)(doc, node, TidyTag_SPAN, warn, no);
             } else {
-                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
             }
         } else
         if ( nodeIsTT(node) ) {
@@ -1528,14 +1528,14 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
                 TY_(AddStyleProperty)( doc, node, "font-family: monospace" );
                 TY_(CoerceNode)(doc, node, TidyTag_SPAN, warn, no);
             } else {
-                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
             }
         } else
         if (TY_(nodeIsElement)(node)) {
             if (node->tag) {
                 if ((!(node->tag->versions & VERS_HTML5))||(inRemovedInfo(node->tag->id))) {
                     /* issue warning for elements like 'markquee' */
-                    TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+//                    TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
                 }
             }
         }

@@ -1394,6 +1394,7 @@ const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attv
     Bool isMismatched;
     uint versionEmitted, declared, version;
     int reportType;
+    Bool check_versions = yes; /* @todo get option `to-be-determined`. */
 
     const Attribute* attribute = attval->dict;
 
@@ -1416,7 +1417,7 @@ const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attv
     }
 
     isProprietary = AttributeIsProprietary(node, attval);
-    isMismatched = AttributeIsMismatched(node, attval, doc);
+    isMismatched = check_versions ? AttributeIsMismatched(node, attval, doc) : no;
 
     /* Let the PROPRIETARY_ATTRIBUTE warning have precedence. */
     if ( isProprietary )

@@ -717,8 +717,8 @@ void TY_(ReportError)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     char elemdesc[ 256 ] = {0};
     Node* rpt = ( element ? element : node );
     ctmbstr fmt = tidyLocalizedString(code);
+    uint versionEmitted, declared, version;
     ctmbstr extra_string = NULL;
-    uint likely_version;
 
     assert( fmt != NULL );
 
@@ -741,13 +741,24 @@ void TY_(ReportError)(TidyDocImpl* doc, Node *element, Node *node, uint code)
         messageNode(doc, TidyWarning, code, node, fmt, nodedesc);
         break;
 
-    case ELEMENT_VERSION_MISMATCH:
-        likely_version = TY_(ApparentVersion)( doc ) == xxxx ? doc->lexer->doctype : TY_(ApparentVersion)( doc );
-        extra_string = TY_(HTMLVersionNameFromCode)(likely_version, 0);
+    case ELEMENT_VERS_MISMATCH_WARN:
+        versionEmitted = doc->lexer->versionEmitted;
+        declared = doc->lexer->doctype;
+        version = versionEmitted == 0 ? declared : versionEmitted;
+        extra_string = TY_(HTMLVersionNameFromCode)(version, 0);
         if (!extra_string)
             extra_string = tidyLocalizedString(STRING_HTML_PROPRIETARY);
-        /* @todo: Should be TidyError, but here for troubleshooting */
         messageNode(doc, TidyWarning, code, node, fmt, nodedesc, extra_string);
+        break;
+
+    case ELEMENT_VERS_MISMATCH_ERROR:
+        versionEmitted = doc->lexer->versionEmitted;
+        declared = doc->lexer->doctype;
+        version = versionEmitted == 0 ? declared : versionEmitted;
+        extra_string = TY_(HTMLVersionNameFromCode)(version, 0);
+        if (!extra_string)
+            extra_string = tidyLocalizedString(STRING_HTML_PROPRIETARY);
+        messageNode(doc, TidyError, code, node, fmt, nodedesc, extra_string);
         break;
 
     case MISSING_TITLE_ELEMENT:

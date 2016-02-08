@@ -1550,17 +1550,26 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
    ######################################################################################
  */
 
+
 /*
- * Check and report HTML tags that are not supported in the current version of
- * HTML. As of 2016-February this is new behavior, and this behavior overrides
- * previous behavior for proprietary tags.
- *
- * @todo: I'm not sure ApparentVersion is correct here. We really want to depend
- *        on the declared version.
+ * Check and report HTML tags that are:
+ *  - Proprietary
+ *  - Not supported in the current version of HTML, defined as the version
+ *    of HTML that we are emitting.
+ * Proprietary elements are reported as WARNINGS, and version mismatches will
+ * be reported as WARNING or ERROR in the following conditions:
+ *  - ERROR if the emitted doctype is a strict doctype.
+ *  - WARNING if the emitted doctype is a non-strict doctype.
+ * The propriety checks are *always* run as they have always been an integral
+ * part of Tidy. The version checks are controlled by option `to-be-determined`.
  */
 void TY_(CheckHTMLTagsVersions)( TidyDocImpl* doc, Node* node )
 {
-    uint likely_version;
+    uint versionEmitted = doc->lexer->versionEmitted;
+    uint declared = doc->lexer->doctype;
+    uint version = versionEmitted == 0 ? declared : versionEmitted;
+    int reportType = VERS_STRICT & version ? ELEMENT_VERS_MISMATCH_ERROR : ELEMENT_VERS_MISMATCH_WARN;
+    Bool check_versions = yes; /* @todo get option `to-be-determined`. */
 
     while (node)
     {
@@ -1568,13 +1577,9 @@ void TY_(CheckHTMLTagsVersions)( TidyDocImpl* doc, Node* node )
 
             if ( !cfgBool(doc, TidyXmlTags) )
             {
-                TY_(ConstrainVersion)( doc, node->tag->versions );
-
-                likely_version = TY_(ApparentVersion)( doc ) == xxxx ? doc->lexer->doctype : TY_(ApparentVersion)( doc );
-
-                if ( !(node->tag->versions & likely_version) )
+                if ( check_versions && !(node->tag->versions & version) )
                 {
-                    TY_(ReportError)(doc, NULL, node, ELEMENT_VERSION_MISMATCH );
+                    TY_(ReportError)(doc, NULL, node, reportType );
                 }
                 else if ( node->tag->versions & VERS_PROPRIETARY )
                 {
@@ -1799,14 +1804,14 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
 
     /* remember given doctype for reporting */
     node = TY_(FindDocType)(doc);
+
+    /* Cleanup for HTML5 */
     sdef = tidyOptGetValue((TidyDoc)doc, TidyDoctype );
     if (!sdef)
         sdef = tidyOptGetCurrPick((TidyDoc) doc, TidyDoctypeMode );
     if (sdef && (strcmp(sdef,"html5") == 0)) {
         TY_(CheckHTML5)( doc, &doc->root );
     }
-
-    TY_(CheckHTMLTagsVersions)( doc, &doc->root );
 
     if (node)
     {
@@ -1852,6 +1857,13 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     /* ensure presence of initial <?xml version="1.0"?> */
     if ( xmlOut && xmlDecl )
         TY_(FixXmlDecl)( doc );
+
+
+    /* At this point the apparent doctype is going to be as stable as
+       it can ever be, so we can start detecting things that shouldn't
+       be in this version of HTML
+     */
+    TY_(CheckHTMLTagsVersions)( doc, &doc->root );
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
     SPRTF("All nodes AFTER clean and repair\n");

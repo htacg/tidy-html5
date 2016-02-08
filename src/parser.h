@@ -67,4 +67,14 @@ Bool TY_(XMLPreserveWhiteSpace)( TidyDocImpl* doc, Node *element );
 
 void TY_(ParseXMLDocument)( TidyDocImpl* doc );
 
+/*
+   We're going to MOVE the attribute checks to tidyDoc.c:TidyDocCleanAndRepair,
+   so let's expose this function so we can use it there instead. We're also
+   going to wrap it in our namespace.
+   @todo: This function and the functions is calls are VERY GOOD candidates
+          for moving into tidylib.c.
+ */
+void TY_(AttributeChecks)(TidyDocImpl* doc, Node* node);
+
+
 #endif /* __PARSER_H__ */

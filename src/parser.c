@@ -4621,7 +4621,7 @@ static void ReplaceObsoleteElements(TidyDocImpl* doc, Node* node)
     }
 }
 
-static void AttributeChecks(TidyDocImpl* doc, Node* node)
+void TY_(AttributeChecks)(TidyDocImpl* doc, Node* node)
 {
     Node *next;
 
@@ -4638,7 +4638,7 @@ static void AttributeChecks(TidyDocImpl* doc, Node* node)
         }
 
         if (node->content)
-            AttributeChecks(doc, node->content);
+            TY_(AttributeChecks)(doc, node->content);
 
         assert( next != node ); /* http://tidy.sf.net/issue/1603538 */
         node = next;
@@ -4789,7 +4789,8 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
         TY_(InsertNodeAtEnd)(head, TY_(InferredTag)(doc, TidyTag_TITLE));
     }
 
-    AttributeChecks(doc, &doc->root);
+    /* Renamed to TY_(AttributeChecks) and called from tidylib.c:tidyDocCleanAndRepair */
+    /* AttributeChecks(doc, &doc->root); */
     ReplaceObsoleteElements(doc, &doc->root);
     TY_(DropEmptyElements)(doc, &doc->root);
     CleanSpaces(doc, &doc->root);

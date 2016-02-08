@@ -543,9 +543,9 @@ static Bool AttributeIsMismatched(Node* node, AttVal* attval, TidyDocImpl* doc)
     
     if (!(node->tag->versions & VERS_ALL))
         return no;
-    
-    doctype = doc->lexer->doctype == 0 ? doctype = TY_(ApparentVersion)( doc ) : doc->lexer->doctype;
-    
+
+    doctype = doc->lexer->versionEmitted == 0 ? doc->lexer->doctype : doc->lexer->versionEmitted;
+
     if (AttributeVersions(node, attval) & doctype)
         return no;
     
@@ -1392,6 +1392,8 @@ const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attv
 {
     Bool isProprietary;
     Bool isMismatched;
+    uint versionEmitted, declared, version;
+    int reportType;
 
     const Attribute* attribute = attval->dict;
 
@@ -1420,7 +1422,13 @@ const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attv
     if ( isProprietary )
         TY_(ReportAttrError)(doc, node, attval, PROPRIETARY_ATTRIBUTE);
     else if ( isMismatched )
-        TY_(ReportAttrError)(doc, node, attval, MISMATCHED_ATTRIBUTE);
+    {
+        versionEmitted = doc->lexer->versionEmitted;
+        declared = doc->lexer->doctype;
+        version = versionEmitted == 0 ? declared : versionEmitted;
+        reportType = VERS_STRICT & version ? MISMATCHED_ATTRIBUTE_ERROR : MISMATCHED_ATTRIBUTE_WARN;
+        TY_(ReportAttrError)(doc, node, attval, reportType);
+    }
 
     /* @todo: do we need a new option to drop mismatches? Or should we
        simply drop them? */

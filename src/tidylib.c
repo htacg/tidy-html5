@@ -31,6 +31,7 @@
 #include "tmbstr.h"
 #include "utf8.h"
 #include "mappedio.h"
+#include "parser.h"
 
 #ifdef TIDY_WIN32_MLANG_SUPPORT
 #include "win32tc.h"
@@ -1864,6 +1865,7 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
        be in this version of HTML
      */
     TY_(CheckHTMLTagsVersions)( doc, &doc->root );
+    TY_(AttributeChecks)(doc, &doc->root);
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
     SPRTF("All nodes AFTER clean and repair\n");

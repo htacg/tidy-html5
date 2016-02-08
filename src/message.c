@@ -525,7 +525,7 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
     char const *name = "NULL", *value = "NULL";
     char tagdesc[64];
     ctmbstr fmt = tidyLocalizedString(code);
-    uint likely_version;
+    uint version;
     ctmbstr extra_string;
 
     assert( fmt != NULL );
@@ -551,12 +551,20 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
         messageNode(doc, TidyWarning, code, node, fmt, tagdesc, name);
         break;
 
-    case MISMATCHED_ATTRIBUTE:
-        likely_version = doc->lexer->doctype == 0 ? TY_(ApparentVersion)( doc ) : doc->lexer->doctype;
-        extra_string = TY_(HTMLVersionNameFromCode)(likely_version, 0);
+    case MISMATCHED_ATTRIBUTE_WARN:
+        version = doc->lexer->versionEmitted == 0 ? doc->lexer->doctype : doc->lexer->versionEmitted;
+        extra_string = TY_(HTMLVersionNameFromCode)(version, 0);
         if (!extra_string)
             extra_string = tidyLocalizedString(STRING_HTML_PROPRIETARY);
         messageNode(doc, TidyWarning, code, node, fmt, tagdesc, name, extra_string);
+        break;
+
+    case MISMATCHED_ATTRIBUTE_ERROR:
+        version = doc->lexer->versionEmitted == 0 ? doc->lexer->doctype : doc->lexer->versionEmitted;
+        extra_string = TY_(HTMLVersionNameFromCode)(version, 0);
+        if (!extra_string)
+            extra_string = tidyLocalizedString(STRING_HTML_PROPRIETARY);
+        messageNode(doc, TidyError, code, node, fmt, tagdesc, name, extra_string);
         break;
 
     case BAD_ATTRIBUTE_VALUE:

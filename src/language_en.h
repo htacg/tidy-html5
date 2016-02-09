@@ -749,7 +749,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TidyDropPropAttrs,            0,
         "This option specifies if Tidy should strip out proprietary attributes, "
-        "such as Microsoft data binding attributes. "
+        "such as Microsoft data binding attributes. Additionally attributes "
+        "that aren't permitted in the output version of HTML will be dropped "
+        "if used with <code>strict-tags-attributes</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
         It's very important that <br/> be self-closing in this manner! 
@@ -1583,10 +1585,14 @@ static languageDefinition language_en = { whichPluralForm_en, {
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TidyStrictTagsAttr,           0,
         "This options ensures that tags and attributes are applicable for the "
-        "version of HTML that Tidy outputs. When set to <code>yes</code> (the default) "
-        "Tidy will report errors if a tag or attribute must not be used in the "
-        "current version of HTML if the document type is a strict type. Tidy will"
-        "report warnings if the document type is a loose or transitional type. "
+        "version of HTML that Tidy outputs. When set to <code>yes</code> (the "
+        "default) and the output document type is a strict doctype, then Tidy "
+        "will report errors. If the output document type is a loose or "
+        "transitional doctype, then Tidy will report warnings. "
+        "<br/>"
+        "Additionally if <code>drop-proprietary-attributes</code> is enabled, "
+        "then not applicable attributes will be dropped, too. "
+        "<br/>"
         "When set to <code>no</code>, these checks are not performed. "
     },
     

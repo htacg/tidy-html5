@@ -57,6 +57,22 @@
   { TidyAttr_ITEMTYPE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
 
 
+/* RDFa attributes. These were moved here from the hard code in attrs.c as-is. Note that RDFa allows the
+   last three items in all versions of HTML. */
+#define INCLUDE_RDFA \
+  { TidyAttr_ABOUT,                 xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
+  { TidyAttr_DATATYPE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
+  { TidyAttr_INLIST,                xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
+  { TidyAttr_PREFIX,                xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
+  { TidyAttr_PROPERTY,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
+  { TidyAttr_RESOURCE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
+  { TidyAttr_TYPEOF,                xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
+  { TidyAttr_VOCAB,                 xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
+  { TidyAttr_CONTENT,               HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 }, \
+  { TidyAttr_REL,                   HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 }, \
+  { TidyAttr_REV,                   HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 }, \
+
+
 /* These are the core attributes that can apply to _any_ element starting with
    HTML5. In general they will be marked as not supported for previous versions
    of HTML, in which case please override the attribute in the specific item
@@ -196,6 +212,7 @@ const AttrVersion TY_(W3CAttrsFor_A)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -223,6 +240,7 @@ const AttrVersion TY_(W3CAttrsFor_ABBR)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -250,6 +268,7 @@ const AttrVersion TY_(W3CAttrsFor_ACRONYM)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -279,6 +298,7 @@ const AttrVersion TY_(W3CAttrsFor_ADDRESS)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -303,6 +323,7 @@ const AttrVersion TY_(W3CAttrsFor_APPLET)[] =
   { TidyAttr_WIDTH,                 xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -344,6 +365,7 @@ const AttrVersion TY_(W3CAttrsFor_AREA)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -353,6 +375,7 @@ const AttrVersion TY_(W3CAttrsFor_ARTICLE)[] =
   INCLUDE_MICRODATA
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -362,6 +385,7 @@ const AttrVersion TY_(W3CAttrsFor_ASIDE)[] =
   INCLUDE_MICRODATA
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -377,6 +401,7 @@ const AttrVersion TY_(W3CAttrsFor_AUDIO)[] =
   { TidyAttr_SRC,                   xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -405,6 +430,7 @@ const AttrVersion TY_(W3CAttrsFor_B)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -418,6 +444,7 @@ const AttrVersion TY_(W3CAttrsFor_BASE)[] =
   { TidyAttr_XMLNS,                 xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -431,6 +458,7 @@ const AttrVersion TY_(W3CAttrsFor_BASEFONT)[] =
   { TidyAttr_SIZE,                  xxxx|HT32|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                          },
 };
 
@@ -440,6 +468,7 @@ const AttrVersion TY_(W3CAttrsFor_BDI)[] =
   INCLUDE_MICRODATA
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -467,6 +496,7 @@ const AttrVersion TY_(W3CAttrsFor_BDO)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -494,6 +524,7 @@ const AttrVersion TY_(W3CAttrsFor_BIG)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -523,6 +554,7 @@ const AttrVersion TY_(W3CAttrsFor_BLOCKQUOTE)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -572,6 +604,7 @@ const AttrVersion TY_(W3CAttrsFor_BODY)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -588,6 +621,7 @@ const AttrVersion TY_(W3CAttrsFor_BR)[] =
   { TidyAttr_XMLNS,                 xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -630,6 +664,7 @@ const AttrVersion TY_(W3CAttrsFor_BUTTON)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -641,6 +676,7 @@ const AttrVersion TY_(W3CAttrsFor_CANVAS)[] =
   { TidyAttr_WIDTH,                 xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -669,6 +705,7 @@ const AttrVersion TY_(W3CAttrsFor_CAPTION)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -695,6 +732,7 @@ const AttrVersion TY_(W3CAttrsFor_CENTER)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -723,6 +761,7 @@ const AttrVersion TY_(W3CAttrsFor_CITE)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -751,6 +790,7 @@ const AttrVersion TY_(W3CAttrsFor_CODE)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -784,6 +824,7 @@ const AttrVersion TY_(W3CAttrsFor_COL)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -817,6 +858,7 @@ const AttrVersion TY_(W3CAttrsFor_COLGROUP)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -832,6 +874,7 @@ const AttrVersion TY_(W3CAttrsFor_COMMAND)[] =
   { TidyAttr_TYPE,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -841,6 +884,7 @@ const AttrVersion TY_(W3CAttrsFor_DATALIST)[] =
   INCLUDE_MICRODATA
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -869,6 +913,7 @@ const AttrVersion TY_(W3CAttrsFor_DD)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -898,6 +943,7 @@ const AttrVersion TY_(W3CAttrsFor_DEL)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -908,6 +954,7 @@ const AttrVersion TY_(W3CAttrsFor_DETAILS)[] =
   { TidyAttr_OPEN,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -935,6 +982,7 @@ const AttrVersion TY_(W3CAttrsFor_DFN)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -945,6 +993,7 @@ const AttrVersion TY_(W3CAttrsFor_DIALOG)[] =
   { TidyAttr_OPEN,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -974,6 +1023,7 @@ const AttrVersion TY_(W3CAttrsFor_DIR)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1002,6 +1052,7 @@ const AttrVersion TY_(W3CAttrsFor_DIV)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1032,6 +1083,7 @@ const AttrVersion TY_(W3CAttrsFor_DL)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1060,6 +1112,7 @@ const AttrVersion TY_(W3CAttrsFor_DT)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1088,6 +1141,7 @@ const AttrVersion TY_(W3CAttrsFor_EM)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1101,6 +1155,7 @@ const AttrVersion TY_(W3CAttrsFor_EMBED)[] =
   { TidyAttr_WIDTH,                 xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1131,6 +1186,7 @@ const AttrVersion TY_(W3CAttrsFor_FIELDSET)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1140,6 +1196,7 @@ const AttrVersion TY_(W3CAttrsFor_FIGCAPTION)[] =
   INCLUDE_MICRODATA
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1149,6 +1206,7 @@ const AttrVersion TY_(W3CAttrsFor_FIGURE)[] =
   INCLUDE_MICRODATA
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1168,6 +1226,7 @@ const AttrVersion TY_(W3CAttrsFor_FONT)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1177,6 +1236,7 @@ const AttrVersion TY_(W3CAttrsFor_FOOTER)[] =
   INCLUDE_MICRODATA
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1217,6 +1277,7 @@ const AttrVersion TY_(W3CAttrsFor_FORM)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1238,6 +1299,7 @@ const AttrVersion TY_(W3CAttrsFor_FRAME)[] =
   { TidyAttr_TITLE,                 xxxx|xxxx|xxxx|xxxx|xxxx|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1255,6 +1317,7 @@ const AttrVersion TY_(W3CAttrsFor_FRAMESET)[] =
   { TidyAttr_TITLE,                 xxxx|xxxx|xxxx|xxxx|xxxx|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1284,6 +1347,7 @@ const AttrVersion TY_(W3CAttrsFor_H1)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1313,6 +1377,7 @@ const AttrVersion TY_(W3CAttrsFor_H2)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1342,6 +1407,7 @@ const AttrVersion TY_(W3CAttrsFor_H3)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1371,6 +1437,7 @@ const AttrVersion TY_(W3CAttrsFor_H4)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1400,6 +1467,7 @@ const AttrVersion TY_(W3CAttrsFor_H5)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1429,6 +1497,7 @@ const AttrVersion TY_(W3CAttrsFor_H6)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1444,6 +1513,7 @@ const AttrVersion TY_(W3CAttrsFor_HEAD)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1453,6 +1523,7 @@ const AttrVersion TY_(W3CAttrsFor_HEADER)[] =
   INCLUDE_MICRODATA
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1462,6 +1533,7 @@ const AttrVersion TY_(W3CAttrsFor_HGROUP)[] =
   INCLUDE_MICRODATA
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1494,6 +1566,7 @@ const AttrVersion TY_(W3CAttrsFor_HR)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1511,6 +1584,7 @@ const AttrVersion TY_(W3CAttrsFor_HTML)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1539,6 +1613,7 @@ const AttrVersion TY_(W3CAttrsFor_I)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1566,6 +1641,7 @@ const AttrVersion TY_(W3CAttrsFor_IFRAME)[] =
   { TidyAttr_WIDTH,                 xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1608,6 +1684,7 @@ const AttrVersion TY_(W3CAttrsFor_IMG)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1675,6 +1752,7 @@ const AttrVersion TY_(W3CAttrsFor_INPUT)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1704,6 +1782,7 @@ const AttrVersion TY_(W3CAttrsFor_INS)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1722,6 +1801,7 @@ const AttrVersion TY_(W3CAttrsFor_ISINDEX)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1750,6 +1830,7 @@ const AttrVersion TY_(W3CAttrsFor_KBD)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1765,6 +1846,7 @@ const AttrVersion TY_(W3CAttrsFor_KEYGEN)[] =
   { TidyAttr_NAME,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1797,6 +1879,7 @@ const AttrVersion TY_(W3CAttrsFor_LABEL)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1826,6 +1909,7 @@ const AttrVersion TY_(W3CAttrsFor_LEGEND)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1856,6 +1940,7 @@ const AttrVersion TY_(W3CAttrsFor_LI)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1895,6 +1980,7 @@ const AttrVersion TY_(W3CAttrsFor_LINK)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1906,6 +1992,7 @@ const AttrVersion TY_(W3CAttrsFor_LISTING)[] =
   { TidyAttr_SDAPREF,               HT20|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1915,6 +2002,7 @@ const AttrVersion TY_(W3CAttrsFor_MAIN)[] =
   INCLUDE_MICRODATA
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1943,6 +2031,7 @@ const AttrVersion TY_(W3CAttrsFor_MAP)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1974,6 +2063,7 @@ const AttrVersion TY_(W3CAttrsFor_MATHML)[] =  /* [i_a]2 */
   { TidyAttr_XMLNS,                 xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -1983,6 +2073,7 @@ const AttrVersion TY_(W3CAttrsFor_MARK)[] =
   INCLUDE_MICRODATA
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2014,6 +2105,7 @@ const AttrVersion TY_(W3CAttrsFor_MENU)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2031,6 +2123,7 @@ const AttrVersion TY_(W3CAttrsFor_MENUITEM)[] =
   { TidyAttr_NAME,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2050,6 +2143,7 @@ const AttrVersion TY_(W3CAttrsFor_META)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2066,6 +2160,7 @@ const AttrVersion TY_(W3CAttrsFor_METER)[] =
   { TidyAttr_VALUE,                 xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2075,6 +2170,7 @@ const AttrVersion TY_(W3CAttrsFor_NAV)[] =
   INCLUDE_MICRODATA
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2085,6 +2181,7 @@ const AttrVersion TY_(W3CAttrsFor_NEXTID)[] =
   { TidyAttr_N,                     HT20|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2111,6 +2208,7 @@ const AttrVersion TY_(W3CAttrsFor_NOFRAMES)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2138,6 +2236,7 @@ const AttrVersion TY_(W3CAttrsFor_NOSCRIPT)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2183,6 +2282,7 @@ const AttrVersion TY_(W3CAttrsFor_OBJECT)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2215,6 +2315,7 @@ const AttrVersion TY_(W3CAttrsFor_OL)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2244,6 +2345,7 @@ const AttrVersion TY_(W3CAttrsFor_OPTGROUP)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2277,6 +2379,7 @@ const AttrVersion TY_(W3CAttrsFor_OPTION)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2289,6 +2392,7 @@ const AttrVersion TY_(W3CAttrsFor_OUTPUT)[] =
   { TidyAttr_NAME,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2318,6 +2422,7 @@ const AttrVersion TY_(W3CAttrsFor_P)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2333,6 +2438,7 @@ const AttrVersion TY_(W3CAttrsFor_PARAM)[] =
   { TidyAttr_XMLNS,                 xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2357,6 +2463,7 @@ const AttrVersion TY_(W3CAttrsFor_PICTURE)[] = /* Issue #151 - support for 'pict
   { TidyAttr_XMLNS,                 xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|XB10|HT50|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2367,6 +2474,7 @@ const AttrVersion TY_(W3CAttrsFor_PLAINTEXT)[] =
   { TidyAttr_SDAFORM,            HT20|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
@@ -2397,6 +2505,7 @@ const AttrVersion TY_(W3CAttrsFor_PRE)[] =
   { TidyAttr_XML_SPACE,             xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|xxxx },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2409,6 +2518,7 @@ const AttrVersion TY_(W3CAttrsFor_PROGRESS)[] =
   { TidyAttr_VALUE,                 xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2437,6 +2547,7 @@ const AttrVersion TY_(W3CAttrsFor_Q)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2463,6 +2574,7 @@ const AttrVersion TY_(W3CAttrsFor_RB)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2489,6 +2601,7 @@ const AttrVersion TY_(W3CAttrsFor_RBC)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2515,6 +2628,7 @@ const AttrVersion TY_(W3CAttrsFor_RP)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2542,6 +2656,7 @@ const AttrVersion TY_(W3CAttrsFor_RT)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2568,6 +2683,7 @@ const AttrVersion TY_(W3CAttrsFor_RTC)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2594,6 +2710,7 @@ const AttrVersion TY_(W3CAttrsFor_RUBY)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2620,6 +2737,7 @@ const AttrVersion TY_(W3CAttrsFor_S)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2648,6 +2766,7 @@ const AttrVersion TY_(W3CAttrsFor_SAMP)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2668,6 +2787,7 @@ const AttrVersion TY_(W3CAttrsFor_SCRIPT)[] =
   { TidyAttr_XML_SPACE,             xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2677,6 +2797,7 @@ const AttrVersion TY_(W3CAttrsFor_SECTION)[] =
   INCLUDE_MICRODATA
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2717,6 +2838,7 @@ const AttrVersion TY_(W3CAttrsFor_SELECT)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2744,6 +2866,7 @@ const AttrVersion TY_(W3CAttrsFor_SMALL)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2757,6 +2880,7 @@ const AttrVersion TY_(W3CAttrsFor_SOURCE)[] =
   { TidyAttr_TYPE,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2784,6 +2908,7 @@ const AttrVersion TY_(W3CAttrsFor_SPAN)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2810,6 +2935,7 @@ const AttrVersion TY_(W3CAttrsFor_STRIKE)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2838,6 +2964,7 @@ const AttrVersion TY_(W3CAttrsFor_STRONG)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2857,6 +2984,7 @@ const AttrVersion TY_(W3CAttrsFor_STYLE)[] =
   { TidyAttr_XML_SPACE,             xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|xxxx },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2884,6 +3012,7 @@ const AttrVersion TY_(W3CAttrsFor_SUB)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2893,6 +3022,7 @@ const AttrVersion TY_(W3CAttrsFor_SUMMARY)[] =
   INCLUDE_MICRODATA
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2920,6 +3050,7 @@ const AttrVersion TY_(W3CAttrsFor_SUP)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2959,6 +3090,7 @@ const AttrVersion TY_(W3CAttrsFor_SVG)[] =
   { TidyAttr_CONTENTSTYLETYPE,      xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|H41S|X10S|XH11|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -2996,6 +3128,7 @@ const AttrVersion TY_(W3CAttrsFor_TABLE)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3027,6 +3160,7 @@ const AttrVersion TY_(W3CAttrsFor_TBODY)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3068,6 +3202,7 @@ const AttrVersion TY_(W3CAttrsFor_TD)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3114,6 +3249,7 @@ const AttrVersion TY_(W3CAttrsFor_TEXTAREA)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3145,6 +3281,7 @@ const AttrVersion TY_(W3CAttrsFor_TFOOT)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3186,6 +3323,7 @@ const AttrVersion TY_(W3CAttrsFor_TH)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3217,6 +3355,7 @@ const AttrVersion TY_(W3CAttrsFor_THEAD)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3226,6 +3365,7 @@ const AttrVersion TY_(W3CAttrsFor_TEMPLATE)[] =
   INCLUDE_MICRODATA
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3237,6 +3377,7 @@ const AttrVersion TY_(W3CAttrsFor_TIME)[] =
   { TidyAttr_PUBDATE,               xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3252,6 +3393,7 @@ const AttrVersion TY_(W3CAttrsFor_TITLE)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3284,6 +3426,7 @@ const AttrVersion TY_(W3CAttrsFor_TR)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3298,6 +3441,7 @@ const AttrVersion TY_(W3CAttrsFor_TRACK)[] =
   { TidyAttr_SRCLANG,               xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3326,6 +3470,7 @@ const AttrVersion TY_(W3CAttrsFor_TT)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3352,6 +3497,7 @@ const AttrVersion TY_(W3CAttrsFor_U)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3382,6 +3528,7 @@ const AttrVersion TY_(W3CAttrsFor_UL)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3410,6 +3557,7 @@ const AttrVersion TY_(W3CAttrsFor_VAR)[] =
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|XB10|xxxx|XH50 }, /* CORE override */
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3428,6 +3576,7 @@ const AttrVersion TY_(W3CAttrsFor_VIDEO)[] =
   { TidyAttr_WIDTH,                 xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3437,6 +3586,7 @@ const AttrVersion TY_(W3CAttrsFor_WBR)[] =
   INCLUDE_MICRODATA
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
@@ -3448,6 +3598,7 @@ const AttrVersion TY_(W3CAttrsFor_XMP)[] =
   { TidyAttr_SDAPREF,               HT20|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 

@@ -450,32 +450,6 @@ static uint AttributeVersions(Node* node, AttVal* attval)
         /* HTML5 data-* attributes can't be added generically; handle here. */
         if (TY_(tmbstrncmp)(attval->attribute, "data-", 5) == 0)
             return (XH50 | HT50);
-
-        /* RDFa global attributes */
-        if (strcmp(attval->attribute,"about") == 0)
-            return (XH50 | HT50);
-        if (strcmp(attval->attribute,"datatype") == 0)
-            return (XH50 | HT50);
-        if (strcmp(attval->attribute,"inlist") == 0)
-            return (XH50 | HT50);
-        if (strcmp(attval->attribute,"prefix") == 0)
-            return (XH50 | HT50);
-        if (strcmp(attval->attribute,"property") == 0)
-            return (XH50 | HT50);
-        if (strcmp(attval->attribute,"resource") == 0)
-            return (XH50 | HT50);
-        if (strcmp(attval->attribute,"typeof") == 0)
-            return (XH50 | HT50);
-        if (strcmp(attval->attribute,"vocab") == 0)
-            return (XH50 | HT50);
-        /* Override the settings on these attributes because
-         * they are allowed everywhere by RDFa */
-        if (strcmp(attval->attribute,"content") == 0)
-            return (HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50) ;
-        if (strcmp(attval->attribute,"rel") == 0)
-            return (HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50) ;
-        if (strcmp(attval->attribute,"rev") == 0)
-            return (HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50) ;
     }
     /* TODO: maybe this should return VERS_PROPRIETARY instead? */
     if (!attval || !attval->dict)

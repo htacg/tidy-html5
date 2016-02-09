@@ -1578,6 +1578,17 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option specifies that Tidy should skip nested tags when parsing "
         "script and style data. "
     },
+    {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
+        It's very important that <br/> be self-closing in this manner! 
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+      TidyStrictTagsAttr,           0,
+        "This options ensures that tags and attributes are applicable for the "
+        "version of HTML that Tidy outputs. When set to <code>yes</code> (the default) "
+        "Tidy will report errors if a tag or attribute must not be used in the "
+        "current version of HTML if the document type is a strict type. Tidy will"
+        "report warnings if the document type is a loose or transitional type. "
+        "When set to <code>no</code>, these checks are not performed. "
+    },
     
     /********************************************************
      ** Console Application

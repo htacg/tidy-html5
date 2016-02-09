@@ -1420,11 +1420,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
                  */
                 TY_(CoerceNode)(doc, node, TidyTag_ABBR, warn, no);
             } else {
-                /* sadly, this stops writing of the tidied document, unless 'forced'
-                   TY_(ReportError)(doc, node, node, REMOVED_HTML5); 
-                   so go back to a 'warning' for now...
-                */
-//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+                /* This will be reported by TY_(CheckHTMLTagsVersions)() */
             }
         } else 
         if ( nodeIsAPPLET(node) ) {
@@ -1434,7 +1430,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
                  */
                 TY_(CoerceNode)(doc, node, TidyTag_OBJECT, warn, no);
             } else {
-//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+                /* This will be reported by TY_(CheckHTMLTagsVersions)() */
             }
         } else
         if ( nodeIsBASEFONT(node) ) {
@@ -1445,7 +1441,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
              *  But also in consideration is the fact that it was NOT supported in many browsers
              *  For now just report a warning
             \*/
-//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+            /* This will be reported by TY_(CheckHTMLTagsVersions)() */
         } else
         if ( nodeIsBIG(node) ) {
             /*\
@@ -1468,7 +1464,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
                 TY_(AddStyleProperty)( doc, node, "font-size: larger" );
                 TY_(CoerceNode)(doc, node, TidyTag_SPAN, warn, no);
             } else {
-//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+                /* This will be reported by TY_(CheckHTMLTagsVersions)() */
             }
         } else
         if ( nodeIsCENTER(node) ) {
@@ -1479,7 +1475,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
              * and adding a <div class="c1"> around the elements.
              * see: static Bool Center2Div( TidyDocImpl* doc, Node *node, Node **pnode)
             \*/
-//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+            /* This will be reported by TY_(CheckHTMLTagsVersions)() */
         } else
         if ( nodeIsDIR(node) ) {
             /*\
@@ -1487,7 +1483,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
              *  Tidy already actions this and issues a warning
              *  Should this be CHANGED???
             \*/
-//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+            /* This will be reported by TY_(CheckHTMLTagsVersions)() */
         } else
         if ( nodeIsFONT(node) ) {
             /*\
@@ -1497,13 +1493,13 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
              * done in Bool Font2Span( TidyDocImpl* doc, Node *node, Node **pnode ) (I think?)
              *
             \*/
-//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+            /* This will be reported by TY_(CheckHTMLTagsVersions)() */
         } else
         if (( nodesIsFRAME(node) ) || ( nodeIsFRAMESET(node) ) || ( nodeIsNOFRAMES(node) )) {
             /*\
              * YOW: What to do here?????? Maybe <iframe>????
             \*/
-//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+            /* This will be reported by TY_(CheckHTMLTagsVersions)() */
         } else
         if ( nodeIsSTRIKE(node) ) {
             /*\
@@ -1514,7 +1510,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
                 TY_(AddStyleProperty)( doc, node, "text-decoration: line-through" );
                 TY_(CoerceNode)(doc, node, TidyTag_SPAN, warn, no);
             } else {
-//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+                /* This will be reported by TY_(CheckHTMLTagsVersions)() */
             }
         } else
         if ( nodeIsTT(node) ) {
@@ -1529,14 +1525,15 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
                 TY_(AddStyleProperty)( doc, node, "font-family: monospace" );
                 TY_(CoerceNode)(doc, node, TidyTag_SPAN, warn, no);
             } else {
-//                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+                /* This will be reported by TY_(CheckHTMLTagsVersions)() */
             }
         } else
         if (TY_(nodeIsElement)(node)) {
             if (node->tag) {
                 if ((!(node->tag->versions & VERS_HTML5))||(inRemovedInfo(node->tag->id))) {
                     /* issue warning for elements like 'markquee' */
-//                    TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+                    /* This will be reported by TY_(CheckHTMLTagsVersions)() */
+                    /* @todo: Consider removing this entire check. */
                 }
             }
         }
@@ -1562,7 +1559,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
  *  - ERROR if the emitted doctype is a strict doctype.
  *  - WARNING if the emitted doctype is a non-strict doctype.
  * The propriety checks are *always* run as they have always been an integral
- * part of Tidy. The version checks are controlled by option `to-be-determined`.
+ * part of Tidy. The version checks are controlled by `strict-tags-attributes`.
  */
 void TY_(CheckHTMLTagsVersions)( TidyDocImpl* doc, Node* node )
 {
@@ -1570,7 +1567,7 @@ void TY_(CheckHTMLTagsVersions)( TidyDocImpl* doc, Node* node )
     uint declared = doc->lexer->doctype;
     uint version = versionEmitted == 0 ? declared : versionEmitted;
     int reportType = VERS_STRICT & version ? ELEMENT_VERS_MISMATCH_ERROR : ELEMENT_VERS_MISMATCH_WARN;
-    Bool check_versions = yes; /* @todo get option `to-be-determined`. */
+    Bool check_versions = cfgBool( doc, TidyStrictTagsAttr );
 
     while (node)
     {

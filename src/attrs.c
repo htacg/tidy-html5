@@ -1394,7 +1394,7 @@ const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attv
     Bool isMismatched;
     uint versionEmitted, declared, version;
     int reportType;
-    Bool check_versions = yes; /* @todo get option `to-be-determined`. */
+    Bool check_versions = cfgBool( doc, TidyStrictTagsAttr );
 
     const Attribute* attribute = attval->dict;
 

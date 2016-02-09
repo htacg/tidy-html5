@@ -523,6 +523,7 @@ typedef enum
   TidyAttr_ADD_DATE,          /**< ADD_DATE= */
   TidyAttr_ALIGN,             /**< ALIGN= */
   TidyAttr_ALINK,             /**< ALINK= */
+  TidyAttr_ALLOWFULLSCREEN,   /**< ALLOWFULLSCREEN= */
   TidyAttr_ALT,               /**< ALT= */
   TidyAttr_ARCHIVE,           /**< ARCHIVE= */
   TidyAttr_AXIS,              /**< AXIS= */

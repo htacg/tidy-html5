@@ -105,6 +105,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_ADD_DATE,          "add_date",              CH_PCDATA    }, /* A */
   { TidyAttr_ALIGN,             "align",                 CH_ALIGN     }, /* varies by element */
   { TidyAttr_ALINK,             "alink",                 CH_COLOR     }, 
+  { TidyAttr_ALLOWFULLSCREEN,   "allowfullscreen",       CH_BOOL      },
   { TidyAttr_ALT,               "alt",                   CH_PCDATA    }, /* nowrap */
   { TidyAttr_ARCHIVE,           "archive",               CH_URLS      }, /* space or comma separated list */
   { TidyAttr_AXIS,              "axis",                  CH_PCDATA    }, 
@@ -444,13 +445,12 @@ static uint AttributeVersions(Node* node, AttVal* attval)
 {
     uint i;
 
-    /* HTML5 data-* attributes 
-       20150118: added allowfullscreen */
+    /* Override or add to items in attrdict.c */
     if (attval && attval->attribute) {
+        /* HTML5 data-* attributes can't be added generically; handle here. */
         if (TY_(tmbstrncmp)(attval->attribute, "data-", 5) == 0)
             return (XH50 | HT50);
-        if (strcmp(attval->attribute,"allowfullscreen") == 0)
-            return (XH50 | HT50);
+
         /* RDFa global attributes */
         if (strcmp(attval->attribute,"about") == 0)
             return (XH50 | HT50);

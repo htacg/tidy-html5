@@ -428,17 +428,17 @@ static const Attribute attribute_defs [] =
   { TidyAttr_DISPLAY,                  "display",                CH_PCDATA   }, /* on MATH tag (html5) */
 
   /* RDFa Attributes */
-  { TidyAttr_ABOUT,                    "about",                 CH_RDFASCURIE },
-  { TidyAttr_DATATYPE,                 "datatype",              CH_RDFATERM   },
-  { TidyAttr_INLIST,                   "inlist",                CH_BOOL       },
-  { TidyAttr_PREFIX,                   "prefix",                CH_RDFAPREFIX },
-  { TidyAttr_PROPERTY,                 "property",              CH_RDFATERMS  },
-  { TidyAttr_RESOURCE,                 "resource",              CH_RDFASCURIE },
-  { TidyAttr_TYPEOF,                   "typeof",                CH_RDFATERMS  },
-  { TidyAttr_VOCAB,                    "vocab",                 CH_URL        },
+  { TidyAttr_ABOUT,                    "about",                  CH_RDFASCURIE },
+  { TidyAttr_DATATYPE,                 "datatype",               CH_RDFATERM   },
+  { TidyAttr_INLIST,                   "inlist",                 CH_BOOL       },
+  { TidyAttr_PREFIX,                   "prefix",                 CH_RDFAPREFIX },
+  { TidyAttr_PROPERTY,                 "property",               CH_RDFATERMS  },
+  { TidyAttr_RESOURCE,                 "resource",               CH_RDFASCURIE },
+  { TidyAttr_TYPEOF,                   "typeof",                 CH_RDFATERMS  },
+  { TidyAttr_VOCAB,                    "vocab",                  CH_URL        },
 
   /* this must be the final entry */
-  { N_TIDY_ATTRIBS,                    NULL,                    NULL         }
+  { N_TIDY_ATTRIBS,                    NULL,                     NULL         }
 };
 
 static uint AttributeVersions(Node* node, AttVal* attval)

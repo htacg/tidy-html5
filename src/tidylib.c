@@ -1807,7 +1807,7 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     sdef = tidyOptGetValue((TidyDoc)doc, TidyDoctype );
     if (!sdef)
         sdef = tidyOptGetCurrPick((TidyDoc) doc, TidyDoctypeMode );
-    if (sdef && (strcmp(sdef,"html5") == 0)) {
+    if ( sdef && ( (strcmp(sdef,"html5") == 0) || (strcmp(sdef,"auto") == 0) ) ) {
         TY_(CheckHTML5)( doc, &doc->root );
     }
 

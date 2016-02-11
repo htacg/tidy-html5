@@ -1741,7 +1741,6 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     Bool tidyXmlTags = cfgBool( doc, TidyXmlTags );
     Bool wantNameAttr = cfgBool( doc, TidyAnchorAsName );
     Bool mergeEmphasis = cfgBool( doc, TidyMergeEmphasis );
-    ctmbstr sdef = NULL;
     Node* node;
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
@@ -1803,14 +1802,6 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     /* remember given doctype for reporting */
     node = TY_(FindDocType)(doc);
 
-    /* Cleanup for HTML5 */
-    sdef = tidyOptGetValue((TidyDoc)doc, TidyDoctype );
-    if (!sdef)
-        sdef = tidyOptGetCurrPick((TidyDoc) doc, TidyDoctypeMode );
-    if ( sdef && ( (strcmp(sdef,"html5") == 0) || (strcmp(sdef,"auto") == 0) ) ) {
-        TY_(CheckHTML5)( doc, &doc->root );
-    }
-
     if (node)
     {
         AttVal* fpi = TY_(GetAttrByName)(node, "PUBLIC");
@@ -1861,6 +1852,8 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
        it can ever be, so we can start detecting things that shouldn't
        be in this version of HTML
      */
+    if (doc->lexer->versionEmitted & VERS_HTML5)
+        TY_(CheckHTML5)( doc, &doc->root );
     TY_(CheckHTMLTagsVersions)( doc, &doc->root );
     TY_(AttributeChecks)(doc, &doc->root);
 

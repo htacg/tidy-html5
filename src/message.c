@@ -525,6 +525,8 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
     char const *name = "NULL", *value = "NULL";
     char tagdesc[64];
     ctmbstr fmt = tidyLocalizedString(code);
+    uint version;
+    ctmbstr extra_string;
 
     assert( fmt != NULL );
 
@@ -547,6 +549,22 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
     case PROPRIETARY_ATTRIBUTE:
     case JOINING_ATTRIBUTE:
         messageNode(doc, TidyWarning, code, node, fmt, tagdesc, name);
+        break;
+
+    case MISMATCHED_ATTRIBUTE_WARN:
+        version = doc->lexer->versionEmitted == 0 ? doc->lexer->doctype : doc->lexer->versionEmitted;
+        extra_string = TY_(HTMLVersionNameFromCode)(version, 0);
+        if (!extra_string)
+            extra_string = tidyLocalizedString(STRING_HTML_PROPRIETARY);
+        messageNode(doc, TidyWarning, code, node, fmt, tagdesc, name, extra_string);
+        break;
+
+    case MISMATCHED_ATTRIBUTE_ERROR:
+        version = doc->lexer->versionEmitted == 0 ? doc->lexer->doctype : doc->lexer->versionEmitted;
+        extra_string = TY_(HTMLVersionNameFromCode)(version, 0);
+        if (!extra_string)
+            extra_string = tidyLocalizedString(STRING_HTML_PROPRIETARY);
+        messageNode(doc, TidyError, code, node, fmt, tagdesc, name, extra_string);
         break;
 
     case BAD_ATTRIBUTE_VALUE:
@@ -666,7 +684,6 @@ void TY_(ReportWarning)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     case NESTED_EMPHASIS:
     case REMOVED_HTML5:
     case BAD_BODY_HTML5:
-    case BAD_ALIGN_HTML5:
     case BAD_SUMMARY_HTML5:
         messageNode(doc, TidyWarning, code, rpt, fmt, nodedesc);
         break;
@@ -707,6 +724,8 @@ void TY_(ReportError)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     char elemdesc[ 256 ] = {0};
     Node* rpt = ( element ? element : node );
     ctmbstr fmt = tidyLocalizedString(code);
+    uint versionEmitted, declared, version;
+    ctmbstr extra_string = NULL;
 
     assert( fmt != NULL );
 
@@ -727,6 +746,26 @@ void TY_(ReportError)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     case UNESCAPED_ELEMENT:
     case NOFRAMES_CONTENT:
         messageNode(doc, TidyWarning, code, node, fmt, nodedesc);
+        break;
+
+    case ELEMENT_VERS_MISMATCH_WARN:
+        versionEmitted = doc->lexer->versionEmitted;
+        declared = doc->lexer->doctype;
+        version = versionEmitted == 0 ? declared : versionEmitted;
+        extra_string = TY_(HTMLVersionNameFromCode)(version, 0);
+        if (!extra_string)
+            extra_string = tidyLocalizedString(STRING_HTML_PROPRIETARY);
+        messageNode(doc, TidyWarning, code, node, fmt, nodedesc, extra_string);
+        break;
+
+    case ELEMENT_VERS_MISMATCH_ERROR:
+        versionEmitted = doc->lexer->versionEmitted;
+        declared = doc->lexer->doctype;
+        version = versionEmitted == 0 ? declared : versionEmitted;
+        extra_string = TY_(HTMLVersionNameFromCode)(version, 0);
+        if (!extra_string)
+            extra_string = tidyLocalizedString(STRING_HTML_PROPRIETARY);
+        messageNode(doc, TidyError, code, node, fmt, nodedesc, extra_string);
         break;
 
     case MISSING_TITLE_ELEMENT:

@@ -838,6 +838,48 @@ void TY_(CheckAttributes)( TidyDocImpl* doc, Node *node )
     }
 }
 
+
+/* For every element node with attributes, catalogue the possible HTML
+ versions. Also run through initial item checks. */
+void TY_(ConstrainAndCheckAttributes)(TidyDocImpl* doc, Node* node)
+{
+    Node *next_node;
+    AttVal *next_attr, *attval;
+    const Attribute* attribute;
+
+    while (node)
+    {
+        next_node = node->next;
+
+        if (TY_(nodeIsElement)(node))
+        {
+            attval = node->attributes;
+
+            while (attval)
+            {
+                next_attr = attval->next;
+
+                /* Add to our possible versions catalogue. */
+                TY_(ConstrainVersion)(doc, AttributeVersions(node, attval));
+
+                /* This goes through the built in checks, like prettifying
+                   color names in attributes. */
+                attribute = attval->dict;
+                if (attribute && attribute->attrchk)
+                    attribute->attrchk( doc, node, attval );
+
+                attval = next_attr;
+            }
+        }
+
+        if (node->content)
+            TY_(ConstrainAndCheckAttributes)(doc, node->content);
+
+        node = next_node;
+    }
+}
+
+
 /* methods for checking attributes for specific elements */
 
 void CheckIMG( TidyDocImpl* doc, Node *node )

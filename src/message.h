@@ -98,6 +98,8 @@ typedef enum {
     CANT_BE_NESTED,
     OBSOLETE_ELEMENT,
     PROPRIETARY_ELEMENT,
+    ELEMENT_VERS_MISMATCH_ERROR,
+    ELEMENT_VERS_MISMATCH_WARN,
     UNKNOWN_ELEMENT,
     TRIM_EMPTY_ELEMENT,
     COERCE_TO_ENDTAG,
@@ -137,6 +139,8 @@ typedef enum {
     BAD_ATTRIBUTE_VALUE,
     UNEXPECTED_GT,
     PROPRIETARY_ATTRIBUTE,
+    MISMATCHED_ATTRIBUTE_ERROR,
+    MISMATCHED_ATTRIBUTE_WARN,
     PROPRIETARY_ATTR_VALUE,
     REPEATED_ATTRIBUTE,
     MISSING_IMAGEMAP,
@@ -169,7 +173,6 @@ typedef enum {
 
     REMOVED_HTML5,                 /* this element removed from HTML5 */
     BAD_BODY_HTML5,                /* attr on body removed from HTML5 */
-    BAD_ALIGN_HTML5,               /* use of align attr removed from HTML5 */
     BAD_SUMMARY_HTML5,             /* use of summary attr removed from HTML5 */
 
     PREVIOUS_LOCATION,             /* last */

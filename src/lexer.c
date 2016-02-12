@@ -1748,7 +1748,7 @@ Bool TY_(SetXHTMLDocType)( TidyDocImpl* doc )
         TY_(RepairAttrValue)(doc, doctype, sys, "");
         break;
     case TidyDoctypeAuto:
-        if (lexer->doctype == VERS_UNKNOWN) {
+        if (lexer->doctype == VERS_UNKNOWN || lexer->doctype == VERS_HTML5) {
           lexer->versionEmitted = XH50;
           return yes;
         }
@@ -1828,7 +1828,8 @@ Bool TY_(FixDocType)( TidyDocImpl* doc )
     if (doctype && (dtmode == TidyDoctypeAuto) &&
         (lexer->doctype == VERS_HTML5) )
     {
-        lexer->versionEmitted = lexer->doctype;
+        /* The version emitted cannot be a composite value! */
+        lexer->versionEmitted = HT50;
         return yes;
     }
     if (dtmode == TidyDoctypeAuto &&

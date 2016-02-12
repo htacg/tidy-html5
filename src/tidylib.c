@@ -1359,19 +1359,19 @@ Bool inRemovedInfo( uint tid )
     return no;
 }
 
-static Bool BadBody5( Node* node )
-{
-    if (TY_(AttrGetById)(node, TidyAttr_BACKGROUND) ||
-        TY_(AttrGetById)(node, TidyAttr_BGCOLOR)    ||
-        TY_(AttrGetById)(node, TidyAttr_TEXT)       ||
-        TY_(AttrGetById)(node, TidyAttr_LINK)       ||
-        TY_(AttrGetById)(node, TidyAttr_VLINK)      ||
-        TY_(AttrGetById)(node, TidyAttr_ALINK))
-    {
-        return yes;
-    }
-    return no;
-}
+/* Things that should not be in an HTML5 body. This is special for CheckHTML5(),
+   and we might just want to remove CheckHTML5()'s output altogether and count
+   on the default --strict-tags-attributes.
+ */
+static BadBody5Attribs[] = {
+    TidyAttr_BACKGROUND,
+    TidyAttr_BGCOLOR,
+    TidyAttr_TEXT,
+    TidyAttr_LINK,
+    TidyAttr_VLINK,
+    TidyAttr_ALINK,
+    TidyAttr_UNKNOWN /* Must be last! */
+};
 
 static Bool nodeHasAlignAttr( Node *node )
 {
@@ -1392,6 +1392,8 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
     Bool clean = cfgBool( doc, TidyMakeClean );
     Node* body = TY_(FindBody)( doc );
     Bool warn = yes;    /* should this be a warning, error, or report??? */
+    AttVal* attr = NULL;
+    int i = 0;
 #if !defined(NDEBUG) && defined(_MSC_VER)
 //    list_not_html5();
 #endif
@@ -1402,15 +1404,25 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
              * Is this for ALL elements that accept an 'align' attribute, or should
              * this be a sub-set test
             \*/
-            TY_(ReportWarning)(doc, node, node, BAD_ALIGN_HTML5);
+
+            /* We will only emit this message if --strict-tags-attributes==no;
+               otherwise if yes this message will be output during later
+               checking. */
+            if (!cfgBool( doc, TidyStrictTagsAttr))
+                TY_(ReportAttrError)(doc, node, TY_(AttrGetById)(node, TidyAttr_ALIGN), MISMATCHED_ATTRIBUTE_WARN);
         }
         if ( node == body ) {
-            if ( BadBody5(body) ) {
-                /* perhaps need a new/different warning for this, like
-                 * The background 'attribute" on the body element is obsolete. Use CSS instead.
-                 * but how to pass an attribute name to be embedded in the message.
-                \*/
-                TY_(ReportWarning)(doc, node, body, BAD_BODY_HTML5);
+            i = 0;
+            /* We will only emit this message if --strict-tags-attributes==no;
+             otherwise if yes this message will be output during later
+             checking. */
+            if (!cfgBool( doc, TidyStrictTagsAttr)) {
+                while ( BadBody5Attribs[i] != TidyAttr_UNKNOWN ) {
+                    attr = TY_(AttrGetById)(node, BadBody5Attribs[i]);
+                    if ( attr )
+                        TY_(ReportAttrError)(doc, node, attr , MISMATCHED_ATTRIBUTE_WARN);
+                    i++;
+                }
             }
         } else
         if ( nodeIsACRONYM(node) ) {
@@ -1603,6 +1615,35 @@ void TY_(CheckHTMLTagsVersions)( TidyDocImpl* doc, Node* node )
         node = node->next;
     }
 }
+
+
+/*
+ *  Check all attributes of the document.
+ */
+void TY_(AttributeChecks)(TidyDocImpl* doc, Node* node)
+{
+    Node *next;
+
+    while (node)
+    {
+        next = node->next;
+
+        if (TY_(nodeIsElement)(node))
+        {
+            if (node->tag && node->tag->chkattrs) /* [i_a]2 fix crash after adding SVG support with alt/unknown tag subtree insertion there */
+                node->tag->chkattrs(doc, node);
+            else
+                TY_(CheckAttributes)(doc, node);
+        }
+
+        if (node->content)
+            TY_(AttributeChecks)(doc, node->content);
+
+        assert( next != node ); /* http://tidy.sf.net/issue/1603538 */
+        node = next;
+    }
+}
+
 
 
 #if !defined(NDEBUG) && defined(_MSC_VER)

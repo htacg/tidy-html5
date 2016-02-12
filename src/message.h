@@ -173,7 +173,6 @@ typedef enum {
 
     REMOVED_HTML5,                 /* this element removed from HTML5 */
     BAD_BODY_HTML5,                /* attr on body removed from HTML5 */
-    BAD_ALIGN_HTML5,               /* use of align attr removed from HTML5 */
     BAD_SUMMARY_HTML5,             /* use of summary attr removed from HTML5 */
 
     PREVIOUS_LOCATION,             /* last */

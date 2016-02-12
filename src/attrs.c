@@ -441,7 +441,7 @@ static const Attribute attribute_defs [] =
   { N_TIDY_ATTRIBS,                    NULL,                     NULL         }
 };
 
-static uint AttributeVersions(Node* node, AttVal* attval)
+uint AttributeVersions(Node* node, AttVal* attval)
 {
     uint i;
 
@@ -1384,8 +1384,6 @@ const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attv
             }
         }
 
-        TY_(ConstrainVersion)(doc, AttributeVersions(node, attval));
-        
         if (attribute->attrchk)
             attribute->attrchk( doc, node, attval );
     }

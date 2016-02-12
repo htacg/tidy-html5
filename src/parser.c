@@ -4621,29 +4621,6 @@ static void ReplaceObsoleteElements(TidyDocImpl* doc, Node* node)
     }
 }
 
-void TY_(AttributeChecks)(TidyDocImpl* doc, Node* node)
-{
-    Node *next;
-
-    while (node)
-    {
-        next = node->next;
-
-        if (TY_(nodeIsElement)(node))
-        {
-            if (node->tag && node->tag->chkattrs) /* [i_a]2 fix crash after adding SVG support with alt/unknown tag subtree insertion there */
-                node->tag->chkattrs(doc, node);
-            else
-                TY_(CheckAttributes)(doc, node);
-        }
-
-        if (node->content)
-            TY_(AttributeChecks)(doc, node->content);
-
-        assert( next != node ); /* http://tidy.sf.net/issue/1603538 */
-        node = next;
-    }
-}
 
 /*
   HTML is the top level element
@@ -4789,8 +4766,10 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
         TY_(InsertNodeAtEnd)(head, TY_(InferredTag)(doc, TidyTag_TITLE));
     }
 
-    /* Renamed to TY_(AttributeChecks) and called from tidylib.c:tidyDocCleanAndRepair */
-    /* AttributeChecks(doc, &doc->root); */
+    /* At this point we still need to evaluate our attributes in order to
+       constrain them and run through their initial checks. */
+    TY_(ConstrainAndCheckAttributes)(doc, &doc->root);
+
     ReplaceObsoleteElements(doc, &doc->root);
     TY_(DropEmptyElements)(doc, &doc->root);
     CleanSpaces(doc, &doc->root);

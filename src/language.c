@@ -327,7 +327,6 @@ static const tidyErrorFilterKeyItem tidyErrorFilterKeysStruct[] = {
     { "WHITE_IN_URI",                                  WHITE_IN_URI                                  },
     { "REMOVED_HTML5",                                 REMOVED_HTML5                                 },
     { "BAD_BODY_HTML5",                                BAD_BODY_HTML5                                },
-    { "BAD_ALIGN_HTML5",                               BAD_ALIGN_HTML5                               },
     { "BAD_SUMMARY_HTML5",                             BAD_SUMMARY_HTML5                             },
     { "PREVIOUS_LOCATION",                             PREVIOUS_LOCATION                             },
     { "VENDOR_SPECIFIC_CHARS",                         VENDOR_SPECIFIC_CHARS                         },

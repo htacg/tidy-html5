@@ -395,7 +395,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { COERCE_TO_ENDTAG_WARN,        0,   "<%s> is probably intended as </%s>"                                      }, /* Warning */
     { REMOVED_HTML5,                0,   "%s element removed from HTML5"                                           }, /* Warning */
     { BAD_BODY_HTML5,               0,   "Found attribute on body that is obsolete in HTML5. Use CSS"              }, /* Warning */
-    { BAD_ALIGN_HTML5,              0,   "The align attribute on the %s element is obsolete. Use CSS"              }, /* Warning */
     { BAD_SUMMARY_HTML5,            0,   "The summary attribute on the %s element is obsolete in HTML5"            }, /* Warning */
     
     /* ReportNotice */

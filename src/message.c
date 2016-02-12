@@ -684,7 +684,6 @@ void TY_(ReportWarning)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     case NESTED_EMPHASIS:
     case REMOVED_HTML5:
     case BAD_BODY_HTML5:
-    case BAD_ALIGN_HTML5:
     case BAD_SUMMARY_HTML5:
         messageNode(doc, TidyWarning, code, rpt, fmt, nodedesc);
         break;

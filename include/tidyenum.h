@@ -204,15 +204,16 @@ typedef enum
   TidyPunctWrapNotUsed,
 #endif
   TidyMergeEmphasis,       /**< Merge nested B and I elements */
-  TidyMergeDivs,       /**< Merge multiple DIVs */
+  TidyMergeDivs,           /**< Merge multiple DIVs */
   TidyDecorateInferredUL,  /**< Mark inferred UL elements with no indent CSS */
   TidyPreserveEntities,    /**< Preserve entities */
   TidySortAttributes,      /**< Sort attributes */
-  TidyMergeSpans,       /**< Merge multiple SPANs */
-  TidyAnchorAsName,    /**< Define anchors as name attributes */
-  TidyPPrintTabs,       /**< Indent using tabs istead of spaces */
-  TidySkipNested,      /**< Skip nested tags in script and style CDATA */
-  N_TIDY_OPTIONS       /**< Must be last */
+  TidyMergeSpans,          /**< Merge multiple SPANs */
+  TidyAnchorAsName,        /**< Define anchors as name attributes */
+  TidyPPrintTabs,          /**< Indent using tabs istead of spaces */
+  TidySkipNested,          /**< Skip nested tags in script and style CDATA */
+  TidyStrictTagsAttr,      /**< Ensure tags and attributes match output HTML version */
+  N_TIDY_OPTIONS           /**< Must be last */
 } TidyOptionId;
 
     
@@ -522,6 +523,7 @@ typedef enum
   TidyAttr_ADD_DATE,          /**< ADD_DATE= */
   TidyAttr_ALIGN,             /**< ALIGN= */
   TidyAttr_ALINK,             /**< ALINK= */
+  TidyAttr_ALLOWFULLSCREEN,   /**< ALLOWFULLSCREEN= */
   TidyAttr_ALT,               /**< ALT= */
   TidyAttr_ARCHIVE,           /**< ARCHIVE= */
   TidyAttr_AXIS,              /**< AXIS= */
@@ -662,6 +664,7 @@ typedef enum
   TidyAttr_TEXT,              /**< TEXT= */
   TidyAttr_TITLE,             /**< TITLE= */
   TidyAttr_TOPMARGIN,         /**< TOPMARGIN= */
+  TidyAttr_TRANSLATE,         /**< TRANSLATE= */
   TidyAttr_TYPE,              /**< TYPE= */
   TidyAttr_USEMAP,            /**< USEMAP= */
   TidyAttr_VALIGN,            /**< VALIGN= */

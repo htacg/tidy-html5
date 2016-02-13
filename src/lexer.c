@@ -2707,10 +2707,10 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 }
                 else if ( !cfgBool(doc, TidyXmlTags) )
                 {
-                    Node* curr = lexer->token;
-                    TY_(ConstrainVersion)( doc, curr->tag->versions );
+                    TY_(ConstrainVersion)( doc, lexer->token->tag->versions );
+                    TY_(RepairDuplicateAttributes)( doc, lexer->token, no );
+                } else 
                     TY_(RepairDuplicateAttributes)( doc, lexer->token, yes );
-                    
 #ifdef TIDY_STORE_ORIGINAL_TEXT
                 StoreOriginalTextInToken(doc, lexer->token, 0);
 #endif

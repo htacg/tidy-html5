@@ -744,9 +744,13 @@ TIDY_EXPORT int TIDY_CALL         tidySaveStdout( TidyDoc tdoc );
 /** Save to given TidyBuffer object */
 TIDY_EXPORT int TIDY_CALL         tidySaveBuffer( TidyDoc tdoc, TidyBuffer* buf );
 
-/** Save document to application buffer.  If buffer is not big enough,
-**  ENOMEM will be returned and the necessary buffer size will be placed
-**  in *buflen.
+/** Save document to application buffer.  If TidyShowMarkup and
+**  the document has no errors, or TidyForceOutput, the current 
+**  document, per the current configuration, will be Pretty Printed
+**  to the application buffer.  The document byte length,
+**  not character length, will be placed in *buflen. The document 
+**  will not be null terminated. If the buffer is not big enough,
+**  ENOMEM will be returned, else the actual document status.
 */
 TIDY_EXPORT int TIDY_CALL         tidySaveString( TidyDoc tdoc,
                                                  tmbstr buffer, uint* buflen );

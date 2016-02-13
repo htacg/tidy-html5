@@ -1917,6 +1917,7 @@ void TY_(CleanWord2000)( TidyDocImpl* doc, Node *node)
     /* used to a list from a sequence of bulletted p's */
     Lexer* lexer = doc->lexer;
     Node* list = NULL;
+    AttVal *next_attr, *attval;
 
     while ( node )
     {
@@ -1927,6 +1928,19 @@ void TY_(CleanWord2000)( TidyDocImpl* doc, Node *node)
             if ( !TY_(GetAttrByName)(node, "xmlns:o") &&
                  !cfgBool(doc, TidyMakeBare) )
                 return;
+
+            /* Output proprietary attributes to maintain errout compatability
+             * with traditional Tidy. This is a result of moving all of the
+             * proprietary checks to near the end of the cleanup process,
+             * meaning this result would not ordinarily be displayed. 
+             */
+            attval = node->attributes;
+            while ( attval ) {
+                next_attr = attval->next;
+                if ( strcmp(attval->attribute, "xmlns") != 0 )
+                    TY_(ReportAttrError)(doc, node, attval, PROPRIETARY_ATTRIBUTE);
+                attval = next_attr;
+            }
 
             TY_(FreeAttrs)( doc, node );
         }
@@ -2001,6 +2015,12 @@ void TY_(CleanWord2000)( TidyDocImpl* doc, Node *node)
         /* discards <o:p> which encodes the paragraph mark */
         if ( node->tag && TY_(tmbstrcmp)(node->tag->name,"o:p")==0)
         {
+            /* Output proprietary elements to maintain errout compatability
+             * with traditional Tidy. This is a result of moving all of the
+             * proprietary checks to near the end of the cleanup process,
+             * meaning this result would not ordinarily be displayed.
+             */
+            TY_(ReportError)(doc, NULL, node, PROPRIETARY_ELEMENT);
             Node* next;
             DiscardContainer( doc, node, &next );
             node = next;

@@ -1552,7 +1552,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
         } else
             if (TY_(nodeIsElement)(node)) {
                 if (node->tag) {
-                    if ((!(node->tag->versions & VERS_HTML5))||(inRemovedInfo(node->tag->id))) {
+                    if ( (!(node->tag->versions & VERS_HTML5) && !(node->tag->versions & VERS_PROPRIETARY)) || (inRemovedInfo(node->tag->id)) ) {
                         if ( !already_strict )
                             TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
                     }

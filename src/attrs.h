@@ -147,6 +147,10 @@ AttVal* TY_(AttrGetById)( Node* node, TidyAttrId id );
 
 uint TY_(NodeAttributeVersions)( Node* node, TidyAttrId id );
 
+Bool TY_(AttributeIsProprietary)(Node* node, AttVal* attval);
+Bool TY_(AttributeIsMismatched)(Node* node, AttVal* attval, TidyDocImpl* doc);
+
+
 /* 0 == TidyAttr_UNKNOWN  */
 #define AttrId(av) ((av) && (av)->dict ? (av)->dict->id : TidyAttr_UNKNOWN)
 #define AttrIsId(av, atid) ((av) && (av)->dict && ((av)->dict->id == atid))

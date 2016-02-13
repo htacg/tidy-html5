@@ -479,11 +479,12 @@ uint TY_(NodeAttributeVersions)( Node* node, TidyAttrId id )
     return VERS_UNKNOWN;
 }
 
-/* returns true if the element is a W3C defined element */
-/* but the element/attribute combination is not. We're  */
-/* only defining as "proprietary" items that are not in */
-/* the element's AttrVersion structure.                 */
-static Bool AttributeIsProprietary(Node* node, AttVal* attval)
+/* returns true if the element is a W3C defined element
+ * but the element/attribute combination is not. We're
+ * only defining as "proprietary" items that are not in
+ * the element's AttrVersion structure.
+ */
+Bool TY_(AttributeIsProprietary)(Node* node, AttVal* attval)
 {
     if (!node || !attval)
         return no;
@@ -499,6 +500,34 @@ static Bool AttributeIsProprietary(Node* node, AttVal* attval)
 
     return yes;
 }
+
+/* returns true if the element is a W3C defined element
+ * but the element/attribute combination is not. We're
+ * considering it a mismatch if the document version
+ * does not allow the attribute as called out in its
+ * AttrVersion structure.
+ */
+Bool TY_(AttributeIsMismatched)(Node* node, AttVal* attval, TidyDocImpl* doc)
+{
+    uint doctype;
+    
+    if (!node || !attval)
+        return no;
+    
+    if (!node->tag)
+        return no;
+    
+    if (!(node->tag->versions & VERS_ALL))
+        return no;
+
+    doctype = doc->lexer->versionEmitted == 0 ? doc->lexer->doctype : doc->lexer->versionEmitted;
+
+    if (AttributeVersions(node, attval) & doctype)
+        return no;
+    
+    return yes;
+}
+
 
 /* used by CheckColor() */
 struct _colors
@@ -1356,14 +1385,6 @@ const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attv
         
         if (attribute->attrchk)
             attribute->attrchk( doc, node, attval );
-    }
-
-    if (AttributeIsProprietary(node, attval))
-    {
-        TY_(ReportAttrError)(doc, node, attval, PROPRIETARY_ATTRIBUTE);
-
-        if (cfgBool(doc, TidyDropPropAttrs))
-            TY_(RemoveAttribute)( doc, node, attval );
     }
 
     return attribute;

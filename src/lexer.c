@@ -52,7 +52,7 @@
 static void check_me(char *name);
 static Bool show_attrs = yes;
 #define MX_TXT 8
-static char buffer[MX_TXT+8]; /* NOTE extra for '...'\0 tail */
+static char buffer[(MX_TXT*4)+8]; /* NOTE extra for '...'\0 tail */
 static tmbstr get_text_string(Lexer* lexer, Node *node)
 {
     uint len = node->end - node->start;
@@ -61,31 +61,74 @@ static tmbstr get_text_string(Lexer* lexer, Node *node)
     unsigned char c;
     uint i = 0;
     Bool insp = no;
-    buffer[0] = (char)0;
-    while (cp < end ) {
-        c = *cp;
-        if (c == '\n') {
-            buffer[i++] = '\\';
-            buffer[i++] = 'n';
-            insp = yes;
-        } else if (c == ' ') {
-            if (!insp)
+    if (len <= ((MX_TXT * 2) + 3)) {
+        buffer[0] = 0;
+        while (cp < end) {
+            c = *cp;
+            cp++;
+            if (c == '\n') {
+                buffer[i++] = '\\';
+                buffer[i++] = 'n';
+            } else if ( c == ' ' ) {
+                if (!insp)
+                    buffer[i++] = c;
+                insp = yes;
+            } else {
                 buffer[i++] = c;
-            insp = yes;
-        } else {
-            buffer[i++] = c;
-            insp = no;
+                insp = no;
+            }
         }
-        cp++;
-        if (i >= MX_TXT)
-            break;
-    }
-    if (i < len) {
-        buffer[i++] = '.';
-        if (i < len) {
-            buffer[i++] = '.';
-            if (i < len) {
-                buffer[i++] = '.';
+    } else {
+        char *end1 = cp + MX_TXT;
+        char *bgn = cp + (len - MX_TXT);
+        buffer[0] = 0;
+        if (bgn < end1)
+            bgn = end1;
+        while (cp < end1) {
+            c = *cp;
+            cp++;
+            if (c == '\n') {
+                buffer[i++] = '\\';
+                buffer[i++] = 'n';
+            } else if ( c == ' ' ) {
+                if (!insp)
+                    buffer[i++] = c;
+                insp = yes;
+            } else {
+                buffer[i++] = c;
+                insp = no;
+            }
+            if (i >= MX_TXT)
+                break;
+        }
+        c = '.';
+        if ((i < len)&&(cp < bgn)) {
+            buffer[i++] = c;
+            cp++;
+            if ((i < len)&&(cp < bgn)) {
+                buffer[i++] = c;
+                cp++;
+                if ((i < len)&&(cp < bgn)) {
+                    buffer[i++] = c;
+                    cp++;
+                }
+            }
+        }
+        cp = bgn;
+        insp = no;
+        while (cp < end) {
+            c = *cp;
+            cp++;
+            if (c == '\n') {
+                buffer[i++] = '\\';
+                buffer[i++] = 'n';
+            } else if ( c == ' ' ) {
+                if (!insp)
+                    buffer[i++] = c;
+                insp = yes;
+            } else {
+                buffer[i++] = c;
+                insp = no;
             }
         }
     }

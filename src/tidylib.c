@@ -1300,9 +1300,9 @@ void         tidyDocReportDoctype( TidyDocImpl* doc )
 }
 
 
-/* ######################################################################################
-   HTML5 STUFF
- */
+/*****************************************************************************
+ *  HTML5 STUFF
+ *****************************************************************************/
 #if !defined(NDEBUG) && defined(_MSC_VER)
 extern void show_not_html5(void);
 /* -----------------------------
@@ -1358,19 +1358,19 @@ Bool inRemovedInfo( uint tid )
     return no;
 }
 
-static Bool BadBody5( Node* node )
-{
-    if (TY_(AttrGetById)(node, TidyAttr_BACKGROUND) ||
-        TY_(AttrGetById)(node, TidyAttr_BGCOLOR)    ||
-        TY_(AttrGetById)(node, TidyAttr_TEXT)       ||
-        TY_(AttrGetById)(node, TidyAttr_LINK)       ||
-        TY_(AttrGetById)(node, TidyAttr_VLINK)      ||
-        TY_(AttrGetById)(node, TidyAttr_ALINK))
-    {
-        return yes;
-    }
-    return no;
-}
+/* Things that should not be in an HTML5 body. This is special for CheckHTML5(),
+ and we might just want to remove CheckHTML5()'s output altogether and count
+ on the default --strict-tags-attributes.
+ */
+static BadBody5Attribs[] = {
+    TidyAttr_BACKGROUND,
+    TidyAttr_BGCOLOR,
+    TidyAttr_TEXT,
+    TidyAttr_LINK,
+    TidyAttr_VLINK,
+    TidyAttr_ALINK,
+    TidyAttr_UNKNOWN /* Must be last! */
+};
 
 static Bool nodeHasAlignAttr( Node *node )
 {
@@ -1383,73 +1383,94 @@ static Bool nodeHasAlignAttr( Node *node )
     return no;
 }
 
-/* see http://www.whatwg.org/specs/web-apps/current-work/multipage/obsolete.html#obsolete */
-
+/*
+ *  Perform special checks for HTML, even when we're not using the default
+ *  option `--strict-tags-attributes yes`. This will ensure that HTML5 warning
+ *  and error output is given regardless of the new option, and ensure that
+ *  cleanup takes place. This provides mostly consistent Tidy behavior even with
+ *  the introduction of this new option. Note that strings have changed, though,
+ *  in order to maintain consistency with the `--strict-tags-attributes` 
+ *  messages.
+ *
+ *  See also: http://www.whatwg.org/specs/web-apps/current-work/multipage/obsolete.html#obsolete
+ */
 void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
 {
-    /* Lexer* lexer = doc->lexer; */
     Bool clean = cfgBool( doc, TidyMakeClean );
+    Bool already_strict = cfgBool( doc, TidyStrictTagsAttr );
     Node* body = TY_(FindBody)( doc );
     Bool warn = yes;    /* should this be a warning, error, or report??? */
+    AttVal* attr = NULL;
+    int i = 0;
 #if !defined(NDEBUG) && defined(_MSC_VER)
-//    list_not_html5();
+    //    list_not_html5();
 #endif
     while (node)
     {
         if ( nodeHasAlignAttr( node ) ) {
-            /*\
-             * Is this for ALL elements that accept an 'align' attribute, or should
-             * this be a sub-set test
-            \*/
-            TY_(ReportWarning)(doc, node, node, BAD_ALIGN_HTML5);
+            /* @todo: Is this for ALL elements that accept an 'align' attribute,
+             * or should this be a sub-set test?
+             */
+
+            /* We will only emit this message if `--strict-tags-attributes==no`;
+             * otherwise if yes this message will be output during later
+             * checking.
+             */
+            if ( !already_strict )
+                TY_(ReportAttrError)(doc, node, TY_(AttrGetById)(node, TidyAttr_ALIGN), MISMATCHED_ATTRIBUTE_WARN);
         }
         if ( node == body ) {
-            if ( BadBody5(body) ) {
-                /* perhaps need a new/different warning for this, like
-                 * The background 'attribute" on the body element is obsolete. Use CSS instead.
-                 * but how to pass an attribute name to be embedded in the message.
-                \*/
-                TY_(ReportWarning)(doc, node, body, BAD_BODY_HTML5);
+            i = 0;
+            /* We will only emit these messages if `--strict-tags-attributes==no`;
+             * otherwise if yes these messages will be output during later
+             * checking.
+             */
+            if ( !already_strict ) {
+                while ( BadBody5Attribs[i] != TidyAttr_UNKNOWN ) {
+                    attr = TY_(AttrGetById)(node, BadBody5Attribs[i]);
+                    if ( attr )
+                        TY_(ReportAttrError)(doc, node, attr , MISMATCHED_ATTRIBUTE_WARN);
+                    i++;
+                }
             }
         } else
         if ( nodeIsACRONYM(node) ) {
             if (clean) {
-                /* replace with 'abbr' with warning to that effect 
-                 * maybe should use static void RenameElem( TidyDocImpl* doc, Node* node, TidyTagId tid )
+                /* Replace with 'abbr' with warning to that effect.
+                 * Maybe should use static void RenameElem( TidyDocImpl* doc, Node* node, TidyTagId tid )
                  */
                 TY_(CoerceNode)(doc, node, TidyTag_ABBR, warn, no);
             } else {
-                /* sadly, this stops writing of the tidied document, unless 'forced'
-                   TY_(ReportError)(doc, node, node, REMOVED_HTML5); 
-                   so go back to a 'warning' for now...
-                */
-                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+                if ( !already_strict )
+                    TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
             }
-        } else 
+        } else
         if ( nodeIsAPPLET(node) ) {
             if (clean) {
-                /* replace with 'object' with warning to that effect 
+                /* replace with 'object' with warning to that effect
                  * maybe should use static void RenameElem( TidyDocImpl* doc, Node* node, TidyTagId tid )
                  */
                 TY_(CoerceNode)(doc, node, TidyTag_OBJECT, warn, no);
             } else {
-                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+                if ( !already_strict )
+                    TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
             }
         } else
         if ( nodeIsBASEFONT(node) ) {
-            /*\ 
-             * basefont: CSS equivalen 'font-size', 'font-family' and 'color' on body or class on each subsequent element
-             * Difficult - If it is the first body element, then could consider adding that
-             *  to the <body> as a whole, else could perhaps apply it to all subsequent element.
-             *  But also in consideration is the fact that it was NOT supported in many browsers
-             *  For now just report a warning
-            \*/
+            /* basefont: CSS equivalent 'font-size', 'font-family' and 'color' 
+             * on body or class on each subsequent element.
+             * Difficult - If it is the first body element, then could consider
+             * adding that to the <body> as a whole, else could perhaps apply it
+             * to all subsequent elements. But also in consideration is the fact
+             * that it was NOT supported in many browsers.
+             * - For now just report a warning
+             */
+            if ( !already_strict )
                 TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
         } else
         if ( nodeIsBIG(node) ) {
-            /*\
-             * big: CSS equivalent 'font-size:larger'
-             * so could replace the <big> ... </big> with 
+            /* big: CSS equivalent 'font-size:larger'
+             * so could replace the <big> ... </big> with
              * <span style="font-size: larger"> ... </span>
              * then replace <big> with <span>
              * Need to think about that...
@@ -1461,94 +1482,185 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
              * Also maybe need a specific message like
              * Element '%s' replaced with 'span' with a 'font-size: larger style attribute
              * maybe should use static void RenameElem( TidyDocImpl* doc, Node* node, TidyTagId tid )
-             *
-            \*/
+             */
             if (clean) {
                 TY_(AddStyleProperty)( doc, node, "font-size: larger" );
                 TY_(CoerceNode)(doc, node, TidyTag_SPAN, warn, no);
             } else {
-                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+                if ( !already_strict )
+                    TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
             }
         } else
         if ( nodeIsCENTER(node) ) {
-            /*\
-             * center: CSS equivalent 'text-align:center'
-             *  and 'margin-left:auto; margin-right:auto' on descendant blocks
-             * Tidy already handles this if 'clean' by SILENTLY generating the <style>
-             * and adding a <div class="c1"> around the elements.
+            /* center: CSS equivalent 'text-align:center'
+             * and 'margin-left:auto; margin-right:auto' on descendant blocks
+             * Tidy already handles this if 'clean' by SILENTLY generating the
+             * <style> and adding a <div class="c1"> around the elements.
              * see: static Bool Center2Div( TidyDocImpl* doc, Node *node, Node **pnode)
-            \*/
+             */
+            if ( !already_strict )
                 TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
-        } else 
+        } else
         if ( nodeIsDIR(node) ) {
-            /*\
-             *  dir: replace by <ul>
-             *  Tidy already actions this and issues a warning
-             *  Should this be CHANGED???
-            \*/
+            /* dir: replace by <ul>
+             * Tidy already actions this and issues a warning
+             * Should this be CHANGED???
+             */
+            if ( !already_strict )
                 TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
         } else
         if ( nodeIsFONT(node) ) {
-            /*\
-             * Tidy already handles this -
-             * If 'clean' replaced by CSS, else 
+            /* Tidy already handles this -
+             * If 'clean' replaced by CSS, else
              * if is NOT clean, and doctype html5 then warnings issued
              * done in Bool Font2Span( TidyDocImpl* doc, Node *node, Node **pnode ) (I think?)
-             *
-            \*/
+             */
+            if ( !already_strict )
                 TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
         } else
         if (( nodesIsFRAME(node) ) || ( nodeIsFRAMESET(node) ) || ( nodeIsNOFRAMES(node) )) {
-            /*\
-             * YOW: What to do here?????? Maybe <iframe>????
-            \*/
+            /* YOW: What to do here?????? Maybe <iframe>????
+             */
+            if ( !already_strict )
                 TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
         } else
         if ( nodeIsSTRIKE(node) ) {
-            /*\
-             * strike: CSS equivalent 'text-decoration:line-through'
+            /* strike: CSS equivalent 'text-decoration:line-through'
              * maybe should use static void RenameElem( TidyDocImpl* doc, Node* node, TidyTagId tid )
-            \*/
+             */
             if (clean) {
                 TY_(AddStyleProperty)( doc, node, "text-decoration: line-through" );
                 TY_(CoerceNode)(doc, node, TidyTag_SPAN, warn, no);
             } else {
-                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+                if ( !already_strict )
+                    TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
             }
         } else
         if ( nodeIsTT(node) ) {
-            /*\
-             * tt: CSS equivalent 'font-family:monospace'
+            /* tt: CSS equivalent 'font-family:monospace'
              * Tidy presently does nothing. Tidy5 issues a warning
              * But like the 'clean' <font> replacement this could also be replaced with CSS
              * maybe should use static void RenameElem( TidyDocImpl* doc, Node* node, TidyTagId tid )
-             *
-            \*/
+             */
             if (clean) {
                 TY_(AddStyleProperty)( doc, node, "font-family: monospace" );
                 TY_(CoerceNode)(doc, node, TidyTag_SPAN, warn, no);
             } else {
-                TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+                if ( !already_strict )
+                    TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
             }
         } else
-        if (TY_(nodeIsElement)(node)) {
-            if (node->tag) {
-                if ((!(node->tag->versions & VERS_HTML5))||(inRemovedInfo(node->tag->id))) {
-                    /* issue warning for elements like 'markquee' */
-                    TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+            if (TY_(nodeIsElement)(node)) {
+                if (node->tag) {
+                    if ( (!(node->tag->versions & VERS_HTML5) && !(node->tag->versions & VERS_PROPRIETARY)) || (inRemovedInfo(node->tag->id)) ) {
+                        if ( !already_strict )
+                            TY_(ReportWarning)(doc, node, node, REMOVED_HTML5);
+                    }
+                }
+            }
+
+        if (node->content)
+            TY_(CheckHTML5)( doc, node->content );
+        
+        node = node->next;
+    }
+}
+/*****************************************************************************
+ *  END HTML5 STUFF
+ *****************************************************************************/
+
+
+/*
+ * Check and report HTML tags and attributes that are:
+ *  - Proprietary, and/or
+ *  - Not supported in the current version of HTML, defined as the version
+ *    of HTML that we are emitting.
+ * Proprietary items are reported as WARNINGS, and version mismatches will
+ * be reported as WARNING or ERROR in the following conditions:
+ *  - ERROR if the emitted doctype is a strict doctype.
+ *  - WARNING if the emitted doctype is a non-strict doctype.
+ * The propriety checks are *always* run as they have always been an integral
+ * part of Tidy. The version checks are controlled by `strict-tags-attributes`.
+ */
+void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
+{
+    uint versionEmitted = doc->lexer->versionEmitted;
+    uint declared = doc->lexer->doctype;
+    uint version = versionEmitted == 0 ? declared : versionEmitted;
+    int tagReportType = VERS_STRICT & version ? ELEMENT_VERS_MISMATCH_ERROR : ELEMENT_VERS_MISMATCH_WARN;
+    int attrReportType = VERS_STRICT & version ? MISMATCHED_ATTRIBUTE_ERROR : MISMATCHED_ATTRIBUTE_WARN;
+    Bool check_versions = cfgBool( doc, TidyStrictTagsAttr );
+    AttVal *next_attr, *attval;
+    Bool attrIsProprietary = no;
+    Bool attrIsMismatched = yes;
+
+    while (node)
+    {
+        /* This bit here handles our HTML tags */
+        if ( TY_(nodeIsElement)(node) && node->tag ) {
+
+            /* Leave XML stuff alone. */
+            if ( !cfgBool(doc, TidyXmlTags) )
+            {
+                /* Version mismatches take priority. */
+                if ( check_versions && !(node->tag->versions & version) )
+                {
+                    TY_(ReportError)(doc, NULL, node, tagReportType );
+                }
+                /* If it's not mismatched, it could still be proprietary. */
+                else if ( node->tag->versions & VERS_PROPRIETARY )
+                {
+                    if ( !cfgBool(doc, TidyMakeClean) ||
+                        ( !nodeIsNOBR(node) && !nodeIsWBR(node) ) )
+                    {
+                        TY_(ReportError)(doc, NULL, node, PROPRIETARY_ELEMENT );
+
+                        if ( nodeIsLAYER(node) )
+                            doc->badLayout |= USING_LAYER;
+                        else if ( nodeIsSPACER(node) )
+                            doc->badLayout |= USING_SPACER;
+                        else if ( nodeIsNOBR(node) )
+                            doc->badLayout |= USING_NOBR;
+                    }
                 }
             }
         }
 
-        if (node->content)
-            TY_(CheckHTML5)( doc, node->content );
+        /* And this bit here handles our attributes */
+        if (TY_(nodeIsElement)(node))
+        {
+            attval = node->attributes;
 
+            while (attval)
+            {
+                next_attr = attval->next;
+
+                attrIsProprietary = TY_(AttributeIsProprietary)(node, attval);
+                attrIsMismatched = check_versions ? TY_(AttributeIsMismatched)(node, attval, doc) : no;
+                /* Let the PROPRIETARY_ATTRIBUTE warning have precedence. */
+                if ( attrIsProprietary )
+                    TY_(ReportAttrError)(doc, node, attval, PROPRIETARY_ATTRIBUTE);
+                else if ( attrIsMismatched )
+                {
+                    TY_(ReportAttrError)(doc, node, attval, attrReportType);
+                }
+
+                /* @todo: do we need a new option to drop mismatches? Or should we
+                 simply drop them? */
+                if ( ( attrIsProprietary || attrIsMismatched ) && cfgBool(doc, TidyDropPropAttrs) )
+                    TY_(RemoveAttribute)( doc, node, attval );
+
+                attval = next_attr;
+            }
+        }
+
+        if (node->content)
+            TY_(CheckHTMLTagsAttribsVersions)( doc, node->content );
+        
         node = node->next;
     }
 }
-/* END HTML5 STUFF
-   ######################################################################################
- */
+
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
 /* *** FOR DEBUG ONLY *** */
@@ -1686,7 +1798,6 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     Bool tidyXmlTags = cfgBool( doc, TidyXmlTags );
     Bool wantNameAttr = cfgBool( doc, TidyAnchorAsName );
     Bool mergeEmphasis = cfgBool( doc, TidyMergeEmphasis );
-    ctmbstr sdef = NULL;
     Node* node;
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
@@ -1747,12 +1858,7 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
 
     /* remember given doctype for reporting */
     node = TY_(FindDocType)(doc);
-    sdef = tidyOptGetValue((TidyDoc)doc, TidyDoctype );
-    if (!sdef)
-        sdef = tidyOptGetCurrPick((TidyDoc) doc, TidyDoctypeMode );
-    if (sdef && (strcmp(sdef,"html5") == 0)) {
-        TY_(CheckHTML5)( doc, &doc->root );
-    }
+
     if (node)
     {
         AttVal* fpi = TY_(GetAttrByName)(node, "PUBLIC");
@@ -1797,6 +1903,14 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     /* ensure presence of initial <?xml version="1.0"?> */
     if ( xmlOut && xmlDecl )
         TY_(FixXmlDecl)( doc );
+
+    /* At this point the apparent doctype is going to be as stable as
+       it can ever be, so we can start detecting things that shouldn't
+       be in this version of HTML
+     */
+    if (doc->lexer->versionEmitted & VERS_HTML5)
+         TY_(CheckHTML5)( doc, &doc->root );
+    TY_(CheckHTMLTagsAttribsVersions)( doc, &doc->root );
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
     SPRTF("All nodes AFTER clean and repair\n");

@@ -350,6 +350,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { MISSING_ATTR_VALUE,           0,   "%s attribute \"%s\" lacks value"                                         }, /* Warning in CheckUrl, Error otherwise */
     { UNKNOWN_ATTRIBUTE,            0,   "%s unknown attribute \"%s\""                                             }, /* Error */
     { PROPRIETARY_ATTRIBUTE,        0,   "%s proprietary attribute \"%s\""                                         }, /* Error */
+    { MISMATCHED_ATTRIBUTE_ERROR,   0,   "%s attribute \"%s\" not allowed for %s"                                  }, /* Error */
+    { MISMATCHED_ATTRIBUTE_WARN,    0,   "%s attribute \"%s\" not allowed for %s"                                  }, /* Warning */
     { JOINING_ATTRIBUTE,            0,   "%s joining values of repeated attribute \"%s\""                          }, /* Error */
     { XML_ATTRIBUTE_VALUE,          0,   "%s has XML attribute \"%s\""                                             }, /* Error (but deprecated) */
     
@@ -392,8 +394,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { OBSOLETE_ELEMENT,             0,   "replacing obsolete element %s with %s"                                   }, /* Warning */
     { COERCE_TO_ENDTAG_WARN,        0,   "<%s> is probably intended as </%s>"                                      }, /* Warning */
     { REMOVED_HTML5,                0,   "%s element removed from HTML5"                                           }, /* Warning */
-    { BAD_BODY_HTML5,               0,   "Found attribute on body that is obsolete in HTML5. Use CSS"              }, /* Warning */
-    { BAD_ALIGN_HTML5,              0,   "The align attribute on the %s element is obsolete. Use CSS"              }, /* Warning */
     { BAD_SUMMARY_HTML5,            0,   "The summary attribute on the %s element is obsolete in HTML5"            }, /* Warning */
     
     /* ReportNotice */
@@ -415,6 +415,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { INSERTING_TAG,                0,   "inserting implicit <%s>"                                                 }, /* Error */
     { CANT_BE_NESTED,               0,   "%s can't be nested"                                                      }, /* Error */
     { PROPRIETARY_ELEMENT,          0,   "%s is not approved by W3C"                                               }, /* Error */
+    { ELEMENT_VERS_MISMATCH_ERROR,  0,   "%s element not available in %s"                                          }, /* Error */
+    { ELEMENT_VERS_MISMATCH_WARN,   0,   "%s element not available in %s"                                          }, /* Warning */
     { ILLEGAL_NESTING,              0,   "%s shouldn't be nested"                                                  }, /* Error */
     { NOFRAMES_CONTENT,             0,   "%s not inside 'noframes' element"                                        }, /* Error */
     { UNEXPECTED_END_OF_FILE,       0,   "unexpected end of file %s"                                               }, /* Error */
@@ -745,7 +747,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TidyDropPropAttrs,            0,
         "This option specifies if Tidy should strip out proprietary attributes, "
-        "such as Microsoft data binding attributes. "
+        "such as Microsoft data binding attributes. Additionally attributes "
+        "that aren't permitted in the output version of HTML will be dropped "
+        "if used with <code>strict-tags-attributes</code>. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
         It's very important that <br/> be self-closing in this manner! 
@@ -1573,6 +1577,21 @@ static languageDefinition language_en = { whichPluralForm_en, {
       TidySkipNested,               0,
         "This option specifies that Tidy should skip nested tags when parsing "
         "script and style data. "
+    },
+    {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
+        It's very important that <br/> be self-closing in this manner! 
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+      TidyStrictTagsAttr,           0,
+        "This options ensures that tags and attributes are applicable for the "
+        "version of HTML that Tidy outputs. When set to <code>yes</code> (the "
+        "default) and the output document type is a strict doctype, then Tidy "
+        "will report errors. If the output document type is a loose or "
+        "transitional doctype, then Tidy will report warnings. "
+        "<br/>"
+        "Additionally if <code>drop-proprietary-attributes</code> is enabled, "
+        "then not applicable attributes will be dropped, too. "
+        "<br/>"
+        "When set to <code>no</code>, these checks are not performed. "
     },
     
     /********************************************************

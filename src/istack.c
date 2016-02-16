@@ -10,6 +10,9 @@
 #include "attrs.h"
 #include "streamio.h"
 #include "tmbstr.h"
+#if !defined(NDEBUG) && defined(_MSC_VER)
+#include "sprtf.h"
+#endif
 
 /* duplicate attributes */
 AttVal *TY_(DupAttrs)( TidyDocImpl* doc, AttVal *attrs)
@@ -115,6 +118,7 @@ static void PopIStack( TidyDocImpl* doc )
         TY_(FreeAttribute)( doc, av );
     }
     TidyDocFree(doc, istack->element);
+    istack->element = NULL; /* remove the freed element */
 }
 
 static void PopIStackUntil( TidyDocImpl* doc, TidyTagId tid )
@@ -267,9 +271,12 @@ Node *TY_(InsertedToken)( TidyDocImpl* doc )
     node->end = lexer->txtend; /* was : lexer->txtstart; */
     istack = lexer->insert;
 
-#if 0 && defined(_DEBUG)
+/* #if 0 && defined(_DEBUG) */
+#if !defined(NDEBUG) && defined(_MSC_VER)
     if ( lexer->istacksize == 0 )
-        fprintf( stderr, "0-size istack!\n" );
+    {
+        SPRTF( "WARNING: ZERO sized istack!\n" );
+    }
 #endif
 
     node->element = TY_(tmbstrdup)(doc->allocator, istack->element);

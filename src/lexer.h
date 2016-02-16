@@ -211,6 +211,9 @@ typedef enum
 #define VERS_FROM40        (VERS_HTML40|VERS_XHTML11|VERS_BASIC)
 #define VERS_XHTML         (X10S|X10T|X10F|XH11|XB10|XH50)
 
+/* strict */
+#define VERS_STRICT        (VERS_HTML5|VERS_HTML40_STRICT)
+
 /* all W3C defined document types */
 #define VERS_ALL           (VERS_HTML20|VERS_HTML32|VERS_FROM40|XH50|HT50)
 

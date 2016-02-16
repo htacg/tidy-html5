@@ -144,7 +144,7 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
     tmbstr src = lex ? "lexer" : "stream";
     SPRTF("R=%d C=%d: ", line, col );
     // DEBUG: Be able to set a TRAP on a SPECIFIC row,col
-    if ((line == 8) && (col == 36)) {
+    if ((line == 67) && (col == 95)) {
         check_me("Show_Node"); // just a debug trap
     }
     if (lexer && lexer->token && 
@@ -2307,8 +2307,11 @@ Node* TY_(GetToken)( TidyDocImpl* doc, GetTokenMode mode )
     assert( !(lexer->pushed || lexer->itoken) );
 
     /* at start of block elements, unclosed inline
-       elements are inserted into the token stream */
-    if (lexer->insert || lexer->inode) {
+       elements are inserted into the token stream 
+       Issue #341 - Can NOT insert a token if NO istacksize  
+     */
+    if ((lexer->insert || lexer->inode) && lexer->istacksize)
+    {
         /*\ Issue #92: could fix by the following, but instead chose not to stack these 2
          *  if ( !(lexer->insert && (nodeIsINS(lexer->insert) || nodeIsDEL(lexer->insert))) ) {
         \*/

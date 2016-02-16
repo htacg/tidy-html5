@@ -52,7 +52,7 @@
 static void check_me(char *name);
 static Bool show_attrs = yes;
 #define MX_TXT 8
-static char buffer[MX_TXT+8]; /* NOTE extra for '...'\0 tail */
+static char buffer[(MX_TXT*4)+8]; /* NOTE extra for '...'\0 tail */
 static tmbstr get_text_string(Lexer* lexer, Node *node)
 {
     uint len = node->end - node->start;
@@ -61,31 +61,74 @@ static tmbstr get_text_string(Lexer* lexer, Node *node)
     unsigned char c;
     uint i = 0;
     Bool insp = no;
-    buffer[0] = (char)0;
-    while (cp < end ) {
-        c = *cp;
-        if (c == '\n') {
-            buffer[i++] = '\\';
-            buffer[i++] = 'n';
-            insp = yes;
-        } else if (c == ' ') {
-            if (!insp)
+    if (len <= ((MX_TXT * 2) + 3)) {
+        buffer[0] = 0;
+        while (cp < end) {
+            c = *cp;
+            cp++;
+            if (c == '\n') {
+                buffer[i++] = '\\';
+                buffer[i++] = 'n';
+            } else if ( c == ' ' ) {
+                if (!insp)
+                    buffer[i++] = c;
+                insp = yes;
+            } else {
                 buffer[i++] = c;
-            insp = yes;
-        } else {
-            buffer[i++] = c;
-            insp = no;
+                insp = no;
+            }
         }
-        cp++;
-        if (i >= MX_TXT)
-            break;
-    }
-    if (i < len) {
-        buffer[i++] = '.';
-        if (i < len) {
-            buffer[i++] = '.';
-            if (i < len) {
-                buffer[i++] = '.';
+    } else {
+        char *end1 = cp + MX_TXT;
+        char *bgn = cp + (len - MX_TXT);
+        buffer[0] = 0;
+        if (bgn < end1)
+            bgn = end1;
+        while (cp < end1) {
+            c = *cp;
+            cp++;
+            if (c == '\n') {
+                buffer[i++] = '\\';
+                buffer[i++] = 'n';
+            } else if ( c == ' ' ) {
+                if (!insp)
+                    buffer[i++] = c;
+                insp = yes;
+            } else {
+                buffer[i++] = c;
+                insp = no;
+            }
+            if (i >= MX_TXT)
+                break;
+        }
+        c = '.';
+        if ((i < len)&&(cp < bgn)) {
+            buffer[i++] = c;
+            cp++;
+            if ((i < len)&&(cp < bgn)) {
+                buffer[i++] = c;
+                cp++;
+                if ((i < len)&&(cp < bgn)) {
+                    buffer[i++] = c;
+                    cp++;
+                }
+            }
+        }
+        cp = bgn;
+        insp = no;
+        while (cp < end) {
+            c = *cp;
+            cp++;
+            if (c == '\n') {
+                buffer[i++] = '\\';
+                buffer[i++] = 'n';
+            } else if ( c == ' ' ) {
+                if (!insp)
+                    buffer[i++] = c;
+                insp = yes;
+            } else {
+                buffer[i++] = c;
+                insp = no;
             }
         }
     }
@@ -101,7 +144,7 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
     tmbstr src = lex ? "lexer" : "stream";
     SPRTF("R=%d C=%d: ", line, col );
     // DEBUG: Be able to set a TRAP on a SPECIFIC row,col
-    if ((line == 8) && (col == 36)) {
+    if ((line == 67) && (col == 95)) {
         check_me("Show_Node"); // just a debug trap
     }
     if (lexer && lexer->token && 
@@ -2265,8 +2308,11 @@ Node* TY_(GetToken)( TidyDocImpl* doc, GetTokenMode mode )
     assert( !(lexer->pushed || lexer->itoken) );
 
     /* at start of block elements, unclosed inline
-       elements are inserted into the token stream */
-    if (lexer->insert || lexer->inode) {
+       elements are inserted into the token stream 
+       Issue #341 - Can NOT insert a token if NO istacksize  
+     */
+    if ((lexer->insert || lexer->inode) && lexer->istacksize)
+    {
         /*\ Issue #92: could fix by the following, but instead chose not to stack these 2
          *  if ( !(lexer->insert && (nodeIsINS(lexer->insert) || nodeIsDEL(lexer->insert))) ) {
         \*/

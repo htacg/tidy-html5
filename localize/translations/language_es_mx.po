@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2016-01-29 10:54:42\n"
+"PO-Revision-Date: 2016-02-16 11:45:26\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -459,6 +459,14 @@ msgctxt "PROPRIETARY_ATTRIBUTE"
 msgid "%s proprietary attribute \"%s\
 msgstr ""
 
+msgctxt "MISMATCHED_ATTRIBUTE_ERROR"
+msgid "%s attribute \"%s\" not allowed for %s"
+msgstr ""
+
+msgctxt "MISMATCHED_ATTRIBUTE_WARN"
+msgid "%s attribute \"%s\" not allowed for %s"
+msgstr ""
+
 msgctxt "JOINING_ATTRIBUTE"
 msgid "%s joining values of repeated attribute \"%s\
 msgstr ""
@@ -579,14 +587,6 @@ msgctxt "REMOVED_HTML5"
 msgid "%s element removed from HTML5"
 msgstr ""
 
-msgctxt "BAD_BODY_HTML5"
-msgid "Found attribute on body that is obsolete in HTML5. Use CSS"
-msgstr ""
-
-msgctxt "BAD_ALIGN_HTML5"
-msgid "The align attribute on the %s element is obsolete. Use CSS"
-msgstr ""
-
 msgctxt "BAD_SUMMARY_HTML5"
 msgid "The summary attribute on the %s element is obsolete in HTML5"
 msgstr ""
@@ -653,6 +653,14 @@ msgstr ""
 
 msgctxt "PROPRIETARY_ELEMENT"
 msgid "%s is not approved by W3C"
+msgstr ""
+
+msgctxt "ELEMENT_VERS_MISMATCH_ERROR"
+msgid "%s element not available in %s"
+msgstr ""
+
+msgctxt "ELEMENT_VERS_MISMATCH_WARN"
+msgid "%s element not available in %s"
 msgstr ""
 
 msgctxt "ILLEGAL_NESTING"
@@ -1422,7 +1430,9 @@ msgstr ""
 msgctxt "TidyDropPropAttrs"
 msgid ""
 "This option specifies if Tidy should strip out proprietary attributes, "
-"such as Microsoft data binding attributes. "
+"such as Microsoft data binding attributes. Additionally attributes "
+"that aren't permitted in the output version of HTML will be dropped "
+"if used with <code>strict-tags-attributes</code>. "
 msgstr ""
 
 #. Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
@@ -2396,6 +2406,23 @@ msgctxt "TidySkipNested"
 msgid ""
 "This option specifies that Tidy should skip nested tags when parsing "
 "script and style data. "
+msgstr ""
+
+#. Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
+#. It's very important that <br/> be self-closing in this manner!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TidyStrictTagsAttr"
+msgid ""
+"This options ensures that tags and attributes are applicable for the "
+"version of HTML that Tidy outputs. When set to <code>yes</code> (the "
+"default) and the output document type is a strict doctype, then Tidy "
+"will report errors. If the output document type is a loose or "
+"transitional doctype, then Tidy will report warnings. "
+"<br/>"
+"Additionally if <code>drop-proprietary-attributes</code> is enabled, "
+"then not applicable attributes will be dropped, too. "
+"<br/>"
+"When set to <code>no</code>, these checks are not performed. "
 msgstr ""
 
 msgctxt "TC_CAT_DIAGNOSTICS"

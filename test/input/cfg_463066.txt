@@ -1,3 +1,0 @@
-// Tidy configuration file for bug #463066
-word-2000: yes
-

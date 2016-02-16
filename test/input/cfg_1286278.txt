@@ -1,3 +1,0 @@
-tidy-mark: no
-drop-empty-paras: no
-

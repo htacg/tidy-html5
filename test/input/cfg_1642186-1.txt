@@ -1,8 +1,0 @@
-// not really required since this is defaul
-skip-nested: yes
-indent: auto
-tidy-mark: no
-clean: yes
-logical-emphasis: yes
-indent-attributes: yes
-show-info: no

@@ -1,1 +1,0 @@
-accessibility-check: 2

@@ -1,2 +1,0 @@
-char-encoding: latin1
-

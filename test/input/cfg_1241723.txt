@@ -1,6 +1,0 @@
-indent: auto
-char-encoding: latin1
-tidy-mark: no
-clean: yes
-indent-attributes: yes
-

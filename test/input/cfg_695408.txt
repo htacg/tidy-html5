@@ -1,7 +1,0 @@
-indent: auto
-indent-attributes: yes
-tidy-mark: no
-clean: yes
-drop-font-tags: yes
-drop-proprietary-attributes: no
-

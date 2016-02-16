@@ -1,7 +1,0 @@
-char-encoding: shiftjis
-ncr: yes
-tidy-mark: no
-output-xhtml: yes
-clean: yes
-indent: auto
-logical-emphasis: yes

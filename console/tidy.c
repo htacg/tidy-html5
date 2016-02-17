@@ -1391,15 +1391,17 @@ static void version( void )
 static void printXMLOptionString( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
 {
     tmbstr description;
+    ctmbstr rawDescription = tidyOptGetDoc( tdoc, topt );
 
     if ( tidyOptIsReadOnly(topt) )
         return;
 
-    description = cleanup_description( tidyOptGetDoc( tdoc, topt ) );
+    description = cleanup_description( rawDescription );
 
     printf( " <option>\n" );
     printf( "  <name>%s</name>\n",d->name);
     printf( "  <description class=\"%s\">%s</description>\n", tidyGetLanguage(), description );
+    printf( "  <raw class=\"%s\"><![CDATA[%s]]></description>\n", tidyGetLanguage(), rawDescription );
     printf( " </option>\n" );
     free( description );
 }
@@ -1421,8 +1423,12 @@ static void xml_options_strings( TidyDoc tdoc )
 
 /**
  **  Handles the -xml-strings service.
- **  This service is primarily helpful to developers and localizers to
- **  compare localized strings to the built in `en` strings.
+ **  This service was primarily helpful to developers and localizers to
+ **  compare localized strings to the built in `en` strings. It's probably
+ **  better to use our POT/PO workflow with your favorite tools, or simply
+ **  diff the language header files directly.
+ **  **Important:** The attribute `id` is not a specification, promise, or
+ **  part of an API. You must not depend on this value.
  */
 static void xml_strings( void )
 {

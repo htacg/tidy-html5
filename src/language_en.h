@@ -1586,9 +1586,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option specifies if Tidy should add some extra empty lines for "
         "readability. "
         "<br/>"
-        "The default is <code>no</code>. "
+        "The default is <var>no</var>. "
         "<br/>"
-        "If set to <code>auto</code> Tidy will eliminate nearly all newline "
+        "If set to <var>auto</var> Tidy will eliminate nearly all newline "
         "characters."
     },
     {/* Important notes for translators:
@@ -1604,7 +1604,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "<br/>"
         "Tidy tries to wrap lines so that they do not exceed this length. "
         "<br/>"
-        "Set <code>wrap</code> to <code>0</code>(zero) if you want to disable line "
+        "Set <code>wrap</code> to <var>0</var>(zero) if you want to disable line "
         "wrapping. "
     },
     {/* Important notes for translators:
@@ -1641,7 +1641,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "To force Tidy to preserve the original, literal values of all attributes, "
         "and ensure that whitespace characters within attribute values are passed "
         "through unchanged, set <code>literal-attributes</code> to "
-        "<code>yes</code>. "
+        "<var>yes</var>. "
     },
     {/* Important notes for translators:
         - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -1704,9 +1704,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
           be translated. */
       TidyAsciiChars,               0,
         "Can be used to modify behavior of the <code>clean</code> option when set "
-        "to <code>yes</code>. "
+        "to <var>yes</var>. "
         "<br/>"
-        "If set to <code>yes</code> when <code>clean</code>, "
+        "If set to <var>yes</var> when <code>clean</code>, "
         "<code>&amp;emdash;</code>, <code>&amp;rdquo;</code>, and other named "
         "character entities are downgraded to their closest ASCII equivalents. "
     },
@@ -1722,21 +1722,21 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option specifies the character encoding Tidy uses for both the input "
         "and output. "
         "<br/>"
-        "For <code>ascii</code> Tidy will accept Latin-1 (ISO-8859-1) character "
+        "For <var>ascii</var> Tidy will accept Latin-1 (ISO-8859-1) character "
         "values, but will use entities for all characters whose value &gt;127. "
         "<br/>"
-        "For <code>raw</code>, Tidy will output values above 127 without "
+        "For <var>raw</var>, Tidy will output values above 127 without "
         "translating them into entities. "
         "<br/>"
-        "For <code>latin1</code>, characters above 255 will be written as entities. "
+        "For <var>latin1</var>, characters above 255 will be written as entities. "
         "<br/>"
-        "For <code>utf8</code>, Tidy assumes that both input and output are encoded "
+        "For <var>utf8</var>, Tidy assumes that both input and output are encoded "
         "as UTF-8. "
         "<br/>"
-        "You can use <code>iso2022</code> for files encoded using the ISO-2022 "
+        "You can use <var>iso2022</var> for files encoded using the ISO-2022 "
         "family of encodings e.g. ISO-2022-JP. "
         "<br/>"
-        "For <code>mac</code> and <code>win1252</code>, Tidy will accept vendor "
+        "For <var>mac</var> and <var>win1252</var>, Tidy will accept vendor "
         "specific character values, but will use entities for all characters whose "
         "value &gt;127. "
         "<br/>"
@@ -1766,7 +1766,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
           be translated. */
       TidyLanguage,                 0,
         "Currently not used, but this option specifies the language Tidy would use "
-        "if it were properly localized. For example: <code>en</code>. "
+        "if it were properly localized. For example: <var>en</var>. "
     },
 #endif
 #if SUPPORT_UTF16_ENCODINGS
@@ -1784,7 +1784,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "U+FEFF) to the beginning of the output, and only applies to UTF-8 and "
         "UTF-16 output encodings. "
         "<br/>"
-        "If set to <code>auto</code> this option causes Tidy to write a BOM to "
+        "If set to <var>auto</var> this option causes Tidy to write a BOM to "
         "the output only if a BOM was present at the beginning of the input. "
         "<br/>"
         "A BOM is always written for XML/XHTML output using UTF-16 output "
@@ -1803,9 +1803,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option specifies the character encoding Tidy uses for the output. "
         "<br/>"
         "Note that this may only be different from <code>input-encoding</code> for "
-        "Latin encodings (<code>ascii</code>, <code>latin0</code>, "
-        "<code>latin1</code>, <code>mac</code>, <code>win1252</code>, "
-        "<code>ibm858</code>)."
+        "Latin encodings (<var>ascii</var>, <var>latin0</var>, "
+        "<var>latin1</var>, <var>mac</var>, <var>win1252</var>, "
+        "<var>ibm858</var>)."
         "<br/>"
         "See <code>char-encoding</code> for more information"
     },
@@ -1898,7 +1898,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option specifies if Tidy should keep the original modification time "
         "of files that Tidy modifies in place. "
         "<br/>"
-        "Setting the option to <code>yes</code> allows you to tidy files without "
+        "Setting the option to <var>yes</var> allows you to tidy files without "
         "changing the file modification date, which may be useful with certain "
         "tools that use the modification date for things such as automatic server "
         "deployment."
@@ -2006,11 +2006,11 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option controls the deletion or addition of the <code>name</code> "
         "attribute in elements where it can serve as anchor. "
         "<br/>"
-        "If set to <code>yes</code> a <code>name</code> attribute, if not already "
+        "If set to <var>yes</var> a <code>name</code> attribute, if not already "
         "existing, is added along an existing <code>id</code> attribute if the DTD "
         "allows it. "
         "<br/>"
-        "If set to <code>no</code> any existing name attribute is removed if an "
+        "If set to <var>no</var> any existing name attribute is removed if an "
         "<code>id</code> attribute exists or has been added. "
     },
     {/* Important notes for translators:
@@ -2023,15 +2023,15 @@ static languageDefinition language_en = { whichPluralForm_en, {
           be translated. */
       TidyPPrintTabs,               0,
         "This option specifies if Tidy should indent with tabs instead of spaces, "
-        "assuming <code>indent</code> is <code>yes</code>. "
+        "assuming <code>indent</code> is <var>yes</var>. "
         "<br/>"
-        "Set it to <code>yes</code> to indent using tabs instead of the default "
+        "Set it to <var>yes</var> to indent using tabs instead of the default "
         "spaces. "
         "<br/>"
         "Use the option <code>indent-spaces</code> to control the number of tabs "
         "output per level of indent. Note that when <code>indent-with-tabs</code> "
         "is enabled the default value of <code>indent-spaces</code> is reset to "
-        "<code>1</code>. "
+        "<var>1</var>. "
         "<br/>"
         "Note <code>tab-size</code> controls converting input tabs to spaces. Set "
         "it to zero to retain input tabs. "
@@ -2058,7 +2058,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
           be translated. */
       TidyStrictTagsAttr,           0,
         "This options ensures that tags and attributes are applicable for the "
-        "version of HTML that Tidy outputs. When set to <code>yes</code> (the "
+        "version of HTML that Tidy outputs. When set to <var>yes</var> (the "
         "default) and the output document type is a strict doctype, then Tidy "
         "will report errors. If the output document type is a loose or "
         "transitional doctype, then Tidy will report warnings. "
@@ -2066,7 +2066,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "Additionally if <code>drop-proprietary-attributes</code> is enabled, "
         "then not applicable attributes will be dropped, too. "
         "<br/>"
-        "When set to <code>no</code>, these checks are not performed. "
+        "When set to <var>no</var>, these checks are not performed. "
     },
     
     /********************************************************

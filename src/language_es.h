@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2016-01-29 10:54:42
+ *   PO_REVISION_DATE=2016-02-17 20:04:18
  */
 
 #ifdef _MSC_VER
@@ -73,9 +73,14 @@ static languageDefinition language_es = { whichPluralForm_es, {
         "ayudarnos a localizar HTML Tidy. Para más detalles consulte \n"
         "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md \n"
     },
-    {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-        It's very important that <br/> be self-closing in this manner! 
-        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+    {/* Important notes for translators:
+        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+          <br/>.
+        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+        - Option values should be enclosed in <var></var>.
+        - It's very important that <br/> be self-closing!
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not
+          be translated. */
       TidyMakeClean,          0,        
         "Esta opción especifica si Tidy debe realizar la limpieza de algún legado etiquetas de "
         "presentación (actualmente <code>&lt;i&gt;</code>, <code>&lt;b&gt;</code>, <code>&lt;center&gt;</"
@@ -85,9 +90,14 @@ static languageDefinition language_es = { whichPluralForm_es, {
     },
 
 #if SUPPORT_ASIAN_ENCODINGS
-    {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-        It's very important that <br/> be self-closing in this manner! 
-        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+    {/* Important notes for translators:
+        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+          <br/>.
+        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+        - Option values should be enclosed in <var></var>.
+        - It's very important that <br/> be self-closing!
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not
+          be translated. */
       TidyNCR,                0, "Esta opción especifica si Tidy debe permitir referencias de caracteres numéricos. "
     },
 #endif /* SUPPORT_ASIAN_ENCODINGS */

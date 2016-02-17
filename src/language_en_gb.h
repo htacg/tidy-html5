@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2016-01-29 10:54:42
+ *   PO_REVISION_DATE=2016-02-17 20:04:18
  */
 
 #ifdef _MSC_VER
@@ -96,9 +96,14 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
     { COLOR_CONTRAST_VISITED_LINK,     0, "[2.2.1.4]: poor colour contrast (visited link)."                             },
 #endif /* SUPPORT_ACCESSIBILITY_CHECKS */
 
-    {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-        It's very important that <br/> be self-closing in this manner! 
-        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+    {/* Important notes for translators:
+        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+          <br/>.
+        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+        - Option values should be enclosed in <var></var>.
+        - It's very important that <br/> be self-closing!
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not
+          be translated. */
       TidyMergeDivs,                   0,        
         "This option can be used to modify the behaviour of <code>clean</code> when "
         "set to <code>yes</code>."
@@ -115,9 +120,14 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
         "<code>&lt;div&gt;</code> are discarded with the exception of "
         "<code>class</code> and <code>style</code>. "
     },
-    {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-        It's very important that <br/> be self-closing in this manner! 
-        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+    {/* Important notes for translators:
+        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+          <br/>.
+        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+        - Option values should be enclosed in <var></var>.
+        - It's very important that <br/> be self-closing!
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not
+          be translated. */
       TidyMergeSpans,                  0,        
         "This option can be used to modify the behaviour of <code>clean</code> when "
         "set to <code>yes</code>."
@@ -127,9 +137,14 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
         "<br/>"
         "The algorithm is identical to the one used by <code>merge-divs</code>. "
     },
-    {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-        It's very important that <br/> be self-closing in this manner! 
-        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+    {/* Important notes for translators:
+        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+          <br/>.
+        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+        - Option values should be enclosed in <var></var>.
+        - It's very important that <br/> be self-closing!
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not
+          be translated. */
       TidyReplaceColor,                0,        
         "This option specifies if Tidy should replace numeric values in colour "
         "attributes with HTML/XHTML colour names where defined, e.g. replace "

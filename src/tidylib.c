@@ -1362,7 +1362,7 @@ Bool inRemovedInfo( uint tid )
  and we might just want to remove CheckHTML5()'s output altogether and count
  on the default --strict-tags-attributes.
  */
-static BadBody5Attribs[] = {
+static int BadBody5Attribs[] = {
     TidyAttr_BACKGROUND,
     TidyAttr_BGCOLOR,
     TidyAttr_TEXT,

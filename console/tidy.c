@@ -1391,20 +1391,13 @@ static void version( void )
  **/
 static void printXMLOptionString( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
 {
-    tmbstr description;
-    ctmbstr rawDescription = tidyOptGetDoc( tdoc, topt );
-
     if ( tidyOptIsReadOnly(topt) )
         return;
 
-    description = cleanup_description( rawDescription );
-
     printf( " <option>\n" );
     printf( "  <name>%s</name>\n",d->name);
-    printf( "  <description class=\"%s\">%s</description>\n", tidyGetLanguage(), description );
-    printf( "  <raw class=\"%s\"><![CDATA[%s]]></description>\n", tidyGetLanguage(), rawDescription );
+    printf( "  <string class=\"%s\"><![CDATA[%s]]></string>\n", tidyGetLanguage(), tidyOptGetDoc( tdoc, topt ) );
     printf( " </option>\n" );
-    free( description );
 }
 
 /**

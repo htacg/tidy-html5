@@ -283,6 +283,7 @@ static const CmdOptDesc cmdopt_defs[] =  {
     { CmdOptXML,       "-xml-help",            TC_OPT_XMLHELP,  0,             NULL },
     { CmdOptXML,       "-xml-config",          TC_OPT_XMLCFG,   0,             NULL },
     { CmdOptXML,       "-xml-strings",         TC_OPT_XMLSTRG,  0,             NULL },
+    { CmdOptXML,       "-xml-error-strings",   TC_OPT_XMLERRS,  0,             NULL },
     { CmdOptXML,       "-xml-options-strings", TC_OPT_XMLOPTS,  0,             NULL },
     { CmdOptMisc,      NULL,                   0,               0,             NULL }
 };
@@ -1408,7 +1409,7 @@ static void printXMLOptionString( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
 
 /**
  **  Handles the -xml-options-strings service.
- **  This service is primarily helppful to developers and localizers to test
+ **  This service is primarily helpful to developers and localizers to test
  **  that option description strings as represented on screen output are
  **  correct and do not break tidy.
  **/
@@ -1419,6 +1420,41 @@ static void xml_options_strings( TidyDoc tdoc )
     ForEachOption( tdoc, printXMLOptionString);
     printf( "</options_strings>\n" );
 }
+
+
+/**
+ **  Handles the -xml-error-strings service.
+ **  This service is primarily helpful to developers who need to generate
+ **  an updated list of strings to expect when using `TidyReportFilter3`.
+ **  Included in the output is the current string associated with the error
+ **  symbol.
+ **/
+static void xml_error_strings( TidyDoc tdoc )
+{
+    const tidyErrorFilterKeyItem *item;
+    ctmbstr localizedString;
+    TidyIterator j = getErrorCodeList();
+
+    printf( "<?xml version=\"1.0\"?>\n" );
+    printf( "<error_strings version=\"%s\">\n", tidyLibraryVersion());
+
+    while (j) {
+        item = getNextErrorCode(&j);
+        localizedString = tidyLocalizedString(item->value);
+        printf( " <error_string>\n" );
+        printf( "  <name>%s</name>\n",item->key);
+        if ( localizedString )
+            printf( "  <string class=\"%s\"><[CDATA[%s]]></string>\n", tidyGetLanguage(), localizedString );
+        else
+            printf( "  <string class=\"%s\">NULL</string>\n", tidyGetLanguage() );
+
+        printf( " </error_string>\n" );
+    }
+    
+    printf( "</error_strings>\n" );
+}
+
+
 
 
 /**
@@ -1682,6 +1718,12 @@ int main( int argc, char** argv )
                 else if ( strcasecmp(arg, "xml-help") == 0)
                 {
                     xml_help( );
+                    tidyRelease( tdoc );
+                    return 0; /* success */
+                }
+                else if ( strcasecmp(arg, "xml-error-strings") == 0)
+                {
+                    xml_error_strings( tdoc );
                     tidyRelease( tdoc );
                     return 0; /* success */
                 }

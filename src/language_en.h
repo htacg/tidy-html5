@@ -1675,7 +1675,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
       TC_OPT_XMLSTRG,               0,   "output all of Tidy's strings in XML format"
     },
 
-    { TC_OPT_XMLOPTS,               0,   "output all option descriptions cleaned XML format"                       },
+    { TC_OPT_XMLERRS,               0,   "output error constants and strings in XML format"                        },
+
+    { TC_OPT_XMLOPTS,               0,   "output option descriptions in XML format"                                },
     
     { TC_STRING_CONF_HEADER,        0,   "Configuration File Settings:"                                            },
 

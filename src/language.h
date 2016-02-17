@@ -67,6 +67,22 @@ typedef struct tidyLocaleMapItem {
 
 
 /**
+ *  The function getNextErrorCode() returns pointers to this type; it gives
+ *  LibTidy implementors the ability to know what errors can be returned
+ *  via `TidyReportFilter3`.
+ *  Provides the mapping for LibTidy users to map between an opaque key
+ *  and an error message value. See `tidyErrorFilterKeys[]` in `language.c`.
+ *  The `key` string is guaranteed by the API (unless deleted entirely). The
+ *  `value` is suitable for use in looking up Tidy's strings, but its value
+ *  is not guaranteed between releases.
+ */
+typedef struct tidyErrorFilterKeyItem {
+    ctmbstr key;
+    int value;
+} tidyErrorFilterKeyItem;
+
+
+/**
  *  Defines all of the possible dictionary keys.
  *  The starting value is arbitrary but must prevent overlaps
  *  with other enums that are used for retrieving strings. The
@@ -294,6 +310,20 @@ TidyIterator getInstalledLanguageList();
  *  Returns the next installed language.
  */
 ctmbstr getNextInstalledLanguage( TidyIterator* iter );
+
+
+/**
+ *  Initializes the TidyIterator to point to the first item
+ *  in Tidy's list of error codes that can be return with
+ *  `TidyReportFilter3`.
+ *  Items can be retrieved with getNextErrorCode();
+ */
+TidyIterator getErrorCodeList();
+
+/**
+ *  Returns the next error code.
+ */
+const tidyErrorFilterKeyItem *getNextErrorCode( TidyIterator* iter );
 
 
 /** @} */

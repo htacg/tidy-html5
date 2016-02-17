@@ -224,16 +224,6 @@ static const tidyLocaleMapItem localeMappings[] = {
 
 
 /**
- *  Provides the mapping for LibTidy users to map between an opaque key
- *  and an error message value. See `tidyErrorFilterKeys[]`, below.
- */
-typedef struct tidyErrorFilterKeyItem {
-    ctmbstr key;
-    int value;
-} tidyErrorFilterKeyItem;
-
-
-/**
  *  LibTidy users may want to use `TidyReportFilter3` to enable their own
  *  localization lookup features. Because Tidy's errors codes are enums the
  *  specific values can change over time. This table will ensure that LibTidy
@@ -904,5 +894,55 @@ ctmbstr getNextInstalledLanguage( TidyIterator* iter )
     }
     
     *iter = (TidyIterator)( itemIndex <= TY_(tidyInstalledLanguageListSize)() ? itemIndex : (size_t)0 );
+    return item;
+}
+
+
+/**
+ *  Determines the number of error codes used by Tidy.
+ */
+const uint TY_(tidyErrorCodeListSize)()
+{
+    static uint array_size = 0;
+    
+    if ( array_size == 0 )
+    {
+        while ( tidyErrorFilterKeysStruct[array_size].key ) {
+            array_size++;
+        }
+    }
+    
+    return array_size;
+}
+
+/**
+ *  Initializes the TidyIterator to point to the first item
+ *  in Tidy's list of error codes that can be return with
+ *  `TidyReportFilter3`.
+ *  Items can be retrieved with getNextErrorCode();
+ */
+TidyIterator getErrorCodeList()
+{
+    return (TidyIterator)(size_t)1;
+}
+
+/**
+ *  Returns the next error code.
+ */
+const tidyErrorFilterKeyItem *getNextErrorCode( TidyIterator* iter )
+{
+    const tidyErrorFilterKeyItem *item = NULL;
+    size_t itemIndex;
+    assert( iter != NULL );
+    
+    itemIndex = (size_t)*iter;
+    
+    if ( itemIndex > 0 && itemIndex <= TY_(tidyErrorCodeListSize)() )
+    {
+        item = &tidyErrorFilterKeysStruct[itemIndex - 1];
+        itemIndex++;
+    }
+    
+    *iter = (TidyIterator)( itemIndex <= TY_(tidyErrorCodeListSize)() ? itemIndex : (size_t)0 );
     return item;
 }

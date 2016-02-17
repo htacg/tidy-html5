@@ -407,7 +407,7 @@ The sources for \fBHTML Tidy\fR are available at https://github.com/htacg/tidy-h
    <xsl:text /> at \fI<xsl:value-of select="@href" />\fR<xsl:text />
 </xsl:template>
 
-<xsl:template match="code | em">
+<xsl:template match="code | em | var">
    <xsl:text />\fI<xsl:call-template name="escape-backslash" />\fR<xsl:text />
 </xsl:template>
 

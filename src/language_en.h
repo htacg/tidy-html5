@@ -593,9 +593,14 @@ static languageDefinition language_en = { whichPluralForm_en, {
      **    <code>, <em>, <strong>, <br/>, <p>
      **  Note that the xslt processor requires <br/> to be self closing!
      *********************************************************************/
-    {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
-        It's very important that <br/> be self-closing in this manner! 
-        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+    {/* Important notes for translators:
+        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+          <br/>.
+        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+        - Option values should be enclosed in <var></var>.
+        - It's very important that <br/> be self-closing!
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not
+          be translated. */
       TidyXmlDecl,                  0,
         "This option specifies if Tidy should add the XML declaration when "
         "outputting XML or XHTML. "
@@ -603,9 +608,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "Note that if the input already includes an <code>&lt;?xml ... ?&gt;</code> "
         "declaration then this option will be ignored. "
         "<br/>"
-        "If the encoding for the output is different from <code>ascii</code>, one "
-        "of the utf encodings or <code>raw</code>, the declaration is always added "
-        "as required by the XML standard. "
+        "If the encoding for the output is different from <var>ascii</var>, one "
+        "of the <var>utf*</var> encodings, or <var>raw</var>, then the "
+        "declaration is always added as required by the XML standard. "
     },
     {/* Please use _only_ <code></code>, <em></em>, <strong></strong>, and <br/>.
         It's very important that <br/> be self-closing in this manner!

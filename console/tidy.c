@@ -1444,7 +1444,7 @@ static void xml_error_strings( TidyDoc tdoc )
         printf( " <error_string>\n" );
         printf( "  <name>%s</name>\n",item->key);
         if ( localizedString )
-            printf( "  <string class=\"%s\"><[CDATA[%s]]></string>\n", tidyGetLanguage(), localizedString );
+            printf( "  <string class=\"%s\"><![CDATA[%s]]></string>\n", tidyGetLanguage(), localizedString );
         else
             printf( "  <string class=\"%s\">NULL</string>\n", tidyGetLanguage() );
 

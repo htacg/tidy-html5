@@ -2020,8 +2020,8 @@ void TY_(CleanWord2000)( TidyDocImpl* doc, Node *node)
              * proprietary checks to near the end of the cleanup process,
              * meaning this result would not ordinarily be displayed.
              */
-            TY_(ReportError)(doc, NULL, node, PROPRIETARY_ELEMENT);
             Node* next;
+            TY_(ReportError)(doc, NULL, node, PROPRIETARY_ELEMENT);
             DiscardContainer( doc, node, &next );
             node = next;
             continue;

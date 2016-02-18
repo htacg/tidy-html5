@@ -2737,7 +2737,9 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 {
                     c = TY_(ReadChar)(doc->docIn);
 
-                    if (c != '\n' && c != '\f')
+                    if ((c == '\n') && (mode != IgnoreWhitespace)) /* Issue #329 - Can NOT afford to lose this newline */
+                        TY_(UngetChar)(c, doc->docIn);  /* Issue #329 - make sure the newline is maintained for now */
+                    else if (c != '\n' && c != '\f')
                         TY_(UngetChar)(c, doc->docIn);
 
                     lexer->waswhite = yes;  /* to swallow leading whitespace */

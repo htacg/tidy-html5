@@ -230,6 +230,7 @@ static const tidyLocaleMapItem localeMappings[] = {
  *  users always have a static value available for use.
  */
 static const tidyErrorFilterKeyItem tidyErrorFilterKeysStruct[] = {
+    /* This blocks of codes comes from `tidyErrorCodes` enum. */
     { "CODES_TIDY_ERROR_FIRST",                        CODES_TIDY_ERROR_FIRST                        },
     { "MISSING_SEMICOLON",                             MISSING_SEMICOLON                             },
     { "MISSING_SEMICOLON_NCR",                         MISSING_SEMICOLON_NCR                         },
@@ -327,6 +328,7 @@ static const tidyErrorFilterKeyItem tidyErrorFilterKeysStruct[] = {
     { "INVALID_NCR",                                   INVALID_NCR                                   },
     { "CODES_TIDY_ERROR_LAST",                         CODES_TIDY_ERROR_LAST                         },
 #if SUPPORT_ACCESSIBILITY_CHECKS
+    /* This blocks of codes comes from `accessErrorCodes` enum. */
     { "FIRST_ACCESS_ERR",                              FIRST_ACCESS_ERR                              },
     { "IMG_MISSING_ALT",                               IMG_MISSING_ALT                               },
     { "IMG_ALT_SUSPICIOUS_FILENAME",                   IMG_ALT_SUSPICIOUS_FILENAME                   },
@@ -461,6 +463,13 @@ static const tidyErrorFilterKeyItem tidyErrorFilterKeysStruct[] = {
     { "SKIPOVER_ASCII_ART",                            SKIPOVER_ASCII_ART                            },
     { "LAST_ACCESS_ERR",                               LAST_ACCESS_ERR                               },
 #endif
+    /* This blocks of codes comes from `tidyMessagesMisc` enum. */
+    { "STRING_UNKNOWN_OPTION",                         STRING_UNKNOWN_OPTION                         },
+    { "STRING_MISSING_MALFORMED",                      STRING_MISSING_MALFORMED                      },
+    { "STRING_DOCTYPE_GIVEN",                          STRING_DOCTYPE_GIVEN                          },
+    { "STRING_HTML_PROPRIETARY",                       STRING_HTML_PROPRIETARY                       },
+    { "STRING_CONTENT_LOOKS",                          STRING_CONTENT_LOOKS                          },
+    { "STRING_NO_SYSID",                               STRING_NO_SYSID                               },
     { NULL,                                            0                                             },
 };
 

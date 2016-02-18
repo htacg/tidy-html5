@@ -1706,7 +1706,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "Can be used to modify behavior of the <code>clean</code> option when set "
         "to <var>yes</var>. "
         "<br/>"
-        "If set to <var>yes</var> when <code>clean</code>, "
+        "If set to <var>yes</var> when using <code>clean</code>, "
         "<code>&amp;emdash;</code>, <code>&amp;rdquo;</code>, and other named "
         "character entities are downgraded to their closest ASCII equivalents. "
     },

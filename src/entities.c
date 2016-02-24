@@ -352,6 +352,7 @@ uint EntityCode( ctmbstr name, uint versions )
 Bool TY_(EntityInfo)( ctmbstr name, Bool isXml, uint* code, uint* versions )
 {
     const entity* np;
+    int res;
     assert( name && name[0] == '&' );
     assert( code != NULL );
     assert( versions != NULL );
@@ -363,13 +364,23 @@ Bool TY_(EntityInfo)( ctmbstr name, Bool isXml, uint* code, uint* versions )
 
         /* 'x' prefix denotes hexadecimal number format */
         if ( name[2] == 'x' || (!isXml && name[2] == 'X') )
-            sscanf( name+3, "%x", &c );
+            res = sscanf( name+3, "%x", &c );
         else
-            sscanf( name+2, "%u", &c );
+            res = sscanf( name+2, "%u", &c );
 
-        *code = c;
-        *versions = VERS_ALL;
-        return yes;
+        /*  Issue #373 - Null Char in XML result doc - sf905 2009 */
+        if ( res == 1 )
+        {
+            *code = c;
+            *versions = VERS_ALL;
+            return yes;
+        }
+        else
+        {
+            *code = 0;
+            *versions = ( isXml ? VERS_XML : VERS_PROPRIETARY );
+            return no;
+        }
     }
 
     /* Named entity: name ="&" followed by a name */

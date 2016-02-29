@@ -924,7 +924,8 @@ void CheckTABLE( TidyDocImpl* doc, Node *node )
 {
     AttVal* attval;
     Bool HasSummary = (TY_(AttrGetById)(node, TidyAttr_SUMMARY) != NULL) ? yes : no;
-    Bool isHTML5 = (TY_(HTMLVersion)(doc) == HT50) ? yes : no;
+    uint vers = TY_(HTMLVersion)(doc);  /* Issue #377 - Also applies to XHTML5 */
+    Bool isHTML5 = ((vers == HT50)||(vers == XH50)) ? yes : no;
 
     TY_(CheckAttributes)(doc, node);
 

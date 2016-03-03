@@ -326,12 +326,105 @@ static uint GetVersFromFPI(ctmbstr fpi)
     return 0;
 }
 
+#if (defined(_MSC_VER) && !defined(NDEBUG))
+/* Issue #377 - Output diminishing version bits */
+typedef struct tagV2S {
+    uint bit;
+    ctmbstr val;
+}V2S, *PV2S;
+
+static V2S v2s[] = {
+    { HT20, "HT20" },
+    { HT32, "HT32" },
+    { H40S, "H40S" },
+    { H40T, "H40T" },
+    { H40F, "H40F" },
+    { H41S, "H41S" },
+    { H41T, "H41T" },
+    { H41F, "H41F" },
+    { X10S, "X10S" },
+    { X10T, "X10T" },
+    { X10F, "X10F" },
+    { XH11, "XH11" },
+    { XB10, "XB10" }, /* 4096u */
+    /* { VERS_SUN, "VSUN" }, */
+    /* { VERS_NETSCAPE, "VNET" },
+    /* { VERS_MICROSOFT, "VMIC" }, 32768u */
+    { VERS_XML, "VXML" }, /* 65536u */
+        /* HTML5 */
+    { HT50, "HT50" }, /* 131072u */
+    { XH50, "XH50" }, /* 262144u */
+    { 0,     0  }
+};
+
+/* Process the above table, adding a bit name,
+   or '----' when not present   */
+static char *add_vers_string( tmbstr buf, uint vers )
+{
+    PV2S pv2s = v2s;
+    int len = (int)strlen(buf);
+    while (pv2s->val) {
+        if (vers & pv2s->bit) {
+            if (len) {
+                strcat(buf,"|");
+                len++;
+            }
+            strcat(buf,pv2s->val);
+            len += (int)strlen(pv2s->val);
+            vers &= ~(pv2s->bit);
+            if (!vers)
+                break;
+        } else {
+            if (len) {
+                strcat(buf,"|");
+                len++;
+            }
+            strcat(buf,"----");
+            len += 4;
+
+        }
+        pv2s++;
+    }
+    if (vers) { /* Should not have any here! */
+        if (len)
+            strcat(buf,"|");
+        sprintf(EndBuf(buf),"%u",vers);
+    }
+    return buf;
+
+}
+
+/* Issue #377 - Show first Before: list, and then on any change
+   Note the VERS_PROPRIETARY are exclude since they always remain */
+void TY_(ConstrainVersion)(TidyDocImpl* doc, uint vers)
+{
+    static char vcur[256];
+    static Bool dnfirst = no;
+    uint curr = doc->lexer->versions; /* get current */
+    doc->lexer->versions &= (vers | VERS_PROPRIETARY);
+    if (curr != doc->lexer->versions) { /* only if different */
+        if (!dnfirst) {
+            dnfirst = yes;
+            vcur[0] = 0;
+            curr &= ~(VERS_PROPRIETARY);
+            add_vers_string( vcur, curr );
+            SPRTF("Before: %s\n", vcur);
+        }
+        vcur[0] = 0;
+        curr = doc->lexer->versions;
+        curr &= ~(VERS_PROPRIETARY);
+        add_vers_string( vcur, curr );
+        SPRTF("After : %s\n", vcur);
+    }
+}
+#else /* !#if (defined(_MSC_VER) && !defined(NDEBUG)) */
 /* everything is allowed in proprietary version of HTML */
 /* this is handled here rather than in the tag/attr dicts */
 void TY_(ConstrainVersion)(TidyDocImpl* doc, uint vers)
 {
     doc->lexer->versions &= (vers | VERS_PROPRIETARY);
 }
+#endif /* #if (defined(_MSC_VER) && !defined(NDEBUG)) y/n */
 
 Bool TY_(IsWhite)(uint c)
 {

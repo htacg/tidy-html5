@@ -2746,14 +2746,9 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                     continue;       /* no text so keep going */
                 }
 
-                /* fix for bug 762102 */
-                if (c == '&')
-                {
-                    TY_(UngetChar)(c, doc->docIn);
-                    --(lexer->lexsize);
-                }
-
                 /* otherwise treat as CDATA */
+                TY_(UngetChar)(c, doc->docIn);
+                lexer->lexsize -= 1;
                 lexer->state = LEX_CONTENT;
                 lexer->waswhite = no;
                 continue;

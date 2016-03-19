@@ -260,30 +260,32 @@ static void messagePos( TidyDocImpl* doc, TidyReportLevel level, uint code,
     if ( go )
     {
         enum { sizeBuf=1024 };
-        char *buf = TidyDocAlloc(doc,sizeBuf);
+        TidyOutputSink *outp = &doc->errout->sink;
+        char *buf = (char *)TidyDocAlloc(doc,sizeBuf);
         const char *cp;
+        byte b;
         if ( line > 0 && col > 0 )
         {
             ReportPosition(doc, line, col, buf, sizeBuf);
-#if !defined(NDEBUG) && defined(_MSC_VER)
-            SPRTF("%s",buf);
-#endif
             for ( cp = buf; *cp; ++cp )
-                TY_(WriteChar)( *cp, doc->errout );
+            {
+                b = (*cp & 0xff);
+                outp->putByte( outp->sinkData, b );
+            }
         }
 
         LevelPrefix( level, buf, sizeBuf );
-#if !defined(NDEBUG) && defined(_MSC_VER)
-            SPRTF("%s",buf);
-            SPRTF("%s\n",messageBuf);
-#else
         for ( cp = buf; *cp; ++cp )
-            TY_(WriteChar)( *cp, doc->errout );
-
+        {
+            b = (*cp & 0xff);
+            outp->putByte( outp->sinkData, b );
+        }
         for ( cp = messageBuf; *cp; ++cp )
-            TY_(WriteChar)( *cp, doc->errout );
+        {
+            b = (*cp & 0xff);
+            outp->putByte( outp->sinkData, b );
+        }
         TY_(WriteChar)( '\n', doc->errout );
-#endif
         TidyDocFree(doc, buf);
     }
     TidyDocFree(doc, messageBuf);

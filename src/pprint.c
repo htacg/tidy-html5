@@ -1034,10 +1034,11 @@ static void PPrintText( TidyDocImpl* doc, uint mode, uint indent,
             ix = IncrWS( ix, end, indent, ixWS );
         }
         else if (( c == '&' ) && (TY_(HTMLVersion)(doc) == HT50) &&
-            (((ix + 1) == end) || (((ix + 1) < end) && (isspace(doc->lexer->lexbuf[ix+1])))) )
+            (((ix + 1) == end) || (((ix + 1) < end) && (isspace(doc->lexer->lexbuf[ix+1] & 0xff)))) )
         {
             /*\
              * Issue #207 - This is an unambiguous ampersand need not be 'quoted' in HTML5
+             * Issue #379 - Ensure only 0 to 255 passed to 'isspace' to avoid debug assert
             \*/
             PPrintChar( doc, c, (mode | CDATA) );
         }
@@ -1866,9 +1867,12 @@ static int TextEndsWithNewline(Lexer *lexer, Node *node, uint mode )
     if ( (mode & (CDATA|COMMENT)) && TY_(nodeIsText)(node) && node->end > node->start )
     {
         uint ch, ix = node->end - 1;
-        /* Skip non-newline whitespace. */
-        while ( ix >= node->start && (ch = (lexer->lexbuf[ix] & 0xff))
-                && ( ch == ' ' || ch == '\t' || ch == '\r' ) )
+        /*\
+         *  Skip non-newline whitespace. 
+         *  Issue #379 - Only if ix is GT start can it be decremented!
+        \*/
+        while ( ix > node->start && (ch = (lexer->lexbuf[ix] & 0xff))
+                 && ( ch == ' ' || ch == '\t' || ch == '\r' ) )
             --ix;
 
         if ( lexer->lexbuf[ ix ] == '\n' )

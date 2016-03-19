@@ -867,7 +867,8 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
 #if !defined(NDEBUG) && defined(_MSC_VER)
     in_parse_block++;
     parse_block_cnt++;
-    SPRTF("Entering ParseBlock %d... %d\n",in_parse_block,parse_block_cnt);
+    SPRTF("Entering ParseBlock %d... %d %s\n",in_parse_block,parse_block_cnt,
+        ((element && element->element) ? element->element : ""));
 #endif
 
     if ( element->tag->model & CM_EMPTY ) {
@@ -943,14 +944,21 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
             return;
         }
 
+#if OBSOLETE /* Issue #380 Kill this code! But leave in src, just in case! */
         if ( nodeIsBODY( node ) && DescendantOf( element, TidyTag_HEAD ))
         {
             /*  If we're in the HEAD, close it before proceeding.
                 This is an extremely rare occurance, but has been observed.
+                ****************************************************************
+                Issue #380 - This can cause an INFINITE loop!
+                This code was added to SF CVS Tidy
+                revision 1.121 by lpassey, Wed Jul 28 18:08:06 2004 UTC
+                ****************************************************************
             */
             TY_(UngetToken)( doc );
             break;
         }
+#endif /* #if OBSOLETE */
 
         if ( nodeIsHTML(node) || nodeIsHEAD(node) || nodeIsBODY(node) )
         {

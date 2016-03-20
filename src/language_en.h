@@ -2068,6 +2068,11 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "<br/>"
         "When set to <var>no</var>, these checks are not performed. "
     },
+    {
+      TidyEscapeScripts,          0,
+        "This option causes items that look like closing tags, like <code>&lt;/g</code> to be "
+        "escaped to <code>&lt;\\/g</code>. Set this option to 'no' if you do not want this."
+    },
     
     /********************************************************
      ** Console Application

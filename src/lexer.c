@@ -2285,8 +2285,10 @@ static Node *GetCDATA( TidyDocImpl* doc, Node *container )
                 SetLexerLocus( doc, lexer );
                 lexer->columns -= 3;
 
-                /* if javascript insert backslash before / */
-                if (TY_(IsJavaScript)(container))
+                /*\ if javascript insert backslash before / 
+                 *  Issue #348 - Add option, escape-scripts, to skip
+                \*/
+                if ((TY_(IsJavaScript)(container)) && cfgBool(doc, TidyEscapeScripts))
                 {
                     /* Issue #281 - only warn if adding the escape! */
                     TY_(ReportError)(doc, NULL, NULL, BAD_CDATA_CONTENT);

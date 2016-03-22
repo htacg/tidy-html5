@@ -622,7 +622,7 @@ tmbstr tidyNormalizedLocaleName( ctmbstr locale )
     len = strlen( search );
     len = len <= 5 ? len : 5;
     
-    for ( i = 0; i < len; i++ )
+    for ( i = 0; i <= len; i++ )
     {
         if ( i == 2 )
         {

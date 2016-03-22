@@ -363,6 +363,7 @@ module PoConvertModule
         self.items[l_key] = {} unless items.has_key?(l_key)
         self.items[l_key][num_case] = {}
         self.items[l_key][num_case][:comment] = comment
+        self.items[l_key][num_case][:fuzzy] = ( comment =~ /\(fuzzy\)/i ) != nil
         self.items[l_key][num_case][:case] = num_case
         self.items[l_key][num_case][:if_group] = nil
         # Reconstitute Hex Escapes
@@ -370,7 +371,7 @@ module PoConvertModule
           line.lstrip.gsub(/\\x(..)/) { |g| [$1.hex].pack('c*').force_encoding('UTF-8') }
         end
         # Eliminate C double-double-quotes.
-        tmp = tmp.join.gsub(/""/) { |g| }
+        tmp = tmp.join.gsub(/(?<!\\)""/) { |g| }
         self.items[l_key][num_case][:string] = tmp
       end
       if !self.items || self.items.empty?
@@ -386,7 +387,7 @@ module PoConvertModule
       content.scan(%r!^#if (.*?)#endif!m) do | found_block |
         found_block[0].scan(%r!^\s*\{(?:/\* .*? \*/)?\s*(.*?),\s*.*?,\s*.*?\s*\},?!m) do | item |
           self.items[item[0].to_sym].each_value do  | plural |
-            plural[:if_group] = found_block[0].lines[0].rstrip
+          plural[:if_group] = found_block[0].each_line("\n").to_a[0].rstrip
           end
         end
       end
@@ -408,15 +409,17 @@ module PoConvertModule
 
     attr_accessor :emacs_footer
     attr_accessor :plaintext
+    attr_accessor :force_comments
 
     #########################################################
     # initialize
     #########################################################
     def initialize
-      @po_locale = nil       # The locale to use to generate PO files.
-      @known_locales = {}    # The locales we know about.
-      @emacs_footer = false  # Indicates whether or not to add emacs instructions.
-      @plaintext = false     # Indicates whether or not we should stick to plaintext.
+      @po_locale = nil        # The locale to use to generate PO files.
+      @known_locales = {}     # The locales we know about.
+      @emacs_footer = false   # Indicates whether or not to add emacs instructions.
+      @plaintext = false      # Indicates whether or not we should stick to plaintext.
+      @force_comments = false # Force comments into non-English header files?
     end
 
 
@@ -535,7 +538,7 @@ module PoConvertModule
       if result
         @@log.info "#{__method__}: The header template was found at #{@@header_template}"
       else
-        @@log.error "#{__method__}: Cannot find the header teamplate file. Check the value of @@header_template in this script."
+        @@log.error "#{__method__}: Cannot find the header template file. Check the value of @@header_template in this script."
         return false
       end
 
@@ -655,7 +658,7 @@ msgstr ""
 "#{header_pot_line}\\n"
 "Last-Translator: #{ENV['USER']}#{ENV['USERNAME']}\\n"
 "Language-Team: \\n"
-
+"BAD"
       HEREDOC
 
       untranslated_items.delete(:TIDY_LANGUAGE)
@@ -665,9 +668,14 @@ msgstr ""
         if value['0'][:comment]
           value['0'][:comment].each_line { |line| report << "#. #{line.strip}\n"}
         end
-        if %w($u $s $d).any? { | find | value['0'][:string].include?(find) }
-          report << "#, c-format\n"
+
+        attribs = []
+        attribs << 'fuzzy' if value['0'][:fuzzy]
+        attribs << 'c-format' if %w(%u %s %d).any? { | find | value['0'][:string].include?(find) }
+        if attribs.count > 0
+          report << "#, #{attribs.join(', ')}\n"
         end
+
         report << "msgctxt \"#{key.to_s}\"\n"
 
         # Handle the untranslated strings, with the possibility that there
@@ -779,7 +787,7 @@ msgstr ""
       po_content.items.each do |key, value|
         value.each_value do |item_entry|
           item_entry[:if_group] = lang_en.items[key]['0'][:if_group]
-          item_entry[:comment] = lang_en.items[key]['0'][:comment]
+          item_entry[:comment] = force_comments ? lang_en.items[key]['0'][:comment] : nil
         end
       end
 
@@ -1083,6 +1091,10 @@ Complete Help:
            :type => :boolean,
            :desc => 'Specifies that the generated file contain hex escaped characters.',
            :aliases => '-h'
+    option :force_comments,
+           :type =>:boolean,
+           :desc => 'Forces comments into the header file. Base language_en.h always has comments.',
+           :aliases => '-f'
     desc 'msgfmt <input_file.po>', 'Creates a Tidy header H file from the given PO file.'
     long_desc <<-LONG_DESC
       Creates a Tidy header H file from the specified <input_file.po> PO file,
@@ -1104,6 +1116,7 @@ Complete Help:
       args.each do |input_file|
         converter = PoConverter.new
         converter.plaintext = !options[:hex]
+        converter.force_comments = options[:force_comments]
         set_options
         error_count = converter.convert_to_h( input_file, options[:baselang] ) ? error_count : error_count + 1
       end

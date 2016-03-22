@@ -408,15 +408,17 @@ module PoConvertModule
 
     attr_accessor :emacs_footer
     attr_accessor :plaintext
+    attr_accessor :force_comments
 
     #########################################################
     # initialize
     #########################################################
     def initialize
-      @po_locale = nil       # The locale to use to generate PO files.
-      @known_locales = {}    # The locales we know about.
-      @emacs_footer = false  # Indicates whether or not to add emacs instructions.
-      @plaintext = false     # Indicates whether or not we should stick to plaintext.
+      @po_locale = nil        # The locale to use to generate PO files.
+      @known_locales = {}     # The locales we know about.
+      @emacs_footer = false   # Indicates whether or not to add emacs instructions.
+      @plaintext = false      # Indicates whether or not we should stick to plaintext.
+      @force_comments = false # Force comments into non-English header files?
     end
 
 
@@ -779,7 +781,7 @@ msgstr ""
       po_content.items.each do |key, value|
         value.each_value do |item_entry|
           item_entry[:if_group] = lang_en.items[key]['0'][:if_group]
-          item_entry[:comment] = lang_en.items[key]['0'][:comment]
+          item_entry[:comment] = force_comments ? lang_en.items[key]['0'][:comment] : nil
         end
       end
 
@@ -1083,6 +1085,10 @@ Complete Help:
            :type => :boolean,
            :desc => 'Specifies that the generated file contain hex escaped characters.',
            :aliases => '-h'
+    option :force_comments,
+           :type =>:boolean,
+           :desc => 'Forces comments into the header file. Base language_en.h always has comments.',
+           :aliases => '-f'
     desc 'msgfmt <input_file.po>', 'Creates a Tidy header H file from the given PO file.'
     long_desc <<-LONG_DESC
       Creates a Tidy header H file from the specified <input_file.po> PO file,
@@ -1104,6 +1110,7 @@ Complete Help:
       args.each do |input_file|
         converter = PoConverter.new
         converter.plaintext = !options[:hex]
+        converter.force_comments = options[:force_comments]
         set_options
         error_count = converter.convert_to_h( input_file, options[:baselang] ) ? error_count : error_count + 1
       end

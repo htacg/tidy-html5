@@ -665,7 +665,7 @@ msgstr ""
         if value['0'][:comment]
           value['0'][:comment].each_line { |line| report << "#. #{line.strip}\n"}
         end
-        if %w($u $s $d).any? { | find | value['0'][:string].include?(find) }
+        if %w(%u %s %d).any? { | find | value['0'][:string].include?(find) }
           report << "#, c-format\n"
         end
         report << "msgctxt \"#{key.to_s}\"\n"

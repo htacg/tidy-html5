@@ -386,7 +386,7 @@ module PoConvertModule
       content.scan(%r!^#if (.*?)#endif!m) do | found_block |
         found_block[0].scan(%r!^\s*\{(?:/\* .*? \*/)?\s*(.*?),\s*.*?,\s*.*?\s*\},?!m) do | item |
           self.items[item[0].to_sym].each_value do  | plural |
-            plural[:if_group] = found_block[0].lines[0].rstrip
+          plural[:if_group] = found_block[0].each_line("\n").to_a[0].rstrip
           end
         end
       end

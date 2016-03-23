@@ -368,23 +368,26 @@ void tidy_out( TidyDocImpl* doc, ctmbstr msg, ... )
 {
     if ( !cfgBool(doc, TidyQuiet) )
     {
+        TidyOutputSink *outp = &doc->errout->sink;
         ctmbstr cp;
         enum { sizeBuf=2048 };
         char *buf = (char *)TidyDocAlloc(doc,sizeBuf);
+        byte b;
 
         va_list args;
         va_start( args, msg );
         TY_(tmbvsnprintf)(buf, sizeBuf, msg, args);
         va_end( args );
 
-#if !defined(NDEBUG) && defined(_MSC_VER)
-        add_std_out(0);
-#endif
         for ( cp=buf; *cp; ++cp )
-          TY_(WriteChar)( *cp, doc->errout );
-#if !defined(NDEBUG) && defined(_MSC_VER)
-        add_std_out(1);
-#endif
+        {
+            b = (*cp & 0xff);
+            if (b == (byte)'\n')
+                TY_(WriteChar)( b, doc->errout ); /* for EOL translation */
+            else
+                outp->putByte( outp->sinkData, b ); /* #383 - no encoding */
+        }
+
         TidyDocFree(doc, buf);
     }
 }

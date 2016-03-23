@@ -1500,7 +1500,7 @@ static void lang_help( void )
     tidyPrintWindowsLanguageNames("  %-20s -> %s\n");
     printf( "%s", tidyLocalizedString(TC_TXT_HELP_LANG_2) );
     tidyPrintTidyLanguageNames("  %s\n");
-    printf( "%s", tidyLocalizedString(TC_TXT_HELP_LANG_3) );
+    printf( tidyLocalizedString(TC_TXT_HELP_LANG_3), tidyGetLanguage() );
 }
 
 

@@ -2323,13 +2323,16 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "\n"
     },
     {/* This console output should be limited to 78 characters per line.
-        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+        - The parameter %s is likely to be two to five characters, e.g., en or en_US. */
       TC_TXT_HELP_LANG_3,           0,
         "\n"
         "If Tidy is able to determine your locale then Tidy will use the \n"
         "locale's language automatically. For example Unix-like systems use a \n"
         "$LANG and/or $LC_ALL environment variable. Consult your operating \n"
         "system documentation for more information. \n"
+        "\n"
+        "Tidy is currently using locale %s. \n"
         "\n"
     },
     

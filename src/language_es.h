@@ -124,6 +124,8 @@ static languageDefinition language_es = { whichPluralForm_es, {
         "$LANG y/o $LC_ALL. Consulte a su documentación del sistema para \n"
         "obtener más información.\n"
         "\n"
+        "Tidy está utilizando la configuración regional %s. \n"
+        "\n"
     },
 
     {/* This MUST be present and last. */

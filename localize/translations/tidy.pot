@@ -5,10 +5,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2016-03-24 10:59:07\n"
+"POT-Creation-Date: 2016-03-24 11:36:17\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
-"BAD"
+
 #. Only translate if a URL to the target language can be found.
 msgctxt "ACCESS_URL"
 msgid "http://www.w3.org/WAI/GL"

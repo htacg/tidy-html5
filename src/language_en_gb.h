@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2016-02-17 20:04:18
+ *   PO_REVISION_DATE=2016-03-24 10:59:55
  */
 
 #ifdef _MSC_VER
@@ -65,19 +65,14 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
     {/* Specify the ll or ll_cc language code here. */
       TIDY_LANGUAGE,                   0, "en_gb"
     },
-    {/* This console output should be limited to 78 characters per line. */
-      TEXT_USING_FONT,                 0,        
+    { TEXT_USING_FONT,                 0,        
         "You are recommended to use CSS to specify the font and\n"
         "properties such as its size and colour. This will reduce\n"
         "the size of HTML files and make them easier to maintain\n"
         "compared with using <FONT> elements.\n\n"
     },
-    {/* This console output should be limited to 78 characters per line. */
-      TEXT_USING_BODY,                 0, "You are recommended to use CSS to specify page and link colours\n"
-    },
-    {/* This console output should be limited to 78 characters per line. 
-      - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-      TEXT_GENERAL_INFO_PLEA,          0,        
+    { TEXT_USING_BODY,                 0, "You are recommended to use CSS to specify page and link colours\n"           },
+    { TEXT_GENERAL_INFO_PLEA,          0,        
         "\n"
         "Would you like to see Tidy in proper, British English? Please consider \n"
         "helping us to localise HTML Tidy. For details please see \n"
@@ -96,15 +91,7 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
     { COLOR_CONTRAST_VISITED_LINK,     0, "[2.2.1.4]: poor colour contrast (visited link)."                             },
 #endif /* SUPPORT_ACCESSIBILITY_CHECKS */
 
-    {/* Important notes for translators:
-        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
-          <br/>.
-        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
-        - Option values should be enclosed in <var></var>.
-        - It's very important that <br/> be self-closing!
-        - The strings "Tidy" and "HTML Tidy" are the program name and must not
-          be translated. */
-      TidyMergeDivs,                   0,        
+    { TidyMergeDivs,                   0,        
         "This option can be used to modify the behaviour of <code>clean</code> when "
         "set to <code>yes</code>."
         "<br/>"
@@ -120,15 +107,7 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
         "<code>&lt;div&gt;</code> are discarded with the exception of "
         "<code>class</code> and <code>style</code>. "
     },
-    {/* Important notes for translators:
-        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
-          <br/>.
-        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
-        - Option values should be enclosed in <var></var>.
-        - It's very important that <br/> be self-closing!
-        - The strings "Tidy" and "HTML Tidy" are the program name and must not
-          be translated. */
-      TidyMergeSpans,                  0,        
+    { TidyMergeSpans,                  0,        
         "This option can be used to modify the behaviour of <code>clean</code> when "
         "set to <code>yes</code>."
         "<br/>"
@@ -137,15 +116,7 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
         "<br/>"
         "The algorithm is identical to the one used by <code>merge-divs</code>. "
     },
-    {/* Important notes for translators:
-        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
-          <br/>.
-        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
-        - Option values should be enclosed in <var></var>.
-        - It's very important that <br/> be self-closing!
-        - The strings "Tidy" and "HTML Tidy" are the program name and must not
-          be translated. */
-      TidyReplaceColor,                0,        
+    { TidyReplaceColor,                0,        
         "This option specifies if Tidy should replace numeric values in colour "
         "attributes with HTML/XHTML colour names where defined, e.g. replace "
         "<code>#ffffff</code> with <code>white</code>. "

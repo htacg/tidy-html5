@@ -5,10 +5,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2016-03-23 14:49:53\n"
+"PO-Revision-Date: 2016-03-24 10:59:55\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
-
+"BAD"
 #. Only translate if a URL to the target language can be found.
 msgctxt "ACCESS_URL"
 msgid "http://www.w3.org/WAI/GL"
@@ -2985,10 +2985,18 @@ msgid ""
 "When set to <var>no</var>, these checks are not performed. "
 msgstr ""
 
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
 msgctxt "TidyEscapeScripts"
 msgid ""
-"This option causes items that look like closing tags, like <code>&lt;/g</code> to be "
-"escaped to <code>&lt;\\/g</code>. Set this option to 'no' if you do not want this."
+"This option causes items that look like closing tags, like <code>&lt;/g</code> to be escaped "
+"to <code>&lt;\\/g</code>. Set this option to 'no' if you do not want this."
 msgstr ""
 
 msgctxt "TC_CAT_DIAGNOSTICS"

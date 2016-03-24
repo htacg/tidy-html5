@@ -2068,12 +2068,19 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "<br/>"
         "When set to <var>no</var>, these checks are not performed. "
     },
-    {
+    {/* Important notes for translators:
+        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+          <br/>.
+        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+        - Option values should be enclosed in <var></var>.
+        - It's very important that <br/> be self-closing!
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not
+          be translated. */
       TidyEscapeScripts,          0,
-        "This option causes items that look like closing tags, like <code>&lt;/g</code> to be "
-        "escaped to <code>&lt;\\/g</code>. Set this option to 'no' if you do not want this."
+        "This option causes items that look like closing tags, like <code>&lt;/g</code> to be escaped "
+        "to <code>&lt;\\/g</code>. Set this option to 'no' if you do not want this."
     },
-    
+
     /********************************************************
      ** Console Application
      **  Although these strings are not used within LibTidy

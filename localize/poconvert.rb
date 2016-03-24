@@ -363,6 +363,7 @@ module PoConvertModule
         self.items[l_key] = {} unless items.has_key?(l_key)
         self.items[l_key][num_case] = {}
         self.items[l_key][num_case][:comment] = comment
+        self.items[l_key][num_case][:fuzzy] = ( comment =~ /\(fuzzy\)/i ) != nil
         self.items[l_key][num_case][:case] = num_case
         self.items[l_key][num_case][:if_group] = nil
         # Reconstitute Hex Escapes
@@ -537,7 +538,7 @@ module PoConvertModule
       if result
         @@log.info "#{__method__}: The header template was found at #{@@header_template}"
       else
-        @@log.error "#{__method__}: Cannot find the header teamplate file. Check the value of @@header_template in this script."
+        @@log.error "#{__method__}: Cannot find the header template file. Check the value of @@header_template in this script."
         return false
       end
 
@@ -657,7 +658,7 @@ msgstr ""
 "#{header_pot_line}\\n"
 "Last-Translator: #{ENV['USER']}#{ENV['USERNAME']}\\n"
 "Language-Team: \\n"
-
+"BAD"
       HEREDOC
 
       untranslated_items.delete(:TIDY_LANGUAGE)
@@ -667,9 +668,13 @@ msgstr ""
         if value['0'][:comment]
           value['0'][:comment].each_line { |line| report << "#. #{line.strip}\n"}
         end
-        if %w(%u %s %d).any? { | find | value['0'][:string].include?(find) }
-          report << "#, c-format\n"
+        attribs = []
+        attribs << 'fuzzy' if value['0'][:fuzzy]
+        attribs << 'c-format' if %w(%u %s %d).any? { | find | value['0'][:string].include?(find) }
+        if attribs.count > 0
+          report << "#, #{attribs.join(', ')}\n"
         end
+
         report << "msgctxt \"#{key.to_s}\"\n"
 
         # Handle the untranslated strings, with the possibility that there

@@ -668,6 +668,7 @@ msgstr ""
         if value['0'][:comment]
           value['0'][:comment].each_line { |line| report << "#. #{line.strip}\n"}
         end
+
         attribs = []
         attribs << 'fuzzy' if value['0'][:fuzzy]
         attribs << 'c-format' if %w(%u %s %d).any? { | find | value['0'][:string].include?(find) }

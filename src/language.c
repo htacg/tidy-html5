@@ -15,6 +15,7 @@
 #include "language_es.h"
 #include "language_es_mx.h"
 #include "language_zh_cn.h"
+#include "language_fr.h"
 #endif
 #include "tmbstr.h"
 #include "locale.h"
@@ -46,6 +47,7 @@ static tidyLanguagesType tidyLanguages = {
         &language_es,
         &language_es_mx,
         &language_zh_cn,
+        &language_fr,
 #endif
         NULL /* This array MUST be null terminated. */
     }

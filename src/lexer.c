@@ -354,7 +354,7 @@ static V2S v2s[] = {
     { XH11, "XH11" },
     { XB10, "XB10" }, /* 4096u */
     /* { VERS_SUN, "VSUN" }, */
-    /* { VERS_NETSCAPE, "VNET" },
+    /* { VERS_NETSCAPE, "VNET" }, */
     /* { VERS_MICROSOFT, "VMIC" }, 32768u */
     { VERS_XML, "VXML" }, /* 65536u */
         /* HTML5 */

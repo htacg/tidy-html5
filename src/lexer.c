@@ -2749,6 +2749,8 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 }
 
                 /* otherwise treat as CDATA */
+                /* fix for bug 762102 (486) */
+                /* Issue #384 - Fix skipping parsing character, particularly '<<' */
                 TY_(UngetChar)(c, doc->docIn);
                 lexer->lexsize -= 1;
                 lexer->state = LEX_CONTENT;

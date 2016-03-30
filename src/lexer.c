@@ -255,12 +255,18 @@ int TY_(HTMLVersion)(TidyDocImpl* doc)
     TidyDoctypeModes dtmode = (TidyDoctypeModes)cfg(doc, TidyDoctypeMode);
     Bool xhtml = (cfgBool(doc, TidyXmlOut) || doc->lexer->isvoyager) &&
                  !cfgBool(doc, TidyHtmlOut);
-    Bool html4 = dtmode == TidyDoctypeStrict || dtmode == TidyDoctypeLoose || VERS_FROM40 & dtver;
+    Bool html4 = ((dtmode == TidyDoctypeStrict) || (dtmode == TidyDoctypeLoose) ||
+                  (VERS_FROM40 & dtver) ? yes : no);
+    Bool html5 = (!html4 && ((dtmode == TidyDoctypeAuto) ||
+                  (dtmode == TidyDoctypeHtml5)) ? yes : no);
 
     if (xhtml && dtver == VERS_UNKNOWN) return XH50;
     if (dtver == VERS_UNKNOWN) return HT50;
     /* Issue #167 - if NOT XHTML, and doctype is default VERS_HTML5, then return HT50 */
     if (!xhtml && (dtver == VERS_HTML5)) return HT50;
+    /* Issue #377 - If xhtml and (doctype == html5) and constrained vers contains XH50 return that,
+       and really if tidy defaults to 'html5', then maybe 'auto' should also apply! */
+    if (xhtml && html5 && ((vers & VERS_HTML5) == XH50)) return XH50;
 
     for (i = 0; W3C_Doctypes[i].name; ++i)
     {

@@ -1564,8 +1564,13 @@ void TY_(ParseNamespace)(TidyDocImpl* doc, Node *basenode, GetTokenMode mode)
                     n->closed = yes;
                     TY_(ReportError)(doc, n->parent, n, MISSING_ENDTAG_BEFORE);
                 }
-                assert(outside == no ? n == mp : 1);
-                assert(outside == yes ? n == basenode->parent : 1);
+
+                /* Issue #369 - Since 'assert' is DEBUG only, and there are
+                   simple cases where these can be fired, removing them
+                   pending feedback from the original author!
+                   assert(outside == no ? n == mp : 1);
+                   assert(outside == yes ? n == basenode->parent : 1);
+                   =================================================== */
 
                 if (outside == no)
                 {

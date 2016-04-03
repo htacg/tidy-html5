@@ -87,7 +87,16 @@ void TIDY_CALL TY_(filesink_putByte)( void* sinkData, byte bv )
   fputc( bv, fout );
 #if !defined(NDEBUG) && defined(_MSC_VER)
   if (_fileno(fout) != 2)
-    SPRTF("%c",bv);
+  {
+      if (bv != 0x0d)
+      {
+          /*\
+           * avoid duplicate newline - SPRTF will translate an 0x0d to CRLF,
+           *  and do the same with the following 0x0a
+          \*/
+          SPRTF("%c",bv);
+      }
+  }
 #endif
 }
 

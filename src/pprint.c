@@ -17,6 +17,18 @@
 #include "tmbstr.h"
 #include "utf8.h"
 
+/* *** FOR DEBUG ONLY *** */
+#if !defined(NDEBUG) && defined(_MSC_VER)
+/* #define DEBUG_PPRINT */
+/* #define DEBUG_INDENT */
+#ifdef DEBUG_PPRINT
+extern void dbg_show_node( TidyDocImpl* doc, Node *node, int caller, int indent );
+#endif
+#ifdef DEBUG_INDENT
+#include "sprtf.h"
+#endif
+#endif
+
 /*
   Block-level and unknown elements are printed on
   new lines and their contents indented 2 spaces
@@ -640,7 +652,12 @@ static Bool CheckWrapIndent( TidyDocImpl* doc, uint indent )
     {
         WrapLine( doc );
         if ( pprint->indent[ 0 ].spaces < 0 )
+        {
+#if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_INDENT)
+            SPRTF("%s Indent from %d to %d\n", __FUNCTION__, pprint->indent[ 0 ].spaces, indent );
+#endif  
             pprint->indent[ 0 ].spaces = indent;
+        }
         return yes;
     }
     return no;
@@ -705,7 +722,14 @@ void TY_(PFlushLine)( TidyDocImpl* doc, uint indent )
 
     TY_(WriteChar)( '\n', doc->docOut );
     pprint->line++;
-    pprint->indent[ 0 ].spaces = indent;
+
+    if (pprint->indent[ 0 ].spaces != (int)indent )
+    {
+#if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_INDENT)
+        SPRTF("%s Indent from %d to %d\n", __FUNCTION__, pprint->indent[ 0 ].spaces, indent );
+#endif  
+        pprint->indent[ 0 ].spaces = indent;
+    }
 }
 
 static void PCondFlushLine( TidyDocImpl* doc, uint indent )
@@ -718,6 +742,14 @@ static void PCondFlushLine( TidyDocImpl* doc, uint indent )
 
          TY_(WriteChar)( '\n', doc->docOut );
          pprint->line++;
+    }
+
+    /* Issue #390 - Whether chars to flush or not, set new indent */
+    if ( pprint->indent[ 0 ].spaces != (int)indent )
+    {
+#if !defined(NDEBUG) && defined(_MSC_VER)  && defined(DEBUG_INDENT)
+        SPRTF("%s Indent from %d to %d\n", __FUNCTION__, pprint->indent[ 0 ].spaces, indent );
+#endif  
          pprint->indent[ 0 ].spaces = indent;
     }
 }
@@ -741,7 +773,13 @@ void TY_(PFlushLineSmart)( TidyDocImpl* doc, uint indent )
         pprint->line++;
     }
 
-    pprint->indent[ 0 ].spaces = indent;
+    if ( pprint->indent[ 0 ].spaces != (int)indent )
+    {
+#if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_INDENT)
+        SPRTF("%s Indent from %d to %d\n", __FUNCTION__, pprint->indent[ 0 ].spaces, indent );
+#endif  
+        pprint->indent[ 0 ].spaces = indent;
+    }
 }
 
 static void PCondFlushLineSmart( TidyDocImpl* doc, uint indent )
@@ -757,8 +795,20 @@ static void PCondFlushLineSmart( TidyDocImpl* doc, uint indent )
             TY_(WriteChar)( '\n', doc->docOut );
             pprint->line++;
          }
+    }
 
-         pprint->indent[ 0 ].spaces = indent;
+    /*\
+     *  Issue #390 - Must still deal with fixing indent!
+     *  If TidyHideEndTags or TidyOmitOptionalTags, then
+     *  in certain circumstance no PrintEndTag will be done,
+     *  so linelen will be 0...
+    \*/
+    if (pprint->indent[ 0 ].spaces != (int)indent)
+    {
+#if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_INDENT)
+        SPRTF("%s Indent from %d to %d\n", __FUNCTION__, pprint->indent[ 0 ].spaces, indent );
+#endif  
+        pprint->indent[ 0 ].spaces = indent;
     }
 }
 
@@ -2026,6 +2076,9 @@ void PPrintScriptStyle( TidyDocImpl* doc, uint mode, uint indent, Node *node )
 
     if ( node->content && pprint->indent[ 0 ].spaces != (int)indent )
     {
+#if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_INDENT)
+        SPRTF("%s Indent from %d to %d\n", __FUNCTION__, pprint->indent[ 0 ].spaces, indent );
+#endif  
         pprint->indent[ 0 ].spaces = indent;
     }
     PPrintEndTag( doc, mode, indent, node );
@@ -2130,6 +2183,10 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
     {
         doc->progressCallback( tidyImplToDoc(doc), node->line, node->column, doc->pprint.line + 1 );
     }
+
+#if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_PPRINT)
+    dbg_show_node( doc, node, 4, GetSpaces( &doc->pprint ) );
+#endif
 
     if (node->type == TextNode)
     {
@@ -2378,6 +2435,18 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
                     if ( classic && !HasMixedContent(node) )
                         TY_(PFlushLineSmart)( doc, indent );
                     PPrintEndTag( doc, mode, indent, node );
+                }
+                else if (hideend)
+                {
+                    /* Issue #390  - must still deal with adjusting indent */
+                    TidyPrintImpl* pprint = &doc->pprint;
+                    if (pprint->indent[ 0 ].spaces != (int)indent)
+                    {
+#if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_INDENT)
+                        SPRTF("%s Indent from %d to %d\n", __FUNCTION__, pprint->indent[ 0 ].spaces, indent );
+#endif  
+                        pprint->indent[ 0 ].spaces = indent;
+                    }
                 }
             }
 

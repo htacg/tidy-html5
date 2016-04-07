@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Release 5.2.0</title>
+</head>
+<body>
+<a id="top"></a>
+<h1>Release 5.2.0</h1>
+<p>Change log for this release. List of <a href="#authors">authors</a></p>
+<pre>
+commit 0db9b32e22568921b1f596d79f5b9f2ac17c3ea5 (HEAD, refs/remotes/origin/master, refs/remotes/origin/HEAD, refs/heads/release/5.2, refs/heads/master)
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Apr 4 18:14:33 2016 +0200
+
+    Issue #390 - Bump to 5.1.52 for this indent fix
+
+commit 61a0a331fc783898aa2dab90627b8437042efe47
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Apr 4 18:02:26 2016 +0200
+
+    Issue #390 - fix indent with --hide-endtags yes.
+    
+    The problem was, with --hide-endtags yes, a conditional pprint buffer
+    flush had nothing to flush, thus the indent was not adjusted.
+    
+    To track down this bug added a lot of MSVC Debug code, but is only
+    existing if some additional items defined, so has no effect on the release
+    code.
+    
+    This, what feels like a good fix, was first reported about 12 years ago by
+    @OlafvdSpek in SF Bugs 563. Hopefully finally closed.
+
+commit 7598fdfff238e02d41706e6f264243dae3f54fcd
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sun Apr 3 17:54:46 2016 +0200
+
+    avoid DEBUG duplicate newline
+
+commit 3e5e07ea1848e6abb24ab226611f29552a85593f
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Thu Mar 31 14:50:47 2016 +0200
+
+    Issue #369 - Bump to version 5.1.51
+
+commit 7777a71913f15a6ee0261eec3f4fd6290316a84a
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Thu Mar 31 14:50:03 2016 +0200
+
+    Issue #369 - Remove Debug asserts
+
+commit 086e4c948c056e45a612e9450f0599ca2789d8a6
+Author: Geoff rpi McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Wed Mar 30 15:02:19 2016 +0000
+
+    remove gcc comment warning
+
+commit 005f36106ad7de2c5d2f600b372d819f13f51b5d
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Wed Mar 30 16:28:45 2016 +0200
+
+    Issue #377 - Bump version to 5.1.50
+
+commit 59d6fc7022f7fde541bdef12e68da5f75b499cdb
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Wed Mar 30 16:28:08 2016 +0200
+
+    Issue #377 - If version XHTML5 available, return that.
+
+commit cd08a709dbeee7a2ac66c6dab0025029e6036f6b
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Wed Mar 30 15:16:44 2016 +0200
+
+    Some improvements in build-me.bat
+
+commit d9ce0fc0782d72795e8295cc29c0edafd7a6fe34
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Wed Mar 30 15:01:40 2016 +0200
+
+    Some improvements in build-me.bat
+
+commit c19d221ddcef5469cb106fb1e497098b3bb35e89
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Wed Mar 30 14:19:07 2016 +0200
+
+    Issue #384 - bump to 5.1.49
+
+commit 1830fdb97cd0a2e2d1e095c3eb7aaf2fb9269227
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Wed Mar 30 14:18:04 2016 +0200
+
+    Issue #384 - insert comments
+
+commit 4b135d9b47a53beed36e8cfbe04a938f4f8a5e6c
+Merge: aa1fc19 7d28b21
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Wed Mar 30 14:08:40 2016 +0200
+
+    Merge pull request #384 from seaburg/master
+    
+    Fix skipping parsing character
+
+commit aa1fc197d500d0a222b66a6999b50f02516c3d8b
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sun Mar 27 19:57:41 2016 +0200
+
+    Issue #383 - Bump to 5.1.48 on this merge
+
+commit e87f26c247b6a854303e547372c520c38154af79
+Merge: 7d2ddee 1933205
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sun Mar 27 19:54:54 2016 +0200
+
+    Merge pull request #388 from htacg/fr.po
+    
+    Merge fr.po to master
+
+commit 193320571bfc8f2208e2ffd5557628e2e63c127e
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Mar 26 20:20:42 2016 +0100
+
+    add WIP fr.po
+
+commit 7d2ddee775368607e4b9d2a1cff89feecc27f41c
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Thu Mar 24 11:38:04 2016 +0800
+
+    Add new `rebase` command to CLI.
+    This is intended to make it very, very easy to update the POT and all of the POs when
+    changes are made to `language_en.h`. Used without an sha-1 hash, untranslated strings
+    (i.e., the &quot;source&quot; strings) are updated in the POT/PO's.
+    
+    However if you specify an --sha=HASH (or -c HASH) option, then the script will use git
+    to examine the `language_en.h` file from that specified commit, determing the strings
+    that have changed, and mark all of these strings as `fuzzy` in the POs. This will serve
+    as a flag to translators that the original has changed. In addition, this `fuzzy` flag
+    will appear in the headers as &quot;(fuzzy) &quot; in the item comments.
+    
+    If a translator edits the header directly, he should remove the &quot;(fuzzy )&quot; in the
+    comment. Then when the PO is rebuilt, the fuzzy flag will be removed automatically.
+    The reverse is also true; if a translator is working with the PO, he or she should
+    clear the fuzzy flag and the comment will be adjusted accordingly in the generated
+    header.
+
+commit a15f97ebcbb93ed58d51723dedb408b0078f5fe2
+Merge: fb95ea2 d208222
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Thu Mar 24 14:18:06 2016 +0100
+
+    Merge branch 'fr.po' of github.com:htacg/tidy-html5 into fr.po
+
+commit fb95ea2ed2350a43f56cfef5c02d2d9d497a1227
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Wed Mar 23 19:53:51 2016 +0100
+
+    Issue #383 - Bump version to 5.1.47fr
+
+commit 8671544beb7c5164d1e6e2d0608b9c5e64331604
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Wed Mar 23 19:52:56 2016 +0100
+
+    Issue #383 - Add a WIP language_fr.h to facilitate testing
+
+commit 5feca8cfd6e335c5bfc7328368963ebce87dc9c6
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Wed Mar 23 19:42:03 2016 +0100
+
+    Issue #383 - correct another byte-by-byte output to message file.
+    
+    As in the previous case these messages are already valid utf-8 text, and
+    thus, if output on a byte-by-byte basis, must not use WriteChar, except
+    for the EOL char.
+    
+    Of course this output can be to either a user ouput file, if configured,
+    otherwise stderr.
+
+commit ad7bdee3b96114ef963ee726fd3e50e8a9efb0f9
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Thu Mar 24 11:00:47 2016 +0800
+
+    Added translator comments to new TidyEscapeScripts option, and updated POT and POs to reflect this.
+
+commit a35352387348b48a5a851de237f206d9407685f8
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Thu Mar 24 10:40:21 2016 +0800
+
+    Spaceing
+
+commit d0ec84c169cf9eb4cb1b495a242152efcab4041d
+Merge: 71d6ca1 9ecdf30
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Thu Mar 24 10:37:37 2016 +0800
+
+    Merge branch 'master' into lang_help_enhance
+
+commit 9ecdf3077401dddb254e0382aea78564ad5363d8
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Tue Mar 22 10:35:03 2016 +0800
+
+    Localization fixes:
+    - Correct format specifiers.
+    - Fix missing trailing quote if following escaped quote. #385
+    - Don't put developer comments into generated headers unless --force-comments is used.
+    - Ruby 1.9.3 fix.
+    - Initial fuzzy support.
+    - Fix two character lang codes not working.
+
+commit d20822230d8fe53bc2b7639f69c91c69b299d913
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Wed Mar 23 19:53:51 2016 +0100
+
+    Issue #383 - Bump version to 5.1.47fr
+
+commit df4174f5fa6f8585f1ece2677396039dffb86f9a
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Wed Mar 23 19:52:56 2016 +0100
+
+    Issue #383 - Add a WIP language_fr.h to facilitate testing
+
+commit 6cda2e02c865fdbe7e96cbcca41d4484fc15d1a4
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Wed Mar 23 19:42:03 2016 +0100
+
+    Issue #383 - correct another byte-by-byte output to message file.
+    
+    As in the previous case these messages are already valid utf-8 text, and
+    thus, if output on a byte-by-byte basis, must not use WriteChar, except
+    for the EOL char.
+    
+    Of course this output can be to either a user ouput file, if configured,
+    otherwise stderr.
+
+commit 71d6ca1392eab720a7a681302062f2feca799a19
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Wed Mar 23 15:10:07 2016 +0800
+
+    Oops. Didn't commit es changes. This fixes that.
+
+commit d54785c933c4a5b6cc2163de036f98067f581e1a
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Wed Mar 23 14:56:36 2016 +0800
+
+    language help enhancements:
+    - Show the language Tidy is using.
+    - Update the POT and POs with the modified string.
+    - Regen language_es.h, which uses the string.
+    
+    Note that the new header uses the new commentless behavior that's still
+    pending in another branch. In addition the proper c style hints have
+    been added to all PO's, as their previous absense was a bug.
+
+commit 2cf03f7fa9575ded678ec19ece8a28496c47928f
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Wed Mar 23 14:38:17 2016 +0800
+
+    Fix two character lang codes not working.
+
+commit ee151f07f1d241838a988c275ff6bc4df4433da7
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Wed Mar 23 13:27:17 2016 +0800
+
+    Ruby 1.9.3 fix.
+
+commit 39e4f16b48209cd1d18fb890c7c0ce7b6a173a16
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Tue Mar 22 11:26:32 2016 +0800
+
+    Don't put developer comments into generated headers unless --force-comments is used.
+
+commit 3cd1a87c44d42bd91c349e101f8399b594c21f44
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Tue Mar 22 11:01:41 2016 +0800
+
+    Fix missing trailing quote if following escaped quote. #385
+
+commit 91e8e6bf1e24e651633b6ee2be6ce2b9c27efd91
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Tue Mar 22 10:35:03 2016 +0800
+
+    Correct format specifiers.
+
+commit a5ae647ee3b41127edf55f3e99f8ee3105edb28d
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sun Mar 20 01:05:36 2016 +0100
+
+    Issue #348 - Add README/OTPIONS.md on adding a new option
+
+commit 3c8d9bf3f64b57d45cef3c3e9708715eb44d85f4
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sun Mar 20 01:03:25 2016 +0100
+
+    Issue #348 - Bump to version 5.1.47
+
+commit 000c6925bd1fdec0098d69d271fd0eecf60555d0
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sun Mar 20 01:01:46 2016 +0100
+
+    Issue #348 - Add option 'escape-script', def = yes
+
+commit e4bf52c51619daa563b5de1701d271cd2fa24db4
+Author: Geoff R. McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Mar 19 19:56:27 2016 +0100
+
+    add a rentidy.sh script to keep old versions
+
+commit 9e28261c71d0d088a4fedc2c9540ef01e2af8834
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Mar 19 19:49:58 2016 +0100
+
+    ignore vc 2008 vcproj files
+
+commit 8a31aad0e35c192bde6fa4c995d96b6eede7ebba
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Mar 19 19:32:39 2016 +0100
+
+    Issues #379 #380 #383 - Bump to 5.1.46 for this merge of 'issue-380'
+
+commit 370dab3b05f1bcaabe0dd1f151a6149171b928e8
+Merge: 9a9acf2 0621576
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Mar 19 19:28:55 2016 +0100
+
+    Merge pull request #382 from htacg/issue-380
+    
+    Merge Issue 378 and 380
+
+commit 06215769aa297bea25fa260a70cfa39e4524fdf7
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Fri Mar 18 18:48:08 2016 +0100
+
+    Issue #383 - Bump version 5.1.45-Exp3
+
+commit e6f1533d896eef9cabced6e6946f7749b49b1e85
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Fri Mar 18 18:47:00 2016 +0100
+
+    Issue #383 - Output message file text byte-by-byte
+
+commit 7d28b21e60c3f5b4194e68d64d31cae6788bfcfc
+Author: Evgeniy Yurtaev &lt;evgeniyyurt _at_ gmail _dot_ com&gt;
+Date:   Fri Mar 18 00:25:24 2016 +0400
+
+    Fix skipping parsing character
+
+commit 9a9acf29cbdfdf72fc1460d7e58d05aa5e740363
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Fri Mar 11 16:39:17 2016 +0800
+
+    Updated broken links in readme.
+
+commit 68e69d54a02a8762831371aa453eeab198c55b37
+Merge: b2c591c ca90fad
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sun Mar 6 17:39:32 2016 +0100
+
+    Merge branch 'master' of github.com:htacg/tidy-html5
+
+commit 98f32ddebbe8dd172c15b7d1c82fd7b1c5583ff3
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sun Mar 6 17:38:48 2016 +0100
+
+    Issue #379 - Bump to version 5.1.45-Exp2
+
+commit 8dda04f1df6a5b43664a55a8c510b3100808f99a
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sun Mar 6 17:31:00 2016 +0100
+
+    Issue #379 - Care about 'ix' going negative.
+    
+    How this lasted so long in the code is a mystery! But of course it will
+    only be a read out-of-bounds if testing the first character in the lexer,
+    and it is a spacey char.
+    
+    A big thanks to @gaa-cifasis for running ASAN tests on Tidy.
+
+commit b83d5ffb03bbea12f442398118053839fa9cc2e0
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Mar 5 17:40:32 2016 +0100
+
+    Issue #380 - Bump to version 5.1.45-Exp1
+
+commit 8eee85cb9e8d996d324fd54db67043305dcbbc40
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Mar 5 17:39:14 2016 +0100
+
+    Issue #380 - Experimental patch in issue-380 branch
+
+commit b2c591c138a51b605fb5d82a02c24faf986701ed
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Fri Mar 4 19:39:21 2016 +0100
+
+    Issue #380 - Bump version to 5.1.45
+    
+    Added more debug code to try to track this bug!
+
+commit ca90fadb34d731038aaf303a9aae8947190b444a
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Fri Mar 4 19:39:21 2016 +0100
+
+    Issue #380 - Bump version to 5.1.45
+    
+    Added more debug code to try to track this bug!
+
+commit 0e6ed639d69449f16128ae2507c363a632c8c463
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Fri Mar 4 19:28:49 2016 +0100
+
+    Issue #380 - Add more MSVC debug
+
+commit d0910270898648ad401000550974fa6b126027a1
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Thu Mar 3 20:21:35 2016 +0100
+
+    Issue #377 add debug only output of constrained versions
+
+commit 1dd06aa4b2060ddedfac328b7860094850c48779
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Feb 29 19:59:41 2016 +0100
+
+    Issue #377 - Bump to 5.1.44 for this fix
+
+commit 7bdc31af760acefbb415d1202f78837b09a26286
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Feb 29 19:58:55 2016 +0100
+
+    Issue #377 - Table summary attribute also applies to XHTML5
+
+commit 9a80938246fabe8368a7d77819a435405fbb9555
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Feb 29 18:49:52 2016 +0100
+
+    Issue #314 - Bump to 5.1.43 for fix
+
+commit 24c62cf0df325b1bfe0fb79c22b2191dd84b1018
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Feb 29 18:49:15 2016 +0100
+
+    Issue #314 - Avoid head warning if show-body-only
+
+commit b41318724ced103f06ea132284166c784b2f4c15
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Wed Feb 24 19:24:46 2016 +0100
+
+    Issue #373 - bump version to 5.1.42 for this merge of branch 373
+
+commit 771b5607f2b229441ae7e53a0458bda557d611e3
+Merge: 8c13d27 23e689d
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Wed Feb 24 19:21:26 2016 +0100
+
+    Merge pull request #375 from htacg/issue-373
+    
+    Issue 373
+
+commit 23e689d14541f906bce2197702b22e34226d7d98
+Merge: 9ba80b8 9cf97d5
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Thu Feb 18 15:18:39 2016 +0100
+
+    Issue #373 - Merge branch 'issue-373' of github.com:htacg/tidy-html5 into issue-373
+    
+    Conflicts: version.txt - set version 5.1.41issue-373
+
+commit 9ba80b864e61c1df9e2ac09e4edcf78a985cd588
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Thu Feb 18 15:12:11 2016 +0100
+
+    Issue #373 - Rebase of issue-373 branch to master
+    
+    Updated version.txt to 5.1.41issue-373
+
+commit 8c13d270ede8d47b74b2373d818b2841f799ee23
+Merge: b91d525 63c0327
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Thu Feb 18 13:58:23 2016 +0100
+
+    Merge branch 'master' of github.com:htacg/tidy-html5
+
+commit b91d52592b69a152c2d07a8e7300fc07f83c5323
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Thu Feb 18 13:57:47 2016 +0100
+
+    Fix to K&amp;R C to compile with MSVC
+
+commit 63c0327de18315a74b870177b1b64b97348bb054
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Thu Feb 18 15:40:10 2016 +0800
+
+    Fixed typo in output strings.
+
+commit be0e5f3a8bc5ce1afd3f4ba7b7850f85153e570a
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Thu Feb 18 10:20:40 2016 +0800
+
+    External API merits patch bump.
+
+commit e00f419f5de36793c9587b1d7d9133c95b3edfdb
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Thu Feb 18 10:19:57 2016 +0800
+
+    Discovered some missing strings from tidyErrorFilterKeysStruct.
+
+commit da8205b2dc730fff8946fbec7326a7400db6bdd8
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Wed Feb 17 20:07:00 2016 +0800
+
+    Regen'd POT, POs, and headers in order to capture documentation changes in all of them.
+
+commit 7fbe76be0b3226fa0d85ee63af301fe15206460d
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Wed Feb 17 20:02:38 2016 +0800
+
+    Finished semantic html.
+
+commit a78daccd3ce2cc5803aefd8a0d09bb341215b052
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Wed Feb 17 17:43:09 2016 +0800
+
+    Through TidyIndentSpaces.
+
+commit a16e89c4f8e9fdfd626e09c10a8ce9fe700280b1
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Wed Feb 17 17:27:57 2016 +0800
+
+    Updated translator comments.
+
+commit d30c2d7747af4445752d287eec087a9dee4a4d03
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Wed Feb 17 17:20:02 2016 +0800
+
+    XSL for man handles &lt;var&gt;. Updated comment and sample string.
+
+commit f76c2615238c10051b5bb6b292833beb0a651dd1
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Wed Feb 17 15:56:21 2016 +0800
+
+    Tidy should only generate valid XML in console output, too.
+
+commit f62e59d813f96fa1e76dc515ed34062657dc1117
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Wed Feb 17 14:17:18 2016 +0800
+
+    Correct CDATA declaration.
+
+commit 6c181d5689353ff7e0d91ec259a538069c676e81
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Wed Feb 17 12:43:44 2016 +0800
+
+    Version bump, since we changed console API a bit.
+
+commit cc59efb23d07e79dca7f59781f230ca9a4d29d55
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Wed Feb 17 12:35:20 2016 +0800
+
+    Add a `xml-error-strings` service to console app providing symbols developers can use with TidyErrorFilter3.
+
+commit bc1e54d5b5d4d546c54cbce86732d991d1151f99
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Wed Feb 17 12:27:11 2016 +0800
+
+    Externalize the TidyReportFilter3 error codes, and provide iterators to loop through them.
+
+commit b4d2bdf3bf9c4be8b5c07e6ba34e0bb691bb6aeb
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Wed Feb 17 11:20:28 2016 +0800
+
+    _Also_ output the raw option description in the -xml-options-strings service.
+    Improve documentation.
+
+commit 720d5c25d2f1581c4004a7b5d85e3523129f34e7
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Wed Feb 17 10:56:21 2016 +0800
+
+    Squelch compiler warning default type.
+
+commit 7b8019c6ef054918266937c3335e395e724ac7d8
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Tue Feb 16 11:46:20 2016 +0800
+
+    Regenerated PO's for new strings.
+
+commit 7246c7e3dc1cea3f224cd53fb5b4abb451c726d4
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Tue Feb 16 11:44:50 2016 +0800
+
+    Regenered POT for new strings.
+
+commit dc15acb0f366d3b48c07d21374cb090d804c6640
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Tue Feb 16 11:20:22 2016 +0800
+
+    Remove /test/ from the repository. Regression testing is still very important, and so
+    tests and tools will be migrated to a separate development repository.
+
+commit 468cc02cf3289b9ad5b2716c3eabc58f33735d41
+Merge: 813b126 97abad0
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Tue Feb 16 11:12:32 2016 +0800
+
+    Merge pull request #372 from htacg/attrdict_phase2
+    
+    Attrdict phase2 - enforce strict tags and attributes
+
+commit 97abad0c0554f382867e9a39e7d1e38656dbc11d
+Merge: c62127b 813b126
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Tue Feb 16 11:11:36 2016 +0800
+
+    Bump to 5.1.39 for merging.
+    Merge branch 'master' into attrdict_phase2
+
+commit 813b12640e175ba1940214005be1fc404c739c2b
+Merge: a955363 3431dd0
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Tue Feb 16 11:08:53 2016 +0800
+
+    Merge pull request #370 from htacg/attrdict_phase1
+    
+    Address #346 and shrink attrdict.c.
+
+commit 3431dd05a4f5e144aa95254ad49f10aa82c20034
+Merge: 7df66c4 a955363
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Tue Feb 16 11:07:32 2016 +0800
+
+    Merge branch 'master' into attrdict_phase1
+    Bump version to 5.1.38
+
+commit 7df66c45daade612654e38b4f6652f84872de134
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Tue Feb 16 10:20:34 2016 +0800
+
+    Update version.txt
+
+commit a95536394d930eefb5d1c45500c664b5f39e7a2f
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Tue Feb 16 10:19:06 2016 +0800
+
+    Bump to 5.1.37
+
+commit 1e4f7dd0f1f2af50741a85c36e76f852e52d6901
+Merge: cf1adc6 03a643f
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Tue Feb 16 10:18:26 2016 +0800
+
+    Merge pull request #368 from htacg/issue-341
+    
+    Issue #341
+
+commit cf1adc6d9d6945a4c4164931f51ec07d2113822a
+Merge: a4f4255 593e1df
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Tue Feb 16 10:16:46 2016 +0800
+
+    Merge pull request #366 from hguemar/master
+    
+    Fix RPM generation
+
+commit 9cf97d536b8016121d1afb59749d95dc1a9801bc
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Feb 15 12:57:22 2016 +0100
+
+    Issue #373 - Avoid a null added to output.
+    
+    This bug was first openned in 2009 by Christophe Chenon, as bug sf905 but
+    the patch provided then never made it into the source.
+    
+    Now appears fixed, 7 years later!
+
+commit a4f425546f924a4801d1d389b8eed818324adac7
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sun Feb 14 18:11:57 2016 +0100
+
+    Improve MSVC DEBUG output.
+    
+    Previous only output the first 8 characters, followed by an elipse if more
+    than 8. Now return first up to 19 chars. If nore than 19, return first 8,
+    followed by an elipse, followed by the last 8 characters.
+    
+    This is in the get_text_string service, which is only used if MSVC and not
+    NDEBUG.
+
+commit c66bb848f232e24e10a19851264f9e4c24d2237f
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Feb 13 18:34:36 2016 +0100
+
+    Improve tidySaveString API documentation.
+    
+    This was suggested by Kevin Locke back in SF bug 917 Nov, 2009. Has taken
+    some time to filter through!
+
+commit c62127b9bd674eafb56412bfde44ff7c478baae3
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Sat Feb 13 12:33:02 2016 +0800
+
+    Default to NO at this point.
+
+commit 8b5771cf24c0a0b440588999cf6af424d18533f5
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Sat Feb 13 12:26:19 2016 +0800
+
+    Word2000
+    Added messages that would otherwise be missed in post-processing, after cleanup.
+
+commit 2cdedb4a630f3363308286643a03aecdc5949aad
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Sat Feb 13 11:53:53 2016 +0800
+
+    Forgot one file...
+
+commit 896b00238b71d63f9ddb6e65b63fb1955cecd5e9
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Sat Feb 13 11:53:40 2016 +0800
+
+    Forgot one file...
+
+commit 2ade3357a927f5139bca62c6c62d1514f467dfad
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Sat Feb 13 11:31:16 2016 +0800
+
+    Phase 2
+    This is a MUCH SANER approach to what I was trying to do (now that I screwed up enough internals to understand some of them!
+    At this point there are zero exit state reversions, and zero markup reversions! There are still 21 errout reversions; I'll
+    annotate and adjust as necessary.
+
+commit e947d296e49f9e14a2e8af8212179411a79975e1
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Fri Feb 12 20:49:14 2016 +0800
+
+    Handle some issues with misusing VERS_HTML5 in the doctype.
+
+commit c81a151da51d2f5ad2a0ccfe71196a3a69f3746f
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Fri Feb 12 20:46:49 2016 +0800
+
+    Add VERS_STRICT to identify future strict document types.
+
+commit 74604fd52b606fdbd914e9abd1588a9fe8f3b0bd
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Fri Feb 12 20:44:03 2016 +0800
+
+    Hard-coded checks are redundant with updates to `attrdict.c`.
+
+commit 429703dce46db84e9ff4b191f7adbe088787fa13
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Fri Feb 12 19:34:19 2016 +0800
+
+    Because the previous effort #350 grew too fast and there was a LOT of side effects to
+    my changes, I'm starting over with this. Comments in the PR thread.
+    
+    This commit reduces the size of attrdict.c while causing only a single errout
+    regression that is justified.
+
+commit 03a643f7815af5c3fbf572acb728fd438df60e83
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Feb 8 15:12:23 2016 +0100
+
+    Issue #341 - No token can be inserted if istacksize == 0!
+
+commit 58229b7e2485b9d590e9289242c402f882a29b6b
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Feb 8 15:10:38 2016 +0100
+
+    Issue #341 - Bump to version 5.1.37Test for this fix
+
+commit fbde392af3b26c44628b1f4365ee9c662d37f9db
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Fri Feb 5 14:59:12 2016 +0800
+
+    - Removed documentation generation from this repository.
+    - Removed documentation generation from CMake.
+    - These functions are now available in the api repository.
+    - Changed documentation directory to man to better illustrate its purpose.
+
+commit 593e1df6ec36d150030a48d6b8ebdeadd0e617fd
+Author: Haikel Guemar &lt;hguemar _at_ fedoraproject _dot_ org&gt;
+Date:   Thu Feb 4 08:40:49 2016 +0100
+
+    Fix RPM generation
+    
+    CPack generated RPM failed to install due to the RPM
+    owning directories owned by filesystem packages.
+    Exclude mandir directories from CPack.
+    
+    Resolves https://github.com/htacg/tidy-html5/issues/364
+
+commit 0f3cab930a3fc1b3a8eb3ff11fc584b13d37d3db
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Feb 1 20:10:23 2016 +0100
+
+    Issue #345 - bump to 5.1.36 for this fix
+
+commit 7d0d8a853a01004572d27e47b5c1146361816271
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Feb 1 20:07:55 2016 +0100
+
+    Issue #345 - discard leading spaces in href
+
+commit e8ca2aa5f307d8900c36747dd9588934ed1b259d
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Feb 1 19:45:43 2016 +0100
+
+    Issue #342 - bump to version 5.1.35 for this fix
+
+commit 7f0d5c31e6b6fa9f5426a669f3fd246218f5f607
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Feb 1 19:44:30 2016 +0100
+
+    If no doctype, allow user doctype to reset table - Issue #342
+
+commit 6abb8b7a3ce14ca5ae596ec6681055bb4634f269
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Feb 1 19:27:28 2016 +0100
+
+    Add new primary language_en.h to sources.
+    
+    Add the ever present language_en.h to the sources. This does nothing
+    really, but is important in MSVC IDE project source searches.
+    
+    Also added win32tc.h even though it is not presently used.
+
+commit c1f94c066c9683e7bc2b05d6d60cdcaf8566b09b
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Jan 30 20:47:20 2016 +0100
+
+    Tidy up some debug only code.
+    
+    After @sria91 added #360 merge, added a little more improvement...
+
+commit 328308cbb5f72ce8a93976da7527603051276dcf
+Merge: 22998e8 9a0af48
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Jan 30 20:31:32 2016 +0100
+
+    Merge pull request #360 from sria91/master
+    
+    fixed a NULL node bug in debug build
+
+commit 9a0af48a4e12b7bc7e81daee499ae455c6118036
+Author: Srikanth Anantharam &lt;sria91 _at_ gmail _dot_ com&gt;
+Date:   Sun Sep 13 10:32:05 2015 +0530
+
+    fixed a NULL node bug in debug build
+
+commit 22998e81e832b105c69d6bdba80697805ddb69bf
+Merge: 7b09cae dca50d4
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Sat Jan 30 16:02:39 2016 +0800
+
+    Merge pull request #359 from htacg/localize_rc
+    
+    HTML Tidy now can be localized.
+
+commit dca50d4077bbb28778e10300eea0bbd05c8cf796
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Sat Jan 30 16:02:00 2016 +0800
+
+    Version bump prior to rolling into master.
+
+commit 3553cbab1f78011d95e334b76c4f1ee68c256436
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Fri Jan 29 17:27:44 2016 +0800
+
+    One more README update.
+
+commit 9ae15f45a7e1493dbeb7f47fcf1070f312e0313f
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Fri Jan 29 11:11:53 2016 +0800
+
+    Consistent tabs
+    
+    Fixed tabs in template file, and regen'd all related files.
+
+commit 53f2a2da2ae7fdf19198ae690514b39494cd9819
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Wed Jan 27 11:48:38 2016 +0800
+
+    msgunfmt works properly with escaped hex.
+
+commit 17e50f26420dfd3c892354b1aec51554b2342161
+Author: Martin von Gagern &lt;Martin _dot_ vGagern _at_ gmx _dot_ net&gt;
+Date:   Tue Jan 26 15:31:07 2016 +0100
+
+    Encode UTF-8 strings to hex escapes in header files
+
+commit bf70824cc27640a92f66b2d36ddc2eb71f323b3f
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Mon Jan 25 20:58:55 2016 +0800
+
+    - Add TidyReportFilter3, which removes translation strings completely from the equation. It would be a good idea to deprecate TidyReportFilter2, which is vulnerable to changing strings in Tidy source.
+    - Documentation reminders for future enum changes.
+    - Documentation updates.
+
+commit d505869910b019731c160fe3b3c944fb5026f3d6
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Fri Jan 15 12:06:15 2016 +0800
+
+    Localization Support added to HTML Tidy
+    - Languages can now be added to Tidy using standard toolchains.
+    - Tidy's help output is improved with new options and some reorganization.
+
+commit 7b09caee37b5e7cb64122ff09b9625d241b0d6ec
+Merge: ce6c7de a81885d
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Thu Jan 21 17:05:04 2016 +0800
+
+    Merge pull request #351 from josephgrossberg/master
+    
+    looks like a pre-processor left &quot;; eof&quot; in some of the outputted mark…
+
+commit a81885d154165c0248d123255c327f7df410d061
+Author: Joe Grossberg &lt;josephgrossberg+github _at_ gmail _dot_ com&gt;
+Date:   Wed Jan 20 16:53:00 2016 -0800
+
+    looks like a pre-processor left &quot;; eof&quot; in some of the outputted markdown files
+
+commit ce6c7de2d9db9b47431566a22d0de84a5cd14ead
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Thu Jan 7 11:52:58 2016 +0800
+
+    Bump version for Mac OS X Fix, addresses #339.
+
+commit 680adfd96491ee8060b93b13ddf7c240eff1f343
+Merge: 0005841 26e7d9d
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Thu Jan 7 11:51:46 2016 +0800
+
+    Merge pull request #340 from htacg/encoding_fixes
+    
+    Fixes Mac OS X encoding issues and harmonizes output across platforms.
+
+commit 26e7d9d4b04d07a5d42d549078be834c5e8be461
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Thu Dec 31 13:57:34 2015 +0800
+
+    Fixes Mac OS X encoding issues and harmonizes output across platforms.
+    Previously Tidy produced different output based on the compilation target, NOT based on
+    the file encoding and specified options. Every platform was equal except Mac OS. Now unless
+    the encoding is specifically set to a Mac file type, all encoding assumptions are the same
+    across platforms.
+
+commit 0005841cfeb4081e5ba2219308f70143b5c77e5f
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Wed Dec 23 00:51:01 2015 +0100
+
+    Drop back to 2.8.7 for Travis CI use
+
+commit 2dd699940bcf7f3592ccee625205ad3543934264
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Tue Dec 8 01:29:39 2015 +0100
+
+    Add W3C validation for sample html
+
+commit 99428561642b830267dad334868eacae837f2c39
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Dec 7 12:42:13 2015 +0100
+
+    Issue #308 - Bump version to 5.1.32
+
+commit 48fbcbfa78bf9fcd595d95482cf88906a59498b2
+Merge: 0c6ccd8 b206331
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Dec 7 12:30:34 2015 +0100
+
+    Merge branch 'issue-308' to fix warning and release memory (#308)
+
+commit 0c6ccd884a531135462ba00bb29f55f3888cecef
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sun Dec 6 18:55:03 2015 +0100
+
+    Some additions to CONTRIBUTING.md
+
+commit b206331c55ab1ecab5b5c55948da4667cf5d55c6
+Merge: 78f2d52 885e85d
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Dec 5 17:03:33 2015 +0100
+
+    Merge branch 'issue-308' of github.com:htacg/tidy-html5 into issue-308
+
+commit 902c961619dbc2911d1f0bcad03249e1b4deb1fe
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Dec 5 17:01:31 2015 +0100
+
+    Some updates of the README.md
+
+commit d68e9c45d071b207af780bb7ad737d12abb05422
+Merge: 59f60d1 e0fdbba
+Author: Geoff R. McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Dec 5 16:22:45 2015 +0100
+
+    Merge branch 'master' of github.com:htacg/tidy-html5
+
+commit 59f60d1a79aa92e7327d28263fd28d16af7eac21
+Author: Geoff R. McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Dec 5 16:22:18 2015 +0100
+
+    update test 443576 msg
+
+commit 78f2d52cdd3c6637d74532258f7643bdfcd6cc52
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Nov 30 17:55:50 2015 +0100
+
+    Issue #308 - remove bad warn, bad assert, and free discarded
+
+commit e0fdbba8b062bb5c778cb8ffe90e44582ff0f28c
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Dec 5 14:28:46 2015 +0100
+
+    For test 500236 need .xml extent
+
+commit 8f8f40fe52e38cae6bd7b929d3cbb47840748295
+Author: Geoff R. McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Dec 5 14:27:16 2015 +0100
+
+    for test 500236 need .xml extent
+
+commit 7f131d3c7906b96b324cfa7ca86aaedec64a424b
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Dec 5 13:48:13 2015 +0100
+
+    Update to new INSERTING_AUTO_ATTRIBUTE message - #324 #320
+
+commit 5f8aac98df913a8a54986048211d81a3805cfe45
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Dec 5 13:02:33 2015 +0100
+
+    Reverted #327 bumped to 5.1.31
+
+commit 9caecb80cf632cf0d332922e96f408ac19a09f6e
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Dec 5 12:45:59 2015 +0100
+
+    Revert &quot;Fix for head closing tag not reported (#327)&quot;
+    
+    This reverts commit 61cfcb15550bfa5b266cb238d0e34b18d810bad9.
+    
+    This added an inconsistent warning about a missing optional close tag. In
+    general tidy does not report such optional close tags. See issue #327 for
+    some discussion on this.
+
+commit 121fe86bc636d708aabbce3a5a3ba02ba9cf9903
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Fri Dec 4 18:32:48 2015 +0100
+
+    Issue #326 - Bump to version 5.1.30
+
+commit e5038f0bc91dfcc45c0805ab3a95f42a9d69d341
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Fri Dec 4 18:31:24 2015 +0100
+
+    Issue #326 - Allow linkage choice TIDY_CONSOLE_SHARED
+
+commit 34eb16b5da5474261c6620fe135339e687951498
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Thu Dec 3 19:38:13 2015 +0100
+
+    Merge MinGW_build branch to version 5.1.29 (#311)
+    
+    Added support for the __MINGW32__ macro of the MinGW (gcc) compiler.
+    
+    Small WIN32 code changes where some MS specific defines and API
+    extensions needed to fall back to the normal API.
+    
+    Removed the MinGW build version extension. In distribution this is a well
+    formed WIN32 app, perhaps renamed to tidy-MinGW.exe.
+
+commit 1c6069ae9901cfee742fd4728000c80b5f1e255d
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Thu Dec 3 19:36:24 2015 +0100
+
+    Remove MinGW compile rc (#311)
+
+commit 3b13cd8076b87fbd745899c3a1be813f04e2b0a0
+Merge: b2c8060 77e053d
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Thu Dec 3 19:18:07 2015 +0100
+
+    Merge branch 'mingw-build'
+
+commit 885e85d0a24689968e3dafe36ea0df0e294caa2a
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Nov 30 17:55:50 2015 +0100
+
+    Issue #308 - remove bad warn, bad assert, and free discarded
+
+commit b2c806063a343f8ad80d514ebb74a8f8db34714d
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sun Nov 29 13:03:05 2015 +0100
+
+    Kick '5' off name
+
+commit 4c848c57bc8da6e274a413b102926429b7d0636b
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Sun Nov 29 13:24:01 2015 +0800
+
+    Bumped version.
+
+commit 61cfcb15550bfa5b266cb238d0e34b18d810bad9
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Sun Nov 29 13:21:49 2015 +0800
+
+    Fix for head closing tag not reported (#327)
+
+commit 3708d429bcacb67ec27904a07b814f6225c117d9
+Merge: dd4eb46 8737941
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Sun Nov 29 12:48:22 2015 +0800
+
+    Merge pull request #325 from htacg/progress_callback
+    
+    Progress callback
+
+commit 873794162ae45356e77a2dce5a3fd2079faad9dc
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Sun Nov 29 07:39:33 2015 +0800
+
+    Callback added to XML printer, too; fixed off-by-one error.
+
+commit 77e053d582e5ea6cba64fe959f70e4c0ab3d612c
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Nov 28 15:25:24 2015 +0100
+
+    Issue #311 - Add MinGW to the version
+
+commit dc969f30d5321f249eef7929d020e4543f8d8a81
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sat Nov 28 15:14:53 2015 +0100
+
+    Issue #311 - small changes for MinGW32 build
+
+commit 3b8ad7482e34a2dc109e9df34c8d0a38b3909db0
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Sat Nov 28 16:02:35 2015 +0800
+
+    This is probably best as void.
+
+commit 4adc07fd659ec0d40864b04a94d85dd542d0e5d0
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Sat Nov 28 15:43:34 2015 +0800
+
+    Removed the one callback per line filter. Library user can filter this himself.
+
+commit dcd8f16f7318debea87ce666d4dde7d61eaa96e0
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Sat Nov 28 15:34:23 2015 +0800
+
+    Tidying progress callback implemented.
+
+commit 34d456aa80cffea38d7b5819653a3471adb28006
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Sat Nov 28 14:16:17 2015 +0800
+
+    Make pretty printer keep track of line numbers as it prints.
+
+commit dd4eb46bb320c6ab06b75d28961f9f78c80f6702
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Fri Nov 27 09:50:33 2015 +0800
+
+    Make the new README less annoying.
+
+commit 501c3fb6166c4d0b6065f16e772c7d5d0f192cd1
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Fri Nov 27 09:47:09 2015 +0800
+
+    Version bump given the different output now produced.
+
+commit 3a3836618b98e49e62fe0ee75d5d7dadeb132ead
+Merge: c65cf43 9834cc1
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Fri Nov 27 09:46:17 2015 +0800
+
+    Merge pull request #324 from htacg/fix_img_alt
+    
+    - Addresses #320
+
+commit 9834cc17ad9ba3ea3973cba198dcc8003a96dd08
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Fri Nov 27 09:45:26 2015 +0800
+
+    Style cleanup for previous commit.
+
+commit 1c963acb58f5ed755940d923e9326dfd53406eec
+Merge: 933fc3d c65cf43
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Fri Nov 27 09:36:32 2015 +0800
+
+    Merge branch 'master' into fix_img_alt
+
+commit c65cf430613b8df21a21c73b10e18f944b73d440
+Merge: db4f647 6323473
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Fri Nov 27 09:04:19 2015 +0800
+
+    Merge pull request #323 from htacg/squelch_null_prefix
+    
+    Allows null value css-prefix to be used in a config file without issu…
+
+commit 933fc3d236cd870ec3cd638e91eea69b47a76d47
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Thu Nov 26 13:23:43 2015 +0800
+
+    - Addresses #320
+    - Different error output depending on whether or not the `alt-text` option was given a value.
+
+commit 63234735d880e699104272a00d5767f743fb6e65
+Author: Jim Derry &lt;balthisar _at_ gmail _dot_ com&gt;
+Date:   Thu Nov 26 11:21:48 2015 +0800
+
+    Allows null value css-prefix to be used in a config file without issuing a warning.
+
+commit db4f6473ed70d55fb1f375d8b18040254aad4aec
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Thu Nov 26 00:58:07 2015 +0100
+
+    Issue #321 - bump v 5.1.27 for #322 PR - thanks
+
+commit 2522730e3c5886422fd929074d0514fbfabfe3be
+Merge: 0ef4493 71d9638
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Thu Nov 26 00:54:55 2015 +0100
+
+    Merge pull request #322 from benkasminbullock/master
+    
+    Don't push back non-A tokens.
+
+commit 71d963844897a6864097d4bc36501a97ff314e40
+Author: Ben Bullock &lt;benkasminbullock _at_ gmail _dot_ com&gt;
+Date:   Wed Nov 25 18:00:45 2015 +0900
+
+    Don't push back non-A tokens.
+
+commit 0ef4493ae8bdc4b8fec125fecf4e1dcc95c30fb1
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Tue Nov 24 19:29:52 2015 +0100
+
+    Issue #319 - bump to 5.1.26 for merge of buffer fix
+
+commit b8e4f6e21eb153f4be8bfbae9551f68d5780fba1
+Merge: f567088 1ef5ba7
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Tue Nov 24 19:21:28 2015 +0100
+
+    Merge pull request #319 from CMB/memfix
+    
+    Fix a tiny buffer overflow.
+
+commit 1ef5ba796882fe9f68254dfb79f995d9c29cfe85
+Author: Christopher Brannon &lt;chris _at_ the-brannons _dot_ com&gt;
+Date:   Mon Nov 23 12:28:00 2015 -0800
+
+    Fix a tiny buffer overflow.
+
+commit f567088a68b0be91c31640c9c5904082a500444f (tag: refs/tags/5.1.25)
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Mon Nov 23 16:07:04 2015 +0100
+
+    Update verhist.log to 5.1.25
+
+commit b58aa1c26a24609e05881639d540d422a40f09e6
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sun Nov 22 20:43:12 2015 +0100
+
+    Issue #307 - add a ref link in comments
+
+commit 2388fb017565bf09b65a400175de800154909955
+Author: Geoff McLane &lt;ubuntu _at_ geoffair _dot_ info&gt;
+Date:   Sun Nov 22 18:46:00 2015 +0100
+
+    Issue #307, #167, #169 - regression of nestd anchors</pre>
+<a name="authors"></a>
+
+<p>This log has  177 commits by 10 authors: Joe Grossberg 1; Evgeniy Yurtaev 1; Geoff R. McLane 93; Jim Derry 76; Haikel Guemar 1; Martin von Gagern 1; Christopher Brannon 1; Srikanth Anantharam 1; Ben Bullock 1; Geoff rpi McLane 1; </p>
+
+<p>Date: from Sun Sep 13 10:32:05 2015 +0530 to Mon Apr 4 18:14:33 2016 +0200 (204 days)</p>
+
+<p>eof <a href="#top">top</a></p>
+</body>
+</html>
+

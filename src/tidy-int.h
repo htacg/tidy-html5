@@ -76,6 +76,8 @@ struct _TidyDocImpl
     uint                badChars;    /* for bad char encodings */
     uint                badForm;     /* bit field, for badly placed form tags, or other format errors */
 
+    Bool                HTML5Mode;  /* current mode is html5 */
+
     /* Memory allocator */
     TidyAllocator*      allocator;
 

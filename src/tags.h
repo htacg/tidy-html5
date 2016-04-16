@@ -88,6 +88,7 @@ void TY_(InitTags)( TidyDocImpl* doc );
 void TY_(FreeTags)( TidyDocImpl* doc );
 void TY_(AdjustTags)( TidyDocImpl *doc ); /* if NOT HTML5 DOCTYPE, fall back to HTML4 legacy mode */
 void TY_(ResetTags)( TidyDocImpl *doc ); /* set table to HTML5 mode */
+Bool TY_(IsHTML5Mode)( TidyDocImpl *doc );
 
 /* Parser methods for tags */
 

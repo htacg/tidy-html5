@@ -328,7 +328,6 @@ static Bool CanPrune( TidyDocImpl* doc, Node *element )
     if (nodeIsDD(element))
         return no;
 
-
     return yes;
 }
 
@@ -2514,7 +2513,14 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
             continue;
         }
 
-        if ( !nodeIsLI(node) )
+        if ( nodeIsLI(node) || TY_(IsHTML5Mode)(doc))
+        {
+            /* node is <LI> 
+               Issue #396 - A <ul> can have Zero or more li elements
+             */
+            TY_(InsertNodeAtEnd)(list,node);
+        }
+        else
         {
             TY_(UngetToken)( doc );
 
@@ -2567,9 +2573,6 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
                 TY_(InsertNodeAtEnd)(list,node);
             }
         }
-        else
-            /* node is <LI> */
-            TY_(InsertNodeAtEnd)(list,node);
 
         ParseTag( doc, node, IgnoreWhitespace);
     }

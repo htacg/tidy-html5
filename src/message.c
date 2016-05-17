@@ -231,7 +231,7 @@ static void messagePos( TidyDocImpl* doc, TidyReportLevel level, uint code,
     {
         va_list args_copy;
         va_copy(args_copy, args);
-        TY_(tmbvsnprintf)(messageBuf, sizeMessageBuf, msg, args);
+        TY_(tmbvsnprintf)(messageBuf, sizeMessageBuf, msg, args_copy);
         if ( doc->mssgFilt )
         {
             TidyDoc tdoc = tidyImplToDoc( doc );
@@ -245,6 +245,8 @@ static void messagePos( TidyDocImpl* doc, TidyReportLevel level, uint code,
                consistent, we have to ensure that we only ever return the
                built-in English version of this string. */
             TidyDoc tdoc = tidyImplToDoc( doc );
+            va_end(args_copy);
+            va_copy(args_copy, args);
             go = go | doc->mssgFilt2( tdoc, level, line, col, tidyDefaultString(code), args_copy );
         }
         if ( doc->mssgFilt3 )
@@ -253,8 +255,11 @@ static void messagePos( TidyDocImpl* doc, TidyReportLevel level, uint code,
                messages via their own means by providing a key string and
                the parameters to fill it. */
             TidyDoc tdoc = tidyImplToDoc( doc );
+            va_end(args_copy);
+            va_copy(args_copy, args);
             go = go | doc->mssgFilt3( tdoc, level, line, col, tidyErrorCodeAsString(code), args_copy );
         }
+        va_end(args_copy);
     }
 
     if ( go )

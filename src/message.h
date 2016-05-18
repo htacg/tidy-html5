@@ -27,37 +27,37 @@
 
 ctmbstr TY_(ReleaseDate)(void);
 
-void TY_(ReportUnknownOption)( TidyDocImpl* doc, ctmbstr option );
-void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option );
-void TY_(NeedsAuthorIntervention)( TidyDocImpl* doc );
+void TY_(ReportUnknownOption)( TidyDoc doc, ctmbstr option );
+void TY_(ReportBadArgument)( TidyDoc doc, ctmbstr option );
+void TY_(NeedsAuthorIntervention)( TidyDoc doc );
 
-void TY_(ReportMarkupVersion)( TidyDocImpl* doc );
-void TY_(ReportNumWarnings)( TidyDocImpl* doc );
+void TY_(ReportMarkupVersion)( TidyDoc doc );
+void TY_(ReportNumWarnings)( TidyDoc doc );
 
-void TY_(GeneralInfo)( TidyDocImpl* doc );
-/* void TY_(UnknownOption)( TidyDocImpl* doc, char c ); */
-/* void TY_(UnknownFile)( TidyDocImpl* doc, ctmbstr program, ctmbstr file ); */
-void TY_(FileError)( TidyDocImpl* doc, ctmbstr file, TidyReportLevel level );
+void TY_(GeneralInfo)( TidyDoc doc );
+/* void TY_(UnknownOption)( TidyDoc doc, char c ); */
+/* void TY_(UnknownFile)( TidyDoc doc, ctmbstr program, ctmbstr file ); */
+void TY_(FileError)( TidyDoc doc, ctmbstr file, TidyReportLevel level );
 
-void TY_(ErrorSummary)( TidyDocImpl* doc );
+void TY_(ErrorSummary)( TidyDoc doc );
 
-void TY_(ReportEncodingWarning)(TidyDocImpl* doc, uint code, uint encoding);
-void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarded);
-void TY_(ReportEntityError)( TidyDocImpl* doc, uint code, ctmbstr entity, int c );
-void TY_(ReportAttrError)( TidyDocImpl* doc, Node* node, AttVal* av, uint code );
-void TY_(ReportMissingAttr)( TidyDocImpl* doc, Node* node, ctmbstr name );
+void TY_(ReportEncodingWarning)(TidyDoc doc, uint code, uint encoding);
+void TY_(ReportEncodingError)(TidyDoc doc, uint code, uint c, Bool discarded);
+void TY_(ReportEntityError)( TidyDoc doc, uint code, ctmbstr entity, int c );
+void TY_(ReportAttrError)( TidyDoc doc, TidyNode node, TidyAttr av, uint code );
+void TY_(ReportMissingAttr)( TidyDoc doc, TidyNode node, ctmbstr name );
 
 #if SUPPORT_ACCESSIBILITY_CHECKS
 
-void TY_(ReportAccessWarning)( TidyDocImpl* doc, Node* node, uint code );
-void TY_(ReportAccessError)( TidyDocImpl* doc, Node* node, uint code );
+void TY_(ReportAccessWarning)( TidyDoc doc, TidyNode node, uint code );
+void TY_(ReportAccessError)( TidyDoc doc, TidyNode node, uint code );
 
 #endif
 
-void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code);
-void TY_(ReportWarning)(TidyDocImpl* doc, Node *element, Node *node, uint code);
-void TY_(ReportError)(TidyDocImpl* doc, Node* element, Node* node, uint code);
-void TY_(ReportFatal)(TidyDocImpl* doc, Node* element, Node* node, uint code);
+void TY_(ReportNotice)(TidyDoc doc, TidyNode element, TidyNode node, uint code);
+void TY_(ReportWarning)(TidyDoc doc, TidyNode element, TidyNode node, uint code);
+void TY_(ReportError)(TidyDoc doc, TidyNode element, TidyNode node, uint code);
+void TY_(ReportFatal)(TidyDoc doc, TidyNode element, TidyNode node, uint code);
 
 
 /**

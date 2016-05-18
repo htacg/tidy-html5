@@ -11,187 +11,187 @@
 
 Bool TIDY_CALL tidyAttrIsHREF( TidyAttr tattr )
 {
-    return attrIsHREF( tidyAttrToImpl(tattr) );
+    return attrIsHREF( tattr );
 }
 Bool TIDY_CALL tidyAttrIsSRC( TidyAttr tattr )
 {
-    return attrIsSRC( tidyAttrToImpl(tattr) );
+    return attrIsSRC( tattr );
 }
 Bool TIDY_CALL tidyAttrIsID( TidyAttr tattr )
 {
-    return attrIsID( tidyAttrToImpl(tattr) );
+    return attrIsID( tattr );
 }
 Bool TIDY_CALL tidyAttrIsNAME( TidyAttr tattr )
 {
-    return attrIsNAME( tidyAttrToImpl(tattr) );
+    return attrIsNAME( tattr );
 }
 Bool TIDY_CALL tidyAttrIsSUMMARY( TidyAttr tattr )
 {
-    return attrIsSUMMARY( tidyAttrToImpl(tattr) );
+    return attrIsSUMMARY( tattr );
 }
 Bool TIDY_CALL tidyAttrIsALT( TidyAttr tattr )
 {
-    return attrIsALT( tidyAttrToImpl(tattr) );
+    return attrIsALT( tattr );
 }
 Bool TIDY_CALL tidyAttrIsLONGDESC( TidyAttr tattr )
 {
-    return attrIsLONGDESC( tidyAttrToImpl(tattr) );
+    return attrIsLONGDESC( tattr );
 }
 Bool TIDY_CALL tidyAttrIsUSEMAP( TidyAttr tattr )
 {
-    return attrIsUSEMAP( tidyAttrToImpl(tattr) );
+    return attrIsUSEMAP( tattr );
 }
 Bool TIDY_CALL tidyAttrIsISMAP( TidyAttr tattr )
 {
-    return attrIsISMAP( tidyAttrToImpl(tattr) );
+    return attrIsISMAP( tattr );
 }
 Bool TIDY_CALL tidyAttrIsLANGUAGE( TidyAttr tattr )
 {
-    return attrIsLANGUAGE( tidyAttrToImpl(tattr) );
+    return attrIsLANGUAGE( tattr );
 }
 Bool TIDY_CALL tidyAttrIsTYPE( TidyAttr tattr )
 {
-    return attrIsTYPE( tidyAttrToImpl(tattr) );
+    return attrIsTYPE( tattr );
 }
 Bool TIDY_CALL tidyAttrIsVALUE( TidyAttr tattr )
 {
-    return attrIsVALUE( tidyAttrToImpl(tattr) );
+    return attrIsVALUE( tattr );
 }
 Bool TIDY_CALL tidyAttrIsCONTENT( TidyAttr tattr )
 {
-    return attrIsCONTENT( tidyAttrToImpl(tattr) );
+    return attrIsCONTENT( tattr );
 }
 Bool TIDY_CALL tidyAttrIsTITLE( TidyAttr tattr )
 {
-    return attrIsTITLE( tidyAttrToImpl(tattr) );
+    return attrIsTITLE( tattr );
 }
 Bool TIDY_CALL tidyAttrIsXMLNS( TidyAttr tattr )
 {
-    return attrIsXMLNS( tidyAttrToImpl(tattr) );
+    return attrIsXMLNS( tattr );
 }
 Bool TIDY_CALL tidyAttrIsDATAFLD( TidyAttr tattr )
 {
-    return attrIsDATAFLD( tidyAttrToImpl(tattr) );
+    return attrIsDATAFLD( tattr );
 }
 Bool TIDY_CALL tidyAttrIsWIDTH( TidyAttr tattr )
 {
-    return attrIsWIDTH( tidyAttrToImpl(tattr) );
+    return attrIsWIDTH( tattr );
 }
 Bool TIDY_CALL tidyAttrIsHEIGHT( TidyAttr tattr )
 {
-    return attrIsHEIGHT( tidyAttrToImpl(tattr) );
+    return attrIsHEIGHT( tattr );
 }
 Bool TIDY_CALL tidyAttrIsFOR( TidyAttr tattr )
 {
-    return attrIsFOR( tidyAttrToImpl(tattr) );
+    return attrIsFOR( tattr );
 }
 Bool TIDY_CALL tidyAttrIsSELECTED( TidyAttr tattr )
 {
-    return attrIsSELECTED( tidyAttrToImpl(tattr) );
+    return attrIsSELECTED( tattr );
 }
 Bool TIDY_CALL tidyAttrIsCHECKED( TidyAttr tattr )
 {
-    return attrIsCHECKED( tidyAttrToImpl(tattr) );
+    return attrIsCHECKED( tattr );
 }
 Bool TIDY_CALL tidyAttrIsLANG( TidyAttr tattr )
 {
-    return attrIsLANG( tidyAttrToImpl(tattr) );
+    return attrIsLANG( tattr );
 }
 Bool TIDY_CALL tidyAttrIsTARGET( TidyAttr tattr )
 {
-    return attrIsTARGET( tidyAttrToImpl(tattr) );
+    return attrIsTARGET( tattr );
 }
 Bool TIDY_CALL tidyAttrIsHTTP_EQUIV( TidyAttr tattr )
 {
-    return attrIsHTTP_EQUIV( tidyAttrToImpl(tattr) );
+    return attrIsHTTP_EQUIV( tattr );
 }
 Bool TIDY_CALL tidyAttrIsREL( TidyAttr tattr )
 {
-    return attrIsREL( tidyAttrToImpl(tattr) );
+    return attrIsREL( tattr );
 }
 Bool TIDY_CALL tidyAttrIsEvent( TidyAttr tattr )
 {
-    return TY_(attrIsEvent)( tidyAttrToImpl(tattr) );
+    return TY_(attrIsEvent)( tattr );
 }
 Bool TIDY_CALL tidyAttrIsOnMOUSEMOVE( TidyAttr tattr )
 {
-    return attrIsOnMOUSEMOVE( tidyAttrToImpl(tattr) );
+    return attrIsOnMOUSEMOVE( tattr );
 }
 Bool TIDY_CALL tidyAttrIsOnMOUSEDOWN( TidyAttr tattr )
 {
-    return attrIsOnMOUSEDOWN( tidyAttrToImpl(tattr) );
+    return attrIsOnMOUSEDOWN( tattr );
 }
 Bool TIDY_CALL tidyAttrIsOnMOUSEUP( TidyAttr tattr )
 {
-    return attrIsOnMOUSEUP( tidyAttrToImpl(tattr) );
+    return attrIsOnMOUSEUP( tattr );
 }
 Bool TIDY_CALL tidyAttrIsOnCLICK( TidyAttr tattr )
 {
-    return attrIsOnCLICK( tidyAttrToImpl(tattr) );
+    return attrIsOnCLICK( tattr );
 }
 Bool TIDY_CALL tidyAttrIsOnMOUSEOVER( TidyAttr tattr )
 {
-    return attrIsOnMOUSEOVER( tidyAttrToImpl(tattr) );
+    return attrIsOnMOUSEOVER( tattr );
 }
 Bool TIDY_CALL tidyAttrIsOnMOUSEOUT( TidyAttr tattr )
 {
-    return attrIsOnMOUSEOUT( tidyAttrToImpl(tattr) );
+    return attrIsOnMOUSEOUT( tattr );
 }
 Bool TIDY_CALL tidyAttrIsOnKEYDOWN( TidyAttr tattr )
 {
-    return attrIsOnKEYDOWN( tidyAttrToImpl(tattr) );
+    return attrIsOnKEYDOWN( tattr );
 }
 Bool TIDY_CALL tidyAttrIsOnKEYUP( TidyAttr tattr )
 {
-    return attrIsOnKEYUP( tidyAttrToImpl(tattr) );
+    return attrIsOnKEYUP( tattr );
 }
 Bool TIDY_CALL tidyAttrIsOnKEYPRESS( TidyAttr tattr )
 {
-    return attrIsOnKEYPRESS( tidyAttrToImpl(tattr) );
+    return attrIsOnKEYPRESS( tattr );
 }
 Bool TIDY_CALL tidyAttrIsOnFOCUS( TidyAttr tattr )
 {
-    return attrIsOnFOCUS( tidyAttrToImpl(tattr) );
+    return attrIsOnFOCUS( tattr );
 }
 Bool TIDY_CALL tidyAttrIsOnBLUR( TidyAttr tattr )
 {
-    return attrIsOnBLUR( tidyAttrToImpl(tattr) );
+    return attrIsOnBLUR( tattr );
 }
 Bool TIDY_CALL tidyAttrIsBGCOLOR( TidyAttr tattr )
 {
-    return attrIsBGCOLOR( tidyAttrToImpl(tattr) );
+    return attrIsBGCOLOR( tattr );
 }
 Bool TIDY_CALL tidyAttrIsLINK( TidyAttr tattr )
 {
-    return attrIsLINK( tidyAttrToImpl(tattr) );
+    return attrIsLINK( tattr );
 }
 Bool TIDY_CALL tidyAttrIsALINK( TidyAttr tattr )
 {
-    return attrIsALINK( tidyAttrToImpl(tattr) );
+    return attrIsALINK( tattr );
 }
 Bool TIDY_CALL tidyAttrIsVLINK( TidyAttr tattr )
 {
-    return attrIsVLINK( tidyAttrToImpl(tattr) );
+    return attrIsVLINK( tattr );
 }
 Bool TIDY_CALL tidyAttrIsTEXT( TidyAttr tattr )
 {
-    return attrIsTEXT( tidyAttrToImpl(tattr) );
+    return attrIsTEXT( tattr );
 }
 Bool TIDY_CALL tidyAttrIsSTYLE( TidyAttr tattr )
 {
-    return attrIsSTYLE( tidyAttrToImpl(tattr) );
+    return attrIsSTYLE( tattr );
 }
 Bool TIDY_CALL tidyAttrIsABBR( TidyAttr tattr )
 {
-    return attrIsABBR( tidyAttrToImpl(tattr) );
+    return attrIsABBR( tattr );
 }
 Bool TIDY_CALL tidyAttrIsCOLSPAN( TidyAttr tattr )
 {
-    return attrIsCOLSPAN( tidyAttrToImpl(tattr) );
+    return attrIsCOLSPAN( tattr );
 }
 Bool TIDY_CALL tidyAttrIsROWSPAN( TidyAttr tattr )
 {
-    return attrIsROWSPAN( tidyAttrToImpl(tattr) );
+    return attrIsROWSPAN( tattr );
 }
 
 /*

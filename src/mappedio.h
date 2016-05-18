@@ -9,7 +9,7 @@
 */
 
 #if defined(_WIN32)
-int TY_(DocParseFileWithMappedFile)( TidyDocImpl* doc, ctmbstr filnam );
+int TY_(DocParseFileWithMappedFile)( TidyDoc doc, ctmbstr filnam );
 #endif
 
 #endif /* __TIDY_MAPPED_IO_H__ */

@@ -135,23 +135,23 @@ static const ctmbstr colorNames[] =
 
 
 /* function prototypes */
-static void InitAccessibilityChecks( TidyDocImpl* doc, int level123 );
-static void FreeAccessibilityChecks( TidyDocImpl* doc );
+static void InitAccessibilityChecks( TidyDoc doc, int level123 );
+static void FreeAccessibilityChecks( TidyDoc doc );
 
 static Bool GetRgb( ctmbstr color, int rgb[3] );
 static Bool CompareColors( const int rgbBG[3], const int rgbFG[3] );
 static int  ctox( tmbchar ch );
 
 /*
-static void CheckMapAccess( TidyDocImpl* doc, Node* node, Node* front);
-static void GetMapLinks( TidyDocImpl* doc, Node* node, Node* front);
-static void CompareAnchorLinks( TidyDocImpl* doc, Node* front, int counter);
-static void FindMissingLinks( TidyDocImpl* doc, Node* node, int counter);
+static void CheckMapAccess( TidyDoc doc, TidyNode node, TidyNode front);
+static void GetMapLinks( TidyDoc doc, TidyNode node, TidyNode front);
+static void CompareAnchorLinks( TidyDoc doc, TidyNode front, int counter);
+static void FindMissingLinks( TidyDoc doc, TidyNode node, int counter);
 */
-static void CheckFormControls( TidyDocImpl* doc, Node* node );
-static void MetaDataPresent( TidyDocImpl* doc, Node* node );
-static void CheckEmbed( TidyDocImpl* doc, Node* node );
-static void CheckListUsage( TidyDocImpl* doc, Node* node );
+static void CheckFormControls( TidyDoc doc, TidyNode node );
+static void MetaDataPresent( TidyDoc doc, TidyNode node );
+static void CheckEmbed( TidyDoc doc, TidyNode node );
+static void CheckListUsage( TidyDoc doc, TidyNode node );
 
 /*
     GetFileExtension takes a path and returns the extension
@@ -289,7 +289,7 @@ static Bool IsWhitespace( ctmbstr pString )
     return isWht;
 }
 
-static Bool hasValue( AttVal* av )
+static Bool hasValue( TidyAttr av )
 {
     return ( av && ! IsWhitespace(av->value) );
 }
@@ -361,7 +361,7 @@ static Bool EndsWithBytes( ctmbstr txt )
 * text node.
 *******************************************************/
 
-static ctmbstr textFromOneNode( TidyDocImpl* doc, Node* node )
+static ctmbstr textFromOneNode( TidyDoc doc, TidyNode node )
 {
     uint i;
     uint x = 0;
@@ -393,7 +393,7 @@ static ctmbstr textFromOneNode( TidyDocImpl* doc, Node* node )
 * text nodes, and concatenates the text.
 *********************************************************/
     
-static void getTextNode( TidyDocImpl* doc, Node* node )
+static void getTextNode( TidyDoc doc, TidyNode node )
 {
     tmbstr txtnod = doc->access.textNode;       
     
@@ -431,7 +431,7 @@ static void getTextNode( TidyDocImpl* doc, Node* node )
 * text.  The textNode must be cleared before use.
 **********************************************************/
 
-static tmbstr getTextNodeClear( TidyDocImpl* doc, Node* node )
+static tmbstr getTextNodeClear( TidyDoc doc, TidyNode node )
 {
     /* Clears list */
     TidyClearMemory( doc->access.textNode, TEXTBUF_SIZE );
@@ -447,18 +447,18 @@ static tmbstr getTextNodeClear( TidyDocImpl* doc, Node* node )
 * Tell whether access "X" is enabled.
 **********************************************************/
 
-static Bool Level1_Enabled( TidyDocImpl* doc )
+static Bool Level1_Enabled( TidyDoc doc )
 {
    return doc->access.PRIORITYCHK == 1 ||
           doc->access.PRIORITYCHK == 2 ||
           doc->access.PRIORITYCHK == 3;
 }
-static Bool Level2_Enabled( TidyDocImpl* doc )
+static Bool Level2_Enabled( TidyDoc doc )
 {
     return doc->access.PRIORITYCHK == 2 ||
            doc->access.PRIORITYCHK == 3;
 }
-static Bool Level3_Enabled( TidyDocImpl* doc )
+static Bool Level3_Enabled( TidyDoc doc )
 {
     return doc->access.PRIORITYCHK == 3;
 }
@@ -470,7 +470,7 @@ static Bool Level3_Enabled( TidyDocImpl* doc )
 * available without color.
 ********************************************************/
 
-static void CheckColorAvailable( TidyDocImpl* doc, Node* node )
+static void CheckColorAvailable( TidyDoc doc, TidyNode node )
 {
     if (Level1_Enabled( doc ))
     {
@@ -507,14 +507,14 @@ static void CheckColorAvailable( TidyDocImpl* doc, Node* node )
 * world cases.  It's a start, however.
 *********************************************************************/
 
-static void CheckColorContrast( TidyDocImpl* doc, Node* node )
+static void CheckColorContrast( TidyDoc doc, TidyNode node )
 {
     int rgbBG[3] = {255,255,255};   /* Black text on white BG */
 
     if (Level3_Enabled( doc ))
     {
         Bool gotBG = yes;
-        AttVal* av;
+        TidyAttr av;
 
         /* Check for 'BGCOLOR' first to compare with other color attributes */
         for ( av = node->attributes; av; av = av->next )
@@ -668,7 +668,7 @@ static int ctox( tmbchar ch )
 * to indicate the error.  
 ***********************************************************/
 
-static void CheckImage( TidyDocImpl* doc, Node* node )
+static void CheckImage( TidyDoc doc, TidyNode node )
 {
     Bool HasAlt = no;
     Bool HasIsMap = no;
@@ -679,7 +679,7 @@ static void CheckImage( TidyDocImpl* doc, Node* node )
     Bool HasValidWidthHR = no; 
     Bool HasTriggeredMissingLongDesc = no;
 
-    AttVal* av;
+    TidyAttr av;
                 
     if (Level1_Enabled( doc ))
     {
@@ -919,12 +919,12 @@ static void CheckImage( TidyDocImpl* doc, Node* node )
 * within the APPLET element.
 ***********************************************************/
 
-static void CheckApplet( TidyDocImpl* doc, Node* node )
+static void CheckApplet( TidyDoc doc, TidyNode node )
 {
     Bool HasAlt = no;
     Bool HasDescription = no;
 
-    AttVal* av;
+    TidyAttr av;
         
     if (Level1_Enabled( doc ))
     {
@@ -984,7 +984,7 @@ static void CheckApplet( TidyDocImpl* doc, Node* node )
 * representation.
 *******************************************************************/
 
-static void CheckObject( TidyDocImpl* doc, Node* node )
+static void CheckObject( TidyDoc doc, TidyNode node )
 {
     Bool HasAlt = no;
     Bool HasDescription = no;
@@ -995,8 +995,8 @@ static void CheckObject( TidyDocImpl* doc, Node* node )
         {
             if ( node->content->type != TextNode )
             {
-                Node* tnode = node->content;
-                AttVal* av;
+                TidyNode tnode = node->content;
+                TidyAttr av;
 
                 for ( av=tnode->attributes; av; av = av->next )
                 {
@@ -1041,10 +1041,10 @@ static void CheckObject( TidyDocImpl* doc, Node* node )
 * Ensures that stylesheets are used to control the presentation.
 ***************************************************************/
 
-static Bool CheckMissingStyleSheets( TidyDocImpl* doc, Node* node )
+static Bool CheckMissingStyleSheets( TidyDoc doc, TidyNode node )
 {
-    AttVal* av;
-    Node* content;
+    TidyAttr av;
+    TidyNode content;
     Bool sspresent = no;
 
     for ( content = node->content;
@@ -1086,10 +1086,10 @@ static Bool CheckMissingStyleSheets( TidyDocImpl* doc, Node* node )
 * Also, checks to ensure that the 'SRC' and 'TITLE' values are valid. 
 *******************************************************************/
 
-static void CheckFrame( TidyDocImpl* doc, Node* node )
+static void CheckFrame( TidyDoc doc, TidyNode node )
 {
     Bool HasTitle = no;
-    AttVal* av;
+    TidyAttr av;
 
     doc->access.numFrames++;
 
@@ -1162,12 +1162,12 @@ static void CheckFrame( TidyDocImpl* doc, Node* node )
 * file extension.
 ****************************************************************/
 
-static void CheckIFrame( TidyDocImpl* doc, Node* node )
+static void CheckIFrame( TidyDoc doc, TidyNode node )
 {
     if (Level1_Enabled( doc ))
     {
         /* Checks for valid 'SRC' value within the IFRAME element */
-        AttVal* av = attrGetSRC( node );
+        TidyAttr av = attrGetSRC( node );
         if ( hasValue(av) )
         {
             if ( !IsValidSrcExtension(av->value) )
@@ -1186,9 +1186,9 @@ static void CheckIFrame( TidyDocImpl* doc, Node* node )
 * (if it exists) is not NULL and does not contain '_new' or '_blank'.
 **********************************************************************/
 
-static void CheckAnchorAccess( TidyDocImpl* doc, Node* node )
+static void CheckAnchorAccess( TidyDoc doc, TidyNode node )
 {
-    AttVal* av;
+    TidyAttr av;
     Bool HasDescription = no;
     Bool HasTriggeredLink = no;
 
@@ -1317,10 +1317,10 @@ static void CheckAnchorAccess( TidyDocImpl* doc, Node* node )
 * or '_blank'.
 ************************************************************/
 
-static void CheckArea( TidyDocImpl* doc, Node* node )
+static void CheckArea( TidyDoc doc, TidyNode node )
 {
     Bool HasAlt = no;
-    AttVal* av;
+    TidyAttr av;
 
     /* Checks all attributes within the AREA element */
     for (av = node->attributes; av != NULL; av = av->next)
@@ -1377,7 +1377,7 @@ static void CheckArea( TidyDocImpl* doc, Node* node )
 * NOSCRIPT section follows the SCRIPT.  
 ***************************************************/
 
-static void CheckScriptAcc( TidyDocImpl* doc, Node* node )
+static void CheckScriptAcc( TidyDoc doc, TidyNode node )
 {
     if (Level1_Enabled( doc ))
     {
@@ -1397,7 +1397,7 @@ static void CheckScriptAcc( TidyDocImpl* doc, Node* node )
 * a column of columns doesn't exist. 
 **********************************************************/
 
-static void CheckRows( TidyDocImpl* doc, Node* node )
+static void CheckRows( TidyDoc doc, TidyNode node )
 {
     int numTR = 0;
     int numValidTH = 0;
@@ -1437,9 +1437,9 @@ static void CheckRows( TidyDocImpl* doc, Node* node )
 * a row of columns doesn't exist.  
 **********************************************************/
 
-static void CheckColumns( TidyDocImpl* doc, Node* node )
+static void CheckColumns( TidyDoc doc, TidyNode node )
 {
-    Node* tnode;
+    TidyNode tnode;
     int numTH = 0;
     Bool isMissingHeader = no;
 
@@ -1484,11 +1484,11 @@ static void CheckColumns( TidyDocImpl* doc, Node* node )
 * length of the header is greater than 15 characters)
 *****************************************************/
 
-static void CheckTH( TidyDocImpl* doc, Node* node )
+static void CheckTH( TidyDoc doc, TidyNode node )
 {
     Bool HasAbbr = no;
     ctmbstr word = NULL;
-    AttVal* av;
+    TidyAttr av;
 
     if (Level3_Enabled( doc ))
     {
@@ -1546,10 +1546,10 @@ static void CheckTH( TidyDocImpl* doc, Node* node )
 * not to data tables. Checks for column of multiple headers.
 *****************************************************************/
 
-static void CheckMultiHeaders( TidyDocImpl* doc, Node* node )
+static void CheckMultiHeaders( TidyDoc doc, TidyNode node )
 {
-    Node* TNode;
-    Node* temp;
+    TidyNode TNode;
+    TidyNode temp;
     
     Bool validColSpanRows = yes;
     Bool validColSpanColumns = yes;
@@ -1586,7 +1586,7 @@ static void CheckMultiHeaders( TidyDocImpl* doc, Node* node )
                                 */
                                 if ( nodeIsTH(temp) )
                                 {
-                                    AttVal* av;
+                                    TidyAttr av;
                                     for (av = temp->attributes; av != NULL; av = av->next)
                                     {
                                         if ( attrIsCOLSPAN(av)
@@ -1635,10 +1635,10 @@ static void CheckMultiHeaders( TidyDocImpl* doc, Node* node )
 * a row or column of headers.  
 ****************************************************/
 
-static void CheckTable( TidyDocImpl* doc, Node* node )
+static void CheckTable( TidyDoc doc, TidyNode node )
 {
-    Node* TNode;
-    Node* temp;
+    TidyNode TNode;
+    TidyNode temp;
 
     tmbstr word = NULL;
 
@@ -1649,7 +1649,7 @@ static void CheckTable( TidyDocImpl* doc, Node* node )
 
     if (Level3_Enabled( doc ))
     {
-        AttVal* av;
+        TidyAttr av;
         /* Table must have a 'SUMMARY' describing the purpose of the table */
         for (av = node->attributes; av != NULL; av = av->next)
         {
@@ -1820,10 +1820,10 @@ static void CheckTable( TidyDocImpl* doc, Node* node )
 * a skip over link to skip multi-lined ASCII art.
 ***************************************************/
 
-static void CheckASCII( TidyDocImpl* doc, Node* node )
+static void CheckASCII( TidyDoc doc, TidyNode node )
 {
-    Node* temp1;
-    Node* temp2;
+    TidyNode temp1;
+    TidyNode temp2;
 
     tmbstr skipOver = NULL;
     Bool IsAscii = no;
@@ -1833,7 +1833,7 @@ static void CheckASCII( TidyDocImpl* doc, Node* node )
     int newLines = -1;
     tmbchar compareLetter;
     int matchingCount = 0;
-    AttVal* av;
+    TidyAttr av;
     
     if (Level1_Enabled( doc ) && node->content)
     {
@@ -1952,7 +1952,7 @@ static void CheckASCII( TidyDocImpl* doc, Node* node )
 * have valid 'ID' attribute for valid form control.
 ***********************************************************/
 
-static void CheckFormControls( TidyDocImpl* doc, Node* node )
+static void CheckFormControls( TidyDoc doc, TidyNode node )
 {
     if ( !doc->access.HasValidFor &&
          doc->access.HasValidId )
@@ -1980,12 +1980,12 @@ static void CheckFormControls( TidyDocImpl* doc, Node* node )
 * Check for valid 'FOR' attribute within the LABEL element
 ************************************************************/
 
-static void CheckLabel( TidyDocImpl* doc, Node* node )
+static void CheckLabel( TidyDoc doc, TidyNode node )
 {
     if (Level2_Enabled( doc ))
     {    
         /* Checks for valid 'FOR' attribute */
-        AttVal* av = attrGetFOR( node );
+        TidyAttr av = attrGetFOR( node );
         if ( hasValue(av) )
             doc->access.HasValidFor = yes;
 
@@ -2007,11 +2007,11 @@ static void CheckLabel( TidyDocImpl* doc, Node* node )
 * Each INPUT element must have a LABEL describing the form.
 ************************************************************/
 
-static void CheckInputLabel( TidyDocImpl* doc, Node* node )
+static void CheckInputLabel( TidyDoc doc, TidyNode node )
 {
     if (Level2_Enabled( doc ))
     {
-        AttVal* av;
+        TidyAttr av;
 
         /* Checks attributes within the INPUT element */
         for (av = node->attributes; av != NULL; av = av->next)
@@ -2037,11 +2037,11 @@ static void CheckInputLabel( TidyDocImpl* doc, Node* node )
 * 'VALUE' attribute is present.
 ***************************************************************/
 
-static void CheckInputAttributes( TidyDocImpl* doc, Node* node )
+static void CheckInputAttributes( TidyDoc doc, TidyNode node )
 {
     Bool HasAlt = no;
     Bool MustHaveAlt = no;
-    AttVal* av;
+    TidyAttr av;
 
     /* Checks attributes within the INPUT element */
     for (av = node->attributes; av != NULL; av = av->next)
@@ -2081,9 +2081,9 @@ static void CheckInputAttributes( TidyDocImpl* doc, Node* node )
 * browsers, 
 ***************************************************************/
 
-static void CheckFrameSet( TidyDocImpl* doc, Node* node )
+static void CheckFrameSet( TidyDoc doc, TidyNode node )
 {
-    Node* temp;
+    TidyNode temp;
     Bool HasNoFrames = no;
 
     if (Level1_Enabled( doc ))
@@ -2101,7 +2101,7 @@ static void CheckFrameSet( TidyDocImpl* doc, Node* node )
 
                 if ( temp->content && nodeIsP(temp->content->content) )
                 {
-                    Node* para = temp->content->content;
+                    TidyNode para = temp->content->content;
                     if ( TY_(nodeIsText)(para->content) )
                     {
                         ctmbstr word = textFromOneNode( doc, para->content );
@@ -2132,9 +2132,9 @@ static void CheckFrameSet( TidyDocImpl* doc, Node* node )
 * headers must not be more than 20 words in length.  
 ***********************************************************/
 
-static void CheckHeaderNesting( TidyDocImpl* doc, Node* node )
+static void CheckHeaderNesting( TidyDoc doc, TidyNode node )
 {
-    Node* temp;
+    TidyNode temp;
     uint i;
     int numWords = 1;
 
@@ -2201,10 +2201,10 @@ static void CheckHeaderNesting( TidyDocImpl* doc, Node* node )
 * or italics, or underlined, etc.
 *************************************************************/
 
-static void CheckParagraphHeader( TidyDocImpl* doc, Node* node )
+static void CheckParagraphHeader( TidyDoc doc, TidyNode node )
 {
     Bool IsNotHeader = no;
-    Node* temp;
+    TidyNode temp;
 
     if (Level2_Enabled( doc ))
     {
@@ -2256,11 +2256,11 @@ static void CheckParagraphHeader( TidyDocImpl* doc, Node* node )
 * syncronized captions if used.
 ****************************************************************/
 
-static void CheckEmbed( TidyDocImpl* doc, Node* node )
+static void CheckEmbed( TidyDoc doc, TidyNode node )
 {
     if (Level1_Enabled( doc ))
     {
-        AttVal* av = attrGetSRC( node );
+        TidyAttr av = attrGetSRC( node );
         if ( hasValue(av) && IsValidMediaExtension(av->value) )
         {
              TY_(ReportAccessError)( doc, node, MULTIMEDIA_REQUIRES_TEXT );
@@ -2276,13 +2276,13 @@ static void CheckEmbed( TidyDocImpl* doc, Node* node )
 * language.  ie. 'fr' or 'en'
 ********************************************************************/
 
-static void CheckHTMLAccess( TidyDocImpl* doc, Node* node )
+static void CheckHTMLAccess( TidyDoc doc, TidyNode node )
 {
     Bool ValidLang = no;
 
     if (Level3_Enabled( doc ))
     {
-        AttVal* av = attrGetLANG( node );
+        TidyAttr av = attrGetLANG( node );
         if ( av )
         {
             ValidLang = yes;
@@ -2302,7 +2302,7 @@ static void CheckHTMLAccess( TidyDocImpl* doc, Node* node )
 * It is invalid HTML/XHTML.
 *********************************************************/
 
-static void CheckBlink( TidyDocImpl* doc, Node* node )
+static void CheckBlink( TidyDoc doc, TidyNode node )
 {
     
     if (Level2_Enabled( doc ))
@@ -2328,7 +2328,7 @@ static void CheckBlink( TidyDocImpl* doc, Node* node )
 ********************************************************/
 
 
-static void CheckMarquee( TidyDocImpl* doc, Node* node )
+static void CheckMarquee( TidyDoc doc, TidyNode node )
 {
     if (Level2_Enabled( doc ))
     {
@@ -2353,14 +2353,14 @@ static void CheckMarquee( TidyDocImpl* doc, Node* node )
 * style sheets are applied.  -- CPR huh?
 **********************************************************/
 
-static void CheckLink( TidyDocImpl* doc, Node* node )
+static void CheckLink( TidyDoc doc, TidyNode node )
 {
     Bool HasRel = no;
     Bool HasType = no;
 
     if (Level1_Enabled( doc ))
     {
-        AttVal* av;
+        TidyAttr av;
         /* Check for valid 'REL' and 'TYPE' attribute */
         for (av = node->attributes; av != NULL; av = av->next)
         {
@@ -2389,7 +2389,7 @@ static void CheckLink( TidyDocImpl* doc, Node* node )
 * document is unreadable when style sheets are applied.
 *******************************************************/
 
-static void CheckStyle( TidyDocImpl* doc, Node* node )
+static void CheckStyle( TidyDoc doc, TidyNode node )
 {
     if (Level1_Enabled( doc ))
     {
@@ -2406,7 +2406,7 @@ static void CheckStyle( TidyDocImpl* doc, Node* node )
 *************************************************************/
 
 
-static void DynamicContent( TidyDocImpl* doc, Node* node )
+static void DynamicContent( TidyDoc doc, TidyNode node )
 {
     if (Level1_Enabled( doc ))
     {
@@ -2431,7 +2431,7 @@ static void DynamicContent( TidyDocImpl* doc, Node* node )
 * are disabled.
 *************************************************************/
 
-static void ProgrammaticObjects( TidyDocImpl* doc, Node* node )
+static void ProgrammaticObjects( TidyDoc doc, TidyNode node )
 {
     if (Level1_Enabled( doc ))
     {
@@ -2457,7 +2457,7 @@ static void ProgrammaticObjects( TidyDocImpl* doc, Node* node )
 * Verify that programmatic objects are directly accessible.
 *************************************************************/
 
-static void AccessibleCompatible( TidyDocImpl* doc, Node* node )
+static void AccessibleCompatible( TidyDoc doc, TidyNode node )
 {
     if (Level1_Enabled( doc ))
     {
@@ -2490,7 +2490,7 @@ static void AccessibleCompatible( TidyDocImpl* doc, Node* node )
 * every document with _more_ than 3 words!
 ********************************************************/
 #if 0
-static int WordCount( TidyDocImpl* doc, Node* node )
+static int WordCount( TidyDoc doc, TidyNode node )
 {
     int wc = 0;
 
@@ -2527,7 +2527,7 @@ static int WordCount( TidyDocImpl* doc, Node* node )
 * Verify that the page does not cause flicker.
 **************************************************/
 
-static void CheckFlicker( TidyDocImpl* doc, Node* node )
+static void CheckFlicker( TidyDoc doc, TidyNode node )
 {
     if (Level1_Enabled( doc ))
     {
@@ -2544,7 +2544,7 @@ static void CheckFlicker( TidyDocImpl* doc, Node* node )
         /* Checks for animated gif within the <img> tag. */
         else if ( nodeIsIMG(node) )
         {
-            AttVal* av = attrGetSRC( node );
+            TidyAttr av = attrGetSRC( node );
             if ( hasValue(av) )
             {
                 tmbchar ext[20];
@@ -2568,7 +2568,7 @@ static void CheckFlicker( TidyDocImpl* doc, Node* node )
 * HTML if any of the above are used.
 **********************************************************/
 
-static void CheckDeprecated( TidyDocImpl* doc, Node* node )
+static void CheckDeprecated( TidyDoc doc, TidyNode node )
 {
     if (Level2_Enabled( doc ))
     {
@@ -2608,9 +2608,9 @@ static void CheckDeprecated( TidyDocImpl* doc, Node* node )
 * handlers. 
 ************************************************************/
 
-static void CheckScriptKeyboardAccessible( TidyDocImpl* doc, Node* node )
+static void CheckScriptKeyboardAccessible( TidyDoc doc, TidyNode node )
 {
-    Node* content;
+    TidyNode content;
     int HasOnMouseDown = 0;
     int HasOnMouseUp = 0;
     int HasOnClick = 0;
@@ -2620,7 +2620,7 @@ static void CheckScriptKeyboardAccessible( TidyDocImpl* doc, Node* node )
 
     if (Level2_Enabled( doc ))
     {
-        AttVal* av;
+        TidyAttr av;
         /* Checks all elements for their attributes */
         for (av = node->attributes; av != NULL; av = av->next)
         {
@@ -2694,7 +2694,7 @@ static void CheckScriptKeyboardAccessible( TidyDocImpl* doc, Node* node )
 **********************************************************/
 
 
-static Bool CheckMetaData( TidyDocImpl* doc, Node* node, Bool HasMetaData )
+static Bool CheckMetaData( TidyDoc doc, TidyNode node, Bool HasMetaData )
 {
     Bool HasHttpEquiv = no;
     Bool HasContent = no;
@@ -2704,7 +2704,7 @@ static Bool CheckMetaData( TidyDocImpl* doc, Node* node, Bool HasMetaData )
     {
         if ( nodeIsMETA(node) )
         {
-            AttVal* av;
+            TidyAttr av;
             for (av = node->attributes; av != NULL; av = av->next)
             {
                 if ( attrIsHTTP_EQUIV(av) && hasValue(av) )
@@ -2762,7 +2762,7 @@ static Bool CheckMetaData( TidyDocImpl* doc, Node* node, Bool HasMetaData )
 
         if( !HasMetaData && nodeIsLINK(node) )
         {
-            AttVal* av = attrGetREL(node);
+            TidyAttr av = attrGetREL(node);
             if( !AttrContains(av, "stylesheet") )
                 HasMetaData = yes;
         }
@@ -2783,7 +2783,7 @@ static Bool CheckMetaData( TidyDocImpl* doc, Node* node, Bool HasMetaData )
 * Determines if MetaData is present in document
 *******************************************************/
 
-static void MetaDataPresent( TidyDocImpl* doc, Node* node )
+static void MetaDataPresent( TidyDoc doc, TidyNode node )
 {
     if (Level2_Enabled( doc ))
     {
@@ -2799,11 +2799,11 @@ static void MetaDataPresent( TidyDocImpl* doc, Node* node )
 * '!DOCTYPE' before the root node. ie.  <HTML>
 *****************************************************/
 
-static void CheckDocType( TidyDocImpl* doc )
+static void CheckDocType( TidyDoc doc )
 {
     if (Level2_Enabled( doc ))
     {
-        Node* DTnode = TY_(FindDocType)(doc);
+        TidyNode DTnode = TY_(FindDocType)(doc);
 
         /* If the doctype has been added by tidy, DTnode->end will be 0. */
         if (DTnode && DTnode->end != 0)
@@ -2836,14 +2836,14 @@ static Bool urlMatch( ctmbstr url1, ctmbstr url2 )
   return ( TY_(tmbstrcmp)( url1, url2 ) == 0 );
 }
 
-static Bool FindLinkA( TidyDocImpl* doc, Node* node, ctmbstr url )
+static Bool FindLinkA( TidyDoc doc, TidyNode node, ctmbstr url )
 {
   Bool found = no;
   for ( node = node->content; !found && node; node = node->next )
   {
     if ( nodeIsA(node) )
     {
-      AttVal* href = attrGetHREF( node );
+      TidyAttr href = attrGetHREF( node );
       found = ( hasValue(href) && urlMatch(url, href->value) );
     }
     else
@@ -2852,9 +2852,9 @@ static Bool FindLinkA( TidyDocImpl* doc, Node* node, ctmbstr url )
   return found;
 }
 
-static void CheckMapLinks( TidyDocImpl* doc, Node* node )
+static void CheckMapLinks( TidyDoc doc, TidyNode node )
 {
-    Node* child;
+    TidyNode child;
 
     if (!Level3_Enabled( doc ))
         return;
@@ -2865,7 +2865,7 @@ static void CheckMapLinks( TidyDocImpl* doc, Node* node )
         if ( nodeIsAREA(child) )
         {
             /* Checks for 'HREF' attribute */                
-            AttVal* href = attrGetHREF( child );
+            TidyAttr href = attrGetHREF( child );
             if ( hasValue(href) &&
                  !FindLinkA( doc, &doc->root, href->value ) )
             {
@@ -2883,13 +2883,13 @@ static void CheckMapLinks( TidyDocImpl* doc, Node* node )
 * for the use of 'STYLE' attribute.
 ****************************************************/
 
-static void CheckForStyleAttribute( TidyDocImpl* doc, Node* node )
+static void CheckForStyleAttribute( TidyDoc doc, TidyNode node )
 {
-    Node* content;
+    TidyNode content;
     if (Level1_Enabled( doc ))
     {
         /* Must not contain 'STYLE' attribute */
-        AttVal* style = attrGetSTYLE( node );
+        TidyAttr style = attrGetSTYLE( node );
         if ( hasValue(style) )
         {
             TY_(ReportAccessWarning)( doc, node, STYLESHEETS_REQUIRE_TESTING_STYLE_ATTR );
@@ -2909,7 +2909,7 @@ static void CheckForStyleAttribute( TidyDocImpl* doc, Node* node )
 * Checks document for list elements (<ol>, <ul>, <li>)
 *****************************************************/
 
-static void CheckForListElements( TidyDocImpl* doc, Node* node )
+static void CheckForListElements( TidyDoc doc, TidyNode node )
 {
     if ( nodeIsLI(node) )
     {
@@ -2935,7 +2935,7 @@ static void CheckForListElements( TidyDocImpl* doc, Node* node )
 * by itself.
 ******************************************************/
 
-static void CheckListUsage( TidyDocImpl* doc, Node* node )
+static void CheckListUsage( TidyDoc doc, TidyNode node )
 {
     int msgcode = 0;
 
@@ -2991,7 +2991,7 @@ static void CheckListUsage( TidyDocImpl* doc, Node* node )
 * Initializes the AccessibilityChecks variables as necessary
 ************************************************************/
 
-static void InitAccessibilityChecks( TidyDocImpl* doc, int level123 )
+static void InitAccessibilityChecks( TidyDoc doc, int level123 )
 {
     TidyClearMemory( &doc->access, sizeof(doc->access) );
     doc->access.PRIORITYCHK = level123;
@@ -3004,7 +3004,7 @@ static void InitAccessibilityChecks( TidyDocImpl* doc, int level123 )
 ************************************************************/
 
 
-static void FreeAccessibilityChecks( TidyDocImpl* ARG_UNUSED(doc) )
+static void FreeAccessibilityChecks( TidyDoc ARG_UNUSED(doc) )
 {
     /* free any memory allocated for the lists
 
@@ -3032,9 +3032,9 @@ static void FreeAccessibilityChecks( TidyDocImpl* ARG_UNUSED(doc) )
 * after the tree structure has been formed.
 ************************************************************/
 
-static void AccessibilityCheckNode( TidyDocImpl* doc, Node* node )
+static void AccessibilityCheckNode( TidyDoc doc, TidyNode node )
 {
-    Node* content;
+    TidyNode content;
     
     /* Check BODY for color contrast */
     if ( nodeIsBODY(node) )
@@ -3241,7 +3241,7 @@ static void AccessibilityCheckNode( TidyDocImpl* doc, Node* node )
 }
 
 
-void TY_(AccessibilityChecks)( TidyDocImpl* doc )
+void TY_(AccessibilityChecks)( TidyDoc doc )
 {
     /* Initialize */
     InitAccessibilityChecks( doc, cfg(doc, TidyAccessibilityCheckLevel) );

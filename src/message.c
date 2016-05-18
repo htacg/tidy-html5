@@ -151,7 +151,7 @@ static char* LevelPrefix( TidyReportLevel level, char* buf, size_t count )
 ** compares counts to options to see if message
 ** display should go forward.
 */
-static Bool UpdateCount( TidyDocImpl* doc, TidyReportLevel level )
+static Bool UpdateCount( TidyDoc doc, TidyReportLevel level )
 {
   /* keep quiet after <ShowErrors> errors */
   Bool go = ( doc->errors < cfg(doc, TidyShowErrors) );
@@ -189,7 +189,7 @@ static Bool UpdateCount( TidyDocImpl* doc, TidyReportLevel level )
 /* Generates the string indicating the source document position for which
 ** Tidy has generated a message.
 */
-static char* ReportPosition(TidyDocImpl* doc, int line, int col, char* buf, size_t count)
+static char* ReportPosition(TidyDoc doc, int line, int col, char* buf, size_t count)
 {
     *buf = 0;
 
@@ -214,13 +214,13 @@ static char* ReportPosition(TidyDocImpl* doc, int line, int col, char* buf, size
 ** filter routine.
 */
 
-static void messagePos( TidyDocImpl* doc, TidyReportLevel level, uint code,
+static void messagePos( TidyDoc doc, TidyReportLevel level, uint code,
                         int line, int col, ctmbstr msg, va_list args )
 #ifdef __GNUC__
 __attribute__((format(printf, 6, 0)))
 #endif
 ;
-static void messagePos( TidyDocImpl* doc, TidyReportLevel level, uint code,
+static void messagePos( TidyDoc doc, TidyReportLevel level, uint code,
                         int line, int col, ctmbstr msg, va_list args )
 {
     enum { sizeMessageBuf=2048 };
@@ -234,8 +234,7 @@ static void messagePos( TidyDocImpl* doc, TidyReportLevel level, uint code,
         TY_(tmbvsnprintf)(messageBuf, sizeMessageBuf, msg, args);
         if ( doc->mssgFilt )
         {
-            TidyDoc tdoc = tidyImplToDoc( doc );
-            go = doc->mssgFilt( tdoc, level, line, col, messageBuf );
+            go = doc->mssgFilt( doc, level, line, col, messageBuf );
         }
         if ( doc->mssgFilt2 )
         {
@@ -244,16 +243,14 @@ static void messagePos( TidyDocImpl* doc, TidyReportLevel level, uint code,
                the parameters to fill it. For the key string to remain
                consistent, we have to ensure that we only ever return the
                built-in English version of this string. */
-            TidyDoc tdoc = tidyImplToDoc( doc );
-            go = go | doc->mssgFilt2( tdoc, level, line, col, tidyDefaultString(code), args_copy );
+            go = go | doc->mssgFilt2( doc, level, line, col, tidyDefaultString(code), args_copy );
         }
         if ( doc->mssgFilt3 )
         {
             /* mssgFilt3 is intended to allow LibTidy users to localize
                messages via their own means by providing a key string and
                the parameters to fill it. */
-            TidyDoc tdoc = tidyImplToDoc( doc );
-            go = go | doc->mssgFilt3( tdoc, level, line, col, tidyErrorCodeAsString(code), args_copy );
+            go = go | doc->mssgFilt3( doc, level, line, col, tidyErrorCodeAsString(code), args_copy );
         }
     }
 
@@ -293,7 +290,7 @@ static void messagePos( TidyDocImpl* doc, TidyReportLevel level, uint code,
 
 /* Reports error at current Lexer line/column. */ 
 static
-void message( TidyDocImpl* doc, TidyReportLevel level, uint code,
+void message( TidyDoc doc, TidyReportLevel level, uint code,
               ctmbstr msg, ... )
 #ifdef __GNUC__
 __attribute__((format(printf, 4, 5)))
@@ -302,8 +299,8 @@ __attribute__((format(printf, 4, 5)))
 
 /* Reports error at node line/column. */ 
 static
-void messageNode( TidyDocImpl* doc, TidyReportLevel level, uint code,
-                  Node* node, ctmbstr msg, ... )
+void messageNode( TidyDoc doc, TidyReportLevel level, uint code,
+                  TidyNode node, ctmbstr msg, ... )
 #ifdef __GNUC__
 __attribute__((format(printf, 5, 6)))
 #endif
@@ -311,7 +308,7 @@ __attribute__((format(printf, 5, 6)))
 
 /* Reports error at given line/column. */ 
 static
-void messageLexer( TidyDocImpl* doc, TidyReportLevel level, uint code,
+void messageLexer( TidyDoc doc, TidyReportLevel level, uint code,
                    ctmbstr msg, ... )
 #ifdef __GNUC__
 __attribute__((format(printf, 4, 5)))
@@ -320,14 +317,14 @@ __attribute__((format(printf, 4, 5)))
 
 /* For general reporting.  Emits nothing if --quiet yes */
 static
-void tidy_out( TidyDocImpl* doc, ctmbstr msg, ... )
+void tidy_out( TidyDoc doc, ctmbstr msg, ... )
 #ifdef __GNUC__
 __attribute__((format(printf, 2, 3)))
 #endif
 ;
 
 
-void message( TidyDocImpl* doc, TidyReportLevel level, uint code,
+void message( TidyDoc doc, TidyReportLevel level, uint code,
               ctmbstr msg, ... )
 {
     va_list args;
@@ -338,7 +335,7 @@ void message( TidyDocImpl* doc, TidyReportLevel level, uint code,
 }
 
 
-void messageLexer( TidyDocImpl* doc, TidyReportLevel level, uint code,
+void messageLexer( TidyDoc doc, TidyReportLevel level, uint code,
                    ctmbstr msg, ... )
 {
     int line = ( doc->lexer ? doc->lexer->lines : 0 );
@@ -350,8 +347,8 @@ void messageLexer( TidyDocImpl* doc, TidyReportLevel level, uint code,
     va_end( args );
 }
 
-void messageNode( TidyDocImpl* doc, TidyReportLevel level, uint code,
-                  Node* node, ctmbstr msg, ... )
+void messageNode( TidyDoc doc, TidyReportLevel level, uint code,
+                  TidyNode node, ctmbstr msg, ... )
 {
     int line = ( node ? node->line :
                  ( doc->lexer ? doc->lexer->lines : 0 ) );
@@ -364,7 +361,7 @@ void messageNode( TidyDocImpl* doc, TidyReportLevel level, uint code,
     va_end( args );
 }
 
-void tidy_out( TidyDocImpl* doc, ctmbstr msg, ... )
+void tidy_out( TidyDoc doc, ctmbstr msg, ... )
 {
     if ( !cfgBool(doc, TidyQuiet) )
     {
@@ -392,12 +389,12 @@ void tidy_out( TidyDocImpl* doc, ctmbstr msg, ... )
     }
 }
 
-void TY_(FileError)( TidyDocImpl* doc, ctmbstr file, TidyReportLevel level )
+void TY_(FileError)( TidyDoc doc, ctmbstr file, TidyReportLevel level )
 {
     message( doc, level, FILE_CANT_OPEN, tidyLocalizedString(FILE_CANT_OPEN), file );
 }
 
-static char* TagToString(Node* tag, char* buf, size_t count)
+static char* TagToString(TidyNode tag, char* buf, size_t count)
 {
     *buf = 0;
     if (tag)
@@ -419,14 +416,14 @@ static char* TagToString(Node* tag, char* buf, size_t count)
 }
 
 /* lexer is not defined when this is called */
-void TY_(ReportUnknownOption)( TidyDocImpl* doc, ctmbstr option )
+void TY_(ReportUnknownOption)( TidyDoc doc, ctmbstr option )
 {
     assert( option != NULL );
     message( doc, TidyConfig, STRING_UNKNOWN_OPTION, tidyLocalizedString(STRING_UNKNOWN_OPTION), option );
 }
 
 /* lexer is not defined when this is called */
-void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option )
+void TY_(ReportBadArgument)( TidyDoc doc, ctmbstr option )
 {
     assert( option != NULL );
     message( doc, TidyConfig, STRING_MISSING_MALFORMED, tidyLocalizedString(STRING_MISSING_MALFORMED), option );
@@ -458,7 +455,7 @@ static void NtoS(int n, tmbstr str)
     str[n+1] = '\0';
 }
 
-void TY_(ReportEncodingWarning)(TidyDocImpl* doc, uint code, uint encoding)
+void TY_(ReportEncodingWarning)(TidyDoc doc, uint code, uint encoding)
 {
     switch(code)
     {
@@ -471,7 +468,7 @@ void TY_(ReportEncodingWarning)(TidyDocImpl* doc, uint code, uint encoding)
     }
 }
 
-void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarded)
+void TY_(ReportEncodingError)(TidyDoc doc, uint code, uint c, Bool discarded)
 {
     char buf[ 32 ] = {'\0'};
 
@@ -513,7 +510,7 @@ void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarde
         messageLexer( doc, TidyWarning, code, fmt, action, buf );
 }
 
-void TY_(ReportEntityError)( TidyDocImpl* doc, uint code, ctmbstr entity,
+void TY_(ReportEntityError)( TidyDoc doc, uint code, ctmbstr entity,
                              int ARG_UNUSED(c) )
 {
     ctmbstr fmt;
@@ -525,7 +522,7 @@ void TY_(ReportEntityError)( TidyDocImpl* doc, uint code, ctmbstr entity,
         messageLexer( doc, TidyWarning, code, fmt, entityname );
 }
 
-void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
+void TY_(ReportAttrError)(TidyDoc doc, TidyNode node, TidyAttr av, uint code)
 {
     char const *name = "NULL", *value = "NULL";
     char tagdesc[64];
@@ -620,7 +617,7 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
     }
 }
 
-void TY_(ReportMissingAttr)( TidyDocImpl* doc, Node* node, ctmbstr name )
+void TY_(ReportMissingAttr)( TidyDoc doc, TidyNode node, ctmbstr name )
 {
     char tagdesc[ 64 ];
     ctmbstr fmt = tidyLocalizedString(MISSING_ATTRIBUTE);
@@ -643,19 +640,19 @@ void TY_(ReportMissingAttr)( TidyDocImpl* doc, Node* node, ctmbstr name )
 * with the cells.
 *********************************************************/
  
-void TY_(DisplayHTMLTableAlgorithm)( TidyDocImpl* doc )
+void TY_(DisplayHTMLTableAlgorithm)( TidyDoc doc )
 {
     tidy_out(doc, "%s", tidyLocalizedString(TEXT_HTML_T_ALGORITHM));
 }
 
-void TY_(ReportAccessWarning)( TidyDocImpl* doc, Node* node, uint code )
+void TY_(ReportAccessWarning)( TidyDoc doc, TidyNode node, uint code )
 {
     ctmbstr fmt = tidyLocalizedString(code);
     doc->badAccess |= BA_WAI;
     messageNode( doc, TidyAccess, code, node, "%s", fmt );
 }
 
-void TY_(ReportAccessError)( TidyDocImpl* doc, Node* node, uint code )
+void TY_(ReportAccessError)( TidyDoc doc, TidyNode node, uint code )
 {
     ctmbstr fmt = tidyLocalizedString(code);
     doc->badAccess |= BA_WAI;
@@ -664,9 +661,9 @@ void TY_(ReportAccessError)( TidyDocImpl* doc, Node* node, uint code )
 
 #endif /* SUPPORT_ACCESSIBILITY_CHECKS */
 
-void TY_(ReportWarning)(TidyDocImpl* doc, Node *element, Node *node, uint code)
+void TY_(ReportWarning)(TidyDoc doc, TidyNode element, TidyNode node, uint code)
 {
-    Node* rpt = (element ? element : node);
+    TidyNode rpt = (element ? element : node);
     ctmbstr fmt = tidyLocalizedString(code);
     char nodedesc[256] = { 0 };
     char elemdesc[256] = { 0 };
@@ -697,9 +694,9 @@ void TY_(ReportWarning)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     }
 }
 
-void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
+void TY_(ReportNotice)(TidyDoc doc, TidyNode element, TidyNode node, uint code)
 {
-    Node* rpt = ( element ? element : node );
+    TidyNode rpt = ( element ? element : node );
     ctmbstr fmt = tidyLocalizedString(code);
     char nodedesc[256] = { 0 };
     char elemdesc[256] = { 0 };
@@ -722,11 +719,11 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     }
 }
 
-void TY_(ReportError)(TidyDocImpl* doc, Node *element, Node *node, uint code)
+void TY_(ReportError)(TidyDoc doc, TidyNode element, TidyNode node, uint code)
 {
     char nodedesc[ 256 ] = {0};
     char elemdesc[ 256 ] = {0};
-    Node* rpt = ( element ? element : node );
+    TidyNode rpt = ( element ? element : node );
     ctmbstr fmt = tidyLocalizedString(code);
     uint versionEmitted, declared, version;
     ctmbstr extra_string = NULL;
@@ -846,10 +843,10 @@ void TY_(ReportError)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     }
 }
 
-void TY_(ReportFatal)( TidyDocImpl* doc, Node *element, Node *node, uint code)
+void TY_(ReportFatal)( TidyDoc doc, TidyNode element, TidyNode node, uint code)
 {
     char nodedesc[ 256 ] = {0};
-    Node* rpt = ( element ? element : node );
+    TidyNode rpt = ( element ? element : node );
     ctmbstr fmt = tidyLocalizedString(code);
 
     switch ( code )
@@ -874,7 +871,7 @@ void TY_(ReportFatal)( TidyDocImpl* doc, Node *element, Node *node, uint code)
     }
 }
 
-void TY_(ErrorSummary)( TidyDocImpl* doc )
+void TY_(ErrorSummary)( TidyDoc doc )
 {
     ctmbstr encnam = tidyLocalizedString(STRING_SPECIFIED);
     int charenc = cfg( doc, TidyCharEncoding ); 
@@ -1007,23 +1004,23 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
 }
 
 #if 0
-void TY_(UnknownOption)( TidyDocImpl* doc, char c )
+void TY_(UnknownOption)( TidyDoc doc, char c )
 {
     message( doc, TidyConfig, tidyLocalizedString(STRING_UNRECZD_OPTION), c );
 }
 
-void TY_(UnknownFile)( TidyDocImpl* doc, ctmbstr program, ctmbstr file )
+void TY_(UnknownFile)( TidyDoc doc, ctmbstr program, ctmbstr file )
 {
     message( doc, TidyConfig, tidyLocalizedString(STRING_UNKNOWN_FILE), program, file );
 }
 #endif
 
-void TY_(NeedsAuthorIntervention)( TidyDocImpl* doc )
+void TY_(NeedsAuthorIntervention)( TidyDoc doc )
 {
     tidy_out(doc, "%s", tidyLocalizedString(TEXT_NEEDS_INTERVENTION));
 }
 
-void TY_(GeneralInfo)( TidyDocImpl* doc )
+void TY_(GeneralInfo)( TidyDoc doc )
 {
     if (!cfgBool(doc, TidyShowInfo)) return;
     tidy_out(doc, "%s", tidyLocalizedString(TEXT_GENERAL_INFO));
@@ -1032,7 +1029,7 @@ void TY_(GeneralInfo)( TidyDocImpl* doc )
 
 #if SUPPORT_ACCESSIBILITY_CHECKS
 
-void TY_(AccessibilityHelloMessage)( TidyDocImpl* doc )
+void TY_(AccessibilityHelloMessage)( TidyDoc doc )
 {
     tidy_out(doc, "\n%s\n\n", tidyLocalizedString(STRING_HELLO_ACCESS));
 }
@@ -1040,7 +1037,7 @@ void TY_(AccessibilityHelloMessage)( TidyDocImpl* doc )
 #endif /* SUPPORT_ACCESSIBILITY_CHECKS */
 
 
-void TY_(ReportMarkupVersion)( TidyDocImpl* doc )
+void TY_(ReportMarkupVersion)( TidyDoc doc )
 {
     if (doc->givenDoctype)
     {
@@ -1069,7 +1066,7 @@ void TY_(ReportMarkupVersion)( TidyDocImpl* doc )
     }
 }
 
-void TY_(ReportNumWarnings)( TidyDocImpl* doc )
+void TY_(ReportNumWarnings)( TidyDoc doc )
 {
     if ( doc->warnings > 0 || doc->errors > 0 )
     {

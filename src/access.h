@@ -89,7 +89,7 @@ struct _TidyAccessImpl
     Bool HasMap;
 
     /* For tracking nodes that are deleted from the original parse tree - TRT */
-    /* Node *access_tree; */
+    /* TidyNode access_tree; */
 
     Bool HasTH;
     Bool HasValidFor;
@@ -263,8 +263,8 @@ typedef enum
 } accessErrorCodes;
 
 
-void TY_(AccessibilityHelloMessage)( TidyDocImpl* doc );
-void TY_(DisplayHTMLTableAlgorithm)( TidyDocImpl* doc );
+void TY_(AccessibilityHelloMessage)( TidyDoc doc );
+void TY_(DisplayHTMLTableAlgorithm)( TidyDoc doc );
 
 /************************************************************
 * AccessibilityChecks
@@ -274,7 +274,7 @@ void TY_(DisplayHTMLTableAlgorithm)( TidyDocImpl* doc );
 * after the tree structure has been formed.
 ************************************************************/
 
-void TY_(AccessibilityChecks)( TidyDocImpl* doc );
+void TY_(AccessibilityChecks)( TidyDoc doc );
 
 
 #endif /* SUPPORT_ACCESSIBILITY_CHECKS */

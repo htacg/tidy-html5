@@ -43,13 +43,13 @@
 #include "win32tc.h"
 #endif
 
-void TY_(InitConfig)( TidyDocImpl* doc )
+void TY_(InitConfig)( TidyDoc doc )
 {
     TidyClearMemory( &doc->config, sizeof(TidyConfigImpl) );
     TY_(ResetConfigToDefault)( doc );
 }
 
-void TY_(FreeConfig)( TidyDocImpl* doc )
+void TY_(FreeConfig)( TidyDoc doc )
 {
     TY_(ResetConfigToDefault)( doc );
     TY_(TakeConfigSnapshot)( doc );
@@ -165,7 +165,7 @@ static const ctmbstr sorterPicks[] =
 #define ParseAcc NULL 
 #endif
 
-static void AdjustConfig( TidyDocImpl* doc );
+static void AdjustConfig( TidyDoc doc );
 
 /* parser for integer values */
 static ParseProperty ParseInt;
@@ -212,7 +212,7 @@ static ParseProperty ParseRepeatAttr;
 \*/
 static ParseProperty ParseTabs;
 
-static const TidyOptionImpl option_defs[] =
+static const struct _tidy_option option_defs[] =
 {
   { TidyUnknownOption,           MS, "unknown!",                    IN, 0,               NULL,              NULL            },
   { TidyIndentSpaces,            PP, "indent-spaces",               IN, 2,               ParseInt,          NULL            },
@@ -331,9 +331,9 @@ static const TidyOptionImpl option_defs[] =
 ** thus, it is cheaper to do a few scans than set
 ** up every option in a hash table.
 */
-const TidyOptionImpl* TY_(lookupOption)( ctmbstr s )
+TidyOption TY_(lookupOption)( ctmbstr s )
 {
-    const TidyOptionImpl* np = option_defs;
+    TidyOption np = option_defs;
     for ( /**/; np < option_defs + N_TIDY_OPTIONS; ++np )
     {
         if ( TY_(tmbstrcasecmp)(s, np->name) == 0 )
@@ -342,7 +342,7 @@ const TidyOptionImpl* TY_(lookupOption)( ctmbstr s )
     return NULL;
 }
 
-const TidyOptionImpl* TY_(getOption)( TidyOptionId optId )
+TidyOption TY_(getOption)( TidyOptionId optId )
 {
   if ( optId < N_TIDY_OPTIONS )
       return option_defs + optId;
@@ -350,13 +350,13 @@ const TidyOptionImpl* TY_(getOption)( TidyOptionId optId )
 }
 
 
-static void FreeOptionValue( TidyDocImpl* doc, const TidyOptionImpl* option, TidyOptionValue* value )
+static void FreeOptionValue( TidyDoc doc, TidyOption option, TidyOptionValue* value )
 {
     if ( option->type == TidyString && value->p && value->p != option->pdflt )
         TidyDocFree( doc, value->p );
 }
 
-static void CopyOptionValue( TidyDocImpl* doc, const TidyOptionImpl* option,
+static void CopyOptionValue( TidyDoc doc, TidyOption option,
                              TidyOptionValue* oldval, const TidyOptionValue* newval )
 {
     assert( oldval != NULL );
@@ -374,9 +374,9 @@ static void CopyOptionValue( TidyDocImpl* doc, const TidyOptionImpl* option,
 }
 
 
-static Bool SetOptionValue( TidyDocImpl* doc, TidyOptionId optId, ctmbstr val )
+static Bool SetOptionValue( TidyDoc doc, TidyOptionId optId, ctmbstr val )
 {
-   const TidyOptionImpl* option = &option_defs[ optId ];
+   TidyOption option = &option_defs[ optId ];
    Bool status = ( optId < N_TIDY_OPTIONS );
    if ( status )
    {
@@ -390,7 +390,7 @@ static Bool SetOptionValue( TidyDocImpl* doc, TidyOptionId optId, ctmbstr val )
    return status;
 }
 
-Bool TY_(SetOptionInt)( TidyDocImpl* doc, TidyOptionId optId, ulong val )
+Bool TY_(SetOptionInt)( TidyDoc doc, TidyOptionId optId, ulong val )
 {
    Bool status = ( optId < N_TIDY_OPTIONS );
    if ( status )
@@ -401,7 +401,7 @@ Bool TY_(SetOptionInt)( TidyDocImpl* doc, TidyOptionId optId, ulong val )
    return status;
 }
 
-Bool TY_(SetOptionBool)( TidyDocImpl* doc, TidyOptionId optId, Bool val )
+Bool TY_(SetOptionBool)( TidyDoc doc, TidyOptionId optId, Bool val )
 {
    Bool status = ( optId < N_TIDY_OPTIONS );
    if ( status )
@@ -412,7 +412,7 @@ Bool TY_(SetOptionBool)( TidyDocImpl* doc, TidyOptionId optId, Bool val )
    return status;
 }
 
-static void GetOptionDefault( const TidyOptionImpl* option,
+static void GetOptionDefault( TidyOption option,
                               TidyOptionValue* dflt )
 {
     if ( option->type == TidyString )
@@ -421,7 +421,7 @@ static void GetOptionDefault( const TidyOptionImpl* option,
         dflt->v = option->dflt;
 }
 
-static Bool OptionValueEqDefault( const TidyOptionImpl* option,
+static Bool OptionValueEqDefault( TidyOption option,
                                   const TidyOptionValue* val )
 {
     return ( option->type == TidyString ) ?
@@ -429,13 +429,13 @@ static Bool OptionValueEqDefault( const TidyOptionImpl* option,
         val->v == option->dflt;
 }
 
-Bool TY_(ResetOptionToDefault)( TidyDocImpl* doc, TidyOptionId optId )
+Bool TY_(ResetOptionToDefault)( TidyDoc doc, TidyOptionId optId )
 {
     Bool status = ( optId > 0 && optId < N_TIDY_OPTIONS );
     if ( status )
     {
         TidyOptionValue dflt;
-        const TidyOptionImpl* option = option_defs + optId;
+        TidyOption option = option_defs + optId;
         TidyOptionValue* value = &doc->config.value[ optId ];
         assert( optId == option->id );
         GetOptionDefault( option, &dflt );
@@ -444,7 +444,7 @@ Bool TY_(ResetOptionToDefault)( TidyDocImpl* doc, TidyOptionId optId )
     return status;
 }
 
-static void ReparseTagType( TidyDocImpl* doc, TidyOptionId optId )
+static void ReparseTagType( TidyDoc doc, TidyOptionId optId )
 {
     ctmbstr tagdecl = cfgStr( doc, optId );
     tmbstr dupdecl = TY_(tmbstrdup)( doc->allocator, tagdecl );
@@ -452,7 +452,7 @@ static void ReparseTagType( TidyDocImpl* doc, TidyOptionId optId )
     TidyDocFree( doc, dupdecl );
 }
 
-static Bool OptionValueIdentical( const TidyOptionImpl* option,
+static Bool OptionValueIdentical( TidyOption option,
                                   const TidyOptionValue* val1,
                                   const TidyOptionValue* val2 )
 {
@@ -474,7 +474,7 @@ static Bool NeedReparseTagDecls( const TidyOptionValue* current,
 {
     Bool ret = no;
     uint ixVal;
-    const TidyOptionImpl* option = option_defs;
+    TidyOption option = option_defs;
     *changedUserTags = tagtype_null;
 
     for ( ixVal=0; ixVal < N_TIDY_OPTIONS; ++option, ++ixVal )
@@ -501,7 +501,7 @@ static Bool NeedReparseTagDecls( const TidyOptionValue* current,
     return ret;
 }
 
-static void ReparseTagDecls( TidyDocImpl* doc, uint changedUserTags  )
+static void ReparseTagDecls( TidyDoc doc, uint changedUserTags  )
 {
 #define REPARSE_USERTAGS(USERTAGOPTION,USERTAGTYPE) \
     if ( changedUserTags & USERTAGTYPE ) \
@@ -515,10 +515,10 @@ static void ReparseTagDecls( TidyDocImpl* doc, uint changedUserTags  )
     REPARSE_USERTAGS(TidyPreTags,tagtype_pre);
 }
 
-void TY_(ResetConfigToDefault)( TidyDocImpl* doc )
+void TY_(ResetConfigToDefault)( TidyDoc doc )
 {
     uint ixVal;
-    const TidyOptionImpl* option = option_defs;
+    TidyOption option = option_defs;
     TidyOptionValue* value = &doc->config.value[ 0 ];
     for ( ixVal=0; ixVal < N_TIDY_OPTIONS; ++option, ++ixVal )
     {
@@ -530,10 +530,10 @@ void TY_(ResetConfigToDefault)( TidyDocImpl* doc )
     TY_(FreeDeclaredTags)( doc, tagtype_null );
 }
 
-void TY_(TakeConfigSnapshot)( TidyDocImpl* doc )
+void TY_(TakeConfigSnapshot)( TidyDoc doc )
 {
     uint ixVal;
-    const TidyOptionImpl* option = option_defs;
+    TidyOption option = option_defs;
     const TidyOptionValue* value = &doc->config.value[ 0 ];
     TidyOptionValue* snap  = &doc->config.snapshot[ 0 ];
 
@@ -545,10 +545,10 @@ void TY_(TakeConfigSnapshot)( TidyDocImpl* doc )
     }
 }
 
-void TY_(ResetConfigToSnapshot)( TidyDocImpl* doc )
+void TY_(ResetConfigToSnapshot)( TidyDoc doc )
 {
     uint ixVal;
-    const TidyOptionImpl* option = option_defs;
+    TidyOption option = option_defs;
     TidyOptionValue* value = &doc->config.value[ 0 ];
     const TidyOptionValue* snap  = &doc->config.snapshot[ 0 ];
     uint changedUserTags;
@@ -564,12 +564,12 @@ void TY_(ResetConfigToSnapshot)( TidyDocImpl* doc )
         ReparseTagDecls( doc, changedUserTags );
 }
 
-void TY_(CopyConfig)( TidyDocImpl* docTo, TidyDocImpl* docFrom )
+void TY_(CopyConfig)( TidyDoc docTo, TidyDoc docFrom )
 {
     if ( docTo != docFrom )
     {
         uint ixVal;
-        const TidyOptionImpl* option = option_defs;
+        TidyOption option = option_defs;
         const TidyOptionValue* from = &docFrom->config.value[ 0 ];
         TidyOptionValue* to   = &docTo->config.value[ 0 ];
         uint changedUserTags;
@@ -592,32 +592,32 @@ void TY_(CopyConfig)( TidyDocImpl* docTo, TidyDocImpl* docFrom )
 #ifdef _DEBUG
 
 /* Debug accessor functions will be type-safe and assert option type match */
-ulong   TY_(_cfgGet)( TidyDocImpl* doc, TidyOptionId optId )
+ulong   TY_(_cfgGet)( TidyDoc doc, TidyOptionId optId )
 {
   assert( optId < N_TIDY_OPTIONS );
   return doc->config.value[ optId ].v;
 }
 
-Bool    TY_(_cfgGetBool)( TidyDocImpl* doc, TidyOptionId optId )
+Bool    TY_(_cfgGetBool)( TidyDoc doc, TidyOptionId optId )
 {
   ulong val = TY_(_cfgGet)( doc, optId );
-  const TidyOptionImpl* opt = &option_defs[ optId ];
+  TidyOption opt = &option_defs[ optId ];
   assert( opt && opt->type == TidyBoolean );
   return (Bool) val;
 }
 
-TidyTriState    TY_(_cfgGetAutoBool)( TidyDocImpl* doc, TidyOptionId optId )
+TidyTriState    TY_(_cfgGetAutoBool)( TidyDoc doc, TidyOptionId optId )
 {
   ulong val = TY_(_cfgGet)( doc, optId );
-  const TidyOptionImpl* opt = &option_defs[ optId ];
+  TidyOption opt = &option_defs[ optId ];
   assert( opt && opt->type == TidyInteger
           && opt->parser == ParseAutoBool );
   return (TidyTriState) val;
 }
 
-ctmbstr TY_(_cfgGetString)( TidyDocImpl* doc, TidyOptionId optId )
+ctmbstr TY_(_cfgGetString)( TidyDoc doc, TidyOptionId optId )
 {
-  const TidyOptionImpl* opt;
+  TidyOption opt;
 
   assert( optId < N_TIDY_OPTIONS );
   opt = &option_defs[ optId ];
@@ -629,7 +629,7 @@ ctmbstr TY_(_cfgGetString)( TidyDocImpl* doc, TidyOptionId optId )
 
 #if 0
 /* for use with Gnu Emacs */
-void SetEmacsFilename( TidyDocImpl* doc, ctmbstr filename )
+void SetEmacsFilename( TidyDoc doc, ctmbstr filename )
 {
     SetOptionValue( doc, TidyEmacsFile, filename );
 }
@@ -707,7 +707,7 @@ static uint NextProperty( TidyConfigImpl* config )
  work on systems that support getpwnam(userid), 
  namely Unix/Linux.
 */
-static ctmbstr ExpandTilde( TidyDocImpl* doc, ctmbstr filename )
+static ctmbstr ExpandTilde( TidyDoc doc, ctmbstr filename )
 {
     char *home_dir = NULL;
 
@@ -762,9 +762,8 @@ static ctmbstr ExpandTilde( TidyDocImpl* doc, ctmbstr filename )
     return (ctmbstr) filename;
 }
 
-Bool TIDY_CALL tidyFileExists( TidyDoc tdoc, ctmbstr filename )
+Bool TIDY_CALL tidyFileExists( TidyDoc doc, ctmbstr filename )
 {
-  TidyDocImpl* doc = tidyDocToImpl( tdoc );
   ctmbstr fname = (tmbstr) ExpandTilde( doc, filename );
 #ifndef NO_ACCESS_SUPPORT
   Bool exists = ( access(fname, 0) == 0 );
@@ -786,14 +785,14 @@ Bool TIDY_CALL tidyFileExists( TidyDoc tdoc, ctmbstr filename )
 #define TIDY_MAX_NAME 64
 #endif
 
-int TY_(ParseConfigFile)( TidyDocImpl* doc, ctmbstr file )
+int TY_(ParseConfigFile)( TidyDoc doc, ctmbstr file )
 {
     return TY_(ParseConfigFileEnc)( doc, file, "ascii" );
 }
 
 /* open the file and parse its contents
 */
-int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
+int TY_(ParseConfigFileEnc)( TidyDoc doc, ctmbstr file, ctmbstr charenc )
 {
     uint opterrs = doc->optionErrors;
     tmbstr fname = (tmbstr) ExpandTilde( doc, file );
@@ -829,7 +828,7 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
 
             if ( c == ':' )
             {
-                const TidyOptionImpl* option = TY_(lookupOption)( name );
+                TidyOption option = TY_(lookupOption)( name );
                 c = AdvanceChar( cfg );
                 if ( option )
                     option->parser( doc, option );
@@ -898,9 +897,9 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
 /* returns false if unknown option, missing parameter,
 ** or option doesn't use parameter
 */
-Bool TY_(ParseConfigOption)( TidyDocImpl* doc, ctmbstr optnam, ctmbstr optval )
+Bool TY_(ParseConfigOption)( TidyDoc doc, ctmbstr optnam, ctmbstr optval )
 {
-    const TidyOptionImpl* option = TY_(lookupOption)( optnam );
+    TidyOption option = TY_(lookupOption)( optnam );
     Bool status = ( option != NULL );
     if ( !status )
     {
@@ -919,9 +918,9 @@ Bool TY_(ParseConfigOption)( TidyDocImpl* doc, ctmbstr optnam, ctmbstr optval )
 /* returns false if unknown option, missing parameter,
 ** or option doesn't use parameter
 */
-Bool TY_(ParseConfigValue)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr optval )
+Bool TY_(ParseConfigValue)( TidyDoc doc, TidyOptionId optId, ctmbstr optval )
 {
-    const TidyOptionImpl* option = option_defs + optId;
+    TidyOption option = option_defs + optId;
     Bool status = ( optId < N_TIDY_OPTIONS && optval != NULL );
 
     if ( !status )
@@ -948,7 +947,7 @@ Bool TY_(ParseConfigValue)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr optval
 
 
 /* ensure that char encodings are self consistent */
-Bool  TY_(AdjustCharEncoding)( TidyDocImpl* doc, int encoding )
+Bool  TY_(AdjustCharEncoding)( TidyDoc doc, int encoding )
 {
     int outenc = -1;
     int inenc = -1;
@@ -1011,7 +1010,7 @@ Bool  TY_(AdjustCharEncoding)( TidyDocImpl* doc, int encoding )
 }
 
 /* ensure that config is self consistent */
-void AdjustConfig( TidyDocImpl* doc )
+void AdjustConfig( TidyDoc doc )
 {
     if ( cfgBool(doc, TidyEncloseBlockText) )
         TY_(SetOptionBool)( doc, TidyEncloseBodyText, yes );
@@ -1082,7 +1081,7 @@ void AdjustConfig( TidyDocImpl* doc )
 }
 
 /* unsigned integers */
-Bool ParseInt( TidyDocImpl* doc, const TidyOptionImpl* entry )
+Bool ParseInt( TidyDoc doc, TidyOption entry )
 {
     ulong number = 0;
     Bool digits = no;
@@ -1104,8 +1103,8 @@ Bool ParseInt( TidyDocImpl* doc, const TidyOptionImpl* entry )
 }
 
 /* true/false or yes/no or 0/1 or "auto" only looks at 1st char */
-static Bool ParseTriState( TidyTriState theState, TidyDocImpl* doc,
-                           const TidyOptionImpl* entry, ulong* flag )
+static Bool ParseTriState( TidyTriState theState, TidyDoc doc,
+                           TidyOption entry, ulong* flag )
 {
     TidyConfigImpl* cfg = &doc->config;
     tchar c = SkipWhite( cfg );
@@ -1126,7 +1125,7 @@ static Bool ParseTriState( TidyTriState theState, TidyDocImpl* doc,
 }
 
 /* cr, lf or crlf */
-Bool ParseNewline( TidyDocImpl* doc, const TidyOptionImpl* entry )
+Bool ParseNewline( TidyDoc doc, TidyOption entry )
 {
     int nl = -1;
     tmbchar work[ 16 ] = {0};
@@ -1155,7 +1154,7 @@ Bool ParseNewline( TidyDocImpl* doc, const TidyOptionImpl* entry )
     return ( nl >= TidyLF && nl <= TidyCR );
 }
 
-Bool ParseBool( TidyDocImpl* doc, const TidyOptionImpl* entry )
+Bool ParseBool( TidyDoc doc, TidyOption entry )
 {
     ulong flag = 0;
     Bool status = ParseTriState( TidyNoState, doc, entry, &flag );
@@ -1164,7 +1163,7 @@ Bool ParseBool( TidyDocImpl* doc, const TidyOptionImpl* entry )
     return status;
 }
 
-Bool ParseAutoBool( TidyDocImpl* doc, const TidyOptionImpl* entry )
+Bool ParseAutoBool( TidyDoc doc, TidyOption entry )
 {
     ulong flag = 0;
     Bool status = ParseTriState( TidyAutoState, doc, entry, &flag );
@@ -1174,7 +1173,7 @@ Bool ParseAutoBool( TidyDocImpl* doc, const TidyOptionImpl* entry )
 }
 
 /* a string excluding whitespace */
-Bool ParseName( TidyDocImpl* doc, const TidyOptionImpl* option )
+Bool ParseName( TidyDoc doc, TidyOption option )
 {
     tmbchar buf[ 1024 ] = {0};
     uint i = 0;
@@ -1195,7 +1194,7 @@ Bool ParseName( TidyDocImpl* doc, const TidyOptionImpl* option )
 }
 
 /* #508936 - CSS class naming for -clean option */
-Bool ParseCSS1Selector( TidyDocImpl* doc, const TidyOptionImpl* option )
+Bool ParseCSS1Selector( TidyDoc doc, TidyOption option )
 {
     char buf[256] = {0};
     uint i = 0;
@@ -1229,7 +1228,7 @@ Bool ParseCSS1Selector( TidyDocImpl* doc, const TidyOptionImpl* option )
  * Sets the indent character to a tab if on, and set indent space count to 1
  * and sets indent character to a space if off.
 \*/
-Bool ParseTabs( TidyDocImpl* doc, const TidyOptionImpl* entry )
+Bool ParseTabs( TidyDoc doc, TidyOption entry )
 {
     ulong flag = 0;
     Bool status = ParseTriState( TidyNoState, doc, entry, &flag );
@@ -1247,7 +1246,7 @@ Bool ParseTabs( TidyDocImpl* doc, const TidyOptionImpl* entry )
 
 
 /* Coordinates Config update and Tags data */
-static void DeclareUserTag( TidyDocImpl* doc, TidyOptionId optId,
+static void DeclareUserTag( TidyDoc doc, TidyOptionId optId,
                             UserTagType tagType, ctmbstr name )
 {
   ctmbstr prvval = cfgStr( doc, optId );
@@ -1268,7 +1267,7 @@ static void DeclareUserTag( TidyDocImpl* doc, TidyOptionId optId,
 }
 
 /* a space or comma separated list of tag names */
-Bool ParseTagNames( TidyDocImpl* doc, const TidyOptionImpl* option )
+Bool ParseTagNames( TidyDoc doc, TidyOption option )
 {
     TidyConfigImpl* cfg = &doc->config;
     tmbchar buf[1024];
@@ -1355,7 +1354,7 @@ Bool ParseTagNames( TidyDocImpl* doc, const TidyOptionImpl* option )
 /* a string including whitespace */
 /* munges whitespace sequences */
 
-Bool ParseString( TidyDocImpl* doc, const TidyOptionImpl* option )
+Bool ParseString( TidyDoc doc, TidyOption option )
 {
     TidyConfigImpl* cfg = &doc->config;
     tmbchar buf[8192];
@@ -1397,7 +1396,7 @@ Bool ParseString( TidyDocImpl* doc, const TidyOptionImpl* option )
     return yes;
 }
 
-Bool ParseCharEnc( TidyDocImpl* doc, const TidyOptionImpl* option )
+Bool ParseCharEnc( TidyDoc doc, TidyOption option )
 {
     tmbchar buf[64] = {0};
     uint i = 0;
@@ -1434,7 +1433,7 @@ Bool ParseCharEnc( TidyDocImpl* doc, const TidyOptionImpl* option )
 }
 
 
-int TY_(CharEncodingId)( TidyDocImpl* ARG_UNUSED(doc), ctmbstr charenc )
+int TY_(CharEncodingId)( TidyDoc ARG_UNUSED(doc), ctmbstr charenc )
 {
     int enc = TY_(GetCharEncodingFromOptName)( charenc );
 
@@ -1477,7 +1476,7 @@ ctmbstr TY_(CharEncodingOptName)( int encoding )
 
       "-//ACME//DTD HTML 3.14159//EN"
 */
-Bool ParseDocType( TidyDocImpl* doc, const TidyOptionImpl* option )
+Bool ParseDocType( TidyDoc doc, TidyOption option )
 {
     tmbchar buf[ 32 ] = {0};
     uint i = 0;
@@ -1528,7 +1527,7 @@ Bool ParseDocType( TidyDocImpl* doc, const TidyOptionImpl* option )
     return status;
 }
 
-Bool ParseRepeatAttr( TidyDocImpl* doc, const TidyOptionImpl* option )
+Bool ParseRepeatAttr( TidyDoc doc, TidyOption option )
 {
     Bool status = yes;
     tmbchar buf[64] = {0};
@@ -1556,7 +1555,7 @@ Bool ParseRepeatAttr( TidyDocImpl* doc, const TidyOptionImpl* option )
     return status;
 }
 
-Bool ParseSorter( TidyDocImpl* doc, const TidyOptionImpl* option )
+Bool ParseSorter( TidyDoc doc, TidyOption option )
 {
     Bool status = yes;
     tmbchar buf[64] = {0};
@@ -1587,7 +1586,7 @@ Bool ParseSorter( TidyDocImpl* doc, const TidyOptionImpl* option )
 /* Use TidyOptionId as iterator.
 ** Send index of 1st option after TidyOptionUnknown as start of list.
 */
-TidyIterator TY_(getOptionList)( TidyDocImpl* ARG_UNUSED(doc) )
+TidyIterator TY_(getOptionList)( TidyDoc ARG_UNUSED(doc) )
 {
     return (TidyIterator) (size_t)1;
 }
@@ -1595,10 +1594,10 @@ TidyIterator TY_(getOptionList)( TidyDocImpl* ARG_UNUSED(doc) )
 /* Check if this item is last valid option.
 ** If so, zero out iterator.
 */
-const TidyOptionImpl*  TY_(getNextOption)( TidyDocImpl* ARG_UNUSED(doc),
+TidyOption  TY_(getNextOption)( TidyDoc ARG_UNUSED(doc),
                                            TidyIterator* iter )
 {
-  const TidyOptionImpl* option = NULL;
+  TidyOption option = NULL;
   size_t optId;
   assert( iter != NULL );
   optId = (size_t) *iter;
@@ -1613,7 +1612,7 @@ const TidyOptionImpl*  TY_(getNextOption)( TidyDocImpl* ARG_UNUSED(doc),
 
 /* Use a 1-based array index as iterator: 0 == end-of-list
 */
-TidyIterator TY_(getOptionPickList)( const TidyOptionImpl* option )
+TidyIterator TY_(getOptionPickList)( TidyOption option )
 {
     size_t ix = 0;
     if ( option && option->pickList )
@@ -1621,7 +1620,7 @@ TidyIterator TY_(getOptionPickList)( const TidyOptionImpl* option )
     return (TidyIterator) ix;
 }
 
-ctmbstr      TY_(getNextOptionPick)( const TidyOptionImpl* option,
+ctmbstr      TY_(getNextOptionPick)( TidyOption option,
                                      TidyIterator* iter )
 {
     size_t ix;
@@ -1635,7 +1634,7 @@ ctmbstr      TY_(getNextOptionPick)( const TidyOptionImpl* option,
     return val;
 }
 
-static int  WriteOptionString( const TidyOptionImpl* option,
+static int  WriteOptionString( TidyOption option,
                                ctmbstr sval, StreamOut* out )
 {
   ctmbstr cp = option->name;
@@ -1650,20 +1649,20 @@ static int  WriteOptionString( const TidyOptionImpl* option,
   return 0;
 }
 
-static int  WriteOptionInt( const TidyOptionImpl* option, uint ival, StreamOut* out )
+static int  WriteOptionInt( TidyOption option, uint ival, StreamOut* out )
 {
   tmbchar sval[ 32 ] = {0};
   TY_(tmbsnprintf)(sval, sizeof(sval), "%u", ival );
   return WriteOptionString( option, sval, out );
 }
 
-static int  WriteOptionBool( const TidyOptionImpl* option, Bool bval, StreamOut* out )
+static int  WriteOptionBool( TidyOption option, Bool bval, StreamOut* out )
 {
   ctmbstr sval = bval ? "yes" : "no";
   return WriteOptionString( option, sval, out );
 }
 
-static int  WriteOptionPick( const TidyOptionImpl* option, uint ival, StreamOut* out )
+static int  WriteOptionPick( TidyOption option, uint ival, StreamOut* out )
 {
     uint ix;
     const ctmbstr* val = option->pickList;
@@ -1674,17 +1673,17 @@ static int  WriteOptionPick( const TidyOptionImpl* option, uint ival, StreamOut*
     return -1;
 }
 
-Bool  TY_(ConfigDiffThanSnapshot)( TidyDocImpl* doc )
+Bool  TY_(ConfigDiffThanSnapshot)( TidyDoc doc )
 {
   int diff = memcmp( &doc->config.value, &doc->config.snapshot,
                      N_TIDY_OPTIONS * sizeof(uint) );
   return ( diff != 0 );
 }
 
-Bool  TY_(ConfigDiffThanDefault)( TidyDocImpl* doc )
+Bool  TY_(ConfigDiffThanDefault)( TidyDoc doc )
 {
   Bool diff = no;
-  const TidyOptionImpl* option = option_defs + 1;
+  TidyOption option = option_defs + 1;
   const TidyOptionValue* val = doc->config.value;
   for ( /**/; !diff && option && option->name; ++option, ++val )
   {
@@ -1694,10 +1693,10 @@ Bool  TY_(ConfigDiffThanDefault)( TidyDocImpl* doc )
 }
 
 
-static int  SaveConfigToStream( TidyDocImpl* doc, StreamOut* out )
+static int  SaveConfigToStream( TidyDoc doc, StreamOut* out )
 {
     int rc = 0;
-    const TidyOptionImpl* option;
+    TidyOption option;
     for ( option=option_defs+1; 0==rc && option && option->name; ++option )
     {
         const TidyOptionValue* val = &doc->config.value[ option->id ];
@@ -1751,7 +1750,7 @@ static int  SaveConfigToStream( TidyDocImpl* doc, StreamOut* out )
     return rc;
 }
 
-int  TY_(SaveConfigFile)( TidyDocImpl* doc, ctmbstr cfgfil )
+int  TY_(SaveConfigFile)( TidyDoc doc, ctmbstr cfgfil )
 {
     int status = -1;
     StreamOut* out = NULL;
@@ -1768,7 +1767,7 @@ int  TY_(SaveConfigFile)( TidyDocImpl* doc, ctmbstr cfgfil )
     return status;
 }
 
-int  TY_(SaveConfigSink)( TidyDocImpl* doc, TidyOutputSink* sink )
+int  TY_(SaveConfigSink)( TidyDoc doc, TidyOutputSink* sink )
 {
     uint outenc = cfg( doc, TidyOutCharEncoding );
     uint nl = cfg( doc, TidyNewline );

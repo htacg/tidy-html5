@@ -441,7 +441,7 @@ static const Attribute attribute_defs [] =
   { N_TIDY_ATTRIBS,                    NULL,                     NULL         }
 };
 
-static uint AttributeVersions(Node* node, AttVal* attval)
+static uint AttributeVersions(TidyNode node, TidyAttr attval)
 {
     uint i;
 
@@ -465,7 +465,7 @@ static uint AttributeVersions(Node* node, AttVal* attval)
 
 
 /* return the version of the attribute "id" of element "node" */
-uint TY_(NodeAttributeVersions)( Node* node, TidyAttrId id )
+uint TY_(NodeAttributeVersions)( TidyNode node, TidyAttrId id )
 {
     uint i;
 
@@ -484,7 +484,7 @@ uint TY_(NodeAttributeVersions)( Node* node, TidyAttrId id )
  * only defining as "proprietary" items that are not in
  * the element's AttrVersion structure.
  */
-Bool TY_(AttributeIsProprietary)(Node* node, AttVal* attval)
+Bool TY_(AttributeIsProprietary)(TidyNode node, TidyAttr attval)
 {
     if (!node || !attval)
         return no;
@@ -507,7 +507,7 @@ Bool TY_(AttributeIsProprietary)(Node* node, AttVal* attval)
  * does not allow the attribute as called out in its
  * AttrVersion structure.
  */
-Bool TY_(AttributeIsMismatched)(Node* node, AttVal* attval, TidyDocImpl* doc)
+Bool TY_(AttributeIsMismatched)(TidyNode node, TidyAttr attval, TidyDoc doc)
 {
     uint doctype;
     
@@ -737,7 +737,7 @@ static uint attrsHash(ctmbstr s)
     return hashval % ATTRIBUTE_HASH_SIZE;
 }
 
-static const Attribute *attrsInstall(TidyDocImpl* doc, TidyAttribImpl * attribs,
+static const Attribute *attrsInstall(TidyDoc doc, TidyAttribImpl * attribs,
                                 const Attribute* old)
 {
     AttrHash *np;
@@ -756,7 +756,7 @@ static const Attribute *attrsInstall(TidyDocImpl* doc, TidyAttribImpl * attribs,
     return old;
 }
 
-static void attrsRemoveFromHash( TidyDocImpl* doc, TidyAttribImpl *attribs,
+static void attrsRemoveFromHash( TidyDoc doc, TidyAttribImpl *attribs,
                             ctmbstr s )
 {
     uint h = attrsHash(s);
@@ -777,7 +777,7 @@ static void attrsRemoveFromHash( TidyDocImpl* doc, TidyAttribImpl *attribs,
     }
 }
 
-static void attrsEmptyHash( TidyDocImpl* doc, TidyAttribImpl * attribs )
+static void attrsEmptyHash( TidyDoc doc, TidyAttribImpl * attribs )
 {
     AttrHash *dict, *next;
     uint i;
@@ -798,7 +798,7 @@ static void attrsEmptyHash( TidyDocImpl* doc, TidyAttribImpl * attribs )
 }
 #endif
 
-static const Attribute* attrsLookup(TidyDocImpl* doc,
+static const Attribute* attrsLookup(TidyDoc doc,
                                TidyAttribImpl* ARG_UNUSED(attribs),
                                ctmbstr atnam)
 {
@@ -829,9 +829,9 @@ static const Attribute* attrsLookup(TidyDocImpl* doc,
 
 
 /* Locate attributes by type */
-AttVal* TY_(AttrGetById)( Node* node, TidyAttrId id )
+TidyAttr TY_(AttrGetById)( TidyNode node, TidyAttrId id )
 {
-   AttVal* av;
+   TidyAttr av;
    for ( av = node->attributes; av; av = av->next )
    {
      if ( AttrIsId(av, id) )
@@ -841,16 +841,16 @@ AttVal* TY_(AttrGetById)( Node* node, TidyAttrId id )
 }
 
 /* public method for finding attribute definition by name */
-const Attribute* TY_(FindAttribute)( TidyDocImpl* doc, AttVal *attval )
+const Attribute* TY_(FindAttribute)( TidyDoc doc, TidyAttr attval )
 {
     if ( attval )
        return attrsLookup( doc, &doc->attribs, attval->attribute );
     return NULL;
 }
 
-AttVal* TY_(GetAttrByName)( Node *node, ctmbstr name )
+TidyAttr TY_(GetAttrByName)( TidyNode node, ctmbstr name )
 {
-    AttVal *attr;
+    TidyAttr attr;
     for (attr = node->attributes; attr != NULL; attr = attr->next)
     {
         if (attr->attribute && TY_(tmbstrcmp)(attr->attribute, name) == 0)
@@ -859,9 +859,9 @@ AttVal* TY_(GetAttrByName)( Node *node, ctmbstr name )
     return attr;
 }
 
-void TY_(DropAttrByName)( TidyDocImpl* doc, Node *node, ctmbstr name )
+void TY_(DropAttrByName)( TidyDoc doc, TidyNode node, ctmbstr name )
 {
-    AttVal *attr, *prev = NULL, *next;
+    TidyAttr attr, prev = NULL, next;
 
     for (attr = node->attributes; attr != NULL; prev = attr, attr = next)
     {
@@ -880,10 +880,10 @@ void TY_(DropAttrByName)( TidyDocImpl* doc, Node *node, ctmbstr name )
     }
 }
 
-AttVal* TY_(AddAttribute)( TidyDocImpl* doc,
-                           Node *node, ctmbstr name, ctmbstr value )
+TidyAttr TY_(AddAttribute)( TidyDoc doc,
+                           TidyNode node, ctmbstr name, ctmbstr value )
 {
-    AttVal *av = TY_(NewAttribute)(doc);
+    TidyAttr av = TY_(NewAttribute)(doc);
     av->delim = '"';
     av->attribute = TY_(tmbstrdup)(doc->allocator, name);
 
@@ -898,9 +898,9 @@ AttVal* TY_(AddAttribute)( TidyDocImpl* doc,
     return av;
 }
 
-AttVal* TY_(RepairAttrValue)(TidyDocImpl* doc, Node* node, ctmbstr name, ctmbstr value)
+TidyAttr TY_(RepairAttrValue)(TidyDoc doc, TidyNode node, ctmbstr name, ctmbstr value)
 {
-    AttVal* old = TY_(GetAttrByName)(node, name);
+    TidyAttr old = TY_(GetAttrByName)(node, name);
 
     if (old)
     {
@@ -917,32 +917,32 @@ AttVal* TY_(RepairAttrValue)(TidyDocImpl* doc, Node* node, ctmbstr name, ctmbstr
         return TY_(AddAttribute)(doc, node, name, value);
 }
 
-static Bool CheckAttrType( TidyDocImpl* doc,
+static Bool CheckAttrType( TidyDoc doc,
                            ctmbstr attrname, AttrCheck type )
 {
     const Attribute* np = attrsLookup( doc, &doc->attribs, attrname );
     return (Bool)( np && np->attrchk == type );
 }
 
-Bool TY_(IsUrl)( TidyDocImpl* doc, ctmbstr attrname )
+Bool TY_(IsUrl)( TidyDoc doc, ctmbstr attrname )
 {
     return CheckAttrType( doc, attrname, CH_URL );
 }
 
 /*
-Bool IsBool( TidyDocImpl* doc, ctmbstr attrname )
+Bool IsBool( TidyDoc doc, ctmbstr attrname )
 {
     return CheckAttrType( doc, attrname, CH_BOOL );
 }
 */
 
-Bool TY_(IsScript)( TidyDocImpl* doc, ctmbstr attrname )
+Bool TY_(IsScript)( TidyDoc doc, ctmbstr attrname )
 {
     return CheckAttrType( doc, attrname, CH_SCRIPT );
 }
 
 /* may id or name serve as anchor? */
-Bool TY_(IsAnchorElement)( TidyDocImpl* ARG_UNUSED(doc), Node* node)
+Bool TY_(IsAnchorElement)( TidyDoc ARG_UNUSED(doc), TidyNode node)
 {
     TidyTagId tid = TagId( node );
     if ( tid == TidyTag_A      ||
@@ -1007,7 +1007,7 @@ Bool TY_(IsCSS1Selector)( ctmbstr buf )
 }
 
 /* free single anchor */
-static void FreeAnchor(TidyDocImpl* doc, Anchor *a)
+static void FreeAnchor(TidyDoc doc, Anchor *a)
 {
     if ( a )
         TidyDocFree( doc, a->name );
@@ -1053,7 +1053,7 @@ static uint anchorNameHash5(ctmbstr s)
  *  Issue #185 - Treat elements ids as case-sensitive
  *  if in HTML5 modes, make hash of value AS IS!
 \*/
-void TY_(RemoveAnchorByNode)( TidyDocImpl* doc, ctmbstr name, Node *node )
+void TY_(RemoveAnchorByNode)( TidyDoc doc, ctmbstr name, TidyNode node )
 {
     TidyAttribImpl* attribs = &doc->attribs;
     Anchor *delme = NULL, *curr, *prev = NULL;
@@ -1080,7 +1080,7 @@ void TY_(RemoveAnchorByNode)( TidyDocImpl* doc, ctmbstr name, Node *node )
 }
 
 /* initialize new anchor */
-static Anchor* NewAnchor( TidyDocImpl* doc, ctmbstr name, Node* node )
+static Anchor* NewAnchor( TidyDoc doc, ctmbstr name, TidyNode node )
 {
     Anchor *a = (Anchor*) TidyDocAlloc( doc, sizeof(Anchor) );
 
@@ -1097,7 +1097,7 @@ static Anchor* NewAnchor( TidyDocImpl* doc, ctmbstr name, Node* node )
  *  Issue #185 - Treat elements ids as case-sensitive
  *  if in HTML5 modes, make hash of value AS IS!
 \*/
-static Anchor* AddAnchor( TidyDocImpl* doc, ctmbstr name, Node *node )
+static Anchor* AddAnchor( TidyDoc doc, ctmbstr name, TidyNode node )
 {
     TidyAttribImpl* attribs = &doc->attribs;
     Anchor *a = NewAnchor( doc, name, node );
@@ -1125,7 +1125,7 @@ static Anchor* AddAnchor( TidyDocImpl* doc, ctmbstr name, Node *node )
  *  Issue #185 - Treat elements ids as case-sensitive
  *  if in HTML5 modes, make hash of value AS IS!
 \*/
-static Node* GetNodeByAnchor( TidyDocImpl* doc, ctmbstr name )
+static TidyNode GetNodeByAnchor( TidyDoc doc, ctmbstr name )
 {
     TidyAttribImpl* attribs = &doc->attribs;
     Anchor *found;
@@ -1153,7 +1153,7 @@ static Node* GetNodeByAnchor( TidyDocImpl* doc, ctmbstr name )
 }
 
 /* free all anchors */
-void TY_(FreeAnchors)( TidyDocImpl* doc )
+void TY_(FreeAnchors)( TidyDoc doc )
 {
     TidyAttribImpl* attribs = &doc->attribs;
     Anchor* a;
@@ -1168,7 +1168,7 @@ void TY_(FreeAnchors)( TidyDocImpl* doc )
 }
 
 /* public method for inititializing attribute dictionary */
-void TY_(InitAttrs)( TidyDocImpl* doc )
+void TY_(InitAttrs)( TidyDoc doc )
 {
     TidyClearMemory( &doc->attribs, sizeof(TidyAttribImpl) );
 #ifdef _DEBUG
@@ -1185,7 +1185,7 @@ void TY_(InitAttrs)( TidyDocImpl* doc )
 }
 
 /* free all declared attributes */
-static void FreeDeclaredAttributes( TidyDocImpl* doc )
+static void FreeDeclaredAttributes( TidyDoc doc )
 {
     TidyAttribImpl* attribs = &doc->attribs;
     Attribute* dict;
@@ -1200,7 +1200,7 @@ static void FreeDeclaredAttributes( TidyDocImpl* doc )
     }
 }
 
-void TY_(FreeAttrTable)( TidyDocImpl* doc )
+void TY_(FreeAttrTable)( TidyDoc doc )
 {
 #if ATTRIBUTE_HASH_LOOKUP
     attrsEmptyHash( doc, &doc->attribs );
@@ -1209,7 +1209,7 @@ void TY_(FreeAttrTable)( TidyDocImpl* doc )
     FreeDeclaredAttributes( doc );
 }
 
-void TY_(AppendToClassAttr)( TidyDocImpl* doc, AttVal *classattr, ctmbstr classname )
+void TY_(AppendToClassAttr)( TidyDoc doc, TidyAttr classattr, ctmbstr classname )
 {
     uint len = TY_(tmbstrlen)(classattr->value) +
         TY_(tmbstrlen)(classname) + 2;
@@ -1227,7 +1227,7 @@ void TY_(AppendToClassAttr)( TidyDocImpl* doc, AttVal *classattr, ctmbstr classn
 }
 
 /* concatenate styles */
-static void AppendToStyleAttr( TidyDocImpl* doc, AttVal *styleattr, ctmbstr styleprop )
+static void AppendToStyleAttr( TidyDoc doc, TidyAttr styleattr, ctmbstr styleprop )
 {
     /*
     this doesn't handle CSS comments and
@@ -1274,7 +1274,7 @@ static void AppendToStyleAttr( TidyDocImpl* doc, AttVal *styleattr, ctmbstr styl
  the same attribute name can't be used
  more than once in each element
 */
-static Bool AttrsHaveSameName( AttVal* av1, AttVal* av2)
+static Bool AttrsHaveSameName( TidyAttr av1, TidyAttr av2)
 {
     TidyAttrId id1, id2;
 
@@ -1289,13 +1289,13 @@ static Bool AttrsHaveSameName( AttVal* av1, AttVal* av2)
      return no;
 }
 
-void TY_(RepairDuplicateAttributes)( TidyDocImpl* doc, Node *node, Bool isXml )
+void TY_(RepairDuplicateAttributes)( TidyDoc doc, TidyNode node, Bool isXml )
 {
-    AttVal *first;
+    TidyAttr first;
 
     for (first = node->attributes; first != NULL;)
     {
-        AttVal *second;
+        TidyAttr second;
         Bool firstRedefined = no;
 
         if (!(first->asp == NULL && first->php == NULL))
@@ -1306,7 +1306,7 @@ void TY_(RepairDuplicateAttributes)( TidyDocImpl* doc, Node *node, Bool isXml )
 
         for (second = first->next; second != NULL;)
         {
-            AttVal *temp;
+            TidyAttr temp;
 
             if (!(second->asp == NULL && second->php == NULL
                   && AttrsHaveSameName(first, second)))
@@ -1365,7 +1365,7 @@ void TY_(RepairDuplicateAttributes)( TidyDocImpl* doc, Node *node, Bool isXml )
 }
 
 /* ignore unknown attributes for proprietary elements */
-const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attval )
+const Attribute* TY_(CheckAttribute)( TidyDoc doc, TidyNode node, TidyAttr attval )
 {
     const Attribute* attribute = attval->dict;
 
@@ -1390,7 +1390,7 @@ const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attv
     return attribute;
 }
 
-Bool TY_(IsBoolAttribute)(AttVal *attval)
+Bool TY_(IsBoolAttribute)(TidyAttr attval)
 {
     const Attribute *attribute = ( attval ? attval->dict : NULL );
     if ( attribute && attribute->attrchk == CH_BOOL )
@@ -1398,7 +1398,7 @@ Bool TY_(IsBoolAttribute)(AttVal *attval)
     return no;
 }
 
-Bool TY_(attrIsEvent)( AttVal* attval )
+Bool TY_(attrIsEvent)( TidyAttr attval )
 {
     TidyAttrId atid = AttrId( attval );
 
@@ -1431,7 +1431,7 @@ Bool TY_(attrIsEvent)( AttVal* attval )
             atid == TidyAttr_OnUNLOAD);
 }
 
-static void CheckLowerCaseAttrValue( TidyDocImpl* doc, Node *node, AttVal *attval)
+static void CheckLowerCaseAttrValue( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     tmbstr p;
     Bool hasUpper = no;
@@ -1464,7 +1464,7 @@ static void CheckLowerCaseAttrValue( TidyDocImpl* doc, Node *node, AttVal *attva
 
 /* methods for checking value of a specific attribute */
 
-void TY_(CheckUrl)( TidyDocImpl* doc, Node *node, AttVal *attval)
+void TY_(CheckUrl)( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     tmbchar c; 
     tmbstr dest, p;
@@ -1553,14 +1553,14 @@ void TY_(CheckUrl)( TidyDocImpl* doc, Node *node, AttVal *attval)
      current document and should be replaced by that URI
      when transformed into a request."
 */
-void CheckAction( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckAction( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     if (AttrHasValue(attval))
         TY_(CheckUrl)( doc, node, attval );
 }
 
-void CheckScript( TidyDocImpl* ARG_UNUSED(doc), Node* ARG_UNUSED(node),
-                  AttVal* ARG_UNUSED(attval))
+void CheckScript( TidyDoc ARG_UNUSED(doc), TidyNode ARG_UNUSED(node),
+                  TidyAttr ARG_UNUSED(attval))
 {
 }
 
@@ -1634,7 +1634,7 @@ static Bool IsValidNMTOKEN(ctmbstr name)
     return yes;
 }
 
-static Bool AttrValueIsAmong(AttVal *attval, ctmbstr const list[])
+static Bool AttrValueIsAmong(TidyAttr attval, ctmbstr const list[])
 {
     const ctmbstr *v;   
     for (v = list; *v; ++v)
@@ -1643,7 +1643,7 @@ static Bool AttrValueIsAmong(AttVal *attval, ctmbstr const list[])
     return no;
 }
 
-static void CheckAttrValidity( TidyDocImpl* doc, Node *node, AttVal *attval,
+static void CheckAttrValidity( TidyDoc doc, TidyNode node, TidyAttr attval,
                                ctmbstr const list[])
 {
     if (!AttrHasValue(attval))
@@ -1658,9 +1658,9 @@ static void CheckAttrValidity( TidyDocImpl* doc, Node *node, AttVal *attval,
         TY_(ReportAttrError)( doc, node, attval, BAD_ATTRIBUTE_VALUE);
 }
 
-void CheckName( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckName( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
-    Node *old;
+    TidyNode old;
 
     if (!AttrHasValue(attval))
     {
@@ -1682,10 +1682,10 @@ void CheckName( TidyDocImpl* doc, Node *node, AttVal *attval)
     }
 }
 
-void CheckId( TidyDocImpl* doc, Node *node, AttVal *attval )
+void CheckId( TidyDoc doc, TidyNode node, TidyAttr attval )
 {
     Lexer* lexer = doc->lexer;
-    Node *old;
+    TidyNode old;
 
     if (!AttrHasValue(attval))
     {
@@ -1709,7 +1709,7 @@ void CheckId( TidyDocImpl* doc, Node *node, AttVal *attval )
         AddAnchor( doc, attval->value, node );
 }
 
-void CheckBool( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckBool( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     if (!AttrHasValue(attval))
         return;
@@ -1717,7 +1717,7 @@ void CheckBool( TidyDocImpl* doc, Node *node, AttVal *attval)
     CheckLowerCaseAttrValue( doc, node, attval );
 }
 
-void CheckAlign( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckAlign( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     ctmbstr const values[] = {"left", "right", "center", "justify", NULL};
 
@@ -1750,7 +1750,7 @@ void CheckAlign( TidyDocImpl* doc, Node *node, AttVal *attval)
     }
 }
 
-void CheckValign( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckValign( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     ctmbstr const values[] = {"top", "middle", "bottom", "baseline", NULL};
     ctmbstr const values2[] = {"left", "right", NULL};
@@ -1783,7 +1783,7 @@ void CheckValign( TidyDocImpl* doc, Node *node, AttVal *attval)
         TY_(ReportAttrError)( doc, node, attval, BAD_ATTRIBUTE_VALUE);
 }
 
-void CheckLength( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckLength( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     tmbstr p;
     
@@ -1817,7 +1817,7 @@ void CheckLength( TidyDocImpl* doc, Node *node, AttVal *attval)
     }
 }
 
-void CheckTarget( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckTarget( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     ctmbstr const values[] = {"_blank", "_self", "_parent", "_top", NULL};
 
@@ -1836,13 +1836,13 @@ void CheckTarget( TidyDocImpl* doc, Node *node, AttVal *attval)
         TY_(ReportAttrError)( doc, node, attval, BAD_ATTRIBUTE_VALUE);
 }
 
-void CheckFsubmit( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckFsubmit( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     ctmbstr const values[] = {"get", "post", NULL};
     CheckAttrValidity( doc, node, attval, values );
 }
 
-void CheckClear( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckClear( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     ctmbstr const values[] = {"none", "left", "right", "all", NULL};
 
@@ -1860,19 +1860,19 @@ void CheckClear( TidyDocImpl* doc, Node *node, AttVal *attval)
         TY_(ReportAttrError)( doc, node, attval, BAD_ATTRIBUTE_VALUE);
 }
 
-void CheckShape( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckShape( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     ctmbstr const values[] = {"rect", "default", "circle", "poly", NULL};
     CheckAttrValidity( doc, node, attval, values );
 }
 
-void CheckScope( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckScope( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     ctmbstr const values[] = {"row", "rowgroup", "col", "colgroup", NULL};
     CheckAttrValidity( doc, node, attval, values );
 }
 
-void CheckNumber( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckNumber( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     tmbstr p;
     
@@ -1924,7 +1924,7 @@ static Bool IsValidColorCode(ctmbstr color)
 }
 
 /* check color syntax and beautify value by option */
-void CheckColor( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckColor( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     Bool valid = no;
     tmbstr given;
@@ -1981,28 +1981,28 @@ void CheckColor( TidyDocImpl* doc, Node *node, AttVal *attval)
 }
 
 /* check valuetype attribute for element param */
-void CheckVType( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckVType( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     ctmbstr const values[] = {"data", "object", "ref", NULL};
     CheckAttrValidity( doc, node, attval, values );
 }
 
 /* checks scrolling attribute */
-void CheckScroll( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckScroll( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     ctmbstr const values[] = {"no", "auto", "yes", NULL};
     CheckAttrValidity( doc, node, attval, values );
 }
 
 /* checks dir attribute */
-void CheckTextDir( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckTextDir( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     ctmbstr const values[] = {"rtl", "ltr", NULL};
     CheckAttrValidity( doc, node, attval, values );
 }
 
 /* checks lang and xml:lang attributes */
-void CheckLang( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckLang( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     /* empty xml:lang is allowed through XML 1.0 SE errata */
     if (!AttrHasValue(attval) && !attrIsXML_LANG(attval))
@@ -2016,7 +2016,7 @@ void CheckLang( TidyDocImpl* doc, Node *node, AttVal *attval)
 }
 
 /* checks type attribute */
-void CheckType( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckType( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     ctmbstr const valuesINPUT[] = {
         "text", "password", "checkbox", "radio", "submit", "reset", "file",
@@ -2059,9 +2059,9 @@ void CheckType( TidyDocImpl* doc, Node *node, AttVal *attval)
 }
 
 static
-AttVal *SortAttVal( AttVal* list, TidyAttrSortStrategy strat );
+TidyAttr SortAttVal( TidyAttr list, TidyAttrSortStrategy strat );
 
-void TY_(SortAttributes)(Node* node, TidyAttrSortStrategy strat)
+void TY_(SortAttributes)(TidyNode node, TidyAttrSortStrategy strat)
 {
     while (node)
     {
@@ -2104,11 +2104,11 @@ void TY_(SortAttributes)(Node* node, TidyAttrSortStrategy strat)
 * SOFTWARE.
 */
 
-typedef int(*ptAttValComparator)(AttVal *one, AttVal *two);
+typedef int(*ptAttValComparator)(TidyAttr one, TidyAttr two);
 
 /* Comparison function for TidySortAttrAlpha */
 static
-int AlphaComparator(AttVal *one, AttVal *two)
+int AlphaComparator(TidyAttr one, TidyAttr two)
 {
     return TY_(tmbstrcmp)(one->attribute, two->attribute);
 }
@@ -2130,10 +2130,10 @@ ptAttValComparator GetAttValComparator(TidyAttrSortStrategy strat)
 
 /* The sort routine */
 static
-AttVal *SortAttVal( AttVal *list, TidyAttrSortStrategy strat)
+TidyAttr SortAttVal( TidyAttr list, TidyAttrSortStrategy strat)
 {
     ptAttValComparator ptComparator = GetAttValComparator(strat);
-    AttVal *p, *q, *e, *tail;
+    TidyAttr p, q, e, tail;
     int insize, nmerges, psize, qsize, i;
 
     /*
@@ -2222,7 +2222,7 @@ AttVal *SortAttVal( AttVal *list, TidyAttrSortStrategy strat)
  *      NCName ':' ' '+ AnyURI
  */
 
-void CheckRDFaPrefix ( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckRDFaPrefix ( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     if (!AttrHasValue(attval))
     {
@@ -2278,7 +2278,7 @@ void CheckRDFaPrefix ( TidyDocImpl* doc, Node *node, AttVal *attval)
  *
  */
 
-void CheckRDFaTerm ( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckRDFaTerm ( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     if (!AttrHasValue(attval))
     {
@@ -2292,7 +2292,7 @@ void CheckRDFaTerm ( TidyDocImpl* doc, Node *node, AttVal *attval)
  *
  */
 
-void CheckRDFaSafeCURIE ( TidyDocImpl* doc, Node *node, AttVal *attval)
+void CheckRDFaSafeCURIE ( TidyDoc doc, TidyNode node, TidyAttr attval)
 {
     if (!AttrHasValue(attval))
     {

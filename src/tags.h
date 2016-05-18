@@ -14,8 +14,8 @@
 #include "forward.h"
 #include "attrdict.h"
 
-typedef void (Parser)( TidyDocImpl* doc, Node *node, GetTokenMode mode );
-typedef void (CheckAttribs)( TidyDocImpl* doc, Node *node );
+typedef void (Parser)( TidyDoc doc, TidyNode node, GetTokenMode mode );
+typedef void (CheckAttribs)( TidyDoc doc, TidyNode node );
 
 /*
  Tag dictionary node
@@ -75,20 +75,20 @@ typedef struct _TidyTagImpl TidyTagImpl;
 
 /* interface for finding tag by name */
 const Dict* TY_(LookupTagDef)( TidyTagId tid );
-Bool    TY_(FindTag)( TidyDocImpl* doc, Node *node );
-Parser* TY_(FindParser)( TidyDocImpl* doc, Node *node );
-void    TY_(DefineTag)( TidyDocImpl* doc, UserTagType tagType, ctmbstr name );
-void    TY_(FreeDeclaredTags)( TidyDocImpl* doc, UserTagType tagType ); /* tagtype_null to free all */
+Bool    TY_(FindTag)( TidyDoc doc, TidyNode node );
+Parser* TY_(FindParser)( TidyDoc doc, TidyNode node );
+void    TY_(DefineTag)( TidyDoc doc, UserTagType tagType, ctmbstr name );
+void    TY_(FreeDeclaredTags)( TidyDoc doc, UserTagType tagType ); /* tagtype_null to free all */
 
-TidyIterator   TY_(GetDeclaredTagList)( TidyDocImpl* doc );
-ctmbstr        TY_(GetNextDeclaredTag)( TidyDocImpl* doc, UserTagType tagType,
+TidyIterator   TY_(GetDeclaredTagList)( TidyDoc doc );
+ctmbstr        TY_(GetNextDeclaredTag)( TidyDoc doc, UserTagType tagType,
                                         TidyIterator* iter );
 
-void TY_(InitTags)( TidyDocImpl* doc );
-void TY_(FreeTags)( TidyDocImpl* doc );
-void TY_(AdjustTags)( TidyDocImpl *doc ); /* if NOT HTML5 DOCTYPE, fall back to HTML4 legacy mode */
-void TY_(ResetTags)( TidyDocImpl *doc ); /* set table to HTML5 mode */
-Bool TY_(IsHTML5Mode)( TidyDocImpl *doc );
+void TY_(InitTags)( TidyDoc doc );
+void TY_(FreeTags)( TidyDoc doc );
+void TY_(AdjustTags)( TidyDoc doc ); /* if NOT HTML5 DOCTYPE, fall back to HTML4 legacy mode */
+void TY_(ResetTags)( TidyDoc doc ); /* set table to HTML5 mode */
+Bool TY_(IsHTML5Mode)( TidyDoc doc );
 
 /* Parser methods for tags */
 
@@ -121,29 +121,29 @@ CheckAttribs TY_(CheckAttributes);
 #define TagId(node)        ((node) && (node)->tag ? (node)->tag->id : TidyTag_UNKNOWN)
 #define TagIsId(node, tid) ((node) && (node)->tag && (node)->tag->id == tid)
 
-Bool TY_(nodeIsText)( Node* node );
-Bool TY_(nodeIsElement)( Node* node );
+Bool TY_(nodeIsText)( TidyNode node );
+Bool TY_(nodeIsElement)( TidyNode node );
 
-Bool TY_(nodeHasText)( TidyDocImpl* doc, Node* node );
+Bool TY_(nodeHasText)( TidyDoc doc, TidyNode node );
 
 #if 0
 /* Compare & result to operand.  If equal, then all bits
 ** requested are set.
 */
-Bool nodeMatchCM( Node* node, uint contentModel );
+Bool nodeMatchCM( TidyNode node, uint contentModel );
 #endif
 
 /* True if any of the bits requested are set.
 */
-Bool TY_(nodeHasCM)( Node* node, uint contentModel );
+Bool TY_(nodeHasCM)( TidyNode node, uint contentModel );
 
-Bool TY_(nodeCMIsBlock)( Node* node );
-Bool TY_(nodeCMIsInline)( Node* node );
-Bool TY_(nodeCMIsEmpty)( Node* node );
+Bool TY_(nodeCMIsBlock)( TidyNode node );
+Bool TY_(nodeCMIsInline)( TidyNode node );
+Bool TY_(nodeCMIsEmpty)( TidyNode node );
 
 
-Bool TY_(nodeIsHeader)( Node* node );     /* H1, H2, ..., H6 */
-uint TY_(nodeHeaderLevel)( Node* node );  /* 1, 2, ..., 6 */
+Bool TY_(nodeIsHeader)( TidyNode node );     /* H1, H2, ..., H6 */
+uint TY_(nodeHeaderLevel)( TidyNode node );  /* 1, 2, ..., 6 */
 
 #define nodeIsHTML( node )       TagIsId( node, TidyTag_HTML )
 #define nodeIsHEAD( node )       TagIsId( node, TidyTag_HEAD )

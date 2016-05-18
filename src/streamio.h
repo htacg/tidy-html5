@@ -90,15 +90,15 @@ struct _StreamIn
 #endif
 
     /* Pointer back to document for error reporting */
-    TidyDocImpl* doc;
+    TidyDoc doc;
 };
 
-StreamIn* TY_(initStreamIn)( TidyDocImpl* doc, int encoding );
+StreamIn* TY_(initStreamIn)( TidyDoc doc, int encoding );
 void TY_(freeStreamIn)(StreamIn* in);
 
-StreamIn* TY_(FileInput)( TidyDocImpl* doc, FILE* fp, int encoding );
-StreamIn* TY_(BufferInput)( TidyDocImpl* doc, TidyBuffer* content, int encoding );
-StreamIn* TY_(UserInput)( TidyDocImpl* doc, TidyInputSource* source, int encoding );
+StreamIn* TY_(FileInput)( TidyDoc doc, FILE* fp, int encoding );
+StreamIn* TY_(BufferInput)( TidyDoc doc, TidyBuffer* content, int encoding );
+StreamIn* TY_(UserInput)( TidyDoc doc, TidyInputSource* source, int encoding );
 
 int       TY_(ReadBOMEncoding)(StreamIn *in);
 uint      TY_(ReadChar)( StreamIn* in );
@@ -124,13 +124,13 @@ struct _StreamOut
     TidyOutputSink sink;
 };
 
-StreamOut* TY_(FileOutput)( TidyDocImpl *doc, FILE* fp, int encoding, uint newln );
-StreamOut* TY_(BufferOutput)( TidyDocImpl *doc, TidyBuffer* buf, int encoding, uint newln );
-StreamOut* TY_(UserOutput)( TidyDocImpl *doc, TidyOutputSink* sink, int encoding, uint newln );
+StreamOut* TY_(FileOutput)( TidyDoc doc, FILE* fp, int encoding, uint newln );
+StreamOut* TY_(BufferOutput)( TidyDoc doc, TidyBuffer* buf, int encoding, uint newln );
+StreamOut* TY_(UserOutput)( TidyDoc doc, TidyOutputSink* sink, int encoding, uint newln );
 
 StreamOut* TY_(StdErrOutput)(void);
 /* StreamOut* StdOutOutput(void); */
-void       TY_(ReleaseStreamOut)( TidyDocImpl *doc, StreamOut* out );
+void       TY_(ReleaseStreamOut)( TidyDoc doc, StreamOut* out );
 
 void TY_(WriteChar)( uint c, StreamOut* out );
 void TY_(outBOM)( StreamOut *out );

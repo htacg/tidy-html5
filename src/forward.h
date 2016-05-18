@@ -28,21 +28,11 @@ typedef struct _StreamIn StreamIn;
 struct _StreamOut;
 typedef struct _StreamOut StreamOut;
 
-struct _TidyDocImpl;
-typedef struct _TidyDocImpl TidyDocImpl;
-
-
 struct _Dict;
 typedef struct _Dict Dict;
 
 struct _Attribute;
 typedef struct _Attribute Attribute;
-
-struct _AttVal;
-typedef struct _AttVal AttVal;
-
-struct _Node;
-typedef struct _Node Node;
 
 struct _IStack;
 typedef struct _IStack IStack;

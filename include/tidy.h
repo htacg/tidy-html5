@@ -84,7 +84,8 @@ opaque_type( TidyDoc );
 /** @struct TidyOption
 **  Opaque option datatype
 */
-opaque_type( TidyOption );
+struct _tidy_option;
+typedef const struct _tidy_option * TidyOption;
 
 /** @struct TidyNode
 **  Opaque node datatype

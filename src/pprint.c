@@ -22,7 +22,7 @@
 /* #define DEBUG_PPRINT */
 /* #define DEBUG_INDENT */
 #ifdef DEBUG_PPRINT
-extern void dbg_show_node( TidyDocImpl* doc, Node *node, int caller, int indent );
+extern void dbg_show_node( TidyDoc doc, TidyNode node, int caller, int indent );
 #endif
 #ifdef DEBUG_INDENT
 #include "sprtf.h"
@@ -40,13 +40,13 @@ extern void dbg_show_node( TidyDocImpl* doc, Node *node, int caller, int indent 
   start tags and before end tags
 */
 
-static void PPrintAsp( TidyDocImpl* doc, uint indent, Node* node );
-static void PPrintJste( TidyDocImpl* doc, uint indent, Node* node );
-static void PPrintPhp( TidyDocImpl* doc, uint indent, Node* node );
-static int  TextEndsWithNewline( Lexer *lexer, Node *node, uint mode );
-static int  TextStartsWithWhitespace( Lexer *lexer, Node *node, uint start, uint mode );
-static Bool InsideHead( TidyDocImpl* doc, Node *node );
-static Bool ShouldIndent( TidyDocImpl* doc, Node *node );
+static void PPrintAsp( TidyDoc doc, uint indent, TidyNode node );
+static void PPrintJste( TidyDoc doc, uint indent, TidyNode node );
+static void PPrintPhp( TidyDoc doc, uint indent, TidyNode node );
+static int  TextEndsWithNewline( Lexer *lexer, TidyNode node, uint mode );
+static int  TextStartsWithWhitespace( Lexer *lexer, TidyNode node, uint start, uint mode );
+static Bool InsideHead( TidyDoc doc, TidyNode node );
+static Bool ShouldIndent( TidyDoc doc, TidyNode node );
 
 /*\
  * Issue #228 20150715 - macros to access --vertical-space tri state configuration parameter
@@ -73,7 +73,7 @@ void TY_(PPrintSpaces)(void)
 /* #431953 - start RJ Wraplen adjusted for smooth international ride */
 
 #if 0
-uint CWrapLen( TidyDocImpl* doc, uint ind )
+uint CWrapLen( TidyDoc doc, uint ind )
 {
     ctmbstr lang = cfgStr( doc, TidyLanguage );
     uint wraplen = cfg( doc, TidyWrapLen );
@@ -318,7 +318,7 @@ static void InitIndent( TidyIndent* ind )
     ind->attrStringStart = -1;
 }
 
-void TY_(InitPrintBuf)( TidyDocImpl* doc )
+void TY_(InitPrintBuf)( TidyDoc doc )
 {
     TidyClearMemory( &doc->pprint, sizeof(TidyPrintImpl) );
     InitIndent( &doc->pprint.indent[0] );
@@ -327,7 +327,7 @@ void TY_(InitPrintBuf)( TidyDocImpl* doc )
     doc->pprint.line = 0;
 }
 
-void TY_(FreePrintBuf)( TidyDocImpl* doc )
+void TY_(FreePrintBuf)( TidyDoc doc )
 {
     TidyDocFree( doc, doc->pprint.linebuf );
     TY_(InitPrintBuf)( doc );
@@ -383,9 +383,9 @@ static Bool IsWrapInString( TidyPrintImpl* pprint )
              (ind->attrStringStart > 0 && ind->attrStringStart < wrap) );
 }
 
-static Bool HasMixedContent (Node *element)
+static Bool HasMixedContent (TidyNode element)
 {
-    Node * node;
+    TidyNode  node;
 
     if (!element)
         return no;
@@ -415,7 +415,7 @@ static Bool IsWrapInAttrVal( TidyPrintImpl* pprint )
              (ind->attrValStart > 0 && ind->attrValStart < wrap) );
 }
 
-static Bool WantIndent( TidyDocImpl* doc )
+static Bool WantIndent( TidyDoc doc )
 {
     TidyPrintImpl* pprint = &doc->pprint;
     Bool wantIt = GetSpaces(pprint) > 0;
@@ -429,19 +429,19 @@ static Bool WantIndent( TidyDocImpl* doc )
 }
 
 
-static uint  WrapOff( TidyDocImpl* doc )
+static uint  WrapOff( TidyDoc doc )
 {
     uint saveWrap = cfg( doc, TidyWrapLen );
     TY_(SetOptionInt)( doc, TidyWrapLen, 0xFFFFFFFF );  /* very large number */
     return saveWrap;
 }
 
-static void  WrapOn( TidyDocImpl* doc, uint saveWrap )
+static void  WrapOn( TidyDoc doc, uint saveWrap )
 {
     TY_(SetOptionInt)( doc, TidyWrapLen, saveWrap );
 }
 
-static uint  WrapOffCond( TidyDocImpl* doc, Bool onoff )
+static uint  WrapOffCond( TidyDoc doc, Bool onoff )
 {
     if ( onoff )
         return WrapOff( doc );
@@ -482,7 +482,7 @@ static uint AddString( TidyPrintImpl* pprint, ctmbstr str )
 ** but only if indentation would NOT overflow 
 ** the current line.  Otherwise keep previous wrap point.
 */
-static Bool SetWrap( TidyDocImpl* doc, uint indent )
+static Bool SetWrap( TidyDoc doc, uint indent )
 {
     TidyPrintImpl* pprint = &doc->pprint;
     Bool wrap = ( indent + pprint->linelen < cfg(doc, TidyWrapLen) );
@@ -511,7 +511,7 @@ static void CarryOver( int* valTo, int* valFrom, uint wrapPoint )
 }
 
 
-static Bool SetWrapAttr( TidyDocImpl* doc,
+static Bool SetWrapAttr( TidyDoc doc,
                          uint indent, int attrStart, int strStart )
 {
     TidyPrintImpl* pprint = &doc->pprint;
@@ -604,7 +604,7 @@ static void ResetLineAfterWrap( TidyPrintImpl* pprint )
 ** previously saved wrap point.  Shifts unwritten
 ** text in output buffer to beginning of next line.
 */
-static void WrapLine( TidyDocImpl* doc )
+static void WrapLine( TidyDoc doc )
 {
     TidyPrintImpl* pprint = &doc->pprint;
     uint i;
@@ -634,7 +634,7 @@ static void WrapLine( TidyDocImpl* doc )
 ** If combined they overflow output line length, go ahead
 ** and flush output up to the current wrap point.
 */
-static Bool CheckWrapLine( TidyDocImpl* doc )
+static Bool CheckWrapLine( TidyDoc doc )
 {
     TidyPrintImpl* pprint = &doc->pprint;
     if ( GetSpaces(pprint) + pprint->linelen >= cfg(doc, TidyWrapLen) )
@@ -645,7 +645,7 @@ static Bool CheckWrapLine( TidyDocImpl* doc )
     return no;
 }
 
-static Bool CheckWrapIndent( TidyDocImpl* doc, uint indent )
+static Bool CheckWrapIndent( TidyDoc doc, uint indent )
 {
     TidyPrintImpl* pprint = &doc->pprint;
     if ( GetSpaces(pprint) + pprint->linelen >= cfg(doc, TidyWrapLen) )
@@ -663,7 +663,7 @@ static Bool CheckWrapIndent( TidyDocImpl* doc, uint indent )
     return no;
 }
 
-static void WrapAttrVal( TidyDocImpl* doc )
+static void WrapAttrVal( TidyDoc doc )
 {
     TidyPrintImpl* pprint = &doc->pprint;
     uint i;
@@ -689,7 +689,7 @@ static void WrapAttrVal( TidyDocImpl* doc )
     ResetLineAfterWrap( pprint );
 }
 
-static void PFlushLineImpl( TidyDocImpl* doc )
+static void PFlushLineImpl( TidyDoc doc )
 {
     TidyPrintImpl* pprint = &doc->pprint;
 
@@ -713,7 +713,7 @@ static void PFlushLineImpl( TidyDocImpl* doc )
     pprint->linelen = 0;
 }
 
-void TY_(PFlushLine)( TidyDocImpl* doc, uint indent )
+void TY_(PFlushLine)( TidyDoc doc, uint indent )
 {
     TidyPrintImpl* pprint = &doc->pprint;
 
@@ -732,7 +732,7 @@ void TY_(PFlushLine)( TidyDocImpl* doc, uint indent )
     }
 }
 
-static void PCondFlushLine( TidyDocImpl* doc, uint indent )
+static void PCondFlushLine( TidyDoc doc, uint indent )
 {
     TidyPrintImpl* pprint = &doc->pprint;
 
@@ -760,7 +760,7 @@ static void PCondFlushLine( TidyDocImpl* doc, uint indent )
  * These need to be used in the right place. In same cases `PFlushLine`
  * and `PCondFlushLine` should still be used.
  */
-void TY_(PFlushLineSmart)( TidyDocImpl* doc, uint indent )
+void TY_(PFlushLineSmart)( TidyDoc doc, uint indent )
 {
     TidyPrintImpl* pprint = &doc->pprint;
 
@@ -782,7 +782,7 @@ void TY_(PFlushLineSmart)( TidyDocImpl* doc, uint indent )
     }
 }
 
-static void PCondFlushLineSmart( TidyDocImpl* doc, uint indent )
+static void PCondFlushLineSmart( TidyDoc doc, uint indent )
 {
     TidyPrintImpl* pprint = &doc->pprint;
 
@@ -812,7 +812,7 @@ static void PCondFlushLineSmart( TidyDocImpl* doc, uint indent )
     }
 }
 
-static void PPrintChar( TidyDocImpl* doc, uint c, uint mode )
+static void PPrintChar( TidyDoc doc, uint c, uint mode )
 {
     tmbchar entity[128];
     ctmbstr p;
@@ -1049,8 +1049,8 @@ static uint IncrWS( uint start, uint end, uint indent, int ixWS )
   to UTF-8 is deferred to the TY_(WriteChar)() routine called
   to flush the line buffer.
 */
-static void PPrintText( TidyDocImpl* doc, uint mode, uint indent,
-                        Node* node  )
+static void PPrintText( TidyDoc doc, uint mode, uint indent,
+                        TidyNode node  )
 {
     uint start = node->start;
     uint end = node->end;
@@ -1100,7 +1100,7 @@ static void PPrintText( TidyDocImpl* doc, uint mode, uint indent,
 }
 
 #if 0
-static void PPrintString( TidyDocImpl* doc, uint indent, ctmbstr str )
+static void PPrintString( TidyDoc doc, uint indent, ctmbstr str )
 {
     while ( *str != '\0' )
         AddChar( &doc->pprint, *str++ );
@@ -1108,7 +1108,7 @@ static void PPrintString( TidyDocImpl* doc, uint indent, ctmbstr str )
 #endif /* 0 */
 
 
-static void PPrintAttrValue( TidyDocImpl* doc, uint indent,
+static void PPrintAttrValue( TidyDoc doc, uint indent,
                              ctmbstr value, uint delim, Bool wrappable, Bool scriptAttr )
 {
     TidyPrintImpl* pprint = &doc->pprint;
@@ -1216,7 +1216,7 @@ static void PPrintAttrValue( TidyDocImpl* doc, uint indent,
     AddChar( pprint, delim );
 }
 
-static uint AttrIndent( TidyDocImpl* doc, Node* node, AttVal* ARG_UNUSED(attr) )
+static uint AttrIndent( TidyDoc doc, TidyNode node, TidyAttr ARG_UNUSED(attr) )
 {
   uint spaces = cfg( doc, TidyIndentSpaces );
   uint xtra = 2;  /* 1 for the '<', another for the ' ' */
@@ -1232,7 +1232,7 @@ static uint AttrIndent( TidyDocImpl* doc, Node* node, AttVal* ARG_UNUSED(attr) )
   return spaces;
 }
 
-static Bool AttrNoIndentFirst( /*TidyDocImpl* doc,*/ Node* node, AttVal* attr )
+static Bool AttrNoIndentFirst( /*TidyDoc doc,*/ TidyNode node, TidyAttr attr )
 {
   return ( attr==node->attributes );
   
@@ -1242,8 +1242,8 @@ static Bool AttrNoIndentFirst( /*TidyDocImpl* doc,*/ Node* node, AttVal* attr )
              */
 }
 
-static void PPrintAttribute( TidyDocImpl* doc, uint indent,
-                             Node *node, AttVal *attr )
+static void PPrintAttribute( TidyDoc doc, uint indent,
+                             TidyNode node, TidyAttr attr )
 {
     TidyPrintImpl* pprint = &doc->pprint;
     Bool xmlOut    = cfgBool( doc, TidyXmlOut );
@@ -1335,10 +1335,10 @@ static void PPrintAttribute( TidyDocImpl* doc, uint indent,
         PPrintAttrValue( doc, indent, attr->value, attr->delim, wrappable, no );
 }
 
-static void PPrintAttrs( TidyDocImpl* doc, uint indent, Node *node )
+static void PPrintAttrs( TidyDoc doc, uint indent, TidyNode node )
 {
     TidyPrintImpl* pprint = &doc->pprint;
-    AttVal* av;
+    TidyAttr av;
 
     /* add xml:space attribute to pre and other elements */
     if ( cfgBool(doc, TidyXmlOut) && cfgBool(doc, TidyXmlSpace) &&
@@ -1367,7 +1367,7 @@ static void PPrintAttrs( TidyDocImpl* doc, uint indent, Node *node )
     }
 }
 
-Bool TY_(TextNodeEndWithSpace)( Lexer *lexer, Node *node )
+Bool TY_(TextNodeEndWithSpace)( Lexer *lexer, TidyNode node )
 {
     if (TY_(nodeIsText)(node) && node->end > node->start)
     {
@@ -1399,9 +1399,9 @@ Bool TY_(TextNodeEndWithSpace)( Lexer *lexer, Node *node )
  <p><img />
  x</p> won't.
 */
-static Bool AfterSpaceImp(Lexer *lexer, Node *node, Bool isEmpty)
+static Bool AfterSpaceImp(Lexer *lexer, TidyNode node, Bool isEmpty)
 {
-    Node *prev;
+    TidyNode prev;
 
     if ( !TY_(nodeCMIsInline)(node) )
         return yes;
@@ -1423,13 +1423,13 @@ static Bool AfterSpaceImp(Lexer *lexer, Node *node, Bool isEmpty)
     return AfterSpaceImp(lexer, node->parent, isEmpty);
 }
 
-static Bool AfterSpace(Lexer *lexer, Node *node)
+static Bool AfterSpace(Lexer *lexer, TidyNode node)
 {
     return AfterSpaceImp(lexer, node, TY_(nodeCMIsEmpty)(node));
 }
 
-static void PPrintEndTag( TidyDocImpl* doc, uint ARG_UNUSED(mode),
-                          uint ARG_UNUSED(indent), Node *node );
+static void PPrintEndTag( TidyDoc doc, uint ARG_UNUSED(mode),
+                          uint ARG_UNUSED(indent), TidyNode node );
 
 /*\
  *  See Issue #162 - void elements also get a closing tag, like img, br, ...
@@ -1446,7 +1446,7 @@ static void PPrintEndTag( TidyDocImpl* doc, uint ARG_UNUSED(mode),
  *  And maybe a switch(id) case would be faster.
 \*/
 
-static Bool TY_(isVoidElement)( Node *node )
+static Bool TY_(isVoidElement)( TidyNode node )
 {
     TidyTagId id;
     if ( !node )
@@ -1494,8 +1494,8 @@ static Bool TY_(isVoidElement)( Node *node )
     return no;
 }
 
-static void PPrintTag( TidyDocImpl* doc,
-                       uint mode, uint indent, Node *node )
+static void PPrintTag( TidyDoc doc,
+                       uint mode, uint indent, TidyNode node )
 {
     TidyPrintImpl* pprint = &doc->pprint;
     Bool uc = cfgBool( doc, TidyUpperCaseTags );
@@ -1577,8 +1577,8 @@ static void PPrintTag( TidyDocImpl* doc,
     }
 }
 
-static void PPrintEndTag( TidyDocImpl* doc, uint ARG_UNUSED(mode),
-                          uint ARG_UNUSED(indent), Node *node )
+static void PPrintEndTag( TidyDoc doc, uint ARG_UNUSED(mode),
+                          uint ARG_UNUSED(indent), TidyNode node )
 {
     TidyPrintImpl* pprint = &doc->pprint;
     Bool uc = cfgBool( doc, TidyUpperCaseTags );
@@ -1617,7 +1617,7 @@ static void PPrintEndTag( TidyDocImpl* doc, uint ARG_UNUSED(mode),
     AddChar( pprint, '>' );
 }
 
-static void PPrintComment( TidyDocImpl* doc, uint indent, Node* node )
+static void PPrintComment( TidyDoc doc, uint indent, TidyNode node )
 {
     TidyPrintImpl* pprint = &doc->pprint;
 
@@ -1641,13 +1641,13 @@ static void PPrintComment( TidyDocImpl* doc, uint indent, Node* node )
         TY_(PFlushLineSmart)( doc, indent );
 }
 
-static void PPrintDocType( TidyDocImpl* doc, uint indent, Node *node )
+static void PPrintDocType( TidyDoc doc, uint indent, TidyNode node )
 {
     TidyPrintImpl* pprint = &doc->pprint;
     uint wraplen = cfg( doc, TidyWrapLen );
     uint spaces = cfg( doc, TidyIndentSpaces );
-    AttVal* fpi = TY_(GetAttrByName)(node, "PUBLIC");
-    AttVal* sys = TY_(GetAttrByName)(node, "SYSTEM");
+    TidyAttr fpi = TY_(GetAttrByName)(node, "PUBLIC");
+    TidyAttr sys = TY_(GetAttrByName)(node, "SYSTEM");
 
     /* todo: handle non-ASCII characters in FPI / SI / node->element */
 
@@ -1704,7 +1704,7 @@ static void PPrintDocType( TidyDocImpl* doc, uint indent, Node *node )
     PCondFlushLineSmart( doc, indent );
 }
 
-static void PPrintPI( TidyDocImpl* doc, uint indent, Node *node )
+static void PPrintPI( TidyDoc doc, uint indent, TidyNode node )
 {
     TidyPrintImpl* pprint = &doc->pprint;
     tchar c;
@@ -1735,9 +1735,9 @@ static void PPrintPI( TidyDocImpl* doc, uint indent, Node *node )
     PCondFlushLine( doc, indent );
 }
 
-static void PPrintXmlDecl( TidyDocImpl* doc, uint indent, Node *node )
+static void PPrintXmlDecl( TidyDoc doc, uint indent, TidyNode node )
 {
-    AttVal* att;
+    TidyAttr att;
     uint saveWrap;
     TidyPrintImpl* pprint = &doc->pprint;
     Bool ucAttrs;
@@ -1770,7 +1770,7 @@ static void PPrintXmlDecl( TidyDocImpl* doc, uint indent, Node *node )
 }
 
 /* note ASP and JSTE share <% ... %> syntax */
-static void PPrintAsp( TidyDocImpl* doc, uint indent, Node *node )
+static void PPrintAsp( TidyDoc doc, uint indent, TidyNode node )
 {
     TidyPrintImpl* pprint = &doc->pprint;
     Bool wrapAsp  = cfgBool( doc, TidyWrapAsp );
@@ -1789,7 +1789,7 @@ static void PPrintAsp( TidyDocImpl* doc, uint indent, Node *node )
 }
 
 /* JSTE also supports <# ... #> syntax */
-static void PPrintJste( TidyDocImpl* doc, uint indent, Node *node )
+static void PPrintJste( TidyDoc doc, uint indent, TidyNode node )
 {
     TidyPrintImpl* pprint = &doc->pprint;
     Bool wrapAsp = cfgBool( doc, TidyWrapAsp );
@@ -1805,7 +1805,7 @@ static void PPrintJste( TidyDocImpl* doc, uint indent, Node *node )
 }
 
 /* PHP is based on XML processing instructions */
-static void PPrintPhp( TidyDocImpl* doc, uint indent, Node *node )
+static void PPrintPhp( TidyDoc doc, uint indent, TidyNode node )
 {
     TidyPrintImpl* pprint = &doc->pprint;
     Bool wrapPhp = cfgBool( doc, TidyWrapPhp );
@@ -1823,7 +1823,7 @@ static void PPrintPhp( TidyDocImpl* doc, uint indent, Node *node )
     WrapOn( doc, saveWrap );
 }
 
-static void PPrintCDATA( TidyDocImpl* doc, uint indent, Node *node )
+static void PPrintCDATA( TidyDoc doc, uint indent, TidyNode node )
 {
     uint saveWrap;
     TidyPrintImpl* pprint = &doc->pprint;
@@ -1842,7 +1842,7 @@ static void PPrintCDATA( TidyDocImpl* doc, uint indent, Node *node )
     WrapOn( doc, saveWrap );          /* restore wrapping */
 }
 
-static void PPrintSection( TidyDocImpl* doc, uint indent, Node *node )
+static void PPrintSection( TidyDoc doc, uint indent, TidyNode node )
 {
     TidyPrintImpl* pprint = &doc->pprint;
     Bool wrapSect = cfgBool( doc, TidyWrapSection );
@@ -1895,7 +1895,7 @@ static ctmbstr CSS_COMMENT_END       = "*/";
 static ctmbstr DEFAULT_COMMENT_START = "";
 static ctmbstr DEFAULT_COMMENT_END   = "";
 
-static Bool InsideHead( TidyDocImpl* doc, Node *node )
+static Bool InsideHead( TidyDoc doc, TidyNode node )
 {
   if ( nodeIsHEAD(node) )
     return yes;
@@ -1912,7 +1912,7 @@ static Bool InsideHead( TidyDocImpl* doc, Node *node )
    If it already ends on a newline, it is not
    necessary to print another before printing end tag.
 */
-static int TextEndsWithNewline(Lexer *lexer, Node *node, uint mode )
+static int TextEndsWithNewline(Lexer *lexer, TidyNode node, uint mode )
 {
     if ( (mode & (CDATA|COMMENT)) && TY_(nodeIsText)(node) && node->end > node->start )
     {
@@ -1940,7 +1940,7 @@ static int TextEndsWithNewline(Lexer *lexer, Node *node, uint mode )
  * Here the total white space is returned, and then a sister service, IncrWS() 
  * will advance the start of the lexer output by the amount of the indent.
 \*/
-static Bool TY_(nodeIsTextLike)( Node *node )
+static Bool TY_(nodeIsTextLike)( TidyNode node )
 {
     if ( TY_(nodeIsText)(node) )
         return yes;
@@ -1950,7 +1950,7 @@ static Bool TY_(nodeIsTextLike)( Node *node )
     return no;
 }
 
-static int TextStartsWithWhitespace( Lexer *lexer, Node *node, uint start, uint mode )
+static int TextStartsWithWhitespace( Lexer *lexer, TidyNode node, uint start, uint mode )
 {
     assert( node != NULL );
     if ( (mode & (CDATA|COMMENT)) && TY_(nodeIsTextLike)(node) && node->end > node->start && start >= node->start )
@@ -1967,7 +1967,7 @@ static int TextStartsWithWhitespace( Lexer *lexer, Node *node, uint start, uint 
     return -1;
 }
 
-static Bool HasCDATA( Lexer* lexer, Node* node )
+static Bool HasCDATA( Lexer* lexer, TidyNode node )
 {
     /* Scan forward through the textarray. Since the characters we're
     ** looking for are < 0x7f, we don't have to do any UTF-8 decoding.
@@ -1983,10 +1983,10 @@ static Bool HasCDATA( Lexer* lexer, Node* node )
 
 
 static
-void PPrintScriptStyle( TidyDocImpl* doc, uint mode, uint indent, Node *node )
+void PPrintScriptStyle( TidyDoc doc, uint mode, uint indent, TidyNode node )
 {
     TidyPrintImpl* pprint = &doc->pprint;
-    Node*   content;
+    TidyNode   content;
     ctmbstr commentStart = DEFAULT_COMMENT_START;
     ctmbstr commentEnd = DEFAULT_COMMENT_END;
     Bool    hasCData = no;
@@ -2004,7 +2004,7 @@ void PPrintScriptStyle( TidyDocImpl* doc, uint mode, uint indent, Node *node )
 
     if ( xhtmlOut && node->content != NULL )
     {
-        AttVal* type = attrGetTYPE(node);
+        TidyAttr type = attrGetTYPE(node);
 
         if (AttrValueIs(type, "text/javascript"))
         {
@@ -2090,7 +2090,7 @@ void PPrintScriptStyle( TidyDocImpl* doc, uint mode, uint indent, Node *node )
 
 
 
-static Bool ShouldIndent( TidyDocImpl* doc, Node *node )
+static Bool ShouldIndent( TidyDoc doc, TidyNode node )
 {
     TidyTriState indentContent = cfgAutoBool( doc, TidyIndentContent );
     if ( indentContent == TidyNoState )
@@ -2144,9 +2144,9 @@ static Bool ShouldIndent( TidyDocImpl* doc, Node *node )
 
  -- Sebastiano Vigna <vigna@dsi.unimi.it>
 */
-void TY_(PrintBody)( TidyDocImpl* doc )
+void TY_(PrintBody)( TidyDoc doc )
 {
-    Node *node = TY_(FindBody)( doc );
+    TidyNode node = TY_(FindBody)( doc );
 
     if ( node )
     {
@@ -2157,9 +2157,9 @@ void TY_(PrintBody)( TidyDocImpl* doc )
 
 /* #130 MathML attr and entity fix! 
    Support MathML namepsace */
-static void PPrintMathML( TidyDocImpl* doc, uint indent, Node *node )
+static void PPrintMathML( TidyDoc doc, uint indent, TidyNode node )
 {
-    Node *content;
+    TidyNode content;
     uint mode = OtherNamespace;
 
     PPrintTag( doc, mode, indent, node );
@@ -2170,9 +2170,9 @@ static void PPrintMathML( TidyDocImpl* doc, uint indent, Node *node )
     PPrintEndTag( doc, mode, indent, node );
 }
 
-void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
+void TY_(PPrintTree)( TidyDoc doc, uint mode, uint indent, TidyNode node )
 {
-    Node *content, *last;
+    TidyNode content, last;
     uint spaces = cfg( doc, TidyIndentSpaces );
     Bool xhtml = cfgBool( doc, TidyXhtmlOut );
 
@@ -2181,7 +2181,7 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
 
     if (doc->progressCallback)
     {
-        doc->progressCallback( tidyImplToDoc(doc), node->line, node->column, doc->pprint.line + 1 );
+        doc->progressCallback( doc, node->line, node->column, doc->pprint.line + 1 );
     }
 
 #if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_PPRINT)
@@ -2458,7 +2458,7 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
     }
 }
 
-void TY_(PPrintXMLTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
+void TY_(PPrintXMLTree)( TidyDoc doc, uint mode, uint indent, TidyNode node )
 {
     Bool xhtmlOut = cfgBool( doc, TidyXhtmlOut );
     if (node == NULL)
@@ -2466,7 +2466,7 @@ void TY_(PPrintXMLTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
 
     if (doc->progressCallback)
     {
-        doc->progressCallback( tidyImplToDoc(doc), node->line, node->column, doc->pprint.line + 1 );
+        doc->progressCallback( doc, node->line, node->column, doc->pprint.line + 1 );
     }
     
     if ( node->type == TextNode)
@@ -2481,7 +2481,7 @@ void TY_(PPrintXMLTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
     }
     else if ( node->type == RootNode )
     {
-        Node *content;
+        TidyNode content;
         for ( content = node->content;
               content != NULL;
               content = content->next )
@@ -2513,7 +2513,7 @@ void TY_(PPrintXMLTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
     else /* some kind of container element */
     {
         uint spaces = cfg( doc, TidyIndentSpaces );
-        Node *content;
+        TidyNode content;
         Bool mixed = no;
         uint cindent;
 

@@ -57,11 +57,11 @@
 /*
   Extricate "element", replace it by its content and delete it.
 */
-static void DiscardContainer( TidyDocImpl* doc, Node *element, Node **pnode)
+static void DiscardContainer( TidyDoc doc, TidyNode element, TidyNode *pnode)
 {
     if (element->content)
     {
-        Node *node, *parent = element->parent;
+        TidyNode node, parent = element->parent;
 
         element->last->next = element->next;
 
@@ -94,9 +94,9 @@ static void DiscardContainer( TidyDocImpl* doc, Node *element, Node **pnode)
     }
 }
 
-static void CleanNode( TidyDocImpl* doc, Node *node )
+static void CleanNode( TidyDoc doc, TidyNode node )
 {
-    Node *child, *next;
+    TidyNode child, next;
 
     if (node->content)
     {
@@ -114,7 +114,7 @@ static void CleanNode( TidyDocImpl* doc, Node *node )
                     DiscardContainer( doc, child, &next);
                 else if (nodeIsA(child) && !child->content)
                  {
-                    AttVal *id = TY_(GetAttrByName)( child, "name" );
+                    TidyAttr id = TY_(GetAttrByName)( child, "name" );
 
                     if (id)
                         TY_(RepairAttrValue)( doc, child->parent, "id", id->value );
@@ -134,13 +134,13 @@ static void CleanNode( TidyDocImpl* doc, Node *node )
 }
 
 /* insert meta element to force browser to recognize doc as UTF8 */
-static void SetUTF8( TidyDocImpl* doc )
+static void SetUTF8( TidyDoc doc )
 {
-    Node *head = TY_(FindHEAD)( doc );
+    TidyNode head = TY_(FindHEAD)( doc );
 
     if (head)
     {
-        Node *node = TY_(InferredTag)(doc, TidyTag_META);
+        TidyNode node = TY_(InferredTag)(doc, TidyTag_META);
         TY_(AddAttribute)( doc, node, "http-equiv", "Content-Type" );
         TY_(AddAttribute)( doc, node, "content", "text/html; charset=UTF-8" );
         TY_(InsertNodeAtStart)( head, node );
@@ -155,7 +155,7 @@ static void SetUTF8( TidyDocImpl* doc )
     - replace <a name=...></a> by id on parent element
     - strip empty <p> elements
 */
-void TY_(CleanGoogleDocument)( TidyDocImpl* doc )
+void TY_(CleanGoogleDocument)( TidyDoc doc )
 {
     /* placeholder.  CleanTree()/CleanNode() will not
     ** zap root element 

@@ -15,9 +15,9 @@
 #endif
 
 /* duplicate attributes */
-AttVal *TY_(DupAttrs)( TidyDocImpl* doc, AttVal *attrs)
+TidyAttr TY_(DupAttrs)( TidyDoc doc, TidyAttr attrs)
 {
-    AttVal *newattrs;
+    TidyAttr newattrs;
 
     if (attrs == NULL)
         return attrs;
@@ -33,7 +33,7 @@ AttVal *TY_(DupAttrs)( TidyDocImpl* doc, AttVal *attrs)
     return newattrs;
 }
 
-static Bool IsNodePushable( Node *node )
+static Bool IsNodePushable( TidyNode node )
 {
     if (node->tag == NULL)
         return no;
@@ -69,7 +69,7 @@ static Bool IsNodePushable( Node *node )
       <p><em>text</em></p>
       <p><em><em>more text</em></em>
 */
-void TY_(PushInline)( TidyDocImpl* doc, Node *node )
+void TY_(PushInline)( TidyDoc doc, TidyNode node )
 {
     Lexer* lexer = doc->lexer;
     IStack *istack;
@@ -102,11 +102,11 @@ void TY_(PushInline)( TidyDocImpl* doc, Node *node )
     ++(lexer->istacksize);
 }
 
-static void PopIStack( TidyDocImpl* doc )
+static void PopIStack( TidyDoc doc )
 {
     Lexer* lexer = doc->lexer;
     IStack *istack;
-    AttVal *av;
+    TidyAttr av;
 
     --(lexer->istacksize);
     istack = &(lexer->istack[lexer->istacksize]);
@@ -121,7 +121,7 @@ static void PopIStack( TidyDocImpl* doc )
     istack->element = NULL; /* remove the freed element */
 }
 
-static void PopIStackUntil( TidyDocImpl* doc, TidyTagId tid )
+static void PopIStackUntil( TidyDoc doc, TidyTagId tid )
 {
     Lexer* lexer = doc->lexer;
     IStack *istack;
@@ -136,7 +136,7 @@ static void PopIStackUntil( TidyDocImpl* doc, TidyTagId tid )
 }
 
 /* pop inline stack */
-void TY_(PopInline)( TidyDocImpl* doc, Node *node )
+void TY_(PopInline)( TidyDoc doc, TidyNode node )
 {
     Lexer* lexer = doc->lexer;
 
@@ -163,7 +163,7 @@ void TY_(PopInline)( TidyDocImpl* doc, Node *node )
     }
 }
 
-Bool TY_(IsPushed)( TidyDocImpl* doc, Node *node )
+Bool TY_(IsPushed)( TidyDoc doc, TidyNode node )
 {
     Lexer* lexer = doc->lexer;
     int i;
@@ -180,7 +180,7 @@ Bool TY_(IsPushed)( TidyDocImpl* doc, Node *node )
 /*
    Test whether the last element on the stack has the same type than "node".
 */
-Bool TY_(IsPushedLast)( TidyDocImpl* doc, Node *element, Node *node )
+Bool TY_(IsPushedLast)( TidyDoc doc, TidyNode element, TidyNode node )
 {
     Lexer* lexer = doc->lexer;
 
@@ -213,7 +213,7 @@ Bool TY_(IsPushedLast)( TidyDocImpl* doc, Node *element, Node *node )
   where it gets tokens from the inline stack rather than
   from the input stream.
 */
-int TY_(InlineDup)( TidyDocImpl* doc, Node* node )
+int TY_(InlineDup)( TidyDoc doc, TidyNode node )
 {
     Lexer* lexer = doc->lexer;
     int n;
@@ -231,16 +231,16 @@ int TY_(InlineDup)( TidyDocImpl* doc, Node* node )
  defer duplicates when entering a table or other
  element where the inlines shouldn't be duplicated
 */
-void TY_(DeferDup)( TidyDocImpl* doc )
+void TY_(DeferDup)( TidyDoc doc )
 {
     doc->lexer->insert = NULL;
     doc->lexer->inode = NULL;
 }
 
-Node *TY_(InsertedToken)( TidyDocImpl* doc )
+TidyNode TY_(InsertedToken)( TidyDoc doc )
 {
     Lexer* lexer = doc->lexer;
-    Node *node;
+    TidyNode node;
     IStack *istack;
     uint n;
 
@@ -303,7 +303,7 @@ Node *TY_(InsertedToken)( TidyDocImpl* doc )
    This function switches the tag positions on the stack,
    returning 'yes' if both were found in the expected order.
 */
-Bool TY_(SwitchInline)( TidyDocImpl* doc, Node* element, Node* node )
+Bool TY_(SwitchInline)( TidyDoc doc, TidyNode element, TidyNode node )
 {
     Lexer* lexer = doc->lexer;
     if ( lexer
@@ -350,7 +350,7 @@ Bool TY_(SwitchInline)( TidyDocImpl* doc, Node* element, Node* node )
   but it may not be the last element, which InlineDup()
   would handle. Return yes, if found and inserted.
 */
-Bool TY_(InlineDup1)( TidyDocImpl* doc, Node* node, Node* element )
+Bool TY_(InlineDup1)( TidyDoc doc, TidyNode node, TidyNode element )
 {
     Lexer* lexer = doc->lexer;
     int n, i;

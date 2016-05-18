@@ -11,7 +11,7 @@
 #include "forward.h"
 
 /* declaration for methods that check attribute values */
-typedef void (AttrCheck)(TidyDocImpl* doc, Node *node, AttVal *attval);
+typedef void (AttrCheck)(TidyDoc doc, TidyNode node, TidyAttr attval);
 
 struct _Attribute
 {
@@ -30,7 +30,7 @@ struct _Attribute
 struct _Anchor
 {
     struct _Anchor *next;
-    Node *node;
+    TidyNode node;
     char *name;
 };
 
@@ -80,27 +80,27 @@ typedef struct _TidyAttribImpl TidyAttribImpl;
 AttrCheck TY_(CheckUrl);
 
 /* public method for finding attribute definition by name */
-const Attribute* TY_(CheckAttribute)( TidyDocImpl* doc, Node *node, AttVal *attval );
+const Attribute* TY_(CheckAttribute)( TidyDoc doc, TidyNode node, TidyAttr attval );
 
-const Attribute* TY_(FindAttribute)( TidyDocImpl* doc, AttVal *attval );
+const Attribute* TY_(FindAttribute)( TidyDoc doc, TidyAttr attval );
 
-AttVal* TY_(GetAttrByName)( Node *node, ctmbstr name );
+TidyAttr TY_(GetAttrByName)( TidyNode node, ctmbstr name );
 
-void TY_(DropAttrByName)( TidyDocImpl* doc, Node *node, ctmbstr name );
+void TY_(DropAttrByName)( TidyDoc doc, TidyNode node, ctmbstr name );
 
-AttVal* TY_(AddAttribute)( TidyDocImpl* doc,
-                           Node *node, ctmbstr name, ctmbstr value );
+TidyAttr TY_(AddAttribute)( TidyDoc doc,
+                           TidyNode node, ctmbstr name, ctmbstr value );
 
-AttVal* TY_(RepairAttrValue)(TidyDocImpl* doc, Node* node, ctmbstr name, ctmbstr value);
+TidyAttr TY_(RepairAttrValue)(TidyDoc doc, TidyNode node, ctmbstr name, ctmbstr value);
 
-Bool TY_(IsUrl)( TidyDocImpl* doc, ctmbstr attrname );
+Bool TY_(IsUrl)( TidyDoc doc, ctmbstr attrname );
 
-/* Bool IsBool( TidyDocImpl* doc, ctmbstr attrname ); */
+/* Bool IsBool( TidyDoc doc, ctmbstr attrname ); */
 
-Bool TY_(IsScript)( TidyDocImpl* doc, ctmbstr attrname );
+Bool TY_(IsScript)( TidyDoc doc, ctmbstr attrname );
 
 /* may id or name serve as anchor? */
-Bool TY_(IsAnchorElement)( TidyDocImpl* doc, Node* node );
+Bool TY_(IsAnchorElement)( TidyDoc doc, TidyNode node );
 
 /*
   In CSS1, selectors can contain only the characters A-Z, 0-9, and
@@ -122,33 +122,33 @@ Bool TY_(IsValidHTMLID)(ctmbstr id);
 Bool TY_(IsValidXMLID)(ctmbstr id);
 
 /* removes anchor for specific node */
-void TY_(RemoveAnchorByNode)( TidyDocImpl* doc, ctmbstr name, Node *node );
+void TY_(RemoveAnchorByNode)( TidyDoc doc, ctmbstr name, TidyNode node );
 
 /* free all anchors */
-void TY_(FreeAnchors)( TidyDocImpl* doc );
+void TY_(FreeAnchors)( TidyDoc doc );
 
 
 /* public methods for inititializing/freeing attribute dictionary */
-void TY_(InitAttrs)( TidyDocImpl* doc );
-void TY_(FreeAttrTable)( TidyDocImpl* doc );
+void TY_(InitAttrs)( TidyDoc doc );
+void TY_(FreeAttrTable)( TidyDoc doc );
 
-void TY_(AppendToClassAttr)( TidyDocImpl* doc, AttVal *classattr, ctmbstr classname );
+void TY_(AppendToClassAttr)( TidyDoc doc, TidyAttr classattr, ctmbstr classname );
 /*
  the same attribute name can't be used
  more than once in each element
 */
-void TY_(RepairDuplicateAttributes)( TidyDocImpl* doc, Node* node, Bool isXml );
-void TY_(SortAttributes)(Node* node, TidyAttrSortStrategy strat);
+void TY_(RepairDuplicateAttributes)( TidyDoc doc, TidyNode node, Bool isXml );
+void TY_(SortAttributes)(TidyNode node, TidyAttrSortStrategy strat);
 
-Bool TY_(IsBoolAttribute)( AttVal* attval );
-Bool TY_(attrIsEvent)( AttVal* attval );
+Bool TY_(IsBoolAttribute)( TidyAttr attval );
+Bool TY_(attrIsEvent)( TidyAttr attval );
 
-AttVal* TY_(AttrGetById)( Node* node, TidyAttrId id );
+TidyAttr TY_(AttrGetById)( TidyNode node, TidyAttrId id );
 
-uint TY_(NodeAttributeVersions)( Node* node, TidyAttrId id );
+uint TY_(NodeAttributeVersions)( TidyNode node, TidyAttrId id );
 
-Bool TY_(AttributeIsProprietary)(Node* node, AttVal* attval);
-Bool TY_(AttributeIsMismatched)(Node* node, AttVal* attval, TidyDocImpl* doc);
+Bool TY_(AttributeIsProprietary)(TidyNode node, TidyAttr attval);
+Bool TY_(AttributeIsMismatched)(TidyNode node, TidyAttr attval, TidyDoc doc);
 
 
 /* 0 == TidyAttr_UNKNOWN  */

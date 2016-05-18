@@ -62,13 +62,13 @@ typedef struct _TidyPrintImpl
 
 #if 0 && SUPPORT_ASIAN_ENCODINGS
 /* #431953 - start RJ Wraplen adjusted for smooth international ride */
-uint CWrapLen( TidyDocImpl* doc, uint ind );
+uint CWrapLen( TidyDoc doc, uint ind );
 #endif
 
-void TY_(InitPrintBuf)( TidyDocImpl* doc );
-void TY_(FreePrintBuf)( TidyDocImpl* doc );
+void TY_(InitPrintBuf)( TidyDoc doc );
+void TY_(FreePrintBuf)( TidyDoc doc );
 
-void TY_(PFlushLine)( TidyDocImpl* doc, uint indent );
+void TY_(PFlushLine)( TidyDoc doc, uint indent );
 
 
 /* print just the content of the body element.
@@ -78,12 +78,12 @@ void TY_(PFlushLine)( TidyDocImpl* doc, uint indent );
 ** -- Sebastiano Vigna <vigna@dsi.unimi.it>
 */
 
-void TY_(PrintBody)( TidyDocImpl* doc );       /* you can print an entire document */
+void TY_(PrintBody)( TidyDoc doc );       /* you can print an entire document */
                                           /* node as body using PPrintTree() */
 
-void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node );
+void TY_(PPrintTree)( TidyDoc doc, uint mode, uint indent, TidyNode node );
 
-void TY_(PPrintXMLTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node );
+void TY_(PPrintXMLTree)( TidyDoc doc, uint mode, uint indent, TidyNode node );
 
 /*\
  * 20150515 - support using tabs instead of spaces

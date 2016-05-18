@@ -14,6 +14,6 @@
 
 */
 
-void TY_(CleanGoogleDocument)( TidyDocImpl* doc );
+void TY_(CleanGoogleDocument)( TidyDoc doc );
 
 #endif /* __GDOC_H__ */

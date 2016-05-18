@@ -273,7 +273,7 @@ static void freeMappedFileSource( TidyInputSource* inp, Bool closeIt )
     TidyFree( fin->allocator, fin );
 }
 
-StreamIn* MappedFileInput ( TidyDocImpl* doc, HANDLE fp, int encoding )
+StreamIn* MappedFileInput ( TidyDoc doc, HANDLE fp, int encoding )
 {
     StreamIn *in = TY_(initStreamIn)( doc, encoding );
     if ( initMappedFileSource( doc->allocator, &in->source, fp ) != 0 )
@@ -286,7 +286,7 @@ StreamIn* MappedFileInput ( TidyDocImpl* doc, HANDLE fp, int encoding )
 }
 
 
-int TY_(DocParseFileWithMappedFile)( TidyDocImpl* doc, ctmbstr filnam ) {
+int TY_(DocParseFileWithMappedFile)( TidyDoc doc, ctmbstr filnam ) {
     int status = -ENOENT;
     HANDLE fin = CreateFileA( filnam, GENERIC_READ, FILE_SHARE_READ, NULL,
                               OPEN_EXISTING, 0, NULL );

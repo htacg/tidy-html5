@@ -252,12 +252,12 @@ struct _StyleProp
 /* Attribute/Value linked list node
 */
 
-struct _AttVal
+struct _TidyAttr
 {
-    AttVal*           next;
+    TidyAttr           next;
     const Attribute*  dict;
-    Node*             asp;
-    Node*             php;
+    TidyNode             asp;
+    TidyNode             php;
     int               delim;
     tmbstr            attribute;
     tmbstr            value;
@@ -285,7 +285,7 @@ struct _IStack
     IStack*     next;
     const Dict* tag;        /* tag's dictionary definition */
     tmbstr      element;    /* name (NULL for text nodes) */
-    AttVal*     attributes;
+    TidyAttr     attributes;
 };
 
 
@@ -293,15 +293,15 @@ struct _IStack
 ** etc. etc.
 */
 
-struct _Node
+struct _TidyNode
 {
-    Node*       parent;         /* tree structure */
-    Node*       prev;
-    Node*       next;
-    Node*       content;
-    Node*       last;
+    TidyNode       parent;         /* tree structure */
+    TidyNode       prev;
+    TidyNode       next;
+    TidyNode       content;
+    TidyNode       last;
 
-    AttVal*     attributes;
+    TidyAttr     attributes;
     const Dict* was;            /* old tag when it was changed */
     const Dict* tag;            /* tag's dictionary definition */
 
@@ -332,7 +332,7 @@ struct _Node
 
 struct _Lexer
 {
-#if 0  /* Move to TidyDocImpl */
+#if 0  /* Move to TidyDoc */
     StreamIn* in;           /* document content input */
     StreamOut* errout;      /* error output stream */
 
@@ -360,10 +360,10 @@ struct _Lexer
     uint txtend;            /* end of current node */
     LexerState state;       /* state of lexer's finite state machine */
 
-    Node* token;            /* last token returned by GetToken() */
-    Node* itoken;           /* last duplicate inline returned by GetToken() */
-    Node* root;             /* remember root node of the document */
-    Node* parent;           /* remember parent node for CDATA elements */
+    TidyNode token;            /* last token returned by GetToken() */
+    TidyNode itoken;           /* last duplicate inline returned by GetToken() */
+    TidyNode root;             /* remember root node of the document */
+    TidyNode parent;           /* remember parent node for CDATA elements */
     
     Bool seenEndBody;       /* true if a </body> tag has been encountered */
     Bool seenEndHtml;       /* true if a </html> tag has been encountered */
@@ -382,7 +382,7 @@ struct _Lexer
     uint lexsize;           /* used */
 
     /* Inline stack for compatibility with Mosaic */
-    Node* inode;            /* for deferring text node */
+    TidyNode inode;            /* for deferring text node */
     IStack* insert;         /* for inferring inline tags */
     IStack* istack;
     uint istacklength;      /* allocated */
@@ -394,7 +394,7 @@ struct _Lexer
     TidyAllocator* allocator; /* allocator */
 
 #if 0
-    TidyDocImpl* doc;       /* Pointer back to doc for error reporting */
+    TidyDoc doc;       /* Pointer back to doc for error reporting */
 #endif 
 };
 
@@ -403,12 +403,12 @@ struct _Lexer
 */
 
 /* choose what version to use for new doctype */
-int TY_(HTMLVersion)( TidyDocImpl* doc );
+int TY_(HTMLVersion)( TidyDoc doc );
 
 /* everything is allowed in proprietary version of HTML */
 /* this is handled here rather than in the tag/attr dicts */
 
-void TY_(ConstrainVersion)( TidyDocImpl* doc, uint vers );
+void TY_(ConstrainVersion)( TidyDoc doc, uint vers );
 
 Bool TY_(IsWhite)(uint c);
 Bool TY_(IsDigit)(uint c);
@@ -424,8 +424,8 @@ Bool TY_(IsUpper)(uint c);
 uint TY_(ToLower)(uint c);
 uint TY_(ToUpper)(uint c);
 
-Lexer* TY_(NewLexer)( TidyDocImpl* doc );
-void TY_(FreeLexer)( TidyDocImpl* doc );
+Lexer* TY_(NewLexer)( TidyDoc doc );
+void TY_(FreeLexer)( TidyDoc doc );
 
 /* store character c as UTF-8 encoded byte stream */
 void TY_(AddCharToLexer)( Lexer *lexer, uint c );
@@ -440,79 +440,79 @@ void TY_(AddCharToLexer)( Lexer *lexer, uint c );
   parent and content allow traversal
   of the parse tree in any direction.
   attributes are represented as a linked
-  list of AttVal nodes which hold the
+  list of TidyAttr nodes which hold the
   strings for attribute/value pairs.
 */
-Node* TY_(NewNode)( TidyAllocator* allocator, Lexer* lexer );
+TidyNode TY_(NewNode)( TidyAllocator* allocator, Lexer* lexer );
 
 
 /* used to clone heading nodes when split by an <HR> */
-Node* TY_(CloneNode)( TidyDocImpl* doc, Node *element );
+TidyNode TY_(CloneNode)( TidyDoc doc, TidyNode element );
 
 /* free node's attributes */
-void TY_(FreeAttrs)( TidyDocImpl* doc, Node *node );
+void TY_(FreeAttrs)( TidyDoc doc, TidyNode node );
 
 /* doesn't repair attribute list linkage */
-void TY_(FreeAttribute)( TidyDocImpl* doc, AttVal *av );
+void TY_(FreeAttribute)( TidyDoc doc, TidyAttr av );
 
 /* detach attribute from node */
-void TY_(DetachAttribute)( Node *node, AttVal *attr );
+void TY_(DetachAttribute)( TidyNode node, TidyAttr attr );
 
 /* detach attribute from node then free it
 */
-void TY_(RemoveAttribute)( TidyDocImpl* doc, Node *node, AttVal *attr );
+void TY_(RemoveAttribute)( TidyDoc doc, TidyNode node, TidyAttr attr );
 
 /*
   Free document nodes by iterating through peers and recursing
   through children. Set next to NULL before calling FreeNode()
   to avoid freeing peer nodes. Doesn't patch up prev/next links.
  */
-void TY_(FreeNode)( TidyDocImpl* doc, Node *node );
+void TY_(FreeNode)( TidyDoc doc, TidyNode node );
 
-Node* TY_(TextToken)( Lexer *lexer );
+TidyNode TY_(TextToken)( Lexer *lexer );
 
 /* used for creating preformatted text from Word2000 */
-Node* TY_(NewLineNode)( Lexer *lexer );
+TidyNode TY_(NewLineNode)( Lexer *lexer );
 
 /* used for adding a &nbsp; for Word2000 */
-Node* TY_(NewLiteralTextNode)(Lexer *lexer, ctmbstr txt );
+TidyNode TY_(NewLiteralTextNode)(Lexer *lexer, ctmbstr txt );
 
 void TY_(AddStringLiteral)( Lexer* lexer, ctmbstr str );
 /* void AddStringLiteralLen( Lexer* lexer, ctmbstr str, int len ); */
 
 /* find element */
-Node* TY_(FindDocType)( TidyDocImpl* doc );
-Node* TY_(FindHTML)( TidyDocImpl* doc );
-Node* TY_(FindHEAD)( TidyDocImpl* doc );
-Node* TY_(FindTITLE)(TidyDocImpl* doc);
-Node* TY_(FindBody)( TidyDocImpl* doc );
-Node* TY_(FindXmlDecl)(TidyDocImpl* doc);
+TidyNode TY_(FindDocType)( TidyDoc doc );
+TidyNode TY_(FindHTML)( TidyDoc doc );
+TidyNode TY_(FindHEAD)( TidyDoc doc );
+TidyNode TY_(FindTITLE)(TidyDoc doc);
+TidyNode TY_(FindBody)( TidyDoc doc );
+TidyNode TY_(FindXmlDecl)(TidyDoc doc);
 
 /* Returns containing block element, if any */
-Node* TY_(FindContainer)( Node* node );
+TidyNode TY_(FindContainer)( TidyNode node );
 
 /* add meta element for Tidy */
-Bool TY_(AddGenerator)( TidyDocImpl* doc );
+Bool TY_(AddGenerator)( TidyDoc doc );
 
-uint TY_(ApparentVersion)( TidyDocImpl* doc );
+uint TY_(ApparentVersion)( TidyDoc doc );
 
 ctmbstr TY_(HTMLVersionNameFromCode)( uint vers, Bool isXhtml );
 
-Bool TY_(WarnMissingSIInEmittedDocType)( TidyDocImpl* doc );
+Bool TY_(WarnMissingSIInEmittedDocType)( TidyDoc doc );
 
-Bool TY_(SetXHTMLDocType)( TidyDocImpl* doc );
+Bool TY_(SetXHTMLDocType)( TidyDoc doc );
 
 
 /* fixup doctype if missing */
-Bool TY_(FixDocType)( TidyDocImpl* doc );
+Bool TY_(FixDocType)( TidyDoc doc );
 
 /* ensure XML document starts with <?xml version="1.0"?> */
 /* add encoding attribute if not using ASCII or UTF-8 output */
-Bool TY_(FixXmlDecl)( TidyDocImpl* doc );
+Bool TY_(FixXmlDecl)( TidyDoc doc );
 
-Node* TY_(InferredTag)(TidyDocImpl* doc, TidyTagId id);
+TidyNode TY_(InferredTag)(TidyDoc doc, TidyTagId id);
 
-void TY_(UngetToken)( TidyDocImpl* doc );
+void TY_(UngetToken)( TidyDoc doc );
 
 
 /*
@@ -532,23 +532,23 @@ typedef enum
   CdataContent
 } GetTokenMode;
 
-Node* TY_(GetToken)( TidyDocImpl* doc, GetTokenMode mode );
+TidyNode TY_(GetToken)( TidyDoc doc, GetTokenMode mode );
 
 void TY_(InitMap)(void);
 
 
 /* create a new attribute */
-AttVal* TY_(NewAttribute)( TidyDocImpl* doc );
+TidyAttr TY_(NewAttribute)( TidyDoc doc );
 
 /* create a new attribute with given name and value */
-AttVal* TY_(NewAttributeEx)( TidyDocImpl* doc, ctmbstr name, ctmbstr value,
+TidyAttr TY_(NewAttributeEx)( TidyDoc doc, ctmbstr name, ctmbstr value,
                              int delim );
 
 /* insert attribute at the end of attribute list of a node */
-void TY_(InsertAttributeAtEnd)( Node *node, AttVal *av );
+void TY_(InsertAttributeAtEnd)( TidyNode node, TidyAttr av );
 
 /* insert attribute at the start of attribute list of a node */
-void TY_(InsertAttributeAtStart)( Node *node, AttVal *av );
+void TY_(InsertAttributeAtStart)( TidyNode node, TidyAttr av );
 
 /*************************************
   In-line Stack functions
@@ -556,7 +556,7 @@ void TY_(InsertAttributeAtStart)( Node *node, AttVal *av );
 
 
 /* duplicate attributes */
-AttVal* TY_(DupAttrs)( TidyDocImpl* doc, AttVal* attrs );
+TidyAttr TY_(DupAttrs)( TidyDoc doc, TidyAttr attrs );
 
 /*
   push a copy of an inline node onto stack
@@ -574,13 +574,13 @@ AttVal* TY_(DupAttrs)( TidyDocImpl* doc, AttVal* attrs );
       <p><em>text</em></p>
       <p><em><em>more text</em></em>
 */
-void TY_(PushInline)( TidyDocImpl* doc, Node* node );
+void TY_(PushInline)( TidyDoc doc, TidyNode node );
 
 /* pop inline stack */
-void TY_(PopInline)( TidyDocImpl* doc, Node* node );
+void TY_(PopInline)( TidyDoc doc, TidyNode node );
 
-Bool TY_(IsPushed)( TidyDocImpl* doc, Node* node );
-Bool TY_(IsPushedLast)( TidyDocImpl* doc, Node *element, Node *node );
+Bool TY_(IsPushed)( TidyDoc doc, TidyNode node );
+Bool TY_(IsPushedLast)( TidyDoc doc, TidyNode element, TidyNode node );
 
 /*
   This has the effect of inserting "missing" inline
@@ -599,18 +599,18 @@ Bool TY_(IsPushedLast)( TidyDocImpl* doc, Node *element, Node *node );
   where it gets tokens from the inline stack rather than
   from the input stream.
 */
-int TY_(InlineDup)( TidyDocImpl* doc, Node *node );
+int TY_(InlineDup)( TidyDoc doc, TidyNode node );
 
 /*
  defer duplicates when entering a table or other
  element where the inlines shouldn't be duplicated
 */
-void TY_(DeferDup)( TidyDocImpl* doc );
-Node* TY_(InsertedToken)( TidyDocImpl* doc );
+void TY_(DeferDup)( TidyDoc doc );
+TidyNode TY_(InsertedToken)( TidyDoc doc );
 
 /* stack manipulation for inline elements */
-Bool TY_(SwitchInline)( TidyDocImpl* doc, Node* element, Node* node );
-Bool TY_(InlineDup1)( TidyDocImpl* doc, Node* node, Node* element );
+Bool TY_(SwitchInline)( TidyDoc doc, TidyNode element, TidyNode node );
+Bool TY_(InlineDup1)( TidyDoc doc, TidyNode node, TidyNode element );
 
 #ifdef __cplusplus
 }

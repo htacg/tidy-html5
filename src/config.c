@@ -762,9 +762,8 @@ static ctmbstr ExpandTilde( TidyDoc doc, ctmbstr filename )
     return (ctmbstr) filename;
 }
 
-Bool TIDY_CALL tidyFileExists( TidyDoc tdoc, ctmbstr filename )
+Bool TIDY_CALL tidyFileExists( TidyDoc doc, ctmbstr filename )
 {
-  TidyDoc doc = tidyDocToImpl( tdoc );
   ctmbstr fname = (tmbstr) ExpandTilde( doc, filename );
 #ifndef NO_ACCESS_SUPPORT
   Bool exists = ( access(fname, 0) == 0 );

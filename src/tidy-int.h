@@ -97,20 +97,6 @@ struct _TidyDoc
 };
 
 
-/* Twizzle internal/external types */
-
-#define tidyDocToImpl( tdoc )       (tdoc)
-#define tidyImplToDoc( doc )        (doc)
-
-#define tidyNodeToImpl( tnod )      (tnod)
-#define tidyImplToNode( node )      (node)
-
-#define tidyAttrToImpl( tattr )     (tattr)
-#define tidyImplToAttr( attval )    (attval)
-
-#define tidyOptionToImpl( topt )    (topt)
-#define tidyImplToOption( option )  (option)
-
 /** Wrappers for easy memory allocation using the document's allocator */
 #define TidyDocAlloc(doc, size) TidyAlloc((doc)->allocator, size)
 #define TidyDocRealloc(doc, block, size) TidyRealloc((doc)->allocator, block, size)

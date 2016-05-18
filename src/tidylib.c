@@ -83,20 +83,17 @@ static int          tidyDocSaveStream( TidyDoc impl, StreamOut* out );
 
 TidyDoc TIDY_CALL       tidyCreate(void)
 {
-  TidyDoc impl = tidyDocCreate( &TY_(g_default_allocator) );
-  return tidyImplToDoc( impl );
+  return tidyDocCreate( &TY_(g_default_allocator) );
 }
 
 TidyDoc TIDY_CALL tidyCreateWithAllocator( TidyAllocator *allocator )
 {
-  TidyDoc impl = tidyDocCreate( allocator );
-  return tidyImplToDoc( impl );
+  return tidyDocCreate( allocator );
 }
 
 void TIDY_CALL          tidyRelease( TidyDoc tdoc )
 {
-  TidyDoc impl = tidyDocToImpl( tdoc );
-  tidyDocRelease( impl );
+  tidyDocRelease( tdoc );
 }
 
 TidyDoc tidyDocCreate( TidyAllocator *allocator )
@@ -156,15 +153,13 @@ void          tidyDocRelease( TidyDoc doc )
 */
 void TIDY_CALL        tidySetAppData( TidyDoc tdoc, void* appData )
 {
-  TidyDoc impl = tidyDocToImpl( tdoc );
-  if ( impl )
-    impl->appData = appData;
+  if ( tdoc )
+    tdoc->appData = appData;
 }
 void* TIDY_CALL       tidyGetAppData( TidyDoc tdoc )
 {
-  TidyDoc impl = tidyDocToImpl( tdoc );
-  if ( impl )
-    return impl->appData;
+  if ( tdoc )
+    return tdoc->appData;
   return NULL;
 }
 
@@ -178,10 +173,9 @@ ctmbstr TIDY_CALL     tidyReleaseDate(void)
 */
 Bool TIDY_CALL        tidySetOptionCallback( TidyDoc tdoc, TidyOptCallback pOptCallback )
 {
-  TidyDoc impl = tidyDocToImpl( tdoc );
-  if ( impl )
+  if ( tdoc )
   {
-    impl->pOptCallback = pOptCallback;
+    tdoc->pOptCallback = pOptCallback;
     return yes;
   }
   return no;
@@ -190,58 +184,53 @@ Bool TIDY_CALL        tidySetOptionCallback( TidyDoc tdoc, TidyOptCallback pOptC
 
 int TIDY_CALL     tidyLoadConfig( TidyDoc tdoc, ctmbstr cfgfil )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
-        return TY_(ParseConfigFile)( impl, cfgfil );
+    if ( tdoc )
+        return TY_(ParseConfigFile)( tdoc, cfgfil );
     return -EINVAL;
 }
 
 int TIDY_CALL     tidyLoadConfigEnc( TidyDoc tdoc, ctmbstr cfgfil, ctmbstr charenc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
-        return TY_(ParseConfigFileEnc)( impl, cfgfil, charenc );
+    if ( tdoc )
+        return TY_(ParseConfigFileEnc)( tdoc, cfgfil, charenc );
     return -EINVAL;
 }
 
 int TIDY_CALL         tidySetCharEncoding( TidyDoc tdoc, ctmbstr encnam )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
+    if ( tdoc )
     {
-        int enc = TY_(CharEncodingId)( impl, encnam );
-        if ( enc >= 0 && TY_(AdjustCharEncoding)(impl, enc) )
+        int enc = TY_(CharEncodingId)( tdoc, encnam );
+        if ( enc >= 0 && TY_(AdjustCharEncoding)(tdoc, enc) )
             return 0;
 
-        TY_(ReportBadArgument)( impl, "char-encoding" );
+        TY_(ReportBadArgument)( tdoc, "char-encoding" );
     }
     return -EINVAL;
 }
 
 int TIDY_CALL           tidySetInCharEncoding( TidyDoc tdoc, ctmbstr encnam )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
+    if ( tdoc )
     {
-        int enc = TY_(CharEncodingId)( impl, encnam );
-        if ( enc >= 0 && TY_(SetOptionInt)( impl, TidyInCharEncoding, enc ) )
+        int enc = TY_(CharEncodingId)( tdoc, encnam );
+        if ( enc >= 0 && TY_(SetOptionInt)( tdoc, TidyInCharEncoding, enc ) )
             return 0;
 
-        TY_(ReportBadArgument)( impl, "in-char-encoding" );
+        TY_(ReportBadArgument)( tdoc, "in-char-encoding" );
     }
     return -EINVAL;
 }
 
 int TIDY_CALL           tidySetOutCharEncoding( TidyDoc tdoc, ctmbstr encnam )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
+    if ( tdoc )
     {
-        int enc = TY_(CharEncodingId)( impl, encnam );
-        if ( enc >= 0 && TY_(SetOptionInt)( impl, TidyOutCharEncoding, enc ) )
+        int enc = TY_(CharEncodingId)( tdoc, encnam );
+        if ( enc >= 0 && TY_(SetOptionInt)( tdoc, TidyOutCharEncoding, enc ) )
             return 0;
 
-        TY_(ReportBadArgument)( impl, "out-char-encoding" );
+        TY_(ReportBadArgument)( tdoc, "out-char-encoding" );
     }
     return -EINVAL;
 }
@@ -256,159 +245,139 @@ TidyOptionId TIDY_CALL tidyOptGetIdForName( ctmbstr optnam )
 
 TidyIterator TIDY_CALL  tidyGetOptionList( TidyDoc tdoc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
-        return TY_(getOptionList)( impl );
+    if ( tdoc )
+        return TY_(getOptionList)( tdoc );
     return (TidyIterator) -1;
 }
 
 TidyOption TIDY_CALL    tidyGetNextOption( TidyDoc tdoc, TidyIterator* pos )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
     TidyOption option = NULL;
-    if ( impl )
-        option = TY_(getNextOption)( impl, pos );
+    if ( tdoc )
+        option = TY_(getNextOption)( tdoc, pos );
     else if ( pos )
         *pos = 0;
-    return tidyImplToOption( option );
+    return option;
 }
 
 
 TidyOption TIDY_CALL    tidyGetOption( TidyDoc ARG_UNUSED(tdoc), TidyOptionId optId )
 {
-    TidyOption option = TY_(getOption)( optId );
-    return tidyImplToOption( option );
+    return TY_(getOption)( optId );
 }
 TidyOption TIDY_CALL    tidyGetOptionByName( TidyDoc ARG_UNUSED(doc), ctmbstr optnam )
 {
-    TidyOption option = TY_(lookupOption)( optnam );
-    return tidyImplToOption( option );
+    return TY_(lookupOption)( optnam );
 }
 
 TidyOptionId TIDY_CALL  tidyOptGetId( TidyOption topt )
 {
-    TidyOption option = tidyOptionToImpl( topt );
-    if ( option )
-        return option->id;
+    if ( topt )
+        return topt->id;
     return N_TIDY_OPTIONS;
 }
 ctmbstr TIDY_CALL       tidyOptGetName( TidyOption topt )
 {
-    TidyOption option = tidyOptionToImpl( topt );
-    if ( option )
-        return option->name;
+    if ( topt )
+        return topt->name;
     return NULL;
 }
 TidyOptionType TIDY_CALL tidyOptGetType( TidyOption topt )
 {
-    TidyOption option = tidyOptionToImpl( topt );
-    if ( option )
-        return option->type;
+    if ( topt )
+        return topt->type;
     return (TidyOptionType) -1;
 }
 TidyConfigCategory TIDY_CALL tidyOptGetCategory( TidyOption topt )
 {
-    TidyOption option = tidyOptionToImpl( topt );
-    if ( option )
-        return option->category;
+    if ( topt )
+        return topt->category;
     return (TidyConfigCategory) -1;
 }
 ctmbstr TIDY_CALL       tidyOptGetDefault( TidyOption topt )
 {
-    TidyOption option = tidyOptionToImpl( topt );
-    if ( option && option->type == TidyString )
-        return option->pdflt; /* Issue #306 - fix an old typo hidden by a cast! */
+    if ( topt && topt->type == TidyString )
+        return topt->pdflt; /* Issue #306 - fix an old typo hidden by a cast! */
     return NULL;
 }
 ulong TIDY_CALL          tidyOptGetDefaultInt( TidyOption topt )
 {
-    TidyOption option = tidyOptionToImpl( topt );
-    if ( option && option->type != TidyString )
-        return option->dflt;
+    if ( topt && topt->type != TidyString )
+        return topt->dflt;
     return ~0U;
 }
 Bool TIDY_CALL          tidyOptGetDefaultBool( TidyOption topt )
 {
-    TidyOption option = tidyOptionToImpl( topt );
-    if ( option && option->type != TidyString )
-        return ( option->dflt ? yes : no );
+    if ( topt && topt->type != TidyString )
+        return ( topt->dflt ? yes : no );
     return no;
 }
 Bool TIDY_CALL          tidyOptIsReadOnly( TidyOption topt )
 {
-    TidyOption option = tidyOptionToImpl( topt );
-    if ( option  )
-        return ( option->parser == NULL );
+    if ( topt  )
+        return ( topt->parser == NULL );
     return yes;
 }
 
 
 TidyIterator TIDY_CALL  tidyOptGetPickList( TidyOption topt )
 {
-    TidyOption option = tidyOptionToImpl( topt );
-    if ( option )
-      return TY_(getOptionPickList)( option );
+    if ( topt )
+      return TY_(getOptionPickList)( topt );
     return (TidyIterator) -1;
 }
 ctmbstr TIDY_CALL       tidyOptGetNextPick( TidyOption topt, TidyIterator* pos )
 {
-    TidyOption option = tidyOptionToImpl( topt );
-    if ( option )
-        return TY_(getNextOptionPick)( option, pos );
+    if ( topt )
+        return TY_(getNextOptionPick)( topt, pos );
     return NULL;
 }
 
 
 ctmbstr TIDY_CALL       tidyOptGetValue( TidyDoc tdoc, TidyOptionId optId )
 {
-  TidyDoc impl = tidyDocToImpl( tdoc );
   ctmbstr optval = NULL;
-  if ( impl )
-    optval = cfgStr( impl, optId );
+  if ( tdoc )
+    optval = cfgStr( tdoc, optId );
   return optval;
 }
 Bool TIDY_CALL        tidyOptSetValue( TidyDoc tdoc, TidyOptionId optId, ctmbstr val )
 {
-  TidyDoc impl = tidyDocToImpl( tdoc );
-  if ( impl )
-    return TY_(ParseConfigValue)( impl, optId, val );
+  if ( tdoc )
+    return TY_(ParseConfigValue)( tdoc, optId, val );
   return no;
 }
 Bool TIDY_CALL        tidyOptParseValue( TidyDoc tdoc, ctmbstr optnam, ctmbstr val )
 {
-  TidyDoc impl = tidyDocToImpl( tdoc );
-  if ( impl )
-    return TY_(ParseConfigOption)( impl, optnam, val );
+  if ( tdoc )
+    return TY_(ParseConfigOption)( tdoc, optnam, val );
   return no;
 }
 
 ulong TIDY_CALL        tidyOptGetInt( TidyDoc tdoc, TidyOptionId optId )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
     ulong opti = 0;
-    if ( impl )
-        opti = cfg( impl, optId );
+    if ( tdoc )
+        opti = cfg( tdoc, optId );
     return opti;
 }
 
 Bool TIDY_CALL        tidyOptSetInt( TidyDoc tdoc, TidyOptionId optId, ulong val )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
-        return TY_(SetOptionInt)( impl, optId, val );
+    if ( tdoc )
+        return TY_(SetOptionInt)( tdoc, optId, val );
     return no;
 }
 
 Bool TIDY_CALL         tidyOptGetBool( TidyDoc tdoc, TidyOptionId optId )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
     Bool optb = no;
-    if ( impl )
+    if ( tdoc )
     {
         TidyOption option = TY_(getOption)( optId );
         if ( option )
         {
-            optb = cfgBool( impl, optId );
+            optb = cfgBool( tdoc, optId );
         }
     }
     return optb;
@@ -416,9 +385,8 @@ Bool TIDY_CALL         tidyOptGetBool( TidyDoc tdoc, TidyOptionId optId )
 
 Bool TIDY_CALL        tidyOptSetBool( TidyDoc tdoc, TidyOptionId optId, Bool val )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
-        return TY_(SetOptionBool)( impl, optId, val );
+    if ( tdoc )
+        return TY_(SetOptionBool)( tdoc, optId, val );
     return no;
 }
 
@@ -446,19 +414,17 @@ ctmbstr TIDY_CALL       tidyOptGetCurrPick( TidyDoc tdoc, TidyOptionId optId )
 
 TidyIterator TIDY_CALL tidyOptGetDeclTagList( TidyDoc tdoc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
     TidyIterator declIter = 0;
-    if ( impl )
-        declIter = TY_(GetDeclaredTagList)( impl );
+    if ( tdoc )
+        declIter = TY_(GetDeclaredTagList)( tdoc );
     return declIter;
 }
 
 ctmbstr TIDY_CALL       tidyOptGetNextDeclTag( TidyDoc tdoc, TidyOptionId optId,
                                      TidyIterator* iter )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
     ctmbstr tagnam = NULL;
-    if ( impl )
+    if ( tdoc )
     {
         UserTagType tagtyp = tagtype_null;
         if ( optId == TidyInlineTags )
@@ -470,7 +436,7 @@ ctmbstr TIDY_CALL       tidyOptGetNextDeclTag( TidyDoc tdoc, TidyOptionId optId,
         else if ( optId == TidyPreTags )
             tagtyp = tagtype_pre;
         if ( tagtyp != tagtype_null )
-            tagnam = TY_(GetNextDeclaredTag)( impl, tagtyp, iter );
+            tagnam = TY_(GetNextDeclaredTag)( tdoc, tagtyp, iter );
     }
     return tagnam;
 }
@@ -509,46 +475,41 @@ TidyOption TIDY_CALL tidyOptGetNextDocLinks( TidyDoc tdoc, TidyIterator* pos )
 
 int TIDY_CALL tidyOptSaveFile( TidyDoc tdoc, ctmbstr cfgfil )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
-        return TY_(SaveConfigFile)( impl, cfgfil );
+    if ( tdoc )
+        return TY_(SaveConfigFile)( tdoc, cfgfil );
     return -EINVAL;
 }
 
 int TIDY_CALL tidyOptSaveSink( TidyDoc tdoc, TidyOutputSink* sink )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
-        return TY_(SaveConfigSink)( impl, sink );
+    if ( tdoc )
+        return TY_(SaveConfigSink)( tdoc, sink );
     return -EINVAL;
 }
 
 Bool TIDY_CALL tidyOptSnapshot( TidyDoc tdoc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
+    if ( tdoc )
     {
-        TY_(TakeConfigSnapshot)( impl );
+        TY_(TakeConfigSnapshot)( tdoc );
         return yes;
     }
     return no;
 }
 Bool TIDY_CALL tidyOptResetToSnapshot( TidyDoc tdoc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
+    if ( tdoc )
     {
-        TY_(ResetConfigToSnapshot)( impl );
+        TY_(ResetConfigToSnapshot)( tdoc );
         return yes;
     }
     return no;
 }
 Bool TIDY_CALL tidyOptResetAllToDefault( TidyDoc tdoc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
+    if ( tdoc )
     {
-        TY_(ResetConfigToDefault)( impl );
+        TY_(ResetConfigToDefault)( tdoc );
         return yes;
     }
     return no;
@@ -556,34 +517,29 @@ Bool TIDY_CALL tidyOptResetAllToDefault( TidyDoc tdoc )
 
 Bool TIDY_CALL tidyOptResetToDefault( TidyDoc tdoc, TidyOptionId optId )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
-        return TY_(ResetOptionToDefault)( impl, optId );
+    if ( tdoc )
+        return TY_(ResetOptionToDefault)( tdoc, optId );
     return no;
 }
 
 Bool TIDY_CALL tidyOptDiffThanDefault( TidyDoc tdoc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
-        return TY_(ConfigDiffThanDefault)( impl );
+    if ( tdoc )
+        return TY_(ConfigDiffThanDefault)( tdoc );
     return no;
 }
 Bool TIDY_CALL          tidyOptDiffThanSnapshot( TidyDoc tdoc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
-        return TY_(ConfigDiffThanSnapshot)( impl );
+    if ( tdoc )
+        return TY_(ConfigDiffThanSnapshot)( tdoc );
     return no;
 }
 
 Bool TIDY_CALL tidyOptCopyConfig( TidyDoc to, TidyDoc from )
 {
-    TidyDoc docTo = tidyDocToImpl( to );
-    TidyDoc docFrom = tidyDocToImpl( from );
-    if ( docTo && docFrom )
+    if ( to && from )
     {
-        TY_(CopyConfig)( docTo, docFrom );
+        TY_(CopyConfig)( to, from );
         return yes;
     }
     return no;
@@ -609,10 +565,9 @@ Bool TIDY_CALL tidyOptCopyConfig( TidyDoc to, TidyDoc from )
 */
 Bool TIDY_CALL        tidySetReportFilter( TidyDoc tdoc, TidyReportFilter filt )
 {
-  TidyDoc impl = tidyDocToImpl( tdoc );
-  if ( impl )
+  if ( tdoc )
   {
-    impl->mssgFilt = filt;
+    tdoc->mssgFilt = filt;
     return yes;
   }
   return no;
@@ -625,10 +580,9 @@ Bool TIDY_CALL        tidySetReportFilter( TidyDoc tdoc, TidyReportFilter filt )
 */
 Bool TIDY_CALL        tidySetReportFilter2( TidyDoc tdoc, TidyReportFilter2 filt )
 {
-  TidyDoc impl = tidyDocToImpl( tdoc );
-  if ( impl )
+  if ( tdoc )
   {
-    impl->mssgFilt2 = filt;
+    tdoc->mssgFilt2 = filt;
     return yes;
   }
   return no;
@@ -641,10 +595,9 @@ Bool TIDY_CALL        tidySetReportFilter2( TidyDoc tdoc, TidyReportFilter2 filt
 */
 Bool TIDY_CALL        tidySetReportFilter3( TidyDoc tdoc, TidyReportFilter3 filt )
 {
-  TidyDoc impl = tidyDocToImpl( tdoc );
-  if ( impl )
+  if ( tdoc )
   {
-    impl->mssgFilt3 = filt;
+    tdoc->mssgFilt3 = filt;
     return yes;
   }
   return no;
@@ -653,20 +606,18 @@ Bool TIDY_CALL        tidySetReportFilter3( TidyDoc tdoc, TidyReportFilter3 filt
 #if 0   /* Not yet */
 int         tidySetContentOutputSink( TidyDoc tdoc, TidyOutputSink* outp )
 {
-  TidyDoc impl = tidyDocToImpl( tdoc );
-  if ( impl )
+  if ( tdoc )
   {
-    impl->docOut = outp;
+    tdoc->docOut = outp;
     return 0;
   }
   return -EINVAL;
 }
 int         tidySetDiagnosticOutputSink( TidyDoc tdoc, TidyOutputSink* outp )
 {
-  TidyDoc impl = tidyDocToImpl( tdoc );
-  if ( impl )
+  if ( tdoc )
   {
-    impl->msgOut = outp;
+    tdoc->msgOut = outp;
     return 0;
   }
   return -EINVAL;
@@ -677,10 +628,9 @@ int         tidySetDiagnosticOutputSink( TidyDoc tdoc, TidyOutputSink* outp )
 */
 cmbstr       tidyLookupMessage( TidyDoc tdoc, int errorNo )
 {
-  TidyDoc impl = tidyDocToImpl( tdoc );
   cmbstr mssg = NULL;
-  if ( impl )
-    mssg = tidyMessage_Lookup( impl->messages, errorNo );
+  if ( tdoc )
+    mssg = tidyMessage_Lookup( tdoc->messages, errorNo );
   return mssg;
 }
 #endif
@@ -688,48 +638,45 @@ cmbstr       tidyLookupMessage( TidyDoc tdoc, int errorNo )
 
 FILE* TIDY_CALL   tidySetErrorFile( TidyDoc tdoc, ctmbstr errfilnam )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
+    if ( tdoc )
     {
         FILE* errout = fopen( errfilnam, "wb" );
         if ( errout )
         {
-            uint outenc = cfg( impl, TidyOutCharEncoding );
-            uint nl = cfg( impl, TidyNewline );
-            TY_(ReleaseStreamOut)( impl, impl->errout );
-            impl->errout = TY_(FileOutput)( impl, errout, outenc, nl );
+            uint outenc = cfg( tdoc, TidyOutCharEncoding );
+            uint nl = cfg( tdoc, TidyNewline );
+            TY_(ReleaseStreamOut)( tdoc, tdoc->errout );
+            tdoc->errout = TY_(FileOutput)( tdoc, errout, outenc, nl );
             return errout;
         }
         else /* Emit message to current error sink */
-            TY_(FileError)( impl, errfilnam, TidyError );
+            TY_(FileError)( tdoc, errfilnam, TidyError );
     }
     return NULL;
 }
 
 int TIDY_CALL    tidySetErrorBuffer( TidyDoc tdoc, TidyBuffer* errbuf )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
+    if ( tdoc )
     {
-        uint outenc = cfg( impl, TidyOutCharEncoding );
-        uint nl = cfg( impl, TidyNewline );
-        TY_(ReleaseStreamOut)( impl, impl->errout );
-        impl->errout = TY_(BufferOutput)( impl, errbuf, outenc, nl );
-        return ( impl->errout ? 0 : -ENOMEM );
+        uint outenc = cfg( tdoc, TidyOutCharEncoding );
+        uint nl = cfg( tdoc, TidyNewline );
+        TY_(ReleaseStreamOut)( tdoc, tdoc->errout );
+        tdoc->errout = TY_(BufferOutput)( tdoc, errbuf, outenc, nl );
+        return ( tdoc->errout ? 0 : -ENOMEM );
     }
     return -EINVAL;
 }
 
 int TIDY_CALL    tidySetErrorSink( TidyDoc tdoc, TidyOutputSink* sink )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
+    if ( tdoc )
     {
-        uint outenc = cfg( impl, TidyOutCharEncoding );
-        uint nl = cfg( impl, TidyNewline );
-        TY_(ReleaseStreamOut)( impl, impl->errout );
-        impl->errout = TY_(UserOutput)( impl, sink, outenc, nl );
-        return ( impl->errout ? 0 : -ENOMEM );
+        uint outenc = cfg( tdoc, TidyOutCharEncoding );
+        uint nl = cfg( tdoc, TidyNewline );
+        TY_(ReleaseStreamOut)( tdoc, tdoc->errout );
+        tdoc->errout = TY_(UserOutput)( tdoc, sink, outenc, nl );
+        return ( tdoc->errout ? 0 : -ENOMEM );
     }
     return -EINVAL;
 }
@@ -738,10 +685,9 @@ int TIDY_CALL    tidySetErrorSink( TidyDoc tdoc, TidyOutputSink* sink )
  */
 Bool TIDY_CALL        tidySetPrettyPrinterCallback(TidyDoc tdoc, TidyPPProgress callback)
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
+    if ( tdoc )
     {
-        impl->progressCallback = callback;
+        tdoc->progressCallback = callback;
         return yes;
     }
     return no;
@@ -751,58 +697,50 @@ Bool TIDY_CALL        tidySetPrettyPrinterCallback(TidyDoc tdoc, TidyPPProgress 
 /* Document info */
 int TIDY_CALL        tidyStatus( TidyDoc tdoc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
     int tidyStat = -EINVAL;
-    if ( impl )
-        tidyStat = tidyDocStatus( impl );
+    if ( tdoc )
+        tidyStat = tidyDocStatus( tdoc );
     return tidyStat;
 }
 int TIDY_CALL        tidyDetectedHtmlVersion( TidyDoc ARG_UNUSED(tdoc) )
 {
-/*    TidyDoc impl = tidyDocToImpl( tdoc ); */
     return 0;
 }
 Bool TIDY_CALL        tidyDetectedXhtml( TidyDoc ARG_UNUSED(tdoc) )
 {
-/*    TidyDoc impl = tidyDocToImpl( tdoc ); */
     return no;
 }
 Bool TIDY_CALL        tidyDetectedGenericXml( TidyDoc ARG_UNUSED(tdoc) )
 {
-/*    TidyDoc impl = tidyDocToImpl( tdoc ); */
     return no;
 }
 
 uint TIDY_CALL       tidyErrorCount( TidyDoc tdoc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
     uint count = 0xFFFFFFFF;
-    if ( impl )
-        count = impl->errors;
+    if ( tdoc )
+        count = tdoc->errors;
     return count;
 }
 uint TIDY_CALL       tidyWarningCount( TidyDoc tdoc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
     uint count = 0xFFFFFFFF;
-    if ( impl )
-        count = impl->warnings;
+    if ( tdoc )
+        count = tdoc->warnings;
     return count;
 }
 uint TIDY_CALL       tidyAccessWarningCount( TidyDoc tdoc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
     uint count = 0xFFFFFFFF;
-    if ( impl )
-        count = impl->accessErrors;
+    if ( tdoc )
+        count = tdoc->accessErrors;
     return count;
 }
 uint TIDY_CALL       tidyConfigErrorCount( TidyDoc tdoc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
     uint count = 0xFFFFFFFF;
-    if ( impl )
-        count = impl->optionErrors;
+    if ( tdoc )
+        count = tdoc->optionErrors;
     return count;
 }
 
@@ -811,15 +749,13 @@ uint TIDY_CALL       tidyConfigErrorCount( TidyDoc tdoc )
 */
 void TIDY_CALL         tidyErrorSummary( TidyDoc tdoc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
-        TY_(ErrorSummary)( impl );
+    if ( tdoc )
+        TY_(ErrorSummary)( tdoc );
 }
 void TIDY_CALL         tidyGeneralInfo( TidyDoc tdoc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
-        TY_(GeneralInfo)( impl );
+    if ( tdoc )
+        TY_(GeneralInfo)( tdoc );
 }
 
 
@@ -833,29 +769,24 @@ void TIDY_CALL         tidyGeneralInfo( TidyDoc tdoc )
 **
 ** HTML/XHTML version determined from input.
 */
-int TIDY_CALL  tidyParseFile( TidyDoc tdoc, ctmbstr filnam )
+int TIDY_CALL  tidyParseFile( TidyDoc doc, ctmbstr filnam )
 {
-    TidyDoc doc = tidyDocToImpl( tdoc );
     return tidyDocParseFile( doc, filnam );
 }
-int TIDY_CALL  tidyParseStdin( TidyDoc tdoc )
+int TIDY_CALL  tidyParseStdin( TidyDoc doc )
 {
-    TidyDoc doc = tidyDocToImpl( tdoc );
     return tidyDocParseStdin( doc );
 }
-int TIDY_CALL  tidyParseString( TidyDoc tdoc, ctmbstr content )
+int TIDY_CALL  tidyParseString( TidyDoc doc, ctmbstr content )
 {
-    TidyDoc doc = tidyDocToImpl( tdoc );
     return tidyDocParseString( doc, content );
 }
-int TIDY_CALL  tidyParseBuffer( TidyDoc tdoc, TidyBuffer* inbuf )
+int TIDY_CALL  tidyParseBuffer( TidyDoc doc, TidyBuffer* inbuf )
 {
-    TidyDoc doc = tidyDocToImpl( tdoc );
     return tidyDocParseBuffer( doc, inbuf );
 }
-int TIDY_CALL  tidyParseSource( TidyDoc tdoc, TidyInputSource* source )
+int TIDY_CALL  tidyParseSource( TidyDoc doc, TidyInputSource* source )
 {
-    TidyDoc doc = tidyDocToImpl( tdoc );
     return tidyDocParseSource( doc, source );
 }
 
@@ -948,29 +879,24 @@ int   tidyDocParseSource( TidyDoc doc, TidyInputSource* source )
 /* Print/save Functions
 **
 */
-int TIDY_CALL        tidySaveFile( TidyDoc tdoc, ctmbstr filnam )
+int TIDY_CALL        tidySaveFile( TidyDoc doc, ctmbstr filnam )
 {
-    TidyDoc doc = tidyDocToImpl( tdoc );
     return tidyDocSaveFile( doc, filnam );
 }
-int TIDY_CALL        tidySaveStdout( TidyDoc tdoc )
+int TIDY_CALL        tidySaveStdout( TidyDoc doc )
 {
-    TidyDoc doc = tidyDocToImpl( tdoc );
     return tidyDocSaveStdout( doc );
 }
-int TIDY_CALL        tidySaveString( TidyDoc tdoc, tmbstr buffer, uint* buflen )
+int TIDY_CALL        tidySaveString( TidyDoc doc, tmbstr buffer, uint* buflen )
 {
-    TidyDoc doc = tidyDocToImpl( tdoc );
     return tidyDocSaveString( doc, buffer, buflen );
 }
-int TIDY_CALL        tidySaveBuffer( TidyDoc tdoc, TidyBuffer* outbuf )
+int TIDY_CALL        tidySaveBuffer( TidyDoc doc, TidyBuffer* outbuf )
 {
-    TidyDoc doc = tidyDocToImpl( tdoc );
     return tidyDocSaveBuffer( doc, outbuf );
 }
-int TIDY_CALL        tidySaveSink( TidyDoc tdoc, TidyOutputSink* sink )
+int TIDY_CALL        tidySaveSink( TidyDoc doc, TidyOutputSink* sink )
 {
-    TidyDoc doc = tidyDocToImpl( tdoc );
     return tidyDocSaveSink( doc, sink );
 }
 
@@ -1136,26 +1062,23 @@ int         tidyDocStatus( TidyDoc doc )
 
 int TIDY_CALL        tidyCleanAndRepair( TidyDoc tdoc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
-      return tidyDocCleanAndRepair( impl );
+    if ( tdoc )
+      return tidyDocCleanAndRepair( tdoc );
     return -EINVAL;
 }
 
 int TIDY_CALL        tidyRunDiagnostics( TidyDoc tdoc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl )
-      return tidyDocRunDiagnostics( impl );
+    if ( tdoc )
+      return tidyDocRunDiagnostics( tdoc );
     return -EINVAL;
 }
 
 int TIDY_CALL        tidyReportDoctype( TidyDoc tdoc )
 {
     int iret = -EINVAL;
-    TidyDoc impl = tidyDocToImpl( tdoc );
-    if ( impl ) {
-      tidyDocReportDoctype( impl );
+    if ( tdoc ) {
+      tidyDocReportDoctype( tdoc );
       iret = 0;
     }
     return iret;
@@ -1994,150 +1917,130 @@ int         tidyDocSaveStream( TidyDoc doc, StreamOut* out )
 
 TidyNode TIDY_CALL   tidyGetRoot( TidyDoc tdoc )
 {
-    TidyDoc impl = tidyDocToImpl( tdoc );
     TidyNode node = NULL;
-    if ( impl )
-        node = &impl->root;
-    return tidyImplToNode( node );
+    if ( tdoc )
+        node = &tdoc->root;
+    return node;
 }
 
 TidyNode TIDY_CALL   tidyGetHtml( TidyDoc tdoc )
 {
-  TidyDoc impl = tidyDocToImpl( tdoc );
   TidyNode node = NULL;
-  if ( impl )
-      node = TY_(FindHTML)( impl );
-  return tidyImplToNode( node );
+  if ( tdoc )
+      node = TY_(FindHTML)( tdoc );
+  return node;
 }
 
 TidyNode TIDY_CALL    tidyGetHead( TidyDoc tdoc )
 {
-  TidyDoc impl = tidyDocToImpl( tdoc );
   TidyNode node = NULL;
-  if ( impl )
-      node = TY_(FindHEAD)( impl );
-  return tidyImplToNode( node );
+  if ( tdoc )
+      node = TY_(FindHEAD)( tdoc );
+  return node;
 }
 
 TidyNode TIDY_CALL    tidyGetBody( TidyDoc tdoc )
 {
-  TidyDoc impl = tidyDocToImpl( tdoc );
   TidyNode node = NULL;
-  if ( impl )
-      node = TY_(FindBody)( impl );
-  return tidyImplToNode( node );
+  if ( tdoc )
+      node = TY_(FindBody)( tdoc );
+  return node;
 }
 
 /* parent / child */
 TidyNode TIDY_CALL    tidyGetParent( TidyNode tnod )
 {
-  TidyNode nimp = tidyNodeToImpl( tnod );
-  return tidyImplToNode( nimp->parent );
+  return tnod->parent;
 }
 TidyNode TIDY_CALL    tidyGetChild( TidyNode tnod )
 {
-  TidyNode nimp = tidyNodeToImpl( tnod );
-  return tidyImplToNode( nimp->content );
+  return tnod->content;
 }
 
 /* remove a node */
 TidyNode TIDY_CALL    tidyDiscardElement( TidyDoc tdoc, TidyNode tnod )
 {
-  TidyDoc doc = tidyDocToImpl( tdoc );
-  TidyNode nimp = tidyNodeToImpl( tnod );
-  TidyNode next = TY_(DiscardElement)( doc, nimp );
-  return tidyImplToNode( next );
+  return TY_(DiscardElement)( tdoc, tnod );
 }
 
 /* siblings */
 TidyNode TIDY_CALL    tidyGetNext( TidyNode tnod )
 {
-  TidyNode nimp = tidyNodeToImpl( tnod );
-  return tidyImplToNode( nimp->next );
+  return tnod->next;
 }
 TidyNode TIDY_CALL    tidyGetPrev( TidyNode tnod )
 {
-  TidyNode nimp = tidyNodeToImpl( tnod );
-  return tidyImplToNode( nimp->prev );
+  return tnod->prev;
 }
 
 /* Node info */
 TidyNodeType TIDY_CALL tidyNodeGetType( TidyNode tnod )
 {
-  TidyNode nimp = tidyNodeToImpl( tnod );
   TidyNodeType ntyp = TidyNode_Root;
-  if ( nimp )
-    ntyp = (TidyNodeType) nimp->type;
+  if ( tnod )
+    ntyp = (TidyNodeType) tnod->type;
   return ntyp;
 }
 
 uint TIDY_CALL tidyNodeLine( TidyNode tnod )
 {
-  TidyNode nimp = tidyNodeToImpl( tnod );
   uint line = 0;
-  if ( nimp )
-    line = nimp->line;
+  if ( tnod )
+    line = tnod->line;
   return line;
 }
 uint TIDY_CALL tidyNodeColumn( TidyNode tnod )
 {
-  TidyNode nimp = tidyNodeToImpl( tnod );
   uint col = 0;
-  if ( nimp )
-    col = nimp->column;
+  if ( tnod )
+    col = tnod->column;
   return col;
 }
 
 ctmbstr TIDY_CALL        tidyNodeGetName( TidyNode tnod )
 {
-  TidyNode nimp = tidyNodeToImpl( tnod );
   ctmbstr nnam = NULL;
-  if ( nimp )
-    nnam = nimp->element;
+  if ( tnod )
+    nnam = tnod->element;
   return nnam;
 }
 
 
 Bool TIDY_CALL  tidyNodeHasText( TidyDoc tdoc, TidyNode tnod )
 {
-  TidyDoc doc = tidyDocToImpl( tdoc );
-  if ( doc )
-      return TY_(nodeHasText)( doc, tidyNodeToImpl(tnod) );
+  if ( tdoc )
+      return TY_(nodeHasText)( tdoc, tnod );
   return no;
 }
 
 
 Bool TIDY_CALL  tidyNodeGetText( TidyDoc tdoc, TidyNode tnod, TidyBuffer* outbuf )
 {
-  TidyDoc doc = tidyDocToImpl( tdoc );
-  TidyNode nimp = tidyNodeToImpl( tnod );
-  if ( doc && nimp && outbuf )
+  if ( tdoc && tnod && outbuf )
   {
-      uint outenc     = cfg( doc, TidyOutCharEncoding );
-      uint nl         = cfg( doc, TidyNewline );
-      StreamOut* out  = TY_(BufferOutput)( doc, outbuf, outenc, nl );
-      Bool xmlOut     = cfgBool( doc, TidyXmlOut );
-      Bool xhtmlOut   = cfgBool( doc, TidyXhtmlOut );
+      uint outenc     = cfg( tdoc, TidyOutCharEncoding );
+      uint nl         = cfg( tdoc, TidyNewline );
+      StreamOut* out  = TY_(BufferOutput)( tdoc, outbuf, outenc, nl );
+      Bool xmlOut     = cfgBool( tdoc, TidyXmlOut );
+      Bool xhtmlOut   = cfgBool( tdoc, TidyXhtmlOut );
 
-      doc->docOut = out;
+      tdoc->docOut = out;
       if ( xmlOut && !xhtmlOut )
-          TY_(PPrintXMLTree)( doc, NORMAL, 0, nimp );
+          TY_(PPrintXMLTree)( tdoc, NORMAL, 0, tnod );
       else
-          TY_(PPrintTree)( doc, NORMAL, 0, nimp );
+          TY_(PPrintTree)( tdoc, NORMAL, 0, tnod );
 
-      TY_(PFlushLine)( doc, 0 );
-      doc->docOut = NULL;
+      TY_(PFlushLine)( tdoc, 0 );
+      tdoc->docOut = NULL;
 
-      TidyDocFree( doc, out );
+      TidyDocFree( tdoc, out );
       return yes;
   }
   return no;
 }
 
-Bool TIDY_CALL tidyNodeGetValue( TidyDoc tdoc, TidyNode tnod, TidyBuffer* buf )
+Bool TIDY_CALL tidyNodeGetValue( TidyDoc doc, TidyNode node, TidyBuffer* buf )
 {
-    TidyDoc doc = tidyDocToImpl( tdoc );
-    TidyNode node = tidyNodeToImpl( tnod );
     if ( doc == NULL || node == NULL || buf == NULL )
         return no;
 
@@ -2166,11 +2069,10 @@ Bool TIDY_CALL tidyNodeGetValue( TidyDoc tdoc, TidyNode tnod, TidyBuffer* buf )
 
 Bool TIDY_CALL tidyNodeIsProp( TidyDoc ARG_UNUSED(tdoc), TidyNode tnod )
 {
-  TidyNode nimp = tidyNodeToImpl( tnod );
   Bool isProprietary = yes;
-  if ( nimp )
+  if ( tnod )
   {
-    switch ( nimp->type )
+    switch ( tnod->type )
     {
     case RootNode:
     case DocTypeTag:
@@ -2192,8 +2094,8 @@ Bool TIDY_CALL tidyNodeIsProp( TidyDoc ARG_UNUSED(tdoc), TidyNode tnod )
     case StartTag:
     case EndTag:
     case StartEndTag:
-        isProprietary = ( nimp->tag
-                          ? (nimp->tag->versions&VERS_PROPRIETARY)!=0
+        isProprietary = ( tnod->tag
+                          ? (tnod->tag->versions&VERS_PROPRIETARY)!=0
                           : yes );
         break;
     }
@@ -2203,11 +2105,10 @@ Bool TIDY_CALL tidyNodeIsProp( TidyDoc ARG_UNUSED(tdoc), TidyNode tnod )
 
 TidyTagId TIDY_CALL tidyNodeGetId(TidyNode tnod)
 {
-    TidyNode nimp = tidyNodeToImpl(tnod);
 
     TidyTagId tagId = TidyTag_UNKNOWN;
-    if (nimp && nimp->tag)
-        tagId = nimp->tag->id;
+    if (tnod && tnod->tag)
+        tagId = tnod->tag->id;
 
     return tagId;
 }
@@ -2228,44 +2129,37 @@ cmbstr       tidyNodeNsUri( TidyNode tnod )
 /* Iterate over attribute values */
 TidyAttr TIDY_CALL   tidyAttrFirst( TidyNode tnod )
 {
-  TidyNode nimp = tidyNodeToImpl( tnod );
   TidyAttr attval = NULL;
-  if ( nimp )
-    attval = nimp->attributes;
-  return tidyImplToAttr( attval );
+  if ( tnod )
+    attval = tnod->attributes;
+  return attval;
 }
 TidyAttr TIDY_CALL    tidyAttrNext( TidyAttr tattr )
 {
-  TidyAttr attval = tidyAttrToImpl( tattr );
   TidyAttr nxtval = NULL;
-  if ( attval )
-    nxtval = attval->next;
-  return tidyImplToAttr( nxtval );
+  if ( tattr )
+    nxtval = tattr->next;
+  return nxtval;
 }
 
 ctmbstr TIDY_CALL       tidyAttrName( TidyAttr tattr )
 {
-  TidyAttr attval = tidyAttrToImpl( tattr );
   ctmbstr anam = NULL;
-  if ( attval )
-    anam = attval->attribute;
+  if ( tattr )
+    anam = tattr->attribute;
   return anam;
 }
 ctmbstr TIDY_CALL       tidyAttrValue( TidyAttr tattr )
 {
-  TidyAttr attval = tidyAttrToImpl( tattr );
   ctmbstr aval = NULL;
-  if ( attval )
-    aval = attval->value;
+  if ( tattr )
+    aval = tattr->value;
   return aval;
 }
 
 void TIDY_CALL           tidyAttrDiscard( TidyDoc tdoc, TidyNode tnod, TidyAttr tattr )
 {
-  TidyDoc impl = tidyDocToImpl( tdoc );
-  TidyNode nimp = tidyNodeToImpl( tnod );
-  TidyAttr attval = tidyAttrToImpl( tattr );
-  TY_(RemoveAttribute)( impl, nimp, attval );
+  TY_(RemoveAttribute)( tdoc, tnod, tattr );
 }
 
 /* Null for pure HTML
@@ -2282,10 +2176,9 @@ ctmbstr       tidyAttrNsUri( TidyAttr tattr )
 
 TidyAttrId TIDY_CALL tidyAttrGetId( TidyAttr tattr )
 {
-  TidyAttr attval = tidyAttrToImpl( tattr );
   TidyAttrId attrId = TidyAttr_UNKNOWN;
-  if ( attval && attval->dict )
-    attrId = attval->dict->id;
+  if ( tattr && tattr->dict )
+    attrId = tattr->dict->id;
   return attrId;
 }
 Bool TIDY_CALL tidyAttrIsProp( TidyAttr tattr )

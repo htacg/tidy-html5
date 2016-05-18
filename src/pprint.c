@@ -2181,7 +2181,7 @@ void TY_(PPrintTree)( TidyDoc doc, uint mode, uint indent, TidyNode node )
 
     if (doc->progressCallback)
     {
-        doc->progressCallback( tidyImplToDoc(doc), node->line, node->column, doc->pprint.line + 1 );
+        doc->progressCallback( doc, node->line, node->column, doc->pprint.line + 1 );
     }
 
 #if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_PPRINT)
@@ -2466,7 +2466,7 @@ void TY_(PPrintXMLTree)( TidyDoc doc, uint mode, uint indent, TidyNode node )
 
     if (doc->progressCallback)
     {
-        doc->progressCallback( tidyImplToDoc(doc), node->line, node->column, doc->pprint.line + 1 );
+        doc->progressCallback( doc, node->line, node->column, doc->pprint.line + 1 );
     }
     
     if ( node->type == TextNode)

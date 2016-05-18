@@ -234,8 +234,7 @@ static void messagePos( TidyDoc doc, TidyReportLevel level, uint code,
         TY_(tmbvsnprintf)(messageBuf, sizeMessageBuf, msg, args);
         if ( doc->mssgFilt )
         {
-            TidyDoc tdoc = tidyImplToDoc( doc );
-            go = doc->mssgFilt( tdoc, level, line, col, messageBuf );
+            go = doc->mssgFilt( doc, level, line, col, messageBuf );
         }
         if ( doc->mssgFilt2 )
         {
@@ -244,16 +243,14 @@ static void messagePos( TidyDoc doc, TidyReportLevel level, uint code,
                the parameters to fill it. For the key string to remain
                consistent, we have to ensure that we only ever return the
                built-in English version of this string. */
-            TidyDoc tdoc = tidyImplToDoc( doc );
-            go = go | doc->mssgFilt2( tdoc, level, line, col, tidyDefaultString(code), args_copy );
+            go = go | doc->mssgFilt2( doc, level, line, col, tidyDefaultString(code), args_copy );
         }
         if ( doc->mssgFilt3 )
         {
             /* mssgFilt3 is intended to allow LibTidy users to localize
                messages via their own means by providing a key string and
                the parameters to fill it. */
-            TidyDoc tdoc = tidyImplToDoc( doc );
-            go = go | doc->mssgFilt3( tdoc, level, line, col, tidyErrorCodeAsString(code), args_copy );
+            go = go | doc->mssgFilt3( doc, level, line, col, tidyErrorCodeAsString(code), args_copy );
         }
     }
 

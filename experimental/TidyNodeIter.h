@@ -8,7 +8,7 @@
 
   A traversal of the tree can be performed in a manner similar to the following:
 
-  Node *testNode;
+  TidyNode testNode;
   TidyNodeIter *iter = newTidyNodeIter( FindBody( tdoc ));
   for (testNode = nextTidyNode( &iter );
        NULL != testNode;
@@ -23,10 +23,10 @@
 
 typedef struct _TidyNodeIter
 {
-    Node *pTop, *pCurrent;
+    TidyNode pTop, *pCurrent;
 } TidyNodeIter;
 
-TidyNodeIter *newTidyNodeIter( Node *pStart );
+TidyNodeIter *newTidyNodeIter( TidyNode pStart );
 
 /* 
     nextTidyNode( TidyNodeIter *pIter )
@@ -36,10 +36,10 @@ TidyNodeIter *newTidyNodeIter( Node *pStart );
     and returns that value. When pTop == pCurrent, the function returns NULL
     to indicate that the entire tree has been visited.
 */
-Node *nextTidyNode( TidyNodeIter *pIter );
+TidyNode nextTidyNode( TidyNodeIter *pIter );
 
 /*
-    setCurrentNode( TidyNodeIter *pThis, Node *newCurr )
+    setCurrentNode( TidyNodeIter *pThis, TidyNode newCurr )
 
     Resets pCurrent to match the passed value; useful if you need to back up
     to an unaltered point in the tree, or to skip a section. The next call to 
@@ -48,4 +48,4 @@ Node *nextTidyNode( TidyNodeIter *pIter );
     Minimal error checking is performed; unexpected results _will_ occur if 
     newCurr is not a descendant node of pTop.
 */
-void setCurrentNode( TidyNodeIter *pThis, Node *newCurr );
+void setCurrentNode( TidyNodeIter *pThis, TidyNode newCurr );

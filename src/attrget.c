@@ -12,7 +12,7 @@
 
 TidyAttr TIDY_CALL tidyAttrGetById( TidyNode tnod, TidyAttrId attId )
 {
-    Node* nimp = tidyNodeToImpl(tnod);
+    TidyNode nimp = tidyNodeToImpl(tnod);
     return tidyImplToAttr( TY_(AttrGetById)( nimp, attId ) );
 }
 TidyAttr TIDY_CALL tidyAttrGetHREF( TidyNode tnod )

@@ -32,10 +32,10 @@
 #define flg_BadForm     0x00000001
 #define flg_BadMain     0x00000002
 
-struct _TidyDocImpl
+struct _TidyDoc
 {
     /* The Document Tree (and backing store buffer) */
-    Node                root;       /* This MUST remain the first declared 
+    struct _TidyNode    root;       /* This MUST remain the first declared 
                                        variable in this structure */
     Lexer*              lexer;
 
@@ -98,33 +98,18 @@ struct _TidyDocImpl
 
 
 /* Twizzle internal/external types */
-#ifdef NEVER
-TidyDocImpl* tidyDocToImpl( TidyDoc tdoc );
-TidyDoc      tidyImplToDoc( TidyDocImpl* impl );
 
-Node*        tidyNodeToImpl( TidyNode tnod );
-TidyNode     tidyImplToNode( Node* node );
+#define tidyDocToImpl( tdoc )       (tdoc)
+#define tidyImplToDoc( doc )        (doc)
 
-AttVal*      tidyAttrToImpl( TidyAttr tattr );
-TidyAttr     tidyImplToAttr( AttVal* attval );
+#define tidyNodeToImpl( tnod )      (tnod)
+#define tidyImplToNode( node )      (node)
 
-const TidyOptionImpl* tidyOptionToImpl( TidyOption topt );
-TidyOption   tidyImplToOption( const TidyOptionImpl* option );
-#else
+#define tidyAttrToImpl( tattr )     (tattr)
+#define tidyImplToAttr( attval )    (attval)
 
-#define tidyDocToImpl( tdoc )       ((TidyDocImpl*)(tdoc))
-#define tidyImplToDoc( doc )        ((TidyDoc)(doc))
-
-#define tidyNodeToImpl( tnod )      ((Node*)(tnod))
-#define tidyImplToNode( node )      ((TidyNode)(node))
-
-#define tidyAttrToImpl( tattr )     ((AttVal*)(tattr))
-#define tidyImplToAttr( attval )    ((TidyAttr)(attval))
-
-#define tidyOptionToImpl( topt )    ((const TidyOptionImpl*)(topt))
-#define tidyImplToOption( option )  ((TidyOption)(option))
-
-#endif
+#define tidyOptionToImpl( topt )    (topt)
+#define tidyImplToOption( option )  (option)
 
 /** Wrappers for easy memory allocation using the document's allocator */
 #define TidyDocAlloc(doc, size) TidyAlloc((doc)->allocator, size)
@@ -132,7 +117,7 @@ TidyOption   tidyImplToOption( const TidyOptionImpl* option );
 #define TidyDocFree(doc, block) TidyFree((doc)->allocator, block)
 #define TidyDocPanic(doc, msg) TidyPanic((doc)->allocator, msg)
 
-int          TY_(DocParseStream)( TidyDocImpl* impl, StreamIn* in );
+int          TY_(DocParseStream)( TidyDoc impl, StreamIn* in );
 
 /*
    [i_a] generic node tree traversal code; used in several spots.
@@ -152,8 +137,8 @@ typedef enum
     ExitTraversal            /* terminate traversal on the spot */
 } NodeTraversalSignal;
 
-typedef NodeTraversalSignal NodeTraversalCallBack(TidyDocImpl* doc, Node* node, void *propagate);
+typedef NodeTraversalSignal NodeTraversalCallBack(TidyDoc doc, TidyNode node, void *propagate);
 
-NodeTraversalSignal TY_(TraverseNodeTree)(TidyDocImpl* doc, Node* node, NodeTraversalCallBack *cb, void *propagate);
+NodeTraversalSignal TY_(TraverseNodeTree)(TidyDoc doc, TidyNode node, NodeTraversalCallBack *cb, void *propagate);
 
 #endif /* __TIDY_INT_H__ */

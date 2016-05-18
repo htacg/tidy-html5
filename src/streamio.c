@@ -89,7 +89,7 @@ StreamOut* TY_(StdOutOutput)(void)
 }
 #endif
 
-void  TY_(ReleaseStreamOut)( TidyDocImpl *doc,  StreamOut* out )
+void  TY_(ReleaseStreamOut)( TidyDoc doc,  StreamOut* out )
 {
     if ( out && out != &stderrStreamOut && out != &stdoutStreamOut )
     {
@@ -105,7 +105,7 @@ void  TY_(ReleaseStreamOut)( TidyDocImpl *doc,  StreamOut* out )
 
 static void InitLastPos( StreamIn *in );
 
-StreamIn* TY_(initStreamIn)( TidyDocImpl* doc, int encoding )
+StreamIn* TY_(initStreamIn)( TidyDoc doc, int encoding )
 {
     StreamIn *in = (StreamIn*) TidyDocAlloc( doc, sizeof(StreamIn) );
 
@@ -137,7 +137,7 @@ void TY_(freeStreamIn)(StreamIn* in)
     TidyFree(in->allocator, in);
 }
 
-StreamIn* TY_(FileInput)( TidyDocImpl* doc, FILE *fp, int encoding )
+StreamIn* TY_(FileInput)( TidyDoc doc, FILE *fp, int encoding )
 {
     StreamIn *in = TY_(initStreamIn)( doc, encoding );
     if ( TY_(initFileSource)( doc->allocator, &in->source, fp ) != 0 )
@@ -149,7 +149,7 @@ StreamIn* TY_(FileInput)( TidyDocImpl* doc, FILE *fp, int encoding )
     return in;
 }
 
-StreamIn* TY_(BufferInput)( TidyDocImpl* doc, TidyBuffer* buf, int encoding )
+StreamIn* TY_(BufferInput)( TidyDoc doc, TidyBuffer* buf, int encoding )
 {
     StreamIn *in = TY_(initStreamIn)( doc, encoding );
     tidyInitInputBuffer( &in->source, buf );
@@ -157,7 +157,7 @@ StreamIn* TY_(BufferInput)( TidyDocImpl* doc, TidyBuffer* buf, int encoding )
     return in;
 }
 
-StreamIn* TY_(UserInput)( TidyDocImpl* doc, TidyInputSource* source, int encoding )
+StreamIn* TY_(UserInput)( TidyDoc doc, TidyInputSource* source, int encoding )
 {
     StreamIn *in = TY_(initStreamIn)( doc, encoding );
     memcpy( &in->source, source, sizeof(TidyInputSource) );
@@ -553,7 +553,7 @@ void TY_(UngetChar)( uint c, StreamIn *in )
 ** Sink
 ************************/
 
-static StreamOut* initStreamOut( TidyDocImpl* doc, int encoding, uint nl )
+static StreamOut* initStreamOut( TidyDoc doc, int encoding, uint nl )
 {
     StreamOut* out = (StreamOut*) TidyDocAlloc( doc, sizeof(StreamOut) );
     TidyClearMemory( out, sizeof(StreamOut) );
@@ -563,21 +563,21 @@ static StreamOut* initStreamOut( TidyDocImpl* doc, int encoding, uint nl )
     return out;
 }
 
-StreamOut* TY_(FileOutput)( TidyDocImpl *doc, FILE* fp, int encoding, uint nl )
+StreamOut* TY_(FileOutput)( TidyDoc doc, FILE* fp, int encoding, uint nl )
 {
     StreamOut* out = initStreamOut( doc, encoding, nl );
     TY_(initFileSink)( &out->sink, fp );
     out->iotype = FileIO;
     return out;
 }
-StreamOut* TY_(BufferOutput)( TidyDocImpl *doc, TidyBuffer* buf, int encoding, uint nl )
+StreamOut* TY_(BufferOutput)( TidyDoc doc, TidyBuffer* buf, int encoding, uint nl )
 {
     StreamOut* out = initStreamOut( doc, encoding, nl );
     tidyInitOutputBuffer( &out->sink, buf );
     out->iotype = BufferIO;
     return out;
 }
-StreamOut* TY_(UserOutput)( TidyDocImpl *doc, TidyOutputSink* sink, int encoding, uint nl )
+StreamOut* TY_(UserOutput)( TidyDoc doc, TidyOutputSink* sink, int encoding, uint nl )
 {
     StreamOut* out = initStreamOut( doc, encoding, nl );
     memcpy( &out->sink, sink, sizeof(TidyOutputSink) );

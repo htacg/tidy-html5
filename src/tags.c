@@ -343,7 +343,7 @@ static uint tagsHash(ctmbstr s)
     return hashval % ELEMENT_HASH_SIZE;
 }
 
-static const Dict *tagsInstall(TidyDocImpl* doc, TidyTagImpl* tags, const Dict* old)
+static const Dict *tagsInstall(TidyDoc doc, TidyTagImpl* tags, const Dict* old)
 {
     DictHash *np;
     uint hashval;
@@ -361,7 +361,7 @@ static const Dict *tagsInstall(TidyDocImpl* doc, TidyTagImpl* tags, const Dict* 
     return old;
 }
 
-static void tagsRemoveFromHash( TidyDocImpl* doc, TidyTagImpl* tags, ctmbstr s )
+static void tagsRemoveFromHash( TidyDoc doc, TidyTagImpl* tags, ctmbstr s )
 {
     uint h = tagsHash(s);
     DictHash *p, *prev = NULL;
@@ -381,7 +381,7 @@ static void tagsRemoveFromHash( TidyDocImpl* doc, TidyTagImpl* tags, ctmbstr s )
     }
 }
 
-static void tagsEmptyHash( TidyDocImpl* doc, TidyTagImpl* tags )
+static void tagsEmptyHash( TidyDoc doc, TidyTagImpl* tags )
 {
     uint i;
     DictHash *prev, *next;
@@ -403,7 +403,7 @@ static void tagsEmptyHash( TidyDocImpl* doc, TidyTagImpl* tags )
 }
 #endif /* ELEMENT_HASH_LOOKUP */
 
-static const Dict* tagsLookup( TidyDocImpl* doc, TidyTagImpl* tags, ctmbstr s )
+static const Dict* tagsLookup( TidyDoc doc, TidyTagImpl* tags, ctmbstr s )
 {
     const Dict *np;
 #if ELEMENT_HASH_LOOKUP
@@ -445,7 +445,7 @@ static const Dict* tagsLookup( TidyDocImpl* doc, TidyTagImpl* tags, ctmbstr s )
     return NULL;
 }
 
-static Dict* NewDict( TidyDocImpl* doc, ctmbstr name )
+static Dict* NewDict( TidyDoc doc, ctmbstr name )
 {
     Dict *np = (Dict*) TidyDocAlloc( doc, sizeof(Dict) );
     np->id = TidyTag_UNKNOWN;
@@ -459,14 +459,14 @@ static Dict* NewDict( TidyDocImpl* doc, ctmbstr name )
     return np;
 }
 
-static void FreeDict( TidyDocImpl* doc, Dict *d )
+static void FreeDict( TidyDoc doc, Dict *d )
 {
     if ( d )
         TidyDocFree( doc, d->name );
     TidyDocFree( doc, d );
 }
 
-static void declare( TidyDocImpl* doc, TidyTagImpl* tags,
+static void declare( TidyDoc doc, TidyTagImpl* tags,
                      ctmbstr name, uint versions, uint model,
                      Parser *parser, CheckAttribs *chkattrs )
 {
@@ -544,7 +544,7 @@ void show_have_html5(void)
 #endif
 
 /* public interface for finding tag by name */
-Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
+Bool TY_(FindTag)( TidyDoc doc, TidyNode node )
 {
     const Dict *np = NULL;
     if ( cfgBool(doc, TidyXmlTags) )
@@ -573,7 +573,7 @@ const Dict* TY_(LookupTagDef)( TidyTagId tid )
     return NULL;
 }
 
-Parser* TY_(FindParser)( TidyDocImpl* doc, Node *node )
+Parser* TY_(FindParser)( TidyDoc doc, TidyNode node )
 {
     const Dict* np = tagsLookup( doc, &doc->tags, node->element );
     if ( np )
@@ -581,7 +581,7 @@ Parser* TY_(FindParser)( TidyDocImpl* doc, Node *node )
     return NULL;
 }
 
-void TY_(DefineTag)( TidyDocImpl* doc, UserTagType tagType, ctmbstr name )
+void TY_(DefineTag)( TidyDoc doc, UserTagType tagType, ctmbstr name )
 {
     Parser* parser = 0;
     uint cm = CM_UNKNOWN;
@@ -616,12 +616,12 @@ void TY_(DefineTag)( TidyDocImpl* doc, UserTagType tagType, ctmbstr name )
         declare( doc, &doc->tags, name, vers, cm, parser, 0 );
 }
 
-TidyIterator   TY_(GetDeclaredTagList)( TidyDocImpl* doc )
+TidyIterator   TY_(GetDeclaredTagList)( TidyDoc doc )
 {
     return (TidyIterator) doc->tags.declared_tag_list;
 }
 
-ctmbstr        TY_(GetNextDeclaredTag)( TidyDocImpl* ARG_UNUSED(doc),
+ctmbstr        TY_(GetNextDeclaredTag)( TidyDoc ARG_UNUSED(doc),
                                         UserTagType tagType, TidyIterator* iter )
 {
     ctmbstr name = NULL;
@@ -660,7 +660,7 @@ ctmbstr        TY_(GetNextDeclaredTag)( TidyDocImpl* ARG_UNUSED(doc),
     return name;
 }
 
-void TY_(InitTags)( TidyDocImpl* doc )
+void TY_(InitTags)( TidyDoc doc )
 {
     Dict* xml;
     TidyTagImpl* tags = &doc->tags;
@@ -680,7 +680,7 @@ void TY_(InitTags)( TidyDocImpl* doc )
 /* By default, zap all of them.  But allow
 ** an single type to be specified.
 */
-void TY_(FreeDeclaredTags)( TidyDocImpl* doc, UserTagType tagType )
+void TY_(FreeDeclaredTags)( TidyDoc doc, UserTagType tagType )
 {
     TidyTagImpl* tags = &doc->tags;
     Dict *curr, *next = NULL, *prev = NULL;
@@ -738,7 +738,7 @@ void TY_(FreeDeclaredTags)( TidyDocImpl* doc, UserTagType tagType )
  * NOTE: For each change added to here, there must 
  * be a RESET added in TY_(ResetTags) below!
 \*/
-void TY_(AdjustTags)( TidyDocImpl *doc )
+void TY_(AdjustTags)( TidyDoc doc )
 {
     Dict *np = (Dict *)TY_(LookupTagDef)( TidyTag_A );
     TidyTagImpl* tags = &doc->tags;
@@ -780,7 +780,7 @@ void TY_(AdjustTags)( TidyDocImpl *doc )
     }
 }
 
-Bool TY_(IsHTML5Mode)( TidyDocImpl *doc )
+Bool TY_(IsHTML5Mode)( TidyDoc doc )
 {
     return doc->HTML5Mode;
 }
@@ -792,7 +792,7 @@ Bool TY_(IsHTML5Mode)( TidyDocImpl *doc )
  * For every change made in the above AdjustTags,
  * the equivalent reset must be added here.
 \*/
-void TY_(ResetTags)( TidyDocImpl *doc )
+void TY_(ResetTags)( TidyDoc doc )
 {
     Dict *np = (Dict *)TY_(LookupTagDef)( TidyTag_A );
     TidyTagImpl* tags = &doc->tags;
@@ -818,7 +818,7 @@ void TY_(ResetTags)( TidyDocImpl *doc )
     doc->HTML5Mode = yes;   /* set HTML5 mode */
 }
 
-void TY_(FreeTags)( TidyDocImpl* doc )
+void TY_(FreeTags)( TidyDoc doc )
 {
     TidyTagImpl* tags = &doc->tags;
 
@@ -836,9 +836,9 @@ void TY_(FreeTags)( TidyDocImpl* doc )
 
 
 /* default method for checking an element's attributes */
-void TY_(CheckAttributes)( TidyDocImpl* doc, Node *node )
+void TY_(CheckAttributes)( TidyDoc doc, TidyNode node )
 {
-    AttVal *next, *attval = node->attributes;
+    TidyAttr next, attval = node->attributes;
     while (attval)
     {
         next = attval->next;
@@ -849,7 +849,7 @@ void TY_(CheckAttributes)( TidyDocImpl* doc, Node *node )
 
 /* methods for checking attributes for specific elements */
 
-void CheckIMG( TidyDocImpl* doc, Node *node )
+void CheckIMG( TidyDoc doc, TidyNode node )
 {
     Bool HasAlt = TY_(AttrGetById)(node, TidyAttr_ALT) != NULL;
     Bool HasSrc = TY_(AttrGetById)(node, TidyAttr_SRC) != NULL;
@@ -869,7 +869,7 @@ void CheckIMG( TidyDocImpl* doc, Node *node )
         }
 
         if ( alttext ) {
-            AttVal *attval = TY_(AddAttribute)( doc, node, "alt", alttext );
+            TidyAttr attval = TY_(AddAttribute)( doc, node, "alt", alttext );
             TY_(ReportAttrError)( doc, node, attval, INSERTING_AUTO_ATTRIBUTE);
         }
     }
@@ -884,9 +884,9 @@ void CheckIMG( TidyDocImpl* doc, Node *node )
     }
 }
 
-void CheckCaption(TidyDocImpl* doc, Node *node)
+void CheckCaption(TidyDoc doc, TidyNode node)
 {
-    AttVal *attval;
+    TidyAttr attval;
 
     TY_(CheckAttributes)(doc, node);
 
@@ -903,12 +903,12 @@ void CheckCaption(TidyDocImpl* doc, Node *node)
         TY_(ReportAttrError)(doc, node, attval, BAD_ATTRIBUTE_VALUE);
 }
 
-void CheckHTML( TidyDocImpl* doc, Node *node )
+void CheckHTML( TidyDoc doc, TidyNode node )
 {
     TY_(CheckAttributes)(doc, node);
 }
 
-void CheckAREA( TidyDocImpl* doc, Node *node )
+void CheckAREA( TidyDoc doc, TidyNode node )
 {
     Bool HasAlt = TY_(AttrGetById)(node, TidyAttr_ALT) != NULL;
     Bool HasHref = TY_(AttrGetById)(node, TidyAttr_HREF) != NULL;
@@ -929,9 +929,9 @@ void CheckAREA( TidyDocImpl* doc, Node *node )
         TY_(ReportMissingAttr)( doc, node, "href" );
 }
 
-void CheckTABLE( TidyDocImpl* doc, Node *node )
+void CheckTABLE( TidyDoc doc, TidyNode node )
 {
-    AttVal* attval;
+    TidyAttr attval;
     Bool HasSummary = (TY_(AttrGetById)(node, TidyAttr_SUMMARY) != NULL) ? yes : no;
     uint vers = TY_(HTMLVersion)(doc);  /* Issue #377 - Also applies to XHTML5 */
     Bool isHTML5 = ((vers == HT50)||(vers == XH50)) ? yes : no;
@@ -965,7 +965,7 @@ void CheckTABLE( TidyDocImpl* doc, Node *node )
 }
 
 /* report missing href attribute; report missing rel attribute */
-void CheckLINK( TidyDocImpl* doc, Node *node )
+void CheckLINK( TidyDoc doc, TidyNode node )
 {
     Bool HasHref = TY_(AttrGetById)(node, TidyAttr_HREF) != NULL;
     Bool HasRel = TY_(AttrGetById)(node, TidyAttr_REL) != NULL;
@@ -982,12 +982,12 @@ void CheckLINK( TidyDocImpl* doc, Node *node )
     }
 }
 
-Bool TY_(nodeIsText)( Node* node )
+Bool TY_(nodeIsText)( TidyNode node )
 {
   return ( node && node->type == TextNode );
 }
 
-Bool TY_(nodeHasText)( TidyDocImpl* doc, Node* node )
+Bool TY_(nodeHasText)( TidyDoc doc, TidyNode node )
 {
   if ( doc && node )
   {
@@ -1003,7 +1003,7 @@ Bool TY_(nodeHasText)( TidyDocImpl* doc, Node* node )
   return no;
 }
 
-Bool TY_(nodeIsElement)( Node* node )
+Bool TY_(nodeIsElement)( TidyNode node )
 {
   return ( node &&
            (node->type == StartTag || node->type == StartEndTag) );
@@ -1013,7 +1013,7 @@ Bool TY_(nodeIsElement)( Node* node )
 /* Compare & result to operand.  If equal, then all bits
 ** requested are set.
 */
-Bool nodeMatchCM( Node* node, uint contentModel )
+Bool nodeMatchCM( TidyNode node, uint contentModel )
 {
   return ( node && node->tag &&
            (node->tag->model & contentModel) == contentModel );
@@ -1022,26 +1022,26 @@ Bool nodeMatchCM( Node* node, uint contentModel )
 
 /* True if any of the bits requested are set.
 */
-Bool TY_(nodeHasCM)( Node* node, uint contentModel )
+Bool TY_(nodeHasCM)( TidyNode node, uint contentModel )
 {
   return ( node && node->tag &&
            (node->tag->model & contentModel) != 0 );
 }
 
-Bool TY_(nodeCMIsBlock)( Node* node )
+Bool TY_(nodeCMIsBlock)( TidyNode node )
 {
   return TY_(nodeHasCM)( node, CM_BLOCK );
 }
-Bool TY_(nodeCMIsInline)( Node* node )
+Bool TY_(nodeCMIsInline)( TidyNode node )
 {
   return TY_(nodeHasCM)( node, CM_INLINE );
 }
-Bool TY_(nodeCMIsEmpty)( Node* node )
+Bool TY_(nodeCMIsEmpty)( TidyNode node )
 {
   return TY_(nodeHasCM)( node, CM_EMPTY );
 }
 
-Bool TY_(nodeIsHeader)( Node* node )
+Bool TY_(nodeIsHeader)( TidyNode node )
 {
     TidyTagId tid = TagId( node  );
     return ( tid && (
@@ -1053,7 +1053,7 @@ Bool TY_(nodeIsHeader)( Node* node )
              tid == TidyTag_H6 ));
 }
 
-uint TY_(nodeHeaderLevel)( Node* node )
+uint TY_(nodeHeaderLevel)( TidyNode node )
 {
     TidyTagId tid = TagId( node  );
     switch ( tid )
@@ -1079,7 +1079,7 @@ uint TY_(nodeHeaderLevel)( Node* node )
 }
 
 /* [i_a] generic node tree traversal; see also <tidy-int.h> */
-NodeTraversalSignal TY_(TraverseNodeTree)(TidyDocImpl* doc, Node* node, NodeTraversalCallBack *cb, void *propagate )
+NodeTraversalSignal TY_(TraverseNodeTree)(TidyDoc doc, TidyNode node, NodeTraversalCallBack *cb, void *propagate )
 {
     while (node)
     {

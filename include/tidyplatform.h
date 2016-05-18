@@ -601,16 +601,13 @@ extern void* null;
 #endif
 
 /* Opaque data structure.
-*  Cast to implementation type struct within lib.
+*  The public header only declares these, but does not define them.
+*  The actual definition is restricted to the library code.
 *  This will reduce inter-dependencies/conflicts w/ application code.
 */
-#if 1
 #define opaque_type( typenam )\
-struct _##typenam { int _opaque; };\
-typedef struct _##typenam const * typenam
-#else
-#define opaque_type(typenam) typedef const void* typenam
-#endif
+struct _##typenam;\
+typedef struct _##typenam * typenam
 
 /* Opaque data structure used to pass back
 ** and forth to keep current position in a

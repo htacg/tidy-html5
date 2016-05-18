@@ -3,7 +3,7 @@
 
 #include "TidyNodeIter.h"
 
-TidyNodeIter *newTidyNodeIter( Node *pStart )
+TidyNodeIter *newTidyNodeIter( TidyNode pStart )
 {
     TidyNodeIter *pThis = NULL;
     if (NULL != (pThis = MemAlloc( sizeof( TidyNodeIter ))))
@@ -14,7 +14,7 @@ TidyNodeIter *newTidyNodeIter( Node *pStart )
     return pThis;
 }
 
-Node *nextTidyNode( TidyNodeIter *pThis )
+TidyNode nextTidyNode( TidyNodeIter *pThis )
 {
     if (NULL == pThis->pCurrent)
     {
@@ -40,7 +40,7 @@ Node *nextTidyNode( TidyNodeIter *pThis )
     return pThis->pCurrent;
 }
 
-void setCurrentNode( TidyNodeIter *pThis, Node *newCurr )
+void setCurrentNode( TidyNodeIter *pThis, TidyNode newCurr )
 {
     if (NULL != newCurr)
         pThis->pCurrent = newCurr;

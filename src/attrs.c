@@ -279,6 +279,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_CONTENTEDITABLE,         "contenteditable",         CH_PCDATA   },
   { TidyAttr_CONTEXTMENU,             "contextmenu",             CH_PCDATA   },
   { TidyAttr_CONTROLS,                "controls",                CH_PCDATA   },
+  { TidyAttr_CROSSORIGIN,             "crossorigin",             CH_PCDATA   },
   { TidyAttr_DEFAULT,                 "default",                 CH_PCDATA   },
   { TidyAttr_DIRNAME,                 "dirname",                 CH_PCDATA   },
   { TidyAttr_DRAGGABLE,               "draggable",               CH_PCDATA   },

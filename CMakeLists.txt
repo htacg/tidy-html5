@@ -37,17 +37,17 @@ else ()
 endif ()
 
 # By default, BOTH library types built, Allow turning OFF shared if not needed
-set( LIB_TYPE STATIC )  # set default message
-option( BUILD_SHARED_LIB "Set OFF to NOT build shared library"    ON  )
+option( BUILD_STATIC_LIBS "Set ON to build static library"         OFF )
+option( BUILD_SHARED_LIBS "Set OFF to NOT build shared library"    ON  )
 option( BUILD_TAB2SPACE  "Set ON to build utility app, tab2space" OFF )
 option( BUILD_SAMPLE_CODE "Set ON to build the sample code"       OFF )
 if (NOT MAN_INSTALL_DIR)
     set(MAN_INSTALL_DIR share/man/man1)
 endif ()
 # Issue #326 - Allow linkage choice of console app tidy
-option( TIDY_CONSOLE_SHARED "Set ON to link with shared(DLL) lib." OFF )
+option( TIDY_CONSOLE_SHARED "Set OFF to link with static lib." ON )
 if (TIDY_CONSOLE_SHARED)
-    if (NOT BUILD_SHARED_LIB)
+    if (NOT BUILD_SHARED_LIBS)
         message(FATAL_ERROR "Enable shared build for this tidy linkage!")
     endif ()
 endif ()
@@ -112,7 +112,7 @@ if (SUPPORT_GETPWNAM)
     add_definitions( -DSUPPORT_GETPWNAM=1 )
 endif ()
 
-if(BUILD_SHARED_LIB)
+if(BUILD_SHARED_LIBS)
    set(LIB_TYPE SHARED)
    message(STATUS "*** Also building DLL library ${LIB_TYPE}, version ${LIBTIDY_VERSION}, date ${LIBTIDY_DATE}")
 else()
@@ -167,28 +167,28 @@ if (NOT INCLUDE_INSTALL_DIR)
     set(INCLUDE_INSTALL_DIR include)
 endif ()
 
-# Always build the STATIC library
-set(name tidy-static)
-add_library ( ${name} STATIC ${CFILES} ${HFILES} ${LIBHFILES} )
-set_target_properties( ${name} PROPERTIES 
-    OUTPUT_NAME ${LIB_NAME}s
-    )
-if (NOT TIDY_CONSOLE_SHARED) # user wants default static linkage
-    list ( APPEND add_LIBS ${name} )
-endif ()    
-install(TARGETS ${name}
-        RUNTIME DESTINATION ${BIN_INSTALL_DIR}
-        ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
-        LIBRARY DESTINATION ${LIB_INSTALL_DIR}
+if (BUILD_STATIC_LIBS)
+    set(name tidy-static)
+    add_library ( ${name} STATIC ${CFILES} ${HFILES} ${LIBHFILES} )
+    set_target_properties( ${name} PROPERTIES
+        OUTPUT_NAME ${LIB_NAME}
         )
+    if (NOT TIDY_CONSOLE_SHARED) # user wants static linkage
+        list ( APPEND add_LIBS ${name} )
+    endif ()
+    install(TARGETS ${name}
+            ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
+            LIBRARY DESTINATION ${LIB_INSTALL_DIR}
+            )
+endif ()
+
 install( FILES ${HFILES} DESTINATION ${INCLUDE_INSTALL_DIR} )
 ########################################
-# if user option still on
-if (BUILD_SHARED_LIB)
+if (BUILD_SHARED_LIBS)
     set(name tidy-share)
     add_library ( ${name} SHARED ${CFILES} ${HFILES} ${LIBHFILES} )
     set_target_properties( ${name} PROPERTIES 
-                                    OUTPUT_NAME ${LIB_NAME} )
+                                   OUTPUT_NAME ${LIB_NAME} )
     set_target_properties( ${name} PROPERTIES
                                    VERSION   ${LIBTIDY_VERSION}
                                    SOVERSION ${TIDY_MAJOR_VERSION} )

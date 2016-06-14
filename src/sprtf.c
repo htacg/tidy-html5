@@ -395,7 +395,7 @@ int MCDECL sprtf( const char *pf, ... )
    int   i;
    va_list arglist;
    va_start(arglist, pf);
-   i = vsprintf( pb, pf, arglist );
+   i = vsnprintf( pb, M_MAX_SPRTF, pf, arglist );
    va_end(arglist);
 #ifdef _MSC_VER
    prt(pb); // ensure CR/LF

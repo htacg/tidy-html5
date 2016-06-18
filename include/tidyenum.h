@@ -553,6 +553,7 @@ typedef enum
   TidyAttr_COMPACT,           /**< COMPACT= */
   TidyAttr_CONTENT,           /**< CONTENT= */
   TidyAttr_COORDS,            /**< COORDS= */
+  TidyAttr_CROSSORIGIN,       /**< CROSSORIGIN= */
   TidyAttr_DATA,              /**< DATA= */
   TidyAttr_DATAFLD,           /**< DATAFLD= */
   TidyAttr_DATAFORMATAS,      /**< DATAFORMATAS= */

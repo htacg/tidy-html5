@@ -139,7 +139,8 @@ set ( CFILES
         ${SRCDIR}/language.c  )
 set ( HFILES
         ${INCDIR}/tidy.h         ${INCDIR}/tidy/enum.h    ${INCDIR}/tidy/platform.h
-        ${INCDIR}/tidy/buffio.h )
+        ${INCDIR}/tidy/buffio.h  ${INCDIR)/tidyenum.h     $(INCDIR}/tidyplatform.h
+	${INCDIR}/tidybuffio.h )
 set ( LIBHFILES
         ${SRCDIR}/access.h       ${SRCDIR}/attrs.h        ${SRCDIR}/attrdict.h ${SRCDIR}/charsets.h
         ${SRCDIR}/clean.h        ${SRCDIR}/config.h       ${SRCDIR}/entities.h

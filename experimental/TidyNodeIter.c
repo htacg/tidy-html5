@@ -1,4 +1,4 @@
-#include "tidyplatform.h"
+#include "tidy/platform.h"
 #include "tidy-int.h"
 
 #include "TidyNodeIter.h"

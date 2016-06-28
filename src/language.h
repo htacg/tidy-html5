@@ -14,7 +14,7 @@
  * Created by Jim Derry on 11/28/15.
  */
 
-#include "tidyplatform.h"
+#include "tidy/platform.h"
 
 
 /** @name Exposed Data Structures */

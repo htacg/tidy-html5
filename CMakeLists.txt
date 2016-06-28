@@ -138,8 +138,8 @@ set ( CFILES
         ${SRCDIR}/tidylib.c      ${SRCDIR}/mappedio.c     ${SRCDIR}/gdoc.c
         ${SRCDIR}/language.c  )
 set ( HFILES
-        ${INCDIR}/tidyplatform.h ${INCDIR}/tidy.h         ${INCDIR}/tidyenum.h
-        ${INCDIR}/tidybuffio.h )
+        ${INCDIR}/tidy.h         ${INCDIR}/tidy/enum.h    ${INCDIR}/tidy/platform.h
+        ${INCDIR}/tidy/buffio.h )
 set ( LIBHFILES
         ${SRCDIR}/access.h       ${SRCDIR}/attrs.h        ${SRCDIR}/attrdict.h ${SRCDIR}/charsets.h
         ${SRCDIR}/clean.h        ${SRCDIR}/config.h       ${SRCDIR}/entities.h

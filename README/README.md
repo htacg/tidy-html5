@@ -38,11 +38,11 @@ If you do **not** need the tidy library built as a 'shared' (DLL) library, then 
 
 ## Build PHP with the tidy-html5 library
 
-Due to API changes in the PHP source, "buffio.h" needs to be changed to "tidybuffio.h" in the file ext/tidy/tidy.c.
+Due to API changes in the PHP source, "buffio.h" needs to be changed to "tidy/buffio.h" in the file ext/tidy/tidy.c.
 
 That is - prior to configuring php run this in the php source directory:
 ```
-sed -i 's/buffio.h/tidybuffio.h/' ext/tidy/*.c
+sed -i 's,buffio.h,tidy/buffio.h,' ext/tidy/*.c
 ```
 
 And then continue with (just an example here, use your own php config options):

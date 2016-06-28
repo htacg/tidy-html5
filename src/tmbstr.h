@@ -8,7 +8,7 @@
 
 */
 
-#include "tidyplatform.h"
+#include "tidy/platform.h"
 
 #ifdef __cplusplus
 extern "C"

@@ -9,7 +9,7 @@
 \*/
 
 #include <stdio.h>
-#include "tidybuffio.h"
+#include "tidy/buffio.h"
 #include "tidy.h"
 
 static const char *sample =

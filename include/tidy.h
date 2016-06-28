@@ -62,8 +62,8 @@
 
 */
 
-#include "tidyplatform.h"
-#include "tidyenum.h"
+#include "tidy/platform.h"
+#include "tidy/enum.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -263,7 +263,7 @@ The following is a short example program.
 
 <pre>
 \#include &lt;tidy.h&gt;
-\#include &lt;tidybuffio.h&gt;
+\#include &lt;tidy/buffio.h&gt;
 \#include &lt;stdio.h&gt;
 \#include &lt;errno.h&gt;
 

@@ -11,7 +11,7 @@
 
 */
 
-#include "tidybuffio.h"
+#include "tidy/buffio.h"
 #ifdef __cplusplus
 extern "C" {
 #endif

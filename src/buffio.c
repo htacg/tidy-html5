@@ -9,7 +9,7 @@
 */
 
 #include "tidy.h"
-#include "tidybuffio.h"
+#include "tidy/buffio.h"
 #include "forward.h"
 
 /**************

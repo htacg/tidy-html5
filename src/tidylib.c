@@ -1908,9 +1908,18 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
        it can ever be, so we can start detecting things that shouldn't
        be in this version of HTML
      */
-    if (doc->lexer->versionEmitted & VERS_HTML5)
-         TY_(CheckHTML5)( doc, &doc->root );
-    TY_(CheckHTMLTagsAttribsVersions)( doc, &doc->root );
+    if (doc->lexer) 
+    {
+        /*\ 
+         *  Issue #429 #426 - These services can only be used
+         *  when there is a document loaded, ie a lexer created.
+         *  But really should not be calling a Clean and Repair
+         *  service with no doc!
+        \*/
+        if (doc->lexer->versionEmitted & VERS_HTML5)
+            TY_(CheckHTML5)( doc, &doc->root );
+        TY_(CheckHTMLTagsAttribsVersions)( doc, &doc->root );
+    }
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
     SPRTF("All nodes AFTER clean and repair\n");

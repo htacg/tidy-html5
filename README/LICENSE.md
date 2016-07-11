@@ -2,10 +2,23 @@
 
 ## HTML parser and pretty printer
 
-Copyright (c) 1998-2003 World Wide Web Consortium
+Copyright (c) 1998-2016 World Wide Web Consortium
 (Massachusetts Institute of Technology, European Research 
 Consortium for Informatics and Mathematics, Keio University).
 All Rights Reserved.
+
+Additional contributions (c) 2001-2016 University of Toronto, Terry Teague, 
+@geoffmcl, HTACG, and others.
+
+### Contributing Author(s):
+
+  Dave Raggett <dsr@w3.org>
+
+The contributing author(s) would like to thank all those who
+helped with testing, bug fixes and suggestions for improvements. 
+This wouldn't have been possible without your help.
+
+## COPYRIGHT NOTICE:
 
 This software and documentation is provided "as is," and
 the copyright holders and contributing author(s) make no

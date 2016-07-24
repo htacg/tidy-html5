@@ -846,6 +846,8 @@ typedef enum
   TidyAttr_TYPEOF,            /**< TYPEOF= */
   TidyAttr_VOCAB,             /**< VOCAB= */
 
+  TidyAttr_INTEGRITY,         /**< INTEGRITY= */
+
   N_TIDY_ATTRIBS              /**< Must be last */
 } TidyAttrId;
 

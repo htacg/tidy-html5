@@ -438,6 +438,8 @@ static const Attribute attribute_defs [] =
   { TidyAttr_TYPEOF,                   "typeof",                 CH_RDFATERMS  },
   { TidyAttr_VOCAB,                    "vocab",                  CH_URL        },
 
+  { TidyAttr_INTEGRITY,                "integrity",              CH_PCDATA   },
+
   /* this must be the final entry */
   { N_TIDY_ATTRIBS,                    NULL,                     NULL         }
 };

@@ -4022,9 +4022,9 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
         */
         lexer->excludeBlocks = no;
         
-        if ( nodeIsINPUT(node) ||
+        if (( nodeIsINPUT(node) ||
              (!TY_(nodeHasCM)(node, CM_BLOCK) && !TY_(nodeHasCM)(node, CM_INLINE))
-           )
+           ) && !TY_(IsHTML5Mode)(doc) )
         {
             /* avoid this error message being issued twice */
             if (!(node->tag->model & CM_HEAD))

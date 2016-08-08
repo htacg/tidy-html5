@@ -601,7 +601,6 @@ tmbstr tidyNormalizedLocaleName( ctmbstr locale )
     uint i;
     uint len;
     static char result[6] = "xx_yy";
-    char character[1];
     tmbstr search = strdup(locale);
     search = TY_(tmbstrtolower)(search);
     
@@ -622,27 +621,28 @@ tmbstr tidyNormalizedLocaleName( ctmbstr locale )
      junk language that doesn't exist and won't be set. */
     
     len = strlen( search );
-    len = len <= 5 ? len : 5;
+    len = ( len <= 5 ? len : 5 );
     
-    for ( i = 0; i <= len; i++ )
+    for ( i = 0; i < len; i++ )
     {
         if ( i == 2 )
         {
             /* Either terminate the string or ensure there's an underscore */
-            if (strlen( search) >= 5)
-                character[0] = '_';
-            else
-                character[0] = '\0';
-            strncpy( result + i, character, 1 );
+            if (len == 5) {
+                result[i] = '_';
+            }
+            else {
+                result[i] = '\0';
+                break;      /* no need to copy after null */
+            }
         }
         else
         {
-            strncpy( result + i, search + i, 1);
-            result[i] = tolower( result[i] );
+            result[i] = tolower( search[i] );
         }
     }
     
-    if ( search ) free( search );
+    free( search );
     return result;
 }
 

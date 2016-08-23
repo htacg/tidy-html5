@@ -440,6 +440,9 @@ static const Attribute attribute_defs [] =
 
   { TidyAttr_INTEGRITY,                "integrity",              CH_PCDATA   },
 
+  /* Preload spec: https://www.w3.org/TR/preload/ */
+  { TidyAttr_AS,                       "as",                     CH_PCDATA   },
+
   /* this must be the final entry */
   { N_TIDY_ATTRIBS,                    NULL,                     NULL         }
 };

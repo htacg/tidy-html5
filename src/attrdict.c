@@ -1950,6 +1950,7 @@ const AttrVersion TY_(W3CAttrsFor_LINK)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
+  { TidyAttr_AS,                    xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_CHARSET,               xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|xxxx|xxxx },
   { TidyAttr_CLASS,                 xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 }, /* CORE override */
   { TidyAttr_CROSSORIGIN,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },

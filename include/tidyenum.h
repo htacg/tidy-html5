@@ -848,6 +848,8 @@ typedef enum
 
   TidyAttr_INTEGRITY,         /**< INTEGRITY= */
 
+  TidyAttr_AS,               /**< AS= */
+
   N_TIDY_ATTRIBS              /**< Must be last */
 } TidyAttrId;
 

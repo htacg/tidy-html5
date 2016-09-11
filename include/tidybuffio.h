@@ -3,7 +3,7 @@
 
 /** @file tidybuffio.h - Treat buffer as an I/O stream.
 
-  (c) 1998-2007 (W3C) MIT, ERCIM, Keio University
+  (c) 1998-2016 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
 
   Requires buffer to automatically grow as bytes are added.

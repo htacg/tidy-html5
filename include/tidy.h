@@ -11,7 +11,7 @@
   this-equivalent as 1st arg.
 
 
-  Copyright (c) 1998-2008 World Wide Web Consortium
+  Copyright (c) 1998-2016 World Wide Web Consortium
   (Massachusetts Institute of Technology, European Research 
   Consortium for Informatics and Mathematics, Keio University).
   All Rights Reserved.
@@ -476,7 +476,7 @@ TIDY_EXPORT TidyIterator TIDY_CALL  tidyOptGetPickList( TidyOption opt );
 /** Get next string value of Option "pick list" */
 TIDY_EXPORT ctmbstr TIDY_CALL       tidyOptGetNextPick( TidyOption opt, TidyIterator* pos );
 
-/** Get current Option value as a string */
+/** Get string Option current value. Note, the optID "must" be a type 'TidyString'! */
 TIDY_EXPORT ctmbstr TIDY_CALL       tidyOptGetValue( TidyDoc tdoc, TidyOptionId optId );
 /** Set Option value as a string */
 TIDY_EXPORT Bool TIDY_CALL          tidyOptSetValue( TidyDoc tdoc, TidyOptionId optId, ctmbstr val );

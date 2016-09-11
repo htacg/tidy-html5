@@ -1,10 +1,15 @@
 #ifndef __TIDY_PLATFORM_H__
 #define __TIDY_PLATFORM_H__
 
-/* tidyplatform.h -- Platform specifics
+/** @file tidyplatform.h - Platform specifics
 
-  (c) 1998-2008 (W3C) MIT, ERCIM, Keio University
+  (c) 1998-2016 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
+  
+  This file is included by tidy.h, and need not 
+  be included sepearately. It sets a number of 
+  default defines, and a PLATFORM_NAME, and includes
+  the most common system headers.
 
 */
 

@@ -1,11 +1,14 @@
 @setlocal
+@REM 20161002 - Change to msvc140 build
+@set VCVERS=14
+@set GENERATOR=Visual Studio %VCVERS% Win64
 @REM 20160324 - Change to relative, and use choice
 @set TMPPRJ=tidy
 @echo Build %TMPPRJ% project, in 64-bits
 @set TMPLOG=bldlog-1.txt
 @set BLDDIR=%CD%
 @set TMPROOT=..\..\..
-@set SET_BAT=%ProgramFiles(x86)%\Microsoft Visual Studio 10.0\VC\vcvarsall.bat
+@set SET_BAT=%ProgramFiles(x86)%\Microsoft Visual Studio %VCVERS%.0\VC\vcvarsall.bat
 @if NOT EXIST "%SET_BAT%" goto NOBAT
 @REM if NOT EXIST %TMPROOT%\nul goto NOROOT
 @set TMPSRC=..\..
@@ -42,7 +45,7 @@
 @REM ##########################################
 @REM set TMPINST=F:\Projects\software.x64
 @set TMPOPTS=-DCMAKE_INSTALL_PREFIX=%TMPINST%
-@set TMPOPTS=%TMPOPTS% -G "Visual Studio 10 Win64"
+@set TMPOPTS=%TMPOPTS% -G "%GENERATOR%"
 @REM set TMPOPTS=%TMPOPTS% -DTIDY_CONFIG_FILE="C:\MDOS\tidy5.cfg"
 @REM set TMPOPTS=%TMPOPTS% -DTIDY_USER_CONFIG_FILE="C:\MDOS\tidy5.cfg"
 @set TMPOPTS=%TMPOPTS% -DBUILD_SHARED_LIB:BOOL=OFF

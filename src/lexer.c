@@ -1674,14 +1674,98 @@ Node *TY_(FindBody)( TidyDocImpl* doc )
     return node;
 }
 
-/* Check meta charset*/
-Bool TY_(TidyMetaCharset)( TidyDocImpl* doc )
+/* Check meta charset
+   1. if there is no meta charset, it adds one.
+   2. if there is a meta charset, it moves it to the top if HEAD.
+   3. if it doesn't match the output encoding, warn about that.
+   4. if there are duplicates, discard them.
+ */
+Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
 {
-    AttVal *attval;
-    Node *node;
     Node *head = TY_(FindHEAD)( doc );
-    printf("hello");
-    return no;
+    ctmbstr enc = TY_(GetEncodingNameFromTidyId)(cfg(doc, TidyOutCharEncoding));
+    Bool charsetFound = no;
+    // We can't do anything we don't have a head or encoding is NULL
+    if( !head || !enc )
+        return no;
+
+    for (Node *node = head->content; node; node = node->next)
+    {
+        if (!nodeIsMETA(node))
+            continue;
+        AttVal *charsetAttr = TY_(AttrGetById)(node, TidyAttr_CHARSET);
+        AttVal *httpEquivAttr = TY_(AttrGetById)(node, TidyAttr_HTTP_EQUIV);
+        if(!charsetAttr && !httpEquivAttr)
+            continue;
+        
+        // Meta charset comes in quite a few flavors:
+        // 1. <meta charset=value> - expected for (X)HTML5.
+        if (charsetAttr && !httpEquivAttr)
+        {
+            // we already found one
+            if(charsetFound)
+            {
+                TY_(DiscardElement)( doc, node );
+                printf("WARNING ABOUT DISCARDING ELEMENT \n");
+                continue;
+            }
+            charsetFound = yes;
+            tmbstr lCharset = TY_(tmbstrtolower)(charsetAttr->value);
+            if(strcmp(lCharset, enc) == 0)
+            {
+                // Move it to head
+                TY_(RemoveNode)( node );
+                TY_(InsertNodeAtStart)( head, node );
+            }
+            else
+            {
+                printf("WARN ABOUT MISMATCH: %s not match output %s \n", lCharset, enc);
+                TY_(RemoveNode)( node );
+                TY_(InsertNodeAtStart)( head, node );
+            }
+            continue;
+        }
+        
+        // 2. <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        // expected for HTML4. This is normally ok - but can clash.
+        if(httpEquivAttr && !charsetAttr)
+        {
+            AttVal *contentAttr = TY_(AttrGetById)(node, TidyAttr_CONTENT);
+            tmbstr lvalue = TY_(tmbstrtolower)(httpEquivAttr->value);
+            if(!contentAttr || strcmp(lvalue, "content-type") != 0)
+                continue;
+            tmbstr lcontent = TY_(tmbstrtolower)(contentAttr->value);
+            char expected[sizeof(enc) + 8] = "charset=";
+            strcat(expected, enc);
+            if(TY_(tmbsubstr)(lcontent, expected)){
+                printf("WARN ABOUT CLASH: %s \n", contentAttr->value);
+            }
+        }
+        // 3. <meta charset="utf-8" http-equiv="Content-Type" content="...">
+        // This is generally bad.
+        if(httpEquivAttr && charsetAttr)
+        {
+           printf("WARN ABOUT HTTP EQUIV AND CHARSET ATTR! \n");
+        }
+    }
+    if(charsetFound){
+        return yes;
+    }
+    Node *node = TY_(InferredTag)(doc, TidyTag_META);
+    switch(TY_(HTMLVersion)(doc))
+    {
+        case HT50:
+        case XH50:
+            TY_(AddAttribute)( doc, node, "charset", enc);
+            break;
+        default:
+            TY_(AddAttribute)( doc, node, "http-equiv", "content-type");
+            TY_(AddAttribute)( doc, node, "content", "text/html; charset=");
+            AttVal *contentAttr = TY_(AttrGetById)(node, TidyAttr_CONTENT);
+            TY_(tmbstrcat)(contentAttr->value, enc);
+    }
+    TY_(InsertNodeAtStart)( head, node );
+    return yes;
 }
 
 /* add meta element for Tidy */

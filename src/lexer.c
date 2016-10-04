@@ -1674,6 +1674,16 @@ Node *TY_(FindBody)( TidyDocImpl* doc )
     return node;
 }
 
+/* Check meta charset*/
+Bool TY_(TidyMetaCharset)( TidyDocImpl* doc )
+{
+    AttVal *attval;
+    Node *node;
+    Node *head = TY_(FindHEAD)( doc );
+    printf("hello");
+    return no;
+}
+
 /* add meta element for Tidy */
 Bool TY_(AddGenerator)( TidyDocImpl* doc )
 {

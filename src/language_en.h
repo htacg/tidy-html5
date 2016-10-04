@@ -2080,6 +2080,18 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option causes items that look like closing tags, like <code>&lt;/g</code> to be escaped "
         "to <code>&lt;\\/g</code>. Set this option to 'no' if you do not want this."
     },
+    {/* Important notes for translators:
+        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+          <br/>.
+        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+        - Option values should be enclosed in <var></var>.
+        - It's very important that <br/> be self-closing!
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not
+          be translated. */
+      TidyMetaCharset,             0,
+        "This option adds a meta element and sets the charset attribute to the encoding of the document."
+        "Set this option to 'yes' if you want this."
+    },
 
     /********************************************************
      ** Console Application

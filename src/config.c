@@ -324,6 +324,7 @@ static const TidyOptionImpl option_defs[] =
   { TidySkipNested,              MU, "skip-nested",                 BL, yes,             ParseBool,         boolPicks       }, /* 1642186 - Issue #65 */
   { TidyStrictTagsAttr,          MU, "strict-tags-attributes",      BL, no,              ParseBool,         boolPicks       }, /* 20160209 - Issue #350 */
   { TidyEscapeScripts,           PP, "escape-scripts",              BL, yes,             ParseBool,         boolPicks       }, /* 20160227 - Issue #348 */
+  { TidyMetaCharset,             MS, "add-meta-charset",            BL, yes,             ParseBool,         boolPicks       }, /* 20161004 - Issue #456 */
   { N_TIDY_OPTIONS,              XX, NULL,                          XY, 0,               NULL,              NULL            }
 };
 

@@ -1717,8 +1717,8 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
             {
                 tmbstr newValue = (tmbstr) TidyDocAlloc( doc, TY_(tmbstrlen)(enc) );
                 TY_(tmbstrcpy)( newValue, enc );
+                TY_(ReportAttrError)( doc, node, charsetAttr, BAD_ATTRIBUTE_VALUE_REPLACED );
                 charsetAttr->value = newValue;
-                TY_(ReportError)( doc, head, node, BAD_ATTRIBUTE_VALUE_REPLACED );
             }
             // Make sure it's the first element.
             if ( node != head->next ){

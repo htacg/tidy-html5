@@ -1697,29 +1697,31 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
         AttVal *httpEquivAttr = TY_(AttrGetById)(node, TidyAttr_HTTP_EQUIV);
         if(!charsetAttr && !httpEquivAttr)
             continue;
-        
         // Meta charset comes in quite a few flavors:
         // 1. <meta charset=value> - expected for (X)HTML5.
         if (charsetAttr && !httpEquivAttr)
         {
-            // we already found one
+            // we already found one, so remove the rest.
             if(charsetFound)
             {
+                Node *prevNode = node->prev;
+                TY_(ReportError)(doc, head, node, DISCARDING_UNEXPECTED);
                 TY_(DiscardElement)( doc, node );
-                printf("WARNING ABOUT DISCARDING ELEMENT \n");
+                node = prevNode;
                 continue;
             }
             charsetFound = yes;
             tmbstr lCharset = TY_(tmbstrtolower)(charsetAttr->value);
-            if(strcmp(lCharset, enc) == 0)
+            // Fix mismatched attribute value
+            if(strcmp(lCharset, enc) != 0)
             {
-                // Move it to head
-                TY_(RemoveNode)( node );
-                TY_(InsertNodeAtStart)( head, node );
+                tmbstr newValue = (tmbstr) TidyDocAlloc( doc, TY_(tmbstrlen)(enc) );
+                TY_(tmbstrcpy)( newValue, enc );
+                charsetAttr->value = newValue;
+                TY_(ReportError)( doc, head, node, BAD_ATTRIBUTE_VALUE_REPLACED );
             }
-            else
-            {
-                printf("WARN ABOUT MISMATCH: %s not match output %s \n", lCharset, enc);
+            // Make sure it's the first element.
+            if ( node != head->next ){
                 TY_(RemoveNode)( node );
                 TY_(InsertNodeAtStart)( head, node );
             }

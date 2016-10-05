@@ -1735,11 +1735,14 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
             if(!contentAttr || strcmp(lvalue, "content-type") != 0)
                 continue;
             tmbstr lcontent = TY_(tmbstrtolower)(contentAttr->value);
-            char expected[sizeof(enc) + 8] = "charset=";
+            char* charsetString = "charset=";
+            char* expected = calloc(strlen(enc) + strlen(charsetString) + 1, sizeof(char*));
+            strcat(expected, charsetString);
             strcat(expected, enc);
             if(TY_(tmbsubstr)(lcontent, expected)){
                 printf("WARN ABOUT CLASH: %s \n", contentAttr->value);
             }
+            free(expected);
         }
         // 3. <meta charset="utf-8" http-equiv="Content-Type" content="...">
         // This is generally bad.

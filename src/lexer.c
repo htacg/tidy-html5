@@ -1693,8 +1693,8 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
     {
         if (!nodeIsMETA(node))
             continue;
-        AttVal *charsetAttr = TY_(AttrGetById)(node, TidyAttr_CHARSET);
-        AttVal *httpEquivAttr = TY_(AttrGetById)(node, TidyAttr_HTTP_EQUIV);
+        AttVal *charsetAttr = attrGetCHARSET(node);
+        AttVal *httpEquivAttr = attrGetHTTP_EQUIV(node);
         if(!charsetAttr && !httpEquivAttr)
             continue;
         // Meta charset comes in quite a few flavors:

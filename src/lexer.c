@@ -1721,7 +1721,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
                 charsetAttr->value = newValue;
             }
             // Make sure it's the first element.
-            if ( node != head->next ){
+            if ( node != head->content->next ){
                 TY_(RemoveNode)( node );
                 TY_(InsertNodeAtStart)( head, node );
             }

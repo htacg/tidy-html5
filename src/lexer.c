@@ -1682,72 +1682,86 @@ Node *TY_(FindBody)( TidyDocImpl* doc )
  */
 Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
 {
-    Node *head = TY_(FindHEAD)( doc );
-    ctmbstr enc = TY_(GetEncodingNameFromTidyId)(cfg(doc, TidyOutCharEncoding));
+    AttVal *charsetAttr;
+    AttVal *contentAttr;
+    AttVal *httpEquivAttr;
     Bool charsetFound = no;
-    // We can't do anything we don't have a head or encoding is NULL
+    ctmbstr enc = TY_(GetEncodingNameFromTidyId)(cfg(doc, TidyOutCharEncoding));
+    Node *currentNode;
+    Node *head = TY_(FindHEAD)( doc );
+    Node *metaTag;
+    Node *prevNode;
+    TidyBuffer buf;
+    TidyBuffer charsetString;
+    tmbstr httpEquivAttrValue;
+    tmbstr lcontent;
+    tmbstr newValue;
+    /* We can't do anything we don't have a head or encoding is NULL */
     if( !head || !enc )
         return no;
-
-    for (Node *node = head->content; node; node = node->next)
+    tidyBufInit(&charsetString);
+    for (currentNode = head->content; currentNode; currentNode = currentNode->next)
     {
-        if (!nodeIsMETA(node))
+        if (!nodeIsMETA(currentNode))
             continue;
-        AttVal *charsetAttr = attrGetCHARSET(node);
-        AttVal *httpEquivAttr = attrGetHTTP_EQUIV(node);
+        charsetAttr = attrGetCHARSET(currentNode);
+        httpEquivAttr = attrGetHTTP_EQUIV(currentNode);
         if(!charsetAttr && !httpEquivAttr)
             continue;
-        // Meta charset comes in quite a few flavors:
-        // 1. <meta charset=value> - expected for (X)HTML5.
+        /*
+        Meta charset comes in quite a few flavors:
+        1. <meta charset=value> - expected for (X)HTML5.
+        */
         if (charsetAttr && !httpEquivAttr)
         {
             // we already found one, so remove the rest.
             if(charsetFound)
             {
-                Node *prevNode = node->prev;
-                TY_(ReportError)(doc, head, node, DISCARDING_UNEXPECTED);
-                TY_(DiscardElement)( doc, node );
-                node = prevNode;
+                prevNode = currentNode->prev;
+                TY_(ReportError)(doc, head, currentNode, DISCARDING_UNEXPECTED);
+                TY_(DiscardElement)( doc, currentNode );
+                currentNode = prevNode;
                 continue;
             }
             charsetFound = yes;
-            tmbstr lCharset = TY_(tmbstrtolower)(charsetAttr->value);
             // Fix mismatched attribute value
-            if(strcmp(lCharset, enc) != 0)
+            if(TY_(tmbstrcmp)(TY_(tmbstrtolower)(charsetAttr->value), enc) != 0)
             {
-                tmbstr newValue = (tmbstr) TidyDocAlloc( doc, TY_(tmbstrlen)(enc) );
+                newValue = (tmbstr) TidyDocAlloc( doc, TY_(tmbstrlen)(enc) );
                 TY_(tmbstrcpy)( newValue, enc );
-                TY_(ReportAttrError)( doc, node, charsetAttr, BAD_ATTRIBUTE_VALUE_REPLACED );
+                TY_(ReportAttrError)( doc, currentNode, charsetAttr, BAD_ATTRIBUTE_VALUE_REPLACED );
                 charsetAttr->value = newValue;
             }
             // Make sure it's the first element.
-            if ( node != head->content->next ){
-                TY_(RemoveNode)( node );
-                TY_(InsertNodeAtStart)( head, node );
+            if ( currentNode != head->content->next ){
+                TY_(RemoveNode)( currentNode );
+                TY_(InsertNodeAtStart)( head, currentNode );
             }
             continue;
         }
-        
-        // 2. <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        // expected for HTML4. This is normally ok - but can clash.
+        /*
+        2. <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        expected for HTML4. This is normally ok - but can clash.
+        */
         if(httpEquivAttr && !charsetAttr)
         {
-            AttVal *contentAttr = TY_(AttrGetById)(node, TidyAttr_CONTENT);
-            tmbstr lvalue = TY_(tmbstrtolower)(httpEquivAttr->value);
-            if(!contentAttr || strcmp(lvalue, "content-type") != 0)
+            tidyBufClear(&charsetString);
+            tidyBufAppend(&charsetString, "charset=", 8);
+            tidyBufAppend(&charsetString, (char*)enc, TY_(tmbstrlen)( enc ));
+            contentAttr = TY_(AttrGetById)(currentNode, TidyAttr_CONTENT);
+            httpEquivAttrValue = TY_(tmbstrtolower)(httpEquivAttr->value);
+
+            if(!contentAttr || TY_(tmbstrcmp)(httpEquivAttr->value, (tmbstr) "content-type") != 0)
                 continue;
-            tmbstr lcontent = TY_(tmbstrtolower)(contentAttr->value);
-            char* charsetString = "charset=";
-            char* expected = calloc(strlen(enc) + strlen(charsetString) + 1, sizeof(char*));
-            strcat(expected, charsetString);
-            strcat(expected, enc);
-            if(TY_(tmbsubstr)(lcontent, expected)){
+            lcontent = TY_(tmbstrtolower)(contentAttr->value);
+            if(TY_(tmbsubstr)(lcontent, (ctmbstr) &charsetString)){
                 printf("WARN ABOUT CLASH: %s \n", contentAttr->value);
             }
-            free(expected);
         }
-        // 3. <meta charset="utf-8" http-equiv="Content-Type" content="...">
-        // This is generally bad.
+        /*
+        3. <meta charset="utf-8" http-equiv="Content-Type" content="...">
+        This is generally bad.
+        */
         if(httpEquivAttr && charsetAttr)
         {
            printf("WARN ABOUT HTTP EQUIV AND CHARSET ATTR! \n");
@@ -1756,20 +1770,22 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
     if(charsetFound){
         return yes;
     }
-    Node *node = TY_(InferredTag)(doc, TidyTag_META);
+    metaTag = TY_(InferredTag)(doc, TidyTag_META);
     switch(TY_(HTMLVersion)(doc))
     {
         case HT50:
         case XH50:
-            TY_(AddAttribute)( doc, node, "charset", enc);
+            TY_(AddAttribute)( doc, metaTag, "charset", enc);
             break;
         default:
-            TY_(AddAttribute)( doc, node, "http-equiv", "content-type");
-            TY_(AddAttribute)( doc, node, "content", "text/html; charset=");
-            AttVal *contentAttr = TY_(AttrGetById)(node, TidyAttr_CONTENT);
-            TY_(tmbstrcat)(contentAttr->value, enc);
+            tidyBufInit(&buf);
+            tidyBufAppend(&buf, "text/html; charset=", 19);
+            tidyBufAppend(&buf, (char*)enc, TY_(tmbstrlen)(enc));
+            TY_(AddAttribute)( doc, metaTag, "content", (char*)buf.bp);
+            tidyBufFree(&buf);
     }
-    TY_(InsertNodeAtStart)( head, node );
+    TY_(InsertNodeAtStart)( head, metaTag );
+    tidyBufFree(&charsetString);
     return yes;
 }
 

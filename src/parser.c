@@ -3851,7 +3851,15 @@ Bool TY_(FindNodeWithId)( Node *node, TidyTagId tid )
     {
         if (TagIsId(node,tid))
             return yes;
-        for (content = node->content; content; content = content->content)
+        /*\ 
+         *   Issue #459 - Under certain circumstances, with many node this use of
+         *   'for (content = node->content; content; content = content->content)'
+         *   would produce a **forever** circle, or at least a very extended loop...
+         *   It is sufficient to test the content, if it exists,
+         *   to quickly iterate all nodes. Now all nodes are tested only once.
+        \*/ 
+        content = node->content;
+        if (content)
         {
             if (TY_(FindNodeWithId)(content,tid))
                 return yes;

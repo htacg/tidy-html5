@@ -34,7 +34,7 @@
 <xsl:template match="/">
    <xsl:call-template name="header-section" />
    <xsl:call-template name="cmdline-section" />
-   <xsl:call-template name="config-section" />
+   <!--xsl:call-template name="config-section" /-->
    <xsl:call-template name="manpage-see-also-section" />
 </xsl:template>
 

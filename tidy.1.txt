@@ -6,7 +6,7 @@ NNAAMMEE
        ttiiddyy - check, correct, and pretty-print HTML(5) files
 
 SSYYNNOOPPSSIISS
-       ttiiddyy [option ...] [file ...] [option ...] [file ...]
+       ttiiddyy [_o_p_t_i_o_n_s] [_f_i_l_e ...] [_o_p_t_i_o_n_s] [_f_i_l_e ...] ...
 
 DDEESSCCRRIIPPTTIIOONN
        Tidy reads HTML, XHTML, and XML files and writes cleaned-up markup.

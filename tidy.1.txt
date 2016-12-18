@@ -214,6 +214,42 @@ OOPPTTIIOONNSS
           ooppttiioonn22: _v_a_l_u_e_2
           etc.
 
+       The permissible values for a given option depend on the option's TTyyppee.
+       There are five types: _B_o_o_l_e_a_n, _A_u_t_o_B_o_o_l, _D_o_c_T_y_p_e, _E_n_u_m, and _S_t_r_i_n_g.
+       Boolean types allow any of _y_e_s_/_n_o_, _y_/_n_, _t_r_u_e_/_f_a_l_s_e_, _t_/_f_, _1_/_0.
+       AutoBools allow _a_u_t_o in addition to the values allowed by Booleans.
+       Integer types take non-negative integers.  String types generally have
+       no defaults, and you should provide them in non-quoted form (unless you
+       wish the output to contain the literal quotes).
+
+       Enum, Encoding, and DocType "types" have a fixed repertoire of items;
+       consult the _E_x_a_m_p_l_e[s] provided below for the option[s] in question.
+
+       You only need to provide options and values for those whose defaults
+       you wish to override, although you may wish to include some already-
+       defaulted options and values for the sake of documentation and
+       explicitness.
+
+       Here is a sample config file, with at least one example of each of the
+       five Types:
+
+
+           _/_/ _s_a_m_p_l_e _T_i_d_y _c_o_n_f_i_g_u_r_a_t_i_o_n _o_p_t_i_o_n_s
+           _o_u_t_p_u_t_-_x_h_t_m_l_: _y_e_s
+           _a_d_d_-_x_m_l_-_d_e_c_l_: _n_o
+           _d_o_c_t_y_p_e_: _s_t_r_i_c_t
+           _c_h_a_r_-_e_n_c_o_d_i_n_g_: _a_s_c_i_i
+           _i_n_d_e_n_t_: _a_u_t_o
+           _w_r_a_p_: _7_6
+           _r_e_p_e_a_t_e_d_-_a_t_t_r_i_b_u_t_e_s_: _k_e_e_p_-_l_a_s_t
+           _e_r_r_o_r_-_f_i_l_e_: _e_r_r_s_._t_x_t
+
+       Below is a summary and brief description of each of the options. They
+       are listed alphabetically within each category.  There are five
+       categories: _H_T_M_L_, _X_H_T_M_L_, _X_M_L options, _D_i_a_g_n_o_s_t_i_c_s options, _P_r_e_t_t_y _P_r_i_n_t
+       options, _C_h_a_r_a_c_t_e_r _E_n_c_o_d_i_n_g options, and _M_i_s_c_e_l_l_a_n_e_o_u_s options.
+
+
 EENNVVIIRROONNMMEENNTT
        HHTTMMLL__TTIIDDYY
               Name of the default configuration file.  This should be an

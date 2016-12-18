@@ -103,6 +103,29 @@ is listed on a separate line in the form
 \fBoption2\fR: \fIvalue2\fR
 .br
 etc.
+.LP
+The permissible values for a given option depend on the option's \fBType\fR.  There are five types: \fIBoolean\fR, \fIAutoBool\fR, \fIDocType\fR, \fIEnum\fR, and \fIString\fR. Boolean types allow any of \fIyes/no, y/n, true/false, t/f, 1/0\fR.  AutoBools allow \fIauto\fR in addition to the values allowed by Booleans.  Integer types take non-negative integers.  String types generally have no defaults, and you should provide them in non-quoted form (unless you wish the output to contain the literal quotes).
+.LP
+Enum, Encoding, and DocType "types" have a fixed repertoire of items; consult the \fIExample\fR[s] provided below for the option[s] in question.
+.LP
+You only need to provide options and values for those whose defaults you wish to override, although you may wish to include some already-defaulted options and values for the sake of documentation and explicitness.
+.LP
+Here is a sample config file, with at least one example of each of the five Types:
+.LP
+\fI
+    // sample Tidy configuration options
+    output-xhtml: yes
+    add-xml-decl: no
+    doctype: strict
+    char-encoding: ascii
+    indent: auto
+    wrap: 76
+    repeated-attributes: keep-last
+    error-file: errs.txt
+\fR
+.LP
+Below is a summary and brief description of each of the options. They are listed alphabetically within each category.  There are five categories: \fIHTML, XHTML, XML\fR options, \fIDiagnostics\fR options, \fIPretty Print\fR options, \fICharacter Encoding\fR options, and \fIMiscellaneous\fR options.
+.LP
 .SH ENVIRONMENT
 .TP
 .B HTML_TIDY

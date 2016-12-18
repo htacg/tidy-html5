@@ -123,7 +123,7 @@ Here is a sample config file, with at least one example of each of the five Type
     error-file: errs.txt
 \fR
 .LP
-Below is a summary and brief description of each of the options. They are listed alphabetically within each category.  There are five categories: \fIHTML, XHTML, XML\fR options, \fIDiagnostics\fR options, \fIPretty Print\fR options, \fICharacter Encoding\fR options, and \fIMiscellaneous\fR options.
+Below is a summary and brief description of each of the options. They are listed alphabetically within each category.
 .LP
 <xsl:call-template name="show-config-options" />
 .SH ENVIRONMENT

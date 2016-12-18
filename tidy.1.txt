@@ -245,9 +245,7 @@ OOPPTTIIOONNSS
            _e_r_r_o_r_-_f_i_l_e_: _e_r_r_s_._t_x_t
 
        Below is a summary and brief description of each of the options. They
-       are listed alphabetically within each category.  There are five
-       categories: _H_T_M_L_, _X_H_T_M_L_, _X_M_L options, _D_i_a_g_n_o_s_t_i_c_s options, _P_r_e_t_t_y _P_r_i_n_t
-       options, _C_h_a_r_a_c_t_e_r _E_n_c_o_d_i_n_g options, and _M_i_s_c_e_l_l_a_n_e_o_u_s options.
+       are listed alphabetically within each category.
 
 
 

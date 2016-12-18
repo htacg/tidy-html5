@@ -211,23 +211,23 @@ For each option in one of the categories/classes, provide its
 
 <xsl:template name="show-config-options">
 <!-- Used only in the cmdline section -->
-.SS HTML, XHTML, XML options:
+.SS HTML, XHTML, XML options
   <xsl:call-template name="config-detail">
      <xsl:with-param name="category">markup</xsl:with-param>
   </xsl:call-template>
-.SS Diagnostics options:
+.SS Diagnostics options
   <xsl:call-template name="config-detail">
      <xsl:with-param name="category">diagnostics</xsl:with-param>
   </xsl:call-template>
-.SS Pretty Print options:
+.SS Pretty Print options
   <xsl:call-template name="config-detail">
      <xsl:with-param name="category">print</xsl:with-param>
   </xsl:call-template>
-.SS Character Encoding options:
+.SS Character Encoding options
   <xsl:call-template name="config-detail">
      <xsl:with-param name="category">encoding</xsl:with-param>
   </xsl:call-template>
-.SS Miscellaneous options:
+.SS Miscellaneous options
   <xsl:call-template name="config-detail">
      <xsl:with-param name="category">misc</xsl:with-param>
   </xsl:call-template>

@@ -249,7 +249,7 @@ OOPPTTIIOONNSS
 
 
 
-   HHTTMMLL,, XXHHTTMMLL,, XXMMLL ooppttiioonnss::
+   HHTTMMLL,, XXHHTTMMLL,, XXMMLL ooppttiioonnss
 
 
 
@@ -985,7 +985,7 @@ OOPPTTIIOONNSS
 
               You should consider using Word's "Save As: Web Page, Filtered".
 
-   DDiiaaggnnoossttiiccss ooppttiioonnss::
+   DDiiaaggnnoossttiiccss ooppttiioonnss
 
 
 
@@ -1034,7 +1034,7 @@ OOPPTTIIOONNSS
               This option specifies if Tidy should suppress warnings. This can
               be useful when a few errors are hidden in a flurry of warnings.
 
-   PPrreettttyy PPrriinntt ooppttiioonnss::
+   PPrreettttyy PPrriinntt ooppttiioonnss
 
 
 
@@ -1264,7 +1264,7 @@ OOPPTTIIOONNSS
               This option specifies if Tidy should line wrap text contained
               within _<_!_[ _._._. _]_> section tags.
 
-   CChhaarraacctteerr EEnnccooddiinngg ooppttiioonnss::
+   CChhaarraacctteerr EEnnccooddiinngg ooppttiioonnss
 
 
 
@@ -1387,7 +1387,7 @@ OOPPTTIIOONNSS
 
                                                        SSeeee aallssoo: _c_h_a_r_-_e_n_c_o_d_i_n_g
 
-   MMiisscceellllaanneeoouuss ooppttiioonnss::
+   MMiisscceellllaanneeoouuss ooppttiioonnss
 
 
 

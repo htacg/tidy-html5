@@ -248,8 +248,6 @@ OOPPTTIIOONNSS
 
    HHTTMMLL,, XXHHTTMMLL,, XXMMLL ooppttiioonnss
 
-
-
        aadddd--xxmmll--ddeeccll
 
               Type:    Boolean
@@ -984,8 +982,6 @@ OOPPTTIIOONNSS
 
    DDiiaaggnnoossttiiccss ooppttiioonnss
 
-
-
        aacccceessssiibbiilliittyy--cchheecckk
 
               Type:    enum
@@ -1032,8 +1028,6 @@ OOPPTTIIOONNSS
               be useful when a few errors are hidden in a flurry of warnings.
 
    PPrreettttyy PPrriinntt ooppttiioonnss
-
-
 
        bbrreeaakk--bbeeffoorree--bbrr
 
@@ -1263,8 +1257,6 @@ OOPPTTIIOONNSS
 
    CChhaarraacctteerr EEnnccooddiinngg ooppttiioonnss
 
-
-
        aasscciiii--cchhaarrss
 
               Type:    Boolean
@@ -1385,8 +1377,6 @@ OOPPTTIIOONNSS
                                                        SSeeee aallssoo: _c_h_a_r_-_e_n_c_o_d_i_n_g
 
    MMiisscceellllaanneeoouuss ooppttiioonnss
-
-
 
        eerrrroorr--ffiillee
 

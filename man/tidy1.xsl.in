@@ -208,7 +208,7 @@ For each option in one of the categories/classes, provide its
 
 
 <xsl:template name="show-config-options">
-.SS HTML, XHTML, XML options
+.SS HTML, XHTML, XML options<xsl:text/>
   <xsl:call-template name="config-detail">
      <xsl:with-param name="category">markup</xsl:with-param>
   </xsl:call-template>
@@ -254,8 +254,7 @@ For each option in one of the 5 categories/classes, provide its
     6. description
 -->
   <xsl:param name="category" />
-.rs
-.sp 1
+.rs<xsl:text/>
     <xsl:for-each select='$CONFIG/config/option[@class=$category]'>
        <xsl:sort select="name" order="ascending" />
 .TP

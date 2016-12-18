@@ -118,8 +118,6 @@ There were errors.
 
 
 <xsl:template name="config-section">
-.SH ______________________________
-.SH "  "
 .SH "DETAILED CONFIGURATION OPTIONS"
 This section describes the Detailed (i.e., "expanded") Options, which may be specified by preceding each option with \fB--\fR at the command line, followed by its desired value, OR by placing the options and values in a configuration file, and telling tidy to read that file with the \fB-config\fR standard option.
 .SH SYNOPSIS

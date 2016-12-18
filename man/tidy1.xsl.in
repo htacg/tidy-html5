@@ -118,8 +118,6 @@ There were errors.
 
 
 <xsl:template name="config-section">
-.SH WARNING
-The options detailed here do not include the "standard" command-line options (i.e., those preceded by a single '\fB-\fR') described above in the first section of this man page.
 .SH DESCRIPTION
 A list of options for configuring the behavior of Tidy, which can be passed either on the command line, or specified in a configuration file.
 .LP

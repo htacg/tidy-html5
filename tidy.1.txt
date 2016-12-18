@@ -233,7 +233,6 @@ OOPPTTIIOONNSS
        Here is a sample config file, with at least one example of each of the
        five Types:
 
-
            _/_/ _s_a_m_p_l_e _T_i_d_y _c_o_n_f_i_g_u_r_a_t_i_o_n _o_p_t_i_o_n_s
            _o_u_t_p_u_t_-_x_h_t_m_l_: _y_e_s
            _a_d_d_-_x_m_l_-_d_e_c_l_: _n_o

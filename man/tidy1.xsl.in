@@ -111,8 +111,7 @@ You only need to provide options and values for those whose defaults you wish to
 .LP
 Here is a sample config file, with at least one example of each of the five Types:
 .LP
-\fI
-    // sample Tidy configuration options
+    \fI// sample Tidy configuration options
     output-xhtml: yes
     add-xml-decl: no
     doctype: strict

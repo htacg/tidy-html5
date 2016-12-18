@@ -278,7 +278,6 @@ Type:    <xsl:apply-templates select="type" />
 <xsl:template name="seealso">
   <xsl:if test="seealso">
      <xsl:text>
-
 </xsl:text>
 .rj 1
 \fBSee also\fR: <xsl:text />

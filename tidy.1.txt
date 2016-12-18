@@ -214,9 +214,6 @@ OOPPTTIIOONNSS
           ooppttiioonn22: _v_a_l_u_e_2
           etc.
 
-UUSSAAGGEE
-       Input/Output default to stdin/stdout respectively.
-
 EENNVVIIRROONNMMEENNTT
        HHTTMMLL__TTIIDDYY
               Name of the default configuration file.  This should be an

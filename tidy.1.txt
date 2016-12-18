@@ -21,10 +21,44 @@ DDEESSCCRRIIPPTTIIOONN
        If no input file is specified, Tidy reads the standard input.  If no
        output file is specified, Tidy writes the tidied markup to the standard
        output.  If no error file is specified, Tidy writes messages to the
-       standard error.  For command line options that expect a numerical
-       argument, a default is assumed if no meaningful value can be found.
+       standard error.
 
 OOPPTTIIOONNSS
+       The options detailed here do not include the "standard" command-line
+       options (i.e., those preceded by a single '--') described above in the
+       first section of this man page.
+
+       Single letter options apart from --ff and --oo may be combined as in:
+
+          ttiiddyy --ff eerrrrss..ttxxtt --iimmuu ffoooo..hhttmmll
+
+       For command line options that expect a numerical argument, a default is
+       assumed if no meaningful value can be found.
+
+       A list of options for configuring the behavior of Tidy, which can be
+       passed either on the command line, or specified in a configuration
+       file.
+
+       Use ----_o_p_t_i_o_n_X _v_a_l_u_e_X for the detailed configuration option "optionX"
+       with argument "valueX".  See also below under DDeettaaiilleedd CCoonnffiigguurraattiioonn
+       OOppttiioonnss as to how to conveniently group all such options in a single
+       config file.  This section describes the Detailed (i.e., "expanded")
+       Options, which may be specified by preceding each option with ---- at the
+       command line, followed by its desired value, OR by placing the options
+       and values in a configuration file, and telling tidy to read that file
+       with the --ccoonnffiigg standard option:
+
+          ttiiddyy ----_o_p_t_i_o_n_1 value1 ----_o_p_t_i_o_n_2 value2 [standard options ...]
+          ttiiddyy --ccoonnffiigg _c_o_n_f_i_g_-_f_i_l_e [standard options ...]
+
+       A Tidy configuration file is simply a text file, where each option is
+       listed on a separate line in the form
+
+          ooppttiioonn11: _v_a_l_u_e_1
+          ooppttiioonn22: _v_a_l_u_e_2
+          etc.
+
+
    FFiillee mmaanniippuullaattiioonn
        --oouuttppuutt <<%%ss>>, --oo <<%%ss>>
               write output to the specified <file> (_o_u_t_p_u_t_-_f_i_l_e_: _<_%_s_>)
@@ -186,15 +220,7 @@ OOPPTTIIOONNSS
 
 
 UUSSAAGGEE
-       Use ----_o_p_t_i_o_n_X _v_a_l_u_e_X for the detailed configuration option "optionX"
-       with argument "valueX".  See also below under DDeettaaiilleedd CCoonnffiigguurraattiioonn
-       OOppttiioonnss as to how to conveniently group all such options in a single
-       config file.
-
-       Input/Output default to stdin/stdout respectively. Single letter
-       options apart from --ff and --oo may be combined as in:
-
-          ttiiddyy --ff eerrrrss..ttxxtt --iimmuu ffoooo..hhttmmll
+       Input/Output default to stdin/stdout respectively.
 
 EENNVVIIRROONNMMEENNTT
        HHTTMMLL__TTIIDDYY

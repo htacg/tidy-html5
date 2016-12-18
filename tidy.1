@@ -15,8 +15,35 @@ Tidy reads HTML, XHTML, and XML files and writes cleaned-up markup.  For HTML va
 A common use of Tidy is to convert plain HTML to XHTML.  For generic XML files, Tidy is limited to correcting basic well-formedness errors and pretty printing.
 .LP
 If no input file is specified, Tidy reads the standard input.  If no output file is specified, Tidy writes the tidied markup to the standard output.  If no error file is specified, Tidy writes messages to the standard error.
-For command line options that expect a numerical argument, a default is assumed if no meaningful value can be found. 
 .SH OPTIONS
+The options detailed here do not include the "standard" command-line options (i.e., those preceded by a single '\fB-\fR') described above in the first section of this man page.
+.LP
+Single letter options apart from \fB-f\fR and \fB-o\fR may be combined as in:
+.LP
+.in 1i
+\fBtidy -f errs.txt -imu foo.html\fR
+.LP
+For command line options that expect a numerical argument, a default is assumed if no meaningful value can be found.  
+.LP
+A list of options for configuring the behavior of Tidy, which can be passed either on the command line, or specified in a configuration file.
+.LP
+Use \fB--\fR\fIoptionX valueX\fR for the detailed configuration option "optionX" with argument "valueX".  See also below under \fBDetailed Configuration Options\fR as to how to conveniently group all such options in a single config file.  
+This section describes the Detailed (i.e., "expanded") Options, which may be specified by preceding each option with \fB--\fR at the command line, followed by its desired value, OR by placing the options and values in a configuration file, and telling tidy to read that file with the \fB-config\fR standard option:
+.LP
+.in 1i
+\fBtidy --\fR\fIoption1 \fRvalue1 \fB--\fIoption2 \fRvalue2 [standard options ...]
+.br
+\fBtidy -config \fIconfig-file \fR[standard options ...]
+.LP
+A Tidy configuration file is simply a text file, where each option
+is listed on a separate line in the form
+.LP
+.in 1i
+\fBoption1\fR: \fIvalue1\fR
+.br
+\fBoption2\fR: \fIvalue2\fR
+.br
+etc.
 
 .SS File manipulation
   
@@ -202,12 +229,7 @@ output option descriptions in XML format
 
 .SH USAGE
 .LP
-Use \fB--\fR\fIoptionX valueX\fR for the detailed configuration option "optionX" with argument "valueX".  See also below under \fBDetailed Configuration Options\fR as to how to conveniently group all such options in a single config file.
-.LP
-Input/Output default to stdin/stdout respectively. Single letter options apart from \fB-f\fR and \fB-o\fR may be combined as in:
-.LP
-.in 1i
-\fBtidy -f errs.txt -imu foo.html\fR
+Input/Output default to stdin/stdout respectively.
 .SH ENVIRONMENT
 .TP
 .B HTML_TIDY

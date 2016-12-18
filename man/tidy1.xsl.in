@@ -34,7 +34,6 @@
 <xsl:template match="/">
    <xsl:call-template name="header-section" />
    <xsl:call-template name="cmdline-section" />
-   <!--xsl:call-template name="config-section" /-->
    <xsl:call-template name="manpage-see-also-section" />
 </xsl:template>
 
@@ -139,11 +138,6 @@ There were warnings.
 .IP 2
 There were errors.
 </xsl:template>
-
-
-<xsl:template name="config-section">
-</xsl:template>
-
 
 <xsl:template name="show-cmdline-options">
 .SS File manipulation

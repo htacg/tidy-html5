@@ -250,6 +250,1260 @@ OOPPTTIIOONNSS
        options, _C_h_a_r_a_c_t_e_r _E_n_c_o_d_i_n_g options, and _M_i_s_c_e_l_l_a_n_e_o_u_s options.
 
 
+
+   HHTTMMLL,, XXHHTTMMLL,, XXMMLL ooppttiioonnss::
+
+
+
+       aadddd--xxmmll--ddeeccll
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should add the XML declaration
+              when outputting XML or XHTML.
+
+              Note that if the input already includes an _<_?_x_m_l _._._. _?_>
+              declaration then this option will be ignored.
+
+              If the encoding for the output is different from _a_s_c_i_i, one of
+              the _u_t_f_* encodings, or _r_a_w, then the declaration is always added
+              as required by the XML standard.
+
+
+                                      SSeeee aallssoo: _c_h_a_r_-_e_n_c_o_d_i_n_g, _o_u_t_p_u_t_-_e_n_c_o_d_i_n_g
+
+       aadddd--xxmmll--ssppaaccee
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should add _x_m_l_:_s_p_a_c_e_=_"_p_r_e_s_e_r_v_e_" to
+              elements such as _<_p_r_e_>, _<_s_t_y_l_e_> and _<_s_c_r_i_p_t_> when generating
+              XML.
+
+              This is needed if the whitespace in such elements is to be
+              parsed appropriately without having access to the DTD.
+
+       aalltt--tteexxtt
+
+              Type:    String
+              Default: -
+              Default: -
+
+              This option specifies the default _a_l_t_= text Tidy uses for _<_i_m_g_>
+              attributes when the _a_l_t_= attribute is missing.
+
+              Use with care, as it is your responsibility to make your
+              documents accessible to people who cannot see the images.
+
+       aanncchhoorr--aass--nnaammee
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option controls the deletion or addition of the _n_a_m_e
+              attribute in elements where it can serve as anchor.
+
+              If set to _y_e_s a _n_a_m_e attribute, if not already existing, is
+              added along an existing _i_d attribute if the DTD allows it.
+
+              If set to _n_o any existing name attribute is removed if an _i_d
+              attribute exists or has been added.
+
+       aassssuummee--xxmmll--pprroocciinnss
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should change the parsing of
+              processing instructions to require _?_> as the terminator rather
+              than _>.
+
+              This option is automatically set if the input is in XML.
+
+       bbaarree    Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should strip Microsoft specific
+              HTML from Word 2000 documents, and output spaces rather than
+              non-breaking spaces where they exist in the input.
+
+       cclleeaann   Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should perform cleaning of some
+              legacy presentational tags (currently _<_i_>, _<_b_>, _<_c_e_n_t_e_r_> when
+              enclosed within appropriate inline tags, and _<_f_o_n_t_>). If set to
+              _y_e_s then legacy tags will be replaced with CSS _<_s_t_y_l_e_> tags and
+              structural markup as appropriate.
+
+       ccooeerrccee--eennddttaaggss
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should coerce a start tag into an
+              end tag in cases where it looks like an end tag was probably
+              intended; for example, given
+
+              _<_s_p_a_n_>_f_o_o _<_b_>_b_a_r_<_b_> _b_a_z_<_/_s_p_a_n_>
+
+              Tidy will output
+
+              _<_s_p_a_n_>_f_o_o _<_b_>_b_a_r_<_/_b_> _b_a_z_<_/_s_p_a_n_>
+
+       ccssss--pprreeffiixx
+
+              Type:    String
+              Default: -
+              Default: -
+
+              This option specifies the prefix that Tidy uses for styles
+              rules.
+
+              By default, _c will be used.
+
+       ddeeccoorraattee--iinnffeerrrreedd--uull
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should decorate inferred _<_u_l_>
+              elements with some CSS markup to avoid indentation to the right.
+
+       ddooccttyyppee
+
+              Type:    DocType
+              Default: auto
+              Example: html5, omit, auto, strict, transitional, user
+
+              This option specifies the DOCTYPE declaration generated by Tidy.
+
+              If set to _o_m_i_t the output won't contain a DOCTYPE declaration.
+              Note this this also implies _n_u_m_e_r_i_c_-_e_n_t_i_t_i_e_s is set to _y_e_s.
+
+              If set to _h_t_m_l_5 the DOCTYPE is set to _<_!_D_O_C_T_Y_P_E _h_t_m_l_>.
+
+              If set to _a_u_t_o (the default) Tidy will use an educated guess
+              based upon the contents of the document.
+
+              If set to _s_t_r_i_c_t, Tidy will set the DOCTYPE to the HTML4 or
+              XHTML1 strict DTD.
+
+              If set to _l_o_o_s_e, the DOCTYPE is set to the HTML4 or XHTML1 loose
+              (transitional) DTD.
+
+              Alternatively, you can supply a string for the formal public
+              identifier (FPI).
+
+              For example:
+
+              _d_o_c_t_y_p_e_: _"_-_/_/_A_C_M_E_/_/_D_T_D _H_T_M_L _3_._1_4_1_5_9_/_/_E_N_"
+
+              If you specify the FPI for an XHTML document, Tidy will set the
+              system identifier to an empty string. For an HTML document, Tidy
+              adds a system identifier only if one was already present in
+              order to preserve the processing mode of some browsers. Tidy
+              leaves the DOCTYPE for generic XML documents unchanged.
+
+              This option does not offer a validation of document conformance.
+
+       ddrroopp--eemmppttyy--eelleemmeennttss
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should discard empty elements.
+
+       ddrroopp--eemmppttyy--ppaarraass
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should discard empty paragraphs.
+
+       ddrroopp--ffoonntt--ttaaggss
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              Deprecated; _d_o _n_o_t _u_s_e. This option is destructive to _<_f_o_n_t_>
+              tags, and it will be removed from future versions of Tidy. Use
+              the _c_l_e_a_n option instead.
+
+              If you do set this option despite the warning it will perform as
+              _c_l_e_a_n except styles will be inline instead of put into a CSS
+              class. _<_f_o_n_t_> tags will be dropped completely and their styles
+              will not be preserved.
+
+              If both _c_l_e_a_n and this option are enabled, _<_f_o_n_t_> tags will
+              still be dropped completely, and other styles will be preserved
+              in a CSS class instead of inline.
+
+              See _c_l_e_a_n for more information.
+
+       ddrroopp--pprroopprriieettaarryy--aattttrriibbuutteess
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should strip out proprietary
+              attributes, such as Microsoft data binding attributes.
+              Additionally attributes that aren't permitted in the output
+              version of HTML will be dropped if used with _s_t_r_i_c_t_-_t_a_g_s_-
+              _a_t_t_r_i_b_u_t_e_s.
+
+       eenncclloossee--bblloocckk--tteexxtt
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should insert a _<_p_> element to
+              enclose any text it finds in any element that allows mixed
+              content for HTML transitional but not HTML strict.
+
+       eenncclloossee--tteexxtt
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should enclose any text it finds
+              in the body element within a _<_p_> element.
+
+              This is useful when you want to take existing HTML and use it
+              with a style sheet.
+
+       eessccaappee--ccddaattaa
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should convert _<_!_[_C_D_A_T_A_[_]_]_>
+              sections to normal text.
+
+       ffiixx--bbaacckkssllaasshh
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should replace backslash
+              characters _\ in URLs with forward slashes _/.
+
+       ffiixx--bbaadd--ccoommmmeennttss
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should replace unexpected hyphens
+              with _= characters when it comes across adjacent hyphens.
+
+              The default is _y_e_s.
+
+              This option is provided for users of Cold Fusion which uses the
+              comment syntax: _<_!_-_-_- _-_-_-_>.
+
+       ffiixx--uurrii
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should check attribute values that
+              carry URIs for illegal characters and if such are found, escape
+              them as HTML4 recommends.
+
+       ggddoocc    Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should enable specific behavior
+              for cleaning up HTML exported from Google Docs.
+
+       hhiiddee--ccoommmmeennttss
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should print out comments.
+
+       hhiiddee--eennddttaaggss
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option is an alias for _o_m_i_t_-_o_p_t_i_o_n_a_l_-_t_a_g_s.
+
+       iinnddeenntt--ccddaattaa
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should indent _<_!_[_C_D_A_T_A_[_]_]_>
+              sections.
+
+       iinnppuutt--xxmmll
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should use the XML parser rather
+              than the error correcting HTML parser.
+
+       jjooiinn--ccllaasssseess
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should combine class names to
+              generate a single, new class name if multiple class assignments
+              are detected on an element.
+
+       jjooiinn--ssttyylleess
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should combine styles to generate
+              a single, new style if multiple style values are detected on an
+              element.
+
+       lliitteerraall--aattttrriibbuutteess
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies how Tidy deals with whitespace characters
+              within attribute values.
+
+              If the value is _n_o Tidy normalizes attribute values by replacing
+              any newline or tab with a single space, and further by replacing
+              any contiguous whitespace with a single space.
+
+              To force Tidy to preserve the original, literal values of all
+              attributes and ensure that whitespace within attribute values is
+              passed through unchanged, set this option to _y_e_s.
+
+       llooggiiccaall--eemmpphhaassiiss
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should replace any occurrence of
+              _<_i_> with _<_e_m_> and any occurrence of _<_b_> with _<_s_t_r_o_n_g_>. Any
+              attributes are preserved unchanged.
+
+              This option can be set independently of the _c_l_e_a_n option.
+
+       lloowweerr--lliitteerraallss
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should convert the value of an
+              attribute that takes a list of predefined values to lower case.
+
+              This is required for XHTML documents.
+
+       mmeerrggee--ddiivvss
+
+              Type:    AutoBool
+              Default: auto
+              Example: auto, y/n, yes/no, t/f, true/false, 1/0
+
+              This option can be used to modify the behavior of _c_l_e_a_n when set
+              to _y_e_s.
+
+              This option specifies if Tidy should merge nested _<_d_i_v_> such as
+              _<_d_i_v_>_<_d_i_v_>_._._._<_/_d_i_v_>_<_/_d_i_v_>.
+
+              If set to _a_u_t_o the attributes of the inner _<_d_i_v_> are moved to
+              the outer one. Nested _<_d_i_v_> with _i_d attributes are _n_o_t merged.
+
+              If set to _y_e_s the attributes of the inner _<_d_i_v_> are discarded
+              with the exception of _c_l_a_s_s and _s_t_y_l_e.
+
+
+                                                  SSeeee aallssoo: _c_l_e_a_n, _m_e_r_g_e_-_s_p_a_n_s
+
+       mmeerrggee--eemmpphhaassiiss
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should merge nested _<_b_> and _<_i_>
+              elements; for example, for the case
+
+              _<_b _c_l_a_s_s_=_"_r_t_o_p_-_2_"_>_f_o_o _<_b _c_l_a_s_s_=_"_r_2_-_2_"_>_b_a_r_<_/_b_> _b_a_z_<_/_b_>,
+
+              Tidy will output _<_b _c_l_a_s_s_=_"_r_t_o_p_-_2_"_>_f_o_o _b_a_r _b_a_z_<_/_b_>.
+
+       mmeerrggee--ssppaannss
+
+              Type:    AutoBool
+              Default: auto
+              Example: auto, y/n, yes/no, t/f, true/false, 1/0
+
+              This option can be used to modify the behavior of _c_l_e_a_n when set
+              to _y_e_s.
+
+              This option specifies if Tidy should merge nested _<_s_p_a_n_> such as
+              _<_s_p_a_n_>_<_s_p_a_n_>_._._._<_/_s_p_a_n_>_<_/_s_p_a_n_>.
+
+              The algorithm is identical to the one used by _m_e_r_g_e_-_d_i_v_s.
+
+
+                                                   SSeeee aallssoo: _c_l_e_a_n, _m_e_r_g_e_-_d_i_v_s
+
+       nnccrr     Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should allow numeric character
+              references.
+
+       nneeww--bblloocckklleevveell--ttaaggss
+
+              Type:    Tag names
+              Default: -
+              Example: tagX, tagY, ...
+
+              This option specifies new block-level tags. This option takes a
+              space or comma separated list of tag names.
+
+              Unless you declare new tags, Tidy will refuse to generate a
+              tidied file if the input includes previously unknown tags.
+
+              Note you can't change the content model for elements such as
+              _<_t_a_b_l_e_>, _<_u_l_>, _<_o_l_> and _<_d_l_>.
+
+              This option is ignored in XML mode.
+
+
+                       SSeeee aallssoo: _n_e_w_-_e_m_p_t_y_-_t_a_g_s, _n_e_w_-_i_n_l_i_n_e_-_t_a_g_s, _n_e_w_-_p_r_e_-_t_a_g_s
+
+       nneeww--eemmppttyy--ttaaggss
+
+              Type:    Tag names
+              Default: -
+              Example: tagX, tagY, ...
+
+              This option specifies new empty inline tags. This option takes a
+              space or comma separated list of tag names.
+
+              Unless you declare new tags, Tidy will refuse to generate a
+              tidied file if the input includes previously unknown tags.
+
+              Remember to also declare empty tags as either inline or
+              blocklevel.
+
+              This option is ignored in XML mode.
+
+
+                  SSeeee aallssoo: _n_e_w_-_b_l_o_c_k_l_e_v_e_l_-_t_a_g_s, _n_e_w_-_i_n_l_i_n_e_-_t_a_g_s, _n_e_w_-_p_r_e_-_t_a_g_s
+
+       nneeww--iinnlliinnee--ttaaggss
+
+              Type:    Tag names
+              Default: -
+              Example: tagX, tagY, ...
+
+              This option specifies new non-empty inline tags. This option
+              takes a space or comma separated list of tag names.
+
+              Unless you declare new tags, Tidy will refuse to generate a
+              tidied file if the input includes previously unknown tags.
+
+              This option is ignored in XML mode.
+
+
+                   SSeeee aallssoo: _n_e_w_-_b_l_o_c_k_l_e_v_e_l_-_t_a_g_s, _n_e_w_-_e_m_p_t_y_-_t_a_g_s, _n_e_w_-_p_r_e_-_t_a_g_s
+
+       nneeww--pprree--ttaaggss
+
+              Type:    Tag names
+              Default: -
+              Example: tagX, tagY, ...
+
+              This option specifies new tags that are to be processed in
+              exactly the same way as HTML's _<_p_r_e_> element. This option takes
+              a space or comma separated list of tag names.
+
+              Unless you declare new tags, Tidy will refuse to generate a
+              tidied file if the input includes previously unknown tags.
+
+              Note you cannot as yet add new CDATA elements.
+
+              This option is ignored in XML mode.
+
+
+                SSeeee aallssoo: _n_e_w_-_b_l_o_c_k_l_e_v_e_l_-_t_a_g_s, _n_e_w_-_e_m_p_t_y_-_t_a_g_s, _n_e_w_-_i_n_l_i_n_e_-_t_a_g_s
+
+       nnuummeerriicc--eennttiittiieess
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should output entities other than
+              the built-in HTML entities (_&_a_m_p_;, _&_l_t_;, _&_g_t_;, and _&_q_u_o_t_;) in
+              the numeric rather than the named entity form.
+
+              Only entities compatible with the DOCTYPE declaration generated
+              are used.
+
+              Entities that can be represented in the output encoding are
+              translated correspondingly.
+
+
+                                          SSeeee aallssoo: _d_o_c_t_y_p_e, _p_r_e_s_e_r_v_e_-_e_n_t_i_t_i_e_s
+
+       oommiitt--ooppttiioonnaall--ttaaggss
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should omit optional start tags
+              and end tags when generating output.
+
+              Setting this option causes all tags for the _<_h_t_m_l_>, _<_h_e_a_d_>, and
+              _<_b_o_d_y_> elements to be omitted from output, as well as such end
+              tags as _<_/_p_>, _<_/_l_i_>, _<_/_d_t_>, _<_/_d_d_>, _<_/_o_p_t_i_o_n_>, _<_/_t_r_>, _<_/_t_d_>, and
+              _<_/_t_h_>.
+
+              This option is ignored for XML output.
+
+       oouuttppuutt--hhttmmll
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should generate pretty printed
+              output, writing it as HTML.
+
+       oouuttppuutt--xxhhttmmll
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should generate pretty printed
+              output, writing it as extensible HTML.
+
+              This option causes Tidy to set the DOCTYPE and default namespace
+              as appropriate to XHTML, and will use the corrected value in
+              output regardless of other sources.
+
+              For XHTML, entities can be written as named or numeric entities
+              according to the setting of _n_u_m_e_r_i_c_-_e_n_t_i_t_i_e_s.
+
+              The original case of tags and attributes will be preserved,
+              regardless of other options.
+
+       oouuttppuutt--xxmmll
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should pretty print output,
+              writing it as well-formed XML.
+
+              Any entities not defined in XML 1.0 will be written as numeric
+              entities to allow them to be parsed by an XML parser.
+
+              The original case of tags and attributes will be preserved,
+              regardless of other options.
+
+       pprreesseerrvvee--eennttiittiieess
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should preserve well-formed
+              entities as found in the input.
+
+       qquuoottee--aammppeerrssaanndd
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should output unadorned _&
+              characters as _&_a_m_p_;.
+
+       qquuoottee--mmaarrkkss
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should output _" characters as
+              _&_q_u_o_t_; as is preferred by some editing environments.
+
+              The apostrophe character _' is written out as _&_#_3_9_; since many
+              web browsers don't yet support _&_a_p_o_s_;.
+
+       qquuoottee--nnbbsspp
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should output non-breaking space
+              characters as entities, rather than as the Unicode character
+              value 160 (decimal).
+
+       rreeppeeaatteedd--aattttrriibbuutteess
+
+              Type:    enum
+              Default: keep-last
+              Example: keep-first, keep-last
+
+              This option specifies if Tidy should keep the first or last
+              attribute, if an attribute is repeated, e.g. has two _a_l_i_g_n
+              attributes.
+
+
+                                           SSeeee aallssoo: _j_o_i_n_-_c_l_a_s_s_e_s, _j_o_i_n_-_s_t_y_l_e_s
+
+       rreeppllaaccee--ccoolloorr
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should replace numeric values in
+              color attributes with HTML/XHTML color names where defined, e.g.
+              replace _#_f_f_f_f_f_f with _w_h_i_t_e.
+
+       sshhooww--bbooddyy--oonnllyy
+
+              Type:    AutoBool
+              Default: no
+              Example: auto, y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should print only the contents of
+              the body tag as an HTML fragment.
+
+              If set to _a_u_t_o, this is performed only if the body tag has been
+              inferred.
+
+              Useful for incorporating existing whole pages as a portion of
+              another page.
+
+              This option has no effect if XML output is requested.
+
+       sskkiipp--nneesstteedd
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies that Tidy should skip nested tags when
+              parsing script and style data.
+
+       ssttrriicctt--ttaaggss--aattttrriibbuutteess
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This options ensures that tags and attributes are applicable for
+              the version of HTML that Tidy outputs. When set to _y_e_s (the
+              default) and the output document type is a strict doctype, then
+              Tidy will report errors. If the output document type is a loose
+              or transitional doctype, then Tidy will report warnings.
+
+              Additionally if _d_r_o_p_-_p_r_o_p_r_i_e_t_a_r_y_-_a_t_t_r_i_b_u_t_e_s is enabled, then not
+              applicable attributes will be dropped, too.
+
+              When set to _n_o, these checks are not performed.
+
+       uuppppeerrccaassee--aattttrriibbuutteess
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should output attribute names in
+              upper case.
+
+              The default is _n_o, which results in lower case attribute names,
+              except for XML input, where the original case is preserved.
+
+       uuppppeerrccaassee--ttaaggss
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should output tag names in upper
+              case.
+
+              The default is _n_o which results in lower case tag names, except
+              for XML input where the original case is preserved.
+
+       wwoorrdd--22000000
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should go to great pains to strip
+              out all the surplus stuff Microsoft Word 2000 inserts when you
+              save Word documents as "Web pages". It doesn't handle embedded
+              images or VML.
+
+              You should consider using Word's "Save As: Web Page, Filtered".
+
+   DDiiaaggnnoossttiiccss ooppttiioonnss::
+
+
+
+       aacccceessssiibbiilliittyy--cchheecckk
+
+              Type:    enum
+              Default: 0 (Tidy Classic)
+              Example: 0 (Tidy Classic), 1 (Priority 1 Checks), 2 (Priority 2
+              Checks), 3 (Priority 3 Checks)
+
+              This option specifies what level of accessibility checking, if
+              any, that Tidy should perform.
+
+              Level _0 _(_T_i_d_y _C_l_a_s_s_i_c_) is equivalent to Tidy Classic's
+              accessibility checking.
+
+              For more information on Tidy's accessibility checking, visit
+              Tidy's Accessibility Page at _h_t_t_p_:_/_/_w_w_w_._h_t_m_l_-
+              _t_i_d_y_._o_r_g_/_a_c_c_e_s_s_i_b_i_l_i_t_y_/.
+
+       sshhooww--eerrrroorrss
+
+              Type:    Integer
+              Default: 6
+              Example: 0, 1, 2, ...
+
+              This option specifies the number Tidy uses to determine if
+              further errors should be shown. If set to _0, then no errors are
+              shown.
+
+       sshhooww--iinnffoo
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should display info-level
+              messages.
+
+       sshhooww--wwaarrnniinnggss
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should suppress warnings. This can
+              be useful when a few errors are hidden in a flurry of warnings.
+
+   PPrreettttyy PPrriinntt ooppttiioonnss::
+
+
+
+       bbrreeaakk--bbeeffoorree--bbrr
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should output a line break before
+              each _<_b_r_> element.
+
+       eessccaappee--ssccrriippttss
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option causes items that look like closing tags, like _<_/_g
+              to be escaped to _<_\_/_g. Set this option to 'no' if you do not
+              want this.
+
+       iinnddeenntt  Type:    AutoBool
+              Default: no
+              Example: auto, y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should indent block-level tags.
+
+              If set to _a_u_t_o Tidy will decide whether or not to indent the
+              content of tags such as _<_t_i_t_l_e_>, _<_h_1_>-_<_h_6_>, _<_l_i_>, _<_t_d_>, or _<_p_>
+              based on the content including a block-level element.
+
+              Setting _i_n_d_e_n_t to _y_e_s can expose layout bugs in some browsers.
+
+              Use the option _i_n_d_e_n_t_-_s_p_a_c_e_s to control the number of spaces or
+              tabs output per level of indent, and _i_n_d_e_n_t_-_w_i_t_h_-_t_a_b_s to specify
+              whether spaces or tabs are used.
+
+
+                                                       SSeeee aallssoo: _i_n_d_e_n_t_-_s_p_a_c_e_s
+
+       iinnddeenntt--aattttrriibbuutteess
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should begin each attribute on a
+              new line.
+
+       iinnddeenntt--ssppaacceess
+
+              Type:    Integer
+              Default: 2
+              Example: 0, 1, 2, ...
+
+              This option specifies the number of spaces or tabs that Tidy
+              uses to indent content when _i_n_d_e_n_t is enabled.
+
+              Note that the default value for this option is dependent upon
+              the value of _i_n_d_e_n_t_-_w_i_t_h_-_t_a_b_s (see also).
+
+
+                                                              SSeeee aallssoo: _i_n_d_e_n_t
+
+       iinnddeenntt--wwiitthh--ttaabbss
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should indent with tabs instead of
+              spaces, assuming _i_n_d_e_n_t is _y_e_s.
+
+              Set it to _y_e_s to indent using tabs instead of the default
+              spaces.
+
+              Use the option _i_n_d_e_n_t_-_s_p_a_c_e_s to control the number of tabs
+              output per level of indent. Note that when _i_n_d_e_n_t_-_w_i_t_h_-_t_a_b_s is
+              enabled the default value of _i_n_d_e_n_t_-_s_p_a_c_e_s is reset to _1.
+
+              Note _t_a_b_-_s_i_z_e controls converting input tabs to spaces. Set it
+              to zero to retain input tabs.
+
+       mmaarrkkuupp  Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should generate a pretty printed
+              version of the markup. Note that Tidy won't generate a pretty
+              printed version if it finds significant errors (see _f_o_r_c_e_-
+              _o_u_t_p_u_t).
+
+       ppuunnccttuuaattiioonn--wwrraapp
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should line wrap after some
+              Unicode or Chinese punctuation characters.
+
+       ssoorrtt--aattttrriibbuutteess
+
+              Type:    enum
+              Default: none
+              Example: none, alpha
+
+              This option specifies that Tidy should sort attributes within an
+              element using the specified sort algorithm. If set to _a_l_p_h_a, the
+              algorithm is an ascending alphabetic sort.
+
+       sspplliitt   Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option has no function and is deprecated.
+
+       ttaabb--ssiizzee
+
+              Type:    Integer
+              Default: 8
+              Example: 0, 1, 2, ...
+
+              This option specifies the number of columns that Tidy uses
+              between successive tab stops. It is used to map tabs to spaces
+              when reading the input.
+
+       vveerrttiiccaall--ssppaaccee
+
+              Type:    AutoBool
+              Default: no
+              Example: auto, y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should add some extra empty lines
+              for readability.
+
+              The default is _n_o.
+
+              If set to _a_u_t_o Tidy will eliminate nearly all newline
+              characters.
+
+       wwrraapp    Type:    Integer
+              Default: 68
+              Example: 0 (no wrapping), 1, 2, ...
+
+              This option specifies the right margin Tidy uses for line
+              wrapping.
+
+              Tidy tries to wrap lines so that they do not exceed this length.
+
+              Set _w_r_a_p to _0(zero) if you want to disable line wrapping.
+
+       wwrraapp--aasspp
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should line wrap text contained
+              within ASP pseudo elements, which look like: _<_% _._._. _%_>.
+
+       wwrraapp--aattttrriibbuutteess
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should line-wrap attribute values,
+              meaning that if the value of an attribute causes a line to
+              exceed the width specified by _w_r_a_p, Tidy will add one or more
+              line breaks to the value, causing it to be wrapped into multiple
+              lines.
+
+              Note that this option can be set independently of _w_r_a_p_-_s_c_r_i_p_t_-
+              _l_i_t_e_r_a_l_s. By default Tidy replaces any newline or tab with a
+              single space and replaces any sequences of whitespace with a
+              single space.
+
+              To force Tidy to preserve the original, literal values of all
+              attributes, and ensure that whitespace characters within
+              attribute values are passed through unchanged, set _l_i_t_e_r_a_l_-
+              _a_t_t_r_i_b_u_t_e_s to _y_e_s.
+
+
+                            SSeeee aallssoo: _w_r_a_p_-_s_c_r_i_p_t_-_l_i_t_e_r_a_l_s, _l_i_t_e_r_a_l_-_a_t_t_r_i_b_u_t_e_s
+
+       wwrraapp--jjssttee
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should line wrap text contained
+              within JSTE pseudo elements, which look like: _<_# _._._. _#_>.
+
+       wwrraapp--pphhpp
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should line wrap text contained
+              within PHP pseudo elements, which look like: _<_?_p_h_p _._._. _?_>.
+
+       wwrraapp--ssccrriipptt--lliitteerraallss
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should line wrap string literals
+              that appear in script attributes.
+
+              Tidy wraps long script string literals by inserting a backslash
+              character before the line break.
+
+
+                                                     SSeeee aallssoo: _w_r_a_p_-_a_t_t_r_i_b_u_t_e_s
+
+       wwrraapp--sseeccttiioonnss
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should line wrap text contained
+              within _<_!_[ _._._. _]_> section tags.
+
+   CChhaarraacctteerr EEnnccooddiinngg ooppttiioonnss::
+
+
+
+       aasscciiii--cchhaarrss
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              Can be used to modify behavior of the _c_l_e_a_n option when set to
+              _y_e_s.
+
+              If set to _y_e_s when using _c_l_e_a_n, _&_e_m_d_a_s_h_;, _&_r_d_q_u_o_;, and other
+              named character entities are downgraded to their closest ASCII
+              equivalents.
+
+
+                                                               SSeeee aallssoo: _c_l_e_a_n
+
+       cchhaarr--eennccooddiinngg
+
+              Type:    Encoding
+              Default: utf8
+              Example: raw, ascii, latin0, latin1, utf8, iso2022, mac,
+              win1252, ibm858, utf16le, utf16be, utf16, big5, shiftjis
+
+              This option specifies the character encoding Tidy uses for both
+              the input and output.
+
+              For _a_s_c_i_i Tidy will accept Latin-1 (ISO-8859-1) character
+              values, but will use entities for all characters whose value
+              >127.
+
+              For _r_a_w, Tidy will output values above 127 without translating
+              them into entities.
+
+              For _l_a_t_i_n_1, characters above 255 will be written as entities.
+
+              For _u_t_f_8, Tidy assumes that both input and output are encoded as
+              UTF-8.
+
+              You can use _i_s_o_2_0_2_2 for files encoded using the ISO-2022 family
+              of encodings e.g. ISO-2022-JP.
+
+              For _m_a_c and _w_i_n_1_2_5_2, Tidy will accept vendor specific character
+              values, but will use entities for all characters whose value
+              >127.
+
+              For unsupported encodings, use an external utility to convert to
+              and from UTF-8.
+
+
+                                     SSeeee aallssoo: _i_n_p_u_t_-_e_n_c_o_d_i_n_g, _o_u_t_p_u_t_-_e_n_c_o_d_i_n_g
+
+       iinnppuutt--eennccooddiinngg
+
+              Type:    Encoding
+              Default: utf8
+              Example: raw, ascii, latin0, latin1, utf8, iso2022, mac,
+              win1252, ibm858, utf16le, utf16be, utf16, big5, shiftjis
+
+              This option specifies the character encoding Tidy uses for the
+              input. See _c_h_a_r_-_e_n_c_o_d_i_n_g for more info.
+
+
+                                                       SSeeee aallssoo: _c_h_a_r_-_e_n_c_o_d_i_n_g
+
+       llaanngguuaaggee
+
+              Type:    String
+              Default: -
+              Default: -
+
+              Currently not used, but this option specifies the language Tidy
+              would use if it were properly localized. For example: _e_n.
+
+       nneewwlliinnee
+
+              Type:    enum
+              Default: _P_l_a_t_f_o_r_m _d_e_p_e_n_d_e_n_t
+              Example: LF, CRLF, CR
+
+              The default is appropriate to the current platform.
+
+              Genrally CRLF on PC-DOS, Windows and OS/2; CR on Classic Mac OS;
+              and LF everywhere else (Linux, Mac OS X, and Unix).
+
+       oouuttppuutt--bboomm
+
+              Type:    AutoBool
+              Default: auto
+              Example: auto, y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should write a Unicode Byte Order
+              Mark character (BOM; also known as Zero Width No-Break Space;
+              has value of U+FEFF) to the beginning of the output, and only
+              applies to UTF-8 and UTF-16 output encodings.
+
+              If set to _a_u_t_o this option causes Tidy to write a BOM to the
+              output only if a BOM was present at the beginning of the input.
+
+              A BOM is always written for XML/XHTML output using UTF-16 output
+              encodings.
+
+       oouuttppuutt--eennccooddiinngg
+
+              Type:    Encoding
+              Default: utf8
+              Example: raw, ascii, latin0, latin1, utf8, iso2022, mac,
+              win1252, ibm858, utf16le, utf16be, utf16, big5, shiftjis
+
+              This option specifies the character encoding Tidy uses for the
+              output.
+
+              Note that this may only be different from _i_n_p_u_t_-_e_n_c_o_d_i_n_g for
+              Latin encodings (_a_s_c_i_i, _l_a_t_i_n_0, _l_a_t_i_n_1, _m_a_c, _w_i_n_1_2_5_2, _i_b_m_8_5_8).
+
+              See _c_h_a_r_-_e_n_c_o_d_i_n_g for more information
+
+
+                                                       SSeeee aallssoo: _c_h_a_r_-_e_n_c_o_d_i_n_g
+
+   MMiisscceellllaanneeoouuss ooppttiioonnss::
+
+
+
+       eerrrroorr--ffiillee
+
+              Type:    String
+              Default: -
+              Default: -
+
+              This option specifies the error file Tidy uses for errors and
+              warnings. Normally errors and warnings are output to _s_t_d_e_r_r.
+
+
+                                                         SSeeee aallssoo: _o_u_t_p_u_t_-_f_i_l_e
+
+       ffoorrccee--oouuttppuutt
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should produce output even if
+              errors are encountered.
+
+              Use this option with care; if Tidy reports an error, this means
+              Tidy was not able to (or is not sure how to) fix the error, so
+              the resulting output may not reflect your intention.
+
+       ggnnuu--eemmaaccss
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should change the format for
+              reporting errors and warnings to a format that is more easily
+              parsed by GNU Emacs.
+
+       ggnnuu--eemmaaccss--ffiillee
+
+              Type:    String
+              Default: -
+              Default: -
+
+              Used internally.
+
+       kkeeeepp--ttiimmee
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should keep the original
+              modification time of files that Tidy modifies in place.
+
+              Setting the option to _y_e_s allows you to tidy files without
+              changing the file modification date, which may be useful with
+              certain tools that use the modification date for things such as
+              automatic server deployment.
+
+              Note this feature is not supported on some platforms.
+
+       oouuttppuutt--ffiillee
+
+              Type:    String
+              Default: -
+              Default: -
+
+              This option specifies the output file Tidy uses for markup.
+              Normally markup is written to _s_t_d_o_u_t.
+
+
+                                                          SSeeee aallssoo: _e_r_r_o_r_-_f_i_l_e
+
+       qquuiieett   Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should output the summary of the
+              numbers of errors and warnings, or the welcome or informational
+              messages.
+
+       sslliiddee--ssttyyllee
+
+              Type:    String
+              Default: -
+              Default: -
+
+              This option has no function and is deprecated.
+
+       ttiiddyy--mmaarrkk
+
+              Type:    Boolean
+              Default: yes
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should add a _m_e_t_a element to the
+              document head to indicate that the document has been tidied.
+
+              Tidy won't add a meta element if one is already present.
+
+       wwrriittee--bbaacckk
+
+              Type:    Boolean
+              Default: no
+              Example: y/n, yes/no, t/f, true/false, 1/0
+
+              This option specifies if Tidy should write back the tidied
+              markup to the same file it read from.
+
+              You are advised to keep copies of important files before tidying
+              them, as on rare occasions the result may not be what you
+              expect.
+
 EENNVVIIRROONNMMEENNTT
        HHTTMMLL__TTIIDDYY
               Name of the default configuration file.  This should be an

@@ -118,10 +118,6 @@ There were errors.
 
 
 <xsl:template name="config-section">
-.SH SYNOPSIS
-\fBtidy --\fR\fIoption1 \fRvalue1 \fB--\fIoption2 \fRvalue2 [standard options ...]
-.br
-\fBtidy -config \fIconfig-file \fR[standard options ...]
 .SH WARNING
 The options detailed here do not include the "standard" command-line options (i.e., those preceded by a single '\fB-\fR') described above in the first section of this man page.
 .SH DESCRIPTION

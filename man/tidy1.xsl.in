@@ -103,7 +103,7 @@ is listed on a separate line in the form
 .br
 etc.
 .LP
-The permissible values for a given option depend on the option's \fBType\fR.  There are five types: \fIBoolean\fR, \fIAutoBool\fR, \fIDocType\fR, \fIEnum\fR, and \fIString\fR. Boolean types allow any of \fIyes/no, y/n, true/false, t/f, 1/0\fR.  AutoBools allow \fIauto\fR in addition to the values allowed by Booleans.  Integer types take non-negative integers.  String types generally have no defaults, and you should provide them in non-quoted form (unless you wish the output to contain the literal quotes).
+The permissible values for a given option depend on the option's \fBType\fR.  There are five types: \fIBoolean\fR, \fIAutoBool\fR, \fIDocType\fR, \fIEnum\fR, and \fIString\fR.  Boolean types allow any of \fIyes/no, y/n, true/false, t/f, 1/0\fR.  AutoBools allow \fIauto\fR in addition to the values allowed by Booleans.  Integer types take non-negative integers.  String types generally have no defaults, and you should provide them in non-quoted form (unless you wish the output to contain the literal quotes).
 .LP
 Enum, Encoding, and DocType "types" have a fixed repertoire of items; consult the \fIExample\fR[s] provided below for the option[s] in question.
 .LP
@@ -123,7 +123,7 @@ Here is a sample config file, with at least one example of each of the five Type
     error-file: errs.txt
 \fR
 .LP
-Below is a summary and brief description of each of the options. They are listed alphabetically within each category.<xsl:text/>
+Below is a summary and brief description of each of the options.  They are listed alphabetically within each category.<xsl:text/>
 <xsl:call-template name="show-config-options" />
 .SH ENVIRONMENT
 .TP

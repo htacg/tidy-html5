@@ -244,7 +244,7 @@ OOPPTTIIOONNSS
            _r_e_p_e_a_t_e_d_-_a_t_t_r_i_b_u_t_e_s_: _k_e_e_p_-_l_a_s_t
            _e_r_r_o_r_-_f_i_l_e_: _e_r_r_s_._t_x_t
 
-       Below is a summary and brief description of each of the options. They
+       Below is a summary and brief description of each of the options.  They
        are listed alphabetically within each category.
 
    HHTTMMLL,, XXHHTTMMLL,, XXMMLL ooppttiioonnss

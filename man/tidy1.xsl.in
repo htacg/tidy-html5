@@ -142,8 +142,6 @@ There were errors.
 
 
 <xsl:template name="config-section">
-.SH OPTIONS
-<xsl:call-template name="show-config-options" />
 </xsl:template>
 
 

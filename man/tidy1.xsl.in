@@ -3,7 +3,7 @@
     For generating the `tidy.1` man page from the
     output of `tidy -xml-help` and `tidy -xml-config`
 
-    (c) 2005-2007 (W3C) MIT, ERCIM, Keio University
+    (c) 2005-2016 (W3C) MIT, ERCIM, Keio University
     See tidy.h for the copyright notice.
 
     Written by Jelks Cabaniss and Arnaud Desitter

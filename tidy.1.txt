@@ -24,15 +24,15 @@ DDEESSCCRRIIPPTTIIOONN
        standard error.
 
 OOPPTTIIOONNSS
-       Tidy supports two different kinds of options.  Regular (or "standard")
-       command-line options start with a single dash '--'.  They are listed in
-       the first part of this section.  Detailed (or "expanded") options for
-       configuring the behavior of Tidy can be passed either on the command
-       line, starting with two dashes ----, or specified in a configuration
-       file, without the starting dashes.  They are listed in the second part
-       of this section.
+       Tidy supports two different kinds of options.  Purely _c_o_m_m_a_n_d_-_l_i_n_e
+       options, starting with a single dash '--', can only be used on the
+       command-line, not in configuration files.  They are listed in the first
+       part of this section.  _C_o_n_f_i_g_u_r_a_t_i_o_n options, on the other hand, can
+       either be passed on the command line, starting with two dashes ----, or
+       specified in a configuration file, using the option name without the
+       starting dashes.  They are listed in the second part of this section.
 
-       Single-letter "standard" options without an associated value can be
+       Single-letter _c_o_m_m_a_n_d_-_l_i_n_e options without an associated value can be
        combined; for example '--ii', '--mm' and '--uu' may be combined as '--iimmuu'.
 
        For command line options that expect a numerical argument, a default is
@@ -198,17 +198,17 @@ OOPPTTIIOONNSS
               output option descriptions in XML format
 
 
-       DDeettaaiilleedd ((ii..ee.. ""eexxppaannddeedd"")) OOppttiioonnss can be specified by preceding each
-       option with ---- at the command line, followed by its desired value, OR
-       by placing the options and values in a configuration file, and telling
-       tidy to read that file with the --ccoonnffiigg standard option:
+       _C_o_n_f_i_g_u_r_a_t_i_o_n options can be specified by preceding each option with ----
+       at the command line, followed by its desired value, OR by placing the
+       options and values in a configuration file, and telling tidy to read
+       that file with the --ccoonnffiigg option:
 
-          ttiiddyy ----_o_p_t_i_o_n_1 value1 ----_o_p_t_i_o_n_2 value2 [standard options ...]
-          ttiiddyy --ccoonnffiigg _c_o_n_f_i_g_-_f_i_l_e [standard options ...]
+          ttiiddyy ----_o_p_t_i_o_n_1 value1 ----_o_p_t_i_o_n_2 value2 ...
+          ttiiddyy --ccoonnffiigg _c_o_n_f_i_g_-_f_i_l_e  ...
 
-       Detailed configuration options can be conveniently grouped in a single
-       config file.  A Tidy configuration file is simply a text file, where
-       each option is listed on a separate line in the form
+       _C_o_n_f_i_g_u_r_a_t_i_o_n options can be conveniently grouped in a single config
+       file.  A Tidy configuration file is simply a text file, where each
+       option is listed on a separate line in the form
 
           ooppttiioonn11: _v_a_l_u_e_1
           ooppttiioonn22: _v_a_l_u_e_2

@@ -32,6 +32,13 @@ OOPPTTIIOONNSS
        specified in a configuration file, using the option name without the
        starting dashes.  They are listed in the second part of this section.
 
+       Using a _c_o_m_m_a_n_d_-_l_i_n_e option is sometimes equivalent to setting the
+       value of a _c_o_n_f_i_g_u_r_a_t_i_o_n option.  The equivalent option and value are
+       shown in parentheses in the list below, as they would appear in a
+       configuration file.  For example, --qquuiieett,, --qq (_q_u_i_e_t_: _y_e_s) means that
+       using the _c_o_m_m_a_n_d_-_l_i_n_e option --qquuiieett or --qq is equivalent to setting the
+       _c_o_n_f_i_g_u_r_a_t_i_o_n option _q_u_i_e_t to _y_e_s.
+
        Single-letter _c_o_m_m_a_n_d_-_l_i_n_e options without an associated value can be
        combined; for example '--ii', '--mm' and '--uu' may be combined as '--iimmuu'.
 
@@ -39,164 +46,137 @@ OOPPTTIIOONNSS
        assumed if no meaningful value can be found.
 
    FFiillee mmaanniippuullaattiioonn
-       --oouuttppuutt <<%%ss>>, --oo <<%%ss>>
-              write output to the specified <file> (_o_u_t_p_u_t_-_f_i_l_e_: _<_%_s_>)
+       --oouuttppuutt <<%%ss>>, --oo <<%%ss>> (_o_u_t_p_u_t_-_f_i_l_e_: _<_%_s_>)
+              write output to the specified <file>
 
        --ccoonnffiigg <<%%ss>>
               set configuration options from the specified <file>
 
+       --ffiillee <<%%ss>>, --ff <<%%ss>> (_e_r_r_o_r_-_f_i_l_e_: _<_%_s_>)
+              write errors and warnings to the specified <file>
 
-       --ffiillee <<%%ss>>, --ff <<%%ss>>
-              write errors and warnings to the specified <file> (_e_r_r_o_r_-_f_i_l_e_:
-              _<_%_s_>)
-
-       --mmooddiiffyy, --mm
-              modify the original input files (_w_r_i_t_e_-_b_a_c_k_: _y_e_s)
+       --mmooddiiffyy, --mm (_w_r_i_t_e_-_b_a_c_k_: _y_e_s)
+              modify the original input files
 
    PPrroocceessssiinngg ddiirreeccttiivveess
-       --iinnddeenntt, --ii
-              indent element content (_i_n_d_e_n_t_: _a_u_t_o)
+       --iinnddeenntt, --ii (_i_n_d_e_n_t_: _a_u_t_o)
+              indent element content
 
-       --wwrraapp <<%%ss>>, --ww <<%%ss>>
+       --wwrraapp <<%%ss>>, --ww <<%%ss>> (_w_r_a_p_: _<_%_s_>)
               wrap text at the specified <column>. 0 is assumed if <column> is
               missing. When this option is omitted, the default of the
-              configuration option 'wrap' applies.  (_w_r_a_p_: _<_%_s_>)
+              configuration option 'wrap' applies.
 
-       --uuppppeerr, --uu
-              force tags to upper case (_u_p_p_e_r_c_a_s_e_-_t_a_g_s_: _y_e_s)
+       --uuppppeerr, --uu (_u_p_p_e_r_c_a_s_e_-_t_a_g_s_: _y_e_s)
+              force tags to upper case
 
-       --cclleeaann, --cc
-              replace FONT, NOBR and CENTER tags with CSS (_c_l_e_a_n_: _y_e_s)
+       --cclleeaann, --cc (_c_l_e_a_n_: _y_e_s)
+              replace FONT, NOBR and CENTER tags with CSS
 
-       --bbaarree, --bb
-              strip out smart quotes and em dashes, etc.  (_b_a_r_e_: _y_e_s)
+       --bbaarree, --bb (_b_a_r_e_: _y_e_s)
+              strip out smart quotes and em dashes, etc.
 
-       --ggddoocc, --gg
-              produce clean version of html exported by Google Docs (_g_d_o_c_:
-              _y_e_s)
+       --ggddoocc, --gg (_g_d_o_c_: _y_e_s)
+              produce clean version of html exported by Google Docs
 
-       --nnuummeerriicc, --nn
-              output numeric rather than named entities (_n_u_m_e_r_i_c_-_e_n_t_i_t_i_e_s_:
-              _y_e_s)
+       --nnuummeerriicc, --nn (_n_u_m_e_r_i_c_-_e_n_t_i_t_i_e_s_: _y_e_s)
+              output numeric rather than named entities
 
-       --eerrrroorrss, --ee
-              show only errors and warnings (_m_a_r_k_u_p_: _n_o)
+       --eerrrroorrss, --ee (_m_a_r_k_u_p_: _n_o)
+              show only errors and warnings
 
-       --qquuiieett, --qq
-              suppress nonessential output (_q_u_i_e_t_: _y_e_s)
+       --qquuiieett, --qq (_q_u_i_e_t_: _y_e_s)
+              suppress nonessential output
 
-       --oommiitt  omit optional start tags and end tags (_o_m_i_t_-_o_p_t_i_o_n_a_l_-_t_a_g_s_: _y_e_s)
+       --oommiitt (_o_m_i_t_-_o_p_t_i_o_n_a_l_-_t_a_g_s_: _y_e_s)
+              omit optional start tags and end tags
 
-       --xxmmll   specify the input is well formed XML (_i_n_p_u_t_-_x_m_l_: _y_e_s)
+       --xxmmll (_i_n_p_u_t_-_x_m_l_: _y_e_s)
+              specify the input is well formed XML
 
-       --aassxxmmll, --aassxxhhttmmll
-              convert HTML to well formed XHTML (_o_u_t_p_u_t_-_x_h_t_m_l_: _y_e_s)
+       --aassxxmmll, --aassxxhhttmmll (_o_u_t_p_u_t_-_x_h_t_m_l_: _y_e_s)
+              convert HTML to well formed XHTML
 
-       --aasshhttmmll
-              force XHTML to well formed HTML (_o_u_t_p_u_t_-_h_t_m_l_: _y_e_s)
+       --aasshhttmmll (_o_u_t_p_u_t_-_h_t_m_l_: _y_e_s)
+              force XHTML to well formed HTML
 
-       --aacccceessss <<%%ss>>
+       --aacccceessss <<%%ss>> (_a_c_c_e_s_s_i_b_i_l_i_t_y_-_c_h_e_c_k_: _<_%_s_>)
               do additional accessibility checks (<level> = 0, 1, 2, 3). 0 is
-              assumed if <level> is missing.  (_a_c_c_e_s_s_i_b_i_l_i_t_y_-_c_h_e_c_k_: _<_%_s_>)
+              assumed if <level> is missing.
 
    CChhaarraacctteerr eennccooddiinnggss
        --rraaww   output values above 127 without conversion to entities
 
-
        --aasscciiii use ISO-8859-1 for input, US-ASCII for output
-
 
        --llaattiinn00
               use ISO-8859-15 for input, US-ASCII for output
 
-
        --llaattiinn11
               use ISO-8859-1 for both input and output
-
 
        --iissoo22002222
               use ISO-2022 for both input and output
 
-
        --uuttff88  use UTF-8 for both input and output
 
-
        --mmaacc   use MacRoman for input, US-ASCII for output
-
 
        --wwiinn11225522
               use Windows-1252 for input, US-ASCII for output
 
-
        --iibbmm885588
               use IBM-858 (CP850+Euro) for input, US-ASCII for output
-
 
        --uuttff1166llee
               use UTF-16LE for both input and output
 
-
        --uuttff1166bbee
               use UTF-16BE for both input and output
 
-
        --uuttff1166 use UTF-16 for both input and output
-
 
        --bbiigg55  use Big5 for both input and output
 
-
        --sshhiiffttjjiiss
               use Shift_JIS for both input and output
-
 
    MMiisscceellllaanneeoouuss
        --vveerrssiioonn, --vv
               show the version of Tidy
 
-
        --hheellpp, --hh, --??
               list the command line options
-
 
        --hheellpp--ccoonnffiigg
               list all configuration options
 
-
        --sshhooww--ccoonnffiigg
               list the current configuration settings
-
 
        --hheellpp--ooppttiioonn <<%%ss>>
               show a description of the <option>
 
-
-       --llaanngguuaaggee <<%%ss>>
+       --llaanngguuaaggee <<%%ss>> (_l_a_n_g_u_a_g_e_: _<_%_s_>)
               set Tidy's output language to <lang>. Specify '-language help'
               for more help. Use before output-causing arguments to ensure the
               language takes effect, e.g.,`tidy -lang es -lang help`.
-              (_l_a_n_g_u_a_g_e_: _<_%_s_>)
 
    XXMMLL
        --xxmmll--hheellpp
               list the command line options in XML format
 
-
        --xxmmll--ccoonnffiigg
               list all configuration options in XML format
-
 
        --xxmmll--ssttrriinnggss
               output all of Tidy's strings in XML format
 
-
        --xxmmll--eerrrroorr--ssttrriinnggss
               output error constants and strings in XML format
 
-
        --xxmmll--ooppttiioonnss--ssttrriinnggss
               output option descriptions in XML format
-
 
        _C_o_n_f_i_g_u_r_a_t_i_o_n options can be specified by preceding each option with ----
        at the command line, followed by its desired value, OR by placing the

@@ -26,6 +26,15 @@ or specified in a configuration file,
 using the option name without the starting dashes.  
 They are listed in the second part of this section.
 .LP
+Using a \fIcommand-line\fR option is sometimes equivalent to setting
+the value of a \fIconfiguration\fR option.  The equivalent option
+and value are shown in parentheses in the list below, as they would
+appear in a configuration file.  For example,
+\fB-quiet, -q\fR (\fIquiet: yes\fR) means that using the
+\fIcommand-line\fR option \fB-quiet\fR or \fB-q\fR
+is equivalent to setting the \fIconfiguration\fR option
+\fIquiet\fR to \fIyes\fR.
+.LP
 Single-letter \fIcommand-line\fR options without an associated value
 can be combined; for example '\fB-i\fR', '\fB-m\fR' and '\fB-u\fR'
 may be combined as '\fB-imu\fR'.
@@ -35,185 +44,142 @@ a default is assumed if no meaningful value can be found.
 .SS File manipulation
   
 .TP
-\fB-output <%s>\fR, \fB-o <%s>\fR
+\fB-output <%s>\fR, \fB-o <%s>\fR (\fIoutput-file: <%s>\fR)
 write output to the specified <file>
-(\fIoutput-file: <%s>\fR)
 .TP
 \fB-config <%s>\fR
 set configuration options from the specified <file>
-
 .TP
-\fB-file <%s>\fR, \fB-f <%s>\fR
+\fB-file <%s>\fR, \fB-f <%s>\fR (\fIerror-file: <%s>\fR)
 write errors and warnings to the specified <file>
-(\fIerror-file: <%s>\fR)
 .TP
-\fB-modify\fR, \fB-m\fR
+\fB-modify\fR, \fB-m\fR (\fIwrite-back: yes\fR)
 modify the original input files
-(\fIwrite-back: yes\fR)
 .SS Processing directives
   
 .TP
-\fB-indent\fR, \fB-i\fR
+\fB-indent\fR, \fB-i\fR (\fIindent: auto\fR)
 indent element content
-(\fIindent: auto\fR)
 .TP
-\fB-wrap <%s>\fR, \fB-w <%s>\fR
+\fB-wrap <%s>\fR, \fB-w <%s>\fR (\fIwrap: <%s>\fR)
 wrap text at the specified <column>. 0 is assumed if <column> is missing. When this option is omitted, the default of the configuration option 'wrap' applies.
-(\fIwrap: <%s>\fR)
 .TP
-\fB-upper\fR, \fB-u\fR
+\fB-upper\fR, \fB-u\fR (\fIuppercase-tags: yes\fR)
 force tags to upper case
-(\fIuppercase-tags: yes\fR)
 .TP
-\fB-clean\fR, \fB-c\fR
+\fB-clean\fR, \fB-c\fR (\fIclean: yes\fR)
 replace FONT, NOBR and CENTER tags with CSS
-(\fIclean: yes\fR)
 .TP
-\fB-bare\fR, \fB-b\fR
+\fB-bare\fR, \fB-b\fR (\fIbare: yes\fR)
 strip out smart quotes and em dashes, etc.
-(\fIbare: yes\fR)
 .TP
-\fB-gdoc\fR, \fB-g\fR
+\fB-gdoc\fR, \fB-g\fR (\fIgdoc: yes\fR)
 produce clean version of html exported by Google Docs
-(\fIgdoc: yes\fR)
 .TP
-\fB-numeric\fR, \fB-n\fR
+\fB-numeric\fR, \fB-n\fR (\fInumeric-entities: yes\fR)
 output numeric rather than named entities
-(\fInumeric-entities: yes\fR)
 .TP
-\fB-errors\fR, \fB-e\fR
+\fB-errors\fR, \fB-e\fR (\fImarkup: no\fR)
 show only errors and warnings
-(\fImarkup: no\fR)
 .TP
-\fB-quiet\fR, \fB-q\fR
+\fB-quiet\fR, \fB-q\fR (\fIquiet: yes\fR)
 suppress nonessential output
-(\fIquiet: yes\fR)
 .TP
-\fB-omit\fR
+\fB-omit\fR (\fIomit-optional-tags: yes\fR)
 omit optional start tags and end tags
-(\fIomit-optional-tags: yes\fR)
 .TP
-\fB-xml\fR
+\fB-xml\fR (\fIinput-xml: yes\fR)
 specify the input is well formed XML
-(\fIinput-xml: yes\fR)
 .TP
-\fB-asxml\fR, \fB-asxhtml\fR
+\fB-asxml\fR, \fB-asxhtml\fR (\fIoutput-xhtml: yes\fR)
 convert HTML to well formed XHTML
-(\fIoutput-xhtml: yes\fR)
 .TP
-\fB-ashtml\fR
+\fB-ashtml\fR (\fIoutput-html: yes\fR)
 force XHTML to well formed HTML
-(\fIoutput-html: yes\fR)
 .TP
-\fB-access <%s>\fR
+\fB-access <%s>\fR (\fIaccessibility-check: <%s>\fR)
 do additional accessibility checks (<level> = 0, 1, 2, 3). 0 is assumed if <level> is missing.
-(\fIaccessibility-check: <%s>\fR)
 .SS Character encodings
   
 .TP
 \fB-raw\fR
 output values above 127 without conversion to entities
-
 .TP
 \fB-ascii\fR
 use ISO-8859-1 for input, US-ASCII for output
-
 .TP
 \fB-latin0\fR
 use ISO-8859-15 for input, US-ASCII for output
-
 .TP
 \fB-latin1\fR
 use ISO-8859-1 for both input and output
-
 .TP
 \fB-iso2022\fR
 use ISO-2022 for both input and output
-
 .TP
 \fB-utf8\fR
 use UTF-8 for both input and output
-
 .TP
 \fB-mac\fR
 use MacRoman for input, US-ASCII for output
-
 .TP
 \fB-win1252\fR
 use Windows-1252 for input, US-ASCII for output
-
 .TP
 \fB-ibm858\fR
 use IBM-858 (CP850+Euro) for input, US-ASCII for output
-
 .TP
 \fB-utf16le\fR
 use UTF-16LE for both input and output
-
 .TP
 \fB-utf16be\fR
 use UTF-16BE for both input and output
-
 .TP
 \fB-utf16\fR
 use UTF-16 for both input and output
-
 .TP
 \fB-big5\fR
 use Big5 for both input and output
-
 .TP
 \fB-shiftjis\fR
 use Shift_JIS for both input and output
-
 .SS Miscellaneous
   
 .TP
 \fB-version\fR, \fB-v\fR
 show the version of Tidy
-
 .TP
 \fB-help\fR, \fB-h\fR, \fB-?\fR
 list the command line options
-
 .TP
 \fB-help-config\fR
 list all configuration options
-
 .TP
 \fB-show-config\fR
 list the current configuration settings
-
 .TP
 \fB-help-option <%s>\fR
 show a description of the <option>
-
 .TP
-\fB-language <%s>\fR
+\fB-language <%s>\fR (\fIlanguage: <%s>\fR)
 set Tidy's output language to <lang>. Specify '-language help' for more help. Use before output-causing arguments to ensure the language takes effect, e.g.,`tidy -lang es -lang help`.
-(\fIlanguage: <%s>\fR)
 .SS XML
   
 .TP
 \fB-xml-help\fR
 list the command line options in XML format
-
 .TP
 \fB-xml-config\fR
 list all configuration options in XML format
-
 .TP
 \fB-xml-strings\fR
 output all of Tidy's strings in XML format
-
 .TP
 \fB-xml-error-strings\fR
 output error constants and strings in XML format
-
 .TP
 \fB-xml-options-strings\fR
 output option descriptions in XML format
-
 .LP
 \fIConfiguration\fR options can be specified
 by preceding each option with \fB--\fR at the command line,

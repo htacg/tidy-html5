@@ -73,6 +73,15 @@ or specified in a configuration file,
 using the option name without the starting dashes.  
 They are listed in the second part of this section.
 .LP
+Using a \fIcommand-line\fR option is sometimes equivalent to setting
+the value of a \fIconfiguration\fR option.  The equivalent option
+and value are shown in parentheses in the list below, as they would
+appear in a configuration file.  For example,
+\fB-quiet, -q\fR (\fIquiet: yes\fR) means that using the
+\fIcommand-line\fR option \fB-quiet\fR or \fB-q\fR
+is equivalent to setting the \fIconfiguration\fR option
+\fIquiet\fR to \fIyes\fR.
+.LP
 Single-letter \fIcommand-line\fR options without an associated value
 can be combined; for example '\fB-i\fR', '\fB-m\fR' and '\fB-u\fR'
 may be combined as '\fB-imu\fR'.
@@ -175,12 +184,10 @@ For each option in one of the categories/classes, provide its
 .TP
 </xsl:text>
        <xsl:call-template name="process-names" />
+       <xsl:call-template name="process-eqconfig" />
        <xsl:text>
 </xsl:text>
        <xsl:apply-templates select="description" />
-       <xsl:text>
-</xsl:text>
-       <xsl:call-template name="process-eqconfig" />
     </xsl:for-each>
 </xsl:template>
 
@@ -200,7 +207,7 @@ For each option in one of the categories/classes, provide its
 <!-- Used only in the cmdline section -->
   <xsl:if test="string-length(eqconfig) &gt; 0">
    <xsl:for-each select="eqconfig">
-     <xsl:text>(\fI</xsl:text>
+     <xsl:text> (\fI</xsl:text>
      <xsl:value-of select="." />
      <xsl:text>\fR)</xsl:text>
    </xsl:for-each>

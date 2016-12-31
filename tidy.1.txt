@@ -190,8 +190,8 @@ OOPPTTIIOONNSS
        file.  A Tidy configuration file is simply a text file, where each
        option is listed on a separate line in the form
 
-          ooppttiioonn11: _v_a_l_u_e_1
-          ooppttiioonn22: _v_a_l_u_e_2
+          _o_p_t_i_o_n_1: _v_a_l_u_e_1
+          _o_p_t_i_o_n_2: _v_a_l_u_e_2
           etc.
 
        The permissible values for a given option depend on the option's TTyyppee.

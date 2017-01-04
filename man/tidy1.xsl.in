@@ -273,8 +273,7 @@ For each option in one of the 5 categories/classes, provide its
 <xsl:text>\fI</xsl:text>
   <xsl:apply-templates select="type" />
 <xsl:text>\fR</xsl:text>
-.br
-<xsl:call-template name="provide-default" />
+<xsl:apply-templates select="default" />
 .br
 <xsl:call-template name="provide-example" />
 <xsl:text>
@@ -304,20 +303,12 @@ For each option in one of the 5 categories/classes, provide its
 
 
 <!-- Used only in the config options section: -->
-<xsl:template name="provide-default">
-<!--
-Picks up the default from the XML.  If the `default` element
-doesn't exist, or it's empty, a single '-' is provided.
--->
-  <xsl:choose>
-    <xsl:when test="string-length(default) &gt; 0 ">
-      <xsl:text />Default: <xsl:apply-templates
-        select="default" /><xsl:text />
-    </xsl:when>
-    <xsl:otherwise>
-      <xsl:text />Default: -<xsl:text />
-    </xsl:otherwise>
-  </xsl:choose>
+<xsl:template match="default[.!='']">
+  <xsl:text> (</xsl:text>
+  <xsl:text>\fB</xsl:text>
+    <xsl:value-of select="." />
+  <xsl:text>\fR</xsl:text>
+  <xsl:text> if unset)</xsl:text>
 </xsl:template>
 
 
@@ -334,9 +325,6 @@ stylesheet-provided one. (Useful e.g. for `repeated-attributes`).
       <xsl:text />Example: <xsl:apply-templates
           select="example" /><xsl:text />
     </xsl:when>
-    <xsl:otherwise>
-      <xsl:text />Default: -<xsl:text />
-    </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
 

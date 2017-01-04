@@ -124,17 +124,17 @@ is listed on a separate line in the form
 .br
 etc.
 .LP
-The permissible values for a given option depend on the option's \fBType\fR.  
-There are five types: \fIBoolean\fR, \fIAutoBool\fR, \fIDocType\fR,
+The permissible values for a given option depend on the option's Type.  
+There are five Types: \fIBoolean\fR, \fIAutoBool\fR, \fIDocType\fR,
 \fIEnum\fR, and \fIString\fR.  
-\fIBoolean\fR types allow any of \fIyes/no, y/n, true/false, t/f, 1/0\fR.  
+\fIBoolean\fR Types allow any of \fIyes/no, y/n, true/false, t/f, 1/0\fR.  
 \fIAutoBool\fRs allow \fIauto\fR in addition to the values allowed
 by \fIBooleans\fR.  
-\fIInteger\fR types take non-negative integers.  
-\fIString\fR types generally have no defaults, and you should provide them in
+\fIInteger\fR Types take non-negative integers.  
+\fIString\fR Types generally have no defaults, and you should provide them in
 non-quoted form (unless you wish the output to contain the literal quotes).
 .LP
-\fIEnum\fR, \fIEncoding\fR, and \fIDocType\fR "types" have a fixed repertoire
+\fIEnum\fR, \fIEncoding\fR, and \fIDocType\fR Types have a fixed repertoire
 of items, which are listed in the \fISupported values\fR sections below.
 .LP
 You only need to provide options and values for those whose defaults you wish
@@ -283,7 +283,7 @@ For each option in one of the categories/classes, provide its
 <!--
 For each option in one of the 5 categories/classes, provide its
     1. name
-    2. type
+    2. Type
     3. default (if any)
     4. example (if any)
     5. description
@@ -338,7 +338,7 @@ For each option in one of the 5 categories/classes, provide its
 
 <!--
   Do not print redundant examples
-  (identical for all values of the same type)
+  (identical for all values of the same Type)
 -->
 <xsl:template match="
   option[

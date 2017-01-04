@@ -266,7 +266,7 @@ For each option in one of the 5 categories/classes, provide its
     <xsl:for-each select='$CONFIG/config/option[@class=$category]'>
        <xsl:sort select="name" order="ascending" />
 .TP
-\fB<xsl:apply-templates select="name" />\fR
+\fB--<xsl:apply-templates select="name" />\fR
 
 Type:    <xsl:apply-templates select="type" />
 .br

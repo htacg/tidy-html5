@@ -133,8 +133,8 @@ Integer types take non-negative integers.
 String types generally have no defaults, and you should provide them in
 non-quoted form (unless you wish the output to contain the literal quotes).
 .LP
-Enum, Encoding, and DocType "types" have a fixed repertoire of items;
-consult the \fIExample\fR[s] provided below for the option[s] in question.
+Enum, Encoding, and DocType "types" have a fixed repertoire of items,
+which are listed in the \fISupported values\fR sections below.
 .LP
 You only need to provide options and values for those whose defaults you wish
 to override, although you may wish to include some already-defaulted options
@@ -350,7 +350,7 @@ For each option in one of the 5 categories/classes, provide its
 
 <!-- Used only in the config options section: -->
 <xsl:template match="example[.!='']">
-  <xsl:text>Example: </xsl:text>
+  <xsl:text>Supported values: </xsl:text>
   <xsl:value-of select="." />
   <xsl:text>&#xA;&#xA;</xsl:text>
 </xsl:template>

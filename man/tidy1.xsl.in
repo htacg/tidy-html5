@@ -315,8 +315,7 @@ For each option in one of the 5 categories/classes, provide its
   <xsl:if test="seealso">
      <xsl:text>
 </xsl:text>
-.rj 1
-\fBSee also\fR: <xsl:text />
+See also: <xsl:text />
     <xsl:for-each select="seealso">
       <xsl:text />\fB--<xsl:value-of select="." />\fR<xsl:text />
       <xsl:if test="position() != last()">

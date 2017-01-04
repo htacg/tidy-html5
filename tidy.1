@@ -259,8 +259,7 @@ Note that if the input already includes an \fI<?xml ... ?>\fR declaration then t
 .sp 1
 If the encoding for the output is different from \fBascii\fR, one of the \fButf*\fR encodings, or \fBraw\fR, then the declaration is always added as required by the XML standard.
 
-.rj 1
-\fBSee also\fR: \fB--char-encoding\fR, \fB--output-encoding\fR
+See also: \fB--char-encoding\fR, \fB--output-encoding\fR
 .TP
 \fB--add-xml-space\fR \fIBoolean\fR (\fBno\fR if unset)
 .br
@@ -452,8 +451,7 @@ If set to \fBauto\fR the attributes of the inner \fI<div>\fR are moved to the ou
 .sp 1
 If set to \fByes\fR the attributes of the inner \fI<div>\fR are discarded with the exception of \fIclass\fR and \fIstyle\fR.
 
-.rj 1
-\fBSee also\fR: \fB--clean\fR, \fB--merge-spans\fR
+See also: \fB--clean\fR, \fB--merge-spans\fR
 .TP
 \fB--merge-emphasis\fR \fIBoolean\fR (\fByes\fR if unset)
 .br
@@ -471,8 +469,7 @@ This option specifies if Tidy should merge nested \fI<span>\fR such as \fI<span>
 .sp 1
 The algorithm is identical to the one used by \fImerge-divs\fR.
 
-.rj 1
-\fBSee also\fR: \fB--clean\fR, \fB--merge-divs\fR
+See also: \fB--clean\fR, \fB--merge-divs\fR
 .TP
 \fB--ncr\fR \fIBoolean\fR (\fByes\fR if unset)
 .br
@@ -488,8 +485,7 @@ Note you can't change the content model for elements such as \fI<table>\fR, \fI<
 .sp 1
 This option is ignored in XML mode.
 
-.rj 1
-\fBSee also\fR: \fB--new-empty-tags\fR, \fB--new-inline-tags\fR, \fB--new-pre-tags\fR
+See also: \fB--new-empty-tags\fR, \fB--new-inline-tags\fR, \fB--new-pre-tags\fR
 .TP
 \fB--new-empty-tags\fR \fITag names\fR
 .br
@@ -501,8 +497,7 @@ Remember to also declare empty tags as either inline or blocklevel.
 .sp 1
 This option is ignored in XML mode.
 
-.rj 1
-\fBSee also\fR: \fB--new-blocklevel-tags\fR, \fB--new-inline-tags\fR, \fB--new-pre-tags\fR
+See also: \fB--new-blocklevel-tags\fR, \fB--new-inline-tags\fR, \fB--new-pre-tags\fR
 .TP
 \fB--new-inline-tags\fR \fITag names\fR
 .br
@@ -512,8 +507,7 @@ Unless you declare new tags, Tidy will refuse to generate a tidied file if the i
 .sp 1
 This option is ignored in XML mode.
 
-.rj 1
-\fBSee also\fR: \fB--new-blocklevel-tags\fR, \fB--new-empty-tags\fR, \fB--new-pre-tags\fR
+See also: \fB--new-blocklevel-tags\fR, \fB--new-empty-tags\fR, \fB--new-pre-tags\fR
 .TP
 \fB--new-pre-tags\fR \fITag names\fR
 .br
@@ -525,8 +519,7 @@ Note you cannot as yet add new CDATA elements.
 .sp 1
 This option is ignored in XML mode.
 
-.rj 1
-\fBSee also\fR: \fB--new-blocklevel-tags\fR, \fB--new-empty-tags\fR, \fB--new-inline-tags\fR
+See also: \fB--new-blocklevel-tags\fR, \fB--new-empty-tags\fR, \fB--new-inline-tags\fR
 .TP
 \fB--numeric-entities\fR \fIBoolean\fR (\fBno\fR if unset)
 .br
@@ -536,8 +529,7 @@ Only entities compatible with the DOCTYPE declaration generated are used.
 .sp 1
 Entities that can be represented in the output encoding are translated correspondingly.
 
-.rj 1
-\fBSee also\fR: \fB--doctype\fR, \fB--preserve-entities\fR
+See also: \fB--doctype\fR, \fB--preserve-entities\fR
 .TP
 \fB--omit-optional-tags\fR \fIBoolean\fR (\fBno\fR if unset)
 .br
@@ -593,8 +585,7 @@ Supported values: \fBkeep-first, keep-last\fR
 
 This option specifies if Tidy should keep the first or last attribute, if an attribute is repeated, e.g. has two \fIalign\fR attributes.
 
-.rj 1
-\fBSee also\fR: \fB--join-classes\fR, \fB--join-styles\fR
+See also: \fB--join-classes\fR, \fB--join-styles\fR
 .TP
 \fB--replace-color\fR \fIBoolean\fR (\fBno\fR if unset)
 .br
@@ -686,8 +677,7 @@ Setting \fIindent\fR to \fByes\fR can expose layout bugs in some browsers.
 .sp 1
 Use the option \fIindent-spaces\fR to control the number of spaces or tabs output per level of indent, and \fIindent-with-tabs\fR to specify whether spaces or tabs are used.
 
-.rj 1
-\fBSee also\fR: \fB--indent-spaces\fR
+See also: \fB--indent-spaces\fR
 .TP
 \fB--indent-attributes\fR \fIBoolean\fR (\fBno\fR if unset)
 .br
@@ -699,8 +689,7 @@ This option specifies the number of spaces or tabs that Tidy uses to indent cont
 .sp 1
 Note that the default value for this option is dependent upon the value of \fIindent-with-tabs\fR (see also).
 
-.rj 1
-\fBSee also\fR: \fB--indent\fR
+See also: \fB--indent\fR
 .TP
 \fB--indent-with-tabs\fR \fIBoolean\fR (\fBno\fR if unset)
 .br
@@ -762,8 +751,7 @@ Note that this option can be set independently of \fIwrap-script-literals\fR. By
 .sp 1
 To force Tidy to preserve the original, literal values of all attributes, and ensure that whitespace characters within attribute values are passed through unchanged, set \fIliteral-attributes\fR to \fByes\fR.
 
-.rj 1
-\fBSee also\fR: \fB--wrap-script-literals\fR, \fB--literal-attributes\fR
+See also: \fB--wrap-script-literals\fR, \fB--literal-attributes\fR
 .TP
 \fB--wrap-jste\fR \fIBoolean\fR (\fByes\fR if unset)
 .br
@@ -779,8 +767,7 @@ This option specifies if Tidy should line wrap string literals that appear in sc
 .sp 1
 Tidy wraps long script string literals by inserting a backslash character before the line break.
 
-.rj 1
-\fBSee also\fR: \fB--wrap-attributes\fR
+See also: \fB--wrap-attributes\fR
 .TP
 \fB--wrap-sections\fR \fIBoolean\fR (\fByes\fR if unset)
 .br
@@ -795,8 +782,7 @@ Can be used to modify behavior of the \fIclean\fR option when set to \fByes\fR.
 .sp 1
 If set to \fByes\fR when using \fIclean\fR, \fI&emdash;\fR, \fI&rdquo;\fR, and other named character entities are downgraded to their closest ASCII equivalents.
 
-.rj 1
-\fBSee also\fR: \fB--clean\fR
+See also: \fB--clean\fR
 .TP
 \fB--char-encoding\fR \fIEncoding\fR (\fButf8\fR if unset)
 .br
@@ -818,8 +804,7 @@ For \fBmac\fR and \fBwin1252\fR, Tidy will accept vendor specific character valu
 .sp 1
 For unsupported encodings, use an external utility to convert to and from UTF-8.
 
-.rj 1
-\fBSee also\fR: \fB--input-encoding\fR, \fB--output-encoding\fR
+See also: \fB--input-encoding\fR, \fB--output-encoding\fR
 .TP
 \fB--input-encoding\fR \fIEncoding\fR (\fButf8\fR if unset)
 .br
@@ -827,8 +812,7 @@ Supported values: \fBraw, ascii, latin0, latin1, utf8, iso2022, mac, win1252, ib
 
 This option specifies the character encoding Tidy uses for the input. See \fIchar-encoding\fR for more info.
 
-.rj 1
-\fBSee also\fR: \fB--char-encoding\fR
+See also: \fB--char-encoding\fR
 .TP
 \fB--language\fR \fIString\fR
 .br
@@ -860,8 +844,7 @@ Note that this may only be different from \fIinput-encoding\fR for Latin encodin
 .sp 1
 See \fIchar-encoding\fR for more information
 
-.rj 1
-\fBSee also\fR: \fB--char-encoding\fR
+See also: \fB--char-encoding\fR
 .SS Miscellaneous options
   
 .rs
@@ -870,8 +853,7 @@ See \fIchar-encoding\fR for more information
 .br
 This option specifies the error file Tidy uses for errors and warnings. Normally errors and warnings are output to \fIstderr\fR.
 
-.rj 1
-\fBSee also\fR: \fB--output-file\fR
+See also: \fB--output-file\fR
 .TP
 \fB--force-output\fR \fIBoolean\fR (\fBno\fR if unset)
 .br
@@ -899,8 +881,7 @@ Note this feature is not supported on some platforms.
 .br
 This option specifies the output file Tidy uses for markup. Normally markup is written to \fIstdout\fR.
 
-.rj 1
-\fBSee also\fR: \fB--error-file\fR
+See also: \fB--error-file\fR
 .TP
 \fB--quiet\fR \fIBoolean\fR (\fBno\fR if unset)
 .br

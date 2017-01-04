@@ -73,6 +73,12 @@ or specified in a configuration file,
 using the option name without the starting dashes.  
 They are listed in the second part of this section.
 .LP
+For \fIcommand-line\fR options that expect a numerical argument,
+a default is assumed if no meaningful value can be found.  
+On the other hand, \fIconfiguration\fR options cannot be used
+without a value; a \fIconfiguration\fR option without a value
+is simply discarded and reported as an error.
+.LP
 Using a \fIcommand-line\fR option is sometimes equivalent to setting
 the value of a \fIconfiguration\fR option.  The equivalent option
 and value are shown in parentheses in the list below, as they would
@@ -84,10 +90,7 @@ is equivalent to setting the \fIconfiguration\fR option
 .LP
 Single-letter \fIcommand-line\fR options without an associated value
 can be combined; for example '\fB-i\fR', '\fB-m\fR' and '\fB-u\fR'
-may be combined as '\fB-imu\fR'.
-.LP
-For command line options that expect a numerical argument,
-a default is assumed if no meaningful value can be found.<xsl:text/>
+may be combined as '\fB-imu\fR'.<xsl:text/>
 <xsl:call-template name="show-cmdline-options" />
 .LP
 \fIConfiguration\fR options can be specified

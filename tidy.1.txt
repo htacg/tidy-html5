@@ -32,6 +32,11 @@ OOPPTTIIOONNSS
        specified in a configuration file, using the option name without the
        starting dashes.  They are listed in the second part of this section.
 
+       For _c_o_m_m_a_n_d_-_l_i_n_e options that expect a numerical argument, a default is
+       assumed if no meaningful value can be found.  On the other hand,
+       _c_o_n_f_i_g_u_r_a_t_i_o_n options cannot be used without a value; a _c_o_n_f_i_g_u_r_a_t_i_o_n
+       option without a value is simply discarded and reported as an error.
+
        Using a _c_o_m_m_a_n_d_-_l_i_n_e option is sometimes equivalent to setting the
        value of a _c_o_n_f_i_g_u_r_a_t_i_o_n option.  The equivalent option and value are
        shown in parentheses in the list below, as they would appear in a
@@ -41,9 +46,6 @@ OOPPTTIIOONNSS
 
        Single-letter _c_o_m_m_a_n_d_-_l_i_n_e options without an associated value can be
        combined; for example '--ii', '--mm' and '--uu' may be combined as '--iimmuu'.
-
-       For command line options that expect a numerical argument, a default is
-       assumed if no meaningful value can be found.
 
    FFiillee mmaanniippuullaattiioonn
        --oouuttppuutt <<%%ss>>, --oo <<%%ss>> (_o_u_t_p_u_t_-_f_i_l_e_: _<_%_s_>)

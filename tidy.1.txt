@@ -198,13 +198,13 @@ OOPPTTIIOONNSS
 
        The permissible values for a given option depend on the option's TTyyppee.
        There are five types: _B_o_o_l_e_a_n, _A_u_t_o_B_o_o_l, _D_o_c_T_y_p_e, _E_n_u_m, and _S_t_r_i_n_g.
-       Boolean types allow any of _y_e_s_/_n_o_, _y_/_n_, _t_r_u_e_/_f_a_l_s_e_, _t_/_f_, _1_/_0.
-       AutoBools allow _a_u_t_o in addition to the values allowed by Booleans.
-       Integer types take non-negative integers.  String types generally have
+       _B_o_o_l_e_a_n types allow any of _y_e_s_/_n_o_, _y_/_n_, _t_r_u_e_/_f_a_l_s_e_, _t_/_f_, _1_/_0.
+       _A_u_t_o_B_o_o_ls allow _a_u_t_o in addition to the values allowed by _B_o_o_l_e_a_n_s.
+       _I_n_t_e_g_e_r types take non-negative integers.  _S_t_r_i_n_g types generally have
        no defaults, and you should provide them in non-quoted form (unless you
        wish the output to contain the literal quotes).
 
-       Enum, Encoding, and DocType "types" have a fixed repertoire of items,
+       _E_n_u_m, _E_n_c_o_d_i_n_g, and _D_o_c_T_y_p_e "types" have a fixed repertoire of items,
        which are listed in the _S_u_p_p_o_r_t_e_d _v_a_l_u_e_s sections below.
 
        You only need to provide options and values for those whose defaults

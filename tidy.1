@@ -218,14 +218,15 @@ etc.
 The permissible values for a given option depend on the option's \fBType\fR.  
 There are five types: \fIBoolean\fR, \fIAutoBool\fR, \fIDocType\fR,
 \fIEnum\fR, and \fIString\fR.  
-Boolean types allow any of \fIyes/no, y/n, true/false, t/f, 1/0\fR.  
-AutoBools allow \fIauto\fR in addition to the values allowed by Booleans.  
-Integer types take non-negative integers.  
-String types generally have no defaults, and you should provide them in
+\fIBoolean\fR types allow any of \fIyes/no, y/n, true/false, t/f, 1/0\fR.  
+\fIAutoBool\fRs allow \fIauto\fR in addition to the values allowed
+by \fIBooleans\fR.  
+\fIInteger\fR types take non-negative integers.  
+\fIString\fR types generally have no defaults, and you should provide them in
 non-quoted form (unless you wish the output to contain the literal quotes).
 .LP
-Enum, Encoding, and DocType "types" have a fixed repertoire of items,
-which are listed in the \fISupported values\fR sections below.
+\fIEnum\fR, \fIEncoding\fR, and \fIDocType\fR "types" have a fixed repertoire
+of items, which are listed in the \fISupported values\fR sections below.
 .LP
 You only need to provide options and values for those whose defaults you wish
 to override, although you may wish to include some already-defaulted options

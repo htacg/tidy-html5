@@ -227,9 +227,7 @@ Below is a summary and brief description of each of the options.  They are liste
 .SS HTML, XHTML, XML options
 .rs
 .TP
-\fB--add-xml-decl\fR
-
-Type:    Boolean
+\fB--add-xml-decl\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -244,9 +242,7 @@ If the encoding for the output is different from \fIascii\fR, one of the \fIutf*
 .rj 1
 \fBSee also\fR: \fIchar-encoding\fR, \fIoutput-encoding\fR
 .TP
-\fB--add-xml-space\fR
-
-Type:    Boolean
+\fB--add-xml-space\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -256,9 +252,7 @@ This option specifies if Tidy should add \fIxml:space="preserve"\fR to elements 
 .sp 1
 This is needed if the whitespace in such elements is to be parsed appropriately without having access to the DTD.
 .TP
-\fB--alt-text\fR
-
-Type:    String
+\fB--alt-text\fR \fIString\fR
 .br
 Default: -
 .br
@@ -268,9 +262,7 @@ This option specifies the default \fIalt=\fR text Tidy uses for \fI<img>\fR attr
 .sp 1
 Use with care, as it is your responsibility to make your documents accessible to people who cannot see the images.
 .TP
-\fB--anchor-as-name\fR
-
-Type:    Boolean
+\fB--anchor-as-name\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -282,9 +274,7 @@ If set to \fIyes\fR a \fIname\fR attribute, if not already existing, is added al
 .sp 1
 If set to \fIno\fR any existing name attribute is removed if an \fIid\fR attribute exists or has been added.
 .TP
-\fB--assume-xml-procins\fR
-
-Type:    Boolean
+\fB--assume-xml-procins\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -294,9 +284,7 @@ This option specifies if Tidy should change the parsing of processing instructio
 .sp 1
 This option is automatically set if the input is in XML.
 .TP
-\fB--bare\fR
-
-Type:    Boolean
+\fB--bare\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -304,9 +292,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should strip Microsoft specific HTML from Word 2000 documents, and output spaces rather than non-breaking spaces where they exist in the input.
 .TP
-\fB--clean\fR
-
-Type:    Boolean
+\fB--clean\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -314,9 +300,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should perform cleaning of some legacy presentational tags (currently \fI<i>\fR, \fI<b>\fR, \fI<center>\fR when enclosed within appropriate inline tags, and \fI<font>\fR). If set to \fIyes\fR then legacy tags will be replaced with CSS \fI<style>\fR tags and structural markup as appropriate.
 .TP
-\fB--coerce-endtags\fR
-
-Type:    Boolean
+\fB--coerce-endtags\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -330,9 +314,7 @@ Tidy will output
 .sp 1
 \fI<span>foo <b>bar</b> baz</span>\fR
 .TP
-\fB--css-prefix\fR
-
-Type:    String
+\fB--css-prefix\fR \fIString\fR
 .br
 Default: -
 .br
@@ -342,9 +324,7 @@ This option specifies the prefix that Tidy uses for styles rules.
 .sp 1
 By default, \fIc\fR will be used.
 .TP
-\fB--decorate-inferred-ul\fR
-
-Type:    Boolean
+\fB--decorate-inferred-ul\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -352,9 +332,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should decorate inferred \fI<ul>\fR elements with some CSS markup to avoid indentation to the right.
 .TP
-\fB--doctype\fR
-
-Type:    DocType
+\fB--doctype\fR \fIDocType\fR
 .br
 Default: auto
 .br
@@ -382,9 +360,7 @@ If you specify the FPI for an XHTML document, Tidy will set the system identifie
 .sp 1
 This option does not offer a validation of document conformance.
 .TP
-\fB--drop-empty-elements\fR
-
-Type:    Boolean
+\fB--drop-empty-elements\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -392,9 +368,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should discard empty elements.
 .TP
-\fB--drop-empty-paras\fR
-
-Type:    Boolean
+\fB--drop-empty-paras\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -402,9 +376,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should discard empty paragraphs.
 .TP
-\fB--drop-font-tags\fR
-
-Type:    Boolean
+\fB--drop-font-tags\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -418,9 +390,7 @@ If both \fIclean\fR and this option are enabled, \fI<font>\fR tags will still be
 .sp 1
 See \fIclean\fR for more information.
 .TP
-\fB--drop-proprietary-attributes\fR
-
-Type:    Boolean
+\fB--drop-proprietary-attributes\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -428,9 +398,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should strip out proprietary attributes, such as Microsoft data binding attributes. Additionally attributes that aren't permitted in the output version of HTML will be dropped if used with \fIstrict-tags-attributes\fR.
 .TP
-\fB--enclose-block-text\fR
-
-Type:    Boolean
+\fB--enclose-block-text\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -438,9 +406,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should insert a \fI<p>\fR element to enclose any text it finds in any element that allows mixed content for HTML transitional but not HTML strict.
 .TP
-\fB--enclose-text\fR
-
-Type:    Boolean
+\fB--enclose-text\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -450,9 +416,7 @@ This option specifies if Tidy should enclose any text it finds in the body eleme
 .sp 1
 This is useful when you want to take existing HTML and use it with a style sheet.
 .TP
-\fB--escape-cdata\fR
-
-Type:    Boolean
+\fB--escape-cdata\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -460,9 +424,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should convert \fI<![CDATA[]]>\fR sections to normal text.
 .TP
-\fB--fix-backslash\fR
-
-Type:    Boolean
+\fB--fix-backslash\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -470,9 +432,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should replace backslash characters \fI\\\fR in URLs with forward slashes \fI/\fR.
 .TP
-\fB--fix-bad-comments\fR
-
-Type:    Boolean
+\fB--fix-bad-comments\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -484,9 +444,7 @@ The default is \fIyes\fR.
 .sp 1
 This option is provided for users of Cold Fusion which uses the comment syntax: \fI<!--- --->\fR.
 .TP
-\fB--fix-uri\fR
-
-Type:    Boolean
+\fB--fix-uri\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -494,9 +452,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should check attribute values that carry URIs for illegal characters and if such are found, escape them as HTML4 recommends.
 .TP
-\fB--gdoc\fR
-
-Type:    Boolean
+\fB--gdoc\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -504,9 +460,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should enable specific behavior for cleaning up HTML exported from Google Docs.
 .TP
-\fB--hide-comments\fR
-
-Type:    Boolean
+\fB--hide-comments\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -514,9 +468,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should print out comments.
 .TP
-\fB--hide-endtags\fR
-
-Type:    Boolean
+\fB--hide-endtags\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -524,9 +476,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option is an alias for \fIomit-optional-tags\fR.
 .TP
-\fB--indent-cdata\fR
-
-Type:    Boolean
+\fB--indent-cdata\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -534,9 +484,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should indent \fI<![CDATA[]]>\fR sections.
 .TP
-\fB--input-xml\fR
-
-Type:    Boolean
+\fB--input-xml\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -544,9 +492,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should use the XML parser rather than the error correcting HTML parser.
 .TP
-\fB--join-classes\fR
-
-Type:    Boolean
+\fB--join-classes\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -554,9 +500,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should combine class names to generate a single, new class name if multiple class assignments are detected on an element.
 .TP
-\fB--join-styles\fR
-
-Type:    Boolean
+\fB--join-styles\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -564,9 +508,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should combine styles to generate a single, new style if multiple style values are detected on an element.
 .TP
-\fB--literal-attributes\fR
-
-Type:    Boolean
+\fB--literal-attributes\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -578,9 +520,7 @@ If the value is \fIno\fR Tidy normalizes attribute values by replacing any newli
 .sp 1
 To force Tidy to preserve the original, literal values of all attributes and ensure that whitespace within attribute values is passed through unchanged, set this option to \fIyes\fR.
 .TP
-\fB--logical-emphasis\fR
-
-Type:    Boolean
+\fB--logical-emphasis\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -590,9 +530,7 @@ This option specifies if Tidy should replace any occurrence of \fI<i>\fR with \f
 .sp 1
 This option can be set independently of the \fIclean\fR option.
 .TP
-\fB--lower-literals\fR
-
-Type:    Boolean
+\fB--lower-literals\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -602,9 +540,7 @@ This option specifies if Tidy should convert the value of an attribute that take
 .sp 1
 This is required for XHTML documents.
 .TP
-\fB--merge-divs\fR
-
-Type:    AutoBool
+\fB--merge-divs\fR \fIAutoBool\fR
 .br
 Default: auto
 .br
@@ -621,9 +557,7 @@ If set to \fIyes\fR the attributes of the inner \fI<div>\fR are discarded with t
 .rj 1
 \fBSee also\fR: \fIclean\fR, \fImerge-spans\fR
 .TP
-\fB--merge-emphasis\fR
-
-Type:    Boolean
+\fB--merge-emphasis\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -635,9 +569,7 @@ This option specifies if Tidy should merge nested \fI<b>\fR and \fI<i>\fR elemen
 .sp 1
 Tidy will output \fI<b class="rtop-2">foo bar baz</b>\fR.
 .TP
-\fB--merge-spans\fR
-
-Type:    AutoBool
+\fB--merge-spans\fR \fIAutoBool\fR
 .br
 Default: auto
 .br
@@ -652,9 +584,7 @@ The algorithm is identical to the one used by \fImerge-divs\fR.
 .rj 1
 \fBSee also\fR: \fIclean\fR, \fImerge-divs\fR
 .TP
-\fB--ncr\fR
-
-Type:    Boolean
+\fB--ncr\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -662,9 +592,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should allow numeric character references.
 .TP
-\fB--new-blocklevel-tags\fR
-
-Type:    Tag names
+\fB--new-blocklevel-tags\fR \fITag names\fR
 .br
 Default: -
 .br
@@ -681,9 +609,7 @@ This option is ignored in XML mode.
 .rj 1
 \fBSee also\fR: \fInew-empty-tags\fR, \fInew-inline-tags\fR, \fInew-pre-tags\fR
 .TP
-\fB--new-empty-tags\fR
-
-Type:    Tag names
+\fB--new-empty-tags\fR \fITag names\fR
 .br
 Default: -
 .br
@@ -700,9 +626,7 @@ This option is ignored in XML mode.
 .rj 1
 \fBSee also\fR: \fInew-blocklevel-tags\fR, \fInew-inline-tags\fR, \fInew-pre-tags\fR
 .TP
-\fB--new-inline-tags\fR
-
-Type:    Tag names
+\fB--new-inline-tags\fR \fITag names\fR
 .br
 Default: -
 .br
@@ -717,9 +641,7 @@ This option is ignored in XML mode.
 .rj 1
 \fBSee also\fR: \fInew-blocklevel-tags\fR, \fInew-empty-tags\fR, \fInew-pre-tags\fR
 .TP
-\fB--new-pre-tags\fR
-
-Type:    Tag names
+\fB--new-pre-tags\fR \fITag names\fR
 .br
 Default: -
 .br
@@ -736,9 +658,7 @@ This option is ignored in XML mode.
 .rj 1
 \fBSee also\fR: \fInew-blocklevel-tags\fR, \fInew-empty-tags\fR, \fInew-inline-tags\fR
 .TP
-\fB--numeric-entities\fR
-
-Type:    Boolean
+\fB--numeric-entities\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -753,9 +673,7 @@ Entities that can be represented in the output encoding are translated correspon
 .rj 1
 \fBSee also\fR: \fIdoctype\fR, \fIpreserve-entities\fR
 .TP
-\fB--omit-optional-tags\fR
-
-Type:    Boolean
+\fB--omit-optional-tags\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -767,9 +685,7 @@ Setting this option causes all tags for the \fI<html>\fR, \fI<head>\fR, and \fI<
 .sp 1
 This option is ignored for XML output.
 .TP
-\fB--output-html\fR
-
-Type:    Boolean
+\fB--output-html\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -777,9 +693,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should generate pretty printed output, writing it as HTML.
 .TP
-\fB--output-xhtml\fR
-
-Type:    Boolean
+\fB--output-xhtml\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -793,9 +707,7 @@ For XHTML, entities can be written as named or numeric entities according to the
 .sp 1
 The original case of tags and attributes will be preserved, regardless of other options.
 .TP
-\fB--output-xml\fR
-
-Type:    Boolean
+\fB--output-xml\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -807,9 +719,7 @@ Any entities not defined in XML 1.0 will be written as numeric entities to allow
 .sp 1
 The original case of tags and attributes will be preserved, regardless of other options.
 .TP
-\fB--preserve-entities\fR
-
-Type:    Boolean
+\fB--preserve-entities\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -817,9 +727,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should preserve well-formed entities as found in the input.
 .TP
-\fB--quote-ampersand\fR
-
-Type:    Boolean
+\fB--quote-ampersand\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -827,9 +735,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should output unadorned \fI&\fR characters as \fI&amp;\fR.
 .TP
-\fB--quote-marks\fR
-
-Type:    Boolean
+\fB--quote-marks\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -839,9 +745,7 @@ This option specifies if Tidy should output \fI"\fR characters as \fI&quot;\fR a
 .sp 1
 The apostrophe character \fI'\fR is written out as \fI&#39;\fR since many web browsers don't yet support \fI&apos;\fR.
 .TP
-\fB--quote-nbsp\fR
-
-Type:    Boolean
+\fB--quote-nbsp\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -849,9 +753,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should output non-breaking space characters as entities, rather than as the Unicode character value 160 (decimal).
 .TP
-\fB--repeated-attributes\fR
-
-Type:    enum
+\fB--repeated-attributes\fR \fIenum\fR
 .br
 Default: keep-last
 .br
@@ -862,9 +764,7 @@ This option specifies if Tidy should keep the first or last attribute, if an att
 .rj 1
 \fBSee also\fR: \fIjoin-classes\fR, \fIjoin-styles\fR
 .TP
-\fB--replace-color\fR
-
-Type:    Boolean
+\fB--replace-color\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -872,9 +772,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should replace numeric values in color attributes with HTML/XHTML color names where defined, e.g. replace \fI#ffffff\fR with \fIwhite\fR.
 .TP
-\fB--show-body-only\fR
-
-Type:    AutoBool
+\fB--show-body-only\fR \fIAutoBool\fR
 .br
 Default: no
 .br
@@ -888,9 +786,7 @@ Useful for incorporating existing whole pages as a portion of another page.
 .sp 1
 This option has no effect if XML output is requested.
 .TP
-\fB--skip-nested\fR
-
-Type:    Boolean
+\fB--skip-nested\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -898,9 +794,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies that Tidy should skip nested tags when parsing script and style data.
 .TP
-\fB--strict-tags-attributes\fR
-
-Type:    Boolean
+\fB--strict-tags-attributes\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -912,9 +806,7 @@ Additionally if \fIdrop-proprietary-attributes\fR is enabled, then not applicabl
 .sp 1
 When set to \fIno\fR, these checks are not performed.
 .TP
-\fB--uppercase-attributes\fR
-
-Type:    Boolean
+\fB--uppercase-attributes\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -924,9 +816,7 @@ This option specifies if Tidy should output attribute names in upper case.
 .sp 1
 The default is \fIno\fR, which results in lower case attribute names, except for XML input, where the original case is preserved.
 .TP
-\fB--uppercase-tags\fR
-
-Type:    Boolean
+\fB--uppercase-tags\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -936,9 +826,7 @@ This option specifies if Tidy should output tag names in upper case.
 .sp 1
 The default is \fIno\fR which results in lower case tag names, except for XML input where the original case is preserved.
 .TP
-\fB--word-2000\fR
-
-Type:    Boolean
+\fB--word-2000\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -951,9 +839,7 @@ You should consider using Word's "Save As: Web Page, Filtered".
   
 .rs
 .TP
-\fB--accessibility-check\fR
-
-Type:    enum
+\fB--accessibility-check\fR \fIenum\fR
 .br
 Default: 0 (Tidy Classic)
 .br
@@ -965,9 +851,7 @@ Level \fI0 (Tidy Classic)\fR is equivalent to Tidy Classic's accessibility check
 .sp 1
 For more information on Tidy's accessibility checking, visit Tidy's Accessibility Page at \fIhttp://www.html-tidy.org/accessibility/\fR.
 .TP
-\fB--show-errors\fR
-
-Type:    Integer
+\fB--show-errors\fR \fIInteger\fR
 .br
 Default: 6
 .br
@@ -975,9 +859,7 @@ Example: 0, 1, 2, ...
 
 This option specifies the number Tidy uses to determine if further errors should be shown. If set to \fI0\fR, then no errors are shown.
 .TP
-\fB--show-info\fR
-
-Type:    Boolean
+\fB--show-info\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -985,9 +867,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should display info-level messages.
 .TP
-\fB--show-warnings\fR
-
-Type:    Boolean
+\fB--show-warnings\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -998,9 +878,7 @@ This option specifies if Tidy should suppress warnings. This can be useful when 
   
 .rs
 .TP
-\fB--break-before-br\fR
-
-Type:    Boolean
+\fB--break-before-br\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -1008,9 +886,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should output a line break before each \fI<br>\fR element.
 .TP
-\fB--escape-scripts\fR
-
-Type:    Boolean
+\fB--escape-scripts\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -1018,9 +894,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option causes items that look like closing tags, like \fI</g\fR to be escaped to \fI<\\/g\fR. Set this option to 'no' if you do not want this.
 .TP
-\fB--indent\fR
-
-Type:    AutoBool
+\fB--indent\fR \fIAutoBool\fR
 .br
 Default: no
 .br
@@ -1037,9 +911,7 @@ Use the option \fIindent-spaces\fR to control the number of spaces or tabs outpu
 .rj 1
 \fBSee also\fR: \fIindent-spaces\fR
 .TP
-\fB--indent-attributes\fR
-
-Type:    Boolean
+\fB--indent-attributes\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -1047,9 +919,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should begin each attribute on a new line.
 .TP
-\fB--indent-spaces\fR
-
-Type:    Integer
+\fB--indent-spaces\fR \fIInteger\fR
 .br
 Default: 2
 .br
@@ -1062,9 +932,7 @@ Note that the default value for this option is dependent upon the value of \fIin
 .rj 1
 \fBSee also\fR: \fIindent\fR
 .TP
-\fB--indent-with-tabs\fR
-
-Type:    Boolean
+\fB--indent-with-tabs\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -1078,9 +946,7 @@ Use the option \fIindent-spaces\fR to control the number of tabs output per leve
 .sp 1
 Note \fItab-size\fR controls converting input tabs to spaces. Set it to zero to retain input tabs.
 .TP
-\fB--markup\fR
-
-Type:    Boolean
+\fB--markup\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -1088,9 +954,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should generate a pretty printed version of the markup. Note that Tidy won't generate a pretty printed version if it finds significant errors (see \fIforce-output\fR).
 .TP
-\fB--punctuation-wrap\fR
-
-Type:    Boolean
+\fB--punctuation-wrap\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -1098,9 +962,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should line wrap after some Unicode or Chinese punctuation characters.
 .TP
-\fB--sort-attributes\fR
-
-Type:    enum
+\fB--sort-attributes\fR \fIenum\fR
 .br
 Default: none
 .br
@@ -1108,9 +970,7 @@ Example: none, alpha
 
 This option specifies that Tidy should sort attributes within an element using the specified sort algorithm. If set to \fIalpha\fR, the algorithm is an ascending alphabetic sort.
 .TP
-\fB--split\fR
-
-Type:    Boolean
+\fB--split\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -1118,9 +978,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option has no function and is deprecated.
 .TP
-\fB--tab-size\fR
-
-Type:    Integer
+\fB--tab-size\fR \fIInteger\fR
 .br
 Default: 8
 .br
@@ -1128,9 +986,7 @@ Example: 0, 1, 2, ...
 
 This option specifies the number of columns that Tidy uses between successive tab stops. It is used to map tabs to spaces when reading the input.
 .TP
-\fB--vertical-space\fR
-
-Type:    AutoBool
+\fB--vertical-space\fR \fIAutoBool\fR
 .br
 Default: no
 .br
@@ -1142,9 +998,7 @@ The default is \fIno\fR.
 .sp 1
 If set to \fIauto\fR Tidy will eliminate nearly all newline characters.
 .TP
-\fB--wrap\fR
-
-Type:    Integer
+\fB--wrap\fR \fIInteger\fR
 .br
 Default: 68
 .br
@@ -1156,9 +1010,7 @@ Tidy tries to wrap lines so that they do not exceed this length.
 .sp 1
 Set \fIwrap\fR to \fI0\fR(zero) if you want to disable line wrapping.
 .TP
-\fB--wrap-asp\fR
-
-Type:    Boolean
+\fB--wrap-asp\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -1166,9 +1018,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should line wrap text contained within ASP pseudo elements, which look like: \fI<% ... %>\fR.
 .TP
-\fB--wrap-attributes\fR
-
-Type:    Boolean
+\fB--wrap-attributes\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -1183,9 +1033,7 @@ To force Tidy to preserve the original, literal values of all attributes, and en
 .rj 1
 \fBSee also\fR: \fIwrap-script-literals\fR, \fIliteral-attributes\fR
 .TP
-\fB--wrap-jste\fR
-
-Type:    Boolean
+\fB--wrap-jste\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -1193,9 +1041,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should line wrap text contained within JSTE pseudo elements, which look like: \fI<# ... #>\fR.
 .TP
-\fB--wrap-php\fR
-
-Type:    Boolean
+\fB--wrap-php\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -1203,9 +1049,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should line wrap text contained within PHP pseudo elements, which look like: \fI<?php ... ?>\fR.
 .TP
-\fB--wrap-script-literals\fR
-
-Type:    Boolean
+\fB--wrap-script-literals\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -1218,9 +1062,7 @@ Tidy wraps long script string literals by inserting a backslash character before
 .rj 1
 \fBSee also\fR: \fIwrap-attributes\fR
 .TP
-\fB--wrap-sections\fR
-
-Type:    Boolean
+\fB--wrap-sections\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -1231,9 +1073,7 @@ This option specifies if Tidy should line wrap text contained within \fI<![ ... 
   
 .rs
 .TP
-\fB--ascii-chars\fR
-
-Type:    Boolean
+\fB--ascii-chars\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -1246,9 +1086,7 @@ If set to \fIyes\fR when using \fIclean\fR, \fI&emdash;\fR, \fI&rdquo;\fR, and o
 .rj 1
 \fBSee also\fR: \fIclean\fR
 .TP
-\fB--char-encoding\fR
-
-Type:    Encoding
+\fB--char-encoding\fR \fIEncoding\fR
 .br
 Default: utf8
 .br
@@ -1273,9 +1111,7 @@ For unsupported encodings, use an external utility to convert to and from UTF-8.
 .rj 1
 \fBSee also\fR: \fIinput-encoding\fR, \fIoutput-encoding\fR
 .TP
-\fB--input-encoding\fR
-
-Type:    Encoding
+\fB--input-encoding\fR \fIEncoding\fR
 .br
 Default: utf8
 .br
@@ -1286,9 +1122,7 @@ This option specifies the character encoding Tidy uses for the input. See \fIcha
 .rj 1
 \fBSee also\fR: \fIchar-encoding\fR
 .TP
-\fB--language\fR
-
-Type:    String
+\fB--language\fR \fIString\fR
 .br
 Default: -
 .br
@@ -1296,9 +1130,7 @@ Default: -
 
 Currently not used, but this option specifies the language Tidy would use if it were properly localized. For example: \fIen\fR.
 .TP
-\fB--newline\fR
-
-Type:    enum
+\fB--newline\fR \fIenum\fR
 .br
 Default: \fIPlatform dependent\fR
 .br
@@ -1308,9 +1140,7 @@ The default is appropriate to the current platform.
 .sp 1
 Genrally CRLF on PC-DOS, Windows and OS/2; CR on Classic Mac OS; and LF everywhere else (Linux, Mac OS X, and Unix).
 .TP
-\fB--output-bom\fR
-
-Type:    AutoBool
+\fB--output-bom\fR \fIAutoBool\fR
 .br
 Default: auto
 .br
@@ -1322,9 +1152,7 @@ If set to \fIauto\fR this option causes Tidy to write a BOM to the output only i
 .sp 1
 A BOM is always written for XML/XHTML output using UTF-16 output encodings.
 .TP
-\fB--output-encoding\fR
-
-Type:    Encoding
+\fB--output-encoding\fR \fIEncoding\fR
 .br
 Default: utf8
 .br
@@ -1342,9 +1170,7 @@ See \fIchar-encoding\fR for more information
   
 .rs
 .TP
-\fB--error-file\fR
-
-Type:    String
+\fB--error-file\fR \fIString\fR
 .br
 Default: -
 .br
@@ -1355,9 +1181,7 @@ This option specifies the error file Tidy uses for errors and warnings. Normally
 .rj 1
 \fBSee also\fR: \fIoutput-file\fR
 .TP
-\fB--force-output\fR
-
-Type:    Boolean
+\fB--force-output\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -1367,9 +1191,7 @@ This option specifies if Tidy should produce output even if errors are encounter
 .sp 1
 Use this option with care; if Tidy reports an error, this means Tidy was not able to (or is not sure how to) fix the error, so the resulting output may not reflect your intention.
 .TP
-\fB--gnu-emacs\fR
-
-Type:    Boolean
+\fB--gnu-emacs\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -1377,9 +1199,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should change the format for reporting errors and warnings to a format that is more easily parsed by GNU Emacs.
 .TP
-\fB--gnu-emacs-file\fR
-
-Type:    String
+\fB--gnu-emacs-file\fR \fIString\fR
 .br
 Default: -
 .br
@@ -1387,9 +1207,7 @@ Default: -
 
 Used internally.
 .TP
-\fB--keep-time\fR
-
-Type:    Boolean
+\fB--keep-time\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -1401,9 +1219,7 @@ Setting the option to \fIyes\fR allows you to tidy files without changing the fi
 .sp 1
 Note this feature is not supported on some platforms.
 .TP
-\fB--output-file\fR
-
-Type:    String
+\fB--output-file\fR \fIString\fR
 .br
 Default: -
 .br
@@ -1414,9 +1230,7 @@ This option specifies the output file Tidy uses for markup. Normally markup is w
 .rj 1
 \fBSee also\fR: \fIerror-file\fR
 .TP
-\fB--quiet\fR
-
-Type:    Boolean
+\fB--quiet\fR \fIBoolean\fR
 .br
 Default: no
 .br
@@ -1424,9 +1238,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should output the summary of the numbers of errors and warnings, or the welcome or informational messages.
 .TP
-\fB--slide-style\fR
-
-Type:    String
+\fB--slide-style\fR \fIString\fR
 .br
 Default: -
 .br
@@ -1434,9 +1246,7 @@ Default: -
 
 This option has no function and is deprecated.
 .TP
-\fB--tidy-mark\fR
-
-Type:    Boolean
+\fB--tidy-mark\fR \fIBoolean\fR
 .br
 Default: yes
 .br
@@ -1446,9 +1256,7 @@ This option specifies if Tidy should add a \fImeta\fR element to the document he
 .sp 1
 Tidy won't add a meta element if one is already present.
 .TP
-\fB--write-back\fR
-
-Type:    Boolean
+\fB--write-back\fR \fIBoolean\fR
 .br
 Default: no
 .br

@@ -228,9 +228,7 @@ OOPPTTIIOONNSS
 
    HHTTMMLL,, XXHHTTMMLL,, XXMMLL ooppttiioonnss
 
-       ----aadddd--xxmmll--ddeeccll
-
-              Type:    Boolean
+       ----aadddd--xxmmll--ddeeccll _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -246,9 +244,7 @@ OOPPTTIIOONNSS
 
                                       SSeeee aallssoo: _c_h_a_r_-_e_n_c_o_d_i_n_g, _o_u_t_p_u_t_-_e_n_c_o_d_i_n_g
 
-       ----aadddd--xxmmll--ssppaaccee
-
-              Type:    Boolean
+       ----aadddd--xxmmll--ssppaaccee _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -259,9 +255,7 @@ OOPPTTIIOONNSS
               This is needed if the whitespace in such elements is to be
               parsed appropriately without having access to the DTD.
 
-       ----aalltt--tteexxtt
-
-              Type:    String
+       ----aalltt--tteexxtt _S_t_r_i_n_g
               Default: -
               Default: -
 
@@ -271,9 +265,7 @@ OOPPTTIIOONNSS
               Use with care, as it is your responsibility to make your
               documents accessible to people who cannot see the images.
 
-       ----aanncchhoorr--aass--nnaammee
-
-              Type:    Boolean
+       ----aanncchhoorr--aass--nnaammee _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -286,9 +278,7 @@ OOPPTTIIOONNSS
               If set to _n_o any existing name attribute is removed if an _i_d
               attribute exists or has been added.
 
-       ----aassssuummee--xxmmll--pprroocciinnss
-
-              Type:    Boolean
+       ----aassssuummee--xxmmll--pprroocciinnss _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -298,7 +288,7 @@ OOPPTTIIOONNSS
 
               This option is automatically set if the input is in XML.
 
-       ----bbaarree  Type:    Boolean
+       ----bbaarree _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -306,9 +296,7 @@ OOPPTTIIOONNSS
               HTML from Word 2000 documents, and output spaces rather than
               non-breaking spaces where they exist in the input.
 
-       ----cclleeaann
-
-              Type:    Boolean
+       ----cclleeaann _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -318,9 +306,7 @@ OOPPTTIIOONNSS
               _y_e_s then legacy tags will be replaced with CSS _<_s_t_y_l_e_> tags and
               structural markup as appropriate.
 
-       ----ccooeerrccee--eennddttaaggss
-
-              Type:    Boolean
+       ----ccooeerrccee--eennddttaaggss _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -334,9 +320,7 @@ OOPPTTIIOONNSS
 
               _<_s_p_a_n_>_f_o_o _<_b_>_b_a_r_<_/_b_> _b_a_z_<_/_s_p_a_n_>
 
-       ----ccssss--pprreeffiixx
-
-              Type:    String
+       ----ccssss--pprreeffiixx _S_t_r_i_n_g
               Default: -
               Default: -
 
@@ -345,18 +329,14 @@ OOPPTTIIOONNSS
 
               By default, _c will be used.
 
-       ----ddeeccoorraattee--iinnffeerrrreedd--uull
-
-              Type:    Boolean
+       ----ddeeccoorraattee--iinnffeerrrreedd--uull _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should decorate inferred _<_u_l_>
               elements with some CSS markup to avoid indentation to the right.
 
-       ----ddooccttyyppee
-
-              Type:    DocType
+       ----ddooccttyyppee _D_o_c_T_y_p_e
               Default: auto
               Example: html5, omit, auto, strict, transitional, user
 
@@ -391,25 +371,19 @@ OOPPTTIIOONNSS
 
               This option does not offer a validation of document conformance.
 
-       ----ddrroopp--eemmppttyy--eelleemmeennttss
-
-              Type:    Boolean
+       ----ddrroopp--eemmppttyy--eelleemmeennttss _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should discard empty elements.
 
-       ----ddrroopp--eemmppttyy--ppaarraass
-
-              Type:    Boolean
+       ----ddrroopp--eemmppttyy--ppaarraass _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should discard empty paragraphs.
 
-       ----ddrroopp--ffoonntt--ttaaggss
-
-              Type:    Boolean
+       ----ddrroopp--ffoonntt--ttaaggss _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -428,9 +402,7 @@ OOPPTTIIOONNSS
 
               See _c_l_e_a_n for more information.
 
-       ----ddrroopp--pprroopprriieettaarryy--aattttrriibbuutteess
-
-              Type:    Boolean
+       ----ddrroopp--pprroopprriieettaarryy--aattttrriibbuutteess _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -440,9 +412,7 @@ OOPPTTIIOONNSS
               version of HTML will be dropped if used with _s_t_r_i_c_t_-_t_a_g_s_-
               _a_t_t_r_i_b_u_t_e_s.
 
-       ----eenncclloossee--bblloocckk--tteexxtt
-
-              Type:    Boolean
+       ----eenncclloossee--bblloocckk--tteexxtt _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -450,9 +420,7 @@ OOPPTTIIOONNSS
               enclose any text it finds in any element that allows mixed
               content for HTML transitional but not HTML strict.
 
-       ----eenncclloossee--tteexxtt
-
-              Type:    Boolean
+       ----eenncclloossee--tteexxtt _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -462,27 +430,21 @@ OOPPTTIIOONNSS
               This is useful when you want to take existing HTML and use it
               with a style sheet.
 
-       ----eessccaappee--ccddaattaa
-
-              Type:    Boolean
+       ----eessccaappee--ccddaattaa _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should convert _<_!_[_C_D_A_T_A_[_]_]_>
               sections to normal text.
 
-       ----ffiixx--bbaacckkssllaasshh
-
-              Type:    Boolean
+       ----ffiixx--bbaacckkssllaasshh _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should replace backslash
               characters _\ in URLs with forward slashes _/.
 
-       ----ffiixx--bbaadd--ccoommmmeennttss
-
-              Type:    Boolean
+       ----ffiixx--bbaadd--ccoommmmeennttss _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -494,9 +456,7 @@ OOPPTTIIOONNSS
               This option is provided for users of Cold Fusion which uses the
               comment syntax: _<_!_-_-_- _-_-_-_>.
 
-       ----ffiixx--uurrii
-
-              Type:    Boolean
+       ----ffiixx--uurrii _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -504,50 +464,40 @@ OOPPTTIIOONNSS
               carry URIs for illegal characters and if such are found, escape
               them as HTML4 recommends.
 
-       ----ggddoocc  Type:    Boolean
+       ----ggddoocc _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should enable specific behavior
               for cleaning up HTML exported from Google Docs.
 
-       ----hhiiddee--ccoommmmeennttss
-
-              Type:    Boolean
+       ----hhiiddee--ccoommmmeennttss _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should print out comments.
 
-       ----hhiiddee--eennddttaaggss
-
-              Type:    Boolean
+       ----hhiiddee--eennddttaaggss _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option is an alias for _o_m_i_t_-_o_p_t_i_o_n_a_l_-_t_a_g_s.
 
-       ----iinnddeenntt--ccddaattaa
-
-              Type:    Boolean
+       ----iinnddeenntt--ccddaattaa _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should indent _<_!_[_C_D_A_T_A_[_]_]_>
               sections.
 
-       ----iinnppuutt--xxmmll
-
-              Type:    Boolean
+       ----iinnppuutt--xxmmll _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should use the XML parser rather
               than the error correcting HTML parser.
 
-       ----jjooiinn--ccllaasssseess
-
-              Type:    Boolean
+       ----jjooiinn--ccllaasssseess _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -555,9 +505,7 @@ OOPPTTIIOONNSS
               generate a single, new class name if multiple class assignments
               are detected on an element.
 
-       ----jjooiinn--ssttyylleess
-
-              Type:    Boolean
+       ----jjooiinn--ssttyylleess _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -565,9 +513,7 @@ OOPPTTIIOONNSS
               a single, new style if multiple style values are detected on an
               element.
 
-       ----lliitteerraall--aattttrriibbuutteess
-
-              Type:    Boolean
+       ----lliitteerraall--aattttrriibbuutteess _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -582,9 +528,7 @@ OOPPTTIIOONNSS
               attributes and ensure that whitespace within attribute values is
               passed through unchanged, set this option to _y_e_s.
 
-       ----llooggiiccaall--eemmpphhaassiiss
-
-              Type:    Boolean
+       ----llooggiiccaall--eemmpphhaassiiss _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -594,9 +538,7 @@ OOPPTTIIOONNSS
 
               This option can be set independently of the _c_l_e_a_n option.
 
-       ----lloowweerr--lliitteerraallss
-
-              Type:    Boolean
+       ----lloowweerr--lliitteerraallss _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -605,9 +547,7 @@ OOPPTTIIOONNSS
 
               This is required for XHTML documents.
 
-       ----mmeerrggee--ddiivvss
-
-              Type:    AutoBool
+       ----mmeerrggee--ddiivvss _A_u_t_o_B_o_o_l
               Default: auto
               Example: auto, y/n, yes/no, t/f, true/false, 1/0
 
@@ -625,9 +565,7 @@ OOPPTTIIOONNSS
 
                                                   SSeeee aallssoo: _c_l_e_a_n, _m_e_r_g_e_-_s_p_a_n_s
 
-       ----mmeerrggee--eemmpphhaassiiss
-
-              Type:    Boolean
+       ----mmeerrggee--eemmpphhaassiiss _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -638,9 +576,7 @@ OOPPTTIIOONNSS
 
               Tidy will output _<_b _c_l_a_s_s_=_"_r_t_o_p_-_2_"_>_f_o_o _b_a_r _b_a_z_<_/_b_>.
 
-       ----mmeerrggee--ssppaannss
-
-              Type:    AutoBool
+       ----mmeerrggee--ssppaannss _A_u_t_o_B_o_o_l
               Default: auto
               Example: auto, y/n, yes/no, t/f, true/false, 1/0
 
@@ -654,16 +590,14 @@ OOPPTTIIOONNSS
 
                                                    SSeeee aallssoo: _c_l_e_a_n, _m_e_r_g_e_-_d_i_v_s
 
-       ----nnccrr   Type:    Boolean
+       ----nnccrr _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should allow numeric character
               references.
 
-       ----nneeww--bblloocckklleevveell--ttaaggss
-
-              Type:    Tag names
+       ----nneeww--bblloocckklleevveell--ttaaggss _T_a_g _n_a_m_e_s
               Default: -
               Example: tagX, tagY, ...
 
@@ -680,9 +614,7 @@ OOPPTTIIOONNSS
 
                        SSeeee aallssoo: _n_e_w_-_e_m_p_t_y_-_t_a_g_s, _n_e_w_-_i_n_l_i_n_e_-_t_a_g_s, _n_e_w_-_p_r_e_-_t_a_g_s
 
-       ----nneeww--eemmppttyy--ttaaggss
-
-              Type:    Tag names
+       ----nneeww--eemmppttyy--ttaaggss _T_a_g _n_a_m_e_s
               Default: -
               Example: tagX, tagY, ...
 
@@ -699,9 +631,7 @@ OOPPTTIIOONNSS
 
                   SSeeee aallssoo: _n_e_w_-_b_l_o_c_k_l_e_v_e_l_-_t_a_g_s, _n_e_w_-_i_n_l_i_n_e_-_t_a_g_s, _n_e_w_-_p_r_e_-_t_a_g_s
 
-       ----nneeww--iinnlliinnee--ttaaggss
-
-              Type:    Tag names
+       ----nneeww--iinnlliinnee--ttaaggss _T_a_g _n_a_m_e_s
               Default: -
               Example: tagX, tagY, ...
 
@@ -715,9 +645,7 @@ OOPPTTIIOONNSS
 
                    SSeeee aallssoo: _n_e_w_-_b_l_o_c_k_l_e_v_e_l_-_t_a_g_s, _n_e_w_-_e_m_p_t_y_-_t_a_g_s, _n_e_w_-_p_r_e_-_t_a_g_s
 
-       ----nneeww--pprree--ttaaggss
-
-              Type:    Tag names
+       ----nneeww--pprree--ttaaggss _T_a_g _n_a_m_e_s
               Default: -
               Example: tagX, tagY, ...
 
@@ -734,9 +662,7 @@ OOPPTTIIOONNSS
 
                 SSeeee aallssoo: _n_e_w_-_b_l_o_c_k_l_e_v_e_l_-_t_a_g_s, _n_e_w_-_e_m_p_t_y_-_t_a_g_s, _n_e_w_-_i_n_l_i_n_e_-_t_a_g_s
 
-       ----nnuummeerriicc--eennttiittiieess
-
-              Type:    Boolean
+       ----nnuummeerriicc--eennttiittiieess _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -752,9 +678,7 @@ OOPPTTIIOONNSS
 
                                           SSeeee aallssoo: _d_o_c_t_y_p_e, _p_r_e_s_e_r_v_e_-_e_n_t_i_t_i_e_s
 
-       ----oommiitt--ooppttiioonnaall--ttaaggss
-
-              Type:    Boolean
+       ----oommiitt--ooppttiioonnaall--ttaaggss _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -768,18 +692,14 @@ OOPPTTIIOONNSS
 
               This option is ignored for XML output.
 
-       ----oouuttppuutt--hhttmmll
-
-              Type:    Boolean
+       ----oouuttppuutt--hhttmmll _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should generate pretty printed
               output, writing it as HTML.
 
-       ----oouuttppuutt--xxhhttmmll
-
-              Type:    Boolean
+       ----oouuttppuutt--xxhhttmmll _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -796,9 +716,7 @@ OOPPTTIIOONNSS
               The original case of tags and attributes will be preserved,
               regardless of other options.
 
-       ----oouuttppuutt--xxmmll
-
-              Type:    Boolean
+       ----oouuttppuutt--xxmmll _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -811,27 +729,21 @@ OOPPTTIIOONNSS
               The original case of tags and attributes will be preserved,
               regardless of other options.
 
-       ----pprreesseerrvvee--eennttiittiieess
-
-              Type:    Boolean
+       ----pprreesseerrvvee--eennttiittiieess _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should preserve well-formed
               entities as found in the input.
 
-       ----qquuoottee--aammppeerrssaanndd
-
-              Type:    Boolean
+       ----qquuoottee--aammppeerrssaanndd _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should output unadorned _&
               characters as _&_a_m_p_;.
 
-       ----qquuoottee--mmaarrkkss
-
-              Type:    Boolean
+       ----qquuoottee--mmaarrkkss _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -841,9 +753,7 @@ OOPPTTIIOONNSS
               The apostrophe character _' is written out as _&_#_3_9_; since many
               web browsers don't yet support _&_a_p_o_s_;.
 
-       ----qquuoottee--nnbbsspp
-
-              Type:    Boolean
+       ----qquuoottee--nnbbsspp _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -851,9 +761,7 @@ OOPPTTIIOONNSS
               characters as entities, rather than as the Unicode character
               value 160 (decimal).
 
-       ----rreeppeeaatteedd--aattttrriibbuutteess
-
-              Type:    enum
+       ----rreeppeeaatteedd--aattttrriibbuutteess _e_n_u_m
               Default: keep-last
               Example: keep-first, keep-last
 
@@ -863,9 +771,7 @@ OOPPTTIIOONNSS
 
                                            SSeeee aallssoo: _j_o_i_n_-_c_l_a_s_s_e_s, _j_o_i_n_-_s_t_y_l_e_s
 
-       ----rreeppllaaccee--ccoolloorr
-
-              Type:    Boolean
+       ----rreeppllaaccee--ccoolloorr _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -873,9 +779,7 @@ OOPPTTIIOONNSS
               color attributes with HTML/XHTML color names where defined, e.g.
               replace _#_f_f_f_f_f_f with _w_h_i_t_e.
 
-       ----sshhooww--bbooddyy--oonnllyy
-
-              Type:    AutoBool
+       ----sshhooww--bbooddyy--oonnllyy _A_u_t_o_B_o_o_l
               Default: no
               Example: auto, y/n, yes/no, t/f, true/false, 1/0
 
@@ -890,18 +794,14 @@ OOPPTTIIOONNSS
 
               This option has no effect if XML output is requested.
 
-       ----sskkiipp--nneesstteedd
-
-              Type:    Boolean
+       ----sskkiipp--nneesstteedd _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies that Tidy should skip nested tags when
               parsing script and style data.
 
-       ----ssttrriicctt--ttaaggss--aattttrriibbuutteess
-
-              Type:    Boolean
+       ----ssttrriicctt--ttaaggss--aattttrriibbuutteess _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -916,9 +816,7 @@ OOPPTTIIOONNSS
 
               When set to _n_o, these checks are not performed.
 
-       ----uuppppeerrccaassee--aattttrriibbuutteess
-
-              Type:    Boolean
+       ----uuppppeerrccaassee--aattttrriibbuutteess _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -928,9 +826,7 @@ OOPPTTIIOONNSS
               The default is _n_o, which results in lower case attribute names,
               except for XML input, where the original case is preserved.
 
-       ----uuppppeerrccaassee--ttaaggss
-
-              Type:    Boolean
+       ----uuppppeerrccaassee--ttaaggss _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -940,9 +836,7 @@ OOPPTTIIOONNSS
               The default is _n_o which results in lower case tag names, except
               for XML input where the original case is preserved.
 
-       ----wwoorrdd--22000000
-
-              Type:    Boolean
+       ----wwoorrdd--22000000 _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -955,9 +849,7 @@ OOPPTTIIOONNSS
 
    DDiiaaggnnoossttiiccss ooppttiioonnss
 
-       ----aacccceessssiibbiilliittyy--cchheecckk
-
-              Type:    enum
+       ----aacccceessssiibbiilliittyy--cchheecckk _e_n_u_m
               Default: 0 (Tidy Classic)
               Example: 0 (Tidy Classic), 1 (Priority 1 Checks), 2 (Priority 2
               Checks), 3 (Priority 3 Checks)
@@ -972,9 +864,7 @@ OOPPTTIIOONNSS
               Tidy's Accessibility Page at _h_t_t_p_:_/_/_w_w_w_._h_t_m_l_-
               _t_i_d_y_._o_r_g_/_a_c_c_e_s_s_i_b_i_l_i_t_y_/.
 
-       ----sshhooww--eerrrroorrss
-
-              Type:    Integer
+       ----sshhooww--eerrrroorrss _I_n_t_e_g_e_r
               Default: 6
               Example: 0, 1, 2, ...
 
@@ -982,18 +872,14 @@ OOPPTTIIOONNSS
               further errors should be shown. If set to _0, then no errors are
               shown.
 
-       ----sshhooww--iinnffoo
-
-              Type:    Boolean
+       ----sshhooww--iinnffoo _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should display info-level
               messages.
 
-       ----sshhooww--wwaarrnniinnggss
-
-              Type:    Boolean
+       ----sshhooww--wwaarrnniinnggss _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -1002,18 +888,14 @@ OOPPTTIIOONNSS
 
    PPrreettttyy PPrriinntt ooppttiioonnss
 
-       ----bbrreeaakk--bbeeffoorree--bbrr
-
-              Type:    Boolean
+       ----bbrreeaakk--bbeeffoorree--bbrr _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should output a line break before
               each _<_b_r_> element.
 
-       ----eessccaappee--ssccrriippttss
-
-              Type:    Boolean
+       ----eessccaappee--ssccrriippttss _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -1021,9 +903,7 @@ OOPPTTIIOONNSS
               to be escaped to _<_\_/_g. Set this option to 'no' if you do not
               want this.
 
-       ----iinnddeenntt
-
-              Type:    AutoBool
+       ----iinnddeenntt _A_u_t_o_B_o_o_l
               Default: no
               Example: auto, y/n, yes/no, t/f, true/false, 1/0
 
@@ -1041,18 +921,14 @@ OOPPTTIIOONNSS
 
                                                        SSeeee aallssoo: _i_n_d_e_n_t_-_s_p_a_c_e_s
 
-       ----iinnddeenntt--aattttrriibbuutteess
-
-              Type:    Boolean
+       ----iinnddeenntt--aattttrriibbuutteess _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should begin each attribute on a
               new line.
 
-       ----iinnddeenntt--ssppaacceess
-
-              Type:    Integer
+       ----iinnddeenntt--ssppaacceess _I_n_t_e_g_e_r
               Default: 2
               Example: 0, 1, 2, ...
 
@@ -1064,9 +940,7 @@ OOPPTTIIOONNSS
 
                                                               SSeeee aallssoo: _i_n_d_e_n_t
 
-       ----iinnddeenntt--wwiitthh--ttaabbss
-
-              Type:    Boolean
+       ----iinnddeenntt--wwiitthh--ttaabbss _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -1083,9 +957,7 @@ OOPPTTIIOONNSS
               Note _t_a_b_-_s_i_z_e controls converting input tabs to spaces. Set it
               to zero to retain input tabs.
 
-       ----mmaarrkkuupp
-
-              Type:    Boolean
+       ----mmaarrkkuupp _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -1094,18 +966,14 @@ OOPPTTIIOONNSS
               printed version if it finds significant errors (see _f_o_r_c_e_-
               _o_u_t_p_u_t).
 
-       ----ppuunnccttuuaattiioonn--wwrraapp
-
-              Type:    Boolean
+       ----ppuunnccttuuaattiioonn--wwrraapp _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should line wrap after some
               Unicode or Chinese punctuation characters.
 
-       ----ssoorrtt--aattttrriibbuutteess
-
-              Type:    enum
+       ----ssoorrtt--aattttrriibbuutteess _e_n_u_m
               Default: none
               Example: none, alpha
 
@@ -1113,17 +981,13 @@ OOPPTTIIOONNSS
               element using the specified sort algorithm. If set to _a_l_p_h_a, the
               algorithm is an ascending alphabetic sort.
 
-       ----sspplliitt
-
-              Type:    Boolean
+       ----sspplliitt _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option has no function and is deprecated.
 
-       ----ttaabb--ssiizzee
-
-              Type:    Integer
+       ----ttaabb--ssiizzee _I_n_t_e_g_e_r
               Default: 8
               Example: 0, 1, 2, ...
 
@@ -1131,9 +995,7 @@ OOPPTTIIOONNSS
               between successive tab stops. It is used to map tabs to spaces
               when reading the input.
 
-       ----vveerrttiiccaall--ssppaaccee
-
-              Type:    AutoBool
+       ----vveerrttiiccaall--ssppaaccee _A_u_t_o_B_o_o_l
               Default: no
               Example: auto, y/n, yes/no, t/f, true/false, 1/0
 
@@ -1145,7 +1007,7 @@ OOPPTTIIOONNSS
               If set to _a_u_t_o Tidy will eliminate nearly all newline
               characters.
 
-       ----wwrraapp  Type:    Integer
+       ----wwrraapp _I_n_t_e_g_e_r
               Default: 68
               Example: 0 (no wrapping), 1, 2, ...
 
@@ -1156,18 +1018,14 @@ OOPPTTIIOONNSS
 
               Set _w_r_a_p to _0(zero) if you want to disable line wrapping.
 
-       ----wwrraapp--aasspp
-
-              Type:    Boolean
+       ----wwrraapp--aasspp _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should line wrap text contained
               within ASP pseudo elements, which look like: _<_% _._._. _%_>.
 
-       ----wwrraapp--aattttrriibbuutteess
-
-              Type:    Boolean
+       ----wwrraapp--aattttrriibbuutteess _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -1189,27 +1047,21 @@ OOPPTTIIOONNSS
 
                             SSeeee aallssoo: _w_r_a_p_-_s_c_r_i_p_t_-_l_i_t_e_r_a_l_s, _l_i_t_e_r_a_l_-_a_t_t_r_i_b_u_t_e_s
 
-       ----wwrraapp--jjssttee
-
-              Type:    Boolean
+       ----wwrraapp--jjssttee _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should line wrap text contained
               within JSTE pseudo elements, which look like: _<_# _._._. _#_>.
 
-       ----wwrraapp--pphhpp
-
-              Type:    Boolean
+       ----wwrraapp--pphhpp _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
               This option specifies if Tidy should line wrap text contained
               within PHP pseudo elements, which look like: _<_?_p_h_p _._._. _?_>.
 
-       ----wwrraapp--ssccrriipptt--lliitteerraallss
-
-              Type:    Boolean
+       ----wwrraapp--ssccrriipptt--lliitteerraallss _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -1221,9 +1073,7 @@ OOPPTTIIOONNSS
 
                                                      SSeeee aallssoo: _w_r_a_p_-_a_t_t_r_i_b_u_t_e_s
 
-       ----wwrraapp--sseeccttiioonnss
-
-              Type:    Boolean
+       ----wwrraapp--sseeccttiioonnss _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -1232,9 +1082,7 @@ OOPPTTIIOONNSS
 
    CChhaarraacctteerr EEnnccooddiinngg ooppttiioonnss
 
-       ----aasscciiii--cchhaarrss
-
-              Type:    Boolean
+       ----aasscciiii--cchhaarrss _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -1247,9 +1095,7 @@ OOPPTTIIOONNSS
 
                                                                SSeeee aallssoo: _c_l_e_a_n
 
-       ----cchhaarr--eennccooddiinngg
-
-              Type:    Encoding
+       ----cchhaarr--eennccooddiinngg _E_n_c_o_d_i_n_g
               Default: utf8
               Example: raw, ascii, latin0, latin1, utf8, iso2022, mac,
               win1252, ibm858, utf16le, utf16be, utf16, big5, shiftjis
@@ -1281,9 +1127,7 @@ OOPPTTIIOONNSS
 
                                      SSeeee aallssoo: _i_n_p_u_t_-_e_n_c_o_d_i_n_g, _o_u_t_p_u_t_-_e_n_c_o_d_i_n_g
 
-       ----iinnppuutt--eennccooddiinngg
-
-              Type:    Encoding
+       ----iinnppuutt--eennccooddiinngg _E_n_c_o_d_i_n_g
               Default: utf8
               Example: raw, ascii, latin0, latin1, utf8, iso2022, mac,
               win1252, ibm858, utf16le, utf16be, utf16, big5, shiftjis
@@ -1293,18 +1137,14 @@ OOPPTTIIOONNSS
 
                                                        SSeeee aallssoo: _c_h_a_r_-_e_n_c_o_d_i_n_g
 
-       ----llaanngguuaaggee
-
-              Type:    String
+       ----llaanngguuaaggee _S_t_r_i_n_g
               Default: -
               Default: -
 
               Currently not used, but this option specifies the language Tidy
               would use if it were properly localized. For example: _e_n.
 
-       ----nneewwlliinnee
-
-              Type:    enum
+       ----nneewwlliinnee _e_n_u_m
               Default: _P_l_a_t_f_o_r_m _d_e_p_e_n_d_e_n_t
               Example: LF, CRLF, CR
 
@@ -1313,9 +1153,7 @@ OOPPTTIIOONNSS
               Genrally CRLF on PC-DOS, Windows and OS/2; CR on Classic Mac OS;
               and LF everywhere else (Linux, Mac OS X, and Unix).
 
-       ----oouuttppuutt--bboomm
-
-              Type:    AutoBool
+       ----oouuttppuutt--bboomm _A_u_t_o_B_o_o_l
               Default: auto
               Example: auto, y/n, yes/no, t/f, true/false, 1/0
 
@@ -1330,9 +1168,7 @@ OOPPTTIIOONNSS
               A BOM is always written for XML/XHTML output using UTF-16 output
               encodings.
 
-       ----oouuttppuutt--eennccooddiinngg
-
-              Type:    Encoding
+       ----oouuttppuutt--eennccooddiinngg _E_n_c_o_d_i_n_g
               Default: utf8
               Example: raw, ascii, latin0, latin1, utf8, iso2022, mac,
               win1252, ibm858, utf16le, utf16be, utf16, big5, shiftjis
@@ -1349,9 +1185,7 @@ OOPPTTIIOONNSS
 
    MMiisscceellllaanneeoouuss ooppttiioonnss
 
-       ----eerrrroorr--ffiillee
-
-              Type:    String
+       ----eerrrroorr--ffiillee _S_t_r_i_n_g
               Default: -
               Default: -
 
@@ -1360,9 +1194,7 @@ OOPPTTIIOONNSS
 
                                                          SSeeee aallssoo: _o_u_t_p_u_t_-_f_i_l_e
 
-       ----ffoorrccee--oouuttppuutt
-
-              Type:    Boolean
+       ----ffoorrccee--oouuttppuutt _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -1373,9 +1205,7 @@ OOPPTTIIOONNSS
               Tidy was not able to (or is not sure how to) fix the error, so
               the resulting output may not reflect your intention.
 
-       ----ggnnuu--eemmaaccss
-
-              Type:    Boolean
+       ----ggnnuu--eemmaaccss _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -1383,17 +1213,13 @@ OOPPTTIIOONNSS
               reporting errors and warnings to a format that is more easily
               parsed by GNU Emacs.
 
-       ----ggnnuu--eemmaaccss--ffiillee
-
-              Type:    String
+       ----ggnnuu--eemmaaccss--ffiillee _S_t_r_i_n_g
               Default: -
               Default: -
 
               Used internally.
 
-       ----kkeeeepp--ttiimmee
-
-              Type:    Boolean
+       ----kkeeeepp--ttiimmee _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -1407,9 +1233,7 @@ OOPPTTIIOONNSS
 
               Note this feature is not supported on some platforms.
 
-       ----oouuttppuutt--ffiillee
-
-              Type:    String
+       ----oouuttppuutt--ffiillee _S_t_r_i_n_g
               Default: -
               Default: -
 
@@ -1418,9 +1242,7 @@ OOPPTTIIOONNSS
 
                                                           SSeeee aallssoo: _e_r_r_o_r_-_f_i_l_e
 
-       ----qquuiieett
-
-              Type:    Boolean
+       ----qquuiieett _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -1428,17 +1250,13 @@ OOPPTTIIOONNSS
               numbers of errors and warnings, or the welcome or informational
               messages.
 
-       ----sslliiddee--ssttyyllee
-
-              Type:    String
+       ----sslliiddee--ssttyyllee _S_t_r_i_n_g
               Default: -
               Default: -
 
               This option has no function and is deprecated.
 
-       ----ttiiddyy--mmaarrkk
-
-              Type:    Boolean
+       ----ttiiddyy--mmaarrkk _B_o_o_l_e_a_n
               Default: yes
               Example: y/n, yes/no, t/f, true/false, 1/0
 
@@ -1447,9 +1265,7 @@ OOPPTTIIOONNSS
 
               Tidy won't add a meta element if one is already present.
 
-       ----wwrriittee--bbaacckk
-
-              Type:    Boolean
+       ----wwrriittee--bbaacckk _B_o_o_l_e_a_n
               Default: no
               Example: y/n, yes/no, t/f, true/false, 1/0
 

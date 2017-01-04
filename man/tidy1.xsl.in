@@ -1,13 +1,12 @@
 <?xml version="1.0"?>
 <!--
-    For generating the `tidy.1` man page from the
-    output of `tidy -xml-help` and `tidy -xml-config`
+  For generating the `tidy.1` man page from the
+  output of `tidy -xml-help` and `tidy -xml-config`
 
-    (c) 2005-2017 (W3C) MIT, ERCIM, Keio University
-    See tidy.h for the copyright notice.
+  (c) 2005-2017 (W3C) MIT, ERCIM, Keio University
+  See tidy.h for the copyright notice.
 
-    Written by Jelks Cabaniss and Arnaud Desitter
-
+  Written by Jelks Cabaniss and Arnaud Desitter
 -->
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -17,35 +16,30 @@
 <xsl:output method="text" />
 
 <!--
-    The default template match is to the document passed on the
-    command line to the XSLT processor, currently "tidy-help.xml".
-    For the detailed config options section however, the template
-    match is to the file "tidy-config.xml".  This is captured in
-    the $CONFIG variable, declared here. CMAKE configure will
-    substitute TIDYCONFIG during the build. Shell scripts will
-    have to do the same.
+  The default template match is to the document passed on the
+  command line to the XSLT processor, currently "tidy-help.xml".
+  For the detailed config options section however, the template
+  match is to the file "tidy-config.xml".  This is captured in
+  the $CONFIG variable, declared here. CMAKE configure will
+  substitute TIDYCONFIG during the build. Shell scripts will
+  have to do the same.
 -->
 
 <xsl:variable name="CONFIG" select="document('@TIDYCONFIG@')"/>
 
-
 <!-- Main Template: -->
-
 <xsl:template match="/">
-   <xsl:call-template name="header-section" />
-   <xsl:call-template name="cmdline-section" />
-   <xsl:call-template name="manpage-see-also-section" />
+  <xsl:call-template name="header-section" />
+  <xsl:call-template name="cmdline-section" />
+  <xsl:call-template name="manpage-see-also-section" />
 </xsl:template>
 
-
 <!-- Named Templates: -->
-
 
 <xsl:template name="header-section">
   <xsl:text/>.\" tidy man page for the HTML Tidy
 .TH TIDY 1 "<xsl:value-of select="cmdline/@version" />" "HTML Tidy" "<xsl:value-of select="cmdline/@version" />"
 </xsl:template>
-
 
 <xsl:template name="cmdline-section">
 .\" disable hyphenation
@@ -178,50 +172,48 @@ There were errors.
 <xsl:template name="show-cmdline-options">
 .SS File manipulation
   <xsl:call-template name="cmdline-detail">
-     <xsl:with-param name="category">file-manip</xsl:with-param>
+    <xsl:with-param name="category">file-manip</xsl:with-param>
   </xsl:call-template>
 .SS Processing directives
   <xsl:call-template name="cmdline-detail">
-     <xsl:with-param name="category">process-directives</xsl:with-param>
+    <xsl:with-param name="category">process-directives</xsl:with-param>
   </xsl:call-template>
 .SS Character encodings
   <xsl:call-template name="cmdline-detail">
-     <xsl:with-param name="category">char-encoding</xsl:with-param>
+    <xsl:with-param name="category">char-encoding</xsl:with-param>
   </xsl:call-template>
 .SS Miscellaneous
   <xsl:call-template name="cmdline-detail">
-     <xsl:with-param name="category">misc</xsl:with-param>
+    <xsl:with-param name="category">misc</xsl:with-param>
   </xsl:call-template>
 .SS XML
   <xsl:call-template name="cmdline-detail">
-     <xsl:with-param name="category">xml</xsl:with-param>
+    <xsl:with-param name="category">xml</xsl:with-param>
   </xsl:call-template>
 </xsl:template>
 
-
 <xsl:template name="cmdline-detail">
 <!--
-For each option in one of the categories/classes, provide its
+  For each option in one of the categories/classes, provide its
     1. names
     2. description
     3. equivalent configuration option
 -->
   <xsl:param name="category" />
-    <xsl:for-each select='/cmdline/option[@class=$category]'>
+  <xsl:for-each select='/cmdline/option[@class=$category]'>
 <xsl:text>
 .TP
 </xsl:text>
-       <xsl:call-template name="process-names" />
-       <xsl:call-template name="process-eqconfig" />
-       <xsl:text>
+    <xsl:call-template name="process-names" />
+    <xsl:call-template name="process-eqconfig" />
+    <xsl:text>
 </xsl:text>
-       <xsl:apply-templates select="description" />
-    </xsl:for-each>
+    <xsl:apply-templates select="description" />
+  </xsl:for-each>
 </xsl:template>
 
-
-<xsl:template name="process-names">
 <!-- Used only in the cmdline section -->
+<xsl:template name="process-names">
   <xsl:for-each select="name">
     <xsl:text />\fB<xsl:value-of select="." />\fR<xsl:text />
     <xsl:if test="position() != last()">
@@ -230,58 +222,55 @@ For each option in one of the categories/classes, provide its
   </xsl:for-each>
 </xsl:template>
 
-
-<xsl:template name="process-eqconfig">
 <!-- Used only in the cmdline section -->
+<xsl:template name="process-eqconfig">
   <xsl:if test="string-length(eqconfig) &gt; 0">
-   <xsl:for-each select="eqconfig">
-     <xsl:text> (\fI</xsl:text>
-     <xsl:value-of select="." />
-     <xsl:text>\fR)</xsl:text>
-   </xsl:for-each>
+    <xsl:for-each select="eqconfig">
+      <xsl:text> (\fI</xsl:text>
+      <xsl:value-of select="." />
+      <xsl:text>\fR)</xsl:text>
+    </xsl:for-each>
   </xsl:if>
 </xsl:template>
-
 
 <xsl:template name="show-config-options">
 .SS HTML, XHTML, XML options<xsl:text/>
   <xsl:call-template name="config-detail">
-     <xsl:with-param name="category">markup</xsl:with-param>
+    <xsl:with-param name="category">markup</xsl:with-param>
   </xsl:call-template>
 .SS Diagnostics options
   <xsl:call-template name="config-detail">
-     <xsl:with-param name="category">diagnostics</xsl:with-param>
+    <xsl:with-param name="category">diagnostics</xsl:with-param>
   </xsl:call-template>
 .SS Pretty Print options
   <xsl:call-template name="config-detail">
-     <xsl:with-param name="category">print</xsl:with-param>
+    <xsl:with-param name="category">print</xsl:with-param>
   </xsl:call-template>
 .SS Character Encoding options
   <xsl:call-template name="config-detail">
-     <xsl:with-param name="category">encoding</xsl:with-param>
+    <xsl:with-param name="category">encoding</xsl:with-param>
   </xsl:call-template>
 .SS Miscellaneous options
   <xsl:call-template name="config-detail">
-     <xsl:with-param name="category">misc</xsl:with-param>
+    <xsl:with-param name="category">misc</xsl:with-param>
   </xsl:call-template>
 </xsl:template>
 
-
 <!--
-    Note that any templates called implicitly or explicitly
-    from the "config-detail" template below will match on
-    the document referred to by the $CONFIG variable, i.e.,
-    the file "tidy-config.xml", created by running
+  Note that any templates called implicitly or explicitly
+  from the "config-detail" template below will match on
+  the document referred to by the $CONFIG variable, i.e.,
+  the file "tidy-config.xml", created by running
 
-        tidy -xml-config > tidy-config.xml
+      tidy -xml-config > tidy-config.xml
 
-    The $CONFIG variable is set at the top level of this
-    stylesheet.
+  The $CONFIG variable is set at the top level of this
+  stylesheet.
 -->
 
 <xsl:template name="config-detail">
 <!--
-For each option in one of the 5 categories/classes, provide its
+  For each option in one of the 5 categories/classes, provide its
     1. name
     2. Type
     3. default (if any)
@@ -291,8 +280,8 @@ For each option in one of the 5 categories/classes, provide its
 -->
   <xsl:param name="category" />
 .rs<xsl:text/>
-    <xsl:for-each select='$CONFIG/config/option[@class=$category]'>
-       <xsl:sort select="name" order="ascending" />
+  <xsl:for-each select='$CONFIG/config/option[@class=$category]'>
+    <xsl:sort select="name" order="ascending" />
 .TP
 <xsl:text>\fB</xsl:text>
   <xsl:text>--</xsl:text><xsl:apply-templates select="name" />
@@ -306,14 +295,13 @@ For each option in one of the 5 categories/classes, provide its
 <xsl:apply-templates select="example" />
 <xsl:apply-templates select="description" />
 <xsl:call-template name="seealso" />
-    </xsl:for-each>
+  </xsl:for-each>
 </xsl:template>
-
 
 <!-- Used only in the config options section: -->
 <xsl:template name="seealso">
   <xsl:if test="seealso">
-     <xsl:text>
+    <xsl:text>
 </xsl:text>
 See also: <xsl:text />
     <xsl:for-each select="seealso">
@@ -324,7 +312,6 @@ See also: <xsl:text />
     </xsl:for-each>
   </xsl:if>
 </xsl:template>
-
 
 <!-- Used only in the config options section: -->
 <xsl:template match="default[.!='']">
@@ -357,13 +344,12 @@ See also: <xsl:text />
   <xsl:text>&#xA;&#xA;</xsl:text>
 </xsl:template>
 
-
 <!-- Called from the templates below matching `code`, `em`, `strong`: -->
 <xsl:template name="escape-backslash">
 <!--
-Since backslashes are "special" to the *roff processors used
-to generate man pages, we need to escape backslash characters
-appearing in content with another backslash.
+  Since backslashes are "special" to the *roff processors used
+  to generate man pages, we need to escape backslash characters
+  appearing in content with another backslash.
 -->
   <xsl:choose>
     <xsl:when test="contains(.,'\')">
@@ -375,7 +361,6 @@ appearing in content with another backslash.
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
-
 
 <!-- Appears at the bottom of the man page: -->
 <xsl:template name="manpage-see-also-section">
@@ -420,17 +405,15 @@ The sources for \fBHTML Tidy\fR are available at
 https://github.com/htacg/tidy-html5/ under the MIT Licence.
 </xsl:template>
 
-
 <!-- Regular Templates: -->
 
-
 <xsl:template match="description">
-   <xsl:apply-templates />
+  <xsl:apply-templates />
 </xsl:template>
 
 <xsl:template match="a">
-   <xsl:apply-templates />
-   <xsl:text /> at \fI<xsl:value-of select="@href" />\fR<xsl:text />
+  <xsl:apply-templates />
+  <xsl:text /> at \fI<xsl:value-of select="@href" />\fR<xsl:text />
 </xsl:template>
 
 <xsl:template match="code | em">
@@ -446,62 +429,61 @@ https://github.com/htacg/tidy-html5/ under the MIT Licence.
 </xsl:template>
 
 <xsl:template match="p[1]">
-   <xsl:text>
+  <xsl:text>
 .sp 1
 </xsl:text>
-   <xsl:text /><xsl:call-template name="escape-backslash" />
+  <xsl:text /><xsl:call-template name="escape-backslash" />
 </xsl:template>
 
 <xsl:template match="p[position() != 1]">
-   <xsl:text>
+  <xsl:text>
 .sp 1
 </xsl:text>
-   <xsl:text /><xsl:call-template name="escape-backslash" />
-   <xsl:text>
+  <xsl:text /><xsl:call-template name="escape-backslash" />
+  <xsl:text>
 .sp 1
 </xsl:text>
 </xsl:template>
 
 <xsl:template match="br">
-   <xsl:text>
+  <xsl:text>
 .sp 1
 </xsl:text>
 </xsl:template>
 
 <xsl:template match="strong">
-   <xsl:text />\fB<xsl:call-template name="escape-backslash" />\fR<xsl:text />
+  <xsl:text />\fB<xsl:call-template name="escape-backslash" />\fR<xsl:text />
 </xsl:template>
 
-
 <!--
-The following templates
-  a) normalize whitespace, primarily necessary for `description`
-  b) do so without stripping possible whitespace surrounding `code`
-  d) strip leading and trailing whitespace in 'description` and `code`
-(courtesy of Ken Holman on the XSL-list):
+  The following templates
+    a) normalize whitespace, primarily necessary for `description`
+    b) do so without stripping possible whitespace surrounding `code`
+    d) strip leading and trailing whitespace in 'description` and `code`
+  (courtesy of Ken Holman on the XSL-list):
 -->
 
 <xsl:template match="text()[preceding-sibling::node() and
                              following-sibling::node()]">
-   <xsl:variable name="ns" select="normalize-space(concat('x',.,'x'))"/>
-   <xsl:value-of select="substring( $ns, 2, string-length($ns) - 2 )" />
+  <xsl:variable name="ns" select="normalize-space(concat('x',.,'x'))"/>
+  <xsl:value-of select="substring( $ns, 2, string-length($ns) - 2 )" />
 </xsl:template>
 
 <xsl:template match="text()[preceding-sibling::node() and
                              not( following-sibling::node() )]">
-   <xsl:variable name="ns" select="normalize-space(concat('x',.))"/>
-   <xsl:value-of select="substring( $ns, 2, string-length($ns) - 1 )" />
+  <xsl:variable name="ns" select="normalize-space(concat('x',.))"/>
+  <xsl:value-of select="substring( $ns, 2, string-length($ns) - 1 )" />
 </xsl:template>
 
 <xsl:template match="text()[not( preceding-sibling::node() ) and
                              following-sibling::node()]">
-   <xsl:variable name="ns" select="normalize-space(concat(.,'x'))"/>
-   <xsl:value-of select="substring( $ns, 1, string-length($ns) - 1 )" />
+  <xsl:variable name="ns" select="normalize-space(concat(.,'x'))"/>
+  <xsl:value-of select="substring( $ns, 1, string-length($ns) - 1 )" />
 </xsl:template>
 
 <xsl:template match="text()[not( preceding-sibling::node() ) and
                              not( following-sibling::node() )]">
-   <xsl:value-of select="normalize-space(.)"/>
+  <xsl:value-of select="normalize-space(.)"/>
 </xsl:template>
 
 </xsl:stylesheet>

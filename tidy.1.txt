@@ -231,8 +231,6 @@ OOPPTTIIOONNSS
    HHTTMMLL,, XXHHTTMMLL,, XXMMLL ooppttiioonnss
 
        ----aadddd--xxmmll--ddeeccll _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should add the XML declaration
               when outputting XML or XHTML.
 
@@ -246,8 +244,6 @@ OOPPTTIIOONNSS
                                   SSeeee aallssoo: ----cchhaarr--eennccooddiinngg, ----oouuttppuutt--eennccooddiinngg
 
        ----aadddd--xxmmll--ssppaaccee _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should add _x_m_l_:_s_p_a_c_e_=_"_p_r_e_s_e_r_v_e_" to
               elements such as _<_p_r_e_>, _<_s_t_y_l_e_> and _<_s_c_r_i_p_t_> when generating
               XML.
@@ -263,8 +259,6 @@ OOPPTTIIOONNSS
               documents accessible to people who cannot see the images.
 
        ----aanncchhoorr--aass--nnaammee _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option controls the deletion or addition of the _n_a_m_e
               attribute in elements where it can serve as anchor.
 
@@ -275,8 +269,6 @@ OOPPTTIIOONNSS
               attribute exists or has been added.
 
        ----aassssuummee--xxmmll--pprroocciinnss _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should change the parsing of
               processing instructions to require _?_> as the terminator rather
               than _>.
@@ -284,15 +276,11 @@ OOPPTTIIOONNSS
               This option is automatically set if the input is in XML.
 
        ----bbaarree _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should strip Microsoft specific
               HTML from Word 2000 documents, and output spaces rather than
               non-breaking spaces where they exist in the input.
 
        ----cclleeaann _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should perform cleaning of some
               legacy presentational tags (currently _<_i_>, _<_b_>, _<_c_e_n_t_e_r_> when
               enclosed within appropriate inline tags, and _<_f_o_n_t_>). If set to
@@ -300,8 +288,6 @@ OOPPTTIIOONNSS
               structural markup as appropriate.
 
        ----ccooeerrccee--eennddttaaggss _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should coerce a start tag into an
               end tag in cases where it looks like an end tag was probably
               intended; for example, given
@@ -319,8 +305,6 @@ OOPPTTIIOONNSS
               By default, _c will be used.
 
        ----ddeeccoorraattee--iinnffeerrrreedd--uull _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should decorate inferred _<_u_l_>
               elements with some CSS markup to avoid indentation to the right.
 
@@ -359,18 +343,12 @@ OOPPTTIIOONNSS
               This option does not offer a validation of document conformance.
 
        ----ddrroopp--eemmppttyy--eelleemmeennttss _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should discard empty elements.
 
        ----ddrroopp--eemmppttyy--ppaarraass _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should discard empty paragraphs.
 
        ----ddrroopp--ffoonntt--ttaaggss _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               Deprecated; _d_o _n_o_t _u_s_e. This option is destructive to _<_f_o_n_t_>
               tags, and it will be removed from future versions of Tidy. Use
               the _c_l_e_a_n option instead.
@@ -387,8 +365,6 @@ OOPPTTIIOONNSS
               See _c_l_e_a_n for more information.
 
        ----ddrroopp--pprroopprriieettaarryy--aattttrriibbuutteess _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should strip out proprietary
               attributes, such as Microsoft data binding attributes.
               Additionally attributes that aren't permitted in the output
@@ -396,15 +372,11 @@ OOPPTTIIOONNSS
               _a_t_t_r_i_b_u_t_e_s.
 
        ----eenncclloossee--bblloocckk--tteexxtt _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should insert a _<_p_> element to
               enclose any text it finds in any element that allows mixed
               content for HTML transitional but not HTML strict.
 
        ----eenncclloossee--tteexxtt _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should enclose any text it finds
               in the body element within a _<_p_> element.
 
@@ -412,20 +384,14 @@ OOPPTTIIOONNSS
               with a style sheet.
 
        ----eessccaappee--ccddaattaa _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should convert _<_!_[_C_D_A_T_A_[_]_]_>
               sections to normal text.
 
        ----ffiixx--bbaacckkssllaasshh _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should replace backslash
               characters _\ in URLs with forward slashes _/.
 
        ----ffiixx--bbaadd--ccoommmmeennttss _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should replace unexpected hyphens
               with _= characters when it comes across adjacent hyphens.
 
@@ -435,57 +401,39 @@ OOPPTTIIOONNSS
               comment syntax: _<_!_-_-_- _-_-_-_>.
 
        ----ffiixx--uurrii _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should check attribute values that
               carry URIs for illegal characters and if such are found, escape
               them as HTML4 recommends.
 
        ----ggddoocc _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should enable specific behavior
               for cleaning up HTML exported from Google Docs.
 
        ----hhiiddee--ccoommmmeennttss _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should print out comments.
 
        ----hhiiddee--eennddttaaggss _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option is an alias for _o_m_i_t_-_o_p_t_i_o_n_a_l_-_t_a_g_s.
 
        ----iinnddeenntt--ccddaattaa _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should indent _<_!_[_C_D_A_T_A_[_]_]_>
               sections.
 
        ----iinnppuutt--xxmmll _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should use the XML parser rather
               than the error correcting HTML parser.
 
        ----jjooiinn--ccllaasssseess _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should combine class names to
               generate a single, new class name if multiple class assignments
               are detected on an element.
 
        ----jjooiinn--ssttyylleess _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should combine styles to generate
               a single, new style if multiple style values are detected on an
               element.
 
        ----lliitteerraall--aattttrriibbuutteess _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies how Tidy deals with whitespace characters
               within attribute values.
 
@@ -498,8 +446,6 @@ OOPPTTIIOONNSS
               passed through unchanged, set this option to _y_e_s.
 
        ----llooggiiccaall--eemmpphhaassiiss _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should replace any occurrence of
               _<_i_> with _<_e_m_> and any occurrence of _<_b_> with _<_s_t_r_o_n_g_>. Any
               attributes are preserved unchanged.
@@ -507,16 +453,12 @@ OOPPTTIIOONNSS
               This option can be set independently of the _c_l_e_a_n option.
 
        ----lloowweerr--lliitteerraallss _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should convert the value of an
               attribute that takes a list of predefined values to lower case.
 
               This is required for XHTML documents.
 
        ----mmeerrggee--ddiivvss _A_u_t_o_B_o_o_l (aauuttoo if unset)
-              Example: auto, y/n, yes/no, t/f, true/false, 1/0
-
               This option can be used to modify the behavior of _c_l_e_a_n when set
               to _y_e_s.
 
@@ -532,8 +474,6 @@ OOPPTTIIOONNSS
                                               SSeeee aallssoo: ----cclleeaann, ----mmeerrggee--ssppaannss
 
        ----mmeerrggee--eemmpphhaassiiss _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should merge nested _<_b_> and _<_i_>
               elements; for example, for the case
 
@@ -542,8 +482,6 @@ OOPPTTIIOONNSS
               Tidy will output _<_b _c_l_a_s_s_=_"_r_t_o_p_-_2_"_>_f_o_o _b_a_r _b_a_z_<_/_b_>.
 
        ----mmeerrggee--ssppaannss _A_u_t_o_B_o_o_l (aauuttoo if unset)
-              Example: auto, y/n, yes/no, t/f, true/false, 1/0
-
               This option can be used to modify the behavior of _c_l_e_a_n when set
               to _y_e_s.
 
@@ -555,14 +493,10 @@ OOPPTTIIOONNSS
                                                SSeeee aallssoo: ----cclleeaann, ----mmeerrggee--ddiivvss
 
        ----nnccrr _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should allow numeric character
               references.
 
        ----nneeww--bblloocckklleevveell--ttaaggss _T_a_g _n_a_m_e_s
-              Example: tagX, tagY, ...
-
               This option specifies new block-level tags. This option takes a
               space or comma separated list of tag names.
 
@@ -577,8 +511,6 @@ OOPPTTIIOONNSS
                  SSeeee aallssoo: ----nneeww--eemmppttyy--ttaaggss, ----nneeww--iinnlliinnee--ttaaggss, ----nneeww--pprree--ttaaggss
 
        ----nneeww--eemmppttyy--ttaaggss _T_a_g _n_a_m_e_s
-              Example: tagX, tagY, ...
-
               This option specifies new empty inline tags. This option takes a
               space or comma separated list of tag names.
 
@@ -593,8 +525,6 @@ OOPPTTIIOONNSS
               SSeeee aallssoo: ----nneeww--bblloocckklleevveell--ttaaggss, ----nneeww--iinnlliinnee--ttaaggss, ----nneeww--pprree--ttaaggss
 
        ----nneeww--iinnlliinnee--ttaaggss _T_a_g _n_a_m_e_s
-              Example: tagX, tagY, ...
-
               This option specifies new non-empty inline tags. This option
               takes a space or comma separated list of tag names.
 
@@ -606,8 +536,6 @@ OOPPTTIIOONNSS
               SSeeee aallssoo: ----nneeww--bblloocckklleevveell--ttaaggss, ----nneeww--eemmppttyy--ttaaggss, ----nneeww--pprree--ttaaggss
 
        ----nneeww--pprree--ttaaggss _T_a_g _n_a_m_e_s
-              Example: tagX, tagY, ...
-
               This option specifies new tags that are to be processed in
               exactly the same way as HTML's _<_p_r_e_> element. This option takes
               a space or comma separated list of tag names.
@@ -622,8 +550,6 @@ OOPPTTIIOONNSS
               SSeeee aallssoo: ----nneeww--bblloocckklleevveell--ttaaggss, ----nneeww--eemmppttyy--ttaaggss, ----nneeww--iinnlliinnee--ttaaggss
 
        ----nnuummeerriicc--eennttiittiieess _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should output entities other than
               the built-in HTML entities (_&_a_m_p_;, _&_l_t_;, _&_g_t_;, and _&_q_u_o_t_;) in
               the numeric rather than the named entity form.
@@ -637,8 +563,6 @@ OOPPTTIIOONNSS
                                       SSeeee aallssoo: ----ddooccttyyppee, ----pprreesseerrvvee--eennttiittiieess
 
        ----oommiitt--ooppttiioonnaall--ttaaggss _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should omit optional start tags
               and end tags when generating output.
 
@@ -650,14 +574,10 @@ OOPPTTIIOONNSS
               This option is ignored for XML output.
 
        ----oouuttppuutt--hhttmmll _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should generate pretty printed
               output, writing it as HTML.
 
        ----oouuttppuutt--xxhhttmmll _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should generate pretty printed
               output, writing it as extensible HTML.
 
@@ -672,8 +592,6 @@ OOPPTTIIOONNSS
               regardless of other options.
 
        ----oouuttppuutt--xxmmll _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should pretty print output,
               writing it as well-formed XML.
 
@@ -684,20 +602,14 @@ OOPPTTIIOONNSS
               regardless of other options.
 
        ----pprreesseerrvvee--eennttiittiieess _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should preserve well-formed
               entities as found in the input.
 
        ----qquuoottee--aammppeerrssaanndd _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should output unadorned _&
               characters as _&_a_m_p_;.
 
        ----qquuoottee--mmaarrkkss _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should output _" characters as
               _&_q_u_o_t_; as is preferred by some editing environments.
 
@@ -705,8 +617,6 @@ OOPPTTIIOONNSS
               web browsers don't yet support _&_a_p_o_s_;.
 
        ----qquuoottee--nnbbsspp _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should output non-breaking space
               characters as entities, rather than as the Unicode character
               value 160 (decimal).
@@ -721,15 +631,11 @@ OOPPTTIIOONNSS
                                        SSeeee aallssoo: ----jjooiinn--ccllaasssseess, ----jjooiinn--ssttyylleess
 
        ----rreeppllaaccee--ccoolloorr _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should replace numeric values in
               color attributes with HTML/XHTML color names where defined, e.g.
               replace _#_f_f_f_f_f_f with _w_h_i_t_e.
 
        ----sshhooww--bbooddyy--oonnllyy _A_u_t_o_B_o_o_l (nnoo if unset)
-              Example: auto, y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should print only the contents of
               the body tag as an HTML fragment.
 
@@ -742,14 +648,10 @@ OOPPTTIIOONNSS
               This option has no effect if XML output is requested.
 
        ----sskkiipp--nneesstteedd _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies that Tidy should skip nested tags when
               parsing script and style data.
 
        ----ssttrriicctt--ttaaggss--aattttrriibbuutteess _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This options ensures that tags and attributes are applicable for
               the version of HTML that Tidy outputs. When set to _y_e_s (the
               default) and the output document type is a strict doctype, then
@@ -762,8 +664,6 @@ OOPPTTIIOONNSS
               When set to _n_o, these checks are not performed.
 
        ----uuppppeerrccaassee--aattttrriibbuutteess _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should output attribute names in
               upper case.
 
@@ -771,8 +671,6 @@ OOPPTTIIOONNSS
               except for XML input, where the original case is preserved.
 
        ----uuppppeerrccaassee--ttaaggss _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should output tag names in upper
               case.
 
@@ -780,8 +678,6 @@ OOPPTTIIOONNSS
               for XML input where the original case is preserved.
 
        ----wwoorrdd--22000000 _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should go to great pains to strip
               out all the surplus stuff Microsoft Word 2000 inserts when you
               save Word documents as "Web pages". It doesn't handle embedded
@@ -806,42 +702,30 @@ OOPPTTIIOONNSS
               _t_i_d_y_._o_r_g_/_a_c_c_e_s_s_i_b_i_l_i_t_y_/.
 
        ----sshhooww--eerrrroorrss _I_n_t_e_g_e_r (66 if unset)
-              Example: 0, 1, 2, ...
-
               This option specifies the number Tidy uses to determine if
               further errors should be shown. If set to _0, then no errors are
               shown.
 
        ----sshhooww--iinnffoo _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should display info-level
               messages.
 
        ----sshhooww--wwaarrnniinnggss _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should suppress warnings. This can
               be useful when a few errors are hidden in a flurry of warnings.
 
    PPrreettttyy PPrriinntt ooppttiioonnss
 
        ----bbrreeaakk--bbeeffoorree--bbrr _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should output a line break before
               each _<_b_r_> element.
 
        ----eessccaappee--ssccrriippttss _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option causes items that look like closing tags, like _<_/_g
               to be escaped to _<_\_/_g. Set this option to 'no' if you do not
               want this.
 
        ----iinnddeenntt _A_u_t_o_B_o_o_l (nnoo if unset)
-              Example: auto, y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should indent block-level tags.
 
               If set to _a_u_t_o Tidy will decide whether or not to indent the
@@ -857,14 +741,10 @@ OOPPTTIIOONNSS
                                                      SSeeee aallssoo: ----iinnddeenntt--ssppaacceess
 
        ----iinnddeenntt--aattttrriibbuutteess _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should begin each attribute on a
               new line.
 
        ----iinnddeenntt--ssppaacceess _I_n_t_e_g_e_r (22 if unset)
-              Example: 0, 1, 2, ...
-
               This option specifies the number of spaces or tabs that Tidy
               uses to indent content when _i_n_d_e_n_t is enabled.
 
@@ -874,8 +754,6 @@ OOPPTTIIOONNSS
                                                             SSeeee aallssoo: ----iinnddeenntt
 
        ----iinnddeenntt--wwiitthh--ttaabbss _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should indent with tabs instead of
               spaces, assuming _i_n_d_e_n_t is _y_e_s.
 
@@ -890,16 +768,12 @@ OOPPTTIIOONNSS
               to zero to retain input tabs.
 
        ----mmaarrkkuupp _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should generate a pretty printed
               version of the markup. Note that Tidy won't generate a pretty
               printed version if it finds significant errors (see _f_o_r_c_e_-
               _o_u_t_p_u_t).
 
        ----ppuunnccttuuaattiioonn--wwrraapp _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should line wrap after some
               Unicode or Chinese punctuation characters.
 
@@ -911,20 +785,14 @@ OOPPTTIIOONNSS
               algorithm is an ascending alphabetic sort.
 
        ----sspplliitt _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option has no function and is deprecated.
 
        ----ttaabb--ssiizzee _I_n_t_e_g_e_r (88 if unset)
-              Example: 0, 1, 2, ...
-
               This option specifies the number of columns that Tidy uses
               between successive tab stops. It is used to map tabs to spaces
               when reading the input.
 
        ----vveerrttiiccaall--ssppaaccee _A_u_t_o_B_o_o_l (nnoo if unset)
-              Example: auto, y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should add some extra empty lines
               for readability.
 
@@ -934,8 +802,6 @@ OOPPTTIIOONNSS
               characters.
 
        ----wwrraapp _I_n_t_e_g_e_r (6688 if unset)
-              Example: 0 (no wrapping), 1, 2, ...
-
               This option specifies the right margin Tidy uses for line
               wrapping.
 
@@ -944,14 +810,10 @@ OOPPTTIIOONNSS
               Set _w_r_a_p to _0(zero) if you want to disable line wrapping.
 
        ----wwrraapp--aasspp _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should line wrap text contained
               within ASP pseudo elements, which look like: _<_% _._._. _%_>.
 
        ----wwrraapp--aattttrriibbuutteess _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should line-wrap attribute values,
               meaning that if the value of an attribute causes a line to
               exceed the width specified by _w_r_a_p, Tidy will add one or more
@@ -971,20 +833,14 @@ OOPPTTIIOONNSS
                         SSeeee aallssoo: ----wwrraapp--ssccrriipptt--lliitteerraallss, ----lliitteerraall--aattttrriibbuutteess
 
        ----wwrraapp--jjssttee _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should line wrap text contained
               within JSTE pseudo elements, which look like: _<_# _._._. _#_>.
 
        ----wwrraapp--pphhpp _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should line wrap text contained
               within PHP pseudo elements, which look like: _<_?_p_h_p _._._. _?_>.
 
        ----wwrraapp--ssccrriipptt--lliitteerraallss _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should line wrap string literals
               that appear in script attributes.
 
@@ -994,16 +850,12 @@ OOPPTTIIOONNSS
                                                    SSeeee aallssoo: ----wwrraapp--aattttrriibbuutteess
 
        ----wwrraapp--sseeccttiioonnss _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should line wrap text contained
               within _<_!_[ _._._. _]_> section tags.
 
    CChhaarraacctteerr EEnnccooddiinngg ooppttiioonnss
 
        ----aasscciiii--cchhaarrss _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               Can be used to modify behavior of the _c_l_e_a_n option when set to
               _y_e_s.
 
@@ -1066,8 +918,6 @@ OOPPTTIIOONNSS
               and LF everywhere else (Linux, Mac OS X, and Unix).
 
        ----oouuttppuutt--bboomm _A_u_t_o_B_o_o_l (aauuttoo if unset)
-              Example: auto, y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should write a Unicode Byte Order
               Mark character (BOM; also known as Zero Width No-Break Space;
               has value of U+FEFF) to the beginning of the output, and only
@@ -1102,8 +952,6 @@ OOPPTTIIOONNSS
                                                        SSeeee aallssoo: ----oouuttppuutt--ffiillee
 
        ----ffoorrccee--oouuttppuutt _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should produce output even if
               errors are encountered.
 
@@ -1112,8 +960,6 @@ OOPPTTIIOONNSS
               the resulting output may not reflect your intention.
 
        ----ggnnuu--eemmaaccss _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should change the format for
               reporting errors and warnings to a format that is more easily
               parsed by GNU Emacs.
@@ -1122,8 +968,6 @@ OOPPTTIIOONNSS
               Used internally.
 
        ----kkeeeepp--ttiimmee _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should keep the original
               modification time of files that Tidy modifies in place.
 
@@ -1141,8 +985,6 @@ OOPPTTIIOONNSS
                                                         SSeeee aallssoo: ----eerrrroorr--ffiillee
 
        ----qquuiieett _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should output the summary of the
               numbers of errors and warnings, or the welcome or informational
               messages.
@@ -1151,16 +993,12 @@ OOPPTTIIOONNSS
               This option has no function and is deprecated.
 
        ----ttiiddyy--mmaarrkk _B_o_o_l_e_a_n (yyeess if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should add a _m_e_t_a element to the
               document head to indicate that the document has been tidied.
 
               Tidy won't add a meta element if one is already present.
 
        ----wwrriittee--bbaacckk _B_o_o_l_e_a_n (nnoo if unset)
-              Example: y/n, yes/no, t/f, true/false, 1/0
-
               This option specifies if Tidy should write back the tidied
               markup to the same file it read from.
 

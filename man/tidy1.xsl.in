@@ -335,6 +335,18 @@ For each option in one of the 5 categories/classes, provide its
   <xsl:text> if unset)</xsl:text>
 </xsl:template>
 
+<!--
+  Do not print redundant examples
+  (identical for all values of the same type)
+-->
+<xsl:template match="
+  option[
+    type = 'Boolean'
+    or type = 'AutoBool'
+    or type = 'Integer'
+    or type = 'Tag names'
+  ]/example" priority="2"
+/>
 
 <!-- Used only in the config options section: -->
 <xsl:template match="example[.!='']">

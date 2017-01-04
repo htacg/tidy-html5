@@ -303,9 +303,6 @@ For each option in one of the 5 categories/classes, provide its
 <xsl:apply-templates select="default" />
 .br
 <xsl:call-template name="provide-example" />
-<xsl:text>
-
-</xsl:text>
 <xsl:apply-templates select="description" />
 <xsl:call-template name="seealso" />
     </xsl:for-each>
@@ -349,8 +346,9 @@ stylesheet-provided one. (Useful e.g. for `repeated-attributes`).
 -->
   <xsl:choose>
     <xsl:when test="string-length(example) &gt; 0">
-      <xsl:text />Example: <xsl:apply-templates
-          select="example" /><xsl:text />
+      <xsl:text>Example: </xsl:text>
+      <xsl:apply-templates select="example" />
+      <xsl:text>&#xA;&#xA;</xsl:text>
     </xsl:when>
   </xsl:choose>
 </xsl:template>

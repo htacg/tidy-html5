@@ -256,8 +256,6 @@ OOPPTTIIOONNSS
               parsed appropriately without having access to the DTD.
 
        ----aalltt--tteexxtt _S_t_r_i_n_g
-
-
               This option specifies the default _a_l_t_= text Tidy uses for _<_i_m_g_>
               attributes when the _a_l_t_= attribute is missing.
 
@@ -315,8 +313,6 @@ OOPPTTIIOONNSS
               _<_s_p_a_n_>_f_o_o _<_b_>_b_a_r_<_/_b_> _b_a_z_<_/_s_p_a_n_>
 
        ----ccssss--pprreeffiixx _S_t_r_i_n_g
-
-
               This option specifies the prefix that Tidy uses for styles
               rules.
 
@@ -1058,8 +1054,6 @@ OOPPTTIIOONNSS
                                                      SSeeee aallssoo: ----cchhaarr--eennccooddiinngg
 
        ----llaanngguuaaggee _S_t_r_i_n_g
-
-
               Currently not used, but this option specifies the language Tidy
               would use if it were properly localized. For example: _e_n.
 
@@ -1102,8 +1096,6 @@ OOPPTTIIOONNSS
    MMiisscceellllaanneeoouuss ooppttiioonnss
 
        ----eerrrroorr--ffiillee _S_t_r_i_n_g
-
-
               This option specifies the error file Tidy uses for errors and
               warnings. Normally errors and warnings are output to _s_t_d_e_r_r.
 
@@ -1127,8 +1119,6 @@ OOPPTTIIOONNSS
               parsed by GNU Emacs.
 
        ----ggnnuu--eemmaaccss--ffiillee _S_t_r_i_n_g
-
-
               Used internally.
 
        ----kkeeeepp--ttiimmee _B_o_o_l_e_a_n (nnoo if unset)
@@ -1145,8 +1135,6 @@ OOPPTTIIOONNSS
               Note this feature is not supported on some platforms.
 
        ----oouuttppuutt--ffiillee _S_t_r_i_n_g
-
-
               This option specifies the output file Tidy uses for markup.
               Normally markup is written to _s_t_d_o_u_t.
 
@@ -1160,8 +1148,6 @@ OOPPTTIIOONNSS
               messages.
 
        ----sslliiddee--ssttyyllee _S_t_r_i_n_g
-
-
               This option has no function and is deprecated.
 
        ----ttiiddyy--mmaarrkk _B_o_o_l_e_a_n (yyeess if unset)

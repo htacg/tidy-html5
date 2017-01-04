@@ -261,8 +261,8 @@ For each option in one of the 5 categories/classes, provide its
     2. type
     3. default (if any)
     4. example (if any)
-    5. seealso (if any)
-    6. description
+    5. description
+    6. seealso (if any)
 -->
   <xsl:param name="category" />
 .rs<xsl:text/>

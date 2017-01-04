@@ -10,11 +10,19 @@
 .SH SYNOPSIS
 \fBtidy\fR [\fIoptions\fR] [\fIfile\fR ...] [\fIoptions\fR] [\fIfile\fR ...] ...
 .SH DESCRIPTION
-Tidy reads HTML, XHTML, and XML files and writes cleaned-up markup.  For HTML variants, it detects, reports, and corrects many common coding errors and strives to produce visually equivalent markup that is both conformant to the HTML specifications and that works in most browsers.
+Tidy reads HTML, XHTML, and XML files and writes cleaned-up markup.  
+For HTML variants, it detects, reports, and corrects many common coding errors
+and strives to produce visually equivalent markup that is both conformant
+to the HTML specifications and that works in most browsers.
 .LP
-A common use of Tidy is to convert plain HTML to XHTML.  For generic XML files, Tidy is limited to correcting basic well-formedness errors and pretty printing.
+A common use of Tidy is to convert plain HTML to XHTML.  
+For generic XML files, Tidy is limited to correcting basic well-formedness
+errors and pretty printing.
 .LP
-If no input file is specified, Tidy reads the standard input.  If no output file is specified, Tidy writes the tidied markup to the standard output.  If no error file is specified, Tidy writes messages to the standard error.
+If no input file is specified, Tidy reads the standard input.  
+If no output file is specified, Tidy writes the tidied markup to the
+standard output.  If no error file is specified, Tidy writes messages
+to the standard error.
 .SH OPTIONS
 Tidy supports two different kinds of options.  
 Purely \fIcommand-line\fR options, starting with a single dash '\fB-\fR',
@@ -207,13 +215,24 @@ is listed on a separate line in the form
 .br
 etc.
 .LP
-The permissible values for a given option depend on the option's \fBType\fR.  There are five types: \fIBoolean\fR, \fIAutoBool\fR, \fIDocType\fR, \fIEnum\fR, and \fIString\fR.  Boolean types allow any of \fIyes/no, y/n, true/false, t/f, 1/0\fR.  AutoBools allow \fIauto\fR in addition to the values allowed by Booleans.  Integer types take non-negative integers.  String types generally have no defaults, and you should provide them in non-quoted form (unless you wish the output to contain the literal quotes).
+The permissible values for a given option depend on the option's \fBType\fR.  
+There are five types: \fIBoolean\fR, \fIAutoBool\fR, \fIDocType\fR,
+\fIEnum\fR, and \fIString\fR.  
+Boolean types allow any of \fIyes/no, y/n, true/false, t/f, 1/0\fR.  
+AutoBools allow \fIauto\fR in addition to the values allowed by Booleans.  
+Integer types take non-negative integers.  
+String types generally have no defaults, and you should provide them in
+non-quoted form (unless you wish the output to contain the literal quotes).
 .LP
-Enum, Encoding, and DocType "types" have a fixed repertoire of items; consult the \fIExample\fR[s] provided below for the option[s] in question.
+Enum, Encoding, and DocType "types" have a fixed repertoire of items;
+consult the \fIExample\fR[s] provided below for the option[s] in question.
 .LP
-You only need to provide options and values for those whose defaults you wish to override, although you may wish to include some already-defaulted options and values for the sake of documentation and explicitness.
+You only need to provide options and values for those whose defaults you wish
+to override, although you may wish to include some already-defaulted options
+and values for the sake of documentation and explicitness.
 .LP
-Here is a sample config file, with at least one example of each of the five Types:
+Here is a sample config file, with at least one example of each of
+the five Types:
 .LP
     \fI// sample Tidy configuration options
     output-xhtml: yes
@@ -226,7 +245,8 @@ Here is a sample config file, with at least one example of each of the five Type
     error-file: errs.txt
 \fR
 .LP
-Below is a summary and brief description of each of the options.  They are listed alphabetically within each category.
+Below is a summary and brief description of each of the options.  
+They are listed alphabetically within each category.
 .SS HTML, XHTML, XML options
 .rs
 .TP
@@ -1079,7 +1099,11 @@ You are advised to keep copies of important files before tidying them, as on rar
 .SH ENVIRONMENT
 .TP
 .B HTML_TIDY
-Name of the default configuration file.  This should be an absolute path, since you will probably invoke \fBtidy\fR from different directories.  The value of HTML_TIDY will be parsed after the compiled-in default (defined with -DTIDY_CONFIG_FILE), but before any of the files specified using \fB-config\fR.
+Name of the default configuration file.  This should be an absolute path,
+since you will probably invoke \fBtidy\fR from different directories.  
+The value of HTML_TIDY will be parsed after the compiled-in default
+(defined with -DTIDY_CONFIG_FILE), but before any of the files specified
+using \fB-config\fR.
 .SH "EXIT STATUS"
 .IP 0
 All input files were processed successfully.
@@ -1121,7 +1145,9 @@ Validate your HTML documents using the \fBW3C Nu Markup Validator\fR:
 http://validator.w3.org/nu/
 .RE
 .SH AUTHOR
-\fBTidy\fR was written by \fBDave Raggett\fR <dsr@w3.org>, and subsequently maintained by a team at http://tidy.sourceforge.net/,
+\fBTidy\fR was written by \fBDave Raggett\fR <dsr@w3.org>,
+and subsequently maintained by a team at http://tidy.sourceforge.net/,
 and now maintained by \fBHTACG\fR (http://www.htacg.org).
 .LP
-The sources for \fBHTML Tidy\fR are available at https://github.com/htacg/tidy-html5/ under the MIT Licence.
+The sources for \fBHTML Tidy\fR are available at
+https://github.com/htacg/tidy-html5/ under the MIT Licence.

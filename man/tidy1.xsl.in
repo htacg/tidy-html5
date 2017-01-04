@@ -302,7 +302,7 @@ For each option in one of the 5 categories/classes, provide its
 <xsl:text>\fR</xsl:text>
 <xsl:apply-templates select="default" />
 .br
-<xsl:call-template name="provide-example" />
+<xsl:apply-templates select="example" />
 <xsl:apply-templates select="description" />
 <xsl:call-template name="seealso" />
     </xsl:for-each>
@@ -337,20 +337,10 @@ For each option in one of the 5 categories/classes, provide its
 
 
 <!-- Used only in the config options section: -->
-<xsl:template name="provide-example">
-<!--
-By default, doesn't output examples for String types (mirroring the
-quickref page).  But for *any* options in the XML instance that
-have an `example` child, that example will be used in lieu of a
-stylesheet-provided one. (Useful e.g. for `repeated-attributes`).
--->
-  <xsl:choose>
-    <xsl:when test="string-length(example) &gt; 0">
-      <xsl:text>Example: </xsl:text>
-      <xsl:apply-templates select="example" />
-      <xsl:text>&#xA;&#xA;</xsl:text>
-    </xsl:when>
-  </xsl:choose>
+<xsl:template match="example[.!='']">
+  <xsl:text>Example: </xsl:text>
+  <xsl:value-of select="." />
+  <xsl:text>&#xA;&#xA;</xsl:text>
 </xsl:template>
 
 

@@ -127,8 +127,8 @@ etc.
 The permissible values for a given option depend on the option's Type.  
 There are five Types: \fIBoolean\fR, \fIAutoBool\fR, \fIDocType\fR,
 \fIEnum\fR, and \fIString\fR.  
-\fIBoolean\fR Types allow any of \fIyes/no, y/n, true/false, t/f, 1/0\fR.  
-\fIAutoBool\fRs allow \fIauto\fR in addition to the values allowed
+\fIBoolean\fR Types allow any of \fByes/no, y/n, true/false, t/f, 1/0\fR.  
+\fIAutoBool\fRs allow \fBauto\fR in addition to the values allowed
 by \fIBooleans\fR.  
 \fIInteger\fR Types take non-negative integers.  
 \fIString\fR Types generally have no defaults, and you should provide them in
@@ -352,7 +352,9 @@ For each option in one of the 5 categories/classes, provide its
 <!-- Used only in the config options section: -->
 <xsl:template match="example[.!='']">
   <xsl:text>Supported values: </xsl:text>
-  <xsl:value-of select="." />
+  <xsl:text>\fB</xsl:text>
+    <xsl:value-of select="." />
+  <xsl:text>\fR</xsl:text>
   <xsl:text>&#xA;&#xA;</xsl:text>
 </xsl:template>
 
@@ -432,8 +434,16 @@ https://github.com/htacg/tidy-html5/ under the MIT Licence.
    <xsl:text /> at \fI<xsl:value-of select="@href" />\fR<xsl:text />
 </xsl:template>
 
-<xsl:template match="code | em | var">
-   <xsl:text />\fI<xsl:call-template name="escape-backslash" />\fR<xsl:text />
+<xsl:template match="code | em">
+  <xsl:text>\fI</xsl:text>
+    <xsl:call-template name="escape-backslash" />
+  <xsl:text>\fR</xsl:text>
+</xsl:template>
+
+<xsl:template match="var">
+  <xsl:text>\fB</xsl:text>
+    <xsl:call-template name="escape-backslash" />
+  <xsl:text>\fR</xsl:text>
 </xsl:template>
 
 <xsl:template match="p[1]">

@@ -243,7 +243,7 @@ OOPPTTIIOONNSS
               the _u_t_f_* encodings, or _r_a_w, then the declaration is always added
               as required by the XML standard.
 
-                                      SSeeee aallssoo: _c_h_a_r_-_e_n_c_o_d_i_n_g, _o_u_t_p_u_t_-_e_n_c_o_d_i_n_g
+                                  SSeeee aallssoo: ----cchhaarr--eennccooddiinngg, ----oouuttppuutt--eennccooddiinngg
 
        ----aadddd--xxmmll--ssppaaccee _B_o_o_l_e_a_n (nnoo if unset)
               Example: y/n, yes/no, t/f, true/false, 1/0
@@ -533,7 +533,7 @@ OOPPTTIIOONNSS
               If set to _y_e_s the attributes of the inner _<_d_i_v_> are discarded
               with the exception of _c_l_a_s_s and _s_t_y_l_e.
 
-                                                  SSeeee aallssoo: _c_l_e_a_n, _m_e_r_g_e_-_s_p_a_n_s
+                                              SSeeee aallssoo: ----cclleeaann, ----mmeerrggee--ssppaannss
 
        ----mmeerrggee--eemmpphhaassiiss _B_o_o_l_e_a_n (yyeess if unset)
               Example: y/n, yes/no, t/f, true/false, 1/0
@@ -556,7 +556,7 @@ OOPPTTIIOONNSS
 
               The algorithm is identical to the one used by _m_e_r_g_e_-_d_i_v_s.
 
-                                                   SSeeee aallssoo: _c_l_e_a_n, _m_e_r_g_e_-_d_i_v_s
+                                               SSeeee aallssoo: ----cclleeaann, ----mmeerrggee--ddiivvss
 
        ----nnccrr _B_o_o_l_e_a_n (yyeess if unset)
               Example: y/n, yes/no, t/f, true/false, 1/0
@@ -578,7 +578,7 @@ OOPPTTIIOONNSS
 
               This option is ignored in XML mode.
 
-                       SSeeee aallssoo: _n_e_w_-_e_m_p_t_y_-_t_a_g_s, _n_e_w_-_i_n_l_i_n_e_-_t_a_g_s, _n_e_w_-_p_r_e_-_t_a_g_s
+                 SSeeee aallssoo: ----nneeww--eemmppttyy--ttaaggss, ----nneeww--iinnlliinnee--ttaaggss, ----nneeww--pprree--ttaaggss
 
        ----nneeww--eemmppttyy--ttaaggss _T_a_g _n_a_m_e_s
               Example: tagX, tagY, ...
@@ -594,7 +594,7 @@ OOPPTTIIOONNSS
 
               This option is ignored in XML mode.
 
-                  SSeeee aallssoo: _n_e_w_-_b_l_o_c_k_l_e_v_e_l_-_t_a_g_s, _n_e_w_-_i_n_l_i_n_e_-_t_a_g_s, _n_e_w_-_p_r_e_-_t_a_g_s
+              SSeeee aallssoo: ----nneeww--bblloocckklleevveell--ttaaggss, ----nneeww--iinnlliinnee--ttaaggss, ----nneeww--pprree--ttaaggss
 
        ----nneeww--iinnlliinnee--ttaaggss _T_a_g _n_a_m_e_s
               Example: tagX, tagY, ...
@@ -607,7 +607,7 @@ OOPPTTIIOONNSS
 
               This option is ignored in XML mode.
 
-                   SSeeee aallssoo: _n_e_w_-_b_l_o_c_k_l_e_v_e_l_-_t_a_g_s, _n_e_w_-_e_m_p_t_y_-_t_a_g_s, _n_e_w_-_p_r_e_-_t_a_g_s
+              SSeeee aallssoo: ----nneeww--bblloocckklleevveell--ttaaggss, ----nneeww--eemmppttyy--ttaaggss, ----nneeww--pprree--ttaaggss
 
        ----nneeww--pprree--ttaaggss _T_a_g _n_a_m_e_s
               Example: tagX, tagY, ...
@@ -623,7 +623,7 @@ OOPPTTIIOONNSS
 
               This option is ignored in XML mode.
 
-                SSeeee aallssoo: _n_e_w_-_b_l_o_c_k_l_e_v_e_l_-_t_a_g_s, _n_e_w_-_e_m_p_t_y_-_t_a_g_s, _n_e_w_-_i_n_l_i_n_e_-_t_a_g_s
+              SSeeee aallssoo: ----nneeww--bblloocckklleevveell--ttaaggss, ----nneeww--eemmppttyy--ttaaggss, ----nneeww--iinnlliinnee--ttaaggss
 
        ----nnuummeerriicc--eennttiittiieess _B_o_o_l_e_a_n (nnoo if unset)
               Example: y/n, yes/no, t/f, true/false, 1/0
@@ -638,7 +638,7 @@ OOPPTTIIOONNSS
               Entities that can be represented in the output encoding are
               translated correspondingly.
 
-                                          SSeeee aallssoo: _d_o_c_t_y_p_e, _p_r_e_s_e_r_v_e_-_e_n_t_i_t_i_e_s
+                                      SSeeee aallssoo: ----ddooccttyyppee, ----pprreesseerrvvee--eennttiittiieess
 
        ----oommiitt--ooppttiioonnaall--ttaaggss _B_o_o_l_e_a_n (nnoo if unset)
               Example: y/n, yes/no, t/f, true/false, 1/0
@@ -722,7 +722,7 @@ OOPPTTIIOONNSS
               attribute, if an attribute is repeated, e.g. has two _a_l_i_g_n
               attributes.
 
-                                           SSeeee aallssoo: _j_o_i_n_-_c_l_a_s_s_e_s, _j_o_i_n_-_s_t_y_l_e_s
+                                       SSeeee aallssoo: ----jjooiinn--ccllaasssseess, ----jjooiinn--ssttyylleess
 
        ----rreeppllaaccee--ccoolloorr _B_o_o_l_e_a_n (nnoo if unset)
               Example: y/n, yes/no, t/f, true/false, 1/0
@@ -858,7 +858,7 @@ OOPPTTIIOONNSS
               tabs output per level of indent, and _i_n_d_e_n_t_-_w_i_t_h_-_t_a_b_s to specify
               whether spaces or tabs are used.
 
-                                                       SSeeee aallssoo: _i_n_d_e_n_t_-_s_p_a_c_e_s
+                                                     SSeeee aallssoo: ----iinnddeenntt--ssppaacceess
 
        ----iinnddeenntt--aattttrriibbuutteess _B_o_o_l_e_a_n (nnoo if unset)
               Example: y/n, yes/no, t/f, true/false, 1/0
@@ -875,7 +875,7 @@ OOPPTTIIOONNSS
               Note that the default value for this option is dependent upon
               the value of _i_n_d_e_n_t_-_w_i_t_h_-_t_a_b_s (see also).
 
-                                                              SSeeee aallssoo: _i_n_d_e_n_t
+                                                            SSeeee aallssoo: ----iinnddeenntt
 
        ----iinnddeenntt--wwiitthh--ttaabbss _B_o_o_l_e_a_n (nnoo if unset)
               Example: y/n, yes/no, t/f, true/false, 1/0
@@ -972,7 +972,7 @@ OOPPTTIIOONNSS
               attribute values are passed through unchanged, set _l_i_t_e_r_a_l_-
               _a_t_t_r_i_b_u_t_e_s to _y_e_s.
 
-                            SSeeee aallssoo: _w_r_a_p_-_s_c_r_i_p_t_-_l_i_t_e_r_a_l_s, _l_i_t_e_r_a_l_-_a_t_t_r_i_b_u_t_e_s
+                        SSeeee aallssoo: ----wwrraapp--ssccrriipptt--lliitteerraallss, ----lliitteerraall--aattttrriibbuutteess
 
        ----wwrraapp--jjssttee _B_o_o_l_e_a_n (yyeess if unset)
               Example: y/n, yes/no, t/f, true/false, 1/0
@@ -995,7 +995,7 @@ OOPPTTIIOONNSS
               Tidy wraps long script string literals by inserting a backslash
               character before the line break.
 
-                                                     SSeeee aallssoo: _w_r_a_p_-_a_t_t_r_i_b_u_t_e_s
+                                                   SSeeee aallssoo: ----wwrraapp--aattttrriibbuutteess
 
        ----wwrraapp--sseeccttiioonnss _B_o_o_l_e_a_n (yyeess if unset)
               Example: y/n, yes/no, t/f, true/false, 1/0
@@ -1015,7 +1015,7 @@ OOPPTTIIOONNSS
               named character entities are downgraded to their closest ASCII
               equivalents.
 
-                                                               SSeeee aallssoo: _c_l_e_a_n
+                                                             SSeeee aallssoo: ----cclleeaann
 
        ----cchhaarr--eennccooddiinngg _E_n_c_o_d_i_n_g (uuttff88 if unset)
               Example: raw, ascii, latin0, latin1, utf8, iso2022, mac,
@@ -1046,7 +1046,7 @@ OOPPTTIIOONNSS
               For unsupported encodings, use an external utility to convert to
               and from UTF-8.
 
-                                     SSeeee aallssoo: _i_n_p_u_t_-_e_n_c_o_d_i_n_g, _o_u_t_p_u_t_-_e_n_c_o_d_i_n_g
+                                 SSeeee aallssoo: ----iinnppuutt--eennccooddiinngg, ----oouuttppuutt--eennccooddiinngg
 
        ----iinnppuutt--eennccooddiinngg _E_n_c_o_d_i_n_g (uuttff88 if unset)
               Example: raw, ascii, latin0, latin1, utf8, iso2022, mac,
@@ -1055,7 +1055,7 @@ OOPPTTIIOONNSS
               This option specifies the character encoding Tidy uses for the
               input. See _c_h_a_r_-_e_n_c_o_d_i_n_g for more info.
 
-                                                       SSeeee aallssoo: _c_h_a_r_-_e_n_c_o_d_i_n_g
+                                                     SSeeee aallssoo: ----cchhaarr--eennccooddiinngg
 
        ----llaanngguuaaggee _S_t_r_i_n_g
 
@@ -1097,7 +1097,7 @@ OOPPTTIIOONNSS
 
               See _c_h_a_r_-_e_n_c_o_d_i_n_g for more information
 
-                                                       SSeeee aallssoo: _c_h_a_r_-_e_n_c_o_d_i_n_g
+                                                     SSeeee aallssoo: ----cchhaarr--eennccooddiinngg
 
    MMiisscceellllaanneeoouuss ooppttiioonnss
 
@@ -1107,7 +1107,7 @@ OOPPTTIIOONNSS
               This option specifies the error file Tidy uses for errors and
               warnings. Normally errors and warnings are output to _s_t_d_e_r_r.
 
-                                                         SSeeee aallssoo: _o_u_t_p_u_t_-_f_i_l_e
+                                                       SSeeee aallssoo: ----oouuttppuutt--ffiillee
 
        ----ffoorrccee--oouuttppuutt _B_o_o_l_e_a_n (nnoo if unset)
               Example: y/n, yes/no, t/f, true/false, 1/0
@@ -1150,7 +1150,7 @@ OOPPTTIIOONNSS
               This option specifies the output file Tidy uses for markup.
               Normally markup is written to _s_t_d_o_u_t.
 
-                                                          SSeeee aallssoo: _e_r_r_o_r_-_f_i_l_e
+                                                        SSeeee aallssoo: ----eerrrroorr--ffiillee
 
        ----qquuiieett _B_o_o_l_e_a_n (nnoo if unset)
               Example: y/n, yes/no, t/f, true/false, 1/0

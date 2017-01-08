@@ -443,6 +443,9 @@ static const Attribute attribute_defs [] =
   /* Preload spec: https://www.w3.org/TR/preload/ */
   { TidyAttr_AS,                       "as",                     CH_PCDATA   },
 
+  /* for xmlns:xlink in <svg> */
+  { TidyAttr_XMLNSXLINK,                "xmlns:xlink",           CH_URL       },
+
   /* this must be the final entry */
   { N_TIDY_ATTRIBS,                    NULL,                     NULL         }
 };

@@ -996,7 +996,7 @@ TIDY_EXPORT Bool TIDY_CALL tidyNodeIsU( TidyNode tnod );
 TIDY_EXPORT Bool TIDY_CALL tidyNodeIsMENU( TidyNode tnod );
 
 /* HTML5 */
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsDATALIST( TidyNode tnod ); // bit like OPTIONS
+TIDY_EXPORT Bool TIDY_CALL tidyNodeIsDATALIST( TidyNode tnod ); /* bit like OPTIONS */
 
 
 /** @} End NodeIsElementName group */

@@ -19,7 +19,7 @@
 TIDY_STRUCT
 typedef struct _HTTPInputSource
 {
-    TidyInputSource tis;    //  This declaration must be first and must not be changed!
+    TidyInputSource tis; /* This declaration must be first and must not be changed! */
 
     tmbstr pHostName;
     tmbstr pResource;

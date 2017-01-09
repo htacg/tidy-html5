@@ -1105,18 +1105,18 @@ static tmbstr cleanup_description( ctmbstr description )
 
     /* Output Setup */
     tmbstr result = NULL;
-    int g_result = 100;  // minimum buffer grow size
-    int l_result = 0;    // buffer current size
-    int i_result = 0;    // current string position
-    int writer_len = 0;  // writer length
+    int g_result = 100;  /* minimum buffer grow size */
+    int l_result = 0;    /* buffer current size */
+    int i_result = 0;    /* current string position */
+    int writer_len = 0;  /* writer length */
 
     ctmbstr writer = NULL;
 
     /* Current tag name setup */
-    tmbstr name = NULL; // tag name
-    int g_name = 10;    // buffer grow size
-    int l_name = 0;     // buffer current size
-    int i_name = 0;     // current string position
+    tmbstr name = NULL; /* tag name */
+    int g_name = 10;    /* buffer grow size */
+    int l_name = 0;     /* buffer current size */
+    int i_name = 0;     /* current string position */
 
     /* Pump Setup */
     int i = 0;
@@ -1189,7 +1189,7 @@ static tmbstr cleanup_description( ctmbstr description )
                          ensure that `writer` is NULL as a flag that we
                          will output the current `c` */
                     case a_EMIT:
-                        writer = NULL; // flag to use c
+                        writer = NULL; /* flag to use c */
                         break;
 
                         /* Now that we've consumed a tag, we will emit the
@@ -1552,7 +1552,7 @@ int main( int argc, char** argv )
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
     set_log_file((char *)"temptidy.txt", 0);
-    // add_append_log(1);
+    /* add_append_log(1); */
 #endif
 
     /*
@@ -1936,7 +1936,7 @@ int main( int argc, char** argv )
             htmlfil = argv[1];
 #if (!defined(NDEBUG) && defined(_MSC_VER))
             SPRTF("Tidying '%s'\n", htmlfil);
-#endif // DEBUG outout
+#endif /* DEBUG outout */
             if ( tidyOptGetBool(tdoc, TidyEmacs) )
                 tidyOptSetValue( tdoc, TidyEmacsFile, htmlfil );
             status = tidyParseFile( tdoc, htmlfil );

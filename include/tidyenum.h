@@ -808,6 +808,8 @@ typedef enum
 
   TidyAttr_AS,               /**< AS= */
 
+  TidyAttr_XMLNSXLINK,        /**< svg xmls:xlink="url" */
+
   N_TIDY_ATTRIBS              /**< Must be last */
 } TidyAttrId;
 

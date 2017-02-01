@@ -1034,6 +1034,103 @@ static void SetLexerLocus( TidyDocImpl* doc, Lexer *lexer )
 }
 
 /*
+    Have detected the first of a surrogate pair...
+    Try to find, decode the second...
+    Already have '&' start...
+*/
+static Bool GetSurrogatePair(TidyDocImpl* doc, Bool isXml, uint *pch)
+{
+    Lexer* lexer = doc->lexer;
+    uint bufSize = 32;
+    uint c, i, ch, offset = 0;
+    tmbstr buf = 0;
+    Bool success = no;  /* assume failed */
+    int type = 0;   /* assume numeric */
+    uint fch = *pch;
+    if (!lexer)
+        return no;
+    buf = (tmbstr)TidyRealloc(lexer->allocator, buf, bufSize);
+    if (!buf)
+        return no;
+    while ((c = TY_(ReadChar)(doc->docIn)) != EndOfStream )
+    {
+        if (c == ';')
+        {
+            break;  /* reached end of entity */
+        }
+        if ((offset + 2) > bufSize)
+        {
+            bufSize *= 2;
+            buf = (tmbstr)TidyRealloc(lexer->allocator, buf, bufSize);
+            if (!buf)
+            {
+                break;
+            }
+        }
+        buf[offset++] = c;  /* add char to buffer */
+        if (offset == 1)
+        {
+            if (c != '#')   /* is a numeric entity */
+                break;
+        }
+        else if (offset == 2 && ((c == 'x') || (!isXml && c == 'X')))
+        {
+            type = 1;   /* set hex digits */
+        }
+        else
+        {
+            if (type)   /* if hex digits */
+            {
+                if (!IsDigitHex(c))
+                    break;
+            }
+            else    /* if numeric */
+            {
+                if (!TY_(IsDigit)(c))
+                    break;
+            }
+        }
+    }
+
+    if (c == ';')
+    {
+        buf[offset] = 0;
+        if (type)
+            sscanf(buf + 2, "%x", &ch);
+        else
+            sscanf(buf + 1, "%d", &ch);
+
+        if (TY_(IsHighSurrogate)(ch))
+        {
+            ch = TY_(CombineSurrogatePair)(ch, fch);
+            if (TY_(IsValidCombinedChar)(ch))
+            {
+                *pch = ch;  /* return combined pair value */
+                success = yes;
+            }
+        }
+    }
+    if (!success)
+    {
+        if (ch == ';')
+            TY_(UngetChar)(ch, doc->docIn);
+        if (buf)
+        {
+            for (i = 0; i < offset; i++)
+            {
+                c = buf[i];
+                TY_(UngetChar)(c, doc->docIn);
+            }
+        }
+    }
+
+    if (buf)
+        TidyFree(lexer->allocator, buf);
+
+    return success;
+}
+
+/*
   No longer attempts to insert missing ';' for unknown
   enitities unless one was present already, since this
   gives unexpected results.
@@ -1157,6 +1254,29 @@ static void ParseEntity( TidyDocImpl* doc, GetTokenMode mode )
         /* Lookup entity code and version
         */
         found = TY_(EntityInfo)( lexer->lexbuf+start, isXml, &ch, &entver );
+    }
+
+    /* Issue #483 - Deal with 'surrogate pairs' */
+    /* TODO: Maybe warning/error, like found a leading surrogate
+       but no following surrogate! Maybe should avoid outputting
+       invalid utf-8 for this entity - maybe substitute?  */
+    if (!preserveEntities && found && TY_(IsLowSurrogate)(ch))
+    {
+        uint c1;
+        if ((c1 = TY_(ReadChar)(doc->docIn)) == '&') 
+        {
+            /* have a following entity */
+            if (!GetSurrogatePair(doc, isXml, &ch))
+            {
+                TY_(UngetChar)(c1, doc->docIn);  /* otherwise put it back */
+            }
+        }
+        else 
+        {
+            /* otherwise put it back */
+            TY_(UngetChar)(c1, doc->docIn);
+        }
+
     }
 
     /* deal with unrecognized or invalid entities */

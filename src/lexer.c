@@ -1042,11 +1042,12 @@ static Bool GetSurrogatePair(TidyDocImpl* doc, Bool isXml, uint *pch)
 {
     Lexer* lexer = doc->lexer;
     uint bufSize = 32;
-    uint c, i, ch, offset = 0;
+    uint c, ch, offset = 0;
     tmbstr buf = 0;
     Bool success = no;  /* assume failed */
     int type = 0;   /* assume numeric */
     uint fch = *pch;
+    int i;  /* has to be signed due to for i >= 0 */
     if (!lexer)
         return no;
     buf = (tmbstr)TidyRealloc(lexer->allocator, buf, bufSize);
@@ -1112,11 +1113,12 @@ static Bool GetSurrogatePair(TidyDocImpl* doc, Bool isXml, uint *pch)
     }
     if (!success)
     {
-        if (ch == ';')
-            TY_(UngetChar)(ch, doc->docIn);
-        if (buf)
+        if (c == ';') /* if last, not added to buffer */
+            TY_(UngetChar)(c, doc->docIn);
+        if (buf && offset)
         {
-            for (i = 0; i < offset; i++)
+            /* correct the order for unget - last first */
+            for (i = offset - 1; i >= 0; i--)
             {
                 c = buf[i];
                 TY_(UngetChar)(c, doc->docIn);

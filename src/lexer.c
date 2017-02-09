@@ -1034,25 +1034,33 @@ static void SetLexerLocus( TidyDocImpl* doc, Lexer *lexer )
 }
 
 /*
+    Issue #483
     Have detected the first of a surrogate pair...
     Try to find, decode the second...
     Already have '&' start...
 */
-static Bool GetSurrogatePair(TidyDocImpl* doc, Bool isXml, uint *pch)
+
+typedef enum {
+    SP_ok,
+    SP_failed,
+    SP_error
+}SPStatus;
+
+static SPStatus GetSurrogatePair(TidyDocImpl* doc, Bool isXml, uint *pch)
 {
     Lexer* lexer = doc->lexer;
     uint bufSize = 32;
     uint c, ch, offset = 0;
     tmbstr buf = 0;
-    Bool success = no;  /* assume failed */
+    SPStatus status = SP_error;  /* assume failed */
     int type = 0;   /* assume numeric */
     uint fch = *pch;
     int i;  /* has to be signed due to for i >= 0 */
     if (!lexer)
-        return no;
+        return status;
     buf = (tmbstr)TidyRealloc(lexer->allocator, buf, bufSize);
     if (!buf)
-        return no;
+        return status;
     while ((c = TY_(ReadChar)(doc->docIn)) != EndOfStream )
     {
         if (c == ';')
@@ -1107,12 +1115,21 @@ static Bool GetSurrogatePair(TidyDocImpl* doc, Bool isXml, uint *pch)
             if (TY_(IsValidCombinedChar)(ch))
             {
                 *pch = ch;  /* return combined pair value */
-                success = yes;
+                status = SP_ok; /* full success - pair used */
+            }
+            else
+            {
+                status = SP_failed; /* is one of the 32 out-of-range pairs */
+                *pch = 0xFFFD;  /* return substitute character */
+                /* SP WARNING: - BAD_SURROGATE_PAIR */
+                fprintf(stderr, "Warning: Have out-of-range surrogate pair U+%04X:U+%04X, replaced with U+FFFD value.\n", fch, ch);
             }
         }
     }
-    if (!success)
+
+    if (status == SP_error)
     {
+        /* Error condition - can only put back all the chars */
         if (c == ';') /* if last, not added to buffer */
             TY_(UngetChar)(c, doc->docIn);
         if (buf && offset)
@@ -1129,7 +1146,7 @@ static Bool GetSurrogatePair(TidyDocImpl* doc, Bool isXml, uint *pch)
     if (buf)
         TidyFree(lexer->allocator, buf);
 
-    return success;
+    return status;
 }
 
 /*
@@ -1265,20 +1282,36 @@ static void ParseEntity( TidyDocImpl* doc, GetTokenMode mode )
     if (!preserveEntities && found && TY_(IsLowSurrogate)(ch))
     {
         uint c1;
-        if ((c1 = TY_(ReadChar)(doc->docIn)) == '&') 
+        if ((c1 = TY_(ReadChar)(doc->docIn)) == '&')
         {
-            /* have a following entity */
-            if (!GetSurrogatePair(doc, isXml, &ch))
+            SPStatus status;
+            /* Have a following entity, 
+               so there is a chance of having a valid surrogate pair */
+            c1 = ch;    /* keep first value, in case of error */
+            status = GetSurrogatePair(doc, isXml, &ch);
+            if (status == SP_error)
             {
-                TY_(UngetChar)(c1, doc->docIn);  /* otherwise put it back */
+                /* SP WARNING: BAD_SURROGATE_TAIL - use substitute character */
+                fprintf(stderr, "Warning: Leading(High) surrogate pair U+%04X, with no trailing(Low) entity, replaced with U+FFFD.\n", c1);
+                TY_(UngetChar)('&', doc->docIn);  /* otherwise put it back */
             }
         }
-        else 
+        else
         {
-            /* otherwise put it back */
+            /* put this non-entity lead char back */
             TY_(UngetChar)(c1, doc->docIn);
+            /* Have leading surrogate pair, with no tail */
+            /* SP WARNING: BAD_SURROGATE_TAIL - use substitute character */
+            fprintf(stderr, "Warning: Leading(High) surrogate pair U+%04X, with no trailing(Low) entity, replaced with U+FFFD.\n", ch);
+            ch = 0xFFFD;
         }
-
+    } 
+    else if (!preserveEntities && found && TY_(IsHighSurrogate)(ch))
+    {
+        /* Have trailing surrogate pair, with no lead */
+        /* SP WARNING: - BAD_SURROGATE_LEAD -  - use substitute character */
+        fprintf(stderr, "Warning: Trailing (Low) surrogate pair U+%04X, with no leading (High) entity, replaced with U+FFFD.\n", ch);
+        ch = 0xFFFD;
     }
 
     /* deal with unrecognized or invalid entities */

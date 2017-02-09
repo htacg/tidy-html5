@@ -186,6 +186,10 @@ typedef enum {
     INVALID_URI,
     INVALID_NCR,
 
+    BAD_SURROGATE_PAIR,
+    BAD_SURROGATE_TAIL,
+    BAD_SURROGATE_LEAD,
+
     /* This MUST be present and last. */
     CODES_TIDY_ERROR_LAST
 } tidyErrorCodes;

@@ -328,6 +328,9 @@ static const tidyErrorFilterKeyItem tidyErrorFilterKeysStruct[] = {
     { "ENCODING_MISMATCH",                             ENCODING_MISMATCH                             },
     { "INVALID_URI",                                   INVALID_URI                                   },
     { "INVALID_NCR",                                   INVALID_NCR                                   },
+    { "BAD_SURROGATE_PAIR",                            BAD_SURROGATE_PAIR                            },
+    { "BAD_SURROGATE_TAIL",                            BAD_SURROGATE_TAIL                            },
+    { "BAD_SURROGATE_LEAD",                            BAD_SURROGATE_LEAD                            },
     { "CODES_TIDY_ERROR_LAST",                         CODES_TIDY_ERROR_LAST                         },
 #if SUPPORT_ACCESSIBILITY_CHECKS
     /* This blocks of codes comes from `accessErrorCodes` enum. */

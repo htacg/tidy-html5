@@ -530,6 +530,13 @@ void TY_(ReportEntityError)( TidyDocImpl* doc, uint code, ctmbstr entity,
         messageLexer( doc, TidyWarning, code, fmt, entityname );
 }
 
+void TY_(ReportSurrogateError)(TidyDocImpl* doc, uint code, uint c1, uint c2)
+{
+    ctmbstr fmt = tidyLocalizedString(code);
+    if (fmt)
+        messageLexer(doc, TidyWarning, code, fmt, c1, c2);
+}
+
 void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
 {
     char const *name = "NULL", *value = "NULL";

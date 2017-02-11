@@ -1121,8 +1121,7 @@ static SPStatus GetSurrogatePair(TidyDocImpl* doc, Bool isXml, uint *pch)
             {
                 status = SP_failed; /* is one of the 32 out-of-range pairs */
                 *pch = 0xFFFD;  /* return substitute character */
-                /* SP WARNING: - BAD_SURROGATE_PAIR */
-                fprintf(stderr, "Warning: Have out-of-range surrogate pair U+%04X:U+%04X, replaced with U+FFFD value.\n", fch, ch);
+                TY_(ReportSurrogateError)(doc, BAD_SURROGATE_PAIR, fch, ch); /* SP WARNING: -  */
             }
         }
     }
@@ -1291,8 +1290,7 @@ static void ParseEntity( TidyDocImpl* doc, GetTokenMode mode )
             status = GetSurrogatePair(doc, isXml, &ch);
             if (status == SP_error)
             {
-                /* SP WARNING: BAD_SURROGATE_TAIL - use substitute character */
-                fprintf(stderr, "Warning: Leading(High) surrogate pair U+%04X, with no trailing(Low) entity, replaced with U+FFFD.\n", c1);
+                TY_(ReportSurrogateError)(doc, BAD_SURROGATE_TAIL, c1, 0); /* SP WARNING: - using substitute character */
                 TY_(UngetChar)('&', doc->docIn);  /* otherwise put it back */
             }
         }
@@ -1301,16 +1299,14 @@ static void ParseEntity( TidyDocImpl* doc, GetTokenMode mode )
             /* put this non-entity lead char back */
             TY_(UngetChar)(c1, doc->docIn);
             /* Have leading surrogate pair, with no tail */
-            /* SP WARNING: BAD_SURROGATE_TAIL - use substitute character */
-            fprintf(stderr, "Warning: Leading(High) surrogate pair U+%04X, with no trailing(Low) entity, replaced with U+FFFD.\n", ch);
+            TY_(ReportSurrogateError)(doc, BAD_SURROGATE_TAIL, ch, 0); /* SP WARNING: - using substitute character */
             ch = 0xFFFD;
         }
     } 
     else if (!preserveEntities && found && TY_(IsHighSurrogate)(ch))
     {
         /* Have trailing surrogate pair, with no lead */
-        /* SP WARNING: - BAD_SURROGATE_LEAD -  - use substitute character */
-        fprintf(stderr, "Warning: Trailing (Low) surrogate pair U+%04X, with no leading (High) entity, replaced with U+FFFD.\n", ch);
+        TY_(ReportSurrogateError)(doc, BAD_SURROGATE_LEAD, ch, 0); /* SP WARNING: - using substitute character */
         ch = 0xFFFD;
     }
 

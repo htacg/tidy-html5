@@ -446,6 +446,7 @@ typedef enum
   TidyTag_FIGCAPTION,
   TidyTag_FIGURE,
   TidyTag_FOOTER,
+  TidyTag_MAIN,
   TidyTag_HEADER,
   TidyTag_HGROUP,
   TidyTag_MAIN,

@@ -132,6 +132,7 @@ extern const AttrVersion TY_(W3CAttrsFor_BDI)[];
 extern const AttrVersion TY_(W3CAttrsFor_NAV)[];
 extern const AttrVersion TY_(W3CAttrsFor_SECTION)[];
 extern const AttrVersion TY_(W3CAttrsFor_FOOTER)[];
+extern const AttrVersion TY_(W3CAttrsFor_MAIN)[];
 extern const AttrVersion TY_(W3CAttrsFor_HEADER)[];
 extern const AttrVersion TY_(W3CAttrsFor_DETAILS)[];
 extern const AttrVersion TY_(W3CAttrsFor_DIALOG)[];

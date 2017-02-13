@@ -46,6 +46,7 @@ void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarde
 void TY_(ReportEntityError)( TidyDocImpl* doc, uint code, ctmbstr entity, int c );
 void TY_(ReportAttrError)( TidyDocImpl* doc, Node* node, AttVal* av, uint code );
 void TY_(ReportMissingAttr)( TidyDocImpl* doc, Node* node, ctmbstr name );
+void TY_(ReportSurrogateError)(TidyDocImpl* doc, uint code, uint c1, uint c2);
 
 #if SUPPORT_ACCESSIBILITY_CHECKS
 
@@ -185,6 +186,10 @@ typedef enum {
     ENCODING_MISMATCH,
     INVALID_URI,
     INVALID_NCR,
+
+    BAD_SURROGATE_PAIR,
+    BAD_SURROGATE_TAIL,
+    BAD_SURROGATE_LEAD,
 
     /* This MUST be present and last. */
     CODES_TIDY_ERROR_LAST

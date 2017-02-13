@@ -1034,6 +1034,121 @@ static void SetLexerLocus( TidyDocImpl* doc, Lexer *lexer )
 }
 
 /*
+    Issue #483
+    Have detected the first of a surrogate pair...
+    Try to find, decode the second...
+    Already have '&' start...
+*/
+
+typedef enum {
+    SP_ok,
+    SP_failed,
+    SP_error
+}SPStatus;
+
+static SPStatus GetSurrogatePair(TidyDocImpl* doc, Bool isXml, uint *pch)
+{
+    Lexer* lexer = doc->lexer;
+    uint bufSize = 32;
+    uint c, ch, offset = 0;
+    tmbstr buf = 0;
+    SPStatus status = SP_error;  /* assume failed */
+    int type = 0;   /* assume numeric */
+    uint fch = *pch;
+    int i;  /* has to be signed due to for i >= 0 */
+    if (!lexer)
+        return status;
+    buf = (tmbstr)TidyRealloc(lexer->allocator, buf, bufSize);
+    if (!buf)
+        return status;
+    while ((c = TY_(ReadChar)(doc->docIn)) != EndOfStream )
+    {
+        if (c == ';')
+        {
+            break;  /* reached end of entity */
+        }
+        if ((offset + 2) > bufSize)
+        {
+            bufSize *= 2;
+            buf = (tmbstr)TidyRealloc(lexer->allocator, buf, bufSize);
+            if (!buf)
+            {
+                break;
+            }
+        }
+        buf[offset++] = c;  /* add char to buffer */
+        if (offset == 1)
+        {
+            if (c != '#')   /* is a numeric entity */
+                break;
+        }
+        else if (offset == 2 && ((c == 'x') || (!isXml && c == 'X')))
+        {
+            type = 1;   /* set hex digits */
+        }
+        else
+        {
+            if (type)   /* if hex digits */
+            {
+                if (!IsDigitHex(c))
+                    break;
+            }
+            else    /* if numeric */
+            {
+                if (!TY_(IsDigit)(c))
+                    break;
+            }
+        }
+    }
+
+    if (c == ';')
+    {
+        buf[offset] = 0;
+        if (type)
+            sscanf(buf + 2, "%x", &ch);
+        else
+            sscanf(buf + 1, "%d", &ch);
+
+        if (TY_(IsHighSurrogate)(ch))
+        {
+            ch = TY_(CombineSurrogatePair)(ch, fch);
+            if (TY_(IsValidCombinedChar)(ch))
+            {
+                *pch = ch;  /* return combined pair value */
+                status = SP_ok; /* full success - pair used */
+            }
+            else
+            {
+                status = SP_failed; /* is one of the 32 out-of-range pairs */
+                *pch = 0xFFFD;  /* return substitute character */
+                TY_(ReportSurrogateError)(doc, BAD_SURROGATE_PAIR, fch, ch); /* SP WARNING: -  */
+            }
+        }
+    }
+
+    if (status == SP_error)
+    {
+        /* Error condition - can only put back all the chars */
+        if (c == ';') /* if last, not added to buffer */
+            TY_(UngetChar)(c, doc->docIn);
+        if (buf && offset)
+        {
+            /* correct the order for unget - last first */
+            for (i = offset - 1; i >= 0; i--)
+            {
+                c = buf[i];
+                TY_(UngetChar)(c, doc->docIn);
+            }
+        }
+    }
+
+    if (buf)
+        TidyFree(lexer->allocator, buf);
+
+    return status;
+}
+
+/*
   No longer attempts to insert missing ';' for unknown
   enitities unless one was present already, since this
   gives unexpected results.
@@ -1157,6 +1272,42 @@ static void ParseEntity( TidyDocImpl* doc, GetTokenMode mode )
         /* Lookup entity code and version
         */
         found = TY_(EntityInfo)( lexer->lexbuf+start, isXml, &ch, &entver );
+    }
+
+    /* Issue #483 - Deal with 'surrogate pairs' */
+    /* TODO: Maybe warning/error, like found a leading surrogate
+       but no following surrogate! Maybe should avoid outputting
+       invalid utf-8 for this entity - maybe substitute?  */
+    if (!preserveEntities && found && TY_(IsLowSurrogate)(ch))
+    {
+        uint c1;
+        if ((c1 = TY_(ReadChar)(doc->docIn)) == '&')
+        {
+            SPStatus status;
+            /* Have a following entity, 
+               so there is a chance of having a valid surrogate pair */
+            c1 = ch;    /* keep first value, in case of error */
+            status = GetSurrogatePair(doc, isXml, &ch);
+            if (status == SP_error)
+            {
+                TY_(ReportSurrogateError)(doc, BAD_SURROGATE_TAIL, c1, 0); /* SP WARNING: - using substitute character */
+                TY_(UngetChar)('&', doc->docIn);  /* otherwise put it back */
+            }
+        }
+        else
+        {
+            /* put this non-entity lead char back */
+            TY_(UngetChar)(c1, doc->docIn);
+            /* Have leading surrogate pair, with no tail */
+            TY_(ReportSurrogateError)(doc, BAD_SURROGATE_TAIL, ch, 0); /* SP WARNING: - using substitute character */
+            ch = 0xFFFD;
+        }
+    } 
+    else if (!preserveEntities && found && TY_(IsHighSurrogate)(ch))
+    {
+        /* Have trailing surrogate pair, with no lead */
+        TY_(ReportSurrogateError)(doc, BAD_SURROGATE_LEAD, ch, 0); /* SP WARNING: - using substitute character */
+        ch = 0xFFFD;
     }
 
     /* deal with unrecognized or invalid entities */

@@ -2000,7 +2000,11 @@ void PPrintScriptStyle( TidyDocImpl* doc, uint mode, uint indent, Node *node )
 
     PPrintTag( doc, mode, indent, node );
 
-    TY_(PFlushLineSmart)(doc, indent);
+    /* SCRIPT may have no content such as when loading code via its SRC attribute.
+       In this case we don't want to flush the line, preferring to keep the required
+       closing SCRIPT tag on the same line. */
+    if ( node->content != NULL )
+        TY_(PFlushLineSmart)(doc, indent);
 
     if ( xhtmlOut && node->content != NULL )
     {
@@ -2053,7 +2057,9 @@ void PPrintScriptStyle( TidyDocImpl* doc, uint mode, uint indent, Node *node )
             contentIndent = TextEndsWithNewline( doc->lexer, content, CDATA );
     }
 
-    if ( contentIndent < 0 )
+    /* Only flush the line if these was content present so that the closing
+       SCRIPT tag will stay on the same line. */
+    if ( contentIndent < 0 && node->content != NULL )
     {
         PCondFlushLineSmart( doc, indent );
         contentIndent = 0;

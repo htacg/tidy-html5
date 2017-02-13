@@ -60,6 +60,16 @@ else ()
 add_definitions ( -DSUPPORT_LOCALIZATIONS=0 )
 endif ()
 
+# Allow building without console support, which mostly prevents console strings
+# from existing in the library. Note that this will prevent the console 
+# application from being built, since it can't be linked.
+option( SUPPORT_CONSOLE_APP "Set OFF to libraries only without console application support." ON )
+if (SUPPORT_CONSOLE_APP)
+add_definitions ( -DSUPPORT_CONSOLE_APP=1 )
+else ()
+add_definitions ( -DSUPPORT_CONSOLE_APP=0 )
+endif ()
+
 if(CMAKE_COMPILER_IS_GNUCXX)
     set( WARNING_FLAGS -Wall )
 endif(CMAKE_COMPILER_IS_GNUCXX)
@@ -136,7 +146,7 @@ set ( CFILES
         ${SRCDIR}/buffio.c       ${SRCDIR}/fileio.c       ${SRCDIR}/streamio.c
         ${SRCDIR}/tagask.c       ${SRCDIR}/tmbstr.c       ${SRCDIR}/utf8.c
         ${SRCDIR}/tidylib.c      ${SRCDIR}/mappedio.c     ${SRCDIR}/gdoc.c
-        ${SRCDIR}/language.c  )
+        ${SRCDIR}/language.c )
 set ( HFILES
         ${INCDIR}/tidyplatform.h ${INCDIR}/tidy.h         ${INCDIR}/tidyenum.h
         ${INCDIR}/tidybuffio.h )
@@ -214,18 +224,20 @@ endif ()
 
 ##########################################################
 ### main executable - linked with STATIC/SHARED library
-set(name ${LIB_NAME})
-set ( BINDIR console )
-add_executable( ${name} ${BINDIR}/tidy.c )
-target_link_libraries( ${name} ${add_LIBS} )
-if (MSVC)
-    set_target_properties( ${name} PROPERTIES DEBUG_POSTFIX d )
+if (SUPPORT_CONSOLE_APP)
+    set(name ${LIB_NAME})
+    set ( BINDIR console )
+    add_executable( ${name} ${BINDIR}/tidy.c )
+    target_link_libraries( ${name} ${add_LIBS} )
+    if (MSVC)
+        set_target_properties( ${name} PROPERTIES DEBUG_POSTFIX d )
+    endif ()
+    if (NOT TIDY_CONSOLE_SHARED)
+        set_target_properties( ${name} PROPERTIES 
+                                       COMPILE_FLAGS "-DTIDY_STATIC" )
+    endif ()
+    install (TARGETS ${name} DESTINATION bin)
 endif ()
-if (NOT TIDY_CONSOLE_SHARED)
-    set_target_properties( ${name} PROPERTIES 
-                                   COMPILE_FLAGS "-DTIDY_STATIC" )
-endif ()
-install (TARGETS ${name} DESTINATION bin)
 
 if (BUILD_TAB2SPACE)
     set(name tab2space)
@@ -250,7 +262,7 @@ endif ()
 #==========================================================
 # Create man pages
 #==========================================================
-if (UNIX)
+if (UNIX AND SUPPORT_CONSOLE_APP)
     find_program( XSLTPROC_FOUND xsltproc )
     if (XSLTPROC_FOUND)
         ## NOTE: man name must match exe ie currently `${LIB_NAME}.1` not `tidy.1`

@@ -21,23 +21,19 @@
  *     `poconvert.rb msgunfmt language_zh_cn.h` (our own
  *     conversion tool) to generate a fresh PO from this file first!
  *
- * (c) 2015 HTACG
+ * (c) 2015-2017 HTACG
  * See tidy.h and access.h for the copyright notice.
  *
  * Template Created by Jim Derry on 01/14/2016.
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2016-03-24 10:59:55
+ *   PO_REVISION_DATE=2017-02-17 14:46:38
  */
 
 #ifdef _MSC_VER
 #pragma execution_character_set("utf-8")
 #endif
-
-#include "language.h"
-#include "access.h"
-#include "message.h"
 
 
 /**
@@ -68,8 +64,11 @@ static languageDefinition language_zh_cn = { whichPluralForm_zh_cn, {
     { FILE_CANT_OPEN,         0, "无法打开”%s”\n"              },
     { LINE_COLUMN_STRING,     0, "行 %d 列 %d - "            },
     { STRING_CONTENT_LOOKS,   0, "文档内容看起来像 %s"             },
+
+#if SUPPORT_CONSOLE_APP
     { TC_STRING_VERS_A,       0, "HTML Tidy 用于 %s 版本 %s"   },
     { TC_STRING_VERS_B,       0, "HTML Tidy 版本 %s"         },
+#endif /* SUPPORT_CONSOLE_APP */
 
     {/* This MUST be present and last. */
       TIDY_MESSAGE_TYPE_LAST, 0, NULL

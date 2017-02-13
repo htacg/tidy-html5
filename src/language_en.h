@@ -12,7 +12,7 @@
  * language localizations. As such do not edit PO files for this language;
  * modify this file directly.
  *
- * (c) 2015 HTACG
+ * (c) 2015-2017 HTACG
  * See tidy.h and access.h for the copyright notice.
  *
  * Created by Jim Derry on 11/28/15.
@@ -21,10 +21,6 @@
 #ifdef _MSC_VER
 #pragma execution_character_set("utf-8")
 #endif
-
-#include "language.h"
-#include "access.h"
-#include "message.h"
 
 
 /**
@@ -99,9 +95,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     {/* For example, "you should avoid using the specified encoding." */
       STRING_SPECIFIED,             0,   "specified"
     },
-    { STRING_UNKNOWN_FILE,          0,   "%s: can't open file \"%s\"\n"                                            },
     { STRING_UNKNOWN_OPTION,        0,   "unknown option: %s"                                                      },
-    { STRING_UNRECZD_OPTION,        0,   "unrecognized option -%c use -help to list options\n"                     },
     { STRING_XML_DECLARATION,       0,   "XML declaration"                                                         },
     
     {/* This console output should be limited to 78 characters per line. */
@@ -314,13 +308,13 @@ static languageDefinition language_en = { whichPluralForm_en, {
     /***************************************
      ** Message Severity Level
      ***************************************/
-    { TidyInfoString,               0,   "Info: "                                                                  },
-    { TidyWarningString,            0,   "Warning: "                                                               },
-    { TidyConfigString,             0,   "Config: "                                                                },
-    { TidyAccessString,             0,   "Access: "                                                                },
-    { TidyErrorString,              0,   "Error: "                                                                 },
-    { TidyBadDocumentString,        0,   "Document: "                                                              },
-    { TidyFatalString,              0,   "Panic: "                                                                 },
+    { TidyInfo,               0,   "Info: "                                                                  },
+    { TidyWarning,            0,   "Warning: "                                                               },
+    { TidyConfig,             0,   "Config: "                                                                },
+    { TidyAccess,             0,   "Access: "                                                                },
+    { TidyError,              0,   "Error: "                                                                 },
+    { TidyBadDocument,        0,   "Document: "                                                              },
+    { TidyFatal,              0,   "Panic: "                                                                 },
     
     /***************************************
      ** Warnings and Errors
@@ -2084,6 +2078,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "to <code>&lt;\\/g</code>. Set this option to 'no' if you do not want this."
     },
 
+#if SUPPORT_CONSOLE_APP
     /********************************************************
      ** Console Application
      **  Although these strings are not used within LibTidy
@@ -2091,11 +2086,11 @@ static languageDefinition language_en = { whichPluralForm_en, {
      **  provided as part of LibTidy for convenience to
      **  developers.
      ********************************************************/
-    { TC_CAT_DIAGNOSTICS,           0,   "diagnostics"                                                             },
-    { TC_CAT_ENCODING,              0,   "encoding"                                                                },
-    { TC_CAT_MARKUP,                0,   "markup"                                                                  },
-    { TC_CAT_MISC,                  0,   "misc"                                                                    },
-    { TC_CAT_PRETTYPRINT,           0,   "print"                                                                   },
+    { TidyDiagnostics,              0,   "diagnostics"                                                             },
+    { TidyEncoding,                 0,   "encoding"                                                                },
+    { TidyMarkup,                   0,   "markup"                                                                  },
+    { TidyMiscellaneous,            0,   "misc"                                                                    },
+    { TidyPrettyPrint,              0,   "print"                                                                   },
     { TC_LABEL_COL,                 0,   "column"                                                                  },
     { TC_LABEL_FILE,                0,   "file"                                                                    },
     { TC_LABEL_LANG,                0,   "lang"                                                                    },
@@ -2345,7 +2340,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "Tidy is currently using locale %s. \n"
         "\n"
     },
-    
+#endif /* SUPPORT_CONSOLE_APP */
     
     {/* This MUST be present and last. */
       TIDY_MESSAGE_TYPE_LAST,      0,   NULL

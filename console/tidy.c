@@ -9,7 +9,6 @@
  */
 
 #include "tidy.h"
-#include "language.h"
 #include "locale.h"
 #if defined(_WIN32)
 #include <windows.h> /* Force console to UTF8. */
@@ -554,19 +553,9 @@ static Bool isAutoBool( TidyOption topt )
  */
 static ctmbstr ConfigCategoryName( TidyConfigCategory id )
 {
-    switch( id )
-    {
-        case TidyMarkup:
-            return tidyLocalizedString( TC_CAT_MARKUP );
-        case TidyDiagnostics:
-            return tidyLocalizedString( TC_CAT_DIAGNOSTICS );
-        case TidyPrettyPrint:
-            return tidyLocalizedString( TC_CAT_PRETTYPRINT );
-        case TidyEncoding:
-            return tidyLocalizedString( TC_CAT_ENCODING );
-        case TidyMiscellaneous:
-            return tidyLocalizedString( TC_CAT_MISC );
-    }
+    if (id >= TidyMarkup && id <= TidyMiscellaneous)
+        return tidyLocalizedString(id);
+
     fprintf(stderr, tidyLocalizedString(TC_STRING_FATAL_ERROR), (int)id);
     fprintf(stderr, "\n");
 
@@ -884,13 +873,17 @@ void tidyPrintWindowsLanguageNames( ctmbstr format )
 {
     const tidyLocaleMapItem *item;
     TidyIterator i = getWindowsLanguageList();
+    ctmbstr winName;
+    ctmbstr posixName;
 
     while (i) {
         item = getNextWindowsLanguage(&i);
+        winName = TidyLangWindowsName( item );
+        posixName = TidyLangPosixName( item );
         if ( format )
-            printf( format, item->winName, item->POSIXName );
+            printf( format, winName, posixName );
         else
-            printf( "%-20s -> %s\n", item->winName, item->POSIXName );
+            printf( "%-20s -> %s\n", winName, posixName );
     }
 }
 
@@ -1424,7 +1417,7 @@ static void xml_options_strings( TidyDoc tdoc )
  **/
 static void xml_error_strings( TidyDoc tdoc )
 {
-    const tidyErrorFilterKeyItem *item;
+    uint errorCode;
     ctmbstr localizedString;
     TidyIterator j = getErrorCodeList();
 
@@ -1432,10 +1425,10 @@ static void xml_error_strings( TidyDoc tdoc )
     printf( "<error_strings version=\"%s\">\n", tidyLibraryVersion());
 
     while (j) {
-        item = getNextErrorCode(&j);
-        localizedString = tidyLocalizedString(item->value);
+        errorCode = getNextErrorCode(&j);
+        localizedString = tidyLocalizedString(errorCode);
         printf( " <error_string>\n" );
-        printf( "  <name>%s</name>\n",item->key);
+        printf( "  <name>%s</name>\n", tidyErrorCodeAsKey(errorCode));
         if ( localizedString )
             printf( "  <string class=\"%s\"><![CDATA[%s]]></string>\n", tidyGetLanguage(), localizedString );
         else
@@ -1457,7 +1450,9 @@ static void xml_error_strings( TidyDoc tdoc )
  **  better to use our POT/PO workflow with your favorite tools, or simply
  **  diff the language header files directly.
  **  **Important:** The attribute `id` is not a specification, promise, or
- **  part of an API. You must not depend on this value.
+ **  part of an API. You must not depend on this value. For strings meant
+ **  for error output, the `label` attribute will contain the stringified
+ **  version of the internal key for the string.
  */
 static void xml_strings( void )
 {
@@ -1465,6 +1460,7 @@ static void xml_strings( void )
     TidyIterator j;
 
     ctmbstr current_language = tidyGetLanguage();
+    ctmbstr current_label;
     Bool skip_current = strcmp( current_language, "en" ) == 0;
     Bool matches_base;
 
@@ -1474,7 +1470,10 @@ static void xml_strings( void )
     j = getStringKeyList();
     while (j) {
         i = getNextStringKey(&j);
-        printf( "<localized_string id=\"%u\">\n", i );
+        current_label = tidyErrorCodeAsKey(i);
+        if (!strcmp(current_label, "UNDEFINED"))
+            current_label = "";
+        printf( "<localized_string id=\"%u\" label=\"%s\">\n", i, current_label );
         printf( " <string class=\"%s\">", "en" );
         printf("%s", tidyDefaultString(i));
         printf( "</string>\n" );

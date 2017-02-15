@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>tidy-html5</id>
+    <version>5.1.8</version>
+    <title>tidy-html5</title>
+    <authors>Geoff McLane, Michael[tm] Smith, Jim Derry</authors>
+    <owners>Geoff McLane</owners>
+    <summary>The granddaddy of HTML tools, with support for modern standards http.</summary>
+    <description>Tidy - The granddaddy of HTML tools. Supports modern standards. Tidy tidies HTML and XML. It can tidy your documents by itself, and developers can easily integrate its features into even more powerful tools.</description>
+    <projectUrl>http://www.html-tidy.org</projectUrl>
+    <docsUrl>http://www.html-tidy.org/documentation/</docsUrl>
+    <bugTrackerUrl>https://github.com/htacg/tidy-html5/issues</bugTrackerUrl>
+    <packageSourceUrl>https://github.com/htacg/tidy-html5/tree/master/build/win64/choco</packageSourceUrl>
+    <tags>HTML tidy HTML5</tags>
+    <licenseUrl>https://github.com/htacg/tidy-html5/blob/master/LICENSE.md</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <iconUrl>http://www.balthisar.com/assets/images/blog/tidy-html5-logo-071e790a.png</iconUrl>
+  </metadata>
+</package>

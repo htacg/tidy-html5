@@ -226,10 +226,6 @@ static const TidyOptionImpl option_defs[] =
   { TidyDoctype,                 MU, "doctype",                     ST, 0,               ParseDocType,      doctypePicks    },
   { TidyDuplicateAttrs,          MU, "repeated-attributes",         IN, TidyKeepLast,    ParseRepeatAttr,   repeatAttrPicks },
   { TidyAltText,                 MU, "alt-text",                    ST, 0,               ParseString,       NULL            },
-
-  /* obsolete */
-  { TidySlideStyle,              MS, "slide-style",                 ST, 0,               ParseName,         NULL            },
-
   { TidyErrFile,                 MS, "error-file",                  ST, 0,               ParseString,       NULL            },
   { TidyOutFile,                 MS, "output-file",                 ST, 0,               ParseString,       NULL            },
   { TidyWriteBack,               MS, "write-back",                  BL, no,              ParseBool,         boolPicks       },
@@ -258,10 +254,6 @@ static const TidyOptionImpl option_defs[] =
   { TidyDropEmptyParas,          MU, "drop-empty-paras",            BL, yes,             ParseBool,         boolPicks       },
   { TidyFixComments,             MU, "fix-bad-comments",            BL, yes,             ParseBool,         boolPicks       },
   { TidyBreakBeforeBR,           PP, "break-before-br",             BL, no,              ParseBool,         boolPicks       },
-
-  /* obsolete */
-  { TidyBurstSlides,             PP, "split",                       BL, no,              ParseBool,         boolPicks       },
-
   { TidyNumEntities,             MU, "numeric-entities",            BL, no,              ParseBool,         boolPicks       },
   { TidyQuoteMarks,              MU, "quote-marks",                 BL, no,              ParseBool,         boolPicks       },
   { TidyQuoteNbsp,               MU, "quote-nbsp",                  BL, yes,             ParseBool,         boolPicks       },
@@ -625,14 +617,6 @@ ctmbstr TY_(_cfgGetString)( TidyDocImpl* doc, TidyOptionId optId )
 }
 #endif
 
-
-#if 0
-/* for use with Gnu Emacs */
-void SetEmacsFilename( TidyDocImpl* doc, ctmbstr filename )
-{
-    SetOptionValue( doc, TidyEmacsFile, filename );
-}
-#endif
 
 static tchar GetC( TidyConfigImpl* config )
 {
@@ -1173,7 +1157,7 @@ Bool ParseAutoBool( TidyDocImpl* doc, const TidyOptionImpl* entry )
 }
 
 /* a string excluding whitespace */
-Bool ParseName( TidyDocImpl* doc, const TidyOptionImpl* option )
+Bool FUNC_UNUSED ParseName( TidyDocImpl* doc, const TidyOptionImpl* option )
 {
     tmbchar buf[ 1024 ] = {0};
     uint i = 0;

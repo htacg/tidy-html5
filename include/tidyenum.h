@@ -71,9 +71,6 @@ typedef enum
   TidyDuplicateAttrs,      /**< Keep first or last duplicate attribute */
   TidyAltText,             /**< Default text for alt attribute */
 
-  /* obsolete */
-  TidySlideStyle,          /**< Style sheet for slides: not used for anything yet */
-
   TidyErrFile,             /**< File name to write errors to */
   TidyOutFile,             /**< File name to write markup to */
   TidyWriteBack,           /**< If true then output tidied markup */
@@ -104,9 +101,6 @@ typedef enum
   TidyDropEmptyParas,      /**< Discard empty p elements */
   TidyFixComments,         /**< Fix comments with adjacent hyphens */
   TidyBreakBeforeBR,       /**< Output newline before <br> or not? */
-
-  /* obsolete */
-  TidyBurstSlides,         /**< Create slides on each h2 element */
 
   TidyNumEntities,         /**< Use numeric entities */
   TidyQuoteMarks,          /**< Output " marks as &quot; */

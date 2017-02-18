@@ -1,4 +1,4 @@
-/* attrget.c -- Locate attribute value by type
+/* attrget.c -- Additional attribute API
 
   (c) 1998-2006 (W3C) MIT, ERCIM, Keio University
   See tidy.h for the copyright notice.
@@ -6,8 +6,6 @@
 */
 
 #include "tidy-int.h"
-#include "tags.h"
-#include "attrs.h"
 #include "tidy.h"
 
 TidyAttr TIDY_CALL tidyAttrGetById( TidyNode tnod, TidyAttrId attId )
@@ -15,6 +13,13 @@ TidyAttr TIDY_CALL tidyAttrGetById( TidyNode tnod, TidyAttrId attId )
     Node* nimp = tidyNodeToImpl(tnod);
     return tidyImplToAttr( TY_(AttrGetById)( nimp, attId ) );
 }
+
+
+Bool TIDY_CALL tidyAttrIsEvent( TidyAttr tattr )
+{
+    return TY_(attrIsEvent)( tidyAttrToImpl(tattr) );
+}
+
 
 /*
  * local variables:

@@ -812,7 +812,7 @@ TIDY_EXPORT void TIDY_CALL        tidyAttrDiscard( TidyDoc itdoc, TidyNode tnod,
 
 /* Node info */
 TIDY_EXPORT TidyNodeType TIDY_CALL tidyNodeGetType( TidyNode tnod );
-TIDY_EXPORT ctmbstr TIDY_CALL     tidyNodeGetName( TidyNode tnod );
+TIDY_EXPORT ctmbstr TIDY_CALL tidyNodeGetName( TidyNode tnod );
 
 TIDY_EXPORT Bool TIDY_CALL tidyNodeIsText( TidyNode tnod );
 TIDY_EXPORT Bool TIDY_CALL tidyNodeIsProp( TidyDoc tdoc, TidyNode tnod );
@@ -832,27 +832,18 @@ TIDY_EXPORT uint TIDY_CALL tidyNodeColumn( TidyNode tnod );
 /** @} End NodeAsk group */
 
 
-/** @defgroup Attribute Attribute Interrogation
+/** @defgroup Attribute Attribute Interrogation and Retrieval
 **
-** Get information about any given attribute.
+** Get information about attributes, and retrieve them from nodes.
 ** @{
 */
 
 TIDY_EXPORT TidyAttrId TIDY_CALL tidyAttrGetId( TidyAttr tattr );
 TIDY_EXPORT Bool TIDY_CALL tidyAttrIsEvent( TidyAttr tattr );
 
-/** @} end AttrAsk group */
-
-
-/** @defgroup AttrGet Attribute Retrieval
-**
-** Lookup an attribute from a given node
-** @{
-*/
-
 TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetById( TidyNode tnod, TidyAttrId attId );
 
-/** @} end AttrGet group */
+/** @} end Attribute group */
 
     
 /** @defgroup MessagesKeys Message Key Management

@@ -72,28 +72,6 @@ void TY_(PPrintSpaces)(void)
 #if SUPPORT_ASIAN_ENCODINGS
 /* #431953 - start RJ Wraplen adjusted for smooth international ride */
 
-#if 0
-uint CWrapLen( TidyDocImpl* doc, uint ind )
-{
-    ctmbstr lang = cfgStr( doc, TidyLanguage );
-    uint wraplen = cfg( doc, TidyWrapLen );
-
-    if ( !TY_(tmbstrcasecmp)(lang, "zh") )
-        /* Chinese characters take two positions on a fixed-width screen */ 
-        /* It would be more accurate to keep a parallel linelen and wraphere
-           incremented by 2 for Chinese characters and 1 otherwise, but this
-           is way simpler.
-        */
-        return (ind + (( wraplen - ind ) / 2)) ; 
-    
-    if ( !TY_(tmbstrcasecmp)(lang, "ja") )
-        /* average Japanese text is 30% kanji */
-        return (ind + ((( wraplen - ind ) * 7) / 10)) ; 
-    
-    return wraplen;
-}
-#endif
-
 typedef enum
 {
   UC00, /* None                       */

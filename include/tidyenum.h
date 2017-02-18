@@ -143,10 +143,8 @@ typedef enum
   TidyEscapeCdata,         /**< Replace <![CDATA[]]> sections with escaped text */
 
 #if SUPPORT_ASIAN_ENCODINGS
-  TidyLanguage,            /**< Language property: not used for anything yet */
   TidyNCR,                 /**< Allow numeric character references */
 #else
-  TidyLanguageNotUsed,
   TidyNCRNotUsed,
 #endif
 #if SUPPORT_UTF16_ENCODINGS

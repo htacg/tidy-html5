@@ -296,7 +296,6 @@ static const TidyOptionImpl option_defs[] =
   { TidyJoinStyles,              MU, "join-styles",                 BL, yes,             ParseBool,         boolPicks       },
   { TidyEscapeCdata,             MU, "escape-cdata",                BL, no,              ParseBool,         boolPicks       },
 #if SUPPORT_ASIAN_ENCODINGS
-  { TidyLanguage,                CE, "language",                    ST, 0,               ParseName,         NULL            },
   { TidyNCR,                     MU, "ncr",                         BL, yes,             ParseBool,         boolPicks       },
 #endif
 #if SUPPORT_UTF16_ENCODINGS

@@ -83,12 +83,12 @@ static languageDefinition language_es = { whichPluralForm_es, {
 #if SUPPORT_CONSOLE_APP
     { TC_TXT_HELP_LANG_1,     0,        
         "\n"
-        "La opción --language (o --lang) indica el lenguaje Tidy debe \n"
+        "La opción -language (o -lang) indica el lenguaje Tidy debe \n"
         "utilizar para comunicar su salida. Tenga en cuenta que esto no es \n"
         "un servicio de traducción de documentos, y sólo afecta a los mensajes \n"
         "que Tidy comunica a usted. \n"
         "\n"
-        "Cuando se utiliza la línea de comandos el argumento --language debe \n"
+        "Cuando se utiliza la línea de comandos el argumento -language debe \n"
         "utilizarse antes de cualquier argumento que dan lugar a la producción, \n"
         "de lo contrario Tidy producirá la salida antes de que se conozca el \n"
         "idioma a utilizar. \n"

@@ -521,13 +521,13 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { TC_TXT_HELP_CONFIG_ALLW,      0, "Les valeurs autorisées"                                                           },
     { TC_TXT_HELP_LANG_1,           0,        
         "\n"
-        "L'option --language (ou --lang) indique la langue Tidy\n"
+        "L'option -language (ou -lang) indique la langue Tidy\n"
         "doit utiliser pour communiquer sa sortie. S'il vous plaît noter que ce ne sont pas "
         "un service de traduction de documents, et affecte uniquement les messages qui Tidy "
         "communique à vous.\n"
         "\n"
         "Lorsqu'il est utilisé à partir de la ligne de commande de l'argument doit \n"
-        "--language être utilisé avant des arguments qui résultent de la production, sinon "
+        "-language être utilisé avant des arguments qui résultent de la production, sinon "
         "Tidy\n"
         "va produire une sortie avant qu'il connaît la langue à utiliser.\n"
         "\n"

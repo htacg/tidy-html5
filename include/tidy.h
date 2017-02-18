@@ -840,61 +840,6 @@ TIDY_EXPORT uint TIDY_CALL tidyNodeColumn( TidyNode tnod );
 
 TIDY_EXPORT TidyAttrId TIDY_CALL tidyAttrGetId( TidyAttr tattr );
 TIDY_EXPORT Bool TIDY_CALL tidyAttrIsEvent( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsProp( TidyAttr tattr );
-
-/** @defgroup AttrIsAttributeName Deprecated attribute interrogation per AttrId
-**
-** @deprecated The functions  tidyAttrIs{AttributeName} are deprecated and 
-** should be replaced by tidyAttrGetId.
-** @{
-*/
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsHREF( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsSRC( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsID( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsNAME( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsSUMMARY( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsALT( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsLONGDESC( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsUSEMAP( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsISMAP( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsLANGUAGE( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsTYPE( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsVALUE( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsCONTENT( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsTITLE( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsXMLNS( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsDATAFLD( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsWIDTH( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsHEIGHT( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsFOR( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsSELECTED( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsCHECKED( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsLANG( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsTARGET( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsHTTP_EQUIV( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsREL( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnMOUSEMOVE( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnMOUSEDOWN( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnMOUSEUP( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnCLICK( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnMOUSEOVER( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnMOUSEOUT( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnKEYDOWN( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnKEYUP( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnKEYPRESS( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnFOCUS( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnBLUR( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsBGCOLOR( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsLINK( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsALINK( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsVLINK( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsTEXT( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsSTYLE( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsABBR( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsCOLSPAN( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsROWSPAN( TidyAttr tattr );
-
-/** @} End AttrIsAttributeName group */
 
 /** @} end AttrAsk group */
 

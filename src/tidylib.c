@@ -2269,18 +2269,6 @@ TidyTagId TIDY_CALL tidyNodeGetId(TidyNode tnod)
 }
 
 
-/* Null for non-element nodes and all pure HTML
-cmbstr       tidyNodeNsLocal( TidyNode tnod )
-{
-}
-cmbstr       tidyNodeNsPrefix( TidyNode tnod )
-{
-}
-cmbstr       tidyNodeNsUri( TidyNode tnod )
-{
-}
-*/
-
 /* Iterate over attribute values */
 TidyAttr TIDY_CALL   tidyAttrFirst( TidyNode tnod )
 {
@@ -2323,18 +2311,6 @@ void TIDY_CALL           tidyAttrDiscard( TidyDoc tdoc, TidyNode tnod, TidyAttr 
   AttVal* attval = tidyAttrToImpl( tattr );
   TY_(RemoveAttribute)( impl, nimp, attval );
 }
-
-/* Null for pure HTML
-ctmbstr       tidyAttrNsLocal( TidyAttr tattr )
-{
-}
-ctmbstr       tidyAttrNsPrefix( TidyAttr tattr )
-{
-}
-ctmbstr       tidyAttrNsUri( TidyAttr tattr )
-{
-}
-*/
 
 TidyAttrId TIDY_CALL tidyAttrGetId( TidyAttr tattr )
 {

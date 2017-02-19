@@ -1514,6 +1514,66 @@ static void unknownOption( uint c )
 
 
 /**
+ **  This callback from LibTidy allows the console application to examine an
+ **  error message before allowing LibTidy to display it. Currently the body
+ **  of the function is not compiled into Tidy, but if you're interested in 
+ **  how to use the new message API, then enable it. Possible applications in
+ **  future console Tidy might be to do things like:
+ **    - allow user-defined filtering
+ **    - sort the report output by line number
+ **    - other things that are user facing and best not put into LibTidy
+ **      proper.
+ */
+static Bool reportCallback(TidyMessage tmessage)
+{
+#if 0
+    TidyIterator pos;
+    TidyMessageArgument arg;
+    TidyFormatParameterType messageType;
+    ctmbstr messageFormat;
+
+    printf("FILTER: %s, %s\n", tidyGetMessageKey( tmessage ), tidyGetMessageOutput( tmessage ));
+    
+    /* loop through the arguments, if any, and print their details */
+    pos = tidyGetMessageArguments( tmessage );
+    while ( pos )
+    {
+        arg = tidyGetNextMessageArgument( tmessage, &pos );
+        messageType = tidyGetArgType( tmessage, &arg );
+        messageFormat = tidyGetArgFormat( tmessage, &arg );
+        printf( "  Type = %u, Format = %s, Value = ", messageType, messageFormat );
+        
+        switch (messageType)
+        {
+            case tidyFormatType_STRING:
+                printf("%s\n", tidyGetArgValueString( tmessage, &arg ));
+                break;
+                
+            case tidyFormatType_INTN:
+            case tidyFormatType_INT16:
+            case tidyFormatType_INT32:
+            case tidyFormatType_INT64:
+                printf("%d\n", tidyGetArgValueInt( tmessage, &arg));
+                break;
+    
+            case tidyFormatType_DOUBLE:
+                printf("%g\n", tidyGetArgValueDouble( tmessage, &arg));
+                break;
+
+            default:
+                printf("%s", "unknown so far\n");
+        }
+    }
+
+    return no;  /* suppress LibTidy's own output of this message */
+#else
+    return yes; /* needed so Tidy will not block output of this message */
+#endif
+}
+
+
+
+/**
  **  MAIN --  let's do something here.
  */
 int main( int argc, char** argv )
@@ -1521,6 +1581,7 @@ int main( int argc, char** argv )
     ctmbstr prog = argv[0];
     ctmbstr cfgfil = NULL, errfil = NULL, htmlfil = NULL;
     TidyDoc tdoc = tidyCreate();
+    tidySetMessageCallback( tdoc, reportCallback);
     int status = 0;
     tmbstr locale = NULL;
 

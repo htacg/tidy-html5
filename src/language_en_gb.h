@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-02-18 18:13:23
+ *   PO_REVISION_DATE=2017-03-05 14:35:59
  */
 
 #ifdef _MSC_VER
@@ -65,14 +65,13 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
         "You are recommended to use CSS to specify the font and\n"
         "properties such as its size and colour. This will reduce\n"
         "the size of HTML files and make them easier to maintain\n"
-        "compared with using <FONT> elements.\n\n"
+        "compared with using <FONT> elements.\n"
     },
     { TEXT_USING_BODY,                 0, "You are recommended to use CSS to specify page and link colours\n"           },
     { TEXT_GENERAL_INFO_PLEA,          0,        
-        "\n"
         "Would you like to see Tidy in proper, British English? Please consider \n"
         "helping us to localise HTML Tidy. For details please see \n"
-        "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md\n"
+        "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
     },
 
 #if SUPPORT_ACCESSIBILITY_CHECKS

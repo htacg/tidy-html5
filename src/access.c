@@ -1592,13 +1592,13 @@ static void CheckMultiHeaders( TidyDocImpl* doc, Node* node )
             if (validColSpanRows == no)
             {
                 TY_(ReportAccessWarning)( doc, node, DATA_TABLE_REQUIRE_MARKUP_ROW_HEADERS );
-                TY_(DisplayHTMLTableAlgorithm)( doc );
+                TY_(DialogueMessage)( doc, TEXT_HTML_T_ALGORITHM, TidyDialogueDoc );
             }
 
             if (validColSpanColumns == no)
             {
                 TY_(ReportAccessWarning)( doc, node, DATA_TABLE_REQUIRE_MARKUP_COLUMN_HEADERS );
-                TY_(DisplayHTMLTableAlgorithm)( doc );
+                TY_(DialogueMessage)( doc, TEXT_HTML_T_ALGORITHM, TidyDialogueDoc );
             }
         }
     }
@@ -3225,7 +3225,7 @@ void TY_(AccessibilityChecks)( TidyDocImpl* doc )
     InitAccessibilityChecks( doc, cfg(doc, TidyAccessibilityCheckLevel) );
 
     /* Hello there, ladies and gentlemen... */
-    TY_(AccessibilityHelloMessage)( doc );
+    TY_(DialogueMessage)( doc, STRING_HELLO_ACCESS, TidyDialogueDoc );
 
     /* Checks all elements for script accessibility */
     CheckScriptKeyboardAccessible( doc, &doc->root );

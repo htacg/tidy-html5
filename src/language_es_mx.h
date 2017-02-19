@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-02-18 18:13:23
+ *   PO_REVISION_DATE=2017-03-05 14:35:59
  */
 
 #ifdef _MSC_VER
@@ -62,10 +62,9 @@ static languageDefinition language_es_mx = { whichPluralForm_es_mx, {
       TIDY_LANGUAGE,          0, "es_mx"
     },
     { TEXT_GENERAL_INFO_PLEA, 0,        
-        "\n"
         "¿Le gustaría ver Tidy en adecuada, español mexicano? Por favor considere \n"
         "ayudarnos a localizar HTML Tidy. Para más detalles consulte \n"
-        "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md \n"
+        "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
     },
 
     {/* This MUST be present and last. */

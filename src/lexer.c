@@ -4096,7 +4096,7 @@ static tmbstr ParseValue( TidyDocImpl* doc, ctmbstr name,
             while (TY_(IsWhite)(lexer->lexbuf[start+len-1]) && (len > 0))
                 --len;
 
-            while (TY_(IsWhite)(lexer->lexbuf[start]) && (start < len) && (len > 0))
+            while (TY_(IsWhite)(lexer->lexbuf[start]) && (len > 0))
             {
                 ++start;
                 --len;

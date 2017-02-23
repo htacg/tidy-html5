@@ -934,7 +934,7 @@ Bool TY_(ParseConfigValue)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr optval
         if (optId == TidyOutFile)
             doc->config.cfgIn = TY_(BufferInput)( doc, &inbuf, RAW );
         else
-            doc->config.cfgIn = TY_(BufferInput)( doc, &inbuf, ASCII );
+            doc->config.cfgIn = TY_(BufferInput)( doc, &inbuf, RAW ); /* Issue #468 - Was ASCII! */
         doc->config.c = GetC( &doc->config );
 
         status = option->parser( doc, option );

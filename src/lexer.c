@@ -4098,6 +4098,7 @@ static tmbstr ParseValue( TidyDocImpl* doc, ctmbstr name,
             while (TY_(IsWhite)(lexer->lexbuf[start+len-1]) && (len > 0))
                 --len;
 
+            /* Issue #497 - Fix leading space trimming */
             while (TY_(IsWhite)(lexer->lexbuf[start]) && (len > 0))
             {
                 ++start;

@@ -259,7 +259,7 @@ localize strings that are actually _different_ from the base language!
 
 ### Positional Parameters
 
-Please note that HTML Tidy does not current support positional parameters. Due
+Please note that HTML Tidy does not currently support positional parameters. Due
 to the nature of most of Tidy's output, it's not expected that they will be
 required. In any case, please translate strings so that substitution values are
 in the same order as the original string.

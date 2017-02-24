@@ -5,10 +5,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2016-03-24 10:59:55\n"
+"PO-Revision-Date: 2017-02-17 14:46:38\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
-"BAD"
+
 #. Only translate if a URL to the target language can be found.
 msgctxt "ACCESS_URL"
 msgid "http://www.w3.org/WAI/GL"
@@ -103,17 +103,8 @@ msgid "specified"
 msgstr ""
 
 #, c-format
-msgctxt "STRING_UNKNOWN_FILE"
-msgid "%s: can't open file \"%s\"\n"
-msgstr ""
-
-#, c-format
 msgctxt "STRING_UNKNOWN_OPTION"
 msgid "unknown option: %s"
-msgstr ""
-
-msgctxt "STRING_UNRECZD_OPTION"
-msgid "unrecognized option -%c use -help to list options\n"
 msgstr ""
 
 msgctxt "STRING_XML_DECLARATION"
@@ -381,31 +372,31 @@ msgstr ""
 "helping us to localise HTML Tidy. For details please see \n"
 "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md\n"
 
-msgctxt "TidyInfoString"
+msgctxt "TidyInfo"
 msgid "Info: "
 msgstr ""
 
-msgctxt "TidyWarningString"
+msgctxt "TidyWarning"
 msgid "Warning: "
 msgstr ""
 
-msgctxt "TidyConfigString"
+msgctxt "TidyConfig"
 msgid "Config: "
 msgstr ""
 
-msgctxt "TidyAccessString"
+msgctxt "TidyAccess"
 msgid "Access: "
 msgstr ""
 
-msgctxt "TidyErrorString"
+msgctxt "TidyError"
 msgid "Error: "
 msgstr ""
 
-msgctxt "TidyBadDocumentString"
+msgctxt "TidyBadDocument"
 msgid "Document: "
 msgstr ""
 
-msgctxt "TidyFatalString"
+msgctxt "TidyFatal"
 msgid "Panic: "
 msgstr ""
 
@@ -437,6 +428,18 @@ msgstr ""
 #, c-format
 msgctxt "INVALID_NCR"
 msgid "%s invalid numeric character reference %s"
+msgstr ""
+
+msgctxt "BAD_SURROGATE_PAIR"
+msgid "Have out-of-range surrogate pair U+%04X:U+%04X, replaced with U+FFFD value."
+msgstr ""
+
+msgctxt "BAD_SURROGATE_TAIL"
+msgid "Leading (High) surrogate pair U+%04X, with no trailing (Low) entity, replaced with U+FFFD."
+msgstr ""
+
+msgctxt "BAD_SURROGATE_LEAD"
+msgid "Trailing (Low) surrogate pair U+%04X, with no leading (High) entity, replaced with U+FFFD."
 msgstr ""
 
 #, c-format
@@ -3027,23 +3030,23 @@ msgid ""
 "to <code>&lt;\\/g</code>. Set this option to 'no' if you do not want this."
 msgstr ""
 
-msgctxt "TC_CAT_DIAGNOSTICS"
+msgctxt "TidyDiagnostics"
 msgid "diagnostics"
 msgstr ""
 
-msgctxt "TC_CAT_ENCODING"
+msgctxt "TidyEncoding"
 msgid "encoding"
 msgstr ""
 
-msgctxt "TC_CAT_MARKUP"
+msgctxt "TidyMarkup"
 msgid "markup"
 msgstr ""
 
-msgctxt "TC_CAT_MISC"
+msgctxt "TidyMiscellaneous"
 msgid "misc"
 msgstr ""
 
-msgctxt "TC_CAT_PRETTYPRINT"
+msgctxt "TidyPrettyPrint"
 msgid "print"
 msgstr ""
 

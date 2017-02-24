@@ -31,6 +31,7 @@
 #include "tmbstr.h"
 #include "utf8.h"
 #include "mappedio.h"
+#include "language.h"
 
 #ifdef TIDY_WIN32_MLANG_SUPPORT
 #include "win32tc.h"
@@ -209,6 +210,11 @@ void* TIDY_CALL       tidyGetAppData( TidyDoc tdoc )
 ctmbstr TIDY_CALL     tidyReleaseDate(void)
 {
     return TY_(ReleaseDate)();
+}
+
+ctmbstr TIDY_CALL     tidyLibraryVersion(void)
+{
+    return TY_(tidyLibraryVersion)();
 }
 
 
@@ -519,6 +525,8 @@ ctmbstr TIDY_CALL tidyOptGetDoc( TidyDoc ARG_UNUSED(tdoc), TidyOption opt )
     return tidyLocalizedString(optId);
 }
 
+#if SUPPORT_CONSOLE_APP
+/* TODO - GROUP ALL CONSOLE-ONLY FUNCTIONS */
 TidyIterator TIDY_CALL tidyOptGetDocLinksList( TidyDoc ARG_UNUSED(tdoc), TidyOption opt )
 {
     const TidyOptionId optId = tidyOptGetId( opt );
@@ -527,6 +535,7 @@ TidyIterator TIDY_CALL tidyOptGetDocLinksList( TidyDoc ARG_UNUSED(tdoc), TidyOpt
         return (TidyIterator)docDesc->links;
     return (TidyIterator)NULL;
 }
+#endif /* SUPPORT_CONSOLE_APP */
 
 TidyOption TIDY_CALL tidyOptGetNextDocLinks( TidyDoc tdoc, TidyIterator* pos )
 {
@@ -675,7 +684,7 @@ Bool TIDY_CALL        tidySetReportFilter2( TidyDoc tdoc, TidyReportFilter2 filt
 /* TidyReportFilter3 functions similar to TidyReportFilter, but provides the
  * string version of the internal enum name so that LibTidy users can use
 ** the string as a lookup key for providing their own error localizations.
-** See the string definitions in language.h
+** See the string key definitions in tidyenum.h.
 */
 Bool TIDY_CALL        tidySetReportFilter3( TidyDoc tdoc, TidyReportFilter3 filt )
 {
@@ -2345,6 +2354,115 @@ Bool TIDY_CALL tidyAttrIsProp( TidyAttr tattr )
   */
   return no;
 }
+
+
+/*******************************************************************
+ ** Message Key Management
+ *******************************************************************/
+ctmbstr TIDY_CALL tidyErrorCodeAsKey(uint code)
+{
+    return TY_(tidyErrorCodeAsKey)( code );
+}
+
+TidyIterator TIDY_CALL getErrorCodeList()
+{
+    return TY_(getErrorCodeList)();
+}
+
+uint TIDY_CALL getNextErrorCode( TidyIterator* iter )
+{
+    return TY_(getNextErrorCode)(iter);
+}
+
+
+/*******************************************************************
+ ** Localization Support
+ *******************************************************************/
+
+
+tmbstr TIDY_CALL tidySystemLocale(tmbstr result)
+{
+    return TY_(tidySystemLocale)( result );
+}
+
+Bool TIDY_EXPORT tidySetLanguage( ctmbstr languageCode )
+{
+    return TY_(tidySetLanguage)( languageCode );
+}
+
+ctmbstr TIDY_EXPORT tidyGetLanguage()
+{
+    return TY_(tidyGetLanguage)();
+}
+
+ctmbstr TIDY_CALL tidyLocalizedStringN( uint messageType, uint quantity )
+{
+    return TY_(tidyLocalizedStringN)( messageType, quantity);
+}
+
+ctmbstr TIDY_CALL tidyLocalizedString( uint messageType )
+{
+    return TY_(tidyLocalizedString)( messageType );
+}
+
+ctmbstr TIDY_CALL tidyDefaultString( uint messageType )
+{
+    return TY_(tidyDefaultString)( messageType );
+}
+
+TidyIterator TIDY_CALL getStringKeyList()
+{
+    return TY_(getStringKeyList)();
+}
+
+uint TIDY_CALL getNextStringKey( TidyIterator* iter )
+{
+    return TY_(getNextStringKey)( iter );
+}
+
+TidyIterator TIDY_CALL getWindowsLanguageList()
+{
+    return TY_(getWindowsLanguageList)();
+}
+
+//#define tidyOptionToImpl( topt )    ((const TidyOptionImpl*)(topt))
+//#define tidyImplToOption( option )  ((TidyOption)(option))
+
+const tidyLocaleMapItem TIDY_CALL *getNextWindowsLanguage( TidyIterator* iter )
+{
+    /* Get a real structure */
+    const tidyLocaleMapItemImpl *item = TY_(getNextWindowsLanguage)( iter );
+
+    /* Return it as the opaque version */
+    return ((tidyLocaleMapItem*)(item));
+}
+
+
+const ctmbstr TIDY_CALL TidyLangWindowsName( const tidyLocaleMapItem *item )
+{
+    return TY_(TidyLangWindowsName)( (tidyLocaleMapItemImpl*)(item) );
+}
+
+
+const ctmbstr TIDY_CALL TidyLangPosixName( const tidyLocaleMapItem *item )
+{
+    return TY_(TidyLangPosixName)( (tidyLocaleMapItemImpl*)(item) );
+}
+
+
+TidyIterator TIDY_CALL getInstalledLanguageList()
+{
+    return TY_(getInstalledLanguageList)();
+}
+
+
+ctmbstr TIDY_CALL getNextInstalledLanguage( TidyIterator* iter )
+{
+    return TY_(getNextInstalledLanguage)( iter );
+}
+
+
+
 
 /*
  * local variables:

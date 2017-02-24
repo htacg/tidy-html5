@@ -6,28 +6,6 @@
   
 */
 
-/*********************************************************************
-* AccessibilityChecks
-*
-* Carries out processes for all accessibility checks.  Traverses
-* through all the content within the tree and evaluates the tags for
-* accessibility.
-*
-* To perform the following checks, 'AccessibilityChecks' must be
-* called AFTER the tree structure has been formed.
-*
-* If, in the command prompt, there is no specification of which
-* accessibility priorities to check, no accessibility checks will be 
-* performed.  (ie. '1' for priority 1, '2' for priorities 1 and 2, 
-*                  and '3') for priorities 1, 2 and 3.)
-*
-* Copyright University of Toronto
-* Programmed by: Mike Lam and Chris Ridpath
-* Modifications by : Terry Teague (TRT)
-*
-* Reference document: http://www.w3.org/TR/WAI-WEBCONTENT/
-*********************************************************************/
-
 
 #include "tidy-int.h"
 

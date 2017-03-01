@@ -3019,9 +3019,22 @@ void TY_(ParseTableTag)(TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED(m
     
     while ((node = TY_(GetToken)(doc, IgnoreWhitespace)) != NULL)
     {
-        if (node->tag == table->tag && node->type == EndTag)
+        if (node->tag == table->tag )
         {
-            TY_(FreeNode)( doc, node);
+            if (node->type == EndTag)
+            {
+                TY_(FreeNode)(doc, node);
+            }
+            else
+            {
+                /* Issue #498 - If a <table> in a <table>
+                 * just close the current table, and issue a 
+                 * warning. The previous action was to discard
+                 * this second <table>
+                 */
+                TY_(UngetToken)(doc);
+                TY_(ReportError)(doc, table, node, TAG_NOT_ALLOWED_IN);
+            }
             lexer->istackbase = istackbase;
             table->closed = yes;
 #if !defined(NDEBUG) && defined(_MSC_VER)

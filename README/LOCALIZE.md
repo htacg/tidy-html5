@@ -14,6 +14,6 @@ team you will certainly earn the admiration of fellow Tidy users worldwide.
 All READMEs (including [instructions][2] on how to localize Tidy) and related 
 materials can be found in [localize][1].
 
- [1]: https://github.com/htacg/tidy-html5/tree/master/localize
- [2]:https://github.com/htacg/tidy-html5/blob/master/localize/README.md
+ [1]: ../localize
+ [2]: ../localize/README.md
  

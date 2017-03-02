@@ -30,7 +30,7 @@ module PoConvertModule
   ###########################################################
   @@default_en = File.expand_path(File.join('..', 'src', 'language_en.h' ))
   @@header_template = File.expand_path(File.join('.', 'language_ll_cc.h.erb'))
-  @@header_digest = 'b597e5948de1611ab6cde11934df6fc792c7ec4d21f3cd2030fb2e9bcfb94991'
+  @@header_digest = '9e5c3bf0b02c20e6fe2068a8edc09de1bb091a14144b211f4c36b0f9d1ec5f97'
 
 
   ###########################################################
@@ -1177,8 +1177,9 @@ Complete Help:
       error_count = 0
       fuzzy_list = nil
 
+      pwd = File.expand_path( File.join(Dir.getwd, '..') )
+
       if options[:sha]
-        pwd = File.expand_path( File.join(Dir.getwd, '..') )
         sha = options[:sha]
         temp_file = "~#{sha}.h"
         project = Git.open(pwd)

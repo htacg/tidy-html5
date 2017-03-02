@@ -2,33 +2,23 @@
 
 Tidy has quite complex warning/error messaging system. This is all about adding a **new** warning or error message to **libTidy**.
 
-First assign the message a key value. This is done in `message.h`, in one of the two enumerations that are listed there.
+First assign the message a key value. This is done in `tidyenum.h`, in one of the two enumerations that are listed there.
 
- 1. `tidyErrorCodes` - starts with the value `CODES_TIDY_ERROR_FIRST = 200`, and it must be first. 
+ 1. `tidyMessageCodes` - starts with the value `tidyMessageCodes_first = 500`, and it must be first. These are messages that appear in Tidy's report list, the list that's emitted telling you what Tidy did to your code. **However** don't modify this enum directly. You'll modify a preprocessor macro instead.
  
- 2. `tidyMessagesMisc` - starts with the value ACCESS_URL = 2048 - so, at present the above `tidyErrorCodes` must not exceed this.
- 
- 3. For the sake of completeness, there's also a third enum present in `access.h` called `accessErrorCodes`; you should only ever be concerned about this if you are working on new strings for Tidy's accessibility module.
- 
-If your message is something that will appear in the error list, then its key should be defined in the `tidyErrorCodes` enum, unless you are adding errors to the accessibility module (see point 3, above). If you are adding strings that are _not_ intended for the error list, then they belong in `tidyMessagesMisc`. These are strings that are typically output with Tidy's CLI.
- 
+ 2. `tidyMessagesMisc` - starts with the value `tidyMessagesMisc_first = tidyMessageCodes_last`. These are messages that are emitted that tell you general information, such as further advice.
+
 All enum values are only ever used by name within **libTidy** (and incidentally, should only ever be used by name in your client applications; never trust the value!), so feel free to enter new strings wherever they make the most sense. There are already existing categories (marked by comments), or feel free to create a new category if that's best.
 
-Because some clients retrieve error information via `libTidy`’s callback mechanism, it's also important to update the `language.c:tidyErrorFilterKeysStruct[]`, as well, if your new messages are intended for the error list.
+As mentioned above, `tidyMessageCodes` messaged must be defined in one of the existing macros named like `FOREACH_...(FN)`, such as `FOREACH_MSG_ENTITIES(FN)`. These macros ensure that another data structure used for localization and key lookup is updated automatically any time strings are added or removed, thus limiting the possibility of developer error.
 
 
 ## Step 1
 
-So in this case I want to add 3 warning messages: `BAD_SURROGATE_PAIR`, `BAD_SURROGATE_TAIL`, and `BAD_SURROGATE_LEAD`. Because these are error messages, they belong in the `tidyErrorCodes` enum, and they fit into nicely into the "character encoding errors" category just before the **last** `CODES_TIDY_ERROR_LAST`.
+So in this case I want to add 3 warning messages: `BAD_SURROGATE_PAIR`, `BAD_SURROGATE_TAIL`, and `BAD_SURROGATE_LEAD`. Because these are error messages, they belong in the `tidyErrorCodes` enum, and they fit into nicely into the macro beginning `FOREACH_MSG_ENCODING(FN)`. 
 
 
 ## Step 2
-
-Because the new messages are error code, update the `tidyErrorFilterKeysStruct` in `language.c` with the same key values, and with string representations thereof. You should put them in the same logical order as you inserted them into `tidyErrorCodes` enum.
-
-Note that at some point when all of the error enums are merged (probably Tidy 5.5) this kludge won't have to be used and we can have a nice, single enum exported to clients.
-
-## Step 3
 
 The next step is adding a `format` string to `language_en.h`. This string may later be translated to various supported language strings, but at present it is important that the other language translated strings, like `language_fr.h`, `language_es.h`, etc, keep the same format order.
 

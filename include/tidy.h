@@ -1,15 +1,11 @@
 #ifndef __TIDY_H__
 #define __TIDY_H__
 
-/** @file tidy.h - Defines HTML Tidy API implemented by tidy library.
+/** @file tidy.h - Defines HTML Tidy API implemented by LibTidy.
 
-  Public interface is const-correct and doesn't explicitly depend
-  on any globals.  Thus, thread-safety may be introduced w/out
-  changing the interface.
-
-  Looking ahead to a C++ wrapper, C functions always pass 
-  this-equivalent as 1st arg.
-
+  Public interface is const-correct and doesn't explicitly depend on any
+  globals.  Thus, thread-safety may be introduced without changing the
+  interface.
 
   Copyright (c) 1998-2016 World Wide Web Consortium
   (Massachusetts Institute of Technology, European Research 
@@ -20,45 +16,43 @@
 
      Dave Raggett <dsr@w3.org>
 
-  The contributing author(s) would like to thank all those who
-  helped with testing, bug fixes and suggestions for improvements. 
-  This wouldn't have been possible without your help.
+  The contributing author(s) would like to thank all those who helped with 
+  testing, bug fixes and suggestions for improvements. This wouldn't have been
+  possible without your help.
 
   COPYRIGHT NOTICE:
  
-  This software and documentation is provided "as is," and
-  the copyright holders and contributing author(s) make no
-  representations or warranties, express or implied, including
-  but not limited to, warranties of merchantability or fitness
-  for any particular purpose or that the use of the software or
-  documentation will not infringe any third party patents,
-  copyrights, trademarks or other rights. 
+  This software and documentation is provided "as is," and the copyright holders
+  and contributing author(s) make no representations or warranties, express or
+  implied, including but not limited to, warranties of merchantability or 
+  fitness for any particular purpose or that the use of the software or
+  documentation will not infringe any third party patents, copyrights, 
+  trademarks or other rights.
 
-  The copyright holders and contributing author(s) will not be held
-  liable for any direct, indirect, special or consequential damages
-  arising out of any use of the software or documentation, even if
-  advised of the possibility of such damage.
+  The copyright holders and contributing author(s) will not be held liable for 
+  any direct, indirect, special or consequential damages arising out of any use
+  of the software or documentation, even if advised of the possibility of such 
+  damage.
 
-  Permission is hereby granted to use, copy, modify, and distribute
-  this source code, or portions hereof, documentation and executables,
-  for any purpose, without fee, subject to the following restrictions:
+  Permission is hereby granted to use, copy, modify, and distribute this source
+  code, or portions hereof, documentation and executables, for any purpose,
+  without fee, subject to the following restrictions:
 
   1. The origin of this source code must not be misrepresented.
-  2. Altered versions must be plainly marked as such and must
-     not be misrepresented as being the original source.
-  3. This Copyright notice may not be removed or altered from any
-     source or altered source distribution.
+  2. Altered versions must be plainly marked as such and must not be
+     misrepresented as being the original source.
+  3. This Copyright notice may not be removed or altered from any source or 
+     altered source distribution.
  
-  The copyright holders and contributing author(s) specifically
-  permit, without fee, and encourage the use of this source code
-  as a component for supporting the Hypertext Markup Language in
-  commercial products. If you use this source code in a product,
-  acknowledgment is not required but would be appreciated.
-
+  The copyright holders and contributing author(s) specifically permit, without
+  fee, and encourage the use of this source code as a component for supporting
+  the Hypertext Markup Language in commercial products. If you use this source
+  code in a product, acknowledgment is not required but would be appreciated.
 
   Created 2001-05-20 by Charles Reitzel
   Updated 2002-07-01 by Charles Reitzel - 1st Implementation
   Updated 2015-06-09 by Geoff R. McLane - Add more doxygen syntax
+  Additional updates: consult git log
 
 */
 
@@ -71,8 +65,14 @@ extern "C" {
 
 /** @defgroup Opaque Opaque Types
 **
+** These instances of these types are available for use in your programs,
+** however their internal details are opaque. These items should be accessed
+** with LibTidy's accessor functions.
+**
+** Internally LibTidy will cast these to internal implementation types.
 ** Cast to implementation types within lib.
-** Reduces inter-dependencies/conflicts w/ application code.
+**
+** This reduces inter-dependencies and conflicts with application code.
 ** @{
 */
 
@@ -98,55 +98,46 @@ opaque_type( TidyAttr );
 
 /** @} end Opaque group */
 
+
 TIDY_STRUCT struct _TidyBuffer;
 typedef struct _TidyBuffer TidyBuffer;
 
 
 /** @defgroup Memory  Memory Allocation
 **
-** Tidy uses a user provided allocator for all
-** memory allocations.  If this allocator is
-** not provided, then a default allocator is
-** used which simply wraps standard C malloc/free
-** calls.  These wrappers call the panic function
-** upon any failure.  The default panic function
-** prints an out of memory message to stderr, and
-** calls exit(2).
+** Tidy uses a user provided allocator for all memory allocations.  If this 
+** allocator is not provided, then a default allocator is used which simply
+** wraps standard C malloc/free calls.  These wrappers call the panic function
+** upon any failure.  The default panic function prints an out of memory message
+** to stderr, and calls exit(2).
 **
-** For applications in which it is unacceptable to
-** abort in the case of memory allocation, then the
-** panic function can be replaced with one which
-** longjmps() out of the tidy code.  For this to
-** clean up completely, you should be careful not
-** to use any tidy methods that open files as these
-** will not be closed before panic() is called.
+** For applications in which it is unacceptable to abort in the case of memory 
+** allocation, then the panic function can be replaced with one which longjmps()
+** out of the LibTidy code.  For this to clean up completely, you should be
+** careful not to use any tidy methods that open files as these will not be 
+** closed before panic() is called.
 **
-** TODO: associate file handles with tidyDoc and
-** ensure that tidyDocRelease() can close them all.
+** TODO: associate file handles with tidyDoc and ensure that tidyDocRelease()
+** can close them all.
 **
-** Calling the withAllocator() family (
-** tidyCreateWithAllocator, tidyBufInitWithAllocator,
-** tidyBufAllocWithAllocator) allow settings custom
-** allocators).
+** Calling the xWithAllocator() family (tidyCreateWithAllocator,
+** tidyBufInitWithAllocator, tidyBufAllocWithAllocator) allow setting custom
+** allocators.
 **
-** All parts of the document use the same allocator.
-** Calls that require a user provided buffer can
-** optionally use a different allocator.
+** All parts of the document use the same allocator. Calls that require a user
+** provided buffer can optionally use a different allocator.
 **
-** For reference in designing a plug-in allocator,
-** most allocations made by tidy are less than 100
-** bytes, corresponding to attribute names/values, etc.
+** For reference in designing a plug-in allocator, most allocations made by 
+** LibTidy are less than 100 bytes, corresponding to attribute names and 
+** values, etc.
 **
-** There is also an additional class of much larger
-** allocations which are where most of the data from
-** the lexer is stored.  (It is not currently possible
-** to use a separate allocator for the lexer, this
-** would be a useful extension).
+** There is also an additional class of much larger allocations which are where
+** most of the data from the lexer is stored. It is not currently possible to
+** use a separate allocator for the lexer; this would be a useful extension.
 **
-** In general, approximately 1/3rd of the memory
-** used by tidy is freed during the parse, so if
-** memory usage is an issue then an allocator that 
-** can reuse this memory is a good idea.
+** In general, approximately 1/3rd of the memory used by LibTidy is freed during
+** the parse, so if memory usage is an issue then an allocator that can reuse
+** this memory is a good idea.
 **
 ** @{
 */
@@ -161,8 +152,7 @@ struct _TidyAllocator;
 /** The allocator **/
 typedef struct _TidyAllocator TidyAllocator;
 
-/**  An allocator's function table.  All functions here must
-    be provided.
+/**  An allocator's function table.  All functions here must be provided.
  */
 struct _TidyAllocatorVtbl {
     /** Called to allocate a block of nBytes of memory */
@@ -173,15 +163,14 @@ struct _TidyAllocatorVtbl {
     void* (TIDY_CALL *realloc)( TidyAllocator *self, void *block, size_t nBytes );
     /** Called to free a previously allocated block of memory */
     void (TIDY_CALL *free)( TidyAllocator *self, void *block);
-    /** Called when a panic condition is detected.  Must support
-        block == NULL.  This function is not called if either alloc 
-        or realloc fails; it is up to the allocator to do this.
-        Currently this function can only be called if an error is
-        detected in the tree integrity via the internal function
-        CheckNodeIntegrity().  This is a situation that can
-        only arise in the case of a programming error in tidylib.
-        You can turn off node integrity checking by defining
-        the constant NO_NODE_INTEGRITY_CHECK during the build.
+    /** Called when a panic condition is detected.  Must support block == NULL.
+        This function is not called if either alloc or realloc fails; it is up 
+        to the allocator to do this. Currently this function can only be called
+        if an error is detected in the tree integrity via the internal function
+        CheckNodeIntegrity().  This is a situation that can only arise in the 
+        case of a programming error in LibTidy. You can turn off node integrity
+        checking by defining the constant NO_NODE_INTEGRITY_CHECK during the
+        build.
     **/
     void (TIDY_CALL *panic)( TidyAllocator *self, ctmbstr msg );
 };
@@ -249,73 +238,20 @@ TIDY_EXPORT Bool TIDY_CALL tidySetPanicCall( TidyPanic fpanic );
 
 /** @defgroup Basic Basic Operations
 **
-** Tidy public interface
+** For an excellent example of how to invoke LibTidy, please consult
+** `console/tidy.c:main()` for in-depth implementation details. A simplified
+** example can be seen on our site: http://www.html-tidy.org/developer/
 **
-** Several functions return an integer document status:
+** There used to be an example built into the documentation right here, but
+** as it was formatted for Doxygen rather than a developer, it was unreadable
+** and so has been removed.
 **
-** <pre>
-** 0    -> SUCCESS
-** >0   -> 1 == TIDY WARNING, 2 == TIDY ERROR
-** <0   -> SEVERE ERROR
-** </pre>
-** 
-The following is a short example program.
-
-<pre>
-\#include &lt;tidy.h&gt;
-\#include &lt;tidybuffio.h&gt;
-\#include &lt;stdio.h&gt;
-\#include &lt;errno.h&gt;
-
-
-int main(int argc, char **argv )
-{
-  const char* input = "&lt;title&gt;Foo&lt;/title&gt;&lt;p&gt;Foo!";
-  TidyBuffer output;
-  TidyBuffer errbuf;
-  int rc = -1;
-  Bool ok;
-
-  TidyDoc tdoc = tidyCreate();                     // Initialize "document"
-  tidyBufInit( &amp;output );
-  tidyBufInit( &amp;errbuf );
-  printf( "Tidying:\t\%s\\n", input );
-
-  ok = tidyOptSetBool( tdoc, TidyXhtmlOut, yes );  // Convert to XHTML
-  if ( ok )
-    rc = tidySetErrorBuffer( tdoc, &amp;errbuf );      // Capture diagnostics
-  if ( rc &gt;= 0 )
-    rc = tidyParseString( tdoc, input );           // Parse the input
-  if ( rc &gt;= 0 )
-    rc = tidyCleanAndRepair( tdoc );               // Tidy it up!
-  if ( rc &gt;= 0 )
-    rc = tidyRunDiagnostics( tdoc );               // Kvetch
-  if ( rc &gt; 1 )                                    // If error, force output.
-    rc = ( tidyOptSetBool(tdoc, TidyForceOutput, yes) ? rc : -1 );
-  if ( rc &gt;= 0 )
-    rc = tidySaveBuffer( tdoc, &amp;output );          // Pretty Print
-
-  if ( rc &gt;= 0 )
-  {
-    if ( rc &gt; 0 )
-      printf( "\\nDiagnostics:\\n\\n\%s", errbuf.bp );
-    printf( "\\nAnd here is the result:\\n\\n\%s", output.bp );
-  }
-  else
-    printf( "A severe error (\%d) occurred.\\n", rc );
-
-  tidyBufFree( &amp;output );
-  tidyBufFree( &amp;errbuf );
-  tidyRelease( tdoc );
-  return rc;
-}
-</pre>
 ** @{
 */
 
-/** The primary creation of a TidyDoc.
- ** This must be the first call before most of the Tidy API which require the TidyDoc parameter.
- ** When completed tidyRelease( TidyDoc tdoc ); should be called to release all memory
+/** The primary creation of a TidyDoc. This must be the first call before most
+ ** of the Tidy API which require the TidyDoc parameter. When completed,
+ **  tidyRelease( TidyDoc tdoc ); should be called to release all memory
  */
 TIDY_EXPORT TidyDoc TIDY_CALL     tidyCreate(void);
 
@@ -338,10 +274,7 @@ TIDY_EXPORT void TIDY_CALL        tidySetAppData( TidyDoc tdoc, void* appData );
 TIDY_EXPORT void* TIDY_CALL       tidyGetAppData( TidyDoc tdoc );
 
 /** Get release date (version) for current library 
- ** @deprecated tidyReleaseDate() is deprecated in favor of semantic
- ** versioning and should be replaced with tidyLibraryVersion().
  */
-
 TIDY_EXPORT ctmbstr TIDY_CALL     tidyReleaseDate(void);
 
 /** Get version number for the current library */
@@ -1137,6 +1070,137 @@ TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetROWSPAN( TidyNode tnod );
 /** @} End AttrGetAttributeName group */
 
 /** @} end AttrGet group */
+
+    
+/** @defgroup MessagesKeys Message Key Management
+**
+** These functions serve to manage message codes. To-do is to rename them
+** so they reflect messages and not errors.
+** @{
+*/
+
+TIDY_EXPORT ctmbstr TIDY_CALL tidyErrorCodeAsKey(uint code);
+TIDY_EXPORT TidyIterator TIDY_CALL getErrorCodeList();
+TIDY_EXPORT uint TIDY_CALL getNextErrorCode( TidyIterator* iter );
+
+/** @} end MessagesKeys group */
+    
+    
+/** @defgroup Localization Localization Support
+**
+** These functions help manage localization in Tidy.
+ ** @{
+*/
+
+    
+/**
+ **  Determines the current locale without affecting the C locale.
+ **  Tidy has always used the default C locale, and at this point
+ **  in its development we're not going to tamper with that.
+ **  @param  result The buffer to use to return the string.
+ **          Returns NULL on failure.
+ **  @return The same buffer for convenience.
+ */
+TIDY_EXPORT tmbstr TIDY_CALL tidySystemLocale(tmbstr result);
+
+/**
+ *  Tells Tidy to use a different language for output.
+ *  @param  languageCode A Windows or POSIX language code, and must match
+ *          a TIDY_LANGUAGE for an installed language.
+ *  @result Indicates that a setting was applied, but not necessarily the
+ *          specific request, i.e., true indicates a language and/or region
+ *          was applied. If es_mx is requested but not installed, and es is
+ *          installed, then es will be selected and this function will return
+ *          true. However the opposite is not true; if es is requested but
+ *          not present, Tidy will not try to select from the es_XX variants.
+ */
+TIDY_EXPORT Bool TIDY_CALL tidySetLanguage( ctmbstr languageCode );
+
+/**
+ *  Gets the current language used by Tidy.
+ */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyGetLanguage();
+
+/**
+ *  Provides a string given `messageType` in the current
+ *  localization for `quantity`.
+ */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyLocalizedStringN( uint messageType, uint quantity );
+
+/**
+ *  Provides a string given `messageType` in the current
+ *  localization for the single case.
+ */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyLocalizedString( uint messageType );
+
+/**
+ *  Provides a string given `messageType` in the default
+ *  localization (which is `en`).
+ */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyDefaultString( uint messageType );
+
+/*
+ *  Initializes the TidyIterator to point to the first item
+ *  in Tidy's list of localization string keys. Note that
+ *  these are provided for documentation generation purposes
+ *  and probably aren't useful for LibTidy implementors.
+ */
+TIDY_EXPORT TidyIterator TIDY_CALL getStringKeyList();
+
+/*
+ *  Provides the next key value in Tidy's list of localized
+ *  strings. Note that these are provided for documentation
+ *  generation purposes and probably aren't useful to
+ *  libtidy implementors.
+ */
+TIDY_EXPORT uint TIDY_CALL getNextStringKey( TidyIterator* iter );
+
+/**
+ *  Define an opaque type we can use for tidyLocaleMapItem, which
+ *  is used to iterate through the language list, and used to access
+ *  the windowsName() and the posixName().
+ */
+opaque_type(tidyLocaleMapItem);
+    
+/**
+ *  Initializes the TidyIterator to point to the first item
+ *  in Tidy's structure of Windows<->POSIX local mapping.
+ *  Items can be retrieved with getNextWindowsLanguage();
+ */
+TIDY_EXPORT TidyIterator TIDY_CALL getWindowsLanguageList();
+
+/**
+ *  Returns the next record of type `localeMapItem` in
+ *  Tidy's structure of Windows<->POSIX local mapping.
+ */
+TIDY_EXPORT const tidyLocaleMapItem* TIDY_CALL getNextWindowsLanguage( TidyIterator* iter );
+
+/**
+ *  Given a `tidyLocalMapItem`, return the Windows name.
+ */
+TIDY_EXPORT const ctmbstr TIDY_CALL TidyLangWindowsName( const tidyLocaleMapItem *item );
+
+/**
+ *  Given a `tidyLocalMapItem`, return the POSIX name.
+ */
+TIDY_EXPORT const ctmbstr TIDY_CALL TidyLangPosixName( const tidyLocaleMapItem *item );
+
+/**
+ *  Initializes the TidyIterator to point to the first item
+ *  in Tidy's list of installed language codes.
+ *  Items can be retrieved with getNextInstalledLanguage();
+ */
+TIDY_EXPORT TidyIterator TIDY_CALL getInstalledLanguageList();
+
+/**
+ *  Returns the next installed language.
+ */
+TIDY_EXPORT ctmbstr TIDY_CALL getNextInstalledLanguage( TidyIterator* iter );
+
+
+
+/** @} end MessagesKeys group */
+    
 
 #ifdef __cplusplus
 }  /* extern "C" */

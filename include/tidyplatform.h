@@ -69,6 +69,11 @@ extern "C" {
 #ifndef SUPPORT_LOCALIZATIONS
 #define SUPPORT_LOCALIZATIONS 1
 #endif
+    
+/* Enable/disable support for console */
+#ifndef SUPPORT_CONSOLE_APP
+#define SUPPORT_CONSOLE_APP 1
+#endif
 
 
 /* Convenience defines for Mac platforms */

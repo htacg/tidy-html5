@@ -6,7 +6,7 @@ The options can also be listed in xml format. `-xml-help` will output each optio
 
 These options can also be used by application linking with **`libtidy`**. For each option there is a `TidyOptionId` enumeration in the `tidyenum.h` file, and get/set functions for each option type.
 
-This file indicates how to add a new option to tidy. Here adding an option `TidyEscapeScripts`. In essence it consists of 4 steps -
+This file indicates how to add a new option to tidy, here adding an option `TidyEscapeScripts`. In essence it consists of 4 steps:
 
  1. Add the option **`ID`** to `tidyenum.h`.
  2. Add to the **`table`** `TidyOptionImpl option_defs[]` in `config.c`
@@ -15,7 +15,7 @@ This file indicates how to add a new option to tidy. Here adding an option `Tidy
  
 #### 1. Option ID
 
-In `tidyenum.h` the `TidyOptionId` can be in any order, but normally a new option would be added just before the last `N_TIDY_OPTIONS`, which must remain the last. Choosing the id name can be any string, but by convention it will commence with `Tidy` followed by brief descriptive like text.
+In `tidyenum.h` the `TidyOptionId` can be in any order, but normally a new option would be added just before the last `N_TIDY_OPTIONS`, which must remain the last. Choosing the id name can be any string, but by convention it will commence with `Tidy` followed by brief descriptive text.
 
 Naturally it can not be the same as any exisitng option. That is, it must be unique. And it will be followed by a brief descriptive special doxygen formatted comment. So for this new option I have chosen -
 
@@ -60,7 +60,7 @@ typedef enum
 
 Care, each of these enumeration strings have been equated to 2 uppercase letters. If you feel there should be another `category` or group then this can be discussed, and added.
 
-The **`name`** can be anything, but should try to be somewhat descriptive of the otpion. Again this string must be unique. It should be lowercase alphanumeric characters, and can contain a `-` separator. Remember this is the name places on the command line, or in a configuration file to set the option.
+The **`name`** can be anything, but should try to be somewhat descriptive of the option. Again this string must be unique. It should be lowercase alphanumeric characters, and can contain a `-` separator. Remember this is the name places on the command line, or in a configuration file to set the option.
 
 The **`type`** is one of the following enumeration items -
 
@@ -73,7 +73,7 @@ typedef enum
 } TidyOptionType;
 ```
 
-Care, each of these enumeration strings have been equated to 2 uppercase letters. If you feel there should be another `type` then this can be discussed, but would require other additional things. And also note the `TidyTriState` is the same as a `TidyInteger` except uses its own parser.
+Care, each of these enumeration strings have been equated to two uppercase letters. If you feel there should be another `type` then this can be discussed, but would require other additional things. And also note the `TidyTriState` is the same as a `TidyInteger` except uses its own parser.
 
 The next item is the **`default`** value for a boolean, tristate or integer. Note tidy set `no=0` and `yes=1` as its own `Bool` enumeration.
 

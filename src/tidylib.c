@@ -2394,7 +2394,7 @@ TidyIterator TIDY_CALL getWindowsLanguageList()
 //#define tidyOptionToImpl( topt )    ((const TidyOptionImpl*)(topt))
 //#define tidyImplToOption( option )  ((TidyOption)(option))
 
-const tidyLocaleMapItem TIDY_CALL *getNextWindowsLanguage( TidyIterator* iter )
+const tidyLocaleMapItem* TIDY_CALL getNextWindowsLanguage( TidyIterator* iter )
 {
     /* Get a real structure */
     const tidyLocaleMapItemImpl *item = TY_(getNextWindowsLanguage)( iter );

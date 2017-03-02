@@ -32,7 +32,7 @@ The minor version tells a lot more about the true version of Tidy that you have,
 
 - **even numbered minor versions** indicate released versions of **HTML Tidy**. We provide binaries for releases, API documentation, and full support including cherry picking bug fixes back to them. In standard parlance, _released_ versions are _stable_ versions, meaning that the API is stable and you can generally expect Tidy’s output to be the same (other than as a result of bug fixes). 
 
-- **odd numbered minor versions** are development versions, or as is considered in many contexts _bleeding edge_ versions. HTACG do not provide binaries, and API documentation is not usually up to date, but you do have access to the latest bug fixes, newest features, and knowledge of where Tidy is going. The downside, though, is that we make absolutely no guarantees that:
+- **odd numbered minor versions** are development versions, or as is considered in many contexts _bleeding edge_ or _next_ versions. HTACG do not provide binaries, and API documentation is not usually up to date, but you do have access to the latest bug fixes, newest features, and knowledge of where Tidy is going. The downside, though, is that we make absolutely no guarantees that:
 
   - Output remains the same as in previous release versions.
   - Output remains the same as in earlier patch versions in the same development series.
@@ -63,20 +63,20 @@ This file consists of two lines of dot (.) separated items. The first being the 
 2017.01.29
 ```
 
-When **cmake** is run, this file is read and two MACROS added to the compile flags:
+When **CMake** is run, this file is read and two macros are added to the compile flags:
 
 ```
 add_definitions ( -DLIBTIDY_VERSION="${LIBTIDY_VERSION}" )
 add_definitions ( -DRELEASE_DATE="${tidy_YEAR}/${tidy_MONTH}/${tidy_DAY}" )
 ```
 
-And in `CMakeLists.txt` there is the posibility to define another MACRO, when and if required:
+And in `CMakeLists.txt` there is the posibility to define another macro, when and if required:
 
 ```
 # add_definitions ( -DRC_NUMBER="D231" )
 ```
 
-These MACROS are put in `static const char` strings in **libTidys**’s internal- only `src/version.h` file:
+These macros are put in `static const char` strings in **libTidys**’s internal- only `src/version.h` file:
 
 ```
 static const char TY_(release_date)[] = RELEASE_DATE;
@@ -96,11 +96,7 @@ TIDY_EXPORT ctmbstr TIDY_CALL     tidyReleaseDate(void);
 
 ### Git branches
 
-When a `release` is done a release/5.0.0 **branch**, and a similar release/5.0.0 **tag** is created.
-
-At that point the `version.txt` is set to the next, 5.1.0. 
-
-That is, the `master` branch will contain the ongoing development. Any subsequent good bug fixes found for some time after that will be carefully tested and push back (cherry picked I think is the correct term) into the release/5.0.0, making it 5.0.1...
+Starting with HTML Tidy 5.4.0 release, our branching scheme aligns nicely with our version numbering scheme. Please consult [BRANCHES.md](BRANCHES.md).
 
 
 Updated: 20170210  

@@ -947,7 +947,7 @@ TIDY_EXPORT TidyIterator TIDY_CALL getWindowsLanguageList();
  *  Returns the next record of type `localeMapItem` in
  *  Tidy's structure of Windows<->POSIX local mapping.
  */
-TIDY_EXPORT const tidyLocaleMapItem TIDY_CALL *getNextWindowsLanguage( TidyIterator* iter );
+TIDY_EXPORT const tidyLocaleMapItem* TIDY_CALL getNextWindowsLanguage( TidyIterator* iter );
 
 /**
  *  Given a `tidyLocalMapItem`, return the Windows name.

@@ -323,6 +323,8 @@ static void localize_option_names( CmdOptDesc *pos)
         pos->name2 = stringWithFormat(pos->name2, fileString);
     if ( pos->name3 )
         pos->name3 = stringWithFormat(pos->name3, fileString);
+    if ( pos->eqconfig )
+        pos->eqconfig = stringWithFormat(pos->eqconfig, fileString);
 }
 
 /**
@@ -470,7 +472,7 @@ static void print_xml_help_option( void )
         print_xml_help_option_element("name", localPos.name3);
         print_xml_help_option_element("description", tidyLocalizedString( pos->key ) );
         if (pos->eqconfig)
-            print_xml_help_option_element("eqconfig", pos->eqconfig);
+            print_xml_help_option_element("eqconfig", localPos.eqconfig);
         else
             printf("  <eqconfig />\n");
         printf(" </option>\n");

@@ -792,12 +792,6 @@ TIDY_EXPORT TidyNode TIDY_CALL    tidyGetChild( TidyNode tnod );
 TIDY_EXPORT TidyNode TIDY_CALL    tidyGetNext( TidyNode tnod );
 TIDY_EXPORT TidyNode TIDY_CALL    tidyGetPrev( TidyNode tnod );
 
-/* Null for non-element nodes and all pure HTML
-TIDY_EXPORT ctmbstr     tidyNodeNsLocal( TidyNode tnod );
-TIDY_EXPORT ctmbstr     tidyNodeNsPrefix( TidyNode tnod );
-TIDY_EXPORT ctmbstr     tidyNodeNsUri( TidyNode tnod );
-*/
-
 /* Iterate over attribute values */
 TIDY_EXPORT TidyAttr TIDY_CALL    tidyAttrFirst( TidyNode tnod );
 TIDY_EXPORT TidyAttr TIDY_CALL    tidyAttrNext( TidyAttr tattr );
@@ -806,12 +800,6 @@ TIDY_EXPORT ctmbstr TIDY_CALL     tidyAttrName( TidyAttr tattr );
 TIDY_EXPORT ctmbstr TIDY_CALL     tidyAttrValue( TidyAttr tattr );
 
 TIDY_EXPORT void TIDY_CALL        tidyAttrDiscard( TidyDoc itdoc, TidyNode tnod, TidyAttr tattr );
-
-/* Null for pure HTML
-TIDY_EXPORT ctmbstr     tidyAttrNsLocal( TidyAttr tattr );
-TIDY_EXPORT ctmbstr     tidyAttrNsPrefix( TidyAttr tattr );
-TIDY_EXPORT ctmbstr     tidyAttrNsUri( TidyAttr tattr );
-*/
 
 /** @} end Tree group */
 
@@ -824,7 +812,7 @@ TIDY_EXPORT ctmbstr     tidyAttrNsUri( TidyAttr tattr );
 
 /* Node info */
 TIDY_EXPORT TidyNodeType TIDY_CALL tidyNodeGetType( TidyNode tnod );
-TIDY_EXPORT ctmbstr TIDY_CALL     tidyNodeGetName( TidyNode tnod );
+TIDY_EXPORT ctmbstr TIDY_CALL tidyNodeGetName( TidyNode tnod );
 
 TIDY_EXPORT Bool TIDY_CALL tidyNodeIsText( TidyNode tnod );
 TIDY_EXPORT Bool TIDY_CALL tidyNodeIsProp( TidyDoc tdoc, TidyNode tnod );
@@ -841,235 +829,21 @@ TIDY_EXPORT TidyTagId TIDY_CALL tidyNodeGetId( TidyNode tnod );
 TIDY_EXPORT uint TIDY_CALL tidyNodeLine( TidyNode tnod );
 TIDY_EXPORT uint TIDY_CALL tidyNodeColumn( TidyNode tnod );
 
-/** @defgroup NodeIsElementName Deprecated node interrogation per TagId
-**
-** @deprecated The functions tidyNodeIs{ElementName} are deprecated and 
-** should be replaced by tidyNodeGetId.
-** @{
-*/
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsHTML( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsHEAD( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsTITLE( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsBASE( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsMETA( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsBODY( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsFRAMESET( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsFRAME( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsIFRAME( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsNOFRAMES( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsHR( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsH1( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsH2( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsPRE( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsLISTING( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsP( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsUL( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsOL( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsDL( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsDIR( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsLI( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsDT( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsDD( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsTABLE( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsCAPTION( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsTD( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsTH( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsTR( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsCOL( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsCOLGROUP( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsBR( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsA( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsLINK( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsB( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsI( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsSTRONG( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsEM( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsBIG( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsSMALL( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsPARAM( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsOPTION( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsOPTGROUP( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsIMG( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsMAP( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsAREA( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsNOBR( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsWBR( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsFONT( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsLAYER( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsSPACER( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsCENTER( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsSTYLE( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsSCRIPT( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsNOSCRIPT( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsFORM( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsTEXTAREA( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsBLOCKQUOTE( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsAPPLET( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsOBJECT( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsDIV( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsSPAN( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsINPUT( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsQ( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsLABEL( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsH3( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsH4( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsH5( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsH6( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsADDRESS( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsXMP( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsSELECT( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsBLINK( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsMARQUEE( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsEMBED( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsBASEFONT( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsISINDEX( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsS( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsSTRIKE( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsU( TidyNode tnod );
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsMENU( TidyNode tnod );
-
-/* HTML5 */
-TIDY_EXPORT Bool TIDY_CALL tidyNodeIsDATALIST( TidyNode tnod ); /* bit like OPTIONS */
-
-
-/** @} End NodeIsElementName group */
-
 /** @} End NodeAsk group */
 
 
-/** @defgroup Attribute Attribute Interrogation
+/** @defgroup Attribute Attribute Interrogation and Retrieval
 **
-** Get information about any given attribute.
+** Get information about attributes, and retrieve them from nodes.
 ** @{
 */
 
 TIDY_EXPORT TidyAttrId TIDY_CALL tidyAttrGetId( TidyAttr tattr );
 TIDY_EXPORT Bool TIDY_CALL tidyAttrIsEvent( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsProp( TidyAttr tattr );
-
-/** @defgroup AttrIsAttributeName Deprecated attribute interrogation per AttrId
-**
-** @deprecated The functions  tidyAttrIs{AttributeName} are deprecated and 
-** should be replaced by tidyAttrGetId.
-** @{
-*/
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsHREF( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsSRC( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsID( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsNAME( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsSUMMARY( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsALT( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsLONGDESC( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsUSEMAP( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsISMAP( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsLANGUAGE( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsTYPE( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsVALUE( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsCONTENT( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsTITLE( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsXMLNS( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsDATAFLD( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsWIDTH( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsHEIGHT( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsFOR( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsSELECTED( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsCHECKED( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsLANG( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsTARGET( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsHTTP_EQUIV( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsREL( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnMOUSEMOVE( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnMOUSEDOWN( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnMOUSEUP( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnCLICK( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnMOUSEOVER( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnMOUSEOUT( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnKEYDOWN( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnKEYUP( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnKEYPRESS( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnFOCUS( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsOnBLUR( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsBGCOLOR( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsLINK( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsALINK( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsVLINK( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsTEXT( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsSTYLE( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsABBR( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsCOLSPAN( TidyAttr tattr );
-TIDY_EXPORT Bool TIDY_CALL tidyAttrIsROWSPAN( TidyAttr tattr );
-
-/** @} End AttrIsAttributeName group */
-
-/** @} end AttrAsk group */
-
-
-/** @defgroup AttrGet Attribute Retrieval
-**
-** Lookup an attribute from a given node
-** @{
-*/
 
 TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetById( TidyNode tnod, TidyAttrId attId );
 
-/** @defgroup AttrGetAttributeName Deprecated attribute retrieval per AttrId
-**
-** @deprecated The functions tidyAttrGet{AttributeName} are deprecated and 
-** should be replaced by tidyAttrGetById.
-** For instance, tidyAttrGetID( TidyNode tnod ) can be replaced by 
-** tidyAttrGetById( TidyNode tnod, TidyAttr_ID ). This avoids a potential
-** name clash with tidyAttrGetId for case-insensitive languages.
-** @{
-*/
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetHREF( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetSRC( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetID( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetNAME( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetSUMMARY( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetALT( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetLONGDESC( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetUSEMAP( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetISMAP( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetLANGUAGE( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetTYPE( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetVALUE( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetCONTENT( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetTITLE( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetXMLNS( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetDATAFLD( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetWIDTH( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetHEIGHT( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetFOR( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetSELECTED( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetCHECKED( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetLANG( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetTARGET( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetHTTP_EQUIV( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetREL( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetOnMOUSEMOVE( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetOnMOUSEDOWN( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetOnMOUSEUP( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetOnCLICK( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetOnMOUSEOVER( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetOnMOUSEOUT( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetOnKEYDOWN( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetOnKEYUP( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetOnKEYPRESS( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetOnFOCUS( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetOnBLUR( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetBGCOLOR( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetLINK( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetALINK( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetVLINK( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetTEXT( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetSTYLE( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetABBR( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetCOLSPAN( TidyNode tnod );
-TIDY_EXPORT TidyAttr TIDY_CALL tidyAttrGetROWSPAN( TidyNode tnod );
-
-/** @} End AttrGetAttributeName group */
-
-/** @} end AttrGet group */
+/** @} end Attribute group */
 
     
 /** @defgroup MessagesKeys Message Key Management

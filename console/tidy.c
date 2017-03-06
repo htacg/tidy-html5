@@ -1936,7 +1936,7 @@ int main( int argc, char** argv )
 #if (!defined(NDEBUG) && defined(_MSC_VER))
             SPRTF("Tidying '%s'\n", htmlfil);
 #endif /* DEBUG outout */
-            if ( tidyOptGetBool(tdoc, TidyEmacs) )
+            if ( tidyOptGetBool(tdoc, TidyEmacs) && !tidyOptGetValue(tdoc, TidyEmacsFile) )
                 tidyOptSetValue( tdoc, TidyEmacsFile, htmlfil );
             status = tidyParseFile( tdoc, htmlfil );
         }

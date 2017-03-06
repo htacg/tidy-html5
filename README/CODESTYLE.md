@@ -18,7 +18,7 @@ From reading of the Tidy source, some things are self evident,  in no particular
  - No C++ single line comments using `//`.
  - The openning `{` is indented on the next newline.
  - While the maximum code line length varies, generally long `if`, `while`, ... statements are wrapped to newlines.
- - For compatibility with MSVC, pointer operators in declarations must precede any macro documentation, e.g, `const tidyLocaleMapItem* TIDY_CALL getNextWindowsLanguage( TidyIterator* iter )` instead of `const tidyLocaleMapItem TIDY_CALL *getNextWindowsLanguage( TidyIterator* iter )`.
+ - Pointer operators in declarations must precede any macro documentation, e.g, `const tidyLocaleMapItem* TIDY_CALL getNextWindowsLanguage( TidyIterator* iter )` instead of `const tidyLocaleMapItem TIDY_CALL *getNextWindowsLanguage( TidyIterator* iter )` in case `TIDY_CALL` is defined.
 
 
 

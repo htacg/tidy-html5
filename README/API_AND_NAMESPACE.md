@@ -36,7 +36,7 @@ The `TIDY_EXPORT` call clearly indicates that this function prototype is meant t
 
 Although this makes things obvious from the documentation perspective, the truth is a little murkier. In some environments one might define `TIDY_EXPORT` and `TIDY_CALL` differently in order to control compiler behavior, especially in environments that have special requirements for dynamic libraries. In general, though, you shouldn't have to worry about this.
 
-Note that MSVC has issues with macros inserted before pointer operators, and so the preferred use of pointer operators when documenting with macros is this:
+The preferred use of pointer operators when documenting with macros is this:
 
 ~~~
 const tidyLocaleMapItem* TIDY_CALL getNextWindowsLanguage( TidyIterator* iter )

@@ -119,8 +119,6 @@ int TY_(CharEncodingId)( TidyDocImpl* doc, ctmbstr charenc );
 ctmbstr TY_(CharEncodingName)( int encoding );
 ctmbstr TY_(CharEncodingOptName)( int encoding );
 
-/* void SetEmacsFilename( TidyDocImpl* doc, ctmbstr filename ); */
-
 
 #ifdef _DEBUG
 

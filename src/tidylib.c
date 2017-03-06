@@ -2144,7 +2144,7 @@ uint TIDY_CALL tidyNodeColumn( TidyNode tnod )
   return col;
 }
 
-ctmbstr TIDY_CALL        tidyNodeGetName( TidyNode tnod )
+ctmbstr TIDY_CALL tidyNodeGetName( TidyNode tnod )
 {
   Node* nimp = tidyNodeToImpl( tnod );
   ctmbstr nnam = NULL;
@@ -2154,7 +2154,7 @@ ctmbstr TIDY_CALL        tidyNodeGetName( TidyNode tnod )
 }
 
 
-Bool TIDY_CALL  tidyNodeHasText( TidyDoc tdoc, TidyNode tnod )
+Bool TIDY_CALL tidyNodeHasText( TidyDoc tdoc, TidyNode tnod )
 {
   TidyDocImpl* doc = tidyDocToImpl( tdoc );
   if ( doc )
@@ -2163,7 +2163,7 @@ Bool TIDY_CALL  tidyNodeHasText( TidyDoc tdoc, TidyNode tnod )
 }
 
 
-Bool TIDY_CALL  tidyNodeGetText( TidyDoc tdoc, TidyNode tnod, TidyBuffer* outbuf )
+Bool TIDY_CALL tidyNodeGetText( TidyDoc tdoc, TidyNode tnod, TidyBuffer* outbuf )
 {
   TidyDocImpl* doc = tidyDocToImpl( tdoc );
   Node* nimp = tidyNodeToImpl( tnod );
@@ -2269,18 +2269,6 @@ TidyTagId TIDY_CALL tidyNodeGetId(TidyNode tnod)
 }
 
 
-/* Null for non-element nodes and all pure HTML
-cmbstr       tidyNodeNsLocal( TidyNode tnod )
-{
-}
-cmbstr       tidyNodeNsPrefix( TidyNode tnod )
-{
-}
-cmbstr       tidyNodeNsUri( TidyNode tnod )
-{
-}
-*/
-
 /* Iterate over attribute values */
 TidyAttr TIDY_CALL   tidyAttrFirst( TidyNode tnod )
 {
@@ -2324,18 +2312,6 @@ void TIDY_CALL           tidyAttrDiscard( TidyDoc tdoc, TidyNode tnod, TidyAttr 
   TY_(RemoveAttribute)( impl, nimp, attval );
 }
 
-/* Null for pure HTML
-ctmbstr       tidyAttrNsLocal( TidyAttr tattr )
-{
-}
-ctmbstr       tidyAttrNsPrefix( TidyAttr tattr )
-{
-}
-ctmbstr       tidyAttrNsUri( TidyAttr tattr )
-{
-}
-*/
-
 TidyAttrId TIDY_CALL tidyAttrGetId( TidyAttr tattr )
 {
   AttVal* attval = tidyAttrToImpl( tattr );
@@ -2343,16 +2319,6 @@ TidyAttrId TIDY_CALL tidyAttrGetId( TidyAttr tattr )
   if ( attval && attval->dict )
     attrId = attval->dict->id;
   return attrId;
-}
-Bool TIDY_CALL tidyAttrIsProp( TidyAttr tattr )
-{
-  /*
-    You cannot tell whether an attribute is proprietary without
-    knowing on which element it occurs in the general case, but
-    this function cannot know the element. As a result, it does
-    not work anymore. Do not use.
-  */
-  return no;
 }
 
 

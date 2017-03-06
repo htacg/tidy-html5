@@ -1555,17 +1555,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         - It's very important that <br/> be self-closing!
         - The strings "Tidy" and "HTML Tidy" are the program name and must not
           be translated. */
-      TidyBurstSlides,              0,
-        "This option has no function and is deprecated. "
-    },
-    {/* Important notes for translators:
-        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
-          <br/>.
-        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
-        - Option values should be enclosed in <var></var>.
-        - It's very important that <br/> be self-closing!
-        - The strings "Tidy" and "HTML Tidy" are the program name and must not
-          be translated. */
       TidyTabSize,                  0,
         "This option specifies the number of columns that Tidy uses between "
         "successive tab stops. It is used to map tabs to spaces when reading the "
@@ -1752,20 +1741,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option specifies the character encoding Tidy uses for the input. See "
         "<code>char-encoding</code> for more info. "
     },
-#if SUPPORT_ASIAN_ENCODINGS
-    {/* Important notes for translators:
-        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
-          <br/>.
-        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
-        - Option values should be enclosed in <var></var>.
-        - It's very important that <br/> be self-closing!
-        - The strings "Tidy" and "HTML Tidy" are the program name and must not
-          be translated. */
-      TidyLanguage,                 0,
-        "Currently not used, but this option specifies the language Tidy would use "
-        "if it were properly localized. For example: <var>en</var>. "
-    },
-#endif
 #if SUPPORT_UTF16_ENCODINGS
     {/* Important notes for translators:
         - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -1881,7 +1856,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         - The strings "Tidy" and "HTML Tidy" are the program name and must not
           be translated. */
       TidyEmacsFile,                0,
-        "Used internally. "
+        "When <code>gnu-emacs</code> is <var>yes</var>, then this option value "
+        "specifies the filename to be used in the output report. The HTML Tidy "
+        "command line program will set this automatically. "
     },
     {/* Important notes for translators:
         - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -1925,17 +1902,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
       TidyQuiet,                    0,
         "This option specifies if Tidy should output the summary of the numbers "
         "of errors and warnings, or the welcome or informational messages. "
-    },
-    {/* Important notes for translators:
-        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
-          <br/>.
-        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
-        - Option values should be enclosed in <var></var>.
-        - It's very important that <br/> be self-closing!
-        - The strings "Tidy" and "HTML Tidy" are the program name and must not
-          be translated. */
-      TidySlideStyle,               0,
-        "This option has no function and is deprecated. "
     },
     {/* Important notes for translators:
         - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -2297,12 +2263,12 @@ static languageDefinition language_en = { whichPluralForm_en, {
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TC_TXT_HELP_LANG_1,           0,
         "\n"
-        "The --language (or --lang) option indicates which language Tidy \n"
+        "The -language (or -lang) option indicates which language Tidy \n"
         "should use to communicate its output. Please note that this is not \n"
         "a document translation service, and only affects the messages that \n"
         "Tidy communicates to you. \n"
         "\n"
-        "When used from the command line the --language argument must \n"
+        "When used from the command line the -language argument must \n"
         "be used before any arguments that result in output, otherwise Tidy \n"
         "will produce output before it knows which language to use. \n"
         "\n"

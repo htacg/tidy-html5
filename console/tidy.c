@@ -447,8 +447,8 @@ static void print_xml_help_option_element( ctmbstr element, ctmbstr name )
     tmbstr escpName;
     if (!name)
         return;
-    printf("  <%s>%s</%s>\n", element, escpName = get_escaped_name(name),
-           element);
+
+    printf("  <%s>%s</%s>\n", element, escpName = get_escaped_name(name), element);
     free(escpName);
 }
 
@@ -457,14 +457,17 @@ static void print_xml_help_option_element( ctmbstr element, ctmbstr name )
  */
 static void print_xml_help_option( void )
 {
-    const CmdOptDesc* pos = cmdopt_defs;
+    const CmdOptDesc* pos;
+    CmdOptDesc localPos;
 
     for( pos=cmdopt_defs; pos->name1; ++pos)
     {
+        localPos = *pos;
+        localize_option_names(&localPos);
         printf(" <option class=\"%s\">\n", cmdopt_catname[pos->cat].mnemonic );
-        print_xml_help_option_element("name", pos->name1);
-        print_xml_help_option_element("name", pos->name2);
-        print_xml_help_option_element("name", pos->name3);
+        print_xml_help_option_element("name", localPos.name1);
+        print_xml_help_option_element("name", localPos.name2);
+        print_xml_help_option_element("name", localPos.name3);
         print_xml_help_option_element("description", tidyLocalizedString( pos->key ) );
         if (pos->eqconfig)
             print_xml_help_option_element("eqconfig", pos->eqconfig);

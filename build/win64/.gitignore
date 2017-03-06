@@ -20,3 +20,4 @@ install_manifest.txt
 *.msi
 _CPack_Packages/*
 dir
+*.VC.db

@@ -647,6 +647,17 @@ Bool TIDY_CALL tidyOptCopyConfig( TidyDoc to, TidyDoc from )
 ** Command line options will just be set directly.
 */
 
+void TIDY_CALL tidySetEmacsFile( TidyDoc tdoc, ctmbstr filePath )
+{
+    tidyOptSetValue( tdoc, TidyEmacsFile, filePath );
+}
+
+ctmbstr TIDY_CALL tidyGetEmacsFile( TidyDoc tdoc )
+{
+    return tidyOptGetValue( tdoc, TidyEmacsFile );
+}
+
+
 /* Use TidyReportFilter to filter messages by diagnostic level:
 ** info, warning, etc.  Just set diagnostic output
 ** handler to redirect all diagnostics output.  Return true

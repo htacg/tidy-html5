@@ -1589,6 +1589,9 @@ const TidyOptionImpl*  TY_(getNextOption)( TidyDocImpl* ARG_UNUSED(doc),
   {
     option = &option_defs[ optId ];
     optId++;
+    /* Hide these internal options from the API entirely. */
+    if ( optId == TidyEmacsFile || optId == TidyDoctypeMode )
+        optId++;
   }
   *iter = (TidyIterator) ( optId < N_TIDY_OPTIONS ? optId : (size_t)0 );
   return option;

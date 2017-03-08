@@ -574,22 +574,30 @@ TIDY_EXPORT Bool TIDY_CALL tidyInitSink( TidyOutputSink* sink,
 TIDY_EXPORT void TIDY_CALL tidyPutByte( TidyOutputSink* sink, uint byteValue );
 
 
-/**********************
-**  Messaging Callbacks
-**  Originally envisioned as filters to suppress or allow the emission of
-**  Tidy's reports, these message callback "filters" allow `LibTidy` API users
-**  to handle Tidy's messages in different and flexible ways. As a simple
-**  filter, each of the callbacks should return true to allow Tidy to proceed
-**  with its own output, or false to prevent output.
-************************/
+    /****************
+     Emacs File
+     ****************/
+    /** Set the file path to use for reports when `TidyEmacs` is being used. This
+     ** function provides a proper interface for using the hidden, internal-only
+     ** `TidyEmacsFile` configuration option.
+     */
+    TIDY_EXPORT void TIDY_CALL tidySetEmacsFile( TidyDoc tdoc, ctmbstr filePath );
 
-/** The original report filter provides the callback function an instance of
-**  the tidy document, the TidyReportLevel of the message, the location in the
-**  source text the message refers to, and the localized message. It's a
-**  largely unsophisticated filter, but can be used very easily in other console
-**  implementations because it provides the exact same string that Tidy would
-**  output.
-**
+    /** Get the file path to use for reports when `TidyEmacs` is being used. This
+     ** function provides a proper interface for using the hidden, internal-only
+     ** `TidyEmacsFile` configuration option.
+     */
+    TIDY_EXPORT ctmbstr TIDY_CALL tidyGetEmacsFile( TidyDoc tdoc );
+    
+    
+/****************
+   Errors
+****************/
+/** Callback to filter messages by diagnostic level:
+**  info, warning, etc.  Just set diagnostic output 
+**  handler to redirect all diagnostics output.  Return true
+**  to proceed with output, false to cancel.
+>>>>>>> next
 */
 typedef Bool (TIDY_CALL *TidyReportFilter)( TidyDoc tdoc, TidyReportLevel lvl,
                                             uint line, uint col, ctmbstr mssg );

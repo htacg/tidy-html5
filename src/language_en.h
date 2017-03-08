@@ -1855,19 +1855,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         - It's very important that <br/> be self-closing!
         - The strings "Tidy" and "HTML Tidy" are the program name and must not
           be translated. */
-      TidyEmacsFile,                0,
-        "When <code>gnu-emacs</code> is <var>yes</var>, then this option value "
-        "specifies the filename to be used in the output report. The HTML Tidy "
-        "command line program will set this automatically. "
-    },
-    {/* Important notes for translators:
-        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
-          <br/>.
-        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
-        - Option values should be enclosed in <var></var>.
-        - It's very important that <br/> be self-closing!
-        - The strings "Tidy" and "HTML Tidy" are the program name and must not
-          be translated. */
       TidyKeepFileTimes,            0,
         "This option specifies if Tidy should keep the original modification time "
         "of files that Tidy modifies in place. "

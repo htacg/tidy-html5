@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-02-18 18:13:23\n"
+"PO-Revision-Date: 2017-03-07 20:09:19\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -2928,21 +2928,6 @@ msgctxt "TidyEmacs"
 msgid ""
 "This option specifies if Tidy should change the format for reporting "
 "errors and warnings to a format that is more easily parsed by GNU Emacs. "
-msgstr ""
-
-#. Important notes for translators:
-#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
-#. <br/>.
-#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
-#. - Option values should be enclosed in <var></var>.
-#. - It's very important that <br/> be self-closing!
-#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
-#. be translated.
-msgctxt "TidyEmacsFile"
-msgid ""
-"When <code>gnu-emacs</code> is <var>yes</var>, then this option value "
-"specifies the filename to be used in the output report. The HTML Tidy "
-"command line program will set this automatically. "
 msgstr ""
 
 #. Important notes for translators:

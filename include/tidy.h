@@ -565,6 +565,22 @@ TIDY_EXPORT void TIDY_CALL tidyPutByte( TidyOutputSink* sink, uint byteValue );
 
 
 /****************
+   Emacs File
+****************/
+/** Set the file path to use for reports when `TidyEmacs` is being used. This
+** function provides a proper interface for using the hidden, internal-only
+** `TidyEmacsFile` configuration option.
+*/
+TIDY_EXPORT void TIDY_CALL tidySetEmacsFile( TidyDoc tdoc, ctmbstr filePath );
+
+/** Get the file path to use for reports when `TidyEmacs` is being used. This
+** function provides a proper interface for using the hidden, internal-only
+** `TidyEmacsFile` configuration option.
+*/
+TIDY_EXPORT ctmbstr TIDY_CALL tidyGetEmacsFile( TidyDoc tdoc );
+
+
+/****************
    Errors
 ****************/
 /** Callback to filter messages by diagnostic level:

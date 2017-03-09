@@ -906,8 +906,6 @@ Bool TY_(ParseConfigOption)( TidyDocImpl* doc, ctmbstr optnam, ctmbstr optval )
 Bool TY_(ParseConfigValue)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr optval )
 {
     const TidyOptionImpl* option = NULL;
-    enum { sizeBuf = 11 };
-    char buffer[sizeBuf];
     /* #472: fail status if there is a NULL parser. @ralfjunker */
     Bool status = ( optId < N_TIDY_OPTIONS
                    && (option = option_defs + optId)->parser
@@ -920,6 +918,8 @@ Bool TY_(ParseConfigValue)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr optval
         {
             /* If optId < N_TIDY_OPTIONS then option remains unassigned,
                and we have to fall back to an ugly error message. */
+            enum { sizeBuf = 11 }; /* uint_max is 10 characters */
+            char buffer[sizeBuf];
             TY_(tmbsnprintf(buffer, sizeBuf, "%u", optId));
             TY_(ReportUnknownOption(doc, buffer));
         }

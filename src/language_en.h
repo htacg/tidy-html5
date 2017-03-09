@@ -2015,9 +2015,35 @@ static languageDefinition language_en = { whichPluralForm_en, {
         - The strings "Tidy" and "HTML Tidy" are the program name and must not
           be translated. */
       TidyEscapeScripts,          0,
-        "This option causes items that look like closing tags, like <code>&lt;/g</code> to be escaped "
-        "to <code>&lt;\\/g</code>. Set this option to 'no' if you do not want this."
+        "This option causes items that look like closing tags, like "
+        "<code>&lt;/g</code> to be escaped to <code>&lt;\\/g</code>. Set "
+        "this option to <var>no</var> if you do not want this."
     },
+//    {/* Important notes for translators:
+//        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+//          <br/>.
+//        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+//        - Option values should be enclosed in <var></var>.
+//        - It's very important that <br/> be self-closing!
+//        - The strings "Tidy" and "HTML Tidy" are the program name and must not
+//          be translated. */
+//      TidyUseCustomTags,          0,
+//        "This option enables the use of tags for autonomous custom elements, "
+//        "e.g. &lt;flag-icon&gt; with Tidy. Custom tags are disabled if this "
+//        "value is <var>no</var>. Other settings - <var>blocklevel</var>, "
+//        "<var>empty</var>, <var>inline</var>, and <var>pre</var> will treat "
+//        "<em>all</em> detected custom tags accordingly. "
+//        "<br/>"
+//        "The use of <code>new-blocklevel-tags</code>, "
+//        "<code>new-empty-tags</code>, <code>new-inline-tags</code>, or "
+//        "<code>new-pre-tags</code> will override the treatment of custom tags "
+//        "by this configuration option. This may be useful if you have "
+//        "different types of custom tags."
+//        "<br/>"
+//        "When enabled these tags are determined during the processing of your "
+//        "document using opening tags; matching closing tags will be recognized "
+//        "accordingly, and unknown closing tags will be discarded. "
+//    },
 
 #if SUPPORT_CONSOLE_APP
     /********************************************************

@@ -218,6 +218,7 @@ static const TidyOptionImpl option_defs[] =
   { TidyUnknownOption,           MS, "unknown!",                    IN, 0,               NULL,              NULL            },
   { TidyDoctypeMode,             MU, "doctype-mode",                IN, TidyDoctypeAuto, NULL,              doctypePicks    },
   { TidyEmacsFile,               MS, "gnu-emacs-file",              ST, 0,               ParseString,       NULL            },
+//  { TidyCustomTags,              MU, "new-custom-tags",             ST, 0,               ParseTagNames,     NULL            }, /* 20170309 - Issue #119 */
   { TidyIndentSpaces,            PP, "indent-spaces",               IN, 2,               ParseInt,          NULL            },
   { TidyWrapLen,                 PP, "wrap",                        IN, 68,              ParseInt,          NULL            },
   { TidyTabSize,                 PP, "tab-size",                    IN, 8,               ParseInt,          NULL            },
@@ -316,6 +317,7 @@ static const TidyOptionImpl option_defs[] =
   { TidySkipNested,              MU, "skip-nested",                 BL, yes,             ParseBool,         boolPicks       }, /* 1642186 - Issue #65 */
   { TidyStrictTagsAttr,          MU, "strict-tags-attributes",      BL, no,              ParseBool,         boolPicks       }, /* 20160209 - Issue #350 */
   { TidyEscapeScripts,           PP, "escape-scripts",              BL, yes,             ParseBool,         boolPicks       }, /* 20160227 - Issue #348 */
+//  { TidyUseCustomTags,           MU, "custom-tags",                 BL, no,              ParseBool,         boolPicks       }, /* 20170309 - Issue #119 */
   { N_TIDY_OPTIONS,              XX, NULL,                          XY, 0,               NULL,              NULL            }
 };
 
@@ -1604,7 +1606,7 @@ const TidyOptionImpl*  TY_(getNextOption)( TidyDocImpl* ARG_UNUSED(doc),
     option = &option_defs[ optId ];
     optId++;
     /* Hide these internal options from the API entirely. */
-    if ( optId == TidyEmacsFile || optId == TidyDoctypeMode )
+    if ( optId == TidyEmacsFile || optId == TidyDoctypeMode )// || optId == TidyCustomTags )
         optId++;
   }
   *iter = (TidyIterator) ( optId < N_TIDY_OPTIONS ? optId : (size_t)0 );

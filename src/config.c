@@ -212,9 +212,12 @@ static ParseProperty ParseRepeatAttr;
 \*/
 static ParseProperty ParseTabs;
 
+/* Ensure struct order is same order as tidyenum.h:TidyOptionId! */
 static const TidyOptionImpl option_defs[] =
 {
   { TidyUnknownOption,           MS, "unknown!",                    IN, 0,               NULL,              NULL            },
+  { TidyDoctypeMode,             MU, "doctype-mode",                IN, TidyDoctypeAuto, NULL,              doctypePicks    },
+  { TidyEmacsFile,               MS, "gnu-emacs-file",              ST, 0,               ParseString,       NULL            },
   { TidyIndentSpaces,            PP, "indent-spaces",               IN, 2,               ParseInt,          NULL            },
   { TidyWrapLen,                 PP, "wrap",                        IN, 68,              ParseInt,          NULL            },
   { TidyTabSize,                 PP, "tab-size",                    IN, 8,               ParseInt,          NULL            },
@@ -222,7 +225,6 @@ static const TidyOptionImpl option_defs[] =
   { TidyInCharEncoding,          CE, "input-encoding",              IN, UTF8,            ParseCharEnc,      charEncPicks    },
   { TidyOutCharEncoding,         CE, "output-encoding",             IN, UTF8,            ParseCharEnc,      charEncPicks    },
   { TidyNewline,                 CE, "newline",                     IN, DLF,             ParseNewline,      newlinePicks    },
-  { TidyDoctypeMode,             MU, "doctype-mode",                IN, TidyDoctypeAuto, NULL,              doctypePicks    },
   { TidyDoctype,                 MU, "doctype",                     ST, 0,               ParseDocType,      doctypePicks    },
   { TidyDuplicateAttrs,          MU, "repeated-attributes",         IN, TidyKeepLast,    ParseRepeatAttr,   repeatAttrPicks },
   { TidyAltText,                 MU, "alt-text",                    ST, 0,               ParseString,       NULL            },
@@ -274,7 +276,6 @@ static const TidyOptionImpl option_defs[] =
   { TidyWord2000,                MU, "word-2000",                   BL, no,              ParseBool,         boolPicks       },
   { TidyMark,                    MS, "tidy-mark",                   BL, yes,             ParseBool,         boolPicks       },
   { TidyEmacs,                   MS, "gnu-emacs",                   BL, no,              ParseBool,         boolPicks       },
-  { TidyEmacsFile,               MS, "gnu-emacs-file",              ST, 0,               ParseString,       NULL            },
   { TidyLiteralAttribs,          MU, "literal-attributes",          BL, no,              ParseBool,         boolPicks       },
   { TidyBodyOnly,                MU, "show-body-only",              IN, no,              ParseAutoBool,     autoBoolPicks   },
   { TidyFixUri,                  MU, "fix-uri",                     BL, yes,             ParseBool,         boolPicks       },
@@ -904,11 +905,24 @@ Bool TY_(ParseConfigOption)( TidyDocImpl* doc, ctmbstr optnam, ctmbstr optval )
 */
 Bool TY_(ParseConfigValue)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr optval )
 {
-    const TidyOptionImpl* option = option_defs + optId;
-    Bool status = ( optId < N_TIDY_OPTIONS && optval != NULL );
+    const TidyOptionImpl* option = NULL;
+    /* #472: fail status if there is a NULL parser. @ralfjunker */
+    Bool status = ( optId < N_TIDY_OPTIONS
+                   && (option = option_defs + optId)->parser
+                   && optval != NULL );
 
     if ( !status )
-        TY_(ReportBadArgument)( doc, option->name );
+        if ( option )
+            TY_(ReportBadArgument)(doc, option->name);
+        else
+        {
+            /* If optId < N_TIDY_OPTIONS then option remains unassigned,
+               and we have to fall back to an ugly error message. */
+            enum { sizeBuf = 11 }; /* uint_max is 10 characters */
+            char buffer[sizeBuf];
+            TY_(tmbsnprintf(buffer, sizeBuf, "%u", optId));
+            TY_(ReportUnknownOption(doc, buffer));
+        }
     else
     {
         TidyBuffer inbuf;            /* Set up input source */

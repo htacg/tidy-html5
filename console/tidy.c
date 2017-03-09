@@ -829,6 +829,43 @@ static void printXMLCrossRef( TidyDoc tdoc, TidyOption topt )
 
 
 /**
+ **  Prints for XML an option's <eqconfig>.
+ **/
+static void printXMLCrossRefEqConsole( TidyDoc tdoc, TidyOption topt )
+{
+    const CmdOptDesc* pos = cmdopt_defs;
+    const CmdOptDesc* hit = NULL;
+    CmdOptDesc localHit;
+    enum { sizeBuffer = 50 }; /* largest config name is 27 chars so far... */
+    char buffer[sizeBuffer];
+
+    for( pos=cmdopt_defs; pos->name1; ++pos)
+    {
+        snprintf(buffer, sizeBuffer, "%s:", tidyOptGetName( topt ));
+        if ( pos->eqconfig && (strncmp(buffer, pos->eqconfig, strlen(buffer)) == 0) )
+        {
+            hit = pos;
+            break;
+        }
+    }
+
+    if ( hit )
+    {
+        localHit = *hit;
+        localize_option_names( &localHit );
+        printf("  <eqconsole>%s</eqconsole>\n", localHit.name1);
+        if ( localHit.name2 )
+            printf("  <eqconsole>%s</eqconsole>\n", localHit.name2);
+        if ( localHit.name3 )
+        printf("  <eqconsole>%s</eqconsole>\n", localHit.name3);
+
+    }
+    else
+        printf("  %s\n", "  <eqconsole />");
+}
+
+
+/**
  **  Prints for XML an option.
  **/
 static void printXMLOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
@@ -855,6 +892,7 @@ static void printXMLOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
     }
     printXMLDescription( tdoc, topt );
     printXMLCrossRef( tdoc, topt );
+    printXMLCrossRefEqConsole( tdoc, topt );
     printf( " </option>\n" );
 }
 

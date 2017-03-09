@@ -52,10 +52,18 @@ typedef enum
 
     These TidyOptionId are used throughout libtidy, and also
     have associated localized strings to describe them.
+ 
+    Ensure struct order is same order as config.c:option_defs structure!
 */
 typedef enum
 {
   TidyUnknownOption = 0,   /**< Unknown option! */
+    
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+  TidyDoctypeMode,         /**< Internal use ONLY */
+  TidyEmacsFile,           /**< Internal use ONLY */
+#endif /* DOXYGEN_SHOULD_SKIP_THIS */
+
   TidyIndentSpaces,        /**< Indentation n spaces/tabs */
   TidyWrapLen,             /**< Wrap margin */
   TidyTabSize,             /**< Expand tabs to n spaces */
@@ -65,7 +73,6 @@ typedef enum
   TidyOutCharEncoding,     /**< Output character encoding (if different) */
   TidyNewline,             /**< Output line ending (default to platform) */
 
-  TidyDoctypeMode,         /**< See doctype property */
   TidyDoctype,             /**< User specified doctype */
 
   TidyDuplicateAttrs,      /**< Keep first or last duplicate attribute */
@@ -122,7 +129,6 @@ typedef enum
   TidyWord2000,            /**< Draconian cleaning for Word2000 */
   TidyMark,                /**< Add meta element indicating tidied doc */
   TidyEmacs,               /**< If true format error output for GNU Emacs */
-  TidyEmacsFile,           /**< Name of current Emacs file */
   TidyLiteralAttribs,      /**< If true attributes may use newlines */
   TidyBodyOnly,            /**< Output BODY content only */
   TidyFixUri,              /**< Applies URI encoding if necessary */

@@ -693,6 +693,10 @@ void GetOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
  ** Array holding all options. Contains a trailing sentinel.
  */
 typedef struct {
+    /* Some options aren't exposed in the API although they're available
+       in the enum. This struct is guaranteed to hold *all* Tidy options,
+       but be sure to use the public API iterators to access them!
+     */
     TidyOption topt[N_TIDY_OPTIONS];
 } AllOption_t;
 
@@ -723,8 +727,7 @@ static void getSortedOption( TidyDoc tdoc, AllOption_t *tOption )
     tOption->topt[i] = NULL; /* sentinel */
 
     qsort(tOption->topt,
-          /* Do not sort the sentinel: hence `-1' */
-          sizeof(tOption->topt)/sizeof(tOption->topt[0])-1,
+          i, /* there are i items, not including the sentinal */
           sizeof(tOption->topt[0]),
           cmpOpt);
 }

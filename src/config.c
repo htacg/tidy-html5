@@ -1595,20 +1595,21 @@ TidyIterator TY_(getOptionList)( TidyDocImpl* ARG_UNUSED(doc) )
 const TidyOptionImpl*  TY_(getNextOption)( TidyDocImpl* ARG_UNUSED(doc),
                                            TidyIterator* iter )
 {
-  const TidyOptionImpl* option = NULL;
-  size_t optId;
-  assert( iter != NULL );
-  optId = (size_t) *iter;
-  if ( optId > TidyUnknownOption && optId < N_TIDY_OPTIONS )
-  {
-    option = &option_defs[ optId ];
-    optId++;
-    /* Hide these internal options from the API entirely. */
-    if ( optId == TidyEmacsFile || optId == TidyDoctypeMode )
+    const TidyOptionImpl* option = NULL;
+    size_t optId;
+    assert( iter != NULL );
+    optId = (size_t) *iter;
+    if ( optId > TidyUnknownOption && optId < N_TIDY_OPTIONS )
+    {
+        /* Hide these internal options from the API entirely. */
+        while ( optId == TidyEmacsFile || optId == TidyDoctypeMode )
+            optId++;
+
+        option = &option_defs[ optId ];
         optId++;
-  }
-  *iter = (TidyIterator) ( optId < N_TIDY_OPTIONS ? optId : (size_t)0 );
-  return option;
+    }
+    *iter = (TidyIterator) ( optId < N_TIDY_OPTIONS ? optId : (size_t)0 );
+    return option;
 }
 
 /* Use a 1-based array index as iterator: 0 == end-of-list

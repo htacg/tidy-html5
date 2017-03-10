@@ -693,6 +693,10 @@ void GetOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
  ** Array holding all options. Contains a trailing sentinel.
  */
 typedef struct {
+    /* Some options aren't exposed in the API although they're available
+       in the enum. This struct is guaranteed to hold *all* Tidy options,
+       but be sure to use the public API iterators to access them!
+     */
     TidyOption topt[N_TIDY_OPTIONS];
 } AllOption_t;
 
@@ -723,8 +727,7 @@ static void getSortedOption( TidyDoc tdoc, AllOption_t *tOption )
     tOption->topt[i] = NULL; /* sentinel */
 
     qsort(tOption->topt,
-          /* Do not sort the sentinel: hence `-1' */
-          sizeof(tOption->topt)/sizeof(tOption->topt[0])-1,
+          i, /* there are i items, not including the sentinal */
           sizeof(tOption->topt[0]),
           cmpOpt);
 }
@@ -853,11 +856,11 @@ static void printXMLCrossRefEqConsole( TidyDoc tdoc, TidyOption topt )
     {
         localHit = *hit;
         localize_option_names( &localHit );
-        printf("  <eqconsole>%s</eqconsole>\n", localHit.name1);
+        printf("  <eqconsole>%s</eqconsole>\n", get_escaped_name(localHit.name1));
         if ( localHit.name2 )
-            printf("  <eqconsole>%s</eqconsole>\n", localHit.name2);
+            printf("  <eqconsole>%s</eqconsole>\n", get_escaped_name(localHit.name2));
         if ( localHit.name3 )
-        printf("  <eqconsole>%s</eqconsole>\n", localHit.name3);
+        printf("  <eqconsole>%s</eqconsole>\n", get_escaped_name(localHit.name3));
 
     }
     else
@@ -1318,13 +1321,16 @@ EXIT_CLEANLY:
 static void optionDescribe( TidyDoc tdoc, char *tag )
 {
     tmbstr result = NULL;
+    Bool allocated = no;
+
     TidyOptionId topt;
 
     topt = tidyOptGetIdForName( tag );
 
-    if (topt < N_TIDY_OPTIONS)
+    if (topt < N_TIDY_OPTIONS && ( tidyOptGetCategory( tidyGetOption(tdoc, topt)) != TidyInternalCategory ) )
     {
         result = cleanup_description( tidyOptGetDoc( tdoc, tidyGetOption( tdoc, topt ) ) );
+        allocated = yes;
     }
     else
     {
@@ -1335,7 +1341,7 @@ static void optionDescribe( TidyDoc tdoc, char *tag )
     printf( "`--%s`\n\n", tag );
     print1Column( "%-68.68s\n", 68, result );
     printf( "\n" );
-    if ( (topt < N_TIDY_OPTIONS) && ( result ) )
+    if ( allocated )
         free ( result );
 }
 

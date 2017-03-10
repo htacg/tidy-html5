@@ -44,7 +44,8 @@ typedef enum
   TidyDiagnostics,     /**< Diagnostics */
   TidyPrettyPrint,     /**< Output layout */
   TidyEncoding,        /**< Character encodings */
-  TidyMiscellaneous    /**< File handling, message format, etc. */
+  TidyMiscellaneous,   /**< File handling, message format, etc. */
+  TidyInternalCategory /**< Option is internal only. */
 } TidyConfigCategory;
 
 

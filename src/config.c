@@ -148,6 +148,7 @@ static const ctmbstr sorterPicks[] =
 #define PP TidyPrettyPrint
 #define CE TidyEncoding
 #define MS TidyMiscellaneous
+#define IR TidyInternalCategory
 
 #define IN TidyInteger
 #define BL TidyBoolean
@@ -216,8 +217,8 @@ static ParseProperty ParseTabs;
 static const TidyOptionImpl option_defs[] =
 {
   { TidyUnknownOption,           MS, "unknown!",                    IN, 0,               NULL,              NULL            },
-  { TidyDoctypeMode,             MU, "doctype-mode",                IN, TidyDoctypeAuto, NULL,              doctypePicks    },
-  { TidyEmacsFile,               MS, "gnu-emacs-file",              ST, 0,               ParseString,       NULL            },
+  { TidyDoctypeMode,             IR, "doctype-mode",                IN, TidyDoctypeAuto, NULL,              doctypePicks    },
+  { TidyEmacsFile,               IR, "gnu-emacs-file",              ST, 0,               ParseString,       NULL            },
   { TidyIndentSpaces,            PP, "indent-spaces",               IN, 2,               ParseInt,          NULL            },
   { TidyWrapLen,                 PP, "wrap",                        IN, 68,              ParseInt,          NULL            },
   { TidyTabSize,                 PP, "tab-size",                    IN, 8,               ParseInt,          NULL            },
@@ -1595,20 +1596,21 @@ TidyIterator TY_(getOptionList)( TidyDocImpl* ARG_UNUSED(doc) )
 const TidyOptionImpl*  TY_(getNextOption)( TidyDocImpl* ARG_UNUSED(doc),
                                            TidyIterator* iter )
 {
-  const TidyOptionImpl* option = NULL;
-  size_t optId;
-  assert( iter != NULL );
-  optId = (size_t) *iter;
-  if ( optId > TidyUnknownOption && optId < N_TIDY_OPTIONS )
-  {
-    option = &option_defs[ optId ];
-    optId++;
-    /* Hide these internal options from the API entirely. */
-    if ( optId == TidyEmacsFile || optId == TidyDoctypeMode )
+    const TidyOptionImpl* option = NULL;
+    size_t optId;
+    assert( iter != NULL );
+    optId = (size_t) *iter;
+    if ( optId > TidyUnknownOption && optId < N_TIDY_OPTIONS )
+    {
+        /* Hide these internal options from the API entirely. */
+        while ( tidyOptGetCategory( tidyGetOption(NULL, optId) ) == TidyInternalCategory )
+            optId++;
+
+        option = &option_defs[ optId ];
         optId++;
-  }
-  *iter = (TidyIterator) ( optId < N_TIDY_OPTIONS ? optId : (size_t)0 );
-  return option;
+    }
+    *iter = (TidyIterator) ( optId < N_TIDY_OPTIONS ? optId : (size_t)0 );
+    return option;
 }
 
 /* Use a 1-based array index as iterator: 0 == end-of-list

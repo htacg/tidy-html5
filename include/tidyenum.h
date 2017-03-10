@@ -58,132 +58,119 @@ typedef enum
 */
 typedef enum
 {
-  TidyUnknownOption = 0,   /**< Unknown option! */
+    TidyUnknownOption = 0,   /**< Unknown option! */
     
+    TidyAccessibilityCheckLevel, /**< Accessibility check level */
+    TidyAltText,                 /**< Default text for alt attribute */
+    TidyAnchorAsName,            /**< Define anchors as name attributes */
+    TidyAsciiChars,              /**< Convert quotes and dashes to nearest ASCII char */
+    TidyBlockTags,               /**< Declared block tags */
+    TidyBodyOnly,                /**< Output BODY content only */
+    TidyBreakBeforeBR,           /**< Output newline before <br> or not? */
+    TidyCharEncoding,            /**< In/out character encoding */
+    TidyCoerceEndTags,           /**< Coerce end tags from start tags where probably intended */
+    TidyCSSPrefix,               /**< CSS class naming for clean option */
+    TidyDecorateInferredUL,      /**< Mark inferred UL elements with no indent CSS */
+    TidyDoctype,                 /**< User specified doctype */
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
-  TidyDoctypeMode,         /**< Internal use ONLY */
-  TidyEmacsFile,           /**< Internal use ONLY */
-#endif /* DOXYGEN_SHOULD_SKIP_THIS */
-
-  TidyIndentSpaces,        /**< Indentation n spaces/tabs */
-  TidyWrapLen,             /**< Wrap margin */
-  TidyTabSize,             /**< Expand tabs to n spaces */
-
-  TidyCharEncoding,        /**< In/out character encoding */
-  TidyInCharEncoding,      /**< Input character encoding (if different) */
-  TidyOutCharEncoding,     /**< Output character encoding (if different) */
-  TidyNewline,             /**< Output line ending (default to platform) */
-
-  TidyDoctype,             /**< User specified doctype */
-
-  TidyDuplicateAttrs,      /**< Keep first or last duplicate attribute */
-  TidyAltText,             /**< Default text for alt attribute */
-
-  TidyErrFile,             /**< File name to write errors to */
-  TidyOutFile,             /**< File name to write markup to */
-  TidyWriteBack,           /**< If true then output tidied markup */
-  TidyShowMarkup,          /**< If false, normal output is suppressed */
-  TidyShowInfo,            /**< If true, info-level messages are shown */
-  TidyShowWarnings,        /**< However errors are always shown */
-  TidyQuiet,               /**< No 'Parsing X', guessed DTD or summary */
-  TidyIndentContent,       /**< Indent content of appropriate tags */
-                           /**< "auto" does text/block level content indentation */
-  TidyCoerceEndTags,       /**< Coerce end tags from start tags where probably intended */
-  TidyOmitOptionalTags,    /**< Suppress optional start tags and end tags */
-  TidyHideEndTags,         /**< Legacy name for TidyOmitOptionalTags */
-  TidyXmlTags,             /**< Treat input as XML */
-  TidyXmlOut,              /**< Create output as XML */
-  TidyXhtmlOut,            /**< Output extensible HTML */
-  TidyHtmlOut,             /**< Output plain HTML, even for XHTML input.
-                               Yes means set explicitly. */
-  TidyXmlDecl,             /**< Add <?xml?> for XML docs */
-  TidyUpperCaseTags,       /**< Output tags in upper not lower case */
-  TidyUpperCaseAttrs,      /**< Output attributes in upper not lower case */
-  TidyMakeBare,            /**< Make bare HTML: remove Microsoft cruft */
-  TidyMakeClean,           /**< Replace presentational clutter by style rules */
-  TidyGDocClean,           /**< Clean up HTML exported from Google Docs */
-  TidyLogicalEmphasis,     /**< Replace i by em and b by strong */
-  TidyDropPropAttrs,       /**< Discard proprietary attributes */
-  TidyDropFontTags,        /**< Discard presentation tags */
-  TidyDropEmptyElems,      /**< Discard empty elements */
-  TidyDropEmptyParas,      /**< Discard empty p elements */
-  TidyFixComments,         /**< Fix comments with adjacent hyphens */
-  TidyBreakBeforeBR,       /**< Output newline before <br> or not? */
-
-  TidyNumEntities,         /**< Use numeric entities */
-  TidyQuoteMarks,          /**< Output " marks as &quot; */
-  TidyQuoteNbsp,           /**< Output non-breaking space as entity */
-  TidyQuoteAmpersand,      /**< Output naked ampersand as &amp; */
-  TidyWrapAttVals,         /**< Wrap within attribute values */
-  TidyWrapScriptlets,      /**< Wrap within JavaScript string literals */
-  TidyWrapSection,         /**< Wrap within <![ ... ]> section tags */
-  TidyWrapAsp,             /**< Wrap within ASP pseudo elements */
-  TidyWrapJste,            /**< Wrap within JSTE pseudo elements */
-  TidyWrapPhp,             /**< Wrap within PHP pseudo elements */
-  TidyFixBackslash,        /**< Fix URLs by replacing \ with / */
-  TidyIndentAttributes,    /**< Newline+indent before each attribute */
-  TidyXmlPIs,              /**< If set to yes PIs must end with ?> */
-  TidyXmlSpace,            /**< If set to yes adds xml:space attr as needed */
-  TidyEncloseBodyText,     /**< If yes text at body is wrapped in P's */
-  TidyEncloseBlockText,    /**< If yes text in blocks is wrapped in P's */
-  TidyKeepFileTimes,       /**< If yes last modied time is preserved */
-  TidyWord2000,            /**< Draconian cleaning for Word2000 */
-  TidyMark,                /**< Add meta element indicating tidied doc */
-  TidyEmacs,               /**< If true format error output for GNU Emacs */
-  TidyLiteralAttribs,      /**< If true attributes may use newlines */
-  TidyBodyOnly,            /**< Output BODY content only */
-  TidyFixUri,              /**< Applies URI encoding if necessary */
-  TidyLowerLiterals,       /**< Folds known attribute values to lower case */
-  TidyHideComments,        /**< Hides all (real) comments in output */
-  TidyIndentCdata,         /**< Indent <!CDATA[ ... ]]> section */
-  TidyForceOutput,         /**< Output document even if errors were found */
-  TidyShowErrors,          /**< Number of errors to put out */
-  TidyAsciiChars,          /**< Convert quotes and dashes to nearest ASCII char */
-  TidyJoinClasses,         /**< Join multiple class attributes */
-  TidyJoinStyles,          /**< Join multiple style attributes */
-  TidyEscapeCdata,         /**< Replace <![CDATA[]]> sections with escaped text */
-
-#if SUPPORT_ASIAN_ENCODINGS
-  TidyNCR,                 /**< Allow numeric character references */
-#else
-  TidyNCRNotUsed,
+    TidyDoctypeMode,             /**< Internal use ONLY */
 #endif
+    TidyDropEmptyElems,          /**< Discard empty elements */
+    TidyDropEmptyParas,          /**< Discard empty p elements */
+    TidyDropFontTags,            /**< Discard presentation tags */
+    TidyDropPropAttrs,           /**< Discard proprietary attributes */
+    TidyDuplicateAttrs,          /**< Keep first or last duplicate attribute */
+    TidyEmacs,                   /**< If true, format error output for GNU Emacs */
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+    TidyEmacsFile,               /**< Internal use ONLY */
+#endif
+    TidyEmptyTags,               /**< Declared empty tags */
+    TidyEncloseBlockText,        /**< If yes text in blocks is wrapped in P's */
+    TidyEncloseBodyText,         /**< If yes text at body is wrapped in P's */
+    TidyErrFile,                 /**< File name to write errors to */
+    TidyEscapeCdata,             /**< Replace <![CDATA[]]> sections with escaped text */
+    TidyEscapeScripts,           /**< Escape items that look like closing tags in script tags */
+    TidyFixBackslash,            /**< Fix URLs by replacing \ with / */
+    TidyFixComments,             /**< Fix comments with adjacent hyphens */
+    TidyFixUri,                  /**< Applies URI encoding if necessary */
+    TidyForceOutput,             /**< Output document even if errors were found */
+    TidyGDocClean,               /**< Clean up HTML exported from Google Docs */
+    TidyHideComments,            /**< Hides all (real) comments in output */
+    TidyHideEndTags,             /**< Legacy name for TidyOmitOptionalTags */
+    TidyHtmlOut,                 /**< Output plain HTML, even for XHTML input.*/
+    TidyInCharEncoding,          /**< Input character encoding (if different) */
+    TidyIndentAttributes,        /**< Newline+indent before each attribute */
+    TidyIndentCdata,             /**< Indent <!CDATA[ ... ]]> section */
+    TidyIndentContent,           /**< Indent content of appropriate tags */
+    TidyIndentSpaces,            /**< Indentation n spaces/tabs */
+    TidyInlineTags,              /**< Declared inline tags */
+    TidyJoinClasses,             /**< Join multiple class attributes */
+    TidyJoinStyles,              /**< Join multiple style attributes */
+    TidyKeepFileTimes,           /**< If yes last modied time is preserved */
+    TidyLiteralAttribs,          /**< If true attributes may use newlines */
+    TidyLogicalEmphasis,         /**< Replace i by em and b by strong */
+    TidyLowerLiterals,           /**< Folds known attribute values to lower case */
+    TidyMakeBare,                /**< Make bare HTML: remove Microsoft cruft */
+    TidyMakeClean,               /**< Replace presentational clutter by style rules */
+    TidyMark,                    /**< Add meta element indicating tidied doc */
+    TidyMergeDivs,               /**< Merge multiple DIVs */
+    TidyMergeEmphasis,           /**< Merge nested B and I elements */
+    TidyMergeSpans,              /**< Merge multiple SPANs */
+#if SUPPORT_ASIAN_ENCODINGS
+    TidyNCR,                     /**< Allow numeric character references */
+#else
+    TidyNCRNotUsed,              /**< This option is not compiled in */
+#endif
+    TidyNewline,                 /**< Output line ending (default to platform) */
+    TidyNumEntities,             /**< Use numeric entities */
+    TidyOmitOptionalTags,        /**< Suppress optional start tags and end tags */
+    TidyOutCharEncoding,         /**< Output character encoding (if different) */
+    TidyOutFile,                 /**< File name to write markup to */
 #if SUPPORT_UTF16_ENCODINGS
-  TidyOutputBOM,           /**< Output a Byte Order Mark (BOM) for UTF-16 encodings */
-                           /**< auto: if input stream has BOM, we output a BOM */
+    TidyOutputBOM,               /**< Output a Byte Order Mark (BOM) for UTF-16 encodings */
 #else
-  TidyOutputBOMNotUsed,
+    TidyOutputBOMNotUsed,        /**< This option is not compiled in */
 #endif
-
-  TidyReplaceColor,        /**< Replace hex color attribute values with names */
-  TidyCSSPrefix,           /**< CSS class naming for -clean option */
-
-  TidyInlineTags,          /**< Declared inline tags */
-  TidyBlockTags,           /**< Declared block tags */
-  TidyEmptyTags,           /**< Declared empty tags */
-  TidyPreTags,             /**< Declared pre tags */
-
-  TidyAccessibilityCheckLevel, /**< Accessibility check level
-                                   0 (old style), or 1, 2, 3 */
-
-  TidyVertSpace,           /**< degree to which markup is spread out vertically */
+    TidyPPrintTabs,              /**< Indent using tabs istead of spaces */
+    TidyPreserveEntities,        /**< Preserve entities */
+    TidyPreTags,                 /**< Declared pre tags */
 #if SUPPORT_ASIAN_ENCODINGS
-  TidyPunctWrap,           /**< consider punctuation and breaking spaces for wrapping */
+    TidyPunctWrap,               /**< consider punctuation and breaking spaces for wrapping */
 #else
-  TidyPunctWrapNotUsed,
+    TidyPunctWrapNotUsed,        /**< This option is not compiled in */
 #endif
-  TidyMergeEmphasis,       /**< Merge nested B and I elements */
-  TidyMergeDivs,           /**< Merge multiple DIVs */
-  TidyDecorateInferredUL,  /**< Mark inferred UL elements with no indent CSS */
-  TidyPreserveEntities,    /**< Preserve entities */
-  TidySortAttributes,      /**< Sort attributes */
-  TidyMergeSpans,          /**< Merge multiple SPANs */
-  TidyAnchorAsName,        /**< Define anchors as name attributes */
-  TidyPPrintTabs,          /**< Indent using tabs istead of spaces */
-  TidySkipNested,          /**< Skip nested tags in script and style CDATA */
-  TidyStrictTagsAttr,      /**< Ensure tags and attributes match output HTML version */
-  TidyEscapeScripts,       /**< Escape items that look like closing tags in script tags */
-  N_TIDY_OPTIONS           /**< Must be last */
+    TidyQuiet,                   /**< No 'Parsing X', guessed DTD or summary */
+    TidyQuoteAmpersand,          /**< Output naked ampersand as &amp; */
+    TidyQuoteMarks,              /**< Output " marks as &quot; */
+    TidyQuoteNbsp,               /**< Output non-breaking space as entity */
+    TidyReplaceColor,            /**< Replace hex color attribute values with names */
+    TidyShowErrors,              /**< Number of errors to put out */
+    TidyShowInfo,                /**< If true, info-level messages are shown */
+    TidyShowMarkup,              /**< If false, normal output is suppressed */
+    TidyShowWarnings,            /**< However errors are always shown */
+    TidySkipNested,              /**< Skip nested tags in script and style CDATA */
+    TidySortAttributes,          /**< Sort attributes */
+    TidyStrictTagsAttr,          /**< Ensure tags and attributes match output HTML version */
+    TidyTabSize,                 /**< Expand tabs to n spaces */
+    TidyUpperCaseAttrs,          /**< Output attributes in upper not lower case */
+    TidyUpperCaseTags,           /**< Output tags in upper not lower case */
+    TidyVertSpace,               /**< degree to which markup is spread out vertically */
+    TidyWord2000,                /**< Draconian cleaning for Word2000 */
+    TidyWrapAsp,                 /**< Wrap within ASP pseudo elements */
+    TidyWrapAttVals,             /**< Wrap within attribute values */
+    TidyWrapJste,                /**< Wrap within JSTE pseudo elements */
+    TidyWrapLen,                 /**< Wrap margin */
+    TidyWrapPhp,                 /**< Wrap within PHP pseudo elements */
+    TidyWrapScriptlets,          /**< Wrap within JavaScript string literals */
+    TidyWrapSection,             /**< Wrap within <![ ... ]> section tags */
+    TidyWriteBack,               /**< If true then output tidied markup */
+    TidyXhtmlOut,                /**< Output extensible HTML */
+    TidyXmlDecl,                 /**< Add <?xml?> for XML docs */
+    TidyXmlOut,                  /**< Create output as XML */
+    TidyXmlPIs,                  /**< If set to yes PIs must end with ?> */
+    TidyXmlSpace,                /**< If set to yes adds xml:space attr as needed */
+    TidyXmlTags,                 /**< Treat input as XML */
+    N_TIDY_OPTIONS               /**< Must be last */
 } TidyOptionId;
 
     
@@ -1252,7 +1239,6 @@ typedef enum
     TC_STRING_CONF_NAME,
     TC_STRING_CONF_TYPE,
     TC_STRING_CONF_VALUE,
-    TC_STRING_CONF_NOTE,
     TC_STRING_OPT_NOT_DOCUMENTED,
     TC_STRING_OUT_OF_MEMORY,
     TC_STRING_FATAL_ERROR,

@@ -1316,7 +1316,7 @@ Bool ParseUseCustomTags( TidyDocImpl* doc, const TidyOptionImpl* entry )
 
 
 /* Coordinates Config update and Tags data */
-static void DeclareUserTag( TidyDocImpl* doc, TidyOptionId optId,
+void TY_(DeclareUserTag)( TidyDocImpl* doc, TidyOptionId optId,
                             UserTagType tagType, ctmbstr name )
 {
   ctmbstr prvval = cfgStr( doc, optId );
@@ -1410,14 +1410,14 @@ Bool ParseTagNames( TidyDocImpl* doc, const TidyOptionImpl* option )
             continue;        /* there is a trailing space on the line. */
             
         /* add tag to dictionary */
-        DeclareUserTag( doc, option->id, ttyp, buf );
+        TY_(DeclareUserTag)( doc, option->id, ttyp, buf );
         i = 0;
         ++nTags;
     }
     while ( c != EndOfStream );
 
     if ( i > 0 )
-      DeclareUserTag( doc, option->id, ttyp, buf );
+      TY_(DeclareUserTag)( doc, option->id, ttyp, buf );
     return ( nTags > 0 );
 }
 

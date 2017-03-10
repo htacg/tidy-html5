@@ -546,6 +546,8 @@ void show_have_html5(void)
 /* public interface for finding tag by name */
 Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
 {
+    TidyUseCustomTagsState configtype = cfg( doc, TidyUseCustomTags );
+
     const Dict *np = NULL;
     if ( cfgBool(doc, TidyXmlTags) )
     {
@@ -558,7 +560,25 @@ Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
         node->tag = np;
         return yes;
     }
-
+    
+    /* Add anonymous custom tag */
+    if ( node->element && configtype != TidyCustomNo )
+    {
+        UserTagType type;
+        if ( configtype == TidyCustomEmpty )
+            type = tagtype_empty;
+        else if ( configtype == TidyCustomInline )
+            type = tagtype_inline;
+        else if ( configtype == TidyCustomPre )
+            type = tagtype_pre;
+        else
+            type = tagtype_block;
+        
+        TY_(DeclareUserTag)( doc, TidyUseCustomTags, type, node->element );
+        node->tag = tagsLookup(doc, &doc->tags, node->element);
+        return yes;
+    }
+    
     return no;
 }
 

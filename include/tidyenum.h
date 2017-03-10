@@ -44,7 +44,8 @@ typedef enum
   TidyDiagnostics,     /**< Diagnostics */
   TidyPrettyPrint,     /**< Output layout */
   TidyEncoding,        /**< Character encodings */
-  TidyMiscellaneous    /**< File handling, message format, etc. */
+  TidyMiscellaneous,   /**< File handling, message format, etc. */
+  TidyInternalCategory /**< Option is internal only. */
 } TidyConfigCategory;
 
 
@@ -62,7 +63,7 @@ typedef enum
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
   TidyDoctypeMode,         /**< Internal use ONLY */
   TidyEmacsFile,           /**< Internal use ONLY */
-//  TidyCustomTags,          /**< Internal use ONLY */
+  TidyCustomTags,          /**< Internal use ONLY */
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
 
   TidyIndentSpaces,        /**< Indentation n spaces/tabs */
@@ -183,7 +184,7 @@ typedef enum
   TidySkipNested,          /**< Skip nested tags in script and style CDATA */
   TidyStrictTagsAttr,      /**< Ensure tags and attributes match output HTML version */
   TidyEscapeScripts,       /**< Escape items that look like closing tags in script tags */
-//  TidyUseCustomTags,       /**< Allow the use of custom tags in documents. */
+  TidyUseCustomTags,       /**< Allow the use of custom tags in documents. */
   N_TIDY_OPTIONS           /**< Must be last */
 } TidyOptionId;
 

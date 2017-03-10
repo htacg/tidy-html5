@@ -143,6 +143,16 @@ static const ctmbstr sorterPicks[] =
   NULL
 };
 
+static const ctmbstr customTagsPicks[] =
+{
+    "no",
+    "blocklevel",
+    "empty",
+    "inline",
+    "pre",
+    NULL
+};
+
 #define MU TidyMarkup
 #define DG TidyDiagnostics
 #define PP TidyPrettyPrint
@@ -212,6 +222,10 @@ static ParseProperty ParseRepeatAttr;
  * (c) sets the indent_char to '\t' or ' '
 \*/
 static ParseProperty ParseTabs;
+
+/* Parse the value of TidyUseCustomTags */
+static ParseProperty ParseUseCustomTags;
+
 
 /* Ensure struct order is same order as tidyenum.h:TidyOptionId! */
 static const TidyOptionImpl option_defs[] =
@@ -306,7 +320,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyTabSize,                 PP, "tab-size",                    IN, 8,               ParseInt,          NULL            },
     { TidyUpperCaseAttrs,          MU, "uppercase-attributes",        BL, no,              ParseBool,         boolPicks       },
     { TidyUpperCaseTags,           MU, "uppercase-tags",              BL, no,              ParseBool,         boolPicks       },
-    { TidyUseCustomTags,           MU, "custom-tags",                 BL, no,              ParseBool,         boolPicks       }, /* 20170309 - Issue #119 */
+    { TidyUseCustomTags,           MU, "custom-tags",                 IN, TidyCustomNo,    ParseUseCustomTags,customTagsPicks }, /* 20170309 - Issue #119 */
     { TidyVertSpace,               PP, "vertical-space",              IN, no,              ParseAutoBool,     autoBoolPicks   }, /* #228 - tri option */
     { TidyWord2000,                MU, "word-2000",                   BL, no,              ParseBool,         boolPicks       },
     { TidyWrapAsp,                 PP, "wrap-asp",                    BL, yes,             ParseBool,         boolPicks       },
@@ -1247,6 +1261,57 @@ Bool ParseTabs( TidyDocImpl* doc, const TidyOptionImpl* entry )
         }
     }
     return status;
+}
+
+/* Parse the value of TidyUseCustomTags. Like other option values, we will
+ * look for the first character only, of no, blocklevel, empty, inline, pre.
+ */
+Bool ParseUseCustomTags( TidyDocImpl* doc, const TidyOptionImpl* entry )
+{
+    uint value;
+    TidyConfigImpl* cfg = &doc->config;
+    tchar c = SkipWhite( cfg );
+    
+    switch (c)
+    {
+        case 'n':
+        case 'N':
+        case '0':
+            value = TidyCustomNo;
+            break;
+            
+        case 'y':
+        case 'Y':
+        case 'b':
+        case '1':
+            value = TidyCustomBlocklevel;
+            break;
+            
+        case 'e':
+        case 'E':
+        case '2':
+            value = TidyCustomEmpty;
+            break;
+        
+        case 'i':
+        case 'I':
+        case '3':
+            value = TidyCustomInline;
+            break;
+
+        case 'p':
+        case 'P':
+        case '4':
+            value = TidyCustomPre;
+            break;
+            
+        default:
+            TY_(ReportBadArgument)( doc, entry->name );
+            return no;
+    }
+    
+    TY_(SetOptionInt)( doc, TidyUseCustomTags, value );
+    return yes;
 }
 
 

@@ -197,6 +197,17 @@ typedef enum
    TidyAutoState    /**< Automatic */
 } TidyTriState;
 
+/** Integer values used by ParseUseCustomTags
+ */
+typedef enum
+{
+    TidyCustomNo,
+    TidyCustomBlocklevel,
+    TidyCustomEmpty,
+    TidyCustomInline,
+    TidyCustomPre
+} TidyUseCustomTagsState;
+    
 /** TidyNewline option values to control output line endings.
 */
 typedef enum

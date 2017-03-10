@@ -508,7 +508,6 @@ static Bool NeedReparseTagDecls( TidyDocImpl* doc,
             TEST_USERTAGS(TidyBlockTags,tagtype_block);
             TEST_USERTAGS(TidyEmptyTags,tagtype_empty);
             TEST_USERTAGS(TidyPreTags,tagtype_pre);
-            TEST_USERTAGS(TidyCustomTags, cfg(doc, TidyUseCustomTags));
         default:
             break;
         }
@@ -528,7 +527,6 @@ static void ReparseTagDecls( TidyDocImpl* doc, uint changedUserTags  )
     REPARSE_USERTAGS(TidyBlockTags,tagtype_block);
     REPARSE_USERTAGS(TidyEmptyTags,tagtype_empty);
     REPARSE_USERTAGS(TidyPreTags,tagtype_pre);
-    REPARSE_USERTAGS(TidyCustomTags, cfg(doc, TidyUseCustomTags));
 }
 
 void TY_(ResetConfigToDefault)( TidyDocImpl* doc )

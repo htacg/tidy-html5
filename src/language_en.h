@@ -2029,6 +2029,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
      ********************************************************/
     { TidyDiagnostics,              0,   "diagnostics"                                                             },
     { TidyEncoding,                 0,   "encoding"                                                                },
+    { TidyInternalCategory,         0,   "internal (private)"                                                      },
     { TidyMarkup,                   0,   "markup"                                                                  },
     { TidyMiscellaneous,            0,   "misc"                                                                    },
     { TidyPrettyPrint,              0,   "print"                                                                   },
@@ -2115,9 +2116,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
     },
     {/* Must be 40 characters or fewer. */
       TC_STRING_CONF_VALUE,         0,   "Current Value"
-    },
-    {/* The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-      TC_STRING_CONF_NOTE,          0,   "Values marked with an *asterisk are calculated internally by HTML Tidy"
     },
 
     { TC_STRING_OPT_NOT_DOCUMENTED, 0,   "Warning: option `%s' is not documented."                                 },

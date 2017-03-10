@@ -382,7 +382,9 @@ while ( itOpt )
 */
 
 TIDY_EXPORT TidyIterator TIDY_CALL  tidyGetOptionList( TidyDoc tdoc );
-/** Get next Option */
+/** Get next Option. Note that this function will return option types
+    including `TidyInternalCategory`; you should *never* use these!
+*/
 TIDY_EXPORT TidyOption TIDY_CALL    tidyGetNextOption( TidyDoc tdoc, TidyIterator* pos );
 
 /** Lookup option by ID */

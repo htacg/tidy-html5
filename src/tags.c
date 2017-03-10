@@ -564,21 +564,28 @@ Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
     /* Add anonymous custom tag */
     if ( node->element && configtype != TidyCustomNo )
     {
-        UserTagType type;
-
-        if ( configtype == TidyCustomEmpty )
-            type = tagtype_empty;
-        else if ( configtype == TidyCustomInline )
-            type = tagtype_inline;
-        else if ( configtype == TidyCustomPre )
-            type = tagtype_pre;
-        else
-            type = tagtype_block;
+        const char *ptr = strchr(node->element, '-');
         
-        TY_(DeclareUserTag)( doc, TidyCustomTags, type, node->element );
-        node->tag = tagsLookup(doc, &doc->tags, node->element);
-        TY_(ReportNotice)(doc, node, node, CUSTOM_TAG_DETECTED);
-        return yes;
+        /* Tag must contain hyphen not in first character. */
+        if ( ptr && (ptr - node->element > 0) )
+        {
+            UserTagType type;
+            
+            if ( configtype == TidyCustomEmpty )
+                type = tagtype_empty;
+            else if ( configtype == TidyCustomInline )
+                type = tagtype_inline;
+            else if ( configtype == TidyCustomPre )
+                type = tagtype_pre;
+            else
+                type = tagtype_block;
+            
+            TY_(DeclareUserTag)( doc, TidyCustomTags, type, node->element );
+            node->tag = tagsLookup(doc, &doc->tags, node->element);
+            TY_(ReportNotice)(doc, node, node, CUSTOM_TAG_DETECTED);
+            
+            return yes;
+        }
     }
     
     return no;

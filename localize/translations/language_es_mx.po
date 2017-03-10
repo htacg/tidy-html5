@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-03-10 09:04:23\n"
+"PO-Revision-Date: 2017-03-10 16:22:27\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -63,7 +63,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgctxt "STRING_HELLO_ACCESS"
-msgid "Accessibility Checks:"
+msgid "\nAccessibility Checks:\n"
 msgstr ""
 
 #. This is not a formal name and can be translated.
@@ -84,8 +84,9 @@ msgctxt "STRING_NO_SYSID"
 msgid "No system identifier in emitted doctype"
 msgstr ""
 
+#, c-format
 msgctxt "STRING_NOT_ALL_SHOWN"
-msgid "Not all warnings/errors were shown."
+msgid "Tidy found %u %s and %u %s! Not all warnings/errors were shown."
 msgstr ""
 
 msgctxt "STRING_PLAIN_TEXT"
@@ -128,7 +129,6 @@ msgid ""
 "        referenced by this attribute are inserted into the list and the \n"
 "        search stops for the current direction.\n"
 "        TD cells that set the axis attribute are also treated as header cells.\n"
-"\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -138,7 +138,7 @@ msgid ""
 "128 - 159 may not be recognized on other platforms. You are\n"
 "instead recommended to use named entities, e.g. &trade; rather\n"
 "than Windows character code 153 (0x2122 in Unicode). Note that\n"
-"as of February 1998 few browsers support the new entities.\n\n"
+"as of February 1998 few browsers support the new entities.\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -150,7 +150,6 @@ msgid ""
 "work widely enough on the World Wide Web; you should avoid using the \n"
 "%s character encoding, instead you are recommended to\n"
 "use named entities, e.g. &trade;.\n"
-"\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -164,7 +163,6 @@ msgid ""
 "Tidy assumed you wanted to refer to a character with the same byte value in the \n"
 "%s encoding and replaced that reference with the Unicode \n"
 "equivalent.\n"
-"\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -179,7 +177,6 @@ msgid ""
 "does not allow mapping of unpaired surrogates, nor U+FFFE and U+FFFF\n"
 "(but it does allow other noncharacters). For more information please refer to\n"
 "http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
-"\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -189,7 +186,6 @@ msgid ""
 "The definition of UTF-16 in Annex C of ISO/IEC 10646-1:2000 does not allow the\n"
 "mapping of unpaired surrogates. For more information please refer to\n"
 "http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
-"\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -204,7 +200,6 @@ msgid ""
 "scripts depend on that. If you want to depend on that, you must\n"
 "escape the URI on your own. For more information please refer to\n"
 "http://www.w3.org/International/O-URL-and-ident.html\n"
-"\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -216,7 +211,6 @@ msgid ""
 "in one table cell and the </form> in another. If the <form> is\n"
 "placed before a table, the </form> cannot be placed inside the\n"
 "table! Note that one form can't be nested inside another!\n"
-"\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -236,7 +230,6 @@ msgid ""
 "table cells are useful for specifying which headers apply\n"
 "to each table cell, enabling non-visual browsers to provide\n"
 "a meaningful context for each cell.\n"
-"\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -246,7 +239,6 @@ msgid ""
 "of an image; longer descriptions should be given with the\n"
 "longdesc attribute which takes a URL linked to the description.\n"
 "These measures are needed for people using non-graphical browsers.\n"
-"\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -256,7 +248,6 @@ msgid ""
 "maps as the latter are inaccessible to people using non-\n"
 "graphical browsers. In addition, client-side maps are easier\n"
 "to set up and provide immediate feedback to users.\n"
-"\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -265,7 +256,6 @@ msgid ""
 "For hypertext links defined using a client-side image map, you\n"
 "need to use the alt attribute to provide a textual description\n"
 "of the link for people using non-graphical browsers.\n"
-"\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -275,20 +265,22 @@ msgid ""
 "people who are either blind or using a browser that\n"
 "doesn't support frames. A frames-based page should always\n"
 "include an alternative layout inside a NOFRAMES element.\n"
-"\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
+#. - The URL should not be translated unless you find a matching URL in your language.
 msgctxt "TEXT_ACCESS_ADVICE1"
 msgid ""
 "For further advice on how to make your pages accessible\n"
-"see http://www.w3.org/WAI/GL"
+"see http://www.w3.org/WAI/GL.\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
 #. - The URL should not be translated unless you find a matching URL in your language.
 msgctxt "TEXT_ACCESS_ADVICE2"
-msgid " and http://www.html-tidy.org/accessibility/"
+msgid ""
+"For further advice on how to make your pages accessible\n"
+"see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/.\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -297,7 +289,6 @@ msgid ""
 "The Cascading Style Sheets (CSS) Positioning mechanism\n"
 "is recommended in preference to the proprietary <LAYER>\n"
 "element due to limited vendor support for LAYER.\n"
-"\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -306,7 +297,6 @@ msgid ""
 "You are recommended to use CSS for controlling white\n"
 "space (e.g. for indentation, margins and line spacing).\n"
 "The proprietary <SPACER> element has limited vendor support.\n"
-"\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -316,7 +306,6 @@ msgid ""
 "properties such as its size and color. This will reduce\n"
 "the size of HTML files and make them easier to maintain\n"
 "compared with using <FONT> elements.\n"
-"\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -325,7 +314,6 @@ msgid ""
 "You are recommended to use CSS to control line wrapping.\n"
 "Use \"white-space: nowrap\" to inhibit wrapping in place\n"
 "of inserting <NOBR>...</NOBR> into the markup.\n"
-"\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -339,7 +327,6 @@ msgctxt "TEXT_NEEDS_INTERVENTION"
 msgid ""
 "This document has errors that must be fixed before\n"
 "using HTML Tidy to generate a tidied up version.\n"
-"\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -356,12 +343,12 @@ msgstr ""
 
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#. - Don't terminate the last line with a newline.
 msgctxt "TEXT_GENERAL_INFO_PLEA"
 msgid ""
-"\n"
 "Do you speak a language other than English, or a different variant of \n"
 "English? Consider helping us to localize HTML Tidy. For details please see \n"
-"https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md\n"
+"https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
 msgstr ""
 "\n"
 "¿Le gustaría ver Tidy en adecuada, español mexicano? Por favor considere \n"
@@ -394,6 +381,18 @@ msgstr ""
 
 msgctxt "TidyFatal"
 msgid "Panic: "
+msgstr ""
+
+msgctxt "TidyDialogueInfo"
+msgid "Information: "
+msgstr ""
+
+msgctxt "TidyDialogueSummary"
+msgid "Summary: "
+msgstr ""
+
+msgctxt "TidyDialogueDoc"
+msgid "Document: "
 msgstr ""
 
 #, c-format
@@ -658,6 +657,27 @@ msgstr ""
 #, c-format
 msgctxt "REPLACING_ELEMENT"
 msgid "replacing %s with %s"
+msgstr ""
+
+#, c-format
+msgctxt "CUSTOM_TAG_DETECTED"
+msgid "detected autonomous custom tag %s; will treat as %s"
+msgstr ""
+
+msgctxt "TidyCustomBlocklevel"
+msgid "block level"
+msgstr ""
+
+msgctxt "TidyCustomEmpty"
+msgid "empty"
+msgstr ""
+
+msgctxt "TidyCustomInline"
+msgid "inline"
+msgstr ""
+
+msgctxt "TidyCustomPre"
+msgid "pre"
 msgstr ""
 
 #, c-format
@@ -2948,8 +2968,36 @@ msgstr ""
 #. be translated.
 msgctxt "TidyEscapeScripts"
 msgid ""
-"This option causes items that look like closing tags, like <code>&lt;/g</code> to be escaped "
-"to <code>&lt;\\/g</code>. Set this option to 'no' if you do not want this."
+"This option causes items that look like closing tags, like "
+"<code>&lt;/g</code> to be escaped to <code>&lt;\\/g</code>. Set "
+"this option to <var>no</var> if you do not want this."
+msgstr ""
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyUseCustomTags"
+msgid ""
+"This option enables the use of tags for autonomous custom elements, "
+"e.g. &lt;flag-icon&gt; with Tidy. Custom tags are disabled if this "
+"value is <var>no</var>. Other settings - <var>blocklevel</var>, "
+"<var>empty</var>, <var>inline</var>, and <var>pre</var> will treat "
+"<em>all</em> detected custom tags accordingly. "
+"<br/>"
+"The use of <code>new-blocklevel-tags</code>, "
+"<code>new-empty-tags</code>, <code>new-inline-tags</code>, or "
+"<code>new-pre-tags</code> will override the treatment of custom tags "
+"by this configuration option. This may be useful if you have "
+"different types of custom tags."
+"<br/>"
+"When enabled these tags are determined during the processing of your "
+"document using opening tags; matching closing tags will be recognized "
+"accordingly, and unknown closing tags will be discarded. "
 msgstr ""
 
 msgctxt "TidyDiagnostics"
@@ -3274,8 +3322,8 @@ msgid "HTML Tidy version %s"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
-#. - %n represents the name of the executable from the file system, and is mostly like going to be "tidy".
-#. - %2 represents a version number, typically x.x.xx.
+#. - First %s represents the name of the executable from the file system, and is mostly like going to be "tidy".
+#. - Second %s represents a version number, typically x.x.xx.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 #, c-format
 msgctxt "TC_TXT_HELP_1"

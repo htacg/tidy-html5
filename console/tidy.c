@@ -185,7 +185,7 @@ static void print3Columns( const char* fmt, uint l1, uint l2, uint l3,
 static const char helpfmt[] = " %-25.25s %-52.52s\n";
 static const char helpul[]  = "-----------------------------------------------------------------";
 static const char fmt[]     = "%-27.27s %-9.9s  %-40.40s\n";
-static const char valfmt[]  = "%-27.27s %-9.9s %-1.1s%-39.39s\n";
+static const char valfmt[]  = "%-27.27s %-9.9s  %-39.39s\n";
 static const char ul[]      = "=================================================================";
 
 /**
@@ -558,7 +558,7 @@ static Bool isAutoBool( TidyOption topt )
  */
 static ctmbstr ConfigCategoryName( TidyConfigCategory id )
 {
-    if (id >= TidyMarkup && id <= TidyMiscellaneous)
+    if (id >= TidyMarkup && id <= TidyInternalCategory)
         return tidyLocalizedString(id);
 
     fprintf(stderr, tidyLocalizedString(TC_STRING_FATAL_ERROR), (int)id);
@@ -575,6 +575,7 @@ static ctmbstr ConfigCategoryName( TidyConfigCategory id )
 typedef struct {
     ctmbstr name;  /**< Name */
     ctmbstr cat;   /**< Category */
+    uint    catid; /**< Category ID */
     ctmbstr type;  /**< "String, ... */
     ctmbstr vals;  /**< Potential values. If NULL, use an external function */
     ctmbstr def;   /**< default */
@@ -596,6 +597,7 @@ void GetOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
 
     d->name = tidyOptGetName( topt );
     d->cat = ConfigCategoryName( tidyOptGetCategory( topt ) );
+    d->catid = tidyOptGetCategory( topt );
     d->vals = NULL;
     d->def = NULL;
     d->haveVals = yes;
@@ -693,10 +695,6 @@ void GetOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
  ** Array holding all options. Contains a trailing sentinel.
  */
 typedef struct {
-    /* Some options aren't exposed in the API although they're available
-       in the enum. This struct is guaranteed to hold *all* Tidy options,
-       but be sure to use the public API iterators to access them!
-     */
     TidyOption topt[N_TIDY_OPTIONS];
 } AllOption_t;
 
@@ -873,7 +871,7 @@ static void printXMLCrossRefEqConsole( TidyDoc tdoc, TidyOption topt )
  **/
 static void printXMLOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
 {
-    if ( tidyOptIsReadOnly(topt) )
+    if ( tidyOptGetCategory(topt) == TidyInternalCategory )
         return;
 
     printf( " <option class=\"%s\">\n", d->cat );
@@ -1014,7 +1012,7 @@ static tmbstr GetAllowedValues( TidyOption topt, const OptionDesc *d )
 static void printOption( TidyDoc ARG_UNUSED(tdoc), TidyOption topt,
                         OptionDesc *d )
 {
-    if ( tidyOptIsReadOnly(topt) )
+    if (tidyOptGetCategory( topt ) == TidyInternalCategory )
         return;
 
     if ( *d->name || *d->type )
@@ -1322,12 +1320,10 @@ static void optionDescribe( TidyDoc tdoc, char *tag )
 {
     tmbstr result = NULL;
     Bool allocated = no;
+    TidyOptionId topt = tidyOptGetIdForName( tag );
+    uint tcat = tidyOptGetCategory( tidyGetOption(tdoc, topt));
 
-    TidyOptionId topt;
-
-    topt = tidyOptGetIdForName( tag );
-
-    if (topt < N_TIDY_OPTIONS && ( tidyOptGetCategory( tidyGetOption(tdoc, topt)) != TidyInternalCategory ) )
+    if (topt < N_TIDY_OPTIONS && tcat != TidyInternalCategory )
     {
         result = cleanup_description( tidyOptGetDoc( tdoc, tidyGetOption( tdoc, topt ) ) );
         allocated = yes;
@@ -1353,7 +1349,9 @@ static void printOptionValues( TidyDoc ARG_UNUSED(tdoc), TidyOption topt,
                               OptionDesc *d )
 {
     TidyOptionId optId = tidyOptGetId( topt );
-    ctmbstr ro = tidyOptIsReadOnly( topt ) ? "*" : "" ;
+
+    if ( tidyOptGetCategory(topt) == TidyInternalCategory )
+        return;
 
     switch ( optId )
     {
@@ -1369,7 +1367,7 @@ static void printOptionValues( TidyDoc ARG_UNUSED(tdoc), TidyOption topt,
                 if ( pos )
                 {
                     if ( *d->name )
-                        printf( valfmt, d->name, d->type, ro, d->def );
+                        printf( valfmt, d->name, d->type, d->def );
                     else
                         printf( fmt, d->name, d->type, d->def );
                     d->name = "";
@@ -1391,7 +1389,7 @@ static void printOptionValues( TidyDoc ARG_UNUSED(tdoc), TidyOption topt,
         if ( ! d->def )
             d->def = "";
         if ( *d->name )
-            printf( valfmt, d->name, d->type, ro, d->def );
+            printf( valfmt, d->name, d->type, d->def );
         else
             printf( fmt, d->name, d->type, d->def );
     }
@@ -1409,8 +1407,6 @@ static void optionvalues( TidyDoc tdoc )
     printf( fmt, ul, ul, ul );
 
     ForEachSortedOption( tdoc, printOptionValues );
-
-    printf( "\n\n%s\n\n", tidyLocalizedString(TC_STRING_CONF_NOTE) );
 }
 
 /**

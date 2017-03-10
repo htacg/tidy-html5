@@ -558,6 +558,7 @@ typedef enum
   TidyAttr_HSPACE,            /**< HSPACE= */
   TidyAttr_HTTP_EQUIV,        /**< HTTP_EQUIV= */
   TidyAttr_ID,                /**< ID= */
+  TidyAttr_IS,                /**< IS= */
   TidyAttr_ISMAP,             /**< ISMAP= */
   TidyAttr_ITEMID,            /**< ITEMID= */
   TidyAttr_ITEMPROP,          /**< ITEMPROP= */

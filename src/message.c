@@ -228,8 +228,9 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
             break;
             
         case CUSTOM_TAG_DETECTED:
+            TagToString(element, elemdesc, sizeof(elemdesc));
             tagtype = cfg( doc, TidyUseCustomTags );
-            message = TY_(tidyMessageCreateWithNode)(doc, element, code, TidyInfo, nodedesc, tidyLocalizedString(tagtype) );
+            message = TY_(tidyMessageCreateWithNode)(doc, element, code, TidyInfo, elemdesc, tidyLocalizedString(tagtype) );
             break;
     }
 

@@ -481,7 +481,8 @@ static Bool OptionValueIdentical( const TidyOptionImpl* option,
         return val1->v == val2->v;
 }
 
-static Bool NeedReparseTagDecls( const TidyOptionValue* current,
+static Bool NeedReparseTagDecls( TidyDocImpl* doc,
+                                 const TidyOptionValue* current,
                                  const TidyOptionValue* new,
                                  uint *changedUserTags )
 {
@@ -507,6 +508,7 @@ static Bool NeedReparseTagDecls( const TidyOptionValue* current,
             TEST_USERTAGS(TidyBlockTags,tagtype_block);
             TEST_USERTAGS(TidyEmptyTags,tagtype_empty);
             TEST_USERTAGS(TidyPreTags,tagtype_pre);
+            TEST_USERTAGS(TidyCustomTags, cfg(doc, TidyUseCustomTags));
         default:
             break;
         }
@@ -526,6 +528,7 @@ static void ReparseTagDecls( TidyDocImpl* doc, uint changedUserTags  )
     REPARSE_USERTAGS(TidyBlockTags,tagtype_block);
     REPARSE_USERTAGS(TidyEmptyTags,tagtype_empty);
     REPARSE_USERTAGS(TidyPreTags,tagtype_pre);
+    REPARSE_USERTAGS(TidyCustomTags, cfg(doc, TidyUseCustomTags));
 }
 
 void TY_(ResetConfigToDefault)( TidyDocImpl* doc )
@@ -565,7 +568,7 @@ void TY_(ResetConfigToSnapshot)( TidyDocImpl* doc )
     TidyOptionValue* value = &doc->config.value[ 0 ];
     const TidyOptionValue* snap  = &doc->config.snapshot[ 0 ];
     uint changedUserTags;
-    Bool needReparseTagsDecls = NeedReparseTagDecls( value, snap,
+    Bool needReparseTagsDecls = NeedReparseTagDecls( doc, value, snap,
                                                      &changedUserTags );
     
     for ( ixVal=0; ixVal < N_TIDY_OPTIONS; ++option, ++ixVal )
@@ -586,7 +589,7 @@ void TY_(CopyConfig)( TidyDocImpl* docTo, TidyDocImpl* docFrom )
         const TidyOptionValue* from = &docFrom->config.value[ 0 ];
         TidyOptionValue* to   = &docTo->config.value[ 0 ];
         uint changedUserTags;
-        Bool needReparseTagsDecls = NeedReparseTagDecls( to, from,
+        Bool needReparseTagsDecls = NeedReparseTagDecls( docTo, to, from,
                                                          &changedUserTags );
 
         TY_(TakeConfigSnapshot)( docTo );
@@ -1347,13 +1350,14 @@ Bool ParseTagNames( TidyDocImpl* doc, const TidyOptionImpl* option )
 
     switch ( option->id )
     {
-    case TidyInlineTags:  ttyp = tagtype_inline;    break;
-    case TidyBlockTags:   ttyp = tagtype_block;     break;
-    case TidyEmptyTags:   ttyp = tagtype_empty;     break;
-    case TidyPreTags:     ttyp = tagtype_pre;       break;
-    default:
-       TY_(ReportUnknownOption)( doc, option->name );
-       return no;
+        case TidyInlineTags:  ttyp = tagtype_inline;              break;
+        case TidyBlockTags:   ttyp = tagtype_block;               break;
+        case TidyEmptyTags:   ttyp = tagtype_empty;               break;
+        case TidyPreTags:     ttyp = tagtype_pre;                 break;
+        case TidyCustomTags:  ttyp = cfg(doc, TidyUseCustomTags); break;
+        default:
+            TY_(ReportUnknownOption)( doc, option->name );
+            return no;
     }
 
     SetOptionValue( doc, option->id, NULL );

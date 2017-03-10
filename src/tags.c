@@ -565,6 +565,7 @@ Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
     if ( node->element && configtype != TidyCustomNo )
     {
         UserTagType type;
+
         if ( configtype == TidyCustomEmpty )
             type = tagtype_empty;
         else if ( configtype == TidyCustomInline )
@@ -574,8 +575,9 @@ Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
         else
             type = tagtype_block;
         
-        TY_(DeclareUserTag)( doc, TidyUseCustomTags, type, node->element );
+        TY_(DeclareUserTag)( doc, TidyCustomTags, type, node->element );
         node->tag = tagsLookup(doc, &doc->tags, node->element);
+        TY_(ReportNotice)(doc, node, node, CUSTOM_TAG_DETECTED);
         return yes;
     }
     

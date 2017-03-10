@@ -197,11 +197,13 @@ typedef enum
    TidyAutoState    /**< Automatic */
 } TidyTriState;
 
-/** Integer values used by ParseUseCustomTags
+/** Integer values used by ParseUseCustomTags. These are used throughout 
+ *  LibTidy to indicate the how Tidy treats custom tags, and also have
+ *  associated localized strings to describe them.
  */
 typedef enum
 {
-    TidyCustomNo,
+    TidyCustomNo = 300,
     TidyCustomBlocklevel,
     TidyCustomEmpty,
     TidyCustomInline,
@@ -914,6 +916,7 @@ typedef enum
         FN(OBSOLETE_ELEMENT)              \
         FN(PROPRIETARY_ELEMENT)           \
         FN(REPLACING_ELEMENT)             \
+        FN(CUSTOM_TAG_DETECTED)           \
         FN(REPLACING_UNEX_ELEMENT)        \
         FN(SPACE_PRECEDING_XMLDECL)       \
         FN(SUSPECTED_MISSING_QUOTE)       \

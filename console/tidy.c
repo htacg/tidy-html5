@@ -1564,7 +1564,7 @@ static void unknownOption( uint c )
  **    - other things that are user facing and best not put into LibTidy
  **      proper.
  */
-static Bool reportCallback(TidyMessage tmessage)
+static Bool TIDY_CALL reportCallback(TidyMessage tmessage)
 {
 #if 0
     TidyIterator pos;
@@ -1589,13 +1589,14 @@ static Bool reportCallback(TidyMessage tmessage)
                 printf("%s\n", tidyGetArgValueString( tmessage, &arg ));
                 break;
                 
-            case tidyFormatType_INTN:
-            case tidyFormatType_INT16:
-            case tidyFormatType_INT32:
-            case tidyFormatType_INT64:
+            case tidyFormatType_INT:
                 printf("%d\n", tidyGetArgValueInt( tmessage, &arg));
                 break;
     
+            case tidyFormatType_UINT:
+                printf("%u\n", tidyGetArgValueUInt( tmessage, &arg));
+                break;
+
             case tidyFormatType_DOUBLE:
                 printf("%g\n", tidyGetArgValueDouble( tmessage, &arg));
                 break;
@@ -1621,9 +1622,9 @@ int main( int argc, char** argv )
     ctmbstr prog = argv[0];
     ctmbstr cfgfil = NULL, errfil = NULL, htmlfil = NULL;
     TidyDoc tdoc = tidyCreate();
-    tidySetMessageCallback( tdoc, reportCallback);
     int status = 0;
     tmbstr locale = NULL;
+    tidySetMessageCallback( tdoc, reportCallback);
 
     uint contentErrors = 0;
     uint contentWarnings = 0;

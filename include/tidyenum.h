@@ -286,20 +286,10 @@ typedef enum
 */
 typedef enum
 {
-    tidyFormatType_INT16    = 0,
-    tidyFormatType_UINT16   = 1,
-    tidyFormatType_INTN     = 2,
-    tidyFormatType_UINTN    = 3,
-    tidyFormatType_INT32    = 4,
-    tidyFormatType_UINT32   = 5,
-    tidyFormatType_INT64    = 6,
-    tidyFormatType_UINT64   = 7,
-    tidyFormatType_STRING   = 8,
-    tidyFormatType_DOUBLE   = 9,
-    tidyFormatType_INTSTR   = 10,
-#ifdef WIN32
-    tidyFormatType_WSTRING  = 11,
-#endif
+    tidyFormatType_INT = 0,
+    tidyFormatType_UINT,
+    tidyFormatType_STRING,
+    tidyFormatType_DOUBLE,
     tidyFormatType_UNKNOWN  = 20
 } TidyFormatParameterType;
 

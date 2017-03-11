@@ -2496,12 +2496,12 @@ tmbstr TIDY_CALL tidySystemLocale(tmbstr result)
     return TY_(tidySystemLocale)( result );
 }
 
-Bool TIDY_EXPORT tidySetLanguage( ctmbstr languageCode )
+Bool TIDY_CALL tidySetLanguage( ctmbstr languageCode )
 {
     return TY_(tidySetLanguage)( languageCode );
 }
 
-ctmbstr TIDY_EXPORT tidyGetLanguage()
+ctmbstr TIDY_CALL tidyGetLanguage()
 {
     return TY_(tidyGetLanguage)();
 }

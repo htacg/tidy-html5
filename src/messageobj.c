@@ -23,8 +23,8 @@
 /** A record of a single argument and its type. An array these
 **  represents the arguments supplied to a format string, ordered
 **  in the same position as they occur in the format string. Because
-**  Windows doesn't support modern positional arguments, Tidy doesn't
-**  either.
+**  older versions of Windows don't support positional arguments,
+**  Tidy doesn't either.
 */
 
 #define FORMAT_LENGTH 21
@@ -37,16 +37,8 @@ struct printfArg {
     union {                        /* the argument            */
         int i;
         uint ui;
-        int32_t i32;
-        uint32_t ui32;
-        int64_t ll;
-        uint64_t ull;
         double d;
         const char *s;
-        size_t *ip;
-#ifdef WIN32
-        const WCHAR *ws;
-#endif
     } u;
 };
 
@@ -365,7 +357,7 @@ TidyMessageArgument TY_(getNextMessageArgument)( TidyMessageImpl message, TidyIt
     
     itemIndex = (size_t)*iter;
     
-    if ( itemIndex >= 1 && itemIndex <= message.argcount )
+    if ( itemIndex >= 1 && itemIndex <= (size_t)message.argcount )
     {
         item = itemIndex - 1;
         itemIndex++;
@@ -375,7 +367,7 @@ TidyMessageArgument TY_(getNextMessageArgument)( TidyMessageImpl message, TidyIt
        TidyMessageArgument is really just a dumb, zero-based index; however
        this type of iterator and opaque interrogation is simply how Tidy
        does things. */
-    *iter = (TidyIterator)( itemIndex <= message.argcount ? itemIndex : (size_t)0 );
+    *iter = (TidyIterator)( itemIndex <= (size_t)message.argcount ? itemIndex : (size_t)0 );
     return (TidyMessageArgument)item;
 }
 
@@ -411,125 +403,20 @@ ctmbstr TY_(getArgValueString)( TidyMessageImpl message, TidyMessageArgument* ar
 uint TY_(getArgValueUInt)( TidyMessageImpl message, TidyMessageArgument* arg )
 {
     int argNum = (int)*arg;
-    uint result = 0;
-    Bool typeIsValid = yes;
     assert( argNum <= message.argcount );
+    assert( message.arguments[argNum].type == tidyFormatType_UINT);
 
-    /* Tidy only uses %u currently, but we'll return a larger uint if that's
-       what we have and the current uint supports its size. */
-    switch (message.arguments[argNum].type)
-    {
-        case tidyFormatType_UINTN:
-            result = (uint)message.arguments[argNum].u.ui;
-            break;
-            
-        case tidyFormatType_UINT16:
-            if ( sizeof(uint) <= sizeof(uint16_t))
-                result = (uint)message.arguments[argNum].u.i;
-            else
-                typeIsValid = no;
-            break;
-            
-        case tidyFormatType_UINT32:
-            if ( sizeof(uint) <= sizeof(uint32_t))
-                result = (uint)message.arguments[argNum].u.ui32;
-            else
-                typeIsValid = no;
-            break;
-            
-        case tidyFormatType_UINT64:
-            if ( sizeof(uint) <= sizeof(uint64_t))
-                result = (uint)message.arguments[argNum].u.ull;
-            else
-                typeIsValid = no;
-            break;
-            
-        default:
-            typeIsValid = no;
-            break;
-    }
-    
-    assert(typeIsValid == yes);
-    
-    return result;
+    return message.arguments[argNum].u.ui;
 }
 
 
 int TY_(getArgValueInt)( TidyMessageImpl message, TidyMessageArgument* arg )
 {
     int argNum = (int)*arg;
-    int result = 0;
-    Bool typeIsValid = yes;
     assert( argNum <= message.argcount );
-    
-    /* Tidy only uses %d currently, but we'll return a larger int or uint
-       if that's what we have and the current int supports its size. */
-    switch (message.arguments[argNum].type)
-    {
-        case tidyFormatType_INTN:
-            result = (int)message.arguments[argNum].u.i;
-            break;
-        
-        case tidyFormatType_INT16:
-            if ( sizeof(int) <= sizeof(int16_t))
-                result = (int)message.arguments[argNum].u.i;
-            else
-                typeIsValid = no;
-            break;
-            
-        case tidyFormatType_INT32:
-            if ( sizeof(int) <= sizeof(int32_t))
-                result = (int)message.arguments[argNum].u.i32;
-            else
-                typeIsValid = no;
-            break;
-            
-        case tidyFormatType_INT64:
-            if ( sizeof(int) <= sizeof(int64_t))
-                result = (int)message.arguments[argNum].u.ll;
-            else
-                typeIsValid = no;
-            break;
-            
-        /* Special testing for uints: if they're small enough to
-           fit, then we'll allow them. */
-            
-        case tidyFormatType_UINTN:
-            if ( message.arguments[argNum].u.ui <= INT_MAX )
-                result = (int)message.arguments[argNum].u.ui;
-            else
-                typeIsValid = no;
-            break;
+    assert( message.arguments[argNum].type == tidyFormatType_INT);
 
-        case tidyFormatType_UINT16:
-            if ( sizeof(int) <= sizeof(int16_t) && message.arguments[argNum].u.i <= INT_MAX )
-                result = (int)message.arguments[argNum].u.i;
-            else
-                typeIsValid = no;
-            break;
-            
-        case tidyFormatType_UINT32:
-            if ( sizeof(int) <= sizeof(int32_t) && (message.arguments[argNum].u.ui32 <= INT_MAX) )
-                result = (int)message.arguments[argNum].u.ui32;
-            else
-                typeIsValid = no;
-            break;
-            
-        case tidyFormatType_UINT64:
-            if ( sizeof(int) <= sizeof(int64_t) && message.arguments[argNum].u.ull <= INT_MAX )
-                result = (int)message.arguments[argNum].u.ull;
-            else
-                typeIsValid = no;
-            break;
-            
-        default:
-            typeIsValid = no;
-            break;
-    }
-    
-    assert(typeIsValid == yes);
-    
-    return result;
+    return message.arguments[argNum].u.i;
 }
 
 
@@ -558,6 +445,10 @@ double TY_(getArgValueDouble)( TidyMessageImpl message, TidyMessageArgument* arg
  **
  ** We'll also be sure to use the document's allocator if specified, thus
  ** the requirement to pass in a TidyDocImpl.
+ **
+ ** Currently Tidy only uses %c, %d, %s, %u, %X, although doubles are
+ ** supported as well. Unsupported arguments will result in failure as
+ ** described above.
  */
 static struct printfArg* BuildArgArray( TidyDocImpl *doc, ctmbstr fmt, va_list ap, int* rv )
 {
@@ -650,97 +541,46 @@ static struct printfArg* BuildArgArray( TidyDocImpl *doc, ctmbstr fmt, va_list a
         
         cn++;
         
-        /* size */
-        nas[cn].type = tidyFormatType_INTN;
-        if (c == 'h')
-        {
-            nas[cn].type = tidyFormatType_INT16;
-            c = *p++;
-        } else if (c == 'L')
-        {
-            nas[cn].type = tidyFormatType_INT64;
-            c = *p++;
-        } else if (c == 'l')
-        {
-            nas[cn].type = tidyFormatType_INT32;
-            c = *p++;
-            if (c == 'l') {
-                nas[cn].type = tidyFormatType_INT64;
-                c = *p++;
-            }
-        } else if (c == 'z')
-        {
-            if (sizeof(size_t) == sizeof(int32_t))
-            {
-                nas[ cn ].type = tidyFormatType_INT32;
-            } else if (sizeof(size_t) == sizeof(int64_t))
-            {
-                nas[ cn ].type = tidyFormatType_INT64;
-            } else
-            {
-                nas[ cn ].type = tidyFormatType_UNKNOWN;
-            }
-            c = *p++;
-        }
-        
-        /* format */
+        /* size and format */
+        nas[cn].type = tidyFormatType_UINT;
         switch (c)
         {
-            case 'd':
-            case 'c':
-            case 'i':
-            case 'o':
-            case 'u':
-            case 'x':
-            case 'X':
+            case 'c': /* unsigned int (char) */
+            case 'u': /* unsigned int */
+            case 'X': /* unsigned int as hex */
+            case 'x': /* unsigned int as hex */
+            case 'o': /* octal */
+                nas[cn].u.ui = va_arg( ap, unsigned int );
                 break;
-                
-            case 'e':
-            case 'f':
-            case 'g':
-                nas[ cn ].type = tidyFormatType_DOUBLE;
+
+            case 'd': /* signed int */
+            case 'i': /* signed int */
+                nas[cn].type = tidyFormatType_INT;
+                nas[cn].u.i = va_arg( ap, int );
                 break;
-                
-            case 'p':
-                if (sizeof(void *) == sizeof(int32_t))
-                {
-                    nas[ cn ].type = tidyFormatType_UINT32;
-                } else if (sizeof(void *) == sizeof(int64_t))
-                {
-                    nas[ cn ].type = tidyFormatType_UINT64;
-                } else if (sizeof(void *) == sizeof(int))
-                {
-                    nas[ cn ].type = tidyFormatType_UINTN;
-                } else
-                {
-                    nas[ cn ].type = tidyFormatType_UNKNOWN;
-                }
+
+
+            case 's': /* string */
+                nas[cn].type = tidyFormatType_STRING;
+                nas[cn].u.s = va_arg( ap, char* );
                 break;
-                
-            case 'S':
-#ifdef WIN32
-                nas[ cn ].type = TYPE_WSTRING;
+
+            case 'e': /* double */
+            case 'E': /* double */
+            case 'f': /* double */
+            case 'F': /* double */
+            case 'g': /* double */
+            case 'G': /* double */
+                nas[cn].type = tidyFormatType_DOUBLE;
+                nas[cn].u.d = va_arg( ap, double );
                 break;
-#endif
-            case 'C':
-            case 'E':
-            case 'G':
-                nas[ cn ].type = tidyFormatType_UNKNOWN;
-                break;
-                
-            case 's':
-                nas[ cn ].type = tidyFormatType_STRING;
-                break;
-                
-            case 'n':
-                nas[ cn ].type = tidyFormatType_INTSTR;
-                break;
-                
+
             default:
-                nas[ cn ].type = tidyFormatType_UNKNOWN;
+                nas[cn].type = tidyFormatType_UNKNOWN;
+                *rv = -1;
                 break;
         }
-        
+
         /* position and format */
         nas[cn].formatStart = pos;
         nas[cn].formatLength = (p - fmt) - pos;
@@ -758,7 +598,7 @@ static struct printfArg* BuildArgArray( TidyDocImpl *doc, ctmbstr fmt, va_list a
         
 
         /* Something's not right. */
-        if( nas[ cn ].type == tidyFormatType_UNKNOWN )
+        if( nas[cn].type == tidyFormatType_UNKNOWN )
         {
             *rv = -1;
             break;
@@ -773,71 +613,7 @@ static struct printfArg* BuildArgArray( TidyDocImpl *doc, ctmbstr fmt, va_list a
         TidyDocFree( doc, nas );;
         return NULL;
     }
-    
-    cn = 0;
-    while( cn < number )
-    {
-        if( nas[cn].type == tidyFormatType_UNKNOWN )
-        {
-            cn++;
-            continue;
-        }
-        
-        switch( nas[cn].type )
-        {
-            case tidyFormatType_INT16:
-            case tidyFormatType_UINT16:
-            case tidyFormatType_INTN:
-                nas[cn].u.i = va_arg( ap, int );
-                break;
-                
-            case tidyFormatType_UINTN:
-                nas[cn].u.ui = va_arg( ap, unsigned int );
-                break;
-                
-            case tidyFormatType_INT32:
-                nas[cn].u.i32 = va_arg( ap, int32_t );
-                break;
-                
-            case tidyFormatType_UINT32:
-                nas[cn].u.ui32 = va_arg( ap, uint32_t );
-                break;
-                
-            case tidyFormatType_INT64:
-                nas[cn].u.ll = va_arg( ap, int64_t );
-                break;
-                
-            case tidyFormatType_UINT64:
-                nas[cn].u.ull = va_arg( ap, uint64_t );
-                break;
-                
-            case tidyFormatType_STRING:
-                nas[cn].u.s = va_arg( ap, char* );
-                break;
-                
-#ifdef WIN32
-            case tidyFormatType_WSTRING:
-                nas[cn].u.ws = va_arg( ap, WCHAR* );
-                break;
-#endif
-                
-            case tidyFormatType_INTSTR:
-                nas[cn].u.ip = va_arg( ap, size_t* );
-                break;
-                
-            case tidyFormatType_DOUBLE:
-                nas[cn].u.d = va_arg( ap, double );
-                break;
-                
-            default:
-                TidyDocFree( doc, nas );
-                *rv = -1;
-                return NULL;
-        }
-        
-        cn++;
-    }
-    
+
     *rv = number;
     return nas;
 }

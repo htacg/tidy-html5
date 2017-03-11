@@ -1629,7 +1629,7 @@ int main( int argc, char** argv )
     TidyDoc tdoc = tidyCreate();
     int status = 0;
     tmbstr locale = NULL;
-    Bool passed = tidySetMessageCallback( tdoc, reportCallback);
+    tidySetMessageCallback( tdoc, reportCallback);
 
     uint contentErrors = 0;
     uint contentWarnings = 0;

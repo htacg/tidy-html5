@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-03-10 16:22:27\n"
+"POT-Creation-Date: 2017-03-11 18:31:52\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -489,6 +489,11 @@ msgstr ""
 #, c-format
 msgctxt "MISMATCHED_ATTRIBUTE_WARN"
 msgid "%s attribute \"%s\" not allowed for %s"
+msgstr ""
+
+#, c-format
+msgctxt "ATTRIBUTE_IS_NOT_ALLOWED"
+msgid "%s attribute \"is\" not allowed for autonomous custom tags."
 msgstr ""
 
 #, c-format

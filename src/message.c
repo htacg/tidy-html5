@@ -475,6 +475,10 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
             message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc, name );
             break;
 
+        case ATTRIBUTE_IS_NOT_ALLOWED:
+            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc, name );
+            break;
+
         case MISMATCHED_ATTRIBUTE_WARN:
             version = doc->lexer->versionEmitted == 0 ? doc->lexer->doctype : doc->lexer->versionEmitted;
             extra_string = TY_(HTMLVersionNameFromCode)(version, 0);

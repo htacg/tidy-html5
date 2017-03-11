@@ -1726,6 +1726,17 @@ void CheckIs( TidyDocImpl* doc, Node *node, AttVal *attval )
     const char *ptr;
     Bool go = yes;
 
+    /* `is` MUST NOT be in an autonomous custom tag */
+    ptr = strchr(node->element, '-');
+    if ( ( ptr && (ptr - node->element > 0) ) )
+    {
+        TY_(ReportAttrError)( doc, node, attval, ATTRIBUTE_IS_NOT_ALLOWED);
+    }
+
+    /* Even if we fail the above test, we'll continue to emit reports because
+       the user should *also* know that his attribute values are wrong, even
+       if they should't be in custom tags anyway. */
+
     /* `is` MUST have a value */
     if (!AttrHasValue(attval))
     {
@@ -1733,17 +1744,15 @@ void CheckIs( TidyDocImpl* doc, Node *node, AttVal *attval )
         return;
     }
 
-    /* `is` MUST contain a hypen and no TY_(IsWhite) */
-    ptr = strchr(node->element, '-');
-    go = ( ptr && (ptr - node->element > 0) );
-    ptr = strchr(node->element, ' ');
+    /* `is` MUST contain a hyphen and no space. */
+    ptr = strchr(attval->value, '-');
+    go = ( ptr && (ptr - attval->value > 0) );
+    ptr = strchr(attval->value, ' ');
     go = go & (ptr == NULL);
     if ( !go )
     {
         TY_(ReportAttrError)( doc, node, attval, BAD_ATTRIBUTE_VALUE);
     }
-
-    /* `is` MUST NOT be in an autonomous custom tag */
 }
 
 void CheckBool( TidyDocImpl* doc, Node *node, AttVal *attval)

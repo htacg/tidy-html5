@@ -941,6 +941,7 @@ typedef enum
         FN(JOINING_ATTRIBUTE)              \
         FN(MISMATCHED_ATTRIBUTE_ERROR)     \
         FN(MISMATCHED_ATTRIBUTE_WARN)      \
+        FN(ATTRIBUTE_IS_NOT_ALLOWED)       \
         FN(MISSING_ATTR_VALUE)             \
         FN(MISSING_ATTRIBUTE)              \
         FN(MISSING_IMAGEMAP)               \

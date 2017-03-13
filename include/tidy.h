@@ -463,11 +463,16 @@ TIDY_EXPORT ctmbstr TIDY_CALL       tidyOptGetEncName( TidyDoc tdoc, TidyOptionI
 /** Get current pick list value for option by ID.  Useful for enum types. */
 TIDY_EXPORT ctmbstr TIDY_CALL       tidyOptGetCurrPick( TidyDoc tdoc, TidyOptionId optId);
 
-/** Iterate over user declared tags as configured. This does not return
-    results for autonomous custom tags, as we have no idea they exist yet. */
+/** Iterate over user declared tags as configured. If `custom-tags` is not
+**  **no**, then autonomous custom tags will be included in the results.
+*/
 TIDY_EXPORT TidyIterator TIDY_CALL  tidyOptGetDeclTagList( TidyDoc tdoc );
 /** Get next declared tag of specified type: TidyInlineTags, TidyBlockTags,
-**  TidyEmptyTags, TidyPreTags */
+**  TidyEmptyTags, TidyPreTags. Note that even when using `custom-tags`,
+**  TidyCustomTags is not an option here, as autonomous custom tags are
+**  added to one of the existing types, and TidyCustomTags is defined as
+**  internal API.
+*/
 TIDY_EXPORT ctmbstr TIDY_CALL       tidyOptGetNextDeclTag( TidyDoc tdoc, 
                                                           TidyOptionId optId,
                                                           TidyIterator* iter );

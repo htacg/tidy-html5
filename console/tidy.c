@@ -610,12 +610,10 @@ void GetOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
         case TidySortAttributes:
         case TidyNewline:
         case TidyAccessibilityCheckLevel:
+        case TidyUseCustomTags:
             d->type = "enum";
             d->vals = NULL;
-            d->def =
-            optId==TidyNewline ?
-            "<em>Platform dependent</em>"
-            :tidyOptGetCurrPick( tdoc, optId );
+            d->def = tidyOptGetCurrPick( tdoc, optId );
             break;
 
         case TidyDoctype:
@@ -648,7 +646,7 @@ void GetOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
                 d->def = "?";
             d->vals = NULL;
             break;
-
+            
             /* General case will handle remaining */
         default:
             switch ( optTyp )
@@ -1375,9 +1373,6 @@ static void printOptionValues( TidyDoc ARG_UNUSED(tdoc), TidyOption topt,
                 }
             }
         }
-            break;
-        case TidyNewline:
-            d->def = tidyOptGetCurrPick( tdoc, optId );
             break;
         default:
             break;

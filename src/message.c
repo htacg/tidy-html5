@@ -211,7 +211,8 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     Node* rpt = ( element ? element : node );
     char nodedesc[256] = { 0 };
     char elemdesc[256] = { 0 };
-
+    ctmbstr tagtype;
+    
     TagToString(node, nodedesc, sizeof(nodedesc));
 
     switch (code)
@@ -224,6 +225,12 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
         case REPLACING_ELEMENT:
             TagToString(element, elemdesc, sizeof(elemdesc));
             message = TY_(tidyMessageCreateWithNode)(doc, rpt, code, TidyWarning, elemdesc, nodedesc );
+            break;
+
+        case CUSTOM_TAG_DETECTED:
+            TagToString(element, elemdesc, sizeof(elemdesc));
+            tagtype = tidyLocalizedString( cfg( doc, TidyUseCustomTags ) );
+            message = TY_(tidyMessageCreateWithNode)(doc, element, code, TidyInfo, elemdesc, tagtype );
             break;
     }
 
@@ -465,6 +472,10 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
         case XML_ATTRIBUTE_VALUE:
         case PROPRIETARY_ATTRIBUTE:
         case JOINING_ATTRIBUTE:
+            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc, name );
+            break;
+
+        case ATTRIBUTE_IS_NOT_ALLOWED:
             message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc, name );
             break;
 
@@ -1040,21 +1051,22 @@ void TY_(ReportAccessWarning)( TidyDocImpl* doc, Node* node, uint code )
  * Note that each list must be terminated with `TidyUnknownOption`.
  */
 static const TidyOptionId TidyAsciiCharsLinks[] =      { TidyMakeClean, TidyUnknownOption };
-static const TidyOptionId TidyBlockTagsLinks[] =       { TidyEmptyTags, TidyInlineTags, TidyPreTags, TidyUnknownOption };
+static const TidyOptionId TidyBlockTagsLinks[] =       { TidyEmptyTags, TidyInlineTags, TidyPreTags, TidyUseCustomTags, TidyUnknownOption };
 static const TidyOptionId TidyCharEncodingLinks[] =    { TidyInCharEncoding, TidyOutCharEncoding, TidyUnknownOption };
 static const TidyOptionId TidyDuplicateAttrsLinks[] =  { TidyJoinClasses, TidyJoinStyles, TidyUnknownOption };
-static const TidyOptionId TidyEmptyTagsLinks[] =       { TidyBlockTags, TidyInlineTags, TidyPreTags, TidyUnknownOption };
+static const TidyOptionId TidyEmptyTagsLinks[] =       { TidyBlockTags, TidyInlineTags, TidyPreTags, TidyUseCustomTags, TidyUnknownOption };
 static const TidyOptionId TidyErrFileLinks[] =         { TidyOutFile, TidyUnknownOption };
 static const TidyOptionId TidyInCharEncodingLinks[] =  { TidyCharEncoding, TidyUnknownOption };
 static const TidyOptionId TidyIndentContentLinks[] =   { TidyIndentSpaces, TidyUnknownOption };
 static const TidyOptionId TidyIndentSpacesLinks[] =    { TidyIndentContent, TidyUnknownOption };
-static const TidyOptionId TidyInlineTagsLinks[] =      { TidyBlockTags, TidyEmptyTags, TidyPreTags, TidyUnknownOption };
+static const TidyOptionId TidyInlineTagsLinks[] =      { TidyBlockTags, TidyEmptyTags, TidyPreTags, TidyUseCustomTags, TidyUnknownOption };
 static const TidyOptionId TidyMergeDivsLinks[] =       { TidyMakeClean, TidyMergeSpans, TidyUnknownOption };
 static const TidyOptionId TidyMergeSpansLinks[] =      { TidyMakeClean, TidyMergeDivs, TidyUnknownOption };
 static const TidyOptionId TidyNumEntitiesLinks[] =     { TidyDoctype, TidyPreserveEntities, TidyUnknownOption };
 static const TidyOptionId TidyOutCharEncodingLinks[] = { TidyCharEncoding, TidyUnknownOption };
 static const TidyOptionId TidyOutFileLinks[] =         { TidyErrFile, TidyUnknownOption };
-static const TidyOptionId TidyPreTagsLinks[] =         { TidyBlockTags, TidyEmptyTags, TidyInlineTags, TidyUnknownOption };
+static const TidyOptionId TidyPreTagsLinks[] =         { TidyBlockTags, TidyEmptyTags, TidyInlineTags, TidyUseCustomTags, TidyUnknownOption };
+static const TidyOptionId TidyUseCustomTagsLinks[] =   { TidyBlockTags, TidyEmptyTags, TidyInlineTags, TidyPreTags, TidyUnknownOption };
 static const TidyOptionId TidyWrapAttValsLinks[] =     { TidyWrapScriptlets, TidyLiteralAttribs, TidyUnknownOption };
 static const TidyOptionId TidyWrapScriptletsLinks[] =  { TidyWrapAttVals, TidyUnknownOption };
 static const TidyOptionId TidyXmlDeclLinks[] =         { TidyCharEncoding, TidyOutCharEncoding, TidyUnknownOption };
@@ -1081,6 +1093,7 @@ static const TidyOptionDoc docs_xrefs[] =
     { TidyOutCharEncoding, TidyOutCharEncodingLinks },
     { TidyOutFile,         TidyOutFileLinks         },
     { TidyPreTags,         TidyPreTagsLinks         },
+    { TidyUseCustomTags,   TidyUseCustomTagsLinks   },
     { TidyWrapAttVals,     TidyWrapAttValsLinks     },
     { TidyWrapScriptlets,  TidyWrapScriptletsLinks  },
     { TidyXmlDecl,         TidyXmlDeclLinks         },

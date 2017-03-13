@@ -26,6 +26,7 @@
 #include "gdoc.h"
 #include "config.h"
 #include "message.h"
+#include "messageobj.h"
 #include "pprint.h"
 #include "entities.h"
 #include "tmbstr.h"
@@ -639,14 +640,11 @@ Bool TIDY_CALL tidyOptCopyConfig( TidyDoc to, TidyDoc from )
 
 /* I/O and Message handling interface
 **
-** By default, Tidy will define, create and use
-** tdocances of input and output handlers for
-** standard C buffered I/O (i.e. FILE* stdin,
-** FILE* stdout and FILE* stderr for content
-** input, content output and diagnostic output,
-** respectively.  A FILE* cfgFile input handler
-** will be used for config files.  Command line
-** options will just be set directly.
+** By default, Tidy will define, create and use instance of input and output 
+** handlers for standard C buffered I/O (i.e. FILE* stdin, FILE* stdout and
+** FILE* stderr for content input, content output and diagnostic output,
+** respectively.  A FILE* cfgFile input handler will be used for config files.
+** Command line options will just be set directly.
 */
 
 void TIDY_CALL tidySetEmacsFile( TidyDoc tdoc, ctmbstr filePath )
@@ -665,48 +663,181 @@ ctmbstr TIDY_CALL tidyGetEmacsFile( TidyDoc tdoc )
 ** handler to redirect all diagnostics output.  Return true
 ** to proceed with output, false to cancel.
 */
-Bool TIDY_CALL        tidySetReportFilter( TidyDoc tdoc, TidyReportFilter filt )
+Bool TIDY_CALL tidySetReportFilter( TidyDoc tdoc, TidyReportFilter filt )
 {
   TidyDocImpl* impl = tidyDocToImpl( tdoc );
   if ( impl )
   {
-    impl->mssgFilt = filt;
+    impl->reportFilter = filt;
     return yes;
   }
   return no;
 }
 
-/* TidyReportFilter2 functions similar to TidyReportFilter, but provides the
-** built-in English format string and va_list so that LibTidy users can use
-** the format string as a lookup key for providing their own error 
-** localizations.
-*/
-Bool TIDY_CALL        tidySetReportFilter2( TidyDoc tdoc, TidyReportFilter2 filt )
-{
-  TidyDocImpl* impl = tidyDocToImpl( tdoc );
-  if ( impl )
-  {
-    impl->mssgFilt2 = filt;
-    return yes;
-  }
-  return no;
-}
-
-/* TidyReportFilter3 functions similar to TidyReportFilter, but provides the
+/* tidySetReportCallback functions similar to TidyReportFilter, but provides the
  * string version of the internal enum name so that LibTidy users can use
 ** the string as a lookup key for providing their own error localizations.
 ** See the string key definitions in tidyenum.h.
 */
-Bool TIDY_CALL        tidySetReportFilter3( TidyDoc tdoc, TidyReportFilter3 filt )
+Bool TIDY_CALL tidySetReportCallback( TidyDoc tdoc, TidyReportCallback filt )
 {
   TidyDocImpl* impl = tidyDocToImpl( tdoc );
   if ( impl )
   {
-    impl->mssgFilt3 = filt;
+    impl->reportCallback = filt;
     return yes;
   }
   return no;
 }
+
+Bool TIDY_CALL tidySetMessageCallback( TidyDoc tdoc, TidyMessageCallback filt )
+{
+    TidyDocImpl* impl = tidyDocToImpl( tdoc );
+    if ( impl )
+    {
+        impl->messageCallback = filt;
+        return yes;
+    }
+    return no;
+}
+
+ctmbstr TIDY_CALL tidyGetMessageKey( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessageKey)(*message);
+}
+
+int TIDY_CALL tidyGetMessageLine( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessageLine)(*message);
+}
+
+int TIDY_CALL tidyGetMessageColumn( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessageColumn)(*message);
+}
+
+TidyReportLevel TIDY_CALL tidyGetMessageLevel( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessageLevel)(*message);
+}
+
+
+
+ctmbstr TIDY_CALL tidyGetMessageFormatDefault( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessageFormatDefault)(*message);
+}
+
+ctmbstr TIDY_CALL tidyGetMessageFormat( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessageFormat)(*message);
+}
+
+ctmbstr TIDY_CALL tidyGetMessageDefault( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessageDefault)(*message);
+}
+
+ctmbstr TIDY_CALL tidyGetMessage( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessage)(*message);
+}
+
+ctmbstr TIDY_CALL tidyGetMessagePosDefault( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessagePosDefault)(*message);
+}
+
+ctmbstr TIDY_CALL tidyGetMessagePos( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessagePos)(*message);
+}
+
+ctmbstr TIDY_CALL tidyGetMessagePrefixDefault( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessagePrefixDefault)(*message);
+}
+
+ctmbstr TIDY_CALL tidyGetMessagePrefix( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessagePrefix)(*message);
+}
+
+
+ctmbstr TIDY_CALL tidyGetMessageOutputDefault( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessageOutputDefault)(*message);
+}
+
+ctmbstr TIDY_CALL tidyGetMessageOutput( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessageOutput)(*message);
+}
+
+TidyIterator TIDY_CALL tidyGetMessageArguments( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessageArguments)(*message);
+}
+
+TidyMessageArgument TIDY_CALL tidyGetNextMessageArgument( TidyMessage tmessage, TidyIterator* iter )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getNextMessageArgument)(*message, iter);
+}
+
+TidyFormatParameterType TIDY_CALL tidyGetArgType( TidyMessage tmessage, TidyMessageArgument* arg )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getArgType)(*message, arg);
+}
+
+ctmbstr TIDY_CALL tidyGetArgFormat( TidyMessage tmessage, TidyMessageArgument* arg )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getArgFormat)(*message, arg);
+}
+
+ctmbstr TIDY_CALL tidyGetArgValueString( TidyMessage tmessage, TidyMessageArgument* arg )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getArgValueString)(*message, arg);
+}
+
+uint TIDY_CALL tidyGetArgValueUInt( TidyMessage tmessage, TidyMessageArgument* arg )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getArgValueUInt)(*message, arg);
+}
+
+int TIDY_CALL tidyGetArgValueInt( TidyMessage tmessage, TidyMessageArgument* arg )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getArgValueInt)(*message, arg);
+}
+
+double TIDY_CALL tidyGetArgValueDouble( TidyMessage tmessage, TidyMessageArgument* arg )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getArgValueDouble)(*message, arg);
+}
+
+
+
 
 #if 0   /* Not yet */
 int         tidySetContentOutputSink( TidyDoc tdoc, TidyOutputSink* outp )
@@ -877,7 +1008,10 @@ void TIDY_CALL         tidyGeneralInfo( TidyDoc tdoc )
 {
     TidyDocImpl* impl = tidyDocToImpl( tdoc );
     if ( impl )
-        TY_(GeneralInfo)( impl );
+    {
+        TY_(DialogueMessage)( impl, TEXT_GENERAL_INFO, TidyDialogueInfo);
+        TY_(DialogueMessage)( impl, TEXT_GENERAL_INFO_PLEA, TidyDialogueInfo);
+    }
 }
 
 
@@ -1309,7 +1443,7 @@ int         tidyDocRunDiagnostics( TidyDocImpl* doc )
     }
 
     if ( doc->errors > 0 && !force )
-        TY_(NeedsAuthorIntervention)( doc );
+        TY_(DialogueMessage)(doc, TEXT_NEEDS_INTERVENTION, TidyDialogueDoc);
 
      return tidyDocStatus( doc );
 }
@@ -2362,12 +2496,12 @@ tmbstr TIDY_CALL tidySystemLocale(tmbstr result)
     return TY_(tidySystemLocale)( result );
 }
 
-Bool TIDY_EXPORT tidySetLanguage( ctmbstr languageCode )
+Bool TIDY_CALL tidySetLanguage( ctmbstr languageCode )
 {
     return TY_(tidySetLanguage)( languageCode );
 }
 
-ctmbstr TIDY_EXPORT tidyGetLanguage()
+ctmbstr TIDY_CALL tidyGetLanguage()
 {
     return TY_(tidyGetLanguage)();
 }

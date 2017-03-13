@@ -91,8 +91,6 @@ struct _TidyAccessImpl
 };
 
 
-void TY_(AccessibilityHelloMessage)( TidyDocImpl* doc ); /* impl. message.c */
-void TY_(DisplayHTMLTableAlgorithm)( TidyDocImpl* doc ); /* impl. message.c */
 void TY_(AccessibilityChecks)( TidyDocImpl* doc );
 
 

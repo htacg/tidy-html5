@@ -1,32 +1,28 @@
 #ifndef __MESSAGE_H__
 #define __MESSAGE_H__
 
-/*********************************************************************
+/******************************************************************************
  * General Message Writing Routines
  *
- * This module handles LibTidy's high level output routines, as well
- * as provides some data structures for the console application.
- *
- * It also provides lookup functions and management for keys used
- * for retrieval of these messages.
+ * This module handles LibTidy's high level output routines, as well as
+ * provides lookup functions and management for keys used for retrieval
+ * of these messages.
  *
  * LibTidy emits two general types of output:
  *
- *  - Reports, which contain data relating to what Tidy discovered
- *    in your source file, and/or what Tidy did to your source file.
- *    In some cases general information about your source file is
- *    emitted as well. Reports are emitted in the current output
- *    buffer, but LibTidy users will probably prefer to hook into
- *    a callback in order to take advantage of the data that are
- *    available in a more flexible way.
+ *  - Reports, which contain data relating to what Tidy discovered in your
+ *    source file, and/or what Tidy did to your source file. In some cases
+ *    general information about your source file is emitted as well. Reports
+ *    are emitted in the current output buffer, but LibTidy users will probably
+ *    prefer to hook into a callback in order to take advantage of the data
+ *    that are available in a more flexible way.
  *
- *  - Dialogue, consisting of general information that's not related
- *    to your source file in particular, is also written to the current
- *    output buffer when appropriate.
+ *  - Dialogue, consisting of general information that's not related to your
+ *    source file in particular, is also written to the current output buffer
+ *    when appropriate.
  *
- *  Report information typically takes the form of a warning, an
- *  error, info., etc., and the output routines keep track of the
- *  count of these and are make them available in the API.
+ * Report information typically takes the form of a warning, an error, info,
+ * etc., and the output routines keep track of the count of these.
  *
  * The preferred way of handling Tidy diagnostics output is either
  *   - define a new output sink, or
@@ -35,23 +31,33 @@
  * (c) 1998-2017 (W3C) MIT, ERCIM, Keio University, University of
  * Toronto, HTACG
  * See tidy.h for the copyright notice.
- *********************************************************************/
+ ******************************************************************************/
 
 #include "forward.h"
 
-/* Release Information */
+/** @name Release Information */
+/** @{ */
+
 
 ctmbstr TY_(ReleaseDate)(void);
 ctmbstr TY_(tidyLibraryVersion)(void);
 
-/* High Level Message Writing Functions - General */
+
+/** @} */
+/** @name High Level Message Writing Functions - General */
+/** @{ */
+
 
 void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code);
 void TY_(ReportWarning)(TidyDocImpl* doc, Node *element, Node *node, uint code);
 void TY_(ReportError)(TidyDocImpl* doc, Node* element, Node* node, uint code);
 void TY_(ReportFatal)(TidyDocImpl* doc, Node* element, Node* node, uint code);
 
-/* High Level Message Writing Functions - Specific */
+
+/** @} */
+/** @name High Level Message Writing Functions - Specific */
+/** @{ */
+
 
 void TY_(FileError)( TidyDocImpl* doc, ctmbstr file, TidyReportLevel level );
 void TY_(ReportAttrError)( TidyDocImpl* doc, Node* node, AttVal* av, uint code );
@@ -73,25 +79,27 @@ void TY_(ReportAccessWarning)( TidyDocImpl* doc, Node* node, uint code );
 #endif
 
 
-/* Output Dialogue Information */
+/** @} */
+/** @name Output Dialogue Information */
+/** @{ */
 
+
+void TY_(DialogueMessage)( TidyDocImpl* doc, uint code, TidyReportLevel level );
 void TY_(ErrorSummary)( TidyDocImpl* doc );
-void TY_(GeneralInfo)( TidyDocImpl* doc );
-void TY_(NeedsAuthorIntervention)( TidyDocImpl* doc );
 void TY_(ReportNumWarnings)( TidyDocImpl* doc );
 
 
+/** @} */
 /** @name Key Discovery */
 /** @{ */
 
 /**
- *  LibTidy users may want to use `TidyReportFilter3` to enable their own
- *  localization lookup features. Because Tidy's errors codes are enums the
+ *  LibTidy users may want to use `TidyReportCallback` to enable their own
+ *  localization lookup features. Because Tidy's report codes are enums the
  *  specific values can change over time. This function returns a string
  *  representing the enum value name that can be used as a lookup key
- *  independent of changing string values (TidyReportFiler2 is vulnerable
- *  to changing strings). `TidyReportFilter3` will return this general
- *  string as the error message indicator.
+ *  independent of changing string values. `TidyReportCallback` will return
+ *  this general string as the report message key.
  */
 ctmbstr TY_(tidyErrorCodeAsKey)(uint code);
 

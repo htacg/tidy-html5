@@ -56,9 +56,9 @@ struct _TidyDocImpl
     StreamIn*           docIn;
     StreamOut*          docOut;
     StreamOut*          errout;
-    TidyReportFilter    mssgFilt;
-    TidyReportFilter2   mssgFilt2;
-    TidyReportFilter3   mssgFilt3;
+    TidyReportFilter    reportFilter;
+    TidyReportCallback  reportCallback;
+    TidyMessageCallback messageCallback;
     TidyOptCallback     pOptCallback;
     TidyPPProgress      progressCallback;
 
@@ -96,6 +96,41 @@ struct _TidyDocImpl
     tmbstr              givenDoctype;
 };
 
+/** The basic struct for communicating a message within LibTidy. All of the
+**  relevant information pertaining to a message can be retrieved with the
+**  accessor functions and one of these records.
+*/
+struct _TidyMessageImpl
+{
+    TidyDocImpl         *tidyDoc;     /* document instance this message is attributed to */
+    Node                *tidyNode;    /* the node reporting the message, if applicable */
+    uint                code;         /* the message code */
+    int                 line;         /* the line message applies to */
+    int                 column;       /* the column the message applies to */
+    TidyReportLevel     level;        /* the severity level of the message */
+    Bool                allowMessage; /* indicates whether or not a filter rejected a message */
+    
+    int                 argcount;    /* the number of arguments */
+    struct printfArg*   arguments;   /* the arguments' values and types */
+
+    ctmbstr             messageKey;             /* the message code as a key string */
+
+    ctmbstr             messageFormatDefault;   /* the built-in format string */
+    ctmbstr             messageFormat;          /* the localized format string */
+
+    tmbstr              messageDefault;         /* the message, formatted, default language */
+    tmbstr              message;                /* the message, formatted, localized */
+
+    tmbstr              messagePosDefault;      /* the position part, default language */
+    tmbstr              messagePos;             /* the position part, localized */
+
+    ctmbstr             messagePrefixDefault;   /* the prefix part, default language */
+    ctmbstr             messagePrefix;          /* the prefix part, localized */
+    
+    tmbstr              messageOutputDefault;   /* the complete string Tidy would output */
+    tmbstr              messageOutput;          /* the complete string, localized */
+};
+
 
 /* Twizzle internal/external types */
 #ifdef NEVER
@@ -112,17 +147,20 @@ const TidyOptionImpl* tidyOptionToImpl( TidyOption topt );
 TidyOption   tidyImplToOption( const TidyOptionImpl* option );
 #else
 
-#define tidyDocToImpl( tdoc )       ((TidyDocImpl*)(tdoc))
-#define tidyImplToDoc( doc )        ((TidyDoc)(doc))
+#define tidyDocToImpl( tdoc )           ((TidyDocImpl*)(tdoc))
+#define tidyImplToDoc( doc )            ((TidyDoc)(doc))
 
-#define tidyNodeToImpl( tnod )      ((Node*)(tnod))
-#define tidyImplToNode( node )      ((TidyNode)(node))
+#define tidyMessageToImpl( tmessage )   ((TidyMessageImpl*)(tmessage))
+#define tidyImplToMessage( message )    ((TidyMessage)(message))
 
-#define tidyAttrToImpl( tattr )     ((AttVal*)(tattr))
-#define tidyImplToAttr( attval )    ((TidyAttr)(attval))
+#define tidyNodeToImpl( tnod )          ((Node*)(tnod))
+#define tidyImplToNode( node )          ((TidyNode)(node))
 
-#define tidyOptionToImpl( topt )    ((const TidyOptionImpl*)(topt))
-#define tidyImplToOption( option )  ((TidyOption)(option))
+#define tidyAttrToImpl( tattr )         ((AttVal*)(tattr))
+#define tidyImplToAttr( attval )        ((TidyAttr)(attval))
+
+#define tidyOptionToImpl( topt )        ((const TidyOptionImpl*)(topt))
+#define tidyImplToOption( option )      ((TidyOption)(option))
 
 #endif
 

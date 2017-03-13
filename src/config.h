@@ -119,6 +119,10 @@ int TY_(CharEncodingId)( TidyDocImpl* doc, ctmbstr charenc );
 ctmbstr TY_(CharEncodingName)( int encoding );
 ctmbstr TY_(CharEncodingOptName)( int encoding );
 
+/* Coordinates Config update and Tags data */
+void TY_(DeclareUserTag)( TidyDocImpl* doc, TidyOptionId optId,
+                         uint tagType, ctmbstr name );
+
 
 #ifdef _DEBUG
 

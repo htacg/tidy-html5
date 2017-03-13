@@ -96,6 +96,16 @@ opaque_type( TidyNode );
 */
 opaque_type( TidyAttr );
 
+/** @struct TidyMessage
+**  Opaque messsage record datatype
+*/
+opaque_type( TidyMessage );
+
+/** @struct TidyMessageArgument
+**  Opaque message argument datatype
+*/
+opaque_type( TidyMessageArgument );
+
 /** @} end Opaque group */
 
 
@@ -453,10 +463,16 @@ TIDY_EXPORT ctmbstr TIDY_CALL       tidyOptGetEncName( TidyDoc tdoc, TidyOptionI
 /** Get current pick list value for option by ID.  Useful for enum types. */
 TIDY_EXPORT ctmbstr TIDY_CALL       tidyOptGetCurrPick( TidyDoc tdoc, TidyOptionId optId);
 
-/** Iterate over user declared tags */
+/** Iterate over user declared tags as configured. If `custom-tags` is not
+**  **no**, then autonomous custom tags will be included in the results.
+*/
 TIDY_EXPORT TidyIterator TIDY_CALL  tidyOptGetDeclTagList( TidyDoc tdoc );
 /** Get next declared tag of specified type: TidyInlineTags, TidyBlockTags,
-**  TidyEmptyTags, TidyPreTags */
+**  TidyEmptyTags, TidyPreTags. Note that even when using `custom-tags`,
+**  TidyCustomTags is not an option here, as autonomous custom tags are
+**  added to one of the existing types, and TidyCustomTags is defined as
+**  internal API.
+*/
 TIDY_EXPORT ctmbstr TIDY_CALL       tidyOptGetNextDeclTag( TidyDoc tdoc, 
                                                           TidyOptionId optId,
                                                           TidyIterator* iter );
@@ -566,22 +582,22 @@ TIDY_EXPORT Bool TIDY_CALL tidyInitSink( TidyOutputSink* sink,
 TIDY_EXPORT void TIDY_CALL tidyPutByte( TidyOutputSink* sink, uint byteValue );
 
 
-/****************
-   Emacs File
-****************/
-/** Set the file path to use for reports when `TidyEmacs` is being used. This
-** function provides a proper interface for using the hidden, internal-only
-** `TidyEmacsFile` configuration option.
-*/
-TIDY_EXPORT void TIDY_CALL tidySetEmacsFile( TidyDoc tdoc, ctmbstr filePath );
+    /****************
+     Emacs File
+     ****************/
+    /** Set the file path to use for reports when `TidyEmacs` is being used. This
+     ** function provides a proper interface for using the hidden, internal-only
+     ** `TidyEmacsFile` configuration option.
+     */
+    TIDY_EXPORT void TIDY_CALL tidySetEmacsFile( TidyDoc tdoc, ctmbstr filePath );
 
-/** Get the file path to use for reports when `TidyEmacs` is being used. This
-** function provides a proper interface for using the hidden, internal-only
-** `TidyEmacsFile` configuration option.
-*/
-TIDY_EXPORT ctmbstr TIDY_CALL tidyGetEmacsFile( TidyDoc tdoc );
-
-
+    /** Get the file path to use for reports when `TidyEmacs` is being used. This
+     ** function provides a proper interface for using the hidden, internal-only
+     ** `TidyEmacsFile` configuration option.
+     */
+    TIDY_EXPORT ctmbstr TIDY_CALL tidyGetEmacsFile( TidyDoc tdoc );
+    
+    
 /****************
    Errors
 ****************/
@@ -589,34 +605,161 @@ TIDY_EXPORT ctmbstr TIDY_CALL tidyGetEmacsFile( TidyDoc tdoc );
 **  info, warning, etc.  Just set diagnostic output 
 **  handler to redirect all diagnostics output.  Return true
 **  to proceed with output, false to cancel.
+>>>>>>> next
 */
 typedef Bool (TIDY_CALL *TidyReportFilter)( TidyDoc tdoc, TidyReportLevel lvl,
-                                           uint line, uint col, ctmbstr mssg );
+                                            uint line, uint col, ctmbstr mssg );
 
-typedef Bool (TIDY_CALL *TidyReportFilter2)( TidyDoc tdoc, TidyReportLevel lvl,
-                                           uint line, uint col, ctmbstr mssg, va_list args );
+TIDY_EXPORT Bool TIDY_CALL tidySetReportFilter( TidyDoc tdoc,
+                                                TidyReportFilter filtCallback );
 
-typedef Bool (TIDY_CALL *TidyReportFilter3)( TidyDoc tdoc, TidyReportLevel lvl,
-                                                uint line, uint col, ctmbstr code, va_list args );
+/** The `TidyReportCallback` is a simple filtering mechanism that provides
+**  the TidyDoc instance, the report level, line and column location, as well
+**  as a string code (see `tidyErrorFilterKeyItem` type for applicable codes)
+**  to look up your own strings, and a va_list of arguments that you can use
+**  to fill in your own strings.
+*/
+typedef Bool (TIDY_CALL *TidyReportCallback)( TidyDoc tdoc, TidyReportLevel lvl,
+                                              uint line, uint col, ctmbstr code, va_list args );
 
-/** Give Tidy a filter callback to use */
-TIDY_EXPORT Bool TIDY_CALL    tidySetReportFilter( TidyDoc tdoc,
-                                                  TidyReportFilter filtCallback );
+TIDY_EXPORT Bool TIDY_CALL tidySetReportCallback( TidyDoc tdoc,
+                                                  TidyReportCallback filtCallback );
 
-TIDY_EXPORT Bool TIDY_CALL    tidySetReportFilter2( TidyDoc tdoc,
-                                                  TidyReportFilter2 filtCallback );
+/** The `TidyMessageCallback` is an advanced filtering mechanism that provides
+**  great flexibility and exposure to reports and dialogue emitted by Tidy.
+**  it returns only the opaque type `TidyMessage` which can be queried with the
+**  message callback API, below. Note that unlike the older filters, this
+**  callback exposes *all* output that `LibTidy` emits (excluding the console
+**  application, which is a client of `LibTidy`).
+*/
+typedef Bool (TIDY_CALL *TidyMessageCallback)( TidyMessage tmessage );
 
-TIDY_EXPORT Bool TIDY_CALL    tidySetReportFilter3( TidyDoc tdoc,
-                                                       TidyReportFilter3 filtCallback );
+TIDY_EXPORT Bool TIDY_CALL tidySetMessageCallback( TidyDoc tdoc,
+                                                   TidyMessageCallback filtCallback );
+
 
 /** Set error sink to named file */
-TIDY_EXPORT FILE* TIDY_CALL   tidySetErrorFile( TidyDoc tdoc, ctmbstr errfilnam );
+TIDY_EXPORT FILE* TIDY_CALL tidySetErrorFile( TidyDoc tdoc, ctmbstr errfilnam );
 /** Set error sink to given buffer */
-TIDY_EXPORT int TIDY_CALL     tidySetErrorBuffer( TidyDoc tdoc, TidyBuffer* errbuf );
+TIDY_EXPORT int TIDY_CALL tidySetErrorBuffer( TidyDoc tdoc, TidyBuffer* errbuf );
 /** Set error sink to given generic sink */
-TIDY_EXPORT int TIDY_CALL     tidySetErrorSink( TidyDoc tdoc, TidyOutputSink* sink );
+TIDY_EXPORT int TIDY_CALL tidySetErrorSink( TidyDoc tdoc, TidyOutputSink* sink );
 
 
+/***************************
+** TidyMessageCallback API
+** When using `TidyMessageCallback` you will be supplied with a valid
+** TidyMessage object. This object can be interrogated with the following
+** API before the callback returns. Upon returning from the callback, this
+** object is destroyed so do not attempt to keep it around.
+****************************/
+
+/** get the message key string. */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyGetMessageKey( TidyMessage tmessage );
+
+/** get the line number the message applies to. */
+TIDY_EXPORT int TIDY_CALL tidyGetMessageLine( TidyMessage tmessage );
+
+/** get the column the message applies to. */
+TIDY_EXPORT int TIDY_CALL tidyGetMessageColumn( TidyMessage tmessage );
+
+/** get the TidyReportLevel of the message. */
+TIDY_EXPORT TidyReportLevel TIDY_CALL tidyGetMessageLevel( TidyMessage tmessage );
+    
+/** the built-in format string */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyGetMessageFormatDefault( TidyMessage tmessage );
+
+/** the localized format string */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyGetMessageFormat( TidyMessage tmessage );
+
+/** the message, formatted, default language */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyGetMessageDefault( TidyMessage tmessage );
+
+/** the message, formatted, localized */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyGetMessage( TidyMessage tmessage );
+
+/** the position part, default language */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyGetMessagePosDefault( TidyMessage tmessage );
+
+/** the position part, localized */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyGetMessagePos( TidyMessage tmessage );
+
+/** the prefix part, default language */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyGetMessagePrefixDefault( TidyMessage tmessage );
+
+/** the prefix part, localized */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyGetMessagePrefix( TidyMessage tmessage );
+
+/** Get the message as Tidy would emit it in the default localization. */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyGetMessageOutputDefault( TidyMessage tmessage );
+
+/** Get the message as Tidy would emit it in the currently-set localization. */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyGetMessageOutput( TidyMessage tmessage );
+
+
+/***************************
+** TidyMessageCallback Arguments API
+** When using `TidyMessageCallback` you will be supplied with a valid
+** TidyMessage object, which may have arguments that can be interrogated
+** with this API.
+****************************/
+    
+/**
+ *  Initializes the TidyIterator to point to the first item in the message's
+ *  argument. Use `TY_(getNextMEssageArgument)` to get an opaque instance of
+ *  `TidyMessageArgument` for which the subsequent interrogators will be of use.
+ */
+TIDY_EXPORT TidyIterator TIDY_CALL tidyGetMessageArguments( TidyMessage tmessage );
+
+/**
+ *  Returns the next `TidyMessageArgument`, which can be interrogated with
+ *  the API, and advances the iterator.
+ */
+TIDY_EXPORT TidyMessageArgument TIDY_CALL tidyGetNextMessageArgument( TidyMessage tmessage, TidyIterator* iter );
+
+/**
+ *  Returns the `TidyFormatParameterType` of the given message argument.
+ */
+TIDY_EXPORT TidyFormatParameterType TIDY_CALL tidyGetArgType( TidyMessage tmessage, TidyMessageArgument* arg );
+
+
+/**
+ *  Returns the format specifier of the given message argument. The memory for
+ *  this string is cleared upon termination of the callback, so do be sure to
+ *  make your own copy.
+ */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyGetArgFormat( TidyMessage tmessage, TidyMessageArgument* arg );
+
+
+/**
+ *  Returns the string value of the given message argument. An assertion
+ *  will be generated if the argument type is not a string.
+ */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyGetArgValueString( TidyMessage tmessage, TidyMessageArgument* arg );
+
+
+/**
+ *  Returns the unsigned integer value of the given message argument. An
+ *  assertion will be generated if the argument type is not an unsigned
+ *  integer.
+ */
+TIDY_EXPORT uint TIDY_CALL tidyGetArgValueUInt( TidyMessage tmessage, TidyMessageArgument* arg );
+
+
+/**
+ *  Returns the integer value of the given message argument. An assertion
+ *  will be generated if the argument type is not an integer.
+ */
+TIDY_EXPORT int TIDY_CALL tidyGetArgValueInt( TidyMessage tmessage, TidyMessageArgument* arg );
+
+
+/**
+ *  Returns the double value of the given message argument. An assertion
+ *  will be generated if the argument type is not a double.
+ */
+TIDY_EXPORT double TIDY_CALL tidyGetArgValueDouble( TidyMessage tmessage, TidyMessageArgument* arg );
+
+    
 /****************
    Printing
 ****************/

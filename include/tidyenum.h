@@ -70,6 +70,7 @@ typedef enum
     TidyCharEncoding,            /**< In/out character encoding */
     TidyCoerceEndTags,           /**< Coerce end tags from start tags where probably intended */
     TidyCSSPrefix,               /**< CSS class naming for clean option */
+    TidyCustomTags,              /**< Enable Tidy to use autonomous custom tags */
     TidyDecorateInferredUL,      /**< Mark inferred UL elements with no indent CSS */
     TidyDoctype,                 /**< User specified doctype */
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -154,6 +155,9 @@ typedef enum
     TidyTabSize,                 /**< Expand tabs to n spaces */
     TidyUpperCaseAttrs,          /**< Output attributes in upper not lower case */
     TidyUpperCaseTags,           /**< Output tags in upper not lower case */
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+    TidyUseCustomTags,           /**< Internal use ONLY */
+#endif
     TidyVertSpace,               /**< degree to which markup is spread out vertically */
     TidyWord2000,                /**< Draconian cleaning for Word2000 */
     TidyWrapAsp,                 /**< Wrap within ASP pseudo elements */
@@ -193,6 +197,19 @@ typedef enum
    TidyAutoState    /**< Automatic */
 } TidyTriState;
 
+/** Integer values used by ParseUseCustomTags. These are used throughout 
+ *  LibTidy to indicate the how Tidy treats custom tags, and also have
+ *  associated localized strings to describe them.
+ */
+typedef enum
+{
+    TidyCustomNo = 300,
+    TidyCustomBlocklevel,
+    TidyCustomEmpty,
+    TidyCustomInline,
+    TidyCustomPre
+} TidyUseCustomTagsState;
+    
 /** TidyNewline option values to control output line endings.
 */
 typedef enum
@@ -248,15 +265,33 @@ typedef enum
  */
 typedef enum
 {
-  TidyInfo = 350,       /**< Information about markup usage */
-  TidyWarning,          /**< Warning message */
-  TidyConfig,           /**< Configuration error */
-  TidyAccess,           /**< Accessibility message */
-  TidyError,            /**< Error message - output suppressed */
-  TidyBadDocument,      /**< I/O or file system error */
-  TidyFatal             /**< Crash! */
+    TidyReportLevel_first = 350,
+    TidyInfo = 350,       /**< Report: Information about markup usage */
+    TidyWarning,          /**< Report: Warning message */
+    TidyConfig,           /**< Report: Configuration error */
+    TidyAccess,           /**< Report: Accessibility message */
+    TidyError,            /**< Report: Error message - output suppressed */
+    TidyBadDocument,      /**< Report: I/O or file system error */
+    TidyFatal,            /**< Report: Crash! */
+    TidyDialogueInfo,     /**< Dialogue: Non-document related information */
+    TidyDialogueSummary,  /**< Dialogue: Summary-related information */
+    TidyDialogueDoc,      /**< Dialogue: Document-related information */
+    TidyReportLevel_last
 } TidyReportLevel;
 
+    
+/** Indicates the data type of a format string parameter used when Tidy
+**  emits reports and dialogue as part of the messaging callback functions.
+**  See `messageobj.h` for more information on this API.
+*/
+typedef enum
+{
+    tidyFormatType_INT = 0,
+    tidyFormatType_UINT,
+    tidyFormatType_STRING,
+    tidyFormatType_DOUBLE,
+    tidyFormatType_UNKNOWN  = 20
+} TidyFormatParameterType;
 
 /* Document tree traversal functions
 */
@@ -513,6 +548,7 @@ typedef enum
   TidyAttr_HSPACE,            /**< HSPACE= */
   TidyAttr_HTTP_EQUIV,        /**< HTTP_EQUIV= */
   TidyAttr_ID,                /**< ID= */
+  TidyAttr_IS,                /**< IS= */
   TidyAttr_ISMAP,             /**< ISMAP= */
   TidyAttr_ITEMID,            /**< ITEMID= */
   TidyAttr_ITEMPROP,          /**< ITEMPROP= */
@@ -804,8 +840,7 @@ typedef enum
  *
  * In order to keep code maintainable and make it simple to add new
  * messages, the `tidyMessageCodes` and `tidyErrorFilterKeysStruct[]`
- * are generated dynamically with preprocessor macros defined below,
- * or in respective modules (e.g., `access.h`).
+ * are generated dynamically with preprocessor macros defined below.
  *
  * Any visible FOREACH_MSG_* macro (including new ones) must be
  * applied to the `tidyMessageCodes` enum with the MAKE_ENUM() macro
@@ -872,6 +907,7 @@ typedef enum
         FN(OBSOLETE_ELEMENT)              \
         FN(PROPRIETARY_ELEMENT)           \
         FN(REPLACING_ELEMENT)             \
+        FN(CUSTOM_TAG_DETECTED)           \
         FN(REPLACING_UNEX_ELEMENT)        \
         FN(SPACE_PRECEDING_XMLDECL)       \
         FN(SUSPECTED_MISSING_QUOTE)       \
@@ -905,6 +941,7 @@ typedef enum
         FN(JOINING_ATTRIBUTE)              \
         FN(MISMATCHED_ATTRIBUTE_ERROR)     \
         FN(MISMATCHED_ATTRIBUTE_WARN)      \
+        FN(ATTRIBUTE_IS_NOT_ALLOWED)       \
         FN(MISSING_ATTR_VALUE)             \
         FN(MISSING_ATTRIBUTE)              \
         FN(MISSING_IMAGEMAP)               \
@@ -938,7 +975,7 @@ typedef enum
         FN(VENDOR_SPECIFIC_CHARS)
 
 /* miscellaneous config and info messages */
-#define FOREACH_MSG_MISC(FN)  \
+#define FOREACH_MSG_OTHER(FN)  \
         FN(STRING_CONTENT_LOOKS)      /* `Document content looks like %s`. */                   \
         FN(STRING_DOCTYPE_GIVEN)      /* `Doctype given is \"%s\". */                           \
         FN(STRING_HTML_PROPRIETARY)   /* `HTML Proprietary`/ */                                 \
@@ -1101,7 +1138,7 @@ typedef enum
     FOREACH_MSG_ELEMENT(MAKE_ENUM)
     FOREACH_MSG_ATTRIBUTE(MAKE_ENUM)
     FOREACH_MSG_ENCODING(MAKE_ENUM)
-    FOREACH_MSG_MISC(MAKE_ENUM)
+    FOREACH_MSG_OTHER(MAKE_ENUM)
     
 #if SUPPORT_ACCESSIBILITY_CHECKS
     /* Defined in `access.h` */
@@ -1122,51 +1159,55 @@ typedef enum
  * in the message filter callback, and are *not* console application
  * specific messages.
  *********************************************************************/
+
+#define FOREACH_MSG_MISC(FN)                                                        \
+/* Point to Accessibility Guidelines. */             FN(ACCESS_URL)                 \
+/* Point to Tidy accessibility page. */              FN(ATRC_ACCESS_URL)            \
+/* File can't be opened. */                          FN(FILE_CANT_OPEN)             \
+/* Localized `line %d column %d` text. */            FN(LINE_COLUMN_STRING)         \
+/* For `discarding`. */                              FN(STRING_DISCARDING)          \
+/* `%u %s, %u %s were found!`. */                    FN(STRING_ERROR_COUNT)         \
+/* `error` and `errors`. */                          FN(STRING_ERROR_COUNT_ERROR)   \
+/* `warning` and `warnings`. */                      FN(STRING_ERROR_COUNT_WARNING) \
+/* Accessibility hello message. */                   FN(STRING_HELLO_ACCESS)        \
+/* `No warnings or errors were found.\n\n`. */       FN(STRING_NO_ERRORS)           \
+/* ` Not all warnings/errors were shown.\n\n`. */    FN(STRING_NOT_ALL_SHOWN)       \
+/* For `plain text`. */                              FN(STRING_PLAIN_TEXT)          \
+/* For `replacing`. */                               FN(STRING_REPLACING)           \
+/* For `specified`. */                               FN(STRING_SPECIFIED)           \
+/* For `XML declaration`. */                         FN(STRING_XML_DECLARATION)     \
+/* Explanatory text. */                              FN(TEXT_ACCESS_ADVICE1)        \
+/* Explanatory text. */                              FN(TEXT_ACCESS_ADVICE2)        \
+/* Explanatory text. */                              FN(TEXT_BAD_FORM)              \
+/* Explanatory text. */                              FN(TEXT_BAD_MAIN)              \
+/* Explanatory text. */                              FN(TEXT_GENERAL_INFO)          \
+/* Explanatory text. */                              FN(TEXT_GENERAL_INFO_PLEA)     \
+/* Describes the HTML table algorithm. */            FN(TEXT_HTML_T_ALGORITHM)      \
+/* Explanatory text. */                              FN(TEXT_INVALID_URI)           \
+/* Explanatory text. */                              FN(TEXT_INVALID_UTF16)         \
+/* Explanatory text. */                              FN(TEXT_INVALID_UTF8)          \
+/* Explanatory text. */                              FN(TEXT_M_IMAGE_ALT)           \
+/* Explanatory text. */                              FN(TEXT_M_IMAGE_MAP)           \
+/* Explanatory text. */                              FN(TEXT_M_LINK_ALT)            \
+/* Explanatory text. */                              FN(TEXT_M_SUMMARY)             \
+/* Explanatory text. */                              FN(TEXT_NEEDS_INTERVENTION)    \
+/* Explanatory text. */                              FN(TEXT_SGML_CHARS)            \
+/* Explanatory text. */                              FN(TEXT_USING_BODY)            \
+/* Explanatory text. */                              FN(TEXT_USING_FONT)            \
+/* Explanatory text. */                              FN(TEXT_USING_FRAMES)          \
+/* Explanatory text. */                              FN(TEXT_USING_LAYER)           \
+/* Explanatory text. */                              FN(TEXT_USING_NOBR)            \
+/* Explanatory text. */                              FN(TEXT_USING_SPACER)          \
+/* Explanatory text. */                              FN(TEXT_VENDOR_CHARS)          \
+/* Explanatory text. */                              FN(TEXT_WINDOWS_CHARS)
+
 typedef enum
 {
     /* This MUST be present and first. */
     tidyMessagesMisc_first = tidyMessageCodes_last,
     
-    ACCESS_URL,                             /* Used to point to Web Accessibility Guidelines. */
-    ATRC_ACCESS_URL,                        /* Points to Tidy's accessibility page. */
-    FILE_CANT_OPEN,                         /* For retrieving a string when a file can't be opened. */
-    LINE_COLUMN_STRING,                     /* For retrieving localized `line %d column %d` text. */
-    STRING_DISCARDING,                      /* For `discarding`. */
-    STRING_ERROR_COUNT,                     /* `%u %s, %u %s were found!`. */
-    STRING_ERROR_COUNT_ERROR,               /* `error` and `errors`. */
-    STRING_ERROR_COUNT_WARNING,             /* `warning` and `warnings`. */
-    STRING_HELLO_ACCESS,                    /* Accessibility hello message. */
-    STRING_NO_ERRORS,                       /* `No warnings or errors were found.\n\n`. */
-    STRING_NOT_ALL_SHOWN,                   /* ` Not all warnings/errors were shown.\n\n`. */
-    STRING_PLAIN_TEXT,                      /* For retrieving a string `plain text`. */
-    STRING_REPLACING,                       /* For `replacing`. */
-    STRING_SPECIFIED,                       /* For `specified`. */
-    STRING_XML_DECLARATION,                 /* For retrieving a string `XML declaration`. */
-    TEXT_ACCESS_ADVICE1,                    /* Explanatory text. */
-    TEXT_ACCESS_ADVICE2,                    /* Explanatory text. */
-    TEXT_BAD_FORM,                          /* Explanatory text. */
-    TEXT_BAD_MAIN,                          /* Explanatory text. */
-    TEXT_GENERAL_INFO,                      /* Explanatory text. */
-    TEXT_GENERAL_INFO_PLEA,                 /* Explanatory text. */
-    TEXT_HTML_T_ALGORITHM,                  /* Paragraph for describing the HTML table algorithm. */
-    TEXT_INVALID_URI,                       /* Explanatory text. */
-    TEXT_INVALID_UTF16,                     /* Explanatory text. */
-    TEXT_INVALID_UTF8,                      /* Explanatory text. */
-    TEXT_M_IMAGE_ALT,                       /* Explanatory text. */
-    TEXT_M_IMAGE_MAP,                       /* Explanatory text. */
-    TEXT_M_LINK_ALT,                        /* Explanatory text. */
-    TEXT_M_SUMMARY,                         /* Explanatory text. */
-    TEXT_NEEDS_INTERVENTION,                /* Explanatory text. */
-    TEXT_SGML_CHARS,                        /* Explanatory text. */
-    TEXT_USING_BODY,                        /* Explanatory text. */
-    TEXT_USING_FONT,                        /* Explanatory text. */
-    TEXT_USING_FRAMES,                      /* Explanatory text. */
-    TEXT_USING_LAYER,                       /* Explanatory text. */
-    TEXT_USING_NOBR,                        /* Explanatory text. */
-    TEXT_USING_SPACER,                      /* Explanatory text. */
-    TEXT_VENDOR_CHARS,                      /* Explanatory text. */
-    TEXT_WINDOWS_CHARS,                     /* Explanatory text. */
-    
+    FOREACH_MSG_MISC(MAKE_ENUM)
+
     /* This MUST be present and last. */
     tidyMessagesMisc_last
 } tidyMessagesMisc;
@@ -1181,91 +1222,95 @@ typedef enum
  * Tidy console application. It it possible to build LibTidy without
  * these strings.
  *********************************************************************/
+#define FOREACH_MSG_CONSOLE(FN)                                                        \
+FN(TC_LABEL_COL)                    \
+FN(TC_LABEL_FILE)                   \
+FN(TC_LABEL_LANG)                   \
+FN(TC_LABEL_LEVL)                   \
+FN(TC_LABEL_OPT)                    \
+FN(TC_MAIN_ERROR_LOAD_CONFIG)       \
+FN(TC_OPT_ACCESS)                   \
+FN(TC_OPT_ASCII)                    \
+FN(TC_OPT_ASHTML)                   \
+FN(TC_OPT_ASXML)                    \
+FN(TC_OPT_BARE)                     \
+FN(TC_OPT_BIG5)                     \
+FN(TC_OPT_CLEAN)                    \
+FN(TC_OPT_CONFIG)                   \
+FN(TC_OPT_ERRORS)                   \
+FN(TC_OPT_FILE)                     \
+FN(TC_OPT_GDOC)                     \
+FN(TC_OPT_HELP)                     \
+FN(TC_OPT_HELPCFG)                  \
+FN(TC_OPT_HELPOPT)                  \
+FN(TC_OPT_IBM858)                   \
+FN(TC_OPT_INDENT)                   \
+FN(TC_OPT_ISO2022)                  \
+FN(TC_OPT_LANGUAGE)                 \
+FN(TC_OPT_LATIN0)                   \
+FN(TC_OPT_LATIN1)                   \
+FN(TC_OPT_MAC)                      \
+FN(TC_OPT_MODIFY)                   \
+FN(TC_OPT_NUMERIC)                  \
+FN(TC_OPT_OMIT)                     \
+FN(TC_OPT_OUTPUT)                   \
+FN(TC_OPT_QUIET)                    \
+FN(TC_OPT_RAW)                      \
+FN(TC_OPT_SHIFTJIS)                 \
+FN(TC_OPT_SHOWCFG)                  \
+FN(TC_OPT_UPPER)                    \
+FN(TC_OPT_UTF16)                    \
+FN(TC_OPT_UTF16BE)                  \
+FN(TC_OPT_UTF16LE)                  \
+FN(TC_OPT_UTF8)                     \
+FN(TC_OPT_VERSION)                  \
+FN(TC_OPT_WIN1252)                  \
+FN(TC_OPT_WRAP)                     \
+FN(TC_OPT_XML)                      \
+FN(TC_OPT_XMLCFG)                   \
+FN(TC_OPT_XMLSTRG)                  \
+FN(TC_OPT_XMLERRS)                  \
+FN(TC_OPT_XMLOPTS)                  \
+FN(TC_OPT_XMLHELP)                  \
+FN(TC_STRING_CONF_HEADER)           \
+FN(TC_STRING_CONF_NAME)             \
+FN(TC_STRING_CONF_TYPE)             \
+FN(TC_STRING_CONF_VALUE)            \
+FN(TC_STRING_CONF_NOTE)             \
+FN(TC_STRING_OPT_NOT_DOCUMENTED)    \
+FN(TC_STRING_OUT_OF_MEMORY)         \
+FN(TC_STRING_FATAL_ERROR)           \
+FN(TC_STRING_FILE_MANIP)            \
+FN(TC_STRING_LANG_MUST_SPECIFY)     \
+FN(TC_STRING_LANG_NOT_FOUND)        \
+FN(TC_STRING_MUST_SPECIFY)          \
+FN(TC_STRING_PROCESS_DIRECTIVES)    \
+FN(TC_STRING_CHAR_ENCODING)         \
+FN(TC_STRING_MISC)                  \
+FN(TC_STRING_XML)                   \
+FN(TC_STRING_UNKNOWN_OPTION)        \
+FN(TC_STRING_UNKNOWN_OPTION_B)      \
+FN(TC_STRING_VERS_A)                \
+FN(TC_STRING_VERS_B)                \
+FN(TC_TXT_HELP_1)                   \
+FN(TC_TXT_HELP_2A)                  \
+FN(TC_TXT_HELP_2B)                  \
+FN(TC_TXT_HELP_3)                   \
+FN(TC_TXT_HELP_CONFIG)              \
+FN(TC_TXT_HELP_CONFIG_NAME)         \
+FN(TC_TXT_HELP_CONFIG_TYPE)         \
+FN(TC_TXT_HELP_CONFIG_ALLW)         \
+FN(TC_TXT_HELP_LANG_1)              \
+FN(TC_TXT_HELP_LANG_2)              \
+FN(TC_TXT_HELP_LANG_3)
+
 typedef enum
 {
     /* This MUST be present and first. */
     tidyConsoleMessages_first = tidyMessagesMisc_last,
-    
-    TC_LABEL_COL,
-    TC_LABEL_FILE,
-    TC_LABEL_LANG,
-    TC_LABEL_LEVL,
-    TC_LABEL_OPT,
-    TC_MAIN_ERROR_LOAD_CONFIG,
-    TC_OPT_ACCESS,
-    TC_OPT_ASCII,
-    TC_OPT_ASHTML,
-    TC_OPT_ASXML,
-    TC_OPT_BARE,
-    TC_OPT_BIG5,
-    TC_OPT_CLEAN,
-    TC_OPT_CONFIG,
-    TC_OPT_ERRORS,
-    TC_OPT_FILE,
-    TC_OPT_GDOC,
-    TC_OPT_HELP,
-    TC_OPT_HELPCFG,
-    TC_OPT_HELPOPT,
-    TC_OPT_IBM858,
-    TC_OPT_INDENT,
-    TC_OPT_ISO2022,
-    TC_OPT_LANGUAGE,
-    TC_OPT_LATIN0,
-    TC_OPT_LATIN1,
-    TC_OPT_MAC,
-    TC_OPT_MODIFY,
-    TC_OPT_NUMERIC,
-    TC_OPT_OMIT,
-    TC_OPT_OUTPUT,
-    TC_OPT_QUIET,
-    TC_OPT_RAW,
-    TC_OPT_SHIFTJIS,
-    TC_OPT_SHOWCFG,
-    TC_OPT_UPPER,
-    TC_OPT_UTF16,
-    TC_OPT_UTF16BE,
-    TC_OPT_UTF16LE,
-    TC_OPT_UTF8,
-    TC_OPT_VERSION,
-    TC_OPT_WIN1252,
-    TC_OPT_WRAP,
-    TC_OPT_XML,
-    TC_OPT_XMLCFG,
-    TC_OPT_XMLSTRG,
-    TC_OPT_XMLERRS,
-    TC_OPT_XMLOPTS,
-    TC_OPT_XMLHELP,
-    TC_STRING_CONF_HEADER,
-    TC_STRING_CONF_NAME,
-    TC_STRING_CONF_TYPE,
-    TC_STRING_CONF_VALUE,
-    TC_STRING_OPT_NOT_DOCUMENTED,
-    TC_STRING_OUT_OF_MEMORY,
-    TC_STRING_FATAL_ERROR,
-    TC_STRING_FILE_MANIP,
-    TC_STRING_LANG_MUST_SPECIFY,
-    TC_STRING_LANG_NOT_FOUND,
-    TC_STRING_MUST_SPECIFY,
-    TC_STRING_PROCESS_DIRECTIVES,
-    TC_STRING_CHAR_ENCODING,
-    TC_STRING_MISC,
-    TC_STRING_XML,
-    TC_STRING_UNKNOWN_OPTION,
-    TC_STRING_UNKNOWN_OPTION_B,
-    TC_STRING_VERS_A,
-    TC_STRING_VERS_B,
-    TC_TXT_HELP_1,
-    TC_TXT_HELP_2A,
-    TC_TXT_HELP_2B,
-    TC_TXT_HELP_3,
-    TC_TXT_HELP_CONFIG,
-    TC_TXT_HELP_CONFIG_NAME,
-    TC_TXT_HELP_CONFIG_TYPE,
-    TC_TXT_HELP_CONFIG_ALLW,
-    TC_TXT_HELP_LANG_1,
-    TC_TXT_HELP_LANG_2,
-    TC_TXT_HELP_LANG_3,
-    
+
+    FOREACH_MSG_CONSOLE(MAKE_ENUM)
+
     /* This MUST be present and last. */
     tidyConsoleMessages_last
 } tidyConsoleMessages;
@@ -1276,7 +1321,7 @@ typedef enum
 /** @} */
 
 
-    
+
 #ifdef __cplusplus
 }  /* extern "C" */
 #endif

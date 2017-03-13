@@ -31,6 +31,7 @@ static AttrCheck CheckAction;
 static AttrCheck CheckScript;
 static AttrCheck CheckName;
 static AttrCheck CheckId;
+static AttrCheck CheckIs;
 static AttrCheck CheckAlign;
 static AttrCheck CheckValign;
 static AttrCheck CheckBool;
@@ -75,6 +76,7 @@ static AttrCheck CheckRDFaPrefix;
 #define CH_IDREFS      NULL
 #define CH_IDREF       NULL
 #define CH_IDDEF       CheckId
+#define CH_ISDEF       CheckIs
 #define CH_NAME        CheckName
 #define CH_TFRAME      NULL
 #define CH_FBORDER     NULL
@@ -160,6 +162,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_HSPACE,                  "hspace",                  CH_NUMBER    }, /* APPLET, IMG, OBJECT */
   { TidyAttr_HTTP_EQUIV,              "http-equiv",              CH_PCDATA    }, /* META */
   { TidyAttr_ID,                      "id",                      CH_IDDEF     }, 
+  { TidyAttr_IS,                      "is",                      CH_ISDEF     },
   { TidyAttr_ISMAP,                   "ismap",                   CH_BOOL      }, /* IMG */
   { TidyAttr_ITEMID,                  "itemid",                  CH_PCDATA    },
   { TidyAttr_ITEMPROP,                "itemprop",                CH_PCDATA    },
@@ -1716,6 +1719,40 @@ void CheckId( TidyDocImpl* doc, Node *node, AttVal *attval )
     }
     else
         AddAnchor( doc, attval->value, node );
+}
+
+void CheckIs( TidyDocImpl* doc, Node *node, AttVal *attval )
+{
+    const char *ptr;
+    Bool go = yes;
+
+    /* `is` MUST NOT be in an autonomous custom tag */
+    ptr = strchr(node->element, '-');
+    if ( ( ptr && (ptr - node->element > 0) ) )
+    {
+        TY_(ReportAttrError)( doc, node, attval, ATTRIBUTE_IS_NOT_ALLOWED);
+    }
+
+    /* Even if we fail the above test, we'll continue to emit reports because
+       the user should *also* know that his attribute values are wrong, even
+       if they should't be in custom tags anyway. */
+
+    /* `is` MUST have a value */
+    if (!AttrHasValue(attval))
+    {
+        TY_(ReportAttrError)( doc, node, attval, MISSING_ATTR_VALUE);
+        return;
+    }
+
+    /* `is` MUST contain a hyphen and no space. */
+    ptr = strchr(attval->value, '-');
+    go = ( ptr && (ptr - attval->value > 0) );
+    ptr = strchr(attval->value, ' ');
+    go = go & (ptr == NULL);
+    if ( !go )
+    {
+        TY_(ReportAttrError)( doc, node, attval, BAD_ATTRIBUTE_VALUE);
+    }
 }
 
 void CheckBool( TidyDocImpl* doc, Node *node, AttVal *attval)

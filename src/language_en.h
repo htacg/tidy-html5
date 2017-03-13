@@ -80,14 +80,14 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { STRING_ERROR_COUNT_ERROR,     1,   "errors"                                                                  },
     { STRING_ERROR_COUNT_WARNING,   0,   "warning"                                                                 },
     { STRING_ERROR_COUNT_WARNING,   1,   "warnings"                                                                },
-    { STRING_HELLO_ACCESS,          0,   "Accessibility Checks:"                                                   },
+    { STRING_HELLO_ACCESS,          0,   "\nAccessibility Checks:\n"                                               },
     {/* This is not a formal name and can be translated. */
       STRING_HTML_PROPRIETARY,      0,   "HTML Proprietary"
     },
     { STRING_MISSING_MALFORMED,     0,   "missing or malformed argument for option: %s"                            },
     { STRING_NO_ERRORS,             0,   "No warnings or errors were found."                                       },
     { STRING_NO_SYSID,              0,   "No system identifier in emitted doctype"                                 },
-    { STRING_NOT_ALL_SHOWN,         0,   "Not all warnings/errors were shown."                                     },
+    { STRING_NOT_ALL_SHOWN,         0,   "Tidy found %u %s and %u %s! Not all warnings/errors were shown."         },
     { STRING_PLAIN_TEXT,            0,   "plain text"                                                              },
     {/* For example, "replacing invalid UTF-8 bytes" */
       STRING_REPLACING,             0,   "replacing"
@@ -114,7 +114,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "        referenced by this attribute are inserted into the list and the \n"
         "        search stops for the current direction.\n"
         "        TD cells that set the axis attribute are also treated as header cells.\n"
-        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_WINDOWS_CHARS,           0,
@@ -122,7 +121,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "128 - 159 may not be recognized on other platforms. You are\n"
         "instead recommended to use named entities, e.g. &trade; rather\n"
         "than Windows character code 153 (0x2122 in Unicode). Note that\n"
-        "as of February 1998 few browsers support the new entities.\n\n"
+        "as of February 1998 few browsers support the new entities.\n"
     },
     {/* This console output should be limited to 78 characters per line.
         - %s represents a string-encoding name which may be localized in your language. */
@@ -131,7 +130,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "work widely enough on the World Wide Web; you should avoid using the \n"
         "%s character encoding, instead you are recommended to\n"
         "use named entities, e.g. &trade;.\n"
-        "\n"
     },
     {/* This console output should be limited to 78 characters per line.
         - %s represents a string-encoding name which may be localized in your language.
@@ -142,7 +140,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "Tidy assumed you wanted to refer to a character with the same byte value in the \n"
         "%s encoding and replaced that reference with the Unicode \n"
         "equivalent.\n"
-        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_INVALID_UTF8,            0,
@@ -155,7 +152,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "does not allow mapping of unpaired surrogates, nor U+FFFE and U+FFFF\n"
         "(but it does allow other noncharacters). For more information please refer to\n"
         "http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
-        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_INVALID_UTF16,           0,
@@ -163,7 +159,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "The definition of UTF-16 in Annex C of ISO/IEC 10646-1:2000 does not allow the\n"
         "mapping of unpaired surrogates. For more information please refer to\n"
         "http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
-        "\n"
     },
     {/* This console output should be limited to 78 characters per line.
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
@@ -176,7 +171,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "scripts depend on that. If you want to depend on that, you must\n"
         "escape the URI on your own. For more information please refer to\n"
         "http://www.w3.org/International/O-URL-and-ident.html\n"
-        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_BAD_FORM,                0,
@@ -186,7 +180,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "in one table cell and the </form> in another. If the <form> is\n"
         "placed before a table, the </form> cannot be placed inside the\n"
         "table! Note that one form can't be nested inside another!\n"
-        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_BAD_MAIN,                0,
@@ -202,7 +195,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "table cells are useful for specifying which headers apply\n"
         "to each table cell, enabling non-visual browsers to provide\n"
         "a meaningful context for each cell.\n"
-        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_M_IMAGE_ALT,             0,
@@ -210,7 +202,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "of an image; longer descriptions should be given with the\n"
         "longdesc attribute which takes a URL linked to the description.\n"
         "These measures are needed for people using non-graphical browsers.\n"
-        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_M_IMAGE_MAP,             0,
@@ -218,14 +209,12 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "maps as the latter are inaccessible to people using non-\n"
         "graphical browsers. In addition, client-side maps are easier\n"
         "to set up and provide immediate feedback to users.\n"
-        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_M_LINK_ALT,              0,
         "For hypertext links defined using a client-side image map, you\n"
         "need to use the alt attribute to provide a textual description\n"
         "of the link for people using non-graphical browsers.\n"
-        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_USING_FRAMES,            0,
@@ -233,31 +222,30 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "people who are either blind or using a browser that\n"
         "doesn't support frames. A frames-based page should always\n"
         "include an alternative layout inside a NOFRAMES element.\n"
-        "\n"
     },
-    {/* This console output should be limited to 78 characters per line. */
+    {/* This console output should be limited to 78 characters per line.
+        - The URL should not be translated unless you find a matching URL in your language. */
       TEXT_ACCESS_ADVICE1,          0,
         "For further advice on how to make your pages accessible\n"
-        "see http://www.w3.org/WAI/GL"
+        "see http://www.w3.org/WAI/GL.\n"
     },
     {/* This console output should be limited to 78 characters per line.
         - The URL should not be translated unless you find a matching URL in your language. */
       TEXT_ACCESS_ADVICE2,          0,
-        " and http://www.html-tidy.org/accessibility/"
+        "For further advice on how to make your pages accessible\n"
+        "see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/.\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_USING_LAYER,             0,
         "The Cascading Style Sheets (CSS) Positioning mechanism\n"
         "is recommended in preference to the proprietary <LAYER>\n"
         "element due to limited vendor support for LAYER.\n"
-        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_USING_SPACER,            0,
         "You are recommended to use CSS for controlling white\n"
         "space (e.g. for indentation, margins and line spacing).\n"
         "The proprietary <SPACER> element has limited vendor support.\n"
-        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_USING_FONT,              0,
@@ -265,14 +253,12 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "properties such as its size and color. This will reduce\n"
         "the size of HTML files and make them easier to maintain\n"
         "compared with using <FONT> elements.\n"
-        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_USING_NOBR,              0,
         "You are recommended to use CSS to control line wrapping.\n"
         "Use \"white-space: nowrap\" to inhibit wrapping in place\n"
         "of inserting <NOBR>...</NOBR> into the markup.\n"
-        "\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_USING_BODY,              0,
@@ -283,7 +269,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
       TEXT_NEEDS_INTERVENTION,      0,
         "This document has errors that must be fixed before\n"
         "using HTML Tidy to generate a tidied up version.\n"
-        "\n"
     },
     {/* This console output should be limited to 78 characters per line.
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
@@ -296,12 +281,12 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "Lobby your company to join the W3C: http://www.w3.org/Consortium\n"
     },
     {/* This console output should be limited to 78 characters per line. 
-      - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+      - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+      - Don't terminate the last line with a newline. */
       TEXT_GENERAL_INFO_PLEA,       0,
-        "\n"
         "Do you speak a language other than English, or a different variant of \n"
         "English? Consider helping us to localize HTML Tidy. For details please see \n"
-        "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md\n"
+        "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
     },
     
     
@@ -315,7 +300,10 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TidyError,              0,   "Error: "                                                                 },
     { TidyBadDocument,        0,   "Document: "                                                              },
     { TidyFatal,              0,   "Panic: "                                                                 },
-    
+    { TidyDialogueInfo,       0,   "Information: "                                                           },
+    { TidyDialogueSummary,    0,   "Summary: "                                                               },
+    { TidyDialogueDoc,        0,   "Document: "                                                              },
+
     /***************************************
      ** Warnings and Errors
      ***************************************/
@@ -349,6 +337,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { PROPRIETARY_ATTRIBUTE,        0,   "%s proprietary attribute \"%s\""                                         }, /* Error */
     { MISMATCHED_ATTRIBUTE_ERROR,   0,   "%s attribute \"%s\" not allowed for %s"                                  }, /* Error */
     { MISMATCHED_ATTRIBUTE_WARN,    0,   "%s attribute \"%s\" not allowed for %s"                                  }, /* Warning */
+    { ATTRIBUTE_IS_NOT_ALLOWED,     0,   "%s attribute \"is\" not allowed for autonomous custom tags."             }, /* Warning */
     { JOINING_ATTRIBUTE,            0,   "%s joining values of repeated attribute \"%s\""                          }, /* Error */
     { XML_ATTRIBUTE_VALUE,          0,   "%s has XML attribute \"%s\""                                             }, /* Error (but deprecated) */
     
@@ -396,6 +385,11 @@ static languageDefinition language_en = { whichPluralForm_en, {
     /* ReportNotice */
     { TRIM_EMPTY_ELEMENT,           0,   "trimming empty %s"                                                       }, /* Notice */
     { REPLACING_ELEMENT,            0,   "replacing %s with %s"                                                    }, /* Notice */
+    { CUSTOM_TAG_DETECTED,          0,   "detected autonomous custom tag %s; will treat as %s"                     }, /* Notice */
+    { TidyCustomBlocklevel,         0,   "block level"                                                             },
+    { TidyCustomEmpty,              0,   "empty"                                                                   },
+    { TidyCustomInline,             0,   "inline"                                                                  },
+    { TidyCustomPre,                0,   "pre"                                                                     },
     
     /* ReportError */
     { COERCE_TO_ENDTAG,             0,   "<%s> is probably intended as </%s>"                                      }, /* Error */
@@ -2027,8 +2021,34 @@ static languageDefinition language_en = { whichPluralForm_en, {
         - The strings "Tidy" and "HTML Tidy" are the program name and must not
           be translated. */
       TidyEscapeScripts,          0,
-        "This option causes items that look like closing tags, like <code>&lt;/g</code> to be escaped "
-        "to <code>&lt;\\/g</code>. Set this option to 'no' if you do not want this."
+        "This option causes items that look like closing tags, like "
+        "<code>&lt;/g</code> to be escaped to <code>&lt;\\/g</code>. Set "
+        "this option to <var>no</var> if you do not want this."
+    },
+    {/* Important notes for translators:
+        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+          <br/>.
+        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+        - Option values should be enclosed in <var></var>.
+        - It's very important that <br/> be self-closing!
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not
+          be translated. */
+      TidyUseCustomTags,          0,
+        "This option enables the use of tags for autonomous custom elements, "
+        "e.g. &lt;flag-icon&gt; with Tidy. Custom tags are disabled if this "
+        "value is <var>no</var>. Other settings - <var>blocklevel</var>, "
+        "<var>empty</var>, <var>inline</var>, and <var>pre</var> will treat "
+        "<em>all</em> detected custom tags accordingly. "
+        "<br/>"
+        "The use of <code>new-blocklevel-tags</code>, "
+        "<code>new-empty-tags</code>, <code>new-inline-tags</code>, or "
+        "<code>new-pre-tags</code> will override the treatment of custom tags "
+        "by this configuration option. This may be useful if you have "
+        "different types of custom tags."
+        "<br/>"
+        "When enabled these tags are determined during the processing of your "
+        "document using opening tags; matching closing tags will be recognized "
+        "accordingly, and unknown closing tags will be discarded. "
     },
 
 #if SUPPORT_CONSOLE_APP
@@ -2160,8 +2180,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
     },
 
     {/* This console output should be limited to 78 characters per line.
-        - %n represents the name of the executable from the file system, and is mostly like going to be "tidy".
-        - %2 represents a version number, typically x.x.xx.
+        - First %s represents the name of the executable from the file system, and is mostly like going to be "tidy".
+        - Second %s represents a version number, typically x.x.xx.
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TC_TXT_HELP_1,                0,
         "\n"

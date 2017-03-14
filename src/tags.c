@@ -546,9 +546,8 @@ void show_have_html5(void)
 /* public interface for finding tag by name */
 Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
 {
-    TidyUseCustomTagsState configtype = cfg( doc, TidyUseCustomTags );
-
     const Dict *np = NULL;
+
     if ( cfgBool(doc, TidyXmlTags) )
     {
         node->tag = doc->tags.xml_tags;
@@ -562,30 +561,25 @@ Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
     }
     
     /* Add anonymous custom tag */
-    if ( node->element && configtype != TidyCustomNo )
+    if ( TY_(nodeIsAutonomousCustomTag)( doc, node) )
     {
-        const char *ptr = strchr(node->element, '-');
+        TidyUseCustomTagsState configtype = cfg( doc, TidyUseCustomTags );
+        UserTagType type;
         
-        /* Tag must contain hyphen not in first character. */
-        if ( ptr && (ptr - node->element > 0) )
-        {
-            UserTagType type;
-            
-            if ( configtype == TidyCustomEmpty )
-                type = tagtype_empty;
-            else if ( configtype == TidyCustomInline )
-                type = tagtype_inline;
-            else if ( configtype == TidyCustomPre )
-                type = tagtype_pre;
-            else
-                type = tagtype_block;
-            
-            TY_(DeclareUserTag)( doc, TidyCustomTags, type, node->element );
-            node->tag = tagsLookup(doc, &doc->tags, node->element);
-            TY_(ReportNotice)(doc, node, node, CUSTOM_TAG_DETECTED);
-            
-            return yes;
-        }
+        if ( configtype == TidyCustomEmpty )
+            type = tagtype_empty;
+        else if ( configtype == TidyCustomInline )
+            type = tagtype_inline;
+        else if ( configtype == TidyCustomPre )
+            type = tagtype_pre;
+        else
+            type = tagtype_block;
+        
+        TY_(DeclareUserTag)( doc, TidyCustomTags, type, node->element );
+        node->tag = tagsLookup(doc, &doc->tags, node->element);
+        TY_(ReportNotice)(doc, node, node, CUSTOM_TAG_DETECTED);
+        
+        return yes;
     }
     
     return no;
@@ -1048,6 +1042,25 @@ Bool nodeMatchCM( Node* node, uint contentModel )
            (node->tag->model & contentModel) == contentModel );
 }
 #endif
+
+
+/* True if the node looks like it's an autonomous custom element tag.
+ */
+Bool TY_(nodeIsAutonomousCustomTag)( TidyDocImpl* doc, Node* node )
+{
+    if ( node->element && cfg( doc, TidyUseCustomTags ) != TidyCustomNo )
+    {
+        const char *ptr = strchr(node->element, '-');
+        
+        /* Tag must contain hyphen not in first character. */
+        if ( ptr && (ptr - node->element > 0) )
+        {
+            return yes;
+        }
+    }
+    
+    return no;
+}
 
 /* True if any of the bits requested are set.
 */

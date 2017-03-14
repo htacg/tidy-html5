@@ -133,6 +133,11 @@ Bool TY_(nodeHasText)( TidyDocImpl* doc, Node* node );
 Bool nodeMatchCM( Node* node, uint contentModel );
 #endif
 
+
+/* True if the node looks like it's an autonomous custom element tag.
+*/
+Bool TY_(nodeIsAutonomousCustomTag)( TidyDocImpl* doc, Node* node );
+
 /* True if any of the bits requested are set.
 */
 Bool TY_(nodeHasCM)( Node* node, uint contentModel );

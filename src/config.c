@@ -1277,32 +1277,27 @@ Bool ParseUseCustomTags( TidyDocImpl* doc, const TidyOptionImpl* entry )
     {
         case 'n':
         case 'N':
-        case '0':
             value = TidyCustomNo;
             break;
             
-        case 'y':
-        case 'Y':
         case 'b':
-        case '1':
             value = TidyCustomBlocklevel;
             break;
             
         case 'e':
         case 'E':
-        case '2':
             value = TidyCustomEmpty;
             break;
         
+        case 'y':
+        case 'Y':
         case 'i':
         case 'I':
-        case '3':
             value = TidyCustomInline;
             break;
 
         case 'p':
         case 'P':
-        case '4':
             value = TidyCustomPre;
             break;
             

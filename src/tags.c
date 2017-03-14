@@ -563,8 +563,8 @@ Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
     /* Add anonymous custom tag */
     if ( TY_(nodeIsAutonomousCustomTag)( doc, node) )
     {
-        TidyUseCustomTagsState configtype = cfg( doc, TidyUseCustomTags );
         UserTagType type;
+        TidyUseCustomTagsState configtype = cfg( doc, TidyUseCustomTags );
         
         if ( configtype == TidyCustomEmpty )
             type = tagtype_empty;
@@ -577,7 +577,17 @@ Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
         
         TY_(DeclareUserTag)( doc, TidyCustomTags, type, node->element );
         node->tag = tagsLookup(doc, &doc->tags, node->element);
-        TY_(ReportNotice)(doc, node, node, CUSTOM_TAG_DETECTED);
+
+        if ( (doc->lexer->doctype & VERS_HTML5) )
+        {
+            TY_(ReportNotice)(doc, node, node, CUSTOM_TAG_DETECTED);
+        }
+        else
+        {
+            /* TODO: not sure whether to include this here, or let it
+               happen where it already happens; still need to suppress elsewhere */
+            TY_(ReportError)(doc, NULL, node, PROPRIETARY_ELEMENT);
+        }
         
         return yes;
     }

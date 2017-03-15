@@ -1747,6 +1747,8 @@ void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
     AttVal *next_attr, *attval;
     Bool attrIsProprietary = no;
     Bool attrIsMismatched = yes;
+    Bool tagLooksCustom = no;
+    Bool htmlIs5 = (doc->lexer->doctype & VERS_HTML5) > 0;
 
     while (node)
     {
@@ -1767,7 +1769,20 @@ void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
                     if ( !cfgBool(doc, TidyMakeClean) ||
                         ( !nodeIsNOBR(node) && !nodeIsWBR(node) ) )
                     {
-                        TY_(ReportError)(doc, NULL, node, PROPRIETARY_ELEMENT );
+                        /* It looks custom, despite whether it's a known tag. */
+                        tagLooksCustom = TY_(nodeIsAutonomousCustomFormat)( node );
+
+                        /* If we're in HTML5 mode and the tag does not look
+                           like a valid custom tag, then issue a warning.
+                           Appearance is good enough because invalid tags have
+                           been dropped. Also, if we're not in HTML5 mode, then
+                           then everything that reaches here gets the warning.
+                           Everything else can be ignored. */
+
+                        if ( (htmlIs5 && !tagLooksCustom) || !htmlIs5 )
+                        {
+                            TY_(ReportError)(doc, NULL, node, PROPRIETARY_ELEMENT );
+                        }
 
                         if ( nodeIsLAYER(node) )
                             doc->badLayout |= USING_LAYER;

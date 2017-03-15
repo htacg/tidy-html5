@@ -908,6 +908,7 @@ typedef enum
         FN(PROPRIETARY_ELEMENT)           \
         FN(REPLACING_ELEMENT)             \
         FN(CUSTOM_TAG_DETECTED)           \
+        FN(CUSTOM_TAG_DETECTED_SETTING)   \
         FN(REPLACING_UNEX_ELEMENT)        \
         FN(SPACE_PRECEDING_XMLDECL)       \
         FN(SUSPECTED_MISSING_QUOTE)       \

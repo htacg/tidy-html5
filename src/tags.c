@@ -546,6 +546,8 @@ void show_have_html5(void)
 /* public interface for finding tag by name */
 Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
 {
+    TidyUseCustomTagsState configtype = cfg( doc, TidyUseCustomTags );
+    Bool htmlIs5 = (doc->lexer->doctype & VERS_HTML5) > 0;
     const Dict *np = NULL;
 
     if ( cfgBool(doc, TidyXmlTags) )
@@ -560,12 +562,12 @@ Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
         return yes;
     }
     
-    /* Add anonymous custom tag */
+    /* Add autonomous custom tag. This can be done in both HTML5 mode and
+       earlier, although if it's earlier we will complain about it elsewhere. */
     if ( TY_(nodeIsAutonomousCustomTag)( doc, node) )
     {
         UserTagType type;
-        TidyUseCustomTagsState configtype = cfg( doc, TidyUseCustomTags );
-        
+
         if ( configtype == TidyCustomEmpty )
             type = tagtype_empty;
         else if ( configtype == TidyCustomInline )
@@ -578,18 +580,18 @@ Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
         TY_(DeclareUserTag)( doc, TidyCustomTags, type, node->element );
         node->tag = tagsLookup(doc, &doc->tags, node->element);
 
-        if ( (doc->lexer->doctype & VERS_HTML5) )
-        {
-            TY_(ReportNotice)(doc, node, node, CUSTOM_TAG_DETECTED);
-        }
-        else
-        {
-            /* TODO: not sure whether to include this here, or let it
-               happen where it already happens; still need to suppress elsewhere */
-            TY_(ReportError)(doc, NULL, node, PROPRIETARY_ELEMENT);
-        }
-        
+        /* Output a message the first time we encounter an autonomous custom 
+           tag. This applies despite the HTML5 mode. */
+        TY_(ReportNotice)(doc, node, node, CUSTOM_TAG_DETECTED);
+
         return yes;
+    }
+    else if ( TY_(nodeIsAutonomousCustomFormat)( node ) && htmlIs5 )
+    {
+        /* It looks like a custom tag, we're in HTML5, but custom-tags is
+           off, so warn the user. TODO: handle in the lexer so we don't
+           repeat this over and over again.*/
+        TY_(ReportNotice)(doc, node, node, CUSTOM_TAG_DETECTED_SETTING);
     }
     
     return no;
@@ -1054,23 +1056,29 @@ Bool nodeMatchCM( Node* node, uint contentModel )
 #endif
 
 
-/* True if the node looks like it's an autonomous custom element tag.
- */
-Bool TY_(nodeIsAutonomousCustomTag)( TidyDocImpl* doc, Node* node )
+Bool TY_(nodeIsAutonomousCustomFormat)( Node* node )
 {
-    if ( node->element && cfg( doc, TidyUseCustomTags ) != TidyCustomNo )
+    if ( node->element )
     {
         const char *ptr = strchr(node->element, '-');
-        
+
         /* Tag must contain hyphen not in first character. */
         if ( ptr && (ptr - node->element > 0) )
         {
             return yes;
         }
     }
-    
+
     return no;
 }
+
+Bool TY_(nodeIsAutonomousCustomTag)( TidyDocImpl* doc, Node* node )
+{
+    return TY_(nodeIsAutonomousCustomFormat)( node )
+            && ( cfg( doc, TidyUseCustomTags ) != TidyCustomNo );
+}
+
+
 
 /* True if any of the bits requested are set.
 */

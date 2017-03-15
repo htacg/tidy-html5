@@ -232,11 +232,6 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
             tagtype = tidyLocalizedString( cfg( doc, TidyUseCustomTags ) );
             message = TY_(tidyMessageCreateWithNode)(doc, element, code, TidyInfo, elemdesc, tagtype );
             break;
-
-        case CUSTOM_TAG_DETECTED_SETTING:
-            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyInfo, nodedesc );
-            break;
-
     }
 
     messageOut( message );
@@ -418,6 +413,7 @@ void TY_(ReportFatal)( TidyDocImpl* doc, Node *element, Node *node, uint code)
             break;
 
         case UNKNOWN_ELEMENT:
+        case UNKNOWN_ELEMENT_LOOKS_CUSTOM:
             TagToString(node, nodedesc, sizeof(nodedesc));
             message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyError, nodedesc );
             break;

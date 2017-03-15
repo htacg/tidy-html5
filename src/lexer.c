@@ -3000,7 +3000,17 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 if (lexer->token->tag == NULL) 
                 {
                     if (mode != OtherNamespace) /* [i_a]2 only issue warning if NOT 'OtherNamespace', and tag null */
-                        TY_(ReportFatal)( doc, NULL, lexer->token, UNKNOWN_ELEMENT );
+                    {
+                        /* Special case for HTML5 unknown tags: if it looks 
+                           like an autonomous custom tag, then emit a variation
+                           of the standard message. We don't want to do this
+                           for older HTML, because it's not truly supported
+                           by the standard, although Tidy will allow it. */
+                        if ( (doc->lexer->doctype & VERS_HTML5) > 0 && TY_(elementIsAutonomousCustomFormat)( lexer->token->element ) )
+                            TY_(ReportFatal)( doc, NULL, lexer->token, UNKNOWN_ELEMENT_LOOKS_CUSTOM );
+                        else
+                            TY_(ReportFatal)( doc, NULL, lexer->token, UNKNOWN_ELEMENT );
+                    }
                 }
                 else if ( !cfgBool(doc, TidyXmlTags) )
                 {

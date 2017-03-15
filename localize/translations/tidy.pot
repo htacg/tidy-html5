@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-03-11 18:31:52\n"
+"POT-Creation-Date: 2017-03-15 17:35:16\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -863,6 +863,11 @@ msgstr ""
 #, c-format
 msgctxt "UNKNOWN_ELEMENT"
 msgid "%s is not recognized!"
+msgstr ""
+
+#, c-format
+msgctxt "UNKNOWN_ELEMENT_LOOKS_CUSTOM"
+msgid "%s is not recognized! Did you mean to enable the custom-tags option?"
 msgstr ""
 
 #, c-format

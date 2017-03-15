@@ -908,7 +908,6 @@ typedef enum
         FN(PROPRIETARY_ELEMENT)           \
         FN(REPLACING_ELEMENT)             \
         FN(CUSTOM_TAG_DETECTED)           \
-        FN(CUSTOM_TAG_DETECTED_SETTING)   \
         FN(REPLACING_UNEX_ELEMENT)        \
         FN(SPACE_PRECEDING_XMLDECL)       \
         FN(SUSPECTED_MISSING_QUOTE)       \
@@ -921,6 +920,7 @@ typedef enum
         FN(UNEXPECTED_ENDTAG_IN)          \
         FN(UNEXPECTED_ENDTAG)             \
         FN(UNKNOWN_ELEMENT)               \
+        FN(UNKNOWN_ELEMENT_LOOKS_CUSTOM)  \
         FN(USING_BR_INPLACE_OF)
 
 /* error codes used for attribute messages */

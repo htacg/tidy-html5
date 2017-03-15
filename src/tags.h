@@ -134,6 +134,9 @@ Bool nodeMatchCM( Node* node, uint contentModel );
 #endif
 
 
+/* True if the element looks like it's an autonomous custom element tag. */
+Bool TY_(elementIsAutonomousCustomFormat)( ctmbstr element );
+
 /* True if the node looks like it's an autonomous custom element tag. */
 Bool TY_(nodeIsAutonomousCustomFormat)( Node* node );
 

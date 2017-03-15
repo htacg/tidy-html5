@@ -586,13 +586,6 @@ Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
 
         return yes;
     }
-    else if ( TY_(nodeIsAutonomousCustomFormat)( node ) && htmlIs5 )
-    {
-        /* It looks like a custom tag, we're in HTML5, but custom-tags is
-           off, so warn the user. TODO: handle in the lexer so we don't
-           repeat this over and over again.*/
-        TY_(ReportNotice)(doc, node, node, CUSTOM_TAG_DETECTED_SETTING);
-    }
     
     return no;
 }
@@ -1056,18 +1049,26 @@ Bool nodeMatchCM( Node* node, uint contentModel )
 #endif
 
 
-Bool TY_(nodeIsAutonomousCustomFormat)( Node* node )
+Bool TY_(elementIsAutonomousCustomFormat)( ctmbstr element )
 {
-    if ( node->element )
+    if ( element )
     {
-        const char *ptr = strchr(node->element, '-');
+        const char *ptr = strchr(element, '-');
 
         /* Tag must contain hyphen not in first character. */
-        if ( ptr && (ptr - node->element > 0) )
+        if ( ptr && (ptr - element > 0) )
         {
             return yes;
         }
     }
+
+    return no;
+}
+
+Bool TY_(nodeIsAutonomousCustomFormat)( Node* node )
+{
+    if ( node->element )
+        return TY_(elementIsAutonomousCustomFormat)( node->element );
 
     return no;
 }

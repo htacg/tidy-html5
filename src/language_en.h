@@ -386,7 +386,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TRIM_EMPTY_ELEMENT,           0,   "trimming empty %s"                                                       }, /* Notice */
     { REPLACING_ELEMENT,            0,   "replacing %s with %s"                                                    }, /* Notice */
     { CUSTOM_TAG_DETECTED,          0,   "detected autonomous custom tag %s; will treat as %s"                     }, /* Notice */
-    { CUSTOM_TAG_DETECTED_SETTING,  0,   "%s appears to be an autonomous custom tag; did you mean to set the custom-tags option?"  }, /* Notice */
     { TidyCustomBlocklevel,         0,   "block level"                                                             },
     { TidyCustomEmpty,              0,   "empty"                                                                   },
     { TidyCustomInline,             0,   "inline"                                                                  },
@@ -437,7 +436,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { SUSPECTED_MISSING_QUOTE,      0,   "missing quote mark for attribute value"                                  }, /* Error? (not really sometimes) */
     { DUPLICATE_FRAMESET,           0,   "repeated FRAMESET element"                                               }, /* Error */
     { UNKNOWN_ELEMENT,              0,   "%s is not recognized!"                                                   }, /* Error */
-    
+    { UNKNOWN_ELEMENT_LOOKS_CUSTOM, 0,   "%s is not recognized! Did you mean to enable the custom-tags option?"    }, /* Error */
+
+
     /* Info */
     { PREVIOUS_LOCATION,            0,   "<%s> previously mentioned"                                               }, /* Info */
     

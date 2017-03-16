@@ -547,7 +547,6 @@ void show_have_html5(void)
 Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
 {
     TidyUseCustomTagsState configtype = cfg( doc, TidyUseCustomTags );
-    Bool htmlIs5 = (doc->lexer->doctype & VERS_HTML5) > 0;
     const Dict *np = NULL;
 
     if ( cfgBool(doc, TidyXmlTags) )

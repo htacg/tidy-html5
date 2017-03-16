@@ -103,6 +103,12 @@ void TY_(ReportNumWarnings)( TidyDocImpl* doc );
  */
 ctmbstr TY_(tidyErrorCodeAsKey)(uint code);
 
+/**
+ *  Given an error code string, return the integer value of it, or UINT_MAX
+ *  as an error flag.
+ */
+uint TY_(tidyErrorCodeFromKey)(ctmbstr code);
+
 
 /**
  *  Initializes the TidyIterator to point to the first item

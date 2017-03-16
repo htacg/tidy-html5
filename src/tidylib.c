@@ -701,6 +701,13 @@ Bool TIDY_CALL tidySetMessageCallback( TidyDoc tdoc, TidyMessageCallback filt )
     return no;
 }
 
+TidyDoc TIDY_CALL tidyGetMessageDoc( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    TidyDocImpl* doc = TY_(getMessageDoc)(*message);
+    return tidyImplToDoc(doc);
+}
+
 ctmbstr TIDY_CALL tidyGetMessageKey( TidyMessage tmessage )
 {
     TidyMessageImpl *message = tidyMessageToImpl(tmessage);
@@ -2488,6 +2495,11 @@ TidyAttrId TIDY_CALL tidyAttrGetId( TidyAttr tattr )
 ctmbstr TIDY_CALL tidyErrorCodeAsKey(uint code)
 {
     return TY_(tidyErrorCodeAsKey)( code );
+}
+
+uint TIDY_CALL tidyErrorCodeFromKey(ctmbstr code)
+{
+    return TY_(tidyErrorCodeFromKey)( code );
 }
 
 TidyIterator TIDY_CALL getErrorCodeList()

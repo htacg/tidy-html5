@@ -1,22 +1,28 @@
 #ifndef messageobj_h
 #define messageobj_h
 
-/******************************************************************************
+/**************************************************************************//**
+ * @file messageobj.h
  * Provides an external, extensible API for message reporting.
  *
- * This module implements the `TidyMessageImpl` structure (declared in
+ * This module implements the `_TidyMessageImpl` structure (declared in
  * `tidy-int.h`) in order to abstract the reporting of reports and dialogue
  * from the rest of Tidy, and to enable a robust and extensible API for
  * message interrogation by LibTidy users.
  *
- * (c) 2017 HTACG
- * See tidy.h for the copyright notice.
+ * @author    Jim Derry
+ * @copyright Copyright (c) 2017 HTACG. See tidy.h for license.
+ * @date      Created 2017-March-10
+ *
  ******************************************************************************/
 
 #include "forward.h"
 
+/** @addtogroup internal_api */
+/** @{ */
 
-/** @name Message Creation and Releasing */
+
+/** @defgroup messageobj_instantiation Message Creation and Releasing */
 /** @{ */
 
 
@@ -51,10 +57,13 @@ TidyMessageImpl *TY_(tidyMessageCreateWithLexer)( TidyDocImpl *doc,
 void TY_(tidyMessageRelease)( TidyMessageImpl *message );
 
 
-/** @} */
-/** @name Report and Dialogue API */
+/** @} end messageobj_instantiation group */
+/** @defgroup messageobj_message_api Report and Dialogue API */
 /** @{ */
 
+
+/** get the document the message came from. */
+TidyDocImpl* TY_(getMessageDoc)( TidyMessageImpl message );
 
 /** get the message key string. */
 ctmbstr TY_(getMessageKey)( TidyMessageImpl message );
@@ -99,8 +108,8 @@ ctmbstr TY_(getMessageOutputDefault)( TidyMessageImpl message );
 ctmbstr TY_(getMessageOutput)( TidyMessageImpl message );
 
 
-/** @} */
-/** @name Report Arguments Interrogation API */
+/** @} end messageobj_message_api group */
+/** @defgroup messageobj_args_api Report Arguments Interrogation API */
 /** @{ */
 
 /**
@@ -160,7 +169,7 @@ int TY_(getArgValueInt)( TidyMessageImpl message, TidyMessageArgument* arg );
 double TY_(getArgValueDouble)( TidyMessageImpl message, TidyMessageArgument* arg );
 
 
-
-/** @} */
+/** @} end messageobj_args_api group */
+/** @} end internal_api group */
 
 #endif /* messageobj_h */

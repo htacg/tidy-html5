@@ -264,6 +264,11 @@ void TY_(tidyMessageRelease)( TidyMessageImpl *message )
  *********************************************************************/
 
 
+TidyDocImpl* TY_(getMessageDoc)( TidyMessageImpl message )
+{
+    return message.tidyDoc;
+}
+
 ctmbstr TY_(getMessageKey)( TidyMessageImpl message )
 {
     return message.messageKey;

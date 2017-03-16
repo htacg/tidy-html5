@@ -8,6 +8,7 @@
 
 #include "message.h"
 #include "messageobj.h"
+#include "limits.h"
 #include "tidy-int.h"
 #include "lexer.h"
 #include "streamio.h"
@@ -955,6 +956,21 @@ ctmbstr TY_(tidyErrorCodeAsKey)(uint code)
         i++;
     }
     return "UNDEFINED";
+}
+
+
+/**
+ *  Given an error code string, return its uint.
+ */
+uint TY_(tidyErrorCodeFromKey)(ctmbstr code)
+{
+    uint i = 0;
+    while (tidyErrorFilterKeysStruct[i].key) {
+        if ( strcmp(tidyErrorFilterKeysStruct[i].key, code) == 0 )
+            return tidyErrorFilterKeysStruct[i].value;
+        i++;
+    }
+    return UINT_MAX;
 }
 
 

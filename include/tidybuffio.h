@@ -18,15 +18,18 @@
 extern "C" {
 #endif
 
-/** TidyBuffer - A chunk of memory */
+/** A TidyBuffer is chunk of memory that can be used for multiple I/O purposes
+ ** within Tidy.
+ ** @ingroup IO
+ */
 TIDY_STRUCT
 struct _TidyBuffer 
 {
     TidyAllocator* allocator;  /**< Memory allocator */
-    byte* bp;           /**< Pointer to bytes */
-    uint  size;         /**< # bytes currently in use */
-    uint  allocated;    /**< # bytes allocated */ 
-    uint  next;         /**< Offset of current input position */
+    byte* bp;                  /**< Pointer to bytes */
+    uint  size;                /**< Number of bytes currently in use */
+    uint  allocated;           /**< Number of bytes allocated */
+    uint  next;                /**< Offset of current input position */
 };
 
 /** Initialize data structure using the default allocator */

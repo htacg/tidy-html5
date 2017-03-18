@@ -70,7 +70,9 @@ typedef enum
     TidyCharEncoding,            /**< In/out character encoding */
     TidyCoerceEndTags,           /**< Coerce end tags from start tags where probably intended */
     TidyCSSPrefix,               /**< CSS class naming for clean option */
-    TidyCustomTags,              /**< Enable Tidy to use autonomous custom tags */
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+    TidyCustomTags,              /**< Internal use ONLY */
+#endif
     TidyDecorateInferredUL,      /**< Mark inferred UL elements with no indent CSS */
     TidyDoctype,                 /**< User specified doctype */
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -155,9 +157,7 @@ typedef enum
     TidyTabSize,                 /**< Expand tabs to n spaces */
     TidyUpperCaseAttrs,          /**< Output attributes in upper not lower case */
     TidyUpperCaseTags,           /**< Output tags in upper not lower case */
-#ifndef DOXYGEN_SHOULD_SKIP_THIS
-    TidyUseCustomTags,           /**< Internal use ONLY */
-#endif
+    TidyUseCustomTags,           /**< Enable Tidy to use autonomous custom tags */
     TidyVertSpace,               /**< degree to which markup is spread out vertically */
     TidyWord2000,                /**< Draconian cleaning for Word2000 */
     TidyWrapAsp,                 /**< Wrap within ASP pseudo elements */

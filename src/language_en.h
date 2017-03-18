@@ -227,13 +227,13 @@ static languageDefinition language_en = { whichPluralForm_en, {
         - The URL should not be translated unless you find a matching URL in your language. */
       TEXT_ACCESS_ADVICE1,          0,
         "For further advice on how to make your pages accessible\n"
-        "see http://www.w3.org/WAI/GL.\n"
+        "see http://www.w3.org/WAI/GL."
     },
     {/* This console output should be limited to 78 characters per line.
         - The URL should not be translated unless you find a matching URL in your language. */
       TEXT_ACCESS_ADVICE2,          0,
         "For further advice on how to make your pages accessible\n"
-        "see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/.\n"
+        "see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/."
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_USING_LAYER,             0,
@@ -262,7 +262,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_USING_BODY,              0,
-        "You are recommended to use CSS to specify page and link colors\n"
+        "You are recommended to use CSS to specify page and link colors"
     },
     {/* This console output should be limited to 78 characters per line.
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */

@@ -267,6 +267,9 @@ void TY_(ReportWarning)(TidyDocImpl* doc, Node *element, Node *node, uint code)
         case COERCE_TO_ENDTAG_WARN:
             message = TY_(tidyMessageCreateWithNode)(doc, rpt, code, TidyWarning, node->element, node->element );
             break;
+        case XML_DECLARATION_DETECTED:
+            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning );
+            break;
     }
 
     messageOut( message );

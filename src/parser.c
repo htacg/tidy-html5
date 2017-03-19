@@ -4752,13 +4752,15 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
     {
         if (node->type == XmlDecl)
         {
+            doc->xmlDetected = yes;
+
             if (TY_(FindXmlDecl)(doc) && doc->root.content)
             {
                 TY_(ReportError)(doc, &doc->root, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)(doc, node);
                 continue;
             }
-            if (node->line != 1 || (node->line == 1 && node->column != 1))
+            if (node->line > 1 || node->column != 1)
             {
                 TY_(ReportError)(doc, &doc->root, node, SPACE_PRECEDING_XMLDECL);
             }
@@ -5014,6 +5016,8 @@ void TY_(ParseXMLDocument)(TidyDocImpl* doc)
     Node *node, *doctype = NULL;
 
     TY_(SetOptionBool)( doc, TidyXmlTags, yes );
+
+    doc->xmlDetected = yes;
 
     while ((node = TY_(GetToken)(doc, IgnoreWhitespace)) != NULL)
     {

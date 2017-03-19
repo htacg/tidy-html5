@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-03-15 17:35:16\n"
+"PO-Revision-Date: 2017-03-19 13:23:38\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -270,7 +270,7 @@ msgstr ""
 msgctxt "TEXT_ACCESS_ADVICE1"
 msgid ""
 "For further advice on how to make your pages accessible\n"
-"see http://www.w3.org/WAI/GL.\n"
+"see http://www.w3.org/WAI/GL."
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -278,7 +278,7 @@ msgstr ""
 msgctxt "TEXT_ACCESS_ADVICE2"
 msgid ""
 "For further advice on how to make your pages accessible\n"
-"see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/.\n"
+"see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/."
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -316,7 +316,7 @@ msgstr ""
 
 #. This console output should be limited to 78 characters per line.
 msgctxt "TEXT_USING_BODY"
-msgid "You are recommended to use CSS to specify page and link colors\n"
+msgid "You are recommended to use CSS to specify page and link colors"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
@@ -646,6 +646,10 @@ msgstr ""
 #, c-format
 msgctxt "BAD_SUMMARY_HTML5"
 msgid "The summary attribute on the %s element is obsolete in HTML5"
+msgstr ""
+
+msgctxt "XML_DECLARATION_DETECTED"
+msgid "An XML declaration was detected. Did you mean to use input-xml?"
 msgstr ""
 
 #, c-format

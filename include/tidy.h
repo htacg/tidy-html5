@@ -410,28 +410,24 @@ TIDY_EXPORT ctmbstr TIDY_CALL     tidyLibraryVersion(void);
  */
 TIDY_EXPORT int TIDY_CALL         tidyStatus( TidyDoc tdoc );
 
-/** This function is supposed to return the detected HTML version; however it
- ** isn't currently implemented.
- ** @note TODO: This function currently does nothing.
+/** Gets the version of HTML that was output, as an integer, times 100. For
+ ** example, HTML5 will return 500; HTML4.0.1 will return 401.
  ** @param tdoc An instance of a TidyDoc to query.
- ** @result Returns the value `0`.
+ ** @result Returns the HTML version number (x100).
  */
 TIDY_EXPORT int TIDY_CALL         tidyDetectedHtmlVersion( TidyDoc tdoc );
 
-/** This function is supposed to return a Bool indicating whether or not the
- ** input document is XHTML; however it isn't currently implemented.
- ** @note TODO: This function currently does nothing.
+/** Indicates whether the output document is or isn't XHTML.
  ** @param tdoc An instance of a TidyDoc to query.
- ** @result Returns the value `no`.
+ ** @result Returns `yes` if the document is an XHTML type.
  */
 TIDY_EXPORT Bool TIDY_CALL        tidyDetectedXhtml( TidyDoc tdoc );
 
-/** This function is supposed to return a Bool indicating whether or not the
- ** input document is generic XML (i.e., not XHTL or HTML); however it isn't
- ** currently implemented.
- ** @note TODO: This function currently does nothing.
+/** Indicates whether or not the input document was XML. If TidyXml tags is
+ ** true, or there was an XML declaration in the input document, then this
+ ** function will return yes.
  ** @param tdoc An instance of a TidyDoc to query.
- ** @result Returns the value `no`.
+ ** @result Returns `yes` if the input document was XML.
  */
 TIDY_EXPORT Bool TIDY_CALL        tidyDetectedGenericXml( TidyDoc tdoc );
 

@@ -955,18 +955,19 @@ int TIDY_CALL        tidyStatus( TidyDoc tdoc )
 }
 int TIDY_CALL        tidyDetectedHtmlVersion( TidyDoc ARG_UNUSED(tdoc) )
 {
-/*    TidyDocImpl* impl = tidyDocToImpl( tdoc ); */
-    return 0;
+    TidyDocImpl* impl = tidyDocToImpl( tdoc );
+    return TY_(HTMLVersionNumberFromCode)( impl->lexer->versionEmitted );
 }
+
 Bool TIDY_CALL        tidyDetectedXhtml( TidyDoc ARG_UNUSED(tdoc) )
 {
-/*    TidyDocImpl* impl = tidyDocToImpl( tdoc ); */
-    return no;
+    TidyDocImpl* impl = tidyDocToImpl( tdoc ); 
+    return impl->lexer->isvoyager;
 }
 Bool TIDY_CALL        tidyDetectedGenericXml( TidyDoc ARG_UNUSED(tdoc) )
 {
-/*    TidyDocImpl* impl = tidyDocToImpl( tdoc ); */
-    return no;
+    TidyDocImpl* impl = tidyDocToImpl( tdoc ); 
+    return impl->xmlDetected;
 }
 
 uint TIDY_CALL       tidyErrorCount( TidyDoc tdoc )
@@ -1400,6 +1401,7 @@ int         TY_(DocParseStream)( TidyDocImpl* doc, StreamIn* in )
     doc->root.line = doc->lexer->lines;
     doc->root.column = doc->lexer->columns;
     doc->inputHadBOM = no;
+    doc->xmlDetected = no;
 
     bomEnc = TY_(ReadBOMEncoding)(in);
 
@@ -2095,6 +2097,12 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
         if (doc->lexer->versionEmitted & VERS_HTML5)
             TY_(CheckHTML5)( doc, &doc->root );
         TY_(CheckHTMLTagsAttribsVersions)( doc, &doc->root );
+
+        if ( !doc->lexer->isvoyager && doc->xmlDetected )
+        {
+            TY_(ReportWarning)(doc, NULL, TY_(FindXmlDecl)(doc), XML_DECLARATION_DETECTED );
+
+        }
     }
 
 #if !defined(NDEBUG) && defined(_MSC_VER)

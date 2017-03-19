@@ -498,6 +498,8 @@ uint TY_(ApparentVersion)( TidyDocImpl* doc );
 
 ctmbstr TY_(HTMLVersionNameFromCode)( uint vers, Bool isXhtml );
 
+uint TY_(HTMLVersionNumberFromCode)( uint vers );
+
 Bool TY_(WarnMissingSIInEmittedDocType)( TidyDocImpl* doc );
 
 Bool TY_(SetXHTMLDocType)( TidyDocImpl* doc );

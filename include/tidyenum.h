@@ -881,6 +881,7 @@ typedef enum
         FN(COERCE_TO_ENDTAG)              \
         FN(CONTENT_AFTER_BODY)            \
         FN(DISCARDING_UNEXPECTED)         \
+        FN(XML_DECLARATION_DETECTED)      \
         FN(DOCTYPE_AFTER_TAGS)            \
         FN(DTYPE_NOT_UPPER_CASE)          \
         FN(DUPLICATE_FRAMESET)            \

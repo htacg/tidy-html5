@@ -293,32 +293,31 @@ static languageDefinition language_en = { whichPluralForm_en, {
     /***************************************
      ** Message Severity Level
      ***************************************/
-    { TidyInfo,               0,   "Info: "                                                                  },
-    { TidyWarning,            0,   "Warning: "                                                               },
-    { TidyConfig,             0,   "Config: "                                                                },
-    { TidyAccess,             0,   "Access: "                                                                },
-    { TidyError,              0,   "Error: "                                                                 },
-    { TidyBadDocument,        0,   "Document: "                                                              },
-    { TidyFatal,              0,   "Panic: "                                                                 },
-    { TidyDialogueInfo,       0,   "Information: "                                                           },
-    { TidyDialogueSummary,    0,   "Summary: "                                                               },
-    { TidyDialogueDoc,        0,   "Document: "                                                              },
+    { TidyInfo,               0,   "Info: "          },
+    { TidyWarning,            0,   "Warning: "       },
+    { TidyConfig,             0,   "Config: "        },
+    { TidyAccess,             0,   "Access: "        },
+    { TidyError,              0,   "Error: "         },
+    { TidyBadDocument,        0,   "Document: "      },
+    { TidyFatal,              0,   "Panic: "         },
+    { TidyDialogueInfo,       0,   "Information: "   },
+    { TidyDialogueSummary,    0,   "Summary: "       },
+    { TidyDialogueDoc,        0,   "Document: "      },
 
     /***************************************
      ** Warnings and Errors
      ***************************************/
     
     /* ReportEncodingWarning */
-    {
-      ENCODING_MISMATCH,            0,   "specified input encoding (%s) does not match actual input encoding (%s)" }, /* Warning */
+    { ENCODING_MISMATCH,            0,   "specified input encoding (%s) does not match actual input encoding (%s)" }, /* Warning */
     
     /* ReportEncodingError */
-    { VENDOR_SPECIFIC_CHARS,        0,   "%s invalid character code %s"                                            }, /* Error */
-    { INVALID_SGML_CHARS,           0,   "%s invalid character code %s"                                            }, /* Error */
-    { INVALID_UTF8,                 0,   "%s invalid UTF-8 bytes (char. code %s)"                                  }, /* Error */
-    { INVALID_UTF16,                0,   "%s invalid UTF-16 surrogate pair (char. code %s)"                        }, /* Error */
-    { INVALID_NCR,                  0,   "%s invalid numeric character reference %s"                               }, /* Error */
-    { BAD_SURROGATE_PAIR,           0,   "Have out-of-range surrogate pair U+%04X:U+%04X, replaced with U+FFFD value."}, /* warning */
+    { VENDOR_SPECIFIC_CHARS,        0,   "%s invalid character code %s"                                                               }, /* Error */
+    { INVALID_SGML_CHARS,           0,   "%s invalid character code %s"                                                               }, /* Error */
+    { INVALID_UTF8,                 0,   "%s invalid UTF-8 bytes (char. code %s)"                                                     }, /* Error */
+    { INVALID_UTF16,                0,   "%s invalid UTF-16 surrogate pair (char. code %s)"                                           }, /* Error */
+    { INVALID_NCR,                  0,   "%s invalid numeric character reference %s"                                                  }, /* Error */
+    { BAD_SURROGATE_PAIR,           0,   "Have out-of-range surrogate pair U+%04X:U+%04X, replaced with U+FFFD value."                }, /* warning */
     { BAD_SURROGATE_TAIL,           0,   "Leading (High) surrogate pair U+%04X, with no trailing (Low) entity, replaced with U+FFFD." }, /* warning */
     { BAD_SURROGATE_LEAD,           0,   "Trailing (Low) surrogate pair U+%04X, with no leading (High) entity, replaced with U+FFFD." }, /* warning */
 
@@ -381,6 +380,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { COERCE_TO_ENDTAG_WARN,        0,   "<%s> is probably intended as </%s>"                                      }, /* Warning */
     { REMOVED_HTML5,                0,   "%s element removed from HTML5"                                           }, /* Warning */
     { BAD_SUMMARY_HTML5,            0,   "The summary attribute on the %s element is obsolete in HTML5"            }, /* Warning */
+    { XML_DECLARATION_DETECTED,     0,   "An XML declaration was detected. Did you mean to use input-xml?"         }, /* Warning */
     
     /* ReportNotice */
     { TRIM_EMPTY_ELEMENT,           0,   "trimming empty %s"                                                       }, /* Notice */

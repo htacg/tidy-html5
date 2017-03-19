@@ -133,6 +133,20 @@ Bool TY_(nodeHasText)( TidyDocImpl* doc, Node* node );
 Bool nodeMatchCM( Node* node, uint contentModel );
 #endif
 
+
+/* True if the element looks like it's an autonomous custom element tag. */
+Bool TY_(elementIsAutonomousCustomFormat)( ctmbstr element );
+
+/* True if the node looks like it's an autonomous custom element tag. */
+Bool TY_(nodeIsAutonomousCustomFormat)( Node* node );
+
+/* True if the node looks like it's an autonomous custom element tag, and
+   TidyCustomTags is not disabled, and we're in HTML5 mode, which are all
+   requirements for valid autonomous custom tags.
+*/
+Bool TY_(nodeIsAutonomousCustomTag)( TidyDocImpl* doc, Node* node );
+
+
 /* True if any of the bits requested are set.
 */
 Bool TY_(nodeHasCM)( Node* node, uint contentModel );

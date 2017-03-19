@@ -109,7 +109,9 @@ add_definitions ( -DSUPPORT_ASIAN_ENCODINGS=1 )
 add_definitions ( -DSUPPORT_ACCESSIBILITY_CHECKS=1 )
 add_definitions ( -DLIBTIDY_VERSION="${LIBTIDY_VERSION}" )
 add_definitions ( -DRELEASE_DATE="${tidy_YEAR}/${tidy_MONTH}/${tidy_DAY}" )
-### add_definitions ( -DRC_NUMBER="MinGW" )
+if (TIDY_RC_NUMBER)
+    add_definitions ( -DRC_NUMBER="${TIDY_RC_NUMBER}" )
+endif ()
 
 # Issue #188 - Support user items in platform.h
 if (TIDY_CONFIG_FILE)

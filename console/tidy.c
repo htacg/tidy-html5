@@ -610,12 +610,10 @@ void GetOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
         case TidySortAttributes:
         case TidyNewline:
         case TidyAccessibilityCheckLevel:
+        case TidyUseCustomTags:
             d->type = "enum";
             d->vals = NULL;
-            d->def =
-            optId==TidyNewline ?
-            "<em>Platform dependent</em>"
-            :tidyOptGetCurrPick( tdoc, optId );
+            d->def = tidyOptGetCurrPick( tdoc, optId );
             break;
 
         case TidyDoctype:
@@ -648,7 +646,7 @@ void GetOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
                 d->def = "?";
             d->vals = NULL;
             break;
-
+            
             /* General case will handle remaining */
         default:
             switch ( optTyp )
@@ -1376,9 +1374,6 @@ static void printOptionValues( TidyDoc ARG_UNUSED(tdoc), TidyOption topt,
             }
         }
             break;
-        case TidyNewline:
-            d->def = tidyOptGetCurrPick( tdoc, optId );
-            break;
         default:
             break;
     }
@@ -2058,6 +2053,15 @@ int main( int argc, char** argv )
 
         if ( status >= 0 ) {
             status = tidyRunDiagnostics( tdoc );
+            /*\ Issue #119 - but not really related to 'custom_tags' support.
+             *  Issue ?: To remove some 2014 extra debug output - I wanted to
+             *  remove the Info: messages, but chose to except one, namely
+             *  tidyReportDoctype(), but never intended keeping it here 
+             *  for so long!
+             *  That doctype Info:, and all others, are still reported by 
+             *  default. geoff
+            \*/
+#if 0 /* 000000000 this code can be removed some time in future 00000000000 */
             if ( !tidyOptGetBool(tdoc, TidyQuiet) ) {
                 /* NOT quiet, show DOCTYPE, if not already shown */
                 if (!tidyOptGetBool(tdoc, TidyShowInfo)) {
@@ -2066,7 +2070,7 @@ int main( int argc, char** argv )
                     tidyOptSetBool( tdoc, TidyShowInfo, no );
                 }
             }
-
+#endif /* 000000000 this code can be removed some time in future 00000000000 */
         }
         if ( status > 1 ) /* If errors, do we want to force output? */
             status = ( tidyOptGetBool(tdoc, TidyForceOutput) ? status : -1 );

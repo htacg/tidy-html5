@@ -92,6 +92,7 @@
   { TidyAttr_DROPZONE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
   { TidyAttr_HIDDEN,                xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
   { TidyAttr_ID,                    xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
+  { TidyAttr_IS,                    xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
   { TidyAttr_LANG,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
   { TidyAttr_ROLE,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
   { TidyAttr_SPELLCHECK,            xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \

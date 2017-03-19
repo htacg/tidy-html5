@@ -227,13 +227,13 @@ static languageDefinition language_en = { whichPluralForm_en, {
         - The URL should not be translated unless you find a matching URL in your language. */
       TEXT_ACCESS_ADVICE1,          0,
         "For further advice on how to make your pages accessible\n"
-        "see http://www.w3.org/WAI/GL.\n"
+        "see http://www.w3.org/WAI/GL."
     },
     {/* This console output should be limited to 78 characters per line.
         - The URL should not be translated unless you find a matching URL in your language. */
       TEXT_ACCESS_ADVICE2,          0,
         "For further advice on how to make your pages accessible\n"
-        "see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/.\n"
+        "see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/."
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_USING_LAYER,             0,
@@ -262,7 +262,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_USING_BODY,              0,
-        "You are recommended to use CSS to specify page and link colors\n"
+        "You are recommended to use CSS to specify page and link colors"
     },
     {/* This console output should be limited to 78 characters per line.
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
@@ -337,6 +337,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { PROPRIETARY_ATTRIBUTE,        0,   "%s proprietary attribute \"%s\""                                         }, /* Error */
     { MISMATCHED_ATTRIBUTE_ERROR,   0,   "%s attribute \"%s\" not allowed for %s"                                  }, /* Error */
     { MISMATCHED_ATTRIBUTE_WARN,    0,   "%s attribute \"%s\" not allowed for %s"                                  }, /* Warning */
+    { ATTRIBUTE_IS_NOT_ALLOWED,     0,   "%s attribute \"is\" not allowed for autonomous custom tags."             }, /* Warning */
     { JOINING_ATTRIBUTE,            0,   "%s joining values of repeated attribute \"%s\""                          }, /* Error */
     { XML_ATTRIBUTE_VALUE,          0,   "%s has XML attribute \"%s\""                                             }, /* Error (but deprecated) */
     
@@ -384,6 +385,11 @@ static languageDefinition language_en = { whichPluralForm_en, {
     /* ReportNotice */
     { TRIM_EMPTY_ELEMENT,           0,   "trimming empty %s"                                                       }, /* Notice */
     { REPLACING_ELEMENT,            0,   "replacing %s with %s"                                                    }, /* Notice */
+    { CUSTOM_TAG_DETECTED,          0,   "detected autonomous custom tag %s; will treat as %s"                     }, /* Notice */
+    { TidyCustomBlocklevel,         0,   "block level"                                                             },
+    { TidyCustomEmpty,              0,   "empty"                                                                   },
+    { TidyCustomInline,             0,   "inline"                                                                  },
+    { TidyCustomPre,                0,   "pre"                                                                     },
     
     /* ReportError */
     { COERCE_TO_ENDTAG,             0,   "<%s> is probably intended as </%s>"                                      }, /* Error */
@@ -430,7 +436,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { SUSPECTED_MISSING_QUOTE,      0,   "missing quote mark for attribute value"                                  }, /* Error? (not really sometimes) */
     { DUPLICATE_FRAMESET,           0,   "repeated FRAMESET element"                                               }, /* Error */
     { UNKNOWN_ELEMENT,              0,   "%s is not recognized!"                                                   }, /* Error */
-    
+    { UNKNOWN_ELEMENT_LOOKS_CUSTOM, 0,   "%s is not recognized! Did you mean to enable the custom-tags option?"    }, /* Error */
+
+
     /* Info */
     { PREVIOUS_LOCATION,            0,   "<%s> previously mentioned"                                               }, /* Info */
     
@@ -2015,8 +2023,34 @@ static languageDefinition language_en = { whichPluralForm_en, {
         - The strings "Tidy" and "HTML Tidy" are the program name and must not
           be translated. */
       TidyEscapeScripts,          0,
-        "This option causes items that look like closing tags, like <code>&lt;/g</code> to be escaped "
-        "to <code>&lt;\\/g</code>. Set this option to 'no' if you do not want this."
+        "This option causes items that look like closing tags, like "
+        "<code>&lt;/g</code> to be escaped to <code>&lt;\\/g</code>. Set "
+        "this option to <var>no</var> if you do not want this."
+    },
+    {/* Important notes for translators:
+        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+          <br/>.
+        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+        - Option values should be enclosed in <var></var>.
+        - It's very important that <br/> be self-closing!
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not
+          be translated. */
+      TidyUseCustomTags,          0,
+        "This option enables the use of tags for autonomous custom elements, "
+        "e.g. &lt;flag-icon&gt; with Tidy. Custom tags are disabled if this "
+        "value is <var>no</var>. Other settings - <var>blocklevel</var>, "
+        "<var>empty</var>, <var>inline</var>, and <var>pre</var> will treat "
+        "<em>all</em> detected custom tags accordingly. "
+        "<br/>"
+        "The use of <code>new-blocklevel-tags</code>, "
+        "<code>new-empty-tags</code>, <code>new-inline-tags</code>, or "
+        "<code>new-pre-tags</code> will override the treatment of custom tags "
+        "by this configuration option. This may be useful if you have "
+        "different types of custom tags."
+        "<br/>"
+        "When enabled these tags are determined during the processing of your "
+        "document using opening tags; matching closing tags will be recognized "
+        "accordingly, and unknown closing tags will be discarded. "
     },
 
 #if SUPPORT_CONSOLE_APP

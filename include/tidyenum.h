@@ -70,6 +70,9 @@ typedef enum
     TidyCharEncoding,            /**< In/out character encoding */
     TidyCoerceEndTags,           /**< Coerce end tags from start tags where probably intended */
     TidyCSSPrefix,               /**< CSS class naming for clean option */
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+    TidyCustomTags,              /**< Internal use ONLY */
+#endif
     TidyDecorateInferredUL,      /**< Mark inferred UL elements with no indent CSS */
     TidyDoctype,                 /**< User specified doctype */
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -154,6 +157,7 @@ typedef enum
     TidyTabSize,                 /**< Expand tabs to n spaces */
     TidyUpperCaseAttrs,          /**< Output attributes in upper not lower case */
     TidyUpperCaseTags,           /**< Output tags in upper not lower case */
+    TidyUseCustomTags,           /**< Enable Tidy to use autonomous custom tags */
     TidyVertSpace,               /**< degree to which markup is spread out vertically */
     TidyWord2000,                /**< Draconian cleaning for Word2000 */
     TidyWrapAsp,                 /**< Wrap within ASP pseudo elements */
@@ -193,6 +197,19 @@ typedef enum
    TidyAutoState    /**< Automatic */
 } TidyTriState;
 
+/** Integer values used by ParseUseCustomTags. These are used throughout 
+ *  LibTidy to indicate the how Tidy treats custom tags, and also have
+ *  associated localized strings to describe them.
+ */
+typedef enum
+{
+    TidyCustomNo = 300,
+    TidyCustomBlocklevel,
+    TidyCustomEmpty,
+    TidyCustomInline,
+    TidyCustomPre
+} TidyUseCustomTagsState;
+    
 /** TidyNewline option values to control output line endings.
 */
 typedef enum
@@ -531,6 +548,7 @@ typedef enum
   TidyAttr_HSPACE,            /**< HSPACE= */
   TidyAttr_HTTP_EQUIV,        /**< HTTP_EQUIV= */
   TidyAttr_ID,                /**< ID= */
+  TidyAttr_IS,                /**< IS= */
   TidyAttr_ISMAP,             /**< ISMAP= */
   TidyAttr_ITEMID,            /**< ITEMID= */
   TidyAttr_ITEMPROP,          /**< ITEMPROP= */
@@ -889,6 +907,7 @@ typedef enum
         FN(OBSOLETE_ELEMENT)              \
         FN(PROPRIETARY_ELEMENT)           \
         FN(REPLACING_ELEMENT)             \
+        FN(CUSTOM_TAG_DETECTED)           \
         FN(REPLACING_UNEX_ELEMENT)        \
         FN(SPACE_PRECEDING_XMLDECL)       \
         FN(SUSPECTED_MISSING_QUOTE)       \
@@ -901,6 +920,7 @@ typedef enum
         FN(UNEXPECTED_ENDTAG_IN)          \
         FN(UNEXPECTED_ENDTAG)             \
         FN(UNKNOWN_ELEMENT)               \
+        FN(UNKNOWN_ELEMENT_LOOKS_CUSTOM)  \
         FN(USING_BR_INPLACE_OF)
 
 /* error codes used for attribute messages */
@@ -922,6 +942,7 @@ typedef enum
         FN(JOINING_ATTRIBUTE)              \
         FN(MISMATCHED_ATTRIBUTE_ERROR)     \
         FN(MISMATCHED_ATTRIBUTE_WARN)      \
+        FN(ATTRIBUTE_IS_NOT_ALLOWED)       \
         FN(MISSING_ATTR_VALUE)             \
         FN(MISSING_ATTRIBUTE)              \
         FN(MISSING_IMAGEMAP)               \

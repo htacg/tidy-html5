@@ -546,7 +546,9 @@ void show_have_html5(void)
 /* public interface for finding tag by name */
 Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
 {
+    TidyUseCustomTagsState configtype = cfg( doc, TidyUseCustomTags );
     const Dict *np = NULL;
+
     if ( cfgBool(doc, TidyXmlTags) )
     {
         node->tag = doc->tags.xml_tags;
@@ -558,7 +560,32 @@ Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
         node->tag = np;
         return yes;
     }
+    
+    /* Add autonomous custom tag. This can be done in both HTML5 mode and
+       earlier, although if it's earlier we will complain about it elsewhere. */
+    if ( TY_(nodeIsAutonomousCustomTag)( doc, node) )
+    {
+        UserTagType type;
 
+        if ( configtype == TidyCustomEmpty )
+            type = tagtype_empty;
+        else if ( configtype == TidyCustomInline )
+            type = tagtype_inline;
+        else if ( configtype == TidyCustomPre )
+            type = tagtype_pre;
+        else
+            type = tagtype_block;
+        
+        TY_(DeclareUserTag)( doc, TidyCustomTags, type, node->element );
+        node->tag = tagsLookup(doc, &doc->tags, node->element);
+
+        /* Output a message the first time we encounter an autonomous custom 
+           tag. This applies despite the HTML5 mode. */
+        TY_(ReportNotice)(doc, node, node, CUSTOM_TAG_DETECTED);
+
+        return yes;
+    }
+    
     return no;
 }
 
@@ -1019,6 +1046,39 @@ Bool nodeMatchCM( Node* node, uint contentModel )
            (node->tag->model & contentModel) == contentModel );
 }
 #endif
+
+
+Bool TY_(elementIsAutonomousCustomFormat)( ctmbstr element )
+{
+    if ( element )
+    {
+        const char *ptr = strchr(element, '-');
+
+        /* Tag must contain hyphen not in first character. */
+        if ( ptr && (ptr - element > 0) )
+        {
+            return yes;
+        }
+    }
+
+    return no;
+}
+
+Bool TY_(nodeIsAutonomousCustomFormat)( Node* node )
+{
+    if ( node->element )
+        return TY_(elementIsAutonomousCustomFormat)( node->element );
+
+    return no;
+}
+
+Bool TY_(nodeIsAutonomousCustomTag)( TidyDocImpl* doc, Node* node )
+{
+    return TY_(nodeIsAutonomousCustomFormat)( node )
+            && ( cfg( doc, TidyUseCustomTags ) != TidyCustomNo );
+}
+
+
 
 /* True if any of the bits requested are set.
 */

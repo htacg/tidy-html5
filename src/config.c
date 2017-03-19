@@ -143,6 +143,16 @@ static const ctmbstr sorterPicks[] =
   NULL
 };
 
+static const ctmbstr customTagsPicks[] =
+{
+    "no",
+    "blocklevel",
+    "empty",
+    "inline",
+    "pre",
+    NULL
+};
+
 #define MU TidyMarkup
 #define DG TidyDiagnostics
 #define PP TidyPrettyPrint
@@ -213,6 +223,10 @@ static ParseProperty ParseRepeatAttr;
 \*/
 static ParseProperty ParseTabs;
 
+/* Parse the value of TidyUseCustomTags */
+static ParseProperty ParseUseCustomTags;
+
+
 /* Ensure struct order is same order as tidyenum.h:TidyOptionId! */
 static const TidyOptionImpl option_defs[] =
 {
@@ -227,6 +241,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyCharEncoding,            CE, "char-encoding",               IN, UTF8,            ParseCharEnc,      charEncPicks    },
     { TidyCoerceEndTags,           MU, "coerce-endtags",              BL, yes,             ParseBool,         boolPicks       },
     { TidyCSSPrefix,               MU, "css-prefix",                  ST, 0,               ParseCSS1Selector, NULL            },
+    { TidyCustomTags,              IR, "new-custom-tags",             ST, 0,               ParseTagNames,     NULL            }, /* 20170309 - Issue #119 */
     { TidyDecorateInferredUL,      MU, "decorate-inferred-ul",        BL, no,              ParseBool,         boolPicks       },
     { TidyDoctype,                 MU, "doctype",                     ST, 0,               ParseDocType,      doctypePicks    },
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -305,6 +320,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyTabSize,                 PP, "tab-size",                    IN, 8,               ParseInt,          NULL            },
     { TidyUpperCaseAttrs,          MU, "uppercase-attributes",        BL, no,              ParseBool,         boolPicks       },
     { TidyUpperCaseTags,           MU, "uppercase-tags",              BL, no,              ParseBool,         boolPicks       },
+    { TidyUseCustomTags,           MU, "custom-tags",                 IN, TidyCustomNo,    ParseUseCustomTags,customTagsPicks }, /* 20170309 - Issue #119 */
     { TidyVertSpace,               PP, "vertical-space",              IN, no,              ParseAutoBool,     autoBoolPicks   }, /* #228 - tri option */
     { TidyWord2000,                MU, "word-2000",                   BL, no,              ParseBool,         boolPicks       },
     { TidyWrapAsp,                 PP, "wrap-asp",                    BL, yes,             ParseBool,         boolPicks       },
@@ -465,7 +481,8 @@ static Bool OptionValueIdentical( const TidyOptionImpl* option,
         return val1->v == val2->v;
 }
 
-static Bool NeedReparseTagDecls( const TidyOptionValue* current,
+static Bool NeedReparseTagDecls( TidyDocImpl* doc,
+                                 const TidyOptionValue* current,
                                  const TidyOptionValue* new,
                                  uint *changedUserTags )
 {
@@ -549,7 +566,7 @@ void TY_(ResetConfigToSnapshot)( TidyDocImpl* doc )
     TidyOptionValue* value = &doc->config.value[ 0 ];
     const TidyOptionValue* snap  = &doc->config.snapshot[ 0 ];
     uint changedUserTags;
-    Bool needReparseTagsDecls = NeedReparseTagDecls( value, snap,
+    Bool needReparseTagsDecls = NeedReparseTagDecls( doc, value, snap,
                                                      &changedUserTags );
     
     for ( ixVal=0; ixVal < N_TIDY_OPTIONS; ++option, ++ixVal )
@@ -570,7 +587,7 @@ void TY_(CopyConfig)( TidyDocImpl* docTo, TidyDocImpl* docFrom )
         const TidyOptionValue* from = &docFrom->config.value[ 0 ];
         TidyOptionValue* to   = &docTo->config.value[ 0 ];
         uint changedUserTags;
-        Bool needReparseTagsDecls = NeedReparseTagDecls( to, from,
+        Bool needReparseTagsDecls = NeedReparseTagDecls( docTo, to, from,
                                                          &changedUserTags );
 
         TY_(TakeConfigSnapshot)( docTo );
@@ -1247,9 +1264,55 @@ Bool ParseTabs( TidyDocImpl* doc, const TidyOptionImpl* entry )
     return status;
 }
 
+/* Parse the value of TidyUseCustomTags. Like other option values, we will
+ * look for the first character only, of no, blocklevel, empty, inline, pre.
+ */
+Bool ParseUseCustomTags( TidyDocImpl* doc, const TidyOptionImpl* entry )
+{
+    uint value;
+    TidyConfigImpl* cfg = &doc->config;
+    tchar c = SkipWhite( cfg );
+    
+    switch (c)
+    {
+        case 'n':
+        case 'N':
+            value = TidyCustomNo;
+            break;
+            
+        case 'b':
+            value = TidyCustomBlocklevel;
+            break;
+            
+        case 'e':
+        case 'E':
+            value = TidyCustomEmpty;
+            break;
+        
+        case 'y':
+        case 'Y':
+        case 'i':
+        case 'I':
+            value = TidyCustomInline;
+            break;
+
+        case 'p':
+        case 'P':
+            value = TidyCustomPre;
+            break;
+            
+        default:
+            TY_(ReportBadArgument)( doc, entry->name );
+            return no;
+    }
+    
+    TY_(SetOptionInt)( doc, TidyUseCustomTags, value );
+    return yes;
+}
+
 
 /* Coordinates Config update and Tags data */
-static void DeclareUserTag( TidyDocImpl* doc, TidyOptionId optId,
+void TY_(DeclareUserTag)( TidyDocImpl* doc, TidyOptionId optId,
                             UserTagType tagType, ctmbstr name )
 {
   ctmbstr prvval = cfgStr( doc, optId );
@@ -1280,13 +1343,14 @@ Bool ParseTagNames( TidyDocImpl* doc, const TidyOptionImpl* option )
 
     switch ( option->id )
     {
-    case TidyInlineTags:  ttyp = tagtype_inline;    break;
-    case TidyBlockTags:   ttyp = tagtype_block;     break;
-    case TidyEmptyTags:   ttyp = tagtype_empty;     break;
-    case TidyPreTags:     ttyp = tagtype_pre;       break;
-    default:
-       TY_(ReportUnknownOption)( doc, option->name );
-       return no;
+        case TidyInlineTags:  ttyp = tagtype_inline;              break;
+        case TidyBlockTags:   ttyp = tagtype_block;               break;
+        case TidyEmptyTags:   ttyp = tagtype_empty;               break;
+        case TidyPreTags:     ttyp = tagtype_pre;                 break;
+        case TidyCustomTags:  ttyp = cfg(doc, TidyUseCustomTags); break;
+        default:
+            TY_(ReportUnknownOption)( doc, option->name );
+            return no;
     }
 
     SetOptionValue( doc, option->id, NULL );
@@ -1343,14 +1407,14 @@ Bool ParseTagNames( TidyDocImpl* doc, const TidyOptionImpl* option )
             continue;        /* there is a trailing space on the line. */
             
         /* add tag to dictionary */
-        DeclareUserTag( doc, option->id, ttyp, buf );
+        TY_(DeclareUserTag)( doc, option->id, ttyp, buf );
         i = 0;
         ++nTags;
     }
     while ( c != EndOfStream );
 
     if ( i > 0 )
-      DeclareUserTag( doc, option->id, ttyp, buf );
+      TY_(DeclareUserTag)( doc, option->id, ttyp, buf );
     return ( nTags > 0 );
 }
 

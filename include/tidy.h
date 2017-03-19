@@ -1301,10 +1301,6 @@ TIDY_EXPORT ctmbstr TIDY_CALL tidyGetMessageOutput( TidyMessage tmessage );
  **     // do something with my_arg, such as inspect its value or format
  **   }
  ** @endcode
- ** TODO: The internal iterator can be made to hold a reference to the
- **       TidyMessage so that we don't have to specify it all the time in
- **       these API functions. In addition the TidyMessageArgument should be
- **       made to do that same, so that we can simplify those signatures, too.
  ** @param tmessage The message about whose arguments you wish to query.
  ** @result Returns a TidyIterator, which is a token used to represent the
  **         current position in a list within LibTidy.

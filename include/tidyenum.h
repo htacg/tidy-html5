@@ -199,11 +199,12 @@ typedef enum
 
 /** Integer values used by ParseUseCustomTags. These are used throughout 
  *  LibTidy to indicate the how Tidy treats custom tags, and also have
- *  associated localized strings to describe them.
+ *  associated localized strings to describe them in tidyMessagesMisc in
+ *  the form MEMBER_STRING, e.g., TIDYCUSTOMBLOCKLEVEL_STRING
  */
 typedef enum
 {
-    TidyCustomNo = 300,
+    TidyCustomNo,
     TidyCustomBlocklevel,
     TidyCustomEmpty,
     TidyCustomInline,
@@ -983,7 +984,12 @@ typedef enum
         FN(STRING_HTML_PROPRIETARY)   /* `HTML Proprietary`/ */                                 \
         FN(STRING_MISSING_MALFORMED)  /* For `missing or malformed argument for option: %s`. */ \
         FN(STRING_NO_SYSID)           /* `No system identifier in emitted doctype`. */          \
-        FN(STRING_UNKNOWN_OPTION)     /* For retrieving a string `unknown option: %s`. */
+        FN(STRING_UNKNOWN_OPTION)     /* For retrieving a string `unknown option: %s`. */       \
+        FN(TIDYCUSTOMNO_STRING)              \
+        FN(TIDYCUSTOMBLOCKLEVEL_STRING)      \
+        FN(TIDYCUSTOMEMPTY_STRING)           \
+        FN(TIDYCUSTOMINLINE_STRING)          \
+        FN(TIDYCUSTOMPRE_STRING)             \
 
 /* accessibility module contributions */
 #define FOREACH_MSG_ACCESS(FN)                                          \

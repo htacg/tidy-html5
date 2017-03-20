@@ -230,7 +230,22 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
 
         case CUSTOM_TAG_DETECTED:
             TagToString(element, elemdesc, sizeof(elemdesc));
-            tagtype = tidyLocalizedString( cfg( doc, TidyUseCustomTags ) );
+            
+            switch ( cfg( doc, TidyUseCustomTags ) )
+            {
+                case TidyCustomBlocklevel:
+                    tagtype = tidyLocalizedString( TIDYCUSTOMBLOCKLEVEL_STRING );
+                    break;
+                case TidyCustomEmpty:
+                    tagtype = tidyLocalizedString( TIDYCUSTOMEMPTY_STRING );
+                    break;
+                case TidyCustomInline:
+                    tagtype = tidyLocalizedString( TIDYCUSTOMINLINE_STRING );
+                    break;
+                case TidyCustomPre:
+                    tagtype = tidyLocalizedString( TIDYCUSTOMPRE_STRING );
+                    break;
+            }
             message = TY_(tidyMessageCreateWithNode)(doc, element, code, TidyInfo, elemdesc, tagtype );
             break;
     }

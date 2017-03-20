@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-03-19 13:23:38\n"
+"POT-Creation-Date: 2017-03-20 12:20:02\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -669,19 +669,19 @@ msgctxt "CUSTOM_TAG_DETECTED"
 msgid "detected autonomous custom tag %s; will treat as %s"
 msgstr ""
 
-msgctxt "TidyCustomBlocklevel"
+msgctxt "TIDYCUSTOMBLOCKLEVEL_STRING"
 msgid "block level"
 msgstr ""
 
-msgctxt "TidyCustomEmpty"
+msgctxt "TIDYCUSTOMEMPTY_STRING"
 msgid "empty"
 msgstr ""
 
-msgctxt "TidyCustomInline"
+msgctxt "TIDYCUSTOMINLINE_STRING"
 msgid "inline"
 msgstr ""
 
-msgctxt "TidyCustomPre"
+msgctxt "TIDYCUSTOMPRE_STRING"
 msgid "pre"
 msgstr ""
 

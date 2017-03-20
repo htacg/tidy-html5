@@ -386,10 +386,10 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TRIM_EMPTY_ELEMENT,           0,   "trimming empty %s"                                                       }, /* Notice */
     { REPLACING_ELEMENT,            0,   "replacing %s with %s"                                                    }, /* Notice */
     { CUSTOM_TAG_DETECTED,          0,   "detected autonomous custom tag %s; will treat as %s"                     }, /* Notice */
-    { TidyCustomBlocklevel,         0,   "block level"                                                             },
-    { TidyCustomEmpty,              0,   "empty"                                                                   },
-    { TidyCustomInline,             0,   "inline"                                                                  },
-    { TidyCustomPre,                0,   "pre"                                                                     },
+    { TIDYCUSTOMBLOCKLEVEL_STRING,  0,   "block level"                                                             },
+    { TIDYCUSTOMEMPTY_STRING,       0,   "empty"                                                                   },
+    { TIDYCUSTOMINLINE_STRING,      0,   "inline"                                                                  },
+    { TIDYCUSTOMPRE_STRING,         0,   "pre"                                                                     },
     
     /* ReportError */
     { COERCE_TO_ENDTAG,             0,   "<%s> is probably intended as </%s>"                                      }, /* Error */

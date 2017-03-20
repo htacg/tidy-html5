@@ -2149,9 +2149,17 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
             }
         }
 
-        /* block level tags end this element */
+        /*\
+         *  block level tags end this element 
+         *  Issue #333 - There seems an exception if the element is a 'span',
+         *  and the node just collected is a 'meta'. The 'meta' can not have
+         *  CM_INLINE added, nor can the 'span' have CM_MIXED added without
+         *  big consequences.
+         *  There may be other exceptions to be added...
+        \*/
         if (!(node->tag->model & CM_INLINE) &&
-            !(element->tag->model & CM_MIXED))
+            !(element->tag->model & CM_MIXED) &&
+            !(nodeIsSPAN(element) && nodeIsMETA(node)) )
         {
             if ( !TY_(nodeIsElement)(node) )
             {

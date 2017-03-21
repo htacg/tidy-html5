@@ -58,41 +58,41 @@ The **libTidy** version is controlled by the contents of `version.txt` in the ro
 
 This file consists of two lines of dot (.) separated items. The first being the **major**, **minor**, and **patch** version values, and the second string is a date. Example:
 
-```
+~~~
 5.3.15
 2017.01.29
-```
+~~~
 
 When **CMake** is run, this file is read and two macros are added to the compile flags:
 
-```
+~~~
 add_definitions ( -DLIBTIDY_VERSION="${LIBTIDY_VERSION}" )
 add_definitions ( -DRELEASE_DATE="${tidy_YEAR}/${tidy_MONTH}/${tidy_DAY}" )
-```
+~~~
 
 And in `CMakeLists.txt` there is the posibility to define another macro, when and if required:
 
-```
+~~~
 # add_definitions ( -DRC_NUMBER="D231" )
-```
+~~~
 
 These macros are put in `static const char` strings in **libTidys**’s internal- only `src/version.h` file:
 
-```
+~~~
 static const char TY_(release_date)[] = RELEASE_DATE;
 #ifdef RC_NUMBER
 static const char TY_(library_version)[] = LIBTIDY_VERSION "." RC_NUMBER;
 #else
 static const char TY_(library_version)[] = LIBTIDY_VERSION;
 #endif
-```
+~~~
 
 These strings are returned respectively by the **libTidy** API functions:
 
-```
+~~~
 TIDY_EXPORT ctmbstr TIDY_CALL     tidyLibraryVersion(void);
 TIDY_EXPORT ctmbstr TIDY_CALL     tidyReleaseDate(void);
-```
+~~~
 
 ### Git branches
 

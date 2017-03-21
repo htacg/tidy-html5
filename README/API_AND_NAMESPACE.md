@@ -66,7 +66,7 @@ All of the information above is useful for anyone who wants to browse Tidy's sou
 
 ## Behind the scenes
 
-The first thing we need to do is have the internal version of the function that we want to add. Tidy has module that handles localization: `language.h/c`. In the header is where we define the interface to LibTidy, which should be namespaced according to the discussion above. We can declare:
+The first thing we need to do is have the internal version of the function that we want to add. Tidy has a module that handles localization: `language.h/c`. In the header is where we define the interface to LibTidy, which should be namespaced according to the discussion above. We can declare:
 
 ~~~
 ctmbstr TY_(tidyLocalizedString)( uint messageType );
@@ -78,7 +78,7 @@ Now you have a decision to make: if you plan to use this function internally, yo
 
 ## The API
 
-Once implemented, we want a pretty, public-facing name for our `tidyLocalizedString()` function, which appropriate is `tidyLocalizedString()`. Add the declaration to `tidy.h`:
+Once implemented, we want a pretty, public-facing name for our `tidyLocalizedString()` function, which appropriately is `tidyLocalizedString()`. Add the declaration to `tidy.h`:
 
 ~~~
 TIDY_EXPORT ctmbstr TIDY_CALL tidyLocalizedString( uint messageType );
@@ -102,4 +102,3 @@ For a more complicated example that demonstrates how to use opaque types (and al
   - implement iteration for structures with multiple records.
   - write a function in `tidylib.c` that converts between the exposed, opaque type and the internal, implementation type.
   - further reinforce how functionality is added to the API.
-

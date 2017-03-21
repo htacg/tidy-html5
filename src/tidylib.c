@@ -708,6 +708,12 @@ TidyDoc TIDY_CALL tidyGetMessageDoc( TidyMessage tmessage )
     return tidyImplToDoc(doc);
 }
 
+uint TIDY_CALL tidyGetMessageCode( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessageCode)(*message);
+}
+
 ctmbstr TIDY_CALL tidyGetMessageKey( TidyMessage tmessage )
 {
     TidyMessageImpl *message = tidyMessageToImpl(tmessage);
@@ -1452,7 +1458,7 @@ int         tidyDocRunDiagnostics( TidyDocImpl* doc )
     }
 
     if ( doc->errors > 0 && !force )
-        TY_(DialogueMessage)(doc, TEXT_NEEDS_INTERVENTION, TidyDialogueDoc);
+        TY_(DialogueMessage)(doc, STRING_NEEDS_INTERVENTION, TidyDialogueDoc);
 
      return tidyDocStatus( doc );
 }

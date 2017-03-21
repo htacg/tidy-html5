@@ -45,18 +45,18 @@ See the `CMakeLists.txt` file for other CMake **options** offered.
 Due to API changes in the PHP source, `buffio.h` needs to be renamed to `tidybuffio.h` in the file `ext/tidy/tidy.c` in PHP's source.
 
 That is - prior to configuring PHP run this in the PHP source directory:
-```
+~~~
 sed -i 's/buffio.h/tidybuffio.h/' ext/tidy/*.c
-```
+~~~
 
 And then continue with (just an example here, use your own PHP config options):
 
-```
+~~~
 ./configure --with-tidy=/usr/local
 make
 make test
 make install
-```
+~~~
 
   [1]: http://git-scm.com/book/en/v2/Getting-Started-Installing-Git
   [2]: http://www.cmake.org/download/

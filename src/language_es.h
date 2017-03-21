@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-03-15 17:35:16
+ *   PO_REVISION_DATE=2017-03-22 15:54:52
  */
 
 #ifdef _MSC_VER
@@ -61,12 +61,6 @@ static languageDefinition language_es = { whichPluralForm_es, {
     {/* Specify the ll or ll_cc language code here. */
       TIDY_LANGUAGE,          0, "es"
     },
-    { TEXT_GENERAL_INFO_PLEA, 0,        
-        "\n"
-        "¿Le gustaría ver Tidy en un español correcto? Por favor considere \n"
-        "ayudarnos a localizar HTML Tidy. Para más detalles consulte \n"
-        "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md \n"
-    },
     { TidyMakeClean,          0,        
         "Esta opción especifica si Tidy debe realizar la limpieza de algún legado etiquetas de "
         "presentación (actualmente <code>&lt;i&gt;</code>, <code>&lt;b&gt;</code>, <code>&lt;center&gt;</"
@@ -79,6 +73,12 @@ static languageDefinition language_es = { whichPluralForm_es, {
     { TidyNCR,                0, "Esta opción especifica si Tidy debe permitir referencias de caracteres numéricos. "   },
 #endif /* SUPPORT_ASIAN_ENCODINGS */
 
+    { TEXT_GENERAL_INFO_PLEA, 0,        
+        "\n"
+        "¿Le gustaría ver Tidy en un español correcto? Por favor considere \n"
+        "ayudarnos a localizar HTML Tidy. Para más detalles consulte \n"
+        "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md \n"
+    },
 
 #if SUPPORT_CONSOLE_APP
     { TC_TXT_HELP_LANG_1,     0,        

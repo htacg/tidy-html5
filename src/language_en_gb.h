@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-03-15 17:35:16
+ *   PO_REVISION_DATE=2017-03-22 15:54:52
  */
 
 #ifdef _MSC_VER
@@ -61,32 +61,6 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
     {/* Specify the ll or ll_cc language code here. */
       TIDY_LANGUAGE,                   0, "en_gb"
     },
-    { TEXT_USING_FONT,                 0,        
-        "You are recommended to use CSS to specify the font and\n"
-        "properties such as its size and colour. This will reduce\n"
-        "the size of HTML files and make them easier to maintain\n"
-        "compared with using <FONT> elements.\n\n"
-    },
-    { TEXT_USING_BODY,                 0, "You are recommended to use CSS to specify page and link colours\n"           },
-    { TEXT_GENERAL_INFO_PLEA,          0,        
-        "\n"
-        "Would you like to see Tidy in proper, British English? Please consider \n"
-        "helping us to localise HTML Tidy. For details please see \n"
-        "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md\n"
-    },
-
-#if SUPPORT_ACCESSIBILITY_CHECKS
-    { INFORMATION_NOT_CONVEYED_IMAGE,  0, "[2.1.1.1]: ensure information not conveyed through colour alone (image)."    },
-    { INFORMATION_NOT_CONVEYED_APPLET, 0, "[2.1.1.2]: ensure information not conveyed through colour alone (applet)."   },
-    { INFORMATION_NOT_CONVEYED_OBJECT, 0, "[2.1.1.3]: ensure information not conveyed through colour alone (object)."   },
-    { INFORMATION_NOT_CONVEYED_SCRIPT, 0, "[2.1.1.4]: ensure information not conveyed through colour alone (script)."   },
-    { INFORMATION_NOT_CONVEYED_INPUT,  0, "[2.1.1.5]: ensure information not conveyed through colour alone (input)."    },
-    { COLOR_CONTRAST_TEXT,             0, "[2.2.1.1]: poor colour contrast (text)."                                     },
-    { COLOR_CONTRAST_LINK,             0, "[2.2.1.2]: poor colour contrast (link)."                                     },
-    { COLOR_CONTRAST_ACTIVE_LINK,      0, "[2.2.1.3]: poor colour contrast (active link)."                              },
-    { COLOR_CONTRAST_VISITED_LINK,     0, "[2.2.1.4]: poor colour contrast (visited link)."                             },
-#endif /* SUPPORT_ACCESSIBILITY_CHECKS */
-
     { TidyMergeDivs,                   0,        
         "This option can be used to modify the behaviour of <code>clean</code> when "
         "set to <code>yes</code>."
@@ -117,6 +91,31 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
         "attributes with HTML/XHTML colour names where defined, e.g. replace "
         "<code>#ffffff</code> with <code>white</code>. "
     },
+    { TEXT_USING_FONT,                 0,        
+        "You are recommended to use CSS to specify the font and\n"
+        "properties such as its size and colour. This will reduce\n"
+        "the size of HTML files and make them easier to maintain\n"
+        "compared with using <FONT> elements.\n\n"
+    },
+    { TEXT_USING_BODY,                 0, "You are recommended to use CSS to specify page and link colours\n"           },
+    { TEXT_GENERAL_INFO_PLEA,          0,        
+        "\n"
+        "Would you like to see Tidy in proper, British English? Please consider \n"
+        "helping us to localise HTML Tidy. For details please see \n"
+        "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md\n"
+    },
+
+#if SUPPORT_ACCESSIBILITY_CHECKS
+    { INFORMATION_NOT_CONVEYED_IMAGE,  0, "[2.1.1.1]: ensure information not conveyed through colour alone (image)."    },
+    { INFORMATION_NOT_CONVEYED_APPLET, 0, "[2.1.1.2]: ensure information not conveyed through colour alone (applet)."   },
+    { INFORMATION_NOT_CONVEYED_OBJECT, 0, "[2.1.1.3]: ensure information not conveyed through colour alone (object)."   },
+    { INFORMATION_NOT_CONVEYED_SCRIPT, 0, "[2.1.1.4]: ensure information not conveyed through colour alone (script)."   },
+    { INFORMATION_NOT_CONVEYED_INPUT,  0, "[2.1.1.5]: ensure information not conveyed through colour alone (input)."    },
+    { COLOR_CONTRAST_TEXT,             0, "[2.2.1.1]: poor colour contrast (text)."                                     },
+    { COLOR_CONTRAST_LINK,             0, "[2.2.1.2]: poor colour contrast (link)."                                     },
+    { COLOR_CONTRAST_ACTIVE_LINK,      0, "[2.2.1.3]: poor colour contrast (active link)."                              },
+    { COLOR_CONTRAST_VISITED_LINK,     0, "[2.2.1.4]: poor colour contrast (visited link)."                             },
+#endif /* SUPPORT_ACCESSIBILITY_CHECKS */
 
     {/* This MUST be present and last. */
       TIDY_MESSAGE_TYPE_LAST,          0, NULL

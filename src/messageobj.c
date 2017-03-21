@@ -269,6 +269,11 @@ TidyDocImpl* TY_(getMessageDoc)( TidyMessageImpl message )
     return message.tidyDoc;
 }
 
+uint TY_(getMessageCode)( TidyMessageImpl message )
+{
+    return message.code;
+}
+
 ctmbstr TY_(getMessageKey)( TidyMessageImpl message )
 {
     return message.messageKey;

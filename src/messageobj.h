@@ -2,7 +2,7 @@
 #define messageobj_h
 
 /**************************************************************************//**
- * @file messageobj.h
+ * @file
  * Provides an external, extensible API for message reporting.
  *
  * This module implements the `_TidyMessageImpl` structure (declared in
@@ -64,6 +64,9 @@ void TY_(tidyMessageRelease)( TidyMessageImpl *message );
 
 /** get the document the message came from. */
 TidyDocImpl* TY_(getMessageDoc)( TidyMessageImpl message );
+
+/** get the message key code. */
+uint TY_(getMessageCode)( TidyMessageImpl message );
 
 /** get the message key string. */
 ctmbstr TY_(getMessageKey)( TidyMessageImpl message );

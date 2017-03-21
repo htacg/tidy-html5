@@ -8,7 +8,7 @@ Note, there are a group of configuration options to add **tags** not yet approve
 
 So, adding a new HTML **tag** consists of the following simple steps:
 
- 1. `tidyenum.h` - Give the element an internal name, like `TidyTag_XXXX`, and thus a value. While there were some initial steps to keep this `TidyTagId` enumeration alphabetic, now just add the new `TidyTag_XXXX` just before the last entry `N_TIDY_TAGS`.
+ 1. `tidyenum.h` - Give the element an internal name, like `TidyTag_XXXX`, and thus a value. Please keep this list in alphabetical order.
 
  2. `tags.c` - Add a line to the `tag_defs[]` table. This assigns the unique string value of the element. Then the html versions that support the element, a pointer to the attributes supported by that elelment, and a bit field of the elements characteristics, inline, block, etc.
  

@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-03-15 17:35:16
+ *   PO_REVISION_DATE=2017-03-22 15:54:52
  */
 
 #ifdef _MSC_VER
@@ -61,7 +61,98 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     {/* Specify the ll or ll_cc language code here. */
       TIDY_LANGUAGE,                0, "fr"
     },
-    { ATRC_ACCESS_URL,              0, "http://www.html-tidy.org/Accessibility/"                                          },
+    { TidyAltText,                  0,        
+        "Cette option spécifie la valeur par défaut <code>alt=</code> utilise le texte Tidy "
+        "pour <code>&lt;img&gt;</code> attributs lorsque le <code>alt=</code> attribut est "
+        "absent. <br/> Utiliser avec précaution, car il est de votre responsabilité de rendre "
+        "vos documents accessibles aux personnes qui ne peuvent pas voir les images."
+    },
+    { TidyCSSPrefix,                0,        
+        "Cette option spécifie le préfixe que Tidy utilise des règles de styles. <br/> Par "
+        "défaut, <var>c</var> sera utilisé."
+    },
+    { TidyDoctype,                  0,        
+        "Cette option spécifie la déclaration DOCTYPE générée par Tidy. <br/> Si <var>omit</"
+        "var> la sortie ne contiendra une déclaration DOCTYPE. Notez que ce cela implique "
+        "aussi <code>numeric-entities</code> est réglé sur <var>yes</var>. <br/> Si "
+        "<code>html5</code> le DOCTYPE est réglé sur <code>&lt;! DOCTYPE html&gt;</code>. <br/"
+        "> Si <var>auto</var> (par défaut) Tidy utilisera une supposition basée sur le "
+        "contenu du document. <br/> Si elle est définie <var>strict</var>, Tidy établira le "
+        "DOCTYPE du HTML4 ou XHTML 1 DTD stricte. <br/> Si <var>loose</var>, le DOCTYPE est "
+        "réglé sur le HTML4 ou XHTML1 loose (transitional) DTD. <br/> Alternativement, vous "
+        "pouvez fournir une chaîne pour l'identificateur public formel (FPI).<br/> Par "
+        "exemple: <br/> <code>doctype: \"- // ACME // DTD HTML. 3,14159 //EN\"</code> <br/> "
+        "Si vous spécifiez le FPI pour un document XHTML, Tidy établira l'identifiant du "
+        "système à une chaîne vide. Pour un document HTML, Tidy ajoute un identificateur de "
+        "système que si l'on était déjà présent dans le but de préserver le mode de certains "
+        "navigateurs de traitement. Tidy quitte le DOCTYPE pour les documents XML génériques "
+        "inchangés. <br/> Cette option ne permet pas une validation du document de conformité."
+    },
+    { TidyDropEmptyElems,           0, "Cette option spécifie si Tidy doit jeter des éléments vides."                     },
+    { TidyDropEmptyParas,           0, "Cette option spécifie si Tidy doit jeter des paragraphes vides."                  },
+    { TidyFixUri,                   0,        
+        "Cette option spécifie si Tidy doit vérifier les valeurs d'attributs qui portent URI "
+        "pour des caractères illégaux et si ce sont trouvés, leur échapper en HTML 4 "
+        "recommande."
+    },
+    { TidyGDocClean,                0,        
+        "Cette option spécifie si Tidy doit permettre un comportement spécifique pour le "
+        "nettoyage HTML exporté à partir de Google Docs."
+    },
+    { TidyMakeBare,                 0,        
+        "Cette option spécifie si Tidy doit dépouiller Microsoft HTML spécifique à partir de "
+        "Word 2000 documents, et des espaces de sortie plutôt que des espaces insécables où "
+        "ils existent dans l'entrée."
+    },
+    { TidyMakeClean,                0,        
+        "Cette option spécifie si Tidy doit effectuer le nettoyage de certains anciens tags "
+        "de présentation (actuellement de <code>& lt; i&gt;</code>, <code>&lt;b&gt;</code>, "
+        "<code>&lt;centre&gt;</code> lorsque placé entre les balises inline appropriées, et "
+        "<code>&lt; font&gt;</code>). Si <var>yes</var> puis balises existantes seront "
+        "remplacées par CSS le <code>&lt;style&gt;</code> balises et le balisage structurel "
+        "selon le cas."
+    },
+    { TidyPPrintTabs,               0,        
+        "Cette option spécifie si tidy doit Indenter avec tabulation au lieu des espaces, en "
+        "supposant <code>indent</code> est <var>yes</var>. <br/>Définir sur <var>yes</var> "
+        "pour indenter avec des tabulations au lieu de la valeur par défaut des espaces. <br /"
+        ">Utilisez l'option <code>indent-spaces</code> pour contrôler le nombre d'onglets "
+        "Sortie par niveau de tiret. Notez que lorsque <code>indent-with-tabs</code> est "
+        "activée. La valeur par défaut de <code>indent-spaces</code> est réinitialisé à "
+        "<var>1</var>. <br/>Remarque <code>tab-size</code> contrôle la conversion des espaces "
+        "d'entrée. Définissez-le à zéro pour conserver onglets de saisie."
+    },
+    { TidySkipNested,               0,        
+        "Cette option spécifie que Tidy doit ignorer les balises imbriquées lors de l'analyse "
+        "des données de script et de style."
+    },
+    { TidyXmlDecl,                  0,        
+        "Cette option spécifie si Tidy devrait ajouter la déclaration XML lors de la sortie "
+        "XML ou XHTML. <br/> Notez que si l'entrée comprend déjà un <code> & lt;?xml ... &&gt;"
+        "</code> déclaration alors cette option sera ignorée. <br/> Si l'encodage pour la "
+        "sortie est différente de <var>ascii</var>, l'un des l'encodage <var>utf*</var> ou "
+        "<var>raw</var>, la déclaration est toujours ajouté que requis par la norme XML."
+    },
+    { TidyXmlPIs,                   0,        
+        "Cette option spécifie si Tidy doit modifier l'analyse syntaxique des instructions de "
+        "traitement pour exiger <code>?&gt;</code> comme terminateur plutôt que <code>&gt;</"
+        "code>. <br/> Cette option est automatiquement activée si l'entrée est en XML."
+    },
+    { TidyXmlSpace,                 0,        
+        "Cette option spécifie si tidy doit ajouter <code>xml:espace=\"préserver \"</code> "
+        "pour des éléments tels que <code><pré></code>, <code><style></code> et "
+        "<code><script></code> lors de la génération de XML. <br />Il est nécessaire si "
+        "l'espace blanc dans ces éléments doit être analysée de manière appropriée sans avoir "
+        "accès à la DTD."
+    },
+    { TidyPrettyPrint,              0, "imprimer"                                                                         },
+    { TidyInfo,                     0, "Info:"                                                                            },
+    { TidyWarning,                  0, "Attention:"                                                                       },
+    { TidyConfig,                   0, "Config:"                                                                          },
+    { TidyAccess,                   0, "Accès:"                                                                           },
+    { TidyError,                    0, "Erreur:"                                                                          },
+    { TidyBadDocument,              0, "Document:"                                                                        },
+    { TidyFatal,                    0, "Panique:"                                                                         },
     { FILE_CANT_OPEN,               0, "Impossible d'ouvrir « %s »\n"                                                     },
     { LINE_COLUMN_STRING,           0, "Ligne: %d Col: %d - "                                                             },
     { STRING_CONTENT_LOOKS,         0, "Le contenu du document ressemble à %s"                                            },
@@ -74,6 +165,12 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { STRING_ERROR_COUNT_WARNING,   1, "alarmes"                                                                          },
     { STRING_HELLO_ACCESS,          0, "Contrôles d'accessibilité: version 0.1"                                           },
     { STRING_MISSING_MALFORMED,     0, "argument manquant ou incorrect pour l'option: %s"                                 },
+    { STRING_XML_DECLARATION,       0, "déclaration XML"                                                                  },
+    { STRING_NEEDS_INTERVENTION,    0,        
+        "Ce document contient des erreurs qui doivent être résolus avant\n"
+        "utilisant HTML Tidy pour générer une version rangé.\n"
+        "\n"
+    },
     { STRING_NO_ERRORS,             0, "Aucun avertissement ou les erreurs ne trouvées."                                  },
     { STRING_NO_SYSID,              0, "Aucun identificateur de système dans le doctype émis"                             },
     { STRING_NOT_ALL_SHOWN,         0, "Pas tous les avertissements/erreurs ont été présentés."                           },
@@ -81,7 +178,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { STRING_REPLACING,             0, "remplaçant"                                                                       },
     { STRING_SPECIFIED,             0, "spécifié"                                                                         },
     { STRING_UNKNOWN_OPTION,        0, "option inconnue: %s"                                                              },
-    { STRING_XML_DECLARATION,       0, "déclaration XML"                                                                  },
     { TEXT_HTML_T_ALGORITHM,        0,        
         "\n"
         "       - D'abord, cherchez à gauche de la position de la cellule de trouver \n"
@@ -249,11 +345,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "Il est recommandé d'utiliser les CSS pour spécifier la page et de liaison des "
         "couleurs\n"
     },
-    { TEXT_NEEDS_INTERVENTION,      0,        
-        "Ce document contient des erreurs qui doivent être résolus avant\n"
-        "utilisant HTML Tidy pour générer une version rangé.\n"
-        "\n"
-    },
     { TEXT_GENERAL_INFO,            0,        
         "A propos de HTML Tidy: https://github.com/htacg/tidy-html5\n"
         "Les rapports de bugs et commentaires: https://github.com/htacg/tidy-html5/issues\n"
@@ -270,192 +361,94 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "vous plaît voir\n"
         "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md\n"
     },
-    { TidyInfo,                     0, "Info:"                                                                            },
-    { TidyWarning,                  0, "Attention:"                                                                       },
-    { TidyConfig,                   0, "Config:"                                                                          },
-    { TidyAccess,                   0, "Accès:"                                                                           },
-    { TidyError,                    0, "Erreur:"                                                                          },
-    { TidyBadDocument,              0, "Document:"                                                                        },
-    { TidyFatal,                    0, "Panique:"                                                                         },
-    { ENCODING_MISMATCH,            0, "codage d'entrée spécifiée (%s) ne correspond pas réelle encodage d'entrée (%s)"   },
-    { VENDOR_SPECIFIC_CHARS,        0, "%s de code de caractère invalide l'%s"                                            },
-    { INVALID_SGML_CHARS,           0, "%s de code de caractère invalide l'%s"                                            },
-    { INVALID_UTF8,                 0, "%s invalides octets UTF-8 de (char. codes %s)"                                    },
-    { INVALID_UTF16,                0, "paire de substitution non valide UTF-16 (code de caract. %s) %s"                  },
-    { INVALID_NCR,                  0, "Référence de caractère numérique non valide de %s %s"                             },
-    { MISSING_SEMICOLON,            0, "entité « %s » ne s'arrête pas à «; »"                                             },
-    { MISSING_SEMICOLON_NCR,        0, "Référence de caractère numérique « %s » n'est pas se terminer par «; »"           },
-    { UNESCAPED_AMPERSAND,          0, "sans séquence d'échappement & qui devrait être écrit comme &amp;"                 },
-    { UNKNOWN_ENTITY,               0, "sans séquence d'échappement & ou entité inconnue « %s »"                          },
-    { APOS_UNDEFINED,               0, "nommée l'entité ' seulement défini en XML/XHTML"                                  },
-    { INSERTING_ATTRIBUTE,          0, "%s insérer l'attribut « %s »"                                                     },
-    { INSERTING_AUTO_ATTRIBUTE,     0, "%s insérer l'attribut « %s », à l'aide de la valeur « %s »"                       },
-    { MISSING_ATTR_VALUE,           0, "L'attribut %s a une valeur non valide \"%s\""                                     },
-    { UNKNOWN_ATTRIBUTE,            0, "L'attribut %s a une valeur non valide \"%s\""                                     },
-    { PROPRIETARY_ATTRIBUTE,        0, "L'attribut %s a une valeur non valide \"%s\""                                     },
-    { JOINING_ATTRIBUTE,            0, "%s rejoignant les valeurs d'attribut répétée « %s »"                              },
-    { XML_ATTRIBUTE_VALUE,          0, "L'attribut %s a une valeur non valide \"%s\""                                     },
-    { XML_ID_SYNTAX,                0, "ID de %s « %s » utilise la syntaxe XML ID"                                        },
-    { ATTR_VALUE_NOT_LCASE,         0, "valeur d'attribut de %s « %s » doit être en minuscules pour XHTML"                },
-    { PROPRIETARY_ATTR_VALUE,       0, "valeur d'attribut propriétaire de %s « %s »"                                      },
     { ANCHOR_NOT_UNIQUE,            0, "%s anchor \"%s\" déjà défini"                                                     },
-    { BAD_ATTRIBUTE_VALUE,          0, "L'attribut %s \"%s\" a une valeur non valide \"%s\""                              },
+    { ATTR_VALUE_NOT_LCASE,         0, "valeur d'attribut de %s « %s » doit être en minuscules pour XHTML"                },
+    { BACKSLASH_IN_URI,             0, "référence URI %s contient des anti-slash. Faute de frappe ?"                      },
     { BAD_ATTRIBUTE_VALUE_REPLACED, 0, "%s attribut « %s » a une valeur non valide « %s » et a été remplacé"              },
+    { BAD_ATTRIBUTE_VALUE,          0, "L'attribut %s \"%s\" a une valeur non valide \"%s\""                              },
+    { ESCAPED_ILLEGAL_URI,          0, "%s échapper malformé référence URI"                                               },
+    { FIXED_BACKSLASH,              0, "%s conversion de barre oblique inverse d'URI de slash"                            },
+    { ID_NAME_MISMATCH,             0, "%s id et le nom valeur d'attribut mismatch"                                       },
+    { ILLEGAL_URI_REFERENCE,        0, "%s mal échappé référence URI"                                                     },
+    { INSERTING_AUTO_ATTRIBUTE,     0, "%s insérer l'attribut « %s », à l'aide de la valeur « %s »"                       },
     { INVALID_ATTRIBUTE,            0, "nom d'attribut de %s « %s » (valeur = « %s ») n'est pas valide"                   },
-    { REPEATED_ATTRIBUTE,           0, "%s laissant tomber la valeur « %s » pour l'attribut répétée « %s »"               },
     { INVALID_XML_ID,               0, "%s ne peut pas copier le nom attribut id"                                         },
+    { JOINING_ATTRIBUTE,            0, "%s rejoignant les valeurs d'attribut répétée « %s »"                              },
+    { MISSING_ATTR_VALUE,           0, "L'attribut %s a une valeur non valide \"%s\""                                     },
+    { MISSING_IMAGEMAP,             0, "%s doivent utiliser côté client image map"                                        },
+    { MISSING_QUOTEMARK,            0, "%s attribut manquant apostrophe droite"                                           },
+    { NEWLINE_IN_URI,               0, "rejeter la nouvelle ligne de %s en référence URI"                                 },
+    { PROPRIETARY_ATTR_VALUE,       0, "valeur d'attribut propriétaire de %s « %s »"                                      },
+    { PROPRIETARY_ATTRIBUTE,        0, "L'attribut %s a une valeur non valide \"%s\""                                     },
+    { REPEATED_ATTRIBUTE,           0, "%s laissant tomber la valeur « %s » pour l'attribut répétée « %s »"               },
+    { UNEXPECTED_END_OF_FILE_ATTR,  0, "%s fin de fichier lors de l'analyse d'attributs"                                  },
+    { UNEXPECTED_EQUALSIGN,         0, "%s unexpected '=', nom d'attribut attendu"                                        },
     { UNEXPECTED_GT,                0, "manquant '>' pour tag: %s"                                                        },
     { UNEXPECTED_QUOTEMARK,         0, "%s inattendue ou double quote mark"                                               },
-    { MISSING_QUOTEMARK,            0, "%s attribut manquant apostrophe droite"                                           },
-    { UNEXPECTED_END_OF_FILE_ATTR,  0, "%s fin de fichier lors de l'analyse d'attributs"                                  },
-    { ID_NAME_MISMATCH,             0, "%s id et le nom valeur d'attribut mismatch"                                       },
-    { BACKSLASH_IN_URI,             0, "référence URI %s contient des anti-slash. Faute de frappe ?"                      },
-    { FIXED_BACKSLASH,              0, "%s conversion de barre oblique inverse d'URI de slash"                            },
-    { ILLEGAL_URI_REFERENCE,        0, "%s mal échappé référence URI"                                                     },
-    { ESCAPED_ILLEGAL_URI,          0, "%s échapper malformé référence URI"                                               },
-    { NEWLINE_IN_URI,               0, "rejeter la nouvelle ligne de %s en référence URI"                                 },
     { WHITE_IN_URI,                 0, "jeter le espaces de %s en référence URI"                                          },
-    { UNEXPECTED_EQUALSIGN,         0, "%s unexpected '=', nom d'attribut attendu"                                        },
-    { MISSING_IMAGEMAP,             0, "%s doivent utiliser côté client image map"                                        },
+    { XML_ATTRIBUTE_VALUE,          0, "L'attribut %s a une valeur non valide \"%s\""                                     },
+    { XML_ID_SYNTAX,                0, "ID de %s « %s » utilise la syntaxe XML ID"                                        },
+    { INVALID_NCR,                  0, "Référence de caractère numérique non valide de %s %s"                             },
+    { INVALID_SGML_CHARS,           0, "%s de code de caractère invalide l'%s"                                            },
+    { INVALID_UTF16,                0, "paire de substitution non valide UTF-16 (code de caract. %s) %s"                  },
+    { INVALID_UTF8,                 0, "%s invalides octets UTF-8 de (char. codes %s)"                                    },
+    { VENDOR_SPECIFIC_CHARS,        0, "%s de code de caractère invalide l'%s"                                            },
+    { ENCODING_MISMATCH,            0, "codage d'entrée spécifiée (%s) ne correspond pas réelle encodage d'entrée (%s)"   },
+    { APOS_UNDEFINED,               0, "nommée l'entité ' seulement défini en XML/XHTML"                                  },
+    { MISSING_SEMICOLON_NCR,        0, "Référence de caractère numérique « %s » n'est pas se terminer par «; »"           },
+    { MISSING_SEMICOLON,            0, "entité « %s » ne s'arrête pas à «; »"                                             },
+    { UNESCAPED_AMPERSAND,          0, "sans séquence d'échappement & qui devrait être écrit comme &amp;"                 },
+    { UNKNOWN_ENTITY,               0, "sans séquence d'échappement & ou entité inconnue « %s »"                          },
+    { BAD_CDATA_CONTENT,            0, "'<' + '/' + lettre non permis ici"                                                },
+    { BAD_COMMENT_CHARS,            0, "attendre -- ou >"                                                                 },
+    { BAD_XML_COMMENT,              0, "commentaires XML ne peut pas contenir --"                                         },
+    { CANT_BE_NESTED,               0, "%s ne peut pas être imbriquée"                                                    },
+    { CONTENT_AFTER_BODY,           0, "contenu se produit après la fin du body"                                          },
+    { DISCARDING_UNEXPECTED,        0, "rejet inattendu %s"                                                               },
+    { DOCTYPE_AFTER_TAGS,           0, "<! DOCTYPE> est pas autorisé après éléments"                                      },
+    { DTYPE_NOT_UPPER_CASE,         0, "SYSTEM, PUBLIC, W3C, DTD, EN doit être en majuscules"                             },
+    { ENCODING_IO_CONFLICT,         0, "encodage de sortie ne fonctionne pas avec la sortie standard"                     },
+    { ILLEGAL_NESTING,              0, "%s ne doivent pas être imbriqués"                                                 },
+    { INCONSISTENT_NAMESPACE,       0, "le namespace HTML ne correspond pas au contenu"                                   },
+    { INCONSISTENT_VERSION,         0, "DOCTYPE HTML ne correspond pas à un contenu"                                      },
+    { INSERTING_TAG,                0, "insertion implicite <%s>"                                                         },
+    { MALFORMED_COMMENT,            0, "tirets adjacents dans un commentaire"                                             },
+    { MALFORMED_DOCTYPE,            0, "en rejetant malformé <!DOCTYPE>"                                                  },
+    { MISSING_DOCTYPE,              0, "manquante <!DOCTYPE> déclaration"                                                 },
+    { MISSING_ENDTAG_BEFORE,        0, "manquante </%s> avant %s"                                                         },
+    { MISSING_ENDTAG_FOR,           0, "manquant </%s>"                                                                   },
+    { MISSING_STARTTAG,             0, "manquant <%s>"                                                                    },
+    { MISSING_TITLE_ELEMENT,        0, "insertion manquante élément 'title'"                                              },
+    { NOFRAMES_CONTENT,             0, "%s non à l'intérieur 'noframes'"                                                  },
+    { NON_MATCHING_ENDTAG,          0, "remplacement inattendu %s avec </%s>"                                             },
+    { PREVIOUS_LOCATION,            0, "<%s> précédemment mentionnés"                                                     },
+    { PROPRIETARY_ELEMENT,          0, "%s n'est pas approuvé par le W3C"                                                 },
+    { REPLACING_UNEX_ELEMENT,       0, "remplacement inattendu %s avec %s"                                                },
+    { SPACE_PRECEDING_XMLDECL,      0, "supprimant l'espace blanc précédent Déclaration XML"                              },
+    { TAG_NOT_ALLOWED_IN,           0, "%s n'est pas autorisé dans <%s> éléments"                                         },
+    { TOO_MANY_ELEMENTS_IN,         0, "trop de %s éléments dans <%s>"                                                    },
+    { TOO_MANY_ELEMENTS,            0, "trop de %s éléments"                                                              },
+    { UNESCAPED_ELEMENT,            0, "unescaped %s dans le contenu pre"                                                 },
+    { USING_BR_INPLACE_OF,          0, "utilisant <br> à la place de %s"                                                  },
+    { DUPLICATE_FRAMESET,           0, "élément répété FRAMESET"                                                          },
+    { SUSPECTED_MISSING_QUOTE,      0, "manquant guillemet pour la valeur d'attribut"                                     },
+    { UNEXPECTED_ENDTAG_IN,         0, "inattendus </%s> dans <%s>"                                                       },
+    { UNKNOWN_ELEMENT,              0, "%s n'est pas reconnue !"                                                          },
     { MISSING_ATTRIBUTE,            0, "%s manque attribut \"%s\""                                                        },
+    { REPLACING_ELEMENT,            0, "remplaçant %s avec %s"                                                            },
+    { TRIM_EMPTY_ELEMENT,           0, "rognage vide %s"                                                                  },
+    { BAD_SUMMARY_HTML5,            0, "L'attribut summary sur l'élément du %s est obsolète dans HTML5"                   },
+    { COERCE_TO_ENDTAG_WARN,        0, "<%s> est probablement destinée en tant que </%s>"                                 },
     { NESTED_EMPHASIS,              0, "accent imbriquée %s"                                                              },
     { NESTED_QUOTATION,             0, "imbriqué \"q\" éléments, typo possible"                                           },
     { OBSOLETE_ELEMENT,             0, "remplaçant élément obsolète %s avec %s"                                           },
-    { COERCE_TO_ENDTAG_WARN,        0, "<%s> est probablement destinée en tant que </%s>"                                 },
     { REMOVED_HTML5,                0, "L'élément de %s retiré HTML5"                                                     },
-    { BAD_SUMMARY_HTML5,            0, "L'attribut summary sur l'élément du %s est obsolète dans HTML5"                   },
-    { TRIM_EMPTY_ELEMENT,           0, "rognage vide %s"                                                                  },
-    { REPLACING_ELEMENT,            0, "remplaçant %s avec %s"                                                            },
     { COERCE_TO_ENDTAG,             0, "<%s> est probablement destinée en tant que </%s>"                                 },
-    { REPLACING_UNEX_ELEMENT,       0, "remplacement inattendu %s avec %s"                                                },
-    { MISSING_ENDTAG_FOR,           0, "manquant </%s>"                                                                   },
-    { MISSING_ENDTAG_BEFORE,        0, "manquante </%s> avant %s"                                                         },
-    { DISCARDING_UNEXPECTED,        0, "rejet inattendu %s"                                                               },
-    { NON_MATCHING_ENDTAG,          0, "remplacement inattendu %s avec </%s>"                                             },
-    { TAG_NOT_ALLOWED_IN,           0, "%s n'est pas autorisé dans <%s> éléments"                                         },
-    { MISSING_STARTTAG,             0, "manquant <%s>"                                                                    },
-    { UNEXPECTED_ENDTAG,            0, "rejet inattendu </%s>"                                                            },
-    { TOO_MANY_ELEMENTS,            0, "trop de %s éléments"                                                              },
-    { USING_BR_INPLACE_OF,          0, "utilisant <br> à la place de %s"                                                  },
-    { INSERTING_TAG,                0, "insertion implicite <%s>"                                                         },
-    { CANT_BE_NESTED,               0, "%s ne peut pas être imbriquée"                                                    },
-    { PROPRIETARY_ELEMENT,          0, "%s n'est pas approuvé par le W3C"                                                 },
-    { ILLEGAL_NESTING,              0, "%s ne doivent pas être imbriqués"                                                 },
-    { NOFRAMES_CONTENT,             0, "%s non à l'intérieur 'noframes'"                                                  },
-    { UNEXPECTED_END_OF_FILE,       0, "fin inattendue du fichier %s"                                                     },
     { ELEMENT_NOT_EMPTY,            0, "%s élément non vide ou pas fermée"                                                },
-    { UNEXPECTED_ENDTAG_IN,         0, "inattendus </%s> dans <%s>"                                                       },
-    { TOO_MANY_ELEMENTS_IN,         0, "trop de %s éléments dans <%s>"                                                    },
-    { UNESCAPED_ELEMENT,            0, "unescaped %s dans le contenu pre"                                                 },
-    { DOCTYPE_AFTER_TAGS,           0, "<! DOCTYPE> est pas autorisé après éléments"                                      },
-    { MISSING_TITLE_ELEMENT,        0, "insertion manquante élément 'title'"                                              },
-    { INCONSISTENT_VERSION,         0, "DOCTYPE HTML ne correspond pas à un contenu"                                      },
-    { MISSING_DOCTYPE,              0, "manquante <!DOCTYPE> déclaration"                                                 },
-    { CONTENT_AFTER_BODY,           0, "contenu se produit après la fin du body"                                          },
-    { MALFORMED_COMMENT,            0, "tirets adjacents dans un commentaire"                                             },
-    { BAD_COMMENT_CHARS,            0, "attendre -- ou >"                                                                 },
-    { BAD_CDATA_CONTENT,            0, "'<' + '/' + lettre non permis ici"                                                },
-    { INCONSISTENT_NAMESPACE,       0, "le namespace HTML ne correspond pas au contenu"                                   },
-    { SPACE_PRECEDING_XMLDECL,      0, "supprimant l'espace blanc précédent Déclaration XML"                              },
-    { MALFORMED_DOCTYPE,            0, "en rejetant malformé <!DOCTYPE>"                                                  },
-    { BAD_XML_COMMENT,              0, "commentaires XML ne peut pas contenir --"                                         },
-    { DTYPE_NOT_UPPER_CASE,         0, "SYSTEM, PUBLIC, W3C, DTD, EN doit être en majuscules"                             },
-    { ENCODING_IO_CONFLICT,         0, "encodage de sortie ne fonctionne pas avec la sortie standard"                     },
-    { SUSPECTED_MISSING_QUOTE,      0, "manquant guillemet pour la valeur d'attribut"                                     },
-    { DUPLICATE_FRAMESET,           0, "élément répété FRAMESET"                                                          },
-    { UNKNOWN_ELEMENT,              0, "%s n'est pas reconnue !"                                                          },
-    { PREVIOUS_LOCATION,            0, "<%s> précédemment mentionnés"                                                     },
-    { TidyXmlDecl,                  0,        
-        "Cette option spécifie si Tidy devrait ajouter la déclaration XML lors de la sortie "
-        "XML ou XHTML. <br/> Notez que si l'entrée comprend déjà un <code> & lt;?xml ... &&gt;"
-        "</code> déclaration alors cette option sera ignorée. <br/> Si l'encodage pour la "
-        "sortie est différente de <var>ascii</var>, l'un des l'encodage <var>utf*</var> ou "
-        "<var>raw</var>, la déclaration est toujours ajouté que requis par la norme XML."
-    },
-    { TidyXmlSpace,                 0,        
-        "Cette option spécifie si tidy doit ajouter <code>xml:espace=\"préserver \"</code> "
-        "pour des éléments tels que <code><pré></code>, <code><style></code> et "
-        "<code><script></code> lors de la génération de XML. <br />Il est nécessaire si "
-        "l'espace blanc dans ces éléments doit être analysée de manière appropriée sans avoir "
-        "accès à la DTD."
-    },
-    { TidyAltText,                  0,        
-        "Cette option spécifie la valeur par défaut <code>alt=</code> utilise le texte Tidy "
-        "pour <code>&lt;img&gt;</code> attributs lorsque le <code>alt=</code> attribut est "
-        "absent. <br/> Utiliser avec précaution, car il est de votre responsabilité de rendre "
-        "vos documents accessibles aux personnes qui ne peuvent pas voir les images."
-    },
-    { TidyXmlPIs,                   0,        
-        "Cette option spécifie si Tidy doit modifier l'analyse syntaxique des instructions de "
-        "traitement pour exiger <code>?&gt;</code> comme terminateur plutôt que <code>&gt;</"
-        "code>. <br/> Cette option est automatiquement activée si l'entrée est en XML."
-    },
-    { TidyMakeBare,                 0,        
-        "Cette option spécifie si Tidy doit dépouiller Microsoft HTML spécifique à partir de "
-        "Word 2000 documents, et des espaces de sortie plutôt que des espaces insécables où "
-        "ils existent dans l'entrée."
-    },
-    { TidyCSSPrefix,                0,        
-        "Cette option spécifie le préfixe que Tidy utilise des règles de styles. <br/> Par "
-        "défaut, <var>c</var> sera utilisé."
-    },
-    { TidyMakeClean,                0,        
-        "Cette option spécifie si Tidy doit effectuer le nettoyage de certains anciens tags "
-        "de présentation (actuellement de <code>& lt; i&gt;</code>, <code>&lt;b&gt;</code>, "
-        "<code>&lt;centre&gt;</code> lorsque placé entre les balises inline appropriées, et "
-        "<code>&lt; font&gt;</code>). Si <var>yes</var> puis balises existantes seront "
-        "remplacées par CSS le <code>&lt;style&gt;</code> balises et le balisage structurel "
-        "selon le cas."
-    },
-    { TidyGDocClean,                0,        
-        "Cette option spécifie si Tidy doit permettre un comportement spécifique pour le "
-        "nettoyage HTML exporté à partir de Google Docs."
-    },
-    { TidyDoctype,                  0,        
-        "Cette option spécifie la déclaration DOCTYPE générée par Tidy. <br/> Si <var>omit</"
-        "var> la sortie ne contiendra une déclaration DOCTYPE. Notez que ce cela implique "
-        "aussi <code>numeric-entities</code> est réglé sur <var>yes</var>. <br/> Si "
-        "<code>html5</code> le DOCTYPE est réglé sur <code>&lt;! DOCTYPE html&gt;</code>. <br/"
-        "> Si <var>auto</var> (par défaut) Tidy utilisera une supposition basée sur le "
-        "contenu du document. <br/> Si elle est définie <var>strict</var>, Tidy établira le "
-        "DOCTYPE du HTML4 ou XHTML 1 DTD stricte. <br/> Si <var>loose</var>, le DOCTYPE est "
-        "réglé sur le HTML4 ou XHTML1 loose (transitional) DTD. <br/> Alternativement, vous "
-        "pouvez fournir une chaîne pour l'identificateur public formel (FPI).<br/> Par "
-        "exemple: <br/> <code>doctype: \"- // ACME // DTD HTML. 3,14159 //EN\"</code> <br/> "
-        "Si vous spécifiez le FPI pour un document XHTML, Tidy établira l'identifiant du "
-        "système à une chaîne vide. Pour un document HTML, Tidy ajoute un identificateur de "
-        "système que si l'on était déjà présent dans le but de préserver le mode de certains "
-        "navigateurs de traitement. Tidy quitte le DOCTYPE pour les documents XML génériques "
-        "inchangés. <br/> Cette option ne permet pas une validation du document de conformité."
-    },
-    { TidyDropEmptyElems,           0, "Cette option spécifie si Tidy doit jeter des éléments vides."                     },
-    { TidyDropEmptyParas,           0, "Cette option spécifie si Tidy doit jeter des paragraphes vides."                  },
-    { TidyFixUri,                   0,        
-        "Cette option spécifie si Tidy doit vérifier les valeurs d'attributs qui portent URI "
-        "pour des caractères illégaux et si ce sont trouvés, leur échapper en HTML 4 "
-        "recommande."
-    },
-    { TidyPPrintTabs,               0,        
-        "Cette option spécifie si tidy doit Indenter avec tabulation au lieu des espaces, en "
-        "supposant <code>indent</code> est <var>yes</var>. <br/>Définir sur <var>yes</var> "
-        "pour indenter avec des tabulations au lieu de la valeur par défaut des espaces. <br /"
-        ">Utilisez l'option <code>indent-spaces</code> pour contrôler le nombre d'onglets "
-        "Sortie par niveau de tiret. Notez que lorsque <code>indent-with-tabs</code> est "
-        "activée. La valeur par défaut de <code>indent-spaces</code> est réinitialisé à "
-        "<var>1</var>. <br/>Remarque <code>tab-size</code> contrôle la conversion des espaces "
-        "d'entrée. Définissez-le à zéro pour conserver onglets de saisie."
-    },
-    { TidySkipNested,               0,        
-        "Cette option spécifie que Tidy doit ignorer les balises imbriquées lors de l'analyse "
-        "des données de script et de style."
-    },
+    { UNEXPECTED_END_OF_FILE,       0, "fin inattendue du fichier %s"                                                     },
+    { UNEXPECTED_ENDTAG,            0, "rejet inattendu </%s>"                                                            },
 
 #if SUPPORT_CONSOLE_APP
-    { TidyDiagnostics,              0, "diagnostics"                                                                      },
-    { TidyEncoding,                 0, "encoding"                                                                         },
-    { TidyMarkup,                   0, "markup"                                                                           },
-    { TidyMiscellaneous,            0, "misc"                                                                             },
-    { TidyPrettyPrint,              0, "imprimer"                                                                         },
     { TC_LABEL_COL,                 0, "colonne"                                                                          },
     { TC_LABEL_FILE,                0, "fichier"                                                                          },
     { TC_LABEL_LANG,                0, "lang"                                                                             },

@@ -26,7 +26,7 @@
  *          This wouldn't have been possible without your help.
  *
  * @copyright
- *     Copyright (c) 1998-2016 World Wide Web Consortium (Massachusetts
+ *     Copyright (c) 1998-2017 World Wide Web Consortium (Massachusetts
  *     Institute of Technology, European Research Consortium for Informatics
  *     and Mathematics, Keio University).
  * @par
@@ -1178,6 +1178,16 @@ TIDY_EXPORT Bool TIDY_CALL tidySetMessageCallback(TidyDoc tdoc,                 
  ** @result Returns the TidyDoc that generated the message.
  */
 TIDY_EXPORT TidyDoc TIDY_CALL tidyGetMessageDoc( TidyMessage tmessage );
+
+/** Get the message code.
+ ** @param tmessage Specify the message that you are querying.
+ ** @result Returns a code representing the message. This code can be used
+ **         directly with the localized strings API; however we never make
+ **         any guarantees about the value of these codes. For code stability
+ **         don't store this value in your own application. Instead use the
+ **         enum field or use the message key string value.
+ */
+TIDY_EXPORT uint TIDY_CALL tidyGetMessageCode( TidyMessage tmessage );
 
 /** Get the message key string.
  ** @param tmessage Specify the message that you are querying.

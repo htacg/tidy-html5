@@ -313,14 +313,24 @@ if (UNIX AND SUPPORT_CONSOLE_APP)
     endif ()
 endif ()
 
-##########################################################
-### Create MSI,EXE, DMG, DEB/RPM
-### TODO: Check each of these builds
-##########################################################
 set(BITNESS 32)
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
   set(BITNESS 64)
 endif()
+
+##########################################################
+### Create MSI,EXE, DMG, DEB/RPM
+### TODO: Check each of these builds
+##########################################################
+# Need to ensure that system dlls get included in a binary distribution
+if (NOT DEFINED CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_NO_WARNINGS)
+  # Visual Studio Express does include redistributable components so
+  # squelch the warning.
+  set (CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_NO_WARNINGS ON)
+endif ()
+set (CMAKE_INSTALL_DEBUG_LIBRARIES ON)
+include (InstallRequiredSystemLibraries)
+##########################################################
 if (WIN32)
     # MSI - this needs WiX Tooset installed and a path to candle.exe
     # EXE - this needs NSIS tools to be in path
@@ -345,8 +355,11 @@ set(CPACK_PACKAGE_VERSION_MAJOR "${TIDY_MAJOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_MINOR "${TIDY_MINOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_PATCH "${TIDY_POINT_VERSION}")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
-
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/README/LICENSE.md")
+if (WIN32)
+    set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/README/LICENSE.txt")
+else ()
+    set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/README/LICENSE.md")
+endif ()    
 set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
 set(CPACK_RESOURCE_FILE_WELCOME "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
 
@@ -355,6 +368,9 @@ set(CPACK_DEBIAN_PACKAGE_MAINTAINER ${CPACK_PACKAGE_CONTACT})
 set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "http://www.html-tidy.org/")
 #set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc")
 set(CPACK_DEBIAN_PACKAGE_SECTION "Libraries")
+set(CPACK_SOURCE_IGNORE_FILES
+  "${PROJECT_SOURCE_DIR}/build"
+  )
 
 ## RPM config
 set(CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/usr/share/man" "/usr/share/man/man1")

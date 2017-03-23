@@ -344,13 +344,17 @@ endif()
 ### TODO: Check each of these builds
 ##########################################################
 # Need to ensure that system dlls get included in a binary distribution
-if (NOT DEFINED CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_NO_WARNINGS)
-  # Visual Studio Express does include redistributable components so
-  # squelch the warning.
-  set (CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_NO_WARNINGS ON)
-endif ()
-set (CMAKE_INSTALL_DEBUG_LIBRARIES OFF)
-include (InstallRequiredSystemLibraries)
+# But since it can miss some... seems incomplete, make optionional
+option( ADD_SYSTEM_RUNTIMES "Set ON to include system runtime DLLS in distribution" OFF )
+if (MSVC AND ADD_SYSTEM_RUNTIMES)
+    if (NOT DEFINED CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_NO_WARNINGS)
+      # Visual Studio Express does include redistributable components so
+      # squelch the warning.
+      set (CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_NO_WARNINGS ON)
+    endif ()
+    set (CMAKE_INSTALL_DEBUG_LIBRARIES OFF)
+    include (InstallRequiredSystemLibraries)
+endif ()    
 ##########################################################
 if (WIN32)
     # MSI - this needs WiX Tooset installed and a path to candle.exe

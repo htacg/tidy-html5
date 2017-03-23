@@ -1825,6 +1825,121 @@ Node *TY_(FindBody)( TidyDocImpl* doc )
     return node;
 }
 
+/* Check meta charset
+   1. if there is no meta charset, it adds one.
+   2. if there is a meta charset, it moves it to the top if HEAD.
+   3. if it doesn't match the output encoding, warn about that.
+   4. if there are duplicates, discard them.
+ */
+Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
+{
+    AttVal *charsetAttr;
+    AttVal *contentAttr;
+    AttVal *httpEquivAttr;
+    Bool charsetFound = no;
+    ctmbstr enc = TY_(GetEncodingNameFromTidyId)(cfg(doc, TidyOutCharEncoding));
+    Node *currentNode;
+    Node *head = TY_(FindHEAD)( doc );
+    Node *metaTag;
+    Node *prevNode;
+    TidyBuffer buf;
+    TidyBuffer charsetString;
+    tmbstr httpEquivAttrValue;
+    tmbstr lcontent;
+    tmbstr newValue;
+    /* We can't do anything we don't have a head or encoding is NULL */
+    if( !head || !enc )
+        return no;
+    tidyBufInit(&charsetString);
+    for (currentNode = head->content; currentNode; currentNode = currentNode->next)
+    {
+        if (!nodeIsMETA(currentNode))
+            continue;
+        charsetAttr = attrGetCHARSET(currentNode);
+        httpEquivAttr = attrGetHTTP_EQUIV(currentNode);
+        if(!charsetAttr && !httpEquivAttr)
+            continue;
+        /*
+        Meta charset comes in quite a few flavors:
+        1. <meta charset=value> - expected for (X)HTML5.
+        */
+        if (charsetAttr && !httpEquivAttr)
+        {
+            // we already found one, so remove the rest.
+            if(charsetFound)
+            {
+                prevNode = currentNode->prev;
+                TY_(ReportError)(doc, head, currentNode, DISCARDING_UNEXPECTED);
+                TY_(DiscardElement)( doc, currentNode );
+                currentNode = prevNode;
+                continue;
+            }
+            charsetFound = yes;
+            // Fix mismatched attribute value
+            if(TY_(tmbstrcmp)(TY_(tmbstrtolower)(charsetAttr->value), enc) != 0)
+            {
+                newValue = (tmbstr) TidyDocAlloc( doc, TY_(tmbstrlen)(enc) );
+                TY_(tmbstrcpy)( newValue, enc );
+                TY_(ReportAttrError)( doc, currentNode, charsetAttr, BAD_ATTRIBUTE_VALUE_REPLACED );
+                charsetAttr->value = newValue;
+            }
+            // Make sure it's the first element.
+            if ( currentNode != head->content->next ){
+                TY_(RemoveNode)( currentNode );
+                TY_(InsertNodeAtStart)( head, currentNode );
+            }
+            continue;
+        }
+        /*
+        2. <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        expected for HTML4. This is normally ok - but can clash.
+        */
+        if(httpEquivAttr && !charsetAttr)
+        {
+            tidyBufClear(&charsetString);
+            tidyBufAppend(&charsetString, "charset=", 8);
+            tidyBufAppend(&charsetString, (char*)enc, TY_(tmbstrlen)( enc ));
+            contentAttr = TY_(AttrGetById)(currentNode, TidyAttr_CONTENT);
+            httpEquivAttrValue = TY_(tmbstrtolower)(httpEquivAttr->value);
+
+            if(!contentAttr || TY_(tmbstrcmp)(httpEquivAttr->value, (tmbstr) "content-type") != 0)
+                continue;
+            lcontent = TY_(tmbstrtolower)(contentAttr->value);
+            if(TY_(tmbsubstr)(lcontent, (ctmbstr) &charsetString)){
+                printf("WARN ABOUT CLASH: %s \n", contentAttr->value);
+            }
+        }
+        /*
+        3. <meta charset="utf-8" http-equiv="Content-Type" content="...">
+        This is generally bad.
+        */
+        if(httpEquivAttr && charsetAttr)
+        {
+           printf("WARN ABOUT HTTP EQUIV AND CHARSET ATTR! \n");
+        }
+    }
+    if(charsetFound){
+        return yes;
+    }
+    metaTag = TY_(InferredTag)(doc, TidyTag_META);
+    switch(TY_(HTMLVersion)(doc))
+    {
+        case HT50:
+        case XH50:
+            TY_(AddAttribute)( doc, metaTag, "charset", enc);
+            break;
+        default:
+            tidyBufInit(&buf);
+            tidyBufAppend(&buf, "text/html; charset=", 19);
+            tidyBufAppend(&buf, (char*)enc, TY_(tmbstrlen)(enc));
+            TY_(AddAttribute)( doc, metaTag, "content", (char*)buf.bp);
+            tidyBufFree(&buf);
+    }
+    TY_(InsertNodeAtStart)( head, metaTag );
+    tidyBufFree(&charsetString);
+    return yes;
+}
+
 /* add meta element for Tidy */
 Bool TY_(AddGenerator)( TidyDocImpl* doc )
 {

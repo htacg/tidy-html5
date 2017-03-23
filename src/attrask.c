@@ -193,6 +193,10 @@ Bool TIDY_CALL tidyAttrIsROWSPAN( TidyAttr tattr )
 {
     return attrIsROWSPAN( tidyAttrToImpl(tattr) );
 }
+Bool TIDY_CALL tidyAttrIsCHARSET( TidyAttr tattr )
+{
+    return attrIsCHARSET( tidyAttrToImpl(tattr) );
+}
 
 /*
  * local variables:

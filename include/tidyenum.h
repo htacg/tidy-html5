@@ -172,6 +172,7 @@ typedef enum
   TidySkipNested,          /**< Skip nested tags in script and style CDATA */
   TidyStrictTagsAttr,      /**< Ensure tags and attributes match output HTML version */
   TidyEscapeScripts,       /**< Escape items that look like closing tags in script tags */
+  TidyMetaCharset,         /**< Adds/checks/fixes meta charset in the head, based on document type */
   N_TIDY_OPTIONS           /**< Must be last */
 } TidyOptionId;
 

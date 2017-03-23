@@ -197,6 +197,10 @@ TidyAttr TIDY_CALL tidyAttrGetROWSPAN( TidyNode tnod )
 {
     return tidyImplToAttr( attrGetROWSPAN( tidyNodeToImpl(tnod) ) );
 }
+TidyAttr TIDY_CALL tidyAttrGetCHARSET( TidyNode tnod )
+{
+    return tidyImplToAttr( attrGetCHARSET( tidyNodeToImpl(tnod) ) );
+}
 
 /*
  * local variables:

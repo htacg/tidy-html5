@@ -491,6 +491,9 @@ Node* TY_(FindXmlDecl)(TidyDocImpl* doc);
 /* Returns containing block element, if any */
 Node* TY_(FindContainer)( Node* node );
 
+/* Adds meta element and sets the charset */
+Bool TY_(TidyMetaCharset)( TidyDocImpl* doc );
+
 /* add meta element for Tidy */
 Bool TY_(AddGenerator)( TidyDocImpl* doc );
 

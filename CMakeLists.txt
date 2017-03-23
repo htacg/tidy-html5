@@ -103,6 +103,27 @@ set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${WARNING_FLAGS} ${MSVC_FLAGS} -D_REENTRANT
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNING_FLAGS} ${MSVC_FLAGS} -D_REENTRANT" )
 set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${MSVC_LD_FLAGS}" )
 
+# option to use static windows runtime - maybe only applies to WIN32/MSVC
+if (MSVC)
+    option( USE_STATIC_RUNTIME "Set ON to change /MD(DLL) to /MT(static)" OFF )
+    if (USE_STATIC_RUNTIME)
+        set(CompilerFlags
+            CMAKE_CXX_FLAGS
+            CMAKE_CXX_FLAGS_DEBUG
+            CMAKE_CXX_FLAGS_RELEASE
+            CMAKE_C_FLAGS
+            CMAKE_C_FLAGS_DEBUG
+            CMAKE_C_FLAGS_RELEASE
+            )
+        foreach(CompilerFlag ${CompilerFlags})
+            string(REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
+        endforeach()    
+        message(STATUS "Using /MT STATIC runtime")
+    else ()
+        message(STATUS "Using /MD DYNAMIC runtime")
+    endif ()
+endif ()
+
 add_definitions ( -DHAVE_CONFIG_H )
 add_definitions ( -DSUPPORT_UTF16_ENCODINGS=1 )
 add_definitions ( -DSUPPORT_ASIAN_ENCODINGS=1 )
@@ -328,7 +349,7 @@ if (NOT DEFINED CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_NO_WARNINGS)
   # squelch the warning.
   set (CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_NO_WARNINGS ON)
 endif ()
-set (CMAKE_INSTALL_DEBUG_LIBRARIES ON)
+set (CMAKE_INSTALL_DEBUG_LIBRARIES OFF)
 include (InstallRequiredSystemLibraries)
 ##########################################################
 if (WIN32)

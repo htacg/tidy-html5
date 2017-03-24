@@ -103,6 +103,27 @@ set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${WARNING_FLAGS} ${MSVC_FLAGS} -D_REENTRANT
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNING_FLAGS} ${MSVC_FLAGS} -D_REENTRANT" )
 set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${MSVC_LD_FLAGS}" )
 
+# option to use static windows runtime - maybe only applies to WIN32/MSVC
+if (MSVC)
+    option( USE_STATIC_RUNTIME "Set ON to change /MD(DLL) to /MT(static)" OFF )
+    if (USE_STATIC_RUNTIME)
+        set(CompilerFlags
+            CMAKE_CXX_FLAGS
+            CMAKE_CXX_FLAGS_DEBUG
+            CMAKE_CXX_FLAGS_RELEASE
+            CMAKE_C_FLAGS
+            CMAKE_C_FLAGS_DEBUG
+            CMAKE_C_FLAGS_RELEASE
+            )
+        foreach(CompilerFlag ${CompilerFlags})
+            string(REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
+        endforeach()    
+        message(STATUS "Using /MT STATIC runtime")
+    else ()
+        message(STATUS "Using /MD DYNAMIC runtime")
+    endif ()
+endif ()
+
 add_definitions ( -DHAVE_CONFIG_H )
 add_definitions ( -DSUPPORT_UTF16_ENCODINGS=1 )
 add_definitions ( -DSUPPORT_ASIAN_ENCODINGS=1 )
@@ -313,14 +334,28 @@ if (UNIX AND SUPPORT_CONSOLE_APP)
     endif ()
 endif ()
 
-##########################################################
-### Create MSI,EXE, DMG, DEB/RPM
-### TODO: Check each of these builds
-##########################################################
 set(BITNESS 32)
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
   set(BITNESS 64)
 endif()
+
+##########################################################
+### Create MSI,EXE, DMG, DEB/RPM
+### TODO: Check each of these builds
+##########################################################
+# Need to ensure that system dlls get included in a binary distribution
+# But since it can miss some... seems incomplete, make optionional
+option( ADD_SYSTEM_RUNTIMES "Set ON to include system runtime DLLS in distribution" OFF )
+if (MSVC AND ADD_SYSTEM_RUNTIMES)
+    if (NOT DEFINED CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_NO_WARNINGS)
+      # Visual Studio Express does include redistributable components so
+      # squelch the warning.
+      set (CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_NO_WARNINGS ON)
+    endif ()
+    set (CMAKE_INSTALL_DEBUG_LIBRARIES OFF)
+    include (InstallRequiredSystemLibraries)
+endif ()    
+##########################################################
 if (WIN32)
     # MSI - this needs WiX Tooset installed and a path to candle.exe
     # EXE - this needs NSIS tools to be in path
@@ -345,8 +380,8 @@ set(CPACK_PACKAGE_VERSION_MAJOR "${TIDY_MAJOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_MINOR "${TIDY_MINOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_PATCH "${TIDY_POINT_VERSION}")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
-
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/README/LICENSE.md")
+# use one compatible license file for all
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/README/LICENSE.txt")
 set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
 set(CPACK_RESOURCE_FILE_WELCOME "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
 
@@ -355,6 +390,9 @@ set(CPACK_DEBIAN_PACKAGE_MAINTAINER ${CPACK_PACKAGE_CONTACT})
 set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "http://www.html-tidy.org/")
 #set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc")
 set(CPACK_DEBIAN_PACKAGE_SECTION "Libraries")
+set(CPACK_SOURCE_IGNORE_FILES
+  "${PROJECT_SOURCE_DIR}/build"
+  )
 
 ## RPM config
 set(CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/usr/share/man" "/usr/share/man/man1")

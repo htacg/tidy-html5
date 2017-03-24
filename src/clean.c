@@ -1394,12 +1394,6 @@ static Bool Font2Span( TidyDocImpl* doc, Node *node, Node **pnode )
 
     if ( nodeIsFONT(node) )
     {
-        if ( cfgBool(doc, TidyDropFontTags) )
-        {
-            DiscardContainer( doc, node, pnode );
-            return yes;
-        }
-
         /* if node is the only child of parent element then leave alone
           Do so only if BlockStyle may be succesful. */
         if ( node->parent->content == node && node->next == NULL &&

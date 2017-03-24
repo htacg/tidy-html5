@@ -167,9 +167,8 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { STRING_MISSING_MALFORMED,     0, "argument manquant ou incorrect pour l'option: %s"                                 },
     { STRING_XML_DECLARATION,       0, "déclaration XML"                                                                  },
     { STRING_NEEDS_INTERVENTION,    0,        
-        "Ce document contient des erreurs qui doivent être résolus avant\n"
-        "utilisant HTML Tidy pour générer une version rangé.\n"
-        "\n"
+        "Ce document contient des erreurs qui doivent être résolus avant "
+        "utilisant HTML Tidy pour générer une version rangé."
     },
     { STRING_NO_ERRORS,             0, "Aucun avertissement ou les erreurs ne trouvées."                                  },
     { STRING_NO_SYSID,              0, "Aucun identificateur de système dans le doctype émis"                             },
@@ -179,7 +178,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { STRING_SPECIFIED,             0, "spécifié"                                                                         },
     { STRING_UNKNOWN_OPTION,        0, "option inconnue: %s"                                                              },
     { TEXT_HTML_T_ALGORITHM,        0,        
-        "\n"
         "       - D'abord, cherchez à gauche de la position de la cellule de trouver \n"
         "         des cellules d'en-tête de ligne.\n"
         "       - Puis rechercher vers le haut pour trouver les cellules d'en-tête \n"
@@ -198,152 +196,136 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "         liste et le recherche arrête pour la direction du courant.\n"
         "         TD cellules qui fixent l'attribut de l'axe sont également \n"
         "         traités comme des cellules d'en-tête.\n"
-        "\n"
     },
     { TEXT_WINDOWS_CHARS,           0,        
-        "Personnages codes pour les polices Microsoft Windows dans la gamme\n"
-        "128-159 ne pas être reconnus sur d'autres plateformes. Vous êtes\n"
-        "au lieu recommandé d'utiliser les entités nommées, par exemple &trade; \n"
-        "plutôt code que Windows de caractères 153 (0x2122 en Unicode). Notez que\n"
-        "à partir de Février 1998 quelques navigateurs supportent les nouvelles \n"
-        "entités.\n"
-        "\n"
+        "Personnages codes pour les polices Microsoft Windows dans la gamme "
+        "128-159 ne pas être reconnus sur d'autres plateformes. Vous êtes "
+        "au lieu recommandé d'utiliser les entités nommées, par exemple &trade; "
+        "plutôt code que Windows de caractères 153 (0x2122 en Unicode). Notez que "
+        "à partir de Février 1998 quelques navigateurs supportent les nouvelles "
+        "entités."
     },
     { TEXT_VENDOR_CHARS,            0,        
-        "Il est peu probable que fournisseur spécifique, encodages qui dépendent du système\n"
+        "Il est peu probable que fournisseur spécifique, encodages qui dépendent du système "
         "travailler assez largement sur le World Wide Web; vous devriez éviter d'utiliser le "
-        "%s codage de caractères de $, à la place il est recommandé \n"
-        "de  utiliser entités nommées, par exemple &trade;.\n"
+        "%s codage de caractères de $, à la place il est recommandé "
+        "de  utiliser entités nommées, par exemple &trade;."
     },
     { TEXT_SGML_CHARS,              0,        
-        "Les codes de caractères 128 à 159 (U + 0080 à U + 009F) ne sont pas autorisés \n"
-        "en HTML; même si elles l'étaient, ils seraient probablement les \n"
-        "caractères non imprimables de contrôle.\n"
-        "Tidy supposé que vous vouliez faire référence à un personnage avec la même valeur "
-        "d'octet\n"
-        "l'encodage %s et remplacé cette référence avec l'équivalent Unicode.\n"
-        "\n"
+        "Les codes de caractères 128 à 159 (U + 0080 à U + 009F) ne sont pas autorisés "
+        "en HTML; même si elles l'étaient, ils seraient probablement les caractères "
+        "non imprimables de contrôle. Tidy supposé que vous vouliez faire référence "
+        "à un personnage avec la même valeur d'octet l'encodage %s et remplacé "
+        "cette référence avec l'équivalent Unicode."
     },
     { TEXT_INVALID_UTF8,            0,        
-        "Les codes de caractères UTF-8 doivent être dans la gamme: U + 0000 à U + 10FFFF.\n"
+        "Les codes de caractères UTF-8 doivent être dans la gamme: U + 0000 à U + 10FFFF. "
         "La définition de l'UTF-8 à l'annexe D de la norme ISO / CEI 10646-1: 2000 a "
-        "également\n"
-        "permet l'utilisation de séquences de cinq et six octets pour coder\n"
-        "des personnages qui sont en dehors de la gamme de l'ensemble de caractères Unicode;\n"
-        "ces séquences de cinq et six octets sont illégales pour l'utilisation de\n"
-        "UTF-8 comme une transformation de caractères Unicode. ISO / IEC 10646\n"
-        "ne permet pas la cartographie des substituts non appariés, ni U + FFFE et U + FFFF\n"
+        "également permet l'utilisation de séquences de cinq et six octets pour coder "
+        "des personnages qui sont en dehors de la gamme de l'ensemble de caractères Unicode; "
+        "ces séquences de cinq et six octets sont illégales pour l'utilisation de "
+        "UTF-8 comme une transformation de caractères Unicode. ISO / IEC 10646 "
+        "ne permet pas la cartographie des substituts non appariés, ni U + FFFE et U + FFFF "
         "(mais il ne permet d'autres non-caractères). Pour plus d'informations s'il vous "
-        "plaît se référer à\n"
-        "http://www.unicode.org/ et http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
-        "\n"
+        "plaît se référer à "
+        "http://www.unicode.org/ et http://www.cl.cam.ac.uk/~mgk25/unicode.html"
     },
     { TEXT_INVALID_UTF16,           0,        
-        "Codes de caractères pour UTF-16 doit être dans la gamme: U + 0000 à U + 10FFFF.\n"
+        "Codes de caractères pour UTF-16 doit être dans la gamme: U + 0000 à U + 10FFFF. "
         "La définition de UTF-16 dans l'annexe C de l'ISO/CEI 10646-1: 2000 n'autorise pas "
-        "le\n"
-        "mappage des substituts non appariés. Pour plus d'informations, veuillez vous "
-        "référer\n"
-        "à http://www.unicode.org/ et http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
-        "\n"
+        "le mappage des substituts non appariés. Pour plus d'informations, veuillez vous "
+        "référer "
+        "à http://www.unicode.org/ et http://www.cl.cam.ac.uk/~mgk25/unicode.html"
     },
     { TEXT_INVALID_URI,             0,        
-        "URI doit être correctement protégés, ils ne doivent pas contenir unescaped\n"
-        "caractères ci-dessous U + 0021, y compris le caractère d'espace et non\n"
-        "ci-dessus U + 007E. Tidy échappe à l'URI pour vous comme recommandé par\n"
-        "HTML 4.01 section B.2.1 et XML 1.0 section 4.2.2. Certains agents utilisateurs\n"
-        "utiliser un autre algorithme pour échapper à ces URI et un serveur-verso\n"
-        "scripts dépendent de cela. Si vous voulez compter sur cela, vous devez\n"
+        "URI doit être correctement protégés, ils ne doivent pas contenir unescaped "
+        "caractères ci-dessous U + 0021, y compris le caractère d'espace et non "
+        "ci-dessus U + 007E. Tidy échappe à l'URI pour vous comme recommandé par "
+        "HTML 4.01 section B.2.1 et XML 1.0 section 4.2.2. Certains agents utilisateurs "
+        "utiliser un autre algorithme pour échapper à ces URI et un serveur-verso "
+        "scripts dépendent de cela. Si vous voulez compter sur cela, vous devez "
         "échapper à l'URI sur votre propre. Pour plus d'informations s'il vous plaît se "
-        "référer à\n"
-        "http://www.w3.org/International/O-URL-and-ident.html\n"
-        "\n"
+        "référer à "
+        "http://www.w3.org/International/O-URL-and-ident.html"
     },
     { TEXT_BAD_FORM,                0,        
-        "Vous devrez peut-être déplacer un ou deux de la<form>et</form>\n"
-        "tags. Éléments HTML doivent être correctement imbriquées et les éléments\n"
-        "de formulaire ne font pas exception. Par exemple, vous ne devez pas placer la\n"
-        "<form>dans une cellule et la </form>dans un autre. Si le <form>est placé\n"
-        "devant une table, le </form>ne peut pas être placé à l'intérieur de la table !\n"
-        "Notez qu'une forme ne peut pas être imbriquée dans un autre !\n"
-        "\n"
+        "Vous devrez peut-être déplacer un ou deux de la<form>et</form> "
+        "tags. Éléments HTML doivent être correctement imbriquées et les éléments "
+        "de formulaire ne font pas exception. Par exemple, vous ne devez pas placer la "
+        "<form>dans une cellule et la </form>dans un autre. Si le <form>est placé "
+        "devant une table, le </form>ne peut pas être placé à l'intérieur de la table ! "
+        "Notez qu'une forme ne peut pas être imbriquée dans un autre !"
     },
     { TEXT_BAD_MAIN,                0,        
-        "Qu'un seul <main> élément est autorisé dans un document.\n"
-        "Les <main>éléments ont été jetées, qui peut invalider le document\n"
-        "\n"
+        "Qu'un seul <main> élément est autorisé dans un document. "
+        "Les <main>éléments ont été jetées, qui peut invalider le document "
     },
     { TEXT_M_SUMMARY,               0,        
-        "L'attribut summary table devrait servir à décrire la structure\n"
-        "de la table. Il est très utile pour les personnes utilisant des\n"
-        "navigateurs non visuels. Les attributs de portée et en-têtes\n"
-        "pour les cellules d'un tableau servent utiles pour spécifier les\n"
-        "en-têtes s'appliquent à chaque cellule du tableau, permettant\n"
-        "aux navigateurs non visuels fournir un contexte pour chaque cellule.\n"
-        "\n"
+        "L'attribut summary table devrait servir à décrire la structure "
+        "de la table. Il est très utile pour les personnes utilisant des "
+        "navigateurs non visuels. Les attributs de portée et en-têtes "
+        "pour les cellules d'un tableau servent utiles pour spécifier les "
+        "en-têtes s'appliquent à chaque cellule du tableau, permettant "
+        "aux navigateurs non visuels fournir un contexte pour chaque cellule. "
     },
     { TEXT_M_IMAGE_ALT,             0,        
-        "L'attribut alt devrait servir à donner une brève description d'une\n"
-        "image ; Il faudrait aussi des descriptions plus longues avec l'attribut\n"
-        "longdesc qui prend une URL liée à la description. Ces mesures sont\n"
-        "nécessaires pour les personnes utilisant des navigateurs textuels.\n"
-        "\n"
+        "L'attribut alt devrait servir à donner une brève description d'une "
+        "image ; Il faudrait aussi des descriptions plus longues avec l'attribut "
+        "longdesc qui prend une URL liée à la description. Ces mesures sont "
+        "nécessaires pour les personnes utilisant des navigateurs textuels. "
     },
     { TEXT_M_IMAGE_MAP,             0,        
-        "Utilisation côté client images interactives préférence cartes-images\n"
-        "côté serveur comme celui-ci est inaccessibles aux personnes utilisant\n"
-        "des navigateurs non graphiques. En outre, les cartes côté client sont\n"
-        "plus faciles à mettre en place et fournir une rétroaction immédiate\n"
-        "aux utilisateurs.\n"
-        "\n"
+        "Utilisation côté client images interactives préférence cartes-images "
+        "côté serveur comme celui-ci est inaccessibles aux personnes utilisant "
+        "des navigateurs non graphiques. En outre, les cartes côté client sont "
+        "plus faciles à mettre en place et fournir une rétroaction immédiate "
+        "aux utilisateurs. "
     },
     { TEXT_M_LINK_ALT,              0,        
-        "Liens hypertextes définie à l'aide d'une hyperimage côté client, vous\n"
-        "devez utiliser l'attribut alt pour fournir une description textuelle de la\n"
-        "liaison pour les personnes utilisant des navigateurs textuels.\n"
-        "\n"
+        "Liens hypertextes définie à l'aide d'une hyperimage côté client, vous "
+        "devez utiliser l'attribut alt pour fournir une description textuelle de la "
+        "liaison pour les personnes utilisant des navigateurs textuels."
     },
     { TEXT_USING_FRAMES,            0,        
-        "Pages conçues à l'aide de cadres pose des problèmes pour\n"
-        "les personnes qui sont aveugles ou utilisez un navigateur qui\n"
-        "ne supporte pas les frames. Une page de base de cadres doit\n"
-        "toujours inclure une disposition alternative à l'intérieur d'un\n"
-        "élément NOFRAMES.\n"
-        "\n"
+        "Pages conçues à l'aide de cadres pose des problèmes pour "
+        "les personnes qui sont aveugles ou utilisez un navigateur qui "
+        "ne supporte pas les frames. Une page de base de cadres doit "
+        "toujours inclure une disposition alternative à l'intérieur d'un "
+        "élément NOFRAMES. "
     },
     { TEXT_ACCESS_ADVICE1,          0,        
-        "Pour plus d'informations sur la façon de rendre vos pages\n"
+        "Pour plus d'informations sur la façon de rendre vos pages "
         "accessibles, voir http://www.w3.org/WAI/GL"
     },
-    { TEXT_ACCESS_ADVICE2,          0, "et http://www.html-tidy.org/Accessibility/"                                       },
+    { TEXT_ACCESS_ADVICE2,          0,
+        "Pour plus d'informations sur la façon de rendre vos pages "
+        "accessibles, voir http://www.w3.org/WAI/GL "
+        "et http://www.html-tidy.org/Accessibility/"
+    },
     { TEXT_USING_LAYER,             0,        
-        "Les Cascading Style Sheets (CSS) mécanisme de positionnement\n"
-        "Il est recommandé de préférence à la propriétaire <LAYER>\n"
-        "élément grâce à l'appui du fournisseur limitée pour la LAYER.\n"
-        "\n"
+        "Les Cascading Style Sheets (CSS) mécanisme de positionnement "
+        "Il est recommandé de préférence à la propriétaire <LAYER> "
+        "élément grâce à l'appui du fournisseur limitée pour la LAYER. "
     },
     { TEXT_USING_SPACER,            0,        
-        "Il est recommandé d'utiliser les CSS pour contrôler blanc\n"
-        "espace (par exemple pour retrait, les marges et interlignes).\n"
-        "Le <SPACER> élément propriétaire a le soutien des fournisseurs limité.\n"
-        "\n"
+        "Il est recommandé d'utiliser les CSS pour contrôler blanc "
+        "espace (par exemple pour retrait, les marges et interlignes). "
+        "Le <SPACER> élément propriétaire a le soutien des fournisseurs limité. "
     },
     { TEXT_USING_FONT,              0,        
-        "Il est recommandé d'utiliser les CSS pour spécifier la police et\n"
-        "propriétés telles que sa taille et sa couleur. Cela permettra de réduire\n"
-        "la taille des fichiers HTML et de les rendre plus faciles à entretenir\n"
-        "rapport à l'utilisation <FONT> éléments.\n"
-        "\n"
+        "Il est recommandé d'utiliser les CSS pour spécifier la police et "
+        "propriétés telles que sa taille et sa couleur. Cela permettra de réduire "
+        "la taille des fichiers HTML et de les rendre plus faciles à entretenir "
+        "rapport à l'utilisation <FONT> éléments. "
     },
     { TEXT_USING_NOBR,              0,        
-        "Il est recommandé d'utiliser les CSS pour contrôler les sauts de ligne.\n"
-        "Utilisez \"white-space: nowrap\" pour inhiber emballage en place\n"
-        "d'insertion <NOBR> ... </ NOBR> dans le balisage.\n"
-        "\n"
+        "Il est recommandé d'utiliser les CSS pour contrôler les sauts de ligne. "
+        "Utilisez \"white-space: nowrap\" pour inhiber emballage en place "
+        "d'insertion <NOBR> ... </ NOBR> dans le balisage."
     },
     { TEXT_USING_BODY,              0,        
         "Il est recommandé d'utiliser les CSS pour spécifier la page et de liaison des "
-        "couleurs\n"
+        "couleurs"
     },
     { TEXT_GENERAL_INFO,            0,        
         "A propos de HTML Tidy: https://github.com/htacg/tidy-html5\n"
@@ -352,14 +334,12 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "Spécification HTML dernière: http://dev.w3.org/html5/spec-author-view/\n"
         "Validez vos documents HTML: http://validator.w3.org/nu/\n"
         "Hall de votre entreprise à rejoindre le W3C: http://www.w3.org/Consortium\n"
-        "\n"
     },
     { TEXT_GENERAL_INFO_PLEA,       0,        
-        "\n"
-        "Parlez-vous une langue autre que l'anglais ou une autre variante de\n"
+        "Parlez-vous une langue autre que l'anglais ou une autre variante de "
         "Anglais? Considérez-nous aidant à localiser HTML Tidy. Pour plus de détails s'il "
-        "vous plaît voir\n"
-        "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md\n"
+        "vous plaît voir "
+        "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
     },
     { ANCHOR_NOT_UNIQUE,            0, "%s anchor \"%s\" déjà défini"                                                     },
     { ATTR_VALUE_NOT_LCASE,         0, "valeur d'attribut de %s « %s » doit être en minuscules pour XHTML"                },
@@ -462,26 +442,25 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { TC_OPT_ASCII,                 0, "utiliser ISO-8859-1 pour l'entrée, US-ASCII pour la sortie"                       },
     { TC_OPT_UPPER,                 0, "balises de force en majuscules"                                                   },
     { TC_TXT_HELP_3,                0,        
-        "\n"
         "Options de configuration Tidy\n"
         "==========================\n"
         "Utilisez les options de configuration de Tidy comme arguments de ligne de commande "
-        "sous la forme de «--option <value>\", par exemple, \"--indent-with-tabs yes\"\n"
-        "\n"
+        "sous la forme de «--option <value>\", par exemple, \"--indent-with-tabs yes\""
+        "\n\n"
         "Pour une liste de toutes les options de configuration, utiliser \"-help-config\"\n"
-        " ou consultez à la man page (si votre OS en a un).\n"
-        "\n"
-        "Si votre environnement a un ensemble de variables à un point de Tidy \n"
-        "$HTML_TIDY fichier de configuration puis Tidy va tenter de l'utiliser.\n"
-        "\n"
+        " ou consultez à la man page (si votre OS en a un)."
+        "\n\n"
+        "Si votre environnement a un ensemble de variables à un point de Tidy "
+        "$HTML_TIDY fichier de configuration puis Tidy va tenter de l'utiliser."
+        "\n\n"
         "Sur certaines plateformes Tidy tentera également d'utiliser une configuration "
-        "spécifiée dans /etc/tidy.conf ou ~/.tidy.conf.\n"
-        "\n"
+        "spécifiée dans /etc/tidy.conf ou ~/.tidy.conf."
+        "\n\n"
         "Autre\n"
         "=====\n"
-        "Entrée/sortie par défaut utiliser stdin/stdout respectivement.\n"
-        "\n"
-        "Options de simple lettre en dehors de -f peuvent être combinés\n"
+        "Entrée/sortie par défaut utiliser stdin/stdout respectivement."
+        "\n\n"
+        "Options de simple lettre en dehors de -f peuvent être combinés "
         "comme dans: bien rangé -f errs.txt -imu foo.html\n"
         "\n"
         "renseignements\n"
@@ -493,10 +472,8 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "\n"
         "  HTML: Edition pour les auteurs Web (de la dernière spécification de HTML)\n"
         "  http://dev.w3.org/html5/spec-author-view\n"
-        "\n"
     },
     { TC_TXT_HELP_CONFIG,           0,        
-        "\n"
         "HTML Tidy paramètres de configuration\n"
         "\n"
         "Dans un fichier, utilisez le formulaire:\n"
@@ -507,47 +484,39 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "Quand il est spécifié sur la ligne de commande, utilisez le formulaire:\n"
         "\n"
         "--wrap 72 --indent pas\n"
-        "\n"
     },
     { TC_TXT_HELP_CONFIG_NAME,      0, "Nom"                                                                              },
     { TC_TXT_HELP_CONFIG_TYPE,      0, "Type"                                                                             },
     { TC_TXT_HELP_CONFIG_ALLW,      0, "Les valeurs autorisées"                                                           },
     { TC_TXT_HELP_LANG_1,           0,        
-        "\n"
-        "L'option -language (ou -lang) indique la langue Tidy\n"
+        "L'option -language (ou -lang) indique la langue Tidy "
         "doit utiliser pour communiquer sa sortie. S'il vous plaît noter que ce ne sont pas "
         "un service de traduction de documents, et affecte uniquement les messages qui Tidy "
-        "communique à vous.\n"
-        "\n"
-        "Lorsqu'il est utilisé à partir de la ligne de commande de l'argument doit \n"
+        "communique à vous."
+        "\n\n"
+        "Lorsqu'il est utilisé à partir de la ligne de commande de l'argument doit "
         "-language être utilisé avant des arguments qui résultent de la production, sinon "
-        "Tidy\n"
-        "va produire une sortie avant qu'il connaît la langue à utiliser.\n"
-        "\n"
-        "En plus des codes de langue standard POSIX, Tidy est capable de\n"
-        "héritées compréhension codes de langue de Windows. S'il vous plaît noter que \n"
-        "cette liste indique les codes Tidy comprend, et ne signifie pas que\n"
-        "la langue est actuellement installé.\n"
-        "\n"
-        "La colonne de droite indique comment Tidy comprendra le\n"
+        "Tidy va produire une sortie avant qu'il connaît la langue à utiliser."
+        "\n\n"
+        "En plus des codes de langue standard POSIX, Tidy est capable de "
+        "héritées compréhension codes de langue de Windows. S'il vous plaît noter que "
+        "cette liste indique les codes Tidy comprend, et ne signifie pas que "
+        "la langue est actuellement installé."
+        "\n\n"
+        "La colonne de droite indique comment Tidy comprendra le "
         "héritage nom Windows.\n"
-        "\n"
     },
-    { TC_TXT_HELP_LANG_2,           0,        
-        "\n"
-        "Notez qu'il n'y a aucune garantie qu'ils sont complets; seulement ça\n"
-        "un développeur ou d'une autre ont commencé à ajouter la langue indiquée.\n"
-        "Localisations incomplètes ne seront par défaut \"et\" si nécessaire.\n"
-        "S'il vous plaît signaler les cas de chaînes incorrectes à l'équipe Tidy.\n"
-        "\n"
+    { TC_TXT_HELP_LANG_2,           0,
+        "Notez qu'il n'y a aucune garantie qu'ils sont complets; seulement ça "
+        "un développeur ou d'une autre ont commencé à ajouter la langue indiquée. "
+        "Localisations incomplètes ne seront par défaut \"et\" si nécessaire. "
+        "S'il vous plaît signaler les cas de chaînes incorrectes à l'équipe Tidy."
     },
     { TC_TXT_HELP_LANG_3,           0,        
-        "\n"
-        "Si Tidy est capable de déterminer votre localisation puis Tidy utilisera le\n"
+        "Si Tidy est capable de déterminer votre localisation puis Tidy utilisera le "
         "langue locale automatiquement. Par exemple les systèmes Unix-like utilisent un $LANG "
         "et/ou $LC_ALL variable d'environnement. Consultez votre exploitation documentation "
-        "du système pour plus d'informations.\n"
-        "\n"
+        "du système pour plus d'informations."
     },
 #endif /* SUPPORT_CONSOLE_APP */
 

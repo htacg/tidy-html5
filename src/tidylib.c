@@ -950,6 +950,19 @@ Bool TIDY_CALL        tidySetPrettyPrinterCallback(TidyDoc tdoc, TidyPPProgress 
 }
 
 
+/* Return an allocated string wrapped to a column. */
+tmbstr TIDY_CALL tidyWrappedText(TidyDoc tdoc, ctmbstr string, uint columns)
+{
+    TidyDocImpl* impl = tidyDocToImpl( tdoc );
+    if (impl)
+    {
+        return TY_(tidyWrappedText)(impl, string, columns);
+    }
+    
+    return NULL;
+}
+
+
 /* Document info */
 int TIDY_CALL        tidyStatus( TidyDoc tdoc )
 {
@@ -1973,7 +1986,6 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     Bool logical  = cfgBool( doc, TidyLogicalEmphasis );
     Bool clean    = cfgBool( doc, TidyMakeClean );
     Bool gdoc     = cfgBool( doc, TidyGDocClean );
-    Bool dropFont = cfgBool( doc, TidyDropFontTags );
     Bool htmlOut  = cfgBool( doc, TidyHtmlOut );
     Bool xmlOut   = cfgBool( doc, TidyXmlOut );
     Bool xhtmlOut = cfgBool( doc, TidyXhtmlOut );
@@ -2014,7 +2026,7 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     }
 
     /* replaces presentational markup by style rules */
-    if ( clean || dropFont )
+    if ( clean )
         TY_(CleanDocument)( doc );
 
     /* clean up html exported by Google Docs */

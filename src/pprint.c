@@ -2328,8 +2328,7 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
         {
             Bool indcont  = ( cfgAutoBool(doc, TidyIndentContent) != TidyNoState );
             Bool indsmart = ( cfgAutoBool(doc, TidyIndentContent) == TidyAutoState );
-            Bool hideend  = cfgBool( doc, TidyHideEndTags ) ||
-              cfgBool( doc, TidyOmitOptionalTags );
+            Bool hideend  = cfgBool( doc, TidyOmitOptionalTags );
             Bool classic  = TidyClassicVS; /* #228 - cfgBool( doc, TidyVertSpace ); */
             uint contentIndent = indent;
 

@@ -62,29 +62,32 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
       TIDY_LANGUAGE,                   0, "en_gb"
     },
     { TidyMergeDivs,                   0,        
-        "This option can be used to modify the behaviour of <code>clean</code> when "
-        "set to <code>yes</code>."
+        "This option can be used to modify the behaviour of <code>clean</code> "
+        "when set to <var>yes</var>."
         "<br/>"
-        "This option specifies if Tidy should merge nested <code>&lt;div&gt;</code> "
-        "such as <code>&lt;div&gt;&lt;div&gt;...&lt;/div&gt;&lt;/div&gt;</code>. "
+        "This option specifies if Tidy should merge nested "
+        "<code>&lt;div&gt;</code> "
+        "such as "
+        "<code>&lt;div&gt;&lt;div&gt;...&lt;/div&gt;&lt;/div&gt;</code>."
         "<br/>"
-        "If set to <code>auto</code> the attributes of the inner "
+        "If set to <var>auto</var> the attributes of the inner "
         "<code>&lt;div&gt;</code> are moved to the outer one. Nested "
-        "<code>&lt;div&gt;</code> with <code>id</code> attributes are <em>not</em> "
-        "merged. "
+        "<code>&lt;div&gt;</code> with <code>id</code> attributes are "
+        "<em>not</em> merged."
         "<br/>"
-        "If set to <code>yes</code> the attributes of the inner "
+        "If set to <var>yes</var> the attributes of the inner "
         "<code>&lt;div&gt;</code> are discarded with the exception of "
-        "<code>class</code> and <code>style</code>. "
+        "<code>class</code> and <code>style</code>."
     },
-    { TidyMergeSpans,                  0,        
-        "This option can be used to modify the behaviour of <code>clean</code> when "
-        "set to <code>yes</code>."
+    { TidyMergeSpans,                  0,
+        "This option can be used to modify the behaviour of <code>clean</code> "
+        "when set to <var>yes</var>."
         "<br/>"
-        "This option specifies if Tidy should merge nested <code>&lt;span&gt;</code> "
-        "such as <code>&lt;span&gt;&lt;span&gt;...&lt;/span&gt;&lt;/span&gt;</code>. "
+        "This option specifies if Tidy should merge nested "
+        "<code>&lt;span&gt;</code> such as "
+        "<code>&lt;span&gt;&lt;span&gt;...&lt;/span&gt;&lt;/span&gt;</code>."
         "<br/>"
-        "The algorithm is identical to the one used by <code>merge-divs</code>. "
+        "The algorithm is identical to the one used by <code>merge-divs</code>."
     },
     { TidyReplaceColor,                0,        
         "This option specifies if Tidy should replace numeric values in colour "
@@ -92,17 +95,17 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
         "<code>#ffffff</code> with <code>white</code>. "
     },
     { TEXT_USING_FONT,                 0,        
-        "You are recommended to use CSS to specify the font and\n"
-        "properties such as its size and colour. This will reduce\n"
-        "the size of HTML files and make them easier to maintain\n"
-        "compared with using <FONT> elements.\n\n"
+        "You are recommended to use CSS to specify the font and "
+        "properties such as its size and colour. This will reduce "
+        "the size of HTML files and make them easier to maintain "
+        "compared with using <FONT> elements."
+        "\n"
     },
     { TEXT_USING_BODY,                 0, "You are recommended to use CSS to specify page and link colours\n"           },
     { TEXT_GENERAL_INFO_PLEA,          0,        
-        "\n"
-        "Would you like to see Tidy in proper, British English? Please consider \n"
-        "helping us to localise HTML Tidy. For details please see \n"
-        "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md\n"
+        "Would you like to see Tidy in proper, British English? Please consider "
+        "helping us to localise HTML Tidy. For details please see "
+        "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
     },
 
 #if SUPPORT_ACCESSIBILITY_CHECKS

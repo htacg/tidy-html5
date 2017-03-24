@@ -177,9 +177,11 @@ static void messageOut( TidyMessageImpl *message )
     if ( go )
     {
         TidyOutputSink *outp = &doc->errout->sink;
+        uint columns = message->level > TidyFatal ? cfg( doc, TidyConsoleWidth ) : 0;
+        tmbstr wrapped = TY_(tidyWrappedText)( doc, message->messageOutput, columns );
         ctmbstr cp;
         byte b = '\0';
-        for ( cp = message->messageOutput; *cp; ++cp )
+        for ( cp = wrapped; *cp; ++cp )
         {
             b = (*cp & 0xff);
             if (b == (byte)'\n')
@@ -187,11 +189,12 @@ static void messageOut( TidyMessageImpl *message )
             else
                 outp->putByte( outp->sinkData, b ); /* #383 - no encoding */
         }
-
+        TidyDocFree( doc, wrapped );
+        
         /* Always add a trailing newline. Reports require this, and dialogue
            messages will be better spaced out without having to fill the
            language file with superflous newlines. */
-        TY_(WriteChar)( '\n', doc->errout );
+        /* TY_(WriteChar)( '\n', doc->errout ); */
     }
 
     TY_(tidyMessageRelease)(message);
@@ -1039,6 +1042,187 @@ uint TY_(getNextErrorCode)( TidyIterator* iter )
     
     *iter = (TidyIterator)( itemIndex <= tidyErrorCodeListSize() ? itemIndex : (size_t)0 );
     return item->value;
+}
+
+
+/*********************************************************************
+ * Output Utility Functions
+ *********************************************************************/
+
+
+/** A simple structure to hold our list of words. */
+typedef struct word {
+    ctmbstr s;  /**< a pointer to the start of the word. */
+    uint len;   /**< The length of the word in bytes. */
+} *wordList;
+
+
+/** Make a list of all of the words that we want to output. Keeping this
+ ** separate allows us the possibility to write other word wrap functions in
+ ** the future, such as typographically beautiful ones instead of greedy ones.
+ ** @param s The string to word wrap.
+ ** @param [out] n A pointer to an integer indicating the number of words in 
+ **        the list. Note that the number of words includes the count of 
+ **        newlines, which are considered words for our purpose.
+ ** @return The list of words, as allocated memory.
+ */
+static wordList makeWordList( TidyDocImpl* doc, ctmbstr s, uint *n )
+{
+    uint max_n = 0;
+    wordList words = 0;
+    
+    *n = 0;
+
+    while (1)
+    {
+        while ( *s && isblank(*s) )
+        {
+            s++;
+        }
+        
+        if ( !*s )
+        {
+            break;
+        }
+        
+        if ( *n >= max_n )
+        {
+            if ( !(max_n *= 2) )
+            {
+                max_n = 2;
+            }
+            words = TidyDocRealloc(doc, words, max_n * sizeof(*words));
+        }
+
+        words[*n].s = s;
+
+        if ( *s == '\n' )
+        {
+            s++;
+            words[*n].len = 1;
+        }
+        else
+        {
+            while ( *s && (!isspace(*s)) )
+            {
+                s++;
+                words[*n].len = (uint)(s - words[*n].s);
+            }
+        }
+
+        (*n)++;
+    }
+    
+    return words;
+}
+
+
+/** Builds a list of line breaks according to the number of specified columns.
+ ** Note that newlines will be treated properly as breaks, but it's important
+ ** that your writing routine identify and not output them, lest you end up
+ ** with a double quantity of newlines.
+ ** @param words A wordList of words, previously generated.
+ ** @param count A count of the words in the wordlist, previously generated.
+ ** @param cols The maximum number of columns to write.
+ ** @result A list of line breaks, as allocated memory.
+ **
+ */
+static uint* makeBreakList( TidyDocImpl* doc, wordList words, uint count, uint cols )
+{
+    uint line = 0;
+    uint i = 0;
+    uint j = 0;
+    Bool isNewline = no;
+    uint *breaks = TidyDocAlloc(doc, sizeof(uint) * (count + 1) );
+    
+    while (1)
+    {
+        if ( i == count )
+        {
+            breaks[j++] = i;
+            break;
+        }
+
+        isNewline = words[i].s[0] == '\n';
+        
+        if ( !line && !isNewline )
+        {
+            line = words[i++].len;
+            continue;
+        }
+        
+        if ( line + words[i].len < cols && !isNewline )
+        {
+            line += words[i++].len + 1;
+            continue;
+        }
+        
+        if ( isNewline )
+        {
+            i++;
+        }
+        
+        breaks[j++] = i;
+        line = 0;
+    }
+    breaks[j++] = 0;
+    return breaks;
+}
+
+
+/** Returns an allocated string of the wrapped text using using the 
+ ** makeBreakList() wrapping algorithm.
+ ** @param doc A Tidy document so that we can use its allocator.
+ ** @param text The text to wrap.
+ ** @param columns The maximum column count to output.
+ ** @result An allocated, word-wrapped string.
+ */
+tmbstr TY_(tidyWrappedText)( TidyDocImpl* doc, ctmbstr string, uint columns )
+{
+    uint i = 0;
+    uint j = 0;
+    uint nl = 0;
+    uint nnl = 0;
+
+    uint len;
+    wordList list;
+    uint *breaks;
+    uint sizeBuf;
+
+    columns = columns > 0 ? columns : UINT_MAX;
+    list = makeWordList( doc,string, &len );
+    breaks = makeBreakList( doc, list, len, columns );
+    sizeBuf = (uint)strlen(list[0].s) + sizeof(breaks) * len + 1;
+
+    char *output = TidyDocAlloc( doc, sizeBuf );
+    output[0] = '\0';
+
+    for ( i = 0; i < len && breaks[i]; i++ )
+    {
+        while ( j < breaks[i] )
+        {
+            nl = list[j].s[0] == '\n';
+            nnl = j + 1 < len && list[j+1].s[0] == '\n';
+            
+            if ( !nl )
+            {
+                uint size = strlen(output);
+                snprintf( output + size, sizeBuf - size + 1, "%.*s", list[j].len, list[j].s );
+            }
+            if ( j < breaks[i] - 1 && !nnl )
+            {
+                snprintf( output + strlen(output), 2, " " );
+            }
+            j++;
+        }
+        if ( breaks[i] )
+        {
+            snprintf( output + strlen(output), 2, "\n" );
+        }
+    }
+
+    TidyDocFree(doc, breaks);
+    return output;
 }
 
 

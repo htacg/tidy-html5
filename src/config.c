@@ -240,6 +240,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyBreakBeforeBR,           PP, "break-before-br",             BL, no,              ParseBool,         boolPicks       },
     { TidyCharEncoding,            CE, "char-encoding",               IN, UTF8,            ParseCharEnc,      charEncPicks    },
     { TidyCoerceEndTags,           MU, "coerce-endtags",              BL, yes,             ParseBool,         boolPicks       },
+    { TidyConsoleWidth,            PP, "console-width",               IN, 80,              ParseInt,          NULL            },
     { TidyCSSPrefix,               MU, "css-prefix",                  ST, 0,               ParseCSS1Selector, NULL            },
     { TidyCustomTags,              IR, "new-custom-tags",             ST, 0,               ParseTagNames,     NULL            }, /* 20170309 - Issue #119 */
     { TidyDecorateInferredUL,      MU, "decorate-inferred-ul",        BL, no,              ParseBool,         boolPicks       },

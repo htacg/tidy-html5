@@ -1,17 +1,35 @@
-/*
- tidy.c - HTML TidyLib command line driver
-
- Copyright (c) 1998-2008 World Wide Web Consortium
- (Massachusetts Institute of Technology, European Research
- Consortium for Informatics and Mathematics, Keio University).
- All Rights Reserved.
-
- */
+/***************************************************************************//**
+ * @file
+ * HTML TidyLib command line driver.
+ *
+ * This console application utilizing LibTidy in order to offer a complete
+ * console application offering all of the features of LibTidy.
+ *
+ * @author  HTACG, et al (consult git log)
+ * 
+ * @copyright
+ *     Copyright (c) 1998-2017 World Wide Web Consortium (Massachusetts
+ *     Institute of Technology, European Research Consortium for Informatics
+ *     and Mathematics, Keio University) and HTACG.
+ * @par
+ *     All Rights Reserved.
+ * @par
+ *     See `tidy.h` for the complete license.
+ *
+ * @date Additional updates: consult git log
+ ******************************************************************************/
 
 #include "tidy.h"
-#include "locale.h"
+#include "tidybuffio.h"
+#include "locale.h"     /* for determing and setting locale */
+#include "limits.h"     /* UINT_MAX, etc. */
+#if !defined(_WIN32)
+#include <sys/ioctl.h>  /* Console size sniffing */
+#include "unistd.h"     /* isatty */
+#endif
 #if defined(_WIN32)
-#include <windows.h> /* Force console to UTF8. */
+#include <windows.h>    /* Force console to UTF8. */
+#include "io.h"         /* _isatty */
 #endif
 #if !defined(NDEBUG) && defined(_MSC_VER)
 #include "sprtf.h"
@@ -21,17 +39,36 @@
 #define SPRTF printf
 #endif
 
-static FILE* errout = NULL;  /* set to stderr */
-/* static FILE* txtout = NULL; */  /* set to stdout */
+/** Tidy will send errors to this file, which will be stderr later. */
+static FILE* errout = NULL;
 
 #if defined(_WIN32)
+/** On Windows, we will store the original code page here. */
 static uint win_cp; /* original Windows code page */
 #endif
 
-/**
- **  Indicates whether or not two filenames are the same.
+
+/** @defgroup console_application Tidy Console Application
+ ** @copydoc tidy.c
+ ** @{
  */
-static Bool samefile( ctmbstr filename1, ctmbstr filename2 )
+
+
+/* MARK: - Miscellaneous Utilities */
+/***************************************************************************//**
+ ** @defgroup utilities_misc Miscellaneous Utilities
+ ** This group contains general utilities used in the console application.
+ *******************************************************************************
+ ** @{
+ */
+
+
+/** Indicates whether or not two filenames are the same.
+ ** @result Returns a Bool indicating whether the filenames are the same.
+ */
+static Bool samefile(ctmbstr filename1, /**< First filename */
+                     ctmbstr filename2  /**< Second filename */
+                     )
 {
 #if FILENAMES_CASE_SENSITIVE
     return ( strcmp( filename1, filename2 ) == 0 );
@@ -41,10 +78,9 @@ static Bool samefile( ctmbstr filename1, ctmbstr filename2 )
 }
 
 
-/**
- **  Handles exit cleanup.
+/** Handles exit cleanup.
  */
-static void tidy_cleanup()
+static void tidy_cleanup( void )
 {
 #if defined(_WIN32)
     /* Restore original Windows code page. */
@@ -52,8 +88,8 @@ static void tidy_cleanup()
 #endif
 }
 
-/**
- **  Exits with an error in the event of an out of memory condition.
+
+/** Exits with an error in the event of an out of memory condition.
  */
 static void outOfMemory(void)
 {
@@ -62,10 +98,82 @@ static void outOfMemory(void)
 }
 
 
-/**
- **  Used by `print2Columns` and `print3Columns` to manage whitespace.
+/** Create a new, allocated string with a format and arguments.
+ ** @result Returns a new, allocated string that you must free.
  */
-static const char *cutToWhiteSpace(const char *s, uint offset, char *sbuf)
+static tmbstr stringWithFormat(const ctmbstr fmt, /**< The format string. */
+                               ...                /**< Variable arguments. */
+                               )
+{
+    va_list argList;
+    tmbstr result = NULL;
+    int len = 0;
+
+    va_start(argList, fmt);
+    len = vsnprintf( result, 0, fmt, argList );
+    va_end(argList);
+
+    if (!(result = malloc( len + 1) ))
+        outOfMemory();
+
+    va_start(argList, fmt);
+    vsnprintf( result, len + 1, fmt, argList);
+    va_end(argList);
+
+    return result;
+}
+
+
+/** Determine whether or not all output is going to an interactive console.
+ ** @result Returns a Bool indicating that all output is going to a console.
+ */
+static Bool outputToConsole( void )
+{
+#if defined(_WIN32)
+#define isatty _isatty
+#endif
+    return isatty(fileno(stdout))   /* No console redirection */
+        && isatty(fileno(stderr))   /* No console redirection */
+        && isatty(fileno(errout));  /* No use of the -file option */
+}
+
+
+/** Determine the width of the console.
+ ** @result Returns the width of the console.
+ */
+static uint getConsoleWidth( void )
+{
+#if !defined(_WIN32)
+    struct winsize size;
+    ioctl(fileno(stdout), TIOCGWINSZ, &size);
+
+    return size.ws_col;
+#else
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    return csbi.srWindow.Right - csbi.srWindow.Left + 1;
+#endif
+}
+
+
+/** @} end utilities_misc group */
+/* MARK: - Output Helping Functions */
+/***************************************************************************//**
+ ** @defgroup utilities_output Output Helping Functions
+ ** This group functions that aid the formatting of output.
+ *******************************************************************************
+ ** @{
+ */
+
+
+/** Used by `print2Columns` and `print3Columns` to manage wrapping text within
+ ** columns.
+ ** @result The pointer to the next part of the string to output.
+ */
+static const char *cutToWhiteSpace(const char *s, /**< starting point of desired string to output */
+                                   uint offset,   /**< column width desired */
+                                   char *sbuf     /**< the buffer to output */
+                                   )
 {
     if (!s)
     {
@@ -109,28 +217,15 @@ static const char *cutToWhiteSpace(const char *s, uint offset, char *sbuf)
     }
 }
 
-/**
- **  Outputs one column of text.
- */
-static void print1Column( const char* fmt, uint l1, const char *c1 )
-{
-    const char *pc1=c1;
-    char *c1buf = (char *)malloc(l1+1);
-    if (!c1buf) outOfMemory();
 
-    do
-    {
-        pc1 = cutToWhiteSpace(pc1, l1, c1buf);
-        printf(fmt, c1buf[0] !='\0' ? c1buf : "");
-    } while (pc1);
-    free(c1buf);
-}
-
-/**
- **  Outputs two columns of text.
+/** Outputs two columns of text.
  */
-static void print2Columns( const char* fmt, uint l1, uint l2,
-                          const char *c1, const char *c2 )
+static void print2Columns(const char* fmt, /**< The format string for formatting the output. */
+                          uint l1,         /**< The width of column 1. */
+                          uint l2,         /**< The width of column 2. */
+                          const char *c1,  /**< The contents of column 1. */
+                          const char *c2   /**< The contents of column 2. */
+)
 {
     const char *pc1=c1, *pc2=c2;
     char *c1buf = (char *)malloc(l1+1);
@@ -142,19 +237,24 @@ static void print2Columns( const char* fmt, uint l1, uint l2,
     {
         pc1 = cutToWhiteSpace(pc1, l1, c1buf);
         pc2 = cutToWhiteSpace(pc2, l2, c2buf);
-        printf(fmt,
-               c1buf[0]!='\0'?c1buf:"",
-               c2buf[0]!='\0'?c2buf:"");
+        printf(fmt, l1, l1, c1buf[0]!='\0'?c1buf:"",
+                    l2, l2, c2buf[0]!='\0'?c2buf:"");
     } while (pc1 || pc2);
     free(c1buf);
     free(c2buf);
 }
 
-/**
- **  Outputs three columns of text.
+
+/** Outputs three columns of text.
  */
-static void print3Columns( const char* fmt, uint l1, uint l2, uint l3,
-                          const char *c1, const char *c2, const char *c3 )
+static void print3Columns(const char* fmt, /**< The three column format string. */
+                          uint l1,         /**< Width of column 1. */
+                          uint l2,         /**< Width of column 2. */
+                          uint l3,         /**< Width of column 3. */
+                          const char *c1,  /**< Content of column 1. */
+                          const char *c2,  /**< Content of column 2. */
+                          const char *c3   /**< Content of column 3. */
+                          )
 {
     const char *pc1=c1, *pc2=c2, *pc3=c3;
     char *c1buf = (char *)malloc(l1+1);
@@ -179,17 +279,71 @@ static void print3Columns( const char* fmt, uint l1, uint l2, uint l3,
     free(c3buf);
 }
 
-/**
- **  Format strings and decorations used in output.
+
+/** Prints a wrapped line, including a terminating newline.
  */
-static const char helpfmt[] = " %-25.25s %-52.52s\n";
+static int printf_wrapped(TidyDoc tdoc, /**< Tidy document needing output. */
+                          ctmbstr fmt,  /**< The format string. */
+                          ...           /**< Variable arguments for the format string. */
+                          )
+{
+    tmbstr buffer, bufferOut;
+    int result;
+    va_list args, args_copy;
+    uint width = tidyOptGetInt(tdoc, TidyConsoleWidth);
+    width = width == 0 ? UINT_MAX : width;
+
+    va_start(args, fmt);
+    va_copy(args_copy, args);
+    result = vsnprintf(NULL, 0, fmt, args_copy) + 1;
+    buffer = malloc(result);
+    result = vsnprintf(buffer, result, fmt, args);
+    va_end(args_copy);
+    va_end(args);
+
+    bufferOut = tidyWrappedText(tdoc, buffer, width);
+    result = printf( "%s", bufferOut );
+    free(buffer);
+    free(bufferOut);
+
+    return result;
+}
+
+
+/** Provides the `unknown option` output to the current errout.
+ */
+static void unknownOption(TidyDoc tdoc, /**< The Tidy document. */
+                          uint c        /**< The unknown option. */
+                          )
+{
+    fprintf( errout, tidyLocalizedString( TC_STRING_UNKNOWN_OPTION ), (char)c );
+    fprintf( errout, "\n");
+}
+
+
+/** @} end utilities_output group */
+/* MARK: - CLI Options Utilities */
+/***************************************************************************//**
+ ** @defgroup options_cli CLI Options Utilities
+ ** These structures, arrays, declarations, and definitions are used throughout
+ ** this console application.
+ *******************************************************************************
+ ** @{
+ */
+
+
+/** @name Format strings and decorations used in output.
+ ** @{
+ */
+
+static const char helpfmt[] = " %-*.*s %-*.*s\n";
 static const char helpul[]  = "-----------------------------------------------------------------";
 static const char fmt[]     = "%-27.27s %-9.9s  %-40.40s\n";
-static const char valfmt[]  = "%-27.27s %-9.9s  %-39.39s\n";
 static const char ul[]      = "=================================================================";
 
-/**
- **  This enum is used to categorize the options for help output.
+/** @} */
+
+/** This enum is used to categorize the options for help output.
  */
 typedef enum
 {
@@ -202,8 +356,7 @@ typedef enum
     CmdOptCatLAST
 } CmdOptCategory;
 
-/**
- **  This array contains headings that will be used in help ouput.
+/** This array contains headings that will be used in help ouput.
  */
 static const struct {
     ctmbstr mnemonic;  /**< Used in XML as a class. */
@@ -216,9 +369,8 @@ static const struct {
     { "xml", TC_STRING_XML }
 };
 
-/**
- **  The struct and subsequent array keep the help output structured
- **  because we _also_ output all of this stuff as as XML.
+/** The struct and subsequent array keep the help output structured
+ ** because we _also_ output all of this stuff as as XML.
  */
 typedef struct {
     CmdOptCategory cat; /**< Category */
@@ -230,8 +382,9 @@ typedef struct {
     ctmbstr name3;      /**< Name */
 } CmdOptDesc;
 
-/* All instances of %s will be substituted with localized string
- specified by the subKey field. */
+/** All instances of %s will be substituted with localized string
+ ** specified by the subKey field.
+ */
 static const CmdOptDesc cmdopt_defs[] =  {
     { CmdOptFileManip, "-output <%s>",         TC_OPT_OUTPUT,   TC_LABEL_FILE, "output-file: <%s>", "-o <%s>" },
     { CmdOptFileManip, "-config <%s>",         TC_OPT_CONFIG,   TC_LABEL_FILE, NULL },
@@ -287,33 +440,10 @@ static const CmdOptDesc cmdopt_defs[] =  {
     { CmdOptMisc,      NULL,                   0,               0,             NULL }
 };
 
-/**
- **  Create a new string with a format and arguments.
- */
-static tmbstr stringWithFormat( const ctmbstr fmt, ... )
-{
-    va_list argList;
-    tmbstr result = NULL;
-    int len = 0;
 
-    va_start(argList, fmt);
-    len = vsnprintf( result, 0, fmt, argList );
-    va_end(argList);
-
-    if (!(result = malloc( len + 1) ))
-        outOfMemory();
-
-    va_start(argList, fmt);
-    vsnprintf( result, len + 1, fmt, argList);
-    va_end(argList);
-
-    return result;
-}
-
-
-/**
- **  Option names aren't localized, but the  sample fields
- **  are, for example <file> should be <archivo> in Spanish.
+/** Option names aren't localized, but the sample fields should be localized.
+ ** For example, `<file>` should be `<archivo>` in Spanish.
+ ** @param pos A CmdOptDesc array with fields that must be localized.
  */
 static void localize_option_names( CmdOptDesc *pos)
 {
@@ -327,45 +457,11 @@ static void localize_option_names( CmdOptDesc *pos)
         pos->eqconfig = stringWithFormat(pos->eqconfig, fileString);
 }
 
-/**
- **  Retrieve the options' names from the structure as a single
- **  string.
- */
-static tmbstr get_option_names( const CmdOptDesc* pos )
-{
-    tmbstr name;
-    uint len;
-    CmdOptDesc localPos = *pos;
 
-    localize_option_names( &localPos );
-
-    len = strlen(localPos.name1);
-    if (localPos.name2)
-        len += 2+strlen(localPos.name2);
-    if (localPos.name3)
-        len += 2+strlen(localPos.name3);
-
-    name = (tmbstr)malloc(len+1);
-    if (!name) outOfMemory();
-    strcpy(name, localPos.name1);
-    free((tmbstr)localPos.name1);
-    if (localPos.name2)
-    {
-        strcat(name, ", ");
-        strcat(name, localPos.name2);
-        free((tmbstr)localPos.name2);
-    }
-    if (localPos.name3)
-    {
-        strcat(name, ", ");
-        strcat(name, localPos.name3);
-        free((tmbstr)localPos.name3);
-    }
-    return name;
-}
-
-/**
- **  Escape a name for XML output.
+/** Escape a name for XML output. For example, `-output <file>` becomes
+ ** `-output &lt;file&gt;` for use in XML.
+ ** @param name The option name to escape.
+ ** @result Returns an allocated string.
  */
 static tmbstr get_escaped_name( ctmbstr name )
 {
@@ -414,124 +510,20 @@ static tmbstr get_escaped_name( ctmbstr name )
     return escpName;
 }
 
-/**
- **  Outputs a complete help option (text)
+
+/** @} end CLI Options Definitions Utilities group */
+/* MARK: - Configuration Options Utilities */
+/***************************************************************************//**
+ ** @defgroup utilities_cli_options Configuration Options Utilities
+ ** Provide utilities to manipulate configuration options for output.
+ *******************************************************************************
+ ** @{
  */
-static void print_help_option( void )
-{
-    CmdOptCategory cat = CmdOptCatFIRST;
-    const CmdOptDesc* pos = cmdopt_defs;
 
-    for( cat=CmdOptCatFIRST; cat!=CmdOptCatLAST; ++cat)
-    {
-        ctmbstr name = tidyLocalizedString(cmdopt_catname[cat].key);
-        size_t len =  strlen(name);
-        printf("%s\n", name );
-        printf("%*.*s\n", (int)len, (int)len, helpul );
-        for( pos=cmdopt_defs; pos->name1; ++pos)
-        {
-            tmbstr name;
-            if (pos->cat != cat)
-                continue;
-            name = get_option_names( pos );
-            print2Columns( helpfmt, 25, 52, name, tidyLocalizedString( pos->key ) );
-            free(name);
-        }
-        printf("\n");
-    }
-}
 
-/**
- **  Outputs an XML element for an option.
- */
-static void print_xml_help_option_element( ctmbstr element, ctmbstr name )
-{
-    tmbstr escpName;
-    if (!name)
-        return;
-
-    printf("  <%s>%s</%s>\n", element, escpName = get_escaped_name(name), element);
-    free(escpName);
-}
-
-/**
- **  Outputs a complete help option (XML)
- */
-static void print_xml_help_option( void )
-{
-    const CmdOptDesc* pos;
-    CmdOptDesc localPos;
-
-    for( pos=cmdopt_defs; pos->name1; ++pos)
-    {
-        localPos = *pos;
-        localize_option_names(&localPos);
-        printf(" <option class=\"%s\">\n", cmdopt_catname[pos->cat].mnemonic );
-        print_xml_help_option_element("name", localPos.name1);
-        print_xml_help_option_element("name", localPos.name2);
-        print_xml_help_option_element("name", localPos.name3);
-        print_xml_help_option_element("description", tidyLocalizedString( pos->key ) );
-        if (pos->eqconfig)
-            print_xml_help_option_element("eqconfig", localPos.eqconfig);
-        else
-            printf("  <eqconfig />\n");
-        printf(" </option>\n");
-    }
-}
-
-/**
- **  Provides the -xml-help service.
- */
-static void xml_help( void )
-{
-    printf( "<?xml version=\"1.0\"?>\n"
-           "<cmdline version=\"%s\">\n", tidyLibraryVersion());
-    print_xml_help_option();
-    printf( "</cmdline>\n" );
-}
-
-/**
- **  Returns the final name of the tidy executable.
- */
-static ctmbstr get_final_name( ctmbstr prog )
-{
-    ctmbstr name = prog;
-    int c;
-    size_t i, len = strlen(prog);
-    for (i = 0; i < len; i++) {
-        c = prog[i];
-        if ((( c == '/' ) || ( c == '\\' )) && prog[i+1])
-            name = &prog[i+1];
-    }
-    return name;
-}
-
-/**
- **  Handles the -help service.
- */
-static void help( ctmbstr prog )
-{
-    tmbstr title_line = NULL;
-
-    printf( tidyLocalizedString(TC_TXT_HELP_1), get_final_name(prog),tidyLibraryVersion() );
-
-#ifdef PLATFORM_NAME
-    title_line = stringWithFormat( tidyLocalizedString(TC_TXT_HELP_2A), PLATFORM_NAME);
-#else
-    title_line = stringWithFormat( tidyLocalizedString(TC_TXT_HELP_2B) );
-#endif
-    printf( "%s\n", title_line );
-    printf("%*.*s\n", (int)strlen(title_line), (int)strlen(title_line), ul);
-    free( title_line );
-    printf( "\n");
-
-    print_help_option();
-
-    printf( "%s", tidyLocalizedString(TC_TXT_HELP_3) );
-}
-
-/**
- **  Utility to determine if an option is an AutoBool.
+/** Utility to determine if an option is an AutoBool.
+ ** @param topt The option to check.
+ ** @result Returns a Bool indicating whether the option is an Autobool or not.
  */
 static Bool isAutoBool( TidyOption topt )
 {
@@ -551,10 +543,10 @@ static Bool isAutoBool( TidyOption topt )
     return no;
 }
 
-/**
- **  Returns the configuration category name for the
- **  specified configuration category id. This will be
- **  used as an XML class attribute value.
+/** Returns the configuration category name for the specified configuration
+ ** category id. This will be used as an XML class attribute value.
+ ** @param id The TidyConfigCategory for which to lookup the category name.
+ ** @result Returns the configuration category, such as "diagnostics".
  */
 static ctmbstr ConfigCategoryName( TidyConfigCategory id )
 {
@@ -569,28 +561,34 @@ static ctmbstr ConfigCategoryName( TidyConfigCategory id )
     return "never_here"; /* only for the compiler warning */
 }
 
-/**
- ** Structure maintains a description of an option.
+/** Structure maintains a description of a configuration ption.
  */
 typedef struct {
-    ctmbstr name;  /**< Name */
-    ctmbstr cat;   /**< Category */
-    uint    catid; /**< Category ID */
-    ctmbstr type;  /**< "String, ... */
-    ctmbstr vals;  /**< Potential values. If NULL, use an external function */
-    ctmbstr def;   /**< default */
+    ctmbstr name;         /**< Name */
+    ctmbstr cat;          /**< Category */
+    uint    catid;        /**< Category ID */
+    ctmbstr type;         /**< "String, ... */
+    ctmbstr vals;         /**< Potential values. If NULL, use an external function */
+    ctmbstr def;          /**< default */
     tmbchar tempdefs[80]; /**< storage for default such as integer */
-    Bool haveVals; /**< if yes, vals is valid */
+    Bool haveVals;        /**< if yes, vals is valid */
 } OptionDesc;
 
+/** A type for a function pointer for a function used to print out options 
+ ** descriptions.
+ ** @param TidyDoc The document.
+ ** @param TidyOption The Tidy option.
+ ** @param OptionDesc A pointer to the option description structure.
+ */
 typedef void (*OptionFunc)( TidyDoc, TidyOption, OptionDesc * );
 
 
-/**
- ** Create OptionDesc "d" related to "opt"
+/** Create OptionDesc "d" related to "opt"
  */
-static
-void GetOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
+static void GetOption(TidyDoc tdoc,    /**< The tidy document. */
+                      TidyOption topt, /**< The option to create a description for. */
+                      OptionDesc *d    /**< [out] The new option description. */
+                      )
 {
     TidyOptionId optId = tidyOptGetId( topt );
     TidyOptionType optTyp = tidyOptGetType( topt );
@@ -602,8 +600,7 @@ void GetOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
     d->def = NULL;
     d->haveVals = yes;
 
-    /* Handle special cases first.
-     */
+    /* Handle special cases first. */
     switch ( optId )
     {
         case TidyDuplicateAttrs:
@@ -689,27 +686,29 @@ void GetOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
     }
 }
 
-/**
- ** Array holding all options. Contains a trailing sentinel.
+/** Array holding all options. Contains a trailing sentinel.
  */
 typedef struct {
     TidyOption topt[N_TIDY_OPTIONS];
 } AllOption_t;
 
-/**
- **  A simple option comparator.
- **/
-static int cmpOpt(const void* e1_, const void *e2_)
+/** A simple option comparator, used for sorting the options.
+ ** @result Returns an integer indicating the result of the comparison.
+ */
+static int cmpOpt(const void* e1_, /**< Item A to compare. */
+                  const void *e2_  /**< Item B to compare. */
+                  )
 {
     const TidyOption* e1 = (const TidyOption*)e1_;
     const TidyOption* e2 = (const TidyOption*)e2_;
     return strcmp(tidyOptGetName(*e1), tidyOptGetName(*e2));
 }
 
-/**
- **  Returns options sorted.
- **/
-static void getSortedOption( TidyDoc tdoc, AllOption_t *tOption )
+/** Returns options sorted.
+ */
+static void getSortedOption(TidyDoc tdoc,         /**< The Tidy document. */
+                            AllOption_t *tOption  /**< [out] The list of options. */
+                            )
 {
     TidyIterator pos = tidyGetOptionList( tdoc );
     uint i = 0;
@@ -728,10 +727,11 @@ static void getSortedOption( TidyDoc tdoc, AllOption_t *tOption )
           cmpOpt);
 }
 
-/**
- **  An iterator for the sorted options.
- **/
-static void ForEachSortedOption( TidyDoc tdoc, OptionFunc OptionPrint )
+/** An iterator for the sorted options.
+ */
+static void ForEachSortedOption(TidyDoc tdoc,          /**< The Tidy document. */
+                                OptionFunc OptionPrint /**< The printing function to be used. */
+                                )
 {
     AllOption_t tOption;
     const TidyOption *topt;
@@ -746,10 +746,11 @@ static void ForEachSortedOption( TidyDoc tdoc, OptionFunc OptionPrint )
     }
 }
 
-/**
- **  An iterator for the unsorted options.
- **/
-static void ForEachOption( TidyDoc tdoc, OptionFunc OptionPrint )
+/** An iterator for the unsorted options.
+ */
+static void ForEachOption(TidyDoc tdoc,          /**< The Tidy document. */
+                          OptionFunc OptionPrint /**< The printing function to be used. */
+)
 {
     TidyIterator pos = tidyGetOptionList( tdoc );
 
@@ -763,9 +764,9 @@ static void ForEachOption( TidyDoc tdoc, OptionFunc OptionPrint )
     }
 }
 
-/**
- **  Prints an option's allowed value as specified in its pick list.
- **/
+/** Prints an option's allowed value as specified in its pick list.
+ ** @param topt The Tidy option.
+ */
 static void PrintAllowedValuesFromPick( TidyOption topt )
 {
     TidyIterator pos = tidyOptGetPickList( topt );
@@ -782,10 +783,11 @@ static void PrintAllowedValuesFromPick( TidyOption topt )
     }
 }
 
-/**
- **  Prints an option's allowed values.
- **/
-static void PrintAllowedValues( TidyOption topt, const OptionDesc *d )
+/** Prints an option's allowed values.
+ */
+static void PrintAllowedValues(TidyOption topt,    /**< The Tidy option. */
+                               const OptionDesc *d /**< The OptionDesc for the option. */
+                               )
 {
     if (d->vals)
         printf( "%s", d->vals );
@@ -793,164 +795,161 @@ static void PrintAllowedValues( TidyOption topt, const OptionDesc *d )
         PrintAllowedValuesFromPick( topt );
 }
 
-/**
- **  Prints for XML an option's <description>.
- **/
-static void printXMLDescription( TidyDoc tdoc, TidyOption topt )
+
+/** @} end utilities_cli_options group */
+/* MARK: - Provide the -help Service */
+/***************************************************************************//**
+ ** @defgroup service_help Provide the -help Service
+ *******************************************************************************
+ ** @{
+ */
+
+
+/** Retrieve the option's name(s) from the structure as a single string,
+ ** localizing the field values if application. For example, this might
+ ** return `-output <file>, -o <file>`.
+ ** @param pos A CmdOptDesc array item for which to get the names.
+ ** @result Returns the name(s) for the option as a single string.
+ */
+static tmbstr get_option_names( const CmdOptDesc* pos )
 {
-    ctmbstr doc = tidyOptGetDoc( tdoc, topt );
+    tmbstr name;
+    uint len;
+    CmdOptDesc localPos = *pos;
 
-    if (doc)
-        printf("  <description>%s</description>\n", doc);
-    else
+    localize_option_names( &localPos );
+
+    len = strlen(localPos.name1);
+    if (localPos.name2)
+        len += 2+strlen(localPos.name2);
+    if (localPos.name3)
+        len += 2+strlen(localPos.name3);
+
+    name = (tmbstr)malloc(len+1);
+    if (!name) outOfMemory();
+    strcpy(name, localPos.name1);
+    free((tmbstr)localPos.name1);
+    if (localPos.name2)
     {
-        printf("  <description />\n");
-        fprintf(stderr, tidyLocalizedString(TC_STRING_OPT_NOT_DOCUMENTED),
-                tidyOptGetName( topt ));
-        fprintf(stderr, "\n");
-
+        strcat(name, ", ");
+        strcat(name, localPos.name2);
+        free((tmbstr)localPos.name2);
     }
+    if (localPos.name3)
+    {
+        strcat(name, ", ");
+        strcat(name, localPos.name3);
+        free((tmbstr)localPos.name3);
+    }
+    return name;
 }
 
-/**
- **  Prints for XML an option's <seealso>.
- **/
-static void printXMLCrossRef( TidyDoc tdoc, TidyOption topt )
+
+/** Returns the final name of the tidy executable by eliminating the path
+ ** name components from the executable name.
+ ** @param prog The path of the current executable.
+ */
+static ctmbstr get_final_name( ctmbstr prog )
 {
-    TidyOption optLinked;
-    TidyIterator pos = tidyOptGetDocLinksList(tdoc, topt);
-    while( pos )
+    ctmbstr name = prog;
+    int c;
+    size_t i;
+    size_t len = strlen(prog);
+
+    for (i = 0; i < len; i++)
     {
-        optLinked = tidyOptGetNextDocLinks(tdoc, &pos );
-        printf("  <seealso>%s</seealso>\n",tidyOptGetName(optLinked));
-    }
-}
-
-
-/**
- **  Prints for XML an option's <eqconfig>.
- **/
-static void printXMLCrossRefEqConsole( TidyDoc tdoc, TidyOption topt )
-{
-    const CmdOptDesc* pos = cmdopt_defs;
-    const CmdOptDesc* hit = NULL;
-    CmdOptDesc localHit;
-    enum { sizeBuffer = 50 }; /* largest config name is 27 chars so far... */
-    char buffer[sizeBuffer];
-
-    for( pos=cmdopt_defs; pos->name1; ++pos)
-    {
-        snprintf(buffer, sizeBuffer, "%s:", tidyOptGetName( topt ));
-        if ( pos->eqconfig && (strncmp(buffer, pos->eqconfig, strlen(buffer)) == 0) )
+        c = prog[i];
+        if ((( c == '/' ) || ( c == '\\' )) && prog[i+1])
         {
-            hit = pos;
-            break;
+            name = &prog[i+1];
         }
     }
 
-    if ( hit )
-    {
-        localHit = *hit;
-        localize_option_names( &localHit );
-        printf("  <eqconsole>%s</eqconsole>\n", get_escaped_name(localHit.name1));
-        if ( localHit.name2 )
-            printf("  <eqconsole>%s</eqconsole>\n", get_escaped_name(localHit.name2));
-        if ( localHit.name3 )
-        printf("  <eqconsole>%s</eqconsole>\n", get_escaped_name(localHit.name3));
-
-    }
-    else
-        printf("  %s\n", "  <eqconsole />");
+    return name;
 }
 
-
-/**
- **  Prints for XML an option.
- **/
-static void printXMLOption( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
-{
-    if ( tidyOptGetCategory(topt) == TidyInternalCategory )
-        return;
-
-    printf( " <option class=\"%s\">\n", d->cat );
-    printf  ("  <name>%s</name>\n",d->name);
-    printf  ("  <type>%s</type>\n",d->type);
-    if (d->def)
-        printf("  <default>%s</default>\n",d->def);
-    else
-        printf("  <default />\n");
-    if (d->haveVals)
-    {
-        printf("  <example>");
-        PrintAllowedValues( topt, d );
-        printf("</example>\n");
-    }
-    else
-    {
-        printf("  <example />\n");
-    }
-    printXMLDescription( tdoc, topt );
-    printXMLCrossRef( tdoc, topt );
-    printXMLCrossRefEqConsole( tdoc, topt );
-    printf( " </option>\n" );
-}
-
-
-/**
- **  Handles the -xml-config service.
- **/
-static void XMLoptionhelp( TidyDoc tdoc )
-{
-    printf( "<?xml version=\"1.0\"?>\n"
-           "<config version=\"%s\">\n", tidyLibraryVersion());
-    ForEachOption( tdoc, printXMLOption );
-    printf( "</config>\n" );
-}
-
-/**
- *  Prints the Windows language names that Tidy recognizes,
- *  using the specified format string.
+/** Outputs all of the complete help options (text).
+ ** @param tdoc The Tidydoc whose options are being printed.
  */
-void tidyPrintWindowsLanguageNames( ctmbstr format )
+static void print_help_options( TidyDoc tdoc )
 {
-    const tidyLocaleMapItem *item;
-    TidyIterator i = getWindowsLanguageList();
-    ctmbstr winName;
-    ctmbstr posixName;
+    CmdOptCategory cat = CmdOptCatFIRST;
+    const CmdOptDesc* pos = cmdopt_defs;
+    uint width = tidyOptGetInt( tdoc, TidyConsoleWidth );
+    uint col1, col2;
 
-    while (i) {
-        item = getNextWindowsLanguage(&i);
-        winName = TidyLangWindowsName( item );
-        posixName = TidyLangPosixName( item );
-        if ( format )
-            printf( format, winName, posixName );
-        else
-            printf( "%-20s -> %s\n", winName, posixName );
+    width = width == 0 ? UINT_MAX : width;
+
+    for( cat=CmdOptCatFIRST; cat!=CmdOptCatLAST; ++cat)
+    {
+        ctmbstr name = tidyLocalizedString(cmdopt_catname[cat].key);
+        size_t len = width < strlen(name) ? width : strlen(name);
+        printf_wrapped( tdoc, "%s", name );
+        printf_wrapped( tdoc, "%*.*s", (int)len, (int)len, helpul );
+
+        /* Tidy's "standard" 78-column output was always 25:52 ratio, so let's
+           try to preserve this approximately 1:2 ratio regardless of whatever
+           silly thing the user might have set for a console width, with a
+           maximum of 50 characters for the first column.
+         */
+        col1 = width / 3;             /* one third of the available */
+        col1 = col1 < 1 ? 1 : col1;   /* at least 1 */
+        col1 = col1 > 35 ? 35 : col1; /* no greater than 35 */
+        col2 = width - col1 - 2;      /* allow two spaces */
+        col2 = col2 < 1 ? 1 : col2;   /* at least 1 */
+
+        for( pos=cmdopt_defs; pos->name1; ++pos)
+        {
+            tmbstr name;
+            if (pos->cat != cat)
+                continue;
+            name = get_option_names( pos );
+            print2Columns( helpfmt, col1, col2, name, tidyLocalizedString( pos->key ) );
+            free(name);
+        }
+        printf("\n");
     }
 }
 
-
-/**
- *  Prints the languages the are currently built into Tidy,
- *  using the specified format string.
+/** Handles the -help service.
  */
-void tidyPrintTidyLanguageNames( ctmbstr format )
+static void help(TidyDoc tdoc, /**< The tidy document for which help is showing. */
+                 ctmbstr prog  /**< The path of the current executable. */
+                 )
 {
-    ctmbstr item;
-    TidyIterator i = getInstalledLanguageList();
+    tmbstr title_line = NULL;
+    uint width = tidyOptGetInt( tdoc, TidyConsoleWidth );
+    width = width == 0 ? UINT_MAX : width;
 
-    while (i) {
-        item = getNextInstalledLanguage(&i);
-        if ( format )
-            printf( format, item );
-        else
-            printf( "%s\n", item );
-    }
+    printf_wrapped( tdoc, tidyLocalizedString(TC_TXT_HELP_1), get_final_name(prog), tidyLibraryVersion() );
+
+#ifdef PLATFORM_NAME
+    title_line = stringWithFormat( tidyLocalizedString(TC_TXT_HELP_2A), PLATFORM_NAME);
+#else
+    title_line = stringWithFormat( tidyLocalizedString(TC_TXT_HELP_2B) );
+#endif
+    width = width < strlen(title_line) ? width : strlen(title_line);
+    printf_wrapped( tdoc, "%s", title_line );
+    printf_wrapped( tdoc, "%*.*s\n", width, width, ul);
+    free( title_line );
+
+    print_help_options( tdoc );
+
+    printf_wrapped( tdoc, "%s", tidyLocalizedString(TC_TXT_HELP_3) );
 }
 
+/** @} end service_help group */
+/* MARK: - Provide the -help-config Service */
+/***************************************************************************//**
+ ** @defgroup service_help_config Provide the -help-config Service
+ *******************************************************************************
+ ** @{
+ */
 
-/**
- **  Retrieves allowed values from an option's pick list.
+
+/** Retrieves allowed values from an option's pick list.
+ ** @param topt A TidyOption for which to get the allowed values.
+ ** @result A string containing the allowed values.
  */
 static tmbstr GetAllowedValuesFromPick( TidyOption topt )
 {
@@ -988,10 +987,12 @@ static tmbstr GetAllowedValuesFromPick( TidyOption topt )
     return val;
 }
 
-/**
- **  Retrieves allowed values for an option.
+/** Retrieves allowed values for an option.
+ ** @result A string containing the allowed values.
  */
-static tmbstr GetAllowedValues( TidyOption topt, const OptionDesc *d )
+static tmbstr GetAllowedValues(TidyOption topt,    /**< A TidyOption for which to get the allowed values. */
+                               const OptionDesc *d /**< A pointer to the OptionDesc array. */
+                               )
 {
     if (d->vals)
     {
@@ -1004,11 +1005,12 @@ static tmbstr GetAllowedValues( TidyOption topt, const OptionDesc *d )
         return GetAllowedValuesFromPick( topt );
 }
 
-/**
- **  Prints a single option.
+/** Prints a single option.
  */
-static void printOption( TidyDoc ARG_UNUSED(tdoc), TidyOption topt,
-                        OptionDesc *d )
+static void printOption(TidyDoc ARG_UNUSED(tdoc), /**< The Tidy document. */
+                        TidyOption topt,          /**< The option to print. */
+                        OptionDesc *d             /**< A pointer to the OptionDesc array. */
+                        )
 {
     if (tidyOptGetCategory( topt ) == TidyInternalCategory )
         return;
@@ -1032,12 +1034,15 @@ static void printOption( TidyDoc ARG_UNUSED(tdoc), TidyOption topt,
     }
 }
 
-/**
- **  Handles the -help-config service.
+/** Handles the -help-config service.
+ ** @remark We will not support console word wrapping for the configuration
+ **         options table. If users really have a small console, then they
+ *          should make it wider or output to a file.
+ ** @param tdoc The Tidy document.
  */
 static void optionhelp( TidyDoc tdoc )
 {
-    printf( "%s", tidyLocalizedString( TC_TXT_HELP_CONFIG ) );
+    printf_wrapped( tdoc, "%s", tidyLocalizedString( TC_TXT_HELP_CONFIG ) );
 
     printf( fmt,
            tidyLocalizedString( TC_TXT_HELP_CONFIG_NAME ),
@@ -1050,10 +1055,19 @@ static void optionhelp( TidyDoc tdoc )
 }
 
 
-/**
- **  Cleans up the HTML-laden option descriptions for console
- **  output. It's just a simple HTML filtering/replacement function.
- **  Will return an allocated string.
+/** @} end service_lang_help group */
+/* MARK: - Provide the -help-option Service */
+/***************************************************************************//**
+ ** @defgroup service_help_option Provide the -help-option Service
+ *******************************************************************************
+ ** @{
+ */
+
+
+/** Cleans up the HTML-laden option descriptions for console output. It's
+ ** just a simple HTML filtering/replacement function.
+ ** @param description The option description.
+ ** @result Returns an allocated string with some HTML stripped away.
  */
 static tmbstr cleanup_description( ctmbstr description )
 {
@@ -1311,14 +1325,15 @@ EXIT_CLEANLY:
 }
 
 
-/**
- **  Handles the -help-option service.
+/** Handles the -help-option service.
  */
-static void optionDescribe( TidyDoc tdoc, char *tag )
+static void optionDescribe(TidyDoc tdoc, /**< The Tidy Document */
+                           char *option  /**< The name of the option. */
+                           )
 {
     tmbstr result = NULL;
     Bool allocated = no;
-    TidyOptionId topt = tidyOptGetIdForName( tag );
+    TidyOptionId topt = tidyOptGetIdForName( option );
     uint tcat = tidyOptGetCategory( tidyGetOption(tdoc, topt));
 
     if (topt < N_TIDY_OPTIONS && tcat != TidyInternalCategory )
@@ -1332,19 +1347,98 @@ static void optionDescribe( TidyDoc tdoc, char *tag )
     }
 
     printf( "\n" );
-    printf( "`--%s`\n\n", tag );
-    print1Column( "%-68.68s\n", 68, result );
+    printf( "`--%s`\n\n", option );
+    printf_wrapped(tdoc, result);
     printf( "\n" );
     if ( allocated )
         free ( result );
 }
 
 
-/**
- *  Prints the option value for a given option.
+/** @} end service_help_option group */
+/* MARK: - Provide the -lang help Service */
+/***************************************************************************//**
+ ** @defgroup service_lang_help Provide the -lang help Service
+ *******************************************************************************
+ ** @{
  */
-static void printOptionValues( TidyDoc ARG_UNUSED(tdoc), TidyOption topt,
-                              OptionDesc *d )
+
+
+/** Prints the Windows language names that Tidy recognizes, using the specified 
+ ** format string.
+ ** @param format A format string used to display the Windows language names,
+ **        or NULL to use the built-in default format.
+ */
+void tidyPrintWindowsLanguageNames( ctmbstr format )
+{
+    const tidyLocaleMapItem *item;
+    TidyIterator i = getWindowsLanguageList();
+    ctmbstr winName;
+    ctmbstr posixName;
+
+    while (i) {
+        item = getNextWindowsLanguage(&i);
+        winName = TidyLangWindowsName( item );
+        posixName = TidyLangPosixName( item );
+        if ( format )
+            printf( format, winName, posixName );
+        else
+            printf( "%-20s -> %s\n", winName, posixName );
+    }
+}
+
+
+/** Prints the languages the are currently built into Tidy, using the specified
+ ** format string.
+ ** @param format A format string used to display the Windows language names,
+ **        or NULL to use the built-in default format.
+ */
+void tidyPrintTidyLanguageNames( ctmbstr format )
+{
+    ctmbstr item;
+    TidyIterator i = getInstalledLanguageList();
+
+    while (i) {
+        item = getNextInstalledLanguage(&i);
+        if ( format )
+            printf( format, item );
+        else
+            printf( "%s\n", item );
+    }
+}
+
+
+/** Handles the -lang help service.
+ ** @remark We will not support console word wrapping for the tables. If users
+ **         really have a small console, then they should make it wider or 
+ **         output to a file.
+ ** @param tdoc The Tidy document.
+ */
+static void lang_help( TidyDoc tdoc )
+{
+    printf_wrapped( tdoc, "%s", tidyLocalizedString(TC_TXT_HELP_LANG_1) );
+    tidyPrintWindowsLanguageNames("  %-20s -> %s\n");
+    printf_wrapped( tdoc, "%s", tidyLocalizedString(TC_TXT_HELP_LANG_2) );
+    tidyPrintTidyLanguageNames("  %s\n");
+    printf_wrapped( tdoc, tidyLocalizedString(TC_TXT_HELP_LANG_3), tidyGetLanguage() );
+}
+
+
+/** @} end service_lang_help group */
+/* MARK: - Provide the -show-config Service */
+/***************************************************************************//**
+ ** @defgroup service_show_config Provide the -show-config Service
+ *******************************************************************************
+ ** @{
+ */
+
+
+/** Prints the option value for a given option.
+ */
+static void printOptionValues(TidyDoc ARG_UNUSED(tdoc),  /**< The Tidy document. */
+                              TidyOption topt,           /**< The option for which to show values. */
+                              OptionDesc *d              /**< The OptionDesc array. */
+                              )
 {
     TidyOptionId optId = tidyOptGetId( topt );
 
@@ -1364,10 +1458,7 @@ static void printOptionValues( TidyDoc ARG_UNUSED(tdoc), TidyOption topt,
                 d->def = tidyOptGetNextDeclTag(tdoc, optId, &pos);
                 if ( pos )
                 {
-                    if ( *d->name )
-                        printf( valfmt, d->name, d->type, d->def );
-                    else
-                        printf( fmt, d->name, d->type, d->def );
+                    printf( fmt, d->name, d->type, d->def );
                     d->name = "";
                     d->type = "";
                 }
@@ -1383,19 +1474,19 @@ static void printOptionValues( TidyDoc ARG_UNUSED(tdoc), TidyOption topt,
     {
         if ( ! d->def )
             d->def = "";
-        if ( *d->name )
-            printf( valfmt, d->name, d->type, d->def );
-        else
-            printf( fmt, d->name, d->type, d->def );
+        printf( fmt, d->name, d->type, d->def );
     }
 }
 
-/**
- **  Handles the -show-config service.
+/** Handles the -show-config service.
+ ** @remark We will not support console word wrapping for the table. If users
+ **         really have a small console, then they should make it wider or
+ **         output to a file.
+ ** @param tdoc The Tidy Document.
  */
 static void optionvalues( TidyDoc tdoc )
 {
-    printf( "\n%s\n\n", tidyLocalizedString(TC_STRING_CONF_HEADER) );
+    printf_wrapped( tdoc, "\n%s\n", tidyLocalizedString(TC_STRING_CONF_HEADER) );
     printf( fmt, tidyLocalizedString(TC_STRING_CONF_NAME),
            tidyLocalizedString(TC_STRING_CONF_TYPE),
            tidyLocalizedString(TC_STRING_CONF_VALUE) );
@@ -1404,56 +1495,184 @@ static void optionvalues( TidyDoc tdoc )
     ForEachSortedOption( tdoc, printOptionValues );
 }
 
-/**
- **  Handles the -version service.
+
+/** @} end service_show_config group */
+/* MARK: - Provide the -version Service */
+/***************************************************************************//**
+ ** @defgroup service_version Provide the -version Service
+ *******************************************************************************
+ ** @{
  */
-static void version( void )
+
+
+/** Handles the -version service.
+ */
+static void version( TidyDoc tdoc )
 {
 #ifdef PLATFORM_NAME
-    printf( tidyLocalizedString( TC_STRING_VERS_A ), PLATFORM_NAME, tidyLibraryVersion() );
+    printf_wrapped( tdoc, tidyLocalizedString( TC_STRING_VERS_A ), PLATFORM_NAME, tidyLibraryVersion() );
 #else
-    printf( tidyLocalizedString( TC_STRING_VERS_B ), tidyLibraryVersion() );
+    printf_wrpped( tdoc, tidyLocalizedString( TC_STRING_VERS_B ), tidyLibraryVersion() );
 #endif
     printf("\n");
 }
 
 
-/**
- **  Handles the printing of option description for
- **  -xml-options-strings service.
- **/
-static void printXMLOptionString( TidyDoc tdoc, TidyOption topt, OptionDesc *d )
+/** @} end service_version group */
+/* MARK: - Provide the -xml-config Service */
+/***************************************************************************//**
+ ** @defgroup service_xml_config Provide the -xml-config Service
+ *******************************************************************************
+ ** @{
+ */
+
+
+/** Prints for XML an option's <description>.
+ */
+static void printXMLDescription(TidyDoc tdoc,   /**< The Tidy document. */
+                                TidyOption topt /**< The option. */
+                                )
 {
-    if ( tidyOptIsReadOnly(topt) )
+    ctmbstr doc = tidyOptGetDoc( tdoc, topt );
+
+    if (doc)
+        printf("  <description>%s</description>\n", doc);
+    else
+    {
+        printf("  <description />\n");
+        fprintf(stderr, tidyLocalizedString(TC_STRING_OPT_NOT_DOCUMENTED),
+                tidyOptGetName( topt ));
+        fprintf(stderr, "\n");
+
+    }
+}
+
+/** Prints for XML an option's `<seealso>`.
+ */
+static void printXMLCrossRef(TidyDoc tdoc,   /**< The Tidy document. */
+                             TidyOption topt /**< The option. */
+                             )
+{
+    TidyOption optLinked;
+    TidyIterator pos = tidyOptGetDocLinksList(tdoc, topt);
+    while( pos )
+    {
+        optLinked = tidyOptGetNextDocLinks(tdoc, &pos );
+        printf("  <seealso>%s</seealso>\n",tidyOptGetName(optLinked));
+    }
+}
+
+
+/** Prints for XML an option's `<eqconfig>`.
+ */
+static void printXMLCrossRefEqConsole(TidyDoc tdoc,   /**< The Tidy document. */
+                                      TidyOption topt /**< The option. */
+                                      )
+{
+    const CmdOptDesc* pos = cmdopt_defs;
+    const CmdOptDesc* hit = NULL;
+    CmdOptDesc localHit;
+    enum { sizeBuffer = 50 }; /* largest config name is 27 chars so far... */
+    char buffer[sizeBuffer];
+
+    for( pos=cmdopt_defs; pos->name1; ++pos)
+    {
+        snprintf(buffer, sizeBuffer, "%s:", tidyOptGetName( topt ));
+        if ( pos->eqconfig && (strncmp(buffer, pos->eqconfig, strlen(buffer)) == 0) )
+        {
+            hit = pos;
+            break;
+        }
+    }
+
+    if ( hit )
+    {
+        localHit = *hit;
+        tmbstr localName;
+        localize_option_names( &localHit );
+        printf("  <eqconsole>%s</eqconsole>\n", localName = get_escaped_name(localHit.name1));
+        free((tmbstr)localHit.name1);
+        free(localName);
+        if ( localHit.name2 )
+        {
+            printf("  <eqconsole>%s</eqconsole>\n", localName = get_escaped_name(localHit.name2));
+            free((tmbstr)localHit.name2);
+            free(localName);
+        }
+        if ( localHit.name3 )
+        {
+            printf("  <eqconsole>%s</eqconsole>\n", localName = get_escaped_name(localHit.name3));
+            free((tmbstr)localHit.name3);
+            free(localName);
+        }
+
+    }
+    else
+        printf("  %s\n", "  <eqconsole />");
+}
+
+
+/** Prints for XML an option.
+ */
+static void printXMLOption(TidyDoc tdoc,    /**< The Tidy document. */
+                           TidyOption topt, /**< The option. */
+                           OptionDesc *d    /**< The OptionDesc for the option. */
+                           )
+{
+    if ( tidyOptGetCategory(topt) == TidyInternalCategory )
         return;
 
-    printf( " <option>\n" );
-    printf( "  <name>%s</name>\n",d->name);
-    printf( "  <string class=\"%s\"><![CDATA[%s]]></string>\n", tidyGetLanguage(), tidyOptGetDoc( tdoc, topt ) );
+    printf( " <option class=\"%s\">\n", d->cat );
+    printf  ("  <name>%s</name>\n",d->name);
+    printf  ("  <type>%s</type>\n",d->type);
+    if (d->def)
+        printf("  <default>%s</default>\n",d->def);
+    else
+        printf("  <default />\n");
+    if (d->haveVals)
+    {
+        printf("  <example>");
+        PrintAllowedValues( topt, d );
+        printf("</example>\n");
+    }
+    else
+    {
+        printf("  <example />\n");
+    }
+    printXMLDescription( tdoc, topt );
+    printXMLCrossRef( tdoc, topt );
+    printXMLCrossRefEqConsole( tdoc, topt );
     printf( " </option>\n" );
 }
 
-/**
- **  Handles the -xml-options-strings service.
- **  This service is primarily helpful to developers and localizers to test
- **  that option description strings as represented on screen output are
- **  correct and do not break tidy.
- **/
-static void xml_options_strings( TidyDoc tdoc )
+
+/** Handles the -xml-config service.
+ ** @param tdoc The Tidy document.
+ */
+static void XMLoptionhelp( TidyDoc tdoc )
 {
     printf( "<?xml version=\"1.0\"?>\n"
-           "<options_strings version=\"%s\">\n", tidyLibraryVersion());
-    ForEachOption( tdoc, printXMLOptionString);
-    printf( "</options_strings>\n" );
+           "<config version=\"%s\">\n", tidyLibraryVersion());
+    ForEachOption( tdoc, printXMLOption );
+    printf( "</config>\n" );
 }
 
 
-/**
- **  Handles the -xml-error-strings service.
- **  This service is primarily helpful to developers who need to generate
- **  an updated list of strings to expect when using `TidyReportFilter3`.
- **  Included in the output is the current string associated with the error
- **  symbol.
+/** @} end service_xml_config group */
+/* MARK: - Provide the -xml-error-strings Service */
+/***************************************************************************//**
+ ** @defgroup service_xml_error_strings Provide the -xml-error-strings Service
+ *******************************************************************************
+ ** @{
+ */
+
+
+/** Handles the -xml-error-strings service.
+ ** This service is primarily helpful to developers who need to generate an
+ ** updated list of strings to expect when using one of the message callbacks.
+ ** Included in the output is the current string associated with the error
+ ** symbol.
+ ** @param tdoc The Tidy document.
  **/
 static void xml_error_strings( TidyDoc tdoc )
 {
@@ -1481,18 +1700,122 @@ static void xml_error_strings( TidyDoc tdoc )
 }
 
 
+/** @} end service_xml_error_strings group */
+/* MARK: - Provide the -xml-help Service */
+/***************************************************************************//**
+ ** @defgroup service_xmlhelp Provide the -xml-help Service
+ *******************************************************************************
+ ** @{
+ */
+
+/** Outputs an XML element for a CLI option, escaping special characters as
+ ** required. For example, it might print `<name>-output &lt;file&gt;</name>`.
+ */
+static void print_xml_help_option_element(ctmbstr element, /**< XML element name. */
+                                          ctmbstr name     /**< The contents of the element. */
+                                          )
+{
+    tmbstr escpName;
+    if (!name)
+        return;
+
+    printf("  <%s>%s</%s>\n", element, escpName = get_escaped_name(name), element);
+    free(escpName);
+}
+
+/** Provides the -xml-help service.
+ */
+static void xml_help( void )
+{
+    const CmdOptDesc* pos;
+    CmdOptDesc localPos;
+
+    printf( "<?xml version=\"1.0\"?>\n"
+           "<cmdline version=\"%s\">\n", tidyLibraryVersion());
+
+    for( pos=cmdopt_defs; pos->name1; ++pos)
+    {
+        localPos = *pos;
+        localize_option_names(&localPos);
+        printf(" <option class=\"%s\">\n", cmdopt_catname[pos->cat].mnemonic );
+        print_xml_help_option_element("name", localPos.name1);
+        print_xml_help_option_element("name", localPos.name2);
+        print_xml_help_option_element("name", localPos.name3);
+        print_xml_help_option_element("description", tidyLocalizedString( pos->key ) );
+        if (pos->eqconfig)
+            print_xml_help_option_element("eqconfig", localPos.eqconfig);
+        else
+            printf("  <eqconfig />\n");
+        printf(" </option>\n");
+
+        if (localPos.name1) free((tmbstr)localPos.name1);
+        if (localPos.name2) free((tmbstr)localPos.name2);
+        if (localPos.name3) free((tmbstr)localPos.name3);
+    }
+
+    printf( "</cmdline>\n" );
+}
 
 
-/**
- **  Handles the -xml-strings service.
- **  This service was primarily helpful to developers and localizers to
- **  compare localized strings to the built in `en` strings. It's probably
- **  better to use our POT/PO workflow with your favorite tools, or simply
- **  diff the language header files directly.
- **  **Important:** The attribute `id` is not a specification, promise, or
- **  part of an API. You must not depend on this value. For strings meant
- **  for error output, the `label` attribute will contain the stringified
- **  version of the internal key for the string.
+/** @} end service_xmlhelp group */
+/* MARK: - Provide the -xml-options-strings Service */
+/***************************************************************************//**
+ ** @defgroup service_xml_opts_strings Provide the -xml-options-strings Service
+ *******************************************************************************
+ ** @{
+ */
+
+
+/** Handles printing of option description for -xml-options-strings service.
+ **/
+static void printXMLOptionString(TidyDoc tdoc,    /**< The Tidy document. */
+                                 TidyOption topt, /**< The option. */
+                                 OptionDesc *d    /**< The OptionDesc array. */
+                                 )
+{
+    if ( tidyOptGetCategory(topt) == TidyInternalCategory )
+        return;
+
+    printf( " <option>\n" );
+    printf( "  <name>%s</name>\n",d->name);
+    printf( "  <string class=\"%s\"><![CDATA[%s]]></string>\n", tidyGetLanguage(), tidyOptGetDoc( tdoc, topt ) );
+    printf( " </option>\n" );
+}
+
+
+/** Handles the -xml-options-strings service.
+ ** This service is primarily helpful to developers and localizers to test
+ ** that option description strings as represented on screen output are
+ ** correct and do not break tidy.
+ ** @param tdoc The Tidy document.
+ */
+static void xml_options_strings( TidyDoc tdoc )
+{
+    printf( "<?xml version=\"1.0\"?>\n"
+           "<options_strings version=\"%s\">\n", tidyLibraryVersion());
+    ForEachOption( tdoc, printXMLOptionString);
+    printf( "</options_strings>\n" );
+}
+
+
+/** @} end service_xml_opts_strings group */
+/* MARK: - Provide the -xml-strings Service */
+/***************************************************************************//**
+ ** @defgroup service_xml_strings Provide the -xml-strings Service
+ *******************************************************************************
+ ** @{
+ */
+
+
+/** Handles the -xml-strings service.
+ ** This service was primarily helpful to developers and localizers to compare
+ ** localized strings to the built in `en` strings. It's probably better to use
+ ** our POT/PO workflow with your favorite tools, or simply diff the language
+ ** header files directly.
+ ** @note The attribute `id` is not a specification, promise, or part of an
+ **       API. You must not depend on this value. For strings meant for error
+ **       output, the `label` attribute will contain the stringified version of
+ **       the internal key for the string.
  */
 static void xml_strings( void )
 {
@@ -1530,39 +1853,26 @@ static void xml_strings( void )
 }
 
 
-/**
- **  Handles the -lang help service.
+/** @} end service_xml_strings group */
+/* MARK: - Experimental Stuff */
+/***************************************************************************//**
+ ** @defgroup experimental_stuff Experimental Stuff
+ ** From time to time the developers might leave stuff here that you can use
+ ** to experiment on their own, or that they're using to experiment with.
+ *******************************************************************************
+ ** @{
  */
-static void lang_help( void )
-{
-    printf( "%s", tidyLocalizedString(TC_TXT_HELP_LANG_1) );
-    tidyPrintWindowsLanguageNames("  %-20s -> %s\n");
-    printf( "%s", tidyLocalizedString(TC_TXT_HELP_LANG_2) );
-    tidyPrintTidyLanguageNames("  %s\n");
-    printf( tidyLocalizedString(TC_TXT_HELP_LANG_3), tidyGetLanguage() );
-}
 
 
-/**
- **  Provides the `unknown option` output.
- */
-static void unknownOption( uint c )
-{
-    fprintf( errout, tidyLocalizedString( TC_STRING_UNKNOWN_OPTION ), (char)c );
-    fprintf( errout, "\n");
-}
-
-
-/**
- **  This callback from LibTidy allows the console application to examine an
- **  error message before allowing LibTidy to display it. Currently the body
- **  of the function is not compiled into Tidy, but if you're interested in 
- **  how to use the new message API, then enable it. Possible applications in
- **  future console Tidy might be to do things like:
- **    - allow user-defined filtering
- **    - sort the report output by line number
- **    - other things that are user facing and best not put into LibTidy
- **      proper.
+/** This callback from LibTidy allows the console application to examine an
+ ** error message before allowing LibTidy to display it. Currently the body
+ ** of the function is not compiled into Tidy, but if you're interested in
+ ** how to use the new message API, then enable it. Possible applications in
+ ** future console Tidy might be to do things like:
+ ** - allow user-defined filtering
+ ** - sort the report output by line number
+ ** - other things that are user facing and best not put into LibTidy
+ **   proper.
  */
 static Bool TIDY_CALL reportCallback(TidyMessage tmessage)
 {
@@ -1613,10 +1923,16 @@ static Bool TIDY_CALL reportCallback(TidyMessage tmessage)
 }
 
 
-
-/**
- **  MAIN --  let's do something here.
+/** @} end experimental_stuff group */
+/* MARK: - main() */
+/***************************************************************************//**
+ ** @defgroup main Main
+ ** Let's do something here!
+ *******************************************************************************
+ ** @{
  */
+
+
 int main( int argc, char** argv )
 {
     ctmbstr prog = argv[0];
@@ -1624,7 +1940,8 @@ int main( int argc, char** argv )
     TidyDoc tdoc = tidyCreate();
     int status = 0;
     tmbstr locale = NULL;
-    tidySetMessageCallback( tdoc, reportCallback);
+    uint iac_width = 0;
+    tidySetMessageCallback( tdoc, reportCallback); /* experimental group */
 
     uint contentErrors = 0;
     uint contentWarnings = 0;
@@ -1634,8 +1951,10 @@ int main( int argc, char** argv )
 
     /* Set an atexit handler. */
     atexit( tidy_cleanup );
-    
+
+    /*************************************/
     /* Set the locale for tidy's output. */
+    /*************************************/
     locale = tidySystemLocale(locale);
     tidySetLanguage(locale);
     if ( locale )
@@ -1650,6 +1969,17 @@ int main( int argc, char** argv )
     win_cp = GetConsoleOutputCP();
     SetConsoleOutputCP(CP_UTF8);
 #endif
+
+    /* Handle the default console width.
+     * Only set this is all output is going to an interactive console; if any
+     * output is going to a file, then do NOT override the default. If the user
+     * uses console-width, it will override this setting and apply to files.
+     */
+    if ( outputToConsole() )
+    {
+        iac_width = getConsoleWidth();
+        tidyOptSetInt( tdoc, TidyConsoleWidth, iac_width);
+    }
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
     set_log_file((char *)"temptidy.txt", 0);
@@ -1784,7 +2114,7 @@ int main( int argc, char** argv )
                 {
                     if ( strcasecmp(argv[2], "help") == 0 )
                     {
-                        lang_help();
+                        lang_help( tdoc );
                         exit(0);
                     }
                     if ( !tidySetLanguage( argv[2] ) )
@@ -1805,7 +2135,7 @@ int main( int argc, char** argv )
                          strcasecmp(arg, "-help") == 0 ||
                          strcasecmp(arg,    "h") == 0 || *arg == '?' )
                 {
-                    help( prog );
+                    help( tdoc, prog );
                     tidyRelease( tdoc );
                     return 0; /* success */
                 }
@@ -1928,7 +2258,7 @@ int main( int argc, char** argv )
                          strcasecmp(arg, "-version") == 0 ||
                          strcasecmp(arg,        "v") == 0 )
                 {
-                    version();
+                    version( tdoc );
                     tidyRelease( tdoc );
                     return 0;  /* success */
 
@@ -2021,7 +2351,7 @@ int main( int argc, char** argv )
                                 break;
 
                             default:
-                                unknownOption( c );
+                                unknownOption( tdoc, c );
                                 break;
                         }
                     }
@@ -2030,6 +2360,18 @@ int main( int argc, char** argv )
             --argc;
             ++argv;
             continue;
+        }
+
+        /* Verify that all output is still going to an interactive console. If
+         * NOT, and the user hasn't set her own value, then undo our setting.
+         */
+        if ( !outputToConsole() )
+        {
+            if ( tidyOptGetInt( tdoc, TidyConsoleWidth ) == iac_width )
+            {
+                TidyOption topt = tidyGetOption(tdoc, TidyConsoleWidth);
+                tidyOptSetInt( tdoc, TidyConsoleWidth, tidyOptGetDefaultInt( topt ) );
+            }
         }
 
         if ( argc > 1 )
@@ -2133,6 +2475,11 @@ int main( int argc, char** argv )
     /* 0 signifies all is ok */
     return 0;
 }
+
+
+/** @} end main group */
+/** @} end console_application group */
+
 
 /*
  * local variables:

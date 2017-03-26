@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-03-22 15:54:52\n"
+"POT-Creation-Date: 2017-03-26 15:47:07\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -199,6 +199,30 @@ msgid ""
 "Tidy will output "
 "<br/>"
 "<code>&lt;span&gt;foo &lt;b&gt;bar&lt;/b&gt; baz&lt;/span&gt;</code> "
+msgstr ""
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyConsoleWidth"
+msgid ""
+"This option specifies the maximum width of messages that Tidy outputs, "
+"that is, the point that Tidy starts to word wrap messages. "
+"<br/>"
+"In no value is specified, then in general the default of 80 characters "
+"will be used. However, when running in an interactive shell the Tidy "
+"console application will attempt to determine your console size. If you "
+"prefer a fixed size despite the console size, then set this option. "
+"<br/>"
+"Note that when using the <code>file</code> option or piping any output "
+"to a file, then the width of the interactive shell will be ignored."
+"<br/>"
+"Specifying <var>0</var> will disable Tidy's word wrapping entirely. "
 msgstr ""
 
 #. Important notes for translators:
@@ -1781,8 +1805,8 @@ msgstr ""
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 msgctxt "STRING_NEEDS_INTERVENTION"
 msgid ""
-"This document has errors that must be fixed before\n"
-"using HTML Tidy to generate a tidied up version.\n"
+"This document has errors that must be fixed before using "
+"HTML Tidy to generate a tidied up version."
 msgstr ""
 
 msgctxt "STRING_NO_ERRORS"
@@ -1837,216 +1861,255 @@ msgctxt "TIDYCUSTOMPRE_STRING"
 msgid "pre"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 msgctxt "TEXT_HTML_T_ALGORITHM"
 msgid ""
+"\n- First, search left from the cell's position to find row header cells."
+"\n- Then search upwards to find column header cells."
+"\n- The search in a given direction stops when the edge of the table is "
+"reached or when a data cell is found after a header cell."
+"\n- Row headers are inserted into the list in the order they appear in "
+"the table."
+"\n- For left-to-right tables, headers are inserted from left to right."
+"\n- Column headers are inserted after row headers, in the order they "
+"appear in the table, from top to bottom."
+"\n- If a header cell has the headers attribute set, then the headers "
+"referenced by this attribute are inserted into the list and the "
+"search stops for the current direction."
+"\n- TD cells that set the axis attribute are also treated as header cells."
 "\n"
-"      - First, search left from the cell's position to find row header cells.\n"
-"      - Then search upwards to find column header cells.\n"
-"      - The search in a given direction stops when the edge of the table is\n"
-"        reached or when a data cell is found after a header cell.\n"
-"      - Row headers are inserted into the list in the order they appear in\n"
-"        the table. \n"
-"      - For left-to-right tables, headers are inserted from left to right.\n"
-"      - Column headers are inserted after row headers, in \n"
-"        the order they appear in the table, from top to bottom. \n"
-"      - If a header cell has the headers attribute set, then the headers \n"
-"        referenced by this attribute are inserted into the list and the \n"
-"        search stops for the current direction.\n"
-"        TD cells that set the axis attribute are also treated as header cells.\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 msgctxt "TEXT_WINDOWS_CHARS"
 msgid ""
-"Characters codes for the Microsoft Windows fonts in the range\n"
-"128 - 159 may not be recognized on other platforms. You are\n"
-"instead recommended to use named entities, e.g. &trade; rather\n"
-"than Windows character code 153 (0x2122 in Unicode). Note that\n"
-"as of February 1998 few browsers support the new entities.\n"
+"Characters codes for the Microsoft Windows fonts in the range "
+"128 - 159 may not be recognized on other platforms. You are "
+"instead recommended to use named entities, e.g. &trade; rather "
+"than Windows character code 153 (0x2122 in Unicode). Note that "
+"as of February 1998 few browsers support the new entities."
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 #. - %s represents a string-encoding name which may be localized in your language.
 #, c-format
 msgctxt "TEXT_VENDOR_CHARS"
 msgid ""
-"It is unlikely that vendor-specific, system-dependent encodings\n"
-"work widely enough on the World Wide Web; you should avoid using the \n"
-"%s character encoding, instead you are recommended to\n"
-"use named entities, e.g. &trade;.\n"
+"It is unlikely that vendor-specific, system-dependent encodings "
+"work widely enough on the World Wide Web; you should avoid using the "
+"%s character encoding, instead you are recommended to"
+"use named entities, e.g. &trade;."
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 #. - %s represents a string-encoding name which may be localized in your language.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 #, c-format
 msgctxt "TEXT_SGML_CHARS"
 msgid ""
-"Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML;\n"
-"even if they were, they would likely be unprintable control characters.\n"
-"Tidy assumed you wanted to refer to a character with the same byte value in the \n"
-"%s encoding and replaced that reference with the Unicode \n"
-"equivalent.\n"
+"Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML; "
+"even if they were, they would likely be unprintable control characters. "
+"Tidy assumed you wanted to refer to a character with the same byte "
+"value in the %s encoding and replaced that reference with the Unicode "
+"equivalent."
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 msgctxt "TEXT_INVALID_UTF8"
 msgid ""
-"Character codes for UTF-8 must be in the range: U+0000 to U+10FFFF.\n"
-"The definition of UTF-8 in Annex D of ISO/IEC 10646-1:2000 also\n"
-"allows for the use of five- and six-byte sequences to encode\n"
-"characters that are outside the range of the Unicode character set;\n"
-"those five- and six-byte sequences are illegal for the use of\n"
-"UTF-8 as a transformation of Unicode characters. ISO/IEC 10646\n"
-"does not allow mapping of unpaired surrogates, nor U+FFFE and U+FFFF\n"
-"(but it does allow other noncharacters). For more information please refer to\n"
-"http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+"Character codes for UTF-8 must be in the range: U+0000 to U+10FFFF. "
+"The definition of UTF-8 in Annex D of ISO/IEC 10646-1:2000 also "
+"allows for the use of five- and six-byte sequences to encode "
+"characters that are outside the range of the Unicode character set; "
+"those five- and six-byte sequences are illegal for the use of "
+"UTF-8 as a transformation of Unicode characters. ISO/IEC 10646 "
+"does not allow mapping of unpaired surrogates, nor U+FFFE and U+FFFF "
+"(but it does allow other noncharacters). For more information please refer to "
+"http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html"
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 msgctxt "TEXT_INVALID_UTF16"
 msgid ""
-"Character codes for UTF-16 must be in the range: U+0000 to U+10FFFF.\n"
-"The definition of UTF-16 in Annex C of ISO/IEC 10646-1:2000 does not allow the\n"
-"mapping of unpaired surrogates. For more information please refer to\n"
-"http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+"Character codes for UTF-16 must be in the range: U+0000 to U+10FFFF. "
+"The definition of UTF-16 in Annex C of ISO/IEC 10646-1:2000 does not allow the "
+"mapping of unpaired surrogates. For more information please refer to "
+"http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html"
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 msgctxt "TEXT_INVALID_URI"
 msgid ""
-"URIs must be properly escaped, they must not contain unescaped\n"
-"characters below U+0021 including the space character and not\n"
-"above U+007E. Tidy escapes the URI for you as recommended by\n"
-"HTML 4.01 section B.2.1 and XML 1.0 section 4.2.2. Some user agents\n"
-"use another algorithm to escape such URIs and some server-sided\n"
-"scripts depend on that. If you want to depend on that, you must\n"
-"escape the URI on your own. For more information please refer to\n"
-"http://www.w3.org/International/O-URL-and-ident.html\n"
+"URIs must be properly escaped, they must not contain unescaped "
+"characters below U+0021 including the space character and not "
+"above U+007E. Tidy escapes the URI for you as recommended by "
+"HTML 4.01 section B.2.1 and XML 1.0 section 4.2.2. Some user agents "
+"use another algorithm to escape such URIs and some server-sided "
+"scripts depend on that. If you want to depend on that, you must "
+"escape the URI on your own. For more information please refer to "
+"http://www.w3.org/International/O-URL-and-ident.html"
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 msgctxt "TEXT_BAD_FORM"
 msgid ""
-"You may need to move one or both of the <form> and </form>\n"
-"tags. HTML elements should be properly nested and form elements\n"
-"are no exception. For instance you should not place the <form>\n"
-"in one table cell and the </form> in another. If the <form> is\n"
-"placed before a table, the </form> cannot be placed inside the\n"
-"table! Note that one form can't be nested inside another!\n"
+"You may need to move one or both of the <form> and </form> "
+"tags. HTML elements should be properly nested and form elements "
+"are no exception. For instance you should not place the <form> "
+"in one table cell and the </form> in another. If the <form> is "
+"placed before a table, the </form> cannot be placed inside the "
+"table! Note that one form can't be nested inside another!"
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 msgctxt "TEXT_BAD_MAIN"
 msgid ""
-"Only one <main> element is allowed in a document.\n"
-"Subsequent <main> elements have been discarded, which may\n"
-"render the document invalid.\n"
+"Only one <main> element is allowed in a document. "
+"Subsequent <main> elements have been discarded, which may "
+"render the document invalid."
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 msgctxt "TEXT_M_SUMMARY"
 msgid ""
-"The table summary attribute should be used to describe\n"
-"the table structure. It is very helpful for people using\n"
-"non-visual browsers. The scope and headers attributes for\n"
-"table cells are useful for specifying which headers apply\n"
-"to each table cell, enabling non-visual browsers to provide\n"
-"a meaningful context for each cell.\n"
+"The table summary attribute should be used to describe "
+"the table structure. It is very helpful for people using "
+"non-visual browsers. The scope and headers attributes for "
+"table cells are useful for specifying which headers apply "
+"to each table cell, enabling non-visual browsers to provide "
+"a meaningful context for each cell."
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 msgctxt "TEXT_M_IMAGE_ALT"
 msgid ""
-"The alt attribute should be used to give a short description\n"
-"of an image; longer descriptions should be given with the\n"
-"longdesc attribute which takes a URL linked to the description.\n"
-"These measures are needed for people using non-graphical browsers.\n"
+"The alt attribute should be used to give a short description "
+"of an image; longer descriptions should be given with the "
+"longdesc attribute which takes a URL linked to the description. "
+"These measures are needed for people using non-graphical browsers."
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 msgctxt "TEXT_M_IMAGE_MAP"
 msgid ""
-"Use client-side image maps in preference to server-side image\n"
-"maps as the latter are inaccessible to people using non-\n"
-"graphical browsers. In addition, client-side maps are easier\n"
-"to set up and provide immediate feedback to users.\n"
+"Use client-side image maps in preference to server-side image maps as "
+"the latter are inaccessible to people using non-graphical browsers. "
+"In addition, client-side maps are easier to set up and provide "
+"immediate feedback to users."
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 msgctxt "TEXT_M_LINK_ALT"
 msgid ""
-"For hypertext links defined using a client-side image map, you\n"
-"need to use the alt attribute to provide a textual description\n"
-"of the link for people using non-graphical browsers.\n"
+"For hypertext links defined using a client-side image map, you "
+"need to use the alt attribute to provide a textual description "
+"of the link for people using non-graphical browsers."
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 msgctxt "TEXT_USING_FRAMES"
 msgid ""
-"Pages designed using frames present problems for\n"
-"people who are either blind or using a browser that\n"
-"doesn't support frames. A frames-based page should always\n"
-"include an alternative layout inside a NOFRAMES element.\n"
+"Pages designed using frames present problems for "
+"people who are either blind or using a browser that "
+"doesn't support frames. A frames-based page should always "
+"include an alternative layout inside a NOFRAMES element."
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 #. - The URL should not be translated unless you find a matching URL in your language.
 msgctxt "TEXT_ACCESS_ADVICE1"
 msgid ""
-"For further advice on how to make your pages accessible\n"
-"see http://www.w3.org/WAI/GL."
+"For further advice on how to make your pages accessible see "
+"http://www.w3.org/WAI/GL."
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 #. - The URL should not be translated unless you find a matching URL in your language.
 msgctxt "TEXT_ACCESS_ADVICE2"
 msgid ""
-"For further advice on how to make your pages accessible\n"
-"see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/."
+"For further advice on how to make your pages accessible see "
+"http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/."
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 msgctxt "TEXT_USING_LAYER"
 msgid ""
-"The Cascading Style Sheets (CSS) Positioning mechanism\n"
-"is recommended in preference to the proprietary <LAYER>\n"
-"element due to limited vendor support for LAYER.\n"
+"The Cascading Style Sheets (CSS) Positioning mechanism "
+"is recommended in preference to the proprietary <LAYER> "
+"element due to limited vendor support for LAYER."
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 msgctxt "TEXT_USING_SPACER"
 msgid ""
-"You are recommended to use CSS for controlling white\n"
-"space (e.g. for indentation, margins and line spacing).\n"
-"The proprietary <SPACER> element has limited vendor support.\n"
+"You are recommended to use CSS for controlling white "
+"space (e.g. for indentation, margins and line spacing). "
+"The proprietary <SPACER> element has limited vendor support."
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 msgctxt "TEXT_USING_FONT"
 msgid ""
-"You are recommended to use CSS to specify the font and\n"
-"properties such as its size and color. This will reduce\n"
-"the size of HTML files and make them easier to maintain\n"
-"compared with using <FONT> elements.\n"
+"You are recommended to use CSS to specify the font and "
+"properties such as its size and color. This will reduce "
+"the size of HTML files and make them easier to maintain "
+"compared with using <FONT> elements."
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 msgctxt "TEXT_USING_NOBR"
 msgid ""
-"You are recommended to use CSS to control line wrapping.\n"
-"Use \"white-space: nowrap\" to inhibit wrapping in place\n"
-"of inserting <NOBR>...</NOBR> into the markup.\n"
+"You are recommended to use CSS to control line wrapping. "
+"Use \"white-space: nowrap\" to inhibit wrapping in place "
+"of inserting <NOBR>...</NOBR> into the markup."
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 msgctxt "TEXT_USING_BODY"
-msgid "You are recommended to use CSS to specify page and link colors"
+msgid "You are recommended to use CSS to specify page and link colors."
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 msgctxt "TEXT_GENERAL_INFO"
 msgid ""
@@ -2055,16 +2118,18 @@ msgid ""
 "Official mailing list: https://lists.w3.org/Archives/Public/public-htacg/\n"
 "Latest HTML specification: http://dev.w3.org/html5/spec-author-view/\n"
 "Validate your HTML documents: http://validator.w3.org/nu/\n"
-"Lobby your company to join the W3C: http://www.w3.org/Consortium\n"
+"Lobby your company to join the W3C: http://www.w3.org/Consortium"
+"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 #. - Don't terminate the last line with a newline.
 msgctxt "TEXT_GENERAL_INFO_PLEA"
 msgid ""
-"Do you speak a language other than English, or a different variant of \n"
-"English? Consider helping us to localize HTML Tidy. For details please see \n"
+"Do you speak a language other than English, or a different variant of "
+"English? Consider helping us to localize HTML Tidy. For details please see "
 "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
 msgstr ""
 
@@ -3319,7 +3384,8 @@ msgctxt "TC_STRING_VERS_B"
 msgid "HTML Tidy version %s"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 #. - First %s represents the name of the executable from the file system, and is mostly like going to be "tidy".
 #. - Second %s represents a version number, typically x.x.xx.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
@@ -3330,7 +3396,8 @@ msgid ""
 "%s [options...] [file...] [options...] [file...]\n"
 "Utility to clean up and pretty print HTML/XHTML/XML.\n"
 "\n"
-"This is modern HTML Tidy version %s.\n"
+"This is modern HTML Tidy version %s."
+"\n"
 "\n"
 msgstr ""
 
@@ -3346,31 +3413,33 @@ msgctxt "TC_TXT_HELP_2B"
 msgid "Command Line Arguments for HTML Tidy:"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 msgctxt "TC_TXT_HELP_3"
 msgid ""
 "\n"
 "Tidy Configuration Options\n"
 "==========================\n"
-"Use Tidy's configuration options as command line arguments in the form\n"
-"of \"--some-option <value>\", for example, \"--indent-with-tabs yes\".\n"
+"Use Tidy's configuration options as command line arguments in the form of\n"
+"   \"--some-option <value>\"\n"
+"For example, \"--indent-with-tabs yes\".\n"
 "\n"
-"For a list of all configuration options, use \"-help-config\" or refer\n"
+"For a list of all configuration options, use \"-help-config\" or refer "
 "to the man page (if your OS has one).\n"
 "\n"
-"If your environment has an $HTML_TIDY variable set point to a Tidy \n"
+"If your environment has an $HTML_TIDY variable set point to a Tidy "
 "configuration file then Tidy will attempt to use it.\n"
 "\n"
-"On some platforms Tidy will also attempt to use a configuration specified \n"
+"On some platforms Tidy will also attempt to use a configuration specified "
 "in /etc/tidy.conf or ~/.tidy.conf.\n"
 "\n"
 "Other\n"
 "=====\n"
 "Input/Output default to stdin/stdout respectively.\n"
 "\n"
-"Single letter options apart from -f may be combined\n"
-"as in:  tidy -f errs.txt -imu foo.html\n"
+"Single letter options apart from -f may be combined, as in:\n"
+"tidy -f errs.txt -imu foo.html\n"
 "\n"
 "Information\n"
 "===========\n"
@@ -3390,10 +3459,10 @@ msgid ""
 "\n"
 "Validate your HTML documents using the W3C Nu Markup Validator:\n"
 "  http://validator.w3.org/nu/\n"
-"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 msgctxt "TC_TXT_HELP_CONFIG"
 msgid ""
@@ -3423,57 +3492,57 @@ msgctxt "TC_TXT_HELP_CONFIG_ALLW"
 msgid "Allowable values"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 msgctxt "TC_TXT_HELP_LANG_1"
 msgid ""
 "\n"
-"The -language (or -lang) option indicates which language Tidy \n"
-"should use to communicate its output. Please note that this is not \n"
-"a document translation service, and only affects the messages that \n"
+"The -language (or -lang) option indicates which language Tidy "
+"should use to communicate its output. Please note that this is not "
+"a document translation service, and only affects the messages that "
 "Tidy communicates to you. \n"
 "\n"
-"When used from the command line the -language argument must \n"
-"be used before any arguments that result in output, otherwise Tidy \n"
-"will produce output before it knows which language to use. \n"
+"When used from the command line the -language argument must "
+"be used before any arguments that result in output, otherwise Tidy "
+"will produce output before it knows which language to use.\n"
 "\n"
-"In addition to standard POSIX language codes, Tidy is capable of \n"
-"understanding legacy Windows language codes. Please note that this \n"
-"list indicates codes Tidy understands, and does not indicate that \n"
-"the language is currently installed. \n"
+"In addition to standard POSIX language codes, Tidy is capable of "
+"understanding legacy Windows language codes. Please note that this "
+"list indicates codes Tidy understands, and does not indicate that "
+"the language is currently installed.\n"
 "\n"
-"The rightmost column indicates how Tidy will understand the \n"
+"The rightmost column indicates how Tidy will understand the "
 "legacy Windows name.\n"
-"\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 msgctxt "TC_TXT_HELP_LANG_2"
 msgid ""
 "\n"
-"The following languages are currently installed in Tidy. Please \n"
-"note that there's no guarantee that they are complete; only that \n"
-"one developer or another started to add the language indicated. \n"
+"The following languages are currently installed in Tidy. Please "
+"note that there's no guarantee that they are complete; only that "
+"one developer or another started to add the language indicated.\n"
 "\n"
-"Incomplete localizations will default to \"en\" when necessary. \n"
-"Please report instances of incorrect strings to the Tidy team. \n"
-"\n"
+"Incomplete localizations will default to \"en\" when necessary. "
+"Please report instances of incorrect strings to the Tidy team.\n"
 msgstr ""
 
-#. This console output should be limited to 78 characters per line.
+#. Languages that do not wrap at blank spaces should limit this console
+#. output to 78 characters per line according to language rules.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 #. - The parameter %s is likely to be two to five characters, e.g., en or en_US.
 #, c-format
 msgctxt "TC_TXT_HELP_LANG_3"
 msgid ""
 "\n"
-"If Tidy is able to determine your locale then Tidy will use the \n"
-"locale's language automatically. For example Unix-like systems use a \n"
-"$LANG and/or $LC_ALL environment variable. Consult your operating \n"
-"system documentation for more information. \n"
+"If Tidy is able to determine your locale then Tidy will use the "
+"locale's language automatically. For example Unix-like systems use a "
+"$LANG and/or $LC_ALL environment variable. Consult your operating "
+"system documentation for more information.\n"
 "\n"
-"Tidy is currently using locale %s. \n"
-"\n"
+"Tidy is currently using locale %s.\n"
 msgstr ""
 

@@ -2264,19 +2264,21 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "\n"
         "Tidy Configuration Options\n"
         "==========================\n"
-        "Use Tidy's configuration options as command line arguments in the form of\n"
-        "   \"--some-option <value>\"\n"
-        "For example, \"--indent-with-tabs yes\".\n"
+        "Use Tidy's configuration options as command line arguments in the form of"
         "\n"
+        "   \"--some-option <value>\"
+        "\n"
+        "For example, \"--indent-with-tabs yes\".
+        "\n\n"
         "For a list of all configuration options, use \"-help-config\" or refer "
-        "to the man page (if your OS has one).\n"
-        "\n"
+        "to the man page (if your OS has one).
+        "\n\n"
         "If your environment has an $HTML_TIDY variable set point to a Tidy "
-        "configuration file then Tidy will attempt to use it.\n"
-        "\n"
+        "configuration file then Tidy will attempt to use it."
+        "\n\n"
         "On some platforms Tidy will also attempt to use a configuration specified "
-        "in /etc/tidy.conf or ~/.tidy.conf.\n"
-        "\n"
+        "in /etc/tidy.conf or ~/.tidy.conf.
+        "\n\n"
         "Other\n"
         "=====\n"
         "Input/Output default to stdin/stdout respectively.\n"
@@ -2331,19 +2333,20 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "The -language (or -lang) option indicates which language Tidy "
         "should use to communicate its output. Please note that this is not "
         "a document translation service, and only affects the messages that "
-        "Tidy communicates to you. \n"
-        "\n"
+        "Tidy communicates to you."
+        "\n\n"
         "When used from the command line the -language argument must "
         "be used before any arguments that result in output, otherwise Tidy "
-        "will produce output before it knows which language to use.\n"
-        "\n"
+        "will produce output before it knows which language to use."
+        "\n\n"
         "In addition to standard POSIX language codes, Tidy is capable of "
         "understanding legacy Windows language codes. Please note that this "
         "list indicates codes Tidy understands, and does not indicate that "
-        "the language is currently installed.\n"
-        "\n"
+        "the language is currently installed."
+        "\n\n"
         "The rightmost column indicates how Tidy will understand the "
-        "legacy Windows name.\n"
+        "legacy Windows name."
+        "\n"
     },
     {/* Languages that do not wrap at blank spaces should limit this console
         output to 78 characters per line according to language rules.
@@ -2352,10 +2355,11 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "\n"
         "The following languages are currently installed in Tidy. Please "
         "note that there's no guarantee that they are complete; only that "
-        "one developer or another started to add the language indicated.\n"
-        "\n"
+        "one developer or another started to add the language indicated."
+        "\n\n"
         "Incomplete localizations will default to \"en\" when necessary. "
-        "Please report instances of incorrect strings to the Tidy team.\n"
+        "Please report instances of incorrect strings to the Tidy team."
+        "\n"
     },
     {/* Languages that do not wrap at blank spaces should limit this console
         output to 78 characters per line according to language rules.
@@ -2366,9 +2370,10 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "If Tidy is able to determine your locale then Tidy will use the "
         "locale's language automatically. For example Unix-like systems use a "
         "$LANG and/or $LC_ALL environment variable. Consult your operating "
-        "system documentation for more information.\n"
+        "system documentation for more information.
+        "\n\n"
+        "Tidy is currently using locale %s."
         "\n"
-        "Tidy is currently using locale %s.\n"
     },
 #endif /* SUPPORT_CONSOLE_APP */
     

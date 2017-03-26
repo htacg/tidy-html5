@@ -92,17 +92,17 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
         "<code>#ffffff</code> with <code>white</code>. "
     },
     { TEXT_USING_FONT,                 0,        
-        "You are recommended to use CSS to specify the font and\n"
-        "properties such as its size and colour. This will reduce\n"
-        "the size of HTML files and make them easier to maintain\n"
-        "compared with using <FONT> elements.\n\n"
+        "You are recommended to use CSS to specify the font and "
+        "properties such as its size and colour. This will reduce "
+        "the size of HTML files and make them easier to maintain "
+        "compared with using <FONT> elements."
+        "\n"
     },
     { TEXT_USING_BODY,                 0, "You are recommended to use CSS to specify page and link colours\n"           },
     { TEXT_GENERAL_INFO_PLEA,          0,        
-        "\n"
-        "Would you like to see Tidy in proper, British English? Please consider \n"
-        "helping us to localise HTML Tidy. For details please see \n"
-        "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md\n"
+        "Would you like to see Tidy in proper, British English? Please consider "
+        "helping us to localise HTML Tidy. For details please see "
+        "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
     },
 
 #if SUPPORT_ACCESSIBILITY_CHECKS

@@ -2266,18 +2266,18 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "==========================\n"
         "Use Tidy's configuration options as command line arguments in the form of"
         "\n"
-        "   \"--some-option <value>\"
+        "   \"--some-option <value>\""
         "\n"
-        "For example, \"--indent-with-tabs yes\".
+        "For example, \"--indent-with-tabs yes\"."
         "\n\n"
         "For a list of all configuration options, use \"-help-config\" or refer "
-        "to the man page (if your OS has one).
+        "to the man page (if your OS has one)."
         "\n\n"
         "If your environment has an $HTML_TIDY variable set point to a Tidy "
         "configuration file then Tidy will attempt to use it."
         "\n\n"
         "On some platforms Tidy will also attempt to use a configuration specified "
-        "in /etc/tidy.conf or ~/.tidy.conf.
+        "in /etc/tidy.conf or ~/.tidy.conf."
         "\n\n"
         "Other\n"
         "=====\n"
@@ -2370,7 +2370,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "If Tidy is able to determine your locale then Tidy will use the "
         "locale's language automatically. For example Unix-like systems use a "
         "$LANG and/or $LC_ALL environment variable. Consult your operating "
-        "system documentation for more information.
+        "system documentation for more information."
         "\n\n"
         "Tidy is currently using locale %s."
         "\n"

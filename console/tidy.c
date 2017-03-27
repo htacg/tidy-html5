@@ -1940,7 +1940,6 @@ int main( int argc, char** argv )
     TidyDoc tdoc = tidyCreate();
     int status = 0;
     tmbstr locale = NULL;
-    uint iac_width = 0;
     tidySetMessageCallback( tdoc, reportCallback); /* experimental group */
 
     uint contentErrors = 0;
@@ -1975,10 +1974,10 @@ int main( int argc, char** argv )
      * output is going to a file, then do NOT override the default. If the user
      * uses console-width, it will override this setting and apply to files.
      */
+#define TY_UNLIKELY_WIDTH 62699
     if ( outputToConsole() )
     {
-        iac_width = getConsoleWidth();
-        tidyOptSetInt( tdoc, TidyConsoleWidth, iac_width);
+        tidyOptSetInt( tdoc, TidyConsoleWidth, TY_UNLIKELY_WIDTH);
     }
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
@@ -2362,17 +2361,23 @@ int main( int argc, char** argv )
             continue;
         }
 
-        /* Verify that all output is still going to an interactive console. If
-         * NOT, and the user hasn't set her own value, then undo our setting.
+        /* If the user didn't specify a width, then let's set the width
+           ourselves, unless not all output is going to the console.
          */
-        if ( !outputToConsole() )
+        if ( tidyOptGetInt( tdoc, TidyConsoleWidth ) == TY_UNLIKELY_WIDTH )
         {
-            if ( tidyOptGetInt( tdoc, TidyConsoleWidth ) == iac_width )
+            if ( outputToConsole() )
+            {
+                tidyOptSetInt( tdoc, TidyConsoleWidth, getConsoleWidth() );
+            }
+            else
             {
                 TidyOption topt = tidyGetOption(tdoc, TidyConsoleWidth);
                 tidyOptSetInt( tdoc, TidyConsoleWidth, tidyOptGetDefaultInt( topt ) );
             }
+
         }
+
 
         if ( argc > 1 )
         {

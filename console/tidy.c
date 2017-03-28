@@ -156,6 +156,29 @@ static uint getConsoleWidth( void )
 }
 
 
+/** Set the final output width based on current conditions. If the user didn't
+ ** specify a width, then let's set the width ourselves, unless not all output
+ ** is going to the console.
+ ** @param tdoc The Tidy document.
+ */
+#define TY_UNLIKELY_WIDTH 62699
+static void setOutputWidth( TidyDoc tdoc )
+{
+    if ( tidyOptGetInt( tdoc, TidyConsoleWidth ) == TY_UNLIKELY_WIDTH )
+    {
+        if ( outputToConsole() )
+        {
+            tidyOptSetInt( tdoc, TidyConsoleWidth, getConsoleWidth() );
+        }
+        else
+        {
+            TidyOption topt = tidyGetOption(tdoc, TidyConsoleWidth);
+            tidyOptSetInt( tdoc, TidyConsoleWidth, tidyOptGetDefaultInt( topt ) );
+        }
+    }
+}
+
+
 /** @} end utilities_misc group */
 /* MARK: - Output Helping Functions */
 /***************************************************************************//**
@@ -1974,7 +1997,6 @@ int main( int argc, char** argv )
      * output is going to a file, then do NOT override the default. If the user
      * uses console-width, it will override this setting and apply to files.
      */
-#define TY_UNLIKELY_WIDTH 62699
     if ( outputToConsole() )
     {
         tidyOptSetInt( tdoc, TidyConsoleWidth, TY_UNLIKELY_WIDTH);
@@ -2134,42 +2156,49 @@ int main( int argc, char** argv )
                          strcasecmp(arg, "-help") == 0 ||
                          strcasecmp(arg,    "h") == 0 || *arg == '?' )
                 {
-                    help( tdoc, prog );
+                  setOutputWidth( tdoc );
+                  help( tdoc, prog );
                     tidyRelease( tdoc );
                     return 0; /* success */
                 }
                 else if ( strcasecmp(arg, "xml-help") == 0)
                 {
+                    setOutputWidth( tdoc );
                     xml_help( );
                     tidyRelease( tdoc );
                     return 0; /* success */
                 }
                 else if ( strcasecmp(arg, "xml-error-strings") == 0)
                 {
+                    setOutputWidth( tdoc );
                     xml_error_strings( tdoc );
                     tidyRelease( tdoc );
                     return 0; /* success */
                 }
                 else if ( strcasecmp(arg, "xml-options-strings") == 0)
                 {
+                    setOutputWidth( tdoc );
                     xml_options_strings( tdoc );
                     tidyRelease( tdoc );
                     return 0; /* success */
                 }
                 else if ( strcasecmp(arg, "xml-strings") == 0)
                 {
+                    setOutputWidth( tdoc );
                     xml_strings( );
                     tidyRelease( tdoc );
                     return 0; /* success */
                 }
                 else if ( strcasecmp(arg, "help-config") == 0 )
                 {
+                    setOutputWidth( tdoc );
                     optionhelp( tdoc );
                     tidyRelease( tdoc );
                     return 0; /* success */
                 }
                 else if ( strcasecmp(arg, "help-option") == 0 )
                 {
+                    setOutputWidth( tdoc );
                     if ( argc >= 3)
                     {
                         optionDescribe( tdoc, argv[2] );
@@ -2183,12 +2212,14 @@ int main( int argc, char** argv )
                 }
                 else if ( strcasecmp(arg, "xml-config") == 0 )
                 {
+                    setOutputWidth( tdoc );
                     XMLoptionhelp( tdoc );
                     tidyRelease( tdoc );
                     return 0; /* success */
                 }
                 else if ( strcasecmp(arg, "show-config") == 0 )
                 {
+                    setOutputWidth( tdoc );
                     optionvalues( tdoc );
                     tidyRelease( tdoc );
                     return 0; /* success */
@@ -2257,6 +2288,7 @@ int main( int argc, char** argv )
                          strcasecmp(arg, "-version") == 0 ||
                          strcasecmp(arg,        "v") == 0 )
                 {
+                    setOutputWidth( tdoc );
                     version( tdoc );
                     tidyRelease( tdoc );
                     return 0;  /* success */
@@ -2361,23 +2393,8 @@ int main( int argc, char** argv )
             continue;
         }
 
-        /* If the user didn't specify a width, then let's set the width
-           ourselves, unless not all output is going to the console.
-         */
-        if ( tidyOptGetInt( tdoc, TidyConsoleWidth ) == TY_UNLIKELY_WIDTH )
-        {
-            if ( outputToConsole() )
-            {
-                tidyOptSetInt( tdoc, TidyConsoleWidth, getConsoleWidth() );
-            }
-            else
-            {
-                TidyOption topt = tidyGetOption(tdoc, TidyConsoleWidth);
-                tidyOptSetInt( tdoc, TidyConsoleWidth, tidyOptGetDefaultInt( topt ) );
-            }
-
-        }
-
+        /* We're ready for normal output, now. */
+        setOutputWidth( tdoc );
 
         if ( argc > 1 )
         {

@@ -167,9 +167,8 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { STRING_MISSING_MALFORMED,     0, "argument manquant ou incorrect pour l'option: %s"                                 },
     { STRING_XML_DECLARATION,       0, "déclaration XML"                                                                  },
     { STRING_NEEDS_INTERVENTION,    0,        
-        "Ce document contient des erreurs qui doivent être résolus avant\n"
-        "utilisant HTML Tidy pour générer une version rangé.\n"
-        "\n"
+        "Ce document contient des erreurs qui doivent être résolus avant "
+        "utilisant HTML Tidy pour générer une version rangé."
     },
     { STRING_NO_ERRORS,             0, "Aucun avertissement ou les erreurs ne trouvées."                                  },
     { STRING_NO_SYSID,              0, "Aucun identificateur de système dans le doctype émis"                             },
@@ -179,7 +178,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { STRING_SPECIFIED,             0, "spécifié"                                                                         },
     { STRING_UNKNOWN_OPTION,        0, "option inconnue: %s"                                                              },
     { TEXT_HTML_T_ALGORITHM,        0,        
-        "\n"
         "       - D'abord, cherchez à gauche de la position de la cellule de trouver \n"
         "         des cellules d'en-tête de ligne.\n"
         "       - Puis rechercher vers le haut pour trouver les cellules d'en-tête \n"
@@ -198,7 +196,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "         liste et le recherche arrête pour la direction du courant.\n"
         "         TD cellules qui fixent l'attribut de l'axe sont également \n"
         "         traités comme des cellules d'en-tête.\n"
-        "\n"
     },
     { TEXT_WINDOWS_CHARS,           0,        
         "Personnages codes pour les polices Microsoft Windows dans la gamme "
@@ -207,14 +204,12 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "plutôt code que Windows de caractères 153 (0x2122 en Unicode). Notez que "
         "à partir de Février 1998 quelques navigateurs supportent les nouvelles "
         "entités."
-        "\n"
     },
     { TEXT_VENDOR_CHARS,            0,        
         "Il est peu probable que fournisseur spécifique, encodages qui dépendent du système "
         "travailler assez largement sur le World Wide Web; vous devriez éviter d'utiliser le "
         "%s codage de caractères de $, à la place il est recommandé "
         "de  utiliser entités nommées, par exemple &trade;."
-        "\n"
     },
     { TEXT_SGML_CHARS,              0,        
         "Les codes de caractères 128 à 159 (U + 0080 à U + 009F) ne sont pas autorisés "
@@ -222,7 +217,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "non imprimables de contrôle. Tidy supposé que vous vouliez faire référence "
         "à un personnage avec la même valeur d'octet l'encodage %s et remplacé "
         "cette référence avec l'équivalent Unicode."
-        "\n"
     },
     { TEXT_INVALID_UTF8,            0,        
         "Les codes de caractères UTF-8 doivent être dans la gamme: U + 0000 à U + 10FFFF. "
@@ -235,7 +229,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "(mais il ne permet d'autres non-caractères). Pour plus d'informations s'il vous "
         "plaît se référer à "
         "http://www.unicode.org/ et http://www.cl.cam.ac.uk/~mgk25/unicode.html"
-        "\n"
     },
     { TEXT_INVALID_UTF16,           0,        
         "Codes de caractères pour UTF-16 doit être dans la gamme: U + 0000 à U + 10FFFF. "
@@ -243,7 +236,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "le mappage des substituts non appariés. Pour plus d'informations, veuillez vous "
         "référer "
         "à http://www.unicode.org/ et http://www.cl.cam.ac.uk/~mgk25/unicode.html"
-        "\n"
     },
     { TEXT_INVALID_URI,             0,        
         "URI doit être correctement protégés, ils ne doivent pas contenir unescaped "
@@ -255,7 +247,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "échapper à l'URI sur votre propre. Pour plus d'informations s'il vous plaît se "
         "référer à "
         "http://www.w3.org/International/O-URL-and-ident.html"
-        "\n"
     },
     { TEXT_BAD_FORM,                0,        
         "Vous devrez peut-être déplacer un ou deux de la<form>et</form> "
@@ -264,12 +255,10 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "<form>dans une cellule et la </form>dans un autre. Si le <form>est placé "
         "devant une table, le </form>ne peut pas être placé à l'intérieur de la table ! "
         "Notez qu'une forme ne peut pas être imbriquée dans un autre !"
-        "\n"
     },
     { TEXT_BAD_MAIN,                0,        
         "Qu'un seul <main> élément est autorisé dans un document. "
         "Les <main>éléments ont été jetées, qui peut invalider le document "
-        "\n"
     },
     { TEXT_M_SUMMARY,               0,        
         "L'attribut summary table devrait servir à décrire la structure "
@@ -278,14 +267,12 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "pour les cellules d'un tableau servent utiles pour spécifier les "
         "en-têtes s'appliquent à chaque cellule du tableau, permettant "
         "aux navigateurs non visuels fournir un contexte pour chaque cellule. "
-        "\n"
     },
     { TEXT_M_IMAGE_ALT,             0,        
         "L'attribut alt devrait servir à donner une brève description d'une "
         "image ; Il faudrait aussi des descriptions plus longues avec l'attribut "
         "longdesc qui prend une URL liée à la description. Ces mesures sont "
         "nécessaires pour les personnes utilisant des navigateurs textuels. "
-        "\n"
     },
     { TEXT_M_IMAGE_MAP,             0,        
         "Utilisation côté client images interactives préférence cartes-images "
@@ -293,13 +280,11 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "des navigateurs non graphiques. En outre, les cartes côté client sont "
         "plus faciles à mettre en place et fournir une rétroaction immédiate "
         "aux utilisateurs. "
-        "\n"
     },
     { TEXT_M_LINK_ALT,              0,        
         "Liens hypertextes définie à l'aide d'une hyperimage côté client, vous "
         "devez utiliser l'attribut alt pour fournir une description textuelle de la "
         "liaison pour les personnes utilisant des navigateurs textuels."
-        "\n"
     },
     { TEXT_USING_FRAMES,            0,        
         "Pages conçues à l'aide de cadres pose des problèmes pour "
@@ -307,7 +292,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "ne supporte pas les frames. Une page de base de cadres doit "
         "toujours inclure une disposition alternative à l'intérieur d'un "
         "élément NOFRAMES. "
-        "\n"
     },
     { TEXT_ACCESS_ADVICE1,          0,        
         "Pour plus d'informations sur la façon de rendre vos pages "
@@ -322,26 +306,22 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "Les Cascading Style Sheets (CSS) mécanisme de positionnement "
         "Il est recommandé de préférence à la propriétaire <LAYER> "
         "élément grâce à l'appui du fournisseur limitée pour la LAYER. "
-        "\n"
     },
     { TEXT_USING_SPACER,            0,        
         "Il est recommandé d'utiliser les CSS pour contrôler blanc "
         "espace (par exemple pour retrait, les marges et interlignes). "
         "Le <SPACER> élément propriétaire a le soutien des fournisseurs limité. "
-        "\n"
     },
     { TEXT_USING_FONT,              0,        
         "Il est recommandé d'utiliser les CSS pour spécifier la police et "
         "propriétés telles que sa taille et sa couleur. Cela permettra de réduire "
         "la taille des fichiers HTML et de les rendre plus faciles à entretenir "
         "rapport à l'utilisation <FONT> éléments. "
-        "\n"
     },
     { TEXT_USING_NOBR,              0,        
         "Il est recommandé d'utiliser les CSS pour contrôler les sauts de ligne. "
         "Utilisez \"white-space: nowrap\" pour inhiber emballage en place "
         "d'insertion <NOBR> ... </ NOBR> dans le balisage."
-        "\n"
     },
     { TEXT_USING_BODY,              0,        
         "Il est recommandé d'utiliser les CSS pour spécifier la page et de liaison des "
@@ -354,7 +334,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "Spécification HTML dernière: http://dev.w3.org/html5/spec-author-view/\n"
         "Validez vos documents HTML: http://validator.w3.org/nu/\n"
         "Hall de votre entreprise à rejoindre le W3C: http://www.w3.org/Consortium\n"
-        "\n"
     },
     { TEXT_GENERAL_INFO_PLEA,       0,        
         "Parlez-vous une langue autre que l'anglais ou une autre variante de "
@@ -463,7 +442,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { TC_OPT_ASCII,                 0, "utiliser ISO-8859-1 pour l'entrée, US-ASCII pour la sortie"                       },
     { TC_OPT_UPPER,                 0, "balises de force en majuscules"                                                   },
     { TC_TXT_HELP_3,                0,        
-        "\n"
         "Options de configuration Tidy\n"
         "==========================\n"
         "Utilisez les options de configuration de Tidy comme arguments de ligne de commande "
@@ -494,10 +472,8 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "\n"
         "  HTML: Edition pour les auteurs Web (de la dernière spécification de HTML)\n"
         "  http://dev.w3.org/html5/spec-author-view\n"
-        "\n"
     },
     { TC_TXT_HELP_CONFIG,           0,        
-        "\n"
         "HTML Tidy paramètres de configuration\n"
         "\n"
         "Dans un fichier, utilisez le formulaire:\n"
@@ -508,13 +484,11 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "Quand il est spécifié sur la ligne de commande, utilisez le formulaire:\n"
         "\n"
         "--wrap 72 --indent pas\n"
-        "\n"
     },
     { TC_TXT_HELP_CONFIG_NAME,      0, "Nom"                                                                              },
     { TC_TXT_HELP_CONFIG_TYPE,      0, "Type"                                                                             },
     { TC_TXT_HELP_CONFIG_ALLW,      0, "Les valeurs autorisées"                                                           },
     { TC_TXT_HELP_LANG_1,           0,        
-        "\n"
         "L'option -language (ou -lang) indique la langue Tidy "
         "doit utiliser pour communiquer sa sortie. S'il vous plaît noter que ce ne sont pas "
         "un service de traduction de documents, et affecte uniquement les messages qui Tidy "
@@ -531,23 +505,18 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "\n\n"
         "La colonne de droite indique comment Tidy comprendra le "
         "héritage nom Windows.\n"
-        "\n"
     },
     { TC_TXT_HELP_LANG_2,           0,
-        "\n"
         "Notez qu'il n'y a aucune garantie qu'ils sont complets; seulement ça "
         "un développeur ou d'une autre ont commencé à ajouter la langue indiquée. "
         "Localisations incomplètes ne seront par défaut \"et\" si nécessaire. "
         "S'il vous plaît signaler les cas de chaînes incorrectes à l'équipe Tidy."
-        "\n"
     },
     { TC_TXT_HELP_LANG_3,           0,        
-        "\n"
         "Si Tidy est capable de déterminer votre localisation puis Tidy utilisera le "
         "langue locale automatiquement. Par exemple les systèmes Unix-like utilisent un $LANG "
         "et/ou $LC_ALL variable d'environnement. Consultez votre exploitation documentation "
         "du système pour plus d'informations."
-        "\n"
     },
 #endif /* SUPPORT_CONSOLE_APP */
 

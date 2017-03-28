@@ -81,7 +81,6 @@ static languageDefinition language_es = { whichPluralForm_es, {
 
 #if SUPPORT_CONSOLE_APP
     { TC_TXT_HELP_LANG_1,     0,        
-        "\n"
         "La opción -language (o -lang) indica el lenguaje Tidy debe "
         "utilizar para comunicar su salida. Tenga en cuenta que esto no es "
         "un servicio de traducción de documentos, y sólo afecta a los mensajes "
@@ -101,20 +100,16 @@ static languageDefinition language_es = { whichPluralForm_es, {
         "legado nombre de Windows."
         "\n\n"
         "Tidy está utilizando la configuración regional %s."
-        "\n"
     },
     { TC_TXT_HELP_LANG_2,     0,        
-        "\n"
         "Los siguientes idiomas están instalados actualmente en Tidy. Tenga "
         "en cuenta que no hay garantía de que están completos; sólo quiere decir "
         "que un desarrollador u otro comenzaron a añadir el idioma indicado."
         "\n\n"
         "Localizaciones incompletas por defecto se usan \"en\" cuando sea "
         "necesario. ¡Favor de informar los desarrolladores de estes casos!"
-        "\n"
     },
     { TC_TXT_HELP_LANG_3,     0,        
-        "\n"
         "Si Tidy es capaz de determinar la configuración regional entonces "
         "Tidy utilizará el lenguaje de forma automática de la configuración "
         "regional. Por ejemplo los sistemas de tipo Unix utilizan los variables "
@@ -122,7 +117,6 @@ static languageDefinition language_es = { whichPluralForm_es, {
         "obtener más información."
         "\n\n"
         "Tidy está utilizando la configuración regional %s."
-        "\n"
     },
 #endif /* SUPPORT_CONSOLE_APP */
 

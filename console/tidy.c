@@ -944,7 +944,9 @@ static void help(TidyDoc tdoc, /**< The tidy document for which help is showing.
     uint width = tidyOptGetInt( tdoc, TidyConsoleWidth );
     width = width == 0 ? UINT_MAX : width;
 
+    printf("%s", "\n");
     printf_wrapped( tdoc, tidyLocalizedString(TC_TXT_HELP_1), get_final_name(prog), tidyLibraryVersion() );
+    printf("%s", "\n");
 
 #ifdef PLATFORM_NAME
     title_line = stringWithFormat( tidyLocalizedString(TC_TXT_HELP_2A), PLATFORM_NAME);
@@ -958,7 +960,9 @@ static void help(TidyDoc tdoc, /**< The tidy document for which help is showing.
 
     print_help_options( tdoc );
 
+    printf("%s", "\n");
     printf_wrapped( tdoc, "%s", tidyLocalizedString(TC_TXT_HELP_3) );
+    printf("%s", "\n");
 }
 
 /** @} end service_help group */
@@ -1065,6 +1069,7 @@ static void printOption(TidyDoc ARG_UNUSED(tdoc), /**< The Tidy document. */
  */
 static void optionhelp( TidyDoc tdoc )
 {
+    printf("%s", "\n");
     printf_wrapped( tdoc, "%s", tidyLocalizedString( TC_TXT_HELP_CONFIG ) );
 
     printf( fmt,
@@ -1439,11 +1444,17 @@ void tidyPrintTidyLanguageNames( ctmbstr format )
  */
 static void lang_help( TidyDoc tdoc )
 {
+    printf("%s", "\n");
     printf_wrapped( tdoc, "%s", tidyLocalizedString(TC_TXT_HELP_LANG_1) );
+    printf("%s", "\n");
     tidyPrintWindowsLanguageNames("  %-20s -> %s\n");
+    printf("%s", "\n");
     printf_wrapped( tdoc, "%s", tidyLocalizedString(TC_TXT_HELP_LANG_2) );
+    printf("%s", "\n");
     tidyPrintTidyLanguageNames("  %s\n");
+    printf("%s", "\n");
     printf_wrapped( tdoc, tidyLocalizedString(TC_TXT_HELP_LANG_3), tidyGetLanguage() );
+    printf("%s", "\n");
 }
 
 

@@ -146,6 +146,7 @@ static void messageOut( TidyMessageImpl *message )
 {
     TidyDocImpl *doc;
     Bool go;
+    static Bool prevDialog = no;
 
     if ( !message )
         return;
@@ -177,10 +178,20 @@ static void messageOut( TidyMessageImpl *message )
     if ( go )
     {
         TidyOutputSink *outp = &doc->errout->sink;
-        uint columns = message->level > TidyFatal ? cfg( doc, TidyConsoleWidth ) : 0;
+        Bool isDialog = message->level > TidyFatal;
+        uint columns = isDialog ? cfg( doc, TidyConsoleWidth ) : 0;
         tmbstr wrapped = TY_(tidyWrappedText)( doc, message->messageOutput, columns );
         ctmbstr cp;
         byte b = '\0';
+        
+        /* Always ensure there's an empty line before a dialogue message,
+           unless one is already there. This avoids adding formatting to the
+           strings, and keeps them here, consistently. */
+        if ( isDialog && !prevDialog )
+        {
+            TY_(WriteChar)( '\n', doc->errout );
+        }
+        
         for ( cp = wrapped; *cp; ++cp )
         {
             b = (*cp & 0xff);
@@ -191,10 +202,17 @@ static void messageOut( TidyMessageImpl *message )
         }
         TidyDocFree( doc, wrapped );
         
-        /* Always add a trailing newline. Reports require this, and dialogue
-           messages will be better spaced out without having to fill the
-           language file with superflous newlines. */
-        /* TY_(WriteChar)( '\n', doc->errout ); */
+        /* Always add a trailing newline after dialogue messages. */
+        if ( isDialog )
+        {
+            TY_(WriteChar)( '\n', doc->errout );
+            prevDialog = yes;
+        }
+        else
+        {
+            prevDialog = no;
+        }
+        
     }
 
     TY_(tidyMessageRelease)(message);
@@ -920,7 +938,6 @@ void TY_(ReportNumWarnings)( TidyDocImpl* doc )
         message = TY_(tidyMessageCreate)( doc, STRING_NO_ERRORS, TidyDialogueSummary);
     }
     messageOut(message);
-    TY_(WriteChar)( '\n', doc->errout );
 }
 
 

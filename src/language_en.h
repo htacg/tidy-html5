@@ -1615,7 +1615,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       STRING_NEEDS_INTERVENTION,    0,
         "This document has errors that must be fixed before using "
-        "HTML Tidy to generate a tidied up version."
+        "HTML Tidy to generate a tidied up version.\n"
     },
     { STRING_NO_ERRORS,             0,   "No warnings or errors were found."                                       },
     { STRING_NO_SYSID,              0,   "No system identifier in emitted doctype"                                 },

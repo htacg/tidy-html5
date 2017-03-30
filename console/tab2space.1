@@ -1,0 +1,39 @@
+.TH TABS2SPACE "1" "March 2013" "tab2space" "User Commands"
+
+.SH NAME
+.B tab2space
+[\fIoptions\fR] [\fIinfile\fR [\fIoutfile\fR]] ...
+.SH DESCRIPTION
+.PP
+Utility to expand tabs and ensure consistent line endings options.
+.PP
+When the \fIinfile\fR is not specified or is set to \fI-\fR (dash) the input
+file is read from standard input.
+.PP
+This man page is rewritten from \fI\-help\fR output.
+
+.SH OPTIONS
+.TP
+\fB\-h\fR, \fB\-help\fR
+display the help message
+.TP
+\fB\-dos\fR, \fB\-crlf\fR
+set line ends to CRLF (PC-DOS/Windows - default)
+.TP
+\fB\-mac\fR, \fB\-cr\fR
+set line ends to CR (classic Mac OS)
+.TP
+\fB\-unix\fR, \fB\-lf\fR
+set line ends to LF (Unix)
+.TP
+\fB\-tabs\fR
+preserve tabs, e.g. for Makefile
+.TP
+\fB\-t\fR\fI<n>\fR
+set tabs to \fI<n>\fR (default is 4) spaces
+.TP
+Note this utility doesn't map spaces to tabs!
+
+.SH VERSION
+.B tab2space
+for 6th February 2003

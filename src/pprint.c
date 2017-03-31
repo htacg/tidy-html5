@@ -578,6 +578,30 @@ static void ResetLineAfterWrap( TidyPrintImpl* pprint )
     ResetLine( pprint );
 }
 
+/*\
+ *  Write the 'indent' char to output
+ *  Issue #335 - The GetSpaces() returns the number of spaces to be
+ *  used for the indent. This is fine if ouputting spaces.
+ *  However, if outputting 'tab' chars, then the number of tabs 
+ *  output should euivalent to spaces divided by 'tab-size'
+\*/
+static void WriteIndentChar(TidyDocImpl* doc )
+{
+    TidyPrintImpl* pprint = &doc->pprint;
+    uint i;
+    uint spaces = GetSpaces(pprint);
+    uint tabsize = cfg(doc, TidyTabSize);
+    if (spaces && (indent_char == '\t') && tabsize)
+    {
+        spaces /= tabsize;  // set number of tabs to output
+        if (spaces == 0)    // with a minimum of one
+            spaces = 1;
+    }
+    for (i = 0; i < spaces; i++)
+        TY_(WriteChar)(indent_char, doc->docOut); /* 20150515 - Issue #108 */
+
+}
+
 /* Goes ahead with writing current line up to
 ** previously saved wrap point.  Shifts unwritten
 ** text in output buffer to beginning of next line.
@@ -591,11 +615,7 @@ static void WrapLine( TidyDocImpl* doc )
         return;
 
     if ( WantIndent(doc) )
-    {
-        uint spaces = GetSpaces( pprint );
-        for ( i = 0; i < spaces; ++i )
-            TY_(WriteChar)( indent_char, doc->docOut ); /* 20150515 - Issue #108 */
-    }
+        WriteIndentChar(doc);
 
     for ( i = 0; i < pprint->wraphere; ++i )
         TY_(WriteChar)( pprint->linebuf[i], doc->docOut );
@@ -648,11 +668,7 @@ static void WrapAttrVal( TidyDocImpl* doc )
 
     /* assert( IsWrapInAttrVal(pprint) ); */
     if ( WantIndent(doc) )
-    {
-        uint spaces = GetSpaces( pprint );
-        for ( i = 0; i < spaces; ++i )
-            TY_(WriteChar)( indent_char, doc->docOut ); /* 20150515 - Issue #108 */
-    }
+        WriteIndentChar(doc);
 
     for ( i = 0; i < pprint->wraphere; ++i )
         TY_(WriteChar)( pprint->linebuf[i], doc->docOut );
@@ -676,11 +692,7 @@ static void PFlushLineImpl( TidyDocImpl* doc )
     CheckWrapLine( doc );
 
     if ( WantIndent(doc) )
-    {
-        uint spaces = GetSpaces( pprint );
-        for ( i = 0; i < spaces; ++i )
-            TY_(WriteChar)( indent_char, doc->docOut ); /* 20150515 - Issue #108 */
-    }
+        WriteIndentChar(doc);
 
     for ( i = 0; i < pprint->linelen; ++i )
         TY_(WriteChar)( pprint->linebuf[i], doc->docOut );

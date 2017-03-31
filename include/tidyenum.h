@@ -542,6 +542,7 @@ typedef enum
     TidyBreakBeforeBR,           /**< Output newline before <br> or not? */
     TidyCharEncoding,            /**< In/out character encoding */
     TidyCoerceEndTags,           /**< Coerce end tags from start tags where probably intended */
+    TidyConsoleWidth,            /**< Specify the width for console message output. */
     TidyCSSPrefix,               /**< CSS class naming for clean option */
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
     TidyCustomTags,              /**< Internal use ONLY */

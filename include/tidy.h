@@ -1405,6 +1405,22 @@ TIDY_EXPORT Bool TIDY_CALL   tidySetPrettyPrinterCallback(TidyDoc tdoc,
                                                           );
 
 /** @} */
+/** @name Output Utilities
+ ** Utility functions can make implementing LibTidy applications somewhat
+ ** simpler.
+ ** @{
+ */
+    
+/** Performs word wrapping on `string` limiting output to `column`, returning
+ ** an allocated string.
+ ** @param tdoc A Tidy document, so that we can use its allocator.
+ ** @param string The text to wrap.
+ ** @param columns The maximum column count to output.
+ ** @result An allocated, word-wrapped string.
+ */
+TIDY_EXPORT tmbstr TIDY_CALL tidyWrappedText(TidyDoc tdoc, ctmbstr string, uint columns);
+
+/** @} */
 /** @} end IO group */
 /* MARK: - Document Parse */
 /***************************************************************************//**

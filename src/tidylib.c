@@ -950,6 +950,19 @@ Bool TIDY_CALL        tidySetPrettyPrinterCallback(TidyDoc tdoc, TidyPPProgress 
 }
 
 
+/* Return an allocated string wrapped to a column. */
+tmbstr TIDY_CALL tidyWrappedText(TidyDoc tdoc, ctmbstr string, uint columns)
+{
+    TidyDocImpl* impl = tidyDocToImpl( tdoc );
+    if (impl)
+    {
+        return TY_(tidyWrappedText)(impl, string, columns);
+    }
+    
+    return NULL;
+}
+
+
 /* Document info */
 int TIDY_CALL        tidyStatus( TidyDoc tdoc )
 {

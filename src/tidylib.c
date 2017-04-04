@@ -1973,7 +1973,6 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     Bool logical  = cfgBool( doc, TidyLogicalEmphasis );
     Bool clean    = cfgBool( doc, TidyMakeClean );
     Bool gdoc     = cfgBool( doc, TidyGDocClean );
-    Bool dropFont = cfgBool( doc, TidyDropFontTags );
     Bool htmlOut  = cfgBool( doc, TidyHtmlOut );
     Bool xmlOut   = cfgBool( doc, TidyXmlOut );
     Bool xhtmlOut = cfgBool( doc, TidyXhtmlOut );
@@ -2014,7 +2013,7 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     }
 
     /* replaces presentational markup by style rules */
-    if ( clean || dropFont )
+    if ( clean )
         TY_(CleanDocument)( doc );
 
     /* clean up html exported by Google Docs */

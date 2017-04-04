@@ -249,7 +249,6 @@ static const TidyOptionImpl option_defs[] =
 #endif
     { TidyDropEmptyElems,          MU, "drop-empty-elements",         BL, yes,             ParseBool,         boolPicks       },
     { TidyDropEmptyParas,          MU, "drop-empty-paras",            BL, yes,             ParseBool,         boolPicks       },
-    { TidyDropFontTags,            MU, "drop-font-tags",              BL, no,              ParseBool,         boolPicks       },
     { TidyDropPropAttrs,           MU, "drop-proprietary-attributes", BL, no,              ParseBool,         boolPicks       },
     { TidyDuplicateAttrs,          MU, "repeated-attributes",         IN, TidyKeepLast,    ParseRepeatAttr,   repeatAttrPicks },
     { TidyEmacs,                   MS, "gnu-emacs",                   BL, no,              ParseBool,         boolPicks       },

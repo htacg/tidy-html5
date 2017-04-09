@@ -1635,14 +1635,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "        search stops for the current direction.\n"
         "        TD cells that set the axis attribute are also treated as header cells.\n"
     },
-    {/* This console output should be limited to 78 characters per line. */
-      TEXT_WINDOWS_CHARS,           0,
-        "Characters codes for the Microsoft Windows fonts in the range\n"
-        "128 - 159 may not be recognized on other platforms. You are\n"
-        "instead recommended to use named entities, e.g. &trade; rather\n"
-        "than Windows character code 153 (0x2122 in Unicode). Note that\n"
-        "as of February 1998 few browsers support the new entities.\n"
-    },
     {/* This console output should be limited to 78 characters per line.
         - %s represents a string-encoding name which may be localized in your language. */
       TEXT_VENDOR_CHARS,            0,

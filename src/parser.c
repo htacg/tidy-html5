@@ -1442,6 +1442,22 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
 #endif
 }
 
+/*
+<button> changed in HTML 5. It now contains phrasing content only, rather than
+HTML4-era flow elements, which also allows for blocks.
+*/
+void TY_(ParseButton)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
+{
+    if (TY_(HTMLVersion)(doc) == HT50 || TY_(HTMLVersion)(doc) == XH50)
+    {
+        TY_(ParseInline)(doc, element, mode);
+    }
+    else
+    {
+        TY_(ParseBlock)(doc, element, mode);
+    }
+}
+
 /* [i_a] svg / math */
 
 struct MatchingDescendantData

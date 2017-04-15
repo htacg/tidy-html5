@@ -215,6 +215,11 @@ Bool TY_(IsPushedLast)( TidyDocImpl* doc, Node *element, Node *node )
 */
 int TY_(InlineDup)( TidyDocImpl* doc, Node* node )
 {
+    if (!cfgBool(doc, TidyInsertInlineTags))
+    {
+        return 0;
+    }
+
     Lexer* lexer = doc->lexer;
     int n;
 

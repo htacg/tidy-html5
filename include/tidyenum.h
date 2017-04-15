@@ -580,6 +580,7 @@ typedef enum
     TidyIndentContent,           /**< Indent content of appropriate tags */
     TidyIndentSpaces,            /**< Indentation n spaces/tabs */
     TidyInlineTags,              /**< Declared inline tags */
+    TidyInsertInlineTags,        /**< Insert injected inline tags into block tags */
     TidyJoinClasses,             /**< Join multiple class attributes */
     TidyJoinStyles,              /**< Join multiple style attributes */
     TidyKeepFileTimes,           /**< If yes last modied time is preserved */

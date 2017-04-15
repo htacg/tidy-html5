@@ -679,6 +679,21 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - It's very important that <br/> be self-closing!
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
+        TidyInsertInlineTags,               0,
+        "This option enables inserting \"missing\" inline elements around the "
+        "contents of blocklevel elements such as <code>P</code>, "
+        "<code>DIV</code>, etc. For instance, this causes "
+        "<code><span><div>OK</div></span></code> to become "
+        "<code><span><div><span>OK</span></div></span></code>."
+    },
+    {/* Important notes for translators:
+      - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+      <br/>.
+      - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+      - Option values should be enclosed in <var></var>.
+      - It's very important that <br/> be self-closing!
+      - The strings "Tidy" and "HTML Tidy" are the program name and must not
+      be translated. */
         TidyJoinClasses,              0,
         "This option specifies if Tidy should combine class names to generate "
         "a single, new class name if multiple class assignments are detected on "

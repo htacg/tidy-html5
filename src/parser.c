@@ -2157,7 +2157,8 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
          *  big consequences.
          *  There may be other exceptions to be added...
         \*/
-        if (!(node->tag->model & CM_INLINE) &&
+        if (cfgBool(doc, TidyInsertInlineTags) &&
+            !(node->tag->model & CM_INLINE) &&
             !(element->tag->model & CM_MIXED) &&
             !(nodeIsSPAN(element) && nodeIsMETA(node)) )
         {

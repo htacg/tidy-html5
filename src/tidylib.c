@@ -1823,7 +1823,10 @@ void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
                 attrIsMismatched = check_versions ? TY_(AttributeIsMismatched)(node, attval, doc) : no;
                 /* Let the PROPRIETARY_ATTRIBUTE warning have precedence. */
                 if ( attrIsProprietary )
-                    TY_(ReportAttrError)(doc, node, attval, PROPRIETARY_ATTRIBUTE);
+                {
+                    if ( cfgBool(doc, TidyWarnPropAttrs) )
+                        TY_(ReportAttrError)(doc, node, attval, PROPRIETARY_ATTRIBUTE);
+                }
                 else if ( attrIsMismatched )
                 {
                     TY_(ReportAttrError)(doc, node, attval, attrReportType);

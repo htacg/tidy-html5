@@ -1,0 +1,9 @@
+libdir=@INSTALL_LIBDIR@
+includedir=@INSTALL_INCDIR@
+
+Name: @LIB_NAME@
+Description: @LIBTIDY_DESCRIPTION@
+URL: @LIBTIDY_URL@
+Version: @LIBTIDY_VERSION@
+Libs: -L${libdir} -l@LIB_NAME@
+Cflags: -I${includedir}

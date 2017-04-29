@@ -276,7 +276,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyIndentContent,           PP, "indent",                      IN, TidyNoState,     ParseAutoBool,     autoBoolPicks   },
     { TidyIndentSpaces,            PP, "indent-spaces",               IN, 2,               ParseInt,          NULL            },
     { TidyInlineTags,              MU, "new-inline-tags",             ST, 0,               ParseTagNames,     NULL            },
-    { TidyInsertInlineTags,        MU, "insert-inline-tags",          BL, no,              ParseBool,         boolPicks       },
+    { TidyInsertInlineTags,        MU, "insert-inline-tags",          BL, yes,             ParseBool,         boolPicks       },
     { TidyJoinClasses,             MU, "join-classes",                BL, no,              ParseBool,         boolPicks       },
     { TidyJoinStyles,              MU, "join-styles",                 BL, yes,             ParseBool,         boolPicks       },
     { TidyKeepFileTimes,           MS, "keep-time",                   BL, no,              ParseBool,         boolPicks       },

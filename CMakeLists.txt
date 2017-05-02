@@ -205,7 +205,7 @@ if (NOT BIN_INSTALL_DIR)
 endif ()
 
 if (NOT INCLUDE_INSTALL_DIR)
-    set(INCLUDE_INSTALL_DIR include)
+    set(INCLUDE_INSTALL_DIR include/${LIB_NAME})
 endif ()
 
 # Always build the STATIC library
@@ -408,8 +408,6 @@ endif ()
 include(CPack)
 
 # pkg-config
-set(INSTALL_LIBDIR "${CMAKE_INSTALL_PREFIX}/${LIB_INSTALL_DIR}" CACHE PATH "Installation directory for libraries")
-set(INSTALL_INCDIR "${CMAKE_INSTALL_PREFIX}/${INCLUDE_INSTALL_DIR}" CACHE PATH "Installation directory for headers")
 configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/${LIB_NAME}.pc.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}.pc"
@@ -417,7 +415,7 @@ configure_file(
     )
 install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}.pc"
-    DESTINATION "${INSTALL_LIBDIR}/pkgconfig"
+    DESTINATION "${LIB_INSTALL_DIR}/pkgconfig"
     )
 
 # eof

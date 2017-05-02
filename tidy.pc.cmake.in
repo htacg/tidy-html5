@@ -1,5 +1,7 @@
-libdir=@INSTALL_LIBDIR@
-includedir=@INSTALL_INCDIR@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/@LIB_INSTALL_DIR@
+includedir=${prefix}/@INCLUDE_INSTALL_DIR@
 
 Name: @LIB_NAME@
 Description: @LIBTIDY_DESCRIPTION@

@@ -541,17 +541,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - It's very important that <br/> be self-closing!
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
-        TidyHideEndTags,              0,
-        "This option is an alias for <code>omit-optional-tags</code>. "
-    },
-    {/* Important notes for translators:
-      - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
-      <br/>.
-      - Entities, tags, attributes, etc., should be enclosed in <code></code>.
-      - Option values should be enclosed in <var></var>.
-      - It's very important that <br/> be self-closing!
-      - The strings "Tidy" and "HTML Tidy" are the program name and must not
-      be translated. */
         TidyHtmlOut,                  0,
         "This option specifies if Tidy should generate pretty printed output, "
         "writing it as HTML. "

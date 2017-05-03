@@ -2261,12 +2261,6 @@ int main( int argc, char** argv )
                                     tidyOptResetToDefault( tdoc, TidyIndentSpaces );
                                 break;
 
-                                /* Usurp -o for output file.  Anyone hiding end tags?
-                                 case 'o':
-                                 tidyOptSetBool( tdoc, TidyHideEndTags, yes );
-                                 break;
-                                 */
-
                             case 'u':
                                 tidyOptSetBool( tdoc, TidyUpperCaseTags, yes );
                                 break;

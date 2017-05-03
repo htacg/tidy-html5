@@ -789,9 +789,8 @@ static void PCondFlushLineSmart( TidyDocImpl* doc, uint indent )
 
     /*\
      *  Issue #390 - Must still deal with fixing indent!
-     *  If TidyHideEndTags or TidyOmitOptionalTags, then
-     *  in certain circumstance no PrintEndTag will be done,
-     *  so linelen will be 0...
+     *  If TidyOmitOptionalTags, then in cerain circumstances no PrintEndTag
+     *  will be done, so linelen will be 0...
     \*/
     if (pprint->indent[ 0 ].spaces != (int)indent)
     {
@@ -2340,8 +2339,7 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
         {
             Bool indcont  = ( cfgAutoBool(doc, TidyIndentContent) != TidyNoState );
             Bool indsmart = ( cfgAutoBool(doc, TidyIndentContent) == TidyAutoState );
-            Bool hideend  = cfgBool( doc, TidyHideEndTags ) ||
-              cfgBool( doc, TidyOmitOptionalTags );
+            Bool hideend  = cfgBool( doc, TidyOmitOptionalTags );
             Bool classic  = TidyClassicVS; /* #228 - cfgBool( doc, TidyVertSpace ); */
             uint contentIndent = indent;
 

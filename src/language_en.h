@@ -1202,10 +1202,10 @@ static languageDefinition language_en = { whichPluralForm_en, {
       be translated. */
         TidyStrictTagsAttr,           0,
         "This options ensures that tags and attributes are applicable for the "
-        "version of HTML that Tidy outputs. When set to <var>yes</var> (the "
-        "default) and the output document type is a strict doctype, then Tidy "
-        "will report errors. If the output document type is a loose or "
-        "transitional doctype, then Tidy will report warnings. "
+        "version of HTML that Tidy outputs. When set to <var>yes</var> and the "
+        "output document type is a strict doctype, then Tidy will report "
+        "errors. If the output document type is a loose or transitional "
+        "doctype, then Tidy will report warnings. "
         "<br/>"
         "Additionally if <code>drop-proprietary-attributes</code> is enabled, "
         "then not applicable attributes will be dropped, too. "

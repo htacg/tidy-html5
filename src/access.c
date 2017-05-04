@@ -2761,6 +2761,10 @@ static Bool CheckMetaData( TidyDocImpl* doc, Node* node, Bool HasMetaData )
                         TY_(ReportAccessError)( doc, node, REMOVE_AUTO_REDIRECT);
                     }
                 }
+                if (TY_(IsHTML5Mode)(doc) && attrIsCHARSET(av) && hasValue(av))
+                {
+                    ContainsAttr = yes;
+                }
             }
         
             if ( HasContent || HasHttpEquiv )
@@ -2840,9 +2844,17 @@ static void CheckDocType( TidyDocImpl* doc )
         if (DTnode && DTnode->end != 0)
         {
             ctmbstr word = textFromOneNode( doc, DTnode);
-            if ((strstr (word, "HTML PUBLIC") == NULL) &&
-                (strstr (word, "html PUBLIC") == NULL))
-                DTnode = NULL;
+            if (TY_(IsHTML5Mode)(doc))
+            {
+                if ((strstr(word, "HTML") == NULL) &&
+                    (strstr(word, "html") == NULL))
+                    DTnode = NULL;
+            }
+            else {
+                if ((strstr(word, "HTML PUBLIC") == NULL) &&
+                    (strstr(word, "html PUBLIC") == NULL))
+                    DTnode = NULL;
+            }
         }
         if (!DTnode)
            TY_(ReportAccessError)( doc, &doc->root, DOCTYPE_MISSING);

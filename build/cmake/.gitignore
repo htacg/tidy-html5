@@ -32,4 +32,4 @@ libtidy*
 tidy1.xsl
 tidy.pc
 *.vcproj
-
+.pkg

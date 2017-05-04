@@ -3,6 +3,8 @@
 cmake_minimum_required (VERSION 2.8.7)
 
 set(LIB_NAME tidy)
+set(LIBTIDY_DESCRIPTION "${LIB_NAME} - HTML syntax checker")
+set(LIBTIDY_URL "http://www.html-tidy.org")
 
 project (${LIB_NAME})
 
@@ -203,7 +205,7 @@ if (NOT BIN_INSTALL_DIR)
 endif ()
 
 if (NOT INCLUDE_INSTALL_DIR)
-    set(INCLUDE_INSTALL_DIR include)
+    set(INCLUDE_INSTALL_DIR include/${LIB_NAME})
 endif ()
 
 # Always build the STATIC library
@@ -371,7 +373,7 @@ else ()
 endif ()
 
 set(CPACK_PACKAGE_NAME "${LIB_NAME}")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${LIB_NAME} - HTML syntax checker")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${LIBTIDY_DESCRIPTION}")
 set(CPACK_PACKAGE_VENDOR "HTML Tidy Advocacy Community Group")
 set(CPACK_PACKAGE_CONTACT "maintainer@htacg.org")
 
@@ -387,7 +389,7 @@ set(CPACK_RESOURCE_FILE_WELCOME "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html"
 
 ## debian config
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER ${CPACK_PACKAGE_CONTACT})
-set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "http://www.html-tidy.org/")
+set(CPACK_DEBIAN_PACKAGE_HOMEPAGE ${LIBTIDY_URL})
 #set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc")
 set(CPACK_DEBIAN_PACKAGE_SECTION "Libraries")
 set(CPACK_SOURCE_IGNORE_FILES
@@ -404,5 +406,16 @@ set( CPACK_PACKAGE_FILE_NAME "${LIB_NAME}-${CPACK_PACKAGE_VERSION}-${BITNESS}bit
 endif ()
 
 include(CPack)
+
+# pkg-config
+configure_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/${LIB_NAME}.pc.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}.pc"
+    @ONLY
+    )
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}.pc"
+    DESTINATION "${LIB_INSTALL_DIR}/pkgconfig"
+    )
 
 # eof

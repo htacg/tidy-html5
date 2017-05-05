@@ -184,7 +184,7 @@ static Dict tag_defs[] =
   { TidyTag_BLOCKQUOTE, "blockquote", VERS_ELEM_BLOCKQUOTE, &TY_(W3CAttrsFor_BLOCKQUOTE)[0], (CM_BLOCK),                                    TY_(ParseBlock),    NULL           },
   { TidyTag_BODY,       "body",       VERS_ELEM_BODY,       &TY_(W3CAttrsFor_BODY)[0],       (CM_HTML|CM_OPT|CM_OMITST),                    TY_(ParseBody),     NULL           },
   { TidyTag_BR,         "br",         VERS_ELEM_BR,         &TY_(W3CAttrsFor_BR)[0],         (CM_INLINE|CM_EMPTY),                          TY_(ParseEmpty),    NULL           },
-  { TidyTag_BUTTON,     "button",     VERS_ELEM_BUTTON,     &TY_(W3CAttrsFor_BUTTON)[0],     (CM_INLINE),                                   TY_(ParseBlock),    NULL           },
+  { TidyTag_BUTTON,     "button",     VERS_ELEM_BUTTON,     &TY_(W3CAttrsFor_BUTTON)[0],     (CM_INLINE),                                   TY_(ParseButton),   NULL           },
   { TidyTag_CAPTION,    "caption",    VERS_ELEM_CAPTION,    &TY_(W3CAttrsFor_CAPTION)[0],    (CM_TABLE),                                    TY_(ParseBlock),    CheckCaption   },
   { TidyTag_CENTER,     "center",     VERS_ELEM_CENTER,     &TY_(W3CAttrsFor_CENTER)[0],     (CM_BLOCK),                                    TY_(ParseBlock),    NULL           },
   { TidyTag_CITE,       "cite",       VERS_ELEM_CITE,       &TY_(W3CAttrsFor_CITE)[0],       (CM_INLINE),                                   TY_(ParseInline),   NULL           },

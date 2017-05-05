@@ -104,6 +104,7 @@ Parser TY_(ParseList);
 Parser TY_(ParseDefList);
 Parser TY_(ParseBlock);
 Parser TY_(ParseInline);
+Parser TY_(ParseButton);
 Parser TY_(ParseEmpty);
 Parser TY_(ParseTableTag);
 Parser TY_(ParseColGroup);

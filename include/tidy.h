@@ -735,7 +735,7 @@ TIDY_EXPORT Bool TIDY_CALL          tidyOptSetValue(TidyDoc tdoc,       /**< The
  ** @result Returns a bool indicating success or failure.
  */
 TIDY_EXPORT Bool TIDY_CALL          tidyOptParseValue(TidyDoc tdoc,   /**< The tidy document for which to set the value. */
-                                                      ctmbstr optnam, /**< The name of the option to set. */
+                                                      ctmbstr optnam, /**< The name of the option to set; this is the string value from the UI, e.g., `error-file`. */
                                                       ctmbstr val     /**< The value to set, as a string. */
                                                       );
 

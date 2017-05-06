@@ -1304,6 +1304,17 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - It's very important that <br/> be self-closing!
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
+        TidyWarnPropAttrs,            0,
+        "This option specifies if Tidy should warn on proprietary attributes."
+    },
+    {/* Important notes for translators:
+      - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+      <br/>.
+      - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+      - Option values should be enclosed in <var></var>.
+      - It's very important that <br/> be self-closing!
+      - The strings "Tidy" and "HTML Tidy" are the program name and must not
+      be translated. */
         TidyWord2000,                 0,
         "This option specifies if Tidy should go to great pains to strip out all "
         "the surplus stuff Microsoft Word 2000 inserts when you save Word "

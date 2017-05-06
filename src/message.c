@@ -757,13 +757,6 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
 
     if (doc->badChars)
     {
-#if 0
-        if ( doc->badChars & WINDOWS_CHARS )
-        {
-            message = TY_(tidyMessageCreate)( doc, TEXT_WINDOWS_CHARS, TidyDialogueDoc);
-            messagePos(message);
-        }
-#endif
         if (doc->badChars & BC_VENDOR_SPECIFIC_CHARS)
         {
             message = TY_(tidyMessageCreate)( doc, TEXT_VENDOR_CHARS, TidyDialogueDoc, encnam);

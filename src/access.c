@@ -132,6 +132,49 @@ static void CheckEmbed( TidyDocImpl* doc, Node* node );
 static void CheckListUsage( TidyDocImpl* doc, Node* node );
 
 /*
+    IsFilePath attempts to determine whether or not the URI indicated
+    by path is a file rather than a TLD. For example, sample.com.au might
+    be confused with an audio file.
+*/
+static Bool IsFilePath( ctmbstr path )
+{
+    const char *p = path;
+    char c;
+    typedef enum states { initial, protocol_found, slash_found, file_found } states;
+    states state = initial;
+
+    while ( ( c = *p++ ) != 0 && state != file_found )
+    {
+        switch ( state )
+        {
+            case initial:
+                if ( c == ':' )
+                    state = protocol_found;
+                break;
+
+            case protocol_found:
+                if ( c =='/' )
+                    state = slash_found;
+                break;
+
+            case slash_found:
+                if ( c =='/' )
+                    state = protocol_found;
+                else
+                    state = file_found;
+                break;
+                
+            default:
+                break;
+        }
+        
+    }
+    
+    return state == file_found || state == initial;
+}
+
+
+/*
     GetFileExtension takes a path and returns the extension
     portion of the path (if any).
 */
@@ -163,9 +206,10 @@ static void GetFileExtension( ctmbstr path, tmbchar *ext, uint maxExt )
 static Bool IsImage( ctmbstr iType )
 {
     uint i;
-
-    /* Get the file extension */
     tmbchar ext[20];
+
+    if ( !IsFilePath(iType) ) return 0;
+
     GetFileExtension( iType, ext, sizeof(ext) );
 
     /* Compare it to the array of known image file extensions */
@@ -190,8 +234,11 @@ static int IsSoundFile( ctmbstr sType )
 {
     uint i;
     tmbchar ext[ 20 ];
-    GetFileExtension( sType, ext, sizeof(ext) );
 
+    if ( !IsFilePath(sType) ) return 0;
+    
+    GetFileExtension( sType, ext, sizeof(ext) );
+    
     for (i = 0; i < N_AUDIO_EXTS; i++)
     {
         if ( TY_(tmbstrcasecmp)(ext, soundExtensions[i]) == 0 )
@@ -215,6 +262,9 @@ static Bool IsValidSrcExtension( ctmbstr sType )
 {
     uint i;
     tmbchar ext[20];
+    
+    if ( !IsFilePath(sType) ) return 0;
+    
     GetFileExtension( sType, ext, sizeof(ext) );
 
     for (i = 0; i < N_FRAME_EXTS; i++)
@@ -237,6 +287,9 @@ static Bool IsValidMediaExtension( ctmbstr sType )
 {
     uint i;
     tmbchar ext[20];
+
+    if ( !IsFilePath(sType) ) return 0;
+
     GetFileExtension( sType, ext, sizeof(ext) );
 
     for (i = 0; i < N_MEDIA_EXTS; i++)
@@ -2708,6 +2761,10 @@ static Bool CheckMetaData( TidyDocImpl* doc, Node* node, Bool HasMetaData )
                         TY_(ReportAccessError)( doc, node, REMOVE_AUTO_REDIRECT);
                     }
                 }
+                if (TY_(IsHTML5Mode)(doc) && attrIsCHARSET(av) && hasValue(av))
+                {
+                    ContainsAttr = yes;
+                }
             }
         
             if ( HasContent || HasHttpEquiv )
@@ -2787,9 +2844,17 @@ static void CheckDocType( TidyDocImpl* doc )
         if (DTnode && DTnode->end != 0)
         {
             ctmbstr word = textFromOneNode( doc, DTnode);
-            if ((strstr (word, "HTML PUBLIC") == NULL) &&
-                (strstr (word, "html PUBLIC") == NULL))
-                DTnode = NULL;
+            if (TY_(IsHTML5Mode)(doc))
+            {
+                if ((strstr(word, "HTML") == NULL) &&
+                    (strstr(word, "html") == NULL))
+                    DTnode = NULL;
+            }
+            else {
+                if ((strstr(word, "HTML PUBLIC") == NULL) &&
+                    (strstr(word, "html PUBLIC") == NULL))
+                    DTnode = NULL;
+            }
         }
         if (!DTnode)
            TY_(ReportAccessError)( doc, &doc->root, DOCTYPE_MISSING);

@@ -1167,10 +1167,10 @@ static languageDefinition language_en = { whichPluralForm_en, {
       be translated. */
         TidyStrictTagsAttr,           0,
         "This options ensures that tags and attributes are applicable for the "
-        "version of HTML that Tidy outputs. When set to <var>yes</var> (the "
-        "default) and the output document type is a strict doctype, then Tidy "
-        "will report errors. If the output document type is a loose or "
-        "transitional doctype, then Tidy will report warnings. "
+        "version of HTML that Tidy outputs. When set to <var>yes</var> and the "
+        "output document type is a strict doctype, then Tidy will report "
+        "errors. If the output document type is a loose or transitional "
+        "doctype, then Tidy will report warnings. "
         "<br/>"
         "Additionally if <code>drop-proprietary-attributes</code> is enabled, "
         "then not applicable attributes will be dropped, too. "
@@ -1260,6 +1260,17 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "<br/>"
         "If set to <var>auto</var> Tidy will eliminate nearly all newline "
         "characters."
+    },
+    {/* Important notes for translators:
+      - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+      <br/>.
+      - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+      - Option values should be enclosed in <var></var>.
+      - It's very important that <br/> be self-closing!
+      - The strings "Tidy" and "HTML Tidy" are the program name and must not
+      be translated. */
+        TidyWarnPropAttrs,            0,
+        "This option specifies if Tidy should warn on proprietary attributes."
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -1599,14 +1610,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "        referenced by this attribute are inserted into the list and the \n"
         "        search stops for the current direction.\n"
         "        TD cells that set the axis attribute are also treated as header cells.\n"
-    },
-    {/* This console output should be limited to 78 characters per line. */
-      TEXT_WINDOWS_CHARS,           0,
-        "Characters codes for the Microsoft Windows fonts in the range\n"
-        "128 - 159 may not be recognized on other platforms. You are\n"
-        "instead recommended to use named entities, e.g. &trade; rather\n"
-        "than Windows character code 153 (0x2122 in Unicode). Note that\n"
-        "as of February 1998 few browsers support the new entities.\n"
     },
     {/* This console output should be limited to 78 characters per line.
         - %s represents a string-encoding name which may be localized in your language. */

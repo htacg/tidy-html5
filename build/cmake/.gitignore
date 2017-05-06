@@ -30,5 +30,6 @@ _CPack_Packages/*
 tidy
 libtidy*
 tidy1.xsl
+tidy.pc
 *.vcproj
-
+.pkg

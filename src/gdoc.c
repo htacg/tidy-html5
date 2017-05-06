@@ -115,6 +115,11 @@ static void CleanNode( TidyDocImpl* doc, Node *node )
                 else if (nodeIsA(child) && !child->content)
                  {
                     AttVal *id = TY_(GetAttrByName)( child, "name" );
+                    /* Recent Google Docs is using "id" instead of "name" in
+                    ** the exported html.
+                    */
+                    if (!id)
+                        id = TY_(GetAttrByName)( child, "id" );
 
                     if (id)
                         TY_(RepairAttrValue)( doc, child->parent, "id", id->value );

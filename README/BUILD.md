@@ -40,6 +40,14 @@ If you do **not** need the tidy library built as a 'shared' (DLL) library, then 
 
 See the `CMakeLists.txt` file for other CMake **options** offered.
 
+## Build the tidy packages
+
+  1. `cd build/cmake`
+
+  2. `cmake ../.. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr`
+
+  3. Unix/OS X: `make package`
+
 ## Build PHP with the tidy-html5 library
 
 Due to API changes in the PHP source, `buffio.h` needs to be renamed to `tidybuffio.h` in the file `ext/tidy/tidy.c` in PHP's source.

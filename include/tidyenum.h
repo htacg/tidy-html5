@@ -630,6 +630,7 @@ typedef enum
     TidyUpperCaseTags,           /**< Output tags in upper not lower case */
     TidyUseCustomTags,           /**< Enable Tidy to use autonomous custom tags */
     TidyVertSpace,               /**< degree to which markup is spread out vertically */
+    TidyWarnPropAttrs,           /**< Warns on proprietary attributes */
     TidyWord2000,                /**< Draconian cleaning for Word2000 */
     TidyWrapAsp,                 /**< Wrap within ASP pseudo elements */
     TidyWrapAttVals,             /**< Wrap within attribute values */

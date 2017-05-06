@@ -171,6 +171,7 @@ extern "C" {
     FN(ESCAPED_ILLEGAL_URI)           \
     FN(FIXED_BACKSLASH)               \
     FN(ID_NAME_MISMATCH)              \
+    FN(ILLEGAL_URI_CODEPOINT)         \
     FN(ILLEGAL_URI_REFERENCE)         \
     FN(INSERTING_AUTO_ATTRIBUTE)      \
     FN(INVALID_ATTRIBUTE)             \

@@ -184,7 +184,7 @@ static Dict tag_defs[] =
   { TidyTag_BLOCKQUOTE, "blockquote", VERS_ELEM_BLOCKQUOTE, &TY_(W3CAttrsFor_BLOCKQUOTE)[0], (CM_BLOCK),                                    TY_(ParseBlock),    NULL           },
   { TidyTag_BODY,       "body",       VERS_ELEM_BODY,       &TY_(W3CAttrsFor_BODY)[0],       (CM_HTML|CM_OPT|CM_OMITST),                    TY_(ParseBody),     NULL           },
   { TidyTag_BR,         "br",         VERS_ELEM_BR,         &TY_(W3CAttrsFor_BR)[0],         (CM_INLINE|CM_EMPTY),                          TY_(ParseEmpty),    NULL           },
-  { TidyTag_BUTTON,     "button",     VERS_ELEM_BUTTON,     &TY_(W3CAttrsFor_BUTTON)[0],     (CM_INLINE),                                   TY_(ParseBlock),    NULL           },
+  { TidyTag_BUTTON,     "button",     VERS_ELEM_BUTTON,     &TY_(W3CAttrsFor_BUTTON)[0],     (CM_INLINE),                                   TY_(ParseInline),   NULL           },
   { TidyTag_CAPTION,    "caption",    VERS_ELEM_CAPTION,    &TY_(W3CAttrsFor_CAPTION)[0],    (CM_TABLE),                                    TY_(ParseBlock),    CheckCaption   },
   { TidyTag_CENTER,     "center",     VERS_ELEM_CENTER,     &TY_(W3CAttrsFor_CENTER)[0],     (CM_BLOCK),                                    TY_(ParseBlock),    NULL           },
   { TidyTag_CITE,       "cite",       VERS_ELEM_CITE,       &TY_(W3CAttrsFor_CITE)[0],       (CM_INLINE),                                   TY_(ParseInline),   NULL           },
@@ -773,9 +773,6 @@ void TY_(AdjustTags)( TidyDocImpl *doc )
     {
         np->parser = TY_(ParseInline);
         np->model  = CM_INLINE;
-#if ELEMENT_HASH_LOOKUP
-        tagsEmptyHash( doc, tags );
-#endif
     }
 
 /*\
@@ -787,9 +784,6 @@ void TY_(AdjustTags)( TidyDocImpl *doc )
     if (np)
     {
         np->parser = TY_(ParseInline);
-#if ELEMENT_HASH_LOOKUP
-        tagsEmptyHash( doc, tags );
-#endif
     }
 
 /*\
@@ -801,10 +795,24 @@ void TY_(AdjustTags)( TidyDocImpl *doc )
     if (np)
     {
         np->model |= CM_HEAD; /* add back allowed in head */
-#if ELEMENT_HASH_LOOKUP
-        tagsEmptyHash( doc, tags );
-#endif
     }
+
+/*\
+ * Issue #461
+ * TidyTag_BUTTON is a block in HTML4,
+ * whereas it is inline in HTML5
+\*/
+    np = (Dict *)TY_(LookupTagDef)(TidyTag_BUTTON);
+    if (np)
+    {
+        np->parser = TY_(ParseBlock);
+    }
+
+#if ELEMENT_HASH_LOOKUP
+    tagsEmptyHash(doc, tags); /* not sure this is really required, but to be sure */
+#endif
+    doc->HTML5Mode = no;   /* set *NOT* HTML5 mode */
+
 }
 
 Bool TY_(IsHTML5Mode)( TidyDocImpl *doc )
@@ -839,6 +847,16 @@ void TY_(ResetTags)( TidyDocImpl *doc )
     {
         np->model = (CM_OBJECT|CM_IMG|CM_INLINE|CM_PARAM); /* reset */
     }
+    /*\
+     * Issue #461
+     * TidyTag_BUTTON reset to inline in HTML5
+    \*/
+    np = (Dict *)TY_(LookupTagDef)(TidyTag_BUTTON);
+    if (np)
+    {
+        np->parser = TY_(ParseInline);
+    }
+
 #if ELEMENT_HASH_LOOKUP
     tagsEmptyHash( doc, tags ); /* not sure this is really required, but to be sure */
 #endif
@@ -858,7 +876,6 @@ void TY_(FreeTags)( TidyDocImpl* doc )
     /* get rid of dangling tag references */
     TidyClearMemory( tags, sizeof(TidyTagImpl) );
 
-    doc->HTML5Mode = no;    /* reset html5 mode == legacy html4 mode */
 }
 
 

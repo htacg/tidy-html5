@@ -1007,35 +1007,6 @@ static Bool Center2Div( TidyDocImpl* doc, Node *node, Node **pnode)
 {
     if ( nodeIsCENTER(node) )
     {
-#if 0 /* 00000000 what is this doing inside an nodeIsCENTER(node)??? 0000000 */
-        if ( cfgBool(doc, TidyDropFontTags) )
-        {
-            if (node->content)
-            {
-                Node *last = node->last;
-                DiscardContainer( doc, node, pnode );
-
-                node = TY_(InferredTag)(doc, TidyTag_BR);
-                TY_(InsertNodeAfterElement)(last, node);
-            }
-            else
-            {
-                Node *prev = node->prev, *next = node->next,
-                     *parent = node->parent;
-                DiscardContainer( doc, node, pnode );
-
-                node = TY_(InferredTag)(doc, TidyTag_BR);
-                if (next)
-                    TY_(InsertNodeBeforeElement)(next, node);
-                else if (prev)
-                    TY_(InsertNodeAfterElement)(prev, node);
-                else
-                    TY_(InsertNodeAtStart)(parent, node);
-            }
-
-            return yes;
-        }
-#endif /* 00000000 what is this doing inside an nodeIsCENTER(node)??? 0000000 */
         RenameElem( doc, node, TidyTag_DIV );
         TY_(AddStyleProperty)( doc, node, "text-align: center" );
         return yes;
@@ -1394,12 +1365,6 @@ static Bool Font2Span( TidyDocImpl* doc, Node *node, Node **pnode )
 
     if ( nodeIsFONT(node) )
     {
-        if ( cfgBool(doc, TidyDropFontTags) )
-        {
-            DiscardContainer( doc, node, pnode );
-            return yes;
-        }
-
         /* if node is the only child of parent element then leave alone
           Do so only if BlockStyle may be succesful. */
         if ( node->parent->content == node && node->next == NULL &&

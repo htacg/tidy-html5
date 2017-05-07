@@ -249,7 +249,6 @@ static const TidyOptionImpl option_defs[] =
 #endif
     { TidyDropEmptyElems,          MU, "drop-empty-elements",         BL, yes,             ParseBool,         boolPicks       },
     { TidyDropEmptyParas,          MU, "drop-empty-paras",            BL, yes,             ParseBool,         boolPicks       },
-    { TidyDropFontTags,            MU, "drop-font-tags",              BL, no,              ParseBool,         boolPicks       },
     { TidyDropPropAttrs,           MU, "drop-proprietary-attributes", BL, no,              ParseBool,         boolPicks       },
     { TidyDuplicateAttrs,          MU, "repeated-attributes",         IN, TidyKeepLast,    ParseRepeatAttr,   repeatAttrPicks },
     { TidyEmacs,                   MS, "gnu-emacs",                   BL, no,              ParseBool,         boolPicks       },
@@ -268,7 +267,6 @@ static const TidyOptionImpl option_defs[] =
     { TidyForceOutput,             MS, "force-output",                BL, no,              ParseBool,         boolPicks       },
     { TidyGDocClean,               MU, "gdoc",                        BL, no,              ParseBool,         boolPicks       },
     { TidyHideComments,            MU, "hide-comments",               BL, no,              ParseBool,         boolPicks       },
-    { TidyHideEndTags,             MU, "hide-endtags",                BL, no,              ParseBool,         boolPicks       },
     { TidyHtmlOut,                 MU, "output-html",                 BL, no,              ParseBool,         boolPicks       },
     { TidyInCharEncoding,          CE, "input-encoding",              IN, UTF8,            ParseCharEnc,      charEncPicks    },
     { TidyIndentAttributes,        PP, "indent-attributes",           BL, no,              ParseBool,         boolPicks       },
@@ -1097,7 +1095,7 @@ void AdjustConfig( TidyDocImpl* doc )
             TY_(SetOptionInt)( doc, TidyOutputBOM, yes );
 #endif
         TY_(SetOptionBool)( doc, TidyQuoteAmpersand, yes );
-        TY_(SetOptionBool)( doc, TidyHideEndTags, no );
+        TY_(SetOptionBool)( doc, TidyOmitOptionalTags, no );
     }
 }
 

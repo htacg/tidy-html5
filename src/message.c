@@ -459,9 +459,9 @@ void TY_(ReportFatal)( TidyDocImpl* doc, Node *element, Node *node, uint code)
  *********************************************************************/
 
 
-void TY_(FileError)( TidyDocImpl* doc, ctmbstr file, TidyReportLevel level )
+void TY_(FileError)( TidyDocImpl* doc, ctmbstr file, TidyReportLevel level, uint code )
 {
-    TidyMessageImpl *message = TY_(tidyMessageCreate)( doc, FILE_CANT_OPEN, level, file);
+    TidyMessageImpl *message = TY_(tidyMessageCreate)( doc, code, level, file);
     messageOut( message );
 }
 

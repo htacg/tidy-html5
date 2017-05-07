@@ -808,7 +808,7 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
 
     if ( fin == NULL || enc < 0 )
     {
-        TY_(FileError)( doc, fname, TidyConfig );
+        TY_(FileError)( doc, fname, TidyConfig, FILE_CANT_OPEN );
         return -1;
     }
     else

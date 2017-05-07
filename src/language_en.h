@@ -1545,6 +1545,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
      ** @rename enum generator FOREACH_MSG_MISC
      ********************************************/
     { FILE_CANT_OPEN,               0,   "Can't open \"%s\"\n"                                                     },
+    { FILE_NOT_FILE,                0,   "\"%s\" is not a file!\n"                                                 },
     { LINE_COLUMN_STRING,           0,   "line %d column %d - "                                                    },
     { STRING_CONTENT_LOOKS,         0,   "Document content looks like %s"                                          },
     {/* For example, "discarding invalid UTF-16 surrogate pair" */

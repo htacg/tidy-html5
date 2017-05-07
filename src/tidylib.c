@@ -903,7 +903,7 @@ FILE* TIDY_CALL   tidySetErrorFile( TidyDoc tdoc, ctmbstr errfilnam )
             return errout;
         }
         else /* Emit message to current error sink */
-            TY_(FileError)( impl, errfilnam, TidyError );
+            TY_(FileError)( impl, errfilnam, TidyError, FILE_CANT_OPEN );
     }
     return NULL;
 }
@@ -1068,11 +1068,21 @@ int TIDY_CALL  tidyParseSource( TidyDoc tdoc, TidyInputSource* source )
 
 int   tidyDocParseFile( TidyDocImpl* doc, ctmbstr filnam )
 {
+    int status = -ENOENT;
+    FILE* fin = fopen( filnam, "r+" );
+
+    if ( !fin )
+    {
+        TY_(FileError)( doc, filnam, TidyError, FILE_NOT_FILE );
+        return status;
+    }
+
 #ifdef _WIN32
     return TY_(DocParseFileWithMappedFile)( doc, filnam );
 #else
-    int status = -ENOENT;
-    FILE* fin = fopen( filnam, "rb" );
+
+    fclose( fin );
+    fin = fopen( filnam, "rb" );
 
 #if PRESERVE_FILE_TIMES
     struct stat sbuf = {0};
@@ -1099,7 +1109,7 @@ int   tidyDocParseFile( TidyDocImpl* doc, ctmbstr filnam )
         TY_(freeStreamIn)(in);
     }
     else /* Error message! */
-        TY_(FileError)( doc, filnam, TidyError );
+        TY_(FileError)( doc, filnam, TidyError, FILE_CANT_OPEN );
     return status;
 #endif
 }
@@ -1213,7 +1223,7 @@ int         tidyDocSaveFile( TidyDocImpl* doc, ctmbstr filnam )
 #endif /* PRESERVFILETIMES */
     }
     if ( status < 0 ) /* Error message! */
-        TY_(FileError)( doc, filnam, TidyError );
+        TY_(FileError)( doc, filnam, TidyError, FILE_CANT_OPEN );
     return status;
 }
 

@@ -1475,13 +1475,21 @@ static void CheckLowerCaseAttrValue( TidyDocImpl* doc, Node *node, AttVal *attva
 }
 
 /* methods for checking value of a specific attribute */
+#ifdef _WIN32
+#define ISUPPER(a) ((a >= 'A') && (a <= 'Z'))
+#define ISLOWER(a) ((a >= 'a') && (a <= 'z'))
+#define ISNUMERIC(a) ((a >= '0') && (a <= '9'))
+#define ISALNUM(a) (ISUPPER(a) || ISLOWER(a) || ISNUMERIC(a))
+#else
+#define ISALNUM(a)  isalnum(a)
+#endif
 
 static Bool IsURLCodePoint( ctmbstr p, uint *increment )
 {
     uint c;
     *increment = TY_(GetUTF8)( p, &c ) + 1;
 
-    return isalnum( c ) ||
+    return ISALNUM( c ) ||
         c == '%' ||    /* not a valid codepoint, but an escape sequence */
         c == '#' ||    /* not a valid codepoint, but a delimiter */
         c == '!' ||

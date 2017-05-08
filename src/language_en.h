@@ -1786,6 +1786,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { ESCAPED_ILLEGAL_URI,          0,   "%s escaping malformed URI reference"                                     }, /* ReportAttrError */
     { FIXED_BACKSLASH,              0,   "%s converting backslash in URI to slash"                                 }, /* ReportAttrError */
     { ID_NAME_MISMATCH,             0,   "%s id and name attribute value mismatch"                                 }, /* ReportAttrError */
+    { ILLEGAL_URI_CODEPOINT,        0,   "%s illegal characters found in URI"                                      }, /* ReportAttrError */
     { ILLEGAL_URI_REFERENCE,        0,   "%s improperly escaped URI reference"                                     }, /* ReportAttrError */
     { INSERTING_AUTO_ATTRIBUTE,     0,   "%s inserting \"%s\" attribute using value \"%s\""                        }, /* ReportAttrError */
     { INVALID_ATTRIBUTE,            0,   "%s attribute name \"%s\" (value=\"%s\") is invalid"                      }, /* ReportAttrError */

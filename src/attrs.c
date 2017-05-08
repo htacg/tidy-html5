@@ -1475,16 +1475,73 @@ static void CheckLowerCaseAttrValue( TidyDocImpl* doc, Node *node, AttVal *attva
 }
 
 /* methods for checking value of a specific attribute */
+#ifdef _WIN32
+#define ISUPPER(a) ((a >= 'A') && (a <= 'Z'))
+#define ISLOWER(a) ((a >= 'a') && (a <= 'z'))
+#define ISNUMERIC(a) ((a >= '0') && (a <= '9'))
+#define ISALNUM(a) (ISUPPER(a) || ISLOWER(a) || ISNUMERIC(a))
+#else
+#define ISALNUM(a)  isalnum(a)
+#endif
+
+static Bool IsURLCodePoint( ctmbstr p, uint *increment )
+{
+    uint c;
+    *increment = TY_(GetUTF8)( p, &c ) + 1;
+
+    return ISALNUM( c ) ||
+        c == '%' ||    /* not a valid codepoint, but an escape sequence */
+        c == '#' ||    /* not a valid codepoint, but a delimiter */
+        c == '!' ||
+        c == '$' ||
+        c == '&' ||
+        c == '\'' ||
+        c == '(' ||
+        c == ')' ||
+        c == '*' ||
+        c == '+' ||
+        c == ',' ||
+        c == '-' ||
+        c == '.' ||
+        c == '/' ||
+        c == ':' ||
+        c == ';' ||
+        c == '=' ||
+        c == '?' ||
+        c == '@' ||
+        c == '_' ||
+        c == '~' ||
+        (c >= 0x00A0 && c <= 0xD7FF) ||
+        (c >= 0xE000 && c <= 0xFDCF) ||
+        (c >= 0xFDF0 && c <= 0xFFEF) ||
+        (c >= 0x10000 && c <= 0x1FFFD) ||
+        (c >= 0x20000 && c <= 0x2FFFD) ||
+        (c >= 0x30000 && c <= 0x3FFFD) ||
+        (c >= 0x40000 && c <= 0x4FFFD) ||
+        (c >= 0x50000 && c <= 0x5FFFD) ||
+        (c >= 0x60000 && c <= 0x6FFFD) ||
+        (c >= 0x70000 && c <= 0x7FFFD) ||
+        (c >= 0x80000 && c <= 0x8FFFD) ||
+        (c >= 0x90000 && c <= 0x9FFFD) ||
+        (c >= 0xA0000 && c <= 0xAFFFD) ||
+        (c >= 0xB0000 && c <= 0xBFFFD) ||
+        (c >= 0xC0000 && c <= 0xCFFFD) ||
+        (c >= 0xD0000 && c <= 0xDFFFD) ||
+        (c >= 0xE0000 && c <= 0xEFFFD) ||
+        (c >= 0xF0000 && c <= 0xFFFFD) ||
+        (c >= 0x100000 && c <= 0x10FFFD);
+}
 
 void TY_(CheckUrl)( TidyDocImpl* doc, Node *node, AttVal *attval)
 {
-    tmbchar c; 
+    tmbchar c;
     tmbstr dest, p;
-    uint escape_count = 0, backslash_count = 0;
+    uint escape_count = 0, backslash_count = 0, bad_codepoint_count = 0;
     uint i, pos = 0;
     uint len;
+    uint increment;
     Bool isJavascript = no;
-    
+
     if (!AttrHasValue(attval))
     {
         TY_(ReportAttrError)( doc, node, attval, MISSING_ATTR_VALUE);
@@ -1492,7 +1549,7 @@ void TY_(CheckUrl)( TidyDocImpl* doc, Node *node, AttVal *attval)
     }
 
     p = attval->value;
-    
+
     isJavascript =
         TY_(tmbstrncmp)(p,"javascript:",sizeof("javascript:")-1)==0;
 
@@ -1507,6 +1564,14 @@ void TY_(CheckUrl)( TidyDocImpl* doc, Node *node, AttVal *attval)
         else if ((c > 0x7e) || (c <= 0x20) || (strchr("<>", c)))
             ++escape_count;
     }
+
+    while ( *p != 0 )
+    {
+        if ( !IsURLCodePoint( p, &increment ) )
+            ++bad_codepoint_count;
+         p = p + increment;
+    }
+    p = attval->value;
 
     if ( cfgBool(doc, TidyFixUri) && escape_count )
     {
@@ -1556,6 +1621,10 @@ void TY_(CheckUrl)( TidyDocImpl* doc, Node *node, AttVal *attval)
             TY_(ReportAttrError)( doc, node, attval, ILLEGAL_URI_REFERENCE);
 
         doc->badChars |= BC_INVALID_URI;
+    }
+    if ( bad_codepoint_count )
+    {
+        TY_(ReportAttrError)( doc, node, attval, ILLEGAL_URI_CODEPOINT );
     }
 }
 

@@ -525,6 +525,7 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
         case ID_NAME_MISMATCH:
         case BACKSLASH_IN_URI:
         case FIXED_BACKSLASH:
+        case ILLEGAL_URI_CODEPOINT:
         case ILLEGAL_URI_REFERENCE:
         case ESCAPED_ILLEGAL_URI:
         case NEWLINE_IN_URI:

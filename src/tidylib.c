@@ -1077,11 +1077,12 @@ int   tidyDocParseFile( TidyDocImpl* doc, ctmbstr filnam )
         return status;
     }
 
+    fclose( fin );
+
 #ifdef _WIN32
     return TY_(DocParseFileWithMappedFile)( doc, filnam );
 #else
 
-    fclose( fin );
     fin = fopen( filnam, "rb" );
 
 #if PRESERVE_FILE_TIMES

@@ -786,6 +786,16 @@ typedef enum
     TidySortAttrAlpha      /**< Sort attributes alphabetically */
 } TidyAttrSortStrategy;
 
+/** Mode controlling capitalization of things, such as attributes.
+ ** @remark This enum's starting value is guaranteed to remain stable.
+ */
+typedef enum
+{
+    TidyUppercaseNo = 0,   /**< Don't uppercase. */
+    TidyUppercaseYes,      /**< Do uppercase. */
+    TidyUppercasePreserve  /**< Preserve case. */
+} TidyUppercase;
+
 
 /** @}
  ** @name Document Tree

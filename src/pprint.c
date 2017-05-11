@@ -1238,7 +1238,7 @@ static void PPrintAttribute( TidyDocImpl* doc, uint indent,
     Bool xmlOut    = cfgBool( doc, TidyXmlOut );
     Bool xhtmlOut  = cfgBool( doc, TidyXhtmlOut );
     Bool wrapAttrs = cfgBool( doc, TidyWrapAttVals );
-    Bool ucAttrs   = cfgBool( doc, TidyUpperCaseAttrs );
+    uint ucAttrs   = cfgBool( doc, TidyUpperCaseAttrs );
     Bool indAttrs  = cfgBool( doc, TidyIndentAttributes );
     uint xtra      = AttrIndent( doc, node, attr );
     Bool first     = AttrNoIndentFirst( /*doc,*/ node, attr );
@@ -1287,7 +1287,7 @@ static void PPrintAttribute( TidyDocImpl* doc, uint indent,
 
         if (c > 0x7F)
             name += TY_(GetUTF8)(name, &c);
-        else if (ucAttrs)
+        else if (ucAttrs == TidyUppercaseYes)
             c = TY_(ToUpper)(c);
 
         AddChar(pprint, c);
@@ -1734,8 +1734,8 @@ static void PPrintXmlDecl( TidyDocImpl* doc, uint indent, Node *node )
     saveWrap = WrapOff( doc );
 
     /* no case translation for XML declaration pseudo attributes */
-    ucAttrs = cfgBool(doc, TidyUpperCaseAttrs);
-    TY_(SetOptionBool)(doc, TidyUpperCaseAttrs, no);
+    ucAttrs = cfg(doc, TidyUpperCaseAttrs);
+    TY_(SetOptionInt)(doc, TidyUpperCaseAttrs, no);
 
     AddString( pprint, "<?xml" );
 
@@ -1749,7 +1749,7 @@ static void PPrintXmlDecl( TidyDocImpl* doc, uint indent, Node *node )
       PPrintAttribute( doc, indent, node, att );
 
     /* restore old config value */
-    TY_(SetOptionBool)(doc, TidyUpperCaseAttrs, ucAttrs);
+    TY_(SetOptionInt)(doc, TidyUpperCaseAttrs, ucAttrs);
 
     if ( node->end <= 0 || doc->lexer->lexbuf[node->end - 1] != '?' )
         AddChar( pprint, '?' );

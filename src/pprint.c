@@ -1238,7 +1238,7 @@ static void PPrintAttribute( TidyDocImpl* doc, uint indent,
     Bool xmlOut    = cfgBool( doc, TidyXmlOut );
     Bool xhtmlOut  = cfgBool( doc, TidyXhtmlOut );
     Bool wrapAttrs = cfgBool( doc, TidyWrapAttVals );
-    uint ucAttrs   = cfgBool( doc, TidyUpperCaseAttrs );
+    uint ucAttrs   = cfg( doc, TidyUpperCaseAttrs );
     Bool indAttrs  = cfgBool( doc, TidyIndentAttributes );
     uint xtra      = AttrIndent( doc, node, attr );
     Bool first     = AttrNoIndentFirst( /*doc,*/ node, attr );

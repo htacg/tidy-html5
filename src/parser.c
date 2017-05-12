@@ -4832,7 +4832,7 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
                 /* adjust other config options, just as in config.c */
                 if ( !htmlOut )
                 {
-                    TY_(SetOptionInt)( doc, TidyUpperCaseTags, no );
+                    TY_(SetOptionBool)( doc, TidyUpperCaseTags, no );
                     TY_(SetOptionInt)( doc, TidyUpperCaseAttrs, no );
                 }
             }

@@ -292,7 +292,7 @@ static const TidyOptionImpl option_defs[] =
     { TidySortAttributes,          PP, "sort-attributes",             IN, TidySortAttrNone,ParsePickList,     &sorterPicks        },
     { TidyStrictTagsAttr,          MU, "strict-tags-attributes",      BL, no,              ParsePickList,     &boolPicks          }, /* 20160209 - Issue #350 */
     { TidyTabSize,                 PP, "tab-size",                    IN, 8,               ParseInt,          NULL                },
-    { TidyUpperCaseAttrs,          MU, "uppercase-attributes",        IN, no,              ParsePickList,     &attributeCasePicks },
+    { TidyUpperCaseAttrs,          MU, "uppercase-attributes",        IN, TidyUppercaseNo, ParsePickList,     &attributeCasePicks },
     { TidyUpperCaseTags,           MU, "uppercase-tags",              BL, no,              ParsePickList,     &boolPicks          },
     { TidyUseCustomTags,           MU, "custom-tags",                 IN, TidyCustomNo,    ParsePickList,     &customTagsPicks    }, /* 20170309 - Issue #119 */
     { TidyVertSpace,               PP, "vertical-space",              IN, no,              ParsePickList,     &autoBoolPicks      }, /* #228 - tri option */
@@ -1034,7 +1034,7 @@ void AdjustConfig( TidyDocImpl* doc )
     {
         TY_(SetOptionBool)( doc, TidyXmlOut, yes );
         TY_(SetOptionBool)( doc, TidyUpperCaseTags, no );
-        TY_(SetOptionBool)( doc, TidyUpperCaseAttrs, no );
+        TY_(SetOptionInt)( doc, TidyUpperCaseAttrs, no );
         /* TY_(SetOptionBool)( doc, TidyXmlPIs, yes ); */
     }
 

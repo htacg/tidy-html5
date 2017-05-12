@@ -54,6 +54,13 @@ static struct printfArg *BuildArgArray( TidyDocImpl *doc, ctmbstr fmt, va_list a
 
 
 /*********************************************************************
+ * Other Static functions
+ *********************************************************************/
+static Bool paragraphizeText( tmbstr dest, size_t size, ctmbstr text );
+
+
+
+/*********************************************************************
  * Tidy Message Object Support
  *********************************************************************/
 
@@ -106,9 +113,12 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
 
     result->messageKey = TY_(tidyErrorCodeAsKey)(code);
 
-    result->messageFormatDefault = tidyDefaultString(code);
-    result->messageFormat = tidyLocalizedString(code);
-
+    result->messageFormatDefault = TidyDocAlloc(doc, sizeMessageBuf);
+    paragraphizeText( result->messageFormatDefault, sizeMessageBuf, tidyDefaultString(code));
+    
+    result->messageFormat = TidyDocAlloc(doc, sizeMessageBuf);
+    paragraphizeText( result->messageFormat, sizeMessageBuf, tidyLocalizedString(code));
+    
     result->messageDefault = TidyDocAlloc(doc, sizeMessageBuf);
     va_copy(args_copy, args);
     TY_(tmbvsnprintf)(result->messageDefault, sizeMessageBuf, result->messageFormatDefault, args_copy);
@@ -250,6 +260,8 @@ void TY_(tidyMessageRelease)( TidyMessageImpl *message )
     if ( !message )
         return;
     TidyDocFree( tidyDocToImpl(message->tidyDoc), message->arguments );
+    TidyDocFree( tidyDocToImpl(message->tidyDoc), message->messageFormatDefault );
+    TidyDocFree( tidyDocToImpl(message->tidyDoc), message->messageFormat );
     TidyDocFree( tidyDocToImpl(message->tidyDoc), message->messageDefault );
     TidyDocFree( tidyDocToImpl(message->tidyDoc), message->message );
     TidyDocFree( tidyDocToImpl(message->tidyDoc), message->messagePosDefault );
@@ -627,4 +639,57 @@ static struct printfArg* BuildArgArray( TidyDocImpl *doc, ctmbstr fmt, va_list a
     *rv = number;
     return nas;
 }
+
+
+/*********************************************************************
+ * Other Static functions
+ *********************************************************************/
+
+/** Filles a provided buffer with with proper paragraph text from the source text.
+ ** For some reason Tidy refuses to work with paragraphs and instead believes that
+ ** 80 characters is good enough for everyone in the world regardless of modern
+ ** monitor sizes, *and* it implements a private API for formatting. This function
+ ** will respect Tidy's private API and turn dialogue output text back into
+ ** paragraphs.
+ **
+ ** The internal, private API seems to be such:
+ */
+static Bool paragraphizeText( tmbstr dest, size_t size, ctmbstr text )
+{
+    const char* p = text;
+    char c;
+    uint ix = 0;
+   
+    while( ( c = *p++ ) != 0 )
+    {
+        if ( c == '\n' && ( c = *p++ ) == '\n' )
+        {
+            dest[ix] = '\n';
+            ix++;
+            continue;
+        }
+        
+        dest[ix] = c;
+        ix++;
+    }
+    
+    dest[ix] = '\0';
+    
+    return yes;
+
+        
+//   {
+//        if( c != '%' )
+//            continue;
+//        
+//        if( ( c = *p++ ) == '%' )	/* skip %% case */
+//            continue;
+//        else
+//            number++;
+//    }
+    
+}
+
+
+
 

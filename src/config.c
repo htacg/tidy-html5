@@ -593,7 +593,7 @@ TidyTriState    TY_(_cfgGetAutoBool)( TidyDocImpl* doc, TidyOptionId optId )
   ulong val = TY_(_cfgGet)( doc, optId );
   const TidyOptionImpl* opt = &option_defs[ optId ];
   assert( opt && opt->type == TidyInteger
-          && opt->parser == ParseAutoBool );
+          && opt->parser == ParsePickList );
   return (TidyTriState) val;
 }
 

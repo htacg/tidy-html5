@@ -601,7 +601,7 @@ TidyTriState    TY_(_cfgGetAutoBool)( TidyDocImpl* doc, TidyOptionId optId )
   ulong val = TY_(_cfgGet)( doc, optId );
   const TidyOptionImpl* opt = &option_defs[ optId ];
   assert( opt && opt->type == TidyInteger
-          && opt->parser == ParseAutoBool );
+          && opt->parser == ParsePickList );
   return (TidyTriState) val;
 }
 
@@ -785,7 +785,7 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
 
     if ( fin == NULL || enc < 0 )
     {
-        TY_(FileError)( doc, fname, TidyConfig );
+        TY_(FileError)( doc, fname, TidyConfig, FILE_CANT_OPEN );
         return -1;
     }
     else

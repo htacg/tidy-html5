@@ -59,7 +59,7 @@ void TY_(ReportFatal)(TidyDocImpl* doc, Node* element, Node* node, uint code);
 /** @{ */
 
 
-void TY_(FileError)( TidyDocImpl* doc, ctmbstr file, TidyReportLevel level );
+void TY_(FileError)( TidyDocImpl* doc, ctmbstr file, TidyReportLevel level, uint code );
 void TY_(ReportAttrError)( TidyDocImpl* doc, Node* node, AttVal* av, uint code );
 void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option );
 void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarded);

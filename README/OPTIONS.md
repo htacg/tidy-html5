@@ -38,7 +38,7 @@ struct _tidy_option
     TidyOptionType      type;       /* string, int or bool */
     ulong               dflt;       /* default for TidyInteger and TidyBoolean */
     ParseProperty*      parser;     /* parsing method, read-only if NULL */
-    const ctmbstr*      pickList;   /* pick list */
+    PickListItems*      pickList;   /* pick list */
     ctmbstr             pdflt;      /* default for TidyString */
 };
 ~~~
@@ -78,7 +78,7 @@ Care, each of these enumeration strings have been equated to two uppercase lette
 
 The next item is the `default` value for a boolean, tristate or integer. Note tidy set `no=0` and `yes=1` as its own `Bool` enumeration.
 
-There are a number of `parser` for the options. Likewise a number of `pickList`. Find another option similar to your new option and use the same values.
+There are a number of `parser` for the options. Likewise a number of `pickList`. Find another option similar to your new option and use the same values. The `parser` is the function that parses config file or command line text input, and the `picklist` constitutes the canonical values for the option. Some types of values logically don't have picklists, such as strings or pure integers.
 
 Presently no options have the final `default` string, and it is left out of the table. The compiler will add a NULL.
 

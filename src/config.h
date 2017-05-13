@@ -1,29 +1,64 @@
 #ifndef __CONFIG_H__
 #define __CONFIG_H__
 
-/* config.h -- read config file and manage config properties
-  
-  (c) 1998-2006 (W3C) MIT, ERCIM, Keio University
-  See tidy.h for the copyright notice.
-
-  config files associate a property name with a value.
-
-  // comments can start at the beginning of a line
-  # comments can start at the beginning of a line
-  name: short values fit onto one line
-  name: a really long value that
-   continues on the next line
-
-  property names are case insensitive and should be less than
-  60 characters in length and must start at the begining of
-  the line, as whitespace at the start of a line signifies a
-  line continuation.
-
-*/
+/**************************************************************************//**
+ * @file
+ * Read configuration files and manage configuration properties.
+ *
+ * Config files associate a property name with a value.
+ *
+ * // comments can start at the beginning of a line
+ * # comments can start at the beginning of a line
+ * name: short values fit onto one line
+ * name: a really long value that
+ *  continues on the next line
+ *
+ * Property names are case insensitive and should be less than 60 characters
+ * in length, and must start at the begining of the line, as whitespace at
+ * the start of a line signifies a line continuation.
+ *
+ * @author  HTACG, et al (consult git log)
+ * 
+ * @copyright
+ *     Copyright (c) 1998-2017 World Wide Web Consortium (Massachusetts
+ *     Institute of Technology, European Research Consortium for Informatics
+ *     and Mathematics, Keio University) and HTACG.
+ * @par
+ *     All Rights Reserved.
+ * @par
+ *     See `tidy.h` for the complete license.
+ *
+ * @date Additional updates: consult git log
+ *
+ ******************************************************************************/
 
 #include "forward.h"
 #include "tidy.h"
 #include "streamio.h"
+
+/** PickLists may have up to 16 items. For some reason,
+ ** this limit has always been hard-coded into Tidy.
+ */
+#define TIDY_PL_SIZE 16
+
+/** Structs of this type contain information needed in order to present pick lists,
+ ** relate pick list entries to public enum values, and parse strings that are
+ ** accepted in order to assign the value.
+ */
+typedef struct PickListItem {
+    ctmbstr label;      /**< PickList label for this item. */
+    const int value;    /**< The option value represented by this label. */
+    ctmbstr inputs[10]; /**< String values that can select this value. */
+} PickListItem;
+
+/** An array of PickListItems, fixed in size for in-code declarations. 
+ ** Arrays must be populated in 0 to 10 order, as the option value is assigned
+ ** based on this index and *not* on the structures' value field. It remains
+ ** a best practice, however, to assign a public enum value with the proper
+ ** index value.
+ */
+typedef const PickListItem PickListItems[TIDY_PL_SIZE];
+
 
 struct _tidy_option;
 typedef struct _tidy_option TidyOptionImpl;
@@ -33,13 +68,13 @@ typedef Bool (ParseProperty)( TidyDocImpl* doc, const TidyOptionImpl* opt );
 struct _tidy_option
 {
     TidyOptionId        id;
-    TidyConfigCategory  category;   /* put 'em in groups */
-    ctmbstr             name;       /* property name */
-    TidyOptionType      type;       /* string, int or bool */
-    ulong               dflt;       /* default for TidyInteger and TidyBoolean */
-    ParseProperty*      parser;     /* parsing method, read-only if NULL */
-    const ctmbstr*      pickList;   /* pick list */
-    ctmbstr             pdflt;      /* default for TidyString */
+    TidyConfigCategory  category;        /* put 'em in groups */
+    ctmbstr             name;            /* property name */
+    TidyOptionType      type;            /* string, int or bool */
+    ulong               dflt;            /* default for TidyInteger and TidyBoolean */
+    ParseProperty*      parser;          /* parsing method, read-only if NULL */
+    PickListItems*      pickList;        /* new style pick list */
+    ctmbstr             pdflt;           /* default for TidyString */
 };
 
 typedef union

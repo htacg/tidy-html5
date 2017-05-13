@@ -1992,6 +1992,7 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     Bool xhtmlOut = cfgBool( doc, TidyXhtmlOut );
     Bool xmlDecl  = cfgBool( doc, TidyXmlDecl );
     Bool tidyMark = cfgBool( doc, TidyMark );
+    Bool tidyMetaCharset = cfgBool( doc, TidyMetaCharset);
     Bool tidyXmlTags = cfgBool( doc, TidyXmlTags );
     Bool wantNameAttr = cfgBool( doc, TidyAnchorAsName );
     Bool mergeEmphasis = cfgBool( doc, TidyMergeEmphasis );
@@ -2095,6 +2096,9 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
 
         if (tidyMark )
             TY_(AddGenerator)(doc);
+
+        if (tidyMetaCharset)
+            TY_(TidyMetaCharset)(doc);
     }
 
     /* ensure presence of initial <?xml version="1.0"?> */

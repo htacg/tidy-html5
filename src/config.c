@@ -336,6 +336,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyXmlPIs,                  MU, "assume-xml-procins",          BL, no,              ParseBool,         boolPicks       },
     { TidyXmlSpace,                MU, "add-xml-space",               BL, no,              ParseBool,         boolPicks       },
     { TidyXmlTags,                 MU, "input-xml",                   BL, no,              ParseBool,         boolPicks       },
+    { TidyMetaCharset,             MS, "add-meta-charset",            BL, no,              ParseBool,         boolPicks       }, /* 20161004 - Issue #456 */
     { N_TIDY_OPTIONS,              XX, NULL,                          XY, 0,               NULL,              NULL            }
 };
 

@@ -648,6 +648,7 @@ typedef enum
     TidyXmlPIs,                  /**< If set to yes PIs must end with ?> */
     TidyXmlSpace,                /**< If set to yes adds xml:space attr as needed */
     TidyXmlTags,                 /**< Treat input as XML */
+    TidyMetaCharset,             /**< Adds/checks/fixes meta charset in the head, based on document type */
     N_TIDY_OPTIONS               /**< Must be last */
 } TidyOptionId;
 

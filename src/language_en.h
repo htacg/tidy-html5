@@ -1508,7 +1508,18 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option specifies if Tidy should use the XML parser rather than the "
         "error correcting HTML parser. "
     },
-
+    {/* Important notes for translators:
+        - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+          <br/>.
+        - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+        - Option values should be enclosed in <var></var>.
+        - It's very important that <br/> be self-closing!
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not
+          be translated. */
+      TidyMetaCharset,             0,
+        "This option adds a meta element and sets the charset attribute to the encoding of the document."
+        "Set this option to 'yes' if you want this."
+    },
 
     /********************************************
      ** TidyConfigCategory enumeration
@@ -1772,7 +1783,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
     },
     
-    
     /********************************************
      ** Report Output
      ** @remark enum source TidyStrings
@@ -1886,7 +1896,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { ELEMENT_NOT_EMPTY,            0,   "%s element not empty or not closed"                                      }, /* ReportError, ReportAttrError */
     { UNEXPECTED_END_OF_FILE,       0,   "unexpected end of file %s"                                               }, /* ReportError, ReportAttrError */
     { UNEXPECTED_ENDTAG,            0,   "unexpected </%s>"                                                        }, /* ReportError, ReportFatal */
-
     
 #if SUPPORT_ACCESSIBILITY_CHECKS
     

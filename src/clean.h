@@ -63,8 +63,10 @@ void TY_(BumpObject)( TidyDocImpl* doc, Node *html );
 #if 0
 void TY_(FixBrakes)( TidyDocImpl* pDoc, Node *pParent );
 #endif
-
+/* Issue #456 - This is discarded */
+#if 0
 void TY_(VerifyHTTPEquiv)( TidyDocImpl* pDoc, Node *pParent );
+#endif
 
 void TY_(DropComments)(TidyDocImpl* doc, Node* node);
 void TY_(DropFontElements)(TidyDocImpl* doc, Node* node, Node **pnode);

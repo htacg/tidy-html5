@@ -1992,7 +1992,6 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     Bool xhtmlOut = cfgBool( doc, TidyXhtmlOut );
     Bool xmlDecl  = cfgBool( doc, TidyXmlDecl );
     Bool tidyMark = cfgBool( doc, TidyMark );
-    Bool tidyMetaCharset = cfgBool( doc, TidyMetaCharset);
     Bool tidyXmlTags = cfgBool( doc, TidyXmlTags );
     Bool wantNameAttr = cfgBool( doc, TidyAnchorAsName );
     Bool mergeEmphasis = cfgBool( doc, TidyMergeEmphasis );
@@ -2044,12 +2043,7 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
 #endif
 
     /*  Reconcile http-equiv meta element with output encoding  */
-    if (cfg( doc, TidyOutCharEncoding) != RAW
-#ifndef NO_NATIVE_ISO2022_SUPPORT
-        && cfg( doc, TidyOutCharEncoding) != ISO2022
-#endif
-        )
-        TY_(VerifyHTTPEquiv)( doc, TY_(FindHEAD)( doc ));
+    TY_(TidyMetaCharset)(doc);
 
     if ( !TY_(CheckNodeIntegrity)( &doc->root ) )
         TidyPanic( doc->allocator, integrity );
@@ -2097,8 +2091,6 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
         if (tidyMark )
             TY_(AddGenerator)(doc);
 
-        if (tidyMetaCharset)
-            TY_(TidyMetaCharset)(doc);
     }
 
     /* ensure presence of initial <?xml version="1.0"?> */

@@ -2208,6 +2208,8 @@ void FixBrakes( TidyDocImpl* pDoc, Node *pParent )
 }
 #endif
 
+/* Issue #456 - This is discarded */
+#if 0
 void TY_(VerifyHTTPEquiv)(TidyDocImpl* doc, Node *head)
 {
     Node *pNode;
@@ -2283,6 +2285,7 @@ void TY_(VerifyHTTPEquiv)(TidyDocImpl* doc, Node *head)
         pLastProp = NULL;
     }
 }
+#endif
 
 void TY_(DropComments)(TidyDocImpl* doc, Node* node)
 {

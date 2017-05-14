@@ -1617,7 +1617,7 @@ void TY_(CheckUrl)( TidyDocImpl* doc, Node *node, AttVal *attval)
     {
         if ( cfgBool(doc, TidyFixUri) )
             TY_(ReportAttrError)( doc, node, attval, ESCAPED_ILLEGAL_URI);
-        else
+        else if ( !(TY_(HTMLVersion)(doc) & VERS_HTML5) )
             TY_(ReportAttrError)( doc, node, attval, ILLEGAL_URI_REFERENCE);
 
         doc->badChars |= BC_INVALID_URI;

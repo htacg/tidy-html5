@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-03-22 15:54:52
+ *   PO_REVISION_DATE=2017-05-13 21:04:45
  */
 
 #ifdef _MSC_VER
@@ -198,15 +198,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "         liste et le recherche arrête pour la direction du courant.\n"
         "         TD cellules qui fixent l'attribut de l'axe sont également \n"
         "         traités comme des cellules d'en-tête.\n"
-        "\n"
-    },
-    { TEXT_WINDOWS_CHARS,           0,        
-        "Personnages codes pour les polices Microsoft Windows dans la gamme\n"
-        "128-159 ne pas être reconnus sur d'autres plateformes. Vous êtes\n"
-        "au lieu recommandé d'utiliser les entités nommées, par exemple &trade; \n"
-        "plutôt code que Windows de caractères 153 (0x2122 en Unicode). Notez que\n"
-        "à partir de Février 1998 quelques navigateurs supportent les nouvelles \n"
-        "entités.\n"
         "\n"
     },
     { TEXT_VENDOR_CHARS,            0,        

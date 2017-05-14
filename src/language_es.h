@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-03-22 15:54:52
+ *   PO_REVISION_DATE=2017-05-13 21:04:45
  */
 
 #ifdef _MSC_VER

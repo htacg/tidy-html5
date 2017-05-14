@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-03-22 15:54:52\n"
+"PO-Revision-Date: 2017-05-13 21:04:45\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -328,32 +328,6 @@ msgstr "Cette option spécifie si Tidy doit jeter des paragraphes vides."
 #. - It's very important that <br/> be self-closing!
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not
 #. be translated.
-msgctxt "TidyDropFontTags"
-msgid ""
-"Deprecated; <em>do not use</em>. This option is destructive to "
-"<code>&lt;font&gt;</code> tags, and it will be removed from future "
-"versions of Tidy. Use the <code>clean</code> option instead. "
-"<br/>"
-"If you do set this option despite the warning it will perform "
-"as <code>clean</code> except styles will be inline instead of put into "
-"a CSS class. <code>&lt;font&gt;</code> tags will be dropped completely "
-"and their styles will not be preserved. "
-"<br/>"
-"If both <code>clean</code> and this option are enabled, "
-"<code>&lt;font&gt;</code> tags will still be dropped completely, and "
-"other styles will be preserved in a CSS class instead of inline. "
-"<br/>"
-"See <code>clean</code> for more information. "
-msgstr ""
-
-#. Important notes for translators:
-#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
-#. <br/>.
-#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
-#. - Option values should be enclosed in <var></var>.
-#. - It's very important that <br/> be self-closing!
-#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
-#. be translated.
 msgctxt "TidyDropPropAttrs"
 msgid ""
 "This option specifies if Tidy should strip out proprietary attributes, "
@@ -581,18 +555,6 @@ msgstr ""
 #. be translated.
 msgctxt "TidyHideComments"
 msgid "This option specifies if Tidy should print out comments. "
-msgstr ""
-
-#. Important notes for translators:
-#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
-#. <br/>.
-#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
-#. - Option values should be enclosed in <var></var>.
-#. - It's very important that <br/> be self-closing!
-#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
-#. be translated.
-msgctxt "TidyHideEndTags"
-msgid "This option is an alias for <code>omit-optional-tags</code>. "
 msgstr ""
 
 #. Important notes for translators:
@@ -1322,10 +1284,10 @@ msgstr ""
 msgctxt "TidyStrictTagsAttr"
 msgid ""
 "This options ensures that tags and attributes are applicable for the "
-"version of HTML that Tidy outputs. When set to <var>yes</var> (the "
-"default) and the output document type is a strict doctype, then Tidy "
-"will report errors. If the output document type is a loose or "
-"transitional doctype, then Tidy will report warnings. "
+"version of HTML that Tidy outputs. When set to <var>yes</var> and the "
+"output document type is a strict doctype, then Tidy will report "
+"errors. If the output document type is a loose or transitional "
+"doctype, then Tidy will report warnings. "
 "<br/>"
 "Additionally if <code>drop-proprietary-attributes</code> is enabled, "
 "then not applicable attributes will be dropped, too. "
@@ -1425,6 +1387,18 @@ msgid ""
 "<br/>"
 "If set to <var>auto</var> Tidy will eliminate nearly all newline "
 "characters."
+msgstr ""
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWarnPropAttrs"
+msgid "This option specifies if Tidy should warn on proprietary attributes."
 msgstr ""
 
 #. Important notes for translators:
@@ -1712,11 +1686,11 @@ msgstr ""
 
 msgctxt "TidyDiagnostics"
 msgid "diagnostics"
-msgstr "diagnostics"
+msgstr ""
 
 msgctxt "TidyEncoding"
 msgid "encoding"
-msgstr "encoding"
+msgstr ""
 
 msgctxt "TidyInternalCategory"
 msgid "internal (private)"
@@ -1724,11 +1698,11 @@ msgstr ""
 
 msgctxt "TidyMarkup"
 msgid "markup"
-msgstr "markup"
+msgstr ""
 
 msgctxt "TidyMiscellaneous"
 msgid "misc"
-msgstr "misc"
+msgstr ""
 
 msgctxt "TidyPrettyPrint"
 msgid "print"
@@ -1778,6 +1752,11 @@ msgstr ""
 msgctxt "FILE_CANT_OPEN"
 msgid "Can't open \"%s\"\n"
 msgstr "Impossible d'ouvrir « %s »\n"
+
+#, c-format
+msgctxt "FILE_NOT_FILE"
+msgid "\"%s\" is not a file!\n"
+msgstr ""
 
 #, c-format
 msgctxt "LINE_COLUMN_STRING"
@@ -1935,23 +1914,6 @@ msgstr ""
 "         liste et le recherche arrête pour la direction du courant.\n"
 "         TD cellules qui fixent l'attribut de l'axe sont également \n"
 "         traités comme des cellules d'en-tête.\n"
-"\n"
-
-#. This console output should be limited to 78 characters per line.
-msgctxt "TEXT_WINDOWS_CHARS"
-msgid ""
-"Characters codes for the Microsoft Windows fonts in the range\n"
-"128 - 159 may not be recognized on other platforms. You are\n"
-"instead recommended to use named entities, e.g. &trade; rather\n"
-"than Windows character code 153 (0x2122 in Unicode). Note that\n"
-"as of February 1998 few browsers support the new entities.\n"
-msgstr ""
-"Personnages codes pour les polices Microsoft Windows dans la gamme\n"
-"128-159 ne pas être reconnus sur d'autres plateformes. Vous êtes\n"
-"au lieu recommandé d'utiliser les entités nommées, par exemple &trade; \n"
-"plutôt code que Windows de caractères 153 (0x2122 en Unicode). Notez que\n"
-"à partir de Février 1998 quelques navigateurs supportent les nouvelles \n"
-"entités.\n"
 "\n"
 
 #. This console output should be limited to 78 characters per line.
@@ -2311,6 +2273,11 @@ msgstr "%s conversion de barre oblique inverse d'URI de slash"
 msgctxt "ID_NAME_MISMATCH"
 msgid "%s id and name attribute value mismatch"
 msgstr "%s id et le nom valeur d'attribut mismatch"
+
+#, c-format
+msgctxt "ILLEGAL_URI_CODEPOINT"
+msgid "%s illegal characters found in URI"
+msgstr ""
 
 #, c-format
 msgctxt "ILLEGAL_URI_REFERENCE"

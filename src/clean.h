@@ -67,6 +67,7 @@ void TY_(FixBrakes)( TidyDocImpl* pDoc, Node *pParent );
 #if 0
 void TY_(VerifyHTTPEquiv)( TidyDocImpl* pDoc, Node *pParent );
 #endif
+Bool TY_(TidyMetaCharset)(TidyDocImpl* doc);
 
 void TY_(DropComments)(TidyDocImpl* doc, Node* node);
 void TY_(DropFontElements)(TidyDocImpl* doc, Node* node, Node **pnode);

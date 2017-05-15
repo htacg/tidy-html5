@@ -2321,6 +2321,8 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
     if (outenc == ISO2022)
         return no;
 #endif
+    if (cfgAutoBool(doc, TidyBodyOnly) == TidyYesState)
+        return no; /* nothing to do here if showing body only */
 
     tidyBufInit(&charsetString);
     /* Set up the content test 'charset=value' */

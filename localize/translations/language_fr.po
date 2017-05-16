@@ -1617,6 +1617,18 @@ msgstr ""
 #. - It's very important that <br/> be self-closing!
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not
 #. be translated.
+msgctxt "TidyWarnPropAttrs"
+msgid "This option specifies if Tidy should warn on proprietary attributes."
+msgstr "Cette option précise si Tidy doit avertir des attributs propriétaires."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
 msgctxt "TidyWord2000"
 msgid ""
 "This option specifies if Tidy should go to great pains to strip out all "
@@ -2005,6 +2017,11 @@ msgid "Can't open \"%s\"\n"
 msgstr "Impossible d'ouvrir « %s »\n"
 
 #, c-format
+msgctxt "FILE_NOT_FILE"
+msgid "\"%s\" is not a file!\n"
+msgstr "\"%s\" n'est pas un fichier!\n"
+
+#, c-format
 msgctxt "LINE_COLUMN_STRING"
 msgid "line %d column %d - "
 msgstr "Ligne: %d Col: %d - "
@@ -2040,7 +2057,7 @@ msgctxt "STRING_ERROR_COUNT_WARNING"
 msgid "warning"
 msgid_plural "warnings"
 msgstr[0] "avertissement"
-msgstr[1] "alertes"
+msgstr[1] "avertissements"
 
 msgctxt "STRING_HELLO_ACCESS"
 msgid ""
@@ -2530,6 +2547,11 @@ msgstr "%s conversion des antislash vers slash dans l'URI "
 msgctxt "ID_NAME_MISMATCH"
 msgid "%s id and name attribute value mismatch"
 msgstr "%s discordance entre id et valeur de nom d'attribut"
+
+#, c-format
+msgctxt "ILLEGAL_URI_CODEPOINT"
+msgid "%s illegal characters found in URI"
+msgstr "%s caractères interdits trouvés dans l'URI"
 
 #, c-format
 msgctxt "ILLEGAL_URI_REFERENCE"

@@ -4833,7 +4833,7 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
                 if ( !htmlOut )
                 {
                     TY_(SetOptionBool)( doc, TidyUpperCaseTags, no );
-                    TY_(SetOptionBool)( doc, TidyUpperCaseAttrs, no );
+                    TY_(SetOptionInt)( doc, TidyUpperCaseAttrs, no );
                 }
             }
         }

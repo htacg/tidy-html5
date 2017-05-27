@@ -3723,11 +3723,30 @@ static tmbstr  ParseAttribute( TidyDocImpl* doc, Bool *isempty,
         if (TY_(IsWhite)(c))
             break;
 
+        if (c == '/') /* Issue #395 - potential self closing tag */
+        {
+            c = TY_(ReadChar)(doc->docIn);  /* read next */
+            if (c == '>')
+            {
+                /* got a self closing tag - put is back and continue... */
+                TY_(UngetChar)(c, doc->docIn);
+                break;
+            }
+            else
+            {
+                /* Not '/>' - put it back */
+                TY_(UngetChar)(c, doc->docIn);
+            }
+        }
+
         /* what should be done about non-namechar characters? */
         /* currently these are incorporated into the attr name */
 
-        if ( !cfgBool(doc, TidyXmlTags) && TY_(IsUpper)(c) )
-            c = TY_(ToLower)(c);
+        if ( cfg(doc, TidyUpperCaseAttrs) != TidyUppercasePreserve )
+        {
+            if ( !cfgBool(doc, TidyXmlTags) && TY_(IsUpper)(c) )
+                c = TY_(ToLower)(c);
+        }
 
         TY_(AddCharToLexer)( lexer, c );
         lastc = c;

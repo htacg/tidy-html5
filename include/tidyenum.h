@@ -726,6 +726,36 @@ typedef enum
     TidyCR          /**< Use Macintosh style: CR */
 } TidyLineEnding;
 
+    
+/** TidyEncodingOptions option values specify the input and/or output encoding.
+ ** @remark This enum's starting value is guaranteed to remain stable.
+ */
+typedef enum
+{
+    TidyEncRaw = 0,
+    TidyEncAscii,
+    TidyEncLatin0,
+    TidyEncLatin1,
+    TidyEncUtf8,
+#ifndef NO_NATIVE_ISO2022_SUPPORT
+    TidyEncIso2022,
+#endif
+    TidyEncMac,
+    TidyEncWin1252,
+    TidyEncIbm858,
+
+#if SUPPORT_UTF16_ENCODINGS
+    TidyEncUtf16le,
+    TidyEncUtf16be,
+    TidyEncUtf16,
+#endif
+
+#if SUPPORT_ASIAN_ENCODINGS
+    TidyEncBig5,
+    TidyEncShiftjis
+#endif
+} TidyEncodingOptions;
+
 
 /** Mode controlling treatment of doctype
  ** @remark This enum's starting value is guaranteed to remain stable.
@@ -757,6 +787,16 @@ typedef enum
     TidySortAttrNone = 0,  /**< Don't sort attributes */
     TidySortAttrAlpha      /**< Sort attributes alphabetically */
 } TidyAttrSortStrategy;
+
+/** Mode controlling capitalization of things, such as attributes.
+ ** @remark This enum's starting value is guaranteed to remain stable.
+ */
+typedef enum
+{
+    TidyUppercaseNo = 0,   /**< Don't uppercase. */
+    TidyUppercaseYes,      /**< Do uppercase. */
+    TidyUppercasePreserve  /**< Preserve case. */
+} TidyUppercase;
 
 
 /** @}

@@ -824,15 +824,15 @@ static const Attribute* attrsLookup(TidyDocImpl* doc,
 
 #if ATTRIBUTE_HASH_LOOKUP
     for (p = attribs->hashtab[attrsHash(atnam)]; p && p->attr; p = p->next)
-        if (TY_(tmbstrcmp)(atnam, p->attr->name) == 0)
+        if (TY_(tmbstrcasecmp)(atnam, p->attr->name) == 0)
             return p->attr;
 
     for (np = attribute_defs; np && np->name; ++np)
-        if (TY_(tmbstrcmp)(atnam, np->name) == 0)
+        if (TY_(tmbstrcasecmp)(atnam, np->name) == 0)
             return attrsInstall(doc, attribs, np);
 #else
     for (np = attribute_defs; np && np->name; ++np)
-        if (TY_(tmbstrcmp)(atnam, np->name) == 0)
+        if (TY_(tmbstrcasecmp)(atnam, np->name) == 0)
             return np;
 #endif
 
@@ -1617,7 +1617,7 @@ void TY_(CheckUrl)( TidyDocImpl* doc, Node *node, AttVal *attval)
     {
         if ( cfgBool(doc, TidyFixUri) )
             TY_(ReportAttrError)( doc, node, attval, ESCAPED_ILLEGAL_URI);
-        else
+        else if ( !(TY_(HTMLVersion)(doc) & VERS_HTML5) )
             TY_(ReportAttrError)( doc, node, attval, ILLEGAL_URI_REFERENCE);
 
         doc->badChars |= BC_INVALID_URI;

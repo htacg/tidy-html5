@@ -243,6 +243,7 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
                     tagtype = tidyLocalizedString( TIDYCUSTOMINLINE_STRING );
                     break;
                 case TidyCustomPre:
+                default:
                     tagtype = tidyLocalizedString( TIDYCUSTOMPRE_STRING );
                     break;
             }

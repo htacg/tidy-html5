@@ -473,26 +473,20 @@ static tmbstr get_escaped_name( ctmbstr name )
  */
 
 
-/** Utility to determine if an option is an AutoBool.
+/** Utility to determine if an option has a picklist.
  ** @param topt The option to check.
- ** @result Returns a Bool indicating whether the option is an Autobool or not.
+ ** @result Returns a Bool indicating whether the option has a picklist or not.
  */
-static Bool isAutoBool( TidyOption topt )
+static Bool hasPickList( TidyOption topt )
 {
     TidyIterator pos;
-    ctmbstr def;
-
+    
     if ( tidyOptGetType( topt ) != TidyInteger)
         return no;
-
+    
     pos = tidyOptGetPickList( topt );
-    while ( pos )
-    {
-        def = tidyOptGetNextPick( topt, &pos );
-        if (0==strcmp(def,"yes"))
-            return yes;
-    }
-    return no;
+    
+    return tidyOptGetNextPick( topt, &pos ) != NULL;
 }
 
 /** Returns the configuration category name for the specified configuration
@@ -555,16 +549,6 @@ static void GetOption(TidyDoc tdoc,    /**< The tidy document. */
     /* Handle special cases first. */
     switch ( optId )
     {
-        case TidyDuplicateAttrs:
-        case TidySortAttributes:
-        case TidyNewline:
-        case TidyAccessibilityCheckLevel:
-        case TidyUseCustomTags:
-            d->type = "enum";
-            d->vals = NULL;
-            d->def = tidyOptGetCurrPick( tdoc, optId );
-            break;
-
         case TidyDoctype:
             d->type = "DocType";
             d->vals = NULL;
@@ -576,16 +560,16 @@ static void GetOption(TidyDoc tdoc,    /**< The tidy document. */
             d->def = sdef;
         }
             break;
-
+            
         case TidyInlineTags:
         case TidyBlockTags:
         case TidyEmptyTags:
         case TidyPreTags:
-            d->type = "Tag names";
+            d->type = "Tag Names";
             d->vals = "tagX, tagY, ...";
             d->def = NULL;
             break;
-
+            
         case TidyCharEncoding:
         case TidyInCharEncoding:
         case TidyOutCharEncoding:
@@ -602,15 +586,13 @@ static void GetOption(TidyDoc tdoc,    /**< The tidy document. */
         {
             case TidyBoolean:
                 d->type = "Boolean";
-                d->vals = "y/n, yes/no, t/f, true/false, 1/0";
                 d->def = tidyOptGetCurrPick( tdoc, optId );
                 break;
-
+                
             case TidyInteger:
-                if (isAutoBool(topt))
+                if (hasPickList(topt))
                 {
-                    d->type = "AutoBool";
-                    d->vals = "auto, y/n, yes/no, t/f, true/false, 1/0";
+                    d->type = "Enum";
                     d->def = tidyOptGetCurrPick( tdoc, optId );
                 }
                 else
@@ -621,13 +603,13 @@ static void GetOption(TidyDoc tdoc,    /**< The tidy document. */
                         d->vals = "0 (no wrapping), 1, 2, ...";
                     else
                         d->vals = "0, 1, 2, ...";
-
+                    
                     idef = tidyOptGetInt( tdoc, optId );
                     sprintf(d->tempdefs, "%u", idef);
                     d->def = d->tempdefs;
                 }
                 break;
-
+                
             case TidyString:
                 d->type = "String";
                 d->vals = NULL;

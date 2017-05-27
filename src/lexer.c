@@ -3742,8 +3742,11 @@ static tmbstr  ParseAttribute( TidyDocImpl* doc, Bool *isempty,
         /* what should be done about non-namechar characters? */
         /* currently these are incorporated into the attr name */
 
-        if ( !cfgBool(doc, TidyXmlTags) && TY_(IsUpper)(c) )
-            c = TY_(ToLower)(c);
+        if ( cfg(doc, TidyUpperCaseAttrs) != TidyUppercasePreserve )
+        {
+            if ( !cfgBool(doc, TidyXmlTags) && TY_(IsUpper)(c) )
+                c = TY_(ToLower)(c);
+        }
 
         TY_(AddCharToLexer)( lexer, c );
         lastc = c;

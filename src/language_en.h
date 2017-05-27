@@ -1202,8 +1202,12 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option specifies if Tidy should output attribute names in upper "
         "case. "
         "<br/>"
-        "The default is <var>no</var>, which results in lower case attribute "
-        "names, except for XML input, where the original case is preserved. "
+        "When set to <var>no</var>, attribute names will be written in lower "
+        "case. Specifying <var>yes</var> will output attribute names in upper "
+        "case, and <var>preserve</var> can used to leave attribute names "
+        "untouched. "
+        "<br/>"
+        "When using XML input, the original case is always preserved. "
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and

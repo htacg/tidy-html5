@@ -2210,7 +2210,6 @@ void FixBrakes( TidyDocImpl* pDoc, Node *pParent )
 
 /* Issue #456 - This is discarded 
    See replacement TidyMetaCharset */
-#if 0
 void TY_(VerifyHTTPEquiv)(TidyDocImpl* doc, Node *head)
 {
     Node *pNode;
@@ -2286,7 +2285,6 @@ void TY_(VerifyHTTPEquiv)(TidyDocImpl* doc, Node *head)
         pLastProp = NULL;
     }
 }
-#endif
 
 /*\
 *  Issue #456 - Check meta charset
@@ -2309,9 +2307,11 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
     Node *prevNode;
     TidyBuffer buf;
     TidyBuffer charsetString;
-    tmbstr httpEquivAttrValue;
-    tmbstr lcontent;
+    /* tmbstr httpEquivAttrValue; */
+    /* tmbstr lcontent; */
     tmbstr newValue;
+    Bool add_meta = cfgBool(doc, TidyMetaCharset);
+
     /* We can't do anything we don't have a head or encoding is NULL */
     if (!head || !enc || !TY_(tmbstrlen)(enc))
         return no;
@@ -2323,6 +2323,11 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
 #endif
     if (cfgAutoBool(doc, TidyBodyOnly) == TidyYesState)
         return no; /* nothing to do here if showing body only */
+
+    if (!add_meta) {
+        TY_(VerifyHTTPEquiv)(doc, head);
+        return no;
+    }
 
     tidyBufInit(&charsetString);
     /* Set up the content test 'charset=value' */
@@ -2356,7 +2361,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
             }
             charsetFound = yes;
             /* Fix mismatched attribute value */
-            if (TY_(tmbstrcmp)(TY_(tmbstrtolower)(charsetAttr->value), enc) != 0)
+            if (TY_(tmbstrcasecmp)(charsetAttr->value, enc) != 0)
             {
                 newValue = (tmbstr)TidyDocAlloc(doc, TY_(tmbstrlen)(enc) + 1);   /* allocate + 1 for 0 */
                 TY_(tmbstrcpy)(newValue, enc);
@@ -2391,24 +2396,30 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
                 currentNode = prevNode;
                 continue;
             }
-            httpEquivAttrValue = TY_(tmbstrtolower)(httpEquivAttr->value);
-            if (TY_(tmbstrcmp)(httpEquivAttr->value, (tmbstr) "content-type") != 0)
+            /* httpEquivAttrValue = TY_(tmbstrtolower)(httpEquivAttr->value); */
+            if (TY_(tmbstrcasecmp)(httpEquivAttr->value, (tmbstr) "content-type") != 0)
                 continue;   /* is not 'content-type' */
             if (!contentAttr->value)
             {
+                /* While this **seems** like a good idea, current tidy accepts this
+                   see reg.test case-1117013.html which contains 
+                   <META HTTP-EQUIV="Content-Type" CONTENT=""> so for now. This could be reviewed 
+                   in future, since there seem no need to keep this invalid meta */
+#if 0 /* 0000000000000000000000000000000000000000000000000 */
                 prevNode = currentNode->prev;
                 /* maybe need better message here */
                 TY_(ReportError)(doc, head, currentNode, DISCARDING_UNEXPECTED);
                 TY_(DiscardElement)(doc, currentNode);
                 currentNode = prevNode;
-                continue;
+#endif /* 000000000000000000000000000000000000000000000000 */
+                continue; /* has no 'content' attribute has NO VALUE! */
             }
             /* check encoding matches
             If a miss-match found here, fix it. previous silently done
             in void TY_(VerifyHTTPEquiv)(TidyDocImpl* doc, Node *head)
-            */
             lcontent = TY_(tmbstrtolower)(contentAttr->value);
-            if (TY_(tmbsubstr)(lcontent, charsetString.bp))
+            */
+            if (TY_(tmbstrcasecmp)(contentAttr->value, charsetString.bp))
             {
                 /* we already found one, so remove the rest. */
                 if (charsetFound)

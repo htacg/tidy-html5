@@ -1935,6 +1935,8 @@ static Bool TY_(nodeIsTextLike)( Node *node )
         return yes;
     if ( node->type == AspTag )
         return yes;
+    if (node->type == PhpTag)
+        return yes; /* Issue #392 */
     /* add other text like nodes... */
     return no;
 }

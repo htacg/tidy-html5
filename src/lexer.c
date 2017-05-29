@@ -3736,6 +3736,7 @@ static tmbstr  ParseAttribute( TidyDocImpl* doc, Bool *isempty,
             {
                 /* Not '/>' - put it back */
                 TY_(UngetChar)(c, doc->docIn);
+                c = '/';  /* retore original char */
             }
         }
 

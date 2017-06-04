@@ -270,7 +270,8 @@ extern "C" {
     FN(COERCE_TO_ENDTAG)              \
     FN(ELEMENT_NOT_EMPTY)             \
     FN(UNEXPECTED_END_OF_FILE)        \
-    FN(UNEXPECTED_ENDTAG)
+    FN(UNEXPECTED_ENDTAG)             \
+    FN(ADDED_MISSING_CHARSET)
     
 
 /** These are report messages added by Tidy's accessibility module. */

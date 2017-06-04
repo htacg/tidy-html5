@@ -2489,10 +2489,12 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
             tidyBufAppend(&buf, "text/html; ", 11);
             tidyBufAppend(&buf, charsetString.bp, TY_(tmbstrlen)(charsetString.bp));
             tidyBufAppend(&buf, "\0", 1);   /* zero terminate the buffer */
-            TY_(AddAttribute)(doc, metaTag, "content", (char*)buf.bp);
+            TY_(AddAttribute)(doc, metaTag, "http-equiv", "Content-Type"); /* add 'http-equiv' const. */
+            TY_(AddAttribute)(doc, metaTag, "content", (char*)buf.bp);  /* add 'content="<enc>"' */
             tidyBufFree(&buf);
         }
         TY_(InsertNodeAtStart)(head, metaTag);
+        TY_(ReportError)(doc, metaTag, head, ADDED_MISSING_CHARSET); /* actually just 'Info:' */
     }
     tidyBufFree(&charsetString);
     return yes;

@@ -408,6 +408,11 @@ void TY_(ReportError)(TidyDocImpl* doc, Node *element, Node *node, uint code)
         case REMOVED_HTML5:
             message = TY_(tidyMessageCreateWithNode)(doc, rpt, code, TidyError, nodedesc );
             break;
+
+        case ADDED_MISSING_CHARSET:
+            message = TY_(tidyMessageCreateWithNode)(doc, rpt, code, TidyInfo, nodedesc);
+            break;
+
     }
 
     messageOut( message );

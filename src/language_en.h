@@ -1900,7 +1900,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { ELEMENT_NOT_EMPTY,            0,   "%s element not empty or not closed"                                      }, /* ReportError, ReportAttrError */
     { UNEXPECTED_END_OF_FILE,       0,   "unexpected end of file %s"                                               }, /* ReportError, ReportAttrError */
     { UNEXPECTED_ENDTAG,            0,   "unexpected </%s>"                                                        }, /* ReportError, ReportFatal */
-    
+
+    { ADDED_MISSING_CHARSET,        0,   "Added appropriate missing <meta charset=...> to %s"                      }, /* ReportInfo */
+
 #if SUPPORT_ACCESSIBILITY_CHECKS
     
     /***************************************

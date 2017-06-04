@@ -39,6 +39,9 @@ static FILE* errout = NULL;
 #if defined(_WIN32)
 /** On Windows, we will store the original code page here. */
 static uint win_cp; /* original Windows code page */
+#if (defined(_MSC_VER) && (_MSC_VER < 1900))
+#define snprintf _snprintf
+#endif
 #endif
 
 
@@ -1529,8 +1532,8 @@ static void printXMLCrossRefEqConsole(TidyDoc tdoc,   /**< The Tidy document. */
 
     if ( hit )
     {
-        localHit = *hit;
         tmbstr localName;
+        localHit = *hit;
         localize_option_names( &localHit );
         printf("  <eqconsole>%s</eqconsole>\n", localName = get_escaped_name(localHit.name1));
         free((tmbstr)localHit.name1);
@@ -1882,12 +1885,12 @@ int main( int argc, char** argv )
     TidyDoc tdoc = tidyCreate();
     int status = 0;
     tmbstr locale = NULL;
-    tidySetMessageCallback( tdoc, reportCallback); /* experimental group */
 
     uint contentErrors = 0;
     uint contentWarnings = 0;
     uint accessWarnings = 0;
 
+    tidySetMessageCallback( tdoc, reportCallback); /* experimental group */
     errout = stderr;  /* initialize to stderr */
 
     /* Set an atexit handler. */

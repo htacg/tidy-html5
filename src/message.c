@@ -569,9 +569,9 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
 /* lexer is not defined when this is called */
 void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option )
 {
+    TidyMessageImpl *message;
     assert( option != NULL );
-
-    TidyMessageImpl *message = TY_(tidyMessageCreate)( doc, STRING_MISSING_MALFORMED, TidyConfig, option );
+    message = TY_(tidyMessageCreate)( doc, STRING_MISSING_MALFORMED, TidyConfig, option );
     messageOut( message );
 }
 

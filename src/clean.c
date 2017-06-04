@@ -2210,6 +2210,7 @@ void FixBrakes( TidyDocImpl* pDoc, Node *pParent )
 
 /* Issue #456 - This is discarded 
    See replacement TidyMetaCharset */
+#if 0  /* 000000000000000000000000 */
 void TY_(VerifyHTTPEquiv)(TidyDocImpl* doc, Node *head)
 {
     Node *pNode;
@@ -2285,6 +2286,7 @@ void TY_(VerifyHTTPEquiv)(TidyDocImpl* doc, Node *head)
         pLastProp = NULL;
     }
 }
+#endif  /* 000000000000000000000000 */
 
 /*\
 *  Issue #456 - Check meta charset
@@ -2324,10 +2326,12 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
     if (cfgAutoBool(doc, TidyBodyOnly) == TidyYesState)
         return no; /* nothing to do here if showing body only */
 
+#if 0  /* 000000000000000000000000 */
     if (!add_meta) {
         TY_(VerifyHTTPEquiv)(doc, head);
         return no;
     }
+#endif /* 000000000000000000000000 */
 
     tidyBufInit(&charsetString);
     /* Set up the content test 'charset=value' */
@@ -2419,7 +2423,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
             in void TY_(VerifyHTTPEquiv)(TidyDocImpl* doc, Node *head)
             lcontent = TY_(tmbstrtolower)(contentAttr->value);
             */
-            if (TY_(tmbstrcasecmp)(contentAttr->value, charsetString.bp))
+            if (TY_(tmbstrcasecmp)(contentAttr->value, charsetString.bp) == 0)
             {
                 /* we already found one, so remove the rest. */
                 if (charsetFound)
@@ -2470,7 +2474,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
     }
 
     /* completed head scan - add appropriate meta - if 'yes' and none exists */
-    if (cfgBool(doc, TidyMetaCharset) && !charsetFound)
+    if (add_meta && !charsetFound)
     {
         /* add appropriate meta charset tag - no warning */
         metaTag = TY_(InferredTag)(doc, TidyTag_META);

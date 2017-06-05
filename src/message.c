@@ -526,6 +526,10 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
             message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc, name, value );
             break;
 
+        case ATTRIBUTE_VALUE_REPLACED:
+            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyInfo, tagdesc, name, value);
+            break;
+
         case UNEXPECTED_QUOTEMARK:
         case MISSING_QUOTEMARK:
         case ID_NAME_MISMATCH:

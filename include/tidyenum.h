@@ -169,6 +169,7 @@ extern "C" {
     FN(BACKSLASH_IN_URI)              \
     FN(BAD_ATTRIBUTE_VALUE_REPLACED)  \
     FN(BAD_ATTRIBUTE_VALUE)           \
+    FN(ATTRIBUTE_VALUE_REPLACED)      \
     FN(ESCAPED_ILLEGAL_URI)           \
     FN(FIXED_BACKSLASH)               \
     FN(ID_NAME_MISMATCH)              \

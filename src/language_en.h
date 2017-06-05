@@ -1798,6 +1798,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { BACKSLASH_IN_URI,             0,   "%s URI reference contains backslash. Typo?"                              }, /* ReportAttrError */
     { BAD_ATTRIBUTE_VALUE_REPLACED, 0,   "%s attribute \"%s\" had invalid value \"%s\" and has been replaced"      }, /* ReportAttrError */
     { BAD_ATTRIBUTE_VALUE,          0,   "%s attribute \"%s\" has invalid value \"%s\""                            }, /* ReportAttrError */
+    { ATTRIBUTE_VALUE_REPLACED,     0,   "%s attribute \"%s\", incorrect value \"%s\" replaced"                    }, /* ReportAttrError/TidyInfo */
     { ESCAPED_ILLEGAL_URI,          0,   "%s escaping malformed URI reference"                                     }, /* ReportAttrError */
     { FIXED_BACKSLASH,              0,   "%s converting backslash in URI to slash"                                 }, /* ReportAttrError */
     { ID_NAME_MISMATCH,             0,   "%s id and name attribute value mismatch"                                 }, /* ReportAttrError */

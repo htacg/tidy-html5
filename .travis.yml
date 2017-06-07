@@ -1,0 +1,14 @@
+language: cpp
+
+dist: trusty
+
+sudo: false
+
+addons:
+  apt:
+    packages:
+      - cmake
+
+script:
+  - (cd build/cmake && cmake ../.. -DCMAKE_BUILD_TYPE=Release && make)
+  - TY_TIDY_PATH=build/cmake/tidy TY_CASES_SETNAME=testbase ./tests/tools-sh/run-tests.sh

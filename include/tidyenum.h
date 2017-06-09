@@ -651,6 +651,7 @@ typedef enum
     TidyXmlSpace,                /**< If set to yes adds xml:space attr as needed */
     TidyXmlTags,                 /**< Treat input as XML */
     TidyMetaCharset,             /**< Adds/checks/fixes meta charset in the head, based on document type */
+    TidyShowMetaChange,          /**< show when meta http-equiv content charset was changed - compatibility */
     N_TIDY_OPTIONS               /**< Must be last */
 } TidyOptionId;
 

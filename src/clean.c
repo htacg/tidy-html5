@@ -2452,7 +2452,8 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
                     newValue = (tmbstr)TidyDocAlloc(doc, 19 + TY_(tmbstrlen)(enc) + 1);
                     TY_(tmbstrcpy)(newValue, "text/html; charset=");
                     TY_(tmbstrcpy)(newValue + 19, enc);
-                    TY_(ReportAttrError)(doc, currentNode, contentAttr, ATTRIBUTE_VALUE_REPLACED);
+                    if (cfgBool(doc, TidyShowMetaChange))   /* Issue #456 - backward compatibility only */
+                        TY_(ReportAttrError)(doc, currentNode, contentAttr, ATTRIBUTE_VALUE_REPLACED);
                     TidyDocFree(doc, contentAttr->value);
                     contentAttr->value = newValue;
                     charsetFound = yes;

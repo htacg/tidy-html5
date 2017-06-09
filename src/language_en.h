@@ -1522,7 +1522,12 @@ static languageDefinition language_en = { whichPluralForm_en, {
           be translated. */
       TidyMetaCharset,             0,
         "This option adds a meta element and sets the charset attribute to the encoding of the document."
-        "Set this option to 'yes' if you want this."
+        " Set this option to <var>yes</var> if you want this."
+    },
+    {
+      TidyShowMetaChange,             0,
+        "This option shows when a meta http-equiv content charset attribute was changed to the encoding of the document."
+        " Set this option to <var>yes</var> if you want this."
     },
 
     /********************************************

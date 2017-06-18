@@ -2647,6 +2647,58 @@ void TY_(FixAnchors)(TidyDocImpl* doc, Node *node, Bool wantName, Bool wantId)
     }
 }
 
+/* Issue #567 - move style elements from body to head */
+void TY_(CleanStyle)(TidyDocImpl* doc, Node *html)
+{
+    Node *node, *next, *head = NULL, *body = NULL;
+    Node *child;
+    if (!html)
+        return; /* oops, not given a start node */
+
+#if 0 /* this failed??? */
+    for (node = html->content; node != NULL; node = node->next)
+    {
+        if (nodeIsHEAD(node))
+            head = node;
+
+        if (nodeIsBODY(node))
+            body = node;
+    }
+#endif /* 0000000000000000000000  */
+    head = TY_(FindHEAD)( doc );
+    body = TY_(FindBody)( doc );
+
+    if (head != NULL && body != NULL)
+    {
+        /* found head and body */
+        for (node = body->content; node != NULL; node = next)
+        {
+            next = node->next;
+            if (nodeIsSTYLE(node))
+            {
+                TY_(RemoveNode)(node); /* unhool style node from body */
+                TY_(InsertNodeAtEnd)(head, node);   /* add to end of head */
+                /* TODO: Add warning */
+            }
+            else if (node->content)
+            {
+                for (child = node->content; child != NULL; child = child->content)
+                {
+                    if (nodeIsSTYLE(child))
+                    {
+                        TY_(RemoveNode)(child); /* unhool style node from body */
+                        TY_(InsertNodeAtEnd)(head, child);   /* add to end of head */
+                        /* TODO: Add warning */
+                        break;
+                    }
+
+                }
+
+            }
+        }
+    }
+}
+
 /*
  * local variables:
  * mode: c

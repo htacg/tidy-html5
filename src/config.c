@@ -312,6 +312,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyXmlPIs,                  MU, "assume-xml-procins",          BL, no,              ParsePickList,     &boolPicks          },
     { TidyXmlSpace,                MU, "add-xml-space",               BL, no,              ParsePickList,     &boolPicks          },
     { TidyXmlTags,                 MU, "input-xml",                   BL, no,              ParsePickList,     &boolPicks          },
+    { TidyStyleTags,               MU, "fix-style-tags",              BL, yes,             ParsePickList,     &boolPicks          },
     { N_TIDY_OPTIONS,              XX, NULL,                          XY, 0,               NULL,              NULL                }
 };
 

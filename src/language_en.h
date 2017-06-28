@@ -1512,6 +1512,18 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option specifies if Tidy should use the XML parser rather than the "
         "error correcting HTML parser. "
     },
+    {/* Important notes for translators:
+     - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+     <br/>.
+     - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+     - Option values should be enclosed in <var></var>.
+     - It's very important that <br/> be self-closing!
+     - The strings "Tidy" and "HTML Tidy" are the program name and must not
+     be translated. */
+        TidyStyleTags,                  0,
+        "This option specifies if Tidy should move all style tags to the "
+        "head of the document. "
+    },
 
 
     /********************************************
@@ -1890,8 +1902,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { ELEMENT_NOT_EMPTY,            0,   "%s element not empty or not closed"                                      }, /* ReportError, ReportAttrError */
     { UNEXPECTED_END_OF_FILE,       0,   "unexpected end of file %s"                                               }, /* ReportError, ReportAttrError */
     { UNEXPECTED_ENDTAG,            0,   "unexpected </%s>"                                                        }, /* ReportError, ReportFatal */
+    { MOVED_STYLE_TO_HEAD,          0,   "moved <style> tag to <head>! fix-style-tags: no to avoid."               }, /* ReportWarning */
+    { FOUND_STYLE_IN_BODY,          0,   "found <style> tag in <body>! fix-style-tags: yes to move."               }, /* ReportWarning */
 
-    
 #if SUPPORT_ACCESSIBILITY_CHECKS
     
     /***************************************

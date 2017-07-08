@@ -2475,6 +2475,21 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
             TY_(FreeNode)( doc, node);
             continue;
         }
+        if (lexer && (node->type == TextNode))
+        {
+            uint ch, ix = node->start;
+            /* Issue #572 - Skip whitespace. */
+            while (ix < node->end && (ch = (lexer->lexbuf[ix] & 0xff))
+                && (ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n'))
+                ++ix;
+            if (ix >= node->end)
+            {
+                /* Issue #572 - Discard if ALL whitespace. */
+                TY_(FreeNode)(doc, node);
+                continue;
+            }
+        }
+
 
         /* 
           if this is the end tag for an ancestor element

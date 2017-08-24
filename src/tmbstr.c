@@ -126,6 +126,13 @@ int TY_(tmbstrcasecmp)( ctmbstr s1, ctmbstr s2 )
 
 int TY_(tmbstrncmp)( ctmbstr s1, ctmbstr s2, uint n )
 {
+    if (s1 == NULL || s2 == NULL)
+    {
+        if (s1 == s2)
+            return 0;
+        return (s1 == NULL ? -1 : 1);
+    }
+
     uint c;
 
     while ((c = (byte)*s1) == (byte)*s2)

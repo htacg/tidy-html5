@@ -817,13 +817,14 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
                     option->parser( doc, option );
                 else
                 {
-                    if (NULL != doc->pOptCallback)
+                    if ( (NULL != doc->pOptCallback) || (NULL != doc->pConfigCallback) )
                     {
                         TidyConfigImpl* cfg = &doc->config;
                         tmbchar buf[8192];
                         uint i = 0;
                         tchar delim = 0;
                         Bool waswhite = yes;
+                        Bool response = yes;
 
                         tchar c = SkipWhite( cfg );
 
@@ -854,7 +855,14 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
                             c = AdvanceChar( cfg );
                         }
                         buf[i] = '\0';
-                        if (no == (*doc->pOptCallback)( name, buf ))
+                        
+                        if ( doc->pOptCallback )
+                            response = response && (*doc->pOptCallback)( name, buf );
+
+                        if ( doc->pConfigCallback )
+                            response = response && (*doc->pConfigCallback)( tidyImplToDoc(doc), name, buf );
+
+                        if (response == no)
                             TY_(ReportUnknownOption)( doc, name );
                     }
                     else

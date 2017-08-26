@@ -548,6 +548,8 @@ TIDY_EXPORT int TIDY_CALL         tidySetOutCharEncoding(TidyDoc tdoc,  /**< The
 /** This typedef represents the required signature for your provided callback
  ** function should you wish to register one with tidySetOptionCallback().
  ** Your callback function will be provided with the following parameters.
+ ** Note that this is deprecated and you should instead migrate to
+ ** tidySetConfigCallback().
  ** @param option The option name that was provided.
  ** @param value The option value that was provided
  ** @return Your callback function will return `yes` if it handles the provided
@@ -560,10 +562,36 @@ typedef Bool (TIDY_CALL *TidyOptCallback)(ctmbstr option, ctmbstr value);
  ** configuration file options. Setting this callback allows a LibTidy
  ** application developer to examine command-line and configuration file options
  ** after LibTidy has examined them and failed to recognize them.
+ ** Note that this is deprecated and you should instead migrate to
+ ** tidySetConfigCallback().
  ** @result Returns `yes` upon success.
  */
 TIDY_EXPORT Bool TIDY_CALL          tidySetOptionCallback(TidyDoc tdoc,                /**< The document to apply the callback to. */
                                                           TidyOptCallback pOptCallback /**< The name of a function of type TidyOptCallback() to serve as your callback. */
+                                                          );
+
+/** This typedef represents the required signature for your provided callback
+ ** function should you wish to register one with tidySetOptionCallback().
+ ** Your callback function will be provided with the following parameters.
+ ** @param tdoc The document instance for which the callback was invoked.
+ ** @param option The option name that was provided.
+ ** @param value The option value that was provided
+ ** @return Your callback function will return `yes` if it handles the provided
+ **         option, or `no` if it does not. In the latter case, Tidy will issue
+ **         an unknown configuration option error.
+ */
+typedef Bool (TIDY_CALL *TidyConfigCallback)(TidyDoc tdoc, ctmbstr option, ctmbstr value);
+
+/** Applications using TidyLib may want to augment command-line and
+ ** configuration file options. Setting this callback allows a LibTidy
+ ** application developer to examine command-line and configuration file options
+ ** after LibTidy has examined them and failed to recognize them.
+ ** Note that this is deprecated and you should instead migrate to
+ ** tidySetConfigCallback().
+ ** @result Returns `yes` upon success.
+ */
+TIDY_EXPORT Bool TIDY_CALL          tidySetConfigCallback(TidyDoc tdoc,                      /**< The document to apply the callback to. */
+                                                          TidyConfigCallback pConfigCallback /**< The name of a function of type TidyConfigCallback() to serve as your callback. */
                                                           );
 
 /** @}

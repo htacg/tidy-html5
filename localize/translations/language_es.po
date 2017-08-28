@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-05-13 21:04:45\n"
+"PO-Revision-Date: 2017-08-28 10:04:30\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -1283,8 +1283,12 @@ msgid ""
 "This option specifies if Tidy should output attribute names in upper "
 "case. "
 "<br/>"
-"The default is <var>no</var>, which results in lower case attribute "
-"names, except for XML input, where the original case is preserved. "
+"When set to <var>no</var>, attribute names will be written in lower "
+"case. Specifying <var>yes</var> will output attribute names in upper "
+"case, and <var>preserve</var> can used to leave attribute names "
+"untouched. "
+"<br/>"
+"When using XML input, the original case is always preserved. "
 msgstr ""
 
 #. Important notes for translators:
@@ -1625,6 +1629,20 @@ msgctxt "TidyXmlTags"
 msgid ""
 "This option specifies if Tidy should use the XML parser rather than the "
 "error correcting HTML parser. "
+msgstr ""
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyStyleTags"
+msgid ""
+"This option specifies if Tidy should move all style tags to the "
+"head of the document. "
 msgstr ""
 
 msgctxt "TidyUnknownCategory"
@@ -2511,6 +2529,14 @@ msgstr ""
 #, c-format
 msgctxt "UNEXPECTED_ENDTAG"
 msgid "unexpected </%s>"
+msgstr ""
+
+msgctxt "MOVED_STYLE_TO_HEAD"
+msgid "moved <style> tag to <head>! fix-style-tags: no to avoid."
+msgstr ""
+
+msgctxt "FOUND_STYLE_IN_BODY"
+msgid "found <style> tag in <body>! fix-style-tags: yes to move."
 msgstr ""
 
 msgctxt "IMG_MISSING_ALT"

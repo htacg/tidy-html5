@@ -2435,6 +2435,7 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
     Lexer* lexer = doc->lexer;
     Node *node, *parent, *lastli;
     Bool wasblock;
+    Bool nodeisOL = nodeIsOL(list);
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
     in_parse_list++;
@@ -2452,6 +2453,7 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
 
     while ((node = TY_(GetToken)( doc, IgnoreWhitespace)) != NULL)
     {
+        Bool foundLI = no;
         if (node->tag == list->tag && node->type == EndTag)
         {
             TY_(FreeNode)( doc, node);
@@ -2473,6 +2475,21 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
             TY_(FreeNode)( doc, node);
             continue;
         }
+        if (lexer && (node->type == TextNode))
+        {
+            uint ch, ix = node->start;
+            /* Issue #572 - Skip whitespace. */
+            while (ix < node->end && (ch = (lexer->lexbuf[ix] & 0xff))
+                && (ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n'))
+                ++ix;
+            if (ix >= node->end)
+            {
+                /* Issue #572 - Discard if ALL whitespace. */
+                TY_(FreeNode)(doc, node);
+                continue;
+            }
+        }
+
 
         /* 
           if this is the end tag for an ancestor element
@@ -2521,10 +2538,16 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
             continue;
         }
 
-        if ( nodeIsLI(node) || TY_(IsHTML5Mode)(doc))
+        if ( !nodeIsLI(node) && nodeisOL )
         {
-            /* node is <LI> 
-               Issue #396 - A <ul> can have Zero or more li elements
+            /* Issue #572 - A <ol><li> can have nested <ol> elements */
+            foundLI = FindLastLI(list, &lastli); /* find last <li> */
+        }
+
+        if ( nodeIsLI(node) || (TY_(IsHTML5Mode)(doc) && !foundLI) )
+        {
+            /* node is <LI> OR
+               Issue #396 - A <ul> can have Zero or more <li> elements
              */
             TY_(InsertNodeAtEnd)(list,node);
         }

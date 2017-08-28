@@ -85,6 +85,12 @@ msgid ""
 "<code>&amp;emdash;</code>, <code>&amp;rdquo;</code>, and other named "
 "character entities are downgraded to their closest ASCII equivalents. "
 msgstr ""
+"Can be used to modify behaviour of the <code>clean</code> option when set "
+"to <var>yes</var>. "
+"<br/>"
+"If set to <var>yes</var> when using <code>clean</code>, "
+"<code>&amp;emdash;</code>, <code>&amp;rdquo;</code>, and other named "
+"character entities are downgraded to their closest ASCII equivalents. "
 
 #. Important notes for translators:
 #. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -518,6 +524,8 @@ msgid ""
 "This option specifies if Tidy should enable specific behavior for "
 "cleaning up HTML exported from Google Docs. "
 msgstr ""
+"This option specifies if Tidy should enable specific behaviour for "
+"cleaning up HTML exported from Google Docs. "
 
 #. Important notes for translators:
 #. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -718,6 +726,16 @@ msgid ""
 "and ensure that whitespace within attribute values is passed "
 "through unchanged, set this option to <var>yes</var>. "
 msgstr ""
+"This option specifies how Tidy deals with whitespace characters within "
+"attribute values. "
+"<br/>"
+"If the value is <var>no</var> Tidy normalises attribute values by "
+"replacing any newline or tab with a single space, and further by replacing "
+"any contiguous whitespace with a single space. "
+"<br/>"
+"To force Tidy to preserve the original, literal values of all attributes "
+"and ensure that whitespace within attribute values is passed "
+"through unchanged, set this option to <var>yes</var>. "
 
 #. Important notes for translators:
 #. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -1352,6 +1370,21 @@ msgid ""
 "document using opening tags; matching closing tags will be recognized "
 "accordingly, and unknown closing tags will be discarded. "
 msgstr ""
+"This option enables the use of tags for autonomous custom elements, "
+"e.g. &lt;flag-icon&gt; with Tidy. Custom tags are disabled if this "
+"value is <var>no</var>. Other settings - <var>blocklevel</var>, "
+"<var>empty</var>, <var>inline</var>, and <var>pre</var> will treat "
+"<em>all</em> detected custom tags accordingly. "
+"<br/>"
+"The use of <code>new-blocklevel-tags</code>, "
+"<code>new-empty-tags</code>, <code>new-inline-tags</code>, or "
+"<code>new-pre-tags</code> will override the treatment of custom tags "
+"by this configuration option. This may be useful if you have "
+"different types of custom tags."
+"<br/>"
+"When enabled these tags are determined during the processing of your "
+"document using opening tags; matching closing tags will be recognised "
+"accordingly, and unknown closing tags will be discarded. "
 
 #. Important notes for translators:
 #. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -2462,12 +2495,12 @@ msgstr ""
 #, c-format
 msgctxt "UNKNOWN_ELEMENT_LOOKS_CUSTOM"
 msgid "%s is not recognized! Did you mean to enable the custom-tags option?"
-msgstr ""
+msgstr "%s is not recognised! Did you mean to enable the custom-tags option?"
 
 #, c-format
 msgctxt "UNKNOWN_ELEMENT"
 msgid "%s is not recognized!"
-msgstr ""
+msgstr "%s is not recognised!"
 
 #, c-format
 msgctxt "MISSING_ATTRIBUTE"
@@ -2652,7 +2685,7 @@ msgstr ""
 
 msgctxt "MULTIMEDIA_REQUIRES_TEXT"
 msgid "[1.4.1.1]: multimedia requires synchronized text equivalents."
-msgstr ""
+msgstr "[1.4.1.1]: multimedia requires synchronised text equivalents."
 
 msgctxt "IMG_MAP_CLIENT_MISSING_TEXT_LINKS"
 msgid "[1.5.1.1]: image map (client-side) missing text links."
@@ -2768,7 +2801,7 @@ msgstr ""
 
 msgctxt "LAYOUT_TABLES_LINEARIZE_PROPERLY"
 msgid "[5.3.1.1]: verify layout tables linearize properly."
-msgstr ""
+msgstr "[5.3.1.1]: verify layout tables linearise properly."
 
 msgctxt "LAYOUT_TABLE_INVALID_MARKUP"
 msgid "[5.4.1.1]: invalid markup used in layout <table>."
@@ -3492,6 +3525,14 @@ msgid ""
 "Please report instances of incorrect strings to the Tidy team. \n"
 "\n"
 msgstr ""
+"\n"
+"The following languages are currently installed in Tidy. Please \n"
+"note that there's no guarantee that they are complete; only that \n"
+"one developer or another started to add the language indicated. \n"
+"\n"
+"Incomplete localisations will default to \"en\" when necessary. \n"
+"Please report instances of incorrect strings to the Tidy team. \n"
+"\n"
 
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.

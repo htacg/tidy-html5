@@ -81,5 +81,7 @@ void TY_(FixAnchors)(TidyDocImpl* doc, Node *node, Bool wantName, Bool wantId);
 void TY_(FixXhtmlNamespace)(TidyDocImpl* doc, Bool wantXmlns);
 void TY_(FixLanguageInformation)(TidyDocImpl* doc, Node* node, Bool wantXmlLang, Bool wantLang);
 
+/* Issue #567 - move style elements from body to head */
+void TY_(CleanStyle)(TidyDocImpl* doc, Node *html);
 
 #endif /* __CLEAN_H__ */

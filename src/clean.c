@@ -2866,6 +2866,57 @@ void TY_(FixAnchors)(TidyDocImpl* doc, Node *node, Bool wantName, Bool wantId)
     }
 }
 
+/* Issue #567 - move style elements from body to head 
+ * ==================================================
+ */
+static void StyleToHead(TidyDocImpl* doc, Node *head, Node *node, Bool fix, int indent)
+{
+	Node *next;
+	while (node)
+	{
+		next = node->next;	/* get 'next' now , in case the node is moved */
+		/* dbg_show_node(doc, node, 0, indent); */
+		if (nodeIsSTYLE(node))
+		{
+			if (fix)
+			{
+				TY_(RemoveNode)(node); /* unhook style node from body */
+				TY_(InsertNodeAtEnd)(head, node);   /* add to end of head */
+				TY_(ReportNotice)(doc, node, head, MOVED_STYLE_TO_HEAD); /* report move */
+			}
+			else
+			{
+				TY_(ReportNotice)(doc, node, head, FOUND_STYLE_IN_BODY);
+			}
+		}
+		else if (node->content)
+		{
+			StyleToHead(doc, head, node->content, fix, indent + 1);
+		}
+		node = next;	/* process the 'next', if any */
+	}
+}
+
+
+void TY_(CleanStyle)(TidyDocImpl* doc, Node *html)
+{
+    Node *head = NULL, *body = NULL;
+    Bool fix = cfgBool(doc, TidyStyleTags);
+
+    if (!html)
+        return; /* oops, not given a start node */
+
+    head = TY_(FindHEAD)( doc );
+    body = TY_(FindBody)( doc );
+
+    if ((head != NULL) && (body != NULL))
+    {
+		StyleToHead(doc, head, body, fix, 0); /* found head and body */
+    }
+}
+/* ==================================================
+ */
+
 /*
  * local variables:
  * mode: c

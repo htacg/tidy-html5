@@ -60,6 +60,7 @@ struct _TidyDocImpl
     TidyReportCallback  reportCallback;
     TidyMessageCallback messageCallback;
     TidyOptCallback     pOptCallback;
+    TidyConfigCallback  pConfigCallback;
     TidyPPProgress      progressCallback;
 
     /* Parse + Repair Results */

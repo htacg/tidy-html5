@@ -249,6 +249,11 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
             }
             message = TY_(tidyMessageCreateWithNode)(doc, element, code, TidyInfo, elemdesc, tagtype );
             break;
+		case MOVED_STYLE_TO_HEAD:
+		case FOUND_STYLE_IN_BODY:
+            TagToString(element, elemdesc, sizeof(elemdesc));
+            message = TY_(tidyMessageCreateWithNode)(doc, element, code, TidyWarning, elemdesc);
+            break;
     }
 
     messageOut( message );

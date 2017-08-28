@@ -2340,7 +2340,8 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
         else /* other tags */
         {
             Bool indcont  = ( cfgAutoBool(doc, TidyIndentContent) != TidyNoState );
-            Bool indsmart = ( cfgAutoBool(doc, TidyIndentContent) == TidyAutoState );
+            /* Issue #582 - Seems this is no longer used
+               Bool indsmart = ( cfgAutoBool(doc, TidyIndentContent) == TidyAutoState ); */
             Bool hideend  = cfgBool( doc, TidyOmitOptionalTags );
             Bool classic  = TidyClassicVS; /* #228 - cfgBool( doc, TidyVertSpace ); */
             uint contentIndent = indent;
@@ -2360,9 +2361,11 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
              *  Issue #180 - with the above PCondFlushLine, 
              *  this adds an uneccessary additional line!
              *  Maybe only if 'classic' ie --vertical-space yes 
+             *  Issue #582 - maybe this is no longer needed!
+             *  It adds a 3rd newline if indent: auto...
+             *  if ( indsmart && node->prev != NULL && classic)
+             *   TY_(PFlushLineSmart)( doc, indent );
             \*/
-            if ( indsmart && node->prev != NULL && classic)
-                TY_(PFlushLineSmart)( doc, indent );
 
             /* do not omit elements with attributes */
             if ( !hideend || !TY_(nodeHasCM)(node, CM_OMITST) ||

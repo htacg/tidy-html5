@@ -232,6 +232,17 @@ Bool TIDY_CALL        tidySetOptionCallback( TidyDoc tdoc, TidyOptCallback pOptC
   return no;
 }
 
+Bool TIDY_CALL         tidySetConfigCallback(TidyDoc tdoc, TidyConfigCallback pConfigCallback)
+{
+  TidyDocImpl* impl = tidyDocToImpl( tdoc );
+  if ( impl )
+  {
+    impl->pConfigCallback = pConfigCallback;
+    return yes;
+  }
+  return no;
+}
+
 
 int TIDY_CALL     tidyLoadConfig( TidyDoc tdoc, ctmbstr cfgfil )
 {
@@ -2010,6 +2021,9 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
 #endif
     if (tidyXmlTags)
        return tidyDocStatus( doc );
+
+    /* Issue #567 - move style elements from body to head */
+    TY_(CleanStyle)(doc, &doc->root);
 
     /* simplifies <b><b> ... </b> ...</b> etc. */
     if ( mergeEmphasis )

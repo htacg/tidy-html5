@@ -268,12 +268,14 @@ extern "C" {
     FN(REMOVED_HTML5)                 \
     FN(XML_DECLARATION_DETECTED)      \
     /* Report, mixed use */           \
+    FN(ADDED_MISSING_CHARSET)         \
     FN(COERCE_TO_ENDTAG)              \
     FN(ELEMENT_NOT_EMPTY)             \
+    FN(FOUND_STYLE_IN_BODY)           \
+    FN(MOVED_STYLE_TO_HEAD)           \
     FN(UNEXPECTED_END_OF_FILE)        \
-    FN(UNEXPECTED_ENDTAG)             \
-    FN(ADDED_MISSING_CHARSET)
-    
+    FN(UNEXPECTED_ENDTAG)
+
 
 /** These are report messages added by Tidy's accessibility module. */
 #define FOREACH_ACCESS_MSG(FN)                                          \
@@ -594,6 +596,7 @@ typedef enum
     TidyMergeDivs,               /**< Merge multiple DIVs */
     TidyMergeEmphasis,           /**< Merge nested B and I elements */
     TidyMergeSpans,              /**< Merge multiple SPANs */
+    TidyMetaCharset,             /**< Adds/checks/fixes meta charset in the head, based on document type */
 #if SUPPORT_ASIAN_ENCODINGS
     TidyNCR,                     /**< Allow numeric character references */
 #else
@@ -625,10 +628,12 @@ typedef enum
     TidyShowErrors,              /**< Number of errors to put out */
     TidyShowInfo,                /**< If true, info-level messages are shown */
     TidyShowMarkup,              /**< If false, normal output is suppressed */
+    TidyShowMetaChange,          /**< show when meta http-equiv content charset was changed - compatibility */
     TidyShowWarnings,            /**< However errors are always shown */
     TidySkipNested,              /**< Skip nested tags in script and style CDATA */
     TidySortAttributes,          /**< Sort attributes */
     TidyStrictTagsAttr,          /**< Ensure tags and attributes match output HTML version */
+    TidyStyleTags,               /**< Move sytle to head */
     TidyTabSize,                 /**< Expand tabs to n spaces */
     TidyUpperCaseAttrs,          /**< Output attributes in upper not lower case */
     TidyUpperCaseTags,           /**< Output tags in upper not lower case */
@@ -650,8 +655,6 @@ typedef enum
     TidyXmlPIs,                  /**< If set to yes PIs must end with ?> */
     TidyXmlSpace,                /**< If set to yes adds xml:space attr as needed */
     TidyXmlTags,                 /**< Treat input as XML */
-    TidyMetaCharset,             /**< Adds/checks/fixes meta charset in the head, based on document type */
-    TidyShowMetaChange,          /**< show when meta http-equiv content charset was changed - compatibility */
     N_TIDY_OPTIONS               /**< Must be last */
 } TidyOptionId;
 

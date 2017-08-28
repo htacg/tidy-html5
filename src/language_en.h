@@ -1521,14 +1521,37 @@ static languageDefinition language_en = { whichPluralForm_en, {
         - The strings "Tidy" and "HTML Tidy" are the program name and must not
           be translated. */
       TidyMetaCharset,             0,
-        "This option adds a meta element and sets the charset attribute to the encoding of the document."
-        " Set this option to <var>yes</var> if you want this."
+        "This option, when enabled, adds a <code>&lt;meta&gt;</code> element "
+        "and sets the <code>charset</code> attribute to the encoding of the "
+        "document. Set this option to <var>yes</var> to enable it. "
     },
-    {
+    {/* Important notes for translators:
+      - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+      <br/>.
+      - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+      - Option values should be enclosed in <var></var>.
+      - It's very important that <br/> be self-closing!
+      - The strings "Tidy" and "HTML Tidy" are the program name and must not
+        be translated. */
       TidyShowMetaChange,             0,
-        "This option shows when a meta http-equiv content charset attribute was changed to the encoding of the document."
-        " Set this option to <var>yes</var> if you want this."
+        "This option enables a message whenever Tidy changes the "
+        "<code>content</code> attribute of a meta charset declaration to match "
+        "the encoding of the document. Set this option to <var>yes</var> to "
+        "enable it. "
     },
+    {/* Important notes for translators:
+     - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+     <br/>.
+     - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+     - Option values should be enclosed in <var></var>.
+     - It's very important that <br/> be self-closing!
+     - The strings "Tidy" and "HTML Tidy" are the program name and must not
+       be translated. */
+      TidyStyleTags,                  0,
+        "This option specifies if Tidy should move all style tags to the "
+        "head of the document. "
+    },
+
 
     /********************************************
      ** TidyConfigCategory enumeration
@@ -1792,6 +1815,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
     },
     
+
     /********************************************
      ** Report Output
      ** @remark enum source TidyStrings
@@ -1800,10 +1824,10 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { ANCHOR_NOT_UNIQUE,            0,   "%s anchor \"%s\" already defined"                                        }, /* ReportAttrError */
     { ATTR_VALUE_NOT_LCASE,         0,   "%s attribute value \"%s\" must be lower case for XHTML"                  }, /* ReportAttrError */
     { ATTRIBUTE_IS_NOT_ALLOWED,     0,   "%s attribute \"is\" not allowed for autonomous custom tags."             }, /* ReportAttrError */
+    { ATTRIBUTE_VALUE_REPLACED,     0,   "%s attribute \"%s\", incorrect value \"%s\" replaced"                    }, /* ReportAttrError/TidyInfo */
     { BACKSLASH_IN_URI,             0,   "%s URI reference contains backslash. Typo?"                              }, /* ReportAttrError */
     { BAD_ATTRIBUTE_VALUE_REPLACED, 0,   "%s attribute \"%s\" had invalid value \"%s\" and has been replaced"      }, /* ReportAttrError */
     { BAD_ATTRIBUTE_VALUE,          0,   "%s attribute \"%s\" has invalid value \"%s\""                            }, /* ReportAttrError */
-    { ATTRIBUTE_VALUE_REPLACED,     0,   "%s attribute \"%s\", incorrect value \"%s\" replaced"                    }, /* ReportAttrError/TidyInfo */
     { ESCAPED_ILLEGAL_URI,          0,   "%s escaping malformed URI reference"                                     }, /* ReportAttrError */
     { FIXED_BACKSLASH,              0,   "%s converting backslash in URI to slash"                                 }, /* ReportAttrError */
     { ID_NAME_MISMATCH,             0,   "%s id and name attribute value mismatch"                                 }, /* ReportAttrError */
@@ -1906,6 +1930,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { ELEMENT_NOT_EMPTY,            0,   "%s element not empty or not closed"                                      }, /* ReportError, ReportAttrError */
     { UNEXPECTED_END_OF_FILE,       0,   "unexpected end of file %s"                                               }, /* ReportError, ReportAttrError */
     { UNEXPECTED_ENDTAG,            0,   "unexpected </%s>"                                                        }, /* ReportError, ReportFatal */
+    { MOVED_STYLE_TO_HEAD,          0,   "moved <style> tag to <head>! fix-style-tags: no to avoid."               }, /* ReportWarning */
+    { FOUND_STYLE_IN_BODY,          0,   "found <style> tag in <body>! fix-style-tags: yes to move."               }, /* ReportWarning */
 
     { ADDED_MISSING_CHARSET,        0,   "Added appropriate missing <meta charset=...> to %s"                      }, /* ReportInfo */
 

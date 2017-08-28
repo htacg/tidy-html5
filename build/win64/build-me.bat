@@ -1,4 +1,6 @@
 @setlocal
+@REM 20170702 - Check branch
+@set TMPBR=next
 @REM 20161002 - Change to msvc140 build
 @set VCVERS=14
 @set GENERATOR=Visual Studio %VCVERS% Win64
@@ -62,6 +64,9 @@
 :GOTCMD
 
 @call chkmsvc %TMPPRJ%
+@call chkbranch %TMPBR%
+@if ERRORLEVEL 1 goto BADBR
+:GOTBR
 
 @echo Begin %DATE% %TIME%, output to %TMPLOG%
 @echo Begin %DATE% %TIME% >> %TMPLOG%
@@ -175,6 +180,16 @@
 @cmake --build . --config release >> %TMPLOG% 2>&1
 @if ERRORLEVEL 1 goto ERR33
 @goto DNREL
+
+:BADBR
+@call git checkout %TMPBR%
+@call chkbranch %TMPBR%
+@if ERRORLEVEL 1 goto BADBR2
+@goto GOTBR
+:BADBR2
+@call shwbranch
+@echo Not on correct branch %TMPBR%
+@goto ISERR
 
 :ISERR
 @endlocal

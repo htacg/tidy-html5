@@ -2022,6 +2022,9 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     if (tidyXmlTags)
        return tidyDocStatus( doc );
 
+    /* Issue #567 - move style elements from body to head */
+    TY_(CleanStyle)(doc, &doc->root);
+
     /* simplifies <b><b> ... </b> ...</b> etc. */
     if ( mergeEmphasis )
         TY_(NestedEmphasis)( doc, &doc->root );

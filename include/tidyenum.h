@@ -270,7 +270,9 @@ extern "C" {
     FN(COERCE_TO_ENDTAG)              \
     FN(ELEMENT_NOT_EMPTY)             \
     FN(UNEXPECTED_END_OF_FILE)        \
-    FN(UNEXPECTED_ENDTAG)
+    FN(UNEXPECTED_ENDTAG)             \
+    FN(MOVED_STYLE_TO_HEAD)           \
+    FN(FOUND_STYLE_IN_BODY)
     
 
 /** These are report messages added by Tidy's accessibility module. */
@@ -648,6 +650,7 @@ typedef enum
     TidyXmlPIs,                  /**< If set to yes PIs must end with ?> */
     TidyXmlSpace,                /**< If set to yes adds xml:space attr as needed */
     TidyXmlTags,                 /**< Treat input as XML */
+    TidyStyleTags,               /**< Move sytle to head */
     N_TIDY_OPTIONS               /**< Must be last */
 } TidyOptionId;
 

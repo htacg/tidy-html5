@@ -424,10 +424,10 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
 
     switch (code)
     {
-        case MISSING_ATTR_VALUE:
-        case XML_ATTRIBUTE_VALUE:
-        case PROPRIETARY_ATTRIBUTE:
         case JOINING_ATTRIBUTE:
+        case MISSING_ATTR_VALUE:
+        case PROPRIETARY_ATTRIBUTE:
+        case XML_ATTRIBUTE_VALUE:
             message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc, name );
             break;
 
@@ -453,31 +453,31 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
 
         case BAD_ATTRIBUTE_VALUE:
         case BAD_ATTRIBUTE_VALUE_REPLACED:
-        case INVALID_ATTRIBUTE:
         case INSERTING_AUTO_ATTRIBUTE:
+        case INVALID_ATTRIBUTE:
             message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc, name, value );
             break;
 
-        case UNEXPECTED_QUOTEMARK:
-        case MISSING_QUOTEMARK:
-        case ID_NAME_MISMATCH:
         case BACKSLASH_IN_URI:
+        case ESCAPED_ILLEGAL_URI:
         case FIXED_BACKSLASH:
+        case ID_NAME_MISMATCH:
         case ILLEGAL_URI_CODEPOINT:
         case ILLEGAL_URI_REFERENCE:
-        case ESCAPED_ILLEGAL_URI:
-        case NEWLINE_IN_URI:
-        case WHITE_IN_URI:
-        case UNEXPECTED_GT:
         case INVALID_XML_ID:
+        case MISSING_QUOTEMARK:
+        case NEWLINE_IN_URI:
         case UNEXPECTED_EQUALSIGN:
+        case UNEXPECTED_GT:
+        case UNEXPECTED_QUOTEMARK:
+        case WHITE_IN_URI:
             message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc );
             break;
 
-        case XML_ID_SYNTAX:
-        case PROPRIETARY_ATTR_VALUE:
         case ANCHOR_NOT_UNIQUE:
         case ATTR_VALUE_NOT_LCASE:
+        case PROPRIETARY_ATTR_VALUE:
+        case XML_ID_SYNTAX:
             message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc, value );
             break;
 

@@ -167,6 +167,12 @@ static void messageOut( TidyMessageImpl *message )
         go = go & (cfgBool(doc, TidyShowInfo) == yes);
     }
 
+    /* If suppressing TidyWarning on Reports, suppress them. */
+    if ( message->level == TidyWarning )
+    {
+        go = go & (cfgBool(doc, TidyShowWarnings) == yes);
+    }
+
     /* If we're TidyQuiet and handling TidyDialogue, then suppress. */
     if ( cfgBool(doc, TidyQuiet) )
     {
@@ -378,11 +384,7 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
         }
 
     messageOut( message );
-
-    /* Although the callback is always executed for message2, it's only
-     added to the output sink TidyShowWarnings is enabled. */
-    if (cfgBool( doc, TidyShowWarnings ))
-        messageOut( message2 );
+    messageOut( message2 );
 }
 
 

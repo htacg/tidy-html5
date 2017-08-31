@@ -260,7 +260,6 @@ extern "C" {
     FN(BAD_SURROGATE_TAIL)            \
     /* ReportWarning */               \
     FN(BAD_SUMMARY_HTML5)             \
-    FN(COERCE_TO_ENDTAG_WARN)         \
     FN(NESTED_EMPHASIS)               \
     FN(NESTED_QUOTATION)              \
     FN(OBSOLETE_ELEMENT)              \
@@ -271,6 +270,7 @@ extern "C" {
     FN(ELEMENT_NOT_EMPTY)             \
     FN(UNEXPECTED_END_OF_FILE)        \
     FN(UNEXPECTED_ENDTAG)             \
+    FN(UNEXPECTED_ENDTAG_ERR)         \
     FN(MOVED_STYLE_TO_HEAD)           \
     FN(FOUND_STYLE_IN_BODY)
     

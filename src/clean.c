@@ -1986,7 +1986,7 @@ void TY_(CleanWord2000)( TidyDocImpl* doc, Node *node)
              * meaning this result would not ordinarily be displayed.
              */
             Node* next;
-            TY_(ReportError)(doc, NULL, node, PROPRIETARY_ELEMENT);
+            TY_(ReportNotice)(doc, NULL, node, PROPRIETARY_ELEMENT);
             DiscardContainer( doc, node, &next );
             node = next;
             continue;

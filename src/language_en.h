@@ -1891,17 +1891,17 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { BAD_SURROGATE_TAIL,           0,   "Leading (High) surrogate pair U+%04X, with no trailing (Low) entity, replaced with U+FFFD." }, /* ReportSurrogateError */
     
     { BAD_SUMMARY_HTML5,            0,   "The summary attribute on the %s element is obsolete in HTML5"            }, /* ReportWarning */
-    { COERCE_TO_ENDTAG_WARN,        0,   "<%s> is probably intended as </%s>"                                      }, /* ReportWarning */
     { NESTED_EMPHASIS,              0,   "nested emphasis %s"                                                      }, /* ReportWarning */
     { NESTED_QUOTATION,             0,   "nested q elements, possible typo."                                       }, /* ReportWarning */
     { OBSOLETE_ELEMENT,             0,   "replacing obsolete element %s with %s"                                   }, /* ReportWarning */
     { REMOVED_HTML5,                0,   "%s element removed from HTML5"                                           }, /* ReportWarning */
     { XML_DECLARATION_DETECTED,     0,   "An XML declaration was detected. Did you mean to use input-xml?"         }, /* ReportWarning */
     
-    { COERCE_TO_ENDTAG,             0,   "<%s> is probably intended as </%s>"                                      }, /* ReportError, ReportWarning */
+    { COERCE_TO_ENDTAG,             0,   "<%s> is probably intended as </%s>"                                      }, /* ReportWarning */
     { ELEMENT_NOT_EMPTY,            0,   "%s element not empty or not closed"                                      }, /* ReportError, ReportAttrError */
     { UNEXPECTED_END_OF_FILE,       0,   "unexpected end of file %s"                                               }, /* ReportError, ReportAttrError */
-    { UNEXPECTED_ENDTAG,            0,   "unexpected </%s>"                                                        }, /* ReportError, ReportFatal */
+    { UNEXPECTED_ENDTAG,            0,   "unexpected </%s>"                                                        }, /* ReportWarning */
+    { UNEXPECTED_ENDTAG_ERR,        0,   "unexpected </%s>"                                                        }, /* ReportError */
     { MOVED_STYLE_TO_HEAD,          0,   "moved <style> tag to <head>! fix-style-tags: no to avoid."               }, /* ReportWarning */
     { FOUND_STYLE_IN_BODY,          0,   "found <style> tag in <body>! fix-style-tags: yes to move."               }, /* ReportWarning */
 

@@ -874,7 +874,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "+FFFD."
     },
     { BAD_SUMMARY_HTML5,                             0, "L'attribut summary sur l'élément %s est obsolète avec HTML5"                                            },
-    { COERCE_TO_ENDTAG_WARN,                         0, "<%s> est probablement destiné à </%s>"                                                                  },
     { NESTED_EMPHASIS,                               0, "accentuation imbriquée %s"                                                                              },
     { NESTED_QUOTATION,                              0, "éléments \"q\" imbriqués, erreur typographique possible"                                                },
     { OBSOLETE_ELEMENT,                              0, "remplacement de l'élément obsolète %s par %s"                                                           },
@@ -884,6 +883,7 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { ELEMENT_NOT_EMPTY,                             0, "%s élément non vide ou non fermé"                                                                       },
     { UNEXPECTED_END_OF_FILE,                        0, "fin de fichier inattendue %s"                                                                           },
     { UNEXPECTED_ENDTAG,                             0, "</%s> inattendu"                                                                                        },
+    { UNEXPECTED_ENDTAG_ERR,                         0, "</%s> inattendu"                                                                                        },
 
 #if SUPPORT_ACCESSIBILITY_CHECKS
     { IMG_MISSING_ALT,                               0, "[1.1.1.1]: <img> texte manquant 'alt'."                                                                 },

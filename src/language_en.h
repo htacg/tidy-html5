@@ -1823,7 +1823,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { UNEXPECTED_GT,                0,   "%s missing '>' for end of tag"                                           }, /* ReportAttrError */
     { UNEXPECTED_QUOTEMARK,         0,   "%s unexpected or duplicate quote mark"                                   }, /* ReportAttrError */
     { WHITE_IN_URI,                 0,   "%s discarding whitespace in URI reference"                               }, /* ReportAttrError */
-    { XML_ATTRIBUTE_VALUE,          0,   "%s has XML attribute \"%s\""                                             }, /* ReportAttrError */
     { XML_ID_SYNTAX,                0,   "%s ID \"%s\" uses XML ID syntax"                                         }, /* ReportAttrError */
     
     { INVALID_NCR,                  0,   "%s invalid numeric character reference %s"                               }, /* ReportEncodingError */
@@ -1841,19 +1840,13 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { UNKNOWN_ENTITY,               0,   "unescaped & or unknown entity \"%s\""                                    }, /* ReportEntityError */
     
     { BAD_CDATA_CONTENT,            0,   "'<' + '/' + letter not allowed here"                                     }, /* ReportError */
-    { BAD_COMMENT_CHARS,            0,   "expecting -- or >"                                                       }, /* ReportError */
-    { BAD_XML_COMMENT,              0,   "XML comments can't contain --"                                           }, /* ReportError */
     { CANT_BE_NESTED,               0,   "%s can't be nested"                                                      }, /* ReportError */
     { CONTENT_AFTER_BODY,           0,   "content occurs after end of body"                                        }, /* ReportError */
     { DISCARDING_UNEXPECTED,        0,   "discarding unexpected %s"                                                }, /* ReportError */
     { DOCTYPE_AFTER_TAGS,           0,   "<!DOCTYPE> isn't allowed after elements"                                 }, /* ReportError */
-    { DTYPE_NOT_UPPER_CASE,         0,   "SYSTEM, PUBLIC, W3C, DTD, EN must be upper case"                         }, /* ReportError */
     { ELEMENT_VERS_MISMATCH_ERROR,  0,   "%s element not available in %s"                                          }, /* ReportError */
     { ELEMENT_VERS_MISMATCH_WARN,   0,   "%s element not available in %s"                                          }, /* ReportError */
-    { ENCODING_IO_CONFLICT,         0,   "Output encoding does not work with standard output"                      }, /* ReportError */
     { ILLEGAL_NESTING,              0,   "%s shouldn't be nested"                                                  }, /* ReportError */
-    { INCONSISTENT_NAMESPACE,       0,   "HTML namespace doesn't match content"                                    }, /* ReportError */
-    { INCONSISTENT_VERSION,         0,   "HTML DOCTYPE doesn't match content"                                      }, /* ReportError */
     { INSERTING_TAG,                0,   "inserting implicit <%s>"                                                 }, /* ReportError */
     { MALFORMED_COMMENT,            0,   "adjacent hyphens within comment"                                         }, /* ReportError */
     { MALFORMED_DOCTYPE,            0,   "discarding malformed <!DOCTYPE>"                                         }, /* ReportError */
@@ -1871,7 +1864,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TAG_NOT_ALLOWED_IN,           0,   "%s isn't allowed in <%s> elements"                                       }, /* ReportError */
     { TOO_MANY_ELEMENTS_IN,         0,   "too many %s elements in <%s>"                                            }, /* ReportError */
     { TOO_MANY_ELEMENTS,            0,   "too many %s elements"                                                    }, /* ReportError */
-    { UNESCAPED_ELEMENT,            0,   "unescaped %s in pre content"                                             }, /* ReportError */
     { USING_BR_INPLACE_OF,          0,   "using <br> in place of %s"                                               }, /* ReportError */
     
     { DUPLICATE_FRAMESET,           0,   "repeated FRAMESET element"                                               }, /* ReportFatal */
@@ -1953,7 +1945,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { LIST_USAGE_INVALID_UL,                         0,   "[3.6.1.1]: list usage invalid <ul>."                                      },
     { LIST_USAGE_INVALID_OL,                         0,   "[3.6.1.2]: list usage invalid <ol>."                                      },
     { LIST_USAGE_INVALID_LI,                         0,   "[3.6.1.4]: list usage invalid <li>."                                      },
-    { INDICATE_CHANGES_IN_LANGUAGE,                  0,   "[4.1.1.1]: indicate changes in language."                                 },
     { LANGUAGE_NOT_IDENTIFIED,                       0,   "[4.3.1.1]: language not identified."                                      },
     { LANGUAGE_INVALID,                              0,   "[4.3.1.2]: language attribute invalid."                                   },
     { DATA_TABLE_MISSING_HEADERS,                    0,   "[5.1.2.1]: data <table> missing row/column headers (all)."                },
@@ -2007,9 +1998,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_MOVE,  0,   "[9.3.1.6]: <script> not keyboard accessible (onMouseMove)."               },
     { NEW_WINDOWS_REQUIRE_WARNING_NEW,               0,   "[10.1.1.1]: new windows require warning (_new)."                          },
     { NEW_WINDOWS_REQUIRE_WARNING_BLANK,             0,   "[10.1.1.2]: new windows require warning (_blank)."                        },
-    { FORM_CONTROL_REQUIRES_DEFAULT_TEXT,            0,   "[10.4.1.1]: form control requires default text."                          },
-    { FORM_CONTROL_DEFAULT_TEXT_INVALID_NULL,        0,   "[10.4.1.2]: form control default text invalid (null)."                    },
-    { FORM_CONTROL_DEFAULT_TEXT_INVALID_SPACES,      0,   "[10.4.1.3]: form control default text invalid (spaces)."                  },
     { REPLACE_DEPRECATED_HTML_APPLET,                0,   "[11.2.1.1]: replace deprecated html <applet>."                            },
     { REPLACE_DEPRECATED_HTML_BASEFONT,              0,   "[11.2.1.2]: replace deprecated html <basefont>."                          },
     { REPLACE_DEPRECATED_HTML_CENTER,                0,   "[11.2.1.3]: replace deprecated html <center>."                            },

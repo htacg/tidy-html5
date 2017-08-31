@@ -291,6 +291,7 @@ static const TidyOptionImpl option_defs[] =
     { TidySkipNested,              MU, "skip-nested",                 BL, yes,             ParsePickList,     &boolPicks          }, /* 1642186 - Issue #65 */
     { TidySortAttributes,          PP, "sort-attributes",             IN, TidySortAttrNone,ParsePickList,     &sorterPicks        },
     { TidyStrictTagsAttr,          MU, "strict-tags-attributes",      BL, no,              ParsePickList,     &boolPicks          }, /* 20160209 - Issue #350 */
+    { TidyStyleTags,               MU, "fix-style-tags",              BL, yes,             ParsePickList,     &boolPicks          },
     { TidyTabSize,                 PP, "tab-size",                    IN, 8,               ParseInt,          NULL                },
     { TidyUpperCaseAttrs,          MU, "uppercase-attributes",        IN, TidyUppercaseNo, ParsePickList,     &attributeCasePicks },
     { TidyUpperCaseTags,           MU, "uppercase-tags",              BL, no,              ParsePickList,     &boolPicks          },
@@ -312,7 +313,6 @@ static const TidyOptionImpl option_defs[] =
     { TidyXmlPIs,                  MU, "assume-xml-procins",          BL, no,              ParsePickList,     &boolPicks          },
     { TidyXmlSpace,                MU, "add-xml-space",               BL, no,              ParsePickList,     &boolPicks          },
     { TidyXmlTags,                 MU, "input-xml",                   BL, no,              ParsePickList,     &boolPicks          },
-    { TidyStyleTags,               MU, "fix-style-tags",              BL, yes,             ParsePickList,     &boolPicks          },
     { N_TIDY_OPTIONS,              XX, NULL,                          XY, 0,               NULL,              NULL                }
 };
 

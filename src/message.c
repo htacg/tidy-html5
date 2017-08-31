@@ -237,7 +237,6 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
         case CANT_BE_NESTED:
         case NOFRAMES_CONTENT:
         case PROPRIETARY_ELEMENT:
-        case UNESCAPED_ELEMENT:
         case USING_BR_INPLACE_OF:
             message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, nodedesc );
             break;
@@ -253,13 +252,8 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
             break;
 
         case BAD_CDATA_CONTENT:
-        case BAD_COMMENT_CHARS:
-        case BAD_XML_COMMENT:
         case CONTENT_AFTER_BODY:
         case DOCTYPE_AFTER_TAGS:
-        case DTYPE_NOT_UPPER_CASE:
-        case INCONSISTENT_NAMESPACE:
-        case INCONSISTENT_VERSION:
         case MALFORMED_COMMENT:
         case MALFORMED_DOCTYPE:
         case MISSING_TITLE_ELEMENT:
@@ -297,7 +291,6 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
             message = TY_(tidyMessageCreateWithNode)(doc, rpt, code, TidyWarning, node->element, node->element );
             break;
 
-        case ENCODING_IO_CONFLICT:
         case MISSING_DOCTYPE:
         case SPACE_PRECEDING_XMLDECL:
         case XML_DECLARATION_DETECTED:
@@ -427,7 +420,6 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
         case JOINING_ATTRIBUTE:
         case MISSING_ATTR_VALUE:
         case PROPRIETARY_ATTRIBUTE:
-        case XML_ATTRIBUTE_VALUE:
             message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc, name );
             break;
 

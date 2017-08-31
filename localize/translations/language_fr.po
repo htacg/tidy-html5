@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-08-28 10:04:31\n"
+"PO-Revision-Date: 2017-08-31 12:54:04\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -2646,11 +2646,6 @@ msgid "%s discarding whitespace in URI reference"
 msgstr "%s rejet des espaces dans la référence URI"
 
 #, c-format
-msgctxt "XML_ATTRIBUTE_VALUE"
-msgid "%s has XML attribute \"%s\""
-msgstr "%s a un attribut XML \"%s\""
-
-#, c-format
 msgctxt "XML_ID_SYNTAX"
 msgid "%s ID \"%s\" uses XML ID syntax"
 msgstr "%s ID « %s » utilise la syntaxe XML ID"
@@ -2712,14 +2707,6 @@ msgctxt "BAD_CDATA_CONTENT"
 msgid "'<' + '/' + letter not allowed here"
 msgstr "'<' + '/' + lettres non permises ici"
 
-msgctxt "BAD_COMMENT_CHARS"
-msgid "expecting -- or >"
-msgstr "attendu -- ou >"
-
-msgctxt "BAD_XML_COMMENT"
-msgid "XML comments can't contain --"
-msgstr "les commentaires XML ne peuvent pas contenir --"
-
 #, c-format
 msgctxt "CANT_BE_NESTED"
 msgid "%s can't be nested"
@@ -2738,10 +2725,6 @@ msgctxt "DOCTYPE_AFTER_TAGS"
 msgid "<!DOCTYPE> isn't allowed after elements"
 msgstr "<!DOCTYPE> n'est pas autorisée après les éléments"
 
-msgctxt "DTYPE_NOT_UPPER_CASE"
-msgid "SYSTEM, PUBLIC, W3C, DTD, EN must be upper case"
-msgstr "SYSTEM, PUBLIC, W3C, DTD, EN doivent être en majuscules"
-
 #, c-format
 msgctxt "ELEMENT_VERS_MISMATCH_ERROR"
 msgid "%s element not available in %s"
@@ -2752,22 +2735,10 @@ msgctxt "ELEMENT_VERS_MISMATCH_WARN"
 msgid "%s element not available in %s"
 msgstr "%s élément non disponible dans %s"
 
-msgctxt "ENCODING_IO_CONFLICT"
-msgid "Output encoding does not work with standard output"
-msgstr "Encodage de sortie non fonctionnel avec la sortie standard"
-
 #, c-format
 msgctxt "ILLEGAL_NESTING"
 msgid "%s shouldn't be nested"
 msgstr "%s ne doit pas être imbriqué"
-
-msgctxt "INCONSISTENT_NAMESPACE"
-msgid "HTML namespace doesn't match content"
-msgstr "l'espace de nom HTML ne correspond pas au contenu"
-
-msgctxt "INCONSISTENT_VERSION"
-msgid "HTML DOCTYPE doesn't match content"
-msgstr "La déclaration DOCTYPE HTML ne correspond pas au contenu"
 
 #, c-format
 msgctxt "INSERTING_TAG"
@@ -2850,11 +2821,6 @@ msgid "too many %s elements"
 msgstr "trop d'éléments %s"
 
 #, c-format
-msgctxt "UNESCAPED_ELEMENT"
-msgid "unescaped %s in pre content"
-msgstr "%s non échappé dans le contenu pre"
-
-#, c-format
 msgctxt "USING_BR_INPLACE_OF"
 msgid "using <br> in place of %s"
 msgstr "utilisation de <br> à la place de %s"
@@ -2924,11 +2890,6 @@ msgid "The summary attribute on the %s element is obsolete in HTML5"
 msgstr "L'attribut summary sur l'élément %s est obsolète avec HTML5"
 
 #, c-format
-msgctxt "COERCE_TO_ENDTAG_WARN"
-msgid "<%s> is probably intended as </%s>"
-msgstr "<%s> est probablement destiné à </%s>"
-
-#, c-format
 msgctxt "NESTED_EMPHASIS"
 msgid "nested emphasis %s"
 msgstr "accentuation imbriquée %s"
@@ -2968,6 +2929,11 @@ msgstr "fin de fichier inattendue %s"
 
 #, c-format
 msgctxt "UNEXPECTED_ENDTAG"
+msgid "unexpected </%s>"
+msgstr "</%s> inattendu"
+
+#, c-format
+msgctxt "UNEXPECTED_ENDTAG_ERR"
 msgid "unexpected </%s>"
 msgstr "</%s> inattendu"
 
@@ -3152,10 +3118,6 @@ msgstr "[3.6.1.2]: usage non valide de liste <ol>."
 msgctxt "LIST_USAGE_INVALID_LI"
 msgid "[3.6.1.4]: list usage invalid <li>."
 msgstr "[3.6.1.4]: usage non valide de liste <li>."
-
-msgctxt "INDICATE_CHANGES_IN_LANGUAGE"
-msgid "[4.1.1.1]: indicate changes in language."
-msgstr "[4.1.1.1]: indique des changements dans le langage."
 
 msgctxt "LANGUAGE_NOT_IDENTIFIED"
 msgid "[4.3.1.1]: language not identified."
@@ -3368,18 +3330,6 @@ msgstr "[10.1.1.1]: les nouvelles fenêtres nécessitent un avertissement (_new)
 msgctxt "NEW_WINDOWS_REQUIRE_WARNING_BLANK"
 msgid "[10.1.1.2]: new windows require warning (_blank)."
 msgstr "[10.1.1.2]: les nouvelles fenêtres nécessitent un avertissement (_blank)."
-
-msgctxt "FORM_CONTROL_REQUIRES_DEFAULT_TEXT"
-msgid "[10.4.1.1]: form control requires default text."
-msgstr "[10.4.1.1]: les contrôles de formulaires nécessitent un texte par défaut."
-
-msgctxt "FORM_CONTROL_DEFAULT_TEXT_INVALID_NULL"
-msgid "[10.4.1.2]: form control default text invalid (null)."
-msgstr "[10.4.1.2]: texte par défaut du contrôle de formulaire non valide (null)."
-
-msgctxt "FORM_CONTROL_DEFAULT_TEXT_INVALID_SPACES"
-msgid "[10.4.1.3]: form control default text invalid (spaces)."
-msgstr "[10.4.1.3]: texte par défaut du contrôle de formulaire non valide (espaces)."
 
 msgctxt "REPLACE_DEPRECATED_HTML_APPLET"
 msgid "[11.2.1.1]: replace deprecated html <applet>."

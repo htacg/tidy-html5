@@ -55,7 +55,6 @@ static Bool UpdateCount( TidyDocImpl* doc, TidyReportLevel level )
           break;
       case TidyWarning:
           doc->warnings++;
-          go = go && cfgBool( doc, TidyShowWarnings );
           break;
       case TidyConfig:
           doc->optionErrors++;
@@ -215,7 +214,7 @@ static void messageOut( TidyMessageImpl *message )
 void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
 {
     TidyMessageImpl *message = NULL;
-    TidyMessageImpl *message2 = NULL; /* extra, when TidyShowWarnings */
+    TidyMessageImpl *message2 = NULL;
     Node* rpt = ( element ? element : node );
     char nodedesc[256] = { 0 };
     char elemdesc[256] = { 0 };
@@ -307,6 +306,7 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
             message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, nodedesc, extra_string );
             break;
 
+            
         case CUSTOM_TAG_DETECTED:
             TagToString(element, elemdesc, sizeof(elemdesc));
 
@@ -329,6 +329,7 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
             message = TY_(tidyMessageCreateWithNode)(doc, element, code, TidyInfo, elemdesc, tagtype );
             break;
 
+            
         case ELEMENT_VERS_MISMATCH_ERROR:
             versionEmitted = doc->lexer->versionEmitted;
             declared = doc->lexer->doctype;
@@ -381,7 +382,10 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
         }
 
     messageOut( message );
-    messageOut( message2 );
+    
+    /* is TidyInfo, but only show it if we're showing warnings! */
+    if ( cfgBool(doc, TidyShowWarnings) == yes )
+        messageOut( message2 );
 }
 
 

@@ -3312,21 +3312,6 @@ void TY_(AccessibilityChecks)( TidyDocImpl* doc )
     /* Check to see if any list elements are found within the document */
     CheckForListElements( doc, &doc->root );
 
-    /* Checks for natural language change */
-    /* Must contain more than 3 words of text in the document
-    **
-    ** CPR - Not sure what intent is here, but this 
-    ** routine has nothing to do with changes in language.
-    ** It seems like a bad idea to emit this message for
-    ** every document with _more_ than 3 words!
-
-    if ( WordCount(doc, &doc->root) > 3 )
-    {
-        TY_(ReportAccessWarning)( doc, node, INDICATE_CHANGES_IN_LANGUAGE);
-    }
-    */
-
-
     /* Recursively apply all remaining checks to 
     ** each node in document.
     */

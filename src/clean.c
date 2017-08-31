@@ -1986,7 +1986,7 @@ void TY_(CleanWord2000)( TidyDocImpl* doc, Node *node)
              * meaning this result would not ordinarily be displayed.
              */
             Node* next;
-            TY_(ReportError)(doc, NULL, node, PROPRIETARY_ELEMENT);
+            TY_(ReportNotice)(doc, NULL, node, PROPRIETARY_ELEMENT);
             DiscardContainer( doc, node, &next );
             node = next;
             continue;
@@ -2358,7 +2358,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
             if (charsetFound || !charsetAttr->value)
             {
                 prevNode = currentNode->prev;
-                TY_(ReportError)(doc, head, currentNode, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, head, currentNode, DISCARDING_UNEXPECTED);
                 TY_(DiscardElement)(doc, currentNode);
                 currentNode = prevNode;
                 continue;
@@ -2395,7 +2395,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
             if (!httpEquivAttr->value)
             {
                 prevNode = currentNode->prev;
-                TY_(ReportError)(doc, head, currentNode, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, head, currentNode, DISCARDING_UNEXPECTED);
                 TY_(DiscardElement)(doc, currentNode);
                 currentNode = prevNode;
                 continue;
@@ -2412,7 +2412,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
 #if 0 /* 0000000000000000000000000000000000000000000000000 */
                 prevNode = currentNode->prev;
                 /* maybe need better message here */
-                TY_(ReportError)(doc, head, currentNode, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, head, currentNode, DISCARDING_UNEXPECTED);
                 TY_(DiscardElement)(doc, currentNode);
                 currentNode = prevNode;
 #endif /* 000000000000000000000000000000000000000000000000 */
@@ -2423,13 +2423,13 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
             in void TY_(VerifyHTTPEquiv)(TidyDocImpl* doc, Node *head)
             lcontent = TY_(tmbstrtolower)(contentAttr->value);
             */
-            if (TY_(tmbstrcasecmp)(contentAttr->value, charsetString.bp) == 0)
+            if (TY_(tmbstrcasecmp)(contentAttr->value, (ctmbstr)charsetString.bp) == 0)
             {
                 /* we already found one, so remove the rest. */
                 if (charsetFound)
                 {
                     prevNode = currentNode->prev;
-                    TY_(ReportError)(doc, head, currentNode, DISCARDING_UNEXPECTED);
+                    TY_(ReportNotice)(doc, head, currentNode, DISCARDING_UNEXPECTED);
                     TY_(DiscardElement)(doc, currentNode);
                     currentNode = prevNode;
                     continue;
@@ -2442,7 +2442,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
                 if (charsetFound)
                 {
                     prevNode = currentNode->prev;
-                    TY_(ReportError)(doc, head, currentNode, DISCARDING_UNEXPECTED);
+                    TY_(ReportNotice)(doc, head, currentNode, DISCARDING_UNEXPECTED);
                     TY_(DiscardElement)(doc, currentNode);
                     currentNode = prevNode;
                 }
@@ -2469,7 +2469,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
         {
             /* printf("WARN ABOUT HTTP EQUIV AND CHARSET ATTR! \n"); */
             prevNode = currentNode->prev;
-            TY_(ReportError)(doc, head, currentNode, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, head, currentNode, DISCARDING_UNEXPECTED);
             TY_(DiscardElement)(doc, currentNode);
             currentNode = prevNode;
         }
@@ -2489,14 +2489,14 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
         default:
             tidyBufInit(&buf);
             tidyBufAppend(&buf, "text/html; ", 11);
-            tidyBufAppend(&buf, charsetString.bp, TY_(tmbstrlen)(charsetString.bp));
+            tidyBufAppend(&buf, charsetString.bp, TY_(tmbstrlen)((ctmbstr)charsetString.bp));
             tidyBufAppend(&buf, "\0", 1);   /* zero terminate the buffer */
             TY_(AddAttribute)(doc, metaTag, "http-equiv", "Content-Type"); /* add 'http-equiv' const. */
             TY_(AddAttribute)(doc, metaTag, "content", (char*)buf.bp);  /* add 'content="<enc>"' */
             tidyBufFree(&buf);
         }
         TY_(InsertNodeAtStart)(head, metaTag);
-        TY_(ReportError)(doc, metaTag, head, ADDED_MISSING_CHARSET); /* actually just 'Info:' */
+        TY_(ReportNotice)(doc, metaTag, head, ADDED_MISSING_CHARSET); /* actually just 'Info:' */
     }
     tidyBufFree(&charsetString);
     return yes;

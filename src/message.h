@@ -49,9 +49,6 @@ ctmbstr TY_(tidyLibraryVersion)(void);
 
 
 void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code);
-void TY_(ReportWarning)(TidyDocImpl* doc, Node *element, Node *node, uint code);
-void TY_(ReportError)(TidyDocImpl* doc, Node* element, Node* node, uint code);
-void TY_(ReportFatal)(TidyDocImpl* doc, Node* element, Node* node, uint code);
 
 
 /** @} */

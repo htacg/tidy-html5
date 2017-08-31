@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-08-28 10:04:30\n"
+"PO-Revision-Date: 2017-08-31 12:54:04\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -2266,11 +2266,6 @@ msgid "%s discarding whitespace in URI reference"
 msgstr ""
 
 #, c-format
-msgctxt "XML_ATTRIBUTE_VALUE"
-msgid "%s has XML attribute \"%s\""
-msgstr ""
-
-#, c-format
 msgctxt "XML_ID_SYNTAX"
 msgid "%s ID \"%s\" uses XML ID syntax"
 msgstr ""
@@ -2332,14 +2327,6 @@ msgctxt "BAD_CDATA_CONTENT"
 msgid "'<' + '/' + letter not allowed here"
 msgstr ""
 
-msgctxt "BAD_COMMENT_CHARS"
-msgid "expecting -- or >"
-msgstr ""
-
-msgctxt "BAD_XML_COMMENT"
-msgid "XML comments can't contain --"
-msgstr ""
-
 #, c-format
 msgctxt "CANT_BE_NESTED"
 msgid "%s can't be nested"
@@ -2358,10 +2345,6 @@ msgctxt "DOCTYPE_AFTER_TAGS"
 msgid "<!DOCTYPE> isn't allowed after elements"
 msgstr ""
 
-msgctxt "DTYPE_NOT_UPPER_CASE"
-msgid "SYSTEM, PUBLIC, W3C, DTD, EN must be upper case"
-msgstr ""
-
 #, c-format
 msgctxt "ELEMENT_VERS_MISMATCH_ERROR"
 msgid "%s element not available in %s"
@@ -2372,21 +2355,9 @@ msgctxt "ELEMENT_VERS_MISMATCH_WARN"
 msgid "%s element not available in %s"
 msgstr ""
 
-msgctxt "ENCODING_IO_CONFLICT"
-msgid "Output encoding does not work with standard output"
-msgstr ""
-
 #, c-format
 msgctxt "ILLEGAL_NESTING"
 msgid "%s shouldn't be nested"
-msgstr ""
-
-msgctxt "INCONSISTENT_NAMESPACE"
-msgid "HTML namespace doesn't match content"
-msgstr ""
-
-msgctxt "INCONSISTENT_VERSION"
-msgid "HTML DOCTYPE doesn't match content"
 msgstr ""
 
 #, c-format
@@ -2470,11 +2441,6 @@ msgid "too many %s elements"
 msgstr ""
 
 #, c-format
-msgctxt "UNESCAPED_ELEMENT"
-msgid "unescaped %s in pre content"
-msgstr ""
-
-#, c-format
 msgctxt "USING_BR_INPLACE_OF"
 msgid "using <br> in place of %s"
 msgstr ""
@@ -2540,11 +2506,6 @@ msgid "The summary attribute on the %s element is obsolete in HTML5"
 msgstr ""
 
 #, c-format
-msgctxt "COERCE_TO_ENDTAG_WARN"
-msgid "<%s> is probably intended as </%s>"
-msgstr ""
-
-#, c-format
 msgctxt "NESTED_EMPHASIS"
 msgid "nested emphasis %s"
 msgstr ""
@@ -2584,6 +2545,11 @@ msgstr ""
 
 #, c-format
 msgctxt "UNEXPECTED_ENDTAG"
+msgid "unexpected </%s>"
+msgstr ""
+
+#, c-format
+msgctxt "UNEXPECTED_ENDTAG_ERR"
 msgid "unexpected </%s>"
 msgstr ""
 
@@ -2765,10 +2731,6 @@ msgstr ""
 
 msgctxt "LIST_USAGE_INVALID_LI"
 msgid "[3.6.1.4]: list usage invalid <li>."
-msgstr ""
-
-msgctxt "INDICATE_CHANGES_IN_LANGUAGE"
-msgid "[4.1.1.1]: indicate changes in language."
 msgstr ""
 
 msgctxt "LANGUAGE_NOT_IDENTIFIED"
@@ -2981,18 +2943,6 @@ msgstr ""
 
 msgctxt "NEW_WINDOWS_REQUIRE_WARNING_BLANK"
 msgid "[10.1.1.2]: new windows require warning (_blank)."
-msgstr ""
-
-msgctxt "FORM_CONTROL_REQUIRES_DEFAULT_TEXT"
-msgid "[10.4.1.1]: form control requires default text."
-msgstr ""
-
-msgctxt "FORM_CONTROL_DEFAULT_TEXT_INVALID_NULL"
-msgid "[10.4.1.2]: form control default text invalid (null)."
-msgstr ""
-
-msgctxt "FORM_CONTROL_DEFAULT_TEXT_INVALID_SPACES"
-msgid "[10.4.1.3]: form control default text invalid (spaces)."
 msgstr ""
 
 msgctxt "REPLACE_DEPRECATED_HTML_APPLET"

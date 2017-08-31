@@ -86,9 +86,9 @@ void TY_(CoerceNode)(TidyDocImpl* doc, Node *node, TidyTagId tid, Bool obsolete,
     Node* tmp = TY_(InferredTag)(doc, tag->id);
 
     if (obsolete)
-        TY_(ReportWarning)(doc, node, tmp, OBSOLETE_ELEMENT);
+        TY_(ReportNotice)(doc, node, tmp, OBSOLETE_ELEMENT);
     else if (unexpected)
-        TY_(ReportError)(doc, node, tmp, REPLACING_UNEX_ELEMENT);
+        TY_(ReportNotice)(doc, node, tmp, REPLACING_UNEX_ELEMENT);
     else
         TY_(ReportNotice)(doc, node, tmp, REPLACING_ELEMENT);
 
@@ -783,12 +783,12 @@ static void InsertDocType( TidyDocImpl* doc, Node *element, Node *doctype )
     Node* existing = TY_(FindDocType)( doc );
     if ( existing )
     {
-        TY_(ReportError)(doc, element, doctype, DISCARDING_UNEXPECTED );
+        TY_(ReportNotice)(doc, element, doctype, DISCARDING_UNEXPECTED );
         TY_(FreeNode)( doc, doctype );
     }
     else
     {
-        TY_(ReportError)(doc, element, doctype, DOCTYPE_AFTER_TAGS );
+        TY_(ReportNotice)(doc, element, doctype, DOCTYPE_AFTER_TAGS );
         while ( !nodeIsHTML(element) )
             element = element->parent;
         TY_(InsertNodeBeforeElement)( element, doctype );
@@ -807,7 +807,7 @@ static void MoveToHead( TidyDocImpl* doc, Node *element, Node *node )
 
     if ( TY_(nodeIsElement)(node) )
     {
-        TY_(ReportError)(doc, element, node, TAG_NOT_ALLOWED_IN );
+        TY_(ReportNotice)(doc, element, node, TAG_NOT_ALLOWED_IN );
 
         head = TY_(FindHEAD)(doc);
         assert(head != NULL);
@@ -819,7 +819,7 @@ static void MoveToHead( TidyDocImpl* doc, Node *element, Node *node )
     }
     else
     {
-        TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED);
+        TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED);
         TY_(FreeNode)( doc, node );
     }
 }
@@ -880,7 +880,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
 
     if ( nodeIsFORM(element) && 
          DescendantOf(element, TidyTag_FORM) )
-        TY_(ReportError)(doc, element, NULL, ILLEGAL_NESTING );
+        TY_(ReportNotice)(doc, element, NULL, ILLEGAL_NESTING );
 
     /*
      InlineDup() asks the lexer to insert inline emphasis tags
@@ -962,7 +962,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
         if ( nodeIsHTML(node) || nodeIsHEAD(node) || nodeIsBODY(node) )
         {
             if ( TY_(nodeIsElement)(node) )
-                TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED );
+                TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED );
             TY_(FreeNode)( doc, node );
             continue;
         }
@@ -972,7 +972,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
         {
             if (node->tag == NULL)
             {
-                TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED );
+                TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED );
                 TY_(FreeNode)( doc, node );
                 continue;
             }
@@ -1012,7 +1012,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                     if (node->tag == parent->tag)
                     {
                         if (!(element->tag->model & CM_OPT))
-                            TY_(ReportError)(doc, element, node, MISSING_ENDTAG_BEFORE );
+                            TY_(ReportNotice)(doc, element, node, MISSING_ENDTAG_BEFORE );
 
                         TY_(UngetToken)( doc );
 
@@ -1093,7 +1093,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
             }
 
             /* otherwise discard it */
-            TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED );
+            TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED );
             TY_(FreeNode)( doc, node );
             continue;
         }
@@ -1108,7 +1108,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
             }
 
             /* otherwise discard it */
-            TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED );
+            TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED );
             TY_(FreeNode)( doc, node );
             continue;
         }
@@ -1116,7 +1116,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
         /* ignore unknown start/end tags */
         if ( node->tag == NULL )
         {
-            TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED );
+            TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED );
             TY_(FreeNode)( doc, node );
             continue;
         }
@@ -1139,7 +1139,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                 if ( nodeIsFORM(node) )
                     BadForm( doc );
 
-                TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED );
+                TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED );
                 TY_(FreeNode)( doc, node );
                 continue;
             }
@@ -1167,7 +1167,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                      nodeIsOPTGROUP(node) ||
                      nodeIsOPTION(node) )
                 {
-                    TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED );
+                    TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED );
                     TY_(FreeNode)( doc, node );  /* DSR - 27Apr02 avoid memory leak */
                     continue;
                 }
@@ -1214,7 +1214,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                 if ( lexer->excludeBlocks )
                 {
                     if ( !TY_(nodeHasCM)(element, CM_OPT) )
-                        TY_(ReportError)(doc, element, node, MISSING_ENDTAG_BEFORE );
+                        TY_(ReportNotice)(doc, element, node, MISSING_ENDTAG_BEFORE );
 
                     TY_(UngetToken)( doc );
 
@@ -1248,14 +1248,14 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                 {
                     if ( nodeIsTD(node) )
                     {
-                        TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED );
+                        TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED );
                         TY_(FreeNode)( doc, node );
                         continue;
                     }
 
                     if ( nodeIsTH(node) )
                     {
-                        TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED );
+                        TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED );
                         TY_(FreeNode)( doc, node );
                         node = element->parent;
                         TidyDocFree(doc, node->element);
@@ -1266,7 +1266,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                 }
 
                 if ( !TY_(nodeHasCM)(element, CM_OPT) && !element->implicit )
-                    TY_(ReportError)(doc, element, node, MISSING_ENDTAG_BEFORE );
+                    TY_(ReportNotice)(doc, element, node, MISSING_ENDTAG_BEFORE );
 
                 TY_(UngetToken)( doc );
 
@@ -1354,7 +1354,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                 && cfgBool(doc, TidyCoerceEndTags) )
             {
                 node->type = EndTag;
-                TY_(ReportError)(doc, element, node, COERCE_TO_ENDTAG);
+                TY_(ReportNotice)(doc, element, node, COERCE_TO_ENDTAG);
                 TY_(UngetToken)( doc );
                 continue;
             }
@@ -1363,7 +1363,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
             {
                 TY_(UngetToken)( doc );
             }
-            TY_(ReportError)(doc, element, node, MISSING_ENDTAG_BEFORE);
+            TY_(ReportNotice)(doc, element, node, MISSING_ENDTAG_BEFORE);
 
             if (!(mode & Preformatted))
                 TrimSpaces(doc, element);
@@ -1406,7 +1406,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
             TY_(InsertNodeAtEnd)(element, node);
             
             if (node->implicit)
-                TY_(ReportError)(doc, element, node, INSERTING_TAG );
+                TY_(ReportNotice)(doc, element, node, INSERTING_TAG );
 
             /* Issue #212 - WHY is this hard coded to 'IgnoreWhitespace' while an 
                effort has been made above to set a 'MixedContent' mode in some cases?
@@ -1419,13 +1419,13 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
         if (node->type == EndTag)
             TY_(PopInline)( doc, node );  /* if inline end tag */
 
-        TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED );
+        TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED );
         TY_(FreeNode)( doc, node );
         continue;
     }
 
     if (!(element->tag->model & CM_OPT))
-        TY_(ReportError)(doc, element, node, MISSING_ENDTAG_FOR);
+        TY_(ReportNotice)(doc, element, node, MISSING_ENDTAG_FOR);
 
     if (element->tag->model & CM_OBJECT)
     {
@@ -1561,7 +1561,7 @@ void TY_(ParseNamespace)(TidyDocImpl* doc, Node *basenode, GetTokenMode mode)
                 {
                     /* n->implicit = yes; */
                     n->closed = yes;
-                    TY_(ReportError)(doc, n->parent, n, MISSING_ENDTAG_BEFORE);
+                    TY_(ReportNotice)(doc, n->parent, n, MISSING_ENDTAG_BEFORE);
                 }
 
                 /* Issue #369 - Since 'assert' is DEBUG only, and there are
@@ -1599,8 +1599,8 @@ void TY_(ParseNamespace)(TidyDocImpl* doc, Node *basenode, GetTokenMode mode)
             else
             {
                 /* unmatched close tag: report an error and discard */
-                /* TY_(ReportError)(doc, parent, node, NON_MATCHING_ENDTAG); Issue #308 - Seems wrong warning! */
-                TY_(ReportError)(doc, parent, node, DISCARDING_UNEXPECTED);
+                /* TY_(ReportNotice)(doc, parent, node, NON_MATCHING_ENDTAG); Issue #308 - Seems wrong warning! */
+                TY_(ReportNotice)(doc, parent, node, DISCARDING_UNEXPECTED);
                 assert(parent);
                 /* assert(parent->tag != node->tag); Issue #308 - Seems would always be true! */
                 TY_(FreeNode)( doc, node); /* Issue #308 - Discard unexpected end tag memory */
@@ -1630,7 +1630,7 @@ void TY_(ParseNamespace)(TidyDocImpl* doc, Node *basenode, GetTokenMode mode)
         }
     }
 
-    TY_(ReportError)(doc, basenode->parent, basenode, MISSING_ENDTAG_FOR);
+    TY_(ReportNotice)(doc, basenode->parent, basenode, MISSING_ENDTAG_FOR);
 }
 
 
@@ -1763,14 +1763,14 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                 && TY_(nodeIsText)(element->last)
                 && !TY_(TextNodeEndWithSpace)(doc->lexer, element->last) )
             {
-                TY_(ReportWarning)(doc, element, node, COERCE_TO_ENDTAG_WARN);
+                TY_(ReportNotice)(doc, element, node, COERCE_TO_ENDTAG);
                 node->type = EndTag;
                 TY_(UngetToken)(doc);
                 continue;
             }
 
             if (node->attributes == NULL || element->attributes == NULL)
-                TY_(ReportWarning)(doc, element, node, NESTED_EMPHASIS);
+                TY_(ReportNotice)(doc, element, node, NESTED_EMPHASIS);
         }
         else if ( TY_(IsPushed)(doc, node) && node->type == StartTag && 
                   nodeIsQ(node) )
@@ -1781,7 +1781,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
             \*/
             if (TY_(HTMLVersion)(doc) != HT50) 
             {
-                TY_(ReportWarning)(doc, element, node, NESTED_QUOTATION);
+                TY_(ReportNotice)(doc, element, node, NESTED_QUOTATION);
             }
         }
 
@@ -1810,7 +1810,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
         {
             if ( TY_(nodeIsElement)(node) )
             {
-                TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED );
+                TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED );
                 TY_(FreeNode)( doc, node );
                 continue;
             }
@@ -1858,7 +1858,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
         /* ignore unknown and PARAM tags */
         if ( node->tag == NULL || nodeIsPARAM(node) )
         {
-            TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node );
             continue;
         }
@@ -1905,7 +1905,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                        <b>bold <i>bold and italic</b> italics</i> */
                     if ( TY_(SwitchInline)( doc, element, node ) )
                     {
-                        TY_(ReportError)(doc, element, node, NON_MATCHING_ENDTAG);
+                        TY_(ReportNotice)(doc, element, node, NON_MATCHING_ENDTAG);
                         TY_(UngetToken)( doc ); /* put this back */
                         TY_(InlineDup1)( doc, NULL, element ); /* dupe the <i>, after </b> */
                         if (!(mode & Preformatted))
@@ -1923,12 +1923,12 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                 {
                     if ( nodeIsA(node) && node->tag != element->tag )
                     {
-                       TY_(ReportError)(doc, element, node, MISSING_ENDTAG_BEFORE );
+                       TY_(ReportNotice)(doc, element, node, MISSING_ENDTAG_BEFORE );
                        TY_(UngetToken)( doc );
                     }
                     else
                     {
-                        TY_(ReportError)(doc, element, node, NON_MATCHING_ENDTAG);
+                        TY_(ReportNotice)(doc, element, node, NON_MATCHING_ENDTAG);
                         TY_(FreeNode)( doc, node);
                     }
 
@@ -1942,7 +1942,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                 }
 
                 /* if parent is <a> then discard unexpected inline end tag */
-                TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);
                 continue;
             }  /* special case </tr> etc. for stuff moved in front of table */
@@ -1965,12 +1965,12 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
 
             if ( node->tag == element->tag )
             {
-                TY_(ReportError)(doc, element, node, NON_MATCHING_ENDTAG );
+                TY_(ReportNotice)(doc, element, node, NON_MATCHING_ENDTAG );
                 TY_(FreeNode)( doc, node);
             }
             else
             {
-                TY_(ReportError)(doc, element, node, MISSING_ENDTAG_BEFORE );
+                TY_(ReportNotice)(doc, element, node, MISSING_ENDTAG_BEFORE );
                 TY_(UngetToken)( doc );
             }
 
@@ -2001,14 +2001,14 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                 && cfgBool(doc, TidyCoerceEndTags) )
             {
                 node->type = EndTag;
-                TY_(ReportError)(doc, element, node, COERCE_TO_ENDTAG);
+                TY_(ReportNotice)(doc, element, node, COERCE_TO_ENDTAG);
                 /* TY_(PopInline)( doc, node ); */
                 TY_(UngetToken)( doc );
                 continue;
             }
 
             TY_(UngetToken)( doc );
-            TY_(ReportError)(doc, element, node, MISSING_ENDTAG_BEFORE);
+            TY_(ReportNotice)(doc, element, node, MISSING_ENDTAG_BEFORE);
             /* TY_(PopInline)( doc, element ); */
 
             if (!(mode & Preformatted))
@@ -2027,12 +2027,12 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
             {
                 if (!TY_(nodeIsElement)(node))
                 {
-                    TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED);
+                    TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED);
                     TY_(FreeNode)( doc, node);
                     continue;
                 }
 
-                TY_(ReportError)(doc, element, node, TAG_NOT_ALLOWED_IN);
+                TY_(ReportNotice)(doc, element, node, TAG_NOT_ALLOWED_IN);
 
                 /* insert center as parent if heading is empty */
                 if (element->content == NULL)
@@ -2056,12 +2056,12 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
             {
                 if ( !TY_(nodeIsElement)(node) )
                 {
-                    TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED);
+                    TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED);
                     TY_(FreeNode)( doc, node);
                     continue;
                 }
 
-                TY_(ReportError)(doc, element, node, TAG_NOT_ALLOWED_IN);
+                TY_(ReportNotice)(doc, element, node, TAG_NOT_ALLOWED_IN);
 
                 /* insert hr before heading if heading is empty */
                 if (element->content == NULL)
@@ -2089,12 +2089,12 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                 Node *dd;
                 if ( !TY_(nodeIsElement)(node) )
                 {
-                    TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED);
+                    TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED);
                     TY_(FreeNode)( doc, node);
                     continue;
                 }
 
-                TY_(ReportError)(doc, element, node, TAG_NOT_ALLOWED_IN);
+                TY_(ReportNotice)(doc, element, node, TAG_NOT_ALLOWED_IN);
                 dd = TY_(InferredTag)(doc, TidyTag_DD);
 
                 /* insert hr within dd before dt if dt is empty */
@@ -2131,7 +2131,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                 if (node->tag == parent->tag)
                 {
                     if (!(element->tag->model & CM_OPT) && !element->implicit)
-                        TY_(ReportError)(doc, element, node, MISSING_ENDTAG_BEFORE);
+                        TY_(ReportNotice)(doc, element, node, MISSING_ENDTAG_BEFORE);
 
                     if( TY_(IsPushedLast)( doc, element, node ) ) 
                         TY_(PopInline)( doc, element );
@@ -2163,7 +2163,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
         {
             if ( !TY_(nodeIsElement)(node) )
             {
-                TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);
                 continue;
             }
@@ -2172,7 +2172,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                 TY_(ConstrainVersion)( doc, ~VERS_HTML5 );
             } else
             if (!(element->tag->model & CM_OPT))
-                TY_(ReportError)(doc, element, node, MISSING_ENDTAG_BEFORE);
+                TY_(ReportNotice)(doc, element, node, MISSING_ENDTAG_BEFORE);
 
             if (node->tag->model & CM_HEAD && !(node->tag->model & CM_BLOCK))
             {
@@ -2216,7 +2216,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
         if (TY_(nodeIsElement)(node))
         {
             if (node->implicit)
-                TY_(ReportError)(doc, element, node, INSERTING_TAG);
+                TY_(ReportNotice)(doc, element, node, INSERTING_TAG);
 
             /* trim white space before <br> */
             if ( nodeIsBR(node) )
@@ -2228,13 +2228,13 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
         }
 
         /* discard unexpected tags */
-        TY_(ReportError)(doc, element, node, DISCARDING_UNEXPECTED);
+        TY_(ReportNotice)(doc, element, node, DISCARDING_UNEXPECTED);
         TY_(FreeNode)( doc, node );
         continue;
     }
 
     if (!(element->tag->model & CM_OPT))
-        TY_(ReportError)(doc, element, node, MISSING_ENDTAG_FOR);
+        TY_(ReportNotice)(doc, element, node, MISSING_ENDTAG_FOR);
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
     in_parse_inline--;
@@ -2252,7 +2252,7 @@ void TY_(ParseEmpty)(TidyDocImpl* doc, Node *element, GetTokenMode mode)
         {
             if ( !(node->type == EndTag && node->tag == element->tag) )
             {
-                /* TY_(ReportError)(doc, element, node, ELEMENT_NOT_EMPTY); */
+                /* TY_(ReportNotice)(doc, element, node, ELEMENT_NOT_EMPTY); */
                 TY_(UngetToken)( doc );
             }
             else
@@ -2290,12 +2290,12 @@ void TY_(ParseDefList)(TidyDocImpl* doc, Node *list, GetTokenMode mode)
         {
             TY_(UngetToken)( doc );
             node = TY_(InferredTag)(doc, TidyTag_DT);
-            TY_(ReportError)(doc, list, node, MISSING_STARTTAG);
+            TY_(ReportNotice)(doc, list, node, MISSING_STARTTAG);
         }
 
         if (node->tag == NULL)
         {
-            TY_(ReportError)(doc, list, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, list, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -2310,7 +2310,7 @@ void TY_(ParseDefList)(TidyDocImpl* doc, Node *list, GetTokenMode mode)
             if ( nodeIsFORM(node) )
             {
                 BadForm( doc );
-                TY_(ReportError)(doc, list, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, list, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node );
                 continue;
             }
@@ -2328,7 +2328,7 @@ void TY_(ParseDefList)(TidyDocImpl* doc, Node *list, GetTokenMode mode)
                 }
                 if (node->tag == parent->tag)
                 {
-                    TY_(ReportError)(doc, list, node, MISSING_ENDTAG_BEFORE);
+                    TY_(ReportNotice)(doc, list, node, MISSING_ENDTAG_BEFORE);
 
                     TY_(UngetToken)( doc );
                     return;
@@ -2336,7 +2336,7 @@ void TY_(ParseDefList)(TidyDocImpl* doc, Node *list, GetTokenMode mode)
             }
             if (discardIt)
             {
-                TY_(ReportError)(doc, list, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, list, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);
                 continue;
             }
@@ -2389,7 +2389,7 @@ void TY_(ParseDefList)(TidyDocImpl* doc, Node *list, GetTokenMode mode)
 
             if (!(node->tag->model & (CM_BLOCK | CM_INLINE)))
             {
-                TY_(ReportError)(doc, list, node, TAG_NOT_ALLOWED_IN);
+                TY_(ReportNotice)(doc, list, node, TAG_NOT_ALLOWED_IN);
                 return;
             }
 
@@ -2398,12 +2398,12 @@ void TY_(ParseDefList)(TidyDocImpl* doc, Node *list, GetTokenMode mode)
                 return;
 
             node = TY_(InferredTag)(doc, TidyTag_DD);
-            TY_(ReportError)(doc, list, node, MISSING_STARTTAG);
+            TY_(ReportNotice)(doc, list, node, MISSING_STARTTAG);
         }
 
         if (node->type == EndTag)
         {
-            TY_(ReportError)(doc, list, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, list, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -2413,7 +2413,7 @@ void TY_(ParseDefList)(TidyDocImpl* doc, Node *list, GetTokenMode mode)
         ParseTag( doc, node, IgnoreWhitespace);
     }
 
-    TY_(ReportError)(doc, list, node, MISSING_ENDTAG_FOR);
+    TY_(ReportNotice)(doc, list, node, MISSING_ENDTAG_FOR);
 }
 
 static Bool FindLastLI( Node *list, Node **lastli )
@@ -2471,7 +2471,7 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
 
         if (node->type != TextNode && node->tag == NULL)
         {
-            TY_(ReportError)(doc, list, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, list, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -2500,14 +2500,14 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
             if ( nodeIsFORM(node) )
             {
                 BadForm( doc );
-                TY_(ReportError)(doc, list, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, list, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node );
                 continue;
             }
 
             if (TY_(nodeHasCM)(node,CM_INLINE))
             {
-                TY_(ReportError)(doc, list, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, list, node, DISCARDING_UNEXPECTED);
                 TY_(PopInline)( doc, node );
                 TY_(FreeNode)( doc, node);
                 continue;
@@ -2523,7 +2523,7 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
                     break;
                 if (node->tag == parent->tag)
                 {
-                    TY_(ReportError)(doc, list, node, MISSING_ENDTAG_BEFORE);
+                    TY_(ReportNotice)(doc, list, node, MISSING_ENDTAG_BEFORE);
                     TY_(UngetToken)( doc );
 #if !defined(NDEBUG) && defined(_MSC_VER)
                     in_parse_list--;
@@ -2533,7 +2533,7 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
                 }
             }
 
-            TY_(ReportError)(doc, list, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, list, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -2557,7 +2557,7 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
 
             if (TY_(nodeHasCM)(node,CM_BLOCK) && lexer->excludeBlocks)
             {
-                TY_(ReportError)(doc, list, node, MISSING_ENDTAG_BEFORE);
+                TY_(ReportNotice)(doc, list, node, MISSING_ENDTAG_BEFORE);
 #if !defined(NDEBUG) && defined(_MSC_VER)
                 in_parse_list--;
                 SPRTF("Exit ParseList 4 %d... No End Tag\n",in_parse_list);
@@ -2584,7 +2584,7 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
             {
                 /* Create a node for error reporting */
                 node = TY_(InferredTag)(doc, TidyTag_LI);
-                TY_(ReportError)(doc, list, node, MISSING_STARTTAG );
+                TY_(ReportNotice)(doc, list, node, MISSING_STARTTAG );
                 TY_(FreeNode)( doc, node);
                 node = lastli;
             }
@@ -2600,7 +2600,7 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
                                        ? "list-style: none; display: inline"
                                        : "list-style: none" 
                                        );
-                TY_(ReportError)(doc, list, node, MISSING_STARTTAG );
+                TY_(ReportNotice)(doc, list, node, MISSING_STARTTAG );
                 TY_(InsertNodeAtEnd)(list,node);
             }
         }
@@ -2608,7 +2608,7 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
         ParseTag( doc, node, IgnoreWhitespace);
     }
 
-    TY_(ReportError)(doc, list, node, MISSING_ENDTAG_FOR);
+    TY_(ReportNotice)(doc, list, node, MISSING_ENDTAG_FOR);
 #if !defined(NDEBUG) && defined(_MSC_VER)
     in_parse_list--;
     SPRTF("Exit ParseList 6 %d... missing end tag\n",in_parse_list);
@@ -2651,7 +2651,7 @@ static void FixEmptyRow(TidyDocImpl* doc, Node *row)
     {
         cell = TY_(InferredTag)(doc, TidyTag_TD);
         TY_(InsertNodeAtEnd)(row, cell);
-        TY_(ReportError)(doc, row, cell, MISSING_STARTTAG);
+        TY_(ReportNotice)(doc, row, cell, MISSING_STARTTAG);
     }
 }
 
@@ -2700,14 +2700,14 @@ void TY_(ParseRow)(TidyDocImpl* doc, Node *row, GetTokenMode ARG_UNUSED(mode))
                 if ( nodeIsFORM(node) )
                     BadForm( doc );
 
-                TY_(ReportError)(doc, row, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, row, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);
                 continue;
             }
 
             if ( nodeIsTD(node) || nodeIsTH(node) )
             {
-                TY_(ReportError)(doc, row, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, row, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);
                 continue;
             }
@@ -2720,7 +2720,7 @@ void TY_(ParseRow)(TidyDocImpl* doc, Node *row, GetTokenMode ARG_UNUSED(mode))
         /* discard unknown tags */
         if (node->tag == NULL && node->type != TextNode)
         {
-            TY_(ReportError)(doc, row, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, row, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -2728,7 +2728,7 @@ void TY_(ParseRow)(TidyDocImpl* doc, Node *row, GetTokenMode ARG_UNUSED(mode))
         /* discard unexpected <table> element */
         if ( nodeIsTABLE(node) )
         {
-            TY_(ReportError)(doc, row, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, row, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -2742,7 +2742,7 @@ void TY_(ParseRow)(TidyDocImpl* doc, Node *row, GetTokenMode ARG_UNUSED(mode))
 
         if (node->type == EndTag)
         {
-            TY_(ReportError)(doc, row, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, row, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -2758,13 +2758,13 @@ void TY_(ParseRow)(TidyDocImpl* doc, Node *row, GetTokenMode ARG_UNUSED(mode))
             {
                 TY_(UngetToken)( doc );
                 node = TY_(InferredTag)(doc, TidyTag_TD);
-                TY_(ReportError)(doc, row, node, MISSING_STARTTAG);
+                TY_(ReportNotice)(doc, row, node, MISSING_STARTTAG);
             }
             else if ( TY_(nodeIsText)(node)
                       || TY_(nodeHasCM)(node, CM_BLOCK | CM_INLINE) )
             {
                 MoveBeforeTable( doc, row, node );
-                TY_(ReportError)(doc, row, node, TAG_NOT_ALLOWED_IN);
+                TY_(ReportNotice)(doc, row, node, TAG_NOT_ALLOWED_IN);
                 lexer->exiled = yes;
                 exclude_state = lexer->excludeBlocks;
                 lexer->excludeBlocks = no;
@@ -2778,7 +2778,7 @@ void TY_(ParseRow)(TidyDocImpl* doc, Node *row, GetTokenMode ARG_UNUSED(mode))
             }
             else if (node->tag->model & CM_HEAD)
             {
-                TY_(ReportError)(doc, row, node, TAG_NOT_ALLOWED_IN);
+                TY_(ReportNotice)(doc, row, node, TAG_NOT_ALLOWED_IN);
                 MoveToHead( doc, row, node);
                 continue;
             }
@@ -2786,7 +2786,7 @@ void TY_(ParseRow)(TidyDocImpl* doc, Node *row, GetTokenMode ARG_UNUSED(mode))
 
         if ( !(nodeIsTD(node) || nodeIsTH(node)) )
         {
-            TY_(ReportError)(doc, row, node, TAG_NOT_ALLOWED_IN);
+            TY_(ReportNotice)(doc, row, node, TAG_NOT_ALLOWED_IN);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -2843,7 +2843,7 @@ void TY_(ParseRowGroup)(TidyDocImpl* doc, Node *rowgroup, GetTokenMode ARG_UNUSE
         /* discard unknown tags */
         if (node->tag == NULL && node->type != TextNode)
         {
-            TY_(ReportError)(doc, rowgroup, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, rowgroup, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -2860,13 +2860,13 @@ void TY_(ParseRowGroup)(TidyDocImpl* doc, Node *rowgroup, GetTokenMode ARG_UNUSE
             {
                 TY_(UngetToken)( doc );
                 node = TY_(InferredTag)(doc, TidyTag_TR);
-                TY_(ReportError)(doc, rowgroup, node, MISSING_STARTTAG);
+                TY_(ReportNotice)(doc, rowgroup, node, MISSING_STARTTAG);
             }
             else if ( TY_(nodeIsText)(node)
                       || TY_(nodeHasCM)(node, CM_BLOCK|CM_INLINE) )
             {
                 MoveBeforeTable( doc, rowgroup, node );
-                TY_(ReportError)(doc, rowgroup, node, TAG_NOT_ALLOWED_IN);
+                TY_(ReportNotice)(doc, rowgroup, node, TAG_NOT_ALLOWED_IN);
                 lexer->exiled = yes;
 
                 if (node->type != TextNode)
@@ -2877,7 +2877,7 @@ void TY_(ParseRowGroup)(TidyDocImpl* doc, Node *rowgroup, GetTokenMode ARG_UNUSE
             }
             else if (node->tag->model & CM_HEAD)
             {
-                TY_(ReportError)(doc, rowgroup, node, TAG_NOT_ALLOWED_IN);
+                TY_(ReportNotice)(doc, rowgroup, node, TAG_NOT_ALLOWED_IN);
                 MoveToHead(doc, rowgroup, node);
                 continue;
             }
@@ -2894,14 +2894,14 @@ void TY_(ParseRowGroup)(TidyDocImpl* doc, Node *rowgroup, GetTokenMode ARG_UNUSE
                 if ( nodeIsFORM(node) )
                     BadForm( doc );
 
-                TY_(ReportError)(doc, rowgroup, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, rowgroup, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);
                 continue;
             }
 
             if ( nodeIsTR(node) || nodeIsTD(node) || nodeIsTH(node) )
             {
-                TY_(ReportError)(doc, rowgroup, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, rowgroup, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);
                 continue;
             }
@@ -2933,7 +2933,7 @@ void TY_(ParseRowGroup)(TidyDocImpl* doc, Node *rowgroup, GetTokenMode ARG_UNUSE
 
         if (node->type == EndTag)
         {
-            TY_(ReportError)(doc, rowgroup, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, rowgroup, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -2941,7 +2941,7 @@ void TY_(ParseRowGroup)(TidyDocImpl* doc, Node *rowgroup, GetTokenMode ARG_UNUSE
         if ( !nodeIsTR(node) )
         {
             node = TY_(InferredTag)(doc, TidyTag_TR);
-            TY_(ReportError)(doc, rowgroup, node, MISSING_STARTTAG);
+            TY_(ReportNotice)(doc, rowgroup, node, MISSING_STARTTAG);
             TY_(UngetToken)( doc );
         }
 
@@ -2977,7 +2977,7 @@ void TY_(ParseColGroup)(TidyDocImpl* doc, Node *colgroup, GetTokenMode ARG_UNUSE
             if ( nodeIsFORM(node) )
             {
                 BadForm( doc );
-                TY_(ReportError)(doc, colgroup, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, colgroup, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);
                 continue;
             }
@@ -3007,7 +3007,7 @@ void TY_(ParseColGroup)(TidyDocImpl* doc, Node *colgroup, GetTokenMode ARG_UNUSE
         /* discard unknown tags */
         if (node->tag == NULL)
         {
-            TY_(ReportError)(doc, colgroup, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, colgroup, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -3020,7 +3020,7 @@ void TY_(ParseColGroup)(TidyDocImpl* doc, Node *colgroup, GetTokenMode ARG_UNUSE
 
         if (node->type == EndTag)
         {
-            TY_(ReportError)(doc, colgroup, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, colgroup, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -3064,7 +3064,7 @@ void TY_(ParseTableTag)(TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED(m
                  * this second <table>
                  */
                 TY_(UngetToken)(doc);
-                TY_(ReportError)(doc, table, node, TAG_NOT_ALLOWED_IN);
+                TY_(ReportNotice)(doc, table, node, TAG_NOT_ALLOWED_IN);
             }
             lexer->istackbase = istackbase;
             table->closed = yes;
@@ -3082,7 +3082,7 @@ void TY_(ParseTableTag)(TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED(m
         /* discard unknown tags */
         if (node->tag == NULL && node->type != TextNode)
         {
-            TY_(ReportError)(doc, table, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, table, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -3095,12 +3095,12 @@ void TY_(ParseTableTag)(TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED(m
             {
                 TY_(UngetToken)( doc );
                 node = TY_(InferredTag)(doc, TidyTag_TR);
-                TY_(ReportError)(doc, table, node, MISSING_STARTTAG);
+                TY_(ReportNotice)(doc, table, node, MISSING_STARTTAG);
             }
             else if ( TY_(nodeIsText)(node) ||TY_(nodeHasCM)(node,CM_BLOCK|CM_INLINE) )
             {
                 TY_(InsertNodeBeforeElement)(table, node);
-                TY_(ReportError)(doc, table, node, TAG_NOT_ALLOWED_IN);
+                TY_(ReportNotice)(doc, table, node, TAG_NOT_ALLOWED_IN);
                 lexer->exiled = yes;
 
                 if (node->type != TextNode) 
@@ -3125,7 +3125,7 @@ void TY_(ParseTableTag)(TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED(m
             if ( nodeIsFORM(node) )
             {
                 BadForm( doc );
-                TY_(ReportError)(doc, table, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, table, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);
                 continue;
             }
@@ -3134,7 +3134,7 @@ void TY_(ParseTableTag)(TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED(m
             if ( TY_(nodeHasCM)(node, CM_TABLE|CM_ROW) ||
                  TY_(nodeHasCM)(node, CM_BLOCK|CM_INLINE) )
             {
-                TY_(ReportError)(doc, table, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, table, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);
                 continue;
             }
@@ -3145,7 +3145,7 @@ void TY_(ParseTableTag)(TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED(m
             {
                 if (node->tag == parent->tag)
                 {
-                    TY_(ReportError)(doc, table, node, MISSING_ENDTAG_BEFORE );
+                    TY_(ReportNotice)(doc, table, node, MISSING_ENDTAG_BEFORE );
                     TY_(UngetToken)( doc );
                     lexer->istackbase = istackbase;
 #if !defined(NDEBUG) && defined(_MSC_VER)
@@ -3160,7 +3160,7 @@ void TY_(ParseTableTag)(TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED(m
         if (!(node->tag->model & CM_TABLE))
         {
             TY_(UngetToken)( doc );
-            TY_(ReportError)(doc, table, node, TAG_NOT_ALLOWED_IN);
+            TY_(ReportNotice)(doc, table, node, TAG_NOT_ALLOWED_IN);
             lexer->istackbase = istackbase;
 #if !defined(NDEBUG) && defined(_MSC_VER)
             in_parse_table--;
@@ -3177,11 +3177,11 @@ void TY_(ParseTableTag)(TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED(m
         }
 
         /* discard unexpected text nodes and end tags */
-        TY_(ReportError)(doc, table, node, DISCARDING_UNEXPECTED);
+        TY_(ReportNotice)(doc, table, node, DISCARDING_UNEXPECTED);
         TY_(FreeNode)( doc, node);
     }
 
-    TY_(ReportError)(doc, table, node, MISSING_ENDTAG_FOR);
+    TY_(ReportNotice)(doc, table, node, MISSING_ENDTAG_FOR);
     lexer->istackbase = istackbase;
 #if !defined(NDEBUG) && defined(_MSC_VER)
     in_parse_table--;
@@ -3220,7 +3220,7 @@ void TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) )
         {
             if (nodeIsBODY(node) || nodeIsHTML(node))
             {
-                TY_(ReportError)(doc, pre, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, pre, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)(doc, node);
                 continue;
             }
@@ -3230,7 +3230,7 @@ void TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) )
             }
             else
             {
-                TY_(ReportError)(doc, pre, node, MISSING_ENDTAG_BEFORE );
+                TY_(ReportNotice)(doc, pre, node, MISSING_ENDTAG_BEFORE );
                 TY_(UngetToken)( doc );
             }
             pre->closed = yes;
@@ -3250,7 +3250,7 @@ void TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) )
 
         if (node->tag == NULL)
         {
-            TY_(ReportError)(doc, pre, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, pre, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)(doc, node);
             continue;
         }
@@ -3272,7 +3272,7 @@ void TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) )
                   return;
                }
 
-               TY_(ReportError)(doc, pre, node, DISCARDING_UNEXPECTED);
+               TY_(ReportNotice)(doc, pre, node, DISCARDING_UNEXPECTED);
                TY_(FreeNode)(doc, node);
                continue;
             }
@@ -3282,7 +3282,7 @@ void TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) )
             {
                 if (!doc->lexer->exiled)
                     /* No missing close warning if exiled. */
-                    TY_(ReportError)(doc, pre, node, MISSING_ENDTAG_BEFORE);
+                    TY_(ReportNotice)(doc, pre, node, MISSING_ENDTAG_BEFORE);
 
                 TY_(UngetToken)(doc);
                 return;
@@ -3326,11 +3326,11 @@ void TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) )
               Todo: discarding </p> is abviously a bug, it should be replaced by <br>.
             */
             TY_(InsertNodeAfterElement)(pre, node);
-            TY_(ReportError)(doc, pre, node, MISSING_ENDTAG_BEFORE);
+            TY_(ReportNotice)(doc, pre, node, MISSING_ENDTAG_BEFORE);
             ParseTag(doc, node, IgnoreWhitespace);
 
             newnode = TY_(InferredTag)(doc, TidyTag_PRE);
-            TY_(ReportError)(doc, pre, newnode, INSERTING_TAG);
+            TY_(ReportNotice)(doc, pre, newnode, INSERTING_TAG);
             pre = newnode;
             TY_(InsertNodeAfterElement)(node, pre);
 
@@ -3341,7 +3341,7 @@ void TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) )
         {
             if (node->type == StartTag)
             {
-                TY_(ReportError)(doc, pre, node, USING_BR_INPLACE_OF);
+                TY_(ReportNotice)(doc, pre, node, USING_BR_INPLACE_OF);
 
                 /* trim white space before <p> in <pre>*/
                 TrimSpaces(doc, pre);
@@ -3353,7 +3353,7 @@ void TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) )
             }
             else
             {
-                TY_(ReportError)(doc, pre, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, pre, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);
             }
             continue;
@@ -3371,11 +3371,11 @@ void TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) )
         }
 
         /* discard unexpected tags */
-        TY_(ReportError)(doc, pre, node, DISCARDING_UNEXPECTED);
+        TY_(ReportNotice)(doc, pre, node, DISCARDING_UNEXPECTED);
         TY_(FreeNode)( doc, node);
     }
 
-    TY_(ReportError)(doc, pre, node, MISSING_ENDTAG_FOR);
+    TY_(ReportNotice)(doc, pre, node, MISSING_ENDTAG_FOR);
 }
 
 void TY_(ParseOptGroup)(TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(mode))
@@ -3403,7 +3403,7 @@ void TY_(ParseOptGroup)(TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(m
              (nodeIsOPTION(node) || nodeIsOPTGROUP(node)) )
         {
             if ( nodeIsOPTGROUP(node) )
-                TY_(ReportError)(doc, field, node, CANT_BE_NESTED);
+                TY_(ReportNotice)(doc, field, node, CANT_BE_NESTED);
 
             TY_(InsertNodeAtEnd)(field, node);
             ParseTag(doc, node, MixedContent);
@@ -3411,7 +3411,7 @@ void TY_(ParseOptGroup)(TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(m
         }
 
         /* discard unexpected tags */
-        TY_(ReportError)(doc, field, node, DISCARDING_UNEXPECTED );
+        TY_(ReportNotice)(doc, field, node, DISCARDING_UNEXPECTED );
         TY_(FreeNode)( doc, node);
     }
 }
@@ -3462,11 +3462,11 @@ void TY_(ParseSelect)(TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(mod
         }
 
         /* discard unexpected tags */
-        TY_(ReportError)(doc, field, node, DISCARDING_UNEXPECTED);
+        TY_(ReportNotice)(doc, field, node, DISCARDING_UNEXPECTED);
         TY_(FreeNode)( doc, node);
     }
 
-    TY_(ReportError)(doc, field, node, MISSING_ENDTAG_FOR);
+    TY_(ReportNotice)(doc, field, node, MISSING_ENDTAG_FOR);
 #if !defined(NDEBUG) && defined(_MSC_VER)
     in_parse_select--;
     SPRTF("Exit ParseSelect 2 %d...\n",in_parse_select);
@@ -3519,11 +3519,11 @@ void TY_(ParseDatalist)(TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(m
         }
 
         /* discard unexpected tags */
-        TY_(ReportError)(doc, field, node, DISCARDING_UNEXPECTED);
+        TY_(ReportNotice)(doc, field, node, DISCARDING_UNEXPECTED);
         TY_(FreeNode)( doc, node);
     }
 
-    TY_(ReportError)(doc, field, node, MISSING_ENDTAG_FOR);
+    TY_(ReportNotice)(doc, field, node, MISSING_ENDTAG_FOR);
 #if !defined(NDEBUG) && defined(_MSC_VER)
     in_parse_datalist--;
     SPRTF("Exit ParseDatalist 2 %d...\n",in_parse_datalist);
@@ -3582,14 +3582,14 @@ void TY_(ParseText)(TidyDocImpl* doc, Node *field, GetTokenMode mode)
             && node->tag->model & CM_INLINE
             && !(node->tag->model & CM_FIELD)) /* #487283 - fix by Lee Passey 25 Jan 02 */
         {
-            TY_(ReportError)(doc, field, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, field, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
 
         /* terminate element on other tags */
         if (!(field->tag->model & CM_OPT))
-            TY_(ReportError)(doc, field, node, MISSING_ENDTAG_BEFORE);
+            TY_(ReportNotice)(doc, field, node, MISSING_ENDTAG_BEFORE);
 
         TY_(UngetToken)( doc );
         TrimSpaces(doc, field);
@@ -3597,7 +3597,7 @@ void TY_(ParseText)(TidyDocImpl* doc, Node *field, GetTokenMode mode)
     }
 
     if (!(field->tag->model & CM_OPT))
-        TY_(ReportError)(doc, field, node, MISSING_ENDTAG_FOR);
+        TY_(ReportNotice)(doc, field, node, MISSING_ENDTAG_FOR);
 }
 
 
@@ -3609,7 +3609,7 @@ void TY_(ParseTitle)(TidyDocImpl* doc, Node *title, GetTokenMode ARG_UNUSED(mode
         if (node->tag == title->tag && node->type == StartTag
             && cfgBool(doc, TidyCoerceEndTags) )
         {
-            TY_(ReportError)(doc, title, node, COERCE_TO_ENDTAG);
+            TY_(ReportNotice)(doc, title, node, COERCE_TO_ENDTAG);
             node->type = EndTag;
             TY_(UngetToken)( doc );
             continue;
@@ -3645,19 +3645,19 @@ void TY_(ParseTitle)(TidyDocImpl* doc, Node *title, GetTokenMode ARG_UNUSED(mode
         /* discard unknown tags */
         if (node->tag == NULL)
         {
-            TY_(ReportError)(doc, title, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, title, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
 
         /* pushback unexpected tokens */
-        TY_(ReportError)(doc, title, node, MISSING_ENDTAG_BEFORE);
+        TY_(ReportNotice)(doc, title, node, MISSING_ENDTAG_BEFORE);
         TY_(UngetToken)( doc );
         TrimSpaces(doc, title);
         return;
     }
 
-    TY_(ReportError)(doc, title, node, MISSING_ENDTAG_FOR);
+    TY_(ReportNotice)(doc, title, node, MISSING_ENDTAG_FOR);
 }
 
 /*
@@ -3682,7 +3682,7 @@ void TY_(ParseScript)(TidyDocImpl* doc, Node *script, GetTokenMode ARG_UNUSED(mo
     else
     {
         /* handle e.g. a document like "<script>" */
-        TY_(ReportError)(doc, script, NULL, MISSING_ENDTAG_FOR);
+        TY_(ReportNotice)(doc, script, NULL, MISSING_ENDTAG_FOR);
         return;
     }
 
@@ -3691,7 +3691,7 @@ void TY_(ParseScript)(TidyDocImpl* doc, Node *script, GetTokenMode ARG_UNUSED(mo
     if (!(node && node->type == EndTag && node->tag &&
         node->tag->id == script->tag->id))
     {
-        TY_(ReportError)(doc, script, node, MISSING_ENDTAG_FOR);
+        TY_(ReportNotice)(doc, script, node, MISSING_ENDTAG_FOR);
 
         if (node)
             TY_(UngetToken)(doc);
@@ -3746,7 +3746,7 @@ void TY_(ParseHead)(TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode))
         /* find and discard <html> in <head> elements */
         if ((node->tag == head->tag || nodeIsHTML(node)) && node->type == StartTag)
         {
-            TY_(ReportError)(doc, head, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, head, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)(doc, node);
             continue;
         }
@@ -3760,7 +3760,7 @@ void TY_(ParseHead)(TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode))
             if (!cfgBool( doc, TidyOmitOptionalTags ) &&
                 !showingBodyOnly(doc) )
             {
-                TY_(ReportError)(doc, head, node, TAG_NOT_ALLOWED_IN);
+                TY_(ReportNotice)(doc, head, node, TAG_NOT_ALLOWED_IN);
             }
             TY_(UngetToken)( doc );
             break;
@@ -3769,7 +3769,7 @@ void TY_(ParseHead)(TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode))
         if (node->type == ProcInsTag && node->element &&
             TY_(tmbstrcmp)(node->element, "xml-stylesheet") == 0)
         {
-            TY_(ReportError)(doc, head, node, TAG_NOT_ALLOWED_IN);
+            TY_(ReportNotice)(doc, head, node, TAG_NOT_ALLOWED_IN);
             TY_(InsertNodeBeforeElement)(TY_(FindHTML)(doc), node);
             continue;
         }
@@ -3787,7 +3787,7 @@ void TY_(ParseHead)(TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode))
         /* discard unknown tags */
         if (node->tag == NULL)
         {
-            TY_(ReportError)(doc, head, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, head, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -3801,7 +3801,7 @@ void TY_(ParseHead)(TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode))
         {
             /* #545067 Implicit closing of head broken - warn only for XHTML input */
             if ( lexer->isvoyager )
-                TY_(ReportError)(doc, head, node, TAG_NOT_ALLOWED_IN );
+                TY_(ReportNotice)(doc, head, node, TAG_NOT_ALLOWED_IN );
             TY_(UngetToken)( doc );
             break;
         }
@@ -3813,7 +3813,7 @@ void TY_(ParseHead)(TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode))
                 ++HasTitle;
 
                 if (HasTitle > 1)
-                    TY_(ReportError)(doc, head, node,
+                    TY_(ReportNotice)(doc, head, node,
                                      head ?
                                      TOO_MANY_ELEMENTS_IN : TOO_MANY_ELEMENTS);
             }
@@ -3822,7 +3822,7 @@ void TY_(ParseHead)(TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode))
                 ++HasBase;
 
                 if (HasBase > 1)
-                    TY_(ReportError)(doc, head, node,
+                    TY_(ReportNotice)(doc, head, node,
                                      head ?
                                      TOO_MANY_ELEMENTS_IN : TOO_MANY_ELEMENTS);
             }
@@ -3876,7 +3876,7 @@ void TY_(ParseHead)(TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode))
         }
 
         /* discard unexpected text nodes and end tags */
-        TY_(ReportError)(doc, head, node, DISCARDING_UNEXPECTED);
+        TY_(ReportNotice)(doc, head, node, DISCARDING_UNEXPECTED);
         TY_(FreeNode)( doc, node);
     }
 #if !defined(NDEBUG) && defined(_MSC_VER)
@@ -3944,7 +3944,7 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
         /* find and discard multiple <body> elements */
         if (node->tag == body->tag && node->type == StartTag)
         {
-            TY_(ReportError)(doc, body, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, body, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)(doc, node);
             continue;
         }
@@ -3953,7 +3953,7 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
         if ( nodeIsHTML(node) )
         {
             if (TY_(nodeIsElement)(node) || lexer->seenEndHtml) 
-                TY_(ReportError)(doc, body, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, body, node, DISCARDING_UNEXPECTED);
             else
                 lexer->seenEndHtml = 1;
 
@@ -3966,7 +3966,7 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
                node->type == EndTag   ||
                node->type == StartEndTag ) )
         {
-            TY_(ReportError)(doc, body, node, CONTENT_AFTER_BODY );
+            TY_(ReportNotice)(doc, body, node, CONTENT_AFTER_BODY );
         }
 
         if ( node->tag == body->tag && node->type == EndTag )
@@ -4024,7 +4024,7 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
         if ( lexer->seenEndBody == 1 && !iswhitenode )
         {
             ++lexer->seenEndBody;
-            TY_(ReportError)(doc, body, node, CONTENT_AFTER_BODY);
+            TY_(ReportNotice)(doc, body, node, CONTENT_AFTER_BODY);
         }
 #endif
 
@@ -4061,7 +4061,7 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
         /* discard unknown  and PARAM tags */
         if ( node->tag == NULL || nodeIsPARAM(node) )
         {
-            TY_(ReportError)(doc, body, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, body, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -4080,7 +4080,7 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
         {
             /* avoid this error message being issued twice */
             if (!(node->tag->model & CM_HEAD))
-                TY_(ReportError)(doc, body, node, TAG_NOT_ALLOWED_IN);
+                TY_(ReportNotice)(doc, body, node, TAG_NOT_ALLOWED_IN);
 
             if (node->tag->model & CM_HTML)
             {
@@ -4172,7 +4172,7 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
                 if ( TY_(FindNodeById)(doc, TidyTag_MAIN) )
                 {
                     doc->badForm |= flg_BadMain; /* this is an ERROR in format */
-                    TY_(ReportError)(doc, body, node, DISCARDING_UNEXPECTED);
+                    TY_(ReportNotice)(doc, body, node, DISCARDING_UNEXPECTED);
                     TY_(FreeNode)( doc, node);
                     continue;
                 }
@@ -4206,7 +4206,7 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
             }
 
             if (node->implicit)
-                TY_(ReportError)(doc, body, node, INSERTING_TAG);
+                TY_(ReportNotice)(doc, body, node, INSERTING_TAG);
 
             TY_(InsertNodeAtEnd)(body, node);
             ParseTag(doc, node, mode);
@@ -4214,7 +4214,7 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
         }
 
         /* discard unexpected tags */
-        TY_(ReportError)(doc, body, node, DISCARDING_UNEXPECTED);
+        TY_(ReportNotice)(doc, body, node, DISCARDING_UNEXPECTED);
         TY_(FreeNode)( doc, node);
     }
 #if !defined(NDEBUG) && defined(_MSC_VER)
@@ -4248,12 +4248,12 @@ void TY_(ParseNoFrames)(TidyDocImpl* doc, Node *noframes, GetTokenMode mode)
             TrimSpaces(doc, noframes);
             if (node->type == EndTag)
             {
-                TY_(ReportError)(doc, noframes, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, noframes, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);       /* Throw it away */
             }
             else
             {
-                TY_(ReportError)(doc, noframes, node, MISSING_ENDTAG_BEFORE);
+                TY_(ReportNotice)(doc, noframes, node, MISSING_ENDTAG_BEFORE);
                 TY_(UngetToken)( doc );
             }
             return;
@@ -4262,7 +4262,7 @@ void TY_(ParseNoFrames)(TidyDocImpl* doc, Node *noframes, GetTokenMode mode)
         if ( nodeIsHTML(node) )
         {
             if (TY_(nodeIsElement)(node))
-                TY_(ReportError)(doc, noframes, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, noframes, node, DISCARDING_UNEXPECTED);
 
             TY_(FreeNode)( doc, node);
             continue;
@@ -4295,7 +4295,7 @@ void TY_(ParseNoFrames)(TidyDocImpl* doc, Node *noframes, GetTokenMode mode)
             {
                 if ( body == NULL )
                 {
-                    TY_(ReportError)(doc, noframes, node, DISCARDING_UNEXPECTED);
+                    TY_(ReportNotice)(doc, noframes, node, DISCARDING_UNEXPECTED);
                     TY_(FreeNode)( doc, node);
                     continue;
                 }
@@ -4303,7 +4303,7 @@ void TY_(ParseNoFrames)(TidyDocImpl* doc, Node *noframes, GetTokenMode mode)
                 {
                     TY_(UngetToken)( doc );
                     node = TY_(InferredTag)(doc, TidyTag_P);
-                    TY_(ReportError)(doc, noframes, node, CONTENT_AFTER_BODY );
+                    TY_(ReportNotice)(doc, noframes, node, CONTENT_AFTER_BODY );
                 }
                 TY_(InsertNodeAtEnd)( body, node );
             }
@@ -4312,7 +4312,7 @@ void TY_(ParseNoFrames)(TidyDocImpl* doc, Node *noframes, GetTokenMode mode)
                 TY_(UngetToken)( doc );
                 node = TY_(InferredTag)(doc, TidyTag_BODY);
                 if ( cfgBool(doc, TidyXmlOut) )
-                    TY_(ReportError)(doc, noframes, node, INSERTING_TAG);
+                    TY_(ReportNotice)(doc, noframes, node, INSERTING_TAG);
                 TY_(InsertNodeAtEnd)( noframes, node );
             }
 
@@ -4321,11 +4321,11 @@ void TY_(ParseNoFrames)(TidyDocImpl* doc, Node *noframes, GetTokenMode mode)
         }
 
         /* discard unexpected end tags */
-        TY_(ReportError)(doc, noframes, node, DISCARDING_UNEXPECTED);
+        TY_(ReportNotice)(doc, noframes, node, DISCARDING_UNEXPECTED);
         TY_(FreeNode)( doc, node);
     }
 
-    TY_(ReportError)(doc, noframes, node, MISSING_ENDTAG_FOR);
+    TY_(ReportNotice)(doc, noframes, node, MISSING_ENDTAG_FOR);
 }
 
 void TY_(ParseFrameSet)(TidyDocImpl* doc, Node *frameset, GetTokenMode ARG_UNUSED(mode))
@@ -4354,7 +4354,7 @@ void TY_(ParseFrameSet)(TidyDocImpl* doc, Node *frameset, GetTokenMode ARG_UNUSE
 
         if (node->tag == NULL)
         {
-            TY_(ReportError)(doc, frameset, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, frameset, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue; 
         }
@@ -4372,7 +4372,7 @@ void TY_(ParseFrameSet)(TidyDocImpl* doc, Node *frameset, GetTokenMode ARG_UNUSE
         {
             TY_(UngetToken)( doc );
             node = TY_(InferredTag)(doc, TidyTag_NOFRAMES);
-            TY_(ReportError)(doc, frameset, node, INSERTING_TAG);
+            TY_(ReportNotice)(doc, frameset, node, INSERTING_TAG);
         }
 
         if (node->type == StartTag && (node->tag->model & CM_FRAMES))
@@ -4395,11 +4395,11 @@ void TY_(ParseFrameSet)(TidyDocImpl* doc, Node *frameset, GetTokenMode ARG_UNUSE
            doc->badAccess |= BA_INVALID_LINK_NOFRAMES;
 #endif
 
-        TY_(ReportError)(doc, frameset, node, DISCARDING_UNEXPECTED);
+        TY_(ReportNotice)(doc, frameset, node, DISCARDING_UNEXPECTED);
         TY_(FreeNode)( doc, node);
     }
 
-    TY_(ReportError)(doc, frameset, node, MISSING_ENDTAG_FOR);
+    TY_(ReportNotice)(doc, frameset, node, MISSING_ENDTAG_FOR);
 }
 
 void TY_(ParseHTML)(TidyDocImpl* doc, Node *html, GetTokenMode mode)
@@ -4428,7 +4428,7 @@ void TY_(ParseHTML)(TidyDocImpl* doc, Node *html, GetTokenMode mode)
 
         if (node->tag == html->tag && node->type == EndTag)
         {
-            TY_(ReportError)(doc, html, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, html, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -4436,7 +4436,7 @@ void TY_(ParseHTML)(TidyDocImpl* doc, Node *html, GetTokenMode mode)
         /* find and discard multiple <html> elements */
         if (node->tag == html->tag && node->type == StartTag)
         {
-            TY_(ReportError)(doc, html, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, html, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)(doc, node);
             continue;
         }
@@ -4476,7 +4476,7 @@ void TY_(ParseHTML)(TidyDocImpl* doc, Node *html, GetTokenMode mode)
         if (node->tag == html->tag)
         {
             if (node->type != StartTag && frameset == NULL)
-                TY_(ReportError)(doc, html, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, html, node, DISCARDING_UNEXPECTED);
 
             TY_(FreeNode)( doc, node);
             continue;
@@ -4491,7 +4491,7 @@ void TY_(ParseHTML)(TidyDocImpl* doc, Node *html, GetTokenMode mode)
         {
             if (node->type != StartTag)
             {
-                TY_(ReportError)(doc, html, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, html, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);
                 continue;
             }
@@ -4506,7 +4506,7 @@ void TY_(ParseHTML)(TidyDocImpl* doc, Node *html, GetTokenMode mode)
                     {
                         noframes = TY_(InferredTag)(doc, TidyTag_NOFRAMES);
                         TY_(InsertNodeAtEnd)(frameset, noframes);
-                        TY_(ReportError)(doc, html, noframes, INSERTING_TAG);
+                        TY_(ReportNotice)(doc, html, noframes, INSERTING_TAG);
                     }
                     else
                     {
@@ -4528,13 +4528,13 @@ void TY_(ParseHTML)(TidyDocImpl* doc, Node *html, GetTokenMode mode)
         {
             if (node->type != StartTag)
             {
-                TY_(ReportError)(doc, html, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, html, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);
                 continue;
             }
 
             if (frameset != NULL)
-                TY_(ReportFatal)(doc, html, node, DUPLICATE_FRAMESET);
+                TY_(ReportNotice)(doc, html, node, DUPLICATE_FRAMESET);
             else
                 frameset = node;
 
@@ -4559,14 +4559,14 @@ void TY_(ParseHTML)(TidyDocImpl* doc, Node *html, GetTokenMode mode)
         {
             if (node->type != StartTag)
             {
-                TY_(ReportError)(doc, html, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, html, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);
                 continue;
             }
 
             if (frameset == NULL)
             {
-                TY_(ReportError)(doc, html, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, html, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);
                 node = TY_(InferredTag)(doc, TidyTag_BODY);
                 break;
@@ -4595,7 +4595,7 @@ void TY_(ParseHTML)(TidyDocImpl* doc, Node *html, GetTokenMode mode)
             /* discard illegal frame element following a frameset */
             if ( frameset != NULL && nodeIsFRAME(node) )
             {
-                TY_(ReportError)(doc, html, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, html, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)(doc, node);
                 continue;
             }
@@ -4614,7 +4614,7 @@ void TY_(ParseHTML)(TidyDocImpl* doc, Node *html, GetTokenMode mode)
             }
             else
             {
-                TY_(ReportError)(doc, html, node, NOFRAMES_CONTENT);
+                TY_(ReportNotice)(doc, html, node, NOFRAMES_CONTENT);
                 if (noframes->type == StartEndTag)
                     noframes->type = StartTag;
             }
@@ -4628,7 +4628,7 @@ void TY_(ParseHTML)(TidyDocImpl* doc, Node *html, GetTokenMode mode)
         /* Issue #132 - disable inserting BODY tag warning
            BUT only if NOT --show-body-only yes */
         if (!showingBodyOnly(doc))
-            TY_(ReportError)(doc, html, node, INSERTING_TAG );
+            TY_(ReportNotice)(doc, html, node, INSERTING_TAG );
         TY_(ConstrainVersion)(doc, ~VERS_FRAMESET);
         break;
     }
@@ -4787,13 +4787,13 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
 
             if (TY_(FindXmlDecl)(doc) && doc->root.content)
             {
-                TY_(ReportError)(doc, &doc->root, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, &doc->root, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)(doc, node);
                 continue;
             }
             if (node->line > 1 || node->column != 1)
             {
-                TY_(ReportError)(doc, &doc->root, node, SPACE_PRECEDING_XMLDECL);
+                TY_(ReportNotice)(doc, &doc->root, node, SPACE_PRECEDING_XMLDECL);
             }
         }
 #ifdef AUTO_INPUT_ENCODING
@@ -4826,7 +4826,7 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
             }
             else
             {
-                TY_(ReportError)(doc, &doc->root, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, &doc->root, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);
             }
             continue;
@@ -4834,7 +4834,7 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
 
         if (node->type == EndTag)
         {
-            TY_(ReportError)(doc, &doc->root, node, DISCARDING_UNEXPECTED);
+            TY_(ReportNotice)(doc, &doc->root, node, DISCARDING_UNEXPECTED);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -4878,7 +4878,7 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
         {
             ulong dtmode = cfg( doc, TidyDoctypeMode );
             if ((dtmode != TidyDoctypeOmit) && !showingBodyOnly(doc))
-                TY_(ReportError)(doc, NULL, NULL, MISSING_DOCTYPE);
+                TY_(ReportNotice)(doc, NULL, NULL, MISSING_DOCTYPE);
             if ((dtmode != TidyDoctypeAuto) && (dtmode != TidyDoctypeHtml5))
             {
                 /*\
@@ -4913,7 +4913,7 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
         /* #72, avoid MISSING_TITLE_ELEMENT if show-body-only (but allow InsertNodeAtEnd to avoid new warning) */
         if (!showingBodyOnly(doc))
         {
-            TY_(ReportError)(doc, head, NULL, MISSING_TITLE_ELEMENT);
+            TY_(ReportNotice)(doc, head, NULL, MISSING_TITLE_ELEMENT);
         }
         TY_(InsertNodeAtEnd)(head, TY_(InferredTag)(doc, TidyTag_TITLE));
     }
@@ -4990,9 +4990,9 @@ static void ParseXMLElement(TidyDocImpl* doc, Node *element, GetTokenMode mode)
         if (node->type == EndTag)
         {
             if (element)
-                TY_(ReportFatal)(doc, element, node, UNEXPECTED_ENDTAG_IN);
+                TY_(ReportNotice)(doc, element, node, UNEXPECTED_ENDTAG_IN);
             else
-                TY_(ReportFatal)(doc, element, node, UNEXPECTED_ENDTAG);
+                TY_(ReportNotice)(doc, element, node, UNEXPECTED_ENDTAG_ERR);
 
             TY_(FreeNode)( doc, node);
             continue;
@@ -5055,7 +5055,7 @@ void TY_(ParseXMLDocument)(TidyDocImpl* doc)
         /* discard unexpected end tags */
         if (node->type == EndTag)
         {
-            TY_(ReportError)(doc, NULL, node, UNEXPECTED_ENDTAG);
+            TY_(ReportNotice)(doc, NULL, node, UNEXPECTED_ENDTAG);
             TY_(FreeNode)( doc, node);
             continue;
         }
@@ -5073,7 +5073,7 @@ void TY_(ParseXMLDocument)(TidyDocImpl* doc)
             }
             else
             {
-                TY_(ReportError)(doc, &doc->root, node, DISCARDING_UNEXPECTED);
+                TY_(ReportNotice)(doc, &doc->root, node, DISCARDING_UNEXPECTED);
                 TY_(FreeNode)( doc, node);
             }
             continue;
@@ -5093,7 +5093,7 @@ void TY_(ParseXMLDocument)(TidyDocImpl* doc)
             continue;
         }
 
-        TY_(ReportError)(doc, &doc->root, node, DISCARDING_UNEXPECTED);
+        TY_(ReportNotice)(doc, &doc->root, node, DISCARDING_UNEXPECTED);
         TY_(FreeNode)( doc, node);
     }
 

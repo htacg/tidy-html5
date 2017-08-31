@@ -193,7 +193,6 @@ extern "C" {
     FN(UNEXPECTED_GT)                 \
     FN(UNEXPECTED_QUOTEMARK)          \
     FN(WHITE_IN_URI)                  \
-    FN(XML_ATTRIBUTE_VALUE)           \
     FN(XML_ID_SYNTAX)                 \
     /* ReportEncodingError */         \
     FN(INVALID_NCR)                   \
@@ -211,19 +210,13 @@ extern "C" {
     FN(UNKNOWN_ENTITY)                \
     /* ReportError */                 \
     FN(BAD_CDATA_CONTENT)             \
-    FN(BAD_COMMENT_CHARS)             \
-    FN(BAD_XML_COMMENT)               \
     FN(CANT_BE_NESTED)                \
     FN(CONTENT_AFTER_BODY)            \
     FN(DISCARDING_UNEXPECTED)         \
     FN(DOCTYPE_AFTER_TAGS)            \
-    FN(DTYPE_NOT_UPPER_CASE)          \
     FN(ELEMENT_VERS_MISMATCH_ERROR)   \
     FN(ELEMENT_VERS_MISMATCH_WARN)    \
-    FN(ENCODING_IO_CONFLICT)          \
     FN(ILLEGAL_NESTING)               \
-    FN(INCONSISTENT_NAMESPACE)        \
-    FN(INCONSISTENT_VERSION)          \
     FN(INSERTING_TAG)                 \
     FN(MALFORMED_COMMENT)             \
     FN(MALFORMED_DOCTYPE)             \
@@ -241,7 +234,6 @@ extern "C" {
     FN(TAG_NOT_ALLOWED_IN)            \
     FN(TOO_MANY_ELEMENTS_IN)          \
     FN(TOO_MANY_ELEMENTS)             \
-    FN(UNESCAPED_ELEMENT)             \
     FN(USING_BR_INPLACE_OF)           \
     /* ReportFatal */                 \
     FN(DUPLICATE_FRAMESET)            \
@@ -261,7 +253,6 @@ extern "C" {
     FN(BAD_SURROGATE_TAIL)            \
     /* ReportWarning */               \
     FN(BAD_SUMMARY_HTML5)             \
-    FN(COERCE_TO_ENDTAG_WARN)         \
     FN(NESTED_EMPHASIS)               \
     FN(NESTED_QUOTATION)              \
     FN(OBSOLETE_ELEMENT)              \
@@ -274,22 +265,26 @@ extern "C" {
     FN(FOUND_STYLE_IN_BODY)           \
     FN(MOVED_STYLE_TO_HEAD)           \
     FN(UNEXPECTED_END_OF_FILE)        \
-    FN(UNEXPECTED_ENDTAG)
+    FN(UNEXPECTED_ENDTAG)             \
+    FN(UNEXPECTED_ENDTAG_ERR)
 
 
-/** These are report messages added by Tidy's accessibility module. */
+/** These are report messages added by Tidy's accessibility module. 
+ ** Note that commented out items don't have checks for them at this time,
+ ** and it was probably intended that some test would eventually be written.
+ */
 #define FOREACH_ACCESS_MSG(FN)                                          \
 /** [1.1.1.1] */     FN(IMG_MISSING_ALT)                                \
 /** [1.1.1.2] */     FN(IMG_ALT_SUSPICIOUS_FILENAME)                    \
 /** [1.1.1.3] */     FN(IMG_ALT_SUSPICIOUS_FILE_SIZE)                   \
 /** [1.1.1.4] */     FN(IMG_ALT_SUSPICIOUS_PLACEHOLDER)                 \
 /** [1.1.1.10] */    FN(IMG_ALT_SUSPICIOUS_TOO_LONG)                    \
-/** [1.1.1.11] */    FN(IMG_MISSING_ALT_BULLET)                         \
-/** [1.1.1.12] */    FN(IMG_MISSING_ALT_H_RULE)                         \
+/** [1.1.1.11] */    /* FN(IMG_MISSING_ALT_BULLET) */                   \
+/** [1.1.1.12] */    /* FN(IMG_MISSING_ALT_H_RULE) */                   \
 /** [1.1.2.1] */     FN(IMG_MISSING_LONGDESC_DLINK)                     \
 /** [1.1.2.2] */     FN(IMG_MISSING_DLINK)                              \
 /** [1.1.2.3] */     FN(IMG_MISSING_LONGDESC)                           \
-/** [1.1.2.5] */     FN(LONGDESC_NOT_REQUIRED)                          \
+/** [1.1.2.5] */     /* FN(LONGDESC_NOT_REQUIRED) */                    \
 /** [1.1.3.1] */     FN(IMG_BUTTON_MISSING_ALT)                         \
 /** [1.1.4.1] */     FN(APPLET_MISSING_ALT)                             \
 /** [1.1.5.1] */     FN(OBJECT_MISSING_ALT)                             \
@@ -325,7 +320,7 @@ extern "C" {
 /** [3.6.1.1] */     FN(LIST_USAGE_INVALID_UL)                          \
 /** [3.6.1.2] */     FN(LIST_USAGE_INVALID_OL)                          \
 /** [3.6.1.4] */     FN(LIST_USAGE_INVALID_LI)                          \
-/** [4.1.1.1] */     FN(INDICATE_CHANGES_IN_LANGUAGE)                   \
+/** [4.1.1.1] */     /* FN(INDICATE_CHANGES_IN_LANGUAGE) */             \
 /** [4.3.1.1] */     FN(LANGUAGE_NOT_IDENTIFIED)                        \
 /** [4.3.1.1] */     FN(LANGUAGE_INVALID)                               \
 /** [5.1.2.1] */     FN(DATA_TABLE_MISSING_HEADERS)                     \
@@ -379,11 +374,11 @@ extern "C" {
 /** [9.3.1.6] */     FN(SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_MOVE)   \
 /** [10.1.1.1] */    FN(NEW_WINDOWS_REQUIRE_WARNING_NEW)                \
 /** [10.1.1.2] */    FN(NEW_WINDOWS_REQUIRE_WARNING_BLANK)              \
-/** [10.2.1.1] */    FN(LABEL_NEEDS_REPOSITIONING_BEFORE_INPUT)         \
-/** [10.2.1.2] */    FN(LABEL_NEEDS_REPOSITIONING_AFTER_INPUT)          \
-/** [10.4.1.1] */    FN(FORM_CONTROL_REQUIRES_DEFAULT_TEXT)             \
-/** [10.4.1.2] */    FN(FORM_CONTROL_DEFAULT_TEXT_INVALID_NULL)         \
-/** [10.4.1.3] */    FN(FORM_CONTROL_DEFAULT_TEXT_INVALID_SPACES)       \
+/** [10.2.1.1] */    /* FN(LABEL_NEEDS_REPOSITIONING_BEFORE_INPUT) */   \
+/** [10.2.1.2] */    /* FN(LABEL_NEEDS_REPOSITIONING_AFTER_INPUT) */    \
+/** [10.4.1.1] */    /* FN(FORM_CONTROL_REQUIRES_DEFAULT_TEXT) */       \
+/** [10.4.1.2] */    /* FN(FORM_CONTROL_DEFAULT_TEXT_INVALID_NULL) */   \
+/** [10.4.1.3] */    /* FN(FORM_CONTROL_DEFAULT_TEXT_INVALID_SPACES) */ \
 /** [11.2.1.1] */    FN(REPLACE_DEPRECATED_HTML_APPLET)                 \
 /** [11.2.1.2] */    FN(REPLACE_DEPRECATED_HTML_BASEFONT)               \
 /** [11.2.1.3] */    FN(REPLACE_DEPRECATED_HTML_CENTER)                 \
@@ -404,10 +399,10 @@ extern "C" {
 /** [13.1.1.2] */    FN(LINK_TEXT_MISSING)                              \
 /** [13.1.1.3] */    FN(LINK_TEXT_TOO_LONG)                             \
 /** [13.1.1.4] */    FN(LINK_TEXT_NOT_MEANINGFUL_CLICK_HERE)            \
-/** [13.1.1.5] */    FN(LINK_TEXT_NOT_MEANINGFUL_MORE)                  \
-/** [13.1.1.6] */    FN(LINK_TEXT_NOT_MEANINGFUL_FOLLOW_THIS)           \
+/** [13.1.1.5] */    /* FN(LINK_TEXT_NOT_MEANINGFUL_MORE) */            \
+/** [13.1.1.6] */    /* FN(LINK_TEXT_NOT_MEANINGFUL_FOLLOW_THIS) */     \
 /** [13.2.1.1] */    FN(METADATA_MISSING)                               \
-/** [13.2.1.2] */    FN(METADATA_MISSING_LINK)                          \
+/** [13.2.1.2] */    /* FN(METADATA_MISSING_LINK) */                    \
 /** [13.2.1.3] */    FN(METADATA_MISSING_REDIRECT_AUTOREFRESH)          \
 /** [13.10.1.1] */   FN(SKIPOVER_ASCII_ART)
 

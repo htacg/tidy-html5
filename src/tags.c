@@ -581,7 +581,7 @@ Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
 
         /* Output a message the first time we encounter an autonomous custom 
            tag. This applies despite the HTML5 mode. */
-        TY_(ReportNotice)(doc, node, node, CUSTOM_TAG_DETECTED);
+        TY_(Report)(doc, node, node, CUSTOM_TAG_DETECTED);
 
         return yes;
     }

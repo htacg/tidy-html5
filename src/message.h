@@ -52,12 +52,20 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code);
 
 
 /** @} */
-/** @name High Level Message Writing Functions - Specific */
+/** @name Convenience Reporting Functions */
+/** @{ */
+
+
+void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code);
+
+
+/** @} */
+/** @name Legacy High Level Message Writing Functions - Specific */
 /** @{ */
 
 
 void TY_(FileError)( TidyDocImpl* doc, ctmbstr file, TidyReportLevel level, uint code );
-void TY_(ReportAttrError)( TidyDocImpl* doc, Node* node, AttVal* av, uint code );
+//void TY_(ReportAttrError)( TidyDocImpl* doc, Node* node, AttVal* av, uint code );
 void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option );
 void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarded);
 void TY_(ReportEncodingWarning)(TidyDocImpl* doc, uint code, uint encoding);

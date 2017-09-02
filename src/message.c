@@ -259,7 +259,7 @@ static struct _dispatchTable {
     { ANCHOR_NOT_UNIQUE,            TidyWarning,     formatAttributeReport   },
     { APOS_UNDEFINED,               TidyWarning,     NULL                    },
     { ATTR_VALUE_NOT_LCASE,         TidyWarning,     formatAttributeReport   },
-    { ATTRIBUTE_VALUE_REPLACED,     TidyInfo,        NULL                    },
+    { ATTRIBUTE_VALUE_REPLACED,     TidyInfo,        formatAttributeReport   },
     { ATTRIBUTE_IS_NOT_ALLOWED,     TidyWarning,     formatAttributeReport   },
     { BACKSLASH_IN_URI,             TidyWarning,     formatAttributeReport   },
     { BAD_ATTRIBUTE_VALUE_REPLACED, TidyWarning,     formatAttributeReport   },
@@ -367,7 +367,8 @@ static struct _dispatchTable {
 TidyMessageImpl *formatAttributeReport(TidyDocImpl* doc, Node *element, Node *node, uint code, uint level, va_list args)
 {
     AttVal *av = NULL;
-    char const *name = "NULL", *value = "NULL";
+    char const *name = "NULL";
+    char const *value = "NULL";
     char tagdesc[64];
 
     TagToString(node, tagdesc, sizeof(tagdesc));
@@ -406,6 +407,8 @@ TidyMessageImpl *formatAttributeReport(TidyDocImpl* doc, Node *element, Node *no
             return TY_(tidyMessageCreateWithNode)(doc, node, code, level, tagdesc, name );
             break;
 
+        case ATTRIBUTE_VALUE_REPLACED:
+        case BAD_ATTRIBUTE_VALUE:
         case BAD_ATTRIBUTE_VALUE_REPLACED:
         case INSERTING_AUTO_ATTRIBUTE:
         case INVALID_ATTRIBUTE:
@@ -704,12 +707,12 @@ void TY_(Report)(TidyDocImpl* doc, Node *element, Node *node, uint code, ...)
 //{
 //    TY_(Report)(doc, NULL, NULL, code, file);
 //}
-//
-//void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
-//{
-//    TY_(Report)(doc, NULL, node, code, av);
-//}
-//
+
+void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
+{
+    TY_(Report)(doc, NULL, node, code, av);
+}
+
 //void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option )
 //{
 //    assert( option != NULL );
@@ -888,7 +891,7 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
 
 
 /*********************************************************************
- * High Level Message Writing Functions - Specific
+ * Legacy High Level Message Writing Functions - Specific
  * When adding new reports to LibTidy, preference should be given
  * to one of the existing, general pupose message writing functions
  * above, if possible, otherwise try to use one of these, or as a
@@ -899,108 +902,6 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
 void TY_(FileError)( TidyDocImpl* doc, ctmbstr file, TidyReportLevel level, uint code )
 {
     TidyMessageImpl *message = TY_(tidyMessageCreate)( doc, code, level, file);
-    messageOut( message );
-}
-
-
-void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
-{
-    TidyMessageImpl *message = NULL;
-    char const *name = "NULL", *value = "NULL";
-    char tagdesc[64];
-    uint version;
-    ctmbstr extra_string;
-
-    TagToString(node, tagdesc, sizeof(tagdesc));
-
-    if (av)
-    {
-        if (av->attribute)
-            name = av->attribute;
-        if (av->value)
-            value = av->value;
-    }
-
-    switch (code)
-    {
-        case JOINING_ATTRIBUTE:
-        case MISSING_ATTR_VALUE:
-        case PROPRIETARY_ATTRIBUTE:
-            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc, name );
-            break;
-
-        case ATTRIBUTE_IS_NOT_ALLOWED:
-            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc, name );
-            break;
-
-        case MISMATCHED_ATTRIBUTE_WARN:
-            version = doc->lexer->versionEmitted == 0 ? doc->lexer->doctype : doc->lexer->versionEmitted;
-            extra_string = TY_(HTMLVersionNameFromCode)(version, 0);
-            if (!extra_string)
-                extra_string = tidyLocalizedString(STRING_HTML_PROPRIETARY);
-            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc, name, extra_string );
-            break;
-
-        case MISMATCHED_ATTRIBUTE_ERROR:
-            version = doc->lexer->versionEmitted == 0 ? doc->lexer->doctype : doc->lexer->versionEmitted;
-            extra_string = TY_(HTMLVersionNameFromCode)(version, 0);
-            if (!extra_string)
-                extra_string = tidyLocalizedString(STRING_HTML_PROPRIETARY);
-            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyError, tagdesc, name, extra_string );
-            break;
-
-        case BAD_ATTRIBUTE_VALUE:
-        case BAD_ATTRIBUTE_VALUE_REPLACED:
-        case INSERTING_AUTO_ATTRIBUTE:
-        case INVALID_ATTRIBUTE:
-            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc, name, value );
-            break;
-
-        case ATTRIBUTE_VALUE_REPLACED:
-            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyInfo, tagdesc, name, value );
-            break;
-
-        case BACKSLASH_IN_URI:
-        case ESCAPED_ILLEGAL_URI:
-        case FIXED_BACKSLASH:
-        case ID_NAME_MISMATCH:
-        case ILLEGAL_URI_CODEPOINT:
-        case ILLEGAL_URI_REFERENCE:
-        case INVALID_XML_ID:
-        case MISSING_QUOTEMARK:
-        case NEWLINE_IN_URI:
-        case UNEXPECTED_EQUALSIGN:
-        case UNEXPECTED_GT:
-        case UNEXPECTED_QUOTEMARK:
-        case WHITE_IN_URI:
-            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc );
-            break;
-
-        case ANCHOR_NOT_UNIQUE:
-        case ATTR_VALUE_NOT_LCASE:
-        case PROPRIETARY_ATTR_VALUE:
-        case XML_ID_SYNTAX:
-            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc, value );
-            break;
-
-
-        case MISSING_IMAGEMAP:
-            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc );
-            doc->badAccess |= BA_MISSING_IMAGE_MAP; /* @todo: why is this here instead of calling function? */
-            break;
-
-        case REPEATED_ATTRIBUTE:
-            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, tagdesc, value, name );
-            break;
-            
-        case UNEXPECTED_END_OF_FILE_ATTR:
-            /* on end of file adjust reported position to end of input */
-            doc->lexer->lines   = doc->docIn->curline;
-            doc->lexer->columns = doc->docIn->curcol;
-            message = TY_(tidyMessageCreateWithLexer)(doc, code, TidyWarning, tagdesc );
-            break;
-    }
-
     messageOut( message );
 }
 

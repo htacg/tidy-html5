@@ -448,8 +448,12 @@ TidyMessageImpl *formatBadArgument(TidyDocImpl* doc, Node *element, Node *node, 
 {
     ctmbstr option;
 
-    if ( (option = va_arg( args, ctmbstr)) )
-        return TY_(tidyMessageCreate)( doc, code, level, option );
+    switch ( code )
+    {
+        case STRING_MISSING_MALFORMED:
+            if ( (option = va_arg( args, ctmbstr)) )
+                return TY_(tidyMessageCreate)( doc, code, level, option );
+    }
 
     return NULL;
 }
@@ -713,11 +717,12 @@ void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
     TY_(Report)(doc, NULL, node, code, av);
 }
 
-//void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option )
-//{
-//    assert( option != NULL );
-//    TY_(Report)(doc, NULL, NULL, STRING_MISSING_MALFORMED, option);
-//}
+
+void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option )
+{
+    assert( option != NULL );
+    TY_(Report)(doc, NULL, NULL, STRING_MISSING_MALFORMED, option);
+}
 
 
 /*********************************************************************
@@ -902,16 +907,6 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
 void TY_(FileError)( TidyDocImpl* doc, ctmbstr file, TidyReportLevel level, uint code )
 {
     TidyMessageImpl *message = TY_(tidyMessageCreate)( doc, code, level, file);
-    messageOut( message );
-}
-
-
-/* lexer is not defined when this is called */
-void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option )
-{
-    TidyMessageImpl *message;
-    assert( option != NULL );
-    message = TY_(tidyMessageCreate)( doc, STRING_MISSING_MALFORMED, TidyConfig, option );
     messageOut( message );
 }
 

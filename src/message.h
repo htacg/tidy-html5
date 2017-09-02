@@ -47,7 +47,7 @@ ctmbstr TY_(tidyLibraryVersion)(void);
 /** @name High Level Message Writing Functions - General */
 /** @{ */
 
-
+void TY_(Report)(TidyDocImpl* doc, Node *element, Node *node, uint code, ...);
 void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code);
 
 

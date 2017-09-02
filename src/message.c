@@ -217,10 +217,509 @@ static void messageOut( TidyMessageImpl *message )
 
 
 /*********************************************************************
- * High Level Message Writing Functions - General
+ * Report Formatting
+ * In order to provide a single, predictable reporting system, Tidy
+ * provides an extensible messaging system that provides most of the
+ * basic requirements for most reports, while permitting simple
+ * implementation of new reports in a flexible manner. By adding
+ * additional formatters, new messages can be added easily while
+ * maintaining Tidy's internal organization.
+ *********************************************************************/
+
+
+/* Functions of this type will create new instances of TidyMessage specific to
+** the type of report being emitted. Many messages share the same fomatter for
+** messages, but new ones can be written as required.
+*/
+typedef TidyMessageImpl*(messageFormatter)(TidyDocImpl* doc, Node *element, Node *node, uint code, uint level, va_list args);
+
+
+/* Forward declarations of messageFormatter functions. */
+static messageFormatter formatAttributeReport;
+static messageFormatter formatBadArgument;
+static messageFormatter formatCustomTagDetected;
+static messageFormatter formatFileError;
+static messageFormatter formatStandard;
+static messageFormatter formatStandardDynamic;
+
+
+/* This structure ties together for each report Code the default 
+** TidyReportLevel, the Formatter to be used to construct the message, and the
+** Next code to output, if applicable. Assuming an existing formatter can, 
+** this it makes it simple to output new reports, or to change report level by
+** modifying this array.
+*/
+static struct _dispatchTable {
+    uint code;                 /**< The message code. */
+    TidyReportLevel level;     /**< The default TidyReportLevel of the message. */
+    messageFormatter *handler; /**< The formatter for the report. */
+    uint next;                 /**< If multiple codes should be displayed, which is next? */
+} dispatchTable[] = {
+    { ADDED_MISSING_CHARSET,        TidyInfo,        formatStandard          },
+    { ANCHOR_NOT_UNIQUE,            TidyWarning,     formatAttributeReport   },
+    { APOS_UNDEFINED,               TidyWarning,     NULL                    },
+    { ATTR_VALUE_NOT_LCASE,         TidyWarning,     formatAttributeReport   },
+    { ATTRIBUTE_VALUE_REPLACED,     TidyInfo,        NULL                    },
+    { ATTRIBUTE_IS_NOT_ALLOWED,     TidyWarning,     formatAttributeReport   },
+    { BACKSLASH_IN_URI,             TidyWarning,     formatAttributeReport   },
+    { BAD_ATTRIBUTE_VALUE_REPLACED, TidyWarning,     formatAttributeReport   },
+    { BAD_ATTRIBUTE_VALUE,          TidyWarning,     formatAttributeReport   },
+    { BAD_CDATA_CONTENT,            TidyWarning,     formatStandard          },
+    { BAD_SUMMARY_HTML5,            TidyWarning,     formatStandard          },
+    { BAD_SURROGATE_LEAD,           TidyWarning,     NULL                    },
+    { BAD_SURROGATE_PAIR,           TidyWarning,     NULL                    },
+    { BAD_SURROGATE_TAIL,           TidyWarning,     NULL                    },
+    { CANT_BE_NESTED,               TidyWarning,     formatStandard          },
+    { COERCE_TO_ENDTAG,             TidyWarning,     formatStandard          },
+    { CONTENT_AFTER_BODY,           TidyWarning,     formatStandard          },
+    { CUSTOM_TAG_DETECTED,          TidyInfo,        formatCustomTagDetected },
+    { DISCARDING_UNEXPECTED,        0,               formatStandardDynamic   },
+    { DOCTYPE_AFTER_TAGS,           TidyWarning,     formatStandard          },
+    { DUPLICATE_FRAMESET,           TidyError,       formatStandard          },
+    { ELEMENT_NOT_EMPTY,            TidyWarning,     formatStandard          },
+    { ELEMENT_VERS_MISMATCH_ERROR,  TidyError,       formatStandard          },
+    { ELEMENT_VERS_MISMATCH_WARN,   TidyWarning,     formatStandard          },
+    { ENCODING_MISMATCH,            TidyWarning,     NULL                    },
+    { ESCAPED_ILLEGAL_URI,          TidyWarning,     formatAttributeReport   },
+    { FILE_CANT_OPEN,               TidyBadDocument, formatFileError         },
+    { FILE_NOT_FILE,                TidyBadDocument, formatFileError         },
+    { FIXED_BACKSLASH,              TidyWarning,     formatAttributeReport   },
+    { FOUND_STYLE_IN_BODY,          TidyWarning,     formatStandard          },
+    { ID_NAME_MISMATCH,             TidyWarning,     formatAttributeReport   },
+    { ILLEGAL_NESTING,              TidyWarning,     formatStandard          },
+    { ILLEGAL_URI_CODEPOINT,        TidyWarning,     formatAttributeReport   },
+    { ILLEGAL_URI_REFERENCE,        TidyWarning,     formatAttributeReport   },
+    { INSERTING_AUTO_ATTRIBUTE,     TidyWarning,     formatAttributeReport   },
+    { INSERTING_TAG,                TidyWarning,     formatStandard          },
+    { INVALID_ATTRIBUTE,            TidyWarning,     formatAttributeReport   },
+    { INVALID_NCR,                  TidyWarning,     NULL                    },
+    { INVALID_SGML_CHARS,           TidyWarning,     NULL                    },
+    { INVALID_UTF8,                 TidyWarning,     NULL                    },
+    { INVALID_UTF16,                TidyWarning,     NULL                    },
+    { INVALID_XML_ID,               TidyWarning,     formatAttributeReport   },
+    { JOINING_ATTRIBUTE,            TidyWarning,     formatAttributeReport   },
+    { MALFORMED_COMMENT,            TidyWarning,     formatStandard          },
+    { MALFORMED_DOCTYPE,            TidyWarning,     formatStandard          },
+    { MISMATCHED_ATTRIBUTE_ERROR,   TidyError,       formatAttributeReport   },
+    { MISMATCHED_ATTRIBUTE_WARN,    TidyWarning,     formatAttributeReport   },
+    { MISSING_ATTR_VALUE,           TidyWarning,     formatAttributeReport   },
+    { MISSING_ATTRIBUTE,            TidyWarning,     NULL                    },
+    { MISSING_DOCTYPE,              TidyWarning,     formatStandard          },
+    { MISSING_ENDTAG_BEFORE,        TidyWarning,     formatStandard          },
+    { MISSING_ENDTAG_FOR,           TidyWarning,     formatStandard          },
+    { MISSING_IMAGEMAP,             TidyWarning,     formatAttributeReport   },
+    { MISSING_QUOTEMARK,            TidyWarning,     formatAttributeReport   },
+    { MISSING_SEMICOLON_NCR,        TidyWarning,     NULL                    },
+    { MISSING_SEMICOLON,            TidyWarning,     NULL                    },
+    { MISSING_STARTTAG,             TidyWarning,     formatStandard          },
+    { MISSING_TITLE_ELEMENT,        TidyWarning,     formatStandard          },
+    { MOVED_STYLE_TO_HEAD,          TidyWarning,     formatStandard          },
+    { NESTED_EMPHASIS,              TidyWarning,     formatStandard          },
+    { NESTED_QUOTATION,             TidyWarning,     formatStandard          },
+    { NEWLINE_IN_URI,               TidyWarning,     formatAttributeReport   },
+    { NOFRAMES_CONTENT,             TidyWarning,     formatStandard          },
+    { NON_MATCHING_ENDTAG,          TidyWarning,     formatStandard          },
+    { OBSOLETE_ELEMENT,             TidyWarning,     formatStandard          },
+    { PREVIOUS_LOCATION,            TidyInfo,        formatStandard          },
+    { PROPRIETARY_ATTR_VALUE,       TidyWarning,     formatAttributeReport   },
+    { PROPRIETARY_ATTRIBUTE,        TidyWarning,     formatAttributeReport   },
+    { PROPRIETARY_ELEMENT,          TidyWarning,     formatStandard          },
+    { REMOVED_HTML5,                TidyWarning,     formatStandard          },
+    { REPEATED_ATTRIBUTE,           TidyWarning,     formatAttributeReport   },
+    { REPLACING_ELEMENT,            TidyWarning,     formatStandard          },
+    { REPLACING_UNEX_ELEMENT,       TidyWarning,     formatStandard          },
+    { SPACE_PRECEDING_XMLDECL,      TidyWarning,     formatStandard          },
+    { STRING_MISSING_MALFORMED,     TidyConfig,      formatBadArgument       },
+    { SUSPECTED_MISSING_QUOTE,      TidyError,       formatStandard          },
+    { TAG_NOT_ALLOWED_IN,           TidyWarning,     formatStandard, PREVIOUS_LOCATION },
+    { TOO_MANY_ELEMENTS_IN,         TidyWarning,     formatStandard, PREVIOUS_LOCATION },
+    { TOO_MANY_ELEMENTS,            TidyWarning,     formatStandard          },
+    { TRIM_EMPTY_ELEMENT,           TidyWarning,     formatStandard          },
+    { UNESCAPED_AMPERSAND,          TidyWarning,     NULL                    },
+    { UNEXPECTED_END_OF_FILE_ATTR,  TidyWarning,     formatAttributeReport   },
+    { UNEXPECTED_END_OF_FILE,       TidyWarning,     formatStandard          },
+    { UNEXPECTED_ENDTAG_IN,         TidyError,       formatStandard          },
+    { UNEXPECTED_ENDTAG,            TidyWarning,     formatStandard          },
+    { UNEXPECTED_ENDTAG_ERR,        TidyError,       formatStandard          },
+    { UNEXPECTED_EQUALSIGN,         TidyWarning,     formatAttributeReport   },
+    { UNEXPECTED_GT,                TidyWarning,     formatAttributeReport   },
+    { UNEXPECTED_QUOTEMARK,         TidyWarning,     formatAttributeReport   },
+    { UNKNOWN_ELEMENT_LOOKS_CUSTOM, TidyError,       formatStandard          },
+    { UNKNOWN_ELEMENT,              TidyError,       formatStandard          },
+    { UNKNOWN_ENTITY,               TidyWarning,     NULL                    },
+    { USING_BR_INPLACE_OF,          TidyWarning,     formatStandard          },
+    { VENDOR_SPECIFIC_CHARS,        TidyWarning,     NULL                    },
+    { WHITE_IN_URI,                 TidyWarning,     formatAttributeReport   },
+    { XML_DECLARATION_DETECTED,     TidyWarning,     formatStandard          },
+    { XML_ID_SYNTAX,                TidyWarning,     formatAttributeReport   },
+    { 0, 0, NULL }
+};
+
+
+/*********************************************************************
+ * Message Formatting
+ * These individual message formatters populate messages with the
+ * correct, pertinent data.
+ *********************************************************************/
+
+
+/* Provides formatting for the Attribute-related reports. */
+TidyMessageImpl *formatAttributeReport(TidyDocImpl* doc, Node *element, Node *node, uint code, uint level, va_list args)
+{
+    AttVal *av = NULL;
+    char const *name = "NULL", *value = "NULL";
+    char tagdesc[64];
+
+    TagToString(node, tagdesc, sizeof(tagdesc));
+
+    if ( ( av = va_arg(args, AttVal*) ) )
+    {
+        if (av->attribute)
+            name = av->attribute;
+        if (av->value)
+            value = av->value;
+    }
+
+    switch (code)
+    {
+        case BACKSLASH_IN_URI:
+        case ESCAPED_ILLEGAL_URI:
+        case FIXED_BACKSLASH:
+        case ID_NAME_MISMATCH:
+        case ILLEGAL_URI_CODEPOINT:
+        case ILLEGAL_URI_REFERENCE:
+        case INVALID_XML_ID:
+        case MISSING_IMAGEMAP:
+        case MISSING_QUOTEMARK:
+        case NEWLINE_IN_URI:
+        case UNEXPECTED_EQUALSIGN:
+        case UNEXPECTED_GT:
+        case UNEXPECTED_QUOTEMARK:
+        case WHITE_IN_URI:
+            return TY_(tidyMessageCreateWithNode)(doc, node, code, level, tagdesc );
+            break;
+
+        case ATTRIBUTE_IS_NOT_ALLOWED:
+        case JOINING_ATTRIBUTE:
+        case MISSING_ATTR_VALUE:
+        case PROPRIETARY_ATTRIBUTE:
+            return TY_(tidyMessageCreateWithNode)(doc, node, code, level, tagdesc, name );
+            break;
+
+        case BAD_ATTRIBUTE_VALUE_REPLACED:
+        case INSERTING_AUTO_ATTRIBUTE:
+        case INVALID_ATTRIBUTE:
+            return TY_(tidyMessageCreateWithNode)(doc, node, code, level, tagdesc, name, value );
+            break;
+
+        case MISMATCHED_ATTRIBUTE_ERROR:
+        case MISMATCHED_ATTRIBUTE_WARN:
+            return TY_(tidyMessageCreateWithNode)(doc, node, code, level, tagdesc, name, HTMLVersion(doc));
+            break;
+
+        case ANCHOR_NOT_UNIQUE:
+        case ATTR_VALUE_NOT_LCASE:
+        case PROPRIETARY_ATTR_VALUE:
+        case XML_ID_SYNTAX:
+            return TY_(tidyMessageCreateWithNode)(doc, node, code, level, tagdesc, value );
+            break;
+
+        case REPEATED_ATTRIBUTE:
+            return TY_(tidyMessageCreateWithNode)(doc, node, code, level, tagdesc, value, name );
+            break;
+
+        case UNEXPECTED_END_OF_FILE_ATTR:
+            /* on end of file adjust reported position to end of input */
+            doc->lexer->lines   = doc->docIn->curline;
+            doc->lexer->columns = doc->docIn->curcol;
+            return TY_(tidyMessageCreateWithLexer)(doc, code, level, tagdesc );
+            break;
+    }
+
+    return NULL;
+}
+
+
+/* Provides formatting for bad-argument errors. */
+TidyMessageImpl *formatBadArgument(TidyDocImpl* doc, Node *element, Node *node, uint code, uint level, va_list args)
+{
+    ctmbstr option;
+
+    if ( (option = va_arg( args, ctmbstr)) )
+        return TY_(tidyMessageCreate)( doc, code, level, option );
+
+    return NULL;
+}
+
+
+/* Provides special formatting for the CUSTOM_TAG_DETECTED report. */
+TidyMessageImpl *formatCustomTagDetected(TidyDocImpl* doc, Node *element, Node *node, uint code, uint level, va_list args)
+{
+    char elemdesc[256] = { 0 };
+    ctmbstr tagtype;
+
+    TagToString(element, elemdesc, sizeof(elemdesc));
+
+    switch ( cfg( doc, TidyUseCustomTags ) )
+    {
+        case TidyCustomBlocklevel:
+            tagtype = tidyLocalizedString( TIDYCUSTOMBLOCKLEVEL_STRING );
+            break;
+        case TidyCustomEmpty:
+            tagtype = tidyLocalizedString( TIDYCUSTOMEMPTY_STRING );
+            break;
+        case TidyCustomInline:
+            tagtype = tidyLocalizedString( TIDYCUSTOMINLINE_STRING );
+            break;
+        case TidyCustomPre:
+        default:
+            tagtype = tidyLocalizedString( TIDYCUSTOMPRE_STRING );
+            break;
+    }
+
+    return TY_(tidyMessageCreateWithNode)(doc, element, code, TidyInfo, elemdesc, tagtype );
+}
+
+
+/* Provides formatting for file-related errors. */
+TidyMessageImpl *formatFileError(TidyDocImpl* doc, Node *element, Node *node, uint code, uint level, va_list args)
+{
+    ctmbstr file;
+
+    if ( (file = va_arg( args, ctmbstr)) )
+        return TY_(tidyMessageCreate)( doc, code, level, file );
+
+    return NULL;
+}
+
+
+/* Provides general formatting for the majority of Tidy's reports. Because most
+** reports use the same basic data derived from the element and node, this
+** formatter covers the vast majority of Tidy's report messages. Note that this
+** formatter guarantees the values of TidyReportLevel in the dispatchTable[].
+*/
+TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uint code, uint level, va_list args)
+{
+    char nodedesc[ 256 ] = {0};
+    char elemdesc[ 256 ] = {0};
+    Node* rpt = ( element ? element : node );
+
+    TagToString(node, nodedesc, sizeof(nodedesc));
+
+    if ( element )
+        TagToString(element, elemdesc, sizeof(elemdesc));
+
+    switch ( code )
+    {
+        case SPACE_PRECEDING_XMLDECL:
+            /* @TODO: Should this be a TidyInfo "silent" fix? */
+            return TY_(tidyMessageCreateWithNode)(doc, node, code, level );
+            break;
+
+        case CANT_BE_NESTED:
+        case NOFRAMES_CONTENT:
+        case USING_BR_INPLACE_OF:
+            /* Can we use `rpt` here? No; `element` has a value in every case. */
+            return TY_(tidyMessageCreateWithNode)(doc, node, code, level, nodedesc );
+            break;
+
+        case ELEMENT_VERS_MISMATCH_ERROR:
+        case ELEMENT_VERS_MISMATCH_WARN:
+            return TY_(tidyMessageCreateWithNode)(doc, node, code, level, nodedesc, HTMLVersion(doc) );
+
+        case TAG_NOT_ALLOWED_IN:
+            /* Can we use `rpt` here? No; `element` has a value in every case. */
+            return TY_(tidyMessageCreateWithNode)(doc, node, code, level, nodedesc, element->element );
+            break;
+
+        case INSERTING_TAG:
+        case MISSING_STARTTAG:
+        case TOO_MANY_ELEMENTS:
+        case UNEXPECTED_ENDTAG:
+            /* Can we use `rpt` here? No; `element` has a value in every case. */
+            return TY_(tidyMessageCreateWithNode)(doc, node, code, level, node->element );
+            break;
+
+        case UNEXPECTED_ENDTAG_IN:
+            /* Can we use `rpt` here? No; `element` has a value in every case. */
+            return TY_(tidyMessageCreateWithNode)(doc, node, code, level, node->element, element->element );
+            break;
+
+        case BAD_CDATA_CONTENT:
+        case CONTENT_AFTER_BODY:
+        case DOCTYPE_AFTER_TAGS:
+        case DUPLICATE_FRAMESET:
+        case MALFORMED_COMMENT:
+        case MALFORMED_DOCTYPE:
+        case MISSING_DOCTYPE:
+        case MISSING_TITLE_ELEMENT:
+        case NESTED_QUOTATION:
+        case SUSPECTED_MISSING_QUOTE:
+        case XML_DECLARATION_DETECTED:
+            return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level );
+            break;
+
+        case ELEMENT_NOT_EMPTY:
+        case ILLEGAL_NESTING:
+        case TRIM_EMPTY_ELEMENT:
+        case UNEXPECTED_END_OF_FILE:
+            return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, elemdesc );
+            break;
+
+        case OBSOLETE_ELEMENT:
+        case REPLACING_ELEMENT:
+        case REPLACING_UNEX_ELEMENT:
+            return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, elemdesc, nodedesc );
+            break;
+
+        case BAD_SUMMARY_HTML5:
+        case NESTED_EMPHASIS:
+        case PROPRIETARY_ELEMENT:
+        case REMOVED_HTML5:
+        case UNKNOWN_ELEMENT:
+        case UNKNOWN_ELEMENT_LOOKS_CUSTOM:
+            return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, nodedesc );
+            break;
+
+        case MISSING_ENDTAG_FOR:
+        case PREVIOUS_LOCATION:
+            return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, element->element );
+            break;
+
+        case MISSING_ENDTAG_BEFORE:
+            return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, element->element, nodedesc );
+            break;
+
+        case COERCE_TO_ENDTAG:
+        case NON_MATCHING_ENDTAG:
+        case TOO_MANY_ELEMENTS_IN:
+            return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, node->element, node->element );
+            break;
+    }
+
+    return NULL;
+}
+
+
+/* Provides general formatting as formatStandard, except TidyReportLevel is set
+** dynamically for these items as it cannot be predicted except at runtime.
+ */
+TidyMessageImpl *formatStandardDynamic(TidyDocImpl* doc, Node *element, Node *node, uint code, uint level, va_list args)
+{
+    char nodedesc[ 256 ] = {0};
+
+    TagToString(node, nodedesc, sizeof(nodedesc));
+
+    switch (code)
+    {
+        case DISCARDING_UNEXPECTED:
+            /* Force error if in a bad form, or Issue #166 - repeated <main> element. */
+            /* Can we use `rpt` here? No; `element` has a value in every case. */
+            return TY_(tidyMessageCreateWithNode)(doc, node, code, doc->badForm ? TidyError : TidyWarning, nodedesc );
+            break;
+    }
+
+    return NULL;
+}
+
+
+/*********************************************************************
+ * High Level Message Writing Functions
  * When adding new reports to LibTidy, preference should be given
- * to one of these existing, general purpose message writing
- * functions, if at all possible.
+ * to one of the existing, general pupose message writing functions
+ * above, if possible, otherwise try to use one of these, or as a
+ * last resort add a new one in this section.
+ *********************************************************************/
+
+
+/* This function performs the heavy lifting for TY_(Report)(). */
+static void vReport(TidyDocImpl* doc, Node *element, Node *node, uint code, va_list args)
+{
+    int i = 0;
+    va_list args_copy;
+
+    while ( dispatchTable[i].code != 0 )
+    {
+        if ( dispatchTable[i].code == code )
+        {
+            TidyMessageImpl *message;
+            messageFormatter *handler = dispatchTable[i].handler;
+            TidyReportLevel level = dispatchTable[i].level;
+
+            va_copy(args_copy, args);
+            message = handler( doc, element, node, code, level, args_copy );
+            va_end(args_copy);
+
+            messageOut( message );
+
+            if ( dispatchTable[i].next )
+            {
+                switch ( code )
+                {
+                    case TAG_NOT_ALLOWED_IN:
+                        TY_(Report)(doc, element, node, PREVIOUS_LOCATION);
+                        break;
+
+                    case TOO_MANY_ELEMENTS_IN:
+                        TY_(Report)(doc, node, node, PREVIOUS_LOCATION);
+                        break;
+
+                    default:
+                        va_copy(args_copy, args);
+                        vReport(doc, element, node, dispatchTable[i].next, args_copy);
+                        va_end(args_copy);
+                        break;
+                }
+            }
+            break;
+        }
+        i++;
+    }
+}
+
+
+/* This single Report output function uses the correct formatter with all
+** possible, relevant data that can be reported. The only real drawbacks are
+** having to pass NULL when some of the values aren't used, and the lack of
+** type safety by using the variable arguments. To counter this some convenience
+** report output functions exist, too.
+*/
+void TY_(Report)(TidyDocImpl* doc, Node *element, Node *node, uint code, ...)
+{
+    va_list args;
+    va_start(args, code);
+    vReport(doc, element, node, code, args);
+    va_end(args);
+}
+
+
+/*********************************************************************
+ * Convenience Reporting Functions
+ * Functions that don't require the full signature of TY_(Report),
+ * and help protect type safety by avoiding variable arguments.
+ *********************************************************************/
+
+
+//void TY_(ReportFileError)( TidyDocImpl* doc, ctmbstr file, uint code )
+//{
+//    TY_(Report)(doc, NULL, NULL, code, file);
+//}
+//
+//void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
+//{
+//    TY_(Report)(doc, NULL, node, code, av);
+//}
+//
+//void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option )
+//{
+//    assert( option != NULL );
+//    TY_(Report)(doc, NULL, NULL, STRING_MISSING_MALFORMED, option);
+//}
+
+
+/*********************************************************************
+ * Legacy High Level Message Writing Functions - General
+ * These will be transitioned to the new reporting method.
  *********************************************************************/
 
 

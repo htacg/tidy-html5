@@ -130,6 +130,19 @@ static void NtoS(int n, tmbstr str)
 }
 
 
+/* Get an HTML version string */
+static ctmbstr HTMLVersion( TidyDocImpl* doc )
+{
+    uint versionEmitted = doc->lexer->versionEmitted;
+    uint declared = doc->lexer->doctype;
+    uint version = versionEmitted == 0 ? declared : versionEmitted;
+    ctmbstr result = TY_(HTMLVersionNameFromCode)(version, 0);
+    if (!result)
+        result = tidyLocalizedString(STRING_HTML_PROPRIETARY);
+    return result;
+}
+
+
 /*********************************************************************
  * Message Writing Functions
  * These funtions provide final, formatted output to the output sink.
@@ -218,8 +231,6 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
     Node* rpt = ( element ? element : node );
     char nodedesc[256] = { 0 };
     char elemdesc[256] = { 0 };
-    uint versionEmitted, declared, version;
-    ctmbstr extra_string = NULL;
     ctmbstr tagtype;
     
     TagToString(node, nodedesc, sizeof(nodedesc));
@@ -297,13 +308,7 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
             break;
 
         case ELEMENT_VERS_MISMATCH_WARN:
-            versionEmitted = doc->lexer->versionEmitted;
-            declared = doc->lexer->doctype;
-            version = versionEmitted == 0 ? declared : versionEmitted;
-            extra_string = TY_(HTMLVersionNameFromCode)(version, 0);
-            if (!extra_string)
-                extra_string = tidyLocalizedString(STRING_HTML_PROPRIETARY);
-            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, nodedesc, extra_string );
+            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyWarning, nodedesc, HTMLVersion( doc ) );
             break;
 
             
@@ -331,13 +336,7 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code)
 
             
         case ELEMENT_VERS_MISMATCH_ERROR:
-            versionEmitted = doc->lexer->versionEmitted;
-            declared = doc->lexer->doctype;
-            version = versionEmitted == 0 ? declared : versionEmitted;
-            extra_string = TY_(HTMLVersionNameFromCode)(version, 0);
-            if (!extra_string)
-                extra_string = tidyLocalizedString(STRING_HTML_PROPRIETARY);
-            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyError, nodedesc, extra_string );
+            message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyError, nodedesc, HTMLVersion( doc ) );
             break;
 
         case TOO_MANY_ELEMENTS_IN:

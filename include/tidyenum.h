@@ -101,6 +101,7 @@ extern "C" {
  */
 #define FOREACH_MSG_MISC(FN) \
 /** File can't be opened */                        FN(FILE_CANT_OPEN)              \
+/** File can't be opened */                        FN(FILE_CANT_OPEN_CFG)          \
 /** Not a file */                                  FN(FILE_NOT_FILE)               \
 /** line %d column %d */                           FN(LINE_COLUMN_STRING)          \
 /** Document content looks like %s */              FN(STRING_CONTENT_LOOKS)        \

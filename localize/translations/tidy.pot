@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-08-31 12:54:04\n"
+"POT-Creation-Date: 2017-09-04 17:43:44\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -1634,6 +1634,37 @@ msgstr ""
 #. - It's very important that <br/> be self-closing!
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not
 #. be translated.
+msgctxt "TidyMetaCharset"
+msgid ""
+"This option, when enabled, adds a <code>&lt;meta&gt;</code> element "
+"and sets the <code>charset</code> attribute to the encoding of the "
+"document. Set this option to <var>yes</var> to enable it. "
+msgstr ""
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowMetaChange"
+msgid ""
+"This option enables a message whenever Tidy changes the "
+"<code>content</code> attribute of a meta charset declaration to match "
+"the encoding of the document. Set this option to <var>yes</var> to "
+"enable it. "
+msgstr ""
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
 msgctxt "TidyStyleTags"
 msgid ""
 "This option specifies if Tidy should move all style tags to the "
@@ -1711,6 +1742,11 @@ msgstr ""
 #, c-format
 msgctxt "FILE_CANT_OPEN"
 msgid "Can't open \"%s\"\n"
+msgstr ""
+
+#, c-format
+msgctxt "FILE_CANT_OPEN_CFG"
+msgid "Can't open configuration file \"%s\"\n"
 msgstr ""
 
 #, c-format
@@ -2068,6 +2104,11 @@ msgstr ""
 #, c-format
 msgctxt "ATTRIBUTE_IS_NOT_ALLOWED"
 msgid "%s attribute \"is\" not allowed for autonomous custom tags."
+msgstr ""
+
+#, c-format
+msgctxt "ATTRIBUTE_VALUE_REPLACED"
+msgid "%s attribute \"%s\", incorrect value \"%s\" replaced"
 msgstr ""
 
 #, c-format
@@ -2494,6 +2535,11 @@ msgstr ""
 
 msgctxt "FOUND_STYLE_IN_BODY"
 msgid "found <style> tag in <body>! fix-style-tags: yes to move."
+msgstr ""
+
+#, c-format
+msgctxt "ADDED_MISSING_CHARSET"
+msgid "Added appropriate missing <meta charset=...> to %s"
 msgstr ""
 
 msgctxt "IMG_MISSING_ALT"

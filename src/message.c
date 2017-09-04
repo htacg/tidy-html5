@@ -238,7 +238,6 @@ typedef TidyMessageImpl*(messageFormatter)(TidyDocImpl* doc, Node *element, Node
 static messageFormatter formatAttributeReport;
 static messageFormatter formatBadArgument;
 static messageFormatter formatCustomTagDetected;
-static messageFormatter formatFileError;
 static messageFormatter formatStandard;
 static messageFormatter formatStandardDynamic;
 
@@ -281,9 +280,9 @@ static struct _dispatchTable {
     { ELEMENT_VERS_MISMATCH_WARN,   TidyWarning,     formatStandard          },
     { ENCODING_MISMATCH,            TidyWarning,     NULL                    },
     { ESCAPED_ILLEGAL_URI,          TidyWarning,     formatAttributeReport   },
-    { FILE_CANT_OPEN,               TidyBadDocument, formatFileError         },
-    { FILE_CANT_OPEN_CFG,           TidyBadDocument, formatFileError         },
-    { FILE_NOT_FILE,                TidyBadDocument, formatFileError         },
+    { FILE_CANT_OPEN,               TidyBadDocument, formatStandard          },
+    { FILE_CANT_OPEN_CFG,           TidyBadDocument, formatStandard          },
+    { FILE_NOT_FILE,                TidyBadDocument, formatStandard          },
     { FIXED_BACKSLASH,              TidyWarning,     formatAttributeReport   },
     { FOUND_STYLE_IN_BODY,          TidyWarning,     formatStandard          },
     { ID_NAME_MISMATCH,             TidyWarning,     formatAttributeReport   },
@@ -493,18 +492,6 @@ TidyMessageImpl *formatCustomTagDetected(TidyDocImpl* doc, Node *element, Node *
 }
 
 
-/* Provides formatting for file-related errors. */
-TidyMessageImpl *formatFileError(TidyDocImpl* doc, Node *element, Node *node, uint code, uint level, va_list args)
-{
-    ctmbstr file;
-
-    if ( (file = va_arg( args, ctmbstr)) )
-        return TY_(tidyMessageCreate)( doc, code, level, file );
-
-    return NULL;
-}
-
-
 /* Provides general formatting for the majority of Tidy's reports. Because most
 ** reports use the same basic data derived from the element and node, this
 ** formatter covers the vast majority of Tidy's report messages. Note that this
@@ -523,6 +510,15 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
 
     switch ( code )
     {
+        case FILE_CANT_OPEN:
+        case FILE_CANT_OPEN_CFG:
+        case FILE_NOT_FILE:
+        {
+            ctmbstr file;
+            if ( (file = va_arg( args, ctmbstr)) )
+                return TY_(tidyMessageCreate)( doc, code, level, file );
+        }
+
         case SPACE_PRECEDING_XMLDECL:
             /* @TODO: Should this be a TidyInfo "silent" fix? */
             return TY_(tidyMessageCreateWithNode)(doc, node, code, level );

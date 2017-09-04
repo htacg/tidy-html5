@@ -163,111 +163,100 @@ extern "C" {
  ** of errors and warnings.
  */
 #define FOREACH_REPORT_MSG(FN)        \
-    /* ReportAttrError */             \
+    FN(ADDED_MISSING_CHARSET)         \
     FN(ANCHOR_NOT_UNIQUE)             \
+    FN(APOS_UNDEFINED)                \
     FN(ATTR_VALUE_NOT_LCASE)          \
     FN(ATTRIBUTE_IS_NOT_ALLOWED)      \
+    FN(ATTRIBUTE_VALUE_REPLACED)      \
     FN(BACKSLASH_IN_URI)              \
     FN(BAD_ATTRIBUTE_VALUE_REPLACED)  \
     FN(BAD_ATTRIBUTE_VALUE)           \
-    FN(ATTRIBUTE_VALUE_REPLACED)      \
-    FN(ESCAPED_ILLEGAL_URI)           \
-    FN(FIXED_BACKSLASH)               \
-    FN(ID_NAME_MISMATCH)              \
-    FN(ILLEGAL_URI_CODEPOINT)         \
-    FN(ILLEGAL_URI_REFERENCE)         \
-    FN(INSERTING_AUTO_ATTRIBUTE)      \
-    FN(INVALID_ATTRIBUTE)             \
-    FN(INVALID_XML_ID)                \
-    FN(JOINING_ATTRIBUTE)             \
-    FN(MISMATCHED_ATTRIBUTE_ERROR)    \
-    FN(MISMATCHED_ATTRIBUTE_WARN)     \
-    FN(MISSING_ATTR_VALUE)            \
-    FN(MISSING_IMAGEMAP)              \
-    FN(MISSING_QUOTEMARK)             \
-    FN(NEWLINE_IN_URI)                \
-    FN(PROPRIETARY_ATTR_VALUE)        \
-    FN(PROPRIETARY_ATTRIBUTE)         \
-    FN(REPEATED_ATTRIBUTE)            \
-    FN(UNEXPECTED_END_OF_FILE_ATTR)   \
-    FN(UNEXPECTED_EQUALSIGN)          \
-    FN(UNEXPECTED_GT)                 \
-    FN(UNEXPECTED_QUOTEMARK)          \
-    FN(WHITE_IN_URI)                  \
-    FN(XML_ID_SYNTAX)                 \
-    /* ReportEncodingError */         \
-    FN(INVALID_NCR)                   \
-    FN(INVALID_SGML_CHARS)            \
-    FN(INVALID_UTF16)                 \
-    FN(INVALID_UTF8)                  \
-    FN(VENDOR_SPECIFIC_CHARS)         \
-    /* ReportEncodingWarning */       \
-    FN(ENCODING_MISMATCH)             \
-    /* ReportEntityError */           \
-    FN(APOS_UNDEFINED)                \
-    FN(MISSING_SEMICOLON_NCR)         \
-    FN(MISSING_SEMICOLON)             \
-    FN(UNESCAPED_AMPERSAND)           \
-    FN(UNKNOWN_ENTITY)                \
-    /* ReportError */                 \
     FN(BAD_CDATA_CONTENT)             \
-    FN(CANT_BE_NESTED)                \
-    FN(CONTENT_AFTER_BODY)            \
-    FN(DISCARDING_UNEXPECTED)         \
-    FN(DOCTYPE_AFTER_TAGS)            \
-    FN(ELEMENT_VERS_MISMATCH_ERROR)   \
-    FN(ELEMENT_VERS_MISMATCH_WARN)    \
-    FN(ILLEGAL_NESTING)               \
-    FN(INSERTING_TAG)                 \
-    FN(MALFORMED_COMMENT)             \
-    FN(MALFORMED_DOCTYPE)             \
-    FN(MISSING_DOCTYPE)               \
-    FN(MISSING_ENDTAG_BEFORE)         \
-    FN(MISSING_ENDTAG_FOR)            \
-    FN(MISSING_STARTTAG)              \
-    FN(MISSING_TITLE_ELEMENT)         \
-    FN(NOFRAMES_CONTENT)              \
-    FN(NON_MATCHING_ENDTAG)           \
-    FN(PREVIOUS_LOCATION)             \
-    FN(PROPRIETARY_ELEMENT)           \
-    FN(REPLACING_UNEX_ELEMENT)        \
-    FN(SPACE_PRECEDING_XMLDECL)       \
-    FN(TAG_NOT_ALLOWED_IN)            \
-    FN(TOO_MANY_ELEMENTS_IN)          \
-    FN(TOO_MANY_ELEMENTS)             \
-    FN(USING_BR_INPLACE_OF)           \
-    /* ReportFatal */                 \
-    FN(DUPLICATE_FRAMESET)            \
-    FN(SUSPECTED_MISSING_QUOTE)       \
-    FN(UNEXPECTED_ENDTAG_IN)          \
-    FN(UNKNOWN_ELEMENT_LOOKS_CUSTOM)  \
-    FN(UNKNOWN_ELEMENT)               \
-    /* ReportMissingAttr */           \
-    FN(MISSING_ATTRIBUTE)             \
-    /* ReportNotice */                \
-    FN(CUSTOM_TAG_DETECTED)           \
-    FN(REPLACING_ELEMENT)             \
-    FN(TRIM_EMPTY_ELEMENT)            \
-    /* ReportSurrogateError */        \
+    FN(BAD_SUMMARY_HTML5)             \
     FN(BAD_SURROGATE_LEAD)            \
     FN(BAD_SURROGATE_PAIR)            \
     FN(BAD_SURROGATE_TAIL)            \
-    /* ReportWarning */               \
-    FN(BAD_SUMMARY_HTML5)             \
+    FN(CANT_BE_NESTED)                \
+    FN(COERCE_TO_ENDTAG)              \
+    FN(CONTENT_AFTER_BODY)            \
+    FN(CUSTOM_TAG_DETECTED)           \
+    FN(DISCARDING_UNEXPECTED)         \
+    FN(DOCTYPE_AFTER_TAGS)            \
+    FN(DUPLICATE_FRAMESET)            \
+    FN(ELEMENT_NOT_EMPTY)             \
+    FN(ELEMENT_VERS_MISMATCH_ERROR)   \
+    FN(ELEMENT_VERS_MISMATCH_WARN)    \
+    FN(ENCODING_MISMATCH)             \
+    FN(ESCAPED_ILLEGAL_URI)           \
+    FN(FIXED_BACKSLASH)               \
+    FN(FOUND_STYLE_IN_BODY)           \
+    FN(ID_NAME_MISMATCH)              \
+    FN(ILLEGAL_NESTING)               \
+    FN(ILLEGAL_URI_CODEPOINT)         \
+    FN(ILLEGAL_URI_REFERENCE)         \
+    FN(INSERTING_AUTO_ATTRIBUTE)      \
+    FN(INSERTING_TAG)                 \
+    FN(INVALID_ATTRIBUTE)             \
+    FN(INVALID_NCR)                   \
+    FN(INVALID_SGML_CHARS)            \
+    FN(INVALID_UTF8)                  \
+    FN(INVALID_UTF16)                 \
+    FN(INVALID_XML_ID)                \
+    FN(JOINING_ATTRIBUTE)             \
+    FN(MALFORMED_COMMENT)             \
+    FN(MALFORMED_DOCTYPE)             \
+    FN(MISMATCHED_ATTRIBUTE_ERROR)    \
+    FN(MISMATCHED_ATTRIBUTE_WARN)     \
+    FN(MISSING_ATTR_VALUE)            \
+    FN(MISSING_ATTRIBUTE)             \
+    FN(MISSING_DOCTYPE)               \
+    FN(MISSING_ENDTAG_BEFORE)         \
+    FN(MISSING_ENDTAG_FOR)            \
+    FN(MISSING_IMAGEMAP)              \
+    FN(MISSING_QUOTEMARK)             \
+    FN(MISSING_SEMICOLON_NCR)         \
+    FN(MISSING_SEMICOLON)             \
+    FN(MISSING_STARTTAG)              \
+    FN(MISSING_TITLE_ELEMENT)         \
+    FN(MOVED_STYLE_TO_HEAD)           \
     FN(NESTED_EMPHASIS)               \
     FN(NESTED_QUOTATION)              \
+    FN(NEWLINE_IN_URI)                \
+    FN(NOFRAMES_CONTENT)              \
+    FN(NON_MATCHING_ENDTAG)           \
     FN(OBSOLETE_ELEMENT)              \
+    FN(PREVIOUS_LOCATION)             \
+    FN(PROPRIETARY_ATTR_VALUE)        \
+    FN(PROPRIETARY_ATTRIBUTE)         \
+    FN(PROPRIETARY_ELEMENT)           \
     FN(REMOVED_HTML5)                 \
-    FN(XML_DECLARATION_DETECTED)      \
-    /* Report, mixed use */           \
-    FN(ADDED_MISSING_CHARSET)         \
-    FN(COERCE_TO_ENDTAG)              \
-    FN(ELEMENT_NOT_EMPTY)             \
-    FN(FOUND_STYLE_IN_BODY)           \
-    FN(MOVED_STYLE_TO_HEAD)           \
+    FN(REPEATED_ATTRIBUTE)            \
+    FN(REPLACING_ELEMENT)             \
+    FN(REPLACING_UNEX_ELEMENT)        \
+    FN(SPACE_PRECEDING_XMLDECL)       \
+    FN(SUSPECTED_MISSING_QUOTE)       \
+    FN(TAG_NOT_ALLOWED_IN)            \
+    FN(TOO_MANY_ELEMENTS_IN)          \
+    FN(TOO_MANY_ELEMENTS)             \
+    FN(TRIM_EMPTY_ELEMENT)            \
+    FN(UNESCAPED_AMPERSAND)           \
+    FN(UNEXPECTED_END_OF_FILE_ATTR)   \
     FN(UNEXPECTED_END_OF_FILE)        \
+    FN(UNEXPECTED_ENDTAG_ERR)         \
+    FN(UNEXPECTED_ENDTAG_IN)          \
     FN(UNEXPECTED_ENDTAG)             \
-    FN(UNEXPECTED_ENDTAG_ERR)
+    FN(UNEXPECTED_EQUALSIGN)          \
+    FN(UNEXPECTED_GT)                 \
+    FN(UNEXPECTED_QUOTEMARK)          \
+    FN(UNKNOWN_ELEMENT_LOOKS_CUSTOM)  \
+    FN(UNKNOWN_ELEMENT)               \
+    FN(UNKNOWN_ENTITY)                \
+    FN(USING_BR_INPLACE_OF)           \
+    FN(VENDOR_SPECIFIC_CHARS)         \
+    FN(WHITE_IN_URI)                  \
+    FN(XML_DECLARATION_DETECTED)      \
+    FN(XML_ID_SYNTAX)
 
 
 /** These are report messages added by Tidy's accessibility module. 

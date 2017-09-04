@@ -235,6 +235,7 @@ typedef TidyMessageImpl*(messageFormatter)(TidyDocImpl* doc, Node *element, Node
 
 
 /* Forward declarations of messageFormatter functions. */
+static messageFormatter formatAccessReport;
 static messageFormatter formatAttributeReport;
 static messageFormatter formatEncodingReport;
 static messageFormatter formatStandard;
@@ -352,6 +353,127 @@ static struct _dispatchTable {
     { WHITE_IN_URI,                 TidyWarning,     formatAttributeReport   },
     { XML_DECLARATION_DETECTED,     TidyWarning,     formatStandard          },
     { XML_ID_SYNTAX,                TidyWarning,     formatAttributeReport   },
+
+    { APPLET_MISSING_ALT,                            TidyAccess, formatAccessReport },
+    { AREA_MISSING_ALT,                              TidyAccess, formatAccessReport },
+    { ASCII_REQUIRES_DESCRIPTION,                    TidyAccess, formatAccessReport },
+    { ASSOCIATE_LABELS_EXPLICITLY,                   TidyAccess, formatAccessReport },
+    { ASSOCIATE_LABELS_EXPLICITLY_FOR,               TidyAccess, formatAccessReport },
+    { ASSOCIATE_LABELS_EXPLICITLY_ID,                TidyAccess, formatAccessReport },
+    { AUDIO_MISSING_TEXT_AIFF,                       TidyAccess, formatAccessReport },
+    { AUDIO_MISSING_TEXT_AU,                         TidyAccess, formatAccessReport },
+    { AUDIO_MISSING_TEXT_RA,                         TidyAccess, formatAccessReport },
+    { AUDIO_MISSING_TEXT_RM,                         TidyAccess, formatAccessReport },
+    { AUDIO_MISSING_TEXT_SND,                        TidyAccess, formatAccessReport },
+    { AUDIO_MISSING_TEXT_WAV,                        TidyAccess, formatAccessReport },
+    { COLOR_CONTRAST_ACTIVE_LINK,                    TidyAccess, formatAccessReport },
+    { COLOR_CONTRAST_LINK,                           TidyAccess, formatAccessReport },
+    { COLOR_CONTRAST_TEXT,                           TidyAccess, formatAccessReport },
+    { COLOR_CONTRAST_VISITED_LINK,                   TidyAccess, formatAccessReport },
+    { DATA_TABLE_MISSING_HEADERS,                    TidyAccess, formatAccessReport },
+    { DATA_TABLE_MISSING_HEADERS_COLUMN,             TidyAccess, formatAccessReport },
+    { DATA_TABLE_MISSING_HEADERS_ROW,                TidyAccess, formatAccessReport },
+    { DATA_TABLE_REQUIRE_MARKUP_COLUMN_HEADERS,      TidyAccess, formatAccessReport },
+    { DATA_TABLE_REQUIRE_MARKUP_ROW_HEADERS,         TidyAccess, formatAccessReport },
+    { DOCTYPE_MISSING,                               TidyAccess, formatAccessReport },
+    { ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_APPLET, TidyAccess, formatAccessReport },
+    { ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_EMBED,  TidyAccess, formatAccessReport },
+    { ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_OBJECT, TidyAccess, formatAccessReport },
+    { ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_SCRIPT, TidyAccess, formatAccessReport },
+    { FRAME_MISSING_LONGDESC,                        TidyAccess, formatAccessReport },
+    { FRAME_MISSING_NOFRAMES,                        TidyAccess, formatAccessReport },
+    { FRAME_MISSING_TITLE,                           TidyAccess, formatAccessReport },
+    { FRAME_SRC_INVALID,                             TidyAccess, formatAccessReport },
+    { FRAME_TITLE_INVALID_NULL,                      TidyAccess, formatAccessReport },
+    { FRAME_TITLE_INVALID_SPACES,                    TidyAccess, formatAccessReport },
+    { HEADER_USED_FORMAT_TEXT,                       TidyAccess, formatAccessReport },
+    { HEADERS_IMPROPERLY_NESTED,                     TidyAccess, formatAccessReport },
+    { IMAGE_MAP_SERVER_SIDE_REQUIRES_CONVERSION,     TidyAccess, formatAccessReport },
+    { IMG_ALT_SUSPICIOUS_FILE_SIZE,                  TidyAccess, formatAccessReport },
+    { IMG_ALT_SUSPICIOUS_FILENAME,                   TidyAccess, formatAccessReport },
+    { IMG_ALT_SUSPICIOUS_PLACEHOLDER,                TidyAccess, formatAccessReport },
+    { IMG_ALT_SUSPICIOUS_TOO_LONG,                   TidyAccess, formatAccessReport },
+    { IMG_BUTTON_MISSING_ALT,                        TidyAccess, formatAccessReport },
+    { IMG_MAP_CLIENT_MISSING_TEXT_LINKS,             TidyAccess, formatAccessReport },
+    { IMG_MAP_SERVER_REQUIRES_TEXT_LINKS,            TidyAccess, formatAccessReport },
+    { IMG_MISSING_ALT,                               TidyAccess, formatAccessReport },
+    { IMG_MISSING_DLINK,                             TidyAccess, formatAccessReport },
+    { IMG_MISSING_LONGDESC,                          TidyAccess, formatAccessReport },
+    { IMG_MISSING_LONGDESC_DLINK,                    TidyAccess, formatAccessReport },
+    { INFORMATION_NOT_CONVEYED_APPLET,               TidyAccess, formatAccessReport },
+    { INFORMATION_NOT_CONVEYED_IMAGE,                TidyAccess, formatAccessReport },
+    { INFORMATION_NOT_CONVEYED_INPUT,                TidyAccess, formatAccessReport },
+    { INFORMATION_NOT_CONVEYED_OBJECT,               TidyAccess, formatAccessReport },
+    { INFORMATION_NOT_CONVEYED_SCRIPT,               TidyAccess, formatAccessReport },
+    { LANGUAGE_INVALID,                              TidyAccess, formatAccessReport },
+    { LANGUAGE_NOT_IDENTIFIED,                       TidyAccess, formatAccessReport },
+    { LAYOUT_TABLE_INVALID_MARKUP,                   TidyAccess, formatAccessReport },
+    { LAYOUT_TABLES_LINEARIZE_PROPERLY,              TidyAccess, formatAccessReport },
+    { LINK_TEXT_MISSING,                             TidyAccess, formatAccessReport },
+    { LINK_TEXT_NOT_MEANINGFUL,                      TidyAccess, formatAccessReport },
+    { LINK_TEXT_NOT_MEANINGFUL_CLICK_HERE,           TidyAccess, formatAccessReport },
+    { LINK_TEXT_TOO_LONG,                            TidyAccess, formatAccessReport },
+    { LIST_USAGE_INVALID_LI,                         TidyAccess, formatAccessReport },
+    { LIST_USAGE_INVALID_OL,                         TidyAccess, formatAccessReport },
+    { LIST_USAGE_INVALID_UL,                         TidyAccess, formatAccessReport },
+    { METADATA_MISSING,                              TidyAccess, formatAccessReport },
+    { METADATA_MISSING_REDIRECT_AUTOREFRESH,         TidyAccess, formatAccessReport },
+    { MULTIMEDIA_REQUIRES_TEXT,                      TidyAccess, formatAccessReport },
+    { NEW_WINDOWS_REQUIRE_WARNING_BLANK,             TidyAccess, formatAccessReport },
+    { NEW_WINDOWS_REQUIRE_WARNING_NEW,               TidyAccess, formatAccessReport },
+    { NOFRAMES_INVALID_CONTENT,                      TidyAccess, formatAccessReport },
+    { NOFRAMES_INVALID_LINK,                         TidyAccess, formatAccessReport },
+    { NOFRAMES_INVALID_NO_VALUE,                     TidyAccess, formatAccessReport },
+    { OBJECT_MISSING_ALT,                            TidyAccess, formatAccessReport },
+    { POTENTIAL_HEADER_BOLD,                         TidyAccess, formatAccessReport },
+    { POTENTIAL_HEADER_ITALICS,                      TidyAccess, formatAccessReport },
+    { POTENTIAL_HEADER_UNDERLINE,                    TidyAccess, formatAccessReport },
+    { PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_APPLET,   TidyAccess, formatAccessReport },
+    { PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_EMBED,    TidyAccess, formatAccessReport },
+    { PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_OBJECT,   TidyAccess, formatAccessReport },
+    { PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_SCRIPT,   TidyAccess, formatAccessReport },
+    { REMOVE_AUTO_REDIRECT,                          TidyAccess, formatAccessReport },
+    { REMOVE_AUTO_REFRESH,                           TidyAccess, formatAccessReport },
+    { REMOVE_BLINK_MARQUEE,                          TidyAccess, formatAccessReport },
+    { REMOVE_FLICKER_ANIMATED_GIF,                   TidyAccess, formatAccessReport },
+    { REMOVE_FLICKER_APPLET,                         TidyAccess, formatAccessReport },
+    { REMOVE_FLICKER_EMBED,                          TidyAccess, formatAccessReport },
+    { REMOVE_FLICKER_OBJECT,                         TidyAccess, formatAccessReport },
+    { REMOVE_FLICKER_SCRIPT,                         TidyAccess, formatAccessReport },
+    { REPLACE_DEPRECATED_HTML_APPLET,                TidyAccess, formatAccessReport },
+    { REPLACE_DEPRECATED_HTML_BASEFONT,              TidyAccess, formatAccessReport },
+    { REPLACE_DEPRECATED_HTML_CENTER,                TidyAccess, formatAccessReport },
+    { REPLACE_DEPRECATED_HTML_DIR,                   TidyAccess, formatAccessReport },
+    { REPLACE_DEPRECATED_HTML_FONT,                  TidyAccess, formatAccessReport },
+    { REPLACE_DEPRECATED_HTML_ISINDEX,               TidyAccess, formatAccessReport },
+    { REPLACE_DEPRECATED_HTML_MENU,                  TidyAccess, formatAccessReport },
+    { REPLACE_DEPRECATED_HTML_S,                     TidyAccess, formatAccessReport },
+    { REPLACE_DEPRECATED_HTML_STRIKE,                TidyAccess, formatAccessReport },
+    { REPLACE_DEPRECATED_HTML_U,                     TidyAccess, formatAccessReport },
+    { SCRIPT_MISSING_NOSCRIPT,                       TidyAccess, formatAccessReport },
+    { SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_CLICK,       TidyAccess, formatAccessReport },
+    { SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_DOWN,  TidyAccess, formatAccessReport },
+    { SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_MOVE,  TidyAccess, formatAccessReport },
+    { SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OUT,   TidyAccess, formatAccessReport },
+    { SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OVER,  TidyAccess, formatAccessReport },
+    { SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_UP,    TidyAccess, formatAccessReport },
+    { SKIPOVER_ASCII_ART,                            TidyAccess, formatAccessReport },
+    { STYLE_SHEET_CONTROL_PRESENTATION,              TidyAccess, formatAccessReport },
+    { STYLESHEETS_REQUIRE_TESTING_LINK,              TidyAccess, formatAccessReport },
+    { STYLESHEETS_REQUIRE_TESTING_STYLE_ATTR,        TidyAccess, formatAccessReport },
+    { STYLESHEETS_REQUIRE_TESTING_STYLE_ELEMENT,     TidyAccess, formatAccessReport },
+    { TABLE_MAY_REQUIRE_HEADER_ABBR,                 TidyAccess, formatAccessReport },
+    { TABLE_MAY_REQUIRE_HEADER_ABBR_NULL,            TidyAccess, formatAccessReport },
+    { TABLE_MAY_REQUIRE_HEADER_ABBR_SPACES,          TidyAccess, formatAccessReport },
+    { TABLE_MISSING_CAPTION,                         TidyAccess, formatAccessReport },
+    { TABLE_MISSING_SUMMARY,                         TidyAccess, formatAccessReport },
+    { TABLE_SUMMARY_INVALID_NULL,                    TidyAccess, formatAccessReport },
+    { TABLE_SUMMARY_INVALID_PLACEHOLDER,             TidyAccess, formatAccessReport },
+    { TABLE_SUMMARY_INVALID_SPACES,                  TidyAccess, formatAccessReport },
+    { TEXT_EQUIVALENTS_REQUIRE_UPDATING_APPLET,      TidyAccess, formatAccessReport },
+    { TEXT_EQUIVALENTS_REQUIRE_UPDATING_OBJECT,      TidyAccess, formatAccessReport },
+    { TEXT_EQUIVALENTS_REQUIRE_UPDATING_SCRIPT,      TidyAccess, formatAccessReport },
+
     { 0, 0, NULL }
 };
 
@@ -362,6 +484,13 @@ static struct _dispatchTable {
  * correct, pertinent data.
  *********************************************************************/
 
+
+/* Provides formatting for the Attribute-related reports. */
+TidyMessageImpl *formatAccessReport(TidyDocImpl* doc, Node *element, Node *node, uint code, uint level, va_list args)
+{
+    doc->badAccess |= BA_WAI;
+    return TY_(tidyMessageCreateWithNode)(doc, node, code, level );
+}
 
 /* Provides formatting for the Attribute-related reports. */
 TidyMessageImpl *formatAttributeReport(TidyDocImpl* doc, Node *element, Node *node, uint code, uint level, va_list args)
@@ -768,6 +897,13 @@ void TY_(Report)(TidyDocImpl* doc, Node *element, Node *node, uint code, ...)
  * and help protect type safety by avoiding variable arguments.
  *********************************************************************/
 
+#if SUPPORT_ACCESSIBILITY_CHECKS
+void TY_(ReportAccessError)( TidyDocImpl* doc, Node* node, uint code )
+{
+    TY_(Report)( doc, NULL, node, code );
+}
+#endif
+
 
 void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
 {
@@ -1053,8 +1189,8 @@ void TY_(ReportNumWarnings)( TidyDocImpl* doc )
         }
 
         message = TY_(tidyMessageCreate)( doc, code, TidyDialogueSummary,
-                                         doc->warnings, tidyLocalizedStringN( STRING_ERROR_COUNT_WARNING, doc->warnings ),
-                                         doc->errors, tidyLocalizedStringN( STRING_ERROR_COUNT_ERROR, doc->errors ) );
+                                          doc->warnings, tidyLocalizedStringN( STRING_ERROR_COUNT_WARNING, doc->warnings ),
+                                          doc->errors, tidyLocalizedStringN( STRING_ERROR_COUNT_ERROR, doc->errors ) );
     }
     else
     {
@@ -1184,36 +1320,6 @@ uint TY_(getNextErrorCode)( TidyIterator* iter )
     *iter = (TidyIterator)( itemIndex <= tidyErrorCodeListSize() ? itemIndex : (size_t)0 );
     return item->value;
 }
-
-
-/*********************************************************************
- * Accessibility Module
- * These methods are part of the accessibility module access.h/c.
- *********************************************************************/
-
-
-#if SUPPORT_ACCESSIBILITY_CHECKS
-
-void TY_(ReportAccessError)( TidyDocImpl* doc, Node* node, uint code )
-{
-    TidyMessageImpl *message = NULL;
-
-    doc->badAccess |= BA_WAI;
-    message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyAccess );
-    messageOut(message);
-}
-
-
-void TY_(ReportAccessWarning)( TidyDocImpl* doc, Node* node, uint code )
-{
-    TidyMessageImpl *message = NULL;
-
-    doc->badAccess |= BA_WAI;
-    message = TY_(tidyMessageCreateWithNode)(doc, node, code, TidyAccess );
-    messageOut(message);
-}
-
-#endif /* SUPPORT_ACCESSIBILITY_CHECKS */
 
 
 /*********************************************************************

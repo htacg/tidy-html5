@@ -506,19 +506,19 @@ static void CheckColorAvailable( TidyDocImpl* doc, Node* node )
     if (Level1_Enabled( doc ))
     {
         if ( nodeIsIMG(node) )
-            TY_(ReportAccessWarning)( doc, node, INFORMATION_NOT_CONVEYED_IMAGE );
+            TY_(ReportAccessError)( doc, node, INFORMATION_NOT_CONVEYED_IMAGE );
 
         else if ( nodeIsAPPLET(node) )
-            TY_(ReportAccessWarning)( doc, node, INFORMATION_NOT_CONVEYED_APPLET );
+            TY_(ReportAccessError)( doc, node, INFORMATION_NOT_CONVEYED_APPLET );
 
         else if ( nodeIsOBJECT(node) )
-            TY_(ReportAccessWarning)( doc, node, INFORMATION_NOT_CONVEYED_OBJECT );
+            TY_(ReportAccessError)( doc, node, INFORMATION_NOT_CONVEYED_OBJECT );
 
         else if ( nodeIsSCRIPT(node) )
-            TY_(ReportAccessWarning)( doc, node, INFORMATION_NOT_CONVEYED_SCRIPT );
+            TY_(ReportAccessError)( doc, node, INFORMATION_NOT_CONVEYED_SCRIPT );
 
         else if ( nodeIsINPUT(node) )
-            TY_(ReportAccessWarning)( doc, node, INFORMATION_NOT_CONVEYED_INPUT );
+            TY_(ReportAccessError)( doc, node, INFORMATION_NOT_CONVEYED_INPUT );
     }
 }
 
@@ -580,7 +580,7 @@ static void CheckColorContrast( TidyDocImpl* doc, Node* node )
                 if ( GetRgb(av->value, rgbFG) &&
                      !CompareColors(rgbBG, rgbFG) )
                 {
-                    TY_(ReportAccessWarning)( doc, node, errcode );
+                    TY_(ReportAccessError)( doc, node, errcode );
                 }
             }
         }
@@ -738,25 +738,25 @@ static void CheckImage( TidyDocImpl* doc, Node* node )
                     else if (TY_(tmbstrlen)(av->value) > 150)
                     {
                         HasAlt = yes;
-                        TY_(ReportAccessWarning)( doc, node, IMG_ALT_SUSPICIOUS_TOO_LONG );
+                        TY_(ReportAccessError)( doc, node, IMG_ALT_SUSPICIOUS_TOO_LONG );
                     }
 
                     else if (IsImage (av->value) == yes)
                     {
                         HasAlt = yes;
-                        TY_(ReportAccessWarning)( doc, node, IMG_ALT_SUSPICIOUS_FILENAME);
+                        TY_(ReportAccessError)( doc, node, IMG_ALT_SUSPICIOUS_FILENAME);
                     }
             
                     else if (IsPlaceholderAlt (av->value) == yes)
                     {
                         HasAlt = yes;
-                        TY_(ReportAccessWarning)( doc, node, IMG_ALT_SUSPICIOUS_PLACEHOLDER);
+                        TY_(ReportAccessError)( doc, node, IMG_ALT_SUSPICIOUS_PLACEHOLDER);
                     }
 
                     else if (EndsWithBytes (av->value) == yes)
                     {
                         HasAlt = yes;
-                        TY_(ReportAccessWarning)( doc, node, IMG_ALT_SUSPICIOUS_FILE_SIZE);
+                        TY_(ReportAccessError)( doc, node, IMG_ALT_SUSPICIOUS_FILE_SIZE);
                     }
                 }
             }
@@ -913,19 +913,19 @@ static void CheckImage( TidyDocImpl* doc, Node* node )
             if ((HasDLINK == yes)&&
                 (HasLongDesc == no))
             {
-                TY_(ReportAccessWarning)( doc, node, IMG_MISSING_LONGDESC);
+                TY_(ReportAccessError)( doc, node, IMG_MISSING_LONGDESC);
             }
 
             if ((HasLongDesc == yes)&&
                 (HasDLINK == no))
             {
-                TY_(ReportAccessWarning)( doc, node, IMG_MISSING_DLINK);
+                TY_(ReportAccessError)( doc, node, IMG_MISSING_DLINK);
             }
 
             if ((HasLongDesc == no)&&
                 (HasDLINK == no))
             {
-                TY_(ReportAccessWarning)( doc, node, IMG_MISSING_LONGDESC_DLINK);
+                TY_(ReportAccessError)( doc, node, IMG_MISSING_LONGDESC_DLINK);
             }
         }
 
@@ -933,7 +933,7 @@ static void CheckImage( TidyDocImpl* doc, Node* node )
         {
             TY_(ReportAccessError)( doc, node, IMAGE_MAP_SERVER_SIDE_REQUIRES_CONVERSION);
 
-            TY_(ReportAccessWarning)( doc, node, IMG_MAP_SERVER_REQUIRES_TEXT_LINKS);
+            TY_(ReportAccessError)( doc, node, IMG_MAP_SERVER_REQUIRES_TEXT_LINKS);
         }
     }
 }
@@ -1180,7 +1180,7 @@ static void CheckFrame( TidyDocImpl* doc, Node* node )
         if ( doc->access.numFrames==3 && doc->access.HasCheckedLongDesc<3 )
         {
             doc->access.numFrames = 0;
-            TY_(ReportAccessWarning)( doc, node, FRAME_MISSING_LONGDESC );
+            TY_(ReportAccessError)( doc, node, FRAME_MISSING_LONGDESC );
         }
     }
 }
@@ -1284,11 +1284,11 @@ static void CheckAnchorAccess( TidyDocImpl* doc, Node* node )
             {
                 if (AttrValueIs(av, "_new"))
                 {
-                    TY_(ReportAccessWarning)( doc, node, NEW_WINDOWS_REQUIRE_WARNING_NEW);
+                    TY_(ReportAccessError)( doc, node, NEW_WINDOWS_REQUIRE_WARNING_NEW);
                 }
                 else if (AttrValueIs(av, "_blank"))
                 {
-                    TY_(ReportAccessWarning)( doc, node, NEW_WINDOWS_REQUIRE_WARNING_BLANK);
+                    TY_(ReportAccessError)( doc, node, NEW_WINDOWS_REQUIRE_WARNING_BLANK);
                 }
             }
         }
@@ -1311,20 +1311,20 @@ static void CheckAnchorAccess( TidyDocImpl* doc, Node* node )
 
                 if (TY_(tmbstrcmp) (word, "click here") == 0)
                 {
-                    TY_(ReportAccessWarning)( doc, node, LINK_TEXT_NOT_MEANINGFUL_CLICK_HERE);
+                    TY_(ReportAccessError)( doc, node, LINK_TEXT_NOT_MEANINGFUL_CLICK_HERE);
                 }
 
                 if (HasTriggeredLink == no)
                 {
                     if (TY_(tmbstrlen)(word) < 6)
                     {
-                        TY_(ReportAccessWarning)( doc, node, LINK_TEXT_NOT_MEANINGFUL);
+                        TY_(ReportAccessError)( doc, node, LINK_TEXT_NOT_MEANINGFUL);
                     }
                 }
 
                 if (TY_(tmbstrlen)(word) > 60)
                 {
-                    TY_(ReportAccessWarning)( doc, node, LINK_TEXT_TOO_LONG);
+                    TY_(ReportAccessError)( doc, node, LINK_TEXT_TOO_LONG);
                 }
 
             }
@@ -1332,7 +1332,7 @@ static void CheckAnchorAccess( TidyDocImpl* doc, Node* node )
         
         if (node->content == NULL)
         {
-            TY_(ReportAccessWarning)( doc, node, LINK_TEXT_MISSING);
+            TY_(ReportAccessError)( doc, node, LINK_TEXT_MISSING);
         }
     }
 }
@@ -1380,11 +1380,11 @@ static void CheckArea( TidyDocImpl* doc, Node* node )
             {
                 if (AttrValueIs(av, "_new"))
                 {
-                    TY_(ReportAccessWarning)( doc, node, NEW_WINDOWS_REQUIRE_WARNING_NEW);
+                    TY_(ReportAccessError)( doc, node, NEW_WINDOWS_REQUIRE_WARNING_NEW);
                 }
                 else if (AttrValueIs(av, "_blank"))
                 {
-                    TY_(ReportAccessWarning)( doc, node, NEW_WINDOWS_REQUIRE_WARNING_BLANK);
+                    TY_(ReportAccessError)( doc, node, NEW_WINDOWS_REQUIRE_WARNING_BLANK);
                 }
             }
         }
@@ -1539,14 +1539,14 @@ static void CheckTH( TidyDocImpl* doc, Node* node )
                     (TY_(tmbstrlen)(av->value) == 0))
                 {
                     HasAbbr = yes;
-                    TY_(ReportAccessWarning)( doc, node, TABLE_MAY_REQUIRE_HEADER_ABBR_NULL);
+                    TY_(ReportAccessError)( doc, node, TABLE_MAY_REQUIRE_HEADER_ABBR_NULL);
                 }
                 
                 if ((IsWhitespace (av->value) == yes)&&
                     (TY_(tmbstrlen)(av->value) > 0))
                 {
                     HasAbbr = yes;
-                    TY_(ReportAccessWarning)( doc, node, TABLE_MAY_REQUIRE_HEADER_ABBR_SPACES);
+                    TY_(ReportAccessError)( doc, node, TABLE_MAY_REQUIRE_HEADER_ABBR_SPACES);
                 }
             }
         }
@@ -1561,7 +1561,7 @@ static void CheckTH( TidyDocImpl* doc, Node* node )
             if ((TY_(tmbstrlen)(word) > 15)&&
                 (HasAbbr == no))
             {
-                TY_(ReportAccessWarning)( doc, node, TABLE_MAY_REQUIRE_HEADER_ABBR);
+                TY_(ReportAccessError)( doc, node, TABLE_MAY_REQUIRE_HEADER_ABBR);
             }
         }
     }
@@ -1644,13 +1644,13 @@ static void CheckMultiHeaders( TidyDocImpl* doc, Node* node )
             /* Displays HTML 4 Table Algorithm when multiple column of headers used */
             if (validColSpanRows == no)
             {
-                TY_(ReportAccessWarning)( doc, node, DATA_TABLE_REQUIRE_MARKUP_ROW_HEADERS );
+                TY_(ReportAccessError)( doc, node, DATA_TABLE_REQUIRE_MARKUP_ROW_HEADERS );
                 TY_(DialogueMessage)( doc, TEXT_HTML_T_ALGORITHM, TidyDialogueDoc );
             }
 
             if (validColSpanColumns == no)
             {
-                TY_(ReportAccessWarning)( doc, node, DATA_TABLE_REQUIRE_MARKUP_COLUMN_HEADERS );
+                TY_(ReportAccessError)( doc, node, DATA_TABLE_REQUIRE_MARKUP_COLUMN_HEADERS );
                 TY_(DialogueMessage)( doc, TEXT_HTML_T_ALGORITHM, TidyDialogueDoc );
             }
         }
@@ -1805,13 +1805,13 @@ static void CheckTable( TidyDocImpl* doc, Node* node )
 
             if (numTR == 1)
             {
-                TY_(ReportAccessWarning)( doc, node, LAYOUT_TABLES_LINEARIZE_PROPERLY);
+                TY_(ReportAccessError)( doc, node, LAYOUT_TABLES_LINEARIZE_PROPERLY);
             }
         }
     
         if ( doc->access.HasTH )
         {
-            TY_(ReportAccessWarning)( doc, node, LAYOUT_TABLE_INVALID_MARKUP);
+            TY_(ReportAccessError)( doc, node, LAYOUT_TABLE_INVALID_MARKUP);
         }
     }
 
@@ -2216,10 +2216,10 @@ static void CheckHeaderNesting( TidyDocImpl* doc, Node* node )
         }
 
         if ( !IsValidIncrease )
-            TY_(ReportAccessWarning)( doc, node, HEADERS_IMPROPERLY_NESTED );
+            TY_(ReportAccessError)( doc, node, HEADERS_IMPROPERLY_NESTED );
     
         if ( NeedsDescription )
-            TY_(ReportAccessWarning)( doc, node, HEADER_USED_FORMAT_TEXT );    
+            TY_(ReportAccessError)( doc, node, HEADER_USED_FORMAT_TEXT );    
     }
 }
 
@@ -2262,17 +2262,17 @@ static void CheckParagraphHeader( TidyDocImpl* doc, Node* node )
             {
                 if ( nodeIsSTRONG(node->content) )
                 {
-                    TY_(ReportAccessWarning)( doc, node, POTENTIAL_HEADER_BOLD);
+                    TY_(ReportAccessError)( doc, node, POTENTIAL_HEADER_BOLD);
                 }
 
                 if ( nodeIsU(node->content) )
                 {
-                    TY_(ReportAccessWarning)( doc, node, POTENTIAL_HEADER_UNDERLINE);
+                    TY_(ReportAccessError)( doc, node, POTENTIAL_HEADER_UNDERLINE);
                 }
 
                 if ( nodeIsEM(node->content) )
                 {
-                    TY_(ReportAccessWarning)( doc, node, POTENTIAL_HEADER_ITALICS);
+                    TY_(ReportAccessError)( doc, node, POTENTIAL_HEADER_ITALICS);
                 }
             }
         }
@@ -2408,7 +2408,7 @@ static void CheckLink( TidyDocImpl* doc, Node* node )
         }
 
         if (HasRel && HasType)
-            TY_(ReportAccessWarning)( doc, node, STYLESHEETS_REQUIRE_TESTING_LINK );
+            TY_(ReportAccessError)( doc, node, STYLESHEETS_REQUIRE_TESTING_LINK );
     }
 }
 
@@ -2424,7 +2424,7 @@ static void CheckStyle( TidyDocImpl* doc, Node* node )
 {
     if (Level1_Enabled( doc ))
     {
-        TY_(ReportAccessWarning)( doc, node, STYLESHEETS_REQUIRE_TESTING_STYLE_ELEMENT );
+        TY_(ReportAccessError)( doc, node, STYLESHEETS_REQUIRE_TESTING_STYLE_ELEMENT );
     }
 }
 
@@ -2450,7 +2450,7 @@ static void DynamicContent( TidyDocImpl* doc, Node* node )
             msgcode = TEXT_EQUIVALENTS_REQUIRE_UPDATING_OBJECT;
 
         if ( msgcode )
-            TY_(ReportAccessWarning)( doc, node, msgcode );
+            TY_(ReportAccessError)( doc, node, msgcode );
     }
 }
 
@@ -2477,7 +2477,7 @@ static void ProgrammaticObjects( TidyDocImpl* doc, Node* node )
             msgcode = PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_APPLET;
 
         if ( msgcode )
-            TY_(ReportAccessWarning)( doc, node, msgcode );
+            TY_(ReportAccessError)( doc, node, msgcode );
     }
 }
 
@@ -2503,7 +2503,7 @@ static void AccessibleCompatible( TidyDocImpl* doc, Node* node )
             msgcode = ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_APPLET;
 
         if ( msgcode )
-            TY_(ReportAccessWarning)( doc, node, msgcode );
+            TY_(ReportAccessError)( doc, node, msgcode );
     }
 }
 
@@ -2586,7 +2586,7 @@ static void CheckFlicker( TidyDocImpl* doc, Node* node )
         }            
 
         if ( msgcode )
-            TY_(ReportAccessWarning)( doc, node, msgcode );
+            TY_(ReportAccessError)( doc, node, msgcode );
     }
 }
 
@@ -2935,7 +2935,7 @@ static void CheckForStyleAttribute( TidyDocImpl* doc, Node* node )
         AttVal* style = attrGetSTYLE( node );
         if ( hasValue(style) )
         {
-            TY_(ReportAccessWarning)( doc, node, STYLESHEETS_REQUIRE_TESTING_STYLE_ATTR );
+            TY_(ReportAccessError)( doc, node, STYLESHEETS_REQUIRE_TESTING_STYLE_ATTR );
         }
     }
 
@@ -2999,9 +2999,9 @@ static void CheckListUsage( TidyDocImpl* doc, Node* node )
        ** IFF OL/UL node is implicit
        */
        if ( !nodeIsLI(node->content) ) {
-            TY_(ReportAccessWarning)( doc, node, msgcode );
+            TY_(ReportAccessError)( doc, node, msgcode );
        } else if ( node->implicit ) {  /* if a tidy added node */
-            TY_(ReportAccessWarning)( doc, node, LIST_USAGE_INVALID_LI );
+            TY_(ReportAccessError)( doc, node, LIST_USAGE_INVALID_LI );
        }
     }
     else if ( nodeIsLI(node) )
@@ -3017,13 +3017,13 @@ static void CheckListUsage( TidyDocImpl* doc, Node* node )
         if ( node->parent == NULL ||
              ( !nodeIsOL(node->parent) && !nodeIsUL(node->parent) ) )
         {
-            TY_(ReportAccessWarning)( doc, node, LIST_USAGE_INVALID_LI );
+            TY_(ReportAccessError)( doc, node, LIST_USAGE_INVALID_LI );
         } else if ( node->implicit && node->parent &&
                     ( nodeIsOL(node->parent) || nodeIsUL(node->parent) ) ) {
             /* if tidy added LI node, then */
             msgcode = nodeIsUL(node->parent) ?
                 LIST_USAGE_INVALID_UL : LIST_USAGE_INVALID_OL;
-            TY_(ReportAccessWarning)( doc, node, msgcode );
+            TY_(ReportAccessError)( doc, node, msgcode );
         }
     }
 }
@@ -3306,7 +3306,7 @@ void TY_(AccessibilityChecks)( TidyDocImpl* doc )
     if ( Level2_Enabled( doc )
          && ! CheckMissingStyleSheets( doc, &doc->root ) )
     {
-        TY_(ReportAccessWarning)( doc, &doc->root, STYLE_SHEET_CONTROL_PRESENTATION );
+        TY_(ReportAccessError)( doc, &doc->root, STYLE_SHEET_CONTROL_PRESENTATION );
     }
 
     /* Check to see if any list elements are found within the document */

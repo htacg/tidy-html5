@@ -254,7 +254,7 @@ static struct _dispatchTable {
 } dispatchTable[] = {
     { ADDED_MISSING_CHARSET,        TidyInfo,        formatStandard          },
     { ANCHOR_NOT_UNIQUE,            TidyWarning,     formatAttributeReport   },
-    { APOS_UNDEFINED,               TidyWarning,     NULL                    },
+    { APOS_UNDEFINED,               TidyWarning,     formatStandard          },
     { ATTR_VALUE_NOT_LCASE,         TidyWarning,     formatAttributeReport   },
     { ATTRIBUTE_VALUE_REPLACED,     TidyInfo,        formatAttributeReport   },
     { ATTRIBUTE_IS_NOT_ALLOWED,     TidyWarning,     formatAttributeReport   },
@@ -307,8 +307,8 @@ static struct _dispatchTable {
     { MISSING_ENDTAG_FOR,           TidyWarning,     formatStandard          },
     { MISSING_IMAGEMAP,             TidyWarning,     formatAttributeReport   },
     { MISSING_QUOTEMARK,            TidyWarning,     formatAttributeReport   },
-    { MISSING_SEMICOLON_NCR,        TidyWarning,     NULL                    },
-    { MISSING_SEMICOLON,            TidyWarning,     NULL                    },
+    { MISSING_SEMICOLON_NCR,        TidyWarning,     formatStandard          },
+    { MISSING_SEMICOLON,            TidyWarning,     formatStandard          },
     { MISSING_STARTTAG,             TidyWarning,     formatStandard          },
     { MISSING_TITLE_ELEMENT,        TidyWarning,     formatStandard          },
     { MOVED_STYLE_TO_HEAD,          TidyWarning,     formatStandard          },
@@ -333,7 +333,7 @@ static struct _dispatchTable {
     { TOO_MANY_ELEMENTS_IN,         TidyWarning,     formatStandard, PREVIOUS_LOCATION },
     { TOO_MANY_ELEMENTS,            TidyWarning,     formatStandard          },
     { TRIM_EMPTY_ELEMENT,           TidyWarning,     formatStandard          },
-    { UNESCAPED_AMPERSAND,          TidyWarning,     NULL                    },
+    { UNESCAPED_AMPERSAND,          TidyWarning,     formatStandard          },
     { UNEXPECTED_END_OF_FILE_ATTR,  TidyWarning,     formatAttributeReport   },
     { UNEXPECTED_END_OF_FILE,       TidyWarning,     formatStandard          },
     { UNEXPECTED_ENDTAG_IN,         TidyError,       formatStandard          },
@@ -344,7 +344,7 @@ static struct _dispatchTable {
     { UNEXPECTED_QUOTEMARK,         TidyWarning,     formatAttributeReport   },
     { UNKNOWN_ELEMENT_LOOKS_CUSTOM, TidyError,       formatStandard          },
     { UNKNOWN_ELEMENT,              TidyError,       formatStandard          },
-    { UNKNOWN_ENTITY,               TidyWarning,     NULL                    },
+    { UNKNOWN_ENTITY,               TidyWarning,     formatStandard          },
     { USING_BR_INPLACE_OF,          TidyWarning,     formatStandard          },
     { VENDOR_SPECIFIC_CHARS,        TidyWarning,     NULL                    },
     { WHITE_IN_URI,                 TidyWarning,     formatAttributeReport   },
@@ -489,6 +489,20 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
             ctmbstr str;
             if ( (str = va_arg( args, ctmbstr)) )
                 return TY_(tidyMessageCreate)( doc, code, level, str );
+        }
+
+        case APOS_UNDEFINED:
+        case MISSING_SEMICOLON_NCR:
+        case MISSING_SEMICOLON:
+        case UNESCAPED_AMPERSAND:
+        case UNKNOWN_ENTITY:
+        {
+            ctmbstr entityname;
+            if ( !(entityname = va_arg( args, ctmbstr)) )
+            {
+                entityname = "NULL";
+            }
+            return TY_(tidyMessageCreateWithLexer)(doc, code, TidyWarning, entityname);
         }
 
         case SPACE_PRECEDING_XMLDECL:
@@ -697,6 +711,13 @@ void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option )
 }
 
 
+void TY_(ReportEntityError)( TidyDocImpl* doc, uint code, ctmbstr entity, int ARG_UNUSED(c) )
+{
+    /* Note that the report formatter currently doesn't use argument c */
+    TY_(Report)( doc, NULL, NULL, code, entity, c );
+}
+
+
 void TY_(ReportFileError)( TidyDocImpl* doc, ctmbstr file, uint code )
 {
     TY_(Report)(doc, NULL, NULL, code, file);
@@ -721,9 +742,9 @@ void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarde
     /* An encoding mismatch is currently treated as a non-fatal error */
     switch (code)
     {
-        case VENDOR_SPECIFIC_CHARS:
+        case INVALID_NCR:
             NtoS(c, buf);
-            doc->badChars |= BC_VENDOR_SPECIFIC_CHARS;
+            doc->badChars |= BC_INVALID_NCR;
             break;
 
         case INVALID_SGML_CHARS:
@@ -743,9 +764,9 @@ void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarde
             break;
 #endif
 
-        case INVALID_NCR:
+        case VENDOR_SPECIFIC_CHARS:
             NtoS(c, buf);
-            doc->badChars |= BC_INVALID_NCR;
+            doc->badChars |= BC_VENDOR_SPECIFIC_CHARS;
             break;
     }
 
@@ -769,17 +790,6 @@ void TY_(ReportEncodingWarning)(TidyDocImpl* doc, uint code, uint encoding)
             break;
     }
 
-    messageOut( message );
-}
-
-
-void TY_(ReportEntityError)( TidyDocImpl* doc, uint code, ctmbstr entity,
-                             int ARG_UNUSED(c) )
-{
-    TidyMessageImpl *message = NULL;
-    ctmbstr entityname = ( entity ? entity : "NULL" );
-
-    message = TY_(tidyMessageCreateWithLexer)(doc, code, TidyWarning, entityname);
     messageOut( message );
 }
 

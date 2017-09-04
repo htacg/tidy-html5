@@ -57,6 +57,7 @@ void TY_(Report)(TidyDocImpl* doc, Node *element, Node *node, uint code, ...);
 
 void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code);
 void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option );
+void TY_(ReportEntityError)( TidyDocImpl* doc, uint code, ctmbstr entity, int c );
 void TY_(ReportFileError)( TidyDocImpl* doc, ctmbstr file, uint code );
 
 
@@ -67,7 +68,6 @@ void TY_(ReportFileError)( TidyDocImpl* doc, ctmbstr file, uint code );
 
 void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarded);
 void TY_(ReportEncodingWarning)(TidyDocImpl* doc, uint code, uint encoding);
-void TY_(ReportEntityError)( TidyDocImpl* doc, uint code, ctmbstr entity, int c );
 void TY_(ReportMarkupVersion)( TidyDocImpl* doc );
 void TY_(ReportMissingAttr)( TidyDocImpl* doc, Node* node, ctmbstr name );
 void TY_(ReportSurrogateError)(TidyDocImpl* doc, uint code, uint c1, uint c2);

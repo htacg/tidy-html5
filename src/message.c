@@ -236,7 +236,6 @@ typedef TidyMessageImpl*(messageFormatter)(TidyDocImpl* doc, Node *element, Node
 
 /* Forward declarations of messageFormatter functions. */
 static messageFormatter formatAttributeReport;
-static messageFormatter formatCustomTagDetected;
 static messageFormatter formatStandard;
 static messageFormatter formatStandardDynamic;
 
@@ -270,7 +269,7 @@ static struct _dispatchTable {
     { CANT_BE_NESTED,               TidyWarning,     formatStandard          },
     { COERCE_TO_ENDTAG,             TidyWarning,     formatStandard          },
     { CONTENT_AFTER_BODY,           TidyWarning,     formatStandard          },
-    { CUSTOM_TAG_DETECTED,          TidyInfo,        formatCustomTagDetected },
+    { CUSTOM_TAG_DETECTED,          TidyInfo,        formatStandard          },
     { DISCARDING_UNEXPECTED,        0,               formatStandardDynamic   },
     { DOCTYPE_AFTER_TAGS,           TidyWarning,     formatStandard          },
     { DUPLICATE_FRAMESET,           TidyError,       formatStandard          },
@@ -442,39 +441,6 @@ TidyMessageImpl *formatAttributeReport(TidyDocImpl* doc, Node *element, Node *no
 }
 
 
-/* Provides special formatting for the CUSTOM_TAG_DETECTED report. */
-TidyMessageImpl *formatCustomTagDetected(TidyDocImpl* doc, Node *element, Node *node, uint code, uint level, va_list args)
-{
-    char elemdesc[256] = { 0 };
-    ctmbstr tagtype;
-
-    TagToString(element, elemdesc, sizeof(elemdesc));
-
-    switch ( code )
-    {
-        case CUSTOM_TAG_DETECTED:
-            switch ( cfg( doc, TidyUseCustomTags ) )
-            {
-                case TidyCustomBlocklevel:
-                    tagtype = tidyLocalizedString( TIDYCUSTOMBLOCKLEVEL_STRING );
-                    break;
-                case TidyCustomEmpty:
-                    tagtype = tidyLocalizedString( TIDYCUSTOMEMPTY_STRING );
-                    break;
-                case TidyCustomInline:
-                    tagtype = tidyLocalizedString( TIDYCUSTOMINLINE_STRING );
-                    break;
-                case TidyCustomPre:
-                default:
-                    tagtype = tidyLocalizedString( TIDYCUSTOMPRE_STRING );
-                    break;
-            }
-    }
-
-    return TY_(tidyMessageCreateWithNode)(doc, element, code, TidyInfo, elemdesc, tagtype );
-}
-
-
 /* Provides general formatting for the majority of Tidy's reports. Because most
 ** reports use the same basic data derived from the element and node, this
 ** formatter covers the vast majority of Tidy's report messages. Note that this
@@ -493,6 +459,28 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
 
     switch ( code )
     {
+        case CUSTOM_TAG_DETECTED:
+        {
+            ctmbstr tagtype;
+            switch ( cfg( doc, TidyUseCustomTags ) )
+            {
+                case TidyCustomBlocklevel:
+                    tagtype = tidyLocalizedString( TIDYCUSTOMBLOCKLEVEL_STRING );
+                    break;
+                case TidyCustomEmpty:
+                    tagtype = tidyLocalizedString( TIDYCUSTOMEMPTY_STRING );
+                    break;
+                case TidyCustomInline:
+                    tagtype = tidyLocalizedString( TIDYCUSTOMINLINE_STRING );
+                    break;
+                case TidyCustomPre:
+                default:
+                    tagtype = tidyLocalizedString( TIDYCUSTOMPRE_STRING );
+                    break;
+            }
+            return TY_(tidyMessageCreateWithNode)(doc, element, code, TidyInfo, elemdesc, tagtype );
+        }
+
         case FILE_CANT_OPEN:
         case FILE_CANT_OPEN_CFG:
         case FILE_NOT_FILE:

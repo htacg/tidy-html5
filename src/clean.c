@@ -1986,7 +1986,7 @@ void TY_(CleanWord2000)( TidyDocImpl* doc, Node *node)
              * meaning this result would not ordinarily be displayed.
              */
             Node* next;
-            TY_(ReportNotice)(doc, NULL, node, PROPRIETARY_ELEMENT);
+            TY_(Report)(doc, NULL, node, PROPRIETARY_ELEMENT);
             DiscardContainer( doc, node, &next );
             node = next;
             continue;
@@ -2358,7 +2358,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
             if (charsetFound || !charsetAttr->value)
             {
                 prevNode = currentNode->prev;
-                TY_(ReportNotice)(doc, head, currentNode, DISCARDING_UNEXPECTED);
+                TY_(Report)(doc, head, currentNode, DISCARDING_UNEXPECTED);
                 TY_(DiscardElement)(doc, currentNode);
                 currentNode = prevNode;
                 continue;
@@ -2395,7 +2395,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
             if (!httpEquivAttr->value)
             {
                 prevNode = currentNode->prev;
-                TY_(ReportNotice)(doc, head, currentNode, DISCARDING_UNEXPECTED);
+                TY_(Report)(doc, head, currentNode, DISCARDING_UNEXPECTED);
                 TY_(DiscardElement)(doc, currentNode);
                 currentNode = prevNode;
                 continue;
@@ -2412,7 +2412,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
 #if 0 /* 0000000000000000000000000000000000000000000000000 */
                 prevNode = currentNode->prev;
                 /* maybe need better message here */
-                TY_(ReportNotice)(doc, head, currentNode, DISCARDING_UNEXPECTED);
+                TY_(Report)(doc, head, currentNode, DISCARDING_UNEXPECTED);
                 TY_(DiscardElement)(doc, currentNode);
                 currentNode = prevNode;
 #endif /* 000000000000000000000000000000000000000000000000 */
@@ -2429,7 +2429,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
                 if (charsetFound)
                 {
                     prevNode = currentNode->prev;
-                    TY_(ReportNotice)(doc, head, currentNode, DISCARDING_UNEXPECTED);
+                    TY_(Report)(doc, head, currentNode, DISCARDING_UNEXPECTED);
                     TY_(DiscardElement)(doc, currentNode);
                     currentNode = prevNode;
                     continue;
@@ -2442,7 +2442,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
                 if (charsetFound)
                 {
                     prevNode = currentNode->prev;
-                    TY_(ReportNotice)(doc, head, currentNode, DISCARDING_UNEXPECTED);
+                    TY_(Report)(doc, head, currentNode, DISCARDING_UNEXPECTED);
                     TY_(DiscardElement)(doc, currentNode);
                     currentNode = prevNode;
                 }
@@ -2469,7 +2469,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
         {
             /* printf("WARN ABOUT HTTP EQUIV AND CHARSET ATTR! \n"); */
             prevNode = currentNode->prev;
-            TY_(ReportNotice)(doc, head, currentNode, DISCARDING_UNEXPECTED);
+            TY_(Report)(doc, head, currentNode, DISCARDING_UNEXPECTED);
             TY_(DiscardElement)(doc, currentNode);
             currentNode = prevNode;
         }
@@ -2496,7 +2496,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
             tidyBufFree(&buf);
         }
         TY_(InsertNodeAtStart)(head, metaTag);
-        TY_(ReportNotice)(doc, metaTag, head, ADDED_MISSING_CHARSET); /* actually just 'Info:' */
+        TY_(Report)(doc, metaTag, head, ADDED_MISSING_CHARSET); /* actually just 'Info:' */
     }
     tidyBufFree(&charsetString);
     return yes;
@@ -2882,11 +2882,11 @@ static void StyleToHead(TidyDocImpl* doc, Node *head, Node *node, Bool fix, int 
 			{
 				TY_(RemoveNode)(node); /* unhook style node from body */
 				TY_(InsertNodeAtEnd)(head, node);   /* add to end of head */
-				TY_(ReportNotice)(doc, node, head, MOVED_STYLE_TO_HEAD); /* report move */
+				TY_(Report)(doc, node, head, MOVED_STYLE_TO_HEAD); /* report move */
 			}
 			else
 			{
-				TY_(ReportNotice)(doc, node, head, FOUND_STYLE_IN_BODY);
+				TY_(Report)(doc, node, head, FOUND_STYLE_IN_BODY);
 			}
 		}
 		else if (node->content)

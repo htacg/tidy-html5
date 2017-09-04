@@ -921,7 +921,7 @@ FILE* TIDY_CALL   tidySetErrorFile( TidyDoc tdoc, ctmbstr errfilnam )
             return errout;
         }
         else /* Emit message to current error sink */
-            TY_(FileError)( impl, errfilnam, TidyError, FILE_CANT_OPEN );
+            TY_(ReportFileError)( impl, errfilnam, FILE_CANT_OPEN );
     }
     return NULL;
 }
@@ -1091,7 +1091,7 @@ int   tidyDocParseFile( TidyDocImpl* doc, ctmbstr filnam )
 
     if ( !fin )
     {
-        TY_(FileError)( doc, filnam, TidyError, FILE_NOT_FILE );
+        TY_(ReportFileError)( doc, filnam, FILE_NOT_FILE );
         return status;
     }
 
@@ -1128,7 +1128,7 @@ int   tidyDocParseFile( TidyDocImpl* doc, ctmbstr filnam )
         TY_(freeStreamIn)(in);
     }
     else /* Error message! */
-        TY_(FileError)( doc, filnam, TidyError, FILE_CANT_OPEN );
+        TY_(ReportFileError)( doc, filnam, FILE_CANT_OPEN );
     return status;
 #endif
 }
@@ -1242,7 +1242,7 @@ int         tidyDocSaveFile( TidyDocImpl* doc, ctmbstr filnam )
 #endif /* PRESERVFILETIMES */
     }
     if ( status < 0 ) /* Error message! */
-        TY_(FileError)( doc, filnam, TidyError, FILE_CANT_OPEN );
+        TY_(ReportFileError)( doc, filnam, FILE_CANT_OPEN );
     return status;
 }
 
@@ -1640,7 +1640,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
                 TY_(CoerceNode)(doc, node, TidyTag_ABBR, warn, no);
             } else {
                 if ( !already_strict )
-                    TY_(ReportNotice)(doc, node, node, REMOVED_HTML5);
+                    TY_(Report)(doc, node, node, REMOVED_HTML5);
             }
         } else
         if ( nodeIsAPPLET(node) ) {
@@ -1651,7 +1651,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
                 TY_(CoerceNode)(doc, node, TidyTag_OBJECT, warn, no);
             } else {
                 if ( !already_strict )
-                    TY_(ReportNotice)(doc, node, node, REMOVED_HTML5);
+                    TY_(Report)(doc, node, node, REMOVED_HTML5);
             }
         } else
         if ( nodeIsBASEFONT(node) ) {
@@ -1664,7 +1664,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
              * - For now just report a warning
              */
             if ( !already_strict )
-                TY_(ReportNotice)(doc, node, node, REMOVED_HTML5);
+                TY_(Report)(doc, node, node, REMOVED_HTML5);
         } else
         if ( nodeIsBIG(node) ) {
             /* big: CSS equivalent 'font-size:larger'
@@ -1686,7 +1686,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
                 TY_(CoerceNode)(doc, node, TidyTag_SPAN, warn, no);
             } else {
                 if ( !already_strict )
-                    TY_(ReportNotice)(doc, node, node, REMOVED_HTML5);
+                    TY_(Report)(doc, node, node, REMOVED_HTML5);
             }
         } else
         if ( nodeIsCENTER(node) ) {
@@ -1697,7 +1697,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
              * see: static Bool Center2Div( TidyDocImpl* doc, Node *node, Node **pnode)
              */
             if ( !already_strict )
-                TY_(ReportNotice)(doc, node, node, REMOVED_HTML5);
+                TY_(Report)(doc, node, node, REMOVED_HTML5);
         } else
         if ( nodeIsDIR(node) ) {
             /* dir: replace by <ul>
@@ -1705,7 +1705,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
              * Should this be CHANGED???
              */
             if ( !already_strict )
-                TY_(ReportNotice)(doc, node, node, REMOVED_HTML5);
+                TY_(Report)(doc, node, node, REMOVED_HTML5);
         } else
         if ( nodeIsFONT(node) ) {
             /* Tidy already handles this -
@@ -1714,13 +1714,13 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
              * done in Bool Font2Span( TidyDocImpl* doc, Node *node, Node **pnode ) (I think?)
              */
             if ( !already_strict )
-                TY_(ReportNotice)(doc, node, node, REMOVED_HTML5);
+                TY_(Report)(doc, node, node, REMOVED_HTML5);
         } else
         if (( nodesIsFRAME(node) ) || ( nodeIsFRAMESET(node) ) || ( nodeIsNOFRAMES(node) )) {
             /* YOW: What to do here?????? Maybe <iframe>????
              */
             if ( !already_strict )
-                TY_(ReportNotice)(doc, node, node, REMOVED_HTML5);
+                TY_(Report)(doc, node, node, REMOVED_HTML5);
         } else
         if ( nodeIsSTRIKE(node) ) {
             /* strike: CSS equivalent 'text-decoration:line-through'
@@ -1731,7 +1731,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
                 TY_(CoerceNode)(doc, node, TidyTag_SPAN, warn, no);
             } else {
                 if ( !already_strict )
-                    TY_(ReportNotice)(doc, node, node, REMOVED_HTML5);
+                    TY_(Report)(doc, node, node, REMOVED_HTML5);
             }
         } else
         if ( nodeIsTT(node) ) {
@@ -1745,14 +1745,14 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
                 TY_(CoerceNode)(doc, node, TidyTag_SPAN, warn, no);
             } else {
                 if ( !already_strict )
-                    TY_(ReportNotice)(doc, node, node, REMOVED_HTML5);
+                    TY_(Report)(doc, node, node, REMOVED_HTML5);
             }
         } else
             if (TY_(nodeIsElement)(node)) {
                 if (node->tag) {
                     if ( (!(node->tag->versions & VERS_HTML5) && !(node->tag->versions & VERS_PROPRIETARY)) || (inRemovedInfo(node->tag->id)) ) {
                         if ( !already_strict )
-                            TY_(ReportNotice)(doc, node, node, REMOVED_HTML5);
+                            TY_(Report)(doc, node, node, REMOVED_HTML5);
                     }
                 }
             }
@@ -1805,7 +1805,7 @@ void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
                 /* Version mismatches take priority. */
                 if ( check_versions && !(node->tag->versions & version) )
                 {
-                    TY_(ReportNotice)(doc, NULL, node, tagReportType );
+                    TY_(Report)(doc, NULL, node, tagReportType );
                 }
                 /* If it's not mismatched, it could still be proprietary. */
                 else if ( node->tag->versions & VERS_PROPRIETARY )
@@ -1825,7 +1825,7 @@ void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
 
                         if ( (htmlIs5 && !tagLooksCustom) || !htmlIs5 )
                         {
-                            TY_(ReportNotice)(doc, NULL, node, PROPRIETARY_ELEMENT );
+                            TY_(Report)(doc, NULL, node, PROPRIETARY_ELEMENT );
                         }
 
                         if ( nodeIsLAYER(node) )
@@ -2136,7 +2136,7 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
 
         if ( !doc->lexer->isvoyager && doc->xmlDetected )
         {
-            TY_(ReportNotice)(doc, NULL, TY_(FindXmlDecl)(doc), XML_DECLARATION_DETECTED );
+            TY_(Report)(doc, NULL, TY_(FindXmlDecl)(doc), XML_DECLARATION_DETECTED );
 
         }
     }

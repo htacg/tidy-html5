@@ -326,7 +326,7 @@ int TY_(DocParseFileWithMappedFile)( TidyDocImpl* doc, ctmbstr filnam ) {
         TY_(freeStreamIn)( in );
     }
     else /* Error message! */
-        TY_(FileError)( doc, filnam, TidyError, FILE_CANT_OPEN );
+        TY_(ReportFileError)( doc, filnam, FILE_CANT_OPEN );
     return status;
 }
 

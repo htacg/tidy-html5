@@ -993,7 +993,7 @@ void CheckTABLE( TidyDocImpl* doc, Node *node )
         if (HasSummary && isHTML5)
         {
             /* #210 - has summary, and is HTML5, then report obsolete */
-            TY_(ReportNotice)(doc, node, node, BAD_SUMMARY_HTML5);
+            TY_(Report)(doc, node, node, BAD_SUMMARY_HTML5);
         } 
         else if (!HasSummary && !isHTML5) 
         {

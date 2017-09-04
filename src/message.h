@@ -48,7 +48,6 @@ ctmbstr TY_(tidyLibraryVersion)(void);
 /** @{ */
 
 void TY_(Report)(TidyDocImpl* doc, Node *element, Node *node, uint code, ...);
-void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code);
 
 
 /** @} */
@@ -58,6 +57,7 @@ void TY_(ReportNotice)(TidyDocImpl* doc, Node *element, Node *node, uint code);
 
 void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code);
 void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option );
+void TY_(ReportFileError)( TidyDocImpl* doc, ctmbstr file, uint code );
 
 
 /** @} */
@@ -65,7 +65,6 @@ void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option );
 /** @{ */
 
 
-void TY_(FileError)( TidyDocImpl* doc, ctmbstr file, TidyReportLevel level, uint code );
 void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarded);
 void TY_(ReportEncodingWarning)(TidyDocImpl* doc, uint code, uint encoding);
 void TY_(ReportEntityError)( TidyDocImpl* doc, uint code, ctmbstr entity, int c );

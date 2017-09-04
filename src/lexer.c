@@ -2454,7 +2454,7 @@ static Node *GetCDATA( TidyDocImpl* doc, Node *container )
                 if ((TY_(IsJavaScript)(container)) && cfgBool(doc, TidyEscapeScripts))
                 {
                     /* Issue #281 - only warn if adding the escape! */
-                    TY_(ReportNotice)(doc, NULL, NULL, BAD_CDATA_CONTENT);
+                    TY_(Report)(doc, NULL, NULL, BAD_CDATA_CONTENT);
 
                     for (i = lexer->lexsize; i > start-1; --i)
                         lexer->lexbuf[i] = lexer->lexbuf[i-1];
@@ -2472,7 +2472,7 @@ static Node *GetCDATA( TidyDocImpl* doc, Node *container )
         lexer->txtend = lexer->lexsize;
 
     if (c == EndOfStream)
-        TY_(ReportNotice)(doc, container, NULL, MISSING_ENDTAG_FOR );
+        TY_(Report)(doc, container, NULL, MISSING_ENDTAG_FOR );
 
 /* this was disabled for some reason... */
 #if 0
@@ -2764,7 +2764,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                             continue;
                         }
 
-                        TY_(ReportNotice)(doc, NULL, NULL, MALFORMED_COMMENT );
+                        TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT );
                     }
                     else if (c == 'd' || c == 'D')
                     {
@@ -3013,9 +3013,9 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                            for older HTML, because it's not truly supported
                            by the standard, although Tidy will allow it. */
                         if ( (doc->lexer->doctype & VERS_HTML5) > 0 && TY_(elementIsAutonomousCustomFormat)( lexer->token->element ) )
-                            TY_(ReportNotice)( doc, NULL, lexer->token, UNKNOWN_ELEMENT_LOOKS_CUSTOM );
+                            TY_(Report)( doc, NULL, lexer->token, UNKNOWN_ELEMENT_LOOKS_CUSTOM );
                         else
-                            TY_(ReportNotice)( doc, NULL, lexer->token, UNKNOWN_ELEMENT );
+                            TY_(Report)( doc, NULL, lexer->token, UNKNOWN_ELEMENT );
                     }
                 }
                 else if ( !cfgBool(doc, TidyXmlTags) )
@@ -3048,7 +3048,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 if (c == '>')
                 {
                     if (badcomment)
-                        TY_(ReportNotice)(doc, NULL, NULL, MALFORMED_COMMENT );
+                        TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT );
 
                     /* do not store closing -- in lexbuf */
                     lexer->lexsize -= 2;
@@ -3163,7 +3163,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
 
                     if (c == EndOfStream)
                     {
-                        TY_(ReportNotice)(doc, NULL, NULL, UNEXPECTED_END_OF_FILE );
+                        TY_(Report)(doc, NULL, NULL, UNEXPECTED_END_OF_FILE );
                         TY_(UngetChar)(c, doc->docIn);
                         continue;
                     }
@@ -3474,7 +3474,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
     else if (lexer->state == LEX_COMMENT) /* comment */
     {
         if (c == EndOfStream)
-            TY_(ReportNotice)(doc, NULL, NULL, MALFORMED_COMMENT );
+            TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT );
 
         lexer->txtend = lexer->lexsize;
         lexer->lexbuf[lexer->lexsize] = '\0';
@@ -4111,7 +4111,7 @@ static tmbstr ParseValue( TidyDocImpl* doc, ctmbstr name,
              !(TY_(IsUrl)(doc, name) && TY_(tmbstrncmp)(lexer->lexbuf+start, "javascript:", 11) == 0) &&
              !(TY_(tmbstrncmp)(lexer->lexbuf+start, "<xml ", 5) == 0)
            )
-            TY_(ReportNotice)( doc, NULL, NULL, SUSPECTED_MISSING_QUOTE ); 
+            TY_(Report)( doc, NULL, NULL, SUSPECTED_MISSING_QUOTE ); 
     }
 
     len = lexer->lexsize - start;
@@ -4383,7 +4383,7 @@ static Node *ParseDocTypeDecl(TidyDocImpl* doc)
 
                 if (!node->element || !IsValidXMLElemName(node->element))
                 {
-                    TY_(ReportNotice)(doc, NULL, NULL, MALFORMED_DOCTYPE);
+                    TY_(Report)(doc, NULL, NULL, MALFORMED_DOCTYPE);
                     TY_(FreeNode)(doc, node);
                     return NULL;
                 }
@@ -4469,7 +4469,7 @@ static Node *ParseDocTypeDecl(TidyDocImpl* doc)
     }
 
     /* document type declaration not finished */
-    TY_(ReportNotice)(doc, NULL, NULL, MALFORMED_DOCTYPE);
+    TY_(Report)(doc, NULL, NULL, MALFORMED_DOCTYPE);
     TY_(FreeNode)(doc, node);
     return NULL;
 }

@@ -620,7 +620,6 @@ void TY_(WriteChar)( uint c, StreamOut* out )
         TY_(EncodeCharToUTF8Bytes)( c, NULL, &out->sink, &count );
         if (count <= 0)
         {
-          /* TY_(ReportEncodingError)(in->lexer, INVALID_UTF8 | REPLACED_CHAR, c); */
             /* replacement char 0xFFFD encoded as UTF-8 */
             PutByte(0xEF, out); PutByte(0xBF, out); PutByte(0xBF, out);
         }
@@ -682,7 +681,6 @@ void TY_(WriteChar)( uint c, StreamOut* out )
         if ( !TY_(IsValidUTF16FromUCS4)(c) )
         {
             /* invalid UTF-16 value */
-            /* TY_(ReportEncodingError)(in->lexer, INVALID_UTF16 | DISCARDED_CHAR, c); */
             c = 0;
             numChars = 0;
         }
@@ -692,7 +690,6 @@ void TY_(WriteChar)( uint c, StreamOut* out )
             numChars = 2;
             if ( !TY_(SplitSurrogatePair)(c, &theChars[0], &theChars[1]) )
             {
-                /* TY_(ReportEncodingError)(in->lexer, INVALID_UTF16 | DISCARDED_CHAR, c); */
                 c = 0;
                 numChars = 0;
             }

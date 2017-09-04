@@ -236,6 +236,7 @@ typedef TidyMessageImpl*(messageFormatter)(TidyDocImpl* doc, Node *element, Node
 
 /* Forward declarations of messageFormatter functions. */
 static messageFormatter formatAttributeReport;
+static messageFormatter formatEncodingReport;
 static messageFormatter formatStandard;
 static messageFormatter formatStandardDynamic;
 
@@ -290,10 +291,10 @@ static struct _dispatchTable {
     { INSERTING_AUTO_ATTRIBUTE,     TidyWarning,     formatAttributeReport   },
     { INSERTING_TAG,                TidyWarning,     formatStandard          },
     { INVALID_ATTRIBUTE,            TidyWarning,     formatAttributeReport   },
-    { INVALID_NCR,                  TidyWarning,     NULL                    },
-    { INVALID_SGML_CHARS,           TidyWarning,     NULL                    },
-    { INVALID_UTF8,                 TidyWarning,     NULL                    },
-    { INVALID_UTF16,                TidyWarning,     NULL                    },
+    { INVALID_NCR,                  TidyWarning,     formatEncodingReport     },
+    { INVALID_SGML_CHARS,           TidyWarning,     formatEncodingReport     },
+    { INVALID_UTF8,                 TidyWarning,     formatEncodingReport     },
+    { INVALID_UTF16,                TidyWarning,     formatEncodingReport     },
     { INVALID_XML_ID,               TidyWarning,     formatAttributeReport   },
     { JOINING_ATTRIBUTE,            TidyWarning,     formatAttributeReport   },
     { MALFORMED_COMMENT,            TidyWarning,     formatStandard          },
@@ -346,7 +347,7 @@ static struct _dispatchTable {
     { UNKNOWN_ELEMENT,              TidyError,       formatStandard          },
     { UNKNOWN_ENTITY,               TidyWarning,     formatStandard          },
     { USING_BR_INPLACE_OF,          TidyWarning,     formatStandard          },
-    { VENDOR_SPECIFIC_CHARS,        TidyWarning,     NULL                    },
+    { VENDOR_SPECIFIC_CHARS,        TidyWarning,     formatEncodingReport     },
     { WHITE_IN_URI,                 TidyWarning,     formatAttributeReport   },
     { XML_DECLARATION_DETECTED,     TidyWarning,     formatStandard          },
     { XML_ID_SYNTAX,                TidyWarning,     formatAttributeReport   },
@@ -438,6 +439,54 @@ TidyMessageImpl *formatAttributeReport(TidyDocImpl* doc, Node *element, Node *no
     }
 
     return NULL;
+}
+
+
+/* Provides report formatting *and* additional status settings for Tidy's
+** encoding reports.
+** @todo: These status changes probably SHOULD be made in the calling code;
+**   however these states are captured to generate future output, which may be
+**   useful here in the long run.
+*/
+TidyMessageImpl *formatEncodingReport(TidyDocImpl* doc, Node *element, Node *node, uint code, uint level, va_list args)
+{
+    char buf[ 32 ] = {'\0'};
+    uint c = va_arg( args, uint );
+    Bool discarded = va_arg( args, Bool );
+    ctmbstr action = tidyLocalizedString(discarded ? STRING_DISCARDING : STRING_REPLACING);
+
+    switch (code)
+    {
+        case INVALID_NCR:
+            NtoS(c, buf);
+            doc->badChars |= BC_INVALID_NCR;
+            break;
+
+        case INVALID_SGML_CHARS:
+            NtoS(c, buf);
+            doc->badChars |= BC_INVALID_SGML_CHARS;
+            break;
+
+        case INVALID_UTF8:
+            TY_(tmbsnprintf)(buf, sizeof(buf), "U+%04X", c);
+            doc->badChars |= BC_INVALID_UTF8;
+            break;
+
+#if SUPPORT_UTF16_ENCODINGS
+        case INVALID_UTF16:
+            TY_(tmbsnprintf)(buf, sizeof(buf), "U+%04X", c);
+            doc->badChars |= BC_INVALID_UTF16;
+            break;
+#endif
+
+        case VENDOR_SPECIFIC_CHARS:
+            NtoS(c, buf);
+            doc->badChars |= BC_VENDOR_SPECIFIC_CHARS;
+            break;
+    }
+
+    return TY_(tidyMessageCreateWithLexer)(doc, code, level, action, buf );
+
 }
 
 
@@ -700,14 +749,14 @@ void TY_(Report)(TidyDocImpl* doc, Node *element, Node *node, uint code, ...)
 
 void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
 {
-    TY_(Report)(doc, NULL, node, code, av);
+    TY_(Report)( doc, NULL, node, code, av );
 }
 
 
 void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option )
 {
     assert( option != NULL );
-    TY_(Report)(doc, NULL, NULL, STRING_MISSING_MALFORMED, option);
+    TY_(Report)( doc, NULL, NULL, STRING_MISSING_MALFORMED, option );
 }
 
 
@@ -720,7 +769,13 @@ void TY_(ReportEntityError)( TidyDocImpl* doc, uint code, ctmbstr entity, int AR
 
 void TY_(ReportFileError)( TidyDocImpl* doc, ctmbstr file, uint code )
 {
-    TY_(Report)(doc, NULL, NULL, code, file);
+    TY_(Report)( doc, NULL, NULL, code, file );
+}
+
+
+void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarded)
+{
+    TY_(Report)( doc, NULL, NULL, code, c, discarded );
 }
 
 
@@ -731,48 +786,6 @@ void TY_(ReportFileError)( TidyDocImpl* doc, ctmbstr file, uint code )
  * above, if possible, otherwise try to use one of these, or as a
  * last resort add a new one in this section.
  *********************************************************************/
-
-
-void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarded)
-{
-    TidyMessageImpl *message = NULL;
-    char buf[ 32 ] = {'\0'};
-    ctmbstr action = tidyLocalizedString(discarded ? STRING_DISCARDING : STRING_REPLACING);
-
-    /* An encoding mismatch is currently treated as a non-fatal error */
-    switch (code)
-    {
-        case INVALID_NCR:
-            NtoS(c, buf);
-            doc->badChars |= BC_INVALID_NCR;
-            break;
-
-        case INVALID_SGML_CHARS:
-            NtoS(c, buf);
-            doc->badChars |= BC_INVALID_SGML_CHARS;
-            break;
-
-        case INVALID_UTF8:
-            TY_(tmbsnprintf)(buf, sizeof(buf), "U+%04X", c);
-            doc->badChars |= BC_INVALID_UTF8;
-            break;
-
-#if SUPPORT_UTF16_ENCODINGS
-        case INVALID_UTF16:
-            TY_(tmbsnprintf)(buf, sizeof(buf), "U+%04X", c);
-            doc->badChars |= BC_INVALID_UTF16;
-            break;
-#endif
-
-        case VENDOR_SPECIFIC_CHARS:
-            NtoS(c, buf);
-            doc->badChars |= BC_VENDOR_SPECIFIC_CHARS;
-            break;
-    }
-
-    message = TY_(tidyMessageCreateWithLexer)(doc, code, TidyWarning, action, buf );
-    messageOut( message );
-}
 
 
 void TY_(ReportEncodingWarning)(TidyDocImpl* doc, uint code, uint encoding)

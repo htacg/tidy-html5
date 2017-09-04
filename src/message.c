@@ -827,54 +827,6 @@ void TY_(ReportUnknownOption)( TidyDocImpl* doc, ctmbstr option )
 
 
 /*********************************************************************
- * Legacy High Level Message Writing Functions - Specific
- * When adding new reports to LibTidy, preference should be given
- * to one of the existing, general pupose message writing functions
- * above, if possible, otherwise try to use one of these, or as a
- * last resort add a new one in this section.
- *********************************************************************/
-
-
-void TY_(ReportMarkupVersion)( TidyDocImpl* doc )
-{
-    TidyMessageImpl *message = NULL;
-    
-    if ( doc->givenDoctype )
-    {
-        /* @todo: deal with non-ASCII characters in FPI */
-        message = TY_(tidyMessageCreate)( doc, STRING_DOCTYPE_GIVEN, TidyInfo, doc->givenDoctype );
-        messageOut(message);
-    }
-    
-    if ( ! cfgBool(doc, TidyXmlTags) )
-    {
-        Bool isXhtml = doc->lexer->isvoyager;
-        uint apparentVers;
-        ctmbstr vers;
-        
-        apparentVers = TY_(ApparentVersion)( doc );
-        
-        vers = TY_(HTMLVersionNameFromCode)( apparentVers, isXhtml );
-        
-        if ( !vers )
-        {
-            vers = tidyLocalizedString(STRING_HTML_PROPRIETARY);
-        }
-        
-        message = TY_(tidyMessageCreate)( doc, STRING_CONTENT_LOOKS, TidyInfo, vers );
-        messageOut(message);
-        
-        /* Warn about missing sytem identifier (SI) in emitted doctype */
-        if ( TY_(WarnMissingSIInEmittedDocType)( doc ) )
-        {
-            message = TY_(tidyMessageCreate)( doc, STRING_NO_SYSID, TidyInfo);
-            messageOut(message);
-        }
-    }
-}
-
-
-/*********************************************************************
  * Output Dialogue Information
  * In addition to reports that are added to the table, Tidy emits
  * various dialogue type information. Most of these are specific to
@@ -1039,6 +991,45 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
         if (doc->badLayout & USING_BODY)
         {
             message = TY_(tidyMessageCreate)( doc, TEXT_USING_BODY, TidyDialogueDoc);
+            messageOut(message);
+        }
+    }
+}
+
+
+void TY_(ReportMarkupVersion)( TidyDocImpl* doc )
+{
+    TidyMessageImpl *message = NULL;
+
+    if ( doc->givenDoctype )
+    {
+        /* @todo: deal with non-ASCII characters in FPI */
+        message = TY_(tidyMessageCreate)( doc, STRING_DOCTYPE_GIVEN, TidyInfo, doc->givenDoctype );
+        messageOut(message);
+    }
+
+    if ( ! cfgBool(doc, TidyXmlTags) )
+    {
+        Bool isXhtml = doc->lexer->isvoyager;
+        uint apparentVers;
+        ctmbstr vers;
+
+        apparentVers = TY_(ApparentVersion)( doc );
+
+        vers = TY_(HTMLVersionNameFromCode)( apparentVers, isXhtml );
+
+        if ( !vers )
+        {
+            vers = tidyLocalizedString(STRING_HTML_PROPRIETARY);
+        }
+
+        message = TY_(tidyMessageCreate)( doc, STRING_CONTENT_LOOKS, TidyInfo, vers );
+        messageOut(message);
+
+        /* Warn about missing sytem identifier (SI) in emitted doctype */
+        if ( TY_(WarnMissingSIInEmittedDocType)( doc ) )
+        {
+            message = TY_(tidyMessageCreate)( doc, STRING_NO_SYSID, TidyInfo);
             messageOut(message);
         }
     }

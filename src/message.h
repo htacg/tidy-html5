@@ -71,9 +71,6 @@ void TY_(ReportUnknownOption)( TidyDocImpl* doc, ctmbstr option );
 /** @{ */
 
 
-void TY_(ReportMarkupVersion)( TidyDocImpl* doc );
-
-
 #if SUPPORT_ACCESSIBILITY_CHECKS
 
 void TY_(ReportAccessError)( TidyDocImpl* doc, Node* node, uint code );
@@ -89,6 +86,7 @@ void TY_(ReportAccessWarning)( TidyDocImpl* doc, Node* node, uint code );
 
 void TY_(DialogueMessage)( TidyDocImpl* doc, uint code, TidyReportLevel level );
 void TY_(ErrorSummary)( TidyDocImpl* doc );
+void TY_(ReportMarkupVersion)( TidyDocImpl* doc );
 void TY_(ReportNumWarnings)( TidyDocImpl* doc );
 
 

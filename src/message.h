@@ -62,6 +62,8 @@ void TY_(ReportFileError)( TidyDocImpl* doc, ctmbstr file, uint code );
 void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarded);
 void TY_(ReportEncodingWarning)(TidyDocImpl* doc, uint code, uint encoding);
 void TY_(ReportMissingAttr)( TidyDocImpl* doc, Node* node, ctmbstr name );
+void TY_(ReportSurrogateError)(TidyDocImpl* doc, uint code, uint c1, uint c2);
+void TY_(ReportUnknownOption)( TidyDocImpl* doc, ctmbstr option );
 
 
 /** @} */
@@ -70,8 +72,6 @@ void TY_(ReportMissingAttr)( TidyDocImpl* doc, Node* node, ctmbstr name );
 
 
 void TY_(ReportMarkupVersion)( TidyDocImpl* doc );
-void TY_(ReportSurrogateError)(TidyDocImpl* doc, uint code, uint c1, uint c2);
-void TY_(ReportUnknownOption)( TidyDocImpl* doc, ctmbstr option );
 
 
 #if SUPPORT_ACCESSIBILITY_CHECKS

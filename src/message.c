@@ -277,7 +277,7 @@ static struct _dispatchTable {
     { ELEMENT_NOT_EMPTY,            TidyWarning,     formatStandard          },
     { ELEMENT_VERS_MISMATCH_ERROR,  TidyError,       formatStandard          },
     { ELEMENT_VERS_MISMATCH_WARN,   TidyWarning,     formatStandard          },
-    { ENCODING_MISMATCH,            TidyWarning,     NULL                    },
+    { ENCODING_MISMATCH,            TidyWarning,     formatEncodingReport    },
     { ESCAPED_ILLEGAL_URI,          TidyWarning,     formatAttributeReport   },
     { FILE_CANT_OPEN,               TidyBadDocument, formatStandard          },
     { FILE_CANT_OPEN_CFG,           TidyBadDocument, formatStandard          },
@@ -291,10 +291,10 @@ static struct _dispatchTable {
     { INSERTING_AUTO_ATTRIBUTE,     TidyWarning,     formatAttributeReport   },
     { INSERTING_TAG,                TidyWarning,     formatStandard          },
     { INVALID_ATTRIBUTE,            TidyWarning,     formatAttributeReport   },
-    { INVALID_NCR,                  TidyWarning,     formatEncodingReport     },
-    { INVALID_SGML_CHARS,           TidyWarning,     formatEncodingReport     },
-    { INVALID_UTF8,                 TidyWarning,     formatEncodingReport     },
-    { INVALID_UTF16,                TidyWarning,     formatEncodingReport     },
+    { INVALID_NCR,                  TidyWarning,     formatEncodingReport    },
+    { INVALID_SGML_CHARS,           TidyWarning,     formatEncodingReport    },
+    { INVALID_UTF8,                 TidyWarning,     formatEncodingReport    },
+    { INVALID_UTF16,                TidyWarning,     formatEncodingReport    },
     { INVALID_XML_ID,               TidyWarning,     formatAttributeReport   },
     { JOINING_ATTRIBUTE,            TidyWarning,     formatAttributeReport   },
     { MALFORMED_COMMENT,            TidyWarning,     formatStandard          },
@@ -302,7 +302,7 @@ static struct _dispatchTable {
     { MISMATCHED_ATTRIBUTE_ERROR,   TidyError,       formatAttributeReport   },
     { MISMATCHED_ATTRIBUTE_WARN,    TidyWarning,     formatAttributeReport   },
     { MISSING_ATTR_VALUE,           TidyWarning,     formatAttributeReport   },
-    { MISSING_ATTRIBUTE,            TidyWarning,     NULL                    },
+    { MISSING_ATTRIBUTE,            TidyWarning,     formatStandard          },
     { MISSING_DOCTYPE,              TidyWarning,     formatStandard          },
     { MISSING_ENDTAG_BEFORE,        TidyWarning,     formatStandard          },
     { MISSING_ENDTAG_FOR,           TidyWarning,     formatStandard          },
@@ -347,7 +347,7 @@ static struct _dispatchTable {
     { UNKNOWN_ELEMENT,              TidyError,       formatStandard          },
     { UNKNOWN_ENTITY,               TidyWarning,     formatStandard          },
     { USING_BR_INPLACE_OF,          TidyWarning,     formatStandard          },
-    { VENDOR_SPECIFIC_CHARS,        TidyWarning,     formatEncodingReport     },
+    { VENDOR_SPECIFIC_CHARS,        TidyWarning,     formatEncodingReport    },
     { WHITE_IN_URI,                 TidyWarning,     formatAttributeReport   },
     { XML_DECLARATION_DETECTED,     TidyWarning,     formatStandard          },
     { XML_ID_SYNTAX,                TidyWarning,     formatAttributeReport   },
@@ -483,6 +483,15 @@ TidyMessageImpl *formatEncodingReport(TidyDocImpl* doc, Node *element, Node *nod
             NtoS(c, buf);
             doc->badChars |= BC_VENDOR_SPECIFIC_CHARS;
             break;
+
+        case ENCODING_MISMATCH:
+            doc->badChars |= BC_ENCODING_MISMATCH;
+            return TY_(tidyMessageCreateWithLexer)(doc,
+                                                   code,
+                                                   level,
+                                                   TY_(CharEncodingName)(doc->docIn->encoding),
+                                                   TY_(CharEncodingName)(c));
+            break;
     }
 
     return TY_(tidyMessageCreateWithLexer)(doc, code, level, action, buf );
@@ -552,6 +561,13 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
                 entityname = "NULL";
             }
             return TY_(tidyMessageCreateWithLexer)(doc, code, TidyWarning, entityname);
+        }
+
+        case MISSING_ATTRIBUTE:
+        {
+            ctmbstr name;
+            if ( (name = va_arg( args, ctmbstr)) )
+                return TY_(tidyMessageCreateWithNode)(doc, node, code, level, nodedesc, name );
         }
 
         case SPACE_PRECEDING_XMLDECL:
@@ -778,6 +794,18 @@ void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarde
     TY_(Report)( doc, NULL, NULL, code, c, discarded );
 }
 
+void TY_(ReportEncodingWarning)(TidyDocImpl* doc, uint code, uint encoding)
+{
+    /* va_list in formatter expects trailing `no` argument */
+    TY_(Report)( doc, NULL, NULL, code, encoding, no );
+}
+
+
+void TY_(ReportMissingAttr)( TidyDocImpl* doc, Node* node, ctmbstr name )
+{
+    TY_(Report)( doc, NULL, node, MISSING_ATTRIBUTE, name );
+}
+
 
 /*********************************************************************
  * Legacy High Level Message Writing Functions - Specific
@@ -786,25 +814,6 @@ void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarde
  * above, if possible, otherwise try to use one of these, or as a
  * last resort add a new one in this section.
  *********************************************************************/
-
-
-void TY_(ReportEncodingWarning)(TidyDocImpl* doc, uint code, uint encoding)
-{
-    TidyMessageImpl *message = NULL;
-    switch(code)
-    {
-        case ENCODING_MISMATCH:
-            message = TY_(tidyMessageCreateWithLexer)(doc,
-                                                      code,
-                                                      TidyWarning,
-                                                      TY_(CharEncodingName)(doc->docIn->encoding),
-                                                      TY_(CharEncodingName)(encoding));
-            doc->badChars |= BC_ENCODING_MISMATCH; /* @todo: why not in calling function? */
-            break;
-    }
-
-    messageOut( message );
-}
 
 
 void TY_(ReportMarkupVersion)( TidyDocImpl* doc )
@@ -843,17 +852,6 @@ void TY_(ReportMarkupVersion)( TidyDocImpl* doc )
             messageOut(message);
         }
     }
-}
-
-
-void TY_(ReportMissingAttr)( TidyDocImpl* doc, Node* node, ctmbstr name )
-{
-    TidyMessageImpl *message = NULL;
-    char tagdesc[ 64 ];
-
-    TagToString(node, tagdesc, sizeof(tagdesc));
-    message = TY_(tidyMessageCreateWithNode)(doc, node, MISSING_ATTRIBUTE, TidyWarning, tagdesc, name );
-    messageOut(message);
 }
 
 

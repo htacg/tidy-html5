@@ -236,7 +236,6 @@ typedef TidyMessageImpl*(messageFormatter)(TidyDocImpl* doc, Node *element, Node
 
 /* Forward declarations of messageFormatter functions. */
 static messageFormatter formatAttributeReport;
-static messageFormatter formatBadArgument;
 static messageFormatter formatCustomTagDetected;
 static messageFormatter formatStandard;
 static messageFormatter formatStandardDynamic;
@@ -329,7 +328,7 @@ static struct _dispatchTable {
     { REPLACING_ELEMENT,            TidyWarning,     formatStandard          },
     { REPLACING_UNEX_ELEMENT,       TidyWarning,     formatStandard          },
     { SPACE_PRECEDING_XMLDECL,      TidyWarning,     formatStandard          },
-    { STRING_MISSING_MALFORMED,     TidyConfig,      formatBadArgument       },
+    { STRING_MISSING_MALFORMED,     TidyConfig,      formatStandard          },
     { SUSPECTED_MISSING_QUOTE,      TidyError,       formatStandard          },
     { TAG_NOT_ALLOWED_IN,           TidyWarning,     formatStandard, PREVIOUS_LOCATION },
     { TOO_MANY_ELEMENTS_IN,         TidyWarning,     formatStandard, PREVIOUS_LOCATION },
@@ -443,22 +442,6 @@ TidyMessageImpl *formatAttributeReport(TidyDocImpl* doc, Node *element, Node *no
 }
 
 
-/* Provides formatting for bad-argument errors. */
-TidyMessageImpl *formatBadArgument(TidyDocImpl* doc, Node *element, Node *node, uint code, uint level, va_list args)
-{
-    ctmbstr option;
-
-    switch ( code )
-    {
-        case STRING_MISSING_MALFORMED:
-            if ( (option = va_arg( args, ctmbstr)) )
-                return TY_(tidyMessageCreate)( doc, code, level, option );
-    }
-
-    return NULL;
-}
-
-
 /* Provides special formatting for the CUSTOM_TAG_DETECTED report. */
 TidyMessageImpl *formatCustomTagDetected(TidyDocImpl* doc, Node *element, Node *node, uint code, uint level, va_list args)
 {
@@ -513,10 +496,11 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
         case FILE_CANT_OPEN:
         case FILE_CANT_OPEN_CFG:
         case FILE_NOT_FILE:
+        case STRING_MISSING_MALFORMED:
         {
-            ctmbstr file;
-            if ( (file = va_arg( args, ctmbstr)) )
-                return TY_(tidyMessageCreate)( doc, code, level, file );
+            ctmbstr str;
+            if ( (str = va_arg( args, ctmbstr)) )
+                return TY_(tidyMessageCreate)( doc, code, level, str );
         }
 
         case SPACE_PRECEDING_XMLDECL:

@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-09-04 17:43:44\n"
+"PO-Revision-Date: 2017-09-06 20:53:40\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -2537,9 +2537,18 @@ msgstr ""
 "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
 
 #, c-format
+msgctxt "ADDED_MISSING_CHARSET"
+msgid "Added appropriate missing <meta charset=...> to %s"
+msgstr ""
+
+#, c-format
 msgctxt "ANCHOR_NOT_UNIQUE"
 msgid "%s anchor \"%s\" already defined"
 msgstr "%s ancre \"%s\" déjà défini"
+
+msgctxt "APOS_UNDEFINED"
+msgid "named entity &apos; only defined in XML/XHTML"
+msgstr "l'entité nommée &apos; est défini seulement en XML/XHTML"
 
 #, c-format
 msgctxt "ATTR_VALUE_NOT_LCASE"
@@ -2571,343 +2580,14 @@ msgctxt "BAD_ATTRIBUTE_VALUE"
 msgid "%s attribute \"%s\" has invalid value \"%s\""
 msgstr "%s l'attribut \"%s\" a une valeur non valide \"%s\""
 
-#, c-format
-msgctxt "ESCAPED_ILLEGAL_URI"
-msgid "%s escaping malformed URI reference"
-msgstr "%s échappement de la référence d''URI mal formée"
-
-#, c-format
-msgctxt "FIXED_BACKSLASH"
-msgid "%s converting backslash in URI to slash"
-msgstr "%s conversion des antislash vers slash dans l'URI "
-
-#, c-format
-msgctxt "ID_NAME_MISMATCH"
-msgid "%s id and name attribute value mismatch"
-msgstr "%s discordance entre id et valeur de nom d'attribut"
-
-#, c-format
-msgctxt "ILLEGAL_URI_CODEPOINT"
-msgid "%s illegal characters found in URI"
-msgstr "%s caractères interdits trouvés dans l'URI"
-
-#, c-format
-msgctxt "ILLEGAL_URI_REFERENCE"
-msgid "%s improperly escaped URI reference"
-msgstr "%s mal échappé dans la référence d'URI"
-
-#, c-format
-msgctxt "INSERTING_AUTO_ATTRIBUTE"
-msgid "%s inserting \"%s\" attribute using value \"%s\""
-msgstr "%s insertion de l'attribut « %s », en utilisant la valeur « %s »"
-
-#, c-format
-msgctxt "INVALID_ATTRIBUTE"
-msgid "%s attribute name \"%s\" (value=\"%s\") is invalid"
-msgstr "%s nom d'attribut « %s » (valeur=« %s ») n'est pas valide"
-
-#, c-format
-msgctxt "INVALID_XML_ID"
-msgid "%s cannot copy name attribute to id"
-msgstr "%s impossible de copier le nom attribut vers id"
-
-#, c-format
-msgctxt "JOINING_ATTRIBUTE"
-msgid "%s joining values of repeated attribute \"%s\""
-msgstr "%s regroupement des valeurs répétées de l'attribut « %s »"
-
-#, c-format
-msgctxt "MISMATCHED_ATTRIBUTE_ERROR"
-msgid "%s attribute \"%s\" not allowed for %s"
-msgstr "%s attribut \"%s\" non permis pour %s"
-
-#, c-format
-msgctxt "MISMATCHED_ATTRIBUTE_WARN"
-msgid "%s attribute \"%s\" not allowed for %s"
-msgstr "%s attribut \"%s\" non permis pour %s"
-
-#, c-format
-msgctxt "MISSING_ATTR_VALUE"
-msgid "%s attribute \"%s\" lacks value"
-msgstr "%s attribut \"%s\" n'a pas de valeur"
-
-#, c-format
-msgctxt "MISSING_IMAGEMAP"
-msgid "%s should use client-side image map"
-msgstr "%s doivent utiliser une image-map côté client"
-
-#, c-format
-msgctxt "MISSING_QUOTEMARK"
-msgid "%s attribute with missing trailing quote mark"
-msgstr "%s attribut avec apostrophe de fin manquante"
-
-#, c-format
-msgctxt "NEWLINE_IN_URI"
-msgid "%s discarding newline in URI reference"
-msgstr "%s inhibition des nouvelles lignes dans la référence d'URI"
-
-#, c-format
-msgctxt "PROPRIETARY_ATTR_VALUE"
-msgid "%s proprietary attribute value \"%s\""
-msgstr "%s valeur d'attribut propriétaire « %s »"
-
-#, c-format
-msgctxt "PROPRIETARY_ATTRIBUTE"
-msgid "%s proprietary attribute \"%s\""
-msgstr "%s attribut propriétaire \"%s\""
-
-#, c-format
-msgctxt "REPEATED_ATTRIBUTE"
-msgid "%s dropping value \"%s\" for repeated attribute \"%s\""
-msgstr "%s abandon de la valeur « %s » pour l'attribut répété « %s »"
-
-#, c-format
-msgctxt "UNEXPECTED_END_OF_FILE_ATTR"
-msgid "%s end of file while parsing attributes"
-msgstr "%s fin de fichier lors de l'analyse des attributs"
-
-#, c-format
-msgctxt "UNEXPECTED_EQUALSIGN"
-msgid "%s unexpected '=', expected attribute name"
-msgstr "%s symbole imprévu '=', nom d'attribut attendu"
-
-#, c-format
-msgctxt "UNEXPECTED_GT"
-msgid "%s missing '>' for end of tag"
-msgstr "%s symbole '>' manquant pour la fin de balise"
-
-#, c-format
-msgctxt "UNEXPECTED_QUOTEMARK"
-msgid "%s unexpected or duplicate quote mark"
-msgstr "%s guillemet double inattendu ou dupliqué"
-
-#, c-format
-msgctxt "WHITE_IN_URI"
-msgid "%s discarding whitespace in URI reference"
-msgstr "%s rejet des espaces dans la référence URI"
-
-#, c-format
-msgctxt "XML_ID_SYNTAX"
-msgid "%s ID \"%s\" uses XML ID syntax"
-msgstr "%s ID « %s » utilise la syntaxe XML ID"
-
-#, c-format
-msgctxt "INVALID_NCR"
-msgid "%s invalid numeric character reference %s"
-msgstr "%s référence de caractère numérique non valide %s"
-
-#, c-format
-msgctxt "INVALID_SGML_CHARS"
-msgid "%s invalid character code %s"
-msgstr "%s code de caractère non valide %s"
-
-#, c-format
-msgctxt "INVALID_UTF16"
-msgid "%s invalid UTF-16 surrogate pair (char. code %s)"
-msgstr "%s paire de substitution UFT-16 non valide (code de caract. %s)"
-
-#, c-format
-msgctxt "INVALID_UTF8"
-msgid "%s invalid UTF-8 bytes (char. code %s)"
-msgstr "%s octets UTF-8 non valides (code de caract. %s)"
-
-#, c-format
-msgctxt "VENDOR_SPECIFIC_CHARS"
-msgid "%s invalid character code %s"
-msgstr "%s code de caractère non valide %s"
-
-#, c-format
-msgctxt "ENCODING_MISMATCH"
-msgid "specified input encoding (%s) does not match actual input encoding (%s)"
-msgstr "l'encodage de caractère précisé en entrée (%s) ne correspond pas à l'encodage réellement entré (%s)"
-
-msgctxt "APOS_UNDEFINED"
-msgid "named entity &apos; only defined in XML/XHTML"
-msgstr "l'entité nommée &apos; est défini seulement en XML/XHTML"
-
-#, c-format
-msgctxt "MISSING_SEMICOLON_NCR"
-msgid "numeric character reference \"%s\" doesn't end in ';'"
-msgstr "La référence de caractère numérique « %s » ne se termine pas par « ; »"
-
-#, c-format
-msgctxt "MISSING_SEMICOLON"
-msgid "entity \"%s\" doesn't end in ';'"
-msgstr "l'entité « %s » ne se termine pas par « ; »"
-
-msgctxt "UNESCAPED_AMPERSAND"
-msgid "unescaped & which should be written as &amp;"
-msgstr "symbole & non échappé qui devrait être écrit &amp;"
-
-#, c-format
-msgctxt "UNKNOWN_ENTITY"
-msgid "unescaped & or unknown entity \"%s\""
-msgstr "symbole & non échappé ou entité inconnue « %s »"
-
 msgctxt "BAD_CDATA_CONTENT"
 msgid "'<' + '/' + letter not allowed here"
 msgstr "'<' + '/' + lettres non permises ici"
 
 #, c-format
-msgctxt "CANT_BE_NESTED"
-msgid "%s can't be nested"
-msgstr "%s ne peut pas être imbriqué"
-
-msgctxt "CONTENT_AFTER_BODY"
-msgid "content occurs after end of body"
-msgstr "contenu trouvé après la fin de body"
-
-#, c-format
-msgctxt "DISCARDING_UNEXPECTED"
-msgid "discarding unexpected %s"
-msgstr "inhibition de valeur inattendue %s"
-
-msgctxt "DOCTYPE_AFTER_TAGS"
-msgid "<!DOCTYPE> isn't allowed after elements"
-msgstr "<!DOCTYPE> n'est pas autorisée après les éléments"
-
-#, c-format
-msgctxt "ELEMENT_VERS_MISMATCH_ERROR"
-msgid "%s element not available in %s"
-msgstr "%s élément non disponible dans %s"
-
-#, c-format
-msgctxt "ELEMENT_VERS_MISMATCH_WARN"
-msgid "%s element not available in %s"
-msgstr "%s élément non disponible dans %s"
-
-#, c-format
-msgctxt "ILLEGAL_NESTING"
-msgid "%s shouldn't be nested"
-msgstr "%s ne doit pas être imbriqué"
-
-#, c-format
-msgctxt "INSERTING_TAG"
-msgid "inserting implicit <%s>"
-msgstr "insertion implicite de <%s>"
-
-msgctxt "MALFORMED_COMMENT"
-msgid "adjacent hyphens within comment"
-msgstr "tirets adjacents dans un commentaire"
-
-msgctxt "MALFORMED_DOCTYPE"
-msgid "discarding malformed <!DOCTYPE>"
-msgstr "inhibition de la <!DOCTYPE> mal formée"
-
-msgctxt "MISSING_DOCTYPE"
-msgid "missing <!DOCTYPE> declaration"
-msgstr "déclaration <!DOCTYPE> manquante"
-
-#, c-format
-msgctxt "MISSING_ENDTAG_BEFORE"
-msgid "missing </%s> before %s"
-msgstr "absence de </%s> avant %s"
-
-#, c-format
-msgctxt "MISSING_ENDTAG_FOR"
-msgid "missing </%s>"
-msgstr "absence de </%s>"
-
-#, c-format
-msgctxt "MISSING_STARTTAG"
-msgid "missing <%s>"
-msgstr "absence de <%s>"
-
-msgctxt "MISSING_TITLE_ELEMENT"
-msgid "inserting missing 'title' element"
-msgstr "ajout d'un élément 'title' manquant"
-
-#, c-format
-msgctxt "NOFRAMES_CONTENT"
-msgid "%s not inside 'noframes' element"
-msgstr "%s non positionné dans l'élément 'noframes'"
-
-#, c-format
-msgctxt "NON_MATCHING_ENDTAG"
-msgid "replacing unexpected %s with </%s>"
-msgstr "remplacement des %s inattendus par </%s>"
-
-#, c-format
-msgctxt "PREVIOUS_LOCATION"
-msgid "<%s> previously mentioned"
-msgstr "<%s> précédemment mentionnés"
-
-#, c-format
-msgctxt "PROPRIETARY_ELEMENT"
-msgid "%s is not approved by W3C"
-msgstr "%s n'est pas approuvé par le W3C"
-
-#, c-format
-msgctxt "REPLACING_UNEX_ELEMENT"
-msgid "replacing unexpected %s with %s"
-msgstr "remplacement des %s inattendus par %s"
-
-msgctxt "SPACE_PRECEDING_XMLDECL"
-msgid "removing whitespace preceding XML Declaration"
-msgstr "suppression de l'espace précédant la déclaration XML"
-
-#, c-format
-msgctxt "TAG_NOT_ALLOWED_IN"
-msgid "%s isn't allowed in <%s> elements"
-msgstr "%s n'est pas permis dans les éléments <%s>"
-
-#, c-format
-msgctxt "TOO_MANY_ELEMENTS_IN"
-msgid "too many %s elements in <%s>"
-msgstr "trop d'éléments %s dans <%s>"
-
-#, c-format
-msgctxt "TOO_MANY_ELEMENTS"
-msgid "too many %s elements"
-msgstr "trop d'éléments %s"
-
-#, c-format
-msgctxt "USING_BR_INPLACE_OF"
-msgid "using <br> in place of %s"
-msgstr "utilisation de <br> à la place de %s"
-
-msgctxt "DUPLICATE_FRAMESET"
-msgid "repeated FRAMESET element"
-msgstr "élément répété FRAMESET"
-
-msgctxt "SUSPECTED_MISSING_QUOTE"
-msgid "missing quote mark for attribute value"
-msgstr "absence de guillemet pour la valeur d'attribut"
-
-#, c-format
-msgctxt "UNEXPECTED_ENDTAG_IN"
-msgid "unexpected </%s> in <%s>"
-msgstr "</%s> inattendu dans <%s>"
-
-#, c-format
-msgctxt "UNKNOWN_ELEMENT_LOOKS_CUSTOM"
-msgid "%s is not recognized! Did you mean to enable the custom-tags option?"
-msgstr "%s n'est pas reconnue! Vouliez-vous activer l'option custom-tags?"
-
-#, c-format
-msgctxt "UNKNOWN_ELEMENT"
-msgid "%s is not recognized!"
-msgstr "%s n'est pas reconnue!"
-
-#, c-format
-msgctxt "MISSING_ATTRIBUTE"
-msgid "%s lacks \"%s\" attribute"
-msgstr "%s absence d'attribut \"%s\""
-
-#, c-format
-msgctxt "CUSTOM_TAG_DETECTED"
-msgid "detected autonomous custom tag %s; will treat as %s"
-msgstr "balise personnalisée autonome détectée %s; sera traitée comme %s"
-
-#, c-format
-msgctxt "REPLACING_ELEMENT"
-msgid "replacing %s with %s"
-msgstr "remplacement de %s par %s"
-
-#, c-format
-msgctxt "TRIM_EMPTY_ELEMENT"
-msgid "trimming empty %s"
-msgstr "réduction des %s vides"
+msgctxt "BAD_SUMMARY_HTML5"
+msgid "The summary attribute on the %s element is obsolete in HTML5"
+msgstr "L'attribut summary sur l'élément %s est obsolète avec HTML5"
 
 msgctxt "BAD_SURROGATE_LEAD"
 msgid "Trailing (Low) surrogate pair U+%04X, with no leading (High) entity, replaced with U+FFFD."
@@ -2926,9 +2606,210 @@ msgstr ""
 "+FFFD."
 
 #, c-format
-msgctxt "BAD_SUMMARY_HTML5"
-msgid "The summary attribute on the %s element is obsolete in HTML5"
-msgstr "L'attribut summary sur l'élément %s est obsolète avec HTML5"
+msgctxt "CANT_BE_NESTED"
+msgid "%s can't be nested"
+msgstr "%s ne peut pas être imbriqué"
+
+#, c-format
+msgctxt "COERCE_TO_ENDTAG"
+msgid "<%s> is probably intended as </%s>"
+msgstr "<%s> est probablement souhaité pour </%s>"
+
+msgctxt "CONTENT_AFTER_BODY"
+msgid "content occurs after end of body"
+msgstr "contenu trouvé après la fin de body"
+
+#, c-format
+msgctxt "CUSTOM_TAG_DETECTED"
+msgid "detected autonomous custom tag %s; will treat as %s"
+msgstr "balise personnalisée autonome détectée %s; sera traitée comme %s"
+
+#, c-format
+msgctxt "DISCARDING_UNEXPECTED"
+msgid "discarding unexpected %s"
+msgstr "inhibition de valeur inattendue %s"
+
+msgctxt "DOCTYPE_AFTER_TAGS"
+msgid "<!DOCTYPE> isn't allowed after elements"
+msgstr "<!DOCTYPE> n'est pas autorisée après les éléments"
+
+msgctxt "DUPLICATE_FRAMESET"
+msgid "repeated FRAMESET element"
+msgstr "élément répété FRAMESET"
+
+#, c-format
+msgctxt "ELEMENT_NOT_EMPTY"
+msgid "%s element not empty or not closed"
+msgstr "%s élément non vide ou non fermé"
+
+#, c-format
+msgctxt "ELEMENT_VERS_MISMATCH_ERROR"
+msgid "%s element not available in %s"
+msgstr "%s élément non disponible dans %s"
+
+#, c-format
+msgctxt "ELEMENT_VERS_MISMATCH_WARN"
+msgid "%s element not available in %s"
+msgstr "%s élément non disponible dans %s"
+
+#, c-format
+msgctxt "ENCODING_MISMATCH"
+msgid "specified input encoding (%s) does not match actual input encoding (%s)"
+msgstr "l'encodage de caractère précisé en entrée (%s) ne correspond pas à l'encodage réellement entré (%s)"
+
+#, c-format
+msgctxt "ESCAPED_ILLEGAL_URI"
+msgid "%s escaping malformed URI reference"
+msgstr "%s échappement de la référence d''URI mal formée"
+
+#, c-format
+msgctxt "FIXED_BACKSLASH"
+msgid "%s converting backslash in URI to slash"
+msgstr "%s conversion des antislash vers slash dans l'URI "
+
+msgctxt "FOUND_STYLE_IN_BODY"
+msgid "found <style> tag in <body>! fix-style-tags: yes to move."
+msgstr ""
+
+#, c-format
+msgctxt "ID_NAME_MISMATCH"
+msgid "%s id and name attribute value mismatch"
+msgstr "%s discordance entre id et valeur de nom d'attribut"
+
+#, c-format
+msgctxt "ILLEGAL_NESTING"
+msgid "%s shouldn't be nested"
+msgstr "%s ne doit pas être imbriqué"
+
+#, c-format
+msgctxt "ILLEGAL_URI_CODEPOINT"
+msgid "%s illegal characters found in URI"
+msgstr "%s caractères interdits trouvés dans l'URI"
+
+#, c-format
+msgctxt "ILLEGAL_URI_REFERENCE"
+msgid "%s improperly escaped URI reference"
+msgstr "%s mal échappé dans la référence d'URI"
+
+#, c-format
+msgctxt "INSERTING_AUTO_ATTRIBUTE"
+msgid "%s inserting \"%s\" attribute using value \"%s\""
+msgstr "%s insertion de l'attribut « %s », en utilisant la valeur « %s »"
+
+#, c-format
+msgctxt "INSERTING_TAG"
+msgid "inserting implicit <%s>"
+msgstr "insertion implicite de <%s>"
+
+#, c-format
+msgctxt "INVALID_ATTRIBUTE"
+msgid "%s attribute name \"%s\" (value=\"%s\") is invalid"
+msgstr "%s nom d'attribut « %s » (valeur=« %s ») n'est pas valide"
+
+#, c-format
+msgctxt "INVALID_NCR"
+msgid "%s invalid numeric character reference %s"
+msgstr "%s référence de caractère numérique non valide %s"
+
+#, c-format
+msgctxt "INVALID_SGML_CHARS"
+msgid "%s invalid character code %s"
+msgstr "%s code de caractère non valide %s"
+
+#, c-format
+msgctxt "INVALID_UTF8"
+msgid "%s invalid UTF-8 bytes (char. code %s)"
+msgstr "%s octets UTF-8 non valides (code de caract. %s)"
+
+#, c-format
+msgctxt "INVALID_UTF16"
+msgid "%s invalid UTF-16 surrogate pair (char. code %s)"
+msgstr "%s paire de substitution UFT-16 non valide (code de caract. %s)"
+
+#, c-format
+msgctxt "INVALID_XML_ID"
+msgid "%s cannot copy name attribute to id"
+msgstr "%s impossible de copier le nom attribut vers id"
+
+#, c-format
+msgctxt "JOINING_ATTRIBUTE"
+msgid "%s joining values of repeated attribute \"%s\""
+msgstr "%s regroupement des valeurs répétées de l'attribut « %s »"
+
+msgctxt "MALFORMED_COMMENT"
+msgid "adjacent hyphens within comment"
+msgstr "tirets adjacents dans un commentaire"
+
+msgctxt "MALFORMED_DOCTYPE"
+msgid "discarding malformed <!DOCTYPE>"
+msgstr "inhibition de la <!DOCTYPE> mal formée"
+
+#, c-format
+msgctxt "MISMATCHED_ATTRIBUTE_ERROR"
+msgid "%s attribute \"%s\" not allowed for %s"
+msgstr "%s attribut \"%s\" non permis pour %s"
+
+#, c-format
+msgctxt "MISMATCHED_ATTRIBUTE_WARN"
+msgid "%s attribute \"%s\" not allowed for %s"
+msgstr "%s attribut \"%s\" non permis pour %s"
+
+#, c-format
+msgctxt "MISSING_ATTR_VALUE"
+msgid "%s attribute \"%s\" lacks value"
+msgstr "%s attribut \"%s\" n'a pas de valeur"
+
+#, c-format
+msgctxt "MISSING_ATTRIBUTE"
+msgid "%s lacks \"%s\" attribute"
+msgstr "%s absence d'attribut \"%s\""
+
+msgctxt "MISSING_DOCTYPE"
+msgid "missing <!DOCTYPE> declaration"
+msgstr "déclaration <!DOCTYPE> manquante"
+
+#, c-format
+msgctxt "MISSING_ENDTAG_BEFORE"
+msgid "missing </%s> before %s"
+msgstr "absence de </%s> avant %s"
+
+#, c-format
+msgctxt "MISSING_ENDTAG_FOR"
+msgid "missing </%s>"
+msgstr "absence de </%s>"
+
+#, c-format
+msgctxt "MISSING_IMAGEMAP"
+msgid "%s should use client-side image map"
+msgstr "%s doivent utiliser une image-map côté client"
+
+#, c-format
+msgctxt "MISSING_QUOTEMARK"
+msgid "%s attribute with missing trailing quote mark"
+msgstr "%s attribut avec apostrophe de fin manquante"
+
+#, c-format
+msgctxt "MISSING_SEMICOLON_NCR"
+msgid "numeric character reference \"%s\" doesn't end in ';'"
+msgstr "La référence de caractère numérique « %s » ne se termine pas par « ; »"
+
+#, c-format
+msgctxt "MISSING_SEMICOLON"
+msgid "entity \"%s\" doesn't end in ';'"
+msgstr "l'entité « %s » ne se termine pas par « ; »"
+
+#, c-format
+msgctxt "MISSING_STARTTAG"
+msgid "missing <%s>"
+msgstr "absence de <%s>"
+
+msgctxt "MISSING_TITLE_ELEMENT"
+msgid "inserting missing 'title' element"
+msgstr "ajout d'un élément 'title' manquant"
+
+msgctxt "MOVED_STYLE_TO_HEAD"
+msgid "moved <style> tag to <head>! fix-style-tags: no to avoid."
+msgstr ""
 
 #, c-format
 msgctxt "NESTED_EMPHASIS"
@@ -2940,28 +2821,101 @@ msgid "nested q elements, possible typo."
 msgstr "éléments \"q\" imbriqués, erreur typographique possible"
 
 #, c-format
+msgctxt "NEWLINE_IN_URI"
+msgid "%s discarding newline in URI reference"
+msgstr "%s inhibition des nouvelles lignes dans la référence d'URI"
+
+#, c-format
+msgctxt "NOFRAMES_CONTENT"
+msgid "%s not inside 'noframes' element"
+msgstr "%s non positionné dans l'élément 'noframes'"
+
+#, c-format
+msgctxt "NON_MATCHING_ENDTAG"
+msgid "replacing unexpected %s with </%s>"
+msgstr "remplacement des %s inattendus par </%s>"
+
+#, c-format
 msgctxt "OBSOLETE_ELEMENT"
 msgid "replacing obsolete element %s with %s"
 msgstr "remplacement de l'élément obsolète %s par %s"
+
+#, c-format
+msgctxt "PREVIOUS_LOCATION"
+msgid "<%s> previously mentioned"
+msgstr "<%s> précédemment mentionnés"
+
+#, c-format
+msgctxt "PROPRIETARY_ATTR_VALUE"
+msgid "%s proprietary attribute value \"%s\""
+msgstr "%s valeur d'attribut propriétaire « %s »"
+
+#, c-format
+msgctxt "PROPRIETARY_ATTRIBUTE"
+msgid "%s proprietary attribute \"%s\""
+msgstr "%s attribut propriétaire \"%s\""
+
+#, c-format
+msgctxt "PROPRIETARY_ELEMENT"
+msgid "%s is not approved by W3C"
+msgstr "%s n'est pas approuvé par le W3C"
 
 #, c-format
 msgctxt "REMOVED_HTML5"
 msgid "%s element removed from HTML5"
 msgstr "élément %s retiré de HTML5"
 
-msgctxt "XML_DECLARATION_DETECTED"
-msgid "An XML declaration was detected. Did you mean to use input-xml?"
-msgstr "Une déclaration XML a été détectée. Voulez-vous utiliser l'option input-xml?"
+#, c-format
+msgctxt "REPEATED_ATTRIBUTE"
+msgid "%s dropping value \"%s\" for repeated attribute \"%s\""
+msgstr "%s abandon de la valeur « %s » pour l'attribut répété « %s »"
 
 #, c-format
-msgctxt "COERCE_TO_ENDTAG"
-msgid "<%s> is probably intended as </%s>"
-msgstr "<%s> est probablement souhaité pour </%s>"
+msgctxt "REPLACING_ELEMENT"
+msgid "replacing %s with %s"
+msgstr "remplacement de %s par %s"
 
 #, c-format
-msgctxt "ELEMENT_NOT_EMPTY"
-msgid "%s element not empty or not closed"
-msgstr "%s élément non vide ou non fermé"
+msgctxt "REPLACING_UNEX_ELEMENT"
+msgid "replacing unexpected %s with %s"
+msgstr "remplacement des %s inattendus par %s"
+
+msgctxt "SPACE_PRECEDING_XMLDECL"
+msgid "removing whitespace preceding XML Declaration"
+msgstr "suppression de l'espace précédant la déclaration XML"
+
+msgctxt "SUSPECTED_MISSING_QUOTE"
+msgid "missing quote mark for attribute value"
+msgstr "absence de guillemet pour la valeur d'attribut"
+
+#, c-format
+msgctxt "TAG_NOT_ALLOWED_IN"
+msgid "%s isn't allowed in <%s> elements"
+msgstr "%s n'est pas permis dans les éléments <%s>"
+
+#, c-format
+msgctxt "TOO_MANY_ELEMENTS_IN"
+msgid "too many %s elements in <%s>"
+msgstr "trop d'éléments %s dans <%s>"
+
+#, c-format
+msgctxt "TOO_MANY_ELEMENTS"
+msgid "too many %s elements"
+msgstr "trop d'éléments %s"
+
+#, c-format
+msgctxt "TRIM_EMPTY_ELEMENT"
+msgid "trimming empty %s"
+msgstr "réduction des %s vides"
+
+msgctxt "UNESCAPED_AMPERSAND"
+msgid "unescaped & which should be written as &amp;"
+msgstr "symbole & non échappé qui devrait être écrit &amp;"
+
+#, c-format
+msgctxt "UNEXPECTED_END_OF_FILE_ATTR"
+msgid "%s end of file while parsing attributes"
+msgstr "%s fin de fichier lors de l'analyse des attributs"
 
 #, c-format
 msgctxt "UNEXPECTED_END_OF_FILE"
@@ -2969,27 +2923,73 @@ msgid "unexpected end of file %s"
 msgstr "fin de fichier inattendue %s"
 
 #, c-format
+msgctxt "UNEXPECTED_ENDTAG_ERR"
+msgid "unexpected </%s>"
+msgstr "</%s> inattendu"
+
+#, c-format
+msgctxt "UNEXPECTED_ENDTAG_IN"
+msgid "unexpected </%s> in <%s>"
+msgstr "</%s> inattendu dans <%s>"
+
+#, c-format
 msgctxt "UNEXPECTED_ENDTAG"
 msgid "unexpected </%s>"
 msgstr "</%s> inattendu"
 
 #, c-format
-msgctxt "UNEXPECTED_ENDTAG_ERR"
-msgid "unexpected </%s>"
-msgstr "</%s> inattendu"
-
-msgctxt "MOVED_STYLE_TO_HEAD"
-msgid "moved <style> tag to <head>! fix-style-tags: no to avoid."
-msgstr ""
-
-msgctxt "FOUND_STYLE_IN_BODY"
-msgid "found <style> tag in <body>! fix-style-tags: yes to move."
-msgstr ""
+msgctxt "UNEXPECTED_EQUALSIGN"
+msgid "%s unexpected '=', expected attribute name"
+msgstr "%s symbole imprévu '=', nom d'attribut attendu"
 
 #, c-format
-msgctxt "ADDED_MISSING_CHARSET"
-msgid "Added appropriate missing <meta charset=...> to %s"
-msgstr ""
+msgctxt "UNEXPECTED_GT"
+msgid "%s missing '>' for end of tag"
+msgstr "%s symbole '>' manquant pour la fin de balise"
+
+#, c-format
+msgctxt "UNEXPECTED_QUOTEMARK"
+msgid "%s unexpected or duplicate quote mark"
+msgstr "%s guillemet double inattendu ou dupliqué"
+
+#, c-format
+msgctxt "UNKNOWN_ELEMENT_LOOKS_CUSTOM"
+msgid "%s is not recognized! Did you mean to enable the custom-tags option?"
+msgstr "%s n'est pas reconnue! Vouliez-vous activer l'option custom-tags?"
+
+#, c-format
+msgctxt "UNKNOWN_ELEMENT"
+msgid "%s is not recognized!"
+msgstr "%s n'est pas reconnue!"
+
+#, c-format
+msgctxt "UNKNOWN_ENTITY"
+msgid "unescaped & or unknown entity \"%s\""
+msgstr "symbole & non échappé ou entité inconnue « %s »"
+
+#, c-format
+msgctxt "USING_BR_INPLACE_OF"
+msgid "using <br> in place of %s"
+msgstr "utilisation de <br> à la place de %s"
+
+#, c-format
+msgctxt "VENDOR_SPECIFIC_CHARS"
+msgid "%s invalid character code %s"
+msgstr "%s code de caractère non valide %s"
+
+#, c-format
+msgctxt "WHITE_IN_URI"
+msgid "%s discarding whitespace in URI reference"
+msgstr "%s rejet des espaces dans la référence URI"
+
+msgctxt "XML_DECLARATION_DETECTED"
+msgid "An XML declaration was detected. Did you mean to use input-xml?"
+msgstr "Une déclaration XML a été détectée. Voulez-vous utiliser l'option input-xml?"
+
+#, c-format
+msgctxt "XML_ID_SYNTAX"
+msgid "%s ID \"%s\" uses XML ID syntax"
+msgstr "%s ID « %s » utilise la syntaxe XML ID"
 
 msgctxt "IMG_MISSING_ALT"
 msgid "[1.1.1.1]: <img> missing 'alt' text."

@@ -1041,8 +1041,8 @@ void TIDY_CALL         tidyGeneralInfo( TidyDoc tdoc )
     TidyDocImpl* impl = tidyDocToImpl( tdoc );
     if ( impl )
     {
-        TY_(DialogueMessage)( impl, TEXT_GENERAL_INFO, TidyDialogueInfo);
-        TY_(DialogueMessage)( impl, TEXT_GENERAL_INFO_PLEA, TidyDialogueInfo);
+        TY_(Dialogue)( impl, TEXT_GENERAL_INFO );
+        TY_(Dialogue)( impl, TEXT_GENERAL_INFO_PLEA );
     }
 }
 
@@ -1487,7 +1487,7 @@ int         tidyDocRunDiagnostics( TidyDocImpl* doc )
     }
 
     if ( doc->errors > 0 && !force )
-        TY_(DialogueMessage)(doc, STRING_NEEDS_INTERVENTION, TidyDialogueDoc);
+        TY_(Dialogue)(doc, STRING_NEEDS_INTERVENTION );
 
      return tidyDocStatus( doc );
 }

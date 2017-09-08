@@ -100,27 +100,15 @@ extern "C" {
  ** application specific messages.
  */
 #define FOREACH_MSG_MISC(FN) \
-/** File can't be opened */                        FN(FILE_CANT_OPEN)              \
-/** File can't be opened */                        FN(FILE_CANT_OPEN_CFG)          \
-/** Not a file */                                  FN(FILE_NOT_FILE)               \
 /** line %d column %d */                           FN(LINE_COLUMN_STRING)          \
-/** Document content looks like %s */              FN(STRING_CONTENT_LOOKS)        \
 /** discarding */                                  FN(STRING_DISCARDING)           \
-/** Doctype given is %s */                         FN(STRING_DOCTYPE_GIVEN)        \
-/** %u %s, %u %s were found! */                    FN(STRING_ERROR_COUNT)          \
 /** error and errors */                            FN(STRING_ERROR_COUNT_ERROR)    \
 /** warning and warnings */                        FN(STRING_ERROR_COUNT_WARNING)  \
 /** Accessibility hello message */                 FN(STRING_HELLO_ACCESS)         \
 /** HTML Proprietary */                            FN(STRING_HTML_PROPRIETARY)     \
-/** missing or malformed argument for option: */   FN(STRING_MISSING_MALFORMED)    \
-/** Errors must be fixed */                        FN(STRING_NEEDS_INTERVENTION)   \
-/** No warnings or errors were found */            FN(STRING_NO_ERRORS)            \
-/** No system identifier in emitted doctype */     FN(STRING_NO_SYSID)             \
-/** Not all warnings/errors were shown */          FN(STRING_NOT_ALL_SHOWN)        \
 /** plain text */                                  FN(STRING_PLAIN_TEXT)           \
 /** replacing */                                   FN(STRING_REPLACING)            \
 /** specified */                                   FN(STRING_SPECIFIED)            \
-/** unknown option: %s */                          FN(STRING_UNKNOWN_OPTION)       \
 /** XML declaration */                             FN(STRING_XML_DECLARATION)      \
 /** no */                                          FN(TIDYCUSTOMNO_STRING)         \
 /** block level */                                 FN(TIDYCUSTOMBLOCKLEVEL_STRING) \
@@ -133,13 +121,11 @@ extern "C" {
  ** Tidy when certain conditions exist, and provide more verbose explanations
  ** than the short report.
  */
-#define FOREACH_DIALOG_MSG(FN) \
+#define FOREACH_FOOTNOTE_MSG(FN) \
 /** Explanatory text. */           FN(TEXT_ACCESS_ADVICE1)        \
 /** Explanatory text. */           FN(TEXT_ACCESS_ADVICE2)        \
 /** Explanatory text. */           FN(TEXT_BAD_FORM)              \
 /** Explanatory text. */           FN(TEXT_BAD_MAIN)              \
-/** Explanatory text. */           FN(TEXT_GENERAL_INFO_PLEA)     \
-/** Explanatory text. */           FN(TEXT_GENERAL_INFO)          \
 /** Explanatory text. */           FN(TEXT_HTML_T_ALGORITHM)      \
 /** Explanatory text. */           FN(TEXT_INVALID_URI)           \
 /** Explanatory text. */           FN(TEXT_INVALID_UTF16)         \
@@ -157,6 +143,22 @@ extern "C" {
 /** Explanatory text. */           FN(TEXT_USING_SPACER)          \
 /** Explanatory text. */           FN(TEXT_VENDOR_CHARS)          \
 /** Explanatory text. */           FN(TEXT_WINDOWS_CHARS)
+
+
+/** These messages are used to generate additional dialogue style output from
+ ** Tidy when certain conditions exist, and provide more verbose explanations
+ ** than the short report.
+ */
+#define FOREACH_DIALOG_MSG(FN) \
+    FN(STRING_CONTENT_LOOKS)        \
+    FN(STRING_DOCTYPE_GIVEN)        \
+    FN(STRING_ERROR_COUNT)          \
+    FN(STRING_NEEDS_INTERVENTION)   \
+    FN(STRING_NO_ERRORS)            \
+    FN(STRING_NO_SYSID)             \
+    FN(STRING_NOT_ALL_SHOWN)        \
+    FN(TEXT_GENERAL_INFO_PLEA)      \
+    FN(TEXT_GENERAL_INFO)
 
 
 /** These are report messages, i.e., messages that appear in Tidy's table
@@ -189,6 +191,9 @@ extern "C" {
     FN(ELEMENT_VERS_MISMATCH_WARN)    \
     FN(ENCODING_MISMATCH)             \
     FN(ESCAPED_ILLEGAL_URI)           \
+    FN(FILE_CANT_OPEN)                \
+    FN(FILE_CANT_OPEN_CFG)            \
+    FN(FILE_NOT_FILE)                 \
     FN(FIXED_BACKSLASH)               \
     FN(FOUND_STYLE_IN_BODY)           \
     FN(ID_NAME_MISMATCH)              \
@@ -235,6 +240,8 @@ extern "C" {
     FN(REPLACING_ELEMENT)             \
     FN(REPLACING_UNEX_ELEMENT)        \
     FN(SPACE_PRECEDING_XMLDECL)       \
+    FN(STRING_MISSING_MALFORMED)      \
+    FN(STRING_UNKNOWN_OPTION)         \
     FN(SUSPECTED_MISSING_QUOTE)       \
     FN(TAG_NOT_ALLOWED_IN)            \
     FN(TOO_MANY_ELEMENTS_IN)          \
@@ -1342,16 +1349,17 @@ typedef enum
  */
 typedef enum
 {
-    TidyInfo = 350,       /**< Report: Information about markup usage */
-    TidyWarning,          /**< Report: Warning message */
-    TidyConfig,           /**< Report: Configuration error */
-    TidyAccess,           /**< Report: Accessibility message */
-    TidyError,            /**< Report: Error message - output suppressed */
-    TidyBadDocument,      /**< Report: I/O or file system error */
-    TidyFatal,            /**< Report: Crash! */
-    TidyDialogueInfo,     /**< Dialogue: Non-document related information */
-    TidyDialogueSummary,  /**< Dialogue: Summary-related information */
-    TidyDialogueDoc,      /**< Dialogue: Document-related information */
+    TidyInfo = 350,         /**< Report: Information about markup usage */
+    TidyWarning,            /**< Report: Warning message */
+    TidyConfig,             /**< Report: Configuration error */
+    TidyAccess,             /**< Report: Accessibility message */
+    TidyError,              /**< Report: Error message - output suppressed */
+    TidyBadDocument,        /**< Report: I/O or file system error */
+    TidyFatal,              /**< Report: Crash! */
+    TidyDialogueSummary,    /**< Dialogue: Summary-related information */
+    TidyDialogueInfo,       /**< Dialogue: Non-document related information */
+    TidyDialogueFootnote,   /**< Dialogue: Footnote */
+    TidyDialogueDoc = TidyDialogueFootnote, /**< Dialogue: Deprecated (renamed) */
 } TidyReportLevel;
 
     
@@ -1397,6 +1405,7 @@ typedef enum
     TIDYSTRINGS_FIRST = 500,
 
     FOREACH_MSG_MISC(MAKE_ENUM)
+    FOREACH_FOOTNOTE_MSG(MAKE_ENUM)
     FOREACH_DIALOG_MSG(MAKE_ENUM)
     FOREACH_REPORT_MSG(MAKE_ENUM)
     

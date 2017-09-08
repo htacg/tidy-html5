@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-05-13 21:04:45
+ *   PO_REVISION_DATE=2017-09-08 11:28:05
  */
 
 #ifdef _MSC_VER
@@ -61,9 +61,9 @@ static languageDefinition language_zh_cn = { whichPluralForm_zh_cn, {
     {/* Specify the ll or ll_cc language code here. */
       TIDY_LANGUAGE,          0, "zh_cn"
     },
-    { FILE_CANT_OPEN,         0, "无法打开”%s”\n"              },
     { LINE_COLUMN_STRING,     0, "行 %d 列 %d - "            },
     { STRING_CONTENT_LOOKS,   0, "文档内容看起来像 %s"             },
+    { FILE_CANT_OPEN,         0, "无法打开”%s”\n"              },
 
 #if SUPPORT_CONSOLE_APP
     { TC_STRING_VERS_A,       0, "HTML Tidy 用于 %s 版本 %s"   },

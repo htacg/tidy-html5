@@ -1506,8 +1506,8 @@ TIDY_EXPORT int TIDY_CALL         tidyParseSource(TidyDoc tdoc,           /**< T
  */
 TIDY_EXPORT int TIDY_CALL         tidyCleanAndRepair( TidyDoc tdoc );
 
-/** Run configured diagnostics on parsed and repaired markup. You must call
- ** tidyCleanAndRepair() before using this function.
+/** Reports the document type and diagnostic statistics on parsed and repaired 
+ ** markup. You must call tidyCleanAndRepair() before using this function.
  ** @param tdoc The tidy document to use.
  ** @result An integer representing the status.
  */

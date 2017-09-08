@@ -1577,28 +1577,19 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TidyError,              0,   "Error: "         },
     { TidyBadDocument,        0,   "Document: "      },
     { TidyFatal,              0,   "Panic: "         },
-    { TidyDialogueInfo,       0,   "Information: "   },
     { TidyDialogueSummary,    0,   "Summary: "       },
-    { TidyDialogueDoc,        0,   "Document: "      },
+    { TidyDialogueInfo,       0,   "Information: "   },
+    { TidyDialogueFootnote,   0,   "Footnote: "      },
     
     
     /********************************************
      ** Miscellaneous Strings
      ** @remark enum source TidyStrings
-     ** @rename enum generator FOREACH_MSG_MISC
+     ** @remark enum generator FOREACH_MSG_MISC
      ********************************************/
-    { FILE_CANT_OPEN,               0,   "Can't open \"%s\"\n"                                                     },
-    { FILE_CANT_OPEN_CFG,           0,   "Can't open configuration file \"%s\"\n"                                  },
-    { FILE_NOT_FILE,                0,   "\"%s\" is not a file!\n"                                                 },
     { LINE_COLUMN_STRING,           0,   "line %d column %d - "                                                    },
-    { STRING_CONTENT_LOOKS,         0,   "Document content looks like %s"                                          },
     {/* For example, "discarding invalid UTF-16 surrogate pair" */
       STRING_DISCARDING,            0,   "discarding"
-    },
-    { STRING_DOCTYPE_GIVEN,         0,   "Doctype given is \"%s\""                                                 },
-
-    {/* The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-      STRING_ERROR_COUNT,           0,   "Tidy found %u %s and %u %s!"
     },
     { STRING_ERROR_COUNT_ERROR,     0,   "error"                                                                   },
     { STRING_ERROR_COUNT_ERROR,     1,   "errors"                                                                  },
@@ -1608,17 +1599,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     {/* This is not a formal name and can be translated. */
       STRING_HTML_PROPRIETARY,      0,   "HTML Proprietary"
     },
-    { STRING_MISSING_MALFORMED,     0,   "missing or malformed argument for option: %s"                            },
     { STRING_XML_DECLARATION,       0,   "XML declaration"                                                         },
-    {/* This console output should be limited to 78 characters per line.
-      - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-      STRING_NEEDS_INTERVENTION,    0,
-        "This document has errors that must be fixed before\n"
-        "using HTML Tidy to generate a tidied up version.\n"
-    },
-    { STRING_NO_ERRORS,             0,   "No warnings or errors were found."                                       },
-    { STRING_NO_SYSID,              0,   "No system identifier in emitted doctype"                                 },
-    { STRING_NOT_ALL_SHOWN,         0,   "Tidy found %u %s and %u %s! Not all warnings/errors were shown."         },
     { STRING_PLAIN_TEXT,            0,   "plain text"                                                              },
     {/* For example, "replacing invalid UTF-8 bytes" */
       STRING_REPLACING,             0,   "replacing"
@@ -1626,7 +1607,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
     {/* For example, "you should avoid using the specified encoding." */
       STRING_SPECIFIED,             0,   "specified"
     },
-    { STRING_UNKNOWN_OPTION,        0,   "unknown option: %s"                                                      },
     { TIDYCUSTOMNO_STRING,          0,   "no"                                                                      },
     { TIDYCUSTOMBLOCKLEVEL_STRING,  0,   "block level"                                                             },
     { TIDYCUSTOMEMPTY_STRING,       0,   "empty"                                                                   },
@@ -1635,9 +1615,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
   
     
     /********************************************
-     ** Miscellaneous Strings
+     ** Footnote Strings
      ** @remark enum source TidyStrings
-     ** @rename enum generator FOREACH_DIALOG_MSG
+     ** @rename enum generator FOREACH_FOOTNOTE_MSG
      ********************************************/
     {/* This console output should be limited to 78 characters per line. */
       TEXT_HTML_T_ALGORITHM,        0,
@@ -1797,8 +1777,28 @@ static languageDefinition language_en = { whichPluralForm_en, {
       TEXT_USING_BODY,              0,
         "You are recommended to use CSS to specify page and link colors"
     },
+    
+    /********************************************
+     ** Miscellaneous Dialogue Strings
+     ** @remark enum source TidyStrings
+     ** @rename enum generator FOREACH_DIALOG_MSG
+     ********************************************/
+    { STRING_CONTENT_LOOKS,         0,   "Document content looks like %s"                                          },
+    { STRING_DOCTYPE_GIVEN,         0,   "Doctype given is \"%s\""                                                 },
+    {/* The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+        STRING_ERROR_COUNT,           0,   "Tidy found %u %s and %u %s!"
+    },
     {/* This console output should be limited to 78 characters per line.
-        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+      - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+      STRING_NEEDS_INTERVENTION,    0,
+        "This document has errors that must be fixed before\n"
+        "using HTML Tidy to generate a tidied up version.\n"
+    },
+    { STRING_NO_ERRORS,             0,   "No warnings or errors were found."                                       },
+    { STRING_NO_SYSID,              0,   "No system identifier in emitted doctype"                                 },
+    { STRING_NOT_ALL_SHOWN,         0,   "Tidy found %u %s and %u %s! Not all warnings/errors were shown."         },
+    {/* This console output should be limited to 78 characters per line.
+      - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TEXT_GENERAL_INFO,            0,
         "About HTML Tidy: https://github.com/htacg/tidy-html5\n"
         "Bug reports and comments: https://github.com/htacg/tidy-html5/issues\n"
@@ -1820,7 +1820,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     /********************************************
      ** Report Output
      ** @remark enum source TidyStrings
-     ** @rename enum generator FOREACH_DIALOG_MSG
+     ** @rename enum generator FOREACH_REPORT_MSG
      ********************************************/    
     { ADDED_MISSING_CHARSET,        0,   "Added appropriate missing <meta charset=...> to %s"                      },
     { ANCHOR_NOT_UNIQUE,            0,   "%s anchor \"%s\" already defined"                                        },
@@ -1848,6 +1848,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { ELEMENT_VERS_MISMATCH_WARN,   0,   "%s element not available in %s"                                          },
     { ENCODING_MISMATCH,            0,   "specified input encoding (%s) does not match actual input encoding (%s)" },
     { ESCAPED_ILLEGAL_URI,          0,   "%s escaping malformed URI reference"                                     },
+    { FILE_CANT_OPEN,               0,   "Can't open \"%s\"\n"                                                     },
+    { FILE_CANT_OPEN_CFG,           0,   "Can't open configuration file \"%s\"\n"                                  },
+    { FILE_NOT_FILE,                0,   "\"%s\" is not a file!\n"                                                 },
     { FIXED_BACKSLASH,              0,   "%s converting backslash in URI to slash"                                 },
     { FOUND_STYLE_IN_BODY,          0,   "found <style> tag in <body>! fix-style-tags: yes to move."               },
     { ID_NAME_MISMATCH,             0,   "%s id and name attribute value mismatch"                                 },
@@ -1894,6 +1897,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { REPLACING_ELEMENT,            0,   "replacing %s with %s"                                                    },
     { REPLACING_UNEX_ELEMENT,       0,   "replacing unexpected %s with %s"                                         },
     { SPACE_PRECEDING_XMLDECL,      0,   "removing whitespace preceding XML Declaration"                           },
+    { STRING_MISSING_MALFORMED,     0,   "missing or malformed argument for option: %s"                            },
+    { STRING_UNKNOWN_OPTION,        0,   "unknown option: %s"                                                      },
     { SUSPECTED_MISSING_QUOTE,      0,   "missing quote mark for attribute value"                                  },
     { TAG_NOT_ALLOWED_IN,           0,   "%s isn't allowed in <%s> elements"                                       },
     { TOO_MANY_ELEMENTS_IN,         0,   "too many %s elements in <%s>"                                            },

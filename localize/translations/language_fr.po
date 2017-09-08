@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-09-06 20:53:40\n"
+"PO-Revision-Date: 2017-09-08 11:50:57\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -2054,50 +2054,19 @@ msgctxt "TidyDialogueSummary"
 msgid "Summary: "
 msgstr "Résumé:"
 
-msgctxt "TidyDialogueDoc"
-msgid "Document: "
-msgstr "Document:"
-
-#, c-format
-msgctxt "FILE_CANT_OPEN"
-msgid "Can't open \"%s\"\n"
-msgstr "Impossible d'ouvrir « %s »\n"
-
-#, c-format
-msgctxt "FILE_CANT_OPEN_CFG"
-msgid "Can't open configuration file \"%s\"\n"
+msgctxt "TidyDialogueFootnote"
+msgid "Footnote: "
 msgstr ""
-
-#, c-format
-msgctxt "FILE_NOT_FILE"
-msgid "\"%s\" is not a file!\n"
-msgstr "\"%s\" n'est pas un fichier!\n"
 
 #, c-format
 msgctxt "LINE_COLUMN_STRING"
 msgid "line %d column %d - "
 msgstr "Ligne: %d Col: %d - "
 
-#, c-format
-msgctxt "STRING_CONTENT_LOOKS"
-msgid "Document content looks like %s"
-msgstr "Le contenu du document ressemble à %s"
-
 #. For example, "discarding invalid UTF-16 surrogate pair"
 msgctxt "STRING_DISCARDING"
 msgid "discarding"
 msgstr "rejet"
-
-#, c-format
-msgctxt "STRING_DOCTYPE_GIVEN"
-msgid "Doctype given is \"%s\""
-msgstr "DOCTYPE donnée est «%s»"
-
-#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
-#, c-format
-msgctxt "STRING_ERROR_COUNT"
-msgid "Tidy found %u %s and %u %s!"
-msgstr "Tidy a trouvé %u %s et %u %s!"
 
 msgctxt "STRING_ERROR_COUNT_ERROR"
 msgid "error"
@@ -2122,37 +2091,9 @@ msgctxt "STRING_HTML_PROPRIETARY"
 msgid "HTML Proprietary"
 msgstr "HTML Propriétaire"
 
-#, c-format
-msgctxt "STRING_MISSING_MALFORMED"
-msgid "missing or malformed argument for option: %s"
-msgstr "argument manquant ou incorrect pour l'option: %s"
-
 msgctxt "STRING_XML_DECLARATION"
 msgid "XML declaration"
 msgstr "déclaration XML"
-
-#. This console output should be limited to 78 characters per line.
-#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
-msgctxt "STRING_NEEDS_INTERVENTION"
-msgid ""
-"This document has errors that must be fixed before\n"
-"using HTML Tidy to generate a tidied up version.\n"
-msgstr ""
-"Ce document contient des erreurs qui doivent d'abord être résolues\n"
-"en utilisant HTML Tidy pour produire une version nettoyée.\n"
-
-msgctxt "STRING_NO_ERRORS"
-msgid "No warnings or errors were found."
-msgstr "Aucun avertissement ou erreur trouvée."
-
-msgctxt "STRING_NO_SYSID"
-msgid "No system identifier in emitted doctype"
-msgstr "Aucun identifiant système dans le doctype soumis"
-
-#, c-format
-msgctxt "STRING_NOT_ALL_SHOWN"
-msgid "Tidy found %u %s and %u %s! Not all warnings/errors were shown."
-msgstr "Tidy a trouvé %u %s et %u %s! Tous les avertissements et erreurs n'ont pas été affichés."
 
 msgctxt "STRING_PLAIN_TEXT"
 msgid "plain text"
@@ -2167,11 +2108,6 @@ msgstr "remplacement"
 msgctxt "STRING_SPECIFIED"
 msgid "specified"
 msgstr "précisé"
-
-#, c-format
-msgctxt "STRING_UNKNOWN_OPTION"
-msgid "unknown option: %s"
-msgstr "option inconnue: %s"
 
 msgctxt "TIDYCUSTOMNO_STRING"
 msgid "no"
@@ -2504,6 +2440,45 @@ msgstr ""
 "Il est recommandé d'utiliser les CSS pour préciser les couleurs \n"
 "de la page et des liens"
 
+#, c-format
+msgctxt "STRING_CONTENT_LOOKS"
+msgid "Document content looks like %s"
+msgstr "Le contenu du document ressemble à %s"
+
+#, c-format
+msgctxt "STRING_DOCTYPE_GIVEN"
+msgid "Doctype given is \"%s\""
+msgstr "DOCTYPE donnée est «%s»"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#, c-format
+msgctxt "STRING_ERROR_COUNT"
+msgid "Tidy found %u %s and %u %s!"
+msgstr "Tidy a trouvé %u %s et %u %s!"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "STRING_NEEDS_INTERVENTION"
+msgid ""
+"This document has errors that must be fixed before\n"
+"using HTML Tidy to generate a tidied up version.\n"
+msgstr ""
+"Ce document contient des erreurs qui doivent d'abord être résolues\n"
+"en utilisant HTML Tidy pour produire une version nettoyée.\n"
+
+msgctxt "STRING_NO_ERRORS"
+msgid "No warnings or errors were found."
+msgstr "Aucun avertissement ou erreur trouvée."
+
+msgctxt "STRING_NO_SYSID"
+msgid "No system identifier in emitted doctype"
+msgstr "Aucun identifiant système dans le doctype soumis"
+
+#, c-format
+msgctxt "STRING_NOT_ALL_SHOWN"
+msgid "Tidy found %u %s and %u %s! Not all warnings/errors were shown."
+msgstr "Tidy a trouvé %u %s et %u %s! Tous les avertissements et erreurs n'ont pas été affichés."
+
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 msgctxt "TEXT_GENERAL_INFO"
@@ -2661,6 +2636,21 @@ msgstr "l'encodage de caractère précisé en entrée (%s) ne correspond pas à 
 msgctxt "ESCAPED_ILLEGAL_URI"
 msgid "%s escaping malformed URI reference"
 msgstr "%s échappement de la référence d''URI mal formée"
+
+#, c-format
+msgctxt "FILE_CANT_OPEN"
+msgid "Can't open \"%s\"\n"
+msgstr "Impossible d'ouvrir « %s »\n"
+
+#, c-format
+msgctxt "FILE_CANT_OPEN_CFG"
+msgid "Can't open configuration file \"%s\"\n"
+msgstr ""
+
+#, c-format
+msgctxt "FILE_NOT_FILE"
+msgid "\"%s\" is not a file!\n"
+msgstr "\"%s\" n'est pas un fichier!\n"
 
 #, c-format
 msgctxt "FIXED_BACKSLASH"
@@ -2883,6 +2873,16 @@ msgstr "remplacement des %s inattendus par %s"
 msgctxt "SPACE_PRECEDING_XMLDECL"
 msgid "removing whitespace preceding XML Declaration"
 msgstr "suppression de l'espace précédant la déclaration XML"
+
+#, c-format
+msgctxt "STRING_MISSING_MALFORMED"
+msgid "missing or malformed argument for option: %s"
+msgstr "argument manquant ou incorrect pour l'option: %s"
+
+#, c-format
+msgctxt "STRING_UNKNOWN_OPTION"
+msgid "unknown option: %s"
+msgstr "option inconnue: %s"
 
 msgctxt "SUSPECTED_MISSING_QUOTE"
 msgid "missing quote mark for attribute value"

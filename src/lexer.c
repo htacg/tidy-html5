@@ -2696,7 +2696,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
 
                     TY_(AddCharToLexer)(lexer, c);
 
-                    if (TY_(IsLetter)(c))
+                    if (TY_(IsLetter)(c) || (cfgBool(doc, TidyXmlTags) && TY_(IsXMLNamechar)(c)))
                     {
                         lexer->lexsize -= 3;
                         lexer->txtend = lexer->lexsize;
@@ -2897,7 +2897,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 }
 
                 /* check for start tag */
-                if (TY_(IsLetter)(c))
+                if (TY_(IsLetter)(c) || (cfgBool(doc, TidyXmlTags) && TY_(IsXMLNamechar)(c)))
                 {
                     TY_(UngetChar)(c, doc->docIn);     /* push back letter */
                     TY_(UngetChar)('<', doc->docIn);

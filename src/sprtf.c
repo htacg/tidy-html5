@@ -294,7 +294,7 @@ static void oi( char * psin )
       }
 
       if( addstdout ) {
-         fwrite( ps, 1, len, stdout );
+         fwrite( ps, 1, len, stderr );  /* 20170917 - Switch to using 'stderr' in place of 'stdout' */
       }
 #ifdef ADD_LISTVIEW
        if (add2listview) {

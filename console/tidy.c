@@ -27,6 +27,10 @@
 #endif
 #if !defined(NDEBUG) && defined(_MSC_VER)
 #include "sprtf.h"
+#ifdef _CRTDBG_MAP_ALLOC  
+#include <stdlib.h>  
+#include <crtdbg.h>  
+#endif
 #endif
 
 #ifndef SPRTF
@@ -1882,13 +1886,23 @@ int main( int argc, char** argv )
 {
     ctmbstr prog = argv[0];
     ctmbstr cfgfil = NULL, errfil = NULL, htmlfil = NULL;
-    TidyDoc tdoc = tidyCreate();
+    TidyDoc tdoc = NULL;
     int status = 0;
     tmbstr locale = NULL;
 
     uint contentErrors = 0;
     uint contentWarnings = 0;
     uint accessWarnings = 0;
+
+#if !defined(NDEBUG) && defined(_MSC_VER)
+#if defined(_CRTDBG_MAP_ALLOC)
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#endif
+    set_log_file((char *)"temptidy.txt", 0);
+    /* add_append_log(1); */
+#endif
+
+    tdoc = tidyCreate();
 
     tidySetMessageCallback( tdoc, reportCallback); /* experimental group */
     errout = stderr;  /* initialize to stderr */
@@ -1912,12 +1926,6 @@ int main( int argc, char** argv )
      */
     win_cp = GetConsoleOutputCP();
     SetConsoleOutputCP(CP_UTF8);
-#endif
-
-
-#if !defined(NDEBUG) && defined(_MSC_VER)
-    set_log_file((char *)"temptidy.txt", 0);
-    /* add_append_log(1); */
 #endif
 
     /*

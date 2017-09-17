@@ -1551,7 +1551,15 @@ void TY_(RemoveAttribute)( TidyDocImpl* doc, Node *node, AttVal *attr )
 void TY_(FreeNode)( TidyDocImpl* doc, Node *node )
 {
 #if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_ALLOCATION)
-    if (node) SPRTF("Free node %p\n", node );
+    /* avoid showing free of root node! */
+    if (node) {
+        if (RootNode != node->type) {
+            SPRTF("Free node %p\n", node);
+        }
+        else {
+            SPRTF("Root node %p\n", node);
+        }
+    }
 #endif
     /* this is no good ;=((
     if (node && doc && doc->lexer) {

@@ -72,6 +72,27 @@ else ()
 add_definitions ( -DSUPPORT_CONSOLE_APP=0 )
 endif ()
 
+# Enable building with some memory diagnostics
+# NOTE: Only available in the Debug configuration build in Windows
+# but could be maybe extended to unix, mac...
+if (WIN32)
+    option( ENABLE_MEMORY_DEBUG  "Set ON to output some memory diagnostics." OFF )
+    option( ENABLE_ALLOC_DEBUG   "Set ON to output node allocation diagnostics." OFF )
+    option( ENABLE_CRTDBG_MEMORY "Set ON to enable the Windows CRT debug library." OFF )
+    if (ENABLE_MEMORY_DEBUG)
+        add_definitions ( -DDEBUG_MEMORY )  # see alloc.c for details
+        message(STATUS "*** Note, alloc.c memory diagnostics are ON")
+    endif ()
+    if (ENABLE_ALLOC_DEBUG)
+        add_definitions ( -DDEBUG_ALLOCATION )  # see lexer.c for details
+        message(STATUS "*** Note, lexer.c node allocation diagnostics are ON")
+    endif ()
+    if (ENABLE_CRTDBG_MEMORY)
+        add_definitions ( -D_CRTDBG_MAP_ALLOC )  # see tidy.c for details
+        message(STATUS "*** Note, tidy.c Windows CRT memory debug is ON")
+    endif ()
+endif ()
+
 if(CMAKE_COMPILER_IS_GNUCXX)
     set( WARNING_FLAGS -Wall )
 endif(CMAKE_COMPILER_IS_GNUCXX)

@@ -18,6 +18,13 @@ static TidyRealloc g_realloc = NULL;
 static TidyFree    g_free    = NULL;
 static TidyPanic   g_panic   = NULL;
 
+#if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_MEMORY)
+static int alloccnt = 0;
+static int realloccnt = 0;
+static int freecnt = 0;
+#endif
+
+
 Bool TIDY_CALL tidySetMallocCall( TidyMalloc fmalloc )
 {
   g_malloc  = fmalloc;
@@ -60,7 +67,8 @@ static void* TIDY_CALL defaultAlloc( TidyAllocator* allocator, size_t size )
     if ( !p )
         defaultPanic( allocator,"Out of memory!");
 #if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_MEMORY)
-    SPRTF("alloc   MEM %p, size %d\n", p, (int)size );
+    alloccnt++;
+    SPRTF("%d: alloc   MEM %p, size %d\n", alloccnt, p, (int)size );
     if (size == 0) {
         SPRTF("NOTE: An allocation of ZERO bytes!!!!!!\n");
     }
@@ -78,7 +86,8 @@ static void* TIDY_CALL defaultRealloc( TidyAllocator* allocator, void* mem, size
     if (!p)
         defaultPanic( allocator, "Out of memory!");
 #if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_MEMORY)
-    SPRTF("realloc MEM %p, size %d\n", p, (int)newsize );
+    realloccnt++;
+    SPRTF("%d: realloc MEM %p, size %d\n", realloccnt, p, (int)newsize );
 #endif
     return p;
 }
@@ -88,7 +97,8 @@ static void TIDY_CALL defaultFree( TidyAllocator* ARG_UNUSED(allocator), void* m
     if ( mem )
     {
 #if !defined(NDEBUG) && defined(_MSC_VER) && defined(DEBUG_MEMORY)
-        SPRTF("free    MEM %p\n", mem );
+        freecnt++;
+        SPRTF("%d: free    MEM %p\n", freecnt, mem );
 #endif
         if ( g_free )
             g_free( mem );

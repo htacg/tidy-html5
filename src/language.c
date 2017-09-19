@@ -14,6 +14,7 @@
 #include "language_en_gb.h"
 #include "language_es.h"
 #include "language_es_mx.h"
+#include "language_pt_br.h"
 #include "language_zh_cn.h"
 #include "language_fr.h"
 #endif
@@ -44,6 +45,7 @@ static tidyLanguagesType tidyLanguages = {
         &language_en_gb,
         &language_es,
         &language_es_mx,
+        &language_pt_br,
         &language_zh_cn,
         &language_fr,
 #endif

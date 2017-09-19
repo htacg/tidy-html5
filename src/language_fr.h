@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-09-08 11:28:05
+ *   PO_REVISION_DATE=2017-09-19 14:00:03
  */
 
 #ifdef _MSC_VER
@@ -579,8 +579,8 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { TidyError,                                     0, "Erreur:"                                                                                                },
     { TidyBadDocument,                               0, "Document:"                                                                                              },
     { TidyFatal,                                     0, "Panique:"                                                                                               },
-    { TidyDialogueInfo,                              0, "Informations: "                                                                                         },
     { TidyDialogueSummary,                           0, "Résumé:"                                                                                                },
+    { TidyDialogueInfo,                              0, "Informations: "                                                                                         },
     { TidyDialogueFootnote,                          0, "Remarque:"                                                                                              },
     { LINE_COLUMN_STRING,                            0, "Ligne: %d Col: %d - "                                                                                   },
     { STRING_DISCARDING,                             0, "rejet"                                                                                                  },

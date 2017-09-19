@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-09-08 11:50:57\n"
+"PO-Revision-Date: 2017-09-19 14:00:03\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -1784,12 +1784,12 @@ msgctxt "TidyFatal"
 msgid "Panic: "
 msgstr ""
 
-msgctxt "TidyDialogueInfo"
-msgid "Information: "
-msgstr ""
-
 msgctxt "TidyDialogueSummary"
 msgid "Summary: "
+msgstr ""
+
+msgctxt "TidyDialogueInfo"
+msgid "Information: "
 msgstr ""
 
 msgctxt "TidyDialogueFootnote"

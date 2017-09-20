@@ -1,0 +1,4005 @@
+# Rafael Fontenelle <rafaelff@gnome.org>, 2017.
+msgid ""
+msgstr ""
+"Project-Id-Version: HTML Tidy 5.5.38\n"
+"POT-Creation-Date: 2017-09-19 15:22:05\n"
+"PO-Revision-Date: 2017-09-19 08:16-0200\n"
+"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Virtaal 1.0.0-beta1\n"
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyAccessibilityCheckLevel"
+msgid ""
+"This option specifies what level of accessibility checking, if any, that "
+"Tidy should perform. <br/>Level <var>0 (Tidy Classic)</var> is equivalent to "
+"Tidy Classic's accessibility checking. <br/>For more information on Tidy's "
+"accessibility checking, visit <a href=\"http://www.html-tidy.org/"
+"accessibility/\"> Tidy's Accessibility Page</a>. "
+msgstr ""
+"Esta opção especifica o nível de verificação de acessibilidade, se houver, "
+"que Tidy deve executar. <br/>Nível <var>0 (Tidy Classic)</var> é equivalente "
+"à verificação de acessibilidade do Tidy Classic.<br/> Para obter mais "
+"informações sobre a verificação de acessibilidade do Tidy, visite <a href="
+"\"http://www.html-tidy.org/accessibility/\"> Página de acessibilidade do "
+"Tidy</a>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyAltText"
+msgid ""
+"This option specifies the default <code>alt=</code> text Tidy uses for "
+"<code>&lt;img&gt;</code> attributes when the <code>alt=</code> attribute is "
+"missing. <br/>Use with care, as it is your responsibility to make your "
+"documents accessible to people who cannot see the images. "
+msgstr ""
+"Esta opção especifica o texto padrão <code>alt=</code> que o Tidy usa para "
+"atributos <code>&lt;img&gt;</code> quando o atributo <code>alt=</code> está "
+"faltando. <br/>Use com cuidado, pois é sua responsabilidade tornar seus "
+"documentos acessíveis para pessoas que não conseguem ver as imagens. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyAnchorAsName"
+msgid ""
+"This option controls the deletion or addition of the <code>name</code> "
+"attribute in elements where it can serve as anchor. <br/>If set to <var>yes</"
+"var> a <code>name</code> attribute, if not already existing, is added along "
+"an existing <code>id</code> attribute if the DTD allows it. <br/>If set to "
+"<var>no</var> any existing name attribute is removed if an <code>id</code> "
+"attribute exists or has been added. "
+msgstr ""
+"Esta opção controla a exclusão ou adição do atributo <code>name</code> em "
+"elementos onde ele pode servir como âncora. <br/>Se configurado para "
+"<var>yes</var>, um atributo <code>name</code>, se não já existir, é "
+"adicionado ao longo de um atributo <code>id</code> existente se o DTD o "
+"permitir. <br/>Se configurado para <var>no</var> qualquer atributo de nome "
+"existente é removido se um atributo <code>id</code> existir ou tenha sido "
+"adicionado. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyAsciiChars"
+msgid ""
+"Can be used to modify behavior of the <code>clean</code> option when set to "
+"<var>yes</var>. <br/>If set to <var>yes</var> when using <code>clean</code>, "
+"<code>&amp;emdash;</code>, <code>&amp;rdquo;</code>, and other named "
+"character entities are downgraded to their closest ASCII equivalents. "
+msgstr ""
+"Pode ser usado para modificar o comportamento da opção <code>clean</code> "
+"quando configurado para <var>yes</var>. <br/>Se configurado para <var>yes</"
+"var> ao usar <code>clean</code>, <code>&amp;emdash;</code>, <code>&amp;rdquo;"
+"</code>, e outras entidades de caracteres nomeadas são rebaixadas para os "
+"equivalentes ASCII mais próximos. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyBlockTags"
+msgid ""
+"This option specifies new block-level tags. This option takes a space or "
+"comma separated list of tag names. <br/>Unless you declare new tags, Tidy "
+"will refuse to generate a tidied file if the input includes previously "
+"unknown tags. <br/>Note you can't change the content model for elements such "
+"as <code>&lt;table&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</"
+"code> and <code>&lt;dl&gt;</code>. <br/>This option is ignored in XML mode. "
+msgstr ""
+"Esta opção especifica novas tags de nível de bloco. Esta opção possui uma "
+"lista separada por vírgulas ou espaço de nomes de tags. <br/>A menos que "
+"você declare novas tags, o Tidy se recusará a gerar um arquivo arrumado se a "
+"entrada incluir tags anteriormente desconhecidas. <br/>Note que você não "
+"pode alterar o modelo de conteúdo para elementos como <code>&lt;table&gt;</"
+"code>, <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code> e <code>&lt;dl&gt;</"
+"code>. <br/>Esta opção é ignorada no modo XML. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyBodyOnly"
+msgid ""
+"This option specifies if Tidy should print only the contents of the body tag "
+"as an HTML fragment. <br/>If set to <var>auto</var>, this is performed only "
+"if the body tag has been inferred. <br/>Useful for incorporating existing "
+"whole pages as a portion of another page. <br/>This option has no effect if "
+"XML output is requested. "
+msgstr ""
+"Esta opção especifica se o Tidy deve imprimir apenas o conteúdo da tag body "
+"como um fragmento HTML. <br/>Se configurado para <var>auto</var>, isso é "
+"realizado somente se a tag body tiver sido inferida. <br/>Útil para "
+"incorporar páginas inteiras existentes como uma porção de outra página. <br/"
+">Esta opção não tem efeito se a saída XML for solicitada. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyBreakBeforeBR"
+msgid ""
+"This option specifies if Tidy should output a line break before each "
+"<code>&lt;br&gt;</code> element. "
+msgstr ""
+"Esta opção especifica se o Tidy deve emitir uma quebra de linha antes de "
+"cada elemento <code>&lt;br&gt;</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyCharEncoding"
+msgid ""
+"This option specifies the character encoding Tidy uses for both the input "
+"and output. <br/>For <var>ascii</var> Tidy will accept Latin-1 (ISO-8859-1) "
+"character values, but will use entities for all characters whose value "
+"&gt;127. <br/>For <var>raw</var>, Tidy will output values above 127 without "
+"translating them into entities. <br/>For <var>latin1</var>, characters above "
+"255 will be written as entities. <br/>For <var>utf8</var>, Tidy assumes that "
+"both input and output are encoded as UTF-8. <br/>You can use <var>iso2022</"
+"var> for files encoded using the ISO-2022 family of encodings e.g. ISO-2022-"
+"JP. <br/>For <var>mac</var> and <var>win1252</var>, Tidy will accept vendor "
+"specific character values, but will use entities for all characters whose "
+"value &gt;127. <br/>For unsupported encodings, use an external utility to "
+"convert to and from UTF-8. "
+msgstr ""
+"Esta opção especifica a codificação de caracteres que o Tidy usa tanto para "
+"a entrada como para a saída. <br/>Para <var>ascii</var>, o Tidy aceitará "
+"valores de caracteres Latin-1 (ISO-8859-1), mas usará entidades para todos "
+"os caracteres cujo valor seja &gt;127. <br/>Para <var>raw</var>, o Tidy "
+"emitirá valores acima de 127 sem traduzi-los em entidades. <br/>Para "
+"<var>latin1</var>, os caracteres acima de 255 serão escritos como entidades. "
+"<br/>Para <var>utf8</var>, Tidy presume que tanto a entrada como a saída são "
+"codificadas como UTF-8. <br/>Você pode usar <var>iso2022</var> para arquivos "
+"codificados usando a família de codificações ISO-2022, p.ex. ISO-2022-JP. "
+"<br/> Para <var>mac</var> e <var>win1252</var>, o Tidy aceitará valores de "
+"caracteres específicos do fornecedor, mas usará entidades para todos os "
+"caracteres cujo valor seja &gt;127. <br/>Para codificações sem suporte, use "
+"um utilitário externo para converter de e para UTF-8. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyCoerceEndTags"
+msgid ""
+"This option specifies if Tidy should coerce a start tag into an end tag in "
+"cases where it looks like an end tag was probably intended; for example, "
+"given <br/><code>&lt;span&gt;foo &lt;b&gt;bar&lt;b&gt; baz&lt;/span&gt;</"
+"code> <br/>Tidy will output <br/><code>&lt;span&gt;foo &lt;b&gt;bar&lt;/"
+"b&gt; baz&lt;/span&gt;</code> "
+msgstr ""
+"Esta opção especifica se o Tidy deve coagir uma tag de início em uma tag de "
+"fim nos casos em que parece que uma tag de fim provavelmente foi projetada; "
+"por exemplo, dado <br/><code>&lt;span&gt;foo &lt;b&gt;bar&lt;b&gt; baz&lt;/"
+"span&gt;</code>, <br/>Tidy vai emitir <br/><code>&lt;span&gt;foo &lt;b&gt;"
+"bar&lt;/b&gt; baz&lt;/span&gt;</code> "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyCSSPrefix"
+msgid ""
+"This option specifies the prefix that Tidy uses for styles rules. <br/>By "
+"default, <var>c</var> will be used. "
+msgstr ""
+"Esta opção especifica o prefixo que o Tidy usa para regras de estilo. <br/"
+">Por padrão, <var>c</var> será usado. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDecorateInferredUL"
+msgid ""
+"This option specifies if Tidy should decorate inferred <code>&lt;ul&gt;</"
+"code> elements with some CSS markup to avoid indentation to the right. "
+msgstr ""
+"Esta opção especifica se o Tidy deve decorar elementos inferidos <code>&lt;"
+"ul&gt;</code> com algumas marcações CSS para evitar recuo para a direita. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDoctype"
+msgid ""
+"This option specifies the DOCTYPE declaration generated by Tidy. <br/>If set "
+"to <var>omit</var> the output won't contain a DOCTYPE declaration. Note this "
+"this also implies <code>numeric-entities</code> is set to <var>yes</var>.<br/"
+">If set to <var>html5</var> the DOCTYPE is set to <code>&lt;!DOCTYPE html&gt;"
+"</code>.<br/>If set to <var>auto</var> (the default) Tidy will use an "
+"educated guess based upon the contents of the document.<br/>If set to "
+"<var>strict</var>, Tidy will set the DOCTYPE to the HTML4 or XHTML1 strict "
+"DTD.<br/>If set to <var>loose</var>, the DOCTYPE is set to the HTML4 or "
+"XHTML1 loose (transitional) DTD.<br/>Alternatively, you can supply a string "
+"for the formal public identifier (FPI).<br/>For example: <br/><code>doctype: "
+"\"-//ACME//DTD HTML 3.14159//EN\"</code><br/>If you specify the FPI for an "
+"XHTML document, Tidy will set the system identifier to an empty string. For "
+"an HTML document, Tidy adds a system identifier only if one was already "
+"present in order to preserve the processing mode of some browsers. Tidy "
+"leaves the DOCTYPE for generic XML documents unchanged. <br/>This option "
+"does not offer a validation of document conformance. "
+msgstr ""
+"Esta opção especifica a declaração DOCTYPE gerada pelo Tidy. <br/>Se "
+"configurado para <var>omit</var>, a saída não conterá uma declaração "
+"DOCTYPE. Note que isso também implica que <code>numeric-entity</code> esteja "
+"definido para <var>yes</var>. <br/>Se configurado para <var>html5</var>, o "
+"DOCTYPE é configurado para <code>&lt;!DOCTYPE html&gt;</code>. <br/>Se "
+"configurado para <var>auto</var> (o padrão), Tidy usará um palpite educado "
+"com base no conteúdo do documento. <br/>Se configurado para <var>strict</"
+"var>, o Tidy configurará o DOCTYPE para o DTD estrito HTML4 ou XHTML1. <br/"
+">Se configurado para <var>loose</var>, o DOCTYPE é definido como o DTD loose "
+"(transicional) HTML4 ou XHTML1. <br/>Alternativamente, você pode fornecer "
+"uma string para o identificador público formal (FPI). <br/>Por exemplo: <br/"
+"><code>doctype: \"-//ACME//DTD HTML 3.14159//EN\"</code><br/>Se você "
+"especificar o FPI para um documento XHTML, o Tidy irá definir o "
+"identificador do sistema em uma string vazia. Para um documento HTML, a Tidy "
+"adiciona um identificador de sistema somente se um já estivesse presente "
+"para preservar o modo de processamento de alguns navegadores. Tidy deixa o "
+"DOCTYPE para documentos genéricos XML inalterados. <br/>Esta opção não "
+"oferece uma validação da conformidade do documento. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDropEmptyElems"
+msgid "This option specifies if Tidy should discard empty elements. "
+msgstr "Esta opção especifica se Tidy deve descartar elementos vazios. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDropEmptyParas"
+msgid "This option specifies if Tidy should discard empty paragraphs. "
+msgstr "Esta opção especifica se Tidy deve descartar parágrafos vazios. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDropPropAttrs"
+msgid ""
+"This option specifies if Tidy should strip out proprietary attributes, such "
+"as Microsoft data binding attributes. Additionally attributes that aren't "
+"permitted in the output version of HTML will be dropped if used with "
+"<code>strict-tags-attributes</code>. "
+msgstr ""
+"Esta opção especifica se o Tidy deve remover os atributos de propriedade, "
+"como os atributos de ligação de dados da Microsoft. Além disso, os atributos "
+"que não são permitidos na versão de saída do HTML serão descartados se "
+"usados com <code>strict-tags-attributes</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDuplicateAttrs"
+msgid ""
+"This option specifies if Tidy should keep the first or last attribute, if an "
+"attribute is repeated, e.g. has two <code>align</code> attributes. "
+msgstr ""
+"Esta opção especifica se o Tidy deve manter o primeiro ou último atributo, "
+"se um atributo estiver repetido, p.ex. possui dois atributos <code>align</"
+"code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEmacs"
+msgid ""
+"This option specifies if Tidy should change the format for reporting errors "
+"and warnings to a format that is more easily parsed by GNU Emacs. "
+msgstr ""
+"Esta opção especifica se o Tidy deve alterar o formato para relatar erros e "
+"avisos para um formato que é analisado mais facilmente pelo GNU Emacs. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEmptyTags"
+msgid ""
+"This option specifies new empty inline tags. This option takes a space or "
+"comma separated list of tag names. <br/>Unless you declare new tags, Tidy "
+"will refuse to generate a tidied file if the input includes previously "
+"unknown tags. <br/>Remember to also declare empty tags as either inline or "
+"blocklevel. <br/>This option is ignored in XML mode. "
+msgstr ""
+"Esta opção especifica novas tags em-linha vazias. Esta opção possui uma "
+"lista separada por espaço ou vírgulas de nomes de tags. <br/>A menos que "
+"você declare novas tags, o Tidy se recusará a gerar um arquivo arrumado se a "
+"entrada incluir tags anteriormente desconhecidas. <br/>Lembre-se de declarar "
+"tags vazias como em linha ou bloqueio. <br/>Esta opção é ignorada no modo "
+"XML. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEncloseBlockText"
+msgid ""
+"This option specifies if Tidy should insert a <code>&lt;p&gt;</code> element "
+"to enclose any text it finds in any element that allows mixed content for "
+"HTML transitional but not HTML strict. "
+msgstr ""
+"Esta opção especifica se Tidy deve inserir um elemento <code>&lt;p&gt;</"
+"code> para incluir qualquer texto que encontre em qualquer elemento que "
+"permita o conteúdo misto para HTML transicional mas não HTML estrito. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEncloseBodyText"
+msgid ""
+"This option specifies if Tidy should enclose any text it finds in the body "
+"element within a <code>&lt;p&gt;</code> element.<br/>This is useful when you "
+"want to take existing HTML and use it with a style sheet. "
+msgstr ""
+"Esta opção especifica se o Tidy deve incluir qualquer texto encontrado no "
+"elemento do corpo dentro de um elemento <code>&lt;p&gt;</code>. <br/>Isso é "
+"útil quando você deseja usar o HTML existente e usá-lo com uma folha de "
+"estilo. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyErrFile"
+msgid ""
+"This option specifies the error file Tidy uses for errors and warnings. "
+"Normally errors and warnings are output to <code>stderr</code>. "
+msgstr ""
+"Esta opção especifica o arquivo de erro que o Tidy usa para erros e avisos. "
+"Normalmente, erros e avisos são emitidos para <code>stderr</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEscapeCdata"
+msgid ""
+"This option specifies if Tidy should convert <code>&lt;![CDATA[]]&gt;</code> "
+"sections to normal text. "
+msgstr ""
+"Esta opção especifica se o Tidy deve converter seções <code>&lt;!"
+"[CDATA[]]&gt;</code> em texto normal. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEscapeScripts"
+msgid ""
+"This option causes items that look like closing tags, like <code>&lt;/g</"
+"code> to be escaped to <code>&lt;\\/g</code>. Set this option to <var>no</"
+"var> if you do not want this."
+msgstr ""
+"Esta opção faz com que itens que se parecem com tags de fechamento, como "
+"<code>&lt;/g</code> sejam escapadas para <code>&lt;\\/g</code>. Defina esta "
+"opção para <var>no</var> se você não deseja isso."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyFixBackslash"
+msgid ""
+"This option specifies if Tidy should replace backslash characters <code>\\</"
+"code> in URLs with forward slashes <code>/</code>. "
+msgstr ""
+"Esta opção especifica se o Tidy deve substituir caracteres de barra "
+"invertida <code>\\</code> em URLs com barras <code>/</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyFixComments"
+msgid ""
+"This option specifies if Tidy should replace unexpected hyphens with "
+"<code>=</code> characters when it comes across adjacent hyphens. <br/>The "
+"default is <var>yes</var>. <br/>This option is provided for users of Cold "
+"Fusion which uses the comment syntax: <code>&lt;!--- ---&gt;</code>. "
+msgstr ""
+"Esta opção especifica se Tidy deve substituir hífenes inesperados com "
+"caracteres <code>=</code> quando se trata de hífenes adjacentes. <br/>O "
+"padrão é <var>yes</var>. <br/>Esta opção é fornecida para usuários do Cold "
+"Fusion que usam a sintaxe do comentário: <code>&lt;!--- ---&gt;</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyFixUri"
+msgid ""
+"This option specifies if Tidy should check attribute values that carry URIs "
+"for illegal characters and if such are found, escape them as HTML4 "
+"recommends. "
+msgstr ""
+"Esta opção especifica se o Tidy deve verificar valores de atributos que "
+"carregam URIs para caracteres ilegais e, se tal for encontrado, escapa-os "
+"conforme o HTML4 recomenda. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyForceOutput"
+msgid ""
+"This option specifies if Tidy should produce output even if errors are "
+"encountered. <br/>Use this option with care; if Tidy reports an error, this "
+"means Tidy was not able to (or is not sure how to) fix the error, so the "
+"resulting output may not reflect your intention. "
+msgstr ""
+"Esta opção especifica se o Tidy deve produzir saída, mesmo se forem "
+"encontrados erros. <br/>Use esta opção com cuidado; Se o Tidy relatar um "
+"erro, significa que o Tidy não conseguiu corrigir o erro (ou não sabe como), "
+"então a saída resultante pode não refletir sua intenção. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyGDocClean"
+msgid ""
+"This option specifies if Tidy should enable specific behavior for cleaning "
+"up HTML exported from Google Docs. "
+msgstr ""
+"Esta opção especifica se o Tidy deve habilitar comportamento específico para "
+"limpeza de HTML exportado do Google Docs. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyHideComments"
+msgid "This option specifies if Tidy should print out comments. "
+msgstr "Esta opção especifica se Tidy deve imprimir os comentários. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyHtmlOut"
+msgid ""
+"This option specifies if Tidy should generate pretty printed output, writing "
+"it as HTML. "
+msgstr ""
+"Esta opção especifica se o Tidy deve gerar uma impressão amigável, "
+"escrevendo como HTML. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyInCharEncoding"
+msgid ""
+"This option specifies the character encoding Tidy uses for the input. See "
+"<code>char-encoding</code> for more info. "
+msgstr ""
+"Esta opção especifica a codificação de caracteres que o Tidy usa para a "
+"entrada. Veja <code>char-encoding</code> para mais informações. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyIndentAttributes"
+msgid ""
+"This option specifies if Tidy should begin each attribute on a new line. "
+msgstr ""
+"Esta opção especifica se o Tidy deve começar cada atributo em uma nova "
+"linha. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyIndentCdata"
+msgid ""
+"This option specifies if Tidy should indent <code>&lt;![CDATA[]]&gt;</code> "
+"sections. "
+msgstr ""
+"Esta opção especifica se o Tidy deve aplicar recuo nas seções <code>&lt;!"
+"[CDATA[]]&gt;</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyIndentContent"
+msgid ""
+"This option specifies if Tidy should indent block-level tags. <br/>If set to "
+"<var>auto</var> Tidy will decide whether or not to indent the content of "
+"tags such as <code>&lt;title&gt;</code>, <code>&lt;h1&gt;</code>-<code>&lt;"
+"h6&gt;</code>, <code>&lt;li&gt;</code>, <code>&lt;td&gt;</code>, or "
+"<code>&lt;p&gt;</code> based on the content including a block-level element. "
+"<br/>Setting <code>indent</code> to <var>yes</var> can expose layout bugs in "
+"some browsers. <br/>Use the option <code>indent-spaces</code> to control the "
+"number of spaces or tabs output per level of indent, and <code>indent-with-"
+"tabs</code> to specify whether spaces or tabs are used. "
+msgstr ""
+"Esta opção especifica se Tidy deve aplicar recuo nas tags de nível de bloco. "
+"<br/>Se configurado para <var>auto</var>, Tidy decidirá se aplica ou não "
+"recuo no conteúdo das tags, como <code>&lt;title&gt;</code>, <code>&lt;h1&gt;"
+"</code>-<code>&lt;h6&gt;</code>, <code>&lt;li&gt;</code>, <code>&lt;td&gt;</"
+"code> ou <code>&lt;p&gt;</code> com base no conteúdo, incluindo um elemento "
+"de nível de bloco. <br/>Configurar <code>indent</code> para <var>yes</var> "
+"pode expor erros de layout em alguns navegadores. <br/>Use a opção "
+"<code>indent-spaces</code> para controlar o número de espaços ou tabulações "
+"de saída por nível de recuo e <code>indent-with-tabs</code> para especificar "
+"se espaços ou tabulações são usados. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyIndentSpaces"
+msgid ""
+"This option specifies the number of spaces or tabs that Tidy uses to indent "
+"content when <code>indent</code> is enabled. <br/>Note that the default "
+"value for this option is dependent upon the value of <code>indent-with-tabs</"
+"code> (see also). "
+msgstr ""
+"Esta opção especifica o número de espaços ou guias que o Tidy usa para "
+"recuar o conteúdo quando <code>indent</code> está habilitado. <br/>Note que "
+"o valor padrão para esta opção depende do valor de <code>indent-with-tabs</"
+"code> (veja também). "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyInlineTags"
+msgid ""
+"This option specifies new non-empty inline tags. This option takes a space "
+"or comma separated list of tag names. <br/>Unless you declare new tags, Tidy "
+"will refuse to generate a tidied file if the input includes previously "
+"unknown tags. <br/>This option is ignored in XML mode. "
+msgstr ""
+"Esta opção especifica novas tags em-linha não vazias. Esta opção possui uma "
+"lista separada por espaço ou vírgulas de nomes de tags. <br/>A menos que "
+"você declare novas tags, o Tidy se recusará a gerar um arquivo arrumado se a "
+"entrada incluir tags anteriormente desconhecidas. <br/>Esta opção é ignorada "
+"no modo XML. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyJoinClasses"
+msgid ""
+"This option specifies if Tidy should combine class names to generate a "
+"single, new class name if multiple class assignments are detected on an "
+"element. "
+msgstr ""
+"Esta opção especifica se o Tidy deve combinar os nomes das classes para "
+"gerar um nome de classe único e novo se várias atribuições de classe forem "
+"detectadas em um elemento. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyJoinStyles"
+msgid ""
+"This option specifies if Tidy should combine styles to generate a single, "
+"new style if multiple style values are detected on an element. "
+msgstr ""
+"Esta opção especifica se o Tidy deve combinar os estilos para gerar um "
+"estilo único e novo se vários valores de estilo forem detectados em um "
+"elemento. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyKeepFileTimes"
+msgid ""
+"This option specifies if Tidy should keep the original modification time of "
+"files that Tidy modifies in place. <br/>Setting the option to <var>yes</var> "
+"allows you to tidy files without changing the file modification date, which "
+"may be useful with certain tools that use the modification date for things "
+"such as automatic server deployment.<br/>Note this feature is not supported "
+"on some platforms. "
+msgstr ""
+"Esta opção especifica se o Tidy deve manter o tempo de modificação original "
+"dos arquivos que o Tidy modifica no local. <br/>Configurar a opção para "
+"<var>yes</var> permite arrumar arquivos sem alterar a data de modificação do "
+"arquivo, o que pode ser útil com determinadas ferramentas que usam a data de "
+"modificação para coisas como a implantação automática do servidor. <br/>Note "
+"que não há suporte a este recurso em algumas plataformas. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyLiteralAttribs"
+msgid ""
+"This option specifies how Tidy deals with whitespace characters within "
+"attribute values. <br/>If the value is <var>no</var> Tidy normalizes "
+"attribute values by replacing any newline or tab with a single space, and "
+"further by replacing any contiguous whitespace with a single space. <br/>To "
+"force Tidy to preserve the original, literal values of all attributes and "
+"ensure that whitespace within attribute values is passed through unchanged, "
+"set this option to <var>yes</var>. "
+msgstr ""
+"Esta opção especifica como o Tidy lida com caracteres de espaço em branco "
+"dentro de valores de atributos. <br/>Se o valor for <var>no</var>, Tidy "
+"normaliza os valores dos atributos substituindo qualquer nova linha ou "
+"tabulação por um único espaço, além de substituir qualquer espaço contíguo "
+"em espaço único. <br/>Para forçar o Tidy a preservar os valores literais "
+"originais de todos os atributos e garantir que os espaços em branco dentro "
+"dos valores de atributo sejam passados inalterados através, defina esta "
+"opção como <var>yes</var>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyLogicalEmphasis"
+msgid ""
+"This option specifies if Tidy should replace any occurrence of <code>&lt;"
+"i&gt;</code> with <code>&lt;em&gt;</code> and any occurrence of <code>&lt;"
+"b&gt;</code> with <code>&lt;strong&gt;</code>. Any attributes are preserved "
+"unchanged. <br/>This option can be set independently of the <code>clean</"
+"code> option. "
+msgstr ""
+"Esta opção especifica se o Tidy deve substitui qualquer ocorrência de "
+"<code>&lt;i&gt;</code> com <code>&lt;em&gt;</code> e qualquer ocorrência de "
+"<code>&lt;b&gt;</code> com <code>&lt;strong&gt;</code>. Quaisquer atributos "
+"são preservados inalterados. <br/>Esta opção pode ser definida "
+"independentemente da opção <code>clean</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyLowerLiterals"
+msgid ""
+"This option specifies if Tidy should convert the value of an attribute that "
+"takes a list of predefined values to lower case. <br/>This is required for "
+"XHTML documents. "
+msgstr ""
+"Esta opção especifica se o Tidy deve converter o valor de um atributo que "
+"leva uma lista de valores predefinidos para minúsculas. <br/>Isto é "
+"necessário para documentos XHTML. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMakeBare"
+msgid ""
+"This option specifies if Tidy should strip Microsoft specific HTML from Word "
+"2000 documents, and output spaces rather than non-breaking spaces where they "
+"exist in the input. "
+msgstr ""
+"Esta opção especifica se o Tidy deve retirar o HTML específico da Microsoft "
+"de documentos do Word 2000 e exibir espaços em vez de espaços rígidos (nbsp) "
+"nos quais eles existam na entrada. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMakeClean"
+msgid ""
+"This option specifies if Tidy should perform cleaning of some legacy "
+"presentational tags (currently <code>&lt;i&gt;</code>, <code>&lt;b&gt;</"
+"code>, <code>&lt;center&gt;</code> when enclosed within appropriate inline "
+"tags, and <code>&lt;font&gt;</code>). If set to <var>yes</var> then legacy "
+"tags will be replaced with CSS <code>&lt;style&gt;</code> tags and "
+"structural markup as appropriate. "
+msgstr ""
+"Esta opção especifica se o Tidy deve executar a limpeza de algumas tags de "
+"apresentação legadas (atualmente <code>&lt;i&gt;</code>, <code>&lt;b&gt;</"
+"code>, <code>&lt;center&gt;</code> quando incluídas nas tags em-linha "
+"apropriadas e <code>&lt;font&gt;</code>). Se configurado para <var>yes</"
+"var>, as tags legadas serão substituídas por tags CSS <code>&lt;style&gt;</"
+"code> e marcação estrutural conforme apropriado. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMark"
+msgid ""
+"This option specifies if Tidy should add a <code>meta</code> element to the "
+"document head to indicate that the document has been tidied. <br/>Tidy won't "
+"add a meta element if one is already present. "
+msgstr ""
+"Esta opção especifica se o Tidy deve adicionar um elemento <code>meta</code> "
+"ao cabeçalho do documento para indicar que o documento foi arrumado. <br/"
+">Tidy não adicionará um elemento meta se um já estiver presente. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMergeDivs"
+msgid ""
+"This option can be used to modify the behavior of <code>clean</code> when "
+"set to <var>yes</var>.<br/>This option specifies if Tidy should merge nested "
+"<code>&lt;div&gt;</code> such as <code>&lt;div&gt;&lt;div&gt;...&lt;/div&gt;"
+"&lt;/div&gt;</code>. <br/>If set to <var>auto</var> the attributes of the "
+"inner <code>&lt;div&gt;</code> are moved to the outer one. Nested <code>&lt;"
+"div&gt;</code> with <code>id</code> attributes are <em>not</em> merged. <br/"
+">If set to <var>yes</var> the attributes of the inner <code>&lt;div&gt;</"
+"code> are discarded with the exception of <code>class</code> and "
+"<code>style</code>. "
+msgstr ""
+"Esta opção pode ser usada para modificar o comportamento de <code>clean</"
+"code> quando configurado para <var>yes</var>. <br/>Esta opção especifica se "
+"o Tidy deve mesclar <code>&lt;div&gt;</code> aninhados, como <code>&lt;"
+"div&gt;&lt;div&gt;...&lt;/div&gt;&lt;/div&gt;</code>. <br/>Se configurado "
+"para <var>auto</var>, os atributos do <code>&lt;div&gt;</code> internos são "
+"movidos para o externo. <code>&lt;div&gt;</code> aninhados com os atributos "
+"<code>id</code> <em>não</em> são mesclados. <br/>Se configurado para "
+"<var>yes</var>, os atributos de <code>&lt;div&gt;</code> interno são "
+"descartados com a exceção de <code>class</code> e <code>style</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMergeEmphasis"
+msgid ""
+"This option specifies if Tidy should merge nested <code>&lt;b&gt;</code> and "
+"<code>&lt;i&gt;</code> elements; for example, for the case <br/><code>&lt;b "
+"class=\"rtop-2\"&gt;foo &lt;b class=\"r2-2\"&gt;bar&lt;/b&gt; baz&lt;/b&gt;</"
+"code>, <br/>Tidy will output <code>&lt;b class=\"rtop-2\"&gt;foo bar baz&lt;/"
+"b&gt;</code>. "
+msgstr ""
+"Esta opção especifica se o Tidy deve mesclar elementos <code>&lt;b&gt;</"
+"code> e <code>&lt;i&gt;</code> aninhados; por exemplo, para o caso de <br/"
+"><code>&lt;b class=\"rtop-2\"&gt;foo &lt;b class=\"r2-2\"&gt;bar&lt;/b&gt; "
+"baz&lt;/b&gt;</code>, <br/>Tidy vai emitir <code>&lt;b class=\"rtop-2\"&gt;"
+"foo bar baz&lt;/b&gt;</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMergeSpans"
+msgid ""
+"This option can be used to modify the behavior of <code>clean</code> when "
+"set to <var>yes</var>.<br/>This option specifies if Tidy should merge nested "
+"<code>&lt;span&gt;</code> such as <code>&lt;span&gt;&lt;span&gt;...&lt;/"
+"span&gt;&lt;/span&gt;</code>. <br/>The algorithm is identical to the one "
+"used by <code>merge-divs</code>. "
+msgstr ""
+"Esta opção pode ser usada para modificar o comportamento de <code>clean</"
+"code> quando configurado para <var>yes</var>. <br/>Esta opção especifica se "
+"o Tidy deve mesclar <code>&lt;span&gt;</code> aninhados como <code>&lt;"
+"span&gt;&lt;span&gt;...&lt;/span&gt;&lt;/span&gt;</code>. <br/>O algoritmo é "
+"idêntico àquele usado por <code>merge-divs</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyNCR"
+msgid ""
+"This option specifies if Tidy should allow numeric character references. "
+msgstr ""
+"Esta opção especifica se o Tidy deve permitir referências de caracteres "
+"numéricos. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyNewline"
+msgid ""
+"The default is appropriate to the current platform. <br/>Genrally CRLF on PC-"
+"DOS, Windows and OS/2; CR on Classic Mac OS; and LF everywhere else (Linux, "
+"Mac OS X, and Unix). "
+msgstr ""
+"O padrão é apropriado para a plataforma atual. <br/>Geralmente, CRLF no PC-"
+"DOS, Windows e OS/2; CR no Mac OS Clássico; e LF nos demais (Linux, Mac OS X "
+"e Unix). "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyNumEntities"
+msgid ""
+"This option specifies if Tidy should output entities other than the built-in "
+"HTML entities (<code>&amp;amp;</code>, <code>&amp;lt;</code>, <code>&amp;gt;"
+"</code>, and <code>&amp;quot;</code>) in the numeric rather than the named "
+"entity form. <br/>Only entities compatible with the DOCTYPE declaration "
+"generated are used. <br/>Entities that can be represented in the output "
+"encoding are translated correspondingly. "
+msgstr ""
+"Esta opção especifica se o Tidy deve produzir entidades diferentes das "
+"entidades HTML integradas (<code>&amp;amp;</code>, <code>&amp;lt;</code>, "
+"<code>&amp;gt;</code> e <code>&amp;quot;</code>) no formulário numérico em "
+"vez do formulário nomeado. <br/>Somente são usadas entidades compatíveis com "
+"a declaração DOCTYPE gerada. <br/>As entidades que podem ser representadas "
+"na codificação de saída são traduzidas correspondentemente. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyOmitOptionalTags"
+msgid ""
+"This option specifies if Tidy should omit optional start tags and end tags "
+"when generating output. <br/>Setting this option causes all tags for the "
+"<code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, and <code>&lt;body&gt;"
+"</code> elements to be omitted from output, as well as such end tags as "
+"<code>&lt;/p&gt;</code>, <code>&lt;/li&gt;</code>, <code>&lt;/dt&gt;</code>, "
+"<code>&lt;/dd&gt;</code>, <code>&lt;/option&gt;</code>, <code>&lt;/tr&gt;</"
+"code>, <code>&lt;/td&gt;</code>, and <code>&lt;/th&gt;</code>. <br/>This "
+"option is ignored for XML output. "
+msgstr ""
+"Esta opção especifica se o Tidy deve omitir tags de início e de fim "
+"opcionais ao gerar saída. <br/>Configurar essa opção causa todas as tags "
+"para os elementos <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code> e "
+"<code>&lt;body&gt;</code> serem omitidos da saída, assim como tags de saída "
+"como <code>&lt;/p&gt;</code>, <code>&lt;/li&gt;</code>, <code>&lt;/dt&gt;</"
+"code>, <code>&lt;/dd&gt;</code>, <code>&lt;/option&gt;</code>, <code>&lt;/"
+"tr&gt;</code>, <code>&lt;/td&gt;</code> e <code>&lt;/th&gt;</code>. <br/"
+">Essa opção é ignorada para saída XML. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyOutCharEncoding"
+msgid ""
+"This option specifies the character encoding Tidy uses for the output. <br/"
+">Note that this may only be different from <code>input-encoding</code> for "
+"Latin encodings (<var>ascii</var>, <var>latin0</var>, <var>latin1</var>, "
+"<var>mac</var>, <var>win1252</var>, <var>ibm858</var>).<br/>See <code>char-"
+"encoding</code> for more information"
+msgstr ""
+"Esta opção especifica a codificação de caracteres que o Tidy usa para a "
+"saída. <br/>Note que isso só pode ser diferente de <code>input-encoding</"
+"code> para codificações latinas (<var>ascii</var>, <var>latin0</var>, "
+"<var>latin1</var>, <var>mac</var>, <var>win1252</var>, <var>ibm858</var>). "
+"<br/>Veja <code>char-encoding</code> para mais informações"
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyOutFile"
+msgid ""
+"This option specifies the output file Tidy uses for markup. Normally markup "
+"is written to <code>stdout</code>. "
+msgstr ""
+"Essa opção especifica o arquivo de saída que o Tidy usa para marcação. "
+"Normalmente, a marcação é escrita para <code>stdout</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyOutputBOM"
+msgid ""
+"This option specifies if Tidy should write a Unicode Byte Order Mark "
+"character (BOM; also known as Zero Width No-Break Space; has value of U"
+"+FEFF) to the beginning of the output, and only applies to UTF-8 and UTF-16 "
+"output encodings. <br/>If set to <var>auto</var> this option causes Tidy to "
+"write a BOM to the output only if a BOM was present at the beginning of the "
+"input. <br/>A BOM is always written for XML/XHTML output using UTF-16 output "
+"encodings. "
+msgstr ""
+"Esta opção especifica se o Tidy deve escrever um caractere Unicode de marca "
+"de ordem de byte (BOM, também conhecido como Zero Width No Break Break, tem "
+"valor de U+FEFF) no início da saída, e aplica-se apenas a codificações de "
+"saída UTF-8 e UTF-16. <br/>Se configurado para <var>auto</var>, esta opção "
+"faz com que Tidy escreva um BOM para a saída somente se um BOM estiver "
+"presente no início da entrada. <br/>Um BOM está sempre escrita para saída "
+"XML/XHTML usando codificações de saída UTF-16. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyPPrintTabs"
+msgid ""
+"This option specifies if Tidy should indent with tabs instead of spaces, "
+"assuming <code>indent</code> is <var>yes</var>. <br/>Set it to <var>yes</"
+"var> to indent using tabs instead of the default spaces. <br/>Use the option "
+"<code>indent-spaces</code> to control the number of tabs output per level of "
+"indent. Note that when <code>indent-with-tabs</code> is enabled the default "
+"value of <code>indent-spaces</code> is reset to <var>1</var>. <br/>Note "
+"<code>tab-size</code> controls converting input tabs to spaces. Set it to "
+"zero to retain input tabs. "
+msgstr ""
+"Esta opção especifica se o Tidy deve aplicar recuo com tabulações em vez de "
+"espaços, presumindo que <code>indent</code> seja <var>yes</var>. <br/>Defina-"
+"o para <var>yes</var> para recuar usando tabulações em vez dos espaços "
+"padrão. <br/>Use a opção <code>indent-spaces</code> para controlar o número "
+"de saídas de tabulação por nível de recuo. Note que quando <code>indent-with-"
+"tabs</code> está habilitado, o valor padrão de <code>indent-spaces</code> é "
+"reiniciado para <var>1</var>. <br/>Note que <code>tab-size</code> controla a "
+"conversão de tabulações de entrada em espaços. Coloque-o em zero para reter "
+"as tabulações de entrada. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyPreserveEntities"
+msgid ""
+"This option specifies if Tidy should preserve well-formed entities as found "
+"in the input. "
+msgstr ""
+"Esta opção especifica se o Tidy deve preservar entidades bem-formadas como "
+"localizado na entrada. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyPreTags"
+msgid ""
+"This option specifies new tags that are to be processed in exactly the same "
+"way as HTML's <code>&lt;pre&gt;</code> element. This option takes a space or "
+"comma separated list of tag names. <br/>Unless you declare new tags, Tidy "
+"will refuse to generate a tidied file if the input includes previously "
+"unknown tags. <br/>Note you cannot as yet add new CDATA elements. <br/>This "
+"option is ignored in XML mode. "
+msgstr ""
+"Esta opção especifica novas tags que devem ser processadas exatamente da "
+"mesma forma que o elemento <code>&lt;pre&gt;</code> de HTML. Esta opção "
+"possui uma lista separada por vírgulas ou espaços de nomes de tag. <br/>A "
+"menos que você declare novas tags, o Tidy se recusará a gerar um arquivo "
+"arrumado se a entrada incluir tags anteriormente desconhecidas. <br/>Note "
+"que você ainda não pode adicionar novos elementos CDATA. <br/>Esta opção é "
+"ignorada no modo XML. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyPunctWrap"
+msgid ""
+"This option specifies if Tidy should line wrap after some Unicode or Chinese "
+"punctuation characters. "
+msgstr ""
+"Essa opção especifica se o Tidy deve quebrar linha após alguns Unicode ou "
+"caracteres de pontuação chineses. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyQuiet"
+msgid ""
+"This option specifies if Tidy should output the summary of the numbers of "
+"errors and warnings, or the welcome or informational messages. "
+msgstr ""
+"Essa opção especifica se o Tidy deve emitir o resumo dos números de erros e "
+"avisos, ou as mensagens de boas-vidas ou informacionais. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyQuoteAmpersand"
+msgid ""
+"This option specifies if Tidy should output unadorned <code>&amp;</code> "
+"characters as <code>&amp;amp;</code>. "
+msgstr ""
+"Essa opção especifica se o Tidy deve emitir caracteres <code>&amp;</code> "
+"sem adornos como <code>&amp;amp;</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyQuoteMarks"
+msgid ""
+"This option specifies if Tidy should output <code>&quot;</code> characters "
+"as <code>&amp;quot;</code> as is preferred by some editing environments. <br/"
+">The apostrophe character <code>'</code> is written out as <code>&amp;#39;</"
+"code> since many web browsers don't yet support <code>&amp;apos;</code>. "
+msgstr ""
+"Esta opção especifica se o Tidy deve enviar caracteres <code>&quot;</code> "
+"como <code>&quot;</code> como é preferido por alguns ambientes de edição. "
+"<br/>O caractere do apóstrofe <code>'</code> é escrito como <code>&amp;#39;</"
+"code> porque muitos navegadores web ainda não oferecem suporte a <code>&amp;"
+"apos;</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyQuoteNbsp"
+msgid ""
+"This option specifies if Tidy should output non-breaking space characters as "
+"entities, rather than as the Unicode character value 160 (decimal). "
+msgstr ""
+"Esta opção especifica se o Tidy deve produzir caracteres de espaço rígido "
+"como entidades, em vez de como o caractere Unicode de valor 160 (decimal). "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyReplaceColor"
+msgid ""
+"This option specifies if Tidy should replace numeric values in color "
+"attributes with HTML/XHTML color names where defined, e.g. replace "
+"<code>#ffffff</code> with <code>white</code>. "
+msgstr ""
+"Esta opção especifica se o Tidy deve substituir os valores numéricos nos "
+"atributos de cor com nomes de cor HTML/XHTML onde definido, p.ex. substituir "
+"<code>#ffffff</code> com <code>white</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowErrors"
+msgid ""
+"This option specifies the number Tidy uses to determine if further errors "
+"should be shown. If set to <var>0</var>, then no errors are shown. "
+msgstr ""
+"Esta opção especifica o número que o Tidy usa para determinar se outros "
+"erros devem ser exibidos. Se configurado para <var>0</var>, nenhum erro será "
+"mostrado. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowInfo"
+msgid "This option specifies if Tidy should display info-level messages. "
+msgstr ""
+"Esta opção especifica se o Tidy deve exibir mensagens de nível "
+"informacional. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowMarkup"
+msgid ""
+"This option specifies if Tidy should generate a pretty printed version of "
+"the markup. Note that Tidy won't generate a pretty printed version if it "
+"finds significant errors (see <code>force-output</code>). "
+msgstr ""
+"Esta opção especifica se o Tidy deve gerar uma versão de impressão amigável "
+"da marcação. Note que o Tidy não gerará uma versão de impressão amigável se "
+"encontrar erros significativos (veja <code>force-output</code>). "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowWarnings"
+msgid ""
+"This option specifies if Tidy should suppress warnings. This can be useful "
+"when a few errors are hidden in a flurry of warnings. "
+msgstr ""
+"Esta opção especifica se o Tidy deve suprimir avisos. Isso pode ser útil "
+"quando alguns erros estão ocultos em uma agitação de avisos. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidySkipNested"
+msgid ""
+"This option specifies that Tidy should skip nested tags when parsing script "
+"and style data. "
+msgstr ""
+"Esta opção especifica que o Tidy deve pular tags aninhadas ao analisar "
+"script e dados de estilo. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidySortAttributes"
+msgid ""
+"This option specifies that Tidy should sort attributes within an element "
+"using the specified sort algorithm. If set to <var>alpha</var>, the "
+"algorithm is an ascending alphabetic sort. "
+msgstr ""
+"Esta opção especifica que o Tidy deve ordenar atributos dentro de um "
+"elemento usando o algoritmo de ordenação especificado. Se configurado para "
+"<var>alpha</var>, o algoritmo é uma ordenação alfabética ascendente. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyStrictTagsAttr"
+msgid ""
+"This options ensures that tags and attributes are applicable for the version "
+"of HTML that Tidy outputs. When set to <var>yes</var> and the output "
+"document type is a strict doctype, then Tidy will report errors. If the "
+"output document type is a loose or transitional doctype, then Tidy will "
+"report warnings. <br/>Additionally if <code>drop-proprietary-attributes</"
+"code> is enabled, then not applicable attributes will be dropped, too. <br/"
+">When set to <var>no</var>, these checks are not performed. "
+msgstr ""
+"Esta opção garante que tags e atributos sejam aplicáveis à versão do HTML "
+"que o Tidy emite. Quando definido para <var>yes</var> e o tipo de documento "
+"de saída é um doctype estrito, então o Tidy informará os erros. Se o tipo de "
+"documento de saída for um tipo de documento loose ou transicional, o Tidy "
+"informará os avisos. <br/>Além disso, se <code>drop-proprietary-attributes</"
+"code> estiver habilitado, os atributos não aplicáveis também serão "
+"descartados. <br/>Quando configurado para <var>no</var>, essas verificações "
+"não são executadas. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyTabSize"
+msgid ""
+"This option specifies the number of columns that Tidy uses between "
+"successive tab stops. It is used to map tabs to spaces when reading the "
+"input. "
+msgstr ""
+"Esta opção especifica o número de colunas que o Tidy usa entre paradas de "
+"tabulação sucessivas. Ela é usada para mapear tabulações para espaços ao ler "
+"a entrada. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyUpperCaseAttrs"
+msgid ""
+"This option specifies if Tidy should output attribute names in upper case. "
+"<br/>When set to <var>no</var>, attribute names will be written in lower "
+"case. Specifying <var>yes</var> will output attribute names in upper case, "
+"and <var>preserve</var> can used to leave attribute names untouched. <br/"
+">When using XML input, the original case is always preserved. "
+msgstr ""
+"Esta opção especifica se o Tidy deve produzir nomes de atributo em "
+"maiúsculo. <br/>Quando configurado para <var>no</var>, os nomes dos "
+"atributos serão escritos em minúsculas. Especificar <var>yes</var> exibirá "
+"nomes de atributos em maiúsculas e <var>preserve</var> pode ser usado para "
+"deixar nomes de atributos intactos. <br/>Ao usar a entrada XML, o "
+"maiusculização original é sempre preservada. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyUpperCaseTags"
+msgid ""
+"This option specifies if Tidy should output tag names in upper case. <br/"
+">The default is <var>no</var> which results in lower case tag names, except "
+"for XML input where the original case is preserved. "
+msgstr ""
+"Esta opção especifica se o Tidy deve emitir nomes de tags em maiúsculo. <br/"
+">O padrão é <var>no</var>, o que resulta em nomes de tags minúsculos, exceto "
+"para entrada XML na qual a maiusculização original é preservada. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyUseCustomTags"
+msgid ""
+"This option enables the use of tags for autonomous custom elements, e.g. &lt;"
+"flag-icon&gt; with Tidy. Custom tags are disabled if this value is <var>no</"
+"var>. Other settings - <var>blocklevel</var>, <var>empty</var>, <var>inline</"
+"var>, and <var>pre</var> will treat <em>all</em> detected custom tags "
+"accordingly. <br/>The use of <code>new-blocklevel-tags</code>, <code>new-"
+"empty-tags</code>, <code>new-inline-tags</code>, or <code>new-pre-tags</"
+"code> will override the treatment of custom tags by this configuration "
+"option. This may be useful if you have different types of custom tags.<br/"
+">When enabled these tags are determined during the processing of your "
+"document using opening tags; matching closing tags will be recognized "
+"accordingly, and unknown closing tags will be discarded. "
+msgstr ""
+"Esta opção permite o uso de tags para elementos personalizados autônomos, p."
+"ex. &lt;flag-icon&gt; com Tidy. As tags personalizadas são desativadas se "
+"esse valor for <var>no</var>. Outras configurações - <var>blocklevel</var>, "
+"<var>empty</var>, <var>inline</var> e <var>pre</var> tratarão <em>todas</em> "
+"as tags personalizadas detectadas em conformidade. <br/>O uso de <code>new-"
+"blocklevel-tags</code>, <code>new-empty-tags</code>, <code>new-inline-tags</"
+"code> ou <code>new-pre-tags</code> substituirá o tratamento de tags "
+"personalizadas por esta opção de configuração. Isso pode ser útil se você "
+"tiver diferentes tipos de tags personalizadas. <br/>Quando habilitado, essas "
+"tags são determinadas durante o processamento do documento usando tags de "
+"abertura; As tags de fechamento de correspondência serão reconhecidas de "
+"acordo, e as tags de fechamento desconhecidas serão descartadas. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyVertSpace"
+msgid ""
+"This option specifies if Tidy should add some extra empty lines for "
+"readability. <br/>The default is <var>no</var>. <br/>If set to <var>auto</"
+"var> Tidy will eliminate nearly all newline characters."
+msgstr ""
+"Esta opção especifica se o Tidy deve adicionar algumas linhas vazias extras "
+"para legibilidade. <br/>O padrão é <var>no</var>. <br/>Se configurado para "
+"<var>auto</var>, Tidy vai eliminar quase todos os caracteres de nova linha."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWarnPropAttrs"
+msgid "This option specifies if Tidy should warn on proprietary attributes."
+msgstr ""
+"Essa opção especifica se o Tidy deve avisar sobre atributos proprietários."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWord2000"
+msgid ""
+"This option specifies if Tidy should go to great pains to strip out all the "
+"surplus stuff Microsoft Word 2000 inserts when you save Word documents as "
+"\"Web pages\". It doesn't handle embedded images or VML. <br/>You should "
+"consider using Word's \"Save As: Web Page, Filtered\". "
+msgstr ""
+"Esta opção especifica se o Tidy deve se esforçar duro para tirar todas as "
+"coisas excedentes que o Microsoft Word 2000 insere quando você salva os "
+"documentos do Word como \"páginas web\". Não manipula imagens embutidas ou "
+"VML. <br/>Você deve considerar usar o Word \"Salvar Como: Página da Web, "
+"Filtrada\". "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapAsp"
+msgid ""
+"This option specifies if Tidy should line wrap text contained within ASP "
+"pseudo elements, which look like: <code>&lt;% ... %&gt;</code>. "
+msgstr ""
+"Essa opção especifica se o Tidy deve quebrar linha de textos contidos em "
+"pseudoelementos do ASP, que se parecem com: <code>&lt;% ... %&gt;</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapAttVals"
+msgid ""
+"This option specifies if Tidy should line-wrap attribute values, meaning "
+"that if the value of an attribute causes a line to exceed the width "
+"specified by <code>wrap</code>, Tidy will add one or more line breaks to the "
+"value, causing it to be wrapped into multiple lines. <br/>Note that this "
+"option can be set independently of <code>wrap-script-literals</code>. By "
+"default Tidy replaces any newline or tab with a single space and replaces "
+"any sequences of whitespace with a single space. <br/>To force Tidy to "
+"preserve the original, literal values of all attributes, and ensure that "
+"whitespace characters within attribute values are passed through unchanged, "
+"set <code>literal-attributes</code> to <var>yes</var>. "
+msgstr ""
+"Esta opção especifica se Tidy deve incluir valores de atributos de linha, o "
+"que significa que, se o valor de um atributo faz com que uma linha exceda a "
+"largura especificada por <code>wrap</code>, Tidy irá adicionar uma ou mais "
+"quebras de linha ao valor, fazendo com que ele seja embrulhado em várias "
+"linhas. <br/>Note que esta opção pode ser definida independentemente de "
+"<code>wrap-script-literals</code>. Por padrão, o Tidy substitui qualquer "
+"nova linha ou tabulação com um único espaço e substitui qualquer sequência "
+"de espaços em branco com um único espaço. <br/>Para forçar a Tidy a "
+"preservar os valores literais originais de todos os atributos e garantir que "
+"os caracteres de espaço em branco nos valores de atributos sejam passados "
+"através de alterações, configure <code>literal-attributes</code> para "
+"<var>yes</var>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapJste"
+msgid ""
+"This option specifies if Tidy should line wrap text contained within JSTE "
+"pseudo elements, which look like: <code>&lt;# ... #&gt;</code>. "
+msgstr ""
+"Essa opção especifica se o Tidy deve quebrar linha de textos contidos em "
+"pseudoelementos do JSTE, que se parecem com: <code>&lt;# ... #&gt;</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapLen"
+msgid ""
+"This option specifies the right margin Tidy uses for line wrapping. <br/"
+">Tidy tries to wrap lines so that they do not exceed this length. <br/>Set "
+"<code>wrap</code> to <var>0</var>(zero) if you want to disable line "
+"wrapping. "
+msgstr ""
+"Esta opção especifica a margem direita que o Tidy usa para quebra de linha. "
+"<br/>Tidy tenta quebrar linhas para que não excedam esse comprimento. <br/"
+">Defina <code>wrap</code> para <var>0</var> (zero) se desejar desativar a "
+"quebra de linha. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapPhp"
+msgid ""
+"This option specifies if Tidy should line wrap text contained within PHP "
+"pseudo elements, which look like: <code>&lt;?php ... ?&gt;</code>. "
+msgstr ""
+"Essa opção especifica se o Tidy deve quebrar linha de textos contidos em "
+"pseudoelementos do PHP, que se parecem com: <code>&lt;?php ... ?&gt;</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapScriptlets"
+msgid ""
+"This option specifies if Tidy should line wrap string literals that appear "
+"in script attributes. <br/>Tidy wraps long script string literals by "
+"inserting a backslash character before the line break. "
+msgstr ""
+"Esta opção especifica se Tidy deve efetuar quebra de linha em string "
+"literais que aparecem em atributos de script. <br/>Tidy efetua essa quebra "
+"em string literais de scripts longos inserindo um caractere de barra "
+"invertida antes da quebra de linha. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapSection"
+msgid ""
+"This option specifies if Tidy should line wrap text contained within "
+"<code>&lt;![ ... ]&gt;</code> section tags. "
+msgstr ""
+"Essa opção especifica se o Tidy deve efetuar quebra de linha de textos "
+"contidos em tags de seção <code>&lt;![ ... ]&gt;</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWriteBack"
+msgid ""
+"This option specifies if Tidy should write back the tidied markup to the "
+"same file it read from. <br/>You are advised to keep copies of important "
+"files before tidying them, as on rare occasions the result may not be what "
+"you expect. "
+msgstr ""
+"Esta opção especifica se o Tidy deve escrever novamente a marcação arrumada "
+"para o mesmo arquivo que lê. <br/> É aconselhável manter cópias de arquivos "
+"importantes antes de ordená-los, como em ocasiões raras, o resultado pode "
+"não ser o que você espera. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXhtmlOut"
+msgid ""
+"This option specifies if Tidy should generate pretty printed output, writing "
+"it as extensible HTML. <br/>This option causes Tidy to set the DOCTYPE and "
+"default namespace as appropriate to XHTML, and will use the corrected value "
+"in output regardless of other sources. <br/>For XHTML, entities can be "
+"written as named or numeric entities according to the setting of "
+"<code>numeric-entities</code>. <br/>The original case of tags and attributes "
+"will be preserved, regardless of other options. "
+msgstr ""
+"Esta opção especifica se o Tidy deve gerar uma impressão amigável, "
+"escrevendo como HTML extensível. <br/>Esta opção faz com que o Tidy "
+"configure o DOCTYPE e o espaço de nomes padrão conforme apropriado para "
+"XHTML e use o valor corrigido no resultado, independentemente de outras "
+"fontes. <br/> Para XHTML, as entidades podem ser escritas como entidades "
+"nomeadas ou numéricas de acordo com a configuração de <code>numeric-"
+"entities</code>. <br/>A maiusculização original de tags e atributos será "
+"preservada, independentemente de outras opções. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXmlDecl"
+msgid ""
+"This option specifies if Tidy should add the XML declaration when outputting "
+"XML or XHTML. <br/>Note that if the input already includes an <code>&lt;?"
+"xml ... ?&gt;</code> declaration then this option will be ignored. <br/>If "
+"the encoding for the output is different from <var>ascii</var>, one of the "
+"<var>utf*</var> encodings, or <var>raw</var>, then the declaration is always "
+"added as required by the XML standard. "
+msgstr ""
+"Esta opção especifica se o Tidy deve adicionar a declaração XML ao enviar "
+"XML ou XHTML. <br/>Note que, se a entrada já incluir uma declaração "
+"<code>&lt;?xml ... ?&gt;</code>, esta opção será ignorada. <br/>Se a "
+"codificação para a saída for diferente de <var>ascii</var>, uma das "
+"codificações <var>utf*</var> ou de <var>raw</var>, então a declaração é "
+"sempre adicionado conforme exigido pelo padrão XML. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXmlOut"
+msgid ""
+"This option specifies if Tidy should pretty print output, writing it as well-"
+"formed XML. <br/>Any entities not defined in XML 1.0 will be written as "
+"numeric entities to allow them to be parsed by an XML parser. <br/>The "
+"original case of tags and attributes will be preserved, regardless of other "
+"options. "
+msgstr ""
+"Esta opção especifica se o Tidy deve emitir impressão amigável, escrevendo-o "
+"como XML bem formado. <br/>Todas as entidades não definidas no XML 1.0 serão "
+"escritas como entidades numéricas para permitir que elas sejam analisadas "
+"por um analisador XML. <br/>A maiusculização original de tags e atributos "
+"será preservada, independentemente de outras opções. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXmlPIs"
+msgid ""
+"This option specifies if Tidy should change the parsing of processing "
+"instructions to require <code>?&gt;</code> as the terminator rather than "
+"<code>&gt;</code>. <br/>This option is automatically set if the input is in "
+"XML. "
+msgstr ""
+"Esta opção especifica se o Tidy deve alterar a análise das instruções de "
+"processamento para exigir <code>?&gt;</code> como o terminador, em vez de "
+"<code>&gt;</code>. <br/>Esta opção é configurada automaticamente se a "
+"entrada for um XML. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXmlSpace"
+msgid ""
+"This option specifies if Tidy should add <code>xml:space=\"preserve\"</code> "
+"to elements such as <code>&lt;pre&gt;</code>, <code>&lt;style&gt;</code> and "
+"<code>&lt;script&gt;</code> when generating XML. <br/>This is needed if the "
+"whitespace in such elements is to be parsed appropriately without having "
+"access to the DTD. "
+msgstr ""
+"Esta opção especifica se o Tidy deve adicionar <code>xml:space=\"preserve\"</"
+"code> para elementos tais como <code>&lt;pre&gt;</code>, <code>&lt;style&gt;"
+"</code> e <code>&lt;script&gt;</code> ao gerar o XML. <br/>Isso é necessário "
+"se o espaço em branco em tais elementos deve ser analisado apropriadamente "
+"sem ter acesso ao DTD. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXmlTags"
+msgid ""
+"This option specifies if Tidy should use the XML parser rather than the "
+"error correcting HTML parser. "
+msgstr ""
+"Esta opção especifica se o Tidy deve usar o analisador XML em vez do "
+"analisador HTML de correção de erro. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMetaCharset"
+msgid ""
+"This option, when enabled, adds a <code>&lt;meta&gt;</code> element and sets "
+"the <code>charset</code> attribute to the encoding of the document. Set this "
+"option to <var>yes</var> to enable it. "
+msgstr ""
+"Esta opção, quando ativada, adiciona um elemento <code>&lt;meta&gt;</code> e "
+"define o atributo <code>charset</code> para a codificação do documento. "
+"Configure esta opção para <var>yes</var> para habilitá-lo. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowMetaChange"
+msgid ""
+"This option enables a message whenever Tidy changes the <code>content</code> "
+"attribute of a meta charset declaration to match the encoding of the "
+"document. Set this option to <var>yes</var> to enable it. "
+msgstr ""
+"Esta opção habilita uma mensagem sempre que o Tidy alterar o atributo "
+"<code>content</code> de uma declaração de meta conjunto de caracteres para "
+"coincidir com a codificação do documento. Defina esta opção para <var>yes</"
+"var> para habilitá-lo. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyStyleTags"
+msgid ""
+"This option specifies if Tidy should move all style tags to the head of the "
+"document. "
+msgstr ""
+"Esta opção especifica se o Tidy deve mover todas as tags de estilo para o "
+"cabeçalho do documento. "
+
+msgctxt "TidyUnknownCategory"
+msgid "unknown category!"
+msgstr "categoria desconhecida!"
+
+msgctxt "TidyDiagnostics"
+msgid "diagnostics"
+msgstr "diagnósticos"
+
+msgctxt "TidyEncoding"
+msgid "encoding"
+msgstr "codificação"
+
+msgctxt "TidyInternalCategory"
+msgid "internal (private)"
+msgstr "interna (privada)"
+
+msgctxt "TidyMarkup"
+msgid "markup"
+msgstr "marcação"
+
+msgctxt "TidyMiscellaneous"
+msgid "misc"
+msgstr "miscelânea"
+
+msgctxt "TidyPrettyPrint"
+msgid "print"
+msgstr "impressão"
+
+msgctxt "TidyInfo"
+msgid "Info: "
+msgstr "Info: "
+
+msgctxt "TidyWarning"
+msgid "Warning: "
+msgstr "Acesso: "
+
+msgctxt "TidyConfig"
+msgid "Config: "
+msgstr "Config: "
+
+msgctxt "TidyAccess"
+msgid "Access: "
+msgstr "Acesso: "
+
+msgctxt "TidyError"
+msgid "Error: "
+msgstr "Erro: "
+
+msgctxt "TidyBadDocument"
+msgid "Document: "
+msgstr "Documento: "
+
+msgctxt "TidyFatal"
+msgid "Panic: "
+msgstr "Pânico: "
+
+msgctxt "TidyDialogueInfo"
+msgid "Information: "
+msgstr "Informação: "
+
+msgctxt "TidyDialogueSummary"
+msgid "Summary: "
+msgstr "Resumo: "
+
+msgctxt "TidyDialogueDoc"
+msgid "Document: "
+msgstr "Documento: "
+
+#, c-format
+msgctxt "FILE_CANT_OPEN"
+msgid "Can't open \"%s\"\n"
+msgstr "Não foi possível abrir \"%s\"\n"
+
+#, c-format
+msgctxt "FILE_CANT_OPEN_CFG"
+msgid "Can't open configuration file \"%s\"\n"
+msgstr "Não foi possível abrir o arquivo de configuração \"%s\"\n"
+
+#, c-format
+msgctxt "FILE_NOT_FILE"
+msgid "\"%s\" is not a file!\n"
+msgstr "\"%s\" não é um arquivo!\n"
+
+#, c-format
+msgctxt "LINE_COLUMN_STRING"
+msgid "line %d column %d - "
+msgstr "linha %d coluna %d - "
+
+#, c-format
+msgctxt "STRING_CONTENT_LOOKS"
+msgid "Document content looks like %s"
+msgstr "O conteúdo do documento se parece com %s"
+
+#. For example, "discarding invalid UTF-16 surrogate pair"
+msgctxt "STRING_DISCARDING"
+msgid "discarding"
+msgstr "descartando"
+
+#, c-format
+msgctxt "STRING_DOCTYPE_GIVEN"
+msgid "Doctype given is \"%s\""
+msgstr "Doctype dado é \"%s\""
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#, c-format
+msgctxt "STRING_ERROR_COUNT"
+msgid "Tidy found %u %s and %u %s!"
+msgstr "Tidy encontrou %u %s e %u %s!"
+
+msgctxt "STRING_ERROR_COUNT_ERROR"
+msgid "error"
+msgid_plural "errors"
+msgstr[0] "erro"
+msgstr[1] "erros"
+
+msgctxt "STRING_ERROR_COUNT_WARNING"
+msgid "warning"
+msgid_plural "warnings"
+msgstr[0] "aviso"
+msgstr[1] "avisos"
+
+msgctxt "STRING_HELLO_ACCESS"
+msgid ""
+"\n"
+"Accessibility Checks:\n"
+msgstr ""
+"\n"
+"Verificações de acessibilidade:\n"
+
+#. This is not a formal name and can be translated.
+msgctxt "STRING_HTML_PROPRIETARY"
+msgid "HTML Proprietary"
+msgstr "Proprietário HTML"
+
+#, c-format
+msgctxt "STRING_MISSING_MALFORMED"
+msgid "missing or malformed argument for option: %s"
+msgstr "argumento faltando ou malformado para opção: %s"
+
+msgctxt "STRING_XML_DECLARATION"
+msgid "XML declaration"
+msgstr "declaração XML"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "STRING_NEEDS_INTERVENTION"
+msgid ""
+"This document has errors that must be fixed before\n"
+"using HTML Tidy to generate a tidied up version.\n"
+msgstr ""
+"Esse documento possui erros que devem ser corrigidos\n"
+"antes de usar HTML Tidy para gerar uma versão arrumada.\n"
+
+msgctxt "STRING_NO_ERRORS"
+msgid "No warnings or errors were found."
+msgstr "Nenhum aviso ou erro foi localizado."
+
+msgctxt "STRING_NO_SYSID"
+msgid "No system identifier in emitted doctype"
+msgstr "Nenhum identificado de sistema no doctype emitido"
+
+#, c-format
+msgctxt "STRING_NOT_ALL_SHOWN"
+msgid "Tidy found %u %s and %u %s! Not all warnings/errors were shown."
+msgstr "Tidy encontrou %u %s e %u %s! Nem todos avisos/erros foram mostrados."
+
+msgctxt "STRING_PLAIN_TEXT"
+msgid "plain text"
+msgstr "texto simples"
+
+#. For example, "replacing invalid UTF-8 bytes"
+msgctxt "STRING_REPLACING"
+msgid "replacing"
+msgstr "substituindo"
+
+#. For example, "you should avoid using the specified encoding."
+msgctxt "STRING_SPECIFIED"
+msgid "specified"
+msgstr "especificada"
+
+#, c-format
+msgctxt "STRING_UNKNOWN_OPTION"
+msgid "unknown option: %s"
+msgstr "opção desconhecida: %s"
+
+msgctxt "TIDYCUSTOMNO_STRING"
+msgid "no"
+msgstr "não"
+
+msgctxt "TIDYCUSTOMBLOCKLEVEL_STRING"
+msgid "block level"
+msgstr "nível de bloco"
+
+msgctxt "TIDYCUSTOMEMPTY_STRING"
+msgid "empty"
+msgstr "vazio"
+
+msgctxt "TIDYCUSTOMINLINE_STRING"
+msgid "inline"
+msgstr "em-linha"
+
+msgctxt "TIDYCUSTOMPRE_STRING"
+msgid "pre"
+msgstr "pré"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_HTML_T_ALGORITHM"
+msgid ""
+"\n"
+"      - First, search left from the cell's position to find row header "
+"cells.\n"
+"      - Then search upwards to find column header cells.\n"
+"      - The search in a given direction stops when the edge of the table is\n"
+"        reached or when a data cell is found after a header cell.\n"
+"      - Row headers are inserted into the list in the order they appear in\n"
+"        the table. \n"
+"      - For left-to-right tables, headers are inserted from left to right.\n"
+"      - Column headers are inserted after row headers, in \n"
+"        the order they appear in the table, from top to bottom. \n"
+"      - If a header cell has the headers attribute set, then the headers \n"
+"        referenced by this attribute are inserted into the list and the \n"
+"        search stops for the current direction.\n"
+"        TD cells that set the axis attribute are also treated as header "
+"cells.\n"
+msgstr ""
+"\n"
+"      - Primeiro, pesquisa à esquerda da posição da célula para\n"
+"        localizar células de cabeçalho de linha.\n"
+"      - Então, pesquisa para cima para localizar células de cabeçalho\n"
+"        de coluna.\n"
+"      - A pesquisa em uma direção dada interrompe quando a borda da\n"
+"        tabela é atingida ou quando uma célula de dados é localizada\n"
+"        após uma célula de cabeçalho.\n"
+"      - Cabeçalhos de linha são inseridas em uma linha na ordem que\n"
+"        elas aparecem na tabela.\n"
+"      - Para tabelas esquerda-para-direita, cabeçalhos são inseridas\n"
+"        da esquerda para direita.\n"
+"      - Cabeçalhos de coluna são inseridas após cabeçalhos de linha,\n"
+"        na ordem que elas aparecem na tabela, de cima para baixo.\n"
+"      - Se uma célula de cabeçalho tem atributo de cabeçalhos configurado,\n"
+"        então os cabeçalhos referenciados por este atributo são inseridos\n"
+"        na lisa e a pesquisa interrompe para a direção atual.\n"
+"        células TD que configuram o atributo de eixo também são tratadas\n"
+"        com células de cabeçalho.\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - %s represents a string-encoding name which may be localized in your language.
+#, c-format
+msgctxt "TEXT_VENDOR_CHARS"
+msgid ""
+"It is unlikely that vendor-specific, system-dependent encodings\n"
+"work widely enough on the World Wide Web; you should avoid using the \n"
+"%s character encoding, instead you are recommended to\n"
+"use named entities, e.g. &trade;.\n"
+msgstr ""
+"É improvável que as codificações dependentes do sistema específicas\n"
+"do fornecedor funcionem amplamente na World Wide Web; você deve\n"
+"evitar o uso da codificação de caracteres %s; em vez disso,\n"
+"recomenda-se que você use entidades nomeadas, p.ex. &trade;.\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - %s represents a string-encoding name which may be localized in your language.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#, c-format
+msgctxt "TEXT_SGML_CHARS"
+msgid ""
+"Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML;\n"
+"even if they were, they would likely be unprintable control characters.\n"
+"Tidy assumed you wanted to refer to a character with the same byte value in "
+"the \n"
+"%s encoding and replaced that reference with the Unicode \n"
+"equivalent.\n"
+msgstr ""
+"Os códigos de caracteres 128 a 159 (U+0080 a U+009F)\n"
+"não são aceitos no HTML; mesmo se eles fossem, eles\n"
+"provavelmente seriam caracteres de controle não imprimíveis.\n"
+"Tidy presumiu que você queria se referir a um caractere\n"
+"com o mesmo valor de bytes na codificação %s e substituiu\n"
+"aquela referência com o equivalente Unicode.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_INVALID_UTF8"
+msgid ""
+"Character codes for UTF-8 must be in the range: U+0000 to U+10FFFF.\n"
+"The definition of UTF-8 in Annex D of ISO/IEC 10646-1:2000 also\n"
+"allows for the use of five- and six-byte sequences to encode\n"
+"characters that are outside the range of the Unicode character set;\n"
+"those five- and six-byte sequences are illegal for the use of\n"
+"UTF-8 as a transformation of Unicode characters. ISO/IEC 10646\n"
+"does not allow mapping of unpaired surrogates, nor U+FFFE and U+FFFF\n"
+"(but it does allow other noncharacters). For more information please refer "
+"to\n"
+"http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+msgstr ""
+"Os códigos de caracteres para UTF-8 devem estar dentro\n"
+"do intervalo: U+0000 a U+10FFFF. A definição de UTF-8\n"
+"no Anexo D do ISO/IEC 10646-1:2000 também permite para\n"
+"o uso de sequências de cinco e seis bytes para codificar\n"
+"caracteres que estão fora do intervalo do conjunto de\n"
+"caracteres do Unicode; aquelas sequências de cinco e\n"
+"seis bytes são ilegais para o uso de UTF-8 como uma\n"
+"transformação de caracteres Unicode. ISO/IEC 10646 não\n"
+"permite mapeamento de substitutos não pareados, nem\n"
+"U+FFFE e U+FFFF (mas permite outros não caracteres).\n"
+"Para mais informações, veja http://www.unicode.org/ e\n"
+"http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_INVALID_UTF16"
+msgid ""
+"Character codes for UTF-16 must be in the range: U+0000 to U+10FFFF.\n"
+"The definition of UTF-16 in Annex C of ISO/IEC 10646-1:2000 does not allow "
+"the\n"
+"mapping of unpaired surrogates. For more information please refer to\n"
+"http://www.unicode.org/ and http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+msgstr ""
+"Os códigos de caracteres para UTF-16 devem estar dentro\n"
+"do intervalo: U+0000 a U+10FFFF. A definição de UTF-16\n"
+"no Anexo C da ISO/IEC 10646-1:2000 não permite o mapeamento\n"
+"de substitutos não pareados. Para mais informações,\n"
+"por favor veja http://www.unicode.org/ e\n"
+"http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TEXT_INVALID_URI"
+msgid ""
+"URIs must be properly escaped, they must not contain unescaped\n"
+"characters below U+0021 including the space character and not\n"
+"above U+007E. Tidy escapes the URI for you as recommended by\n"
+"HTML 4.01 section B.2.1 and XML 1.0 section 4.2.2. Some user agents\n"
+"use another algorithm to escape such URIs and some server-sided\n"
+"scripts depend on that. If you want to depend on that, you must\n"
+"escape the URI on your own. For more information please refer to\n"
+"http://www.w3.org/International/O-URL-and-ident.html\n"
+msgstr ""
+"URIs devem ser devidamente escapadas, elas não devem\n"
+"conter caracteres não elaborados abaixo de U+0021,\n"
+"incluindo o caractere de espaço e não acima de U+007E.\n"
+"Tidy escapa a URI para você conforme recomendado pelo\n"
+"HTML 4.01 seção B.2.1 e XML 1.0 seção 4.2.2. Alguns\n"
+"agentes de usuários usam outro algoritmo para escapar\n"
+"tais URIs e alguns scripts de servidor dependem disso.\n"
+"Se você quiser depender disso, você deve escapar a URI\n"
+"por conta própria. Para mais informações, consulte\n"
+"http://www.w3.org/International/O-URL-and-ident.html\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_BAD_FORM"
+msgid ""
+"You may need to move one or both of the <form> and </form>\n"
+"tags. HTML elements should be properly nested and form elements\n"
+"are no exception. For instance you should not place the <form>\n"
+"in one table cell and the </form> in another. If the <form> is\n"
+"placed before a table, the </form> cannot be placed inside the\n"
+"table! Note that one form can't be nested inside another!\n"
+msgstr ""
+"Talvez seja necessário mover uma ou ambas as tags <form>\n"
+"e </form>. Os elementos HTML devem estar adequadamente\n"
+"aninhados e os elementos de formulário não são uma exceção.\n"
+"Por exemplo, você não deve colocar o <form> em uma célula\n"
+"de tabela e </form> em outra. Se o <form> for colocado\n"
+"antes de uma tabela, o </form> não pode ser colocado dentro\n"
+"da tabela! Note que um formulário não pode ser aninhado\n"
+"dentro de outro!\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_BAD_MAIN"
+msgid ""
+"Only one <main> element is allowed in a document.\n"
+"Subsequent <main> elements have been discarded, which may\n"
+"render the document invalid.\n"
+msgstr ""
+"Apenas um elemento <main> é permitido em um documento.\n"
+"Elementos <main> subsequentes foram descartados, o que\n"
+"pode tornar o documento inválido.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_M_SUMMARY"
+msgid ""
+"The table summary attribute should be used to describe\n"
+"the table structure. It is very helpful for people using\n"
+"non-visual browsers. The scope and headers attributes for\n"
+"table cells are useful for specifying which headers apply\n"
+"to each table cell, enabling non-visual browsers to provide\n"
+"a meaningful context for each cell.\n"
+msgstr ""
+"O atributo de resumo da tabela deve ser usado para\n"
+"descrever a estrutura da tabela. É muito útil para\n"
+"pessoas que usam navegadores não visuais. Os atributos\n"
+"de escopo e cabeçalho para células de tabela são\n"
+"úteis para especificar quais cabeçalhos se aplicam\n"
+"a cada célula de tabela, permitindo que navegadores\n"
+"não visuais forneçam um contexto significativo para\n"
+"cada célula.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_M_IMAGE_ALT"
+msgid ""
+"The alt attribute should be used to give a short description\n"
+"of an image; longer descriptions should be given with the\n"
+"longdesc attribute which takes a URL linked to the description.\n"
+"These measures are needed for people using non-graphical browsers.\n"
+msgstr ""
+"O atributo alt deve ser usado para dar uma breve descrição\n"
+"de uma imagem; descrições mais longas devem ser fornecidas\n"
+"com o atributo longdesc que leva uma URL vinculada à\n"
+"descrição. Essas medidas são necessárias para pessoas que\n"
+"usam navegadores não-gráficos.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_M_IMAGE_MAP"
+msgid ""
+"Use client-side image maps in preference to server-side image\n"
+"maps as the latter are inaccessible to people using non-\n"
+"graphical browsers. In addition, client-side maps are easier\n"
+"to set up and provide immediate feedback to users.\n"
+msgstr ""
+"Use os mapas de imagens do lado do cliente de preferência\n"
+"aos mapas de imagens do lado do servidor, pois estes são\n"
+"inacessíveis para pessoas que usam navegadores não gráficos.\n"
+"Além disso, os mapas do lado do cliente são mais fáceis\n"
+"de configurar e fornecer feedback imediato aos usuários.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_M_LINK_ALT"
+msgid ""
+"For hypertext links defined using a client-side image map, you\n"
+"need to use the alt attribute to provide a textual description\n"
+"of the link for people using non-graphical browsers.\n"
+msgstr ""
+"Para links de hipertexto definidos usando um mapa de imagem\n"
+"do lado do cliente, você precisa usar o atributo alt para\n"
+"fornecer uma descrição textual do link para pessoas que usam\n"
+"navegadores não gráficos.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_FRAMES"
+msgid ""
+"Pages designed using frames present problems for\n"
+"people who are either blind or using a browser that\n"
+"doesn't support frames. A frames-based page should always\n"
+"include an alternative layout inside a NOFRAMES element.\n"
+msgstr ""
+"Páginas desenhadas usando quadros apresentam problemas\n"
+"para pessoas que são cegas ou que usam um navegador que\n"
+"não oferece suporte a quadros. Uma página baseada em\n"
+"quadros deve sempre incluir um layout alternativo dentro\n"
+"de um elemento NOFRAMES.\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The URL should not be translated unless you find a matching URL in your language.
+msgctxt "TEXT_ACCESS_ADVICE1"
+msgid ""
+"For further advice on how to make your pages accessible\n"
+"see http://www.w3.org/WAI/GL."
+msgstr ""
+"Para mais conselhos sobre como tornar suas páginas\n"
+"acessíveis, veja http://www.w3.org/WAI/GL."
+
+#. This console output should be limited to 78 characters per line.
+#. - The URL should not be translated unless you find a matching URL in your language.
+msgctxt "TEXT_ACCESS_ADVICE2"
+msgid ""
+"For further advice on how to make your pages accessible\n"
+"see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/."
+msgstr ""
+"Para mais conselhos sobre como tornar suas páginas\n"
+"acessíveis, veja http://www.w3.org/WAI/GL e\n"
+"http://www.html-tidy.org/accessibility/."
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_LAYER"
+msgid ""
+"The Cascading Style Sheets (CSS) Positioning mechanism\n"
+"is recommended in preference to the proprietary <LAYER>\n"
+"element due to limited vendor support for LAYER.\n"
+msgstr ""
+"O mecanismo de posicionamento do Cascading Style\n"
+"Sheets (CSS) é recomendado em preferência ao\n"
+"elemento proprietário <LAYER> devido ao suporte\n"
+"de fornecedor limitado a LAYER.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_SPACER"
+msgid ""
+"You are recommended to use CSS for controlling white\n"
+"space (e.g. for indentation, margins and line spacing).\n"
+"The proprietary <SPACER> element has limited vendor support.\n"
+msgstr ""
+"É recomendável usar CSS para controlar o espaço em\n"
+"branco (p.ex., para recuo, margens e espaçamento\n"
+"entre linhas). O elemento proprietário <SPACER>\n"
+"possui suporte limitado para fornecedores.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_FONT"
+msgid ""
+"You are recommended to use CSS to specify the font and\n"
+"properties such as its size and color. This will reduce\n"
+"the size of HTML files and make them easier to maintain\n"
+"compared with using <FONT> elements.\n"
+msgstr ""
+"É recomendável usar o CSS para especificar a fonte e\n"
+"as propriedades, como seu tamanho e cor. Isso reduzirá\n"
+"o tamanho dos arquivos HTML e facilitando a manutenção\n"
+"em comparação com o uso de elementos <FONT>.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_NOBR"
+msgid ""
+"You are recommended to use CSS to control line wrapping.\n"
+"Use \"white-space: nowrap\" to inhibit wrapping in place\n"
+"of inserting <NOBR>...</NOBR> into the markup.\n"
+msgstr ""
+"É recomendável usar CSS para controlar a quebra de linha.\n"
+"Use \"white-space: nowrap\" para inibir a quebra em vez\n"
+"de inserir <NOBR>...</NOBR> na marcação.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_BODY"
+msgid "You are recommended to use CSS to specify page and link colors"
+msgstr "É recomendável usar CSS para especificar cores de página e link"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TEXT_GENERAL_INFO"
+msgid ""
+"About HTML Tidy: https://github.com/htacg/tidy-html5\n"
+"Bug reports and comments: https://github.com/htacg/tidy-html5/issues\n"
+"Official mailing list: https://lists.w3.org/Archives/Public/public-htacg/\n"
+"Latest HTML specification: http://dev.w3.org/html5/spec-author-view/\n"
+"Validate your HTML documents: http://validator.w3.org/nu/\n"
+"Lobby your company to join the W3C: http://www.w3.org/Consortium\n"
+msgstr ""
+"Sobre o HTML Tidy: https://github.com/htacg/tidy-html5\n"
+"Relatórios de erro e comentários: https://github.com/htacg/tidy-html5/"
+"issues\n"
+"Lista de discussão: https://lists.w3.org/Archives/Public/public-htacg/\n"
+"Especificação HTML mais recente: http://dev.w3.org/html5/spec-author-view/\n"
+"Valide seus documentos HTML: http://validator.w3.org/nu/\n"
+"Incentive sua empresa a se juntar à W3C: http://www.w3.org/Consortium\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#. - Don't terminate the last line with a newline.
+msgctxt "TEXT_GENERAL_INFO_PLEA"
+msgid ""
+"Do you speak a language other than English, or a different variant of \n"
+"English? Consider helping us to localize HTML Tidy. For details please see \n"
+"https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
+msgstr ""
+"Você fala um idioma diferente do inglês, ou uma variante diferente do\n"
+"inglês? Considere nos ajudar a traduzir HTML Tidy. Para detalhes, consulte\n"
+"https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
+
+#, c-format
+msgctxt "ADDED_MISSING_CHARSET"
+msgid "Added appropriate missing <meta charset=...> to %s"
+msgstr "Adicionado o <meta charset=...> apropriado em falta ao %s"
+
+#, c-format
+msgctxt "ANCHOR_NOT_UNIQUE"
+msgid "%s anchor \"%s\" already defined"
+msgstr "âncora de %s \"%s\" já está definido"
+
+msgctxt "APOS_UNDEFINED"
+msgid "named entity &apos; only defined in XML/XHTML"
+msgstr "a entidade declarada &apos; só definida em XML/XHTML"
+
+#, c-format
+msgctxt "ATTR_VALUE_NOT_LCASE"
+msgid "%s attribute value \"%s\" must be lower case for XHTML"
+msgstr "valor do atributo de %s \"%s\" deve ser minúsculo para XHTML"
+
+#, c-format
+msgctxt "ATTRIBUTE_IS_NOT_ALLOWED"
+msgid "%s attribute \"is\" not allowed for autonomous custom tags."
+msgstr ""
+"atributo de %s \"is\" não permitido para tags personalizadas autônomas."
+
+#, c-format
+msgctxt "ATTRIBUTE_VALUE_REPLACED"
+msgid "%s attribute \"%s\", incorrect value \"%s\" replaced"
+msgstr "atributo %s \"%s\", valor incorreto \"%s\" substituído"
+
+#, c-format
+msgctxt "BACKSLASH_IN_URI"
+msgid "%s URI reference contains backslash. Typo?"
+msgstr "referência da URI %s contém barra invertida. Erro de escrita?"
+
+#, c-format
+msgctxt "BAD_ATTRIBUTE_VALUE_REPLACED"
+msgid "%s attribute \"%s\" had invalid value \"%s\" and has been replaced"
+msgstr "atributo %s \"%s\" tinha valor inválido \"%s\" e foi substituído"
+
+#, c-format
+msgctxt "BAD_ATTRIBUTE_VALUE"
+msgid "%s attribute \"%s\" has invalid value \"%s\""
+msgstr "atributo %s \"%s\" possui valor inválido \"%s\""
+
+msgctxt "BAD_CDATA_CONTENT"
+msgid "'<' + '/' + letter not allowed here"
+msgstr "'<' + '/' + letra não permitido aqui"
+
+#, c-format
+msgctxt "BAD_SUMMARY_HTML5"
+msgid "The summary attribute on the %s element is obsolete in HTML5"
+msgstr "O atributo de resumo no elemento %s é obsoleto no HTML5"
+
+msgctxt "BAD_SURROGATE_LEAD"
+msgid ""
+"Trailing (Low) surrogate pair U+%04X, with no leading (High) entity, "
+"replaced with U+FFFD."
+msgstr ""
+"Par substituto ao final (baixo) U+%04X, com nenhuma entidade precedente "
+"(Alta), substituído por U+FFFD."
+
+msgctxt "BAD_SURROGATE_PAIR"
+msgid ""
+"Have out-of-range surrogate pair U+%04X:U+%04X, replaced with U+FFFD value."
+msgstr ""
+"Possui par substituto U+%04X:U+%04X fora do intervalo, substituído pelo "
+"valor U+FFFD."
+
+msgctxt "BAD_SURROGATE_TAIL"
+msgid ""
+"Leading (High) surrogate pair U+%04X, with no trailing (Low) entity, "
+"replaced with U+FFFD."
+msgstr ""
+"Par substituto precedente (alto) U+%04X, com nenhuma entidade ao final "
+"(Baixo), substituído por U+FFFD."
+
+#, c-format
+msgctxt "CANT_BE_NESTED"
+msgid "%s can't be nested"
+msgstr "%s não pode ser aninhado"
+
+#, c-format
+msgctxt "COERCE_TO_ENDTAG"
+msgid "<%s> is probably intended as </%s>"
+msgstr "<%s> provavelmente deveria ser </%s>"
+
+msgctxt "CONTENT_AFTER_BODY"
+msgid "content occurs after end of body"
+msgstr "o conteúdo ocorre após o fim do corpo"
+
+#, c-format
+msgctxt "CUSTOM_TAG_DETECTED"
+msgid "detected autonomous custom tag %s; will treat as %s"
+msgstr "tag personalizada autônoma %s detectada; será tratada como %s"
+
+#, c-format
+msgctxt "DISCARDING_UNEXPECTED"
+msgid "discarding unexpected %s"
+msgstr "descartando %s inesperado"
+
+msgctxt "DOCTYPE_AFTER_TAGS"
+msgid "<!DOCTYPE> isn't allowed after elements"
+msgstr "<!DOCTYPE> não é permitido após elementos"
+
+msgctxt "DUPLICATE_FRAMESET"
+msgid "repeated FRAMESET element"
+msgstr "elemento FRAMESET repetido"
+
+#, c-format
+msgctxt "ELEMENT_NOT_EMPTY"
+msgid "%s element not empty or not closed"
+msgstr "%s elemento não vazio ou não fechado"
+
+#, c-format
+msgctxt "ELEMENT_VERS_MISMATCH_ERROR"
+msgid "%s element not available in %s"
+msgstr "%s elemento não disponível na %s"
+
+#, c-format
+msgctxt "ELEMENT_VERS_MISMATCH_WARN"
+msgid "%s element not available in %s"
+msgstr "%s elemento não disponível na %s"
+
+#, c-format
+msgctxt "ENCODING_MISMATCH"
+msgid "specified input encoding (%s) does not match actual input encoding (%s)"
+msgstr ""
+"a codificação de entrada especificada (%s) não corresponde à codificação de "
+"entrada atual (%s)"
+
+#, c-format
+msgctxt "ESCAPED_ILLEGAL_URI"
+msgid "%s escaping malformed URI reference"
+msgstr "%s escapando referência de URI malformada"
+
+#, c-format
+msgctxt "FIXED_BACKSLASH"
+msgid "%s converting backslash in URI to slash"
+msgstr "%s convertendo barra invertida em URI para barra"
+
+msgctxt "FOUND_STYLE_IN_BODY"
+msgid "found <style> tag in <body>! fix-style-tags: yes to move."
+msgstr "encontrada tag <style> em <body>! fix-style-tags: yes para mover."
+
+#, c-format
+msgctxt "ID_NAME_MISMATCH"
+msgid "%s id and name attribute value mismatch"
+msgstr "%s valores dos atributos id e name incompatíveis"
+
+#, c-format
+msgctxt "ILLEGAL_NESTING"
+msgid "%s shouldn't be nested"
+msgstr "%s não devem ser aninhados"
+
+#, c-format
+msgctxt "ILLEGAL_URI_CODEPOINT"
+msgid "%s illegal characters found in URI"
+msgstr "%s caracteres ilegais localizados na URI"
+
+#, c-format
+msgctxt "ILLEGAL_URI_REFERENCE"
+msgid "%s improperly escaped URI reference"
+msgstr "referência de URI %s inadequadamente escapada"
+
+#, c-format
+msgctxt "INSERTING_AUTO_ATTRIBUTE"
+msgid "%s inserting \"%s\" attribute using value \"%s\""
+msgstr "%s inserindo atributo \"%s\" usando valor \"%s\""
+
+#, c-format
+msgctxt "INSERTING_TAG"
+msgid "inserting implicit <%s>"
+msgstr "inserindo <%s> implícita"
+
+#, c-format
+msgctxt "INVALID_ATTRIBUTE"
+msgid "%s attribute name \"%s\" (value=\"%s\") is invalid"
+msgstr "nome do atributo de %s \"%s\" (valor=\"%s\") é inválido"
+
+#, c-format
+msgctxt "INVALID_NCR"
+msgid "%s invalid numeric character reference %s"
+msgstr "%s referência de caractere numérico %s"
+
+#, c-format
+msgctxt "INVALID_SGML_CHARS"
+msgid "%s invalid character code %s"
+msgstr "%s código de caracteres inválido %s"
+
+#, c-format
+msgctxt "INVALID_UTF8"
+msgid "%s invalid UTF-8 bytes (char. code %s)"
+msgstr "%s bytes de UTF-8 inválido (código de caracteres %s)"
+
+#, c-format
+msgctxt "INVALID_UTF16"
+msgid "%s invalid UTF-16 surrogate pair (char. code %s)"
+msgstr "%s par de substituto de UTF-16 inválido (código de caracteres %s)"
+
+#, c-format
+msgctxt "INVALID_XML_ID"
+msgid "%s cannot copy name attribute to id"
+msgstr "%s não pôde copiar atributo de nome para id"
+
+#, c-format
+msgctxt "JOINING_ATTRIBUTE"
+msgid "%s joining values of repeated attribute \"%s\""
+msgstr "%s juntando valores de atributo repetido \"%s\""
+
+msgctxt "MALFORMED_COMMENT"
+msgid "adjacent hyphens within comment"
+msgstr "hífenes adjacentes dentro de comentário"
+
+msgctxt "MALFORMED_DOCTYPE"
+msgid "discarding malformed <!DOCTYPE>"
+msgstr "descartando <!DOCTYPE> malformado"
+
+#, c-format
+msgctxt "MISMATCHED_ATTRIBUTE_ERROR"
+msgid "%s attribute \"%s\" not allowed for %s"
+msgstr "atributo de %s \"%s\" não permitido para %s"
+
+#, c-format
+msgctxt "MISMATCHED_ATTRIBUTE_WARN"
+msgid "%s attribute \"%s\" not allowed for %s"
+msgstr "atributo de %s \"%s\" não permitido para %s"
+
+#, c-format
+msgctxt "MISSING_ATTR_VALUE"
+msgid "%s attribute \"%s\" lacks value"
+msgstr "atributo de %s \"%s\" carece de valor"
+
+#, c-format
+msgctxt "MISSING_ATTRIBUTE"
+msgid "%s lacks \"%s\" attribute"
+msgstr "%s carece de atributo \"%s\""
+
+msgctxt "MISSING_DOCTYPE"
+msgid "missing <!DOCTYPE> declaration"
+msgstr "faltando declaração <!DOCTYPE>"
+
+#, c-format
+msgctxt "MISSING_ENDTAG_BEFORE"
+msgid "missing </%s> before %s"
+msgstr "faltando </%s> antes de %s"
+
+#, c-format
+msgctxt "MISSING_ENDTAG_FOR"
+msgid "missing </%s>"
+msgstr "faltando </%s>"
+
+#, c-format
+msgctxt "MISSING_IMAGEMAP"
+msgid "%s should use client-side image map"
+msgstr "%s deve usar mapa de imagem no lado de cliente"
+
+#, c-format
+msgctxt "MISSING_QUOTEMARK"
+msgid "%s attribute with missing trailing quote mark"
+msgstr "atributo de %s faltando aspas ao final"
+
+#, c-format
+msgctxt "MISSING_SEMICOLON_NCR"
+msgid "numeric character reference \"%s\" doesn't end in ';'"
+msgstr "referência de caractere numérico \"%s\" não termina em ';'"
+
+#, c-format
+msgctxt "MISSING_SEMICOLON"
+msgid "entity \"%s\" doesn't end in ';'"
+msgstr "entidade \"%s\" não termina em ';'"
+
+#, c-format
+msgctxt "MISSING_STARTTAG"
+msgid "missing <%s>"
+msgstr "faltando <%s>"
+
+msgctxt "MISSING_TITLE_ELEMENT"
+msgid "inserting missing 'title' element"
+msgstr "inserindo elemento faltante 'title'"
+
+msgctxt "MOVED_STYLE_TO_HEAD"
+msgid "moved <style> tag to <head>! fix-style-tags: no to avoid."
+msgstr "tag <style> movida para <head>! fix-style-tags: no para evitar."
+
+#, c-format
+msgctxt "NESTED_EMPHASIS"
+msgid "nested emphasis %s"
+msgstr "ênfase aninhada %s"
+
+msgctxt "NESTED_QUOTATION"
+msgid "nested q elements, possible typo."
+msgstr "elementos q aninhados, possível erro de escrita."
+
+#, c-format
+msgctxt "NEWLINE_IN_URI"
+msgid "%s discarding newline in URI reference"
+msgstr "%s descartando nova linha na referência de URI"
+
+#, c-format
+msgctxt "NOFRAMES_CONTENT"
+msgid "%s not inside 'noframes' element"
+msgstr "%s não dentre de elemento 'noframes'"
+
+#, c-format
+msgctxt "NON_MATCHING_ENDTAG"
+msgid "replacing unexpected %s with </%s>"
+msgstr "substituindo %s inesperada por </%s>"
+
+#, c-format
+msgctxt "OBSOLETE_ELEMENT"
+msgid "replacing obsolete element %s with %s"
+msgstr "substituindo elemento obsoleto %s por %s"
+
+#, c-format
+msgctxt "PREVIOUS_LOCATION"
+msgid "<%s> previously mentioned"
+msgstr "<%s> anteriormente mencionada"
+
+#, c-format
+msgctxt "PROPRIETARY_ATTR_VALUE"
+msgid "%s proprietary attribute value \"%s\""
+msgstr "atributo proprietário %s com valor \"%s\""
+
+#, c-format
+msgctxt "PROPRIETARY_ATTRIBUTE"
+msgid "%s proprietary attribute \"%s\""
+msgstr "atributo proprietário %s \"%s\""
+
+#, c-format
+msgctxt "PROPRIETARY_ELEMENT"
+msgid "%s is not approved by W3C"
+msgstr "%s não é aprovado pela W3C"
+
+#, c-format
+msgctxt "REMOVED_HTML5"
+msgid "%s element removed from HTML5"
+msgstr "elemento %s removido do HTML5"
+
+#, c-format
+msgctxt "REPEATED_ATTRIBUTE"
+msgid "%s dropping value \"%s\" for repeated attribute \"%s\""
+msgstr "%s descartando valor \"%s\" para atributo repetido \"%s\""
+
+#, c-format
+msgctxt "REPLACING_ELEMENT"
+msgid "replacing %s with %s"
+msgstr "substituindo %s por %s"
+
+#, c-format
+msgctxt "REPLACING_UNEX_ELEMENT"
+msgid "replacing unexpected %s with %s"
+msgstr "substituindo %s inesperada por %s"
+
+msgctxt "SPACE_PRECEDING_XMLDECL"
+msgid "removing whitespace preceding XML Declaration"
+msgstr "removendo espaço em branco precedendo a declaração XML"
+
+msgctxt "SUSPECTED_MISSING_QUOTE"
+msgid "missing quote mark for attribute value"
+msgstr "faltando aspas para o valor de atributo"
+
+#, c-format
+msgctxt "TAG_NOT_ALLOWED_IN"
+msgid "%s isn't allowed in <%s> elements"
+msgstr "%s não é permitido em elementos <%s>"
+
+#, c-format
+msgctxt "TOO_MANY_ELEMENTS_IN"
+msgid "too many %s elements in <%s>"
+msgstr "número excessivo de elementos %s em <%s>"
+
+#, c-format
+msgctxt "TOO_MANY_ELEMENTS"
+msgid "too many %s elements"
+msgstr "número excessivo de elementos %s"
+
+#, c-format
+msgctxt "TRIM_EMPTY_ELEMENT"
+msgid "trimming empty %s"
+msgstr "aparando %s vazio"
+
+msgctxt "UNESCAPED_AMPERSAND"
+msgid "unescaped & which should be written as &amp;"
+msgstr "& não escapado que deve ser escrito como &amp;"
+
+#, c-format
+msgctxt "UNEXPECTED_END_OF_FILE_ATTR"
+msgid "%s end of file while parsing attributes"
+msgstr "%s fim de arquivo enquanto analisava atributos"
+
+#, c-format
+msgctxt "UNEXPECTED_END_OF_FILE"
+msgid "unexpected end of file %s"
+msgstr "fim do arquivo %s inesperado"
+
+#, c-format
+msgctxt "UNEXPECTED_ENDTAG_ERR"
+msgid "unexpected </%s>"
+msgstr "</%s> inesperada"
+
+#, c-format
+msgctxt "UNEXPECTED_ENDTAG_IN"
+msgid "unexpected </%s> in <%s>"
+msgstr "</%s> inesperada em <%s>"
+
+#, c-format
+msgctxt "UNEXPECTED_ENDTAG"
+msgid "unexpected </%s>"
+msgstr "</%s> inesperada"
+
+#, c-format
+msgctxt "UNEXPECTED_EQUALSIGN"
+msgid "%s unexpected '=', expected attribute name"
+msgstr "%s inesperado '=', esperava nome de atributo"
+
+#, c-format
+msgctxt "UNEXPECTED_GT"
+msgid "%s missing '>' for end of tag"
+msgstr "%s carece de '>' para o fim da tag"
+
+#, c-format
+msgctxt "UNEXPECTED_QUOTEMARK"
+msgid "%s unexpected or duplicate quote mark"
+msgstr "%s aspas inesperadas ou duplicadas"
+
+#, c-format
+msgctxt "UNKNOWN_ELEMENT_LOOKS_CUSTOM"
+msgid "%s is not recognized! Did you mean to enable the custom-tags option?"
+msgstr "%s não é reconhecido! Você queria habilitar a opção custom-tags?"
+
+#, c-format
+msgctxt "UNKNOWN_ELEMENT"
+msgid "%s is not recognized!"
+msgstr "%s não é reconhecido!"
+
+#, c-format
+msgctxt "UNKNOWN_ENTITY"
+msgid "unescaped & or unknown entity \"%s\""
+msgstr "& não escapado ou entidade desconhecida \"%s\""
+
+#, c-format
+msgctxt "USING_BR_INPLACE_OF"
+msgid "using <br> in place of %s"
+msgstr "usando <br> no lugar de %s"
+
+#, c-format
+msgctxt "VENDOR_SPECIFIC_CHARS"
+msgid "%s invalid character code %s"
+msgstr "%s código de caractere inválido %s"
+
+#, c-format
+msgctxt "WHITE_IN_URI"
+msgid "%s discarding whitespace in URI reference"
+msgstr "%s descartando espaço em branco na referência de URI"
+
+msgctxt "XML_DECLARATION_DETECTED"
+msgid "An XML declaration was detected. Did you mean to use input-xml?"
+msgstr "Uma declaração XML foi detectada. Você queria usar input-xml?"
+
+#, c-format
+msgctxt "XML_ID_SYNTAX"
+msgid "%s ID \"%s\" uses XML ID syntax"
+msgstr "%s ID \"%s\" usa sintaxe de ID de XML"
+
+msgctxt "IMG_MISSING_ALT"
+msgid "[1.1.1.1]: <img> missing 'alt' text."
+msgstr "[1.1.1.1]: <img> carece de texto 'alt'."
+
+msgctxt "IMG_ALT_SUSPICIOUS_FILENAME"
+msgid "[1.1.1.2]: suspicious 'alt' text (filename)."
+msgstr "[1.1.1.2]: texto 'alt' suspeito (nome de arquivo)."
+
+msgctxt "IMG_ALT_SUSPICIOUS_FILE_SIZE"
+msgid "[1.1.1.3]: suspicious 'alt' text (file size)."
+msgstr "[1.1.1.3]: texto 'alt' suspeito (tamanho de arquivo)."
+
+msgctxt "IMG_ALT_SUSPICIOUS_PLACEHOLDER"
+msgid "[1.1.1.4]: suspicious 'alt' text (placeholder)."
+msgstr "[1.1.1.4]: texto 'alt' suspeito (espaço reservado)."
+
+msgctxt "IMG_ALT_SUSPICIOUS_TOO_LONG"
+msgid "[1.1.1.10]: suspicious 'alt' text (too long)."
+msgstr "[1.1.1.10]: texto 'alt' suspeito (longo demais)."
+
+msgctxt "IMG_MISSING_LONGDESC_DLINK"
+msgid "[1.1.2.1]: <img> missing 'longdesc' and d-link."
+msgstr "[1.1.2.1]: <img> carece de 'longdesc' e d-link."
+
+msgctxt "IMG_MISSING_DLINK"
+msgid "[1.1.2.2]: <img> missing d-link."
+msgstr "[1.1.2.2]: <img> carece de d-link."
+
+msgctxt "IMG_MISSING_LONGDESC"
+msgid "[1.1.2.3]: <img> missing 'longdesc'."
+msgstr "[1.1.2.3]: <img> carece de 'longdesc'."
+
+msgctxt "IMG_BUTTON_MISSING_ALT"
+msgid "[1.1.3.1]: <img> (button) missing 'alt' text."
+msgstr "[1.1.3.1]: <img> (botão) carece de texto 'alt'."
+
+msgctxt "APPLET_MISSING_ALT"
+msgid "[1.1.4.1]: <applet> missing alternate content."
+msgstr "[1.1.4.1]: <applet> carece de conteúdo alternativo."
+
+msgctxt "OBJECT_MISSING_ALT"
+msgid "[1.1.5.1]: <object> missing alternate content."
+msgstr "[1.1.5.1]: <object> carece de conteúdo alternativo."
+
+msgctxt "AUDIO_MISSING_TEXT_WAV"
+msgid "[1.1.6.1]: audio missing text transcript (wav)."
+msgstr "[1.1.6.1]: áudio carece de transcrição de texto (wav)."
+
+msgctxt "AUDIO_MISSING_TEXT_AU"
+msgid "[1.1.6.2]: audio missing text transcript (au)."
+msgstr "[1.1.6.2]: áudio carece de transcrição de texto (au)."
+
+msgctxt "AUDIO_MISSING_TEXT_AIFF"
+msgid "[1.1.6.3]: audio missing text transcript (aiff)."
+msgstr "[1.1.6.3]: áudio carece de transcrição de texto (aiff)."
+
+msgctxt "AUDIO_MISSING_TEXT_SND"
+msgid "[1.1.6.4]: audio missing text transcript (snd)."
+msgstr "[1.1.6.4]: áudio carece de transcrição de texto (snd)."
+
+msgctxt "AUDIO_MISSING_TEXT_RA"
+msgid "[1.1.6.5]: audio missing text transcript (ra)."
+msgstr "[1.1.6.5]: áudio carece de transcrição de texto (ra)."
+
+msgctxt "AUDIO_MISSING_TEXT_RM"
+msgid "[1.1.6.6]: audio missing text transcript (rm)."
+msgstr "[1.1.6.6]: áudio carece de transcrição de texto (rm)."
+
+msgctxt "FRAME_MISSING_LONGDESC"
+msgid "[1.1.8.1]: <frame> may require 'longdesc'."
+msgstr "[1.1.8.1]: <frame> pode exigir 'longdesc'."
+
+msgctxt "AREA_MISSING_ALT"
+msgid "[1.1.9.1]: <area> missing 'alt' text."
+msgstr "[1.1.9.1]: <area> carece de texto 'alt'."
+
+msgctxt "SCRIPT_MISSING_NOSCRIPT"
+msgid "[1.1.10.1]: <script> missing <noscript> section."
+msgstr "[1.1.10.1]: <script> carece de seção <noscript>."
+
+msgctxt "ASCII_REQUIRES_DESCRIPTION"
+msgid "[1.1.12.1]: ascii art requires description."
+msgstr "[1.1.12.1]: arte em ascii exige descrição."
+
+msgctxt "IMG_MAP_SERVER_REQUIRES_TEXT_LINKS"
+msgid "[1.2.1.1]: image map (server-side) requires text links."
+msgstr "[1.2.1.1]: mapa de imagem (lado do servidor) exige links de texto."
+
+msgctxt "MULTIMEDIA_REQUIRES_TEXT"
+msgid "[1.4.1.1]: multimedia requires synchronized text equivalents."
+msgstr "[1.4.1.1]: multimídia exibe equivalentes de texto sincronizado."
+
+msgctxt "IMG_MAP_CLIENT_MISSING_TEXT_LINKS"
+msgid "[1.5.1.1]: image map (client-side) missing text links."
+msgstr "[1.5.1.1]: mapa da imagem (lado do cliente) carece de links de texto."
+
+msgctxt "INFORMATION_NOT_CONVEYED_IMAGE"
+msgid "[2.1.1.1]: ensure information not conveyed through color alone (image)."
+msgstr ""
+"[2.1.1.1]: certificar de que as informações não sejam transmitidas apenas "
+"por cores (imagem)."
+
+msgctxt "INFORMATION_NOT_CONVEYED_APPLET"
+msgid ""
+"[2.1.1.2]: ensure information not conveyed through color alone (applet)."
+msgstr ""
+"[2.1.1.2]: certificar de que as informações não sejam transmitidas apenas "
+"por cores (applet)."
+
+msgctxt "INFORMATION_NOT_CONVEYED_OBJECT"
+msgid ""
+"[2.1.1.3]: ensure information not conveyed through color alone (object)."
+msgstr ""
+"[2.1.1.3]: certificar de que as informações não sejam transmitidas apenas "
+"por cores (objeto)."
+
+msgctxt "INFORMATION_NOT_CONVEYED_SCRIPT"
+msgid ""
+"[2.1.1.4]: ensure information not conveyed through color alone (script)."
+msgstr ""
+"[2.1.1.4]: certificar de que as informações não sejam transmitidas apenas "
+"por cores (script)."
+
+msgctxt "INFORMATION_NOT_CONVEYED_INPUT"
+msgid "[2.1.1.5]: ensure information not conveyed through color alone (input)."
+msgstr ""
+"[2.1.1.5]: certificar de que as informações não sejam transmitidas apenas "
+"por cores (entrada)."
+
+msgctxt "COLOR_CONTRAST_TEXT"
+msgid "[2.2.1.1]: poor color contrast (text)."
+msgstr "[2.2.1.1]: contraste de cores ruim (texto)."
+
+msgctxt "COLOR_CONTRAST_LINK"
+msgid "[2.2.1.2]: poor color contrast (link)."
+msgstr "[2.2.1.2]: contraste de cores ruim (link)."
+
+msgctxt "COLOR_CONTRAST_ACTIVE_LINK"
+msgid "[2.2.1.3]: poor color contrast (active link)."
+msgstr "[2.2.1.3]: contraste de cores ruim (link ativo)."
+
+msgctxt "COLOR_CONTRAST_VISITED_LINK"
+msgid "[2.2.1.4]: poor color contrast (visited link)."
+msgstr "[2.2.1.4]: contraste de cores ruim (link visitado)."
+
+msgctxt "DOCTYPE_MISSING"
+msgid "[3.2.1.1]: <doctype> missing."
+msgstr "[3.2.1.1]: faltando <doctype>."
+
+msgctxt "STYLE_SHEET_CONTROL_PRESENTATION"
+msgid "[3.3.1.1]: use style sheets to control presentation."
+msgstr "[3.3.1.1]: use folhas de estilo para controlar apresentação."
+
+msgctxt "HEADERS_IMPROPERLY_NESTED"
+msgid "[3.5.1.1]: headers improperly nested."
+msgstr "[3.5.1.1]: cabeçalhos aninhados incorretamente."
+
+msgctxt "POTENTIAL_HEADER_BOLD"
+msgid "[3.5.2.1]: potential header (bold)."
+msgstr "[3.5.2.1]: cabeçalho potencial (negrito)."
+
+msgctxt "POTENTIAL_HEADER_ITALICS"
+msgid "[3.5.2.2]: potential header (italics)."
+msgstr "[3.5.2.2]: cabeçalho potencial (itálico)."
+
+msgctxt "POTENTIAL_HEADER_UNDERLINE"
+msgid "[3.5.2.3]: potential header (underline)."
+msgstr "[3.5.2.3]: cabeçalho potencial (sublinhado)."
+
+msgctxt "HEADER_USED_FORMAT_TEXT"
+msgid "[3.5.3.1]: header used to format text."
+msgstr "[3.5.3.1]: cabeçalho usado para formatar o texto."
+
+msgctxt "LIST_USAGE_INVALID_UL"
+msgid "[3.6.1.1]: list usage invalid <ul>."
+msgstr "[3.6.1.1]: uso de lista inválido <ul>."
+
+msgctxt "LIST_USAGE_INVALID_OL"
+msgid "[3.6.1.2]: list usage invalid <ol>."
+msgstr "[3.6.1.2]: uso de lista inválido <ol>."
+
+msgctxt "LIST_USAGE_INVALID_LI"
+msgid "[3.6.1.4]: list usage invalid <li>."
+msgstr "[3.6.1.4]: uso de lista inválido <li>."
+
+msgctxt "LANGUAGE_NOT_IDENTIFIED"
+msgid "[4.3.1.1]: language not identified."
+msgstr "[4.3.1.1]: idioma não identificado."
+
+msgctxt "LANGUAGE_INVALID"
+msgid "[4.3.1.2]: language attribute invalid."
+msgstr "[4.3.1.2]: atributo de idioma inválido."
+
+msgctxt "DATA_TABLE_MISSING_HEADERS"
+msgid "[5.1.2.1]: data <table> missing row/column headers (all)."
+msgstr ""
+"[5.1.2.1]: <table> de dados carece de cabeçalhos de linha/coluna (todos)."
+
+msgctxt "DATA_TABLE_MISSING_HEADERS_COLUMN"
+msgid "[5.1.2.2]: data <table> missing row/column headers (1 col)."
+msgstr ""
+"[5.1.2.2]: <table> de dados carece de cabeçalhos de linha/coluna (1 col)."
+
+msgctxt "DATA_TABLE_MISSING_HEADERS_ROW"
+msgid "[5.1.2.3]: data <table> missing row/column headers (1 row)."
+msgstr ""
+"[5.1.2.3]: <table> de dados carece de cabeçalhos de linha/coluna (1 lin)."
+
+msgctxt "DATA_TABLE_REQUIRE_MARKUP_COLUMN_HEADERS"
+msgid "[5.2.1.1]: data <table> may require markup (column headers)."
+msgstr "[5.2.1.1]: <table> pode exigir marcação (cabeçalhos de coluna)."
+
+msgctxt "DATA_TABLE_REQUIRE_MARKUP_ROW_HEADERS"
+msgid "[5.2.1.2]: data <table> may require markup (row headers)."
+msgstr "[5.2.1.2]: <table> pode exigir marcação (cabeçalhos de linha)."
+
+msgctxt "LAYOUT_TABLES_LINEARIZE_PROPERLY"
+msgid "[5.3.1.1]: verify layout tables linearize properly."
+msgstr "[5.3.1.1]: verifique se tabelas de layout linearizaram corretamente."
+
+msgctxt "LAYOUT_TABLE_INVALID_MARKUP"
+msgid "[5.4.1.1]: invalid markup used in layout <table>."
+msgstr "[5.4.1.1]: marcação inválida usada em <table> de layout."
+
+msgctxt "TABLE_MISSING_SUMMARY"
+msgid "[5.5.1.1]: <table> missing summary."
+msgstr "[5.5.1.1]: <table> carece de sumário."
+
+msgctxt "TABLE_SUMMARY_INVALID_NULL"
+msgid "[5.5.1.2]: <table> summary invalid (null)."
+msgstr "[5.5.1.2]: resumo da <table> inválido (nulo)."
+
+msgctxt "TABLE_SUMMARY_INVALID_SPACES"
+msgid "[5.5.1.3]: <table> summary invalid (spaces)."
+msgstr "[5.5.1.3]: resumo da <table> inválido (espaços)."
+
+msgctxt "TABLE_SUMMARY_INVALID_PLACEHOLDER"
+msgid "[5.5.1.6]: <table> summary invalid (placeholder text)."
+msgstr "[5.5.1.6]: resumo da <table> inválido (texto de espaço reservado)."
+
+msgctxt "TABLE_MISSING_CAPTION"
+msgid "[5.5.2.1]: <table> missing <caption>."
+msgstr "[5.5.2.1]: <table> carece de <caption>."
+
+msgctxt "TABLE_MAY_REQUIRE_HEADER_ABBR"
+msgid "[5.6.1.1]: <table> may require header abbreviations."
+msgstr "[5.6.1.1]: <table> pode exigir abreviações de cabeçalho."
+
+msgctxt "TABLE_MAY_REQUIRE_HEADER_ABBR_NULL"
+msgid "[5.6.1.2]: <table> header abbreviations invalid (null)."
+msgstr "[5.6.1.2]: abreviações de cabeçalho de <table> inválidas (nula)."
+
+msgctxt "TABLE_MAY_REQUIRE_HEADER_ABBR_SPACES"
+msgid "[5.6.1.3]: <table> header abbreviations invalid (spaces)."
+msgstr "[5.6.1.3]: abreviações de cabeçalho de <table> inválidas (espaços)."
+
+msgctxt "STYLESHEETS_REQUIRE_TESTING_LINK"
+msgid "[6.1.1.1]: style sheets require testing (link)."
+msgstr "[6.1.1.1]: folhas de estilo exigem teste (link)."
+
+msgctxt "STYLESHEETS_REQUIRE_TESTING_STYLE_ELEMENT"
+msgid "[6.1.1.2]: style sheets require testing (style element)."
+msgstr "[6.1.1.2]: folhas de estilo exigem teste (elemento de estilo)."
+
+msgctxt "STYLESHEETS_REQUIRE_TESTING_STYLE_ATTR"
+msgid "[6.1.1.3]: style sheets require testing (style attribute)."
+msgstr "[6.1.1.3]: folhas de estilo exigem teste (atributo de estilo)."
+
+msgctxt "FRAME_SRC_INVALID"
+msgid "[6.2.1.1]: <frame> source invalid."
+msgstr "[6.2.1.1]: fonte de <frame> inválida."
+
+msgctxt "TEXT_EQUIVALENTS_REQUIRE_UPDATING_APPLET"
+msgid "[6.2.2.1]: text equivalents require updating (applet)."
+msgstr "[6.2.2.1]: equivalentes de texto exigem atualização (applet)."
+
+msgctxt "TEXT_EQUIVALENTS_REQUIRE_UPDATING_SCRIPT"
+msgid "[6.2.2.2]: text equivalents require updating (script)."
+msgstr "[6.2.2.2]: equivalentes de texto exigem atualização (script)."
+
+msgctxt "TEXT_EQUIVALENTS_REQUIRE_UPDATING_OBJECT"
+msgid "[6.2.2.3]: text equivalents require updating (object)."
+msgstr "[6.2.2.3]: equivalentes de texto exigem atualização (object)."
+
+msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_SCRIPT"
+msgid "[6.3.1.1]: programmatic objects require testing (script)."
+msgstr "[6.3.1.1]: objetos programáticos exigem teste (script)."
+
+msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_OBJECT"
+msgid "[6.3.1.2]: programmatic objects require testing (object)."
+msgstr "[6.3.1.2]: objetos programáticos exigem teste (object)."
+
+msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_EMBED"
+msgid "[6.3.1.3]: programmatic objects require testing (embed)."
+msgstr "[6.3.1.3]: objetos programáticos exigem teste (embed)."
+
+msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_APPLET"
+msgid "[6.3.1.4]: programmatic objects require testing (applet)."
+msgstr "[6.3.1.4]: objetos programáticos exigem teste (applet)."
+
+msgctxt "FRAME_MISSING_NOFRAMES"
+msgid "[6.5.1.1]: <frameset> missing <noframes> section."
+msgstr "[6.5.1.1]: <frameset> carece de seção <noframes>."
+
+msgctxt "NOFRAMES_INVALID_NO_VALUE"
+msgid "[6.5.1.2]: <noframes> section invalid (no value)."
+msgstr "[6.5.1.2]: seção <noframes> inválida (sem valor)."
+
+msgctxt "NOFRAMES_INVALID_CONTENT"
+msgid "[6.5.1.3]: <noframes> section invalid (content)."
+msgstr "[6.5.1.3]: seção <noframes> inválida (conteúdo)."
+
+msgctxt "NOFRAMES_INVALID_LINK"
+msgid "[6.5.1.4]: <noframes> section invalid (link)."
+msgstr "[6.5.1.4]: seção <noframes> inválida (link)."
+
+msgctxt "REMOVE_FLICKER_SCRIPT"
+msgid "[7.1.1.1]: remove flicker (script)."
+msgstr "[7.1.1.1]: remoção de cintilação (script)."
+
+msgctxt "REMOVE_FLICKER_OBJECT"
+msgid "[7.1.1.2]: remove flicker (object)."
+msgstr "[7.1.1.2]: remoção de cintilação (object)."
+
+msgctxt "REMOVE_FLICKER_EMBED"
+msgid "[7.1.1.3]: remove flicker (embed)."
+msgstr "[7.1.1.3]: remoção de cintilação (embed)."
+
+msgctxt "REMOVE_FLICKER_APPLET"
+msgid "[7.1.1.4]: remove flicker (applet)."
+msgstr "[7.1.1.4]: remoção de cintilação (applet)."
+
+msgctxt "REMOVE_FLICKER_ANIMATED_GIF"
+msgid "[7.1.1.5]: remove flicker (animated gif)."
+msgstr "[7.1.1.5]: remoção de cintilação (gif animado)."
+
+msgctxt "REMOVE_BLINK_MARQUEE"
+msgid "[7.2.1.1]: remove blink/marquee."
+msgstr "[7.2.1.1]: remoção de blink/marquee."
+
+msgctxt "REMOVE_AUTO_REFRESH"
+msgid "[7.4.1.1]: remove auto-refresh."
+msgstr "[7.4.1.1]: remoção de autorrenovação."
+
+msgctxt "REMOVE_AUTO_REDIRECT"
+msgid "[7.5.1.1]: remove auto-redirect."
+msgstr "[7.5.1.1]: remoção de autorredirecionamento."
+
+msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_SCRIPT"
+msgid "[8.1.1.1]: ensure programmatic objects are accessible (script)."
+msgstr ""
+"[8.1.1.1]: certifique-se que objetos programáticos sejam acessíveis (script)."
+
+msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_OBJECT"
+msgid "[8.1.1.2]: ensure programmatic objects are accessible (object)."
+msgstr ""
+"[8.1.1.2]: certifique-se que objetos programáticos sejam acessíveis (object)."
+
+msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_APPLET"
+msgid "[8.1.1.3]: ensure programmatic objects are accessible (applet)."
+msgstr ""
+"[8.1.1.3]: certifique-se que objetos programáticos sejam acessíveis (applet)."
+
+msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_EMBED"
+msgid "[8.1.1.4]: ensure programmatic objects are accessible (embed)."
+msgstr ""
+"[8.1.1.43]: certifique-se que objetos programáticos sejam acessíveis (embed)."
+
+msgctxt "IMAGE_MAP_SERVER_SIDE_REQUIRES_CONVERSION"
+msgid "[9.1.1.1]: image map (server-side) requires conversion."
+msgstr "[9.1.1.1]: mapa de imagem (lado do servidor) exige conversão."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_DOWN"
+msgid "[9.3.1.1]: <script> not keyboard accessible (onMouseDown)."
+msgstr "[9.3.1.1]: <script> não é acessível por teclado (onMouseDown)."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_UP"
+msgid "[9.3.1.2]: <script> not keyboard accessible (onMouseUp)."
+msgstr "[9.3.1.2]: <script> não é acessível por teclado (onMouseUp)."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_CLICK"
+msgid "[9.3.1.3]: <script> not keyboard accessible (onClick)."
+msgstr "[9.3.1.3]: <script> não é acessível por teclado (onClick)."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OVER"
+msgid "[9.3.1.4]: <script> not keyboard accessible (onMouseOver)."
+msgstr "[9.3.1.4]: <script> não é acessível por teclado (onMouseOver)."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OUT"
+msgid "[9.3.1.5]: <script> not keyboard accessible (onMouseOut)."
+msgstr "[9.3.1.5]: <script> não é acessível por teclado (onMouseOut)."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_MOVE"
+msgid "[9.3.1.6]: <script> not keyboard accessible (onMouseMove)."
+msgstr "[9.3.1.6]: <script> não é acessível por teclado (onMouseMove)."
+
+msgctxt "NEW_WINDOWS_REQUIRE_WARNING_NEW"
+msgid "[10.1.1.1]: new windows require warning (_new)."
+msgstr "[10.1.1.1]: novas janelas exigem aviso (_new)."
+
+msgctxt "NEW_WINDOWS_REQUIRE_WARNING_BLANK"
+msgid "[10.1.1.2]: new windows require warning (_blank)."
+msgstr "[10.1.1.2]: novas janelas exigem aviso (_blank)."
+
+msgctxt "REPLACE_DEPRECATED_HTML_APPLET"
+msgid "[11.2.1.1]: replace deprecated html <applet>."
+msgstr "[11.2.1.1]: substituir o elemento html obsoleto <applet>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_BASEFONT"
+msgid "[11.2.1.2]: replace deprecated html <basefont>."
+msgstr "[11.2.1.2]: substituir o elemento html obsoleto <basefont>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_CENTER"
+msgid "[11.2.1.3]: replace deprecated html <center>."
+msgstr "[11.2.1.3]: substituir o elemento html obsoleto <center>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_DIR"
+msgid "[11.2.1.4]: replace deprecated html <dir>."
+msgstr "[11.2.1.4]: substituir o elemento html obsoleto <dir>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_FONT"
+msgid "[11.2.1.5]: replace deprecated html <font>."
+msgstr "[11.2.1.5]: substituir o elemento html obsoleto <font>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_ISINDEX"
+msgid "[11.2.1.6]: replace deprecated html <isindex>."
+msgstr "[11.2.1.6]: substituir o elemento html obsoleto <isindex>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_MENU"
+msgid "[11.2.1.7]: replace deprecated html <menu>."
+msgstr "[11.2.1.7]: substituir o elemento html obsoleto <menu>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_S"
+msgid "[11.2.1.8]: replace deprecated html <s>."
+msgstr "[11.2.1.8]: substituir o elemento html obsoleto <s>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_STRIKE"
+msgid "[11.2.1.9]: replace deprecated html <strike>."
+msgstr "[11.2.1.9]: substituir o elemento html obsoleto <strike>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_U"
+msgid "[11.2.1.10]: replace deprecated html <u>."
+msgstr "[11.2.1.10]: substituir o elemento html obsoleto <u>."
+
+msgctxt "FRAME_MISSING_TITLE"
+msgid "[12.1.1.1]: <frame> missing title."
+msgstr "[12.1.1.1]: <frame> carece de título."
+
+msgctxt "FRAME_TITLE_INVALID_NULL"
+msgid "[12.1.1.2]: <frame> title invalid (null)."
+msgstr "[12.1.1.2]: título de <frame> inválido (nulo)."
+
+msgctxt "FRAME_TITLE_INVALID_SPACES"
+msgid "[12.1.1.3]: <frame> title invalid (spaces)."
+msgstr "[12.1.1.3]: título de <frame> inválido (espaços)."
+
+msgctxt "ASSOCIATE_LABELS_EXPLICITLY"
+msgid "[12.4.1.1]: associate labels explicitly with form controls."
+msgstr ""
+"[12.4.1.1]: associar rótulos explicitamente com controles de formulário."
+
+msgctxt "ASSOCIATE_LABELS_EXPLICITLY_FOR"
+msgid "[12.4.1.2]: associate labels explicitly with form controls (for)."
+msgstr ""
+"[12.4.1.2]: associar rótulos explicitamente com controles de formulário "
+"(for)."
+
+msgctxt "ASSOCIATE_LABELS_EXPLICITLY_ID"
+msgid "[12.4.1.3]: associate labels explicitly with form controls (id)."
+msgstr ""
+"[12.4.1.3]: associar rótulos explicitamente com controles de formulário (id)."
+
+msgctxt "LINK_TEXT_NOT_MEANINGFUL"
+msgid "[13.1.1.1]: link text not meaningful."
+msgstr "[13.1.1.1]: texto de link não significativo."
+
+msgctxt "LINK_TEXT_MISSING"
+msgid "[13.1.1.2]: link text missing."
+msgstr "[13.1.1.2]: faltando texto de link."
+
+msgctxt "LINK_TEXT_TOO_LONG"
+msgid "[13.1.1.3]: link text too long."
+msgstr "[13.1.1.3]: texto de link longo demais."
+
+msgctxt "LINK_TEXT_NOT_MEANINGFUL_CLICK_HERE"
+msgid "[13.1.1.4]: link text not meaningful (click here)."
+msgstr "[13.1.1.4]: texto de link não significativo (clique aqui)."
+
+msgctxt "METADATA_MISSING"
+msgid "[13.2.1.1]: Metadata missing."
+msgstr "[13.2.1.1]: faltando metadados."
+
+msgctxt "METADATA_MISSING_REDIRECT_AUTOREFRESH"
+msgid "[13.2.1.3]: Metadata missing (redirect/auto-refresh)."
+msgstr "[13.2.1.3]: faltando metadados (redirecionamento/autorrenovação)."
+
+msgctxt "SKIPOVER_ASCII_ART"
+msgid "[13.10.1.1]: skip over ascii art."
+msgstr "[13.10.1.1]: pular arte em ascii."
+
+msgctxt "TC_LABEL_COL"
+msgid "column"
+msgstr "coluna"
+
+msgctxt "TC_LABEL_FILE"
+msgid "file"
+msgstr "arquivo"
+
+msgctxt "TC_LABEL_LANG"
+msgid "lang"
+msgstr "idioma"
+
+msgctxt "TC_LABEL_LEVL"
+msgid "level"
+msgstr "nível"
+
+msgctxt "TC_LABEL_OPT"
+msgid "option"
+msgstr "opção"
+
+#, c-format
+msgctxt "TC_MAIN_ERROR_LOAD_CONFIG"
+msgid "Loading config file \"%s\" failed, err = %d"
+msgstr "Falha ao carregar o arquivo de config \"%s\", err = %d"
+
+# Espaço adicionado para manter alinhamento -- Rafael
+msgctxt "TC_OPT_ACCESS"
+msgid ""
+"do additional accessibility checks (<level> = 0, 1, 2, 3). 0 is assumed if "
+"<level> is missing."
+msgstr ""
+" faz verificações adicionais de acessibilidade (<nível> = 0, 1, 2, 3). 0 é "
+"presumido se <nível> estiver faltando."
+
+msgctxt "TC_OPT_ASCII"
+msgid "use ISO-8859-1 for input, US-ASCII for output"
+msgstr "usa ISO-8859-1 para entrada, US-ASCII para saída"
+
+msgctxt "TC_OPT_ASHTML"
+msgid "force XHTML to well formed HTML"
+msgstr "força XHTML para HTML bem formatado"
+
+msgctxt "TC_OPT_ASXML"
+msgid "convert HTML to well formed XHTML"
+msgstr "converte HTML para XHTML bem formatado"
+
+msgctxt "TC_OPT_BARE"
+msgid "strip out smart quotes and em dashes, etc."
+msgstr "retira aspas inteligentes, travessões etc."
+
+msgctxt "TC_OPT_BIG5"
+msgid "use Big5 for both input and output"
+msgstr "usa Big5 para tanto entrada quanto saída"
+
+msgctxt "TC_OPT_CLEAN"
+msgid "replace FONT, NOBR and CENTER tags with CSS"
+msgstr "substitui tags FONT, NOBR e CENTER com CSS"
+
+msgctxt "TC_OPT_CONFIG"
+msgid "set configuration options from the specified <file>"
+msgstr "define opções de configuração a partir do <arquivo> especificado"
+
+msgctxt "TC_OPT_ERRORS"
+msgid "show only errors and warnings"
+msgstr "mostra apenas erros e avisos"
+
+msgctxt "TC_OPT_FILE"
+msgid "write errors and warnings to the specified <file>"
+msgstr "escreve erros e avisos para o <arquivo> especificado"
+
+msgctxt "TC_OPT_GDOC"
+msgid "produce clean version of html exported by Google Docs"
+msgstr "produz versão limpa do html exportado pelo Google Docs"
+
+msgctxt "TC_OPT_HELP"
+msgid "list the command line options"
+msgstr "lista as opções de linha de comando"
+
+msgctxt "TC_OPT_HELPCFG"
+msgid "list all configuration options"
+msgstr "lista todas as opções de configuração"
+
+# Espaço adicionado para manter alinhamento -- Rafael
+msgctxt "TC_OPT_HELPOPT"
+msgid "show a description of the <option>"
+msgstr "  mostra uma descrição da <opção>"
+
+msgctxt "TC_OPT_IBM858"
+msgid "use IBM-858 (CP850+Euro) for input, US-ASCII for output"
+msgstr "usa IBM-858 (CP850+Euro) para entrada, US-ASCII para saída"
+
+msgctxt "TC_OPT_INDENT"
+msgid "indent element content"
+msgstr "recua o conteúdo do elemento"
+
+msgctxt "TC_OPT_ISO2022"
+msgid "use ISO-2022 for both input and output"
+msgstr "usa ISO-2022 para tanto entrada quanto saída"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_OPT_LANGUAGE"
+msgid ""
+"set Tidy's output language to <lang>. Specify '-language help' for more "
+"help. Use before output-causing arguments to ensure the language takes "
+"effect, e.g.,`tidy -lang es -lang help`."
+msgstr ""
+"define o idioma de saída do Tidy para <idioma>. Especifique '-language help' "
+"para mais ajuda. Use antes de argumentos que gerem saída para garantir que o "
+"idioma surta efeitos, p.ex.:\n"
+"`tidy -lang es -lang help`."
+
+msgctxt "TC_OPT_LATIN0"
+msgid "use ISO-8859-15 for input, US-ASCII for output"
+msgstr "usa ISO-8859-15 para entrada, US-ASCII para saída"
+
+msgctxt "TC_OPT_LATIN1"
+msgid "use ISO-8859-1 for both input and output"
+msgstr "usa ISO-8859-1 para tanto entrada quanto saída"
+
+msgctxt "TC_OPT_MAC"
+msgid "use MacRoman for input, US-ASCII for output"
+msgstr "usa MacRoman para entrada, US-ASCII para saída"
+
+msgctxt "TC_OPT_MODIFY"
+msgid "modify the original input files"
+msgstr "modifica os arquivos de entrada originais"
+
+msgctxt "TC_OPT_NUMERIC"
+msgid "output numeric rather than named entities"
+msgstr "emite entidades numéricas em vez de nomeadas"
+
+msgctxt "TC_OPT_OMIT"
+msgid "omit optional start tags and end tags"
+msgstr "omite tags opcionais de início e de fim"
+
+msgctxt "TC_OPT_OUTPUT"
+msgid "write output to the specified <file>"
+msgstr "escreve a saída para o <arquivo> especificado"
+
+msgctxt "TC_OPT_QUIET"
+msgid "suppress nonessential output"
+msgstr "suprime saída não essencial"
+
+msgctxt "TC_OPT_RAW"
+msgid "output values above 127 without conversion to entities"
+msgstr "emite valores acima de 127 sem conversão para entidades"
+
+msgctxt "TC_OPT_SHIFTJIS"
+msgid "use Shift_JIS for both input and output"
+msgstr "usa Shift_JIS para tanto entrada quanto saída"
+
+msgctxt "TC_OPT_SHOWCFG"
+msgid "list the current configuration settings"
+msgstr "lista as definições da configuração atual"
+
+msgctxt "TC_OPT_UPPER"
+msgid "force tags to upper case"
+msgstr "força tags para maiúsculo"
+
+msgctxt "TC_OPT_UTF16"
+msgid "use UTF-16 for both input and output"
+msgstr "usa UTF-16 para tanto entrada quanto saída"
+
+msgctxt "TC_OPT_UTF16BE"
+msgid "use UTF-16BE for both input and output"
+msgstr "usa UTF-16BE para tanto entrada quanto saída"
+
+msgctxt "TC_OPT_UTF16LE"
+msgid "use UTF-16LE for both input and output"
+msgstr "usa UTF-16LE para tanto entrada quanto saída"
+
+msgctxt "TC_OPT_UTF8"
+msgid "use UTF-8 for both input and output"
+msgstr "usa UTF-8 para tanto entrada quanto saída"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_OPT_VERSION"
+msgid "show the version of Tidy"
+msgstr "mostra a versão do Tidy"
+
+msgctxt "TC_OPT_WIN1252"
+msgid "use Windows-1252 for input, US-ASCII for output"
+msgstr "usa Windows--1252 para entrada, US-ASCII para saída"
+
+msgctxt "TC_OPT_WRAP"
+msgid ""
+"wrap text at the specified <column>. 0 is assumed if <column> is missing. "
+"When this option is omitted, the default of the configuration option 'wrap' "
+"applies."
+msgstr ""
+"efetua quebra de texto na <coluna> especificada, 0 é presumido se <coluna> "
+"estiver faltando. Quando esta opção é omitida, o padrão da opção da "
+"configuração 'wrap' é aplicado."
+
+msgctxt "TC_OPT_XML"
+msgid "specify the input is well formed XML"
+msgstr "especifica a entrada é XML bem formatado"
+
+msgctxt "TC_OPT_XMLCFG"
+msgid "list all configuration options in XML format"
+msgstr "lista todas as opções de configuração no formato XML"
+
+msgctxt "TC_OPT_XMLHELP"
+msgid "list the command line options in XML format"
+msgstr "lista as opções de linha de comando no formato XML"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_OPT_XMLSTRG"
+msgid "output all of Tidy's strings in XML format"
+msgstr "emite todas as strings do Tidy no formato XML"
+
+msgctxt "TC_OPT_XMLERRS"
+msgid "output error constants and strings in XML format"
+msgstr "emite constantes de erro e strings no formato XML"
+
+msgctxt "TC_OPT_XMLOPTS"
+msgid "output option descriptions in XML format"
+msgstr "emite descrições de opção no formato XML"
+
+msgctxt "TC_STRING_CONF_HEADER"
+msgid "Configuration File Settings:"
+msgstr "Definições do arquivo de configuração:"
+
+#. Must be 27 characters or fewer.
+msgctxt "TC_STRING_CONF_NAME"
+msgid "Name"
+msgstr "Nome"
+
+#. Must be 9 characters or fewer.
+msgctxt "TC_STRING_CONF_TYPE"
+msgid "Type"
+msgstr "Tipo"
+
+#. Must be 40 characters or fewer.
+msgctxt "TC_STRING_CONF_VALUE"
+msgid "Current Value"
+msgstr "Valor atual"
+
+#, c-format
+msgctxt "TC_STRING_OPT_NOT_DOCUMENTED"
+msgid "Warning: option `%s' is not documented."
+msgstr "Aviso: a opção '%s' não está documentada."
+
+msgctxt "TC_STRING_OUT_OF_MEMORY"
+msgid "Out of memory. Bailing out."
+msgstr "Memória insuficiente. Saindo."
+
+#, c-format
+msgctxt "TC_STRING_FATAL_ERROR"
+msgid "Fatal error: impossible value for id='%d'."
+msgstr "Erro fatal: valor impossível para id='%d'."
+
+msgctxt "TC_STRING_FILE_MANIP"
+msgid "File manipulation"
+msgstr "Manipulação de arquivo"
+
+msgctxt "TC_STRING_PROCESS_DIRECTIVES"
+msgid "Processing directives"
+msgstr "Diretivas de processamento"
+
+msgctxt "TC_STRING_CHAR_ENCODING"
+msgid "Character encodings"
+msgstr "Codificações de caracteres"
+
+msgctxt "TC_STRING_LANG_MUST_SPECIFY"
+msgid "A POSIX or Windows locale must be specified."
+msgstr "Uma localidade POSIX ou Windows deve ser especificada."
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#, c-format
+msgctxt "TC_STRING_LANG_NOT_FOUND"
+msgid "Tidy doesn't have language '%s,' will use '%s' instead."
+msgstr "Tidy não possui o idioma '%s'; em vez desta, usará '%s'."
+
+msgctxt "TC_STRING_MISC"
+msgid "Miscellaneous"
+msgstr "Diversos"
+
+msgctxt "TC_STRING_XML"
+msgid "XML"
+msgstr "XML"
+
+msgctxt "TC_STRING_MUST_SPECIFY"
+msgid "A Tidy option name must be specified."
+msgstr "Um nome de opção Tidy deve ser especificado."
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_STRING_UNKNOWN_OPTION"
+msgid "HTML Tidy: unknown option: %c"
+msgstr "HTML Tidy: opção desconhecida: %c"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_STRING_UNKNOWN_OPTION_B"
+msgid "HTML Tidy: unknown option."
+msgstr "HTML Tidy: opção desconhecida."
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#, c-format
+msgctxt "TC_STRING_VERS_A"
+msgid "HTML Tidy for %s version %s"
+msgstr "HTML Tidy para %s versão %s"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#, c-format
+msgctxt "TC_STRING_VERS_B"
+msgid "HTML Tidy version %s"
+msgstr "HTML Tidy versão %s"
+
+#. This console output should be limited to 78 characters per line.
+#. - First %s represents the name of the executable from the file system, and is mostly like going to be "tidy".
+#. - Second %s represents a version number, typically x.x.xx.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#, c-format
+msgctxt "TC_TXT_HELP_1"
+msgid ""
+"\n"
+"%s [options...] [file...] [options...] [file...]\n"
+"Utility to clean up and pretty print HTML/XHTML/XML.\n"
+"\n"
+"This is modern HTML Tidy version %s.\n"
+"\n"
+msgstr ""
+"\n"
+"%s [opções...] [arquivo...] [opções...] [arquivo...]\n"
+"Utilitário para limpar e melhor imprimir HTML/XHTML/XML.\n"
+"\n"
+"Essa é o HTML Tidy moderno versão %s.\n"
+"\n"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#. - %s represents the platform, for example, "Mac OS X" or "Windows".
+#, c-format
+msgctxt "TC_TXT_HELP_2A"
+msgid "Command Line Arguments for HTML Tidy for %s:"
+msgstr "Os argumentos de linha de comando para HTML Tidy para %s:"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_TXT_HELP_2B"
+msgid "Command Line Arguments for HTML Tidy:"
+msgstr "Os argumentos de linha de comando para HTML Tidy:"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_TXT_HELP_3"
+msgid ""
+"\n"
+"Tidy Configuration Options\n"
+"==========================\n"
+"Use Tidy's configuration options as command line arguments in the form\n"
+"of \"--some-option <value>\", for example, \"--indent-with-tabs yes\".\n"
+"\n"
+"For a list of all configuration options, use \"-help-config\" or refer\n"
+"to the man page (if your OS has one).\n"
+"\n"
+"If your environment has an $HTML_TIDY variable set point to a Tidy \n"
+"configuration file then Tidy will attempt to use it.\n"
+"\n"
+"On some platforms Tidy will also attempt to use a configuration specified \n"
+"in /etc/tidy.conf or ~/.tidy.conf.\n"
+"\n"
+"Other\n"
+"=====\n"
+"Input/Output default to stdin/stdout respectively.\n"
+"\n"
+"Single letter options apart from -f may be combined\n"
+"as in:  tidy -f errs.txt -imu foo.html\n"
+"\n"
+"Information\n"
+"===========\n"
+"For more information about HTML Tidy, see\n"
+"  http://www.html-tidy.org/\n"
+"\n"
+"For more information on HTML, see the following:\n"
+"\n"
+"  HTML: Edition for Web Authors (the latest HTML specification)\n"
+"  http://dev.w3.org/html5/spec-author-view\n"
+"\n"
+"  HTML: The Markup Language (an HTML language reference)\n"
+"  http://dev.w3.org/html5/markup/\n"
+"\n"
+"File bug reports at https://github.com/htacg/tidy-html5/issues/\n"
+"or send questions and comments to public-htacg@w3.org.\n"
+"\n"
+"Validate your HTML documents using the W3C Nu Markup Validator:\n"
+"  http://validator.w3.org/nu/\n"
+"\n"
+msgstr ""
+"\n"
+"Opções de configuração do Tidy\n"
+"==========================\n"
+"Use as opções de configuração do Tidy como argumentos de linha de comando\n"
+"no forma de \"--alguma-opcao <valor>\", por exemplo \"--indent-with-tabs yes"
+"\".\n"
+"\n"
+"Para uma lista de todas as opções de configuração, use \"-help-config\" ou\n"
+"veja a página man (se seu SO tiver uma).\n"
+"\n"
+"Se seu ambiente tem uma variável $HTML_TIDY definida, aponte para um "
+"arquivo\n"
+"de configuração Tidy e, então, Tidy vai tentar usá-la.\n"
+"\n"
+"Em algumas plataformas, Tidy também vai tentar usar uma configuração\n"
+"especificada no /etc/tidy.conf ou ~/.tidy.conf.\n"
+"\n"
+"Outro\n"
+"=====\n"
+"Entrada/Saída usa, por padrão, stdin/stdout respectivamente.\n"
+"\n"
+"Opções de uma só letra, com exceção de -f, podem ser combinadas\n"
+"como em: tidy -f errs.txt -imu foo.html\n"
+"\n"
+"Informação\n"
+"===========\n"
+"Para mais informações sobre HTML Tidy, veja\n"
+"  http://www.html-tidy.org/\n"
+"\n"
+"Para mais informações sobre HTML, veja o seguinte:\n"
+"\n"
+"  HTML: Edition for Web Authors (the latest HTML specification)\n"
+"  http://dev.w3.org/html5/spec-author-view\n"
+"\n"
+"  HTML: The Markup Language (an HTML language reference)\n"
+"  http://dev.w3.org/html5/markup/\n"
+"\n"
+"Preencha relatórios de erros em https://github.com/htacg/tidy-html5/issues/\n"
+"ou envie perguntas e comentários para public-htacg@w3.org.\n"
+"\n"
+"Valide seus documentos HTML usando Nu, o validador de marcação da W3C:\n"
+"  http://validator.w3.org/nu/\n"
+"\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_TXT_HELP_CONFIG"
+msgid ""
+"\n"
+"HTML Tidy Configuration Settings\n"
+"\n"
+"Within a file, use the form:\n"
+"\n"
+"wrap: 72\n"
+"indent: no\n"
+"\n"
+"When specified on the command line, use the form:\n"
+"\n"
+"--wrap 72 --indent no\n"
+"\n"
+msgstr ""
+"\n"
+"Definições de configuração do HTML Tidy\n"
+"\n"
+"Dentro de um arquivo, use a forma:\n"
+"\n"
+"wrap: 72\n"
+"indent: no\n"
+"\n"
+"Quando especificado na linha de comando, use a forma:\n"
+"\n"
+"--wrap 72 --indent no\n"
+"\n"
+
+msgctxt "TC_TXT_HELP_CONFIG_NAME"
+msgid "Name"
+msgstr "Nome"
+
+msgctxt "TC_TXT_HELP_CONFIG_TYPE"
+msgid "Type"
+msgstr "Tipo"
+
+msgctxt "TC_TXT_HELP_CONFIG_ALLW"
+msgid "Allowable values"
+msgstr "Valores permitidos"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_TXT_HELP_LANG_1"
+msgid ""
+"\n"
+"The -language (or -lang) option indicates which language Tidy \n"
+"should use to communicate its output. Please note that this is not \n"
+"a document translation service, and only affects the messages that \n"
+"Tidy communicates to you. \n"
+"\n"
+"When used from the command line the -language argument must \n"
+"be used before any arguments that result in output, otherwise Tidy \n"
+"will produce output before it knows which language to use. \n"
+"\n"
+"In addition to standard POSIX language codes, Tidy is capable of \n"
+"understanding legacy Windows language codes. Please note that this \n"
+"list indicates codes Tidy understands, and does not indicate that \n"
+"the language is currently installed. \n"
+"\n"
+"The rightmost column indicates how Tidy will understand the \n"
+"legacy Windows name.\n"
+"\n"
+msgstr ""
+"\n"
+"A opção -language (ou -lang) indica qual idioma o Tidy deve usar\n"
+"para comunicar sua saída. Por favor, note que este não é um serviço\n"
+"de tradução de documentos e afeta apenas as mensagens com as quais\n"
+"o Tidy se comunica com você.\n"
+"\n"
+"Quando usado a partir da linha de comando, o argumento -language\n"
+"deve ser usado antes de qualquer argumento que resulte em saída; do\n"
+"contrário, o Tidy produzirá saída antes de saber qual idioma usar.\n"
+"\n"
+"Além dos códigos de idioma POSIX padrão, o Tidy é capaz de entender\n"
+"os códigos legados de idioma do Windows. Por favor, note que esta\n"
+"lista indica códigos Tidy entende e não indica que o idioma esteja\n"
+"instalado no momento.\n"
+"\n"
+"A coluna mais à direita indica como o Tidy vai entender o nome do\n"
+"Windows legado.\n"
+"\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_TXT_HELP_LANG_2"
+msgid ""
+"\n"
+"The following languages are currently installed in Tidy. Please \n"
+"note that there's no guarantee that they are complete; only that \n"
+"one developer or another started to add the language indicated. \n"
+"\n"
+"Incomplete localizations will default to \"en\" when necessary. \n"
+"Please report instances of incorrect strings to the Tidy team. \n"
+"\n"
+msgstr ""
+"\n"
+"Os seguintes idiomas estão atualmente instalados em Tidy. Por favor, \n"
+"note que não há garantia de que eles estejam completos; apenas que \n"
+"esse desenvolvedor ou outro começou a adicionar o idioma indicado. \n"
+"\n"
+"As localizações incompletas serão padrão para \"en\" quando necessário. \n"
+"Informe as instâncias de strings incorretas para a equipe do Tidy. \n"
+"\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#. - The parameter %s is likely to be two to five characters, e.g., en or en_US.
+#, c-format
+msgctxt "TC_TXT_HELP_LANG_3"
+msgid ""
+"\n"
+"If Tidy is able to determine your locale then Tidy will use the \n"
+"locale's language automatically. For example Unix-like systems use a \n"
+"$LANG and/or $LC_ALL environment variable. Consult your operating \n"
+"system documentation for more information. \n"
+"\n"
+"Tidy is currently using locale %s. \n"
+"\n"
+msgstr ""
+"\n"
+"Se o Tidy for capaz de determinar sua localidade, o Tidy usará \n"
+"o idioma da localidade automaticamente. Por exemplo, os sistemas \n"
+"tipo Unix usam uma variável de ambiente $LANG e/ou $LC_ALL. \n"
+"Consulte a documentação de seu sistema operacional para obter \n"
+"mais informações. \n"
+"\n"
+"Tidy está usando a localidade %s. \n"
+"\n"

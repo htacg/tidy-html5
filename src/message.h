@@ -2,7 +2,8 @@
 #define __MESSAGE_H__
 
 /******************************************************************************
- * General Message Writing Routines
+ * @file
+ * Provides General Message Writing Routines
  *
  * This module handles LibTidy's high level output routines, as well as
  * provides lookup functions and management for keys used for retrieval
@@ -17,9 +18,10 @@
  *    prefer to hook into a callback in order to take advantage of the data
  *    that are available in a more flexible way.
  *
- *  - Dialogue, consisting of general information that's not related to your
- *    source file in particular, is also written to the current output buffer
- *    when appropriate.
+ *  - Dialogue, consisting of footnotes related to your source file, and of
+ *    general information that's not related to your source file in particular.
+ *    This is also written to the current output buffer when appropriate, and
+ *    available via callbacks.
  *
  * Report information typically takes the form of a warning, an error, info,
  * etc., and the output routines keep track of the count of these.
@@ -27,31 +29,90 @@
  * The preferred way of handling Tidy diagnostics output is either
  *   - define a new output sink, or
  *   - use a message filter callback routine.
- * *
- * (c) 1998-2017 (W3C) MIT, ERCIM, Keio University, University of
- * Toronto, HTACG
- * See tidy.h for the copyright notice.
+ *
+ * @author  HTACG, et al (consult git log)
+ * 
+ * @copyright
+ *     Copyright (c) 1998-2017 World Wide Web Consortium (Massachusetts
+ *     Institute of Technology, European Research Consortium for Informatics
+ *     and Mathematics, Keio University) and HTACG.
+ * @par
+ *     All Rights Reserved.
+ * @par
+ *     See `tidy.h` for the complete license.
+ *
+ * @date Additional updates: consult git log
+ *
  ******************************************************************************/
 
 #include "forward.h"
 
-/** @name Release Information */
+/** @addtogroup internal_api */
 /** @{ */
 
 
+/***************************************************************************//**
+ ** @defgroup message_releaseinfo Tidy Release Information
+ **
+ ** These functions return information about the current release version date
+ ** and version number. Note that the latest release date or the highest
+ ** version number alone do not guarantee the latest Tidy release, as we may
+ ** backport important fixes to older releases of Tidy.
+ **
+ ** @{
+ ******************************************************************************/
+
+/**
+ *  Returns the release date of this instance of HTML Tidy.
+ */
 ctmbstr TY_(ReleaseDate)(void);
+
+/** 
+ *  Returns the release version of this instance of HTML Tidy.
+ */
 ctmbstr TY_(tidyLibraryVersion)(void);
 
 
-/** @} */
-/** @name High Level Message Writing Functions - General */
+/** @} message_releaseinfo group */
+
+
+/***************************************************************************//**
+ ** @defgroup message_reporting Report and Dialogue Writing Functions
+ **
+ ** These simple functions perform the vast majority of Tidy's output, and
+ ** one these should be your first choice when adding your own output.
+ **
+ ** A report is typically diagnostic output that is generated each time Tidy
+ ** detects an issue in your document or makes a change. A dialogue is a piece
+ ** of information such as a summary, a footnote, or other non-tabular data.
+ ** Some of these functions emit multiple reports or dialogue in order to
+ ** effect a summary.
+ **
+ ** @{
+ ******************************************************************************/
+
+/** @name General Report Writing 
+ ** If one of the convenience reporting functions does not fit your required
+ ** message signature, then this designated reporting function will fit the
+ ** bill. Be sure to see if a message formatter exists that can handle the
+ ** variable arguments.
+ */
 /** @{ */
 
+
+/**
+ *  The designated report writing function. When a proper formatter exists,
+ *  this one function can hanle all report output.
+ */
 void TY_(Report)(TidyDocImpl* doc, Node *element, Node *node, uint code, ...);
 
 
 /** @} */
-/** @name Convenience Reporting Functions */
+/** @name Convenience Reporting Functions
+ ** These convenience reporting functions are able to handle the bulk of Tidy's
+ ** necessary reporting, and avoid the danger of using a variadic if you are
+ ** unfamiliar with Tidy.
+ */
 /** @{ */
 
 
@@ -71,27 +132,74 @@ void TY_(ReportUnknownOption)( TidyDocImpl* doc, ctmbstr option );
 
 
 /** @} */
+/** @name General Dialogue Writing
+ ** These functions produce dialogue output such as individual messages, or
+ ** several messages in summary form.
+ */
+/** @{ */
+
+
+/**
+ *  Emits a single dialogue message, and is capable of accepting a variadic
+ *  that is passed to the correct message formatter as needed.
+ */
+void TY_(Dialogue)( TidyDocImpl* doc, uint code, ... );
+
+
+/** @} */
 /** @name Output Dialogue Information */
 /** @{ */
 
 
-void TY_(DialogueMessage)( TidyDocImpl* doc, uint code, TidyReportLevel level );
+/** 
+ *  Outputs the footnotes and other dialogue information after document cleanup
+ *  is complete. LibTidy users might consider capturing these individually in
+ *  the message callback rather than capturing this entire buffer.
+ *  Called by `tidyErrorSummary()`, in console.
+ *  @todo: This name is a bit misleading and should probably be renamed to
+ *  indicate its focus on printing footnotes.
+ */
 void TY_(ErrorSummary)( TidyDocImpl* doc );
+
+
+/** 
+ *  Outputs document HTML version and version-related information as the final
+ *  report(s) in the report table.
+ *  Called by `tidyRunDiagnostics()`, from console.
+ *  Called by `tidyDocReportDoctype()`, currently unused.
+ */
 void TY_(ReportMarkupVersion)( TidyDocImpl* doc );
+
+
+/**
+ *  Reports the number of warnings and errors found in the document as dialogue
+ *  inforation.
+ *  Called by `tidyRunDiagnostics()`, from console.
+ */
 void TY_(ReportNumWarnings)( TidyDocImpl* doc );
 
 
 /** @} */
-/** @name Key Discovery */
-/** @{ */
+/** @} message_reporting group */
+
+
+/***************************************************************************//**
+ ** @defgroup message_keydiscovery Key Discovery
+ **
+ ** LibTidy users may want to use `TidyReportCallback` to enable their own
+ ** localization lookup features. Because Tidy's report codes are enums the
+ ** specific values can change over time. Using these functions provides the
+ ** ability for LibTidy users to use LibTidy's enum values as strings for
+ ** lookup purposes.
+ **
+ ** @{
+ ******************************************************************************/
 
 /**
- *  LibTidy users may want to use `TidyReportCallback` to enable their own
- *  localization lookup features. Because Tidy's report codes are enums the
- *  specific values can change over time. This function returns a string
- *  representing the enum value name that can be used as a lookup key
- *  independent of changing string values. `TidyReportCallback` will return
- *  this general string as the report message key.
+ *  This function returns a string representing the enum value name that can
+ *  be used as a lookup key independent of changing string values. 
+ *  `TidyReportCallback` will return this general string as the report 
+ *  message key.
  */
 ctmbstr TY_(tidyErrorCodeAsKey)(uint code);
 
@@ -118,7 +226,9 @@ TidyIterator TY_(getErrorCodeList)();
 uint TY_(getNextErrorCode)( TidyIterator* iter );
 
 
-/** @} */
+/** @} message_keydiscovery group */
+/** @} internal_api addtogroup */
+
 
 
 /* accessibility flaws */

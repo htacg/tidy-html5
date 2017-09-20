@@ -162,22 +162,29 @@ static void messageOut( TidyMessageImpl *message )
         go = go & ( doc->errors < cfg(doc, TidyShowErrors) );
     }
     
+//    /* Suppress TidyInfo on Reports if applicable. */
+//    if ( message->level == TidyInfo )
+//    {
+//        go = go & (cfgBool(doc, TidyShowInfo) == yes);
+//    }
+
     /* If suppressing TidyInfo/TidyDialogueInfo on Reports, suppress them. */
     if ( message->level == TidyInfo || message->level == TidyDialogueInfo )
     {
         go = go & (cfgBool(doc, TidyShowInfo) == yes);
     }
 
-    /* If suppressing TidyWarning on Reports, suppress them. */
+    /* Suppress TidyWarning on Reports if applicable. */
     if ( message->level == TidyWarning )
     {
         go = go & (cfgBool(doc, TidyShowWarnings) == yes);
     }
 
-    /* If we're TidyQuiet and handling TidyDialogue, then suppress. */
-    if ( cfgBool(doc, TidyQuiet) )
+    /* If we're TidyQuiet and handling any type of dialogue above summaries,
+       then suppress. */
+    if ( message->level > TidyDialogueSummary )
     {
-        go = go & !(message->level > TidyFatal);
+        go = go & !cfgBool(doc, TidyQuiet);
     }
 
     /* Output the message if applicable. */
@@ -322,7 +329,10 @@ static struct _dispatchTable {
     { REPLACING_ELEMENT,            TidyWarning,     formatStandard          },
     { REPLACING_UNEX_ELEMENT,       TidyWarning,     formatStandard          },
     { SPACE_PRECEDING_XMLDECL,      TidyWarning,     formatStandard          },
+    { STRING_CONTENT_LOOKS,         TidyInfo,        formatStandard          }, /* reportMarkupVersion() */
+    { STRING_DOCTYPE_GIVEN,         TidyInfo,        formatStandard          }, /* reportMarkupVersion() */
     { STRING_MISSING_MALFORMED,     TidyConfig,      formatStandard          },
+    { STRING_NO_SYSID,              TidyInfo,        formatStandard          }, /* reportMarkupVersion() */
     { STRING_UNKNOWN_OPTION,        TidyConfig,      formatStandard          },
     { SUSPECTED_MISSING_QUOTE,      TidyError,       formatStandard          },
     { TAG_NOT_ALLOWED_IN,           TidyWarning,     formatStandard, PREVIOUS_LOCATION },
@@ -682,9 +692,14 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
             return TY_(tidyMessageCreateWithNode)(doc, element, code, level, elemdesc, tagtype );
         }
 
+        case STRING_NO_SYSID:
+            return TY_(tidyMessageCreate)( doc, code, level );
+            
         case FILE_CANT_OPEN:
         case FILE_CANT_OPEN_CFG:
         case FILE_NOT_FILE:
+        case STRING_CONTENT_LOOKS:
+        case STRING_DOCTYPE_GIVEN:
         case STRING_MISSING_MALFORMED:
         {
             ctmbstr str;
@@ -843,7 +858,9 @@ TidyMessageImpl *formatStandardDynamic(TidyDocImpl* doc, Node *element, Node *no
  *********************************************************************/
 
 
-/* This function performs the heavy lifting for TY_(Report)(). */
+/* This function performs the heavy lifting for TY_(Report)(). Critically we
+** can accept the va_list needed for recursion.
+*/
 static void vReport(TidyDocImpl* doc, Node *element, Node *node, uint code, va_list args)
 {
     int i = 0;
@@ -865,22 +882,9 @@ static void vReport(TidyDocImpl* doc, Node *element, Node *node, uint code, va_l
 
             if ( dispatchTable[i].next )
             {
-                switch ( code )
-                {
-                    case TAG_NOT_ALLOWED_IN:
-                        TY_(Report)(doc, element, node, PREVIOUS_LOCATION);
-                        break;
-
-                    case TOO_MANY_ELEMENTS_IN:
-                        TY_(Report)(doc, node, node, PREVIOUS_LOCATION);
-                        break;
-
-                    default:
-                        va_copy(args_copy, args);
-                        vReport(doc, element, node, dispatchTable[i].next, args_copy);
-                        va_end(args_copy);
-                        break;
-                }
+                va_copy(args_copy, args);
+                vReport(doc, element, node, dispatchTable[i].next, args_copy);
+                va_end(args_copy);
             }
             break;
         }
@@ -979,26 +983,148 @@ void TY_(ReportUnknownOption)( TidyDocImpl* doc, ctmbstr option )
 
 
 /*********************************************************************
- * Output Dialogue Information
- * In addition to reports that are added to the table, Tidy emits
- * various dialogue type information. Most of these are specific to
- * exact circumstances, although `TY_(DialogueMessage)` should be
- * used instead of adding a new function, if possible.
+ * Dialogue Output Functions
+ * As for issuing reports, Tidy manages all dialogue output from a
+ * single source in order to manage message categories in a simple
+ * an consistent manner.
  *********************************************************************/
 
 
-void TY_(DialogueMessage)( TidyDocImpl* doc, uint code, TidyReportLevel level )
-{
-    TidyMessageImpl *message = NULL;
+/* This structure ties together for each dialogue Code the default
+** TidyReportLevel. This it makes it simple to output new dialogue
+** messages, or to change report level by modifying this array.
+*/
+static struct _dialogueDispatchTable {
+    uint code;                 /**< The message code. */
+    TidyReportLevel level;     /**< The default TidyReportLevel of the message. */
+} dialogueDispatchTable[] = {
+    { STRING_HELLO_ACCESS,       TidyDialogueInfo     }, /* AccessibilityChecks() */
+    { TEXT_GENERAL_INFO,         TidyDialogueInfo     }, /* tidyGeneralInfo() */
+    { TEXT_GENERAL_INFO_PLEA,    TidyDialogueInfo     }, /* tidyGeneralInfo() */
+    
+    { STRING_NEEDS_INTERVENTION, TidyDialogueSummary  }, /* tidyDocRunDiagnostics() */
+    { STRING_ERROR_COUNT,        TidyDialogueSummary  }, /* ReportNumWarnings() */
+    { STRING_NO_ERRORS,          TidyDialogueSummary  }, /* ReportNumWarnings() */
+    { STRING_NOT_ALL_SHOWN,      TidyDialogueSummary  }, /* ReportNumWarnings() */
+    
+    { TEXT_ACCESS_ADVICE1,       TidyDialogueFootnote }, /* errorSummary() */
+    { TEXT_ACCESS_ADVICE2,       TidyDialogueFootnote },
+    { TEXT_BAD_FORM,             TidyDialogueFootnote },
+    { TEXT_BAD_MAIN,             TidyDialogueFootnote },
+    { TEXT_HTML_T_ALGORITHM,     TidyDialogueFootnote },
+    { TEXT_INVALID_URI,          TidyDialogueFootnote },
+    { TEXT_INVALID_UTF8,         TidyDialogueFootnote },
+    { TEXT_INVALID_UTF16,        TidyDialogueFootnote },
+    { TEXT_M_IMAGE_ALT,          TidyDialogueFootnote },
+    { TEXT_M_IMAGE_MAP,          TidyDialogueFootnote },
+    { TEXT_M_LINK_ALT,           TidyDialogueFootnote },
+    { TEXT_M_SUMMARY,            TidyDialogueFootnote },
+    { TEXT_SGML_CHARS,           TidyDialogueFootnote },
+    { TEXT_USING_BODY,           TidyDialogueFootnote },
+    { TEXT_USING_FONT,           TidyDialogueFootnote },
+    { TEXT_USING_FRAMES,         TidyDialogueFootnote },
+    { TEXT_USING_LAYER,          TidyDialogueFootnote },
+    { TEXT_USING_NOBR,           TidyDialogueFootnote },
+    { TEXT_USING_SPACER,         TidyDialogueFootnote },
+    { TEXT_VENDOR_CHARS,         TidyDialogueFootnote },
+};
 
-    message = TY_(tidyMessageCreate)( doc, code, level);
-    messageOut(message);
+
+/* This message formatter for dialogue messages should be capable of formatting
+** every message, because they're not all the complex and there aren't that
+** many.
+*/
+TidyMessageImpl *formatDialogue( TidyDocImpl* doc, uint code, TidyReportLevel level, va_list args )
+{
+    switch (code)
+    {
+        case TEXT_SGML_CHARS:
+        case TEXT_VENDOR_CHARS:
+        {
+            ctmbstr str = va_arg(args, ctmbstr);
+            return TY_(tidyMessageCreate)( doc, code, level, str );
+        }
+            
+        case STRING_ERROR_COUNT:
+        case STRING_NOT_ALL_SHOWN:
+            return TY_(tidyMessageCreate)( doc, code, level,
+                                           doc->warnings, tidyLocalizedStringN( STRING_ERROR_COUNT_WARNING, doc->warnings ),
+                                           doc->errors, tidyLocalizedStringN( STRING_ERROR_COUNT_ERROR, doc->errors ) );
+
+        case STRING_HELLO_ACCESS:
+        case STRING_NEEDS_INTERVENTION:
+        case STRING_NO_ERRORS:
+        case TEXT_ACCESS_ADVICE1:
+        case TEXT_ACCESS_ADVICE2:
+        case TEXT_BAD_FORM:
+        case TEXT_BAD_MAIN:
+        case TEXT_GENERAL_INFO:
+        case TEXT_GENERAL_INFO_PLEA:
+        case TEXT_HTML_T_ALGORITHM:
+        case TEXT_INVALID_URI:
+        case TEXT_INVALID_UTF8:
+        case TEXT_INVALID_UTF16:
+        case TEXT_M_IMAGE_ALT:
+        case TEXT_M_IMAGE_MAP:
+        case TEXT_M_LINK_ALT:
+        case TEXT_M_SUMMARY:
+        case TEXT_USING_BODY:
+        case TEXT_USING_FONT:
+        case TEXT_USING_FRAMES:
+        case TEXT_USING_LAYER:
+        case TEXT_USING_NOBR:
+        case TEXT_USING_SPACER:
+        default:
+            return TY_(tidyMessageCreate)( doc, code, level );
+    }
+    
+    return NULL;
 }
 
 
+/* This single Dialogue output function determines the correct message level
+** and formats the message with the appropriate formatter, and then outputs it.
+** This one dialogue function should be sufficient for every use case.
+*/
+void TY_(Dialogue)(TidyDocImpl* doc, uint code, ...)
+{
+    int i = 0;
+    va_list args;
+
+    while ( dialogueDispatchTable[i].code != 0 )
+    {
+        if ( dialogueDispatchTable[i].code == code )
+        {
+            TidyReportLevel level = dialogueDispatchTable[i].level;
+            va_start(args, code);
+            TidyMessageImpl *message = formatDialogue( doc, code, level, args );
+            va_end(args);
+            messageOut( message );
+            break;
+        }
+        i++;
+    }
+}
+
+
+/*********************************************************************
+ * Output Dialogue Information
+ * In addition to reports that are added to the table, Tidy emits
+ * various dialogue type information. Most of these are specific to
+ * exact circumstances, although `TY_(Dialogue)` should be used
+ * instead of adding a new function, if possible.
+ *********************************************************************/
+
+
+/* Outputs the footnotes and other dialogue information after document cleanup
+** is complete. LibTidy users might consider capturing these individually in
+** the message callback rather than capturing this entire buffer.
+** Called by tidyErrorSummary(), in console.
+** @todo: This name is a bit misleading and should probably be renamed to
+** indicate its focus on printing footnotes.
+*/
 void TY_(ErrorSummary)( TidyDocImpl* doc )
 {
-    TidyMessageImpl *message = NULL;
     ctmbstr encnam = tidyLocalizedString(STRING_SPECIFIED);
     int charenc = cfg( doc, TidyCharEncoding ); 
     if ( charenc == WIN1252 ) 
@@ -1022,48 +1148,30 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
     if (doc->badChars)
     {
         if (doc->badChars & BC_VENDOR_SPECIFIC_CHARS)
-        {
-            message = TY_(tidyMessageCreate)( doc, TEXT_VENDOR_CHARS, TidyDialogueDoc, encnam);
-            messageOut(message);
-        }
+            TY_(Dialogue)( doc, TEXT_VENDOR_CHARS, encnam );
+
         if ((doc->badChars & BC_INVALID_SGML_CHARS) || (doc->badChars & BC_INVALID_NCR))
-        {
-            message = TY_(tidyMessageCreate)( doc, TEXT_SGML_CHARS, TidyDialogueDoc, encnam);
-            messageOut(message);
-        }
+            TY_(Dialogue)( doc, TEXT_SGML_CHARS, encnam );
+
         if (doc->badChars & BC_INVALID_UTF8)
-        {
-            message = TY_(tidyMessageCreate)( doc, TEXT_INVALID_UTF8, TidyDialogueDoc);
-            messageOut(message);
-        }
+            TY_(Dialogue)( doc, TEXT_INVALID_UTF8 );
 
 #if SUPPORT_UTF16_ENCODINGS
-
         if (doc->badChars & BC_INVALID_UTF16)
-        {
-            message = TY_(tidyMessageCreate)( doc, TEXT_INVALID_UTF16, TidyDialogueDoc);
-            messageOut(message);
-        }
-
+            TY_(Dialogue)( doc, TEXT_INVALID_UTF16 );
 #endif
 
         if (doc->badChars & BC_INVALID_URI)
-        {
-            message = TY_(tidyMessageCreate)( doc, TEXT_INVALID_URI, TidyDialogueDoc);
-            messageOut(message);
-        }
+            TY_(Dialogue)( doc, TEXT_INVALID_URI );
     }
-
-    if (doc->badForm & flg_BadForm) /* Issue #166 - changed to BIT flag to support other errors */
+    
+    if (doc->badForm)
     {
-        message = TY_(tidyMessageCreate)( doc, TEXT_BAD_FORM, TidyDialogueDoc);
-        messageOut(message);
-    }
+        if (doc->badForm & flg_BadForm) /* Issue #166 - changed to BIT flag to support other errors */
+            TY_(Dialogue)( doc, TEXT_BAD_FORM );
 
-    if (doc->badForm & flg_BadMain) /* Issue #166 - repeated <main> element */
-    {
-        message = TY_(tidyMessageCreate)( doc, TEXT_BAD_MAIN, TidyDialogueDoc);
-        messageOut(message);
+        if (doc->badForm & flg_BadMain) /* Issue #166 - repeated <main> element */
+            TY_(Dialogue)( doc, TEXT_BAD_MAIN );
     }
 
     if (doc->badAccess)
@@ -1072,147 +1180,96 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
         if ( cfg(doc, TidyAccessibilityCheckLevel) == 0 )
         {
             if (doc->badAccess & BA_MISSING_SUMMARY)
-            {
-                message = TY_(tidyMessageCreate)( doc, TEXT_M_SUMMARY, TidyDialogueDoc);
-                messageOut(message);
-            }
+                TY_(Dialogue)( doc, TEXT_M_SUMMARY );
 
             if (doc->badAccess & BA_MISSING_IMAGE_ALT)
-            {
-                message = TY_(tidyMessageCreate)( doc, TEXT_M_IMAGE_ALT, TidyDialogueDoc);
-                messageOut(message);
-            }
+                TY_(Dialogue)( doc, TEXT_M_IMAGE_ALT );
 
             if (doc->badAccess & BA_MISSING_IMAGE_MAP)
-            {
-                message = TY_(tidyMessageCreate)( doc, TEXT_M_IMAGE_MAP, TidyDialogueDoc);
-                messageOut(message);
-            }
+                TY_(Dialogue)( doc, TEXT_M_IMAGE_MAP );
 
             if (doc->badAccess & BA_MISSING_LINK_ALT)
-            {
-                message = TY_(tidyMessageCreate)( doc, TEXT_M_LINK_ALT, TidyDialogueDoc);
-                messageOut(message);
-            }
+                TY_(Dialogue)( doc, TEXT_M_LINK_ALT );
 
             if ((doc->badAccess & BA_USING_FRAMES) && !(doc->badAccess & BA_USING_NOFRAMES))
-            {
-                message = TY_(tidyMessageCreate)( doc, TEXT_USING_FRAMES, TidyDialogueDoc);
-                messageOut(message);
-            }
+                TY_(Dialogue)( doc, TEXT_USING_FRAMES );
         }
 
         if ( cfg(doc, TidyAccessibilityCheckLevel) > 0 )
-        {
-            message = TY_(tidyMessageCreate)( doc, TEXT_ACCESS_ADVICE2, TidyDialogueDoc);
-            messageOut(message);
-        }
+            TY_(Dialogue)( doc, TEXT_ACCESS_ADVICE2 );
         else
-        {
-            message = TY_(tidyMessageCreate)( doc, TEXT_ACCESS_ADVICE1, TidyDialogueDoc);
-            messageOut(message);
-        }
+            TY_(Dialogue)( doc, TEXT_ACCESS_ADVICE1 );
     }
 
     if (doc->badLayout)
     {
         if (doc->badLayout & USING_LAYER)
-        {
-            message = TY_(tidyMessageCreate)( doc, TEXT_USING_LAYER, TidyDialogueDoc);
-            messageOut(message);
-        }
+            TY_(Dialogue)( doc, TEXT_USING_LAYER );
 
         if (doc->badLayout & USING_SPACER)
-        {
-            message = TY_(tidyMessageCreate)( doc, TEXT_USING_SPACER, TidyDialogueDoc);
-            messageOut(message);
-        }
+            TY_(Dialogue)( doc, TEXT_USING_SPACER );
 
         if (doc->badLayout & USING_FONT)
-        {
-            message = TY_(tidyMessageCreate)( doc, TEXT_USING_FONT, TidyDialogueDoc);
-            messageOut(message);
-        }
+            TY_(Dialogue)( doc, TEXT_USING_FONT );
 
         if (doc->badLayout & USING_NOBR)
-        {
-            message = TY_(tidyMessageCreate)( doc, TEXT_USING_NOBR, TidyDialogueDoc);
-            messageOut(message);
-        }
+            TY_(Dialogue)( doc, TEXT_USING_NOBR );
         
         if (doc->badLayout & USING_BODY)
-        {
-            message = TY_(tidyMessageCreate)( doc, TEXT_USING_BODY, TidyDialogueDoc);
-            messageOut(message);
-        }
+            TY_(Dialogue)( doc, TEXT_USING_BODY );
     }
 }
 
 
+/* Outputs document HTML version and version-related information. 
+** Called by tidyRunDiagnostics(), from console.
+** Called by tidyDocReportDoctype(), currently unused.
+*/
 void TY_(ReportMarkupVersion)( TidyDocImpl* doc )
 {
-    TidyMessageImpl *message = NULL;
-
     if ( doc->givenDoctype )
-    {
-        /* @todo: deal with non-ASCII characters in FPI */
-        message = TY_(tidyMessageCreate)( doc, STRING_DOCTYPE_GIVEN, TidyInfo, doc->givenDoctype );
-        messageOut(message);
-    }
+        TY_(Report)( doc, NULL, NULL, STRING_DOCTYPE_GIVEN, doc->givenDoctype );
 
     if ( ! cfgBool(doc, TidyXmlTags) )
     {
         Bool isXhtml = doc->lexer->isvoyager;
-        uint apparentVers;
-        ctmbstr vers;
-
-        apparentVers = TY_(ApparentVersion)( doc );
-
-        vers = TY_(HTMLVersionNameFromCode)( apparentVers, isXhtml );
+        uint apparentVers = TY_(ApparentVersion)( doc );
+        ctmbstr vers = TY_(HTMLVersionNameFromCode)( apparentVers, isXhtml );
 
         if ( !vers )
-        {
             vers = tidyLocalizedString(STRING_HTML_PROPRIETARY);
-        }
 
-        message = TY_(tidyMessageCreate)( doc, STRING_CONTENT_LOOKS, TidyInfo, vers );
-        messageOut(message);
+        TY_(Report)( doc, NULL, NULL, STRING_CONTENT_LOOKS, vers );
 
         /* Warn about missing sytem identifier (SI) in emitted doctype */
         if ( TY_(WarnMissingSIInEmittedDocType)( doc ) )
-        {
-            message = TY_(tidyMessageCreate)( doc, STRING_NO_SYSID, TidyInfo);
-            messageOut(message);
-        }
+            TY_(Report)( doc, NULL, NULL, STRING_NO_SYSID );
     }
 }
 
 
+/* Reports the number of warnings and errors found in the document. 
+** Called by tidyRunDiagnostics(), from console.
+*/
 void TY_(ReportNumWarnings)( TidyDocImpl* doc )
 {
-    TidyMessageImpl *message = NULL;
-
     if ( doc->warnings > 0 || doc->errors > 0 )
     {
-        uint code;
         if ( doc->errors > cfg(doc, TidyShowErrors) || !cfgBool(doc, TidyShowWarnings) )
         {
-            code = STRING_NOT_ALL_SHOWN;
+            TY_(Dialogue)( doc, STRING_NOT_ALL_SHOWN );
         }
         else
         {
-            code = STRING_ERROR_COUNT;
+            TY_(Dialogue)( doc, STRING_ERROR_COUNT );
         }
 
-        message = TY_(tidyMessageCreate)( doc, code, TidyDialogueSummary,
-                                          doc->warnings, tidyLocalizedStringN( STRING_ERROR_COUNT_WARNING, doc->warnings ),
-                                          doc->errors, tidyLocalizedStringN( STRING_ERROR_COUNT_ERROR, doc->errors ) );
     }
     else
     {
-        message = TY_(tidyMessageCreate)( doc, STRING_NO_ERRORS, TidyDialogueSummary);
+        TY_(Dialogue)( doc, STRING_NO_ERRORS );
     }
-    messageOut(message);
+
     TY_(WriteChar)( '\n', doc->errout );
 }
 
@@ -1240,6 +1297,7 @@ static const tidyStringsKeyItem tidyStringsKeys[] = {
 
     FOREACH_TIDYCONFIGCATEGORY(MAKE_STRUCT)
     FOREACH_MSG_MISC(MAKE_STRUCT)
+    FOREACH_FOOTNOTE_MSG(MAKE_STRUCT)
     FOREACH_DIALOG_MSG(MAKE_STRUCT)
     FOREACH_REPORT_MSG(MAKE_STRUCT)
     

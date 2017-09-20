@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-09-06 20:53:40
+ *   PO_REVISION_DATE=2017-09-19 14:00:03
  */
 
 #ifdef _MSC_VER
@@ -579,16 +579,11 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { TidyError,                                     0, "Erreur:"                                                                                                },
     { TidyBadDocument,                               0, "Document:"                                                                                              },
     { TidyFatal,                                     0, "Panique:"                                                                                               },
-    { TidyDialogueInfo,                              0, "Informations: "                                                                                         },
     { TidyDialogueSummary,                           0, "Résumé:"                                                                                                },
-    { TidyDialogueDoc,                               0, "Document:"                                                                                              },
-    { FILE_CANT_OPEN,                                0, "Impossible d'ouvrir « %s »\n"                                                                           },
-    { FILE_NOT_FILE,                                 0, "\"%s\" n'est pas un fichier!\n"                                                                         },
+    { TidyDialogueInfo,                              0, "Informations: "                                                                                         },
+    { TidyDialogueFootnote,                          0, "Remarque:"                                                                                              },
     { LINE_COLUMN_STRING,                            0, "Ligne: %d Col: %d - "                                                                                   },
-    { STRING_CONTENT_LOOKS,                          0, "Le contenu du document ressemble à %s"                                                                  },
     { STRING_DISCARDING,                             0, "rejet"                                                                                                  },
-    { STRING_DOCTYPE_GIVEN,                          0, "DOCTYPE donnée est «%s»"                                                                                },
-    { STRING_ERROR_COUNT,                            0, "Tidy a trouvé %u %s et %u %s!"                                                                          },
     { STRING_ERROR_COUNT_ERROR,                      0, "erreur"                                                                                                 },
     { STRING_ERROR_COUNT_ERROR,                      1, "erreurs"                                                                                                },
     { STRING_ERROR_COUNT_WARNING,                    0, "avertissement"                                                                                          },
@@ -598,19 +593,10 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "Contrôles d'accessibilité:\n"
     },
     { STRING_HTML_PROPRIETARY,                       0, "HTML Propriétaire"                                                                                      },
-    { STRING_MISSING_MALFORMED,                      0, "argument manquant ou incorrect pour l'option: %s"                                                       },
     { STRING_XML_DECLARATION,                        0, "déclaration XML"                                                                                        },
-    { STRING_NEEDS_INTERVENTION,                     0,        
-        "Ce document contient des erreurs qui doivent d'abord être résolues\n"
-        "en utilisant HTML Tidy pour produire une version nettoyée.\n"
-    },
-    { STRING_NO_ERRORS,                              0, "Aucun avertissement ou erreur trouvée."                                                                 },
-    { STRING_NO_SYSID,                               0, "Aucun identifiant système dans le doctype soumis"                                                       },
-    { STRING_NOT_ALL_SHOWN,                          0, "Tidy a trouvé %u %s et %u %s! Tous les avertissements et erreurs n'ont pas été affichés."               },
     { STRING_PLAIN_TEXT,                             0, "texte brut"                                                                                             },
     { STRING_REPLACING,                              0, "remplacement"                                                                                           },
     { STRING_SPECIFIED,                              0, "précisé"                                                                                                },
-    { STRING_UNKNOWN_OPTION,                         0, "option inconnue: %s"                                                                                    },
     { TIDYCUSTOMNO_STRING,                           0, "aucune"                                                                                                 },
     { TIDYCUSTOMBLOCKLEVEL_STRING,                   0, "élément de bloc"                                                                                        },
     { TIDYCUSTOMEMPTY_STRING,                        0, "vide"                                                                                                   },
@@ -766,6 +752,16 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "Il est recommandé d'utiliser les CSS pour préciser les couleurs \n"
         "de la page et des liens"
     },
+    { STRING_CONTENT_LOOKS,                          0, "Le contenu du document ressemble à %s"                                                                  },
+    { STRING_DOCTYPE_GIVEN,                          0, "DOCTYPE donnée est «%s»"                                                                                },
+    { STRING_ERROR_COUNT,                            0, "Tidy a trouvé %u %s et %u %s!"                                                                          },
+    { STRING_NEEDS_INTERVENTION,                     0,        
+        "Ce document contient des erreurs qui doivent d'abord être résolues\n"
+        "en utilisant HTML Tidy pour produire une version nettoyée.\n"
+    },
+    { STRING_NO_ERRORS,                              0, "Aucun avertissement ou erreur trouvée."                                                                 },
+    { STRING_NO_SYSID,                               0, "Aucun identifiant système dans le doctype soumis"                                                       },
+    { STRING_NOT_ALL_SHOWN,                          0, "Tidy a trouvé %u %s et %u %s! Tous les avertissements et erreurs n'ont pas été affichés."               },
     { TEXT_GENERAL_INFO,                             0,        
         "À propos de HTML Tidy: https://github.com/htacg/tidy-html5\n"
         "Rapports de bugs et commentaires: https://github.com/htacg/tidy-html5/issues\n"
@@ -810,6 +806,8 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { ELEMENT_VERS_MISMATCH_WARN,                    0, "%s élément non disponible dans %s"                                                                      },
     { ENCODING_MISMATCH,                             0, "l'encodage de caractère précisé en entrée (%s) ne correspond pas à l'encodage réellement entré (%s)"    },
     { ESCAPED_ILLEGAL_URI,                           0, "%s échappement de la référence d''URI mal formée"                                                       },
+    { FILE_CANT_OPEN,                                0, "Impossible d'ouvrir « %s »\n"                                                                           },
+    { FILE_NOT_FILE,                                 0, "\"%s\" n'est pas un fichier!\n"                                                                         },
     { FIXED_BACKSLASH,                               0, "%s conversion des antislash vers slash dans l'URI "                                                     },
     { ID_NAME_MISMATCH,                              0, "%s discordance entre id et valeur de nom d'attribut"                                                    },
     { ILLEGAL_NESTING,                               0, "%s ne doit pas être imbriqué"                                                                           },
@@ -854,6 +852,8 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { REPLACING_ELEMENT,                             0, "remplacement de %s par %s"                                                                              },
     { REPLACING_UNEX_ELEMENT,                        0, "remplacement des %s inattendus par %s"                                                                  },
     { SPACE_PRECEDING_XMLDECL,                       0, "suppression de l'espace précédant la déclaration XML"                                                   },
+    { STRING_MISSING_MALFORMED,                      0, "argument manquant ou incorrect pour l'option: %s"                                                       },
+    { STRING_UNKNOWN_OPTION,                         0, "option inconnue: %s"                                                                                    },
     { SUSPECTED_MISSING_QUOTE,                       0, "absence de guillemet pour la valeur d'attribut"                                                         },
     { TAG_NOT_ALLOWED_IN,                            0, "%s n'est pas permis dans les éléments <%s>"                                                             },
     { TOO_MANY_ELEMENTS_IN,                          0, "trop d'éléments %s dans <%s>"                                                                           },

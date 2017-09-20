@@ -1361,9 +1361,16 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
 
             if (nodeIsA(element))
             {
+                TY_(Report)(doc, element, node, MISSING_ENDTAG_BEFORE);
                 TY_(UngetToken)( doc );
             }
-            TY_(Report)(doc, element, node, MISSING_ENDTAG_BEFORE);
+            else
+            {
+                /* Issue #597 - if we not 'UngetToken' then it is being discarded.
+                   Add message, and 'FreeNode' - thanks @ralfjunker */
+                TY_(Report)(doc, element, node, DISCARDING_UNEXPECTED);
+                TY_(FreeNode)(doc, node);
+            }
 
             if (!(mode & Preformatted))
                 TrimSpaces(doc, element);

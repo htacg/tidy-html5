@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=Rafael Fontenelle <rafaelff@gnome.org>
- *   PO_REVISION_DATE=2017-09-20 17:51:15
+ *   PO_REVISION_DATE=2017-09-21 00:07-0200
  */
 
 #ifdef _MSC_VER
@@ -672,6 +672,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     { TidyFatal,                                     0, "Pânico: "                                                                                        },
     { TidyDialogueSummary,                           0, "Resumo: "                                                                                        },
     { TidyDialogueInfo,                              0, "Informação: "                                                                                    },
+    { TidyDialogueFootnote,                          0, "Nota de rodapé: "                                                                                },
     { LINE_COLUMN_STRING,                            0, "linha %d coluna %d - "                                                                           },
     { STRING_DISCARDING,                             0, "descartando"                                                                                     },
     { STRING_ERROR_COUNT_ERROR,                      0, "erro"                                                                                            },
@@ -866,8 +867,9 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "Incentive sua empresa a se juntar à W3C: http://www.w3.org/Consortium\n"
     },
     { TEXT_GENERAL_INFO_PLEA,                        0,        
-        "Você fala um idioma diferente do inglês, ou uma variante diferente do\n"
-        "inglês? Considere nos ajudar a traduzir HTML Tidy. Para detalhes, consulte\n"
+        "Você fala um idioma diferente do português brasileiro, ou uma variante \n"
+        "diferente do português? Considere em ajudar a traduzir o HTML Tidy. \n"
+        "Para mais detalhes, por favor veja: \n"
         "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
     },
     { ADDED_MISSING_CHARSET,                         0, "Adicionado o <meta charset=...> apropriado em falta ao %s"                                       },

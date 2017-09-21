@@ -1,13 +1,15 @@
+# Rafael Fontenelle <rafaelff@gnome.org>, 2017.
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=UTF-8\n"
-"Language: pt_br\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-09-20 17:51:15\n"
-"Last-Translator: jderry\n"
+"PO-Revision-Date: 2017-09-21 00:07-0200\n"
+"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: \n"
+"Language: pt_BR\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Virtaal 1.0.0-beta1\n"
 
 #. Important notes for translators:
 #. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -2100,7 +2102,7 @@ msgstr "impressão"
 
 msgctxt "TidyInfo"
 msgid "Info: "
-msgstr ""
+msgstr "Info: "
 
 msgctxt "TidyWarning"
 msgid "Warning: "
@@ -2108,7 +2110,7 @@ msgstr "Acesso: "
 
 msgctxt "TidyConfig"
 msgid "Config: "
-msgstr ""
+msgstr "Config: "
 
 msgctxt "TidyAccess"
 msgid "Access: "
@@ -2136,7 +2138,7 @@ msgstr "Informação: "
 
 msgctxt "TidyDialogueFootnote"
 msgid "Footnote: "
-msgstr ""
+msgstr "Nota de rodapé: "
 
 #, c-format
 msgctxt "LINE_COLUMN_STRING"
@@ -2590,8 +2592,9 @@ msgid ""
 "English? Consider helping us to localize HTML Tidy. For details please see \n"
 "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
 msgstr ""
-"Você fala um idioma diferente do inglês, ou uma variante diferente do\n"
-"inglês? Considere nos ajudar a traduzir HTML Tidy. Para detalhes, consulte\n"
+"Você fala um idioma diferente do português brasileiro, ou uma variante \n"
+"diferente do português? Considere em ajudar a traduzir o HTML Tidy. \n"
+"Para mais detalhes, por favor veja: \n"
 "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
 
 #, c-format
@@ -4117,4 +4120,3 @@ msgstr ""
 "\n"
 "Tidy está usando a localidade %s. \n"
 "\n"
-

@@ -220,6 +220,7 @@ extern "C" {
     FN(MISSING_ENDTAG_FOR)            \
     FN(MISSING_IMAGEMAP)              \
     FN(MISSING_QUOTEMARK)             \
+    FN(MISSING_QUOTEMARK_OPEN)        \
     FN(MISSING_SEMICOLON_NCR)         \
     FN(MISSING_SEMICOLON)             \
     FN(MISSING_STARTTAG)              \

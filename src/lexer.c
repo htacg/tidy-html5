@@ -3621,8 +3621,9 @@ static Node *ParsePhp( TidyDocImpl* doc )
 }   
 
 /* consumes the '>' terminating start tags */
+/* @TODO: float the errors back to the calling method */
 static tmbstr  ParseAttribute( TidyDocImpl* doc, Bool *isempty,
-                              Node **asp, Node **php)
+                              Node **asp, Node **php )
 {
     Lexer* lexer = doc->lexer;
     int start, len = 0;
@@ -3984,8 +3985,6 @@ static tmbstr ParseValue( TidyDocImpl* doc, ctmbstr name,
             {
                 uint q = c;
 
-                TY_(ReportAttrError)( doc, lexer->token, NULL, UNEXPECTED_QUOTEMARK );
-
                 /* handle <input onclick=s("btn1")> and <a title=foo""">...</a> */
                 /* this doesn't handle <a title=foo"/> which browsers treat as  */
                 /* 'foo"/' nor  <a title=foo" /> which browser treat as 'foo"'  */
@@ -4156,7 +4155,7 @@ static tmbstr ParseValue( TidyDocImpl* doc, ctmbstr name,
         value = NULL;
 
     /* note delimiter if given */
-    *pdelim = (delim ? delim : '"');
+    *pdelim = delim;
 
     return value;
 }
@@ -4273,11 +4272,13 @@ static AttVal* ParseAttrs( TidyDocImpl* doc, Bool *isempty )
             (cfgBool(doc, TidyXmlTags) && IsValidXMLAttrName(attribute))))
         {
             av = TY_(NewAttribute)(doc);
-            av->delim = delim;
+            av->delim = delim ? delim : '"';
             av->attribute = attribute;
             av->value = value;
             av->dict = TY_(FindAttribute)( doc, av );
-            AddAttrToList( &list, av ); 
+            AddAttrToList( &list, av );
+			if ( !delim && value )
+				 TY_(ReportAttrError)( doc, lexer->token, av, MISSING_QUOTEMARK_OPEN);
         }
         else
         {

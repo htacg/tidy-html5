@@ -1877,6 +1877,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { MISSING_ENDTAG_FOR,           0,   "missing </%s>"                                                           },
     { MISSING_IMAGEMAP,             0,   "%s should use client-side image map"                                     },
     { MISSING_QUOTEMARK,            0,   "%s attribute with missing trailing quote mark"                           },
+    { MISSING_QUOTEMARK_OPEN,       0,   "value for attribute \"%s\" missing quote marks"                          },
     { MISSING_SEMICOLON_NCR,        0,   "numeric character reference \"%s\" doesn't end in ';'"                   },
     { MISSING_SEMICOLON,            0,   "entity \"%s\" doesn't end in ';'"                                        },
     { MISSING_STARTTAG,             0,   "missing <%s>"                                                            },

@@ -2073,154 +2073,154 @@ int main( int argc, char** argv )
                     printf( "%s\n", tidyLocalizedString(TC_STRING_LANG_MUST_SPECIFY));
                 }
 
-                else if ( strcasecmp(arg, "help") == 0 ||
-                         strcasecmp(arg, "-help") == 0 ||
-                         strcasecmp(arg,    "h") == 0 || *arg == '?' )
+            else if ( strcasecmp(arg, "help") == 0 ||
+                        strcasecmp(arg, "-help") == 0 ||
+                        strcasecmp(arg,    "h") == 0 || *arg == '?' )
+            {
+                help( tdoc, prog );
+                tidyRelease( tdoc );
+                return 0; /* success */
+            }
+            else if ( strcasecmp(arg, "xml-help") == 0)
+            {
+                xml_help( );
+                tidyRelease( tdoc );
+                return 0; /* success */
+            }
+            else if ( strcasecmp(arg, "xml-error-strings") == 0)
+            {
+                xml_error_strings( tdoc );
+                tidyRelease( tdoc );
+                return 0; /* success */
+            }
+            else if ( strcasecmp(arg, "xml-options-strings") == 0)
+            {
+                xml_options_strings( tdoc );
+                tidyRelease( tdoc );
+                return 0; /* success */
+            }
+            else if ( strcasecmp(arg, "xml-strings") == 0)
+            {
+                xml_strings( );
+                tidyRelease( tdoc );
+                return 0; /* success */
+            }
+            else if ( strcasecmp(arg, "help-config") == 0 )
+            {
+                optionhelp( tdoc );
+                tidyRelease( tdoc );
+                return 0; /* success */
+            }
+            else if ( strcasecmp(arg, "help-option") == 0 )
+            {
+                if ( argc >= 3)
                 {
-                  help( tdoc, prog );
-                    tidyRelease( tdoc );
-                    return 0; /* success */
+                    optionDescribe( tdoc, argv[2] );
                 }
-                else if ( strcasecmp(arg, "xml-help") == 0)
+                else
                 {
-                    xml_help( );
-                    tidyRelease( tdoc );
-                    return 0; /* success */
+                    printf( "%s\n", tidyLocalizedString(TC_STRING_MUST_SPECIFY));
                 }
-                else if ( strcasecmp(arg, "xml-error-strings") == 0)
+                tidyRelease( tdoc );
+                return 0; /* success */
+            }
+            else if ( strcasecmp(arg, "xml-config") == 0 )
+            {
+                XMLoptionhelp( tdoc );
+                tidyRelease( tdoc );
+                return 0; /* success */
+            }
+            else if ( strcasecmp(arg, "show-config") == 0 )
+            {
+                optionvalues( tdoc );
+                tidyRelease( tdoc );
+                return 0; /* success */
+            }
+            else if ( strcasecmp(arg, "config") == 0 )
+            {
+                if ( argc >= 3 )
                 {
-                    xml_error_strings( tdoc );
-                    tidyRelease( tdoc );
-                    return 0; /* success */
-                }
-                else if ( strcasecmp(arg, "xml-options-strings") == 0)
-                {
-                    xml_options_strings( tdoc );
-                    tidyRelease( tdoc );
-                    return 0; /* success */
-                }
-                else if ( strcasecmp(arg, "xml-strings") == 0)
-                {
-                    xml_strings( );
-                    tidyRelease( tdoc );
-                    return 0; /* success */
-                }
-                else if ( strcasecmp(arg, "help-config") == 0 )
-                {
-                    optionhelp( tdoc );
-                    tidyRelease( tdoc );
-                    return 0; /* success */
-                }
-                else if ( strcasecmp(arg, "help-option") == 0 )
-                {
-                    if ( argc >= 3)
+                    ctmbstr post;
+
+                    tidyLoadConfig( tdoc, argv[2] );
+
+                    /* Set new error output stream if setting changed */
+                    post = tidyOptGetValue( tdoc, TidyErrFile );
+                    if ( post && (!errfil || !samefile(errfil, post)) )
                     {
-                        optionDescribe( tdoc, argv[2] );
+                        errfil = post;
+                        errout = tidySetErrorFile( tdoc, post );
                     }
-                    else
+
+                    --argc;
+                    ++argv;
+                }
+            }
+
+            else if ( strcasecmp(arg, "output") == 0 ||
+                        strcasecmp(arg, "-output-file") == 0 ||
+                        strcasecmp(arg, "o") == 0 )
+            {
+                if ( argc >= 3 )
+                {
+                    tidyOptSetValue( tdoc, TidyOutFile, argv[2] );
+                    --argc;
+                    ++argv;
+                }
+            }
+            else if ( strcasecmp(arg,  "file") == 0 ||
+                        strcasecmp(arg, "-file") == 0 ||
+                        strcasecmp(arg,     "f") == 0 )
+            {
+                if ( argc >= 3 )
+                {
+                    errfil = argv[2];
+                    errout = tidySetErrorFile( tdoc, errfil );
+                    --argc;
+                    ++argv;
+                }
+            }
+            else if ( strcasecmp(arg,  "wrap") == 0 ||
+                        strcasecmp(arg, "-wrap") == 0 ||
+                        strcasecmp(arg,     "w") == 0 )
+            {
+                if ( argc >= 3 )
+                {
+                    uint wraplen = 0;
+                    int nfields = sscanf( argv[2], "%u", &wraplen );
+                    tidyOptSetInt( tdoc, TidyWrapLen, wraplen );
+                    if (nfields > 0)
                     {
-                        printf( "%s\n", tidyLocalizedString(TC_STRING_MUST_SPECIFY));
-                    }
-                    tidyRelease( tdoc );
-                    return 0; /* success */
-                }
-                else if ( strcasecmp(arg, "xml-config") == 0 )
-                {
-                    XMLoptionhelp( tdoc );
-                    tidyRelease( tdoc );
-                    return 0; /* success */
-                }
-                else if ( strcasecmp(arg, "show-config") == 0 )
-                {
-                    optionvalues( tdoc );
-                    tidyRelease( tdoc );
-                    return 0; /* success */
-                }
-                else if ( strcasecmp(arg, "config") == 0 )
-                {
-                    if ( argc >= 3 )
-                    {
-                        ctmbstr post;
-
-                        tidyLoadConfig( tdoc, argv[2] );
-
-                        /* Set new error output stream if setting changed */
-                        post = tidyOptGetValue( tdoc, TidyErrFile );
-                        if ( post && (!errfil || !samefile(errfil, post)) )
-                        {
-                            errfil = post;
-                            errout = tidySetErrorFile( tdoc, post );
-                        }
-
                         --argc;
                         ++argv;
                     }
                 }
+            }
+            else if ( strcasecmp(arg,  "version") == 0 ||
+                        strcasecmp(arg, "-version") == 0 ||
+                        strcasecmp(arg,        "v") == 0 )
+            {
+                version( tdoc );
+                tidyRelease( tdoc );
+                return 0;  /* success */
 
-                else if ( strcasecmp(arg, "output") == 0 ||
-                         strcasecmp(arg, "-output-file") == 0 ||
-                         strcasecmp(arg, "o") == 0 )
+            }
+            else if ( strncmp(argv[1], "--", 2 ) == 0)
+            {
+                if ( tidyOptParseValue(tdoc, argv[1]+2, argv[2]) )
                 {
-                    if ( argc >= 3 )
+                    /* Set new error output stream if setting changed */
+                    ctmbstr post = tidyOptGetValue( tdoc, TidyErrFile );
+                    if ( post && (!errfil || !samefile(errfil, post)) )
                     {
-                        tidyOptSetValue( tdoc, TidyOutFile, argv[2] );
-                        --argc;
-                        ++argv;
+                        errfil = post;
+                        errout = tidySetErrorFile( tdoc, post );
                     }
-                }
-                else if ( strcasecmp(arg,  "file") == 0 ||
-                         strcasecmp(arg, "-file") == 0 ||
-                         strcasecmp(arg,     "f") == 0 )
-                {
-                    if ( argc >= 3 )
-                    {
-                        errfil = argv[2];
-                        errout = tidySetErrorFile( tdoc, errfil );
-                        --argc;
-                        ++argv;
-                    }
-                }
-                else if ( strcasecmp(arg,  "wrap") == 0 ||
-                         strcasecmp(arg, "-wrap") == 0 ||
-                         strcasecmp(arg,     "w") == 0 )
-                {
-                    if ( argc >= 3 )
-                    {
-                        uint wraplen = 0;
-                        int nfields = sscanf( argv[2], "%u", &wraplen );
-                        tidyOptSetInt( tdoc, TidyWrapLen, wraplen );
-                        if (nfields > 0)
-                        {
-                            --argc;
-                            ++argv;
-                        }
-                    }
-                }
-                else if ( strcasecmp(arg,  "version") == 0 ||
-                         strcasecmp(arg, "-version") == 0 ||
-                         strcasecmp(arg,        "v") == 0 )
-                {
-                    version( tdoc );
-                    tidyRelease( tdoc );
-                    return 0;  /* success */
 
+                    ++argv;
+                    --argc;
                 }
-                else if ( strncmp(argv[1], "--", 2 ) == 0)
-                {
-                    if ( tidyOptParseValue(tdoc, argv[1]+2, argv[2]) )
-                    {
-                        /* Set new error output stream if setting changed */
-                        ctmbstr post = tidyOptGetValue( tdoc, TidyErrFile );
-                        if ( post && (!errfil || !samefile(errfil, post)) )
-                        {
-                            errfil = post;
-                            errout = tidySetErrorFile( tdoc, post );
-                        }
-
-                        ++argv;
-                        --argc;
-                    }
-                }
+            }
 
 #if SUPPORT_ACCESSIBILITY_CHECKS
                 else if ( strcasecmp(arg, "access") == 0 )

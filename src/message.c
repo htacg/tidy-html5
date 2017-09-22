@@ -1095,9 +1095,10 @@ void TY_(Dialogue)(TidyDocImpl* doc, uint code, ...)
     {
         if ( dialogueDispatchTable[i].code == code )
         {
+            TidyMessageImpl *message;
             TidyReportLevel level = dialogueDispatchTable[i].level;
             va_start(args, code);
-            TidyMessageImpl *message = formatDialogue( doc, code, level, args );
+            message = formatDialogue( doc, code, level, args );
             va_end(args);
             messageOut( message );
             break;

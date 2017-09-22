@@ -535,7 +535,7 @@ TidyMessageImpl *formatAttributeReport(TidyDocImpl* doc, Node *element, Node *no
         case MISSING_QUOTEMARK_OPEN:
             return TY_(tidyMessageCreateWithNode)(doc, node, code, level, name );
 		
-		case BACKSLASH_IN_URI:
+        case BACKSLASH_IN_URI:
         case ESCAPED_ILLEGAL_URI:
         case FIXED_BACKSLASH:
         case ID_NAME_MISMATCH:
@@ -1092,8 +1092,8 @@ void TY_(Dialogue)(TidyDocImpl* doc, uint code, ...)
     {
         if ( dialogueDispatchTable[i].code == code )
         {
+            TidyMessageImpl *message;
             TidyReportLevel level = dialogueDispatchTable[i].level;
-			TidyMessageImpl *message;
             va_start(args, code);
             message = formatDialogue( doc, code, level, args );
             va_end(args);

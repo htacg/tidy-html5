@@ -4277,8 +4277,8 @@ static AttVal* ParseAttrs( TidyDocImpl* doc, Bool *isempty )
             av->value = value;
             av->dict = TY_(FindAttribute)( doc, av );
             AddAttrToList( &list, av );
-			if ( !delim && value )
-				 TY_(ReportAttrError)( doc, lexer->token, av, MISSING_QUOTEMARK_OPEN);
+            if ( !delim && value )
+                TY_(ReportAttrError)( doc, lexer->token, av, MISSING_QUOTEMARK_OPEN);
         }
         else
         {

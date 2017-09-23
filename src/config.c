@@ -172,6 +172,9 @@ static PickListItems attributeCasePicks = {
 
 static void AdjustConfig( TidyDocImpl* doc );
 
+/* a space or comma separated list of attribute names */
+static ParseProperty ParseAttribNames;
+
 /* parser for integer values */
 static ParseProperty ParseInt;
 
@@ -277,6 +280,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyPPrintTabs,              PP, "indent-with-tabs",            BL, no,              ParseTabs,         &boolPicks          }, /* 20150515 - Issue #108 */
     { TidyPreserveEntities,        MU, "preserve-entities",           BL, no,              ParsePickList,     &boolPicks          },
     { TidyPreTags,                 MU, "new-pre-tags",                ST, 0,               ParseTagNames,     NULL                },
+    { TidyPriorityAttributes,      MU, "priority-attributes",         ST, 0,               ParseAttribNames,  NULL                },
 #if SUPPORT_ASIAN_ENCODINGS
     { TidyPunctWrap,               PP, "punctuation-wrap",            BL, no,              ParsePickList,     &boolPicks          },
 #endif
@@ -1087,6 +1091,88 @@ void AdjustConfig( TidyDocImpl* doc )
     }
 }
 
+
+/* Coordinates Config update and Attributes data */
+void TY_(DeclarePriorityAttrib)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr name )
+{
+    ctmbstr prvval = cfgStr( doc, optId );
+    tmbstr catval = NULL;
+    ctmbstr theval = name;
+    if ( prvval )
+    {
+        uint len = TY_(tmbstrlen)(name) + TY_(tmbstrlen)(prvval) + 3;
+        catval = TY_(tmbstrndup)( doc->allocator, prvval, len );
+        TY_(tmbstrcat)( catval, ", " );
+        TY_(tmbstrcat)( catval, name );
+        theval = catval;
+    }
+
+    TY_(DefinePriorityAttribute)( doc, name );
+    SetOptionValue( doc, optId, theval );
+    if ( catval )
+        TidyDocFree( doc, catval );
+        }
+
+/* a space or comma separated list of attribute names */
+Bool ParseAttribNames( TidyDocImpl* doc, const TidyOptionImpl* option )
+{
+    TidyConfigImpl* cfg = &doc->config;
+    tmbchar buf[1024];
+    uint i = 0, nAttribs = 0;
+    uint c = SkipWhite( cfg );
+
+
+    SetOptionValue( doc, option->id, NULL );
+
+    do
+    {
+        if (c == ' ' || c == '\t' || c == ',')
+        {
+            c = AdvanceChar( cfg );
+            continue;
+        }
+
+        if ( c == '\r' || c == '\n' )
+        {
+            uint c2 = AdvanceChar( cfg );
+            if ( c == '\r' && c2 == '\n' )
+                c = AdvanceChar( cfg );
+            else
+                c = c2;
+
+            if ( !TY_(IsWhite)(c) )
+            {
+                buf[i] = 0;
+                TY_(UngetChar)( c, cfg->cfgIn );
+                TY_(UngetChar)( '\n', cfg->cfgIn );
+                break;
+            }
+        }
+
+        while ( i < sizeof(buf)-2 && c != EndOfStream && !TY_(IsWhite)(c) && c != ',' )
+        {
+            buf[i++] = (tmbchar) c;
+            c = AdvanceChar( cfg );
+        }
+
+        buf[i] = '\0';
+        if (i == 0)          /* Skip empty attribute definition. Possible when */
+            continue;        /* there is a trailing space on the line. */
+
+        /* add attribute to array */
+        TY_(DeclarePriorityAttrib)( doc, option->id, buf );
+        i = 0;
+        ++nAttribs;
+    }
+    while ( c != EndOfStream );
+
+    if ( i > 0 )
+        TY_(DeclarePriorityAttrib)( doc, option->id, buf );
+
+    return ( nAttribs > 0 );
+}
+
+
 /* unsigned integers */
 Bool ParseInt( TidyDocImpl* doc, const TidyOptionImpl* entry )
 {
@@ -1351,9 +1437,9 @@ Bool ParseTagNames( TidyDocImpl* doc, const TidyOptionImpl* option )
     return ( nTags > 0 );
 }
 
+
 /* a string including whitespace */
 /* munges whitespace sequences */
-
 Bool ParseString( TidyDocImpl* doc, const TidyOptionImpl* option )
 {
     TidyConfigImpl* cfg = &doc->config;

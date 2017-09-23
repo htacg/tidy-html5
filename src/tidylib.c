@@ -2215,8 +2215,7 @@ int         tidyDocSaveStream( TidyDocImpl* doc, StreamOut* out )
     else
         TY_(ReplacePreformattedSpaces)(doc, &doc->root);
 
-    if ( sortAttrStrat != TidySortAttrNone )
-        TY_(SortAttributes)(&doc->root, sortAttrStrat);
+    TY_(SortAttributes)(&doc->root, sortAttrStrat);
 
     if ( showMarkup && (doc->errors == 0 || forceOutput) )
     {

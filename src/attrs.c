@@ -929,6 +929,42 @@ AttVal* TY_(RepairAttrValue)(TidyDocImpl* doc, Node* node, ctmbstr name, ctmbstr
         return TY_(AddAttribute)(doc, node, name, value);
 }
 
+
+void TY_(DefinePriorityAttribute)(TidyDocImpl* doc, ctmbstr name)
+{
+    enum { capacity = 10 };
+    PriorityAttribs *priorities = &(doc->attribs.priorityAttribs);
+
+    /* @TODO: Don't forget to free this stuff */
+    if ( !priorities->list )
+    {
+        priorities->list = malloc( sizeof(ctmbstr) * capacity );
+        priorities->list[0] = NULL;
+        priorities->capacity = capacity;
+        priorities->count = 0;
+    }
+
+    if ( priorities->count >= priorities->capacity )
+    {
+        priorities->capacity = priorities->capacity * 2;
+        priorities->list = realloc( priorities->list, sizeof(tmbstr) * priorities->capacity + 1 );
+    }
+
+    priorities->list[priorities->count] = TY_(tmbstrdup)( doc->allocator, name);
+    priorities->count++;
+    priorities->list[priorities->count] = NULL;
+
+    uint i = 0;
+    while ( priorities->list[i] != NULL )
+    {
+        printf("Array contains %s.\n", priorities->list[i]);
+        i++;
+    }
+
+    printf("Adding %s to list.\n", name);
+}
+
+
 static Bool CheckAttrType( TidyDocImpl* doc,
                            ctmbstr attrname, AttrCheck type )
 {
@@ -2219,25 +2255,85 @@ void TY_(SortAttributes)(Node* node, TidyAttrSortStrategy strat)
 * SOFTWARE.
 */
 
-typedef int(*ptAttValComparator)(AttVal *one, AttVal *two);
+typedef int(*ptAttValComparator)(AttVal *one, AttVal *two, ctmbstr *list);
 
-/* Comparison function for TidySortAttrAlpha */
+/* Returns the index of the item in the array, or -1 if not in the array */
 static
-int AlphaComparator(AttVal *one, AttVal *two)
+int indexof( ctmbstr item, ctmbstr *list )
 {
+    uint i = 0;
+    while ( list[i] != NULL ) {
+        if ( TY_(tmbstrcasecmp)(item, list[i]) == 0 )
+            return i;
+        i++;
+    }
+
+    return -1;
+}
+
+/* Comparison function for TidySortAttrAlpha. Will also consider items in
+   the passed in list as higher-priority, and will group them first.
+ */
+static
+int AlphaComparator(AttVal *one, AttVal *two, ctmbstr *list)
+{
+    int oneIndex = indexof( one->attribute, list );
+    int twoIndex = indexof( two->attribute, list );
+
+    /* If both on the list, the lower index has priority. */
+    if ( oneIndex >= 0 && twoIndex >= 0 )
+        return oneIndex < twoIndex ? -1 : 1;
+
+    /* If A on the list but B not on the list, then A has priority. */
+    if ( oneIndex >= 0 && twoIndex == -1 )
+        return -1;
+
+    /* If A not on the list but B is on the list, then B has priority. */
+    if ( oneIndex == -1 && twoIndex >= 0 )
+        return 1;
+
+    /* Otherwise nothing is on the list, so just compare strings. */
     return TY_(tmbstrcmp)(one->attribute, two->attribute);
+}
+
+
+/* Comparison function for prioritizing list items. It doesn't otherwise
+   sort.
+ */
+static
+int PriorityComparator(AttVal *one, AttVal *two, ctmbstr *list)
+{
+    int oneIndex = indexof( one->attribute, list );
+    int twoIndex = indexof( two->attribute, list );
+
+    /* If both on the list, the lower index has priority. */
+    if ( oneIndex >= 0 && twoIndex >= 0 )
+        return oneIndex < twoIndex ? -1 : 1;
+
+    /* If A on the list but B not on the list, then A has priority. */
+    if ( oneIndex >= 0 && twoIndex == -1 )
+        return -1;
+
+    /* If A not on the list but B is on the list, then B has priority. */
+    if ( oneIndex == -1 && twoIndex >= 0 )
+        return 1;
+
+    /* Otherwise nothing is on the list, so just mark them as the same. */
+    return 0;
 }
 
 
 /* The "factory method" that returns a pointer to the comparator function */
 static
-ptAttValComparator GetAttValComparator(TidyAttrSortStrategy strat)
+ptAttValComparator GetAttValComparator(TidyAttrSortStrategy strat, ctmbstr *list)
 {
     switch (strat)
     {
     case TidySortAttrAlpha:
         return AlphaComparator;
     case TidySortAttrNone:
+        if ( list[0] )
+            return PriorityComparator;
         break;
     }
     return 0;
@@ -2247,7 +2343,13 @@ ptAttValComparator GetAttValComparator(TidyAttrSortStrategy strat)
 static
 AttVal *SortAttVal( AttVal *list, TidyAttrSortStrategy strat)
 {
-    ptAttValComparator ptComparator = GetAttValComparator(strat);
+    /* Get the list from the pass-in tidyDoc, which is a to-do.
+       We'll use this static list temporarily.
+     */
+//    ctmbstr doc[] = { NULL };
+    ctmbstr temp_list[] = { "id", "name", "class", NULL }; /* temp until option */
+
+    ptAttValComparator ptComparator = GetAttValComparator(strat, temp_list);
     AttVal *p, *q, *e, *tail;
     int insize, nmerges, psize, qsize, i;
 
@@ -2257,6 +2359,10 @@ AttVal *SortAttVal( AttVal *list, TidyAttrSortStrategy strat)
     */
     if (!list)
         return NULL;
+
+    /* If no comparator, return the list as is */
+    if (ptComparator == 0)
+        return list;
 
     insize = 1;
 
@@ -2291,7 +2397,7 @@ AttVal *SortAttVal( AttVal *list, TidyAttrSortStrategy strat)
                 } else if (qsize == 0 || !q) {
                     /* q is empty; e must come from p. */
                     e = p; p = p->next; psize--;
-                } else if (ptComparator(p,q) <= 0) {
+                } else if (ptComparator(p,q, temp_list) <= 0) {
                     /* First element of p is lower (or same);
                     * e must come from p. */
                     e = p; p = p->next; psize--;

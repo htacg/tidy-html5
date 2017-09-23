@@ -60,6 +60,12 @@ enum
     ANCHOR_HASH_SIZE=1021u
 };
 
+typedef struct _priorityAttribs {
+    ctmbstr* list;
+    uint count;
+    uint capacity;
+} PriorityAttribs;
+
 struct _TidyAttribImpl
 {
     /* anchor/node lookup */
@@ -67,6 +73,9 @@ struct _TidyAttribImpl
 
     /* Declared literal attributes */
     Attribute* declared_attr_list;
+
+    /* Prioritized list of attributes to write */
+    PriorityAttribs priorityAttribs;
 
 #if ATTRIBUTE_HASH_LOOKUP
     AttrHash*  hashtab[ATTRIBUTE_HASH_SIZE];
@@ -92,6 +101,9 @@ AttVal* TY_(AddAttribute)( TidyDocImpl* doc,
                            Node *node, ctmbstr name, ctmbstr value );
 
 AttVal* TY_(RepairAttrValue)(TidyDocImpl* doc, Node* node, ctmbstr name, ctmbstr value);
+
+/* Add an item to the list of priority attributes to write first. */
+void TY_(DefinePriorityAttribute)(TidyDocImpl* doc, ctmbstr name);
 
 Bool TY_(IsUrl)( TidyDocImpl* doc, ctmbstr attrname );
 

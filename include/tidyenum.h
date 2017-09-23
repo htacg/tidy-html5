@@ -608,6 +608,7 @@ typedef enum
     TidyPPrintTabs,              /**< Indent using tabs istead of spaces */
     TidyPreserveEntities,        /**< Preserve entities */
     TidyPreTags,                 /**< Declared pre tags */
+    TidyPriorityAttributes,      /**< Attributes to place first in an element */
 #if SUPPORT_ASIAN_ENCODINGS
     TidyPunctWrap,               /**< consider punctuation and breaking spaces for wrapping */
 #else

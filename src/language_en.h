@@ -1005,6 +1005,22 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "<br/>"
         "This option is ignored in XML mode. "
     },
+    {/* Important notes for translators:
+      - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+      <br/>.
+      - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+      - Option values should be enclosed in <var></var>.
+      - It's very important that <br/> be self-closing!
+      - The strings "Tidy" and "HTML Tidy" are the program name and must not
+      be translated. */
+        TidyPriorityAttributes,       0,
+        "This option allows prioritizing the writing of attributes in tidied "
+        "documents, allowing them to written before the other attributes of an "
+        "element. For example, you might specify that <var>id</var> and "
+        "<var>name</var> are written before every other attribute. "
+        "<br/>"
+        "This option takes a space or comma separated list of attribute names. "
+    },
 #if SUPPORT_ASIAN_ENCODINGS
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and

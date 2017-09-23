@@ -172,11 +172,11 @@ static PickListItems attributeCasePicks = {
 
 static void AdjustConfig( TidyDocImpl* doc );
 
-/* a space or comma separated list of attribute names */
-static ParseProperty ParseAttribNames;
-
 /* parser for integer values */
 static ParseProperty ParseInt;
+
+/* a space or comma separated list */
+static ParseProperty ParseList;
 
 /* a string excluding whitespace */
 static ParseProperty ParseName;
@@ -280,7 +280,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyPPrintTabs,              PP, "indent-with-tabs",            BL, no,              ParseTabs,         &boolPicks          }, /* 20150515 - Issue #108 */
     { TidyPreserveEntities,        MU, "preserve-entities",           BL, no,              ParsePickList,     &boolPicks          },
     { TidyPreTags,                 MU, "new-pre-tags",                ST, 0,               ParseTagNames,     NULL                },
-    { TidyPriorityAttributes,      MU, "priority-attributes",         ST, 0,               ParseAttribNames,  NULL                },
+    { TidyPriorityAttributes,      MU, "priority-attributes",         ST, 0,               ParseList,         NULL                },
 #if SUPPORT_ASIAN_ENCODINGS
     { TidyPunctWrap,               PP, "punctuation-wrap",            BL, no,              ParsePickList,     &boolPicks          },
 #endif
@@ -1092,7 +1092,9 @@ void AdjustConfig( TidyDocImpl* doc )
 }
 
 
-/* Coordinates Config update and Attributes data */
+/* Coordinates Config update and Attributes data for priority attributes, as
+   a service to ParseList().
+ */
 void TY_(DeclarePriorityAttrib)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr name )
 {
     ctmbstr prvval = cfgStr( doc, optId );
@@ -1114,13 +1116,12 @@ void TY_(DeclarePriorityAttrib)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr n
         }
 
 /* a space or comma separated list of attribute names */
-Bool ParseAttribNames( TidyDocImpl* doc, const TidyOptionImpl* option )
+Bool ParseList( TidyDocImpl* doc, const TidyOptionImpl* option )
 {
     TidyConfigImpl* cfg = &doc->config;
     tmbchar buf[1024];
-    uint i = 0, nAttribs = 0;
+    uint i = 0, nItems = 0;
     uint c = SkipWhite( cfg );
-
 
     SetOptionValue( doc, option->id, NULL );
 
@@ -1160,16 +1161,33 @@ Bool ParseAttribNames( TidyDocImpl* doc, const TidyOptionImpl* option )
             continue;        /* there is a trailing space on the line. */
 
         /* add attribute to array */
-        TY_(DeclarePriorityAttrib)( doc, option->id, buf );
+        switch ( option->id )
+        {
+            case TidyPriorityAttributes:
+                TY_(DeclarePriorityAttrib)( doc, option->id, buf );
+                break;
+
+            default:
+                break;
+        }
+
         i = 0;
-        ++nAttribs;
+        ++nItems;
     }
     while ( c != EndOfStream );
 
     if ( i > 0 )
-        TY_(DeclarePriorityAttrib)( doc, option->id, buf );
+        switch ( option->id )
+        {
+            case TidyPriorityAttributes:
+                TY_(DeclarePriorityAttrib)( doc, option->id, buf );
+                break;
 
-    return ( nAttribs > 0 );
+            default:
+                break;
+        }
+
+    return ( nItems > 0 );
 }
 
 

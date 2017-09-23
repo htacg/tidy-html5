@@ -1172,6 +1172,10 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option specifies that Tidy should sort attributes within an element "
         "using the specified sort algorithm. If set to <var>alpha</var>, the "
         "algorithm is an ascending alphabetic sort. "
+        "<br/>"
+        "When used while sorting with <code>priority-attributes</code>, any "
+        "attribute sorting will take place after the priority attributes have "
+        "been output. "
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and

@@ -576,6 +576,12 @@ static void GetOption(TidyDoc tdoc,    /**< The tidy document. */
             d->vals = "tagX, tagY, ...";
             d->def = NULL;
             break;
+
+        case TidyPriorityAttributes:
+            d->type = "Attributes Names";
+            d->vals = "attributeX, attributeY, ...";
+            d->def = NULL;
+            break;
             
         case TidyCharEncoding:
         case TidyInCharEncoding:

@@ -925,7 +925,7 @@ TIDY_EXPORT TidyIterator TIDY_CALL  tidyOptGetDocLinksList(TidyDoc tdoc,  /**< T
 
 /** Given a valid TidyIterator initiated with tidyOptGetDocLinksList(), returns
  ** a TidyOption instance.
- ** @result Returns in instane of TidyOption.
+ ** @result Returns in instance of TidyOption.
  */
 TIDY_EXPORT TidyOption TIDY_CALL    tidyOptGetNextDocLinks(TidyDoc tdoc,     /**< The tidy document to query. */
                                                            TidyIterator* pos /**< The TidyIterator (initiated with tidyOptGetDocLinksList()) token. */

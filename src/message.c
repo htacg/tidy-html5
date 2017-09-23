@@ -1424,6 +1424,7 @@ static const TidyOptionId TidyNumEntitiesLinks[] =     { TidyDoctype, TidyPreser
 static const TidyOptionId TidyOutCharEncodingLinks[] = { TidyCharEncoding, TidyUnknownOption };
 static const TidyOptionId TidyOutFileLinks[] =         { TidyErrFile, TidyUnknownOption };
 static const TidyOptionId TidyPreTagsLinks[] =         { TidyBlockTags, TidyEmptyTags, TidyInlineTags, TidyUseCustomTags, TidyUnknownOption };
+static const TidyOptionId TidySortAttributesLinks[] =  { TidyPriorityAttributes, TidyUnknownOption };
 static const TidyOptionId TidyUseCustomTagsLinks[] =   { TidyBlockTags, TidyEmptyTags, TidyInlineTags, TidyPreTags, TidyUnknownOption };
 static const TidyOptionId TidyWrapAttValsLinks[] =     { TidyWrapScriptlets, TidyLiteralAttribs, TidyUnknownOption };
 static const TidyOptionId TidyWrapScriptletsLinks[] =  { TidyWrapAttVals, TidyUnknownOption };
@@ -1451,6 +1452,7 @@ static const TidyOptionDoc docs_xrefs[] =
     { TidyOutCharEncoding, TidyOutCharEncodingLinks },
     { TidyOutFile,         TidyOutFileLinks         },
     { TidyPreTags,         TidyPreTagsLinks         },
+    { TidySortAttributes,  TidySortAttributesLinks  },
     { TidyUseCustomTags,   TidyUseCustomTagsLinks   },
     { TidyWrapAttVals,     TidyWrapAttValsLinks     },
     { TidyWrapScriptlets,  TidyWrapScriptletsLinks  },

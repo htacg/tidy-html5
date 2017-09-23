@@ -60,6 +60,13 @@ enum
     ANCHOR_HASH_SIZE=1021u
 };
 
+/* Keeps a list of attributes that are sorted ahead of the others. */
+typedef struct _priorityAttribs {
+    tmbstr* list;
+    uint count;
+    uint capacity;
+} PriorityAttribs;
+
 struct _TidyAttribImpl
 {
     /* anchor/node lookup */
@@ -67,6 +74,9 @@ struct _TidyAttribImpl
 
     /* Declared literal attributes */
     Attribute* declared_attr_list;
+
+    /* Prioritized list of attributes to write */
+    PriorityAttribs priorityAttribs;
 
 #if ATTRIBUTE_HASH_LOOKUP
     AttrHash*  hashtab[ATTRIBUTE_HASH_SIZE];
@@ -92,6 +102,9 @@ AttVal* TY_(AddAttribute)( TidyDocImpl* doc,
                            Node *node, ctmbstr name, ctmbstr value );
 
 AttVal* TY_(RepairAttrValue)(TidyDocImpl* doc, Node* node, ctmbstr name, ctmbstr value);
+
+/* Add an item to the list of priority attributes to write first. */
+void TY_(DefinePriorityAttribute)(TidyDocImpl* doc, ctmbstr name);
 
 Bool TY_(IsUrl)( TidyDocImpl* doc, ctmbstr attrname );
 
@@ -132,13 +145,15 @@ void TY_(FreeAnchors)( TidyDocImpl* doc );
 void TY_(InitAttrs)( TidyDocImpl* doc );
 void TY_(FreeAttrTable)( TidyDocImpl* doc );
 
+void TY_(FreeAttrPriorityList)( TidyDocImpl* doc );
+
 void TY_(AppendToClassAttr)( TidyDocImpl* doc, AttVal *classattr, ctmbstr classname );
 /*
  the same attribute name can't be used
  more than once in each element
 */
 void TY_(RepairDuplicateAttributes)( TidyDocImpl* doc, Node* node, Bool isXml );
-void TY_(SortAttributes)(Node* node, TidyAttrSortStrategy strat);
+void TY_(SortAttributes)(TidyDocImpl* doc, Node* node, TidyAttrSortStrategy strat);
 
 Bool TY_(IsBoolAttribute)( AttVal* attval );
 Bool TY_(attrIsEvent)( AttVal* attval );

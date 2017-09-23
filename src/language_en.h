@@ -1005,6 +1005,22 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "<br/>"
         "This option is ignored in XML mode. "
     },
+    {/* Important notes for translators:
+      - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+      <br/>.
+      - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+      - Option values should be enclosed in <var></var>.
+      - It's very important that <br/> be self-closing!
+      - The strings "Tidy" and "HTML Tidy" are the program name and must not
+      be translated. */
+        TidyPriorityAttributes,       0,
+        "This option allows prioritizing the writing of attributes in tidied "
+        "documents, allowing them to written before the other attributes of an "
+        "element. For example, you might specify that <var>id</var> and "
+        "<var>name</var> are written before every other attribute. "
+        "<br/>"
+        "This option takes a space or comma separated list of attribute names. "
+    },
 #if SUPPORT_ASIAN_ENCODINGS
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -1156,6 +1172,10 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option specifies that Tidy should sort attributes within an element "
         "using the specified sort algorithm. If set to <var>alpha</var>, the "
         "algorithm is an ascending alphabetic sort. "
+        "<br/>"
+        "When used while sorting with <code>priority-attributes</code>, any "
+        "attribute sorting will take place after the priority attributes have "
+        "been output. "
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -1877,6 +1897,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { MISSING_ENDTAG_FOR,           0,   "missing </%s>"                                                           },
     { MISSING_IMAGEMAP,             0,   "%s should use client-side image map"                                     },
     { MISSING_QUOTEMARK,            0,   "%s attribute with missing trailing quote mark"                           },
+    { MISSING_QUOTEMARK_OPEN,       0,   "value for attribute \"%s\" missing quote marks"                          },
     { MISSING_SEMICOLON_NCR,        0,   "numeric character reference \"%s\" doesn't end in ';'"                   },
     { MISSING_SEMICOLON,            0,   "entity \"%s\" doesn't end in ';'"                                        },
     { MISSING_STARTTAG,             0,   "missing <%s>"                                                            },

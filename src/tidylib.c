@@ -181,6 +181,7 @@ void          tidyDocRelease( TidyDocImpl* doc )
 
         TY_(FreeConfig)( doc );
         TY_(FreeAttrTable)( doc );
+        TY_(FreeAttrPriorityList)( doc );
         TY_(FreeTags)( doc );
         /*\ 
          *  Issue #186 - Now FreeNode depend on the doctype, so the lexer is needed
@@ -2215,8 +2216,7 @@ int         tidyDocSaveStream( TidyDocImpl* doc, StreamOut* out )
     else
         TY_(ReplacePreformattedSpaces)(doc, &doc->root);
 
-    if ( sortAttrStrat != TidySortAttrNone )
-        TY_(SortAttributes)(&doc->root, sortAttrStrat);
+    TY_(SortAttributes)(doc, &doc->root, sortAttrStrat);
 
     if ( showMarkup && (doc->errors == 0 || forceOutput) )
     {

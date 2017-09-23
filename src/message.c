@@ -309,6 +309,7 @@ static struct _dispatchTable {
     { MISSING_ENDTAG_FOR,           TidyWarning,     formatStandard          },
     { MISSING_IMAGEMAP,             TidyWarning,     formatAttributeReport   },
     { MISSING_QUOTEMARK,            TidyWarning,     formatAttributeReport   },
+    { MISSING_QUOTEMARK_OPEN,       TidyInfo,        formatAttributeReport   },
     { MISSING_SEMICOLON_NCR,        TidyWarning,     formatStandard          },
     { MISSING_SEMICOLON,            TidyWarning,     formatStandard          },
     { MISSING_STARTTAG,             TidyWarning,     formatStandard          },
@@ -531,6 +532,9 @@ TidyMessageImpl *formatAttributeReport(TidyDocImpl* doc, Node *element, Node *no
 
     switch (code)
     {
+        case MISSING_QUOTEMARK_OPEN:
+            return TY_(tidyMessageCreateWithNode)(doc, node, code, level, name );
+		
         case BACKSLASH_IN_URI:
         case ESCAPED_ILLEGAL_URI:
         case FIXED_BACKSLASH:
@@ -546,14 +550,12 @@ TidyMessageImpl *formatAttributeReport(TidyDocImpl* doc, Node *element, Node *no
         case UNEXPECTED_QUOTEMARK:
         case WHITE_IN_URI:
             return TY_(tidyMessageCreateWithNode)(doc, node, code, level, tagdesc );
-            break;
 
         case ATTRIBUTE_IS_NOT_ALLOWED:
         case JOINING_ATTRIBUTE:
         case MISSING_ATTR_VALUE:
         case PROPRIETARY_ATTRIBUTE:
             return TY_(tidyMessageCreateWithNode)(doc, node, code, level, tagdesc, name );
-            break;
 
         case ATTRIBUTE_VALUE_REPLACED:
         case BAD_ATTRIBUTE_VALUE:
@@ -561,30 +563,25 @@ TidyMessageImpl *formatAttributeReport(TidyDocImpl* doc, Node *element, Node *no
         case INSERTING_AUTO_ATTRIBUTE:
         case INVALID_ATTRIBUTE:
             return TY_(tidyMessageCreateWithNode)(doc, node, code, level, tagdesc, name, value );
-            break;
 
         case MISMATCHED_ATTRIBUTE_ERROR:
         case MISMATCHED_ATTRIBUTE_WARN:
             return TY_(tidyMessageCreateWithNode)(doc, node, code, level, tagdesc, name, HTMLVersion(doc));
-            break;
 
         case ANCHOR_NOT_UNIQUE:
         case ATTR_VALUE_NOT_LCASE:
         case PROPRIETARY_ATTR_VALUE:
         case XML_ID_SYNTAX:
             return TY_(tidyMessageCreateWithNode)(doc, node, code, level, tagdesc, value );
-            break;
 
         case REPEATED_ATTRIBUTE:
             return TY_(tidyMessageCreateWithNode)(doc, node, code, level, tagdesc, value, name );
-            break;
 
         case UNEXPECTED_END_OF_FILE_ATTR:
             /* on end of file adjust reported position to end of input */
             doc->lexer->lines   = doc->docIn->curline;
             doc->lexer->columns = doc->docIn->curcol;
             return TY_(tidyMessageCreateWithLexer)(doc, code, level, tagdesc );
-            break;
     }
 
     return NULL;
@@ -1427,6 +1424,7 @@ static const TidyOptionId TidyNumEntitiesLinks[] =     { TidyDoctype, TidyPreser
 static const TidyOptionId TidyOutCharEncodingLinks[] = { TidyCharEncoding, TidyUnknownOption };
 static const TidyOptionId TidyOutFileLinks[] =         { TidyErrFile, TidyUnknownOption };
 static const TidyOptionId TidyPreTagsLinks[] =         { TidyBlockTags, TidyEmptyTags, TidyInlineTags, TidyUseCustomTags, TidyUnknownOption };
+static const TidyOptionId TidySortAttributesLinks[] =  { TidyPriorityAttributes, TidyUnknownOption };
 static const TidyOptionId TidyUseCustomTagsLinks[] =   { TidyBlockTags, TidyEmptyTags, TidyInlineTags, TidyPreTags, TidyUnknownOption };
 static const TidyOptionId TidyWrapAttValsLinks[] =     { TidyWrapScriptlets, TidyLiteralAttribs, TidyUnknownOption };
 static const TidyOptionId TidyWrapScriptletsLinks[] =  { TidyWrapAttVals, TidyUnknownOption };
@@ -1454,6 +1452,7 @@ static const TidyOptionDoc docs_xrefs[] =
     { TidyOutCharEncoding, TidyOutCharEncodingLinks },
     { TidyOutFile,         TidyOutFileLinks         },
     { TidyPreTags,         TidyPreTagsLinks         },
+    { TidySortAttributes,  TidySortAttributesLinks  },
     { TidyUseCustomTags,   TidyUseCustomTagsLinks   },
     { TidyWrapAttVals,     TidyWrapAttValsLinks     },
     { TidyWrapScriptlets,  TidyWrapScriptletsLinks  },

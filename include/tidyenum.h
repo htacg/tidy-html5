@@ -220,6 +220,7 @@ extern "C" {
     FN(MISSING_ENDTAG_FOR)            \
     FN(MISSING_IMAGEMAP)              \
     FN(MISSING_QUOTEMARK)             \
+    FN(MISSING_QUOTEMARK_OPEN)        \
     FN(MISSING_SEMICOLON_NCR)         \
     FN(MISSING_SEMICOLON)             \
     FN(MISSING_STARTTAG)              \
@@ -607,6 +608,7 @@ typedef enum
     TidyPPrintTabs,              /**< Indent using tabs istead of spaces */
     TidyPreserveEntities,        /**< Preserve entities */
     TidyPreTags,                 /**< Declared pre tags */
+    TidyPriorityAttributes,      /**< Attributes to place first in an element */
 #if SUPPORT_ASIAN_ENCODINGS
     TidyPunctWrap,               /**< consider punctuation and breaking spaces for wrapping */
 #else

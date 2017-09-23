@@ -930,15 +930,31 @@ AttVal* TY_(RepairAttrValue)(TidyDocImpl* doc, Node* node, ctmbstr name, ctmbstr
 }
 
 
+void TY_(FreeAttrPriorityList)( TidyDocImpl* doc )
+{
+    PriorityAttribs *priorities = &(doc->attribs.priorityAttribs);
+
+    if ( priorities->list )
+    {
+        uint i = 0;
+        while ( priorities->list[i] != NULL )
+        {
+            TidyFree( doc->allocator, priorities->list[i] );
+            i++;
+        }
+
+        TidyFree( doc->allocator, priorities->list );
+    }
+}
+
 void TY_(DefinePriorityAttribute)(TidyDocImpl* doc, ctmbstr name)
 {
     enum { capacity = 10 };
     PriorityAttribs *priorities = &(doc->attribs.priorityAttribs);
 
-    /* @TODO: Don't forget to free this stuff */
     if ( !priorities->list )
     {
-        priorities->list = malloc( sizeof(ctmbstr) * capacity );
+        priorities->list = TidyAlloc(doc->allocator, sizeof(ctmbstr) * capacity );
         priorities->list[0] = NULL;
         priorities->capacity = capacity;
         priorities->count = 0;
@@ -953,15 +969,6 @@ void TY_(DefinePriorityAttribute)(TidyDocImpl* doc, ctmbstr name)
     priorities->list[priorities->count] = TY_(tmbstrdup)( doc->allocator, name);
     priorities->count++;
     priorities->list[priorities->count] = NULL;
-
-    uint i = 0;
-    while ( priorities->list[i] != NULL )
-    {
-        printf("Array contains %s.\n", priorities->list[i]);
-        i++;
-    }
-
-    printf("Adding %s to list.\n", name);
 }
 
 
@@ -2210,15 +2217,15 @@ void CheckType( TidyDocImpl* doc, Node *node, AttVal *attval)
 }
 
 static
-AttVal *SortAttVal( AttVal* list, TidyAttrSortStrategy strat );
+AttVal *SortAttVal( TidyDocImpl* doc, AttVal* list, TidyAttrSortStrategy strat );
 
-void TY_(SortAttributes)(Node* node, TidyAttrSortStrategy strat)
+void TY_(SortAttributes)(TidyDocImpl* doc, Node* node, TidyAttrSortStrategy strat)
 {
     while (node)
     {
-        node->attributes = SortAttVal( node->attributes, strat );
+        node->attributes = SortAttVal( doc, node->attributes, strat );
         if (node->content)
-            TY_(SortAttributes)(node->content, strat);
+            TY_(SortAttributes)(doc, node->content, strat);
         node = node->next;
     }
 }
@@ -2261,11 +2268,14 @@ typedef int(*ptAttValComparator)(AttVal *one, AttVal *two, ctmbstr *list);
 static
 int indexof( ctmbstr item, ctmbstr *list )
 {
-    uint i = 0;
-    while ( list[i] != NULL ) {
-        if ( TY_(tmbstrcasecmp)(item, list[i]) == 0 )
-            return i;
-        i++;
+    if ( list )
+    {
+        uint i = 0;
+        while ( list[i] != NULL ) {
+            if ( TY_(tmbstrcasecmp)(item, list[i]) == 0 )
+                return i;
+            i++;
+        }
     }
 
     return -1;
@@ -2332,7 +2342,7 @@ ptAttValComparator GetAttValComparator(TidyAttrSortStrategy strat, ctmbstr *list
     case TidySortAttrAlpha:
         return AlphaComparator;
     case TidySortAttrNone:
-        if ( list[0] )
+        if ( list && list[0] )
             return PriorityComparator;
         break;
     }
@@ -2341,15 +2351,14 @@ ptAttValComparator GetAttValComparator(TidyAttrSortStrategy strat, ctmbstr *list
 
 /* The sort routine */
 static
-AttVal *SortAttVal( AttVal *list, TidyAttrSortStrategy strat)
+AttVal *SortAttVal( TidyDocImpl* doc, AttVal *list, TidyAttrSortStrategy strat)
 {
-    /* Get the list from the pass-in tidyDoc, which is a to-do.
-       We'll use this static list temporarily.
-     */
-//    ctmbstr doc[] = { NULL };
-    ctmbstr temp_list[] = { "id", "name", "class", NULL }; /* temp until option */
+    /* Get the list from the passed-in tidyDoc. */
+//    ctmbstr* priorityList = (ctmbstr*)doc->attribs.priorityAttribs.list;
+//    ctmbstr priorityList[] = { "id", NULL };
+    ctmbstr* priorityList = (ctmbstr*)doc->attribs.priorityAttribs.list;
 
-    ptAttValComparator ptComparator = GetAttValComparator(strat, temp_list);
+    ptAttValComparator ptComparator = GetAttValComparator(strat, priorityList);
     AttVal *p, *q, *e, *tail;
     int insize, nmerges, psize, qsize, i;
 
@@ -2360,7 +2369,7 @@ AttVal *SortAttVal( AttVal *list, TidyAttrSortStrategy strat)
     if (!list)
         return NULL;
 
-    /* If no comparator, return the list as is */
+    /* If no comparator, return the list as-is */
     if (ptComparator == 0)
         return list;
 
@@ -2397,7 +2406,7 @@ AttVal *SortAttVal( AttVal *list, TidyAttrSortStrategy strat)
                 } else if (qsize == 0 || !q) {
                     /* q is empty; e must come from p. */
                     e = p; p = p->next; psize--;
-                } else if (ptComparator(p,q, temp_list) <= 0) {
+                } else if (ptComparator(p,q, priorityList) <= 0) {
                     /* First element of p is lower (or same);
                     * e must come from p. */
                     e = p; p = p->next; psize--;

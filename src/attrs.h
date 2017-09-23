@@ -60,8 +60,9 @@ enum
     ANCHOR_HASH_SIZE=1021u
 };
 
+/* Keeps a list of attributes that are sorted ahead of the others. */
 typedef struct _priorityAttribs {
-    ctmbstr* list;
+    tmbstr* list;
     uint count;
     uint capacity;
 } PriorityAttribs;
@@ -144,13 +145,15 @@ void TY_(FreeAnchors)( TidyDocImpl* doc );
 void TY_(InitAttrs)( TidyDocImpl* doc );
 void TY_(FreeAttrTable)( TidyDocImpl* doc );
 
+void TY_(FreeAttrPriorityList)( TidyDocImpl* doc );
+
 void TY_(AppendToClassAttr)( TidyDocImpl* doc, AttVal *classattr, ctmbstr classname );
 /*
  the same attribute name can't be used
  more than once in each element
 */
 void TY_(RepairDuplicateAttributes)( TidyDocImpl* doc, Node* node, Bool isXml );
-void TY_(SortAttributes)(Node* node, TidyAttrSortStrategy strat);
+void TY_(SortAttributes)(TidyDocImpl* doc, Node* node, TidyAttrSortStrategy strat);
 
 Bool TY_(IsBoolAttribute)( AttVal* attval );
 Bool TY_(attrIsEvent)( AttVal* attval );

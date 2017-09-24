@@ -1,4 +1,4 @@
-﻿#ifndef language_fr_h
+#ifndef language_fr_h
 #define language_fr_h
 /*
  * language_fr.h
@@ -201,7 +201,7 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { TidyFixComments,                               0,        
         "Cette option précise si Tidy doit remplacer les traits d'unions par le caractère <code>=</code> "
         "s'il rencontre des traits-d'unions adjacents. <br/>La valeur par défaut est <var>yes</var>. <br/"
-        ">Cette option est fourni pour les utilisateurs de Cold Fusion qui utilisent la syntaxe de "
+        ">Cette option est fourni pour les utilisateurs de ColdFusion qui utilisent la syntaxe de "
         "commentaire: <code>&lt;!--- ---&gt;</code>. "
     },
     { TidyFixUri,                                    0,        

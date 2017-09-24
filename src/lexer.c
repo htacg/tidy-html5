@@ -2613,6 +2613,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
     Bool isempty = no;
     AttVal *attributes = NULL;
     Node *node;
+    Bool fixComments = cfgBool(doc, TidyFixComments);
 
     /* Lexer->token must be set on return. Nullify it for safety. */
     lexer->token = NULL;
@@ -2772,7 +2773,11 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                             continue;
                         }
 
-                        TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT );
+                        /*
+                           We only print this message if there's a missing
+                           starting hyphen; this comment will be dropped.
+                         */
+                        TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT_DROPPING );
                     }
                     else if (c == 'd' || c == 'D')
                     {
@@ -3045,6 +3050,13 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                     continue;
 
                 c = TY_(ReadChar)(doc->docIn);
+
+                /* Fix hyphens at beginning of tag */
+                if ( c != '-' && fixComments && lexer->txtstart - lexer->txtend == 0 )
+                {
+                    lexer->lexbuf[lexer->lexsize - 1] = '=';
+                }
+
                 TY_(AddCharToLexer)(lexer, c);
 
                 if (c != '-')
@@ -3056,7 +3068,26 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 if (c == '>')
                 {
                     if (badcomment)
-                        TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT );
+                    {
+                        /*
+                           We've got bad comments that we either fixed or
+                           ignored; provide proper user feedback based on
+                           doctype and whether or not we fixed them.
+                         */
+                        if ( (TY_(HTMLVersion)(doc) & HT50) )
+                        {
+                            if ( fixComments )
+                                TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT );
+                            /* Otherwise for HTML5, it's safe to ignore. */
+                        }
+                        else
+                        {
+                            if ( fixComments )
+                                TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT );
+                            else
+                                TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT_WARN );
+                        }
+                    }
 
                     /* do not store closing -- in lexbuf */
                     lexer->lexsize -= 2;
@@ -3089,7 +3120,8 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
 
                 badcomment++;
 
-                if ( cfgBool(doc, TidyFixComments) )
+                /* fix hyphens in the middle */
+                if ( fixComments )
                     lexer->lexbuf[lexer->lexsize - 2] = '=';
 
                 /* if '-' then look for '>' to end the comment */
@@ -3099,8 +3131,9 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                     goto end_comment;
                 }
 
-                /* otherwise continue to look for --> */
-                lexer->lexbuf[lexer->lexsize - 1] = '=';
+                /* fix hyphens end, and continue to look for --> */
+                if ( fixComments )
+                    lexer->lexbuf[lexer->lexsize - 1] = '=';
 
                 /* http://tidy.sf.net/bug/1266647 */
                 TY_(AddCharToLexer)(lexer, c);
@@ -3482,7 +3515,10 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
     else if (lexer->state == LEX_COMMENT) /* comment */
     {
         if (c == EndOfStream)
-            TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT );
+        {
+            /* We print this if we reached end of the stream mid-comment. */
+            TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT_EOS );
+        }
 
         lexer->txtend = lexer->lexsize;
         lexer->lexbuf[lexer->lexsize] = '\0';

@@ -476,10 +476,12 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option specifies if Tidy should replace unexpected hyphens with "
         "<code>=</code> characters when it comes across adjacent hyphens. "
         "<br/>"
-        "The default is <var>yes</var>. "
+        "The default is <var>no</var>. "
         "<br/>"
-        "This option is provided for users of Cold Fusion which uses the "
-        "comment syntax: <code>&lt;!--- ---&gt;</code>. "
+        "HTML has abandonded SGML comment syntax, and allows adjacent hypens "
+        "for all versions of HTML, although XML and XHTML do not. If you plan "
+        "to support older browsers that require SGML comment syntax, then "
+        "consider setting this value to <var>yes</var>."
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -1886,7 +1888,10 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { INVALID_UTF16,                0,   "%s invalid UTF-16 surrogate pair (char. code %s)"                        },
     { INVALID_XML_ID,               0,   "%s cannot copy name attribute to id"                                     },
     { JOINING_ATTRIBUTE,            0,   "%s joining values of repeated attribute \"%s\""                          },
-    { MALFORMED_COMMENT,            0,   "adjacent hyphens within comment"                                         },
+    { MALFORMED_COMMENT,            0,   "tidy replaced adjacent \"-\" with \"=\""                                 },
+    { MALFORMED_COMMENT_DROPPING,   0,   "dropping a possible comment due to a missing hyphen"                     },
+    { MALFORMED_COMMENT_EOS,        0,   "the end of the document was reached before the end of the comment"       },
+    { MALFORMED_COMMENT_WARN,       0,   "detected adjacent hyphens within the comment; consider fix-bad-comments" },
     { MALFORMED_DOCTYPE,            0,   "discarding malformed <!DOCTYPE>"                                         },
     { MISMATCHED_ATTRIBUTE_ERROR,   0,   "%s attribute \"%s\" not allowed for %s"                                  },
     { MISMATCHED_ATTRIBUTE_WARN,    0,   "%s attribute \"%s\" not allowed for %s"                                  },

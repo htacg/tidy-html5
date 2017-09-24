@@ -298,7 +298,10 @@ static struct _dispatchTable {
     { INVALID_UTF16,                TidyWarning,     formatEncodingReport    },
     { INVALID_XML_ID,               TidyWarning,     formatAttributeReport   },
     { JOINING_ATTRIBUTE,            TidyWarning,     formatAttributeReport   },
-    { MALFORMED_COMMENT,            TidyWarning,     formatStandard          },
+    { MALFORMED_COMMENT,            TidyInfo,        formatStandard          },
+    { MALFORMED_COMMENT_EOS,        TidyError,       formatStandard          },
+    { MALFORMED_COMMENT_DROPPING,   TidyWarning,     formatStandard          },
+    { MALFORMED_COMMENT_WARN,       TidyWarning,     formatStandard          },
     { MALFORMED_DOCTYPE,            TidyWarning,     formatStandard          },
     { MISMATCHED_ATTRIBUTE_ERROR,   TidyError,       formatAttributeReport   },
     { MISMATCHED_ATTRIBUTE_WARN,    TidyWarning,     formatAttributeReport   },
@@ -777,6 +780,9 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
         case DOCTYPE_AFTER_TAGS:
         case DUPLICATE_FRAMESET:
         case MALFORMED_COMMENT:
+        case MALFORMED_COMMENT_DROPPING:
+        case MALFORMED_COMMENT_EOS:
+        case MALFORMED_COMMENT_WARN:
         case MALFORMED_DOCTYPE:
         case MISSING_DOCTYPE:
         case MISSING_TITLE_ELEMENT:

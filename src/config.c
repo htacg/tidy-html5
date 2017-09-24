@@ -241,7 +241,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyEscapeCdata,             MU, "escape-cdata",                BL, no,              ParsePickList,     &boolPicks          },
     { TidyEscapeScripts,           PP, "escape-scripts",              BL, yes,             ParsePickList,     &boolPicks          }, /* 20160227 - Issue #348 */
     { TidyFixBackslash,            MU, "fix-backslash",               BL, yes,             ParsePickList,     &boolPicks          },
-    { TidyFixComments,             MU, "fix-bad-comments",            BL, yes,             ParsePickList,     &boolPicks          },
+    { TidyFixComments,             MU, "fix-bad-comments",            BL, no,              ParsePickList,     &boolPicks          },
     { TidyFixUri,                  MU, "fix-uri",                     BL, yes,             ParsePickList,     &boolPicks          },
     { TidyForceOutput,             MS, "force-output",                BL, no,              ParsePickList,     &boolPicks          },
     { TidyGDocClean,               MU, "gdoc",                        BL, no,              ParsePickList,     &boolPicks          },

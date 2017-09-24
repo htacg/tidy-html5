@@ -210,6 +210,9 @@ extern "C" {
     FN(INVALID_XML_ID)                \
     FN(JOINING_ATTRIBUTE)             \
     FN(MALFORMED_COMMENT)             \
+    FN(MALFORMED_COMMENT_DROPPING)    \
+    FN(MALFORMED_COMMENT_EOS)         \
+    FN(MALFORMED_COMMENT_WARN)        \
     FN(MALFORMED_DOCTYPE)             \
     FN(MISMATCHED_ATTRIBUTE_ERROR)    \
     FN(MISMATCHED_ATTRIBUTE_WARN)     \

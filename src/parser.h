@@ -18,7 +18,7 @@ Bool TY_(TextNodeEndWithSpace)( Lexer *lexer, Node *node );
  used to determine how attributes
  without values should be printed
  this was introduced to deal with
- user defined tags e.g. Cold Fusion
+ user defined tags e.g. ColdFusion
 */
 Bool TY_(IsNewNode)(Node *node);
 

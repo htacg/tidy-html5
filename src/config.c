@@ -59,9 +59,9 @@ static PickListItems boolPicks = {
 };
 
 static PickListItems autoBoolPicks = {
-    { "no",   TidyNoState,  { "0", "n", "f", "no",  "false", NULL } },
-    { "yes",  TidyYesState, { "1", "y", "t", "yes", "true",  NULL } },
-    { "auto", TidyYesState, { "auto",                        NULL } },
+    { "no",   TidyNoState,   { "0", "n", "f", "no",  "false", NULL } },
+    { "yes",  TidyYesState,  { "1", "y", "t", "yes", "true",  NULL } },
+    { "auto", TidyAutoState, { "auto",                        NULL } },
     { NULL }
 };
 
@@ -241,7 +241,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyEscapeCdata,             MU, "escape-cdata",                BL, no,              ParsePickList,     &boolPicks          },
     { TidyEscapeScripts,           PP, "escape-scripts",              BL, yes,             ParsePickList,     &boolPicks          }, /* 20160227 - Issue #348 */
     { TidyFixBackslash,            MU, "fix-backslash",               BL, yes,             ParsePickList,     &boolPicks          },
-    { TidyFixComments,             MU, "fix-bad-comments",            BL, no,              ParsePickList,     &boolPicks          },
+    { TidyFixComments,             MU, "fix-bad-comments",            IN, TidyAutoState,   ParsePickList,     &autoBoolPicks      },
     { TidyFixUri,                  MU, "fix-uri",                     BL, yes,             ParsePickList,     &boolPicks          },
     { TidyForceOutput,             MS, "force-output",                BL, no,              ParsePickList,     &boolPicks          },
     { TidyGDocClean,               MU, "gdoc",                        BL, no,              ParsePickList,     &boolPicks          },

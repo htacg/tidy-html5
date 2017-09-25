@@ -2613,7 +2613,22 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
     Bool isempty = no;
     AttVal *attributes = NULL;
     Node *node;
-    Bool fixComments = cfgBool(doc, TidyFixComments);
+    Bool fixComments;
+    
+    switch ( cfgAutoBool(doc, TidyFixComments) )
+    {
+        case TidyYesState:
+            fixComments = yes;
+            break;
+
+        case TidyNoState:
+            fixComments = no;
+            break;
+
+        default:
+            fixComments = (TY_(HTMLVersion)(doc) & HT50) == 0;
+            break;
+    }
 
     /* Lexer->token must be set on return. Nullify it for safety. */
     lexer->token = NULL;

@@ -3052,7 +3052,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 c = TY_(ReadChar)(doc->docIn);
 
                 /* Fix hyphens at beginning of tag */
-                if ( c != '-' && fixComments && lexer->txtstart - lexer->txtend == 0 )
+                if ( c != '-' && fixComments && lexer->lexsize - lexer->txtstart == 1 )
                 {
                     lexer->lexbuf[lexer->lexsize - 1] = '=';
                 }

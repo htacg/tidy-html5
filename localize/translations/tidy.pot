@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-09-28 13:24:51\n"
+"POT-Creation-Date: 2017-09-29 10:42:01\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -2480,7 +2480,7 @@ msgid "unknown option: %s"
 msgstr ""
 
 msgctxt "SUSPECTED_MISSING_QUOTE"
-msgid "missing quote mark for attribute value"
+msgid "suspected missing quote mark for attribute value"
 msgstr ""
 
 #, c-format

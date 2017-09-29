@@ -122,27 +122,28 @@ extern "C" {
  ** than the short report.
  */
 #define FOREACH_FOOTNOTE_MSG(FN) \
-/** Explanatory text. */           FN(TEXT_ACCESS_ADVICE1)        \
-/** Explanatory text. */           FN(TEXT_ACCESS_ADVICE2)        \
-/** Explanatory text. */           FN(TEXT_BAD_FORM)              \
-/** Explanatory text. */           FN(TEXT_BAD_MAIN)              \
-/** Explanatory text. */           FN(TEXT_HTML_T_ALGORITHM)      \
-/** Explanatory text. */           FN(TEXT_INVALID_URI)           \
-/** Explanatory text. */           FN(TEXT_INVALID_UTF16)         \
-/** Explanatory text. */           FN(TEXT_INVALID_UTF8)          \
-/** Explanatory text. */           FN(TEXT_M_IMAGE_ALT)           \
-/** Explanatory text. */           FN(TEXT_M_IMAGE_MAP)           \
-/** Explanatory text. */           FN(TEXT_M_LINK_ALT)            \
-/** Explanatory text. */           FN(TEXT_M_SUMMARY)             \
-/** Explanatory text. */           FN(TEXT_SGML_CHARS)            \
-/** Explanatory text. */           FN(TEXT_USING_BODY)            \
-/** Explanatory text. */           FN(TEXT_USING_FONT)            \
-/** Explanatory text. */           FN(TEXT_USING_FRAMES)          \
-/** Explanatory text. */           FN(TEXT_USING_LAYER)           \
-/** Explanatory text. */           FN(TEXT_USING_NOBR)            \
-/** Explanatory text. */           FN(TEXT_USING_SPACER)          \
-/** Explanatory text. */           FN(TEXT_VENDOR_CHARS)          \
-/** Explanatory text. */           FN(TEXT_WINDOWS_CHARS)
+    FN(FOOTNOTE_TRIM_EMPTY_ELEMENT) \
+    FN(TEXT_ACCESS_ADVICE1)         \
+    FN(TEXT_ACCESS_ADVICE2)         \
+    FN(TEXT_BAD_FORM)               \
+    FN(TEXT_BAD_MAIN)               \
+    FN(TEXT_HTML_T_ALGORITHM)       \
+    FN(TEXT_INVALID_URI)            \
+    FN(TEXT_INVALID_UTF16)          \
+    FN(TEXT_INVALID_UTF8)           \
+    FN(TEXT_M_IMAGE_ALT)            \
+    FN(TEXT_M_IMAGE_MAP)            \
+    FN(TEXT_M_LINK_ALT)             \
+    FN(TEXT_M_SUMMARY)              \
+    FN(TEXT_SGML_CHARS)             \
+    FN(TEXT_USING_BODY)             \
+    FN(TEXT_USING_FONT)             \
+    FN(TEXT_USING_FRAMES)           \
+    FN(TEXT_USING_LAYER)            \
+    FN(TEXT_USING_NOBR)             \
+    FN(TEXT_USING_SPACER)           \
+    FN(TEXT_VENDOR_CHARS)           \
+    FN(TEXT_WINDOWS_CHARS)
 
 
 /** These messages are used to generate additional dialogue style output from

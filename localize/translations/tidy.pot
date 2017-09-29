@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-09-28 13:24:51\n"
+"POT-Creation-Date: 2017-09-29 11:24:53\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -1978,6 +1978,15 @@ msgid ""
 "people who are either blind or using a browser that\n"
 "doesn't support frames. A frames-based page should always\n"
 "include an alternative layout inside a NOFRAMES element.\n"
+msgstr ""
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "FOOTNOTE_TRIM_EMPTY_ELEMENT"
+msgid ""
+"One or more empty elements were present in the source document but\n"
+"dropped on output. If these elements are necessary or you don't want\n"
+"this behavior, then consider setting the option \"drop-empty-elements\"\n"
+"to no.\n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.

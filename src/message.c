@@ -1001,35 +1001,38 @@ static struct _dialogueDispatchTable {
     uint code;                 /**< The message code. */
     TidyReportLevel level;     /**< The default TidyReportLevel of the message. */
 } dialogueDispatchTable[] = {
-    { STRING_HELLO_ACCESS,       TidyDialogueInfo     }, /* AccessibilityChecks() */
-    { TEXT_GENERAL_INFO,         TidyDialogueInfo     }, /* tidyGeneralInfo() */
-    { TEXT_GENERAL_INFO_PLEA,    TidyDialogueInfo     }, /* tidyGeneralInfo() */
+    { STRING_HELLO_ACCESS,         TidyDialogueInfo     }, /* AccessibilityChecks() */
+    { TEXT_GENERAL_INFO,           TidyDialogueInfo     }, /* tidyGeneralInfo() */
+    { TEXT_GENERAL_INFO_PLEA,      TidyDialogueInfo     }, /* tidyGeneralInfo() */
     
-    { STRING_NEEDS_INTERVENTION, TidyDialogueSummary  }, /* tidyDocRunDiagnostics() */
-    { STRING_ERROR_COUNT,        TidyDialogueSummary  }, /* ReportNumWarnings() */
-    { STRING_NO_ERRORS,          TidyDialogueSummary  }, /* ReportNumWarnings() */
-    { STRING_NOT_ALL_SHOWN,      TidyDialogueSummary  }, /* ReportNumWarnings() */
+    { STRING_NEEDS_INTERVENTION,   TidyDialogueSummary  }, /* tidyDocRunDiagnostics() */
+    { STRING_ERROR_COUNT,          TidyDialogueSummary  }, /* ReportNumWarnings() */
+    { STRING_NO_ERRORS,            TidyDialogueSummary  }, /* ReportNumWarnings() */
+    { STRING_NOT_ALL_SHOWN,        TidyDialogueSummary  }, /* ReportNumWarnings() */
     
-    { TEXT_ACCESS_ADVICE1,       TidyDialogueFootnote }, /* errorSummary() */
-    { TEXT_ACCESS_ADVICE2,       TidyDialogueFootnote },
-    { TEXT_BAD_FORM,             TidyDialogueFootnote },
-    { TEXT_BAD_MAIN,             TidyDialogueFootnote },
-    { TEXT_HTML_T_ALGORITHM,     TidyDialogueFootnote },
-    { TEXT_INVALID_URI,          TidyDialogueFootnote },
-    { TEXT_INVALID_UTF8,         TidyDialogueFootnote },
-    { TEXT_INVALID_UTF16,        TidyDialogueFootnote },
-    { TEXT_M_IMAGE_ALT,          TidyDialogueFootnote },
-    { TEXT_M_IMAGE_MAP,          TidyDialogueFootnote },
-    { TEXT_M_LINK_ALT,           TidyDialogueFootnote },
-    { TEXT_M_SUMMARY,            TidyDialogueFootnote },
-    { TEXT_SGML_CHARS,           TidyDialogueFootnote },
-    { TEXT_USING_BODY,           TidyDialogueFootnote },
-    { TEXT_USING_FONT,           TidyDialogueFootnote },
-    { TEXT_USING_FRAMES,         TidyDialogueFootnote },
-    { TEXT_USING_LAYER,          TidyDialogueFootnote },
-    { TEXT_USING_NOBR,           TidyDialogueFootnote },
-    { TEXT_USING_SPACER,         TidyDialogueFootnote },
-    { TEXT_VENDOR_CHARS,         TidyDialogueFootnote },
+    { FOOTNOTE_TRIM_EMPTY_ELEMENT, TidyDialogueFootnote },
+    { TEXT_ACCESS_ADVICE1,         TidyDialogueFootnote }, /* errorSummary() */
+    { TEXT_ACCESS_ADVICE2,         TidyDialogueFootnote },
+    { TEXT_BAD_FORM,               TidyDialogueFootnote },
+    { TEXT_BAD_MAIN,               TidyDialogueFootnote },
+    { TEXT_HTML_T_ALGORITHM,       TidyDialogueFootnote },
+    { TEXT_INVALID_URI,            TidyDialogueFootnote },
+    { TEXT_INVALID_UTF8,           TidyDialogueFootnote },
+    { TEXT_INVALID_UTF16,          TidyDialogueFootnote },
+    { TEXT_M_IMAGE_ALT,            TidyDialogueFootnote },
+    { TEXT_M_IMAGE_MAP,            TidyDialogueFootnote },
+    { TEXT_M_LINK_ALT,             TidyDialogueFootnote },
+    { TEXT_M_SUMMARY,              TidyDialogueFootnote },
+    { TEXT_SGML_CHARS,             TidyDialogueFootnote },
+    { TEXT_USING_BODY,             TidyDialogueFootnote },
+    { TEXT_USING_FONT,             TidyDialogueFootnote },
+    { TEXT_USING_FRAMES,           TidyDialogueFootnote },
+    { TEXT_USING_LAYER,            TidyDialogueFootnote },
+    { TEXT_USING_NOBR,             TidyDialogueFootnote },
+    { TEXT_USING_SPACER,           TidyDialogueFootnote },
+    { TEXT_VENDOR_CHARS,           TidyDialogueFootnote },
+    
+    { 0, 0 }
 };
 
 
@@ -1054,6 +1057,7 @@ TidyMessageImpl *formatDialogue( TidyDocImpl* doc, uint code, TidyReportLevel le
                                            doc->warnings, tidyLocalizedStringN( STRING_ERROR_COUNT_WARNING, doc->warnings ),
                                            doc->errors, tidyLocalizedStringN( STRING_ERROR_COUNT_ERROR, doc->errors ) );
 
+        case FOOTNOTE_TRIM_EMPTY_ELEMENT:
         case STRING_HELLO_ACCESS:
         case STRING_NEEDS_INTERVENTION:
         case STRING_NO_ERRORS:
@@ -1222,6 +1226,13 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
         if (doc->badLayout & USING_BODY)
             TY_(Dialogue)( doc, TEXT_USING_BODY );
     }
+    
+    if (doc->footnotes)
+    {
+        if (doc->footnotes & FN_TRIM_EMPTY_ELEMENT)
+            TY_(Dialogue)( doc, FOOTNOTE_TRIM_EMPTY_ELEMENT );
+    }
+
 }
 
 

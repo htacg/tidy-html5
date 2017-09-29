@@ -1041,6 +1041,7 @@ typedef enum
   TidyAttr_DEFER,                  /**< DEFER= */
   TidyAttr_DIR,                    /**< DIR= */
   TidyAttr_DISABLED,               /**< DISABLED= */
+  TidyAttr_DOWNLOAD,               /**< DOWNLOAD= */
   TidyAttr_ENCODING,               /**< ENCODING= */
   TidyAttr_ENCTYPE,                /**< ENCTYPE= */
   TidyAttr_FACE,                   /**< FACE= */

@@ -1902,7 +1902,9 @@ void TY_(CleanWord2000)( TidyDocImpl* doc, Node *node)
             attval = node->attributes;
             while ( attval ) {
                 next_attr = attval->next;
-                if ( strcmp(attval->attribute, "xmlns") != 0 )
+
+                /* Issue #591 - take care of a NULL attribute, too. */
+                if ( !attval->attribute || ( strcmp(attval->attribute, "xmlns") != 0 ))
                     TY_(ReportAttrError)(doc, node, attval, PROPRIETARY_ATTRIBUTE);
                 attval = next_attr;
             }

@@ -221,6 +221,7 @@ extern "C" {
     FN(MISSING_DOCTYPE)               \
     FN(MISSING_ENDTAG_BEFORE)         \
     FN(MISSING_ENDTAG_FOR)            \
+    FN(MISSING_ENDTAG_OPTIONAL)       \
     FN(MISSING_IMAGEMAP)              \
     FN(MISSING_QUOTEMARK)             \
     FN(MISSING_QUOTEMARK_OPEN)        \

@@ -310,6 +310,7 @@ static struct _dispatchTable {
     { MISSING_DOCTYPE,              TidyWarning,     formatStandard          },
     { MISSING_ENDTAG_BEFORE,        TidyWarning,     formatStandard          },
     { MISSING_ENDTAG_FOR,           TidyWarning,     formatStandard          },
+    { MISSING_ENDTAG_OPTIONAL,      TidyInfo,        formatStandard          },
     { MISSING_IMAGEMAP,             TidyWarning,     formatAttributeReport   },
     { MISSING_QUOTEMARK,            TidyWarning,     formatAttributeReport   },
     { MISSING_QUOTEMARK_OPEN,       TidyInfo,        formatAttributeReport   },
@@ -814,6 +815,7 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
             return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, nodedesc );
 
         case MISSING_ENDTAG_FOR:
+        case MISSING_ENDTAG_OPTIONAL:
         case PREVIOUS_LOCATION:
             return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, element->element );
 

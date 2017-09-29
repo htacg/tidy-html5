@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-09-28 13:24:51\n"
+"POT-Creation-Date: 2017-09-29 14:48:34\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -2356,6 +2356,11 @@ msgstr ""
 #, c-format
 msgctxt "MISSING_ENDTAG_FOR"
 msgid "missing </%s>"
+msgstr ""
+
+#, c-format
+msgctxt "MISSING_ENDTAG_OPTIONAL"
+msgid "missing optional end tag </%s>"
 msgstr ""
 
 #, c-format

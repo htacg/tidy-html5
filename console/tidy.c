@@ -862,7 +862,7 @@ static void help(TidyDoc tdoc, /**< The tidy document for which help is showing.
                  ctmbstr prog  /**< The path of the current executable. */
                  )
 {
-    tmbstr title_line = NULL;
+    tmbstr temp_string = NULL;
     uint width = 78;
 
     printf("\n");
@@ -870,19 +870,26 @@ static void help(TidyDoc tdoc, /**< The tidy document for which help is showing.
     printf("\n");
 
 #ifdef PLATFORM_NAME
-    title_line = stringWithFormat( tidyLocalizedString(TC_TXT_HELP_2A), PLATFORM_NAME);
+    temp_string = stringWithFormat( tidyLocalizedString(TC_TXT_HELP_2A), PLATFORM_NAME);
 #else
     title_line = stringWithFormat( tidyLocalizedString(TC_TXT_HELP_2B) );
 #endif
-    width = width < strlen(title_line) ? width : strlen(title_line);
-    printf( "%s\n", title_line );
+    width = width < strlen(temp_string) ? width : strlen(temp_string);
+    printf( "%s\n", temp_string );
     printf( "%*.*s\n\n", width, width, ul);
-    free( title_line );
+    free( temp_string );
 
     print_help_options( tdoc );
 
+
     printf("\n");
-    printf( "%s", tidyLocalizedString(TC_TXT_HELP_3) );
+#if defined(TIDY_CONFIG_FILE) && defined(TIDY_USER_CONFIG_FILE)
+    temp_string = stringWithFormat( tidyLocalizedString(TC_TXT_HELP_3A), TIDY_CONFIG_FILE, TIDY_USER_CONFIG_FILE );
+    printf( tidyLocalizedString(TC_TXT_HELP_3), temp_string );
+    free( temp_string );
+#else
+    printf( tidyLocalizedString(TC_TXT_HELP_3), "\n" );
+#endif
     printf("\n");
 }
 

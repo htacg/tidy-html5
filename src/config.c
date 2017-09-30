@@ -722,7 +722,7 @@ static ctmbstr ExpandTilde( TidyDocImpl* doc, ctmbstr filename )
         while ( *s && *s != '/' )
             s++;
 
-        if ( t = TidyDocAlloc(doc, s - filename) )
+        if ( (t = TidyDocAlloc(doc, s - filename)) )
         {
             memcpy(t, filename+1, s-filename-1);
             t[s-filename-1] = 0;

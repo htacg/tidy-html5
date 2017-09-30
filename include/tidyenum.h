@@ -486,6 +486,7 @@ extern "C" {
         FN(TC_TXT_HELP_2A)                  \
         FN(TC_TXT_HELP_2B)                  \
         FN(TC_TXT_HELP_3)                   \
+        FN(TC_TXT_HELP_3A)                  \
         FN(TC_TXT_HELP_CONFIG)              \
         FN(TC_TXT_HELP_CONFIG_NAME)         \
         FN(TC_TXT_HELP_CONFIG_TYPE)         \

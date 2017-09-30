@@ -1,17 +1,32 @@
 #ifndef __TIDY_PLATFORM_H__
 #define __TIDY_PLATFORM_H__
 
-/** @file tidyplatform.h - Platform specifics
-
-  (c) 1998-2016 (W3C) MIT, ERCIM, Keio University
-  See tidy.h for the copyright notice.
-  
-  This file is included by tidy.h, and need not 
-  be included sepearately. It sets a number of 
-  default defines, and a PLATFORM_NAME, and includes
-  the most common system headers.
-
-*/
+/**************************************************************************//**
+ * @file
+ * Platform specific definitions, specifics, and headers. This file is
+ * included by `tidy.h` already, and need not be included separately. Among
+ * other things, the PLATFORM_NAME is defined and the most common systems
+ * headers are included.
+ *
+ * @note It should be largely unnecessary to modify this file unless adding
+ * support for a completely new architecture. Most options defined in this
+ * file specify defaults that can be overriden by the build system; for
+ * example, passing -D flags to CMake.
+ *
+ * @author  Charles Reitzel [creitzel@rcn.com]
+ * @author  HTACG, et al (consult git log)
+ *
+ * @copyright
+ *     Copyright (c) 1998-2017 World Wide Web Consortium (Massachusetts
+ *     Institute of Technology, European Research Consortium for Informatics
+ *     and Mathematics, Keio University).
+ * @copyright
+ *     See tidy.h for license.
+ *
+ * @date      Created 2001-05-20 by Charles Reitzel
+ * @date      Updated 2002-07-01 by Charles Reitzel
+ * @date      Further modifications: consult git log.
+ ******************************************************************************/
 
 #ifdef __cplusplus
 extern "C" {

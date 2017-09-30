@@ -1,15 +1,25 @@
 #ifndef __TIDY_BUFFIO_H__
 #define __TIDY_BUFFIO_H__
 
-/** @file tidybuffio.h - Treat buffer as an I/O stream.
-
-  (c) 1998-2016 (W3C) MIT, ERCIM, Keio University
-  See tidy.h for the copyright notice.
-
-  Requires buffer to automatically grow as bytes are added.
-  Must keep track of current read and write points.
-
-*/
+/**************************************************************************//**
+ * @file
+ * Treat buffer as a stream that Tidy can use for I/O operations. It offers
+ * the ability for the buffer to grow as bytes are added, and keeps track
+ * of current read and write points.
+ *
+ * @author
+ *     HTACG, et al (consult git log)
+ *
+ * @copyright
+ *     Copyright (c) 1998-2017 World Wide Web Consortium (Massachusetts
+ *     Institute of Technology, European Research Consortium for Informatics
+ *     and Mathematics, Keio University).
+ * @copyright
+ *     See tidy.h for license.
+ *
+ * @date
+ *     Consult git log.
+ ******************************************************************************/
 
 #include "tidyplatform.h"
 #include "tidy.h"

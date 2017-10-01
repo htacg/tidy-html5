@@ -449,6 +449,8 @@ extern "C" {
         FN(TC_OPT_RAW)                      \
         FN(TC_OPT_SHIFTJIS)                 \
         FN(TC_OPT_SHOWCFG)                  \
+        FN(TC_OPT_EXP_CFG)                  \
+        FN(TC_OPT_EXP_DEF)                  \
         FN(TC_OPT_UPPER)                    \
         FN(TC_OPT_UTF16)                    \
         FN(TC_OPT_UTF16BE)                  \

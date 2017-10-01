@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-10-01 19:19:32\n"
+"POT-Creation-Date: 2017-10-01 19:49:27\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -3211,6 +3211,14 @@ msgstr ""
 
 msgctxt "TC_OPT_SHOWCFG"
 msgid "list the current configuration settings"
+msgstr ""
+
+msgctxt "TC_OPT_EXP_CFG"
+msgid "list the current configuration settings, suitable for a config file"
+msgstr ""
+
+msgctxt "TC_OPT_EXP_DEF"
+msgid "list the default configuration settings, suitable for a config file"
 msgstr ""
 
 msgctxt "TC_OPT_UPPER"

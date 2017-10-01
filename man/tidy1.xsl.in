@@ -160,6 +160,11 @@ since you will probably invoke \fBtidy\fR from different directories.
 The value of HTML_TIDY will be parsed after the compiled-in default
 (defined with -DTIDY_CONFIG_FILE), but before any of the files specified
 using \fB-config\fR.
+.TP
+.B RUNTIME CONFIGURATION FILES
+In general, Unix-like systems support runtime configuration files. Use
+\fBtidy -help-env\fR to see if your version of \fBtidy\fR supports them, and
+where they are expected to be on your system.
 .SH "EXIT STATUS"
 .IP 0
 All input files were processed successfully.

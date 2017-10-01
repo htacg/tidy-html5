@@ -2108,6 +2108,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TC_OPT_GDOC,                  0,   "produce clean version of html exported by Google Docs"                   },
     { TC_OPT_HELP,                  0,   "list the command line options"                                           },
     { TC_OPT_HELPCFG,               0,   "list all configuration options"                                          },
+    { TC_OPT_HELPENV,               0,   "show information about the environment and runtime configuration"        },
     { TC_OPT_HELPOPT,               0,   "show a description of the <option>"                                      },
     { TC_OPT_IBM858,                0,   "use IBM-858 (CP850+Euro) for input, US-ASCII for output"                 },
     { TC_OPT_INDENT,                0,   "indent element content"                                                  },

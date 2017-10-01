@@ -388,6 +388,7 @@ static const CmdOptDesc cmdopt_defs[] =  {
     { CmdOptMisc,      "-version",             TC_OPT_VERSION,  0,             NULL,  "-v" },
     { CmdOptMisc,      "-help",                TC_OPT_HELP,     0,             NULL,  "-h", "-?" },
     { CmdOptMisc,      "-help-config",         TC_OPT_HELPCFG,  0,             NULL },
+    { CmdOptMisc,      "-help-env",            TC_OPT_HELPENV,  0,             NULL },
     { CmdOptMisc,      "-show-config",         TC_OPT_SHOWCFG,  0,             NULL },
     { CmdOptMisc,      "-help-option <%s>",    TC_OPT_HELPOPT,  TC_LABEL_OPT,  NULL },
     { CmdOptMisc,      "-language <%s>",       TC_OPT_LANGUAGE, TC_LABEL_LANG, "language: <%s>" },

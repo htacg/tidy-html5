@@ -432,6 +432,7 @@ extern "C" {
         FN(TC_OPT_GDOC)                     \
         FN(TC_OPT_HELP)                     \
         FN(TC_OPT_HELPCFG)                  \
+        FN(TC_OPT_HELPENV)                  \
         FN(TC_OPT_HELPOPT)                  \
         FN(TC_OPT_IBM858)                   \
         FN(TC_OPT_INDENT)                   \

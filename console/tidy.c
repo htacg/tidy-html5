@@ -1011,7 +1011,45 @@ static void optionhelp( TidyDoc tdoc )
 }
 
 
-/** @} end service_lang_help group */
+/** @} end service_help_config group */
+/* MARK: - Provide the -help-env Service */
+/***************************************************************************//**
+ ** @defgroup service_help_env Provide the -help-env Service
+ *******************************************************************************
+ ** @{
+ */
+
+
+/** Handles the -help-env service.
+ ** @param tdoc The Tidy document.
+ */
+static void helpEnv( TidyDoc tdoc )
+{
+    tmbstr subst = "";
+    Bool uses_env = getenv("HTML_TIDY") != NULL;
+    ctmbstr env_var = uses_env ? getenv("HTML_TIDY"): tidyLocalizedString( TC_TXT_HELP_ENV_1B );
+
+#if defined( TIDY_CONFIG_FILE ) && defined( TIDY_USER_CONFIG_FILE )
+    subst = stringWithFormat( tidyLocalizedString(TC_TXT_HELP_ENV_1A), TIDY_CONFIG_FILE, TIDY_USER_CONFIG_FILE );
+#endif
+
+    env_var = env_var != NULL ? env_var : tidyLocalizedString( TC_TXT_HELP_ENV_1B );
+
+    printf( "\n" );
+    printf( tidyLocalizedString( TC_TXT_HELP_ENV_1), subst, env_var );
+
+#if defined( TIDY_CONFIG_FILE ) && defined( TIDY_USER_CONFIG_FILE )
+    if ( uses_env )
+        printf( tidyLocalizedString( TC_TXT_HELP_ENV_1C ), TIDY_USER_CONFIG_FILE );
+    free( subst );
+#endif
+
+    printf( "\n" );
+}
+
+
+
+/** @} end service_help_env group */
 /* MARK: - Provide the -help-option Service */
 /***************************************************************************//**
  ** @defgroup service_help_option Provide the -help-option Service
@@ -2121,6 +2159,12 @@ int main( int argc, char** argv )
             else if ( strcasecmp(arg, "help-config") == 0 )
             {
                 optionhelp( tdoc );
+                tidyRelease( tdoc );
+                return 0; /* success */
+            }
+            else if ( strcasecmp(arg, "help-env") == 0 )
+            {
+                helpEnv( tdoc );
                 tidyRelease( tdoc );
                 return 0; /* success */
             }

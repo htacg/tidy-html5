@@ -2305,6 +2305,44 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TC_TXT_HELP_CONFIG_TYPE,      0,   "Type"                                                                    },
     { TC_TXT_HELP_CONFIG_ALLW,      0,   "Allowable values"                                                        },
     {/* This console output should be limited to 78 characters per line.
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+        - The first %s indicates two more list items, or an empty string.
+        - The second %s indicates a file name, or a message indicating no file name. */
+      TC_TXT_HELP_ENV_1,           0,
+        "\n"
+        "Tidy can configure its option values from multiple sources, in the \n"
+        "order below. Subsequent use of the same option overrides previous \n"
+        "option settings. \n"
+        "\n"
+        " - Tidy's built-in default values. \n"
+        "%s" /* rc files */
+        " - The file specified in the $HTML_TIDY environment variable: \n"
+        "     %s \n"
+        " - Options in a file specified on the command line. \n"
+        " - Options set directly on the command line. \n"
+    },
+    {/* This console output should be limited to 78 characters per line.
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+      TC_TXT_HELP_ENV_1A,          0,
+        " - The system runtime configuration file: \n"
+        "     %s \n"
+        " - The user runtime configuration file: \n"
+        "     %s \n"
+    },
+    {/* This console output should be limited to 78 characters per line.
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+        - This message indicates that a file name is not currently set. */
+      TC_TXT_HELP_ENV_1B,          0,
+        "(not currently set)"
+    },
+    {/* This console output should be limited to 78 characters per line.
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+      TC_TXT_HELP_ENV_1C,          0,
+        "\n"
+        "Note that because $HTML_TIDY is set, the user runtime configuration file \n"
+        "%s will not be used. \n"
+    },
+    {/* This console output should be limited to 78 characters per line.
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TC_TXT_HELP_LANG_1,           0,
         "\n"

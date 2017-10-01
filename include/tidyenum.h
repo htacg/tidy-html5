@@ -491,6 +491,10 @@ extern "C" {
         FN(TC_TXT_HELP_CONFIG_NAME)         \
         FN(TC_TXT_HELP_CONFIG_TYPE)         \
         FN(TC_TXT_HELP_CONFIG_ALLW)         \
+        FN(TC_TXT_HELP_ENV_1)               \
+        FN(TC_TXT_HELP_ENV_1A)              \
+        FN(TC_TXT_HELP_ENV_1B)              \
+        FN(TC_TXT_HELP_ENV_1C)              \
         FN(TC_TXT_HELP_LANG_1)              \
         FN(TC_TXT_HELP_LANG_2)              \
         FN(TC_TXT_HELP_LANG_3)

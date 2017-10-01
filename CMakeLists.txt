@@ -157,16 +157,42 @@ if (TIDY_RC_NUMBER)
     add_definitions ( -DRC_NUMBER="${TIDY_RC_NUMBER}" )
 endif ()
 
-# Issue #188 - Support user items in platform.h
-if (TIDY_CONFIG_FILE)
-    add_definitions( -DTIDY_CONFIG_FILE="${TIDY_CONFIG_FILE}" )
-endif ()
-if (TIDY_USER_CONFIG_FILE)
-    add_definitions( -DTIDY_USER_CONFIG_FILE="${TIDY_USER_CONFIG_FILE}" )
-endif ()
-if (SUPPORT_GETPWNAM)
+
+#=============================================================================
+# Unix console application features
+#   By default on Unix-like systems when building for the console program,
+#   support runtime configuration files in /etc/ and in ~/. To prevent this,
+#   set ENABLE_CONFIG_FILES to NO. Specify -DTIDY_CONFIG_FILE and/or 
+#   -DTIDY_USER_CONFIG_FILE to override the default paths in tidyplatform.h.
+# @note: this section refactored to support #584.
+#=============================================================================
+if (UNIX AND SUPPORT_CONSOLE_APP)
+
+  option ( ENABLE_CONFIG_FILES "Set to OFF to disable Tidy runtime configuration file support" ON )
+
+  if ( ENABLE_CONFIG_FILES )
+  
+    message(STATUS "*** Building support for runtime configuration files.")
+
+    add_definitions( -DTIDY_ENABLE_CONFIG_FILES )
+
+    # For example, /etc/tidy.conf
+    if (TIDY_CONFIG_FILE)
+        add_definitions( -DTIDY_CONFIG_FILE="${TIDY_CONFIG_FILE}" )
+    endif ()
+    
+    # For example, ~/.tidy.rc
+    if (TIDY_USER_CONFIG_FILE)
+        add_definitions( -DTIDY_USER_CONFIG_FILE="${TIDY_USER_CONFIG_FILE}" )
+    endif ()
+    
+    # All Unixes support getpwnam(); undef'd in tidyplatform.h if necessary.
     add_definitions( -DSUPPORT_GETPWNAM=1 )
+
+  endif ()
 endif ()
+
+
 
 if(BUILD_SHARED_LIB)
    set(LIB_TYPE SHARED)

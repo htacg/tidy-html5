@@ -26,6 +26,9 @@
 -->
 
 <xsl:variable name="CONFIG" select="document('@TIDYCONFIG@')"/>
+<xsl:variable name="ENABLE_CONFIG_FILES" select="'@ENABLE_CONFIG_FILES@'"/>
+<xsl:variable name="TIDY_CONFIG_FILE" select="'@TIDY_CONFIG_FILE@'"/>
+<xsl:variable name="TIDY_USER_CONFIG_FILE" select="'@TIDY_USER_CONFIG_FILE@'"/>
 
 <!-- Main Template: -->
 <xsl:template match="/">
@@ -160,6 +163,20 @@ since you will probably invoke \fBtidy\fR from different directories.
 The value of HTML_TIDY will be parsed after the compiled-in default
 (defined with -DTIDY_CONFIG_FILE), but before any of the files specified
 using \fB-config\fR.
+<xsl:if test="$ENABLE_CONFIG_FILES = 'ON'">
+.TP
+.B RUNTIME CONFIGURATION FILES
+You can also specify runtime configuration files from which \fBtidy\fR will
+attempt to load a configuration automatically.
+.IP
+The system runtime configuration file (<xsl:value-of select="$TIDY_CONFIG_FILE" />),
+if it exists will be loaded and applied first, followed by the user runtime
+configuration file (<xsl:value-of select="$TIDY_USER_CONFIG_FILE" />).
+Subsequent usage of a specific option will override any previous usage.
+.IP
+Note that if you use the \fBHTML_TIDY\fR environment variable, then the user
+runtime configuration file will not be used. This is a feature, not a bug.
+</xsl:if>
 .SH "EXIT STATUS"
 .IP 0
 All input files were processed successfully.

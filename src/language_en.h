@@ -2116,6 +2116,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TC_OPT_GDOC,                  0,   "produce clean version of html exported by Google Docs"                   },
     { TC_OPT_HELP,                  0,   "list the command line options"                                           },
     { TC_OPT_HELPCFG,               0,   "list all configuration options"                                          },
+    { TC_OPT_HELPENV,               0,   "show information about the environment and runtime configuration"        },
     { TC_OPT_HELPOPT,               0,   "show a description of the <option>"                                      },
     { TC_OPT_IBM858,                0,   "use IBM-858 (CP850+Euro) for input, US-ASCII for output"                 },
     { TC_OPT_INDENT,                0,   "indent element content"                                                  },
@@ -2139,6 +2140,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TC_OPT_RAW,                   0,   "output values above 127 without conversion to entities"                  },
     { TC_OPT_SHIFTJIS,              0,   "use Shift_JIS for both input and output"                                 },
     { TC_OPT_SHOWCFG,               0,   "list the current configuration settings"                                 },
+    { TC_OPT_EXP_CFG,               0,   "list the current configuration settings, suitable for a config file"     },
+    { TC_OPT_EXP_DEF,               0,   "list the default configuration settings, suitable for a config file"     },
     { TC_OPT_UPPER,                 0,   "force tags to upper case"                                                },
     { TC_OPT_UTF16,                 0,   "use UTF-16 for both input and output"                                    },
     { TC_OPT_UTF16BE,               0,   "use UTF-16BE for both input and output"                                  },
@@ -2230,48 +2233,67 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "Command Line Arguments for HTML Tidy:"
     },
     {/* This console output should be limited to 78 characters per line. 
-        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+        - %s represents either a blank line, or TC_TXT_HELP_3A explaining environment options. */
       TC_TXT_HELP_3,                0,
         "\n"
         "Tidy Configuration Options\n"
         "==========================\n"
-        "Use Tidy's configuration options as command line arguments in the form\n"
-        "of \"--some-option <value>\", for example, \"--indent-with-tabs yes\".\n"
+        " Use Tidy's configuration options as command line arguments in the form\n"
+        " of \"--some-option <value>\", for example, \"--indent-with-tabs yes\".\n"
         "\n"
-        "For a list of all configuration options, use \"-help-config\" or refer\n"
-        "to the man page (if your OS has one).\n"
+        " You can also specify a file containing configuration options with the \n"
+        " -options <file> directive, or in one or more files specific to your \n"
+        " environment (see next section). \n"
         "\n"
-        "If your environment has an $HTML_TIDY variable set point to a Tidy \n"
-        "configuration file then Tidy will attempt to use it.\n"
+        " For a list of all configuration options, use \"-help-config\" or refer\n"
+        " to the man page (if your OS has one).\n"
         "\n"
-        "On some platforms Tidy will also attempt to use a configuration specified \n"
-        "in /etc/tidy.conf or ~/.tidy.conf.\n"
+        "Configuration Files\n"
+        "===================\n"
+        " If your environment has an $HTML_TIDY variable set to point to a Tidy \n"
+        " configuration file, then Tidy will attempt to use it. \n"
+        "%s"
+        " Use \"-help-env\" for more information about how you can use the environment. \n"
+        " to specify Tidy options. \n"
         "\n"
         "Other\n"
         "=====\n"
-        "Input/Output default to stdin/stdout respectively.\n"
+        " Input/Output default to stdin/stdout respectively.\n"
         "\n"
-        "Single letter options apart from -f may be combined\n"
-        "as in:  tidy -f errs.txt -imu foo.html\n"
+        " Single letter options apart from -f may be combined\n"
+        " as in:  tidy -f errs.txt -imu foo.html\n"
         "\n"
         "Information\n"
         "===========\n"
-        "For more information about HTML Tidy, see\n"
+        " For more information about HTML Tidy, see\n"
         "  http://www.html-tidy.org/\n"
         "\n"
-        "For more information on HTML, see the following:\n"
+        " For more information on HTML, see the following:\n"
         "\n"
-        "  HTML: Edition for Web Authors (the latest HTML specification)\n"
-        "  http://dev.w3.org/html5/spec-author-view\n"
+        "   HTML: Edition for Web Authors (the latest HTML specification)\n"
+        "   http://dev.w3.org/html5/spec-author-view\n"
         "\n"
-        "  HTML: The Markup Language (an HTML language reference)\n"
-        "  http://dev.w3.org/html5/markup/\n"
+        "   HTML: The Markup Language (an HTML language reference)\n"
+        "   http://dev.w3.org/html5/markup/\n"
         "\n"
-        "File bug reports at https://github.com/htacg/tidy-html5/issues/\n"
-        "or send questions and comments to public-htacg@w3.org.\n"
+        " File bug reports at https://github.com/htacg/tidy-html5/issues/\n"
+        " or send questions and comments to public-htacg@w3.org.\n"
         "\n"
-        "Validate your HTML documents using the W3C Nu Markup Validator:\n"
-        "  http://validator.w3.org/nu/\n"
+        " Validate your HTML documents using the W3C Nu Markup Validator:\n"
+        "   http://validator.w3.org/nu/\n"
+        "\n"
+    },
+    {/* This console output should be limited to 78 characters per line.
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+        - Both parameters %s reflect file paths and names. */
+      TC_TXT_HELP_3A,               0,
+        "\n"
+        " Additionally, Tidy will automatically attempt to use configuration specified \n"
+        " in these files, if present: \n"
+        "\n"
+        "  %s \n"
+        "  %s \n"
         "\n"
     },
     {/* This console output should be limited to 78 characters per line.
@@ -2293,6 +2315,44 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TC_TXT_HELP_CONFIG_NAME,      0,   "Name"                                                                    },
     { TC_TXT_HELP_CONFIG_TYPE,      0,   "Type"                                                                    },
     { TC_TXT_HELP_CONFIG_ALLW,      0,   "Allowable values"                                                        },
+    {/* This console output should be limited to 78 characters per line.
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+        - The first %s indicates two more list items, or an empty string.
+        - The second %s indicates a file name, or a message indicating no file name. */
+      TC_TXT_HELP_ENV_1,           0,
+        "\n"
+        "Tidy can configure its option values from multiple sources, in the \n"
+        "order below. Subsequent use of the same option overrides previous \n"
+        "option settings. \n"
+        "\n"
+        " - Tidy's built-in default values. \n"
+        "%s" /* rc files */
+        " - The file specified in the $HTML_TIDY environment variable: \n"
+        "     %s \n"
+        " - Options in a file specified on the command line. \n"
+        " - Options set directly on the command line. \n"
+    },
+    {/* This console output should be limited to 78 characters per line.
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+      TC_TXT_HELP_ENV_1A,          0,
+        " - The system runtime configuration file: \n"
+        "     %s \n"
+        " - The user runtime configuration file: \n"
+        "     %s \n"
+    },
+    {/* This console output should be limited to 78 characters per line.
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+        - This message indicates that a file name is not currently set. */
+      TC_TXT_HELP_ENV_1B,          0,
+        "(not currently set)"
+    },
+    {/* This console output should be limited to 78 characters per line.
+        - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
+      TC_TXT_HELP_ENV_1C,          0,
+        "\n"
+        "Note that because $HTML_TIDY is set, the user runtime configuration file \n"
+        "%s will not be used. \n"
+    },
     {/* This console output should be limited to 78 characters per line.
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TC_TXT_HELP_LANG_1,           0,

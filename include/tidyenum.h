@@ -434,6 +434,7 @@ extern "C" {
         FN(TC_OPT_GDOC)                     \
         FN(TC_OPT_HELP)                     \
         FN(TC_OPT_HELPCFG)                  \
+        FN(TC_OPT_HELPENV)                  \
         FN(TC_OPT_HELPOPT)                  \
         FN(TC_OPT_IBM858)                   \
         FN(TC_OPT_INDENT)                   \
@@ -450,6 +451,8 @@ extern "C" {
         FN(TC_OPT_RAW)                      \
         FN(TC_OPT_SHIFTJIS)                 \
         FN(TC_OPT_SHOWCFG)                  \
+        FN(TC_OPT_EXP_CFG)                  \
+        FN(TC_OPT_EXP_DEF)                  \
         FN(TC_OPT_UPPER)                    \
         FN(TC_OPT_UTF16)                    \
         FN(TC_OPT_UTF16BE)                  \
@@ -488,10 +491,15 @@ extern "C" {
         FN(TC_TXT_HELP_2A)                  \
         FN(TC_TXT_HELP_2B)                  \
         FN(TC_TXT_HELP_3)                   \
+        FN(TC_TXT_HELP_3A)                  \
         FN(TC_TXT_HELP_CONFIG)              \
         FN(TC_TXT_HELP_CONFIG_NAME)         \
         FN(TC_TXT_HELP_CONFIG_TYPE)         \
         FN(TC_TXT_HELP_CONFIG_ALLW)         \
+        FN(TC_TXT_HELP_ENV_1)               \
+        FN(TC_TXT_HELP_ENV_1A)              \
+        FN(TC_TXT_HELP_ENV_1B)              \
+        FN(TC_TXT_HELP_ENV_1C)              \
         FN(TC_TXT_HELP_LANG_1)              \
         FN(TC_TXT_HELP_LANG_2)              \
         FN(TC_TXT_HELP_LANG_3)

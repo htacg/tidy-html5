@@ -338,7 +338,7 @@ static struct _dispatchTable {
     { STRING_MISSING_MALFORMED,     TidyConfig,      formatStandard          },
     { STRING_NO_SYSID,              TidyInfo,        formatStandard          }, /* reportMarkupVersion() */
     { STRING_UNKNOWN_OPTION,        TidyConfig,      formatStandard          },
-    { SUSPECTED_MISSING_QUOTE,      TidyError,       formatStandard          },
+    { SUSPECTED_MISSING_QUOTE,      TidyWarning,     formatStandard          },
     { TAG_NOT_ALLOWED_IN,           TidyWarning,     formatStandard, PREVIOUS_LOCATION },
     { TOO_MANY_ELEMENTS_IN,         TidyWarning,     formatStandard, PREVIOUS_LOCATION },
     { TOO_MANY_ELEMENTS,            TidyWarning,     formatStandard          },

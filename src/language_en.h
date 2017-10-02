@@ -1928,7 +1928,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { SPACE_PRECEDING_XMLDECL,      0,   "removing whitespace preceding XML Declaration"                           },
     { STRING_MISSING_MALFORMED,     0,   "missing or malformed argument for option: %s"                            },
     { STRING_UNKNOWN_OPTION,        0,   "unknown option: %s"                                                      },
-    { SUSPECTED_MISSING_QUOTE,      0,   "missing quote mark for attribute value"                                  },
+    { SUSPECTED_MISSING_QUOTE,      0,   "suspected missing quote mark for attribute value"                        },
     { TAG_NOT_ALLOWED_IN,           0,   "%s isn't allowed in <%s> elements"                                       },
     { TOO_MANY_ELEMENTS_IN,         0,   "too many %s elements in <%s>"                                            },
     { TOO_MANY_ELEMENTS,            0,   "too many %s elements"                                                    },

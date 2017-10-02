@@ -1270,6 +1270,11 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
 
                 if ( !TY_(nodeHasCM)(element, CM_OPT) && !element->implicit )
                     TY_(Report)(doc, element, node, MISSING_ENDTAG_BEFORE );
+                
+                /* #521, warn on missing optional end-tags if not omitting them. */
+                if ( cfgBool( doc, TidyOmitOptionalTags ) == no && TY_(nodeHasCM)(element, CM_OPT) )
+                    TY_(Report)(doc, element, node, MISSING_ENDTAG_OPTIONAL );
+
 
                 TY_(UngetToken)( doc );
 

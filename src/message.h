@@ -260,6 +260,10 @@ uint TY_(getNextErrorCode)( TidyIterator* iter );
 #define BC_INVALID_URI             32
 #define BC_INVALID_NCR             64
 
+/* other footnote bit field (temporary until formalized) */
+
+#define FN_TRIM_EMPTY_ELEMENT     1
+
 /* Lexer and I/O Macros */
 
 #define REPLACED_CHAR           0

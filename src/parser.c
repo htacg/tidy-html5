@@ -336,9 +336,12 @@ Node *TY_(TrimEmptyElement)( TidyDocImpl* doc, Node *element )
 {
     if ( CanPrune(doc, element) )
     {
-       if (element->type != TextNode)
+        if (element->type != TextNode)
+        {
+            doc->footnotes |= FN_TRIM_EMPTY_ELEMENT;
             TY_(Report)(doc, element, NULL, TRIM_EMPTY_ELEMENT);
-
+        }
+        
         return TY_(DiscardElement)(doc, element);
     }
     return element->next;

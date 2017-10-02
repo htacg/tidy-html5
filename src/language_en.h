@@ -1761,6 +1761,13 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "doesn't support frames. A frames-based page should always\n"
         "include an alternative layout inside a NOFRAMES element.\n"
     },
+    {/* This console output should be limited to 78 characters per line. */
+      FOOTNOTE_TRIM_EMPTY_ELEMENT,  0,
+        "One or more empty elements were present in the source document but\n"
+        "dropped on output. If these elements are necessary or you don't want\n"
+        "this behavior, then consider setting the option \"drop-empty-elements\"\n"
+        "to no.\n"
+    },
     {/* This console output should be limited to 78 characters per line.
         - The URL should not be translated unless you find a matching URL in your language. */
       TEXT_ACCESS_ADVICE1,          0,

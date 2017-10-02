@@ -273,17 +273,20 @@ if ( ENABLE_CONFIG_FILES )
     message(STATUS "*** Building support for runtime configuration files.")
 
     add_definitions( -DTIDY_ENABLE_CONFIG_FILES )
-
-    # For example, /etc/tidy.conf
-    if ( TIDY_CONFIG_FILE )
-        add_definitions( -DTIDY_CONFIG_FILE="${TIDY_CONFIG_FILE}" )
+    
+    # define a default here so we can pass to XSL.
+    if ( NOT TIDY_CONFIG_FILE )
+        set( TIDY_CONFIG_FILE "/etc/tidy.conf" )
     endif ()
 
-    # For example, ~/.tidy.rc
-    if ( TIDY_USER_CONFIG_FILE )
-        add_definitions( -DTIDY_USER_CONFIG_FILE="${TIDY_USER_CONFIG_FILE}" )
+    # define a default here so we can pass to XSL.
+    if ( NOT TIDY_USER_CONFIG_FILE )
+        set( TIDY_USER_CONFIG_FILE "~/.tidyrc" )
     endif ()
 
+    # do *not* add these unless ENABLE_CONFIG_FILES!
+    add_definitions( -DTIDY_CONFIG_FILE="${TIDY_CONFIG_FILE}" )
+    add_definitions( -DTIDY_USER_CONFIG_FILE="${TIDY_USER_CONFIG_FILE}" )
 
 endif ()
   

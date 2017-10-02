@@ -1,5 +1,22 @@
-# CMakeLists.txt - 20150402 - 20150130 - 20140801 - for github htacg/tidy-html5
-# Prepare for changing the name to 'tidy'
+##############################################################################
+# @file CMakeLists.txt
+# Build executables, static and dylibs, packages, build systems, etc., for
+# HTML Tidy.
+#
+# Read this file or use cmake-gui (Windows) or ccmake (everything else) for
+# guided build.
+#
+# @author  Geoff McLane [ubuntu@geoffair.info]
+# @author  HTACG, et al (consult git log)
+#
+# @copyright
+#          Copyright (c) 1998-2017 HTACG
+# @copyright
+#          See tidy.h for license.
+#
+# @date    Consult git log.
+##############################################################################
+
 cmake_minimum_required (VERSION 2.8.7)
 
 set(LIB_NAME tidy)
@@ -8,18 +25,30 @@ set(LIBTIDY_URL "http://www.html-tidy.org")
 
 project (${LIB_NAME})
 
-# ### NOTE: *** Adjust version.txt when required ***
-# read 'version' file into a variable (stripping any newlines or spaces)
-# 20150609: Revert to supplying BOTH version and date, as we had back in Jan 2015
-# NOTE: Both version and date MUST be DOT separated, in two lines.
+
+#################################################
+# Setup
+#################################################
+
+#------------------------------------------------------------------------
+# Release Information
+#   Release version and date are found in `version.txt`; update *that*
+#   file when required. It will be read into variable `versionFile`
+#   (stripping any newlines or spaces). This file must be formatted into
+#   two lines: the dot-separated MAJOR.MINOR.POINT version, followed by
+#   the date separated YEAR.MONTH.DAY release date.
+#------------------------------------------------------------------------
 file(READ version.txt versionFile)
+
 if (NOT versionFile)
     message(FATAL_ERROR "Unable to determine libtidy version. version.txt file is missing.")
 endif()
+
 string(STRIP "${versionFile}" VERSION_TEXT)
 string(REGEX REPLACE "(.*)[\r\n|\n](.*)" "\\1" LIBTIDY_VERSION ${VERSION_TEXT})
 string(REGEX REPLACE "(.*)[\r\n|\n](.*)" "\\2" LIBTIDY_DATE ${VERSION_TEXT})
-# establish version number
+
+# Establish version number
 if (LIBTIDY_VERSION)
     string(REPLACE "." ";" VERSION_LIST ${LIBTIDY_VERSION})
     list(GET VERSION_LIST 0 TIDY_MAJOR_VERSION)
@@ -27,8 +56,9 @@ if (LIBTIDY_VERSION)
     list(GET VERSION_LIST 2 TIDY_POINT_VERSION)
 else ()
     message(FATAL_ERROR "*** FAILED to get a VERSION from version.txt!")
-endif ()    
-# establish version date
+endif ()   
+ 
+# Establish version date
 if (LIBTIDY_DATE)
     string(REPLACE "." ";" DATE_LIST ${LIBTIDY_DATE})
     list(GET DATE_LIST 0 tidy_YEAR)
@@ -38,61 +68,106 @@ else ()
     message(FATAL_ERROR "*** FAILED to get a DATE from version.txt!")
 endif ()
 
-# By default, BOTH library types built, Allow turning OFF shared if not needed
+
+#------------------------------------------------------------------------
+# Library Types and Linking
+#   By default, *both* static and dynamic library types are built. The
+#   shared library can be turned off if not needed. The console program
+#   can be configured for static linking or dynamic linking.
+#------------------------------------------------------------------------
 set( LIB_TYPE STATIC )  # set default message
-option( BUILD_SHARED_LIB "Set OFF to NOT build shared library"    ON  )
-option( BUILD_TAB2SPACE  "Set ON to build utility app, tab2space" OFF )
-option( BUILD_SAMPLE_CODE "Set ON to build the sample code"       OFF )
-if (NOT MAN_INSTALL_DIR)
-    set(MAN_INSTALL_DIR share/man/man1)
-endif ()
+
+option( BUILD_SHARED_LIB "Set OFF to NOT build shared library"     ON  )
+
 # Issue #326 - Allow linkage choice of console app tidy
 option( TIDY_CONSOLE_SHARED "Set ON to link with shared(DLL) lib." OFF )
+
 if (TIDY_CONSOLE_SHARED)
     if (NOT BUILD_SHARED_LIB)
         message(FATAL_ERROR "Enable shared build for this tidy linkage!")
     endif ()
 endif ()
 
-# Allow building without extra language support
+
+#------------------------------------------------------------------------
+# Miscellaneous Options
+#------------------------------------------------------------------------
+option( BUILD_TAB2SPACE     "Set ON to build utility app, tab2space"  OFF )
+option( BUILD_SAMPLE_CODE   "Set ON to build the sample code"         OFF )
+option( TIDY_COMPAT_HEADERS "Set ON to include compatibility headers" OFF )
+
+
+#------------------------------------------------------------------------
+# Man Page
+#   Allow building with non-default man page directory.
+#------------------------------------------------------------------------
+if (NOT MAN_INSTALL_DIR)
+    set(MAN_INSTALL_DIR share/man/man1)
+endif ()
+
+
+#------------------------------------------------------------------------
+# Localization
+#   Allow building without extra language support.
+#------------------------------------------------------------------------
 option( SUPPORT_LOCALIZATIONS "Set OFF to build without additional languages." ON )
+
 if (SUPPORT_LOCALIZATIONS)
-add_definitions ( -DSUPPORT_LOCALIZATIONS=1 )
+    add_definitions ( -DSUPPORT_LOCALIZATIONS=1 )
 else ()
-add_definitions ( -DSUPPORT_LOCALIZATIONS=0 )
+    add_definitions ( -DSUPPORT_LOCALIZATIONS=0 )
 endif ()
 
-# Allow building without console support, which mostly prevents console strings
-# from existing in the library. Note that this will prevent the console 
-# application from being built, since it can't be linked.
-option( SUPPORT_CONSOLE_APP "Set OFF to libraries only without console application support." ON )
+
+#------------------------------------------------------------------------
+# Console Application
+#   Allow building without console support, which mostly prevents
+#   console strings from existing in the library. Note that this will
+#   prevent the console application from being built, since it can't be
+#   linked.
+#------------------------------------------------------------------------
+option( SUPPORT_CONSOLE_APP "Set OFF to build libraries only without console application support." ON )
+
 if (SUPPORT_CONSOLE_APP)
-add_definitions ( -DSUPPORT_CONSOLE_APP=1 )
+    add_definitions ( -DSUPPORT_CONSOLE_APP=1 )
 else ()
-add_definitions ( -DSUPPORT_CONSOLE_APP=0 )
+    add_definitions ( -DSUPPORT_CONSOLE_APP=0 )
 endif ()
 
-# Enable building with some memory diagnostics
-# NOTE: Only available in the Debug configuration build in Windows
-# but could be maybe extended to unix, mac...
+
+#------------------------------------------------------------------------
+# Memory Diagnostics
+#   Enable building with some memory diagnostics.
+#  
+# NOTE: Currently only available in the Debug configuration build in
+#   Windows, but could be maybe extended to Unix, others...
+#------------------------------------------------------------------------
 if (WIN32)
     option( ENABLE_MEMORY_DEBUG  "Set ON to output some memory diagnostics." OFF )
     option( ENABLE_ALLOC_DEBUG   "Set ON to output node allocation diagnostics." OFF )
     option( ENABLE_CRTDBG_MEMORY "Set ON to enable the Windows CRT debug library." OFF )
+    
     if (ENABLE_MEMORY_DEBUG)
         add_definitions ( -DDEBUG_MEMORY )  # see alloc.c for details
         message(STATUS "*** Note, alloc.c memory diagnostics are ON")
     endif ()
+    
     if (ENABLE_ALLOC_DEBUG)
         add_definitions ( -DDEBUG_ALLOCATION )  # see lexer.c for details
         message(STATUS "*** Note, lexer.c node allocation diagnostics are ON")
     endif ()
+    
     if (ENABLE_CRTDBG_MEMORY)
         add_definitions ( -D_CRTDBG_MAP_ALLOC )  # see tidy.c for details
         message(STATUS "*** Note, tidy.c Windows CRT memory debug is ON")
     endif ()
 endif ()
 
+
+#------------------------------------------------------------------------
+# Complier Flags
+#   Setup other compiler-specific and platform-specific compiler flags.
+#------------------------------------------------------------------------
 if(CMAKE_COMPILER_IS_GNUCXX)
     set( WARNING_FLAGS -Wall )
 endif(CMAKE_COMPILER_IS_GNUCXX)
@@ -102,20 +177,16 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
 endif() 
 
 if(WIN32 AND MSVC)
-    # turn off various warnings
-    set(WARNING_FLAGS "${WARNING_FLAGS} /wd4996")
+    # C4996: The compiler encountered a deprecated declaration.
     # C4090: 'function' : different 'const' qualifiers
     # C4244: '=' : conversion from '__int64' to 'uint', possible loss of data
     # C4267: 'function' : conversion from 'size_t' to 'uint', possible loss of data
-    # foreach(warning 4244 4251 4267 4275 4290 4786 4305)
-    foreach(warning 4090 4244 4267)
+    foreach(warning 4996 4090 4244 4267)
         set(WARNING_FLAGS "${WARNING_FLAGS} /wd${warning}")
     endforeach()
+    
     set( MSVC_FLAGS "-DNOMINMAX -D_USE_MATH_DEFINES -D_CRT_SECURE_NO_WARNINGS -D_SCL_SECURE_NO_WARNINGS -D__CRT_NONSTDC_NO_WARNINGS" )
-    # if (${MSVC_VERSION} EQUAL 1600)
-    #    set( MSVC_LD_FLAGS "/FORCE:MULTIPLE" )
-    # endif (${MSVC_VERSION} EQUAL 1600)
-    # set( NOMINMAX 1 )
+
     # to distinguish between debug and release lib in windows
     set( CMAKE_DEBUG_POSTFIX "d" ) # little effect in unix
 else()
@@ -126,7 +197,12 @@ set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${WARNING_FLAGS} ${MSVC_FLAGS} -D_REENTRANT
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNING_FLAGS} ${MSVC_FLAGS} -D_REENTRANT" )
 set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${MSVC_LD_FLAGS}" )
 
-# option to use static windows runtime - maybe only applies to WIN32/MSVC
+
+#------------------------------------------------------------------------
+# Static Windows Runtime
+#   Option to statically link to the Windows runtime. Maybe only 
+#   applies to WIN32/MSVC.
+#------------------------------------------------------------------------
 if (MSVC)
     option( USE_STATIC_RUNTIME "Set ON to change /MD(DLL) to /MT(static)" OFF )
     if (USE_STATIC_RUNTIME)
@@ -147,25 +223,34 @@ if (MSVC)
     endif ()
 endif ()
 
-add_definitions ( -DHAVE_CONFIG_H )
+
+#------------------------------------------------------------------------
+# Macro Values
+#   These additional macros are set in Tidy's source code.
+#------------------------------------------------------------------------
 add_definitions ( -DSUPPORT_UTF16_ENCODINGS=1 )
 add_definitions ( -DSUPPORT_ASIAN_ENCODINGS=1 )
 add_definitions ( -DSUPPORT_ACCESSIBILITY_CHECKS=1 )
 add_definitions ( -DLIBTIDY_VERSION="${LIBTIDY_VERSION}" )
 add_definitions ( -DRELEASE_DATE="${tidy_YEAR}/${tidy_MONTH}/${tidy_DAY}" )
+
+# Optionally specify an extra version point for pre-release/debug versions.
 if (TIDY_RC_NUMBER)
     add_definitions ( -DRC_NUMBER="${TIDY_RC_NUMBER}" )
 endif ()
 
+# Delete me? Not used in Tidy source!
+add_definitions ( -DHAVE_CONFIG_H ) 
 
-#=============================================================================
+
+#------------------------------------------------------------------------
 # Runtime Configuration File Support
 #   By default on Unix-like systems when building for the console program,
 #   support runtime configuration files in /etc/ and in ~/. To prevent this,
 #   set ENABLE_CONFIG_FILES to NO. Specify -DTIDY_CONFIG_FILE and/or 
 #   -DTIDY_USER_CONFIG_FILE to override the default paths in tidyplatform.h.
 # @note: this section refactored to support #584.
-#=============================================================================
+#------------------------------------------------------------------------
 if ( UNIX AND SUPPORT_CONSOLE_APP )
 
   option ( ENABLE_CONFIG_FILES "Set to OFF to disable Tidy runtime configuration file support" ON )
@@ -203,6 +288,10 @@ if ( ENABLE_CONFIG_FILES )
 endif ()
   
 
+#------------------------------------------------------------------------
+# Shared Library
+#   Setup whether or not we will build the shared library.
+#------------------------------------------------------------------------
 if(BUILD_SHARED_LIB)
    set(LIB_TYPE SHARED)
    message(STATUS "*** Also building DLL library ${LIB_TYPE}, version ${LIBTIDY_VERSION}, date ${LIBTIDY_DATE}")
@@ -210,14 +299,20 @@ else()
    message(STATUS "*** Only building static library ${LIB_TYPE}, version ${LIBTIDY_VERSION}, date ${LIBTIDY_DATE}")
 endif()
 
+
+#################################################
+# Build
+#################################################
+
+#------------------------------------------------------------------------
+# File Locations and File Lists
+#   Setup whether or not we will build the shared library.
+#------------------------------------------------------------------------
 include_directories ( "${PROJECT_SOURCE_DIR}/include" "${PROJECT_SOURCE_DIR}/src" )
 
-##############################################################################
-### tidy library
-# file locations
 set ( SRCDIR src )
 set ( INCDIR include )
-# file lists
+
 set ( CFILES
         ${SRCDIR}/access.c       ${SRCDIR}/attrs.c        ${SRCDIR}/istack.c
         ${SRCDIR}/parser.c       ${SRCDIR}/tags.c         ${SRCDIR}/entities.c
@@ -228,11 +323,11 @@ set ( CFILES
         ${SRCDIR}/tagask.c       ${SRCDIR}/tmbstr.c       ${SRCDIR}/utf8.c
         ${SRCDIR}/tidylib.c      ${SRCDIR}/mappedio.c     ${SRCDIR}/gdoc.c
         ${SRCDIR}/language.c     ${SRCDIR}/messageobj.c )
+        
 set ( HFILES
         ${INCDIR}/tidyplatform.h ${INCDIR}/tidy.h         ${INCDIR}/tidyenum.h
         ${INCDIR}/tidybuffio.h )
 
-option (TIDY_COMPAT_HEADERS "If set to ON, compatability headers are included" OFF)
 if (TIDY_COMPAT_HEADERS)
     set ( HFILES ${HFILES}      ${INCDIR}/buffio.h        ${INCDIR}/platform.h )
 endif ()
@@ -246,12 +341,16 @@ set ( LIBHFILES
         ${SRCDIR}/tmbstr.h       ${SRCDIR}/utf8.h         ${SRCDIR}/tidy-int.h
         ${SRCDIR}/version.h      ${SRCDIR}/gdoc.h         ${SRCDIR}/language.h
         ${SRCDIR}/language_en.h  ${SRCDIR}/win32tc.h )
+    
 if (MSVC)
     list(APPEND CFILES ${SRCDIR}/sprtf.c)
     list(APPEND LIBHFILES ${SRCDIR}/sprtf.h)
 endif ()
-#######################################
 
+
+#------------------------------------------------------------------------
+# Target Locations
+#------------------------------------------------------------------------
 if (NOT LIB_INSTALL_DIR)
     set(LIB_INSTALL_DIR lib${LIB_SUFFIX})
 endif ()
@@ -264,12 +363,15 @@ if (NOT INCLUDE_INSTALL_DIR)
     set(INCLUDE_INSTALL_DIR include/${LIB_NAME})
 endif ()
 
-# Always build the STATIC library
+
+#------------------------------------------------------------------------
+# Static Library
+#   The static library always builds.
+#------------------------------------------------------------------------
 set(name tidy-static)
 add_library ( ${name} STATIC ${CFILES} ${HFILES} ${LIBHFILES} )
 set_target_properties( ${name} PROPERTIES 
-    OUTPUT_NAME ${LIB_NAME}s
-    )
+                       OUTPUT_NAME ${LIB_NAME}s )
 if (NOT TIDY_CONSOLE_SHARED) # user wants default static linkage
     list ( APPEND add_LIBS ${name} )
 endif ()    
@@ -279,13 +381,17 @@ install(TARGETS ${name}
         LIBRARY DESTINATION ${LIB_INSTALL_DIR}
         )
 install( FILES ${HFILES} DESTINATION ${INCLUDE_INSTALL_DIR} )
-########################################
-# if user option still on
+
+
+#------------------------------------------------------------------------
+# Dynamic Library
+#   If the user option is still on.
+#------------------------------------------------------------------------
 if (BUILD_SHARED_LIB)
     set(name tidy-share)
     add_library ( ${name} SHARED ${CFILES} ${HFILES} ${LIBHFILES} )
     set_target_properties( ${name} PROPERTIES 
-                                    OUTPUT_NAME ${LIB_NAME} )
+                                   OUTPUT_NAME ${LIB_NAME} )
     set_target_properties( ${name} PROPERTIES
                                    VERSION   ${LIBTIDY_VERSION}
                                    SOVERSION ${TIDY_MAJOR_VERSION} )
@@ -298,13 +404,17 @@ if (BUILD_SHARED_LIB)
         ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
         LIBRARY DESTINATION ${LIB_INSTALL_DIR}
         )
-    if (TIDY_CONSOLE_SHARED)    # user wants shared/dll linkage
+    if (TIDY_CONSOLE_SHARED) # user wants shared/dll linkage
         list ( APPEND add_LIBS ${name} )
     endif ()    
 endif ()
 
-##########################################################
-### main executable - linked with STATIC/SHARED library
+
+#------------------------------------------------------------------------
+# Main Executable
+#   The main executable will be linked with either the static or the
+#   shared library.
+#------------------------------------------------------------------------
 if (SUPPORT_CONSOLE_APP)
     set(name ${LIB_NAME})
     set ( BINDIR console )
@@ -320,6 +430,10 @@ if (SUPPORT_CONSOLE_APP)
     install (TARGETS ${name} DESTINATION bin)
 endif ()
 
+
+#------------------------------------------------------------------------
+# Miscellaneous Targets
+#------------------------------------------------------------------------
 if (BUILD_TAB2SPACE)
     set(name tab2space)
     add_executable( ${name} ${BINDIR}/tab2space.c )
@@ -340,9 +454,11 @@ if (BUILD_SAMPLE_CODE)
     # no INSTALL of this 'local' sample
 endif ()
 
-#==========================================================
+
+#################################################
 # Create man pages
-#==========================================================
+#################################################
+
 if (UNIX AND SUPPORT_CONSOLE_APP)
     find_program( XSLTPROC_FOUND xsltproc )
     if (XSLTPROC_FOUND)
@@ -354,12 +470,14 @@ if (UNIX AND SUPPORT_CONSOLE_APP)
         set(TIDYHELP ${CMAKE_CURRENT_BINARY_DIR}/tidy-help.xml)
         set(TIDYCONFIG ${CMAKE_CURRENT_BINARY_DIR}/tidy-config.xml)
         add_custom_target(man ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}")
+        
+        ## Populate the @VARIABLES@ in the input file.
         configure_file(
             ${CMAKE_CURRENT_SOURCE_DIR}/man/tidy1.xsl.in
             ${TIDY1XSL}
         )
  
-        # run built EXE to generate xml output 
+        # Run the built EXE to generate xml output .
         add_custom_command(
             TARGET man
             COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME} -xml-help > ${TIDYHELP}
@@ -367,7 +485,7 @@ if (UNIX AND SUPPORT_CONSOLE_APP)
             VERBATIM
         )
 
-        # run built EXE to generate more xml output 
+        # Run the built EXE to generate more xml output.
         add_custom_command(
             TARGET man
             COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME} -xml-config > ${TIDYCONFIG}
@@ -375,7 +493,7 @@ if (UNIX AND SUPPORT_CONSOLE_APP)
             VERBATIM
         )
 
-        # run xsltproc to generate the install files..
+        # Run xsltproc to generate the install files.
         add_custom_command(
             TARGET man
             DEPENDS ${TIDYHELP}
@@ -392,17 +510,24 @@ if (UNIX AND SUPPORT_CONSOLE_APP)
     endif ()
 endif ()
 
+
+#################################################
+# Create MSI,EXE, DMG, DEB/RPM
+#   TODO: Check each of these builds
+#################################################
+
 set(BITNESS 32)
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
   set(BITNESS 64)
 endif()
 
-##########################################################
-### Create MSI,EXE, DMG, DEB/RPM
-### TODO: Check each of these builds
-##########################################################
-# Need to ensure that system dlls get included in a binary distribution
-# But since it can miss some... seems incomplete, make optionional
+
+#------------------------------------------------------------------------
+# System Runtime Libraries
+#   Need to ensure that system DLLs get included in a binary 
+#   distribution, but since it can miss some - seems incomplete - make
+#   optional.
+#------------------------------------------------------------------------
 option( ADD_SYSTEM_RUNTIMES "Set ON to include system runtime DLLS in distribution" OFF )
 if (MSVC AND ADD_SYSTEM_RUNTIMES)
     if (NOT DEFINED CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_NO_WARNINGS)
@@ -412,11 +537,15 @@ if (MSVC AND ADD_SYSTEM_RUNTIMES)
     endif ()
     set (CMAKE_INSTALL_DEBUG_LIBRARIES OFF)
     include (InstallRequiredSystemLibraries)
-endif ()    
-##########################################################
+endif ()
+
+
+#------------------------------------------------------------------------
+# Windows
+#   MSI - this needs WiX Tooset installed and a path to candle.exe
+#   EXE - this needs NSIS tools to be in path
+#------------------------------------------------------------------------
 if (WIN32)
-    # MSI - this needs WiX Tooset installed and a path to candle.exe
-    # EXE - this needs NSIS tools to be in path
     set(CPACK_GENERATOR "NSIS;WIX;ZIP")
     set(CPACK_SOURCE_GENERATOR "ZIP")
     set(CPACK_WIX_UPGRADE_GUID "D809598A-B513-4752-B268-0BAC403B00E4")
@@ -428,6 +557,10 @@ else ()
     set(CPACK_SOURCE_GENERATOR "TGZ")
 endif ()
 
+
+#------------------------------------------------------------------------
+# General
+#------------------------------------------------------------------------
 set(CPACK_PACKAGE_NAME "${LIB_NAME}")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${LIBTIDY_DESCRIPTION}")
 set(CPACK_PACKAGE_VENDOR "HTML Tidy Advocacy Community Group")
@@ -438,12 +571,16 @@ set(CPACK_PACKAGE_VERSION_MAJOR "${TIDY_MAJOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_MINOR "${TIDY_MINOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_PATCH "${TIDY_POINT_VERSION}")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
+
 # use one compatible license file for all
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/README/LICENSE.txt")
 set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
 set(CPACK_RESOURCE_FILE_WELCOME "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
 
-## debian config
+
+#------------------------------------------------------------------------
+# Debian
+#------------------------------------------------------------------------
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER ${CPACK_PACKAGE_CONTACT})
 set(CPACK_DEBIAN_PACKAGE_HOMEPAGE ${LIBTIDY_URL})
 #set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc")
@@ -452,7 +589,10 @@ set(CPACK_SOURCE_IGNORE_FILES
   "${PROJECT_SOURCE_DIR}/build"
   )
 
-## RPM config
+
+#------------------------------------------------------------------------
+# RPM config
+#------------------------------------------------------------------------
 set(CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/usr/share/man" "/usr/share/man/man1")
 
 set(CPACK_SOURCE_IGNORE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/test/;${CMAKE_CURRENT_SOURCE_DIR}/build/;${CMAKE_CURRENT_SOURCE_DIR}/.git/")
@@ -463,12 +603,15 @@ endif ()
 
 include(CPack)
 
+#------------------------------------------------------------------------
 # pkg-config
+#------------------------------------------------------------------------
 configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/${LIB_NAME}.pc.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}.pc"
     @ONLY
     )
+    
 install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}.pc"
     DESTINATION "${LIB_INSTALL_DIR}/pkgconfig"

@@ -146,6 +146,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_DEFER,                   "defer",                   CH_BOOL      }, /* SCRIPT */
   { TidyAttr_DIR,                     "dir",                     CH_TEXTDIR   }, /* ltr or rtl */
   { TidyAttr_DISABLED,                "disabled",                CH_BOOL      }, /* form fields */
+  { TidyAttr_DOWNLOAD,                "download",                CH_PCDATA    }, /* anchor */
   { TidyAttr_ENCODING,                "encoding",                CH_PCDATA    }, /* <?xml?> */
   { TidyAttr_ENCTYPE,                 "enctype",                 CH_XTYPE     }, /* FORM */
   { TidyAttr_FACE,                    "face",                    CH_PCDATA    }, /* BASEFONT, FONT */

@@ -1517,15 +1517,16 @@ static void CheckLowerCaseAttrValue( TidyDocImpl* doc, Node *node, AttVal *attva
     }
 }
 
-/* methods for checking value of a specific attribute */
-#ifdef _WIN32
+/* Issue #588 - use simple macros only!
+   Seems 'isalnum(c)' is undefined and can
+   cause an assert or a SIGSEGV in some libraries
+   if 'c' is not EOF, or in the range 0 to 0xff,
+   so avoid using it.
+*/
 #define ISUPPER(a) ((a >= 'A') && (a <= 'Z'))
 #define ISLOWER(a) ((a >= 'a') && (a <= 'z'))
 #define ISNUMERIC(a) ((a >= '0') && (a <= '9'))
 #define ISALNUM(a) (ISUPPER(a) || ISLOWER(a) || ISNUMERIC(a))
-#else
-#define ISALNUM(a)  isalnum(a)
-#endif
 
 static Bool IsURLCodePoint( ctmbstr p, uint *increment )
 {

@@ -17,7 +17,7 @@
 # @date    Consult git log.
 ##############################################################################
 
-cmake_minimum_required (VERSION 2.8.7)
+cmake_minimum_required (VERSION 2.8.12)
 
 set(LIB_NAME tidy)
 set(LIBTIDY_DESCRIPTION "${LIB_NAME} - HTML syntax checker")
@@ -392,6 +392,9 @@ install( FILES ${HFILES} DESTINATION ${INCLUDE_INSTALL_DIR} )
 #------------------------------------------------------------------------
 if (BUILD_SHARED_LIB)
     set(name tidy-share)
+    if (UNIX AND APPLE)
+        set(CMAKE_MACOSX_RPATH 1)
+    endif ()
     add_library ( ${name} SHARED ${CFILES} ${HFILES} ${LIBHFILES} )
     set_target_properties( ${name} PROPERTIES 
                                    OUTPUT_NAME ${LIB_NAME} )

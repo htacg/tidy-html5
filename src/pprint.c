@@ -69,7 +69,6 @@ void TY_(PPrintSpaces)(void)
     indent_char = ' ';
 }
 
-#if SUPPORT_ASIAN_ENCODINGS
 /* #431953 - start RJ Wraplen adjusted for smooth international ride */
 
 typedef enum
@@ -287,7 +286,6 @@ static WrapPoint Big5WrapPoint(tchar c)
     return NoWrapPoint;
 }
 
-#endif /* SUPPORT_ASIAN_ENCODINGS */
 
 static void InitIndent( TidyIndent* ind )
 {
@@ -888,8 +886,6 @@ static void PPrintChar( TidyDocImpl* doc, uint c, uint mode )
         }
     }
 
-#if SUPPORT_ASIAN_ENCODINGS
-
     /* #431953 - start RJ */
     /* Handle encoding-specific issues */
     switch ( outenc )
@@ -930,22 +926,6 @@ static void PPrintChar( TidyDocImpl* doc, uint c, uint mode )
         AddChar( pprint, c );
         return;
     }
-    /* #431953 - end RJ */
-
-#else /* SUPPORT_ASIAN_ENCODINGS */
-
-    /* otherwise ISO 2022 characters are passed raw */
-    if (
-#ifndef NO_NATIVE_ISO2022_SUPPORT
-        outenc == ISO2022 ||
-#endif
-        outenc == RAW )
-    {
-        AddChar( pprint, c );
-        return;
-    }
-
-#endif /* SUPPORT_ASIAN_ENCODINGS */
 
     /* don't map latin-1 chars to entities */
     if ( outenc == LATIN1 )

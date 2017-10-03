@@ -1,4 +1,4 @@
-#ifndef language_pt_br_h
+﻿#ifndef language_pt_br_h
 #define language_pt_br_h
 /*
  * language_pt_br.h
@@ -27,8 +27,8 @@
  * Template Created by Jim Derry on 01/14/2016.
  *
  * Orginating PO file metadata:
- *   PO_LAST_TRANSLATOR=Rafael Fontenelle <rafaelff@gnome.org>
- *   PO_REVISION_DATE=2017-09-21 00:07-0200
+ *   PO_LAST_TRANSLATOR=jderry
+ *   PO_REVISION_DATE=2017-10-03 12:37:01
  */
 
 #ifdef _MSC_VER
@@ -361,14 +361,10 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "<code>&lt;span&gt;&lt;span&gt;...&lt;/span&gt;&lt;/span&gt;</code>. <br/>O "
         "algoritmo é idêntico àquele usado por <code>merge-divs</code>. "
     },
-
-#if SUPPORT_ASIAN_ENCODINGS
     { TidyNCR,                                       0,        
         "Esta opção especifica se o Tidy deve permitir referências de caracteres "
         "numéricos. "
     },
-#endif /* SUPPORT_ASIAN_ENCODINGS */
-
     { TidyNewline,                                   0,        
         "O padrão é apropriado para a plataforma atual. <br/>Geralmente, CRLF no PC-"
         "DOS, Windows e OS/2; CR no Mac OS Clássico; e LF nos demais (Linux, Mac OS X "
@@ -436,14 +432,10 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "que você ainda não pode adicionar novos elementos CDATA. <br/>Esta opção é "
         "ignorada no modo XML. "
     },
-
-#if SUPPORT_ASIAN_ENCODINGS
     { TidyPunctWrap,                                 0,        
         "Essa opção especifica se o Tidy deve quebrar linha após alguns Unicode ou "
         "caracteres de pontuação chineses. "
     },
-#endif /* SUPPORT_ASIAN_ENCODINGS */
-
     { TidyQuiet,                                     0,        
         "Essa opção especifica se o Tidy deve emitir o resumo dos números de erros e "
         "avisos, ou as mensagens de boas-vidas ou informacionais. "

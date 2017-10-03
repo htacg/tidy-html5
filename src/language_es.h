@@ -1,4 +1,4 @@
-#ifndef language_es_h
+﻿#ifndef language_es_h
 #define language_es_h
 /*
  * language_es.h
@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-05-13 21:04:45
+ *   PO_REVISION_DATE=2017-10-03 12:37:01
  */
 
 #ifdef _MSC_VER
@@ -68,11 +68,7 @@ static languageDefinition language_es = { whichPluralForm_es, {
         "code>). Si se establece en <code>yes</code>, entonces etiquetas existentes serán reemplazados "
         "con CSS <code>&lt;style&gt;</code> y estructural markup según corresponda. "
     },
-
-#if SUPPORT_ASIAN_ENCODINGS
     { TidyNCR,                0, "Esta opción especifica si Tidy debe permitir referencias de caracteres numéricos. "   },
-#endif /* SUPPORT_ASIAN_ENCODINGS */
-
     { TEXT_GENERAL_INFO_PLEA, 0,        
         "\n"
         "¿Le gustaría ver Tidy en un español correcto? Por favor considere \n"

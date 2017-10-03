@@ -94,12 +94,8 @@ static PickListItems charEncPicks = {
     { "utf16le",  TidyEncUtf16le,  { "utf16le",  NULL } },
     { "utf16be",  TidyEncUtf16be,  { "utf16be",  NULL } },
     { "utf16",    TidyEncUtf16,    { "utf16",    NULL } },
-
-#if SUPPORT_ASIAN_ENCODINGS
     { "big5",     TidyEncBig5,     { "big5",     NULL } },
     { "shiftjis", TidyEncShiftjis, { "shiftjis", NULL } },
-#endif
-
     { NULL }
 };
 
@@ -263,9 +259,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyMergeEmphasis,           MU, "merge-emphasis",              BL, yes,             ParsePickList,     &boolPicks          },
     { TidyMergeSpans,              MU, "merge-spans",                 IN, TidyAutoState,   ParsePickList,     &autoBoolPicks      },
     { TidyMetaCharset,             MS, "add-meta-charset",            BL, no,              ParsePickList,     &boolPicks          }, /* 20161004 - Issue #456 */
-#if SUPPORT_ASIAN_ENCODINGS
     { TidyNCR,                     MU, "ncr",                         BL, yes,             ParsePickList,     &boolPicks          },
-#endif
     { TidyNewline,                 CE, "newline",                     IN, DLF,             ParsePickList,     &newlinePicks       },
     { TidyNumEntities,             MU, "numeric-entities",            BL, no,              ParsePickList,     &boolPicks          },
     { TidyOmitOptionalTags,        MU, "omit-optional-tags",          BL, no,              ParsePickList,     &boolPicks          },
@@ -276,9 +270,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyPreserveEntities,        MU, "preserve-entities",           BL, no,              ParsePickList,     &boolPicks          },
     { TidyPreTags,                 MU, "new-pre-tags",                ST, 0,               ParseTagNames,     NULL                },
     { TidyPriorityAttributes,      MU, "priority-attributes",         ST, 0,               ParseList,         NULL                },
-#if SUPPORT_ASIAN_ENCODINGS
     { TidyPunctWrap,               PP, "punctuation-wrap",            BL, no,              ParsePickList,     &boolPicks          },
-#endif
     { TidyQuiet,                   MS, "quiet",                       BL, no,              ParsePickList,     &boolPicks          },
     { TidyQuoteAmpersand,          MU, "quote-ampersand",             BL, yes,             ParsePickList,     &boolPicks          },
     { TidyQuoteMarks,              MU, "quote-marks",                 BL, no,              ParsePickList,     &boolPicks          },
@@ -995,11 +987,8 @@ Bool  TY_(AdjustCharEncoding)( TidyDocImpl* doc, int encoding )
     case UTF16LE:
     case UTF16BE:
     case UTF16:
-
-#if SUPPORT_ASIAN_ENCODINGS
     case SHIFTJIS:
     case BIG5:
-#endif
         inenc = outenc = encoding;
         break;
     }

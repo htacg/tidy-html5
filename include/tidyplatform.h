@@ -77,11 +77,6 @@ extern "C" {
  * Optional Tidy features support
  *===========================================================================*/
 
-/* Enable/disable support for Big5 and Shift_JIS character encodings */
-#ifndef SUPPORT_ASIAN_ENCODINGS
-#  define SUPPORT_ASIAN_ENCODINGS 1
-#endif
-
 /* Enable/disable support for additional accessibility checks */
 #ifndef SUPPORT_ACCESSIBILITY_CHECKS
 #  define SUPPORT_ACCESSIBILITY_CHECKS 1

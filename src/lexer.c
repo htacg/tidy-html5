@@ -1215,15 +1215,14 @@ static void ParseEntity( TidyDocImpl* doc, GetTokenMode mode )
 
         if (charRead == 1 && c == '#')
         {
-#if SUPPORT_ASIAN_ENCODINGS
-            if ( !cfgBool(doc, TidyNCR) || 
+            if ( !cfgBool(doc, TidyNCR) ||
                  cfg(doc, TidyInCharEncoding) == BIG5 ||
                  cfg(doc, TidyInCharEncoding) == SHIFTJIS )
             {
                 TY_(UngetChar)('#', doc->docIn);
                 return;
             }
-#endif
+
             TY_(AddCharToLexer)( lexer, c );
             entState = ENT_numdec;
             continue;

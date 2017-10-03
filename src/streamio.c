@@ -395,11 +395,8 @@ uint TY_(ReadChar)( StreamIn *in )
          || in->encoding == ISO2022
 #endif
          || in->encoding == UTF8
-
-#if SUPPORT_ASIAN_ENCODINGS
          || in->encoding == SHIFTJIS /* #431953 - RJ */
          || in->encoding == BIG5     /* #431953 - RJ */
-#endif
            )
         {
             in->curcol++;
@@ -710,8 +707,6 @@ void TY_(WriteChar)( uint c, StreamOut* out )
             }
         }
     }
-
-#if SUPPORT_ASIAN_ENCODINGS
     else if (out->encoding == BIG5 || out->encoding == SHIFTJIS)
     {
         if (c < 128)
@@ -722,8 +717,6 @@ void TY_(WriteChar)( uint c, StreamOut* out )
             ch = c & 0xFF; PutByte(ch, out); 
         }
     }
-#endif
-
     else
         PutByte( c, out );
 }
@@ -1243,7 +1236,6 @@ static uint ReadCharFromStream( StreamIn* in )
         return n;
     }
     
-#if SUPPORT_ASIAN_ENCODINGS
     /*
        This section is suitable for any "multibyte" variable-width 
        character encoding in which a one-byte code is less than
@@ -1273,7 +1265,6 @@ static uint ReadCharFromStream( StreamIn* in )
             return n;
         }
     }
-#endif
 
 #ifdef TIDY_WIN32_MLANG_SUPPORT
     else if (in->encoding > WIN32MLANG)
@@ -1322,10 +1313,8 @@ static struct _enc2iana
   { UTF16LE,  "utf-16",       "utf16le" },
   { UTF16BE,  "utf-16",       "utf16be" },
   { UTF16,    "utf-16",       "utf16"   },
-#if SUPPORT_ASIAN_ENCODINGS
   { BIG5,     "big5",         "big5"    },
   { SHIFTJIS, "shift_jis",    "shiftjis"},
-#endif
 #ifndef NO_NATIVE_ISO2022_SUPPORT
   { ISO2022,  NULL,           "iso2022" },
 #endif

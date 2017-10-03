@@ -379,10 +379,8 @@ static const CmdOptDesc cmdopt_defs[] =  {
     { CmdOptCharEnc,   "-utf16le",               TC_OPT_UTF16LE,  0,             NULL },
     { CmdOptCharEnc,   "-utf16be",               TC_OPT_UTF16BE,  0,             NULL },
     { CmdOptCharEnc,   "-utf16",                 TC_OPT_UTF16,    0,             NULL },
-#if SUPPORT_ASIAN_ENCODINGS /* #431953 - RJ */
     { CmdOptCharEnc,   "-big5",                  TC_OPT_BIG5,     0,             NULL },
     { CmdOptCharEnc,   "-shiftjis",              TC_OPT_SHIFTJIS, 0,             NULL },
-#endif
     { CmdOptMisc,      "-version",               TC_OPT_VERSION,  0,             NULL,  "-v" },
     { CmdOptMisc,      "-help",                  TC_OPT_HELP,     0,             NULL,  "-h", "-?" },
     { CmdOptMisc,      "-help-config",           TC_OPT_HELPCFG,  0,             NULL },
@@ -2145,11 +2143,8 @@ int main( int argc, char** argv )
                      strcasecmp(arg, "utf16le") == 0  ||
                      strcasecmp(arg, "utf16be") == 0  ||
                      strcasecmp(arg, "utf16") == 0    ||
-                     
-#if SUPPORT_ASIAN_ENCODINGS
                      strcasecmp(arg, "shiftjis") == 0 ||
                      strcasecmp(arg, "big5") == 0     ||
-#endif
                      strcasecmp(arg, "mac") == 0      ||
                      strcasecmp(arg, "win1252") == 0  ||
                      strcasecmp(arg, "ibm858") == 0 )

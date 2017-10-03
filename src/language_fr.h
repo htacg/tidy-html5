@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-10-03 12:22:47
+ *   PO_REVISION_DATE=2017-10-03 12:37:01
  */
 
 #ifdef _MSC_VER
@@ -319,11 +319,7 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "imbriqués, comme suit : <code>&lt;span&gt;&lt;span&gt;...&lt;/span&gt;&lt;/span&gt;</code>. <br/"
         ">L'algorithme est le même que celui de <code>merge-divs</code>. "
     },
-
-#if SUPPORT_ASIAN_ENCODINGS
     { TidyNCR,                                       0, "Cette option précise si Tidy doit autoriser les références numériques de caractères. "                  },
-#endif /* SUPPORT_ASIAN_ENCODINGS */
-
     { TidyNewline,                                   0,        
         "La valeur par défaut est appropriée à la plateforme d'exécution de Tidy. <br/>Généralement "
         "<var>CRLF</var> sur PC-DOS, Windows et OS/2; <var>CR</var> sur Classic Mac OS; et <var>LF</var> "
@@ -381,14 +377,10 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "inconnues. <br/>Notez que vous ne pouvez encore ajouter de nouveaux éléments CDATA. <br/>Cette "
         "option est ignorée avec le mode XML. "
     },
-
-#if SUPPORT_ASIAN_ENCODINGS
     { TidyPunctWrap,                                 0,        
         "Cette option précise si Tidy doit passer à la ligne après certains caractères de ponctuation "
         "Unicode ou chinois."
     },
-#endif /* SUPPORT_ASIAN_ENCODINGS */
-
     { TidyQuiet,                                     0,        
         "Cette option précise si Tidy doit afficher le résumé du nombre des erreurs et avertissements, ou "
         "les messages de bienvenue et d'information."

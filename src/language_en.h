@@ -835,7 +835,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "<br/>"
         "The algorithm is identical to the one used by <code>merge-divs</code>. "
     },
-#if SUPPORT_ASIAN_ENCODINGS
     {/* Important notes for translators:
         - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
           <br/>.
@@ -847,7 +846,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
       TidyNCR,                      0,
         "This option specifies if Tidy should allow numeric character references. "
     },
-#endif
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
       <br/>.
@@ -1024,7 +1022,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "<br/>"
         "This option takes a space or comma separated list of attribute names. "
     },
-#if SUPPORT_ASIAN_ENCODINGS
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
       <br/>.
@@ -1037,7 +1034,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option specifies if Tidy should line wrap after some Unicode or "
         "Chinese punctuation characters. "
     },
-#endif
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
       <br/>.

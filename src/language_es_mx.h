@@ -1,4 +1,4 @@
-#ifndef language_es_mx_h
+﻿#ifndef language_es_mx_h
 #define language_es_mx_h
 /*
  * language_es_mx.h
@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-05-13 21:04:45
+ *   PO_REVISION_DATE=2017-10-03 12:37:01
  */
 
 #ifdef _MSC_VER

@@ -603,11 +603,7 @@ typedef enum
     TidyMergeEmphasis,           /**< Merge nested B and I elements */
     TidyMergeSpans,              /**< Merge multiple SPANs */
     TidyMetaCharset,             /**< Adds/checks/fixes meta charset in the head, based on document type */
-#if SUPPORT_ASIAN_ENCODINGS
     TidyNCR,                     /**< Allow numeric character references */
-#else
-    TidyNCRNotUsed,              /**< This option is not compiled in */
-#endif
     TidyNewline,                 /**< Output line ending (default to platform) */
     TidyNumEntities,             /**< Use numeric entities */
     TidyOmitOptionalTags,        /**< Suppress optional start tags and end tags */
@@ -618,11 +614,7 @@ typedef enum
     TidyPreserveEntities,        /**< Preserve entities */
     TidyPreTags,                 /**< Declared pre tags */
     TidyPriorityAttributes,      /**< Attributes to place first in an element */
-#if SUPPORT_ASIAN_ENCODINGS
     TidyPunctWrap,               /**< consider punctuation and breaking spaces for wrapping */
-#else
-    TidyPunctWrapNotUsed,        /**< This option is not compiled in */
-#endif
     TidyQuiet,                   /**< No 'Parsing X', guessed DTD or summary */
     TidyQuoteAmpersand,          /**< Output naked ampersand as &amp; */
     TidyQuoteMarks,              /**< Output " marks as &quot; */
@@ -755,11 +747,8 @@ typedef enum
     TidyEncUtf16le,
     TidyEncUtf16be,
     TidyEncUtf16,
-
-#if SUPPORT_ASIAN_ENCODINGS
     TidyEncBig5,
     TidyEncShiftjis
-#endif
 } TidyEncodingOptions;
 
 

@@ -60,7 +60,7 @@ typedef struct _TidyPrintImpl
 } TidyPrintImpl;
 
 
-#if 0 && SUPPORT_ASIAN_ENCODINGS
+#if 0
 /* #431953 - start RJ Wraplen adjusted for smooth international ride */
 uint CWrapLen( TidyDocImpl* doc, uint ind );
 #endif

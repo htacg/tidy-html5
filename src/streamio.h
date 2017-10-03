@@ -157,18 +157,8 @@ int TY_(GetCharEncodingFromOptName)(ctmbstr charenc);
 #define UTF16LE     9
 #define UTF16BE     10
 #define UTF16       11
-
-/* Note that Big5 and SHIFTJIS are not converted to ISO 10646 codepoints
-** (i.e., to Unicode) before being recoded into UTF-8. This may be
-** confusing: usually UTF-8 implies ISO10646 codepoints.
-*/
-#if SUPPORT_ASIAN_ENCODINGS
 #define BIG5        12
 #define SHIFTJIS    13
-#else
-#define BIG5        9
-#define SHIFTJIS    10
-#endif
 
 #ifdef TIDY_WIN32_MLANG_SUPPORT
 /* hack: windows code page numbers start at 37 */

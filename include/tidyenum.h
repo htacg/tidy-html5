@@ -151,15 +151,15 @@ extern "C" {
  ** than the short report.
  */
 #define FOREACH_DIALOG_MSG(FN) \
-    FN(STRING_CONTENT_LOOKS)        \
-    FN(STRING_DOCTYPE_GIVEN)        \
-    FN(STRING_ERROR_COUNT)          \
-    FN(STRING_NEEDS_INTERVENTION)   \
-    FN(STRING_NO_ERRORS)            \
-    FN(STRING_NO_SYSID)             \
-    FN(STRING_NOT_ALL_SHOWN)        \
-    FN(TEXT_GENERAL_INFO_PLEA)      \
-    FN(TEXT_GENERAL_INFO)
+/* TidyInfo */             FN(STRING_CONTENT_LOOKS)        \
+/* TidyInfo */             FN(STRING_DOCTYPE_GIVEN)        \
+/* TidyDialogueSummary */  FN(STRING_ERROR_COUNT)          \
+/* TidyDialogueSummary */  FN(STRING_NEEDS_INTERVENTION)   \
+/* TidyDialogueSummary */  FN(STRING_NO_ERRORS)            \
+/* TidyInfo */             FN(STRING_NO_SYSID)             \
+/* TidyDialogueSummary */  FN(STRING_NOT_ALL_SHOWN)        \
+/* TidyDialogueInfo */     FN(TEXT_GENERAL_INFO_PLEA)      \
+/* TidyDialogueInfo */     FN(TEXT_GENERAL_INFO)
 
 
 /** These are report messages, i.e., messages that appear in Tidy's table

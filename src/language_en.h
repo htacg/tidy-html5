@@ -1818,7 +1818,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { STRING_CONTENT_LOOKS,         0,   "Document content looks like %s"                                          },
     { STRING_DOCTYPE_GIVEN,         0,   "Doctype given is \"%s\""                                                 },
     {/* The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-        STRING_ERROR_COUNT,           0,   "Tidy found %u %s and %u %s!"
+      STRING_ERROR_COUNT,           0,   "Tidy found %u %s and %u %s!"
     },
     {/* This console output should be limited to 78 characters per line.
       - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */

@@ -79,10 +79,6 @@ struct _StreamIn
 
     TidyInputSource source;
 
-#ifdef TIDY_WIN32_MLANG_SUPPORT
-    void* mlang;
-#endif
-
     /* Pointer back to document for error reporting */
     TidyDocImpl* doc;
 };
@@ -109,11 +105,6 @@ struct _StreamOut
     int   encoding;
     ISO2022State   state;     /* for ISO 2022 */
     uint  nl;
-
-#ifdef TIDY_WIN32_MLANG_SUPPORT
-    void* mlang;
-#endif
-
     IOType iotype;
     TidyOutputSink sink;
 };
@@ -153,12 +144,6 @@ int TY_(GetCharEncodingFromOptName)(ctmbstr charenc);
 #define UTF16       11
 #define BIG5        12
 #define SHIFTJIS    13
-
-#ifdef TIDY_WIN32_MLANG_SUPPORT
-/* hack: windows code page numbers start at 37 */
-#define WIN32MLANG  36
-#endif
-
 
 /* Function for conversion from Windows-1252 to Unicode */
 uint TY_(DecodeWin1252)(uint c);

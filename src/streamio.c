@@ -20,9 +20,6 @@
 #include "utf8.h"
 #include "tmbstr.h"
 
-#ifdef TIDY_WIN32_MLANG_SUPPORT
-#include "win32tc.h"
-#endif
 
 /************************
 ** Forward Declarations
@@ -54,9 +51,6 @@ static StreamOut stderrStreamOut =
     ASCII,
     FSM_ASCII,
     DEFAULT_NL_CONFIG,
-#ifdef TIDY_WIN32_MLANG_SUPPORT
-    NULL,
-#endif
     FileIO,
     { 0, TY_(filesink_putByte) }
 };
@@ -66,9 +60,6 @@ static StreamOut stdoutStreamOut =
     ASCII,
     FSM_ASCII,
     DEFAULT_NL_CONFIG,
-#ifdef TIDY_WIN32_MLANG_SUPPORT
-    NULL,
-#endif
     FileIO,
     { 0, TY_(filesink_putByte) }
 };
@@ -922,9 +913,6 @@ static void PutByte( uint byteValue, StreamOut* out )
 static uint ReadCharFromStream( StreamIn* in )
 {
     uint c, n;
-#ifdef TIDY_WIN32_MLANG_SUPPORT
-    uint bytesRead = 0;
-#endif
 
     if ( TY_(IsEOF)(in) )
         return EndOfStream;
@@ -1070,15 +1058,6 @@ static uint ReadCharFromStream( StreamIn* in )
             return n;
         }
     }
-
-#ifdef TIDY_WIN32_MLANG_SUPPORT
-    else if (in->encoding > WIN32MLANG)
-    {
-        assert( in->mlang != NULL );
-        return TY_(Win32MLangGetChar)((byte)c, in, &bytesRead);
-    }
-#endif
-
     else
         n = c;
         

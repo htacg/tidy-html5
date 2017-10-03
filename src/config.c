@@ -30,9 +30,6 @@
 #include <unistd.h>
 #endif
 
-#ifdef TIDY_WIN32_MLANG_SUPPORT
-#include "win32tc.h"
-#endif
 
 void TY_(InitConfig)( TidyDocImpl* doc )
 {
@@ -1487,12 +1484,6 @@ Bool ParseCharEnc( TidyDocImpl* doc, const TidyOptionImpl* option )
 
     enc = TY_(CharEncodingId)( doc, buf );
 
-#ifdef TIDY_WIN32_MLANG_SUPPORT
-    /* limit support to --input-encoding */
-    if (option->id != TidyInCharEncoding && enc > WIN32MLANG)
-        enc = -1;
-#endif
-
     if ( enc < 0 )
     {
         validEncoding = no;
@@ -1510,16 +1501,6 @@ Bool ParseCharEnc( TidyDocImpl* doc, const TidyOptionImpl* option )
 int TY_(CharEncodingId)( TidyDocImpl* ARG_UNUSED(doc), ctmbstr charenc )
 {
     int enc = TY_(GetCharEncodingFromOptName)( charenc );
-
-#ifdef TIDY_WIN32_MLANG_SUPPORT
-    if (enc == -1)
-    {
-        uint wincp = TY_(Win32MLangGetCPFromName)(doc->allocator, charenc);
-        if (wincp)
-            enc = wincp;
-    }
-#endif
-
     return enc;
 }
 

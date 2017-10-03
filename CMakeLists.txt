@@ -352,7 +352,7 @@ set ( LIBHFILES
         ${SRCDIR}/pprint.h       ${SRCDIR}/streamio.h     ${SRCDIR}/tags.h
         ${SRCDIR}/tmbstr.h       ${SRCDIR}/utf8.h         ${SRCDIR}/tidy-int.h
         ${SRCDIR}/version.h      ${SRCDIR}/gdoc.h         ${SRCDIR}/language.h
-        ${SRCDIR}/language_en.h  ${SRCDIR}/win32tc.h )
+        ${SRCDIR}/language_en.h )
     
 if (MSVC)
     list(APPEND CFILES ${SRCDIR}/sprtf.c)

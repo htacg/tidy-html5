@@ -34,9 +34,6 @@
 #include "mappedio.h"
 #include "language.h"
 
-#ifdef TIDY_WIN32_MLANG_SUPPORT
-#include "win32tc.h"
-#endif
 #if !defined(NDEBUG) && defined(_MSC_VER)
 #include "sprtf.h"
 #endif
@@ -1365,11 +1362,6 @@ int         TY_(DocParseStream)( TidyDocImpl* doc, StreamIn* in )
         TY_(SetOptionInt)(doc, TidyInCharEncoding, bomEnc);
     }
 
-#ifdef TIDY_WIN32_MLANG_SUPPORT
-    if (in->encoding > WIN32MLANG)
-        TY_(Win32MLangInitInputTranscoder)(in, in->encoding);
-#endif /* TIDY_WIN32_MLANG_SUPPORT */
-
     /* Tidy doesn't alter the doctype for generic XML docs */
     if ( xmlIn )
     {
@@ -1384,10 +1376,6 @@ int         TY_(DocParseStream)( TidyDocImpl* doc, StreamIn* in )
         if ( !TY_(CheckNodeIntegrity)( &doc->root ) )
             TidyPanic( doc->allocator, integrity );
     }
-
-#ifdef TIDY_WIN32_MLANG_SUPPORT
-    TY_(Win32MLangUninitInputTranscoder)(in);
-#endif /* TIDY_WIN32_MLANG_SUPPORT */
 
     doc->docIn = NULL;
     return tidyDocStatus( doc );

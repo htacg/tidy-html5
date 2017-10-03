@@ -1305,21 +1305,16 @@ typedef struct tidyStringsKeyItem {
 } tidyStringsKeyItem;
 
 static const tidyStringsKeyItem tidyStringsKeys[] = {
-
     FOREACH_TIDYCONFIGCATEGORY(MAKE_STRUCT)
     FOREACH_MSG_MISC(MAKE_STRUCT)
     FOREACH_FOOTNOTE_MSG(MAKE_STRUCT)
     FOREACH_DIALOG_MSG(MAKE_STRUCT)
     FOREACH_REPORT_MSG(MAKE_STRUCT)
-    
-    { "TIDYSTRINGS_FIRST",                        TIDYSTRINGS_FIRST },
-    
     FOREACH_ACCESS_MSG(MAKE_STRUCT)
-
 #if SUPPORT_CONSOLE_APP
     FOREACH_MSG_CONSOLE(MAKE_STRUCT)
 #endif
-
+    { "TIDYSTRINGS_FIRST",                        TIDYSTRINGS_FIRST },
     { "TIDYSTRINGS_LAST",                         TIDYSTRINGS_LAST  },
     { NULL,                                       0                 },
 };

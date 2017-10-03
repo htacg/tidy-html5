@@ -1953,8 +1953,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { XML_DECLARATION_DETECTED,     0,   "An XML declaration was detected. Did you mean to use input-xml?"         },
     { XML_ID_SYNTAX,                0,   "%s ID \"%s\" uses XML ID syntax"                                         },
 
-#if SUPPORT_ACCESSIBILITY_CHECKS
-    
+
     /***************************************
      ** Report Output -- Accessibility
      ***************************************/
@@ -2077,7 +2076,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { METADATA_MISSING,                              0,   "[13.2.1.1]: Metadata missing."                                            },
     { METADATA_MISSING_REDIRECT_AUTOREFRESH,         0,   "[13.2.1.3]: Metadata missing (redirect/auto-refresh)."                    },
     { SKIPOVER_ASCII_ART,                            0,   "[13.10.1.1]: skip over ascii art."                                        },
-#endif /* SUPPORT_ACCESSIBILITY_CHECKS */
     
     
 #if SUPPORT_CONSOLE_APP

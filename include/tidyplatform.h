@@ -77,11 +77,6 @@ extern "C" {
  * Optional Tidy features support
  *===========================================================================*/
 
-/* Enable/disable support for additional accessibility checks */
-#ifndef SUPPORT_ACCESSIBILITY_CHECKS
-#  define SUPPORT_ACCESSIBILITY_CHECKS 1
-#endif
-
 /* Enable/disable support for additional languages */
 #ifndef SUPPORT_LOCALIZATIONS
 #  define SUPPORT_LOCALIZATIONS 1

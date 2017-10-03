@@ -156,13 +156,6 @@ static PickListItems attributeCasePicks = {
 
 #define DLF DEFAULT_NL_CONFIG
 
-/* If Accessibility checks not supported, make config setting read-only */
-#if SUPPORT_ACCESSIBILITY_CHECKS
-#define ParseAcc ParsePickList
-#else
-#define ParseAcc NULL 
-#endif
-
 static void AdjustConfig( TidyDocImpl* doc );
 
 /* parser for integer values */
@@ -203,7 +196,7 @@ static ParseProperty ParsePickList;
 static const TidyOptionImpl option_defs[] =
 {
     { TidyUnknownOption,           MS, "unknown!",                    IN, 0,               NULL,              NULL                },
-    { TidyAccessibilityCheckLevel, DG, "accessibility-check",         IN, 0,               ParseAcc,          &accessPicks        },
+    { TidyAccessibilityCheckLevel, DG, "accessibility-check",         IN, 0,               ParsePickList,     &accessPicks        },
     { TidyAltText,                 MU, "alt-text",                    ST, 0,               ParseString,       NULL                },
     { TidyAnchorAsName,            MU, "anchor-as-name",              BL, yes,             ParsePickList,     &boolPicks          },
     { TidyAsciiChars,              CE, "ascii-chars",                 BL, no,              ParsePickList,     &boolPicks          },

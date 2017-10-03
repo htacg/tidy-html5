@@ -4,11 +4,6 @@
 /*********************************************************************
  * carry out accessibility checks
  *
- * This module is an add-on to HTML Tidy and is enabled or disabled via
- * the SUPPORT_ACCESSIBILITY_CHECKS macro, which is defined by default
- * in `tidyplatform.h`. Search this code for this macro to determine
- * other locations supporting code exists.
- *
  * This module carries out processes for all accessibility checks. It
  * traverses through all the content within the tree and evaluates the
  * tags for accessibility.
@@ -36,8 +31,6 @@
  *********************************************************************/
 
 #include "forward.h"
-
-#if SUPPORT_ACCESSIBILITY_CHECKS
 
 
 enum {
@@ -94,5 +87,4 @@ struct _TidyAccessImpl
 void TY_(AccessibilityChecks)( TidyDocImpl* doc );
 
 
-#endif /* SUPPORT_ACCESSIBILITY_CHECKS */
 #endif /* __ACCESS_H__ */

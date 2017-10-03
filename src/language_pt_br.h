@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-10-03 12:37:01
+ *   PO_REVISION_DATE=2017-10-03 12:44:37
  */
 
 #ifdef _MSC_VER
@@ -971,8 +971,6 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     { WHITE_IN_URI,                                  0, "%s descartando espaço em branco na referência de URI"                                            },
     { XML_DECLARATION_DETECTED,                      0, "Uma declaração XML foi detectada. Você queria usar input-xml?"                                   },
     { XML_ID_SYNTAX,                                 0, "%s ID \"%s\" usa sintaxe de ID de XML"                                                           },
-
-#if SUPPORT_ACCESSIBILITY_CHECKS
     { IMG_MISSING_ALT,                               0, "[1.1.1.1]: <img> carece de texto 'alt'."                                                         },
     { IMG_ALT_SUSPICIOUS_FILENAME,                   0, "[1.1.1.2]: texto 'alt' suspeito (nome de arquivo)."                                              },
     { IMG_ALT_SUSPICIOUS_FILE_SIZE,                  0, "[1.1.1.3]: texto 'alt' suspeito (tamanho de arquivo)."                                           },
@@ -1098,8 +1096,6 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     { METADATA_MISSING,                              0, "[13.2.1.1]: faltando metadados."                                                                 },
     { METADATA_MISSING_REDIRECT_AUTOREFRESH,         0, "[13.2.1.3]: faltando metadados (redirecionamento/autorrenovação)."                               },
     { SKIPOVER_ASCII_ART,                            0, "[13.10.1.1]: pular arte em ascii."                                                               },
-#endif /* SUPPORT_ACCESSIBILITY_CHECKS */
-
 
 #if SUPPORT_CONSOLE_APP
     { TC_LABEL_COL,                                  0, "coluna"                                                                                          },

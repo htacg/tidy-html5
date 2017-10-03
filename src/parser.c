@@ -4404,11 +4404,9 @@ void TY_(ParseFrameSet)(TidyDocImpl* doc, Node *frameset, GetTokenMode ARG_UNUSE
         }
 
         /* discard unexpected tags */
-#if SUPPORT_ACCESSIBILITY_CHECKS
         /* WAI [6.5.1.4] link is being discarded outside of NOFRAME */
         if ( nodeIsA(node) )
            doc->badAccess |= BA_INVALID_LINK_NOFRAMES;
-#endif
 
         TY_(Report)(doc, frameset, node, DISCARDING_UNEXPECTED);
         TY_(FreeNode)( doc, node);
@@ -4908,11 +4906,9 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
         break;
     }
 
-#if SUPPORT_ACCESSIBILITY_CHECKS
     /* do this before any more document fixes */
     if ( cfg( doc, TidyAccessibilityCheckLevel ) > 0 )
         TY_(AccessibilityChecks)( doc );
-#endif /* #if SUPPORT_ACCESSIBILITY_CHECKS */
 
     if (!TY_(FindHTML)(doc))
     {

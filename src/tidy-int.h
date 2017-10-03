@@ -43,11 +43,7 @@ struct _TidyDocImpl
     TidyConfigImpl      config;
     TidyTagImpl         tags;
     TidyAttribImpl      attribs;
-
-#if SUPPORT_ACCESSIBILITY_CHECKS
-    /* Accessibility Checks state */
     TidyAccessImpl      access;
-#endif
 
     /* The Pretty Print buffer */
     TidyPrintImpl       pprint;

@@ -920,12 +920,10 @@ void TY_(Report)(TidyDocImpl* doc, Node *element, Node *node, uint code, ...)
  * rest of Tidy's code.
  *********************************************************************/
 
-#if SUPPORT_ACCESSIBILITY_CHECKS
 void TY_(ReportAccessError)( TidyDocImpl* doc, Node* node, uint code )
 {
     TY_(Report)( doc, NULL, node, code );
 }
-#endif
 
 
 void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code)
@@ -1316,10 +1314,7 @@ static const tidyStringsKeyItem tidyStringsKeys[] = {
     
     { "TIDYSTRINGS_FIRST",                        TIDYSTRINGS_FIRST },
     
-#if SUPPORT_ACCESSIBILITY_CHECKS
     FOREACH_ACCESS_MSG(MAKE_STRUCT)
-#endif
-
 
 #if SUPPORT_CONSOLE_APP
     FOREACH_MSG_CONSOLE(MAKE_STRUCT)

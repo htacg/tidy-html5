@@ -362,9 +362,7 @@ static const CmdOptDesc cmdopt_defs[] =  {
     { CmdOptProcDir,   "-xml",                   TC_OPT_XML,      0,             "input-xml: yes" },
     { CmdOptProcDir,   "-asxml",                 TC_OPT_ASXML,    0,             "output-xhtml: yes", "-asxhtml" },
     { CmdOptProcDir,   "-ashtml",                TC_OPT_ASHTML,   0,             "output-html: yes" },
-#if SUPPORT_ACCESSIBILITY_CHECKS
     { CmdOptProcDir,   "-access <%s>",           TC_OPT_ACCESS,   TC_LABEL_LEVL, "accessibility-check: <%s>" },
-#endif
     { CmdOptCharEnc,   "-raw",                   TC_OPT_RAW,      0,             NULL },
     { CmdOptCharEnc,   "-ascii",                 TC_OPT_ASCII,    0,             NULL },
     { CmdOptCharEnc,   "-latin0",                TC_OPT_LATIN0,   0,             NULL },
@@ -2357,8 +2355,6 @@ int main( int argc, char** argv )
                     --argc;
                 }
             }
-
-#if SUPPORT_ACCESSIBILITY_CHECKS
                 else if ( strcasecmp(arg, "access") == 0 )
                 {
                     if ( argc >= 3 )
@@ -2373,7 +2369,6 @@ int main( int argc, char** argv )
                         }
                     }
                 }
-#endif
 
                 else
                 {

@@ -8,9 +8,6 @@
 
 
 #include "tidy-int.h"
-
-#if SUPPORT_ACCESSIBILITY_CHECKS
-
 #include "access.h"
 #include "message.h"
 #include "tags.h"
@@ -3321,13 +3318,3 @@ void TY_(AccessibilityChecks)( TidyDocImpl* doc )
     FreeAccessibilityChecks( doc );
 }
 
-#endif
-
-/*
- * local variables:
- * mode: c
- * indent-tabs-mode: nil
- * c-basic-offset: 4
- * eval: (c-set-offset 'substatement-open 0)
- * end:
- */

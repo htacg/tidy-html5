@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-10-03 12:37:01
+ *   PO_REVISION_DATE=2017-10-03 12:44:37
  */
 
 #ifdef _MSC_VER
@@ -147,8 +147,6 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
     },
     { UNKNOWN_ELEMENT_LOOKS_CUSTOM,     0, "%s is not recognised! Did you mean to enable the custom-tags option?"        },
     { UNKNOWN_ELEMENT,                  0, "%s is not recognised!"                                                       },
-
-#if SUPPORT_ACCESSIBILITY_CHECKS
     { MULTIMEDIA_REQUIRES_TEXT,         0, "[1.4.1.1]: multimedia requires synchronised text equivalents."               },
     { INFORMATION_NOT_CONVEYED_IMAGE,   0, "[2.1.1.1]: ensure information not conveyed through colour alone (image)."    },
     { INFORMATION_NOT_CONVEYED_APPLET,  0, "[2.1.1.2]: ensure information not conveyed through colour alone (applet)."   },
@@ -160,8 +158,6 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
     { COLOR_CONTRAST_ACTIVE_LINK,       0, "[2.2.1.3]: poor colour contrast (active link)."                              },
     { COLOR_CONTRAST_VISITED_LINK,      0, "[2.2.1.4]: poor colour contrast (visited link)."                             },
     { LAYOUT_TABLES_LINEARIZE_PROPERLY, 0, "[5.3.1.1]: verify layout tables linearise properly."                         },
-#endif /* SUPPORT_ACCESSIBILITY_CHECKS */
-
 
 #if SUPPORT_CONSOLE_APP
     { TC_TXT_HELP_LANG_2,               0,        

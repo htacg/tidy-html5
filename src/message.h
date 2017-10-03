@@ -116,10 +116,7 @@ void TY_(Report)(TidyDocImpl* doc, Node *element, Node *node, uint code, ...);
 /** @{ */
 
 
-#if SUPPORT_ACCESSIBILITY_CHECKS
 void TY_(ReportAccessError)( TidyDocImpl* doc, Node* node, uint code );
-#endif
-
 void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code);
 void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option );
 void TY_(ReportEntityError)( TidyDocImpl* doc, uint code, ctmbstr entity, int c );

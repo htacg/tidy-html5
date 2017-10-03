@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-10-03 12:37:01
+ *   PO_REVISION_DATE=2017-10-03 12:44:37
  */
 
 #ifdef _MSC_VER
@@ -864,8 +864,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { WHITE_IN_URI,                                  0, "%s rejet des espaces dans la référence URI"                                                             },
     { XML_DECLARATION_DETECTED,                      0, "Une déclaration XML a été détectée. Voulez-vous utiliser l'option input-xml?"                           },
     { XML_ID_SYNTAX,                                 0, "%s ID « %s » utilise la syntaxe XML ID"                                                                 },
-
-#if SUPPORT_ACCESSIBILITY_CHECKS
     { IMG_MISSING_ALT,                               0, "[1.1.1.1]: <img> texte manquant 'alt'."                                                                 },
     { IMG_ALT_SUSPICIOUS_FILENAME,                   0, "[1.1.1.2]: texte 'alt' suspect (nom de fichier)."                                                       },
     { IMG_ALT_SUSPICIOUS_FILE_SIZE,                  0, "[1.1.1.3]: texte 'alt' suspect (taille de fichier)."                                                    },
@@ -988,8 +986,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { METADATA_MISSING,                              0, "[13.2.1.1]: Métadonnées manquantes."                                                                    },
     { METADATA_MISSING_REDIRECT_AUTOREFRESH,         0, "[13.2.1.3]: Métadonnées manquantes (redirect/auto-refresh)."                                            },
     { SKIPOVER_ASCII_ART,                            0, "[13.10.1.1]: ignore l'ascii art."                                                                       },
-#endif /* SUPPORT_ACCESSIBILITY_CHECKS */
-
 
 #if SUPPORT_CONSOLE_APP
     { TC_LABEL_COL,                                  0, "colonne"                                                                                                },

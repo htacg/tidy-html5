@@ -613,11 +613,7 @@ typedef enum
     TidyOmitOptionalTags,        /**< Suppress optional start tags and end tags */
     TidyOutCharEncoding,         /**< Output character encoding (if different) */
     TidyOutFile,                 /**< File name to write markup to */
-#if SUPPORT_UTF16_ENCODINGS
     TidyOutputBOM,               /**< Output a Byte Order Mark (BOM) for UTF-16 encodings */
-#else
-    TidyOutputBOMNotUsed,        /**< This option is not compiled in */
-#endif
     TidyPPrintTabs,              /**< Indent using tabs istead of spaces */
     TidyPreserveEntities,        /**< Preserve entities */
     TidyPreTags,                 /**< Declared pre tags */
@@ -756,12 +752,9 @@ typedef enum
     TidyEncMac,
     TidyEncWin1252,
     TidyEncIbm858,
-
-#if SUPPORT_UTF16_ENCODINGS
     TidyEncUtf16le,
     TidyEncUtf16be,
     TidyEncUtf16,
-#endif
 
 #if SUPPORT_ASIAN_ENCODINGS
     TidyEncBig5,

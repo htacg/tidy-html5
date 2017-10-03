@@ -895,11 +895,9 @@ static void PPrintChar( TidyDocImpl* doc, uint c, uint mode )
     switch ( outenc )
     {
     case UTF8:
-#if SUPPORT_UTF16_ENCODINGS
     case UTF16:
     case UTF16LE:
     case UTF16BE:
-#endif
         if (!(mode & PREFORMATTED) && cfg(doc, TidyPunctWrap))
         {
             WrapPoint wp = CharacterWrapPoint(c);
@@ -982,14 +980,12 @@ static void PPrintChar( TidyDocImpl* doc, uint c, uint mode )
         return;
     }
 
-#if SUPPORT_UTF16_ENCODINGS
     /* don't map UTF-16 chars to entities */
     if ( outenc == UTF16 || outenc == UTF16LE || outenc == UTF16BE )
     {
         AddChar( pprint, c );
         return;
     }
-#endif
 
     /* use numeric entities only  for XML */
     if ( cfgBool(doc, TidyXmlTags) )

@@ -1,4 +1,4 @@
-#ifndef language_fr_h
+﻿#ifndef language_fr_h
 #define language_fr_h
 /*
  * language_fr.h
@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-09-19 14:00:03
+ *   PO_REVISION_DATE=2017-10-03 12:22:47
  */
 
 #ifdef _MSC_VER
@@ -355,8 +355,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "Cette option précise le fichier de sortie que Tidy utilise pour la structure de balises. En "
         "principe la structure est écrite vers <code>stdout</code>. "
     },
-
-#if SUPPORT_UTF16_ENCODINGS
     { TidyOutputBOM,                                 0,        
         "Cette option précise si Tidy doit écrire un caractère indicateur d'ordre des octets (Unicode Byte "
         "Order Mark ou BOM; connu aussi sous Zero Width No-Break Space; a la valeur de U+FEFF) au début de "
@@ -364,8 +362,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "<var>auto</var>, Tidy écrira un BOM vers la sortie seulement si un BOM était présent au début de "
         "l'entrée. <br/>Un BOM est toujours écrit pour la sortie XML/XHTML des sorties encodées en UTF-16. "
     },
-#endif /* SUPPORT_UTF16_ENCODINGS */
-
     { TidyPPrintTabs,                                0,        
         "Cette option précise si tidy doit indenter avec des tabulations plutôt que des espaces, en "
         "supposant que <code>indent</code> vaut <var>yes</var>. <br/>Définir cette option à <var>yes</var> "

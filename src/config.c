@@ -91,12 +91,9 @@ static PickListItems charEncPicks = {
     { "mac",      TidyEncMac,      { "mac",      NULL } },
     { "win1252",  TidyEncWin1252,  { "win1252",  NULL } },
     { "ibm858",   TidyEncIbm858,   { "ibm858",   NULL } },
-
-#if SUPPORT_UTF16_ENCODINGS
     { "utf16le",  TidyEncUtf16le,  { "utf16le",  NULL } },
     { "utf16be",  TidyEncUtf16be,  { "utf16be",  NULL } },
     { "utf16",    TidyEncUtf16,    { "utf16",    NULL } },
-#endif
 
 #if SUPPORT_ASIAN_ENCODINGS
     { "big5",     TidyEncBig5,     { "big5",     NULL } },
@@ -274,9 +271,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyOmitOptionalTags,        MU, "omit-optional-tags",          BL, no,              ParsePickList,     &boolPicks          },
     { TidyOutCharEncoding,         CE, "output-encoding",             IN, UTF8,            ParseCharEnc,      &charEncPicks       },
     { TidyOutFile,                 MS, "output-file",                 ST, 0,               ParseString,       NULL                },
-#if SUPPORT_UTF16_ENCODINGS
     { TidyOutputBOM,               CE, "output-bom",                  IN, TidyAutoState,   ParsePickList,     &autoBoolPicks      },
-#endif
     { TidyPPrintTabs,              PP, "indent-with-tabs",            BL, no,              ParseTabs,         &boolPicks          }, /* 20150515 - Issue #108 */
     { TidyPreserveEntities,        MU, "preserve-entities",           BL, no,              ParsePickList,     &boolPicks          },
     { TidyPreTags,                 MU, "new-pre-tags",                ST, 0,               ParseTagNames,     NULL                },
@@ -997,11 +992,10 @@ Bool  TY_(AdjustCharEncoding)( TidyDocImpl* doc, int encoding )
     case ISO2022:
 #endif
 
-#if SUPPORT_UTF16_ENCODINGS
     case UTF16LE:
     case UTF16BE:
     case UTF16:
-#endif
+
 #if SUPPORT_ASIAN_ENCODINGS
     case SHIFTJIS:
     case BIG5:
@@ -1066,11 +1060,9 @@ void AdjustConfig( TidyDocImpl* doc )
     */
     if ( cfg(doc, TidyOutCharEncoding) != ASCII &&
          cfg(doc, TidyOutCharEncoding) != UTF8 &&
-#if SUPPORT_UTF16_ENCODINGS
          cfg(doc, TidyOutCharEncoding) != UTF16 &&
          cfg(doc, TidyOutCharEncoding) != UTF16BE &&
          cfg(doc, TidyOutCharEncoding) != UTF16LE &&
-#endif
          cfg(doc, TidyOutCharEncoding) != RAW &&
          cfgBool(doc, TidyXmlOut) )
     {
@@ -1080,12 +1072,11 @@ void AdjustConfig( TidyDocImpl* doc )
     /* XML requires end tags */
     if ( cfgBool(doc, TidyXmlOut) )
     {
-#if SUPPORT_UTF16_ENCODINGS
         /* XML requires a BOM on output if using UTF-16 encoding */
         ulong enc = cfg( doc, TidyOutCharEncoding );
         if ( enc == UTF16LE || enc == UTF16BE || enc == UTF16 )
             TY_(SetOptionInt)( doc, TidyOutputBOM, yes );
-#endif
+        
         TY_(SetOptionBool)( doc, TidyQuoteAmpersand, yes );
         TY_(SetOptionBool)( doc, TidyOmitOptionalTags, no );
     }

@@ -1,4 +1,4 @@
-﻿#ifndef language_es_mx_h
+#ifndef language_es_mx_h
 #define language_es_mx_h
 /*
  * language_es_mx.h

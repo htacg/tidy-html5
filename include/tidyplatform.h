@@ -82,11 +82,6 @@ extern "C" {
 #  define SUPPORT_ASIAN_ENCODINGS 1
 #endif
 
-/* Enable/disable support for UTF-16 character encodings */
-#ifndef SUPPORT_UTF16_ENCODINGS
-#  define SUPPORT_UTF16_ENCODINGS 1
-#endif
-
 /* Enable/disable support for additional accessibility checks */
 #ifndef SUPPORT_ACCESSIBILITY_CHECKS
 #  define SUPPORT_ACCESSIBILITY_CHECKS 1

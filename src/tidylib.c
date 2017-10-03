@@ -2173,10 +2173,8 @@ int         tidyDocSaveStream( TidyDocImpl* doc, StreamOut* out )
 {
     Bool showMarkup  = cfgBool( doc, TidyShowMarkup );
     Bool forceOutput = cfgBool( doc, TidyForceOutput );
-#if SUPPORT_UTF16_ENCODINGS
     Bool outputBOM   = ( cfgAutoBool(doc, TidyOutputBOM) == TidyYesState );
     Bool smartBOM    = ( cfgAutoBool(doc, TidyOutputBOM) == TidyAutoState );
-#endif
     Bool xmlOut      = cfgBool( doc, TidyXmlOut );
     Bool xhtmlOut    = cfgBool( doc, TidyXhtmlOut );
     TidyTriState bodyOnly    = cfgAutoBool( doc, TidyBodyOnly );
@@ -2220,11 +2218,9 @@ int         tidyDocSaveStream( TidyDocImpl* doc, StreamOut* out )
 
     if ( showMarkup && (doc->errors == 0 || forceOutput) )
     {
-#if SUPPORT_UTF16_ENCODINGS
         /* Output a Byte Order Mark if required */
         if ( outputBOM || (doc->inputHadBOM && smartBOM) )
             TY_(outBOM)( out );
-#endif
 
         /* No longer necessary. No DOCTYPE == HTML 3.2,
         ** which gives you only the basic character entities,

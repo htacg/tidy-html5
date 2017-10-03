@@ -168,9 +168,7 @@ StreamIn* TY_(UserInput)( TidyDocImpl* doc, TidyInputSource* source, int encodin
 int TY_(ReadBOMEncoding)(StreamIn *in)
 {
     uint c, c1;
-#if SUPPORT_UTF16_ENCODINGS
     uint bom;
-#endif
 
     c = ReadByte(in);
     if (c == EndOfStream)
@@ -186,7 +184,6 @@ int TY_(ReadBOMEncoding)(StreamIn *in)
     /* todo: dont warn about mismatch for auto input encoding */
     /* todo: let the user override the encoding found here */
 
-#if SUPPORT_UTF16_ENCODINGS
     bom = (c << 8) + c1;
 
     if ( bom == UNICODE_BOM_BE )
@@ -206,7 +203,6 @@ int TY_(ReadBOMEncoding)(StreamIn *in)
         return UTF16LE; /* return decoded BOM */
     }
     else
-#endif /* SUPPORT_UTF16_ENCODINGS */
     {
         uint c2 = ReadByte(in);
 
@@ -410,7 +406,6 @@ uint TY_(ReadChar)( StreamIn *in )
             break;
         }
 
-#if SUPPORT_UTF16_ENCODINGS
         /* handle surrogate pairs */
         if ( in->encoding == UTF16LE ||
              in->encoding == UTF16   ||
@@ -441,7 +436,6 @@ uint TY_(ReadChar)( StreamIn *in )
                     TY_(ReportEncodingError)( in->doc, INVALID_UTF16, c, yes );
             }
         }
-#endif
 
         /* Do first: acts on range 128 - 255 */
         switch ( in->encoding )
@@ -670,7 +664,6 @@ void TY_(WriteChar)( uint c, StreamOut* out )
     }
 #endif /* NO_NATIVE_ISO2022_SUPPORT */
 
-#if SUPPORT_UTF16_ENCODINGS
     else if ( out->encoding == UTF16LE ||
               out->encoding == UTF16BE ||
               out->encoding == UTF16 )
@@ -717,7 +710,6 @@ void TY_(WriteChar)( uint c, StreamOut* out )
             }
         }
     }
-#endif
 
 #if SUPPORT_ASIAN_ENCODINGS
     else if (out->encoding == BIG5 || out->encoding == SHIFTJIS)
@@ -1210,7 +1202,6 @@ static uint ReadCharFromStream( StreamIn* in )
     }
 #endif /* #ifndef NO_NATIVE_ISO2022_SUPPORT */
 
-#if SUPPORT_UTF16_ENCODINGS
     if ( in->encoding == UTF16LE )
     {
         uint c1 = ReadByte( in );
@@ -1228,7 +1219,6 @@ static uint ReadCharFromStream( StreamIn* in )
         n = (c << 8) + c1;
         return n;
     }
-#endif
 
     if ( in->encoding == UTF8 )
     {
@@ -1303,11 +1293,9 @@ static uint ReadCharFromStream( StreamIn* in )
 void TY_(outBOM)( StreamOut *out )
 {
     if ( out->encoding == UTF8
-#if SUPPORT_UTF16_ENCODINGS
          || out->encoding == UTF16LE
          || out->encoding == UTF16BE
          || out->encoding == UTF16
-#endif
        )
     {
         /* this will take care of encoding the BOM correctly */
@@ -1331,11 +1319,9 @@ static struct _enc2iana
   { MACROMAN, "macintosh",    "mac"     },
   { WIN1252,  "windows-1252", "win1252" },
   { IBM858,   "ibm00858",     "ibm858"  },
-#if SUPPORT_UTF16_ENCODINGS
   { UTF16LE,  "utf-16",       "utf16le" },
   { UTF16BE,  "utf-16",       "utf16be" },
   { UTF16,    "utf-16",       "utf16"   },
-#endif
 #if SUPPORT_ASIAN_ENCODINGS
   { BIG5,     "big5",         "big5"    },
   { SHIFTJIS, "shift_jis",    "shiftjis"},

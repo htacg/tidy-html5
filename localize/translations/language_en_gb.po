@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-09-19 14:00:03\n"
+"PO-Revision-Date: 2017-10-03 12:22:47\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -257,7 +257,8 @@ msgid ""
 "<code>&lt;!DOCTYPE html&gt;</code>."
 "<br/>"
 "If set to <var>auto</var> (the default) Tidy will use an educated guess "
-"based upon the contents of the document."
+"based upon the contents of the document. Note that selecting this option "
+"will <em>not</em> change the current document's DOCTYPE on output. "
 "<br/>"
 "If set to <var>strict</var>, Tidy will set the DOCTYPE to the HTML4 or "
 "XHTML1 strict DTD."
@@ -472,10 +473,14 @@ msgid ""
 "This option specifies if Tidy should replace unexpected hyphens with "
 "<code>=</code> characters when it comes across adjacent hyphens. "
 "<br/>"
-"The default is <var>yes</var>. "
+"The default is <var>auto</var> will which will act as <var>no</var> "
+"for HTML5 document types, and <var>yes</var> for all other document "
+"types. "
 "<br/>"
-"This option is provided for users of Cold Fusion which uses the "
-"comment syntax: <code>&lt;!--- ---&gt;</code>. "
+"HTML has abandonded SGML comment syntax, and allows adjacent hypens "
+"for all versions of HTML, although XML and XHTML do not. If you plan "
+"to support older browsers that require SGML comment syntax, then "
+"consider setting this value to <var>yes</var>."
 msgstr ""
 
 #. Important notes for translators:
@@ -1102,6 +1107,24 @@ msgstr ""
 #. - It's very important that <br/> be self-closing!
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not
 #. be translated.
+msgctxt "TidyPriorityAttributes"
+msgid ""
+"This option allows prioritizing the writing of attributes in tidied "
+"documents, allowing them to written before the other attributes of an "
+"element. For example, you might specify that <var>id</var> and "
+"<var>name</var> are written before every other attribute. "
+"<br/>"
+"This option takes a space or comma separated list of attribute names. "
+msgstr ""
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
 msgctxt "TidyPunctWrap"
 msgid ""
 "This option specifies if Tidy should line wrap after some Unicode or "
@@ -1268,6 +1291,10 @@ msgid ""
 "This option specifies that Tidy should sort attributes within an element "
 "using the specified sort algorithm. If set to <var>alpha</var>, the "
 "algorithm is an ascending alphabetic sort. "
+"<br/>"
+"When used while sorting with <code>priority-attributes</code>, any "
+"attribute sorting will take place after the priority attributes have "
+"been output. "
 msgstr ""
 
 #. Important notes for translators:
@@ -2011,6 +2038,15 @@ msgid ""
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.
+msgctxt "FOOTNOTE_TRIM_EMPTY_ELEMENT"
+msgid ""
+"One or more empty elements were present in the source document but\n"
+"dropped on output. If these elements are necessary or you don't want\n"
+"this behavior, then consider setting the option \"drop-empty-elements\"\n"
+"to no.\n"
+msgstr ""
+
+#. This console output should be limited to 78 characters per line.
 #. - The URL should not be translated unless you find a matching URL in your language.
 msgctxt "TEXT_ACCESS_ADVICE1"
 msgid ""
@@ -2343,7 +2379,19 @@ msgid "%s joining values of repeated attribute \"%s\""
 msgstr ""
 
 msgctxt "MALFORMED_COMMENT"
-msgid "adjacent hyphens within comment"
+msgid "tidy replaced adjacent \"-\" with \"=\""
+msgstr ""
+
+msgctxt "MALFORMED_COMMENT_DROPPING"
+msgid "dropping a possible comment due to a missing hyphen"
+msgstr ""
+
+msgctxt "MALFORMED_COMMENT_EOS"
+msgid "the end of the document was reached before the end of the comment"
+msgstr ""
+
+msgctxt "MALFORMED_COMMENT_WARN"
+msgid "detected adjacent hyphens within the comment; consider fix-bad-comments"
 msgstr ""
 
 msgctxt "MALFORMED_DOCTYPE"
@@ -2385,6 +2433,11 @@ msgid "missing </%s>"
 msgstr ""
 
 #, c-format
+msgctxt "MISSING_ENDTAG_OPTIONAL"
+msgid "missing optional end tag </%s>"
+msgstr ""
+
+#, c-format
 msgctxt "MISSING_IMAGEMAP"
 msgid "%s should use client-side image map"
 msgstr ""
@@ -2392,6 +2445,11 @@ msgstr ""
 #, c-format
 msgctxt "MISSING_QUOTEMARK"
 msgid "%s attribute with missing trailing quote mark"
+msgstr ""
+
+#, c-format
+msgctxt "MISSING_QUOTEMARK_OPEN"
+msgid "value for attribute \"%s\" missing quote marks"
 msgstr ""
 
 #, c-format
@@ -2501,7 +2559,7 @@ msgid "unknown option: %s"
 msgstr ""
 
 msgctxt "SUSPECTED_MISSING_QUOTE"
-msgid "missing quote mark for attribute value"
+msgid "suspected missing quote mark for attribute value"
 msgstr ""
 
 #, c-format
@@ -3162,6 +3220,10 @@ msgctxt "TC_OPT_HELPCFG"
 msgid "list all configuration options"
 msgstr ""
 
+msgctxt "TC_OPT_HELPENV"
+msgid "show information about the environment and runtime configuration"
+msgstr ""
+
 msgctxt "TC_OPT_HELPOPT"
 msgid "show a description of the <option>"
 msgstr ""
@@ -3228,6 +3290,14 @@ msgstr ""
 
 msgctxt "TC_OPT_SHOWCFG"
 msgid "list the current configuration settings"
+msgstr ""
+
+msgctxt "TC_OPT_EXP_CFG"
+msgid "list the current configuration settings, suitable for a config file"
+msgstr ""
+
+msgctxt "TC_OPT_EXP_DEF"
+msgid "list the default configuration settings, suitable for a config file"
 msgstr ""
 
 msgctxt "TC_OPT_UPPER"
@@ -3409,48 +3479,71 @@ msgstr ""
 
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#. - %s represents either a blank line, or TC_TXT_HELP_3A explaining environment options.
+#, c-format
 msgctxt "TC_TXT_HELP_3"
 msgid ""
 "\n"
 "Tidy Configuration Options\n"
 "==========================\n"
-"Use Tidy's configuration options as command line arguments in the form\n"
-"of \"--some-option <value>\", for example, \"--indent-with-tabs yes\".\n"
+" Use Tidy's configuration options as command line arguments in the form\n"
+" of \"--some-option <value>\", for example, \"--indent-with-tabs yes\".\n"
 "\n"
-"For a list of all configuration options, use \"-help-config\" or refer\n"
-"to the man page (if your OS has one).\n"
+" You can also specify a file containing configuration options with the \n"
+" -options <file> directive, or in one or more files specific to your \n"
+" environment (see next section). \n"
 "\n"
-"If your environment has an $HTML_TIDY variable set point to a Tidy \n"
-"configuration file then Tidy will attempt to use it.\n"
+" For a list of all configuration options, use \"-help-config\" or refer\n"
+" to the man page (if your OS has one).\n"
 "\n"
-"On some platforms Tidy will also attempt to use a configuration specified \n"
-"in /etc/tidy.conf or ~/.tidy.conf.\n"
+"Configuration Files\n"
+"===================\n"
+" If your environment has an $HTML_TIDY variable set to point to a Tidy \n"
+" configuration file, then Tidy will attempt to use it. \n"
+"%s"
+" Use \"-help-env\" for more information about how you can use the environment. \n"
+" to specify Tidy options. \n"
 "\n"
 "Other\n"
 "=====\n"
-"Input/Output default to stdin/stdout respectively.\n"
+" Input/Output default to stdin/stdout respectively.\n"
 "\n"
-"Single letter options apart from -f may be combined\n"
-"as in:  tidy -f errs.txt -imu foo.html\n"
+" Single letter options apart from -f may be combined\n"
+" as in:  tidy -f errs.txt -imu foo.html\n"
 "\n"
 "Information\n"
 "===========\n"
-"For more information about HTML Tidy, see\n"
+" For more information about HTML Tidy, see\n"
 "  http://www.html-tidy.org/\n"
 "\n"
-"For more information on HTML, see the following:\n"
+" For more information on HTML, see the following:\n"
 "\n"
-"  HTML: Edition for Web Authors (the latest HTML specification)\n"
-"  http://dev.w3.org/html5/spec-author-view\n"
+"   HTML: Edition for Web Authors (the latest HTML specification)\n"
+"   http://dev.w3.org/html5/spec-author-view\n"
 "\n"
-"  HTML: The Markup Language (an HTML language reference)\n"
-"  http://dev.w3.org/html5/markup/\n"
+"   HTML: The Markup Language (an HTML language reference)\n"
+"   http://dev.w3.org/html5/markup/\n"
 "\n"
-"File bug reports at https://github.com/htacg/tidy-html5/issues/\n"
-"or send questions and comments to public-htacg@w3.org.\n"
+" File bug reports at https://github.com/htacg/tidy-html5/issues/\n"
+" or send questions and comments to public-htacg@w3.org.\n"
 "\n"
-"Validate your HTML documents using the W3C Nu Markup Validator:\n"
-"  http://validator.w3.org/nu/\n"
+" Validate your HTML documents using the W3C Nu Markup Validator:\n"
+"   http://validator.w3.org/nu/\n"
+"\n"
+msgstr ""
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#. - Both parameters %s reflect file paths and names.
+#, c-format
+msgctxt "TC_TXT_HELP_3A"
+msgid ""
+"\n"
+" Additionally, Tidy will automatically attempt to use configuration specified \n"
+" in these files, if present: \n"
+"\n"
+"  %s \n"
+"  %s \n"
 "\n"
 msgstr ""
 
@@ -3482,6 +3575,54 @@ msgstr ""
 
 msgctxt "TC_TXT_HELP_CONFIG_ALLW"
 msgid "Allowable values"
+msgstr ""
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#. - The first %s indicates two more list items, or an empty string.
+#. - The second %s indicates a file name, or a message indicating no file name.
+#, c-format
+msgctxt "TC_TXT_HELP_ENV_1"
+msgid ""
+"\n"
+"Tidy can configure its option values from multiple sources, in the \n"
+"order below. Subsequent use of the same option overrides previous \n"
+"option settings. \n"
+"\n"
+" - Tidy's built-in default values. \n"
+"%s" /* rc files */
+" - The file specified in the $HTML_TIDY environment variable: \n"
+"     %s \n"
+" - Options in a file specified on the command line. \n"
+" - Options set directly on the command line. \n"
+msgstr ""
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#, c-format
+msgctxt "TC_TXT_HELP_ENV_1A"
+msgid ""
+" - The system runtime configuration file: \n"
+"     %s \n"
+" - The user runtime configuration file: \n"
+"     %s \n"
+msgstr ""
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#. - This message indicates that a file name is not currently set.
+msgctxt "TC_TXT_HELP_ENV_1B"
+msgid "(not currently set)"
+msgstr ""
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#, c-format
+msgctxt "TC_TXT_HELP_ENV_1C"
+msgid ""
+"\n"
+"Note that because $HTML_TIDY is set, the user runtime configuration file \n"
+"%s will not be used. \n"
 msgstr ""
 
 #. This console output should be limited to 78 characters per line.

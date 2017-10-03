@@ -623,12 +623,10 @@ TidyMessageImpl *formatEncodingReport(TidyDocImpl* doc, Node *element, Node *nod
             doc->badChars |= BC_INVALID_UTF8;
             break;
 
-#if SUPPORT_UTF16_ENCODINGS
         case INVALID_UTF16:
             TY_(tmbsnprintf)(buf, sizeof(buf), "U+%04X", c);
             doc->badChars |= BC_INVALID_UTF16;
             break;
-#endif
 
         case VENDOR_SPECIFIC_CHARS:
             NtoS(c, buf);
@@ -1166,10 +1164,8 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
         if (doc->badChars & BC_INVALID_UTF8)
             TY_(Dialogue)( doc, TEXT_INVALID_UTF8 );
 
-#if SUPPORT_UTF16_ENCODINGS
         if (doc->badChars & BC_INVALID_UTF16)
             TY_(Dialogue)( doc, TEXT_INVALID_UTF16 );
-#endif
 
         if (doc->badChars & BC_INVALID_URI)
             TY_(Dialogue)( doc, TEXT_INVALID_URI );

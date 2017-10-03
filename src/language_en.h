@@ -933,7 +933,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option specifies the output file Tidy uses for markup. Normally "
         "markup is written to <code>stdout</code>. "
     },
-#if SUPPORT_UTF16_ENCODINGS
     {/* Important notes for translators:
         - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
           <br/>.
@@ -954,7 +953,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "A BOM is always written for XML/XHTML output using UTF-16 output "
         "encodings. "
     },
-#endif
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
       <br/>.

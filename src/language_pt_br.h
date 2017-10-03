@@ -403,8 +403,6 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "Essa opção especifica o arquivo de saída que o Tidy usa para marcação. "
         "Normalmente, a marcação é escrita para <code>stdout</code>. "
     },
-
-#if SUPPORT_UTF16_ENCODINGS
     { TidyOutputBOM,                                 0,        
         "Esta opção especifica se o Tidy deve escrever um caractere Unicode de marca "
         "de ordem de byte (BOM, também conhecido como Zero Width No Break Break, tem "
@@ -414,8 +412,6 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "presente no início da entrada. <br/>Um BOM está sempre escrita para saída "
         "XML/XHTML usando codificações de saída UTF-16. "
     },
-#endif /* SUPPORT_UTF16_ENCODINGS */
-
     { TidyPPrintTabs,                                0,        
         "Esta opção especifica se o Tidy deve aplicar recuo com tabulações em vez de "
         "espaços, presumindo que <code>indent</code> seja <var>yes</var>. <br/>Defina-"

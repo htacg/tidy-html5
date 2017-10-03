@@ -1184,35 +1184,30 @@ int         tidyDocSaveFile( TidyDocImpl* doc, ctmbstr filnam )
 */
 
 #if !defined(NO_SETMODE_SUPPORT)
-
-#if defined(_WIN32) || defined(OS2_OS)
-#include <fcntl.h>
-#include <io.h>
-#endif
-
+#  if defined(_WIN32) || defined(OS2_OS)
+#   include <fcntl.h>
+#     include <io.h>
+#   endif
 #endif
 
 int         tidyDocSaveStdout( TidyDocImpl* doc )
 {
 #if !defined(NO_SETMODE_SUPPORT)
-
-#if defined(_WIN32) || defined(OS2_OS)
+#  if defined(_WIN32) || defined(OS2_OS)
     int oldstdoutmode = -1, oldstderrmode = -1;
+#  endif
 #endif
 
-#endif
     int status = 0;
     uint outenc = cfg( doc, TidyOutCharEncoding );
     uint nl = cfg( doc, TidyNewline );
     StreamOut* out = TY_(FileOutput)( doc, stdout, outenc, nl );
 
 #if !defined(NO_SETMODE_SUPPORT)
-
-#if defined(_WIN32) || defined(OS2_OS)
+#  if defined(_WIN32) || defined(OS2_OS)
     oldstdoutmode = setmode( fileno(stdout), _O_BINARY );
     oldstderrmode = setmode( fileno(stderr), _O_BINARY );
-#endif
-
+#  endif
 #endif
 
     if ( 0 == status )
@@ -1222,14 +1217,12 @@ int         tidyDocSaveStdout( TidyDocImpl* doc )
     fflush(stderr);
 
 #if !defined(NO_SETMODE_SUPPORT)
-
-#if defined(_WIN32) || defined(OS2_OS)
+#  if defined(_WIN32) || defined(OS2_OS)
     if ( oldstdoutmode != -1 )
         oldstdoutmode = setmode( fileno(stdout), oldstdoutmode );
     if ( oldstderrmode != -1 )
         oldstderrmode = setmode( fileno(stderr), oldstderrmode );
-#endif
-
+#  endif
 #endif
 
     TidyDocFree( doc, out );

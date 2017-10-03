@@ -23,29 +23,28 @@
 #include "tidybuffio.h"
 #include "locale.h"     /* for determing and setting locale */
 #if defined(_WIN32)
-#include <windows.h>    /* Force console to UTF8. */
+#  include <windows.h>    /* Force console to UTF8. */
 #endif
 #if !defined(NDEBUG) && defined(_MSC_VER)
-#include "sprtf.h"
-#ifdef _CRTDBG_MAP_ALLOC  
-#include <stdlib.h>  
-#include <crtdbg.h>  
-#endif
+#  include "sprtf.h"
+#  ifdef _CRTDBG_MAP_ALLOC
+#    include <stdlib.h>
+#    include <crtdbg.h>
+#  endif
 #endif
 
 #ifndef SPRTF
-#define SPRTF printf
+#  define SPRTF printf
 #endif
 
 /** Tidy will send errors to this file, which will be stderr later. */
 static FILE* errout = NULL;
 
 #if defined(_WIN32)
-/** On Windows, we will store the original code page here. */
-static uint win_cp; /* original Windows code page */
-#if (defined(_MSC_VER) && (_MSC_VER < 1900))
-#define snprintf _snprintf
-#endif
+   static uint win_cp; /* original Windows code page */
+#  if (defined(_MSC_VER) && (_MSC_VER < 1900))
+#    define snprintf _snprintf
+#  endif
 #endif
 
 
@@ -2015,11 +2014,10 @@ int main( int argc, char** argv )
     uint accessWarnings = 0;
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
-#if defined(_CRTDBG_MAP_ALLOC)
+#  if defined(_CRTDBG_MAP_ALLOC)
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-#endif
-    set_log_file((char *)"temptidy.txt", 0);
-    /* add_append_log(1); */
+#  endif
+    set_log_file((char *)"temptidy.txt", 0); /* add_append_log(1); */
 #endif
 
     tdoc = tidyCreate();

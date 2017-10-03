@@ -36,11 +36,6 @@ struct _Anchor
 
 typedef struct _Anchor Anchor;
 
-#if !defined(ATTRIBUTE_HASH_LOOKUP)
-#define ATTRIBUTE_HASH_LOOKUP 1
-#endif
-
-#if ATTRIBUTE_HASH_LOOKUP
 enum
 {
     ATTRIBUTE_HASH_SIZE=178u
@@ -53,7 +48,6 @@ struct _AttrHash
 };
 
 typedef struct _AttrHash AttrHash;
-#endif
 
 enum
 {
@@ -78,9 +72,7 @@ struct _TidyAttribImpl
     /* Prioritized list of attributes to write */
     PriorityAttribs priorityAttribs;
 
-#if ATTRIBUTE_HASH_LOOKUP
     AttrHash*  hashtab[ATTRIBUTE_HASH_SIZE];
-#endif
 };
 
 typedef struct _TidyAttribImpl TidyAttribImpl;

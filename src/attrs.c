@@ -582,7 +582,6 @@ static ctmbstr GetColorName(ctmbstr code)
     return NULL;
 }
 
-#if ATTRIBUTE_HASH_LOOKUP
 static uint attrsHash(ctmbstr s)
 {
     uint hashval;
@@ -652,21 +651,17 @@ static void attrsEmptyHash( TidyDocImpl* doc, TidyAttribImpl * attribs )
         attribs->hashtab[i] = NULL;
     }
 }
-#endif
 
 static const Attribute* attrsLookup(TidyDocImpl* doc,
                                TidyAttribImpl* ARG_UNUSED(attribs),
                                ctmbstr atnam)
 {
     const Attribute *np;
-#if ATTRIBUTE_HASH_LOOKUP
     const AttrHash *p;
-#endif
 
     if (!atnam)
         return NULL;
 
-#if ATTRIBUTE_HASH_LOOKUP
     for (p = attribs->hashtab[attrsHash(atnam)]; p && p->attr; p = p->next)
         if (TY_(tmbstrcasecmp)(atnam, p->attr->name) == 0)
             return p->attr;
@@ -674,11 +669,6 @@ static const Attribute* attrsLookup(TidyDocImpl* doc,
     for (np = attribute_defs; np && np->name; ++np)
         if (TY_(tmbstrcasecmp)(atnam, np->name) == 0)
             return attrsInstall(doc, attribs, np);
-#else
-    for (np = attribute_defs; np && np->name; ++np)
-        if (TY_(tmbstrcasecmp)(atnam, np->name) == 0)
-            return np;
-#endif
 
     return NULL;
 }
@@ -1091,9 +1081,7 @@ static void FreeDeclaredAttributes( TidyDocImpl* doc )
     while ( NULL != (dict = attribs->declared_attr_list) )
     {
         attribs->declared_attr_list = dict->next;
-#if ATTRIBUTE_HASH_LOOKUP
         attrsRemoveFromHash( doc, &doc->attribs, dict->name );
-#endif
         TidyDocFree( doc, dict->name );
         TidyDocFree( doc, dict );
     }
@@ -1101,9 +1089,7 @@ static void FreeDeclaredAttributes( TidyDocImpl* doc )
 
 void TY_(FreeAttrTable)( TidyDocImpl* doc )
 {
-#if ATTRIBUTE_HASH_LOOKUP
     attrsEmptyHash( doc, &doc->attribs );
-#endif
     TY_(FreeAnchors)( doc );
     FreeDeclaredAttributes( doc );
 }

@@ -35,7 +35,7 @@
 #include "language.h"
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
-#include "sprtf.h"
+#  include "sprtf.h"
 #endif
 
 /* Create/Destroy a Tidy "document" object */

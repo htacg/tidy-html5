@@ -93,19 +93,18 @@ void TY_(freeFileSource)( TidyInputSource* inp, Bool closeIt )
         TY_(freeStdIOFileSource)( inp, closeIt );
 }
 
-#endif
+#endif /* SUPPORT_POSIX_MAPPED_FILES */
 
 
 #if defined(_WIN32)
-#if defined(_MSC_VER) && (_MSC_VER < 1300)  /* less than msvc++ 7.0 */
-#pragma warning(disable:4115) /* named type definition in parentheses in windows headers */
-#endif
-#include <windows.h>
-#include <errno.h>
-
-#include "streamio.h"
-#include "tidy-int.h"
-#include "message.h"
+#  if defined(_MSC_VER) && (_MSC_VER < 1300)  /* less than msvc++ 7.0 */
+#    pragma warning(disable:4115) /* named type definition in parentheses in windows headers */
+#  endif
+#  include <windows.h>
+#  include <errno.h>
+#  include "streamio.h"
+#  include "tidy-int.h"
+#  include "message.h"
 
 typedef struct _fp_input_mapped_source
 {
@@ -192,7 +191,7 @@ static int initMappedFileSource( TidyAllocator *allocator, TidyInputSource* inp,
     if ( !fin )
         return -1;
 
-#if defined(__MINGW32__)
+#  if defined(__MINGW32__)
     {
         DWORD lowVal, highVal;
         lowVal = GetFileSize(fp, &highVal);
@@ -205,8 +204,8 @@ static int initMappedFileSource( TidyAllocator *allocator, TidyInputSource* inp,
         fin->size = (fin->size << 32);
         fin->size += lowVal;
     }
-#else /* NOT a MinGW build */
-#if defined(_MSC_VER) && (_MSC_VER < 1300)  /* less than msvc++ 7.0 */
+#  else /* NOT a MinGW build */
+#    if defined(_MSC_VER) && (_MSC_VER < 1300)  /* less than msvc++ 7.0 */
     {
         LARGE_INTEGER* pli = (LARGE_INTEGER *)&fin->size;
         (DWORD)pli->LowPart = GetFileSize( fp, (DWORD *)&pli->HighPart );
@@ -216,15 +215,15 @@ static int initMappedFileSource( TidyAllocator *allocator, TidyInputSource* inp,
             return -1;
         }
     }
-#else
+#    else
     if ( !GetFileSizeEx( fp, (LARGE_INTEGER*)&fin->size )
          || fin->size <= 0 )
     {
         TidyFree(allocator, fin);
         return -1;
     }
-#endif
-#endif /* MinGW y/n */
+#    endif
+#  endif /* MinGW y/n */
 
     fin->map = CreateFileMapping( fp, NULL, PAGE_READONLY, 0, 0, NULL );
 
@@ -291,25 +290,25 @@ int TY_(DocParseFileWithMappedFile)( TidyDocImpl* doc, ctmbstr filnam ) {
     HANDLE fin = CreateFileA( filnam, GENERIC_READ, FILE_SHARE_READ, NULL,
                               OPEN_EXISTING, 0, NULL );
 
-#if PRESERVE_FILE_TIMES
+#  if PRESERVE_FILE_TIMES
     LONGLONG actime, modtime;
     TidyClearMemory( &doc->filetimes, sizeof(doc->filetimes) );
 
     if ( fin != INVALID_HANDLE_VALUE && cfgBool(doc,TidyKeepFileTimes) &&
          GetFileTime(fin, NULL, (FILETIME*)&actime, (FILETIME*)&modtime) )
     {
-#define TY_I64(str) TYDYAPPEND(str,LL)
-#if _MSC_VER < 1300  && !defined(__GNUC__) /* less than msvc++ 7.0 */
-# undef TY_I64
-# define TY_I64(str) TYDYAPPEND(str,i64)
-#endif
+#    define TY_I64(str) TYDYAPPEND(str,LL)
+#    if _MSC_VER < 1300  && !defined(__GNUC__) /* less than msvc++ 7.0 */
+#      undef TY_I64
+#      define TY_I64(str) TYDYAPPEND(str,i64)
+#    endif
         doc->filetimes.actime =
             (time_t)( ( actime  - TY_I64(116444736000000000)) / 10000000 );
 
         doc->filetimes.modtime =
             (time_t)( ( modtime - TY_I64(116444736000000000)) / 10000000 );
     }
-#endif
+#  endif /* PRESERVE_FILE_TIMES */
 
     if ( fin != INVALID_HANDLE_VALUE )
     {
@@ -330,14 +329,5 @@ int TY_(DocParseFileWithMappedFile)( TidyDocImpl* doc, ctmbstr filnam ) {
     return status;
 }
 
-#endif
+#endif /* defined(_WIN32) */
 
-
-/*
- * local variables:
- * mode: c
- * indent-tabs-mode: nil
- * c-basic-offset: 4
- * eval: (c-set-offset 'substatement-open 0)
- * end:
- */

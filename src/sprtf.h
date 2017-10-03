@@ -13,16 +13,16 @@
 /* Module: sprtf.h */
 /* Debug log file output */
 #ifndef _SPRTF_HXX_
-#define _SPRTF_HXX_
+#  define _SPRTF_HXX_
 #include "tidyplatform.h"
 
 #ifdef   __cplusplus
 extern "C" {
 #endif
 #ifdef _MSC_VER
-#define MCDECL _cdecl
+#  define MCDECL _cdecl
 #else
-#define MCDECL
+#  define MCDECL
 #endif
 
 TIDY_EXPORT int add_std_out( int val );
@@ -54,7 +54,7 @@ TIDY_EXPORT int gettimeofday(struct timeval *tp, void *tzp);
 #endif
 
 #ifndef SPRTF
-#define SPRTF sprtf
+#  define SPRTF sprtf
 #endif
 
 #ifdef   __cplusplus

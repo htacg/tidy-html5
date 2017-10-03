@@ -21,12 +21,12 @@
 #if !defined(NDEBUG) && defined(_MSC_VER)
 /* #define DEBUG_PPRINT */
 /* #define DEBUG_INDENT */
-#ifdef DEBUG_PPRINT
+#  ifdef DEBUG_PPRINT
 extern void dbg_show_node( TidyDocImpl* doc, Node *node, int caller, int indent );
-#endif
-#ifdef DEBUG_INDENT
-#include "sprtf.h"
-#endif
+#  endif
+#  ifdef DEBUG_INDENT
+#    include "sprtf.h"
+#  endif
 #endif
 
 /*

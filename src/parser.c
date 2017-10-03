@@ -13,11 +13,11 @@
 #include "tags.h"
 #include "tmbstr.h"
 #ifdef _MSC_VER
-#include "sprtf.h"
+#  include "sprtf.h"
 #endif
 
 #ifndef SPRTF
-#define SPRTF printf
+#  define SPRTF printf
 #endif
 
 /*
@@ -401,30 +401,12 @@ static void TrimTrailingSpace( TidyDocImpl* doc, Node *element, Node *last )
         {
             c = (byte) lexer->lexbuf[ last->end - 1 ];
 
-            if (   c == ' '
-#ifdef COMMENT_NBSP_FIX
-                || c == 160
-#endif
-               )
+            if ( c == ' ' )
             {
-#ifdef COMMENT_NBSP_FIX
-                /* take care with <td>&nbsp;</td> */
-                if ( c == 160 && 
-                     ( element->tag == doc->tags.tag_td || 
-                       element->tag == doc->tags.tag_th )
-                   )
-                {
-                    if (last->end > last->start + 1)
-                        last->end -= 1;
-                }
-                else
-#endif
-                {
-                    last->end -= 1;
-                    if ( (element->tag->model & CM_INLINE) &&
-                         !(element->tag->model & CM_FIELD) )
-                        lexer->insertspace = yes;
-                }
+                last->end -= 1;
+                if ( (element->tag->model & CM_INLINE) &&
+                     !(element->tag->model & CM_FIELD) )
+                    lexer->insertspace = yes;
             }
         }
     }

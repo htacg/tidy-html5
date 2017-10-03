@@ -40,11 +40,11 @@
 #include "utf8.h"
 #include "streamio.h"
 #ifdef _MSC_VER
-#include "sprtf.h"
+#  include "sprtf.h"
 #endif
 
 #ifndef SPRTF
-#define SPRTF printf
+#  define SPRTF printf
 #endif
 
 #if !defined(NDEBUG) && defined(_MSC_VER)

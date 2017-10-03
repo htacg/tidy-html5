@@ -162,12 +162,12 @@ uint TY_(DecodeMacRoman)(uint c);
 #define CR    0xD
 #define LF    0xA
 
-#if   defined(MAC_OS_CLASSIC)
-#define DEFAULT_NL_CONFIG TidyCR
+#if defined(MAC_OS_CLASSIC)
+#  define DEFAULT_NL_CONFIG TidyCR
 #elif defined(_WIN32) || defined(OS2_OS)
-#define DEFAULT_NL_CONFIG TidyCRLF
+#  define DEFAULT_NL_CONFIG TidyCRLF
 #else
-#define DEFAULT_NL_CONFIG TidyLF
+#  define DEFAULT_NL_CONFIG TidyLF
 #endif
 
 

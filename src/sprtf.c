@@ -11,40 +11,42 @@
  */
 
 #ifdef _MSC_VER
-#pragma warning( disable : 4995 )
+#  pragma warning( disable : 4995 )
 #endif
 /* Module: sprtf.c */
 /* Debug log file output */
 #include <stdio.h> /* fopen()... */
 #include <string.h> /* strcpy */
 #include <stdarg.h> /* va_start, va_end, ... */
+
 #ifdef _MSC_VER
-#include <WinSock2.h>
-#include <sys/timeb.h>
-#if (defined(UNICODE) || defined(_UNICODE))
-#include <Strsafe.h>
-#endif
+#  include <WinSock2.h>
+#  include <sys/timeb.h>
+#  if (defined(UNICODE) || defined(_UNICODE))
+#    include <Strsafe.h>
+#  endif
 #else /* !_MSC_VER */
-#include <sys/time.h> /* gettimeoday(), struct timeval,... */
+#  include <sys/time.h> /* gettimeoday(), struct timeval,... */
 #endif /* _MSC_VER y/n */
+
 #include <time.h>
 #include <stdlib.h> /* for exit() in unix */
 #include "sprtf.h"
 
 #ifdef _MSC_VER
-#ifndef _CRT_SECURE_NO_DEPRECATE
-#define _CRT_SECURE_NO_DEPRECATE
-#endif /* #ifndef _CRT_SECURE_NO_DEPRECATE */
-#pragma warning( disable:4996 )
+#  ifndef _CRT_SECURE_NO_DEPRECATE
+#    define _CRT_SECURE_NO_DEPRECATE
+#  endif /* #ifndef _CRT_SECURE_NO_DEPRECATE */
+#  pragma warning( disable:4996 )
 #else
-#define strcmpi strcasecmp
+#  define strcmpi strcasecmp
 #endif 
 
 #ifndef MX_ONE_BUF
-#define MX_ONE_BUF 1024
+#  define MX_ONE_BUF 1024
 #endif
 #ifndef MX_BUFFERS
-#define MX_BUFFERS 1024
+#  define MX_BUFFERS 1024
 #endif
 
 static char _s_strbufs[MX_ONE_BUF * MX_BUFFERS];
@@ -75,7 +77,7 @@ static int add2listview = 0;
 static int append_to_log = 0;
 
 #ifndef VFP
-#define VFP(a) ( a && ( a != (FILE *)-1 ) )
+#  define VFP(a) ( a && ( a != (FILE *)-1 ) )
 #endif
 
 int   add_list_out( int val )

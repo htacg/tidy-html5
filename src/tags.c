@@ -11,7 +11,7 @@
 #include "message.h"
 #include "tmbstr.h"
 #if !defined(NDEBUG) && defined(_MSC_VER)
-#include "sprtf.h"
+#  include "sprtf.h"
 #endif
 /* Attribute checking methods */
 static CheckAttribs CheckIMG;

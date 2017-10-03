@@ -236,6 +236,12 @@ if (TIDY_RC_NUMBER)
     add_definitions ( -DRC_NUMBER="${TIDY_RC_NUMBER}" )
 endif ()
 
+# If your OS doesn't have native ISO2022 support, then build with this flag.
+if (NO_NATIVE_ISO2022_SUPPORT)
+    add_definitions ( -DNO_NATIVE_ISO2022_SUPPORT=1 )
+endif ()
+
+
 # Delete me? Not used in Tidy source!
 add_definitions ( -DHAVE_CONFIG_H ) 
 

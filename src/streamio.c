@@ -1193,7 +1193,7 @@ static uint ReadCharFromStream( StreamIn* in )
 
         return c;
     }
-#endif /* #ifndef NO_NATIVE_ISO2022_SUPPORT */
+#endif /* NO_NATIVE_ISO2022_SUPPORT */
 
     if ( in->encoding == UTF16LE )
     {

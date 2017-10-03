@@ -2017,7 +2017,7 @@ int main( int argc, char** argv )
 #  if defined(_CRTDBG_MAP_ALLOC)
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #  endif
-    set_log_file((char *)"temptidy.txt", 0); /* add_append_log(1); */
+    set_log_file((char *)"temptidy.txt", 0);
 #endif
 
     tdoc = tidyCreate();

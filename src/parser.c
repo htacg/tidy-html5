@@ -20,10 +20,6 @@
 #define SPRTF printf
 #endif
 
-#ifdef AUTO_INPUT_ENCODING
-#include "charsets.h"
-#endif
-
 /*
   Issue #72 - Need to know to avoid error-reporting - no warning only if --show-body-only yes
   Issue #132 - likewise avoid warning if showing body only
@@ -3754,49 +3750,6 @@ void TY_(ParseHead)(TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode))
                                      TOO_MANY_ELEMENTS_IN : TOO_MANY_ELEMENTS);
             }
 
-#ifdef AUTO_INPUT_ENCODING
-            else if (nodeIsMETA(node))
-            {
-                AttVal * httpEquiv = AttrGetById(node, TidyAttr_HTTP_EQUIV);
-                AttVal * content = AttrGetById(node, TidyAttr_CONTENT);
-                if (httpEquiv && AttrValueIs(httpEquiv, "Content-Type") && AttrHasValue(content))
-                {
-                    tmbstr val, charset;
-                    uint end = 0;
-                    val = charset = TY_(tmbstrdup)(doc->allocator, content->value);
-                    val = TY_(tmbstrtolower)(val);
-                    val = strstr(content->value, "charset");
-                    
-                    if (val)
-                        val += 7;
-
-                    while(val && *val && (TY_(IsWhite)((tchar)*val) ||
-                          *val == '=' || *val == '"' || *val == '\''))
-                        ++val;
-
-                    while(val && val[end] && !(TY_(IsWhite)((tchar)val[end]) ||
-                          val[end] == '"' || val[end] == '\'' || val[end] == ';'))
-                        ++end;
-
-                    if (val && end)
-                    {
-                        tmbstr encoding = TY_(tmbstrndup)(doc->allocator,val, end);
-                        uint id = TY_(GetEncodingIdFromName)(encoding);
-
-                        /* todo: detect mismatch with BOM/XMLDecl/declared */
-                        /* todo: error for unsupported encodings */
-                        /* todo: try to re-init transcoder */
-                        /* todo: change input/output encoding settings */
-                        /* todo: store id in StreamIn */
-
-                        TidyDocFree(doc, encoding);
-                    }
-
-                    TidyDocFree(doc, charset);
-                }
-            }
-#endif /* AUTO_INPUT_ENCODING */
-
             TY_(InsertNodeAtEnd)(head, node);
             ParseTag(doc, node, IgnoreWhitespace);
             continue;
@@ -4706,22 +4659,6 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
                 TY_(Report)(doc, &doc->root, node, SPACE_PRECEDING_XMLDECL);
             }
         }
-#ifdef AUTO_INPUT_ENCODING
-        if (node->type == XmlDecl)
-        {
-            AttVal* encoding = GetAttrByName(node, "encoding");
-            if (AttrHasValue(encoding))
-            {
-                uint id = TY_(GetEncodingIdFromName)(encoding->value);
-
-                /* todo: detect mismatch with BOM/XMLDecl/declared */
-                /* todo: error for unsupported encodings */
-                /* todo: try to re-init transcoder */
-                /* todo: change input/output encoding settings */
-                /* todo: store id in StreamIn */
-            }
-        }
-#endif /* AUTO_INPUT_ENCODING */
 
         /* deal with comments etc. */
         if (InsertMisc( &doc->root, node ))

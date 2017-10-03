@@ -332,7 +332,6 @@ static Dict tag_defs[] =
   { (TidyTagId)0,        NULL,         0,                    NULL,                       (0),                                           NULL,          NULL           }
 };
 
-#if ELEMENT_HASH_LOOKUP
 static uint tagsHash(ctmbstr s)
 {
     uint hashval;
@@ -401,19 +400,15 @@ static void tagsEmptyHash( TidyDocImpl* doc, TidyTagImpl* tags )
         tags->hashtab[i] = NULL;
     }
 }
-#endif /* ELEMENT_HASH_LOOKUP */
 
 static const Dict* tagsLookup( TidyDocImpl* doc, TidyTagImpl* tags, ctmbstr s )
 {
     const Dict *np;
-#if ELEMENT_HASH_LOOKUP
     const DictHash* p;
-#endif
 
     if (!s)
         return NULL;
 
-#if ELEMENT_HASH_LOOKUP
     /* this breaks if declared elements get changed between two   */
     /* parser runs since Tidy would use the cached version rather */
     /* than the new one.                                          */
@@ -430,17 +425,6 @@ static const Dict* tagsLookup( TidyDocImpl* doc, TidyTagImpl* tags, ctmbstr s )
     for (np = tags->declared_tag_list; np; np = np->next)
         if (TY_(tmbstrcmp)(s, np->name) == 0)
             return tagsInstall(doc, tags, np);
-#else
-
-    for (np = tag_defs + 1; np < tag_defs + N_TIDY_TAGS; ++np)
-        if (TY_(tmbstrcmp)(s, np->name) == 0)
-            return np;
-
-    for (np = tags->declared_tag_list; np; np = np->next)
-        if (TY_(tmbstrcmp)(s, np->name) == 0)
-            return np;
-
-#endif /* ELEMENT_HASH_LOOKUP */
 
     return NULL;
 }
@@ -742,9 +726,7 @@ void TY_(FreeDeclaredTags)( TidyDocImpl* doc, UserTagType tagType )
 
         if ( deleteIt )
         {
-#if ELEMENT_HASH_LOOKUP
           tagsRemoveFromHash( doc, &doc->tags, curr->name );
-#endif
           FreeDict( doc, curr );
           if ( prev )
             prev->next = next;
@@ -808,9 +790,7 @@ void TY_(AdjustTags)( TidyDocImpl *doc )
         np->parser = TY_(ParseBlock);
     }
 
-#if ELEMENT_HASH_LOOKUP
     tagsEmptyHash(doc, tags); /* not sure this is really required, but to be sure */
-#endif
     doc->HTML5Mode = no;   /* set *NOT* HTML5 mode */
 
 }
@@ -857,9 +837,7 @@ void TY_(ResetTags)( TidyDocImpl *doc )
         np->parser = TY_(ParseInline);
     }
 
-#if ELEMENT_HASH_LOOKUP
     tagsEmptyHash( doc, tags ); /* not sure this is really required, but to be sure */
-#endif
     doc->HTML5Mode = yes;   /* set HTML5 mode */
 }
 
@@ -867,9 +845,7 @@ void TY_(FreeTags)( TidyDocImpl* doc )
 {
     TidyTagImpl* tags = &doc->tags;
 
-#if ELEMENT_HASH_LOOKUP
     tagsEmptyHash( doc, tags );
-#endif
     TY_(FreeDeclaredTags)( doc, tagtype_null );
     FreeDict( doc, tags->xml_tags );
 

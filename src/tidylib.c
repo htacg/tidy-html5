@@ -73,43 +73,6 @@ static int          tidyDocSaveBuffer( TidyDocImpl* impl, TidyBuffer* outbuf );
 static int          tidyDocSaveSink( TidyDocImpl* impl, TidyOutputSink* docOut );
 static int          tidyDocSaveStream( TidyDocImpl* impl, StreamOut* out );
 
-#ifdef NEVER
-TidyDocImpl* tidyDocToImpl( TidyDoc tdoc )
-{
-  return (TidyDocImpl*) tdoc;
-}
-TidyDoc      tidyImplToDoc( TidyDocImpl* impl )
-{
-  return (TidyDoc) impl;
-}
-
-Node*        tidyNodeToImpl( TidyNode tnod )
-{
-  return (Node*) tnod;
-}
-TidyNode     tidyImplToNode( Node* node )
-{
-  return (TidyNode) node;
-}
-
-AttVal*      tidyAttrToImpl( TidyAttr tattr )
-{
-  return (AttVal*) tattr;
-}
-TidyAttr     tidyImplToAttr( AttVal* attval )
-{
-  return (TidyAttr) attval;
-}
-
-const TidyOptionImpl* tidyOptionToImpl( TidyOption topt )
-{
-  return (const TidyOptionImpl*) topt;
-}
-TidyOption   tidyImplToOption( const TidyOptionImpl* option )
-{
-  return (TidyOption) option;
-}
-#endif
 
 /* Tidy public interface
 **
@@ -867,44 +830,6 @@ double TIDY_CALL tidyGetArgValueDouble( TidyMessage tmessage, TidyMessageArgumen
     TidyMessageImpl *message = tidyMessageToImpl(tmessage);
     return TY_(getArgValueDouble)(*message, arg);
 }
-
-
-
-
-#if 0   /* Not yet */
-int         tidySetContentOutputSink( TidyDoc tdoc, TidyOutputSink* outp )
-{
-  TidyDocImpl* impl = tidyDocToImpl( tdoc );
-  if ( impl )
-  {
-    impl->docOut = outp;
-    return 0;
-  }
-  return -EINVAL;
-}
-int         tidySetDiagnosticOutputSink( TidyDoc tdoc, TidyOutputSink* outp )
-{
-  TidyDocImpl* impl = tidyDocToImpl( tdoc );
-  if ( impl )
-  {
-    impl->msgOut = outp;
-    return 0;
-  }
-  return -EINVAL;
-}
-
-
-/* Library helpers
-*/
-cmbstr       tidyLookupMessage( TidyDoc tdoc, int errorNo )
-{
-  TidyDocImpl* impl = tidyDocToImpl( tdoc );
-  cmbstr mssg = NULL;
-  if ( impl )
-    mssg = tidyMessage_Lookup( impl->messages, errorNo );
-  return mssg;
-}
-#endif
 
 
 FILE* TIDY_CALL   tidySetErrorFile( TidyDoc tdoc, ctmbstr errfilnam )
@@ -2055,14 +1980,6 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     /* clean up html exported by Google Docs */
     if ( gdoc )
         TY_(CleanGoogleDocument)( doc );
-
-    /*  Move terminating <br /> tags from out of paragraphs  */
-    /*!  Do we want to do this for all block-level elements?  */
-
-    /* This is disabled due to http://tidy.sf.net/bug/681116 */
-#if 0
-    FixBrakes( doc, TY_(FindBody)( doc ));
-#endif
 
     /*  Reconcile http-equiv meta element with output encoding  */
     TY_(TidyMetaCharset)(doc);

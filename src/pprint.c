@@ -127,36 +127,6 @@ static struct _unicode4cat
   UnicodeCategory category;
 } const unicode4cat[] =
 {
-#if 0
-  { 0x037E, UCPO }, { 0x0387, UCPO }, { 0x055A, UCPO }, { 0x055B, UCPO },
-  { 0x055C, UCPO }, { 0x055D, UCPO }, { 0x055E, UCPO }, { 0x055F, UCPO },
-  { 0x0589, UCPO }, { 0x058A, UCPD }, { 0x05BE, UCPO }, { 0x05C0, UCPO },
-  { 0x05C3, UCPO }, { 0x05F3, UCPO }, { 0x05F4, UCPO }, { 0x060C, UCPO },
-  { 0x060D, UCPO }, { 0x061B, UCPO }, { 0x061F, UCPO }, { 0x066A, UCPO },
-  { 0x066B, UCPO }, { 0x066C, UCPO }, { 0x066D, UCPO }, { 0x06D4, UCPO },
-  { 0x0700, UCPO }, { 0x0701, UCPO }, { 0x0702, UCPO }, { 0x0703, UCPO },
-  { 0x0704, UCPO }, { 0x0705, UCPO }, { 0x0706, UCPO }, { 0x0707, UCPO },
-  { 0x0708, UCPO }, { 0x0709, UCPO }, { 0x070A, UCPO }, { 0x070B, UCPO },
-  { 0x070C, UCPO }, { 0x070D, UCPO }, { 0x0964, UCPO }, { 0x0965, UCPO },
-  { 0x0970, UCPO }, { 0x0DF4, UCPO }, { 0x0E4F, UCPO }, { 0x0E5A, UCPO },
-  { 0x0E5B, UCPO }, { 0x0F04, UCPO }, { 0x0F05, UCPO }, { 0x0F06, UCPO },
-  { 0x0F07, UCPO }, { 0x0F08, UCPO }, { 0x0F09, UCPO }, { 0x0F0A, UCPO },
-  { 0x0F0B, UCPO }, { 0x0F0D, UCPO }, { 0x0F0E, UCPO }, { 0x0F0F, UCPO },
-  { 0x0F10, UCPO }, { 0x0F11, UCPO }, { 0x0F12, UCPO }, { 0x0F3A, UCPS },
-  { 0x0F3B, UCPE }, { 0x0F3C, UCPS }, { 0x0F3D, UCPE }, { 0x0F85, UCPO },
-  { 0x104A, UCPO }, { 0x104B, UCPO }, { 0x104C, UCPO }, { 0x104D, UCPO },
-  { 0x104E, UCPO }, { 0x104F, UCPO }, { 0x10FB, UCPO }, { 0x1361, UCPO },
-  { 0x1362, UCPO }, { 0x1363, UCPO }, { 0x1364, UCPO }, { 0x1365, UCPO },
-  { 0x1366, UCPO }, { 0x1367, UCPO }, { 0x1368, UCPO }, { 0x166D, UCPO },
-  { 0x166E, UCPO }, { 0x1680, UCZS }, { 0x169B, UCPS }, { 0x169C, UCPE },
-  { 0x16EB, UCPO }, { 0x16EC, UCPO }, { 0x16ED, UCPO }, { 0x1735, UCPO },
-  { 0x1736, UCPO }, { 0x17D4, UCPO }, { 0x17D5, UCPO }, { 0x17D6, UCPO },
-  { 0x17D8, UCPO }, { 0x17D9, UCPO }, { 0x17DA, UCPO }, { 0x1800, UCPO },
-  { 0x1801, UCPO }, { 0x1802, UCPO }, { 0x1803, UCPO }, { 0x1804, UCPO },
-  { 0x1805, UCPO }, { 0x1806, UCPD }, { 0x1807, UCPO }, { 0x1808, UCPO },
-  { 0x1809, UCPO }, { 0x180A, UCPO }, { 0x180E, UCZS }, { 0x1944, UCPO },
-  { 0x1945, UCPO }, 
-#endif
   { 0x2000, UCZS }, { 0x2001, UCZS }, { 0x2002, UCZS }, { 0x2003, UCZS },
   { 0x2004, UCZS }, { 0x2005, UCZS }, { 0x2006, UCZS }, { 0x2008, UCZS },
   { 0x2009, UCZS }, { 0x200A, UCZS }, { 0x2010, UCPD }, { 0x2012, UCPD },
@@ -1064,14 +1034,6 @@ static void PPrintText( TidyDocImpl* doc, uint mode, uint indent,
     }
 }
 
-#if 0
-static void PPrintString( TidyDocImpl* doc, uint indent, ctmbstr str )
-{
-    while ( *str != '\0' )
-        AddChar( &doc->pprint, *str++ );
-}
-#endif /* 0 */
-
 
 static void PPrintAttrValue( TidyDocImpl* doc, uint indent,
                              ctmbstr value, uint delim, Bool wrappable, Bool scriptAttr )
@@ -1269,15 +1231,6 @@ static void PPrintAttribute( TidyDocImpl* doc, uint indent,
         AddChar(pprint, c);
         ++name;
     }
-
-/* fix for bug 732038 */
-#if 0
-    /* If not indenting attributes, bump up indent for 
-    ** value after putting out name.
-    */
-    if ( !indAttrs )
-        indent += xtra;
-#endif
 
     CheckWrapIndent( doc, indent );
  
@@ -1550,17 +1503,6 @@ static void PPrintEndTag( TidyDocImpl* doc, uint ARG_UNUSED(mode),
     tmbstr s = node->element;
     tchar c;
 
-   /*
-     Netscape ignores SGML standard by not ignoring a
-     line break before </A> or </U> etc. To avoid rendering 
-     this as an underlined space, I disable line wrapping
-     before inline end tags by the #if 0 ... #endif
-   */
-#if 0
-    if ( !(mode & NOWRAP) )
-        SetWrap( doc, indent );
-#endif
-
     AddString( pprint, "</" );
 
     if (s)
@@ -1589,16 +1531,7 @@ static void PPrintComment( TidyDocImpl* doc, uint indent, Node* node )
     SetWrap( doc, indent );
     AddString( pprint, "<!--" );
 
-#if 0
-    SetWrap( doc, indent );
-#endif
-
     PPrintText(doc, COMMENT, 0, node);
-
-#if 0
-    SetWrap( doc, indent );
-    AddString( pprint, "--" );
-#endif
 
     AddString(pprint, "--");
     AddChar( pprint, '>' );
@@ -1742,9 +1675,6 @@ static void PPrintAsp( TidyDocImpl* doc, uint indent, Node *node )
     Bool wrapJste = cfgBool( doc, TidyWrapJste );
     uint saveWrap = WrapOffCond( doc, !wrapAsp || !wrapJste );
 
-#if 0
-    SetWrap( doc, indent );
-#endif
     AddString( pprint, "<%" );
     PPrintText( doc, (wrapAsp ? CDATA : COMMENT), indent, node );
     AddString( pprint, "%>" );
@@ -1775,9 +1705,6 @@ static void PPrintPhp( TidyDocImpl* doc, uint indent, Node *node )
     TidyPrintImpl* pprint = &doc->pprint;
     Bool wrapPhp = cfgBool( doc, TidyWrapPhp );
     uint saveWrap = WrapOffCond( doc, !wrapPhp  );
-#if 0
-    SetWrap( doc, indent );
-#endif
 
     AddString( pprint, "<?" );
     PPrintText( doc, (wrapPhp ? CDATA : COMMENT),
@@ -1812,9 +1739,6 @@ static void PPrintSection( TidyDocImpl* doc, uint indent, Node *node )
     TidyPrintImpl* pprint = &doc->pprint;
     Bool wrapSect = cfgBool( doc, TidyWrapSection );
     uint saveWrap = WrapOffCond( doc, !wrapSect  );
-#if 0
-    SetWrap( doc, indent );
-#endif
 
     AddString( pprint, "<![" );
     PPrintText( doc, (wrapSect ? CDATA : COMMENT),
@@ -1825,29 +1749,6 @@ static void PPrintSection( TidyDocImpl* doc, uint indent, Node *node )
     WrapOn( doc, saveWrap );
 }
 
-
-#if 0
-/*
-** Print script and style elements. For XHTML, wrap the content as follows:
-**
-**     JavaScript:
-**         //<![CDATA[
-**             content
-**         //]]>
-**     VBScript:
-**         '<![CDATA[
-**             content
-**         ']]>
-**     CSS:
-**         / *<![CDATA[* /     Extra spaces to keep compiler happy
-**             content
-**         / *]]>* /
-**     other:
-**         <![CDATA[
-**             content
-**         ]]>
-*/
-#endif
 
 static ctmbstr CDATA_START           = "<![CDATA[";
 static ctmbstr CDATA_END             = "]]>";

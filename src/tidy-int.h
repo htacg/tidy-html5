@@ -131,21 +131,6 @@ struct _TidyMessageImpl
 };
 
 
-/* Twizzle internal/external types */
-#ifdef NEVER
-TidyDocImpl* tidyDocToImpl( TidyDoc tdoc );
-TidyDoc      tidyImplToDoc( TidyDocImpl* impl );
-
-Node*        tidyNodeToImpl( TidyNode tnod );
-TidyNode     tidyImplToNode( Node* node );
-
-AttVal*      tidyAttrToImpl( TidyAttr tattr );
-TidyAttr     tidyImplToAttr( AttVal* attval );
-
-const TidyOptionImpl* tidyOptionToImpl( TidyOption topt );
-TidyOption   tidyImplToOption( const TidyOptionImpl* option );
-#else
-
 #define tidyDocToImpl( tdoc )           ((TidyDocImpl*)(tdoc))
 #define tidyImplToDoc( doc )            ((TidyDoc)(doc))
 
@@ -161,7 +146,6 @@ TidyOption   tidyImplToOption( const TidyOptionImpl* option );
 #define tidyOptionToImpl( topt )        ((const TidyOptionImpl*)(topt))
 #define tidyImplToOption( option )      ((TidyOption)(option))
 
-#endif
 
 /** Wrappers for easy memory allocation using the document's allocator */
 #define TidyDocAlloc(doc, size) TidyAlloc((doc)->allocator, size)

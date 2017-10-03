@@ -2451,24 +2451,6 @@ int main( int argc, char** argv )
 
         if ( status >= 0 ) {
             status = tidyRunDiagnostics( tdoc );
-            /*\ Issue #119 - but not really related to 'custom_tags' support.
-             *  Issue ?: To remove some 2014 extra debug output - I wanted to
-             *  remove the Info: messages, but chose to except one, namely
-             *  tidyReportDoctype(), but never intended keeping it here 
-             *  for so long!
-             *  That doctype Info:, and all others, are still reported by 
-             *  default. geoff
-            \*/
-#if 0 /* 000000000 this code can be removed some time in future 00000000000 */
-            if ( !tidyOptGetBool(tdoc, TidyQuiet) ) {
-                /* NOT quiet, show DOCTYPE, if not already shown */
-                if (!tidyOptGetBool(tdoc, TidyShowInfo)) {
-                    tidyOptSetBool( tdoc, TidyShowInfo, yes );
-                    tidyReportDoctype( tdoc );  /* FIX20140913: like warnings, errors, ALWAYS report DOCTYPE */
-                    tidyOptSetBool( tdoc, TidyShowInfo, no );
-                }
-            }
-#endif /* 000000000 this code can be removed some time in future 00000000000 */
         }
         if ( status > 1 ) /* If errors, do we want to force output? */
             status = ( tidyOptGetBool(tdoc, TidyForceOutput) ? status : -1 );

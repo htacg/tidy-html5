@@ -2505,50 +2505,6 @@ static void AccessibleCompatible( TidyDocImpl* doc, Node* node )
 }
 
 
-/********************************************************
-* WordCount
-*
-* Counts the number of words in the document.  Must have
-* more than 3 words to verify changes in natural
-* language of document.
-*
-* CPR - Not sure what intent is here, but this 
-* routine has nothing to do with changes in language.
-* It seems like a bad idea to emit this message for
-* every document with _more_ than 3 words!
-********************************************************/
-#if 0
-static int WordCount( TidyDocImpl* doc, Node* node )
-{
-    int wc = 0;
-
-    if (Level1_Enabled( doc ))
-    {
-        /* Count the number of words found within a text node */
-        if ( TY_(nodeIsText)( node ) )
-        {
-            tmbchar ch;
-            ctmbstr word = textFromOneNode( doc, node );
-            if ( !IsWhitespace(word) )
-            {
-                ++wc;
-                while ( (ch = *word++) && wc < 5 )
-                {
-                    if ( ch == ' ')
-                        ++wc;
-                }
-            }
-        }
-
-        for ( node = node->content; wc < 5 && node; node = node->next )
-        {
-            wc += WordCount( doc, node );
-        }
-    }
-    return wc;
-}
-#endif
-
 /**************************************************
 * CheckFlicker
 *

@@ -226,7 +226,9 @@ endif ()
 
 #------------------------------------------------------------------------
 # Macro Values
-#   These additional macros are set in Tidy's source code.
+#   These additional macros are set in Tidy's source code. It is *very*
+#   seldom that you would ever have to change any of these in order to
+#   achieve a functioning build.
 #------------------------------------------------------------------------
 add_definitions ( -DLIBTIDY_VERSION="${LIBTIDY_VERSION}" )
 add_definitions ( -DRELEASE_DATE="${tidy_YEAR}/${tidy_MONTH}/${tidy_DAY}" )
@@ -241,6 +243,10 @@ if (NO_NATIVE_ISO2022_SUPPORT)
     add_definitions ( -DNO_NATIVE_ISO2022_SUPPORT=1 )
 endif ()
 
+# If your OS doesn't have library function access(), build with this flag.
+if (NO_ACCESS_SUPPORT)
+    add_definitions ( -DNO_ACCESS_SUPPORT=1 )
+endif ()
 
 # Delete me? Not used in Tidy source!
 add_definitions ( -DHAVE_CONFIG_H ) 

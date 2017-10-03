@@ -2166,129 +2166,6 @@ void TY_(BumpObject)( TidyDocImpl* doc, Node *html )
     }
 }
 
-/* This is disabled due to http://tidy.sf.net/bug/681116 */
-#if 0
-void FixBrakes( TidyDocImpl* pDoc, Node *pParent )
-{
-    Node *pNode;
-    Bool bBRDeleted = no;
-
-    if (NULL == pParent)
-        return;
-
-    /*  First, check the status of All My Children  */
-    pNode = pParent->content;
-    while (NULL != pNode )
-    {
-        /* The node may get trimmed, so save the next pointer, if any */
-        Node *pNext = pNode->next;
-        FixBrakes( pDoc, pNode );
-        pNode = pNext;
-    }
-
-
-    /*  As long as my last child is a <br />, move it to my last peer  */
-    if ( nodeCMIsBlock( pParent ))
-    { 
-        for ( pNode = pParent->last; 
-              NULL != pNode && nodeIsBR( pNode ); 
-              pNode = pParent->last ) 
-        {
-            if ( NULL == pNode->attributes && no == bBRDeleted )
-            {
-                TY_(DiscardElement)( pDoc, pNode );
-                bBRDeleted = yes;
-            }
-            else
-            {
-                TY_(RemoveNode)( pNode );
-                TY_(InsertNodeAfterElement)( pParent, pNode );
-            }
-        }
-        TY_(TrimEmptyElement)( pDoc, pParent );
-    }
-}
-#endif
-
-/* Issue #456 - This is discarded 
-   See replacement TidyMetaCharset */
-#if 0  /* 000000000000000000000000 */
-void TY_(VerifyHTTPEquiv)(TidyDocImpl* doc, Node *head)
-{
-    Node *pNode;
-    StyleProp *pFirstProp = NULL, *pLastProp = NULL, *prop = NULL;
-    tmbstr s, pszBegin, pszEnd;
-    ctmbstr enc = TY_(GetEncodingNameFromTidyId)(cfg(doc, TidyOutCharEncoding));
-
-    if (!enc)
-        return;
-
-    if (!nodeIsHEAD(head))
-        head = TY_(FindHEAD)(doc);
-
-    if (!head)
-        return;
-
-    /* Find any <meta http-equiv='Content-Type' content='...' /> */
-    for (pNode = head->content; NULL != pNode; pNode = pNode->next)
-    {
-        AttVal* httpEquiv = TY_(AttrGetById)(pNode, TidyAttr_HTTP_EQUIV);
-        AttVal* metaContent = TY_(AttrGetById)(pNode, TidyAttr_CONTENT);
-
-        if ( !nodeIsMETA(pNode) || !metaContent ||
-             !AttrValueIs(httpEquiv, "Content-Type") )
-            continue;
-
-        pszBegin = s = TY_(tmbstrdup)( doc->allocator, metaContent->value );
-        while (pszBegin && *pszBegin)
-        {
-            while (isspace( *pszBegin ))
-                pszBegin++;
-            pszEnd = pszBegin;
-            while ('\0' != *pszEnd && ';' != *pszEnd)
-                pszEnd++;
-            if (';' == *pszEnd )
-                *(pszEnd++) = '\0';
-            if (pszEnd > pszBegin)
-            {
-                prop = (StyleProp *)TidyDocAlloc(doc, sizeof(StyleProp));
-                prop->name = TY_(tmbstrdup)( doc->allocator, pszBegin );
-                prop->value = NULL;
-                prop->next = NULL;
-
-                if (NULL != pLastProp)
-                    pLastProp->next = prop;
-                else
-                    pFirstProp = prop;
-
-                pLastProp = prop;
-                pszBegin = pszEnd;
-            }
-        }
-        TidyDocFree( doc, s );
-
-        /*  find the charset property */
-        for (prop = pFirstProp; NULL != prop; prop = prop->next)
-        {
-            if (0 != TY_(tmbstrncasecmp)( prop->name, "charset", 7 ))
-                continue;
-
-            TidyDocFree( doc, prop->name );
-            prop->name = (tmbstr)TidyDocAlloc( doc, 8 + TY_(tmbstrlen)(enc) + 1 );
-            TY_(tmbstrcpy)(prop->name, "charset=");
-            TY_(tmbstrcpy)(prop->name+8, enc);
-            s = CreatePropString( doc, pFirstProp );
-            TidyDocFree( doc, metaContent->value );
-            metaContent->value = s;
-            break;
-        }
-        /* #718127, prevent memory leakage */
-        FreeStyleProps(doc, pFirstProp);
-        pFirstProp = NULL;
-        pLastProp = NULL;
-    }
-}
-#endif  /* 000000000000000000000000 */
 
 /*\
 *  Issue #456 - Check meta charset
@@ -2327,13 +2204,6 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
 #endif
     if (cfgAutoBool(doc, TidyBodyOnly) == TidyYesState)
         return no; /* nothing to do here if showing body only */
-
-#if 0  /* 000000000000000000000000 */
-    if (!add_meta) {
-        TY_(VerifyHTTPEquiv)(doc, head);
-        return no;
-    }
-#endif /* 000000000000000000000000 */
 
     tidyBufInit(&charsetString);
     /* Set up the content test 'charset=value' */
@@ -2407,17 +2277,6 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
                 continue;   /* is not 'content-type' */
             if (!contentAttr->value)
             {
-                /* While this **seems** like a good idea, current tidy accepts this
-                   see reg.test case-1117013.html which contains 
-                   <META HTTP-EQUIV="Content-Type" CONTENT=""> so for now. This could be reviewed 
-                   in future, since there seem no need to keep this invalid meta */
-#if 0 /* 0000000000000000000000000000000000000000000000000 */
-                prevNode = currentNode->prev;
-                /* maybe need better message here */
-                TY_(Report)(doc, head, currentNode, DISCARDING_UNEXPECTED);
-                TY_(DiscardElement)(doc, currentNode);
-                currentNode = prevNode;
-#endif /* 000000000000000000000000000000000000000000000000 */
                 continue; /* has no 'content' attribute has NO VALUE! */
             }
             /* check encoding matches

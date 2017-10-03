@@ -238,11 +238,6 @@ static struct _doctypes
   { 20, HT50, 500, no,  "HTML5",                  NULL,                                     NULL                                                        },
   { 21, XH50, 500, yes, "XHTML5",                 NULL,                                     NULL                                                        },
 
-  /* reminder to add XHTML Print 1.0 support, see http://www.w3.org/TR/xhtml-print */
-#if 0
-  { 14, XP10, 100, yes, "XHTML Print 1.0",        "-//W3C//DTD XHTML-Print 1.0//EN",         "http://www.w3.org/MarkUp/DTD/xhtml-print10.dtd"           },
-  { 14, XP10, 100, yes, "XHTML Print 1.0",        "-//PWG//DTD XHTML-Print 1.0//EN",         "http://www.xhtml-print.org/xhtml-print/xhtml-print10.dtd" },
-#endif
   /* final entry */
   {  0,    0, 0,  no,  NULL,                     NULL,                                     NULL                                                        }
 };
@@ -825,15 +820,6 @@ Bool TY_(IsXMLNamechar)(uint c)
         (c >= 0x30fc && c <= 0x30fe));
 }
 
-#if 0
-Bool IsLower(uint c)
-{
-    uint map = MAP(c);
-
-    return (map & lowercase)!=0;
-}
-#endif
-
 Bool TY_(IsUpper)(uint c)
 {
     uint map = MAP(c);
@@ -860,24 +846,6 @@ uint TY_(ToUpper)(uint c)
 
     return c;
 }
-
-#if 0
-char FoldCase( TidyDocImpl* doc, tmbchar c, Bool tocaps )
-{
-    if ( !cfgBool(doc, TidyXmlTags) )
-    {
-        if ( tocaps )
-        {
-            c = (tmbchar) ToUpper(c);
-        }
-        else /* force to lower case */
-        {
-            c = (tmbchar) ToLower(c);
-        }
-    }
-    return c;
-}
-#endif
 
 /*
  return last character in string
@@ -1002,9 +970,6 @@ void TY_(AddCharToLexer)( Lexer *lexer, uint c )
     err = TY_(EncodeCharToUTF8Bytes)( c, buf, NULL, &count );
     if (err)
     {
-#if 0 && defined(_DEBUG)
-        fprintf( stderr, "lexer UTF-8 encoding error for U+%x : ", c );
-#endif
         /* replacement character 0xFFFD encoded as UTF-8 */
         buf[0] = (byte) 0xEF;
         buf[1] = (byte) 0xBF;
@@ -2481,15 +2446,7 @@ static Node *GetCDATA( TidyDocImpl* doc, Node *container )
     if (c == EndOfStream)
         TY_(Report)(doc, container, NULL, MISSING_ENDTAG_FOR );
 
-/* this was disabled for some reason... */
-#if 0
-    if (lexer->txtend > lexer->txtstart)
-        return TextToken(lexer);
-    else
-        return NULL;
-#else
     return TY_(TextToken)(lexer);
-#endif
 }
 
 void TY_(UngetToken)( TidyDocImpl* doc )

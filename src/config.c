@@ -751,10 +751,6 @@ Bool TIDY_CALL tidyFileExists( TidyDoc tdoc, ctmbstr filename )
 }
 
 
-#ifndef TIDY_MAX_NAME
-#define TIDY_MAX_NAME 64
-#endif
-
 int TY_(ParseConfigFile)( TidyDocImpl* doc, ctmbstr file )
 {
     return TY_(ParseConfigFileEnc)( doc, file, "ascii" );
@@ -764,6 +760,7 @@ int TY_(ParseConfigFile)( TidyDocImpl* doc, ctmbstr file )
 */
 int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
 {
+    enum { tidy_max_name = 64 };
     uint opterrs = doc->optionErrors;
     tmbstr fname = (tmbstr) ExpandTilde( doc, file );
     TidyConfigImpl* cfg = &doc->config;
@@ -784,7 +781,7 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
         for ( c = SkipWhite(cfg); c != EndOfStream; c = NextProperty(cfg) )
         {
             uint ix = 0;
-            tmbchar name[ TIDY_MAX_NAME ] = {0};
+            tmbchar name[ tidy_max_name ] = {0};
 
             /* // or # start a comment */
             if ( c == '/' || c == '#' )

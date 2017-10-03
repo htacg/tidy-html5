@@ -1056,18 +1056,6 @@ Bool TY_(nodeIsElement)( Node* node )
            (node->type == StartTag || node->type == StartEndTag) );
 }
 
-#if 0
-/* Compare & result to operand.  If equal, then all bits
-** requested are set.
-*/
-Bool nodeMatchCM( Node* node, uint contentModel )
-{
-  return ( node && node->tag &&
-           (node->tag->model & contentModel) == contentModel );
-}
-#endif
-
-
 Bool TY_(elementIsAutonomousCustomFormat)( ctmbstr element )
 {
     if ( element )

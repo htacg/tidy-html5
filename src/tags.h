@@ -126,14 +126,6 @@ Bool TY_(nodeIsElement)( Node* node );
 
 Bool TY_(nodeHasText)( TidyDocImpl* doc, Node* node );
 
-#if 0
-/* Compare & result to operand.  If equal, then all bits
-** requested are set.
-*/
-Bool nodeMatchCM( Node* node, uint contentModel );
-#endif
-
-
 /* True if the element looks like it's an autonomous custom element tag. */
 Bool TY_(elementIsAutonomousCustomFormat)( ctmbstr element );
 

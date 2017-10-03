@@ -59,14 +59,6 @@ Bool TY_(IsWord2000)( TidyDocImpl* doc );
 /* where appropriate move object elements from head to body */
 void TY_(BumpObject)( TidyDocImpl* doc, Node *html );
 
-/* This is disabled due to http://tidy.sf.net/bug/681116 */
-#if 0
-void TY_(FixBrakes)( TidyDocImpl* pDoc, Node *pParent );
-#endif
-/* Issue #456 - This is discarded */
-#if 0
-void TY_(VerifyHTTPEquiv)( TidyDocImpl* pDoc, Node *pParent );
-#endif
 Bool TY_(TidyMetaCharset)(TidyDocImpl* doc);
 
 void TY_(DropComments)(TidyDocImpl* doc, Node* node);

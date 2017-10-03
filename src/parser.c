@@ -434,41 +434,6 @@ static void TrimTrailingSpace( TidyDocImpl* doc, Node *element, Node *last )
     }
 }
 
-#if 0
-static Node *EscapeTag(Lexer *lexer, Node *element)
-{
-    Node *node = NewNode(lexer->allocator, lexer);
-
-    node->start = lexer->lexsize;
-    AddByte(lexer, '<');
-
-    if (element->type == EndTag)
-        AddByte(lexer, '/');
-
-    if (element->element)
-    {
-        char *p;
-        for (p = element->element; *p != '\0'; ++p)
-            AddByte(lexer, *p);
-    }
-    else if (element->type == DocTypeTag)
-    {
-        uint i;
-        AddStringLiteral( lexer, "!DOCTYPE " );
-        for (i = element->start; i < element->end; ++i)
-            AddByte(lexer, lexer->lexbuf[i]);
-    }
-
-    if (element->type == StartEndTag)
-        AddByte(lexer, '/');
-
-    AddByte(lexer, '>');
-    node->end = lexer->lexsize;
-
-    return node;
-}
-#endif /* 0 */
-
 /* Only true for text nodes. */
 Bool TY_(IsBlank)(Lexer *lexer, Node *node)
 {
@@ -946,22 +911,6 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
             return;
         }
 
-#if OBSOLETE /* Issue #380 Kill this code! But leave in src, just in case! */
-        if ( nodeIsBODY( node ) && DescendantOf( element, TidyTag_HEAD ))
-        {
-            /*  If we're in the HEAD, close it before proceeding.
-                This is an extremely rare occurance, but has been observed.
-                ****************************************************************
-                Issue #380 - This can cause an INFINITE loop!
-                This code was added to SF CVS Tidy
-                revision 1.121 by lpassey, Wed Jul 28 18:08:06 2004 UTC
-                ****************************************************************
-            */
-            TY_(UngetToken)( doc );
-            break;
-        }
-#endif /* #if OBSOLETE */
-
         if ( nodeIsHTML(node) || nodeIsHEAD(node) || nodeIsBODY(node) )
         {
             if ( TY_(nodeIsElement)(node) )
@@ -991,12 +940,6 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                 */
                 node->type = StartEndTag;
                 node->implicit = yes;
-#if OBSOLETE
-                TY_(CoerceNode)(doc, node, TidyTag_BR, no, no);
-                TY_(FreeAttrs)( doc, node ); /* discard align attribute etc. */
-                TY_(InsertNodeAtEnd)( element, node );
-                node = InferredTag(doc, TidyTag_BR);
-#endif
             }
             else if (DescendantOf( element, node->tag->id ))
             {
@@ -1006,32 +949,6 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                 */
                 TY_(UngetToken)( doc );
                 break;
-#if OBSOLETE
-                Node *parent;
-                for ( parent = element->parent;
-                      parent != NULL; 
-                      parent = parent->parent )
-                {
-                    if (node->tag == parent->tag)
-                    {
-                        if (!(element->tag->model & CM_OPT))
-                            TY_(Report)(doc, element, node, MISSING_ENDTAG_BEFORE );
-
-                        TY_(UngetToken)( doc );
-
-                        if (element->tag->model & CM_OBJECT)
-                        {
-                            /* pop inline stack */
-                            while (lexer->istacksize > lexer->istackbase)
-                                TY_(PopInline)( doc, NULL );
-                            lexer->istackbase = istackbase;
-                        }
-
-                        TrimSpaces( doc, element );
-                        return;
-                    }
-                }
-#endif
             }
             else
             {
@@ -2365,11 +2282,6 @@ void TY_(ParseDefList)(TidyDocImpl* doc, Node *list, GetTokenMode mode)
             else /* trim empty dl list */
             {
                 TY_(InsertNodeBeforeElement)(list, node);
-
-/* #540296 tidy dumps with empty definition list */
-#if 0
-                TY_(DiscardElement)(list);
-#endif
             }
 
             /* #426885 - fix by Glenn Carroll 19 Apr 00, and
@@ -4034,15 +3946,6 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
         if (InsertMisc(body, node))
             continue;
 
-        /* #538536 Extra endtags not detected */
-#if 0
-        if ( lexer->seenEndBody == 1 && !iswhitenode )
-        {
-            ++lexer->seenEndBody;
-            TY_(Report)(doc, body, node, CONTENT_AFTER_BODY);
-        }
-#endif
-
         /* mixed content model permits text */
         if (TY_(nodeIsText)(node))
         {
@@ -4167,12 +4070,6 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
             {
                 node->type = StartEndTag;
                 node->implicit = yes;
-#if OBSOLETE
-                TY_(CoerceNode)(doc, node, TidyTag_BR, no, no);
-                FreeAttrs( doc, node ); /* discard align attribute etc. */
-                TY_(InsertNodeAtEnd)(body, node);
-                node = TY_(InferredTag)(doc, TidyTag_BR);
-#endif
             }
             else if ( TY_(nodeHasCM)(node, CM_INLINE) )
                 TY_(PopInline)( doc, node );

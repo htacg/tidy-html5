@@ -60,11 +60,6 @@ typedef struct _TidyPrintImpl
 } TidyPrintImpl;
 
 
-#if 0
-/* #431953 - start RJ Wraplen adjusted for smooth international ride */
-uint CWrapLen( TidyDocImpl* doc, uint ind );
-#endif
-
 void TY_(InitPrintBuf)( TidyDocImpl* doc );
 void TY_(FreePrintBuf)( TidyDocImpl* doc );
 

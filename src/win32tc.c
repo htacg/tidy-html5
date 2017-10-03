@@ -576,63 +576,6 @@ void TY_(Win32MLangUninitInputTranscoder)(StreamIn * in)
     CoUninitialize();
 }
 
-#if 0
-Bool Win32MLangInitOutputTranscoder(TidyAllocator *allocator, StreamOut * out, tmbstr encoding)
-{
-    IMLangConvertCharset * p = NULL;
-    HRESULT hr;
-    uint wincp;
-
-    assert( out != NULL );
-
-    CoInitialize(NULL);
-
-    wincp = TY_(Win32MLangGetCPFromName)(allocator, encoding);
-    if (wincp == 0)
-    {
-        /* no codepage found for this encoding */
-        return no;
-    }
-
-    hr = CreateMLangObject(p);
-
-    if (hr != S_OK || !p)
-    {
-        /* MLang not supported */
-        return no;
-    }
-
-    IMLangConvertCharset_Initialize(p, 1200, wincp, MLCONVCHARF_NOBESTFITCHARS);
-
-    if (hr != S_OK)
-    {
-        /* encoding not supported, insufficient memory, etc. */
-        return no;
-    }
-
-    out->mlang = p;
-
-    return yes;
-}
-
-void Win32MLangUninitOutputTranscoder(StreamOut * out)
-{
-    IMLangConvertCharset * p;
-
-    assert( out != NULL );
-
-    p = (IMLangConvertCharset *)out->mlang;
-    if (p)
-    {
-        IMLangConvertCharset_Release(p);
-        p = NULL;
-        out->mlang = NULL;
-    }
-
-    CoUninitialize();
-}
-#endif
-
 int TY_(Win32MLangGetChar)(byte firstByte, StreamIn * in, uint * bytesRead)
 {
     IMLangConvertCharset * p;

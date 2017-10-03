@@ -1539,10 +1539,6 @@ void TY_(FreeNode)( TidyDocImpl* doc, Node *node )
         TY_(FreeAttrs)( doc, node );
         TY_(FreeNode)( doc, node->content );
         TidyDocFree( doc, node->element );
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-        if (node->otext)
-            TidyDocFree(doc, node->otext);
-#endif
         if (RootNode != node->type)
             TidyDocFree( doc, node );
         else
@@ -1551,53 +1547,6 @@ void TY_(FreeNode)( TidyDocImpl* doc, Node *node )
         node = next;
     }
 }
-
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-void StoreOriginalTextInToken(TidyDocImpl* doc, Node* node, uint count)
-{
-    if (!doc->storeText)
-        return;
-
-    if (count >= doc->docIn->otextlen)
-        return;
-
-    if (!doc->docIn->otextsize)
-        return;
-
-    if (count == 0)
-    {
-        node->otext = doc->docIn->otextbuf;
-        doc->docIn->otextbuf = NULL;
-        doc->docIn->otextlen = 0;
-        doc->docIn->otextsize = 0;
-    }
-    else
-    {
-        uint len = doc->docIn->otextlen;
-        tmbstr buf1 = (tmbstr)TidyDocAlloc(doc, len - count + 1);
-        tmbstr buf2 = (tmbstr)TidyDocAlloc(doc, count + 1);
-        uint i, j;
-
-        /* strncpy? */
-
-        for (i = 0; i < len - count; ++i)
-            buf1[i] = doc->docIn->otextbuf[i];
-
-        buf1[i] = 0;
-
-        for (j = 0; j + i < len; ++j)
-            buf2[j] = doc->docIn->otextbuf[j + i];
-
-        buf2[j] = 0;
-
-        TidyDocFree(doc, doc->docIn->otextbuf);
-        node->otext = buf1;
-        doc->docIn->otextbuf = buf2;
-        doc->docIn->otextlen = count;
-        doc->docIn->otextsize = count + 1;
-    }
-}
-#endif
 
 Node* TY_(TextToken)( Lexer *lexer )
 {
@@ -1651,9 +1600,6 @@ static Node* NewToken(TidyDocImpl* doc, NodeType type)
     node->type = type;
     node->start = lexer->txtstart;
     node->end = lexer->txtend;
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-    StoreOriginalTextInToken(doc, node, 0);
-#endif
     return node;
 }
 
@@ -2454,17 +2400,8 @@ void TY_(UngetToken)( TidyDocImpl* doc )
     doc->lexer->pushed = yes;
 }
 
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-#define CondReturnTextNode(doc, skip) \
-            if (lexer->txtend > lexer->txtstart) \
-            { \
-                lexer->token = TY_(TextToken)(lexer); \
-                StoreOriginalTextInToken(doc, lexer->token, skip); \
-                return lexer->token; \
-            }
-#else
 #if !defined(NDEBUG) && defined(_MSC_VER)
-#define CondReturnTextNode(doc, skip) \
+#  define CondReturnTextNode(doc, skip) \
             if (lexer->txtend > lexer->txtstart) { \
                 Node *_node = TY_(TextToken)(lexer); \
                 lexer->token = _node; \
@@ -2473,13 +2410,12 @@ void TY_(UngetToken)( TidyDocImpl* doc )
             }
 
 #else
-#define CondReturnTextNode(doc, skip) \
+#  define CondReturnTextNode(doc, skip) \
             if (lexer->txtend > lexer->txtstart) \
             { \
                 lexer->token = TY_(TextToken)(lexer); \
                 return lexer->token; \
             }
-#endif
 #endif
 
 /*
@@ -2695,9 +2631,6 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                                 lexer->txtend = lexer->lexsize;
                             }
                             lexer->token = TY_(TextToken)(lexer);
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-                            StoreOriginalTextInToken(doc, lexer->token, 3);
-#endif
                             node = lexer->token;
                             GTDBG(doc,"text", node);
                             return node;
@@ -2925,9 +2858,6 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
 
                 lexer->state = LEX_CONTENT;
                 lexer->waswhite = no;
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-                StoreOriginalTextInToken(doc, lexer->token, 0); /* hmm... */
-#endif
                 node = lexer->token;
                 GTDBG(doc,"endtag", node);
                 return node;  /* the endtag token */
@@ -3008,9 +2938,6 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                     TY_(RepairDuplicateAttributes)( doc, lexer->token, no );
                 } else 
                     TY_(RepairDuplicateAttributes)( doc, lexer->token, yes );
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-                StoreOriginalTextInToken(doc, lexer->token, 0);
-#endif
                 node = lexer->token;
                 GTDBG(doc,"starttag", node);
                 return node;  /* return start tag */
@@ -3475,9 +3402,6 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                 lexer->txtend = lexer->lexsize;
             }
             lexer->token = TY_(TextToken)(lexer);
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-            StoreOriginalTextInToken(doc, lexer->token, 0); /* ? */
-#endif
             node = lexer->token;
             GTDBG(doc,"textstring", node);
             return node;  /* the textstring token */
@@ -4403,9 +4327,6 @@ static Node *ParseDocTypeDecl(TidyDocImpl* doc)
                     TY_(FreeNode)(doc, node);
                     return NULL;
                 }
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-                StoreOriginalTextInToken(doc, node, 0);
-#endif
                 return node;
             }
             else

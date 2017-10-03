@@ -110,20 +110,11 @@ StreamIn* TY_(initStreamIn)( TidyDocImpl* doc, int encoding )
     in->allocator = doc->allocator;
     in->charbuf = (tchar*)TidyDocAlloc(doc, sizeof(tchar) * in->bufsize);
     InitLastPos( in );
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-    in->otextbuf = NULL;
-    in->otextlen = 0;
-    in->otextsize = 0;
-#endif
     return in;
 }
 
 void TY_(freeStreamIn)(StreamIn* in)
 {
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-    if (in->otextbuf)
-        TidyFree(in->allocator, in->otextbuf);
-#endif
     TidyFree(in->allocator, in->charbuf);
     TidyFree(in->allocator, in);
 }
@@ -222,40 +213,6 @@ int TY_(ReadBOMEncoding)(StreamIn *in)
     return -1;
 }
 
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-void TY_(AddByteToOriginalText)(StreamIn *in, tmbchar c)
-{
-    if (in->otextlen + 1 >= in->otextsize)
-    {
-        size_t size = in->otextsize ? 1 : 2;
-        in->otextbuf = TidyRealloc(in->allocator, in->otextbuf, in->otextsize + size);
-        in->otextsize += size;
-    }
-    in->otextbuf[in->otextlen++] = c;
-    in->otextbuf[in->otextlen  ] = 0;
-}
-
-void TY_(AddCharToOriginalText)(StreamIn *in, tchar c)
-{
-    int i, err, count = 0;
-    tmbchar buf[10] = {0};
-    
-    err = TY_(EncodeCharToUTF8Bytes)(c, buf, NULL, &count);
-
-    if (err)
-    {
-        /* replacement character 0xFFFD encoded as UTF-8 */
-        buf[0] = (byte) 0xEF;
-        buf[1] = (byte) 0xBF;
-        buf[2] = (byte) 0xBD;
-        count = 3;
-    }
-    
-    for (i = 0; i < count; ++i)
-        TY_(AddByteToOriginalText)(in, buf[i]);
-}
-#endif
-
 static void InitLastPos( StreamIn *in )
 {
     in->curlastpos = 0;
@@ -292,9 +249,6 @@ uint TY_(ReadChar)( StreamIn *in )
 {
     uint c = EndOfStream;
     uint tabsize = cfg( in->doc, TidyTabSize );
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-    Bool added = no;
-#endif
 
     if ( in->pushed )
         return PopChar( in );
@@ -317,10 +271,6 @@ uint TY_(ReadChar)( StreamIn *in )
 
         if (c == '\n')
         {
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-            added = yes;
-            TY_(AddCharToOriginalText)(in, (tchar)c);
-#endif
             in->curcol = 1;
             in->curline++;
             break;
@@ -328,10 +278,6 @@ uint TY_(ReadChar)( StreamIn *in )
 
         if (c == '\t')
         {
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-            added = yes;
-            TY_(AddCharToOriginalText)(in, (tchar)c);
-#endif
             in->tabs = tabsize > 0 ?
                 tabsize - ((in->curcol - 1) % tabsize) - 1
                 : 0;
@@ -343,10 +289,6 @@ uint TY_(ReadChar)( StreamIn *in )
         /* #427663 - map '\r' to '\n' - Andy Quick 11 Aug 00 */
         if (c == '\r')
         {
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-            added = yes;
-            TY_(AddCharToOriginalText)(in, (tchar)c);
-#endif
             c = ReadCharFromStream(in);
             if (c != '\n')
             {
@@ -355,9 +297,6 @@ uint TY_(ReadChar)( StreamIn *in )
             }
             else
             {
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-                TY_(AddCharToOriginalText)(in, (tchar)c);
-#endif
             }
             in->curcol = 1;
             in->curline++;
@@ -476,11 +415,6 @@ uint TY_(ReadChar)( StreamIn *in )
         in->curcol++;
         break;
     }
-
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-    if (!added)
-        TY_(AddCharToOriginalText)(in, (tchar)c);
-#endif
 
     return c;
 }

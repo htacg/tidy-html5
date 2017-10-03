@@ -85,10 +85,6 @@ struct _TidyDocImpl
     uint                nClassId;
     Bool                inputHadBOM;
 
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-    Bool                storeText;
-#endif
-
 #if PRESERVE_FILE_TIMES
     struct utimbuf      filetimes;
 #endif

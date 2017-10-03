@@ -317,10 +317,6 @@ struct _Node
     Bool        closed;         /* true if closed by explicit end tag */
     Bool        implicit;       /* true if inferred */
     Bool        linebreak;      /* true if followed by a line break */
-
-#ifdef TIDY_STORE_ORIGINAL_TEXT
-    tmbstr      otext;
-#endif
 };
 
 

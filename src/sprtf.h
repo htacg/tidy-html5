@@ -43,20 +43,20 @@ TIDY_EXPORT int add_append_log( int val );
 
 TIDY_EXPORT int open_log_file( void );
 TIDY_EXPORT void close_log_file( void );
-TIDY_EXPORT void set_log_file( char * nf, int open ); /* used */
-TIDY_EXPORT char * get_log_file( void );              /* used */
+TIDY_EXPORT void set_log_file( char * nf, int open );
+TIDY_EXPORT char * get_log_file( void );
 
-TIDY_EXPORT int MCDECL sprtf( const char *pf, ... );  /* used */
+TIDY_EXPORT int MCDECL sprtf( const char *pf, ... );
 #define M_MAX_SPRTF 2048
 TIDY_EXPORT int direct_out_it( char *cp );
 
-TIDY_EXPORT char *GetNxtBuf();
+TIDY_EXPORT char *GetNxtBuf(void);
 
 #define EndBuf(a)   ( a + strlen(a) )
 
-TIDY_EXPORT char *get_date_stg();
-TIDY_EXPORT char *get_time_stg();
-TIDY_EXPORT char *get_date_time_stg();
+TIDY_EXPORT char *get_date_stg(void);
+TIDY_EXPORT char *get_time_stg(void);
+TIDY_EXPORT char *get_date_time_stg(void);
 
 #ifdef _MSC_VER
 TIDY_EXPORT int gettimeofday(struct timeval *tp, void *tzp);

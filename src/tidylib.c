@@ -1405,7 +1405,7 @@ void         tidyDocReportDoctype( TidyDocImpl* doc )
 /*****************************************************************************
  *  HTML5 STUFF
  *****************************************************************************/
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if 0 && !defined(NDEBUG)
 extern void show_not_html5(void);
 /* -----------------------------
 List tags that do not have version HTML5 (HT50|XH50)
@@ -1504,9 +1504,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
     Bool warn = yes;    /* should this be a warning, error, or report??? */
     AttVal* attr = NULL;
     int i = 0;
-#if !defined(NDEBUG) && defined(_MSC_VER)
-    //    list_not_html5();
-#endif
+
     while (node)
     {
         if ( nodeHasAlignAttr( node ) ) {
@@ -1782,7 +1780,7 @@ void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
 }
 
 
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
 /* *** FOR DEBUG ONLY *** */
 const char *dbg_get_lexer_type( void *vp )
 {
@@ -1919,7 +1917,7 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     Bool mergeEmphasis = cfgBool( doc, TidyMergeEmphasis );
     Node* node;
 
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     SPRTF("All nodes BEFORE clean and repair\n");
     dbg_show_all_nodes( doc, &doc->root, 0  );
 #endif
@@ -2037,7 +2035,7 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
         }
     }
 
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     SPRTF("All nodes AFTER clean and repair\n");
     dbg_show_all_nodes( doc, &doc->root, 0  );
 #endif

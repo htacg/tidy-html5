@@ -142,20 +142,21 @@ endif ()
 # NOTE: Currently only available in the Debug configuration build in
 #   Windows, but could be maybe extended to Unix, others...
 #------------------------------------------------------------------------
+option( ENABLE_ALLOC_DEBUG   "Set ON to output node allocation diagnostics." OFF )
+option( ENABLE_MEMORY_DEBUG  "Set ON to output some memory diagnostics." OFF )
+
+if (ENABLE_ALLOC_DEBUG)
+    add_definitions ( -DDEBUG_ALLOCATION )  # see lexer.c for details
+    message(STATUS "*** Note, lexer.c node allocation diagnostics are ON")
+endif ()
+    
+  if (ENABLE_MEMORY_DEBUG)
+      add_definitions ( -DDEBUG_MEMORY )  # see alloc.c for details
+      message(STATUS "*** Note, alloc.c memory diagnostics are ON")
+  endif ()
+    
 if (WIN32)
-    option( ENABLE_MEMORY_DEBUG  "Set ON to output some memory diagnostics." OFF )
-    option( ENABLE_ALLOC_DEBUG   "Set ON to output node allocation diagnostics." OFF )
     option( ENABLE_CRTDBG_MEMORY "Set ON to enable the Windows CRT debug library." OFF )
-    
-    if (ENABLE_MEMORY_DEBUG)
-        add_definitions ( -DDEBUG_MEMORY )  # see alloc.c for details
-        message(STATUS "*** Note, alloc.c memory diagnostics are ON")
-    endif ()
-    
-    if (ENABLE_ALLOC_DEBUG)
-        add_definitions ( -DDEBUG_ALLOCATION )  # see lexer.c for details
-        message(STATUS "*** Note, lexer.c node allocation diagnostics are ON")
-    endif ()
     
     if (ENABLE_CRTDBG_MEMORY)
         add_definitions ( -D_CRTDBG_MAP_ALLOC )  # see tidy.c for details
@@ -334,7 +335,7 @@ set ( CFILES
         ${SRCDIR}/buffio.c       ${SRCDIR}/fileio.c       ${SRCDIR}/streamio.c
         ${SRCDIR}/tagask.c       ${SRCDIR}/tmbstr.c       ${SRCDIR}/utf8.c
         ${SRCDIR}/tidylib.c      ${SRCDIR}/mappedio.c     ${SRCDIR}/gdoc.c
-        ${SRCDIR}/language.c     ${SRCDIR}/messageobj.c )
+        ${SRCDIR}/language.c     ${SRCDIR}/messageobj.c   ${SRCDIR}/sprtf.c )
         
 set ( HFILES
         ${INCDIR}/tidyplatform.h ${INCDIR}/tidy.h         ${INCDIR}/tidyenum.h
@@ -352,13 +353,8 @@ set ( LIBHFILES
         ${SRCDIR}/pprint.h       ${SRCDIR}/streamio.h     ${SRCDIR}/tags.h
         ${SRCDIR}/tmbstr.h       ${SRCDIR}/utf8.h         ${SRCDIR}/tidy-int.h
         ${SRCDIR}/version.h      ${SRCDIR}/gdoc.h         ${SRCDIR}/language.h
-        ${SRCDIR}/language_en.h )
-    
-if (MSVC)
-    list(APPEND CFILES ${SRCDIR}/sprtf.c)
-    list(APPEND LIBHFILES ${SRCDIR}/sprtf.h)
-endif ()
-
+        ${SRCDIR}/language_en.h  ${SRCDIR}/sprtf.h )
+  
 
 #------------------------------------------------------------------------
 # Target Locations

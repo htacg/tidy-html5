@@ -323,6 +323,10 @@ static uint GetVersFromFPI(ctmbstr fpi)
 }
 
 #if defined(_MSC_VER)
+#ifndef EndBuf
+#  define EndBuf(a)   ( a + strlen(a) )
+#endif
+
 /* Issue #377 - Output diminishing version bits */
 typedef struct tagV2S {
     uint bit;

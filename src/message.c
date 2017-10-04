@@ -14,9 +14,6 @@
 #include "streamio.h"
 #include "tmbstr.h"
 #include "utf8.h"
-#if !defined(NDEBUG) && defined(_MSC_VER)
-#  include "sprtf.h"
-#endif
 #include "version.h"
 
 

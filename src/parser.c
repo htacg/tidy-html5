@@ -12,13 +12,6 @@
 #include "clean.h"
 #include "tags.h"
 #include "tmbstr.h"
-#ifdef _MSC_VER
-#  include "sprtf.h"
-#endif
-
-#ifndef SPRTF
-#  define SPRTF printf
-#endif
 
 /*
   Issue #72 - Need to know to avoid error-reporting - no warning only if --show-body-only yes

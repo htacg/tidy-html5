@@ -62,10 +62,6 @@ TIDY_EXPORT char *get_date_time_stg();
 TIDY_EXPORT int gettimeofday(struct timeval *tp, void *tzp);
 #endif
 
-#ifndef SPRTF
-#  define SPRTF sprtf
-#endif
-
 #ifdef   __cplusplus
 }
 #endif

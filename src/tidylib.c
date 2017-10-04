@@ -34,9 +34,6 @@
 #include "mappedio.h"
 #include "language.h"
 
-#if !defined(NDEBUG) && defined(_MSC_VER)
-#  include "sprtf.h"
-#endif
 
 /* Create/Destroy a Tidy "document" object */
 static TidyDocImpl* tidyDocCreate( TidyAllocator *allocator );

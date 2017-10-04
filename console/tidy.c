@@ -26,15 +26,10 @@
 #  include <windows.h>    /* Force console to UTF8. */
 #endif
 #if !defined(NDEBUG) && defined(_MSC_VER)
-#  include "sprtf.h"
 #  ifdef _CRTDBG_MAP_ALLOC
 #    include <stdlib.h>
 #    include <crtdbg.h>
 #  endif
-#endif
-
-#ifndef SPRTF
-#  define SPRTF printf
 #endif
 
 /** Tidy will send errors to this file, which will be stderr later. */

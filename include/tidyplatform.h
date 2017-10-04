@@ -647,6 +647,20 @@ opaque_type( TidyIterator );
 } /* extern "C" */
 #endif
 
+
+/*=============================================================================
+ * Debugging
+ *===========================================================================*/
+#if !defined(NDEBUG)
+#  include "sprtf.h"
+#endif
+
+#ifndef SPRTF
+#  define SPRTF printf
+#endif
+
+
+
 #endif /* __TIDY_PLATFORM_H__ */
 
 

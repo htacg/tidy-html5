@@ -9,9 +9,6 @@
 
 #include "tidy.h"
 #include "forward.h"
-#ifdef DEBUG_MEMORY
-#  include "sprtf.h"
-#endif
 
 static TidyMalloc  g_malloc  = NULL;
 static TidyRealloc g_realloc = NULL;

@@ -10,9 +10,6 @@
 #include "attrs.h"
 #include "streamio.h"
 #include "tmbstr.h"
-#if !defined(NDEBUG) && defined(_MSC_VER)
-#  include "sprtf.h"
-#endif
 
 /* duplicate attributes */
 AttVal *TY_(DupAttrs)( TidyDocImpl* doc, AttVal *attrs)

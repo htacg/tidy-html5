@@ -13,9 +13,6 @@
 #include "forward.h"
 #include "fileio.h"
 #include "tidy.h"
-#if !defined(NDEBUG) && defined(_MSC_VER)
-#  include "sprtf.h"
-#endif
 
 typedef struct _fp_input_source
 {

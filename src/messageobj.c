@@ -10,9 +10,6 @@
 #include "tidy-int.h"
 #include "limits.h"
 #include "tmbstr.h"
-#if !defined(NDEBUG) && defined(_MSC_VER)
-#  include "sprtf.h"
-#endif
 
 
 /*********************************************************************

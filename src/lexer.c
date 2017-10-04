@@ -39,13 +39,6 @@
 #include "clean.h"
 #include "utf8.h"
 #include "streamio.h"
-#ifdef _MSC_VER
-#  include "sprtf.h"
-#endif
-
-#ifndef SPRTF
-#  define SPRTF printf
-#endif
 
 #if !defined(NDEBUG) && defined(_MSC_VER)
 /* #define DEBUG_ALLOCATION   special EXTRA allocation debug information - VERY NOISY */

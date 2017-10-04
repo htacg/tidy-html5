@@ -24,9 +24,6 @@
 #  ifdef DEBUG_PPRINT
 extern void dbg_show_node( TidyDocImpl* doc, Node *node, int caller, int indent );
 #  endif
-#  ifdef DEBUG_INDENT
-#    include "sprtf.h"
-#  endif
 #endif
 
 /*

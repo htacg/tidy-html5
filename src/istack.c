@@ -269,7 +269,7 @@ Node *TY_(InsertedToken)( TidyDocImpl* doc )
     istack = lexer->insert;
 
 /* #if 0 && defined(_DEBUG) */
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     if ( lexer->istacksize == 0 )
     {
         SPRTF( "WARNING: ZERO sized istack!\n" );

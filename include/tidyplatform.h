@@ -481,6 +481,10 @@ extern "C" {
 #    define setmode _setmode
 #  endif
 
+# if defined(_MSC_VER)
+#    define fileno _fileno
+#endif
+
 #  define access _access
 #  define strcasecmp _stricmp
 

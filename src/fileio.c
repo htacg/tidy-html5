@@ -82,8 +82,8 @@ void TIDY_CALL TY_(filesink_putByte)( void* sinkData, byte bv )
 {
   FILE* fout = (FILE*) sinkData;
   fputc( bv, fout );
-#if !defined(NDEBUG) && defined(_MSC_VER)
-  if (_fileno(fout) != 2)
+#if !defined(NDEBUG)
+  if (fileno(fout) != 2)
   {
       if (bv != 0x0d)
       {

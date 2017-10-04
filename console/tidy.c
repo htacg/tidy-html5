@@ -2426,7 +2426,7 @@ int main( int argc, char** argv )
         if ( argc > 1 )
         {
             htmlfil = argv[1];
-#if (!defined(NDEBUG) && defined(_MSC_VER))
+#if (!defined(NDEBUG))
             SPRTF("Tidying '%s'\n", htmlfil);
 #endif /* DEBUG outout */
             if ( tidyOptGetBool(tdoc, TidyEmacs) )
@@ -2458,7 +2458,7 @@ int main( int argc, char** argv )
                 if ( outfil ) {
                     status = tidySaveFile( tdoc, outfil );
                 } else {
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                     static char tmp_buf[264];
                     sprintf(tmp_buf,"%s.html",get_log_file());
                     status = tidySaveFile( tdoc, tmp_buf );

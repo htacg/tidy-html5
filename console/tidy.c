@@ -494,7 +494,7 @@ static Bool hasPickList( TidyOption topt )
  */
 static ctmbstr ConfigCategoryName( TidyConfigCategory id )
 {
-    if (id >= TidyMarkup && id <= TidyInternalCategory)
+    if (id >= TidyDiagnostics && id <= TidyInternalCategory)
         return tidyLocalizedString(id);
 
     fprintf(stderr, tidyLocalizedString(TC_STRING_FATAL_ERROR), (int)id);

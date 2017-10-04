@@ -1,4 +1,4 @@
-﻿#ifndef language_fr_h
+#ifndef language_fr_h
 #define language_fr_h
 /*
  * language_fr.h
@@ -557,8 +557,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     { TidyUnknownCategory,                           0, "catégorie inconnue!"                                                                                    },
     { TidyEncoding,                                  0, "encodage"                                                                                               },
     { TidyInternalCategory,                          0, "interne (privée)"                                                                                       },
-    { TidyMarkup,                                    0, "structure de balises"                                                                                   },
-    { TidyMiscellaneous,                             0, "divers"                                                                                                 },
     { TidyPrettyPrint,                               0, "affichage"                                                                                              },
     { TidyInfo,                                      0, "Info:"                                                                                                  },
     { TidyWarning,                                   0, "Avertissement:"                                                                                         },

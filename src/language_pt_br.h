@@ -1,4 +1,4 @@
-﻿#ifndef language_pt_br_h
+#ifndef language_pt_br_h
 #define language_pt_br_h
 /*
  * language_pt_br.h
@@ -650,8 +650,6 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     { TidyDiagnostics,                               0, "diagnósticos"                                                                                    },
     { TidyEncoding,                                  0, "codificação"                                                                                     },
     { TidyInternalCategory,                          0, "interna (privada)"                                                                               },
-    { TidyMarkup,                                    0, "marcação"                                                                                        },
-    { TidyMiscellaneous,                             0, "miscelânea"                                                                                      },
     { TidyPrettyPrint,                               0, "impressão"                                                                                       },
     { TidyWarning,                                   0, "Acesso: "                                                                                        },
     { TidyAccess,                                    0, "Acesso: "                                                                                        },

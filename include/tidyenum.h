@@ -87,11 +87,17 @@ extern "C" {
 
 /** Codes for populating TidyConfigCategory enumeration. */
 #define FOREACH_TIDYCONFIGCATEGORY(FN)                                    \
-    FN(TidyMarkup)           /**< Markup options: (X)HTML version, etc */ \
     FN(TidyDiagnostics)      /**< Diagnostics */                          \
-    FN(TidyPrettyPrint)      /**< Output layout */                        \
-    FN(TidyEncoding)         /**< Character encodings */                  \
-    FN(TidyMiscellaneous)    /**< File handling, message format, etc. */  \
+    FN(TidyDisplay)          /**< Affecting screen display */             \
+    FN(TidyDocumentIO)       /**< Pertaining to document I/O */           \
+    FN(TidyEncoding)         /**< Relating to encoding */                 \
+    FN(TidyFileIO)           /**< Pertaining to file I/O */               \
+    FN(TidyMarkupCleanup)    /**< Cleanup related options */              \
+    FN(TidyMarkupEntities)   /**< Entity related options */               \
+    FN(TidyMarkupRepair)     /**< Document repair related options */      \
+    FN(TidyMarkupTeach)      /**< Teach tidy new things */                \
+    FN(TidyMarkupXForm)      /**< Transform HTML one way or another */    \
+    FN(TidyPrettyPrint)      /**< Pretty printing options */              \
     FN(TidyInternalCategory) /**< Option is internal only. */
 
 

@@ -12,13 +12,6 @@
 #include "clean.h"
 #include "tags.h"
 #include "tmbstr.h"
-#ifdef _MSC_VER
-#  include "sprtf.h"
-#endif
-
-#ifndef SPRTF
-#  define SPRTF printf
-#endif
 
 /*
   Issue #72 - Need to know to avoid error-reporting - no warning only if --show-body-only yes
@@ -461,7 +454,7 @@ static void TrimInitialSpace( TidyDocImpl* doc, Node *element, Node *text )
                 node->end = element->start;
                 lexer->lexbuf[node->start] = ' ';
                 TY_(InsertNodeBeforeElement)(element ,node);
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                 SPRTF("TrimInitialSpace: Created text node, inserted before <%s>\n", 
                     (element->element ? element->element : "unknown"));
 #endif
@@ -801,7 +794,7 @@ static void AddClassNoIndent( TidyDocImpl* doc, Node *node )
 */
 void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
 {
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     static int in_parse_block = 0;
     static int parse_block_cnt = 0;
 #endif
@@ -809,7 +802,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
     Node *node;
     Bool checkstack = yes;
     uint istackbase = 0;
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     in_parse_block++;
     parse_block_cnt++;
     SPRTF("Entering ParseBlock %d... %d %s\n",in_parse_block,parse_block_cnt,
@@ -817,7 +810,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
 #endif
 
     if ( element->tag->model & CM_EMPTY ) {
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
         in_parse_block--;
         SPRTF("Exit ParseBlockL 1 %d...\n",in_parse_block);
 #endif
@@ -882,7 +875,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
 
             element->closed = yes;
             TrimSpaces( doc, element );
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
             in_parse_block--;
             SPRTF("Exit ParseBlock 2 %d...\n",in_parse_block);
 #endif
@@ -936,7 +929,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                 {
                     TY_(UngetToken)( doc );
                     TrimSpaces( doc, element );
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                     in_parse_block--;
                     SPRTF("Exit ParseBlock 2 %d...\n",in_parse_block);
 #endif
@@ -1100,7 +1093,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                 {
                     TY_(UngetToken)( doc );
                     TrimSpaces( doc, element );
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                     in_parse_block--;
                     SPRTF("Exit ParseBlock 3 %d...\n",in_parse_block);
 #endif
@@ -1120,7 +1113,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                         lexer->istackbase = istackbase;
 
                     TrimSpaces( doc, element );
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                     in_parse_block--;
                     SPRTF("Exit ParseBlock 4 %d...\n",in_parse_block);
 #endif
@@ -1179,7 +1172,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                          element->parent->tag->parser == TY_(ParseList) )
                     {
                         TrimSpaces( doc, element );
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                         in_parse_block--;
                         SPRTF("Exit ParseBlock 5 %d...\n",in_parse_block);
 #endif
@@ -1194,7 +1187,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                     if ( nodeIsDL(element->parent) )
                     {
                         TrimSpaces( doc, element );
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                         in_parse_block--;
                         SPRTF("Exit ParseBlock 6 %d...\n",in_parse_block);
 #endif
@@ -1209,7 +1202,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                     /* In exiled mode, return so table processing can 
                        continue. */
                     if (lexer->exiled) {
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                         in_parse_block--;
                         SPRTF("Exit ParseBlock 7 %d...\n",in_parse_block);
 #endif
@@ -1224,7 +1217,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                         TY_(PopInline)( doc, NULL );
                     lexer->istackbase = istackbase;
                     TrimSpaces( doc, element );
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                     in_parse_block--;
                     SPRTF("Exit ParseBlock 8 %d...\n",in_parse_block);
 #endif
@@ -1234,7 +1227,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                 else
                 {
                     TrimSpaces( doc, element );
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                     in_parse_block--;
                     SPRTF("Exit ParseBlock 9 %d...\n",in_parse_block);
 #endif
@@ -1278,7 +1271,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
             if (!(mode & Preformatted))
                 TrimSpaces(doc, element);
 
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
             in_parse_block--;
             SPRTF("Exit ParseBlock 9b %d...\n",in_parse_block);
 #endif
@@ -1346,7 +1339,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
     }
 
     TrimSpaces( doc, element );
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     in_parse_block--;
     SPRTF("Exit ParseBlock 10 %d...\n",in_parse_block);
 #endif
@@ -1546,18 +1539,18 @@ void TY_(ParseNamespace)(TidyDocImpl* doc, Node *basenode, GetTokenMode mode)
 
 void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
 {
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     static int in_parse_inline = 0;
 #endif
     Lexer* lexer = doc->lexer;
     Node *node, *parent;
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     in_parse_inline++;
     SPRTF("Entering ParseInline %d...\n",in_parse_inline);
 #endif
 
     if (element->tag->model & CM_EMPTY) {
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
         in_parse_inline--;
         SPRTF("Exit ParseInline 1 %d...\n",in_parse_inline);
 #endif
@@ -1639,7 +1632,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
 
             element->closed = yes;
             TrimSpaces( doc, element );
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
             in_parse_inline--;
             SPRTF("Exit ParseInline 2 %d...\n",in_parse_inline);
 #endif
@@ -1730,7 +1723,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
 
             if (!(mode & Preformatted))
                 TrimSpaces(doc, element);
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
             in_parse_inline--;
             SPRTF("Exit ParseInline 3 %d...\n",in_parse_inline);
 #endif
@@ -1820,7 +1813,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                         TY_(InlineDup1)( doc, NULL, element ); /* dupe the <i>, after </b> */
                         if (!(mode & Preformatted))
                             TrimSpaces( doc, element );
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                         in_parse_inline--;
                         SPRTF("Exit ParseInline 4 %d...\n",in_parse_inline);
 #endif
@@ -1844,7 +1837,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
 
                     if (!(mode & Preformatted))
                         TrimSpaces(doc, element);
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                     in_parse_inline--;
                     SPRTF("Exit ParseInline 5 %d...\n",in_parse_inline);
 #endif
@@ -1861,7 +1854,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
             {
                 TY_(UngetToken)( doc );
                 TrimSpaces(doc, element);
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                 in_parse_inline--;
                 SPRTF("Exit ParseInline 6 %d...\n",in_parse_inline);
 #endif
@@ -1887,7 +1880,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
             if (!(mode & Preformatted))
                 TrimSpaces(doc, element);
 
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
             in_parse_inline--;
             SPRTF("Exit ParseInline 7 %d...\n",in_parse_inline);
 #endif
@@ -1924,7 +1917,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
             if (!(mode & Preformatted))
                 TrimSpaces(doc, element);
 
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
             in_parse_inline--;
             SPRTF("Exit ParseInline 8 %d...\n",in_parse_inline);
 #endif
@@ -2050,7 +2043,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                     if (!(mode & Preformatted))
                         TrimSpaces(doc, element);
 
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                     in_parse_inline--;
                     SPRTF("Exit ParseInline 9 %d...\n",in_parse_inline);
 #endif
@@ -2102,7 +2095,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                 {
                     TY_(DiscardElement)( doc, element );
                     TY_(UngetToken)( doc );
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                     in_parse_inline--;
                     SPRTF("Exit ParseInline 10 %d...\n",in_parse_inline);
 #endif
@@ -2115,7 +2108,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
             if (!(mode & Preformatted))
                 TrimSpaces(doc, element);
 
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
             in_parse_inline--;
             SPRTF("Exit ParseInline 11 %d...\n",in_parse_inline);
 #endif
@@ -2146,7 +2139,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
     if (!(element->tag->model & CM_OPT))
         TY_(Report)(doc, element, node, MISSING_ENDTAG_FOR);
 
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     in_parse_inline--;
     SPRTF("Exit ParseInline 12 %d...\n",in_parse_inline);
 #endif
@@ -2334,7 +2327,7 @@ static Bool FindLastLI( Node *list, Node **lastli )
 
 void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
 {
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     static int in_parse_list = 0;
 #endif
     Lexer* lexer = doc->lexer;
@@ -2342,13 +2335,13 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
     Bool wasblock;
     Bool nodeisOL = nodeIsOL(list);
 
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     in_parse_list++;
     SPRTF("Entering ParseList %d...\n",in_parse_list);
 #endif
     if (list->tag->model & CM_EMPTY)
     {
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
         in_parse_list--;
         SPRTF("Exit ParseList 1 %d... CM_EMPTY\n",in_parse_list);
 #endif
@@ -2363,7 +2356,7 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
         {
             TY_(FreeNode)( doc, node);
             list->closed = yes;
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
             in_parse_list--;
             SPRTF("Exit ParseList 2 %d... Endtag\n",in_parse_list);
 #endif
@@ -2430,7 +2423,7 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
                 {
                     TY_(Report)(doc, list, node, MISSING_ENDTAG_BEFORE);
                     TY_(UngetToken)( doc );
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                     in_parse_list--;
                     SPRTF("Exit ParseList 3 %d... No End Tag\n",in_parse_list);
 #endif
@@ -2463,7 +2456,7 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
             if (TY_(nodeHasCM)(node,CM_BLOCK) && lexer->excludeBlocks)
             {
                 TY_(Report)(doc, list, node, MISSING_ENDTAG_BEFORE);
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                 in_parse_list--;
                 SPRTF("Exit ParseList 4 %d... No End Tag\n",in_parse_list);
 #endif
@@ -2475,7 +2468,7 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
                       && (TY_(nodeHasCM)(node, CM_TABLE|CM_ROWGRP|CM_ROW)
                           || nodeIsTABLE(node)) )
             {
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                 in_parse_list--;
                 SPRTF("Exit ParseList 5 %d... exiled\n",in_parse_list);
 #endif
@@ -2514,7 +2507,7 @@ void TY_(ParseList)(TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode))
     }
 
     TY_(Report)(doc, list, node, MISSING_ENDTAG_FOR);
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     in_parse_list--;
     SPRTF("Exit ParseList 6 %d... missing end tag\n",in_parse_list);
 #endif
@@ -2938,7 +2931,7 @@ void TY_(ParseColGroup)(TidyDocImpl* doc, Node *colgroup, GetTokenMode ARG_UNUSE
 
 void TY_(ParseTableTag)(TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED(mode))
 {
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     static int in_parse_table = 0;
 #endif
     Lexer* lexer = doc->lexer;
@@ -2948,7 +2941,7 @@ void TY_(ParseTableTag)(TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED(m
     TY_(DeferDup)( doc );
     istackbase = lexer->istackbase;
     lexer->istackbase = lexer->istacksize;
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     in_parse_table++;
     SPRTF("Entering ParseTableTag %d...\n",in_parse_table);
 #endif
@@ -2973,7 +2966,7 @@ void TY_(ParseTableTag)(TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED(m
             }
             lexer->istackbase = istackbase;
             table->closed = yes;
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
             in_parse_table--;
             SPRTF("Exit ParseTableTag 1 %d... EndTag\n",in_parse_table);
 #endif
@@ -3053,7 +3046,7 @@ void TY_(ParseTableTag)(TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED(m
                     TY_(Report)(doc, table, node, MISSING_ENDTAG_BEFORE );
                     TY_(UngetToken)( doc );
                     lexer->istackbase = istackbase;
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                     in_parse_table--;
                     SPRTF("Exit ParseTableTag 2 %d... missing EndTag\n",in_parse_table);
 #endif
@@ -3067,7 +3060,7 @@ void TY_(ParseTableTag)(TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED(m
             TY_(UngetToken)( doc );
             TY_(Report)(doc, table, node, TAG_NOT_ALLOWED_IN);
             lexer->istackbase = istackbase;
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
             in_parse_table--;
             SPRTF("Exit ParseTableTag 3 %d... CM_TABLE\n",in_parse_table);
 #endif
@@ -3088,7 +3081,7 @@ void TY_(ParseTableTag)(TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED(m
 
     TY_(Report)(doc, table, node, MISSING_ENDTAG_FOR);
     lexer->istackbase = istackbase;
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     in_parse_table--;
     SPRTF("Exit ParseTableTag 4 %d... missing end\n",in_parse_table);
 #endif
@@ -3324,14 +3317,14 @@ void TY_(ParseOptGroup)(TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(m
 
 void TY_(ParseSelect)(TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(mode))
 {
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG) 
     static int in_parse_select = 0;
 #endif
     Lexer* lexer = doc->lexer;
     Node *node;
 
     lexer->insert = NULL;  /* defer implicit inline start tags */
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     in_parse_select++;
     SPRTF("Entering ParseSelect %d...\n",in_parse_select);
 #endif
@@ -3343,7 +3336,7 @@ void TY_(ParseSelect)(TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(mod
             TY_(FreeNode)( doc, node);
             field->closed = yes;
             TrimSpaces(doc, field);
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
             in_parse_select--;
             SPRTF("Exit ParseSelect 1 %d...\n",in_parse_select);
 #endif
@@ -3372,7 +3365,7 @@ void TY_(ParseSelect)(TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(mod
     }
 
     TY_(Report)(doc, field, node, MISSING_ENDTAG_FOR);
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     in_parse_select--;
     SPRTF("Exit ParseSelect 2 %d...\n",in_parse_select);
 #endif
@@ -3381,14 +3374,14 @@ void TY_(ParseSelect)(TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(mod
 /* HTML5 */
 void TY_(ParseDatalist)(TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(mode))
 {
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     static int in_parse_datalist = 0;
 #endif
     Lexer* lexer = doc->lexer;
     Node *node;
 
     lexer->insert = NULL;  /* defer implicit inline start tags */
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     in_parse_datalist++;
     SPRTF("Entering ParseDatalist %d...\n",in_parse_datalist);
 #endif
@@ -3400,7 +3393,7 @@ void TY_(ParseDatalist)(TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(m
             TY_(FreeNode)( doc, node);
             field->closed = yes;
             TrimSpaces(doc, field);
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
             in_parse_datalist--;
             SPRTF("Exit ParseDatalist 1 %d...\n",in_parse_datalist);
 #endif
@@ -3429,7 +3422,7 @@ void TY_(ParseDatalist)(TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(m
     }
 
     TY_(Report)(doc, field, node, MISSING_ENDTAG_FOR);
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     in_parse_datalist--;
     SPRTF("Exit ParseDatalist 2 %d...\n",in_parse_datalist);
 #endif
@@ -3635,7 +3628,7 @@ void TY_(ParseHead)(TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode))
     int HasTitle = 0;
     int HasBase = 0;
 
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     SPRTF("Enter ParseHead...\n");
 #endif
     while ((node = TY_(GetToken)(doc, IgnoreWhitespace)) != NULL)
@@ -3741,7 +3734,7 @@ void TY_(ParseHead)(TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode))
         TY_(Report)(doc, head, node, DISCARDING_UNEXPECTED);
         TY_(FreeNode)( doc, node);
     }
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     SPRTF("Exit ParseHead 1...\n");
 #endif
 }
@@ -3797,7 +3790,7 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
     checkstack = yes;
 
     TY_(BumpObject)( doc, body->parent );
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     SPRTF("Enter ParseBody...\n");
 #endif
 
@@ -4064,7 +4057,7 @@ void TY_(ParseBody)(TidyDocImpl* doc, Node *body, GetTokenMode mode)
         TY_(Report)(doc, body, node, DISCARDING_UNEXPECTED);
         TY_(FreeNode)( doc, node);
     }
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     SPRTF("Exit ParseBody 1...\n");
 #endif
 }
@@ -4253,7 +4246,7 @@ void TY_(ParseHTML)(TidyDocImpl* doc, Node *html, GetTokenMode mode)
     Node *frameset = NULL;
     Node *noframes = NULL;
 
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     SPRTF("Entering ParseHTML...\n");
 #endif
     TY_(SetOptionBool)( doc, TidyXmlTags, no );
@@ -4311,7 +4304,7 @@ void TY_(ParseHTML)(TidyDocImpl* doc, Node *html, GetTokenMode mode)
                 TY_(InsertNodeAtEnd)(html, node);
                 TY_(ParseBody)(doc, node, mode);
             }
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
             SPRTF("Exit ParseHTML 1...\n");
 #endif
             return;
@@ -4482,7 +4475,7 @@ void TY_(ParseHTML)(TidyDocImpl* doc, Node *html, GetTokenMode mode)
 
     TY_(InsertNodeAtEnd)(html, node);
     ParseTag(doc, node, mode);
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
     SPRTF("Exit ParseHTML 2...\n");
 #endif
 }

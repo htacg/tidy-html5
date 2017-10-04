@@ -25,17 +25,12 @@
 #if defined(_WIN32)
 #  include <windows.h>    /* Force console to UTF8. */
 #endif
-#if !defined(NDEBUG) && defined(_MSC_VER)
-#  include "sprtf.h"
-#  ifdef _CRTDBG_MAP_ALLOC
-#    include <stdlib.h>
-#    include <crtdbg.h>
-#  endif
+#if !defined(NDEBUG) && defined(_MSC_VER) && defined(_CRTDBG_MAP_ALLOC)
+#  include <stdlib.h>
+#  include <crtdbg.h>
 #endif
 
-#ifndef SPRTF
-#  define SPRTF printf
-#endif
+#include "sprtf.h"
 
 /** Tidy will send errors to this file, which will be stderr later. */
 static FILE* errout = NULL;
@@ -2017,7 +2012,7 @@ int main( int argc, char** argv )
 #  if defined(_CRTDBG_MAP_ALLOC)
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #  endif
-    set_log_file((char *)"temptidy.txt", 0); /* add_append_log(1); */
+    set_log_file((char *)"temptidy.txt", 0);
 #endif
 
     tdoc = tidyCreate();
@@ -2431,7 +2426,7 @@ int main( int argc, char** argv )
         if ( argc > 1 )
         {
             htmlfil = argv[1];
-#if (!defined(NDEBUG) && defined(_MSC_VER))
+#if (!defined(NDEBUG))
             SPRTF("Tidying '%s'\n", htmlfil);
 #endif /* DEBUG outout */
             if ( tidyOptGetBool(tdoc, TidyEmacs) )
@@ -2463,7 +2458,7 @@ int main( int argc, char** argv )
                 if ( outfil ) {
                     status = tidySaveFile( tdoc, outfil );
                 } else {
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if !defined(NDEBUG)
                     static char tmp_buf[264];
                     sprintf(tmp_buf,"%s.html",get_log_file());
                     status = tidySaveFile( tdoc, tmp_buf );

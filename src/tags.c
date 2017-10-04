@@ -10,9 +10,6 @@
 #include "tidy-int.h"
 #include "message.h"
 #include "tmbstr.h"
-#if !defined(NDEBUG) && defined(_MSC_VER)
-#  include "sprtf.h"
-#endif
 /* Attribute checking methods */
 static CheckAttribs CheckIMG;
 static CheckAttribs CheckLINK;
@@ -476,10 +473,7 @@ static void declare( TidyDocImpl* doc, TidyTagImpl* tags,
     }
 }
 
-#if !defined(NDEBUG) && defined(_MSC_VER)
-/* ==================================================================== 
-   MSVC DEBUG ONLY
- */
+#if !defined(NDEBUG)
 void ListElementsPerVersion( uint vers, Bool has )
 {
     uint val, cnt, total, wrap = 10;
@@ -525,7 +519,7 @@ void show_have_html5(void)
     ListElementsPerVersion( VERS_HTML5, yes );
 }
 
-#endif
+#endif /* !defined(NDEBUG) */
 
 /* public interface for finding tag by name */
 Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )

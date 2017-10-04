@@ -481,6 +481,10 @@ extern "C" {
 #    define setmode _setmode
 #  endif
 
+# if defined(_MSC_VER)
+#    define fileno _fileno
+#endif
+
 #  define access _access
 #  define strcasecmp _stricmp
 
@@ -646,6 +650,27 @@ opaque_type( TidyIterator );
 #ifdef __cplusplus
 } /* extern "C" */
 #endif
+
+
+/*=============================================================================
+ * Debugging
+ *  When building and not defining the NDEBUG macro, Tidy will output
+ *  extensive debug information. In addition to this macro, you can supply
+ *  build flags for additional diagnostic information:
+ *    - _CRTDBG_MAP_ALLOC (_MSC_VER only)
+ *    - DEBUG_ALLOCATION
+ *    - DEBUG_MEMORY
+ *===========================================================================*/
+
+#if !defined(NDEBUG)
+#  include "sprtf.h"
+#endif
+
+#ifndef SPRTF
+#  define SPRTF printf
+#endif
+
+
 
 #endif /* __TIDY_PLATFORM_H__ */
 

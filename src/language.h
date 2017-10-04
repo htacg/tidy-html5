@@ -113,7 +113,7 @@ Bool TY_(tidySetLanguage)( ctmbstr languageCode );
 /**
  *  Gets the current language used by Tidy.
  */
-ctmbstr TY_(tidyGetLanguage)();
+ctmbstr TY_(tidyGetLanguage)(void);
 
 /**
  *  Provides a string given `messageType` in the current
@@ -145,7 +145,7 @@ ctmbstr TY_(tidyDefaultString)( uint messageType );
  *  these are provided for documentation generation purposes
  *  and probably aren't useful for LibTidy implementors.
  */
-TidyIterator TY_(getStringKeyList)();
+TidyIterator TY_(getStringKeyList)(void);
 
 /*
  *  Provides the next key value in Tidy's list of localized
@@ -160,7 +160,7 @@ uint TY_(getNextStringKey)( TidyIterator* iter );
  *  in Tidy's structure of Windows<->POSIX local mapping.
  *  Items can be retrieved with getNextWindowsLanguage();
  */
-TidyIterator TY_(getWindowsLanguageList)();
+TidyIterator TY_(getWindowsLanguageList)(void);
 
 /**
  *  Returns the next record of type `localeMapItem` in
@@ -183,7 +183,7 @@ const ctmbstr TY_(TidyLangPosixName)( const tidyLocaleMapItemImpl *item );
  *  in Tidy's list of installed language codes.
  *  Items can be retrieved with getNextInstalledLanguage();
  */
-TidyIterator TY_(getInstalledLanguageList)();
+TidyIterator TY_(getInstalledLanguageList)(void);
 
 /**
  *  Returns the next installed language.

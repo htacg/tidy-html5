@@ -1418,10 +1418,8 @@ TIDY_EXPORT double TIDY_CALL tidyGetArgValueDouble(TidyMessage tmessage,    /**<
  ** Your callback function will be provided with the following parameters.
  ** @param tdoc Indicates the source tidy document.
  ** @param line Indicates the line in the source document at this point in the process.
- ** @param column Indicates the column in the source document at this point in the process.
+ ** @param col Indicates the column in the source document at this point in the process.
  ** @param destLine Indicates the line number in the output document at this point in the process.
- ** @return Your callback function will return `yes` if Tidy should include the
- **         report in its own output sink, or `no` if Tidy should suppress it.
  */
 typedef void (TIDY_CALL *TidyPPProgress)( TidyDoc tdoc, uint line, uint col, uint destLine );
 
@@ -1898,7 +1896,7 @@ TIDY_EXPORT uint TIDY_CALL tidyErrorCodeFromKey(ctmbstr code);
  ** @result Returns a TidyIterator, which is a token used to represent the
  **         current position in a list within LibTidy.
  */
-TIDY_EXPORT TidyIterator TIDY_CALL getErrorCodeList();
+TIDY_EXPORT TidyIterator TIDY_CALL getErrorCodeList(void);
 
 /** Given a valid TidyIterator initiated with getErrorCodeList(), returns
  ** an instance of the opaque type TidyMessageArgument, which serves as a token
@@ -1946,7 +1944,7 @@ TIDY_EXPORT Bool TIDY_CALL tidySetLanguage( ctmbstr languageCode );
 /** Gets the current language used by Tidy.
  ** @result Returns a string indicating the currently set language.
  */
-TIDY_EXPORT ctmbstr TIDY_CALL tidyGetLanguage();
+TIDY_EXPORT ctmbstr TIDY_CALL tidyGetLanguage(void);
 
 /** @}
  ** @name Locale Mappings
@@ -1978,7 +1976,7 @@ opaque_type(tidyLocaleMapItem);
  ** @result Returns a TidyIterator, which is a token used to represent the
  **         current position in a list within LibTidy.
  */
-TIDY_EXPORT TidyIterator TIDY_CALL getWindowsLanguageList();
+TIDY_EXPORT TidyIterator TIDY_CALL getWindowsLanguageList(void);
 
 /** Given a valid TidyIterator initiated with getWindowsLanguageList(), returns
  ** a pointer to a tidyLocaleMapItem, which can be further interrogated with
@@ -2046,7 +2044,7 @@ TIDY_EXPORT ctmbstr TIDY_CALL tidyDefaultString( uint messageType );
  ** @result Returns a TidyIterator, which is a token used to represent the
  **         current position in a list within LibTidy.
  */
-TIDY_EXPORT TidyIterator TIDY_CALL getStringKeyList();
+TIDY_EXPORT TidyIterator TIDY_CALL getStringKeyList(void);
 
 /** Given a valid TidyIterator initiated with getStringKeyList(), returns
  ** an unsigned integer representing the next key value.
@@ -2076,7 +2074,7 @@ TIDY_EXPORT uint TIDY_CALL getNextStringKey( TidyIterator* iter );
  ** @result Returns a TidyIterator, which is a token used to represent the
  **         current position in a list within LibTidy.
  */
-TIDY_EXPORT TidyIterator TIDY_CALL getInstalledLanguageList();
+TIDY_EXPORT TidyIterator TIDY_CALL getInstalledLanguageList(void);
 
 /** Given a valid TidyIterator initiated with getInstalledLanguageList(),
  ** returns a string representing a language name that is installed in Tidy.

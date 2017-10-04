@@ -1,21 +1,16 @@
-/*
- *  SPRTF - Log output utility - part of the HTML Tidy project
+/* sprtf.c
+ * SPRTF - Log output utility - part of the HTML Tidy project
  *
- *   Author: Geoff R. McLane <reports _at_ geoffair _dot_ info>
- *   License: MIT (see tidy.h for the copyright notice)
+ * Copyright (c) 1998-2017 Geoff R. McLane and HTACG
  *
- *   Revision 1.0.2  2017/02/12 17:06:02  geoff - correct license and coding style
- *   Revision 1.0.1  2012/11/06 13:01:25  geoff
- *   Revision 1.0.0  2012/10/17 00:00:00  geoff
- *
+ * See tidy.h for the copyright notice.
  */
 
 #ifdef _MSC_VER
 #  pragma warning( disable : 4995 )
 #endif
-/* Module: sprtf.c */
-/* Debug log file output */
-#include <stdio.h> /* fopen()... */
+
+#include <stdio.h>  /* fopen()... */
 #include <string.h> /* strcpy */
 #include <stdarg.h> /* va_start, va_end, ... */
 

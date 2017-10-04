@@ -213,7 +213,7 @@ uint TY_(tidyErrorCodeFromKey)(ctmbstr code);
  *  `TidyReportFilter3`.
  *  Items can be retrieved with getNextErrorCode();
  */
-TidyIterator TY_(getErrorCodeList)();
+TidyIterator TY_(getErrorCodeList)(void);
 
 /**
  *  Returns the next error code having initialized the iterator

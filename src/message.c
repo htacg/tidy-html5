@@ -159,22 +159,45 @@ static void messageOut( TidyMessageImpl *message )
         go = go & ( doc->errors < cfg(doc, TidyShowErrors) );
     }
     
-//    /* Suppress TidyInfo on Reports if applicable. */
-//    if ( message->level == TidyInfo )
-//    {
-//        go = go & (cfgBool(doc, TidyShowInfo) == yes);
-//    }
-
-    /* If suppressing TidyInfo/TidyDialogueInfo on Reports, suppress them. */
-    if ( message->level == TidyInfo || message->level == TidyDialogueInfo )
+    /* Check for conditions to suppress TidyInfo. */
+    if ( message->level == TidyInfo )
     {
         go = go & (cfgBool(doc, TidyShowInfo) == yes);
+
+        /* Temporary; we currently let TidyQuiet hide these: */
+        switch ( message->code )
+        {
+            case STRING_DOCTYPE_GIVEN:
+            case STRING_CONTENT_LOOKS:
+            case STRING_NO_SYSID:
+                go = go && !cfgBool(doc, TidyQuiet);
+                break;
+            default:
+                break;
+        }
     }
 
     /* Suppress TidyWarning on Reports if applicable. */
     if ( message->level == TidyWarning )
     {
         go = go & (cfgBool(doc, TidyShowWarnings) == yes);
+    }
+
+    /* Check for conditions to suppress TidyDialogueInfo */
+    if ( message->level == TidyDialogueInfo )
+    {
+        /* Temporary; TidyShowInfo shouldn't affect TidyDialogueInfo, but
+         right now such messages are hidden until we granularize the
+         output controls. */
+        go = go & (cfgBool(doc, TidyShowInfo) == yes);
+        go = go | (cfgBool(doc, TidyQuiet) == yes);
+    }
+
+    /* Check for conditions to suppress TidyDialogueSummary */
+    /* Temporary; TidyQuiet shouldn't hide this type of message. */
+    if ( message->level == TidyDialogueSummary && message->code != STRING_NEEDS_INTERVENTION )
+    {
+        go = go & !cfgBool(doc, TidyQuiet);
     }
 
     /* If we're TidyQuiet and handling any type of dialogue above summaries,
@@ -1225,7 +1248,6 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
         if (doc->footnotes & FN_TRIM_EMPTY_ELEMENT)
             TY_(Dialogue)( doc, FOOTNOTE_TRIM_EMPTY_ELEMENT );
     }
-
 }
 
 
@@ -1277,8 +1299,6 @@ void TY_(ReportNumWarnings)( TidyDocImpl* doc )
     {
         TY_(Dialogue)( doc, STRING_NO_ERRORS );
     }
-
-    TY_(WriteChar)( '\n', doc->errout );
 }
 
 

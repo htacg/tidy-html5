@@ -2480,19 +2480,18 @@ int main( int argc, char** argv )
         if ( argc <= 1 )
             break;
     } /* read command line loop */
-    
-    
-    if (!tidyOptGetBool(tdoc, TidyQuiet) &&
-        errout == stderr && !contentErrors)
+
+    /* blank line for screen formatting */
+    if ( errout == stderr && !contentErrors && !tidyOptGetBool( tdoc, TidyQuiet ) )
         fprintf(errout, "\n");
-    
-    if (contentErrors + contentWarnings > 0 &&
-        !tidyOptGetBool(tdoc, TidyQuiet))
+
+    /* footnote printing only if errors or warnings */
+    if ( contentErrors + contentWarnings > 0 )
         tidyErrorSummary(tdoc);
-    
-    if (!tidyOptGetBool(tdoc, TidyQuiet))
-        tidyGeneralInfo(tdoc);
-    
+
+    /* prints the general info, if applicable */
+    tidyGeneralInfo(tdoc);
+
     /* called to free hash tables etc. */
     tidyRelease( tdoc );
     

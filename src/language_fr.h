@@ -1,4 +1,4 @@
-#ifndef language_fr_h
+﻿#ifndef language_fr_h
 #define language_fr_h
 /*
  * language_fr.h
@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-10-03 12:44:37
+ *   PO_REVISION_DATE=2017-10-05 15:06:28
  */
 
 #ifdef _MSC_VER
@@ -742,14 +742,14 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     },
     { STRING_CONTENT_LOOKS,                          0, "Le contenu du document ressemble à %s"                                                                  },
     { STRING_DOCTYPE_GIVEN,                          0, "DOCTYPE donnée est «%s»"                                                                                },
-    { STRING_ERROR_COUNT,                            0, "Tidy a trouvé %u %s et %u %s!\n"                                                                          },
+    { STRING_ERROR_COUNT,                            0, "Tidy a trouvé %u %s et %u %s!\n"                                                                        },
     { STRING_NEEDS_INTERVENTION,                     0,        
         "Ce document contient des erreurs qui doivent d'abord être résolues\n"
         "en utilisant HTML Tidy pour produire une version nettoyée.\n"
     },
-    { STRING_NO_ERRORS,                              0, "Aucun avertissement ou erreur trouvée.\n"                                                                 },
+    { STRING_NO_ERRORS,                              0, "Aucun avertissement ou erreur trouvée.\n"                                                               },
     { STRING_NO_SYSID,                               0, "Aucun identifiant système dans le doctype soumis"                                                       },
-    { STRING_NOT_ALL_SHOWN,                          0, "Tidy a trouvé %u %s et %u %s! Tous les avertissements et erreurs n'ont pas été affichés.\n"               },
+    { STRING_NOT_ALL_SHOWN,                          0, "Tidy a trouvé %u %s et %u %s! Tous les avertissements et erreurs n'ont pas été affichés.\n"             },
     { TEXT_GENERAL_INFO,                             0,        
         "À propos de HTML Tidy: https://github.com/htacg/tidy-html5\n"
         "Rapports de bugs et commentaires: https://github.com/htacg/tidy-html5/issues\n"

@@ -1,4 +1,4 @@
-#ifndef language_pt_br_h
+﻿#ifndef language_pt_br_h
 #define language_pt_br_h
 /*
  * language_pt_br.h
@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-10-03 12:44:37
+ *   PO_REVISION_DATE=2017-10-05 09:29:27
  */
 
 #ifdef _MSC_VER
@@ -646,11 +646,6 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "Esta opção especifica se o Tidy deve mover todas as tags de estilo para o "
         "cabeçalho do documento. "
     },
-    { TidyUnknownCategory,                           0, "categoria desconhecida!"                                                                         },
-    { TidyDiagnostics,                               0, "diagnósticos"                                                                                    },
-    { TidyEncoding,                                  0, "codificação"                                                                                     },
-    { TidyInternalCategory,                          0, "interna (privada)"                                                                               },
-    { TidyPrettyPrint,                               0, "impressão"                                                                                       },
     { TidyWarning,                                   0, "Acesso: "                                                                                        },
     { TidyAccess,                                    0, "Acesso: "                                                                                        },
     { TidyError,                                     0, "Erro: "                                                                                          },

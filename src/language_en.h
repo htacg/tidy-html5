@@ -1573,25 +1573,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
 
 
     /********************************************
-     ** TidyConfigCategory enumeration
-     ** @remark enum source TidyConfigCategory
-     ********************************************/
-    { TidyUnknownCategory,          0,   "unknown category!"                                                       },
-    { TidyDiagnostics,              0,   "diagnostics"                                                             },
-    { TidyDisplay,                  0,   "display"                                                                 },
-    { TidyDocumentIO,               0,   "document"                                                                },
-    { TidyEncoding,                 0,   "encoding"                                                                },
-    { TidyFileIO,                   0,   "file"                                                                    },
-    { TidyInternalCategory,         0,   "internal (private)"                                                      },
-    { TidyMarkupCleanup,            0,   "cleanup"                                                                 },
-    { TidyMarkupEntities,           0,   "entities"                                                                },
-    { TidyMarkupRepair,             0,   "repair"                                                                  },
-    { TidyMarkupTeach,              0,   "teach"                                                                   },
-    { TidyMarkupXForm,              0,   "transform"                                                               },
-    { TidyPrettyPrint,              0,   "print"                                                                   },
-
-
-    /********************************************
      ** Message Severity Level
      ** @remark enum source TidyConfigCategory
      ********************************************/

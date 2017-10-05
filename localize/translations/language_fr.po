@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-10-03 12:44:37\n"
+"PO-Revision-Date: 2017-10-05 09:29:27\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -2016,34 +2016,6 @@ msgid ""
 "This option specifies if Tidy should move all style tags to the "
 "head of the document. "
 msgstr ""
-
-msgctxt "TidyUnknownCategory"
-msgid "unknown category!"
-msgstr "catégorie inconnue!"
-
-msgctxt "TidyDiagnostics"
-msgid "diagnostics"
-msgstr ""
-
-msgctxt "TidyEncoding"
-msgid "encoding"
-msgstr "encodage"
-
-msgctxt "TidyInternalCategory"
-msgid "internal (private)"
-msgstr "interne (privée)"
-
-msgctxt "TidyMarkup"
-msgid "markup"
-msgstr "structure de balises"
-
-msgctxt "TidyMiscellaneous"
-msgid "misc"
-msgstr "divers"
-
-msgctxt "TidyPrettyPrint"
-msgid "print"
-msgstr "affichage"
 
 msgctxt "TidyInfo"
 msgid "Info: "

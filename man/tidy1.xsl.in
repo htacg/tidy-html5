@@ -253,47 +253,47 @@ There were errors.
 <xsl:template name="show-config-options">
 .SS Document Display options<xsl:text/>
   <xsl:call-template name="config-detail">
-    <xsl:with-param name="category">display</xsl:with-param>
+    <xsl:with-param name="category">TidyDisplay</xsl:with-param>
   </xsl:call-template>
 .SS Document In and Out options
   <xsl:call-template name="config-detail">
-    <xsl:with-param name="category">document</xsl:with-param>
+    <xsl:with-param name="category">TidyDocumentIO</xsl:with-param>
   </xsl:call-template>
 .SS File Input-Output options
   <xsl:call-template name="config-detail">
-    <xsl:with-param name="category">file</xsl:with-param>
+    <xsl:with-param name="category">TidyFileIO</xsl:with-param>
   </xsl:call-template>
 .SS Diagnostics options
   <xsl:call-template name="config-detail">
-    <xsl:with-param name="category">diagnostics</xsl:with-param>
+    <xsl:with-param name="category">TidyDiagnostics</xsl:with-param>
   </xsl:call-template>
 .SS Encoding options
   <xsl:call-template name="config-detail">
-    <xsl:with-param name="category">encoding</xsl:with-param>
+    <xsl:with-param name="category">TidyEncoding</xsl:with-param>
   </xsl:call-template>
 .SS Cleanup options
   <xsl:call-template name="config-detail">
-    <xsl:with-param name="category">cleanup</xsl:with-param>
+    <xsl:with-param name="category">TidyMarkupCleanup</xsl:with-param>
   </xsl:call-template>
 .SS Entities options
   <xsl:call-template name="config-detail">
-    <xsl:with-param name="category">entities</xsl:with-param>
+    <xsl:with-param name="category">TidyMarkupEntities</xsl:with-param>
   </xsl:call-template>
 .SS Repair options
   <xsl:call-template name="config-detail">
-    <xsl:with-param name="category">repair</xsl:with-param>
+    <xsl:with-param name="category">TidyMarkupRepair</xsl:with-param>
   </xsl:call-template>
 .SS Transformation options
   <xsl:call-template name="config-detail">
-    <xsl:with-param name="category">transform</xsl:with-param>
+    <xsl:with-param name="category">TidyMarkupXForm</xsl:with-param>
   </xsl:call-template>
 .SS Teaching Tidy options
   <xsl:call-template name="config-detail">
-    <xsl:with-param name="category">teach</xsl:with-param>
+    <xsl:with-param name="category">TidyMarkupTeach</xsl:with-param>
   </xsl:call-template>
 .SS Pretty Print options
   <xsl:call-template name="config-detail">
-    <xsl:with-param name="category">print</xsl:with-param>
+    <xsl:with-param name="category">TidyPrettyPrint</xsl:with-param>
   </xsl:call-template>
 </xsl:template>
 

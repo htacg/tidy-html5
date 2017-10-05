@@ -98,7 +98,7 @@ extern "C" {
     FN(TidyMarkupTeach)      /**< Teach tidy new things */                \
     FN(TidyMarkupXForm)      /**< Transform HTML one way or another */    \
     FN(TidyPrettyPrint)      /**< Pretty printing options */              \
-    FN(TidyInternalCategory) /**< Option is internal only. */
+    FN(TidyInternalCategory) /**< Option is internal only. */             \
 
 
 /** These message codes comprise every possible message that can be output by

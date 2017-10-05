@@ -487,15 +487,15 @@ static Bool hasPickList( TidyOption topt )
     return tidyOptGetNextPick( topt, &pos ) != NULL;
 }
 
-/** Returns the configuration category name for the specified configuration
+/** Returns the configuration category id for the specified configuration
  ** category id. This will be used as an XML class attribute value.
  ** @param id The TidyConfigCategory for which to lookup the category name.
  ** @result Returns the configuration category, such as "diagnostics".
  */
-static ctmbstr ConfigCategoryName( TidyConfigCategory id )
+static ctmbstr ConfigCategoryId( TidyConfigCategory id )
 {
     if (id >= TidyDiagnostics && id <= TidyInternalCategory)
-        return tidyLocalizedString(id);
+        return tidyErrorCodeAsKey( id );
 
     fprintf(stderr, tidyLocalizedString(TC_STRING_FATAL_ERROR), (int)id);
     fprintf(stderr, "\n");
@@ -538,7 +538,7 @@ static void GetOption(TidyDoc tdoc,    /**< The tidy document. */
     TidyOptionType optTyp = tidyOptGetType( topt );
 
     d->name = tidyOptGetName( topt );
-    d->cat = ConfigCategoryName( tidyOptGetCategory( topt ) );
+    d->cat = ConfigCategoryId( tidyOptGetCategory( topt ) );
     d->catid = tidyOptGetCategory( topt );
     d->vals = NULL;
     d->def = NULL;

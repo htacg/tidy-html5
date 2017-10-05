@@ -1,4 +1,4 @@
-#ifndef language_fr_h
+﻿#ifndef language_fr_h
 #define language_fr_h
 /*
  * language_fr.h
@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-10-03 12:44:37
+ *   PO_REVISION_DATE=2017-10-05 09:29:27
  */
 
 #ifdef _MSC_VER
@@ -554,10 +554,6 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "Cette option précise si Tidy doit utiliser l'analyseur XML plutôt que l'analyseur de correction "
         "d'erreur HTML."
     },
-    { TidyUnknownCategory,                           0, "catégorie inconnue!"                                                                                    },
-    { TidyEncoding,                                  0, "encodage"                                                                                               },
-    { TidyInternalCategory,                          0, "interne (privée)"                                                                                       },
-    { TidyPrettyPrint,                               0, "affichage"                                                                                              },
     { TidyInfo,                                      0, "Info:"                                                                                                  },
     { TidyWarning,                                   0, "Avertissement:"                                                                                         },
     { TidyConfig,                                    0, "Config:"                                                                                                },

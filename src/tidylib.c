@@ -1380,17 +1380,10 @@ int         TY_(DocParseStream)( TidyDocImpl* doc, StreamIn* in )
 
 int         tidyDocRunDiagnostics( TidyDocImpl* doc )
 {
-    Bool quiet = cfgBool( doc, TidyQuiet );
-    Bool force = cfgBool( doc, TidyForceOutput );
+    TY_(ReportMarkupVersion)( doc );
+    TY_(ReportNumWarnings)( doc );
 
-    if ( !quiet )
-    {
-
-        TY_(ReportMarkupVersion)( doc );
-        TY_(ReportNumWarnings)( doc );
-    }
-
-    if ( doc->errors > 0 && !force )
+    if ( doc->errors > 0 && !cfgBool( doc, TidyForceOutput ) )
         TY_(Dialogue)(doc, STRING_NEEDS_INTERVENTION );
 
      return tidyDocStatus( doc );

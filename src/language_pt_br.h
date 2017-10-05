@@ -28,7 +28,7 @@
  *
  * Orginating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-10-05 09:29:27
+ *   PO_REVISION_DATE=2017-10-05 15:13:40
  */
 
 #ifdef _MSC_VER
@@ -830,14 +830,14 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     { TEXT_USING_BODY,                               0, "É recomendável usar CSS para especificar cores de página e link"                                 },
     { STRING_CONTENT_LOOKS,                          0, "O conteúdo do documento se parece com %s"                                                        },
     { STRING_DOCTYPE_GIVEN,                          0, "Doctype dado é \"%s\""                                                                           },
-    { STRING_ERROR_COUNT,                            0, "Tidy encontrou %u %s e %u %s!"                                                                   },
+    { STRING_ERROR_COUNT,                            0, "Tidy encontrou %u %s e %u %s!\n"                                                                 },
     { STRING_NEEDS_INTERVENTION,                     0,        
         "Esse documento possui erros que devem ser corrigidos\n"
         "antes de usar HTML Tidy para gerar uma versão arrumada.\n"
     },
-    { STRING_NO_ERRORS,                              0, "Nenhum aviso ou erro foi localizado."                                                            },
+    { STRING_NO_ERRORS,                              0, "Nenhum aviso ou erro foi localizado.\n"                                                          },
     { STRING_NO_SYSID,                               0, "Nenhum identificado de sistema no doctype emitido"                                               },
-    { STRING_NOT_ALL_SHOWN,                          0, "Tidy encontrou %u %s e %u %s! Nem todos avisos/erros foram mostrados."                           },
+    { STRING_NOT_ALL_SHOWN,                          0, "Tidy encontrou %u %s e %u %s! Nem todos avisos/erros foram mostrados.\n"                         },
     { TEXT_GENERAL_INFO,                             0,        
         "Sobre o HTML Tidy: https://github.com/htacg/tidy-html5\n"
         "Relatórios de erro e comentários: https://github.com/htacg/tidy-html5/"

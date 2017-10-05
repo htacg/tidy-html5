@@ -1799,7 +1799,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { STRING_CONTENT_LOOKS,         0,   "Document content looks like %s"                                          },
     { STRING_DOCTYPE_GIVEN,         0,   "Doctype given is \"%s\""                                                 },
     {/* The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
-      STRING_ERROR_COUNT,           0,   "Tidy found %u %s and %u %s!"
+      STRING_ERROR_COUNT,           0,   "Tidy found %u %s and %u %s!\n"
     },
     {/* This console output should be limited to 78 characters per line.
       - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
@@ -1807,9 +1807,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This document has errors that must be fixed before\n"
         "using HTML Tidy to generate a tidied up version.\n"
     },
-    { STRING_NO_ERRORS,             0,   "No warnings or errors were found."                                       },
+    { STRING_NO_ERRORS,             0,   "No warnings or errors were found.\n"                                     },
     { STRING_NO_SYSID,              0,   "No system identifier in emitted doctype"                                 },
-    { STRING_NOT_ALL_SHOWN,         0,   "Tidy found %u %s and %u %s! Not all warnings/errors were shown."         },
+    { STRING_NOT_ALL_SHOWN,         0,   "Tidy found %u %s and %u %s! Not all warnings/errors were shown.\n"       },
     {/* This console output should be limited to 78 characters per line.
       - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TEXT_GENERAL_INFO,            0,

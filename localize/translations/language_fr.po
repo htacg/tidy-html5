@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-10-05 09:29:27\n"
+"PO-Revision-Date: 2017-10-05 15:13:40\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -2461,8 +2461,8 @@ msgstr "DOCTYPE donnée est «%s»"
 #. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 #, c-format
 msgctxt "STRING_ERROR_COUNT"
-msgid "Tidy found %u %s and %u %s!"
-msgstr "Tidy a trouvé %u %s et %u %s!"
+msgid "Tidy found %u %s and %u %s!\n"
+msgstr "Tidy a trouvé %u %s et %u %s!\n"
 
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
@@ -2475,8 +2475,8 @@ msgstr ""
 "en utilisant HTML Tidy pour produire une version nettoyée.\n"
 
 msgctxt "STRING_NO_ERRORS"
-msgid "No warnings or errors were found."
-msgstr "Aucun avertissement ou erreur trouvée."
+msgid "No warnings or errors were found.\n"
+msgstr "Aucun avertissement ou erreur trouvée.\n"
 
 msgctxt "STRING_NO_SYSID"
 msgid "No system identifier in emitted doctype"
@@ -2484,8 +2484,8 @@ msgstr "Aucun identifiant système dans le doctype soumis"
 
 #, c-format
 msgctxt "STRING_NOT_ALL_SHOWN"
-msgid "Tidy found %u %s and %u %s! Not all warnings/errors were shown."
-msgstr "Tidy a trouvé %u %s et %u %s! Tous les avertissements et erreurs n'ont pas été affichés."
+msgid "Tidy found %u %s and %u %s! Not all warnings/errors were shown.\n"
+msgstr "Tidy a trouvé %u %s et %u %s! Tous les avertissements et erreurs n'ont pas été affichés.\n"
 
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.

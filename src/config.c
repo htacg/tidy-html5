@@ -303,6 +303,16 @@ static const TidyOptionImpl option_defs[] =
 };
 
 
+/* List of deprecated options and their replacements. */
+static const struct {
+    ctmbstr name;                /**< name of the deprecated option */
+    TidyOptionId replacementId;  /**< Id of the replacement option, or 0 if none. */
+} deprecatedOptions[] = {
+    { "show-body-only", TidyBodyOnly }, /* WIP, for development purposes! */
+    { NULL }
+};
+
+
 /* Should only be called by options set by name
 ** thus, it is cheaper to do a few scans than set
 ** up every option in a hash table.
@@ -491,6 +501,72 @@ static void ReparseTagDecls( TidyDocImpl* doc, uint changedUserTags  )
     REPARSE_USERTAGS(TidyEmptyTags,tagtype_empty);
     REPARSE_USERTAGS(TidyPreTags,tagtype_pre);
 }
+
+
+/* returns the option id of the replacement Tidy option for optName. */
+static TidyOptionId getOptionReplacement( ctmbstr optName )
+{
+    uint i = 0;
+    ctmbstr testName;
+    while ( (testName = deprecatedOptions[i].name) )
+    {
+        if ( TY_(tmbstrcasecmp)( optName, testName ) == 0 )
+            return deprecatedOptions[i].replacementId;
+
+        i++;
+    }
+    return N_TIDY_OPTIONS;
+}
+
+
+/* indicates whether or not optName is deprecated */
+static Bool isOptionDeprecated( ctmbstr optName )
+{
+    return getOptionReplacement( optName ) != N_TIDY_OPTIONS;
+}
+
+/* forward declaration */
+Bool GetPickListValue();
+
+/* substitute the new option for the deprecated one. */
+static Bool subDeprecatedOption( TidyDocImpl* doc, ctmbstr oldName, ctmbstr oldValue)
+{
+    TidyOptionId newOptId = getOptionReplacement( oldName );
+
+    if ( newOptId == TidyUnknownOption )
+    {
+        printf("%s has been removed, and there is no replacement.\n", oldName);
+        return no;
+    }
+
+    if ( TY_(tmbstrcasecmp)( oldName, "show-body-only" ) == 0 )
+    {
+        uint value;
+
+        /* `show-body-only` used to use the boolPicks */
+        if ( GetPickListValue( oldValue, boolPicks, &value ) )
+        {
+            if ( value == TidyNoState )
+            {
+                printf("show-body-only is deprecated; use show-markup. No action taken.\n");
+                TY_(SetOptionBool)( doc, newOptId, value );
+            }
+            else
+            {
+                TY_(SetOptionBool)( doc, newOptId, value );
+                printf("show-body-only has been removed; use show-markup, which has been set to `body-only`.\n");
+            }
+        }
+        else
+        {
+            printf("Report bad argument %s\n", oldValue);
+        }
+        return yes;
+    }
+
+    return no;
+}
+
 
 void TY_(ResetConfigToDefault)( TidyDocImpl* doc )
 {
@@ -875,20 +951,24 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
 Bool TY_(ParseConfigOption)( TidyDocImpl* doc, ctmbstr optnam, ctmbstr optval )
 {
     const TidyOptionImpl* option = TY_(lookupOption)( optnam );
-    Bool status = ( option != NULL );
+    Bool isDeprecated = isOptionDeprecated( optnam );
+    Bool status = ( option != NULL ) && !isDeprecated;
     if ( !status )
     {
-        /* Not a standard tidy option.  Check to see if the user application 
-           recognizes it  */
+        /* Unknown or deprecated, so check to see if the user application
+           wants to deal with it first. */
         if (NULL != doc->pOptCallback)
             status = (*doc->pOptCallback)( optnam, optval );
         if (NULL != doc->pConfigCallback )
             status = status && (*doc->pConfigCallback)( tidyImplToDoc(doc), optnam, optval );
+        if (!status && isDeprecated)
+            status = subDeprecatedOption( doc, optnam, optval);
         if (!status)
             TY_(ReportUnknownOption)( doc, optnam );
     }
-    else 
+    else
         status = TY_(ParseConfigValue)( doc, option->id, optval );
+
     return status;
 }
 
@@ -1236,6 +1316,33 @@ Bool ParseCSS1Selector( TidyDocImpl* doc, const TidyOptionImpl* option )
     return yes;
 }
 
+
+/* Given a string, return the picklist value from an arbitrary picklist. */
+Bool GetPickListValue( ctmbstr value, PickListItems* pickList, uint *result )
+{
+    const PickListItem *item = NULL;
+    uint ix = 0;
+
+    while ( (item = &(*pickList)[ ix ]) && item->label )
+    {
+        ctmbstr input;
+        uint i = 0;
+        while ( ( input = &(*item->inputs[i]) ) )
+        {
+            if (TY_(tmbstrcasecmp)(value, input) == 0 )
+            {
+                *result = ix;
+                return yes;
+            }
+            ++i;
+        }
+        ++ix;
+    }
+
+    return no;
+}
+
+
 /* A general parser for anything using pick lists. This provides the engine to
    determine the proper option value, and can be used by parsers in addition to
    ParsePickList that require special handling.
@@ -1246,33 +1353,20 @@ Bool GetParsePickListValue( TidyDocImpl* doc, const TidyOptionImpl* entry, uint 
     tchar c = SkipWhite( cfg );
     tmbchar work[ 16 ] = {0};
     tmbstr cp = work, end = work + sizeof(work);
-    const PickListItem *item = NULL;
-    uint ix = 0;
-    
+
     while ( c!=EndOfStream && cp < end && !TY_(IsWhite)(c) && c != '\r' && c != '\n' )
     {
         *cp++ = (tmbchar) c;
         c = AdvanceChar( cfg );
     }
-    
-    while ( (item = &(*entry->pickList)[ ix ]) && item->label )
+
+    if ( GetPickListValue( work, entry->pickList, result ) != yes )
     {
-        ctmbstr input;
-        uint i = 0;
-        while ( ( input = &(*item->inputs[i]) ) )
-        {
-            if (TY_(tmbstrcasecmp)(work, input) == 0 )
-            {
-                *result = ix;
-                return yes;
-            }
-            ++i;
-        }
-        ++ix;
+        TY_(ReportBadArgument)( doc, entry->name );
+        return no;
     }
-    
-    TY_(ReportBadArgument)( doc, entry->name );
-    return no;
+
+    return yes;
 }
 
 

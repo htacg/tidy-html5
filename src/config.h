@@ -36,14 +36,30 @@
 #include "tidy.h"
 #include "streamio.h"
 
-/** PickLists may have up to 16 items. For some reason,
- ** this limit has always been hard-coded into Tidy.
+/** @addtogroup internal_api */
+/** @{ */
+
+
+/***************************************************************************//**
+ ** @defgroup configuration_options Configuration Options
+ **
+ ** This module organizes all of Tidy's configuration options, including
+ ** picklist management, option setting and retrieval, option file utilities,
+ ** and so on.
+ **
+ ** @{
+ ******************************************************************************/
+
+
+/** Determines the maximum number of items in an option's picklist. PickLists
+ ** may have up to 16 items. For some reason, this limit has been hard-coded
+ ** into Tidy for some time. Feel free to increase this as needed.
  */
 #define TIDY_PL_SIZE 16
 
-/** Structs of this type contain information needed in order to present pick lists,
- ** relate pick list entries to public enum values, and parse strings that are
- ** accepted in order to assign the value.
+/** Structs of this type contain information needed in order to present
+ ** picklists, relate picklist entries to public enum values, and parse
+ ** strings that are accepted in order to assign the value.
  */
 typedef struct PickListItem {
     ctmbstr label;      /**< PickList label for this item. */
@@ -60,57 +76,91 @@ typedef struct PickListItem {
 typedef const PickListItem PickListItems[TIDY_PL_SIZE];
 
 
-struct _tidy_option;
+struct _tidy_option; /* forward */
+
+/** The TidyOptionImpl type implements the `_tidy_option` structure.
+ */
 typedef struct _tidy_option TidyOptionImpl;
 
+
+/** This typedef describes a function that is used for parsing the input
+ ** given for a particular Tidy option.
+ */
 typedef Bool (ParseProperty)( TidyDocImpl* doc, const TidyOptionImpl* opt );
 
+
+/** This structure defines the internal representation of a Tidy option.
+ */
 struct _tidy_option
 {
     TidyOptionId        id;
-    TidyConfigCategory  category;        /* put 'em in groups */
-    ctmbstr             name;            /* property name */
-    TidyOptionType      type;            /* string, int or bool */
-    ulong               dflt;            /* default for TidyInteger and TidyBoolean */
-    ParseProperty*      parser;          /* parsing method, read-only if NULL */
-    PickListItems*      pickList;        /* new style pick list */
-    ctmbstr             pdflt;           /* default for TidyString */
+    TidyConfigCategory  category;        /**< The category of the option. */
+    ctmbstr             name;            /**< The name of the option. */
+    TidyOptionType      type;            /**< The date type for the option. */
+    ulong               dflt;            /**< Dfeault value for TidyInteger and TidyBoolean */
+    ParseProperty*      parser;          /**< Function to parse input; read-only if NULL. */
+    PickListItems*      pickList;        /**< The picklist of possible values for this option. */
+    ctmbstr             pdflt;           /**< Default value for TidyString. */
 };
 
+
+/** Stored option values can be one of two internal types.
+ */
 typedef union
 {
   ulong v;  /* Value for TidyInteger and TidyBoolean */
   char *p;  /* Value for TidyString */
 } TidyOptionValue;
 
+/** This type is used to define a structure for keeping track of the values
+ ** for each option.
+ */
 typedef struct _tidy_config
 {
-    TidyOptionValue value[ N_TIDY_OPTIONS + 1 ];     /* current config values */
-    TidyOptionValue snapshot[ N_TIDY_OPTIONS + 1 ];  /* Snapshot of values to be restored later */
-
-    /* track what tags user has defined to eliminate unnecessary searches */
-    uint  defined_tags;
-
-    uint c;           /* current char in input stream */
-    StreamIn* cfgIn;  /* current input source */
-
+    TidyOptionValue value[ N_TIDY_OPTIONS + 1 ];     /**< Current config values. */
+    TidyOptionValue snapshot[ N_TIDY_OPTIONS + 1 ];  /**< Snapshot of values to be restored later. */
+    uint  defined_tags;                              /**< Tracks user-defined tags. */
+    uint c;                                          /**< Current char in input stream for reading options. */
+    StreamIn* cfgIn;                                 /**< Current input source for reading options.*/
 } TidyConfigImpl;
 
 
-/* Used to build a table of documentation cross-references. */
+/** Used to build a table of documentation cross-references.
+ */
 typedef struct {
   TidyOptionId opt;          /**< Identifier. */
   TidyOptionId const *links; /**< Cross references. Last element must be 'TidyUnknownOption'. */
 } TidyOptionDoc;
 
 
+/** Given an option name, return an instance of an option.
+ */
 const TidyOptionImpl* TY_(lookupOption)( ctmbstr optnam );
+
+
+/** Given an option ID, return an instance of an option.
+ */
 const TidyOptionImpl* TY_(getOption)( TidyOptionId optId );
 
+
+/** Initiates an iterator to cycle through all of the available options.
+ */
 TidyIterator TY_(getOptionList)( TidyDocImpl* doc );
+
+
+/** Gets the next option provided by the iterator.
+ */
 const TidyOptionImpl* TY_(getNextOption)( TidyDocImpl* doc, TidyIterator* iter );
 
+
+/** Initiates an iterator to cycle through all of the available picklist
+ ** possibilities.
+ */
 TidyIterator TY_(getOptionPickList)( const TidyOptionImpl* option );
+
+
+/** Gets the next picklist possibility provided by the iterator.
+ */
 ctmbstr TY_(getNextOptionPick)( const TidyOptionImpl* option, TidyIterator* iter );
 
 #if SUPPORT_CONSOLE_APP
@@ -181,5 +231,10 @@ ctmbstr TY_(_cfgGetString)( TidyDocImpl* doc, TidyOptionId optId );
 #define cfgStr(doc, id)         ((ctmbstr) (doc)->config.value[ (id) ].p)
 
 #endif /* _DEBUG */
+
+
+/** @} configuration_options group */
+/** @} internal_api addtogroup */
+
 
 #endif /* __CONFIG_H__ */

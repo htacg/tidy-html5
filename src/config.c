@@ -313,7 +313,7 @@ static const struct {
     ctmbstr name;                /**< name of the deprecated option */
     TidyOptionId replacementId;  /**< Id of the replacement option, or 0 if none. */
 } deprecatedOptions[] = {
-    { "show-body-only", TidyBodyOnly }, /* WIP, for development purposes! */
+//    { "show-body-only", TidyBodyOnly }, /* WIP, for development purposes! */
     { NULL }
 };
 
@@ -887,20 +887,21 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
 
             if ( c == ':' )
             {
+                Bool isDeprecated = isOptionDeprecated( name );
                 const TidyOptionImpl* option = TY_(lookupOption)( name );
                 c = AdvanceChar( cfg );
-                if ( option )
+                if ( option && !isDeprecated )
                     option->parser( doc, option );
                 else
                 {
-                    if ( (NULL != doc->pOptCallback) || (NULL != doc->pConfigCallback) )
+                    if ( (NULL != doc->pOptCallback) || (NULL != doc->pConfigCallback) || isDeprecated )
                     {
                         TidyConfigImpl* cfg = &doc->config;
                         tmbchar buf[8192];
                         uint i = 0;
                         tchar delim = 0;
                         Bool waswhite = yes;
-                        Bool response = yes;
+                        Bool response = no;
 
                         tchar c = SkipWhite( cfg );
 
@@ -933,12 +934,15 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
                         buf[i] = '\0';
                         
                         if ( doc->pOptCallback )
-                            response = response && (*doc->pOptCallback)( name, buf );
+                            response = (*doc->pOptCallback)( name, buf );
 
                         if ( doc->pConfigCallback )
                             response = response && (*doc->pConfigCallback)( tidyImplToDoc(doc), name, buf );
 
-                        if (response == no)
+                        if ( !response && isDeprecated )
+                            response = subDeprecatedOption( doc, name, buf);
+
+                        if ( response == no )
                             TY_(ReportUnknownOption)( doc, name );
                     }
                     else

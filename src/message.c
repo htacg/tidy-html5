@@ -345,6 +345,9 @@ static struct _dispatchTable {
     { NOFRAMES_CONTENT,             TidyWarning,     formatStandard          },
     { NON_MATCHING_ENDTAG,          TidyWarning,     formatStandard          },
     { OBSOLETE_ELEMENT,             TidyWarning,     formatStandard          },
+    { OPTION_REMOVED,               TidyConfig,      formatStandard          },
+    { OPTION_REMOVED_APPLIED,       TidyConfig,      formatStandard          },
+    { OPTION_REMOVED_UNAPPLIED,     TidyConfig,      formatStandard          },
     { PREVIOUS_LOCATION,            TidyInfo,        formatStandard          },
     { PROPRIETARY_ATTR_VALUE,       TidyWarning,     formatAttributeReport   },
     { PROPRIETARY_ATTRIBUTE,        TidyWarning,     formatAttributeReport   },
@@ -749,11 +752,28 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
         } break;
 
         case STRING_UNKNOWN_OPTION:
+        case OPTION_REMOVED:
         {
             ctmbstr str;
             if ( (str = va_arg( args, ctmbstr)) )
                 return TY_(tidyMessageCreateWithLexer)(doc, code, level, str);
         } break;
+
+        case OPTION_REMOVED_UNAPPLIED:
+        {
+            ctmbstr s1 = va_arg( args, ctmbstr );
+            ctmbstr s2 = va_arg( args, ctmbstr );
+            return TY_(tidyMessageCreateWithLexer)(doc, code, level, s1, s2);
+        }
+
+        case OPTION_REMOVED_APPLIED:
+        {
+            ctmbstr s1 = va_arg( args, ctmbstr );
+            ctmbstr s2 = va_arg( args, ctmbstr );
+            ctmbstr s3 = va_arg( args, ctmbstr );
+            return TY_(tidyMessageCreateWithLexer)(doc, code, level, s1, s2, s3);
+        }
+
 
         case BAD_SURROGATE_LEAD:
         case BAD_SURROGATE_PAIR:

@@ -303,7 +303,12 @@ static const TidyOptionImpl option_defs[] =
 };
 
 
-/* List of deprecated options and their replacements. */
+/*  Deleted options. This array keeps track of options that have been
+ ** removed from Tidy, and suggests a replacement. When a deleted option is
+ ** used, client programs will have the opportunity to consume the option
+ ** first via the callback, and if not handled by the callback, will be
+ ** handled by Tidy, generally by setting an alternate or new option.
+ */
 static const struct {
     ctmbstr name;                /**< name of the deprecated option */
     TidyOptionId replacementId;  /**< Id of the replacement option, or 0 if none. */
@@ -503,7 +508,11 @@ static void ReparseTagDecls( TidyDocImpl* doc, uint changedUserTags  )
 }
 
 
-/* returns the option id of the replacement Tidy option for optName. */
+/*  Returns the option id of the replacement Tidy option for optName. Because
+ ** an option might not have a replacement (0, TidyUnknownOption), a return
+ ** value of N_TIDY_OPTIONS indicates an error, i.e., that the option isn't
+ ** in the deprecated list.
+ */
 static TidyOptionId getOptionReplacement( ctmbstr optName )
 {
     uint i = 0;
@@ -519,26 +528,31 @@ static TidyOptionId getOptionReplacement( ctmbstr optName )
 }
 
 
-/* indicates whether or not optName is deprecated */
+/* Indicates whether or not optName is deprecated */
 static Bool isOptionDeprecated( ctmbstr optName )
 {
     return getOptionReplacement( optName ) != N_TIDY_OPTIONS;
 }
 
-/* forward declaration */
+/* Forward declaration */
 Bool GetPickListValue();
 
-/* substitute the new option for the deprecated one. */
+/* Aubstitute the new option for the deprecated one. */
 static Bool subDeprecatedOption( TidyDocImpl* doc, ctmbstr oldName, ctmbstr oldValue)
 {
     TidyOptionId newOptId = getOptionReplacement( oldName );
+    ctmbstr newName = TY_(getOption)( newOptId )->name;
+    TidyDoc tdoc = tidyImplToDoc( doc );
 
     if ( newOptId == TidyUnknownOption )
     {
-        printf("%s has been removed, and there is no replacement.\n", oldName);
+        TY_(Report)( doc, NULL, NULL, OPTION_REMOVED, oldName );
         return no;
     }
 
+    /********************/
+    /* `show-body-only` */
+    /********************/
     if ( TY_(tmbstrcasecmp)( oldName, "show-body-only" ) == 0 )
     {
         uint value;
@@ -548,21 +562,23 @@ static Bool subDeprecatedOption( TidyDocImpl* doc, ctmbstr oldName, ctmbstr oldV
         {
             if ( value == TidyNoState )
             {
-                printf("show-body-only is deprecated; use show-markup. No action taken.\n");
+                TY_(Report)( doc, NULL, NULL, OPTION_REMOVED_UNAPPLIED, oldName, newName );
                 TY_(SetOptionBool)( doc, newOptId, value );
             }
             else
             {
                 TY_(SetOptionBool)( doc, newOptId, value );
-                printf("show-body-only has been removed; use show-markup, which has been set to `body-only`.\n");
+                ctmbstr val = tidyOptGetCurrPick( tdoc, newOptId );
+                TY_(Report)( doc, NULL, NULL, OPTION_REMOVED_APPLIED, oldName, newName, val );
             }
         }
         else
         {
-            printf("Report bad argument %s\n", oldValue);
+            printf("-->Report bad argument %s\n", oldValue);
         }
         return yes;
     }
+
 
     return no;
 }

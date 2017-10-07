@@ -243,6 +243,9 @@ extern "C" {
     FN(NOFRAMES_CONTENT)              \
     FN(NON_MATCHING_ENDTAG)           \
     FN(OBSOLETE_ELEMENT)              \
+    FN(OPTION_REMOVED)                \
+    FN(OPTION_REMOVED_APPLIED)        \
+    FN(OPTION_REMOVED_UNAPPLIED)      \
     FN(PREVIOUS_LOCATION)             \
     FN(PROPRIETARY_ATTR_VALUE)        \
     FN(PROPRIETARY_ATTRIBUTE)         \

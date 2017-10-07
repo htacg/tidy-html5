@@ -138,14 +138,7 @@ endif ()
 #------------------------------------------------------------------------
 # Diagnostics
 #   Enable building with logs, some memory diagnostics.
-#
-#   - ensure that NDEBUG is applied by default, so that default builds
-#     don't spew debugging messages everywhere, except MSVC builds,
-#     where this is already expected behavior.
-#   - allow other diagnostic tools.
 #------------------------------------------------------------------------
-add_definitions( -DNDEBUG )
-
 if (MSVC AND NOT CMAKE_BUILD_TYPE MATCHES Release)
     option( ENABLE_DEBUG_LOG "Set ON to output debugging messages." ON )
 else ()
@@ -153,7 +146,7 @@ else ()
 endif ()
 
 if ( ENABLE_DEBUG_LOG )
-    remove_definitions ( -DNDEBUG )
+    add_definitions( -DENABLE_DEBUG_LOG )
     message(STATUS "*** Debug Logging is enabled.")  
 else ()
     message(STATUS "*** Debug Logging is NOT enabled.")  
@@ -167,10 +160,10 @@ if (ENABLE_ALLOC_DEBUG)
     message(STATUS "*** Note, lexer.c node allocation diagnostics are ON")
 endif ()
     
-  if (ENABLE_MEMORY_DEBUG)
-      add_definitions ( -DDEBUG_MEMORY )  # see alloc.c for details
-      message(STATUS "*** Note, alloc.c memory diagnostics are ON")
-  endif ()
+if (ENABLE_MEMORY_DEBUG)
+    add_definitions ( -DDEBUG_MEMORY )  # see alloc.c for details
+    message(STATUS "*** Note, alloc.c memory diagnostics are ON")
+endif ()
     
 if (WIN32)
     option( ENABLE_CRTDBG_MEMORY "Set ON to enable the Windows CRT debug library." OFF )

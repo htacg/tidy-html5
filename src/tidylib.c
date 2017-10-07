@@ -1398,7 +1398,7 @@ void         tidyDocReportDoctype( TidyDocImpl* doc )
 /*****************************************************************************
  *  HTML5 STUFF
  *****************************************************************************/
-#if 0 && !defined(NDEBUG)
+#if 0 && defined(ENABLE_DEBUG_LOG)
 extern void show_not_html5(void);
 /* -----------------------------
 List tags that do not have version HTML5 (HT50|XH50)
@@ -1773,7 +1773,7 @@ void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
 }
 
 
-#if !defined(NDEBUG)
+#if defined(ENABLE_DEBUG_LOG)
 /* *** FOR DEBUG ONLY *** */
 const char *dbg_get_lexer_type( void *vp )
 {
@@ -1910,7 +1910,7 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     Bool mergeEmphasis = cfgBool( doc, TidyMergeEmphasis );
     Node* node;
 
-#if !defined(NDEBUG)
+#if defined(ENABLE_DEBUG_LOG)
     SPRTF("All nodes BEFORE clean and repair\n");
     dbg_show_all_nodes( doc, &doc->root, 0  );
 #endif
@@ -2028,7 +2028,7 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
         }
     }
 
-#if !defined(NDEBUG)
+#if defined(ENABLE_DEBUG_LOG)
     SPRTF("All nodes AFTER clean and repair\n");
     dbg_show_all_nodes( doc, &doc->root, 0  );
 #endif

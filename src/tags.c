@@ -473,7 +473,7 @@ static void declare( TidyDocImpl* doc, TidyTagImpl* tags,
     }
 }
 
-#if !defined(NDEBUG)
+#if defined(ENABLE_DEBUG_LOG)
 void ListElementsPerVersion( uint vers, Bool has )
 {
     uint val, cnt, total, wrap = 10;
@@ -519,7 +519,7 @@ void show_have_html5(void)
     ListElementsPerVersion( VERS_HTML5, yes );
 }
 
-#endif /* !defined(NDEBUG) */
+#endif /* defined(ENABLE_DEBUG_LOG) */
 
 /* public interface for finding tag by name */
 Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )

@@ -20,7 +20,7 @@
 /* *** FOR DEBUG ONLY *** */
 /* #define DEBUG_PPRINT */
 /* #define DEBUG_INDENT */
-#if !defined(NDEBUG) && defined(DEBUG_PPRINT)
+#if defined(ENABLE_DEBUG_LOG) && defined(DEBUG_PPRINT)
 extern void dbg_show_node( TidyDocImpl* doc, Node *node, int caller, int indent );
 #endif
 
@@ -614,7 +614,7 @@ static Bool CheckWrapIndent( TidyDocImpl* doc, uint indent )
         WrapLine( doc );
         if ( pprint->indent[ 0 ].spaces < 0 )
         {
-#if !defined(NDEBUG) && defined(DEBUG_INDENT)
+#if defined(ENABLE_DEBUG_LOG) && defined(DEBUG_INDENT)
             SPRTF("%s Indent from %d to %d\n", __FUNCTION__, pprint->indent[ 0 ].spaces, indent );
 #endif  
             pprint->indent[ 0 ].spaces = indent;
@@ -678,7 +678,7 @@ void TY_(PFlushLine)( TidyDocImpl* doc, uint indent )
 
     if (pprint->indent[ 0 ].spaces != (int)indent )
     {
-#if !defined(NDEBUG) && defined(DEBUG_INDENT)
+#if defined(ENABLE_DEBUG_LOG) && defined(DEBUG_INDENT)
         SPRTF("%s Indent from %d to %d\n", __FUNCTION__, pprint->indent[ 0 ].spaces, indent );
 #endif  
         pprint->indent[ 0 ].spaces = indent;
@@ -700,7 +700,7 @@ static void PCondFlushLine( TidyDocImpl* doc, uint indent )
     /* Issue #390 - Whether chars to flush or not, set new indent */
     if ( pprint->indent[ 0 ].spaces != (int)indent )
     {
-#if !defined(NDEBUG) && defined(DEBUG_INDENT)
+#if defined(ENABLE_DEBUG_LOG) && defined(DEBUG_INDENT)
         SPRTF("%s Indent from %d to %d\n", __FUNCTION__, pprint->indent[ 0 ].spaces, indent );
 #endif  
          pprint->indent[ 0 ].spaces = indent;
@@ -728,7 +728,7 @@ void TY_(PFlushLineSmart)( TidyDocImpl* doc, uint indent )
 
     if ( pprint->indent[ 0 ].spaces != (int)indent )
     {
-#if !defined(NDEBUG) && defined(DEBUG_INDENT)
+#if defined(ENABLE_DEBUG_LOG) && defined(DEBUG_INDENT)
         SPRTF("%s Indent from %d to %d\n", __FUNCTION__, pprint->indent[ 0 ].spaces, indent );
 #endif  
         pprint->indent[ 0 ].spaces = indent;
@@ -757,7 +757,7 @@ static void PCondFlushLineSmart( TidyDocImpl* doc, uint indent )
     \*/
     if (pprint->indent[ 0 ].spaces != (int)indent)
     {
-#if !defined(NDEBUG) && defined(DEBUG_INDENT)
+#if defined(ENABLE_DEBUG_LOG) && defined(DEBUG_INDENT)
         SPRTF("%s Indent from %d to %d\n", __FUNCTION__, pprint->indent[ 0 ].spaces, indent );
 #endif  
         pprint->indent[ 0 ].spaces = indent;
@@ -1945,7 +1945,7 @@ void PPrintScriptStyle( TidyDocImpl* doc, uint mode, uint indent, Node *node )
 
     if ( node->content && pprint->indent[ 0 ].spaces != (int)indent )
     {
-#if !defined(NDEBUG) && defined(DEBUG_INDENT)
+#if defined(ENABLE_DEBUG_LOG) && defined(DEBUG_INDENT)
         SPRTF("%s Indent from %d to %d\n", __FUNCTION__, pprint->indent[ 0 ].spaces, indent );
 #endif  
         pprint->indent[ 0 ].spaces = indent;
@@ -2053,7 +2053,7 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
         doc->progressCallback( tidyImplToDoc(doc), node->line, node->column, doc->pprint.line + 1 );
     }
 
-#if !defined(NDEBUG) && defined(DEBUG_PPRINT)
+#if defined(ENABLE_DEBUG_LOG) && defined(DEBUG_PPRINT)
     dbg_show_node( doc, node, 4, GetSpaces( &doc->pprint ) );
 #endif
 
@@ -2313,7 +2313,7 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
                     TidyPrintImpl* pprint = &doc->pprint;
                     if (pprint->indent[ 0 ].spaces != (int)indent)
                     {
-#if !defined(NDEBUG) && defined(DEBUG_INDENT)
+#if defined(ENABLE_DEBUG_LOG) && defined(DEBUG_INDENT)
                         SPRTF("%s Indent from %d to %d\n", __FUNCTION__, pprint->indent[ 0 ].spaces, indent );
 #endif  
                         pprint->indent[ 0 ].spaces = indent;

@@ -654,15 +654,18 @@ opaque_type( TidyIterator );
 
 /*=============================================================================
  * Debugging
- *  When building and not defining the NDEBUG macro, Tidy will output
+ *  When building and defining the ENABLE_DEBUG_LOG macro, Tidy will output
  *  extensive debug information. In addition to this macro, you can supply
  *  build flags for additional diagnostic information:
  *    - _CRTDBG_MAP_ALLOC (_MSC_VER only)
  *    - DEBUG_ALLOCATION
  *    - DEBUG_MEMORY
+ *
+ *  You can use DEBUG_LOG( SPRTF() ) to avoid #ifdef ENABLE_DEBUG_LOG for
+ *  one-liners.
  *===========================================================================*/
 
-#if !defined(NDEBUG)
+#ifdef ENABLE_DEBUG_LOG
 #  include "sprtf.h"
 #endif
 
@@ -670,6 +673,11 @@ opaque_type( TidyIterator );
 #  define SPRTF printf
 #endif
 
+#ifdef ENABLE_DEBUG_LOG
+#  define DEBUG_LOG(ARG) do { ARG; } while(0)
+#else
+#  define DEBUG_LOG(ARG)
+#endif
 
 
 #endif /* __TIDY_PLATFORM_H__ */

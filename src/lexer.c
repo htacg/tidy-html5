@@ -40,7 +40,7 @@
 #include "utf8.h"
 #include "streamio.h"
 
-#if !defined(NDEBUG)
+#if defined(ENABLE_DEBUG_LOG)
 /* #define DEBUG_ALLOCATION   special EXTRA allocation debug information - VERY NOISY */
 static void check_me(char *name);
 static Bool show_attrs = yes;
@@ -173,9 +173,9 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
     }
 }
 #define GTDBG(a,b,c) Show_Node(a,b,c)
-#else /* NDEBUG is define */
+#else /* ENABLE_DEBUG_LOG */
 #define GTDBG(a,b,c)
-#endif /* !defined(NDEBUG) */
+#endif /* defined(ENABLE_DEBUG_LOG) */
 
 /* Forward references
 */
@@ -322,10 +322,10 @@ static uint GetVersFromFPI(ctmbstr fpi)
     return 0;
 }
 
-#if defined(_MSC_VER)
-#ifndef EndBuf
-#  define EndBuf(a)   ( a + strlen(a) )
-#endif
+#ifdef ENABLE_DEBUG_LOG
+#  ifndef EndBuf
+#    define EndBuf(a)   ( a + strlen(a) )
+#  endif
 
 /* Issue #377 - Output diminishing version bits */
 typedef struct tagV2S {
@@ -417,14 +417,14 @@ void TY_(ConstrainVersion)(TidyDocImpl* doc, uint vers)
         SPRTF("After : %s\n", vcur);
     }
 }
-#else /* !#if defined(_MSC_VER) */
+#else /* !#if defined(ENABLE_DEBUG_LOG) */
 /* everything is allowed in proprietary version of HTML */
 /* this is handled here rather than in the tag/attr dicts */
 void TY_(ConstrainVersion)(TidyDocImpl* doc, uint vers)
 {
     doc->lexer->versions &= (vers | VERS_PROPRIETARY);
 }
-#endif /* #if defined(_MSC_VER) y/n */
+#endif /* #if defined(ENABLE_DEBUG_LOG) y/n */
 
 Bool TY_(IsWhite)(uint c)
 {
@@ -1417,7 +1417,7 @@ Node *TY_(NewNode)(TidyAllocator* allocator, Lexer *lexer)
         node->column = lexer->columns;
     }
     node->type = TextNode;
-#if !defined(NDEBUG) && defined(DEBUG_ALLOCATION)
+#if defined(ENABLE_DEBUG_LOG) && defined(DEBUG_ALLOCATION)
     SPRTF("Allocated node %p\n", node );
 #endif
     return node;
@@ -1511,7 +1511,7 @@ void TY_(RemoveAttribute)( TidyDocImpl* doc, Node *node, AttVal *attr )
  */
 void TY_(FreeNode)( TidyDocImpl* doc, Node *node )
 {
-#if !defined(NDEBUG) && defined(DEBUG_ALLOCATION)
+#if defined(ENABLE_DEBUG_LOG) && defined(DEBUG_ALLOCATION)
     /* avoid showing free of root node! */
     if (node) {
         if (RootNode != node->type) {
@@ -2397,7 +2397,7 @@ void TY_(UngetToken)( TidyDocImpl* doc )
     doc->lexer->pushed = yes;
 }
 
-#if !defined(NDEBUG) && defined(_MSC_VER)
+#if defined(ENABLE_DEBUG_LOG)
 #  define CondReturnTextNode(doc, skip) \
             if (lexer->txtend > lexer->txtstart) { \
                 Node *_node = TY_(TextToken)(lexer); \
@@ -2488,7 +2488,7 @@ Node* TY_(GetToken)( TidyDocImpl* doc, GetTokenMode mode )
     return GetTokenFromStream( doc, mode );
 }
 
-#if !defined(NDEBUG)
+#if defined(ENABLE_DEBUG_LOG)
 static void check_me(char *name)
 {
     SPRTF("Have node %s\n", name);
@@ -3422,9 +3422,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
         return node;  /* the COMMENT token */
     }
 
-#if !defined(NDEBUG)
-    SPRTF("Returning NULL...\n");
-#endif
+    DEBUG_LOG(SPRTF("Returning NULL...\n"));
     return NULL;
 }
 

@@ -136,12 +136,22 @@ endif ()
 
 
 #------------------------------------------------------------------------
-# Memory Diagnostics
-#   Enable building with some memory diagnostics.
-#  
-# NOTE: Currently only available in the Debug configuration build in
-#   Windows, but could be maybe extended to Unix, others...
+# Diagnostics
+#   Enable building with logs, some memory diagnostics.
 #------------------------------------------------------------------------
+if (MSVC AND NOT CMAKE_BUILD_TYPE MATCHES Release)
+    option( ENABLE_DEBUG_LOG "Set ON to output debugging messages." ON )
+else ()
+    option( ENABLE_DEBUG_LOG  "Set ON to output debugging messages." OFF )
+endif ()
+
+if ( ENABLE_DEBUG_LOG )
+    add_definitions( -DENABLE_DEBUG_LOG )
+    message(STATUS "*** Debug Logging is enabled.")  
+else ()
+    message(STATUS "*** Debug Logging is NOT enabled.")  
+endif ()
+
 option( ENABLE_ALLOC_DEBUG   "Set ON to output node allocation diagnostics." OFF )
 option( ENABLE_MEMORY_DEBUG  "Set ON to output some memory diagnostics." OFF )
 
@@ -150,10 +160,10 @@ if (ENABLE_ALLOC_DEBUG)
     message(STATUS "*** Note, lexer.c node allocation diagnostics are ON")
 endif ()
     
-  if (ENABLE_MEMORY_DEBUG)
-      add_definitions ( -DDEBUG_MEMORY )  # see alloc.c for details
-      message(STATUS "*** Note, alloc.c memory diagnostics are ON")
-  endif ()
+if (ENABLE_MEMORY_DEBUG)
+    add_definitions ( -DDEBUG_MEMORY )  # see alloc.c for details
+    message(STATUS "*** Note, alloc.c memory diagnostics are ON")
+endif ()
     
 if (WIN32)
     option( ENABLE_CRTDBG_MEMORY "Set ON to enable the Windows CRT debug library." OFF )

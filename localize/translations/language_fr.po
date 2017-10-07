@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-10-05 15:13:40\n"
+"PO-Revision-Date: 2017-10-07 16:24:04\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -2859,6 +2859,21 @@ msgstr "remplacement des %s inattendus par </%s>"
 msgctxt "OBSOLETE_ELEMENT"
 msgid "replacing obsolete element %s with %s"
 msgstr "remplacement de l'élément obsolète %s par %s"
+
+#, c-format
+msgctxt "OPTION_REMOVED"
+msgid "option \"%s\" no longer exists, and no replacement could be found."
+msgstr ""
+
+#, c-format
+msgctxt "OPTION_REMOVED_APPLIED"
+msgid "option \"%s\" replaced with \"%s\", which Tidy has set to \"%s\"."
+msgstr ""
+
+#, c-format
+msgctxt "OPTION_REMOVED_UNAPPLIED"
+msgid "option \"%s\" replaced with \"%s\", but Tidy could not set it for you."
+msgstr ""
 
 #, c-format
 msgctxt "PREVIOUS_LOCATION"

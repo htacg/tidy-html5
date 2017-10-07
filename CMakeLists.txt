@@ -136,12 +136,29 @@ endif ()
 
 
 #------------------------------------------------------------------------
-# Memory Diagnostics
-#   Enable building with some memory diagnostics.
-#  
-# NOTE: Currently only available in the Debug configuration build in
-#   Windows, but could be maybe extended to Unix, others...
+# Diagnostics
+#   Enable building with logs, some memory diagnostics.
+#
+#   - ensure that NDEBUG is applied by default, so that default builds
+#     don't spew debugging messages everywhere, except MSVC builds,
+#     where this is already expected behavior.
+#   - allow other diagnostic tools.
 #------------------------------------------------------------------------
+add_definitions( -DNDEBUG )
+
+if (MSVC AND NOT CMAKE_BUILD_TYPE MATCHES Release)
+    option( ENABLE_DEBUG_LOG "Set ON to output debugging messages." ON )
+else ()
+    option( ENABLE_DEBUG_LOG  "Set ON to output debugging messages." OFF )
+endif ()
+
+if ( ENABLE_DEBUG_LOG )
+    remove_definitions ( -DNDEBUG )
+    message(STATUS "*** Debug Logging is enabled.")  
+else ()
+    message(STATUS "*** Debug Logging is NOT enabled.")  
+endif ()
+
 option( ENABLE_ALLOC_DEBUG   "Set ON to output node allocation diagnostics." OFF )
 option( ENABLE_MEMORY_DEBUG  "Set ON to output some memory diagnostics." OFF )
 

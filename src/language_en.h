@@ -1184,6 +1184,20 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - It's very important that <br/> be self-closing!
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
+        TidySquelchShow,              0,
+        "This option indicates whether or not Tidy should display message ID's "
+        "with each of its error reports. This could be useful if you wanted to "
+        "use the \"squelch\" configuration option in order to filter out certain "
+        "report messages. "
+    },
+    {/* Important notes for translators:
+      - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+      <br/>.
+      - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+      - Option values should be enclosed in <var></var>.
+      - It's very important that <br/> be self-closing!
+      - The strings "Tidy" and "HTML Tidy" are the program name and must not
+      be translated. */
         TidyStrictTagsAttr,           0,
         "This options ensures that tags and attributes are applicable for the "
         "version of HTML that Tidy outputs. When set to <var>yes</var> and the "

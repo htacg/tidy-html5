@@ -137,7 +137,7 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
     result->messagePrefix = tidyLocalizedString(level);
 
     if ( line > 0 && column > 0 )
-        pattern = "%s%s%s";      /* pattern in there's location information */
+        pattern = "%s%s%s";      /* pattern if there's location information */
     else
         pattern = "%.0s%s%s";    /* otherwise if there isn't */
 
@@ -154,6 +154,11 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
                      result->messagePos, result->messagePrefix,
                      result->message);
 
+    if ( cfgBool(doc, TidySquelchShow) == yes )
+    {
+        TY_(tmbsnprintf)(result->messageOutputDefault, sizeMessageBuf, "%s (%s)", result->messageOutputDefault, TY_(tidyErrorCodeAsKey)(code) );
+        TY_(tmbsnprintf)(result->messageOutput, sizeMessageBuf, "%s (%s)", result->messageOutput, TY_(tidyErrorCodeAsKey)(code) );
+    }
 
     result->allowMessage = yes;
 

@@ -636,6 +636,7 @@ typedef enum
     TidyShowWarnings,            /**< However errors are always shown */
     TidySkipNested,              /**< Skip nested tags in script and style CDATA */
     TidySortAttributes,          /**< Sort attributes */
+    TidySquelchShow,             /**< Show message ID's in the error table */
     TidyStrictTagsAttr,          /**< Ensure tags and attributes match output HTML version */
     TidyStyleTags,               /**< Move sytle to head */
     TidyTabSize,                 /**< Expand tabs to n spaces */

@@ -549,7 +549,7 @@ static Bool isOptionDeprecated( ctmbstr optName )
 }
 
 
-/* Aubstitute the new option for the deprecated one. */
+/* Substitute the new option for the deprecated one. */
 static Bool subDeprecatedOption( TidyDocImpl* doc, ctmbstr oldName, ctmbstr oldValue)
 {
     TidyOptionId newOptId = getOptionReplacement( oldName );

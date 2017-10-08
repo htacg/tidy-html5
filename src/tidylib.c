@@ -715,7 +715,11 @@ TidyReportLevel TIDY_CALL tidyGetMessageLevel( TidyMessage tmessage )
     return TY_(getMessageLevel)(*message);
 }
 
-
+Bool TIDY_CALL tidyGetMessageIsSquelched( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessageIsSquelched)(*message);
+}
 
 ctmbstr TIDY_CALL tidyGetMessageFormatDefault( TidyMessage tmessage )
 {

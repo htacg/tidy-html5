@@ -1175,8 +1175,6 @@ void AdjustConfig( TidyDocImpl* doc )
    coordinates additions to the internal lists. Within Tidy, this function
    might be used to programmatically add individual values to items that use
    this service.
- @todo: see if we can apply this for other things such as tags, etc., to
-   simplify code.
  */
 void TY_(DeclareListItem)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name )
 {

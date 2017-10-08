@@ -139,11 +139,9 @@ endif ()
 # Diagnostics
 #   Enable building with logs, some memory diagnostics.
 #------------------------------------------------------------------------
-if (MSVC AND NOT CMAKE_BUILD_TYPE MATCHES Release)
-    option( ENABLE_DEBUG_LOG "Set ON to output debugging messages." ON )
-else ()
-    option( ENABLE_DEBUG_LOG  "Set ON to output debugging messages." OFF )
-endif ()
+option( ENABLE_DEBUG_LOG    "Set ON to output debugging messages."          ON  )
+option( ENABLE_ALLOC_DEBUG  "Set ON to output node allocation diagnostics." OFF )
+option( ENABLE_MEMORY_DEBUG "Set ON to output some memory diagnostics."     OFF )
 
 if ( ENABLE_DEBUG_LOG )
     add_definitions( -DENABLE_DEBUG_LOG )
@@ -151,9 +149,6 @@ if ( ENABLE_DEBUG_LOG )
 else ()
     message(STATUS "*** Debug Logging is NOT enabled.")  
 endif ()
-
-option( ENABLE_ALLOC_DEBUG   "Set ON to output node allocation diagnostics." OFF )
-option( ENABLE_MEMORY_DEBUG  "Set ON to output some memory diagnostics." OFF )
 
 if (ENABLE_ALLOC_DEBUG)
     add_definitions ( -DDEBUG_ALLOCATION )  # see lexer.c for details

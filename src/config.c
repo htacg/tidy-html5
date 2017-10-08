@@ -336,6 +336,7 @@ const TidyOptionImpl* TY_(lookupOption)( ctmbstr s )
     return NULL;
 }
 
+
 const TidyOptionImpl* TY_(getOption)( TidyOptionId optId )
 {
   if ( optId < N_TIDY_OPTIONS )
@@ -349,6 +350,7 @@ static void FreeOptionValue( TidyDocImpl* doc, const TidyOptionImpl* option, Tid
     if ( option->type == TidyString && value->p && value->p != option->pdflt )
         TidyDocFree( doc, value->p );
 }
+
 
 static void CopyOptionValue( TidyDocImpl* doc, const TidyOptionImpl* option,
                              TidyOptionValue* oldval, const TidyOptionValue* newval )
@@ -408,6 +410,7 @@ Bool TY_(SetOptionBool)( TidyDocImpl* doc, TidyOptionId optId, Bool val )
    return status;
 }
 
+
 static void GetOptionDefault( const TidyOptionImpl* option,
                               TidyOptionValue* dflt )
 {
@@ -416,6 +419,7 @@ static void GetOptionDefault( const TidyOptionImpl* option,
     else
         dflt->v = option->dflt;
 }
+
 
 static Bool OptionValueEqDefault( const TidyOptionImpl* option,
                                   const TidyOptionValue* val )
@@ -568,7 +572,7 @@ static Bool subDeprecatedOption( TidyDocImpl* doc, ctmbstr oldName, ctmbstr oldV
         uint value;
 
         /* `show-body-only` used to use the autoBoolPicks */
-        if ( GetPickListValue( oldValue, autoBoolPicks, &value ) )
+        if ( GetPickListValue( oldValue, &autoBoolPicks, &value ) )
         {
             if ( value == TidyNoState )
             {

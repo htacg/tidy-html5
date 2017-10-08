@@ -156,7 +156,7 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
                      result->messagePos, result->messagePrefix,
                      result->message);
 
-    if ( cfgBool(doc, TidySquelchShow) == yes )
+    if ( ( cfgBool(doc, TidySquelchShow) == yes ) && level <= TidyFatal )
     {
         TY_(tmbsnprintf)(result->messageOutputDefault, sizeMessageBuf, "%s (%s)", result->messageOutputDefault, TY_(tidyErrorCodeAsKey)(code) );
         TY_(tmbsnprintf)(result->messageOutput, sizeMessageBuf, "%s (%s)", result->messageOutput, TY_(tidyErrorCodeAsKey)(code) );

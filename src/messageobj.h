@@ -80,6 +80,9 @@ int TY_(getMessageColumn)( TidyMessageImpl message );
 /** get the TidyReportLevel of the message. */
 TidyReportLevel TY_(getMessageLevel)( TidyMessageImpl message );
 
+/** get whether or not the message was squelched by the configuration. */
+Bool TY_(getMessageIsSquelched)( TidyMessageImpl message );
+
 /** the built-in format string */
 ctmbstr TY_(getMessageFormatDefault)( TidyMessageImpl message );
 

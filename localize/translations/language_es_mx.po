@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-10-07 16:24:04\n"
+"PO-Revision-Date: 2017-10-08 10:46:33\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -1263,6 +1263,41 @@ msgstr ""
 #. - It's very important that <br/> be self-closing!
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not
 #. be translated.
+msgctxt "TidySquelchReports"
+msgid ""
+"Use this option to prevent Tidy from displaying certain types of "
+"report output,for example, for conditions that you wish to ignore."
+"<br/>"
+"This option takes a list of one or more keys indicating the message "
+"type to squelch. You can discover these message keys by using the "
+"<code>squelch-id</code> configuration option and examining Tidy's "
+"output. "
+msgstr ""
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidySquelchShow"
+msgid ""
+"This option indicates whether or not Tidy should display message ID's "
+"with each of its error reports. This could be useful if you wanted to "
+"use the <code>squelch</code> configuration option in order to filter "
+"out certain report messages. "
+msgstr ""
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
 msgctxt "TidyStrictTagsAttr"
 msgid ""
 "This options ensures that tags and attributes are applicable for the "
@@ -2475,8 +2510,18 @@ msgid "removing whitespace preceding XML Declaration"
 msgstr ""
 
 #, c-format
+msgctxt "STRING_ARGUMENT_BAD"
+msgid "option \"%s\" given bad argument \"%s\""
+msgstr ""
+
+#, c-format
 msgctxt "STRING_MISSING_MALFORMED"
 msgid "missing or malformed argument for option: %s"
+msgstr ""
+
+#, c-format
+msgctxt "STRING_SQUELCHING_TYPE"
+msgid "messages of type \"%s\" will not be output"
 msgstr ""
 
 #, c-format

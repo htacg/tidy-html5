@@ -85,6 +85,8 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
     va_list args_copy;
     enum { sizeMessageBuf=2048 };
     ctmbstr pattern;
+    uint i = 0;
+
 
     /* Things we know... */
 
@@ -187,6 +189,19 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
     if ( doc->messageCallback )
     {
         result->allowMessage = result->allowMessage & doc->messageCallback( tidyImplToMessage(result) );
+    }
+
+    /* finally, check the document's configuration to determine whether
+       this message is squelched. */
+    result->squelched = no;
+    while ( ( doc->squelched.list ) && ( doc->squelched.list[i] != 0 ) )
+    {
+        if ( doc->squelched.list[i] == code )
+        {
+            result->squelched = yes;
+            break;
+        }
+        i++;
     }
 
     return result;
@@ -295,6 +310,11 @@ int TY_(getMessageColumn)( TidyMessageImpl message )
 TidyReportLevel TY_(getMessageLevel)( TidyMessageImpl message )
 {
     return message.level;
+}
+
+Bool TY_(getMessageIsSquelched)( TidyMessageImpl message )
+{
+    return message.squelched;
 }
 
 ctmbstr TY_(getMessageFormatDefault)( TidyMessageImpl message )

@@ -249,6 +249,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyShowWarnings,            DD, "show-warnings",               BL, yes,             ParsePickList,     &boolPicks          },
     { TidySkipNested,              MR, "skip-nested",                 BL, yes,             ParsePickList,     &boolPicks          }, /* 1642186 - Issue #65 */
     { TidySortAttributes,          PP, "sort-attributes",             IN, TidySortAttrNone,ParsePickList,     &sorterPicks        },
+    { TidySquelchReports,          DD, "squelch",                     ST, 0,               ParseList,         NULL                },
     { TidySquelchShow,             DD, "squelch-id",                  BL, no,              ParsePickList,     &boolPicks          },
     { TidyStrictTagsAttr,          MR, "strict-tags-attributes",      BL, no,              ParsePickList,     &boolPicks          }, /* 20160209 - Issue #350 */
     { TidyStyleTags,               MR, "fix-style-tags",              BL, yes,             ParsePickList,     &boolPicks          },
@@ -1166,12 +1167,16 @@ void AdjustConfig( TidyDocImpl* doc )
 }
 
 
-/* Coordinates Config update and Attributes data for priority attributes, as
-   a service to ParseList().
+/* A service to ParseList(), keeps option values nicely formatted and
+   coordinates additions to the internal lists. Within Tidy, this function
+   might be used to programmatically add individual values to items that use
+   this service.
+ @todo: see if we can apply this for other things such as tags, etc., to
+   simplify code.
  */
-void TY_(DeclarePriorityAttrib)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr name )
+void TY_(DeclareListItem)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name )
 {
-    ctmbstr prvval = cfgStr( doc, optId );
+    ctmbstr prvval = cfgStr( doc, opt->id );
     tmbstr catval = NULL;
     ctmbstr theval = name;
     if ( prvval )
@@ -1183,14 +1188,27 @@ void TY_(DeclarePriorityAttrib)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr n
         theval = catval;
     }
 
-    TY_(DefinePriorityAttribute)( doc, name );
-    SetOptionValue( doc, optId, theval );
+    switch ( opt->id )
+    {
+        case TidyPriorityAttributes:
+            TY_(DefinePriorityAttribute)( doc, name );
+            break;
+
+        case TidySquelchReports:
+            TY_(DefineSquelchedMessage)( doc, opt, name );
+            break;
+
+        default:
+            break;
+    }
+
+    SetOptionValue( doc, opt->id, theval );
     if ( catval )
         TidyDocFree( doc, catval );
-        }
+}
 
 
-/* a space or comma separated list of attribute names */
+/* a space or comma separated list of items */
 Bool ParseList( TidyDocImpl* doc, const TidyOptionImpl* option )
 {
     TidyConfigImpl* cfg = &doc->config;
@@ -1236,15 +1254,7 @@ Bool ParseList( TidyDocImpl* doc, const TidyOptionImpl* option )
             continue;        /* there is a trailing space on the line. */
 
         /* add attribute to array */
-        switch ( option->id )
-        {
-            case TidyPriorityAttributes:
-                TY_(DeclarePriorityAttrib)( doc, option->id, buf );
-                break;
-
-            default:
-                break;
-        }
+        TY_(DeclareListItem)( doc, option, buf );
 
         i = 0;
         ++nItems;
@@ -1252,15 +1262,7 @@ Bool ParseList( TidyDocImpl* doc, const TidyOptionImpl* option )
     while ( c != EndOfStream );
 
     if ( i > 0 )
-        switch ( option->id )
-        {
-            case TidyPriorityAttributes:
-                TY_(DeclarePriorityAttrib)( doc, option->id, buf );
-                break;
-
-            default:
-                break;
-        }
+        TY_(DeclareListItem)( doc, option, buf );
 
     return ( nItems > 0 );
 }

@@ -139,6 +139,7 @@ void          tidyDocRelease( TidyDocImpl* doc )
         TY_(FreeConfig)( doc );
         TY_(FreeAttrTable)( doc );
         TY_(FreeAttrPriorityList)( doc );
+        TY_(FreeSquelchedMessageList( doc ));
         TY_(FreeTags)( doc );
         /*\ 
          *  Issue #186 - Now FreeNode depend on the doctype, so the lexer is needed

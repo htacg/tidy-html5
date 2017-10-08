@@ -1350,7 +1350,10 @@ void TY_(DefineSquelchedMessage)(TidyDocImpl* doc, const TidyOptionImpl* opt, ct
     tidyStrings message = TY_(tidyErrorCodeFromKey)( name );
 
     if ( message <= REPORT_MESSAGE_FIRST || message >= REPORT_MESSAGE_LAST)
+    {
         TY_(Report)( doc, NULL, NULL, STRING_ARGUMENT_BAD, opt->name, name );
+        return;
+    }
 
     if ( !list->list )
     {

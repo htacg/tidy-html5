@@ -304,7 +304,7 @@ static const struct {
 
 /* forward declarations */
 static void AdjustConfig( TidyDocImpl* doc );
-static Bool GetPickListValue();
+static Bool GetPickListValue( ctmbstr value, PickListItems* pickList, uint *result );
 
 
 void TY_(InitConfig)( TidyDocImpl* doc )

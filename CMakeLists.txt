@@ -139,7 +139,7 @@ endif ()
 # Diagnostics
 #   Enable building with logs, some memory diagnostics.
 #------------------------------------------------------------------------
-option( ENABLE_DEBUG_LOG    "Set ON to output debugging messages."          ON  )
+option( ENABLE_DEBUG_LOG    "Set ON to output debugging messages."          OFF )
 option( ENABLE_ALLOC_DEBUG  "Set ON to output node allocation diagnostics." OFF )
 option( ENABLE_MEMORY_DEBUG "Set ON to output some memory diagnostics."     OFF )
 

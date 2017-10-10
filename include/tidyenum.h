@@ -257,7 +257,7 @@ extern "C" {
     FN(SPACE_PRECEDING_XMLDECL)       \
     FN(STRING_ARGUMENT_BAD)           \
     FN(STRING_MISSING_MALFORMED)      \
-    FN(STRING_SQUELCHING_TYPE)        \
+    FN(STRING_MUTING_TYPE)            \
     FN(STRING_UNKNOWN_OPTION)         \
     FN(SUSPECTED_MISSING_QUOTE)       \
     FN(TAG_NOT_ALLOWED_IN)            \
@@ -638,8 +638,8 @@ typedef enum
     TidyShowWarnings,            /**< However errors are always shown */
     TidySkipNested,              /**< Skip nested tags in script and style CDATA */
     TidySortAttributes,          /**< Sort attributes */
-    TidySquelchReports,          /**< Filter these messages from output. */
-    TidySquelchShow,             /**< Show message ID's in the error table */
+    TidyMuteReports,             /**< Filter these messages from output. */
+    TidyMuteShow,                /**< Show message ID's in the error table */
     TidyStrictTagsAttr,          /**< Ensure tags and attributes match output HTML version */
     TidyStyleTags,               /**< Move sytle to head */
     TidyTabSize,                 /**< Expand tabs to n spaces */

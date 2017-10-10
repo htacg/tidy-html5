@@ -45,7 +45,7 @@ struct _TidyDocImpl
     TidyTagImpl             tags;
     TidyAttribImpl          attribs;
     TidyAccessImpl          access;
-    TidySquelchedMessages   squelched;
+    TidyMutedMessages       muted;
 
     /* The Pretty Print buffer */
     TidyPrintImpl       pprint;
@@ -106,7 +106,7 @@ struct _TidyMessageImpl
     int                 column;       /* the column the message applies to */
     TidyReportLevel     level;        /* the severity level of the message */
     Bool                allowMessage; /* indicates whether or not a filter rejected a message */
-    Bool                squelched;    /* indicates whether or not a configuration squelches this message */
+    Bool                muted;        /* indicates whether or not a configuration mutes this message */
     
     int                 argcount;    /* the number of arguments */
     struct printfArg*   arguments;   /* the arguments' values and types */

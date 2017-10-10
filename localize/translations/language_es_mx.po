@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-10-08 10:46:33\n"
+"PO-Revision-Date: 2017-10-10 08:20:36\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -1263,14 +1263,14 @@ msgstr ""
 #. - It's very important that <br/> be self-closing!
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not
 #. be translated.
-msgctxt "TidySquelchReports"
+msgctxt "TidyMuteReports"
 msgid ""
 "Use this option to prevent Tidy from displaying certain types of "
 "report output,for example, for conditions that you wish to ignore."
 "<br/>"
 "This option takes a list of one or more keys indicating the message "
-"type to squelch. You can discover these message keys by using the "
-"<code>squelch-id</code> configuration option and examining Tidy's "
+"type to mute. You can discover these message keys by using the "
+"<code>mute-id</code> configuration option and examining Tidy's "
 "output. "
 msgstr ""
 
@@ -1282,11 +1282,11 @@ msgstr ""
 #. - It's very important that <br/> be self-closing!
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not
 #. be translated.
-msgctxt "TidySquelchShow"
+msgctxt "TidyMuteShow"
 msgid ""
 "This option indicates whether or not Tidy should display message ID's "
 "with each of its error reports. This could be useful if you wanted to "
-"use the <code>squelch</code> configuration option in order to filter "
+"use the <code>mute</code> configuration option in order to filter "
 "out certain report messages. "
 msgstr ""
 
@@ -2520,7 +2520,7 @@ msgid "missing or malformed argument for option: %s"
 msgstr ""
 
 #, c-format
-msgctxt "STRING_SQUELCHING_TYPE"
+msgctxt "STRING_MUTING_TYPE"
 msgid "messages of type \"%s\" will not be output"
 msgstr ""
 

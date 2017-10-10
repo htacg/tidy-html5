@@ -249,8 +249,8 @@ static const TidyOptionImpl option_defs[] =
     { TidyShowWarnings,            DD, "show-warnings",               BL, yes,             ParsePickList,     &boolPicks          },
     { TidySkipNested,              MR, "skip-nested",                 BL, yes,             ParsePickList,     &boolPicks          }, /* 1642186 - Issue #65 */
     { TidySortAttributes,          PP, "sort-attributes",             IN, TidySortAttrNone,ParsePickList,     &sorterPicks        },
-    { TidySquelchReports,          DD, "squelch",                     ST, 0,               ParseList,         NULL                },
-    { TidySquelchShow,             DD, "squelch-id",                  BL, no,              ParsePickList,     &boolPicks          },
+    { TidyMuteReports,             DD, "mute",                        ST, 0,               ParseList,         NULL                },
+    { TidyMuteShow,                DD, "mute-id",                     BL, no,              ParsePickList,     &boolPicks          },
     { TidyStrictTagsAttr,          MR, "strict-tags-attributes",      BL, no,              ParsePickList,     &boolPicks          }, /* 20160209 - Issue #350 */
     { TidyStyleTags,               MR, "fix-style-tags",              BL, yes,             ParsePickList,     &boolPicks          },
     { TidyTabSize,                 PP, "tab-size",                    IN, 8,               ParseInt,          NULL                },
@@ -1196,8 +1196,8 @@ void TY_(DeclareListItem)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr 
             TY_(DefinePriorityAttribute)( doc, name );
             break;
 
-        case TidySquelchReports:
-            TY_(DefineSquelchedMessage)( doc, opt, name );
+        case TidyMuteReports:
+            TY_(DefineMutedMessage)( doc, opt, name );
             break;
 
         default:

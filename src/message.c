@@ -153,8 +153,8 @@ static void messageOut( TidyMessageImpl *message )
             break;
     }
 
-    /* Suppress report messages if they've been squelched. */
-    go = go & !message->squelched;
+    /* Suppress report messages if they've been muted. */
+    go = go & !message->muted;
 
     /* Suppress report messages if we've already reached the reporting limit. */
     if ( message->level <= TidyFatal )
@@ -364,8 +364,8 @@ static struct _dispatchTable {
     { STRING_CONTENT_LOOKS,         TidyInfo,        formatStandard          }, /* reportMarkupVersion() */
     { STRING_DOCTYPE_GIVEN,         TidyInfo,        formatStandard          }, /* reportMarkupVersion() */
     { STRING_MISSING_MALFORMED,     TidyConfig,      formatStandard          },
+    { STRING_MUTING_TYPE,           TidyConfig,      formatStandard          },
     { STRING_NO_SYSID,              TidyInfo,        formatStandard          }, /* reportMarkupVersion() */
-    { STRING_SQUELCHING_TYPE,       TidyConfig,      formatStandard          },
     { STRING_UNKNOWN_OPTION,        TidyConfig,      formatStandard          },
     { SUSPECTED_MISSING_QUOTE,      TidyWarning,     formatStandard          },
     { TAG_NOT_ALLOWED_IN,           TidyWarning,     formatStandard, PREVIOUS_LOCATION },
@@ -728,7 +728,7 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
         case STRING_CONTENT_LOOKS:
         case STRING_DOCTYPE_GIVEN:
         case STRING_MISSING_MALFORMED:
-        case STRING_SQUELCHING_TYPE:
+        case STRING_MUTING_TYPE:
         {
             ctmbstr str;
             if ( (str = va_arg( args, ctmbstr)) )
@@ -1330,23 +1330,23 @@ void TY_(ReportNumWarnings)( TidyDocImpl* doc )
 
 
 /*********************************************************************
- * Message Squelching
+ * Message Muting
  *********************************************************************/
 
 
-void TY_(FreeSquelchedMessageList)( TidyDocImpl* doc )
+void TY_(FreeMutedMessageList)( TidyDocImpl* doc )
 {
-    TidySquelchedMessages *list = &(doc->squelched);
+    TidyMutedMessages *list = &(doc->muted);
 
     if ( list->list )
         TidyFree( doc->allocator, list->list );
 }
 
 
-void TY_(DefineSquelchedMessage)(TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name)
+void TY_(DefineMutedMessage)(TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name)
 {
     enum { capacity = 10 };
-    TidySquelchedMessages *list = &(doc->squelched);
+    TidyMutedMessages *list = &(doc->muted);
     tidyStrings message = TY_(tidyErrorCodeFromKey)( name );
 
     if ( message <= REPORT_MESSAGE_FIRST || message >= REPORT_MESSAGE_LAST)
@@ -1373,8 +1373,8 @@ void TY_(DefineSquelchedMessage)(TidyDocImpl* doc, const TidyOptionImpl* opt, ct
     list->count++;
     list->list[list->count] = 0;
 
-    /* Must come *after* adding to the list, in case it's squelched, too. */
-    TY_(Report)( doc, NULL, NULL, STRING_SQUELCHING_TYPE, name );
+    /* Must come *after* adding to the list, in case it's muted, too. */
+    TY_(Report)( doc, NULL, NULL, STRING_MUTING_TYPE, name );
 }
 
 
@@ -1518,13 +1518,13 @@ static const TidyOptionId TidyIndentSpacesLinks[] =    { TidyIndentContent, Tidy
 static const TidyOptionId TidyInlineTagsLinks[] =      { TidyBlockTags, TidyEmptyTags, TidyPreTags, TidyUseCustomTags, TidyUnknownOption };
 static const TidyOptionId TidyMergeDivsLinks[] =       { TidyMakeClean, TidyMergeSpans, TidyUnknownOption };
 static const TidyOptionId TidyMergeSpansLinks[] =      { TidyMakeClean, TidyMergeDivs, TidyUnknownOption };
+static const TidyOptionId TidyMuteLinks[] =            { TidyMuteShow };
+static const TidyOptionId TidyMuteShowLinks[] =        { TidyMuteReports };
 static const TidyOptionId TidyNumEntitiesLinks[] =     { TidyDoctype, TidyPreserveEntities, TidyUnknownOption };
 static const TidyOptionId TidyOutCharEncodingLinks[] = { TidyCharEncoding, TidyUnknownOption };
 static const TidyOptionId TidyOutFileLinks[] =         { TidyErrFile, TidyUnknownOption };
 static const TidyOptionId TidyPreTagsLinks[] =         { TidyBlockTags, TidyEmptyTags, TidyInlineTags, TidyUseCustomTags, TidyUnknownOption };
 static const TidyOptionId TidySortAttributesLinks[] =  { TidyPriorityAttributes, TidyUnknownOption };
-static const TidyOptionId TidySquelchLinks[] =         { TidySquelchShow };
-static const TidyOptionId TidySquelchShowLinks[] =     { TidySquelchReports };
 static const TidyOptionId TidyUseCustomTagsLinks[] =   { TidyBlockTags, TidyEmptyTags, TidyInlineTags, TidyPreTags, TidyUnknownOption };
 static const TidyOptionId TidyWrapAttValsLinks[] =     { TidyWrapScriptlets, TidyLiteralAttribs, TidyUnknownOption };
 static const TidyOptionId TidyWrapScriptletsLinks[] =  { TidyWrapAttVals, TidyUnknownOption };
@@ -1548,13 +1548,13 @@ static const TidyOptionDoc docs_xrefs[] =
     { TidyInlineTags,      TidyInlineTagsLinks      },
     { TidyMergeDivs,       TidyMergeDivsLinks       },
     { TidyMergeSpans,      TidyMergeSpansLinks      },
+    { TidyMuteShow,        TidyMuteShowLinks        },
     { TidyNumEntities,     TidyNumEntitiesLinks     },
     { TidyOutCharEncoding, TidyOutCharEncodingLinks },
     { TidyOutFile,         TidyOutFileLinks         },
     { TidyPreTags,         TidyPreTagsLinks         },
     { TidySortAttributes,  TidySortAttributesLinks  },
-    { TidySquelchShow,     TidySquelchShowLinks     },
-    { TidySquelchReports,  TidySquelchLinks         },
+    { TidyMuteReports,     TidyMuteLinks            },
     { TidyUseCustomTags,   TidyUseCustomTagsLinks   },
     { TidyWrapAttVals,     TidyWrapAttValsLinks     },
     { TidyWrapScriptlets,  TidyWrapScriptletsLinks  },

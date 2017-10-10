@@ -156,7 +156,7 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
                      result->messagePos, result->messagePrefix,
                      result->message);
 
-    if ( ( cfgBool(doc, TidySquelchShow) == yes ) && level <= TidyFatal )
+    if ( ( cfgBool(doc, TidyMuteShow) == yes ) && level <= TidyFatal )
     {
         TY_(tmbsnprintf)(result->messageOutputDefault, sizeMessageBuf, "%s (%s)", result->messageOutputDefault, TY_(tidyErrorCodeAsKey)(code) );
         TY_(tmbsnprintf)(result->messageOutput, sizeMessageBuf, "%s (%s)", result->messageOutput, TY_(tidyErrorCodeAsKey)(code) );
@@ -192,13 +192,13 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
     }
 
     /* finally, check the document's configuration to determine whether
-       this message is squelched. */
-    result->squelched = no;
-    while ( ( doc->squelched.list ) && ( doc->squelched.list[i] != 0 ) )
+       this message is muted. */
+    result->muted = no;
+    while ( ( doc->muted.list ) && ( doc->muted.list[i] != 0 ) )
     {
-        if ( doc->squelched.list[i] == code )
+        if ( doc->muted.list[i] == code )
         {
-            result->squelched = yes;
+            result->muted = yes;
             break;
         }
         i++;
@@ -312,9 +312,9 @@ TidyReportLevel TY_(getMessageLevel)( TidyMessageImpl message )
     return message.level;
 }
 
-Bool TY_(getMessageIsSquelched)( TidyMessageImpl message )
+Bool TY_(getMessageIsMuted)( TidyMessageImpl message )
 {
-    return message.squelched;
+    return message.muted;
 }
 
 ctmbstr TY_(getMessageFormatDefault)( TidyMessageImpl message )

@@ -182,36 +182,36 @@ void TY_(ReportNumWarnings)( TidyDocImpl* doc );
 
 
 /***************************************************************************//**
- ** @defgroup message_squelching Message Squelching
+ ** @defgroup message_mutinging Message Muting
  **
- ** Message types included in the `squelch` option will be be printed in
+ ** Message types included in the `mute` option will be be printed in
  ** messageOut().
  **
  ** @{
  ******************************************************************************/
 
 /** Maintains a list of messages not to display. */
-typedef struct _squelchedMessages {
+typedef struct _mutedMessages {
     tidyStrings* list; /**< A list of messages that won't be output. */
     uint count;        /**< Current count of the list. */
     uint capacity;     /**< Current capacity of the list. */
-} TidySquelchedMessages;
+} TidyMutedMessages;
 
 
-/** Frees the list of squelched messages.
+/** Frees the list of muted messages.
  ** @param doc The Tidy document.
  */
-void TY_(FreeSquelchedMessageList)( TidyDocImpl* doc );
+void TY_(FreeMutedMessageList)( TidyDocImpl* doc );
 
-/** Adds a new message ID to the list of squelched messages.
+/** Adds a new message ID to the list of muted messages.
  ** @param doc The Tidy document.
  ** @param name The message code as a string.
  */
-void TY_(DefineSquelchedMessage)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name );
+void TY_(DefineMutedMessage)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name );
 
 
 /** @} */
-/** @} message_squelching group */
+/** @} message_muting group */
 
 
 /***************************************************************************//**

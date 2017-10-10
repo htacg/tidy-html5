@@ -1184,13 +1184,13 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - It's very important that <br/> be self-closing!
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
-        TidySquelchReports,           0,
+        TidyMuteReports,           0,
         "Use this option to prevent Tidy from displaying certain types of "
         "report output,for example, for conditions that you wish to ignore."
         "<br/>"
         "This option takes a list of one or more keys indicating the message "
-        "type to squelch. You can discover these message keys by using the "
-        "<code>squelch-id</code> configuration option and examining Tidy's "
+        "type to mute. You can discover these message keys by using the "
+        "<code>mute-id</code> configuration option and examining Tidy's "
         "output. " 
     },
     {/* Important notes for translators:
@@ -1201,10 +1201,10 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - It's very important that <br/> be self-closing!
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
-        TidySquelchShow,              0,
+        TidyMuteShow,              0,
         "This option indicates whether or not Tidy should display message ID's "
         "with each of its error reports. This could be useful if you wanted to "
-        "use the <code>squelch</code> configuration option in order to filter "
+        "use the <code>mute</code> configuration option in order to filter "
         "out certain report messages. "
     },
     {/* Important notes for translators:
@@ -1951,7 +1951,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { SPACE_PRECEDING_XMLDECL,      0,   "removing whitespace preceding XML Declaration"                           },
     { STRING_ARGUMENT_BAD,          0,   "option \"%s\" given bad argument \"%s\""                                 },
     { STRING_MISSING_MALFORMED,     0,   "missing or malformed argument for option: %s"                            },
-    { STRING_SQUELCHING_TYPE,       0,   "messages of type \"%s\" will not be output"                              },
+    { STRING_MUTING_TYPE,           0,   "messages of type \"%s\" will not be output"                              },
     { STRING_UNKNOWN_OPTION,        0,   "unknown option: %s"                                                      },
     { SUSPECTED_MISSING_QUOTE,      0,   "suspected missing quote mark for attribute value"                        },
     { TAG_NOT_ALLOWED_IN,           0,   "%s isn't allowed in <%s> elements"                                       },

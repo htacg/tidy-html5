@@ -1245,13 +1245,13 @@ TIDY_EXPORT int TIDY_CALL tidyGetMessageColumn( TidyMessage tmessage );
 TIDY_EXPORT TidyReportLevel TIDY_CALL tidyGetMessageLevel( TidyMessage tmessage );
 
 
-/** Get the squelched status of the message, that is, whether or not the
+/** Get the muted status of the message, that is, whether or not the
  ** current configuration indicated that this message should be muted.
  ** @param tmessage Specify the message that you are querying.
  ** @result Returns a Bool indicating that the config indicates muting this
  **         message.
  */
-TIDY_EXPORT Bool TIDY_CALL tidyGetMessageIsSquelched( TidyMessage tmessage );
+TIDY_EXPORT Bool TIDY_CALL tidyGetMessageIsMuted( TidyMessage tmessage );
 
 /** Get the default format string, which is the format string for the message
  ** in Tidy's default localization (en_us).

@@ -12,6 +12,7 @@
 #include "clean.h"
 #include "tags.h"
 #include "tmbstr.h"
+#include "sprtf.h"
 
 /*
   Issue #72 - Need to know to avoid error-reporting - no warning only if --show-body-only yes

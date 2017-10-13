@@ -13,6 +13,7 @@
 #include "forward.h"
 #include "fileio.h"
 #include "tidy.h"
+#include "sprtf.h"
 
 typedef struct _fp_input_source
 {

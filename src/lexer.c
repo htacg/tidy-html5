@@ -39,6 +39,7 @@
 #include "clean.h"
 #include "utf8.h"
 #include "streamio.h"
+#include "sprtf.h"
 
 #if defined(ENABLE_DEBUG_LOG)
 /* #define DEBUG_ALLOCATION   special EXTRA allocation debug information - VERY NOISY */

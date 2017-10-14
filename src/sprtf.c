@@ -28,6 +28,8 @@
 #include <stdlib.h> /* for exit() in unix */
 #include "sprtf.h"
 
+#ifdef ENABLE_DEBUG_LOG
+
 #ifdef _MSC_VER
 #  ifndef _CRT_SECURE_NO_DEPRECATE
 #    define _CRT_SECURE_NO_DEPRECATE
@@ -416,4 +418,5 @@ int MCDECL wsprtf( PTSTR pf, ... )
 
 #endif /* #ifdef UNICODE */
 
+#endif /* #ifdef ENABLE_DEBUG_LOG */
 /* eof - sprtf.c */

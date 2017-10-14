@@ -26,6 +26,7 @@
 #ifdef   __cplusplus
 extern "C" {
 #endif
+#ifdef ENABLE_DEBUG_LOG
     /*=============================================================================
     * EXTRA Debugging, and information aid.
     *
@@ -49,12 +50,6 @@ extern "C" {
 
 #ifndef SPRTF
 #  define SPRTF sprtf
-#endif
-
-#ifdef ENABLE_DEBUG_LOG
-#  define DEBUG_LOG(ARG) do { ARG; } while(0)
-#else
-#  define DEBUG_LOG(ARG)
 #endif
 
 #ifdef _MSC_VER
@@ -92,9 +87,14 @@ TIDY_EXPORT char *get_date_time_stg(void);
 TIDY_EXPORT int gettimeofday(struct timeval *tp, void *tzp);
 #endif
 
+#  define DEBUG_LOG(ARG) do { ARG; } while(0)
+
+#else
+#  define DEBUG_LOG(ARG)
+#endif
+
 #ifdef   __cplusplus
 }
 #endif
-
 #endif /* #ifndef _SPRTF_HXX_*/
 /* eof - sprtf.h */

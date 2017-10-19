@@ -26,6 +26,31 @@
 #ifdef   __cplusplus
 extern "C" {
 #endif
+#ifdef ENABLE_DEBUG_LOG
+    /*=============================================================================
+    * EXTRA Debugging, and information aid.
+    *
+    *  When building and defining the ENABLE_DEBUG_LOG macro, Tidy will output
+    *  extensive debug information. In addition to this macro, you can supply
+    *  cmake build flags for additional diagnostic information:
+    *    - -DENABLE_ALLOC_DEBUG:BOOL=ON   - DEBUG_ALLOCATION
+    *    - -DENABLE_MEMORY_DEBUG:BOOL=ON  - DEBUG_MEMORY
+    *    - -DENABLE_CRTDBG_MEMORY:BOOL=ON - _CRTDBG_MAP_ALLOC (WIN32 only)
+    *
+    *  _MSC_VER Only - ENABLE_DEBUG_LOG is automatically enabled in the Debug
+    *  build, unless DISABLE_DEBUG_LOG is defined. See 'tidyplatform.h'
+    *
+    *  You can use DEBUG_LOG( SPRTF() ) to avoid #ifdef ENABLE_DEBUG_LOG for
+    *  one-liners.
+    *
+    *  This EXTRA Debug information is also written to a 'temptidy.txt' log
+    *  file, for review, and analysis.
+    *
+    *===========================================================================*/
+
+#ifndef SPRTF
+#  define SPRTF sprtf
+#endif
 
 #ifdef _MSC_VER
 #  define MCDECL _cdecl
@@ -62,9 +87,14 @@ TIDY_EXPORT char *get_date_time_stg(void);
 TIDY_EXPORT int gettimeofday(struct timeval *tp, void *tzp);
 #endif
 
+#  define DEBUG_LOG(ARG) do { ARG; } while(0)
+
+#else
+#  define DEBUG_LOG(ARG)
+#endif
+
 #ifdef   __cplusplus
 }
 #endif
-
 #endif /* #ifndef _SPRTF_HXX_*/
 /* eof - sprtf.h */

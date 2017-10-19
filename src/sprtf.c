@@ -28,6 +28,8 @@
 #include <stdlib.h> /* for exit() in unix */
 #include "sprtf.h"
 
+#ifdef ENABLE_DEBUG_LOG
+
 #ifdef _MSC_VER
 #  ifndef _CRT_SECURE_NO_DEPRECATE
 #    define _CRT_SECURE_NO_DEPRECATE
@@ -56,11 +58,8 @@ char *GetNxtBuf()
 }
 
 #define  MXIO     512
-#ifdef _MSC_VER /* use local log */
-static char def_log[] = "tempex.txt";
-#else
-static char def_log[] = "ex.log";
-#endif
+
+static char def_log[] = "temptidy.txt"; /* use local log */
 static char logfile[264] = "\0";
 static FILE * outfile = NULL;
 static int addsystime = 0;
@@ -419,4 +418,5 @@ int MCDECL wsprtf( PTSTR pf, ... )
 
 #endif /* #ifdef UNICODE */
 
+#endif /* #ifdef ENABLE_DEBUG_LOG */
 /* eof - sprtf.c */

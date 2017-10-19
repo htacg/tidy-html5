@@ -33,7 +33,7 @@
 #include "utf8.h"
 #include "mappedio.h"
 #include "language.h"
-
+#include "sprtf.h"
 
 /* Create/Destroy a Tidy "document" object */
 static TidyDocImpl* tidyDocCreate( TidyAllocator *allocator );

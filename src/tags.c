@@ -10,6 +10,8 @@
 #include "tidy-int.h"
 #include "message.h"
 #include "tmbstr.h"
+#include "sprtf.h"
+
 /* Attribute checking methods */
 static CheckAttribs CheckIMG;
 static CheckAttribs CheckLINK;

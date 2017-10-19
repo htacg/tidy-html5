@@ -9,6 +9,7 @@
 
 #include "tidy.h"
 #include "forward.h"
+#include "sprtf.h"
 
 static TidyMalloc  g_malloc  = NULL;
 static TidyRealloc g_realloc = NULL;

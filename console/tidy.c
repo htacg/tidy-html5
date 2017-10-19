@@ -22,13 +22,10 @@
 #include "tidy.h"
 #include "tidybuffio.h"
 #include "locale.h"
+#include "sprtf.h"
 
 #if defined(_WIN32)
 #  include <windows.h>    /* Force console to UTF8. */
-#endif
-
-#ifdef ENABLE_DEBUG_LOG
-#  include "sprtf.h"
 #endif
 
 #if defined(ENABLE_DEBUG_LOG) && defined(_MSC_VER) && defined(_CRTDBG_MAP_ALLOC)
@@ -2016,7 +2013,6 @@ int main( int argc, char** argv )
 #  if defined(_CRTDBG_MAP_ALLOC)
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #  endif
-    set_log_file((char *)"temptidy.txt", 0);
 #endif
 
     tdoc = tidyCreate();

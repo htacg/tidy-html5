@@ -864,11 +864,11 @@ static void help(TidyDoc tdoc, /**< The tidy document for which help is showing.
     printf( tidyLocalizedString(TC_TXT_HELP_1), get_final_name(prog), tidyLibraryVersion() );
     printf("\n");
 
-#ifdef PLATFORM_NAME
-    temp_string = stringWithFormat( tidyLocalizedString(TC_TXT_HELP_2A), PLATFORM_NAME);
-#else
-    title_line = stringWithFormat( tidyLocalizedString(TC_TXT_HELP_2B) );
-#endif
+    if ( tidyPlatform() )
+        temp_string = stringWithFormat( tidyLocalizedString(TC_TXT_HELP_2A), tidyPlatform() );
+    else
+        temp_string = stringWithFormat( tidyLocalizedString(TC_TXT_HELP_2B) );
+
     width = width < strlen(temp_string) ? width : strlen(temp_string);
     printf( "%s\n", temp_string );
     printf( "%*.*s\n\n", width, width, ul);
@@ -1576,11 +1576,11 @@ static void exportDefaultOptionValues( TidyDoc tdoc )
  */
 static void version( TidyDoc tdoc )
 {
-#ifdef PLATFORM_NAME
-    printf( tidyLocalizedString( TC_STRING_VERS_A ), PLATFORM_NAME, tidyLibraryVersion() );
-#else
-    printf( tidyLocalizedString( TC_STRING_VERS_B ), tidyLibraryVersion() );
-#endif
+    if ( tidyPlatform() )
+        printf( tidyLocalizedString( TC_STRING_VERS_A ), tidyPlatform(), tidyLibraryVersion() );
+    else
+        printf( tidyLocalizedString( TC_STRING_VERS_B ), tidyLibraryVersion() );
+
     printf("\n");
 }
 

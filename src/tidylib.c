@@ -139,6 +139,7 @@ void          tidyDocRelease( TidyDocImpl* doc )
         TY_(FreeConfig)( doc );
         TY_(FreeAttrTable)( doc );
         TY_(FreeAttrPriorityList)( doc );
+        TY_(FreeMutedMessageList( doc ));
         TY_(FreeTags)( doc );
         /*\ 
          *  Issue #186 - Now FreeNode depend on the doctype, so the lexer is needed
@@ -723,7 +724,11 @@ TidyReportLevel TIDY_CALL tidyGetMessageLevel( TidyMessage tmessage )
     return TY_(getMessageLevel)(*message);
 }
 
-
+Bool TIDY_CALL tidyGetMessageIsMuted( TidyMessage tmessage )
+{
+    TidyMessageImpl *message = tidyMessageToImpl(tmessage);
+    return TY_(getMessageIsMuted)(*message);
+}
 
 ctmbstr TIDY_CALL tidyGetMessageFormatDefault( TidyMessage tmessage )
 {

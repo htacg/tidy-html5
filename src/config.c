@@ -249,6 +249,8 @@ static const TidyOptionImpl option_defs[] =
     { TidyShowWarnings,            DD, "show-warnings",               BL, yes,             ParsePickList,     &boolPicks          },
     { TidySkipNested,              MR, "skip-nested",                 BL, yes,             ParsePickList,     &boolPicks          }, /* 1642186 - Issue #65 */
     { TidySortAttributes,          PP, "sort-attributes",             IN, TidySortAttrNone,ParsePickList,     &sorterPicks        },
+    { TidyMuteReports,             DD, "mute",                        ST, 0,               ParseList,         NULL                },
+    { TidyMuteShow,                DD, "mute-id",                     BL, no,              ParsePickList,     &boolPicks          },
     { TidyStrictTagsAttr,          MR, "strict-tags-attributes",      BL, no,              ParsePickList,     &boolPicks          }, /* 20160209 - Issue #350 */
     { TidyStyleTags,               MR, "fix-style-tags",              BL, yes,             ParsePickList,     &boolPicks          },
     { TidyTabSize,                 PP, "tab-size",                    IN, 8,               ParseInt,          NULL                },
@@ -302,7 +304,7 @@ static const struct {
 
 /* forward declarations */
 static void AdjustConfig( TidyDocImpl* doc );
-static Bool GetPickListValue();
+static Bool GetPickListValue( ctmbstr value, PickListItems* pickList, uint *result );
 
 
 void TY_(InitConfig)( TidyDocImpl* doc )
@@ -334,6 +336,7 @@ const TidyOptionImpl* TY_(lookupOption)( ctmbstr s )
     return NULL;
 }
 
+
 const TidyOptionImpl* TY_(getOption)( TidyOptionId optId )
 {
   if ( optId < N_TIDY_OPTIONS )
@@ -347,6 +350,7 @@ static void FreeOptionValue( TidyDocImpl* doc, const TidyOptionImpl* option, Tid
     if ( option->type == TidyString && value->p && value->p != option->pdflt )
         TidyDocFree( doc, value->p );
 }
+
 
 static void CopyOptionValue( TidyDocImpl* doc, const TidyOptionImpl* option,
                              TidyOptionValue* oldval, const TidyOptionValue* newval )
@@ -406,6 +410,7 @@ Bool TY_(SetOptionBool)( TidyDocImpl* doc, TidyOptionId optId, Bool val )
    return status;
 }
 
+
 static void GetOptionDefault( const TidyOptionImpl* option,
                               TidyOptionValue* dflt )
 {
@@ -414,6 +419,7 @@ static void GetOptionDefault( const TidyOptionImpl* option,
     else
         dflt->v = option->dflt;
 }
+
 
 static Bool OptionValueEqDefault( const TidyOptionImpl* option,
                                   const TidyOptionValue* val )
@@ -543,7 +549,7 @@ static Bool isOptionDeprecated( ctmbstr optName )
 }
 
 
-/* Aubstitute the new option for the deprecated one. */
+/* Substitute the new option for the deprecated one. */
 static Bool subDeprecatedOption( TidyDocImpl* doc, ctmbstr oldName, ctmbstr oldValue)
 {
     TidyOptionId newOptId = getOptionReplacement( oldName );
@@ -566,7 +572,7 @@ static Bool subDeprecatedOption( TidyDocImpl* doc, ctmbstr oldName, ctmbstr oldV
         uint value;
 
         /* `show-body-only` used to use the autoBoolPicks */
-        if ( GetPickListValue( oldValue, autoBoolPicks, &value ) )
+        if ( GetPickListValue( oldValue, &autoBoolPicks, &value ) )
         {
             if ( value == TidyNoState )
             {
@@ -1165,12 +1171,14 @@ void AdjustConfig( TidyDocImpl* doc )
 }
 
 
-/* Coordinates Config update and Attributes data for priority attributes, as
-   a service to ParseList().
+/* A service to ParseList(), keeps option values nicely formatted and
+   coordinates additions to the internal lists. Within Tidy, this function
+   might be used to programmatically add individual values to items that use
+   this service.
  */
-void TY_(DeclarePriorityAttrib)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr name )
+void TY_(DeclareListItem)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name )
 {
-    ctmbstr prvval = cfgStr( doc, optId );
+    ctmbstr prvval = cfgStr( doc, opt->id );
     tmbstr catval = NULL;
     ctmbstr theval = name;
     if ( prvval )
@@ -1182,14 +1190,27 @@ void TY_(DeclarePriorityAttrib)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr n
         theval = catval;
     }
 
-    TY_(DefinePriorityAttribute)( doc, name );
-    SetOptionValue( doc, optId, theval );
+    switch ( opt->id )
+    {
+        case TidyPriorityAttributes:
+            TY_(DefinePriorityAttribute)( doc, name );
+            break;
+
+        case TidyMuteReports:
+            TY_(DefineMutedMessage)( doc, opt, name );
+            break;
+
+        default:
+            break;
+    }
+
+    SetOptionValue( doc, opt->id, theval );
     if ( catval )
         TidyDocFree( doc, catval );
-        }
+}
 
 
-/* a space or comma separated list of attribute names */
+/* a space or comma separated list of items */
 Bool ParseList( TidyDocImpl* doc, const TidyOptionImpl* option )
 {
     TidyConfigImpl* cfg = &doc->config;
@@ -1235,15 +1256,7 @@ Bool ParseList( TidyDocImpl* doc, const TidyOptionImpl* option )
             continue;        /* there is a trailing space on the line. */
 
         /* add attribute to array */
-        switch ( option->id )
-        {
-            case TidyPriorityAttributes:
-                TY_(DeclarePriorityAttrib)( doc, option->id, buf );
-                break;
-
-            default:
-                break;
-        }
+        TY_(DeclareListItem)( doc, option, buf );
 
         i = 0;
         ++nItems;
@@ -1251,15 +1264,7 @@ Bool ParseList( TidyDocImpl* doc, const TidyOptionImpl* option )
     while ( c != EndOfStream );
 
     if ( i > 0 )
-        switch ( option->id )
-        {
-            case TidyPriorityAttributes:
-                TY_(DeclarePriorityAttrib)( doc, option->id, buf );
-                break;
-
-            default:
-                break;
-        }
+        TY_(DeclareListItem)( doc, option, buf );
 
     return ( nItems > 0 );
 }

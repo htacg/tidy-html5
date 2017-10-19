@@ -1184,6 +1184,37 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - It's very important that <br/> be self-closing!
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
+        TidyMuteReports,           0,
+        "Use this option to prevent Tidy from displaying certain types of "
+        "report output,for example, for conditions that you wish to ignore."
+        "<br/>"
+        "This option takes a list of one or more keys indicating the message "
+        "type to mute. You can discover these message keys by using the "
+        "<code>mute-id</code> configuration option and examining Tidy's "
+        "output. " 
+    },
+    {/* Important notes for translators:
+      - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+      <br/>.
+      - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+      - Option values should be enclosed in <var></var>.
+      - It's very important that <br/> be self-closing!
+      - The strings "Tidy" and "HTML Tidy" are the program name and must not
+      be translated. */
+        TidyMuteShow,              0,
+        "This option indicates whether or not Tidy should display message ID's "
+        "with each of its error reports. This could be useful if you wanted to "
+        "use the <code>mute</code> configuration option in order to filter "
+        "out certain report messages. "
+    },
+    {/* Important notes for translators:
+      - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+      <br/>.
+      - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+      - Option values should be enclosed in <var></var>.
+      - It's very important that <br/> be self-closing!
+      - The strings "Tidy" and "HTML Tidy" are the program name and must not
+      be translated. */
         TidyStrictTagsAttr,           0,
         "This options ensures that tags and attributes are applicable for the "
         "version of HTML that Tidy outputs. When set to <var>yes</var> and the "
@@ -1918,7 +1949,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { REPLACING_ELEMENT,            0,   "replacing %s with %s"                                                    },
     { REPLACING_UNEX_ELEMENT,       0,   "replacing unexpected %s with %s"                                         },
     { SPACE_PRECEDING_XMLDECL,      0,   "removing whitespace preceding XML Declaration"                           },
+    { STRING_ARGUMENT_BAD,          0,   "option \"%s\" given bad argument \"%s\""                                 },
     { STRING_MISSING_MALFORMED,     0,   "missing or malformed argument for option: %s"                            },
+    { STRING_MUTING_TYPE,           0,   "messages of type \"%s\" will not be output"                              },
     { STRING_UNKNOWN_OPTION,        0,   "unknown option: %s"                                                      },
     { SUSPECTED_MISSING_QUOTE,      0,   "suspected missing quote mark for attribute value"                        },
     { TAG_NOT_ALLOWED_IN,           0,   "%s isn't allowed in <%s> elements"                                       },

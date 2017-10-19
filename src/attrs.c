@@ -781,6 +781,7 @@ void TY_(FreeAttrPriorityList)( TidyDocImpl* doc )
     }
 }
 
+
 void TY_(DefinePriorityAttribute)(TidyDocImpl* doc, ctmbstr name)
 {
     enum { capacity = 10 };

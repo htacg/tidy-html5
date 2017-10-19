@@ -85,6 +85,8 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
     va_list args_copy;
     enum { sizeMessageBuf=2048 };
     ctmbstr pattern;
+    uint i = 0;
+
 
     /* Things we know... */
 
@@ -137,7 +139,7 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
     result->messagePrefix = tidyLocalizedString(level);
 
     if ( line > 0 && column > 0 )
-        pattern = "%s%s%s";      /* pattern in there's location information */
+        pattern = "%s%s%s";      /* pattern if there's location information */
     else
         pattern = "%.0s%s%s";    /* otherwise if there isn't */
 
@@ -154,6 +156,11 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
                      result->messagePos, result->messagePrefix,
                      result->message);
 
+    if ( ( cfgBool(doc, TidyMuteShow) == yes ) && level <= TidyFatal )
+    {
+        TY_(tmbsnprintf)(result->messageOutputDefault, sizeMessageBuf, "%s (%s)", result->messageOutputDefault, TY_(tidyErrorCodeAsKey)(code) );
+        TY_(tmbsnprintf)(result->messageOutput, sizeMessageBuf, "%s (%s)", result->messageOutput, TY_(tidyErrorCodeAsKey)(code) );
+    }
 
     result->allowMessage = yes;
 
@@ -182,6 +189,19 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
     if ( doc->messageCallback )
     {
         result->allowMessage = result->allowMessage & doc->messageCallback( tidyImplToMessage(result) );
+    }
+
+    /* finally, check the document's configuration to determine whether
+       this message is muted. */
+    result->muted = no;
+    while ( ( doc->muted.list ) && ( doc->muted.list[i] != 0 ) )
+    {
+        if ( doc->muted.list[i] == code )
+        {
+            result->muted = yes;
+            break;
+        }
+        i++;
     }
 
     return result;
@@ -290,6 +310,11 @@ int TY_(getMessageColumn)( TidyMessageImpl message )
 TidyReportLevel TY_(getMessageLevel)( TidyMessageImpl message )
 {
     return message.level;
+}
+
+Bool TY_(getMessageIsMuted)( TidyMessageImpl message )
+{
+    return message.muted;
 }
 
 ctmbstr TY_(getMessageFormatDefault)( TidyMessageImpl message )

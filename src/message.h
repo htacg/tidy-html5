@@ -46,6 +46,7 @@
  ******************************************************************************/
 
 #include "forward.h"
+#include "config.h"
 
 /** @addtogroup internal_api */
 /** @{ */
@@ -178,6 +179,39 @@ void TY_(ReportNumWarnings)( TidyDocImpl* doc );
 
 /** @} */
 /** @} message_reporting group */
+
+
+/***************************************************************************//**
+ ** @defgroup message_mutinging Message Muting
+ **
+ ** Message types included in the `mute` option will be be printed in
+ ** messageOut().
+ **
+ ** @{
+ ******************************************************************************/
+
+/** Maintains a list of messages not to display. */
+typedef struct _mutedMessages {
+    tidyStrings* list; /**< A list of messages that won't be output. */
+    uint count;        /**< Current count of the list. */
+    uint capacity;     /**< Current capacity of the list. */
+} TidyMutedMessages;
+
+
+/** Frees the list of muted messages.
+ ** @param doc The Tidy document.
+ */
+void TY_(FreeMutedMessageList)( TidyDocImpl* doc );
+
+/** Adds a new message ID to the list of muted messages.
+ ** @param doc The Tidy document.
+ ** @param name The message code as a string.
+ */
+void TY_(DefineMutedMessage)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name );
+
+
+/** @} */
+/** @} message_muting group */
 
 
 /***************************************************************************//**

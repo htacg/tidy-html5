@@ -153,6 +153,9 @@ static void messageOut( TidyMessageImpl *message )
             break;
     }
 
+    /* Suppress report messages if they've been muted. */
+    go = go & !message->muted;
+
     /* Suppress report messages if we've already reached the reporting limit. */
     if ( message->level <= TidyFatal )
     {
@@ -357,9 +360,11 @@ static struct _dispatchTable {
     { REPLACING_ELEMENT,            TidyWarning,     formatStandard          },
     { REPLACING_UNEX_ELEMENT,       TidyWarning,     formatStandard          },
     { SPACE_PRECEDING_XMLDECL,      TidyWarning,     formatStandard          },
+    { STRING_ARGUMENT_BAD,          TidyConfig,      formatStandard          },
     { STRING_CONTENT_LOOKS,         TidyInfo,        formatStandard          }, /* reportMarkupVersion() */
     { STRING_DOCTYPE_GIVEN,         TidyInfo,        formatStandard          }, /* reportMarkupVersion() */
     { STRING_MISSING_MALFORMED,     TidyConfig,      formatStandard          },
+    { STRING_MUTING_TYPE,           TidyConfig,      formatStandard          },
     { STRING_NO_SYSID,              TidyInfo,        formatStandard          }, /* reportMarkupVersion() */
     { STRING_UNKNOWN_OPTION,        TidyConfig,      formatStandard          },
     { SUSPECTED_MISSING_QUOTE,      TidyWarning,     formatStandard          },
@@ -723,6 +728,7 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
         case STRING_CONTENT_LOOKS:
         case STRING_DOCTYPE_GIVEN:
         case STRING_MISSING_MALFORMED:
+        case STRING_MUTING_TYPE:
         {
             ctmbstr str;
             if ( (str = va_arg( args, ctmbstr)) )
@@ -760,6 +766,7 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
         } break;
 
         case OPTION_REMOVED_UNAPPLIED:
+        case STRING_ARGUMENT_BAD:
         {
             ctmbstr s1 = va_arg( args, ctmbstr );
             ctmbstr s2 = va_arg( args, ctmbstr );
@@ -1323,6 +1330,55 @@ void TY_(ReportNumWarnings)( TidyDocImpl* doc )
 
 
 /*********************************************************************
+ * Message Muting
+ *********************************************************************/
+
+
+void TY_(FreeMutedMessageList)( TidyDocImpl* doc )
+{
+    TidyMutedMessages *list = &(doc->muted);
+
+    if ( list->list )
+        TidyFree( doc->allocator, list->list );
+}
+
+
+void TY_(DefineMutedMessage)(TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name)
+{
+    enum { capacity = 10 };
+    TidyMutedMessages *list = &(doc->muted);
+    tidyStrings message = TY_(tidyErrorCodeFromKey)( name );
+
+    if ( message <= REPORT_MESSAGE_FIRST || message >= REPORT_MESSAGE_LAST)
+    {
+        TY_(Report)( doc, NULL, NULL, STRING_ARGUMENT_BAD, opt->name, name );
+        return;
+    }
+
+    if ( !list->list )
+    {
+        list->list = TidyAlloc(doc->allocator, sizeof(tidyStrings) * capacity );
+        list->list[0] = 0;
+        list->capacity = capacity;
+        list->count = 0;
+    }
+
+    if ( list->count >= list->capacity )
+    {
+        list->capacity = list->capacity * 2;
+        list->list = realloc( list->list, sizeof(tidyStrings) * list->capacity + 1 );
+    }
+
+    list->list[list->count] = message;
+    list->count++;
+    list->list[list->count] = 0;
+
+    /* Must come *after* adding to the list, in case it's muted, too. */
+    TY_(Report)( doc, NULL, NULL, STRING_MUTING_TYPE, name );
+}
+
+
+/*********************************************************************
  * Key Discovery
  *********************************************************************/
 
@@ -1462,6 +1518,8 @@ static const TidyOptionId TidyIndentSpacesLinks[] =    { TidyIndentContent, Tidy
 static const TidyOptionId TidyInlineTagsLinks[] =      { TidyBlockTags, TidyEmptyTags, TidyPreTags, TidyUseCustomTags, TidyUnknownOption };
 static const TidyOptionId TidyMergeDivsLinks[] =       { TidyMakeClean, TidyMergeSpans, TidyUnknownOption };
 static const TidyOptionId TidyMergeSpansLinks[] =      { TidyMakeClean, TidyMergeDivs, TidyUnknownOption };
+static const TidyOptionId TidyMuteLinks[] =            { TidyMuteShow };
+static const TidyOptionId TidyMuteShowLinks[] =        { TidyMuteReports };
 static const TidyOptionId TidyNumEntitiesLinks[] =     { TidyDoctype, TidyPreserveEntities, TidyUnknownOption };
 static const TidyOptionId TidyOutCharEncodingLinks[] = { TidyCharEncoding, TidyUnknownOption };
 static const TidyOptionId TidyOutFileLinks[] =         { TidyErrFile, TidyUnknownOption };
@@ -1490,11 +1548,13 @@ static const TidyOptionDoc docs_xrefs[] =
     { TidyInlineTags,      TidyInlineTagsLinks      },
     { TidyMergeDivs,       TidyMergeDivsLinks       },
     { TidyMergeSpans,      TidyMergeSpansLinks      },
+    { TidyMuteShow,        TidyMuteShowLinks        },
     { TidyNumEntities,     TidyNumEntitiesLinks     },
     { TidyOutCharEncoding, TidyOutCharEncodingLinks },
     { TidyOutFile,         TidyOutFileLinks         },
     { TidyPreTags,         TidyPreTagsLinks         },
     { TidySortAttributes,  TidySortAttributesLinks  },
+    { TidyMuteReports,     TidyMuteLinks            },
     { TidyUseCustomTags,   TidyUseCustomTagsLinks   },
     { TidyWrapAttVals,     TidyWrapAttValsLinks     },
     { TidyWrapScriptlets,  TidyWrapScriptletsLinks  },

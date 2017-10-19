@@ -157,12 +157,9 @@ extern "C" {
  ** than the short report.
  */
 #define FOREACH_DIALOG_MSG(FN) \
-/* TidyInfo */             FN(STRING_CONTENT_LOOKS)        \
-/* TidyInfo */             FN(STRING_DOCTYPE_GIVEN)        \
 /* TidyDialogueSummary */  FN(STRING_ERROR_COUNT)          \
 /* TidyDialogueSummary */  FN(STRING_NEEDS_INTERVENTION)   \
 /* TidyDialogueSummary */  FN(STRING_NO_ERRORS)            \
-/* TidyInfo */             FN(STRING_NO_SYSID)             \
 /* TidyDialogueSummary */  FN(STRING_NOT_ALL_SHOWN)        \
 /* TidyDialogueInfo */     FN(TEXT_GENERAL_INFO_PLEA)      \
 /* TidyDialogueInfo */     FN(TEXT_GENERAL_INFO)
@@ -255,7 +252,12 @@ extern "C" {
     FN(REPLACING_ELEMENT)             \
     FN(REPLACING_UNEX_ELEMENT)        \
     FN(SPACE_PRECEDING_XMLDECL)       \
+    FN(STRING_CONTENT_LOOKS)        \
+    FN(STRING_ARGUMENT_BAD)           \
+    FN(STRING_DOCTYPE_GIVEN)        \
     FN(STRING_MISSING_MALFORMED)      \
+    FN(STRING_MUTING_TYPE)            \
+    FN(STRING_NO_SYSID)             \
     FN(STRING_UNKNOWN_OPTION)         \
     FN(SUSPECTED_MISSING_QUOTE)       \
     FN(TAG_NOT_ALLOWED_IN)            \
@@ -636,6 +638,8 @@ typedef enum
     TidyShowWarnings,            /**< However errors are always shown */
     TidySkipNested,              /**< Skip nested tags in script and style CDATA */
     TidySortAttributes,          /**< Sort attributes */
+    TidyMuteReports,             /**< Filter these messages from output. */
+    TidyMuteShow,                /**< Show message ID's in the error table */
     TidyStrictTagsAttr,          /**< Ensure tags and attributes match output HTML version */
     TidyStyleTags,               /**< Move sytle to head */
     TidyTabSize,                 /**< Expand tabs to n spaces */
@@ -1414,7 +1418,9 @@ typedef enum
     FOREACH_MSG_MISC(MAKE_ENUM)
     FOREACH_FOOTNOTE_MSG(MAKE_ENUM)
     FOREACH_DIALOG_MSG(MAKE_ENUM)
+    REPORT_MESSAGE_FIRST,
     FOREACH_REPORT_MSG(MAKE_ENUM)
+    REPORT_MESSAGE_LAST,
     FOREACH_ACCESS_MSG(MAKE_ENUM)
 
 #if SUPPORT_CONSOLE_APP

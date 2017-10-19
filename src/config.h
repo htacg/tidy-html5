@@ -369,6 +369,12 @@ ctmbstr TY_(CharEncodingOptName)( int encoding );
 void TY_(DeclareUserTag)( TidyDocImpl* doc, TidyOptionId optId,
                          uint tagType, ctmbstr name );
 
+/** Coordinates Config update and list data.
+ ** @param doc The Tidy document.
+ ** @param opt The option the list item is intended for.
+ ** @param name The name of the new list item.
+ */
+void TY_(DeclareListItem)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name );
 
 #ifdef _DEBUG
 

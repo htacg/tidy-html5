@@ -176,6 +176,15 @@ ctmbstr TIDY_CALL     tidyLibraryVersion(void)
     return TY_(tidyLibraryVersion)();
 }
 
+ctmbstr TIDY_CALL     tidyPlatform(void)
+{
+#ifdef PLATFORM_NAME
+    return PLATFORM_NAME;
+#else
+    return NULL;
+#endif
+}
+
 
 /* Get/set configuration options
 */

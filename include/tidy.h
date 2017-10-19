@@ -395,6 +395,11 @@ TIDY_EXPORT ctmbstr TIDY_CALL     tidyReleaseDate(void);
  */
 TIDY_EXPORT ctmbstr TIDY_CALL     tidyLibraryVersion(void);
 
+/** Get the platform for which Tidy was built.
+ ** @result The string representing the version number.
+ */
+TIDY_EXPORT ctmbstr TIDY_CALL     tidyPlatform(void);
+
     
 /** @}
  ** @name Diagnostics and Repair

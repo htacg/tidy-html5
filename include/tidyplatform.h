@@ -111,10 +111,21 @@ extern "C" {
 #  endif
 
 #elif defined(__APPLE__) && defined(__MACH__)
-/* Mac OS X (client) 10.x (or server 1.x/10.x) - gcc or Metrowerks MachO compilers */
+    /* Mac OS X (client) 10.x (or server 1.x/10.x) - gcc or Metrowerks MachO compilers */
 #  define MAC_OS_X
 #  ifndef PLATFORM_NAME
-#    define PLATFORM_NAME "Mac OS X"
+#    include "TargetConditionals.h"
+#    if TARGET_OS_IOS
+#      define PLATFORM_NAME "Apple iOS"
+#    elif TARGET_OS_MAC
+#      define PLATFORM_NAME "Apple macOS"
+#    elif TARGET_OS_TV
+#      define PLATFORM_NAME "Apple tvOS"
+#    elif TARGET_OS_WATCH
+#      define PLATFORM_NAME "Apple watchOS"
+#    else
+#      define PLATFORM_NAME "Apple Unknown OS"
+#    endif
 #  endif
 #endif
 

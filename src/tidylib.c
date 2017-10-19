@@ -1071,6 +1071,7 @@ int   tidyDocParseStdin( TidyDocImpl* doc )
 {
     StreamIn* in = TY_(FileInput)( doc, stdin, cfg( doc, TidyInCharEncoding ));
     int status = TY_(DocParseStream)( doc, in );
+    TY_(freeFileSource)(&in->source, yes);
     TY_(freeStreamIn)(in);
     return status;
 }

@@ -941,7 +941,7 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
                             response = (*doc->pOptCallback)( name, buf );
 
                         if ( doc->pConfigCallback )
-                            response = response && (*doc->pConfigCallback)( tidyImplToDoc(doc), name, buf );
+                            response = response & (*doc->pConfigCallback)( tidyImplToDoc(doc), name, buf );
 
                         if ( !response && isDeprecated )
                             response = subDeprecatedOption( doc, name, buf);

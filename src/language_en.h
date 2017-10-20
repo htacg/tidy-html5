@@ -1043,8 +1043,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
         TidyQuiet,                    0,
-        "This option specifies if Tidy should output the summary of the numbers "
-        "of errors and warnings, or the welcome or informational messages. "
+        "When enabled, this option limits Tidy's non-document output to report "
+        "only document warnings and errors. "
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and

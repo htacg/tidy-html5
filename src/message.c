@@ -161,53 +161,35 @@ static void messageOut( TidyMessageImpl *message )
     {
         go = go & ( doc->errors < cfg(doc, TidyShowErrors) );
     }
-    
-    /* Check for conditions to suppress TidyInfo. */
-    if ( message->level == TidyInfo )
-    {
-        go = go & (cfgBool(doc, TidyShowInfo) == yes);
 
-        /* Temporary; we currently let TidyQuiet hide these: */
-        switch ( message->code )
-        {
-            case STRING_DOCTYPE_GIVEN:
-            case STRING_CONTENT_LOOKS:
-            case STRING_NO_SYSID:
-                go = go && !cfgBool(doc, TidyQuiet);
-                break;
-            default:
-                break;
-        }
+    /* Let TidyQuiet silence a lot of things. */
+    if ( cfgBool( doc, TidyQuiet ) == yes )
+    {
+        go = go && message->code != STRING_DOCTYPE_GIVEN;
+        go = go && message->code != STRING_CONTENT_LOOKS;
+        go = go && message->code != STRING_NO_SYSID;
+        go = go && message->level != TidyDialogueInfo;
+        go = go && message->level != TidyConfig;
+        go = go && message->level != TidyInfo;
+        go = go && !(message->level >= TidyDialogueSummary &&
+                            message->code != STRING_NEEDS_INTERVENTION);
     }
 
-    /* Suppress TidyWarning on Reports if applicable. */
-    if ( message->level == TidyWarning )
+    /* Let !TidyShowInfo silence some things. */
+    if ( cfgBool( doc, TidyShowInfo ) == no )
     {
-        go = go & (cfgBool(doc, TidyShowWarnings) == yes);
-    }
+        go = go && message->level != TidyInfo;
 
-    /* Check for conditions to suppress TidyDialogueInfo */
-    if ( message->level == TidyDialogueInfo )
-    {
         /* Temporary; TidyShowInfo shouldn't affect TidyDialogueInfo, but
-         right now such messages are hidden until we granularize the
-         output controls. */
-        go = go & (cfgBool(doc, TidyShowInfo) == yes);
-        go = go | (cfgBool(doc, TidyQuiet) == yes);
+           right now such messages are hidden until we granularize the
+           output controls. */
+        go = go && message->level != TidyDialogueInfo;
     }
 
-    /* Check for conditions to suppress TidyDialogueSummary */
-    /* Temporary; TidyQuiet shouldn't hide this type of message. */
-    if ( message->level == TidyDialogueSummary && message->code != STRING_NEEDS_INTERVENTION )
+    /* Let !TidyShowWarnings silence some things. */
+    if ( cfgBool( doc, TidyShowWarnings ) == no )
     {
-        go = go & !cfgBool(doc, TidyQuiet);
-    }
-
-    /* If we're TidyQuiet and handling any type of dialogue above summaries,
-       then suppress. */
-    if ( message->level > TidyDialogueSummary )
-    {
-        go = go & !cfgBool(doc, TidyQuiet);
+        go = go && message->level != TidyWarning;
     }
 
     /* Output the message if applicable. */

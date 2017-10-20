@@ -211,7 +211,6 @@ void TY_(FreeMutedMessageList)( TidyDocImpl* doc );
 void TY_(DefineMutedMessage)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name );
 
 
-/** @} */
 /** @} message_muting group */
 
 

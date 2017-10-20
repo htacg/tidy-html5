@@ -205,6 +205,7 @@ void TY_(FreeMutedMessageList)( TidyDocImpl* doc );
 
 /** Adds a new message ID to the list of muted messages.
  ** @param doc The Tidy document.
+ ** @param opt The option that is defining the muted message.
  ** @param name The message code as a string.
  */
 void TY_(DefineMutedMessage)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name );

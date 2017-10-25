@@ -1823,7 +1823,7 @@ Bool  TY_(ConfigDiffThanDefault)( TidyDocImpl* doc )
 {
   Bool diff = no;
   const TidyOptionImpl* option = option_defs + 1;
-  const TidyOptionValue* val = doc->config.value;
+  const TidyOptionValue* val = doc->config.value + 1;
   for ( /**/; !diff && option && option->name; ++option, ++val )
   {
       diff = !OptionValueEqDefault( option, val );

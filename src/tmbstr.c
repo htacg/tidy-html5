@@ -102,7 +102,7 @@ uint TY_(tmbstrlen)( ctmbstr str )
 }
 
 /*
- MS C 4.2 doesn't include strcasecmp.
+ MS C 4.2 (and ANSI C) doesn't include strcasecmp.
  Note that tolower and toupper won't
  work on chars > 127.
 

@@ -84,7 +84,7 @@ extern "C" {
  **       public API function internally. In most cases, the public API
  **       functions simply call an internal function.
  ** - - -
- ** @note This documention _is not_ a substitute for browsing the source
+ ** @note This documentation _is not_ a substitute for browsing the source
  **       code. Although the public API is fairly well documented, the
  **       internal API is a very long, very slow, work-in-progress.
  ******************************************************************************/
@@ -410,7 +410,7 @@ TIDY_EXPORT ctmbstr TIDY_CALL     tidyPlatform(void);
 /** Get status of current document.
  ** @param tdoc An instance of a TidyDoc to query.
  ** @result Returns the highest of `2` indicating that errors were present in
- **         the docment, `1` indicating warnings, and `0` in the case of
+ **         the document, `1` indicating warnings, and `0` in the case of
  **         everything being okay.
  */
 TIDY_EXPORT int TIDY_CALL         tidyStatus( TidyDoc tdoc );
@@ -493,7 +493,7 @@ TIDY_EXPORT int TIDY_CALL         tidyLoadConfig(TidyDoc tdoc,      /**< The Tid
  */
 TIDY_EXPORT int TIDY_CALL         tidyLoadConfigEnc(TidyDoc tdoc,       /**< The TidyDoc to which to apply the configuration. */
                                                     ctmbstr configFile, /**< The complete path to the file to load. */
-                                                    ctmbstr charenc     /**< The encodingto use. See the _enc2iana struct for valid values. */
+                                                    ctmbstr charenc     /**< The encoding to use. See the _enc2iana struct for valid values. */
                                                     );
 
 /** Determine whether or not a particular file exists. On Unix systems, the use
@@ -543,6 +543,14 @@ TIDY_EXPORT int TIDY_CALL         tidySetOutCharEncoding(TidyDoc tdoc,  /**< The
  ** @defgroup Configuration Configuration Options
  **
  ** Functions for getting and setting Tidy configuration options.
+ **
+ ** @note In general, you should expect that options you set should stay set.
+ **       This isn't always the case, though, because Tidy will adjust options
+ **       for internal use during the lexing, parsing, cleaning, and printing
+ **       phases, but will restore them after the printing process. If you
+ **       require access to user configuration values at any time between the
+ **       tidyParseXXX() process and the tidySaveXXX() process, make sure to
+ **       keep your own copy.
  ** @{
  ******************************************************************************/
 
@@ -815,15 +823,17 @@ TIDY_EXPORT Bool TIDY_CALL          tidyOptResetToDefault(TidyDoc tdoc,    /**< 
  */
 TIDY_EXPORT Bool TIDY_CALL          tidyOptResetAllToDefault( TidyDoc tdoc );
 
-/** Take a snapshot of current config settings.
+/** Take a snapshot of current config settings. These settings are stored
+ ** within the tidy document. Note, however, that snapshots do not reliably
+ ** survive the tidyParseXXX() process, as Tidy uses the snapshot mechanism
+ ** in order to store the current configuration right at the beginning of the
+ ** parsing process.
  ** @param tdoc The tidy document for which to take a snapshot.
  ** @result Returns a bool indicating success or failure.
  */
 TIDY_EXPORT Bool TIDY_CALL          tidyOptSnapshot( TidyDoc tdoc );
 
-/** Apply a snapshot of config settings to a document, such as after document
- ** processing. This will ensure that any values which Tidy may have changed
- ** are back to the intended configuration.
+/** Apply a snapshot of config settings to a document.
  ** @param tdoc The tidy document for which to apply a snapshot.
  ** @result Returns a bool indicating success or failure.
  */
@@ -841,7 +851,10 @@ TIDY_EXPORT Bool TIDY_CALL          tidyOptDiffThanDefault( TidyDoc tdoc );
  */
 TIDY_EXPORT Bool TIDY_CALL          tidyOptDiffThanSnapshot( TidyDoc tdoc );
 
-/** Copy current configuration settings from one document to another.
+/** Copy current configuration settings from one document to another. Note
+ ** that the destination document's existing settings will be stored as that
+ ** document's snapshot prior to having its option values overwritten by the
+ ** source document's settings.
  ** @result Returns a bool indicating success or failure.
  */
 TIDY_EXPORT Bool TIDY_CALL          tidyOptCopyConfig(TidyDoc tdocTo,  /**< The destination tidy document. */
@@ -1459,7 +1472,7 @@ TIDY_EXPORT Bool TIDY_CALL   tidySetPrettyPrinterCallback(TidyDoc tdoc,
 
 /** Parse markup in named file.
  ** @result Returns the highest of `2` indicating that errors were present in
- **         the docment, `1` indicating warnings, and `0` in the case of
+ **         the document, `1` indicating warnings, and `0` in the case of
  **         everything being okay.
  */
 TIDY_EXPORT int TIDY_CALL         tidyParseFile(TidyDoc tdoc,    /**< The tidy document to use for parsing. */
@@ -1469,14 +1482,14 @@ TIDY_EXPORT int TIDY_CALL         tidyParseFile(TidyDoc tdoc,    /**< The tidy d
 /** Parse markup from the standard input.
  ** @param tdoc The tidy document to use for parsing.
  ** @result Returns the highest of `2` indicating that errors were present in
- **         the docment, `1` indicating warnings, and `0` in the case of
+ **         the document, `1` indicating warnings, and `0` in the case of
  **         everything being okay.
  */
 TIDY_EXPORT int TIDY_CALL         tidyParseStdin( TidyDoc tdoc );
 
 /** Parse markup in given string.
  ** @result Returns the highest of `2` indicating that errors were present in
- **         the docment, `1` indicating warnings, and `0` in the case of
+ **         the document, `1` indicating warnings, and `0` in the case of
  **         everything being okay.
  */
 TIDY_EXPORT int TIDY_CALL         tidyParseString(TidyDoc tdoc,   /**< The tidy document to use for parsing. */
@@ -1485,7 +1498,7 @@ TIDY_EXPORT int TIDY_CALL         tidyParseString(TidyDoc tdoc,   /**< The tidy 
 
 /** Parse markup in given buffer.
  ** @result Returns the highest of `2` indicating that errors were present in
- **         the docment, `1` indicating warnings, and `0` in the case of
+ **         the document, `1` indicating warnings, and `0` in the case of
  **         everything being okay.
  */
 TIDY_EXPORT int TIDY_CALL         tidyParseBuffer(TidyDoc tdoc,   /**< The tidy document to use for parsing. */
@@ -1494,7 +1507,7 @@ TIDY_EXPORT int TIDY_CALL         tidyParseBuffer(TidyDoc tdoc,   /**< The tidy 
 
 /** Parse markup in given generic input source.
  ** @result Returns the highest of `2` indicating that errors were present in
- **         the docment, `1` indicating warnings, and `0` in the case of
+ **         the document, `1` indicating warnings, and `0` in the case of
  **         everything being okay.
  */
 TIDY_EXPORT int TIDY_CALL         tidyParseSource(TidyDoc tdoc,           /**< The tidy document to use for parsing. */

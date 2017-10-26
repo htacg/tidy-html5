@@ -178,7 +178,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyBreakBeforeBR,           PP, "break-before-br",             BL, no,              ParsePickList,     &boolPicks          },
     { TidyCharEncoding,            CE, "char-encoding",               IN, UTF8,            ParseCharEnc,      &charEncPicks       },
     { TidyCoerceEndTags,           MR, "coerce-endtags",              BL, yes,             ParsePickList,     &boolPicks          },
-    { TidyCSSPrefix,               MR, "css-prefix",                  ST, 0,               ParseCSS1Selector, NULL                },
+    { TidyCSSPrefix,               MR, "css-prefix",                  ST, 0,               ParseCSS1Selector, NULL,           "c" },
     { TidyCustomTags,              IR, "new-custom-tags",             ST, 0,               ParseTagNames,     NULL                }, /* 20170309 - Issue #119 */
     { TidyDecorateInferredUL,      MX, "decorate-inferred-ul",        BL, no,              ParsePickList,     &boolPicks          },
     { TidyDoctype,                 DT, "doctype",                     ST, 0,               ParseDocType,      &doctypePicks       },

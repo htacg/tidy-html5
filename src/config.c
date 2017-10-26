@@ -303,7 +303,6 @@ static const struct {
 
 
 /* forward declarations */
-static void AdjustConfig( TidyDocImpl* doc );
 static Bool GetPickListValue( ctmbstr value, PickListItems* pickList, uint *result );
 
 
@@ -620,7 +619,7 @@ void TY_(TakeConfigSnapshot)( TidyDocImpl* doc )
     const TidyOptionValue* value = &doc->config.value[ 0 ];
     TidyOptionValue* snap  = &doc->config.snapshot[ 0 ];
 
-    AdjustConfig( doc );  /* Make sure it's consistent */
+    TY_(AdjustConfig)( doc );  /* Make sure it's consistent */
     for ( ixVal=0; ixVal < N_TIDY_OPTIONS; ++option, ++ixVal )
     {
         assert( ixVal == (uint) option->id );
@@ -669,7 +668,7 @@ void TY_(CopyConfig)( TidyDocImpl* docTo, TidyDocImpl* docFrom )
         }
         if ( needReparseTagsDecls )
             ReparseTagDecls( docTo, changedUserTags  );
-        AdjustConfig( docTo );  /* Make sure it's consistent */
+        TY_(AdjustConfig)( docTo );  /* Make sure it's consistent */
     }
 }
 
@@ -963,7 +962,7 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
     if ( fname != (tmbstr) file )
         TidyDocFree( doc, fname );
 
-    AdjustConfig( doc );
+    TY_(AdjustConfig)( doc );
 
     /* any new config errors? If so, return warning status. */
     return (doc->optionErrors > opterrs ? 1 : 0); 
@@ -1103,7 +1102,7 @@ Bool  TY_(AdjustCharEncoding)( TidyDocImpl* doc, int encoding )
 
 
 /* ensure that config is self consistent */
-void AdjustConfig( TidyDocImpl* doc )
+void TY_(AdjustConfig)( TidyDocImpl* doc )
 {
     if ( cfgBool(doc, TidyEncloseBlockText) )
         TY_(SetOptionBool)( doc, TidyEncloseBodyText, yes );

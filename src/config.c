@@ -619,7 +619,6 @@ void TY_(TakeConfigSnapshot)( TidyDocImpl* doc )
     const TidyOptionValue* value = &doc->config.value[ 0 ];
     TidyOptionValue* snap  = &doc->config.snapshot[ 0 ];
 
-    TY_(AdjustConfig)( doc );  /* Make sure it's consistent */
     for ( ixVal=0; ixVal < N_TIDY_OPTIONS; ++option, ++ixVal )
     {
         assert( ixVal == (uint) option->id );
@@ -668,7 +667,6 @@ void TY_(CopyConfig)( TidyDocImpl* docTo, TidyDocImpl* docFrom )
         }
         if ( needReparseTagsDecls )
             ReparseTagDecls( docTo, changedUserTags  );
-        TY_(AdjustConfig)( docTo );  /* Make sure it's consistent */
     }
 }
 
@@ -961,8 +959,6 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
 
     if ( fname != (tmbstr) file )
         TidyDocFree( doc, fname );
-
-    TY_(AdjustConfig)( doc );
 
     /* any new config errors? If so, return warning status. */
     return (doc->optionErrors > opterrs ? 1 : 0); 

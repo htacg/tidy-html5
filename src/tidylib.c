@@ -1345,6 +1345,7 @@ int         TY_(DocParseStream)( TidyDocImpl* doc, StreamIn* in )
 
     TY_(ResetTags)(doc);    /* reset table to html5 mode */
     TY_(TakeConfigSnapshot)( doc );    /* Save config state */
+    TY_(AdjustConfig)( doc ); /* ensure config consistency */
     TY_(FreeAnchors)( doc );
 
     TY_(FreeNode)(doc, &doc->root);

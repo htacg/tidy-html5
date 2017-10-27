@@ -157,7 +157,6 @@ static ParseProperty ParseList;
 static ParseProperty ParseName;
 static ParseProperty ParseCSS1Selector;
 static ParseProperty ParseString;
-static ParseProperty ParseTagNames;
 static ParseProperty ParseCharEnc;
 static ParseProperty ParseDocType;
 static ParseProperty ParseTabs;
@@ -173,13 +172,13 @@ static const TidyOptionImpl option_defs[] =
     { TidyAltText,                 MR, "alt-text",                    ST, 0,               ParseString,       NULL                },
     { TidyAnchorAsName,            MR, "anchor-as-name",              BL, yes,             ParsePickList,     &boolPicks          },
     { TidyAsciiChars,              ME, "ascii-chars",                 BL, no,              ParsePickList,     &boolPicks          },
-    { TidyBlockTags,               MT, "new-blocklevel-tags",         ST, 0,               ParseTagNames,     NULL                },
+    { TidyBlockTags,               MT, "new-blocklevel-tags",         ST, 0,               ParseList,         NULL                },
     { TidyBodyOnly,                DD, "show-body-only",              IN, no,              ParsePickList,     &autoBoolPicks      },
     { TidyBreakBeforeBR,           PP, "break-before-br",             BL, no,              ParsePickList,     &boolPicks          },
     { TidyCharEncoding,            CE, "char-encoding",               IN, UTF8,            ParseCharEnc,      &charEncPicks       },
     { TidyCoerceEndTags,           MR, "coerce-endtags",              BL, yes,             ParsePickList,     &boolPicks          },
     { TidyCSSPrefix,               MR, "css-prefix",                  ST, 0,               ParseCSS1Selector, NULL,           "c" },
-    { TidyCustomTags,              IR, "new-custom-tags",             ST, 0,               ParseTagNames,     NULL                }, /* 20170309 - Issue #119 */
+    { TidyCustomTags,              IR, "new-custom-tags",             ST, 0,               ParseList,         NULL                }, /* 20170309 - Issue #119 */
     { TidyDecorateInferredUL,      MX, "decorate-inferred-ul",        BL, no,              ParsePickList,     &boolPicks          },
     { TidyDoctype,                 DT, "doctype",                     ST, 0,               ParseDocType,      &doctypePicks       },
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -193,7 +192,7 @@ static const TidyOptionImpl option_defs[] =
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
     { TidyEmacsFile,               IR, "gnu-emacs-file",              ST, 0,               ParseString,       NULL                },
 #endif
-    { TidyEmptyTags,               MT, "new-empty-tags",              ST, 0,               ParseTagNames,     NULL                },
+    { TidyEmptyTags,               MT, "new-empty-tags",              ST, 0,               ParseList,         NULL                },
     { TidyEncloseBlockText,        MR, "enclose-block-text",          BL, no,              ParsePickList,     &boolPicks          },
     { TidyEncloseBodyText,         MR, "enclose-text",                BL, no,              ParsePickList,     &boolPicks          },
     { TidyErrFile,                 IO, "error-file",                  ST, 0,               ParseString,       NULL                },
@@ -211,7 +210,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyIndentCdata,             PP, "indent-cdata",                BL, no,              ParsePickList,     &boolPicks          },
     { TidyIndentContent,           PP, "indent",                      IN, TidyNoState,     ParsePickList,     &autoBoolPicks      },
     { TidyIndentSpaces,            PP, "indent-spaces",               IN, 2,               ParseInt,          NULL                },
-    { TidyInlineTags,              MT, "new-inline-tags",             ST, 0,               ParseTagNames,     NULL                },
+    { TidyInlineTags,              MT, "new-inline-tags",             ST, 0,               ParseList,         NULL                },
     { TidyJoinClasses,             MX, "join-classes",                BL, no,              ParsePickList,     &boolPicks          },
     { TidyJoinStyles,              MX, "join-styles",                 BL, yes,             ParsePickList,     &boolPicks          },
     { TidyKeepFileTimes,           IO, "keep-time",                   BL, no,              ParsePickList,     &boolPicks          },
@@ -234,7 +233,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyOutputBOM,               CE, "output-bom",                  IN, TidyAutoState,   ParsePickList,     &autoBoolPicks      },
     { TidyPPrintTabs,              PP, "indent-with-tabs",            BL, no,              ParseTabs,         &boolPicks          }, /* 20150515 - Issue #108 */
     { TidyPreserveEntities,        ME, "preserve-entities",           BL, no,              ParsePickList,     &boolPicks          },
-    { TidyPreTags,                 MT, "new-pre-tags",                ST, 0,               ParseTagNames,     NULL                },
+    { TidyPreTags,                 MT, "new-pre-tags",                ST, 0,               ParseList,         NULL                },
     { TidyPriorityAttributes,      PP, "priority-attributes",         ST, 0,               ParseList,         NULL                },
     { TidyPunctWrap,               PP, "punctuation-wrap",            BL, no,              ParsePickList,     &boolPicks          },
     { TidyQuiet,                   DD, "quiet",                       BL, no,              ParsePickList,     &boolPicks          },
@@ -292,7 +291,7 @@ static const struct {
     ctmbstr name;                /**< name of the deprecated option */
     TidyOptionId replacementId;  /**< Id of the replacement option, or 0 if none. */
 } deprecatedOptions[] = {
-//    { "show-body-only", TidyBodyOnly },
+/*    { "show-body-only", TidyBodyOnly }, */
     { NULL }
 };
 
@@ -980,7 +979,7 @@ Bool TY_(ParseConfigOption)( TidyDocImpl* doc, ctmbstr optnam, ctmbstr optval )
         if (NULL != doc->pOptCallback)
             status = (*doc->pOptCallback)( optnam, optval );
         if (NULL != doc->pConfigCallback )
-            status = status && (*doc->pConfigCallback)( tidyImplToDoc(doc), optnam, optval );
+        status = status || (*doc->pConfigCallback)( tidyImplToDoc(doc), optnam, optval );
         if (!status && isDeprecated)
             status = subDeprecatedOption( doc, optnam, optval);
         if (!status)
@@ -1193,6 +1192,14 @@ void TY_(DeclareListItem)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr 
 
         case TidyMuteReports:
             TY_(DefineMutedMessage)( doc, opt, name );
+            break;
+
+        case TidyInlineTags:
+        case TidyBlockTags:
+        case TidyEmptyTags:
+        case TidyPreTags:
+        case TidyCustomTags:
+            TY_(DeclareUserTag)( doc, opt, name );
             break;
 
         default:
@@ -1435,115 +1442,6 @@ Bool ParseTabs( TidyDocImpl* doc, const TidyOptionImpl* entry )
         }
     }
     return status;
-}
-
-
-/* Coordinates Config update and Tags data */
-void TY_(DeclareUserTag)( TidyDocImpl* doc, TidyOptionId optId,
-                            UserTagType tagType, ctmbstr name )
-{
-  ctmbstr prvval = cfgStr( doc, optId );
-  tmbstr catval = NULL;
-  ctmbstr theval = name;
-  if ( prvval )
-  {
-    uint len = TY_(tmbstrlen)(name) + TY_(tmbstrlen)(prvval) + 3;
-    catval = TY_(tmbstrndup)( doc->allocator, prvval, len );
-    TY_(tmbstrcat)( catval, ", " );
-    TY_(tmbstrcat)( catval, name );
-    theval = catval;
-  }
-  TY_(DefineTag)( doc, tagType, name );
-  SetOptionValue( doc, optId, theval );
-  if ( catval )
-    TidyDocFree( doc, catval );
-}
-
-
-/* a space or comma separated list of tag names */
-Bool ParseTagNames( TidyDocImpl* doc, const TidyOptionImpl* option )
-{
-    TidyConfigImpl* cfg = &doc->config;
-    tmbchar buf[1024];
-    uint i = 0, nTags = 0;
-    uint c = SkipWhite( cfg );
-    UserTagType ttyp = tagtype_null;
-
-    switch ( option->id )
-    {
-        case TidyInlineTags:  ttyp = tagtype_inline;              break;
-        case TidyBlockTags:   ttyp = tagtype_block;               break;
-        case TidyEmptyTags:   ttyp = tagtype_empty;               break;
-        case TidyPreTags:     ttyp = tagtype_pre;                 break;
-        case TidyCustomTags:  ttyp = cfg(doc, TidyUseCustomTags); break;
-        default:
-            TY_(ReportUnknownOption)( doc, option->name );
-            return no;
-    }
-
-    SetOptionValue( doc, option->id, NULL );
-    TY_(FreeDeclaredTags)( doc, ttyp );
-    cfg->defined_tags |= ttyp;
-
-    do
-    {
-        if (c == ' ' || c == '\t' || c == ',')
-        {
-            c = AdvanceChar( cfg );
-            continue;
-        }
-
-        if ( c == '\r' || c == '\n' )
-        {
-            uint c2 = AdvanceChar( cfg );
-            if ( c == '\r' && c2 == '\n' )
-                c = AdvanceChar( cfg );
-            else
-                c = c2;
-
-            if ( !TY_(IsWhite)(c) )
-            {
-                buf[i] = 0;
-                TY_(UngetChar)( c, cfg->cfgIn );
-                TY_(UngetChar)( '\n', cfg->cfgIn );
-                break;
-            }
-        }
-
-        /*
-        if ( c == '\n' )
-        {
-            c = AdvanceChar( cfg );
-            if ( !TY_(IsWhite)(c) )
-            {
-                buf[i] = 0;
-                TY_(UngetChar)( c, cfg->cfgIn );
-                TY_(UngetChar)( '\n', cfg->cfgIn );
-                break;
-            }
-        }
-        */
-
-        while ( i < sizeof(buf)-2 && c != EndOfStream && !TY_(IsWhite)(c) && c != ',' )
-        {
-            buf[i++] = (tmbchar) c;
-            c = AdvanceChar( cfg );
-        }
-
-        buf[i] = '\0';
-        if (i == 0)          /* Skip empty tag definition.  Possible when */
-            continue;        /* there is a trailing space on the line. */
-            
-        /* add tag to dictionary */
-        TY_(DeclareUserTag)( doc, option->id, ttyp, buf );
-        i = 0;
-        ++nTags;
-    }
-    while ( c != EndOfStream );
-
-    if ( i > 0 )
-      TY_(DeclareUserTag)( doc, option->id, ttyp, buf );
-    return ( nTags > 0 );
 }
 
 

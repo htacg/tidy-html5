@@ -1,11 +1,12 @@
-/* tags.c -- recognize HTML tags
-
-  (c) 1998-2008 (W3C) MIT, ERCIM, Keio University
-  See tidy.h for the copyright notice.
-
-  The HTML tags are stored as 8 bit ASCII strings.
-
-*/
+/* tags.c
+ * Recognize HTML tags.
+ *
+ * Copyright (c) 1998-2017 World Wide Web Consortium (Massachusetts
+ * Institute of Technology, European Research Consortium for Informatics
+ * and Mathematics, Keio University) and HTACG.
+ *
+ * See tidy.h for the copyright notice.
+ */
 
 #include "tidy-int.h"
 #include "message.h"
@@ -475,6 +476,38 @@ static void declare( TidyDocImpl* doc, TidyTagImpl* tags,
     }
 }
 
+
+/* Coordinates Config update and Tags data */
+void TY_(DeclareUserTag)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name )
+{
+    UserTagType tagType;
+
+    switch ( opt->id )
+    {
+        case TidyInlineTags:  tagType = tagtype_inline;              break;
+        case TidyBlockTags:   tagType = tagtype_block;               break;
+        case TidyEmptyTags:   tagType = tagtype_empty;               break;
+        case TidyPreTags:     tagType = tagtype_pre;                 break;
+        case TidyCustomTags:
+        {
+            switch (cfg( doc, TidyUseCustomTags ))
+            {
+                case TidyCustomBlocklevel: tagType = tagtype_block;  break;
+                case TidyCustomEmpty:      tagType = tagtype_empty;  break;
+                case TidyCustomInline:     tagType = tagtype_inline; break;
+                case TidyCustomPre:        tagType = tagtype_pre;    break;
+                default: TY_(ReportUnknownOption)( doc, opt->name ); return;
+            }
+        } break;
+        default:
+        TY_(ReportUnknownOption)( doc, opt->name );
+        return;
+    }
+
+    TY_(DefineTag)( doc, tagType, name );
+}
+
+
 #if defined(ENABLE_DEBUG_LOG)
 void ListElementsPerVersion( uint vers, Bool has )
 {
@@ -526,7 +559,6 @@ void show_have_html5(void)
 /* public interface for finding tag by name */
 Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
 {
-    TidyUseCustomTagsState configtype = cfg( doc, TidyUseCustomTags );
     const Dict *np = NULL;
 
     if ( cfgBool(doc, TidyXmlTags) )
@@ -545,18 +577,9 @@ Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
        earlier, although if it's earlier we will complain about it elsewhere. */
     if ( TY_(nodeIsAutonomousCustomTag)( doc, node) )
     {
-        UserTagType type;
+        const TidyOptionImpl* opt = TY_(getOption)( TidyCustomTags );
 
-        if ( configtype == TidyCustomEmpty )
-            type = tagtype_empty;
-        else if ( configtype == TidyCustomInline )
-            type = tagtype_inline;
-        else if ( configtype == TidyCustomPre )
-            type = tagtype_pre;
-        else
-            type = tagtype_block;
-        
-        TY_(DeclareUserTag)( doc, TidyCustomTags, type, node->element );
+        TY_(DeclareUserTag)( doc, opt, node->element );
         node->tag = tagsLookup(doc, &doc->tags, node->element);
 
         /* Output a message the first time we encounter an autonomous custom 

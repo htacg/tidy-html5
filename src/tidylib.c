@@ -189,7 +189,7 @@ ctmbstr TIDY_CALL     tidyPlatform(void)
 
 /* Get/set configuration options
 */
-Bool TIDY_CALL        tidySetOptionCallback( TidyDoc tdoc, TidyOptCallback pOptCallback )
+Bool TIDY_CALL     tidySetOptionCallback( TidyDoc tdoc, TidyOptCallback pOptCallback )
 {
   TidyDocImpl* impl = tidyDocToImpl( tdoc );
   if ( impl )
@@ -200,7 +200,7 @@ Bool TIDY_CALL        tidySetOptionCallback( TidyDoc tdoc, TidyOptCallback pOptC
   return no;
 }
 
-Bool TIDY_CALL         tidySetConfigCallback(TidyDoc tdoc, TidyConfigCallback pConfigCallback)
+Bool TIDY_CALL     tidySetConfigCallback(TidyDoc tdoc, TidyConfigCallback pConfigCallback)
 {
   TidyDocImpl* impl = tidyDocToImpl( tdoc );
   if ( impl )
@@ -210,6 +210,18 @@ Bool TIDY_CALL         tidySetConfigCallback(TidyDoc tdoc, TidyConfigCallback pC
   }
   return no;
 }
+
+Bool TIDY_CALL    tidySetConfigChangeCallback(TidyDoc tdoc, TidyConfigChangeCallback pCallback)
+{
+  TidyDocImpl* impl = tidyDocToImpl( tdoc );
+  if ( impl )
+  {
+    impl->pConfigChangeCallback = pCallback;
+    return yes;
+  }
+  return no;
+}
+
 
 
 int TIDY_CALL     tidyLoadConfig( TidyDoc tdoc, ctmbstr cfgfil )

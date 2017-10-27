@@ -366,15 +366,6 @@ ctmbstr TY_(CharEncodingName)( int encoding );
 ctmbstr TY_(CharEncodingOptName)( int encoding );
 
 
-/** Coordinates Config update and Tags data.
- ** @param doc The Tidy document.
- ** @param optId The option ID the tag is intended for.
- ** @param tagType The type of tag (pre, inline, etc.).
- ** @param name The name of the new tag.
- */
-void TY_(DeclareUserTag)( TidyDocImpl* doc, TidyOptionId optId,
-                         uint tagType, ctmbstr name );
-
 /** Coordinates Config update and list data.
  ** @param doc The Tidy document.
  ** @param opt The option the list item is intended for.

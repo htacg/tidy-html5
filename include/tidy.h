@@ -584,7 +584,7 @@ TIDY_EXPORT Bool TIDY_CALL          tidySetOptionCallback(TidyDoc tdoc,         
                                                           );
 
 /** This typedef represents the required signature for your provided callback
- ** function should you wish to register one with tidySetOptionCallback().
+ ** function should you wish to register one with tidySetConfigCallback().
  ** Your callback function will be provided with the following parameters.
  ** @param tdoc The document instance for which the callback was invoked.
  ** @param option The option name that was provided.
@@ -599,13 +599,32 @@ typedef Bool (TIDY_CALL *TidyConfigCallback)(TidyDoc tdoc, ctmbstr option, ctmbs
  ** configuration file options. Setting this callback allows a LibTidy
  ** application developer to examine command-line and configuration file options
  ** after LibTidy has examined them and failed to recognize them.
- ** Note that this is deprecated and you should instead migrate to
- ** tidySetConfigCallback().
  ** @result Returns `yes` upon success.
  */
 TIDY_EXPORT Bool TIDY_CALL          tidySetConfigCallback(TidyDoc tdoc,                      /**< The document to apply the callback to. */
                                                           TidyConfigCallback pConfigCallback /**< The name of a function of type TidyConfigCallback() to serve as your callback. */
                                                           );
+
+    
+/** This typedef represents the required signature for your provided callback
+ ** function should you wish to register one with tidySetConfigChangeCallback().
+ ** Your callback function will be provided with the following parameters.
+ ** @param tdoc The document instance for which the callback was invoked.
+ ** @param option The option that will be changed.
+ */
+typedef void (TIDY_CALL *TidyConfigChangeCallback)(TidyDoc tdoc, TidyOption option);
+
+/** Applications using TidyLib may want to be informed when changes to options
+ ** are made. Temporary changes made internally by Tidy are not reported, but
+ ** permanent changes made by Tidy (such as indent-spaces or output-encoding)
+ ** will be reported.
+ ** @note This callback is not currently implemented.
+ ** @result Returns `yes` upon success.
+ */
+TIDY_EXPORT Bool TIDY_CALL          tidySetConfigChangeCallback(TidyDoc tdoc,                      /**< The document to apply the callback to. */
+                                                                TidyConfigChangeCallback pCallback /**< The name of a function of type TidyConfigChangeCallback() to serve as your callback. */
+                                                                );
+
 
 /** @}
  ** @name Option ID Discovery

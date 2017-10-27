@@ -34,6 +34,7 @@ typedef struct _TidyDocImpl TidyDocImpl;
 struct _TidyMessageImpl;
 typedef struct _TidyMessageImpl TidyMessageImpl;
 
+/* @todo: this name isn't very instructive! */
 struct _Dict;
 typedef struct _Dict Dict;
 

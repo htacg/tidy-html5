@@ -51,15 +51,16 @@ struct _TidyDocImpl
     TidyPrintImpl       pprint;
 
     /* I/O */
-    StreamIn*           docIn;
-    StreamOut*          docOut;
-    StreamOut*          errout;
-    TidyReportFilter    reportFilter;
-    TidyReportCallback  reportCallback;
-    TidyMessageCallback messageCallback;
-    TidyOptCallback     pOptCallback;
-    TidyConfigCallback  pConfigCallback;
-    TidyPPProgress      progressCallback;
+    StreamIn*                docIn;
+    StreamOut*               docOut;
+    StreamOut*               errout;
+    TidyReportFilter         reportFilter;
+    TidyReportCallback       reportCallback;
+    TidyMessageCallback      messageCallback;
+    TidyOptCallback          pOptCallback;
+    TidyConfigCallback       pConfigCallback;
+    TidyConfigChangeCallback pConfigChangeCallback;
+    TidyPPProgress           progressCallback;
 
     /* Parse + Repair Results */
     uint                optionErrors;

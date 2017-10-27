@@ -2186,8 +2186,6 @@ static
 AttVal *SortAttVal( TidyDocImpl* doc, AttVal *list, TidyAttrSortStrategy strat)
 {
     /* Get the list from the passed-in tidyDoc. */
-//    ctmbstr* priorityList = (ctmbstr*)doc->attribs.priorityAttribs.list;
-//    ctmbstr priorityList[] = { "id", NULL };
     ctmbstr* priorityList = (ctmbstr*)doc->attribs.priorityAttribs.list;
 
     ptAttValComparator ptComparator = GetAttValComparator(strat, priorityList);

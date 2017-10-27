@@ -1,88 +1,231 @@
 #ifndef __TAGS_H__
 #define __TAGS_H__
 
-/* tags.h -- recognize HTML tags
-
-  (c) 1998-2006 (W3C) MIT, ERCIM, Keio University
-  See tidy.h for the copyright notice.
-
-  The HTML tags are stored as 8 bit ASCII strings.
-  Use lookupw() to find a tag given a wide char string.
-
-*/
+/**************************************************************************//**
+ * @file
+ * Recognize HTML Tags.
+ *
+ * The HTML tags are stored as 8 bit ASCII strings.
+ * Use lookupw() to find a tag given a wide char string.
+ *
+ * @author  HTACG, et al (consult git log)
+ *
+ * @copyright
+ *     Copyright (c) 1998-2017 World Wide Web Consortium (Massachusetts
+ *     Institute of Technology, European Research Consortium for Informatics
+ *     and Mathematics, Keio University) and HTACG.
+ * @par
+ *     All Rights Reserved.
+ * @par
+ *     See `tidy.h` for the complete license.
+ *
+ * @date Additional updates: consult git log
+ *
+ ******************************************************************************/
 
 #include "forward.h"
 #include "attrdict.h"
 
-typedef void (Parser)( TidyDocImpl* doc, Node *node, GetTokenMode mode );
-typedef void (CheckAttribs)( TidyDocImpl* doc, Node *node );
+/** @addtogroup internal_api */
+/** @{ */
 
-/*
- Tag dictionary node
-*/
 
-/* types of tags that the user can define */
+/***************************************************************************//**
+ ** @defgroup tags_h HTML Tags
+ **
+ ** This module organizes all of Tidy's HTML tag operations, such as parsing
+ ** tags, defining tags, and user-defined tags.
+ **
+ ** @{
+ ******************************************************************************/
+
+
+/** @name Basic Structures and Tag Operations.
+ ** These structures form the backbone of Tidy tag processing, and the
+ ** functions in this group provide basic operations with tags and nodes.
+ */
+/** @{ */
+
+
+/** This enumeration defines the types of user-defined tags that can be
+ ** created.
+ */
 typedef enum
 {
-    tagtype_null = 0,
-    tagtype_empty = 1,
-    tagtype_inline = 2,
-    tagtype_block = 4,
-    tagtype_pre = 8
+    tagtype_null = 0,   /**< First item marker. */
+    tagtype_empty = 1,  /**< Tag is an empty element. */
+    tagtype_inline = 2, /**< Tag is an inline element. */
+    tagtype_block = 4,  /**< Tag is a block level element. */
+    tagtype_pre = 8     /**< Tag is a preformatted tag. */
 } UserTagType;
 
+
+/** This typedef describes a function to be used to parse HTML of a Tidy tag.
+ */
+typedef void (Parser)( TidyDocImpl* doc, Node *node, GetTokenMode mode );
+
+
+/** This typedef describes a function be be used to check the attributes
+ ** of a Tidy tag.
+ */
+typedef void (CheckAttribs)( TidyDocImpl* doc, Node *node );
+
+
+/** Defines a dictionary entry for a single Tidy tag, including all of the
+ ** relevant information that it requires.
+ */
 struct _Dict
 {
-    TidyTagId       id;
-    tmbstr          name;
-    uint            versions;
-    AttrVersion const *    attrvers;
-    uint            model;
-    Parser*         parser;
-    CheckAttribs*   chkattrs;
-    Dict*           next;
+    TidyTagId           id;       /**< Identifier for this tag. */
+    tmbstr              name;     /**< The tag name. */
+    uint                versions; /**< Accumulates potential HTML versions. See TY_(ConstrainVersion). */
+    AttrVersion const * attrvers; /**< Accumulates potential HTML versions for attributes. */
+    uint                model;    /**< Indicates the relevant content models for the tag. See lexer.h; there is no enum. */
+    Parser*             parser;   /**< Specifies the parser to use for this tag. */
+    CheckAttribs*       chkattrs; /**< Specifies the function to check this tag's attributes. */
+    Dict*               next;     /**< Link to next tag. */
 };
 
+
+/** This enum indicates the maximum size of the has table for tag hash lookup.
+ */
 enum
 {
-    ELEMENT_HASH_SIZE=178u
+    ELEMENT_HASH_SIZE=178u  /**< Maximum number of tags in the hash table. */
 };
 
-struct _DictHash
+
+/** This structure provide hash lookup for Tidy tags.
+ */
+typedef struct _DictHash
 {
-    Dict const*         tag;
-    struct _DictHash*   next;
-};
+    Dict const*         tag;   /**< The current tag. */
+    struct _DictHash*   next;  /**< The next tag. */
+} DictHash;
 
-typedef struct _DictHash DictHash;
 
-struct _TidyTagImpl
+/** This structure consists of the lists of all tags known to Tidy.
+ */
+typedef struct _TidyTagImpl
 {
-    Dict* xml_tags;                /* placeholder for all xml tags */
-    Dict* declared_tag_list;       /* User declared tags */
-    DictHash* hashtab[ELEMENT_HASH_SIZE];
-};
+    Dict* xml_tags;                        /**< Placeholder for all xml tags. */
+    Dict* declared_tag_list;               /**< User-declared tags. */
+    DictHash* hashtab[ELEMENT_HASH_SIZE];  /**< All of Tidy's built-in tags. */
+} TidyTagImpl;
 
-typedef struct _TidyTagImpl TidyTagImpl;
 
-/* interface for finding tag by name */
+/** Coordinates Config update and Tags data.
+ ** @param doc The Tidy document.
+ ** @param opt The option the tag is intended for.
+ ** @param name The name of the new tag.
+ */
+void TY_(DeclareUserTag)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name );
+
+
+/** Interface for finding a tag by TidyTagId.
+ ** @param tid The TidyTagId to search for.
+ ** @returns An instance of a Tidy tag.
+ */
 const Dict* TY_(LookupTagDef)( TidyTagId tid );
-Bool    TY_(FindTag)( TidyDocImpl* doc, Node *node );
-Parser* TY_(FindParser)( TidyDocImpl* doc, Node *node );
-void    TY_(DefineTag)( TidyDocImpl* doc, UserTagType tagType, ctmbstr name );
-void    TY_(FreeDeclaredTags)( TidyDocImpl* doc, UserTagType tagType ); /* tagtype_null to free all */
 
+/** Assigns the node's tag.
+ ** @param doc The Tidy document.
+ ** @param node The node to assign the tag to.
+ ** @returns Returns a bool indicating whether or not the tag was assigned.
+ */
+Bool    TY_(FindTag)( TidyDocImpl* doc, Node *node );
+
+
+/** Finds the parser function for a given node.
+ ** @param doc The Tidy document.
+ ** @param node The node to lookup.
+ ** @returns The parser for the given node.
+ */
+Parser* TY_(FindParser)( TidyDocImpl* doc, Node *node );
+
+
+/** Defines a new user-defined tag.
+ ** @param doc The Tidy document.
+ ** @param tagType The type of user-defined tag to define.
+ ** @param name The name of the new tag.
+ */
+void    TY_(DefineTag)( TidyDocImpl* doc, UserTagType tagType, ctmbstr name );
+
+
+/** Frees user-defined tags of the given type, or all user tags in given
+ ** `tagtype_null`.
+ ** @param doc The Tidy document.
+ ** @param tagType The type of tag to free, or `tagtype_null` to free all
+ **        user-defined tags.
+ */
+void    TY_(FreeDeclaredTags)( TidyDocImpl* doc, UserTagType tagType );
+
+
+/** Initiates an iterator for a list of user-declared tags, including autonomous
+ ** custom tags detected in the document if @ref TidyUseCustomTags is not set to
+ ** **no**.
+ ** @param doc An instance of a TidyDocImp to query.
+ ** @result Returns a TidyIterator, which is a token used to represent the
+ **         current position in a list within LibTidy.
+ */
 TidyIterator   TY_(GetDeclaredTagList)( TidyDocImpl* doc );
+
+
+/** Given a valid TidyIterator initiated with TY_(GetDeclaredTagList)(),
+ ** returns a string representing a user-declared or autonomous custom tag.
+ ** @remark Specifying tagType limits the scope of the tags to one of
+ **         @ref UserTagType types. Note that autonomous custom tags (if used)
+ **         are added to one of these option types, depending on the value of
+ **         @ref TidyUseCustomTags.
+ ** @param doc The Tidy document.
+ ** @param tagType The type of tag to iterate through.
+ ** @param iter The iterator token provided initially by
+ **        TY_(GetDeclaredTagList)().
+ ** @result A string containing the next tag.
+ */
 ctmbstr        TY_(GetNextDeclaredTag)( TidyDocImpl* doc, UserTagType tagType,
                                         TidyIterator* iter );
 
+
+/** Initializes tags and tag structures for the given Tidy document.
+ ** @param doc The Tidy document.
+ */
 void TY_(InitTags)( TidyDocImpl* doc );
+
+
+/** Frees the tags and structures used by Tidy for tags.
+ ** @param doc The Tidy document.
+ */
 void TY_(FreeTags)( TidyDocImpl* doc );
-void TY_(AdjustTags)( TidyDocImpl *doc ); /* if NOT HTML5 DOCTYPE, fall back to HTML4 legacy mode */
-void TY_(ResetTags)( TidyDocImpl *doc ); /* set table to HTML5 mode */
+
+
+/** Tidy defaults to HTML5 mode. If the <!DOCTYPE ...> is found to NOT be
+ ** HTML5, then adjust the tags table to HTML4 mode.
+ ** @param doc The Tidy document.
+ */
+void TY_(AdjustTags)( TidyDocImpl *doc );
+
+
+/** Reset the tags table back to default HTML5 mode.
+ ** @param doc The Tidy document.
+ */
+void TY_(ResetTags)( TidyDocImpl *doc );
+
+
+/** Indicates whether or not the Tidy is procesing in HTML5 mode.
+ ** @param doc The Tidy document.
+ ** @returns Returns `yes` if processing in HTML5 mode.
+ */
 Bool TY_(IsHTML5Mode)( TidyDocImpl *doc );
 
-/* Parser methods for tags */
+
+/** @} */
+/** @name Parser Methods And Attribute Checker Functions for Tags
+ ** These functions define the parsers and attribute checking functions for
+ ** each of Tidy's tags.
+ */
+/** @{ */
+
 
 Parser TY_(ParseHTML);
 Parser TY_(ParseHead);
@@ -109,39 +252,115 @@ Parser TY_(ParseNamespace);
 
 CheckAttribs TY_(CheckAttributes);
 
-/* 0 == TidyTag_UNKNOWN */
+
+/** @} */
+/** @name Other Tag and Node Lookup Functions
+ ** These functions perform additional lookup on tags and nodes.
+ */
+/** @{ */
+
+
+/** Gets the TidyTagId of the given node. 0 == TidyTag_UNKNOWN.
+ */
 #define TagId(node)        ((node) && (node)->tag ? (node)->tag->id : TidyTag_UNKNOWN)
+
+
+/** Determines if the given node is of the given tag id type.
+ */
 #define TagIsId(node, tid) ((node) && (node)->tag && (node)->tag->id == tid)
 
+
+/** Inquires whether or not the given node is a text node.
+ ** @param node The node being interrogated.
+ ** @returns The status of the inquiry.
+ */
 Bool TY_(nodeIsText)( Node* node );
+
+
+/** Inquires whether or not the given node is an element node.
+ ** @param node The node being interrogated.
+ ** @returns The status of the inquiry.
+ */
 Bool TY_(nodeIsElement)( Node* node );
 
+
+/** Inquires whether or not the given node has any text.
+ ** @param doc The Tidy document.
+ ** @param node The node being interrogated.
+ ** @returns The status of the inquiry.
+ */
 Bool TY_(nodeHasText)( TidyDocImpl* doc, Node* node );
 
-/* True if the element looks like it's an autonomous custom element tag. */
+
+/** Inquires whether the given element looks like it's an autonomous custom
+ ** element tag.
+ ** @param element A string to be checked.
+ ** @returns The status of the inquiry.
+ */
 Bool TY_(elementIsAutonomousCustomFormat)( ctmbstr element );
 
-/* True if the node looks like it's an autonomous custom element tag. */
+
+/** Inquires whether the given node looks like it's an autonomous custom
+ ** element tag.
+ ** @param node The node being interrogated.
+ ** @returns The status of the inquiry.
+ */
 Bool TY_(nodeIsAutonomousCustomFormat)( Node* node );
 
-/* True if the node looks like it's an autonomous custom element tag, and
-   TidyCustomTags is not disabled, and we're in HTML5 mode, which are all
-   requirements for valid autonomous custom tags.
-*/
+
+/** True if the node looks like it's an autonomous custom element tag, and
+ ** TidyCustomTags is not disabled, and we're in HTML5 mode, which are all
+ ** requirements for valid autonomous custom tags.
+ ** @param doc The Tidy document.
+ ** @param node The node being interrogated.
+ ** @returns The status of the inquiry.
+ */
 Bool TY_(nodeIsAutonomousCustomTag)( TidyDocImpl* doc, Node* node );
 
 
-/* True if any of the bits requested are set.
-*/
+/** Does the node have the indicated content model? True if any of the bits
+ ** requested are set.
+ ** @param node The node being interrogated.
+ ** @param contentModel The content model to check against.
+ ** @returns The status of the inquiry.
+ */
 Bool TY_(nodeHasCM)( Node* node, uint contentModel );
 
+
+/** Does the content model of the node include block?
+ ** @param node The node being interrogated.
+ ** @returns The status of the inquiry.
+ */
 Bool TY_(nodeCMIsBlock)( Node* node );
+
+
+/** Does the content model of the node include inline?
+ ** @param node The node being interrogated.
+ ** @returns The status of the inquiry.
+ */
 Bool TY_(nodeCMIsInline)( Node* node );
+
+
+/** Does the content model of the node include empty?
+ ** @param node The node being interrogated.
+ ** @returns The status of the inquiry.
+ */
 Bool TY_(nodeCMIsEmpty)( Node* node );
 
 
-Bool TY_(nodeIsHeader)( Node* node );     /* H1, H2, ..., H6 */
-uint TY_(nodeHeaderLevel)( Node* node );  /* 1, 2, ..., 6 */
+/** Is the node a header, such as H1, H2, ..., H6?
+ ** @param node The node being interrogated.
+ ** @returns The status of the inquiry.
+ */
+Bool TY_(nodeIsHeader)( Node* node );
+
+
+/** Inquires as to the header level of the given node: 1, 2, ..., 6.
+ ** @param node The node being interrogated.
+ ** @returns The header level.
+ */
+uint TY_(nodeHeaderLevel)( Node* node );
+
 
 #define nodeIsHTML( node )       TagIsId( node, TidyTag_HTML )
 #define nodeIsHEAD( node )       TagIsId( node, TidyTag_HEAD )
@@ -241,5 +460,11 @@ uint TY_(nodeHeaderLevel)( Node* node );  /* 1, 2, ..., 6 */
 #define nodeIsACRONYM( node )    TagIsId( node, TidyTag_ACRONYM )
 #define nodesIsFRAME( node )     TagIsId( node, TidyTag_FRAME )
 #define nodeIsTT( node )         TagIsId( node, TidyTag_TT )
+
+
+/** @} name */
+/** @} tags_h group */
+/** @} internal_api addtogroup */
+
 
 #endif /* __TAGS_H__ */

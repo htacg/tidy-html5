@@ -299,6 +299,7 @@ ctmbstr TY_(tidyLocalizedString)( uint messageType )
  **  Determines the current locale without affecting the C locale.
  **  Tidy has always used the default C locale, and at this point
  **  in its development we're not going to tamper with that.
+ **  @note this routine uses default allocator, see tidySetMallocCall.
  **  @param  result The buffer to use to return the string.
  **          Returns NULL on failure.
  **  @return The same buffer for convenience.
@@ -306,6 +307,7 @@ ctmbstr TY_(tidyLocalizedString)( uint messageType )
 tmbstr TY_(tidySystemLocale)(tmbstr result)
 {
     ctmbstr temp;
+    TidyAllocator* allocator = &TY_(g_default_allocator);
     
     /* This should set the OS locale. */
     setlocale( LC_ALL, "" );
@@ -315,7 +317,7 @@ tmbstr TY_(tidySystemLocale)(tmbstr result)
     
     /* Make a new copy of the string, because temp
      always points to the current locale. */
-    if (( result = malloc( strlen( temp ) + 1 ) ))
+    if (( result = TidyAlloc( allocator, strlen( temp ) + 1 ) ))
         strcpy(result, temp);
     
     /* This should restore the C locale. */
@@ -329,13 +331,16 @@ tmbstr TY_(tidySystemLocale)(tmbstr result)
  *  Retrieves the POSIX name for a string. Result is a static char so please
  *  don't try to free it. If the name looks like a cc_ll identifier, we will
  *  return it if there's no other match.
+ *  @note this routine uses default allocator, see tidySetMallocCall.
  */
 tmbstr TY_(tidyNormalizedLocaleName)( ctmbstr locale )
 {
     uint i;
     uint len;
     static char result[6] = "xx_yy";
-    tmbstr search = strdup(locale);
+    TidyAllocator * allocator = &TY_(g_default_allocator);
+
+    tmbstr search = TY_(tmbstrdup)( allocator, locale );
     search = TY_(tmbstrtolower)(search);
     
     /* See if our string matches a Windows name. */
@@ -343,8 +348,8 @@ tmbstr TY_(tidyNormalizedLocaleName)( ctmbstr locale )
     {
         if ( strcmp( localeMappings[i].winName, search ) == 0 )
         {
-            free(search);
-            search = strdup(localeMappings[i].POSIXName);
+            TidyFree( allocator, search );
+            search = TY_(tmbstrdup)( allocator, localeMappings[i].POSIXName );
             break;
         }
     }
@@ -376,7 +381,7 @@ tmbstr TY_(tidyNormalizedLocaleName)( ctmbstr locale )
         }
     }
     
-    free( search );
+    TidyFree( allocator, search );
     return result;
 }
 

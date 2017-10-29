@@ -979,7 +979,7 @@ Bool TY_(ParseConfigOption)( TidyDocImpl* doc, ctmbstr optnam, ctmbstr optval )
         if (NULL != doc->pOptCallback)
             status = (*doc->pOptCallback)( optnam, optval );
         if (NULL != doc->pConfigCallback )
-        status = status || (*doc->pConfigCallback)( tidyImplToDoc(doc), optnam, optval );
+            status = status || (*doc->pConfigCallback)( tidyImplToDoc(doc), optnam, optval );
         if (!status && isDeprecated)
             status = subDeprecatedOption( doc, optnam, optval);
         if (!status)

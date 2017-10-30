@@ -2472,11 +2472,6 @@ uint TIDY_CALL getNextErrorCode( TidyIterator* iter )
  *******************************************************************/
 
 
-tmbstr TIDY_CALL tidySystemLocale(tmbstr result)
-{
-    return TY_(tidySystemLocale)( result );
-}
-
 Bool TIDY_CALL tidySetLanguage( ctmbstr languageCode )
 {
     return TY_(tidySetLanguage)( languageCode );

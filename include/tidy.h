@@ -1969,12 +1969,6 @@ TIDY_EXPORT uint TIDY_CALL getNextErrorCode( TidyIterator* iter );
  ** @{
  */
 
-/** Determines the current locale without affecting the C locale.
- ** @param  result The buffer to use to return the string, or NULL on failure.
- ** @return The same buffer for convenience.
- */
-TIDY_EXPORT tmbstr TIDY_CALL tidySystemLocale(tmbstr result);
-
 /** Tells Tidy to use a different language for output.
  ** @param  languageCode A Windows or POSIX language code, and must match
  **         a TIDY_LANGUAGE for an installed language.

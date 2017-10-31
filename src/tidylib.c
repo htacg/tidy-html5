@@ -34,6 +34,9 @@
 #include "mappedio.h"
 #include "language.h"
 #include "sprtf.h"
+#if SUPPORT_LOCALIZATIONS
+#  include "locale.h"
+#endif
 
 /* Create/Destroy a Tidy "document" object */
 static TidyDocImpl* tidyDocCreate( TidyAllocator *allocator );
@@ -107,6 +110,17 @@ TidyDocImpl* tidyDocCreate( TidyAllocator *allocator )
     TY_(InitAttrs)( doc );
     TY_(InitConfig)( doc );
     TY_(InitPrintBuf)( doc );
+
+    /* Set the locale for tidy's output. This both configures
+    ** LibTidy to use the environment's locale as well as the
+    ** standard library.
+    */
+#if SUPPORT_LOCALIZATIONS
+    if ( TY_(tidyGetLanguageSetByUser)() == no )
+    {
+        TY_(tidySetLanguage)( setlocale( LC_ALL, "") );
+    }
+#endif
 
     /* By default, wire tidy messages to standard error.
     ** Document input will be set by parsing routines.
@@ -2474,7 +2488,12 @@ uint TIDY_CALL getNextErrorCode( TidyIterator* iter )
 
 Bool TIDY_CALL tidySetLanguage( ctmbstr languageCode )
 {
-    return TY_(tidySetLanguage)( languageCode );
+    Bool result = TY_(tidySetLanguage)( languageCode );
+
+    if ( result )
+        TY_(tidySetLanguageSetByUser)();
+
+    return result;
 }
 
 ctmbstr TIDY_CALL tidyGetLanguage()

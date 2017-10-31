@@ -115,6 +115,26 @@ Bool TY_(tidySetLanguage)( ctmbstr languageCode );
  */
 ctmbstr TY_(tidyGetLanguage)(void);
 
+
+/**
+ *  Indicates whether or not the current language was set by a
+ *  LibTidy user or internally by the library. This flag prevents
+ *  subsequently created instances of TidyDocument from changing the
+ *  user's language.
+ *  @returns Returns yes to indicate that the current language was
+ *    specified by an API user.
+ */
+Bool TY_(tidyGetLanguageSetByUser)(void);
+
+
+/**
+ *  Specifies to LibTidy that the user (rather than the library)
+ *  selected the current language. This flag prevents subsequently
+ *  created instances of TidyDocument from changing the user's language.
+ */
+void TY_(tidySetLanguageSetByUser)( void );
+
+
 /**
  *  Provides a string given `messageType` in the current
  *  localization for `quantity`.

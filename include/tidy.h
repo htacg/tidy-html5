@@ -336,9 +336,10 @@ TIDY_EXPORT Bool TIDY_CALL tidySetPanicCall( TidyPanic fpanic );
  */
     
 /** The primary creation of a document instance. Instances of a TidyDoc are used
- ** throughout the API as a token to represent a particular document. When done
- ** using a TidyDoc instance, be sure to `tidyRelease(myTidyDoc);` in order
- ** to free related memory.
+ ** throughout the API as a token to represent a particular document. You must
+ ** create at least one TidyDoc instance to initialize the library and begin
+ ** interaction with the API. When done using a TidyDoc instance, be sure to
+ ** `tidyRelease(myTidyDoc);` in order to free related memory.
  ** @result Returns a TidyDoc instance.
  */
 TIDY_EXPORT TidyDoc TIDY_CALL     tidyCreate(void);

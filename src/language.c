@@ -24,6 +24,7 @@
  *  This structure type provides universal access to all of Tidy's strings.
  */
 typedef struct {
+    Bool manually_set;
     languageDefinition *currentLanguage;
     languageDefinition *fallbackLanguage;
     languageDefinition *languages[];
@@ -35,6 +36,7 @@ typedef struct {
  *  `.currentLanguage` to language_en, which is Tidy's default language.
  */
 static tidyLanguagesType tidyLanguages = {
+    no,           /* library language was NOT manually set */
     &language_en, /* current language */
     &language_en, /* first fallback language */
     {
@@ -448,6 +450,26 @@ ctmbstr TY_(tidyGetLanguage)()
     languageDefinition *langDef = tidyLanguages.currentLanguage;
     languageDictionary *langDict = &langDef->messages;
     return (*langDict)[0].value;
+}
+
+
+/**
+ *  Indicates whether or not the current language was set by a
+ *  LibTidy user (yes) or internally by the library (no).
+ */
+Bool TY_(tidyGetLanguageSetByUser)()
+{
+    return tidyLanguages.manually_set;
+}
+
+
+/**
+ *  Specifies to LibTidy that the user (rather than the library)
+ *  selected the current language.
+ */
+void TY_(tidySetLanguageSetByUser)( void )
+{
+    tidyLanguages.manually_set = yes;
 }
 
 

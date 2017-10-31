@@ -2022,11 +2022,6 @@ int main( int argc, char** argv )
     /* Set an atexit handler. */
     atexit( tidy_cleanup );
 
-    /* Set the locale for tidy's output. This both configures LibTidy to
-       use the environment's locale as well as the standard library.
-     */
-    tidySetLanguage( setlocale( LC_ALL, "") );
-
 #if defined(_WIN32)
     /* Force Windows console to use UTF, otherwise many characters will
      * be garbage. Note that East Asian languages *are* supported, but

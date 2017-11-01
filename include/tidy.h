@@ -336,9 +336,10 @@ TIDY_EXPORT Bool TIDY_CALL tidySetPanicCall( TidyPanic fpanic );
  */
     
 /** The primary creation of a document instance. Instances of a TidyDoc are used
- ** throughout the API as a token to represent a particular document. When done
- ** using a TidyDoc instance, be sure to `tidyRelease(myTidyDoc);` in order
- ** to free related memory.
+ ** throughout the API as a token to represent a particular document. You must
+ ** create at least one TidyDoc instance to initialize the library and begin
+ ** interaction with the API. When done using a TidyDoc instance, be sure to
+ ** `tidyRelease(myTidyDoc);` in order to free related memory.
  ** @result Returns a TidyDoc instance.
  */
 TIDY_EXPORT TidyDoc TIDY_CALL     tidyCreate(void);
@@ -1968,12 +1969,6 @@ TIDY_EXPORT uint TIDY_CALL getNextErrorCode( TidyIterator* iter );
 /** @name Tidy's Locale
  ** @{
  */
-
-/** Determines the current locale without affecting the C locale.
- ** @param  result The buffer to use to return the string, or NULL on failure.
- ** @return The same buffer for convenience.
- */
-TIDY_EXPORT tmbstr TIDY_CALL tidySystemLocale(tmbstr result);
 
 /** Tells Tidy to use a different language for output.
  ** @param  languageCode A Windows or POSIX language code, and must match

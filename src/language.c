@@ -24,6 +24,7 @@
  *  This structure type provides universal access to all of Tidy's strings.
  */
 typedef struct {
+    Bool manually_set;
     languageDefinition *currentLanguage;
     languageDefinition *fallbackLanguage;
     languageDefinition *languages[];
@@ -35,6 +36,7 @@ typedef struct {
  *  `.currentLanguage` to language_en, which is Tidy's default language.
  */
 static tidyLanguagesType tidyLanguages = {
+    no,           /* library language was NOT manually set */
     &language_en, /* current language */
     &language_en, /* first fallback language */
     {
@@ -296,38 +298,6 @@ ctmbstr TY_(tidyLocalizedString)( uint messageType )
 
 
 /**
- **  Determines the current locale without affecting the C locale.
- **  Tidy has always used the default C locale, and at this point
- **  in its development we're not going to tamper with that.
- **  @note this routine uses default allocator, see tidySetMallocCall.
- **  @param  result The buffer to use to return the string.
- **          Returns NULL on failure.
- **  @return The same buffer for convenience.
- */
-tmbstr TY_(tidySystemLocale)(tmbstr result)
-{
-    ctmbstr temp;
-    TidyAllocator* allocator = &TY_(g_default_allocator);
-    
-    /* This should set the OS locale. */
-    setlocale( LC_ALL, "" );
-    
-    /* This should read the current locale. */
-    temp = setlocale( LC_ALL, NULL);
-    
-    /* Make a new copy of the string, because temp
-     always points to the current locale. */
-    if (( result = TidyAlloc( allocator, strlen( temp ) + 1 ) ))
-        strcpy(result, temp);
-    
-    /* This should restore the C locale. */
-    setlocale( LC_ALL, "C" );
-    
-    return result;
-}
-
-
-/**
  *  Retrieves the POSIX name for a string. Result is a static char so please
  *  don't try to free it. If the name looks like a cc_ll identifier, we will
  *  return it if there's no other match.
@@ -480,6 +450,26 @@ ctmbstr TY_(tidyGetLanguage)()
     languageDefinition *langDef = tidyLanguages.currentLanguage;
     languageDictionary *langDict = &langDef->messages;
     return (*langDict)[0].value;
+}
+
+
+/**
+ *  Indicates whether or not the current language was set by a
+ *  LibTidy user (yes) or internally by the library (no).
+ */
+Bool TY_(tidyGetLanguageSetByUser)()
+{
+    return tidyLanguages.manually_set;
+}
+
+
+/**
+ *  Specifies to LibTidy that the user (rather than the library)
+ *  selected the current language.
+ */
+void TY_(tidySetLanguageSetByUser)( void )
+{
+    tidyLanguages.manually_set = yes;
 }
 
 

@@ -2003,7 +2003,6 @@ int main( int argc, char** argv )
     ctmbstr cfgfil = NULL, errfil = NULL, htmlfil = NULL;
     TidyDoc tdoc = NULL;
     int status = 0;
-    tmbstr locale = NULL;
 
     uint contentErrors = 0;
     uint contentWarnings = 0;
@@ -2022,14 +2021,6 @@ int main( int argc, char** argv )
 
     /* Set an atexit handler. */
     atexit( tidy_cleanup );
-
-    /*************************************/
-    /* Set the locale for tidy's output. */
-    /*************************************/
-    locale = tidySystemLocale(locale);
-    tidySetLanguage(locale);
-    if ( locale )
-        free( locale );
 
 #if defined(_WIN32)
     /* Force Windows console to use UTF, otherwise many characters will

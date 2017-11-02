@@ -579,8 +579,9 @@ static Bool subDeprecatedOption( TidyDocImpl* doc, ctmbstr oldName, ctmbstr oldV
             }
             else
             {
+                ctmbstr val;
                 TY_(SetOptionInt)( doc, newOptId, value );
-                ctmbstr val = tidyOptGetCurrPick( tdoc, newOptId );
+                val = tidyOptGetCurrPick( tdoc, newOptId );
                 TY_(Report)( doc, NULL, NULL, OPTION_REMOVED_APPLIED, oldName, newName, val );
             }
         }

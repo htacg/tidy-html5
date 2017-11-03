@@ -214,6 +214,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyJoinClasses,             MX, "join-classes",                BL, no,              ParsePickList,     &boolPicks          },
     { TidyJoinStyles,              MX, "join-styles",                 BL, yes,             ParsePickList,     &boolPicks          },
     { TidyKeepFileTimes,           IO, "keep-time",                   BL, no,              ParsePickList,     &boolPicks          },
+    { TidyKeepTabs,                PP, "keep-tabs",                   BL, no,              ParsePickList,     &boolPicks          }, /* 20171103 - Issue #403 */
     { TidyLiteralAttribs,          MR, "literal-attributes",          BL, no,              ParsePickList,     &boolPicks          },
     { TidyLogicalEmphasis,         MC, "logical-emphasis",            BL, no,              ParsePickList,     &boolPicks          },
     { TidyLowerLiterals,           MR, "lower-literals",              BL, yes,             ParsePickList,     &boolPicks          },

@@ -700,6 +700,17 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "Note this feature is not supported on some platforms. "
     },
     {/* Important notes for translators:
+     - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+     <br/>.
+     - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+     - Option values should be enclosed in <var></var>.
+     - It's very important that <br/> be self-closing!
+     - The strings "Tidy" and "HTML Tidy" are the program name and must not
+     be translated. */
+        TidyKeepTabs,            0,
+        "This option specifies if Tidy should keep tabs found in the source. "
+    },
+    {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
       <br/>.
       - Entities, tags, attributes, etc., should be enclosed in <code></code>.

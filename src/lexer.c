@@ -63,6 +63,9 @@ static tmbstr get_text_string(Lexer* lexer, Node *node)
             if (c == '\n') {
                 buffer[i++] = '\\';
                 buffer[i++] = 'n';
+            } else if (c == '\t') {
+                buffer[i++] = '\\';
+                buffer[i++] = 't';
             } else if ( c == ' ' ) {
                 if (!insp)
                     buffer[i++] = c;
@@ -84,6 +87,9 @@ static tmbstr get_text_string(Lexer* lexer, Node *node)
             if (c == '\n') {
                 buffer[i++] = '\\';
                 buffer[i++] = 'n';
+            } else if (c == '\t') {
+                buffer[i++] = '\\';
+                buffer[i++] = 't';
             } else if ( c == ' ' ) {
                 if (!insp)
                     buffer[i++] = c;
@@ -116,6 +122,9 @@ static tmbstr get_text_string(Lexer* lexer, Node *node)
             if (c == '\n') {
                 buffer[i++] = '\\';
                 buffer[i++] = 'n';
+            } else if (c == '\t') {
+                buffer[i++] = '\\';
+                buffer[i++] = 't';
             } else if ( c == ' ' ) {
                 if (!insp)
                     buffer[i++] = c;

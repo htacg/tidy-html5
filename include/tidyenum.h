@@ -653,7 +653,7 @@ typedef enum
     TidyWrapAttVals,             /**< Wrap within attribute values */
     TidyWrapJste,                /**< Wrap within JSTE pseudo elements */
     TidyWrapLen,                 /**< Wrap margin */
-    TidyWrapPhp,                 /**< Wrap within PHP pseudo elements */
+    TidyWrapPhp,                 /**< Wrap consecutive PHP pseudo elements */
     TidyWrapScriptlets,          /**< Wrap within JavaScript string literals */
     TidyWrapSection,             /**< Wrap within <![ ... ]> section tags */
     TidyWriteBack,               /**< If true then output tidied markup */

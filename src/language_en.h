@@ -710,7 +710,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         TidyKeepTabs,            0,
         "With the default <var>no</var> Tidy will replace all source tabs, with spaces, "
         "controlled by the option <code>tab-size</code>, and the current line offset. "
-        "Of course, except in the special blocks/elments enumerated below, this will later "
+        "Of course, except in the special blocks/elements enumerated below, this will later "
         "be reduced to just one space. "
         "<br/>"
         "If set <var>yes</var> this option specifies Tidy should keep certain tabs "

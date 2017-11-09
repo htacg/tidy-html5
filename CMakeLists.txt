@@ -373,7 +373,7 @@ if (NOT BIN_INSTALL_DIR)
 endif ()
 
 if (NOT INCLUDE_INSTALL_DIR)
-    set(INCLUDE_INSTALL_DIR include/${LIB_NAME})
+    set(INCLUDE_INSTALL_DIR include)
 endif ()
 
 

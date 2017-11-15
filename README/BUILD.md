@@ -12,7 +12,7 @@
   
 CMake comes in two forms - command line and GUI. Some installations only install one or the other, but sometimes both. The build commands below are only for command line use.
 
-Also the actual build tools vary for each platform. But that is one of the great features of CMake, it can generate variuous 'native' build files. Running `cmake --help` should list the generators available on that platform. For sure one of the common ones is "Unix Makefiles", which needs autotools make installed, but many other generators are supported.
+Also the actual build tools vary for each platform. But that is one of the great features of CMake, it can generate various 'native' build files. Running `cmake --help` should list the generators available on that platform. For sure one of the common ones is "Unix Makefiles", which needs autotools make installed, but many other generators are supported.
 
 In Windows CMake offers various versions for MSVC. Again below only the command line use of MSVC is shown, but the tidy solution (*.sln) file can be loaded into the MSVC IDE, and the building done in there.
 

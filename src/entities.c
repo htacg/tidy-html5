@@ -25,12 +25,12 @@ struct _entity
 };
 
 #ifndef VERS_CHECK
-#define VERS_CHECK VERS_ALL
+#define VERS_CHECK VERS_HTML5
 #endif
 
 /*
 ** Issue #643 - list increased to
-** 2031 known entities.
+** 2032 known entities.
 ** Note also stuct /not/ padded to 
 ** keep source weight down, 79K vs 149K,
 ** and is strictly alphabetic to optimize 
@@ -406,7 +406,7 @@ static const entity entities[] =
     { "Otilde", VERS_ALL, 213 },
     { "Otimes", VERS_CHECK, 10807 },
     { "Ouml", VERS_ALL, 214 },
-    { "OverBar", VERS_CHECK, 175 },
+    { "OverBar", VERS_CHECK, 8254 },
     { "OverBrace", VERS_CHECK, 9182 },
     { "OverBracket", VERS_CHECK, 9140 },
     { "OverParenthesis", VERS_CHECK, 9180 },
@@ -549,7 +549,7 @@ static const entity entities[] =
     { "Ufr", VERS_CHECK, 120088 },
     { "Ugrave", VERS_ALL, 217 },
     { "Umacr", VERS_CHECK, 362 },
-    { "UnderBar", VERS_CHECK, 818 },
+    { "UnderBar", VERS_CHECK, 95 },
     { "UnderBrace", VERS_CHECK, 9183 },
     { "UnderBracket", VERS_CHECK, 9141 },
     { "UnderParenthesis", VERS_CHECK, 9181 },
@@ -658,7 +658,7 @@ static const entity entities[] =
     { "angrtvb", VERS_CHECK, 8894 },
     { "angrtvbd", VERS_CHECK, 10653 },
     { "angsph", VERS_CHECK, 8738 },
-    { "angst", VERS_CHECK, 8491 },
+    { "angst", VERS_CHECK, 197 },
     { "angzarr", VERS_CHECK, 9084 },
     { "aogon", VERS_CHECK, 261 },
     { "aopf", VERS_CHECK, 120146 },
@@ -785,6 +785,7 @@ static const entity entities[] =
     { "bsime", VERS_CHECK, 8909 },
     { "bsol", VERS_CHECK, 92 },
     { "bsolb", VERS_CHECK, 10693 },
+    { "bsolhsub", VERS_CHECK, 10184 },
     { "bull", VERS_FROM40, 8226 },
     { "bullet", VERS_CHECK, 8226 },
     { "bump", VERS_CHECK, 8782 },
@@ -983,9 +984,9 @@ static const entity entities[] =
     { "epar", VERS_CHECK, 8917 },
     { "eparsl", VERS_CHECK, 10723 },
     { "eplus", VERS_CHECK, 10865 },
-    { "epsi", VERS_CHECK, 1013 },
+    { "epsi", VERS_CHECK, 949 },
     { "epsilon", VERS_FROM40, 949 },
-    { "epsiv", VERS_CHECK, 949 },
+    { "epsiv", VERS_CHECK, 1013 },
     { "eqcirc", VERS_CHECK, 8790 },
     { "eqcolon", VERS_CHECK, 8789 },
     { "eqsim", VERS_CHECK, 8770 },
@@ -1518,7 +1519,7 @@ static const entity entities[] =
     { "ograve", VERS_ALL, 242 },
     { "ogt", VERS_CHECK, 10689 },
     { "ohbar", VERS_CHECK, 10677 },
-    { "ohm", VERS_CHECK, 8486 },
+    { "ohm", VERS_CHECK, 937 },
     { "oint", VERS_CHECK, 8750 },
     { "olarr", VERS_CHECK, 8634 },
     { "olcir", VERS_CHECK, 10686 },
@@ -1567,7 +1568,7 @@ static const entity entities[] =
     { "pertenk", VERS_CHECK, 8241 },
     { "pfr", VERS_CHECK, 120109 },
     { "phi", VERS_FROM40, 966 },
-    { "phiv", VERS_CHECK, 966 },
+    { "phiv", VERS_CHECK, 981 },
     { "phmmat", VERS_CHECK, 8499 },
     { "phone", VERS_CHECK, 9742 },
     { "pi", VERS_FROM40, 960 },
@@ -1634,7 +1635,6 @@ static const entity entities[] =
     { "rAtail", VERS_CHECK, 10524 },
     { "rBarr", VERS_CHECK, 10511 },
     { "rHar", VERS_CHECK, 10596 },
-    { "race", VERS_CHECK, 10714 },
     { "racute", VERS_CHECK, 341 },
     { "radic", VERS_FROM40, 8730 },
     { "raemptyv", VERS_CHECK, 10675 },
@@ -1859,6 +1859,7 @@ static const entity entities[] =
     { "supdsub", VERS_CHECK, 10968 },
     { "supe", VERS_FROM40, 8839 },
     { "supedot", VERS_CHECK, 10948 },
+    { "suphsol", VERS_CHECK, 10185 },
     { "suphsub", VERS_CHECK, 10967 },
     { "suplarr", VERS_CHECK, 10619 },
     { "supmult", VERS_CHECK, 10946 },
@@ -1987,10 +1988,10 @@ static const entity entities[] =
     { "vBarv", VERS_CHECK, 10985 },
     { "vDash", VERS_CHECK, 8872 },
     { "vangrt", VERS_CHECK, 10652 },
-    { "varepsilon", VERS_CHECK, 949 },
+    { "varepsilon", VERS_CHECK, 1013 },
     { "varkappa", VERS_CHECK, 1008 },
     { "varnothing", VERS_CHECK, 8709 },
-    { "varphi", VERS_CHECK, 966 },
+    { "varphi", VERS_CHECK, 981 },
     { "varpi", VERS_CHECK, 982 },
     { "varpropto", VERS_CHECK, 8733 },
     { "varr", VERS_CHECK, 8597 },

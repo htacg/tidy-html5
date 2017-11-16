@@ -180,7 +180,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyCSSPrefix,               MR, "css-prefix",                  ST, 0,               ParseCSS1Selector, NULL,           "c" },
     { TidyCustomTags,              IR, "new-custom-tags",             ST, 0,               ParseList,         NULL                }, /* 20170309 - Issue #119 */
     { TidyDecorateInferredUL,      MX, "decorate-inferred-ul",        BL, no,              ParsePickList,     &boolPicks          },
-    { TidyDoctype,                 DT, "doctype",                     ST, 0,               ParseDocType,      &doctypePicks       },
+    { TidyDoctype,                 DT, "doctype",                     ST, TidyDoctypeAuto, ParseDocType,      &doctypePicks       },
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
     { TidyDoctypeMode,             IR, "doctype-mode",                IN, TidyDoctypeAuto, NULL,              &doctypePicks       },
 #endif
@@ -382,6 +382,28 @@ static Bool SetOptionValue( TidyDocImpl* doc, TidyOptionId optId, ctmbstr val )
           doc->config.value[ optId ].p = 0; /* should already be zero, but to be sure... */
    }
    return status;
+}
+
+
+ctmbstr TY_(GetPickListLabelForPick)( TidyOptionId optId, uint pick )
+{
+    const TidyOptionImpl* option = TY_(getOption)( optId );
+
+    if ( option && option->pickList )
+    {
+        uint ix = 0;
+        const PickListItem *item = NULL;
+
+        /* Loop through the picklist until index matches the value. */
+        while ( (item = &(*option->pickList)[ ix ]) && item->label && ix<pick )
+        {
+            ++ix;
+        }
+        if ( ix==pick && item->label )
+            return item->label;
+    }
+
+    return NULL;
 }
 
 

@@ -548,18 +548,6 @@ static void GetOption(TidyDoc tdoc,    /**< The tidy document. */
     /* Handle special cases first. */
     switch ( optId )
     {
-        case TidyDoctype:
-            d->type = "DocType";
-            d->vals = NULL;
-        {
-            ctmbstr sdef = NULL;
-            sdef = tidyOptGetCurrPick( tdoc, TidyDoctypeMode );
-            if ( !sdef || *sdef == '*' )
-                sdef = tidyOptGetValue( tdoc, TidyDoctype );
-            d->def = sdef;
-        }
-            break;
-            
         case TidyInlineTags:
         case TidyBlockTags:
         case TidyEmptyTags:

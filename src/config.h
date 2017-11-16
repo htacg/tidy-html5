@@ -203,6 +203,14 @@ void TY_(InitConfig)( TidyDocImpl* doc );
 void TY_(FreeConfig)( TidyDocImpl* doc );
 
 
+/** Gets the picklist label for a given value.
+ ** @param optId the option id having a picklist to check.
+ ** @param pick the picklist item to retrieve.
+ ** @returns The label for the pick.
+ */
+ctmbstr TY_(GetPickListLabelForPick)( TidyOptionId optId, uint pick );
+
+
 /** Sets the integer value for the given option Id.
  ** @param doc The Tidy document.
  ** @param optId The option ID to set.

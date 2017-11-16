@@ -366,6 +366,12 @@ TidyConfigCategory TIDY_CALL tidyOptGetCategory( TidyOption topt )
 ctmbstr TIDY_CALL       tidyOptGetDefault( TidyOption topt )
 {
     const TidyOptionImpl* option = tidyOptionToImpl( topt );
+    /* Special case for TidyDoctype, because it is declared as string */
+    if ( option && option->id == TidyDoctype )
+    {
+        const TidyOptionImpl* newopt = TY_(getOption)( TidyDoctypeMode );
+        return TY_(GetPickListLabelForPick)( TidyDoctypeMode, newopt->dflt );
+    }
     if ( option && option->type == TidyString )
         return option->pdflt; /* Issue #306 - fix an old typo hidden by a cast! */
     return NULL;
@@ -375,6 +381,14 @@ ulong TIDY_CALL          tidyOptGetDefaultInt( TidyOption topt )
     const TidyOptionImpl* option = tidyOptionToImpl( topt );
     if ( option && option->type != TidyString )
         return option->dflt;
+
+    /* Special case for TidyDoctype, because it has a picklist */
+    if ( option->id == TidyDoctype )
+    {
+        const TidyOptionImpl* newopt = TY_(getOption)( TidyDoctypeMode );
+        return newopt->dflt;
+    }
+
     return ~0U;
 }
 Bool TIDY_CALL          tidyOptGetDefaultBool( TidyOption topt )
@@ -411,11 +425,26 @@ ctmbstr TIDY_CALL       tidyOptGetNextPick( TidyOption topt, TidyIterator* pos )
 
 ctmbstr TIDY_CALL       tidyOptGetValue( TidyDoc tdoc, TidyOptionId optId )
 {
-  TidyDocImpl* impl = tidyDocToImpl( tdoc );
-  ctmbstr optval = NULL;
-  if ( impl )
-    optval = cfgStr( impl, optId );
-  return optval;
+    TidyDocImpl* impl = tidyDocToImpl( tdoc );
+    ctmbstr optval = NULL;
+    if ( impl )
+    {
+        if ( optId == TidyDoctype )
+        {
+            /* Special case for TidyDoctype, because it has a picklist and is a string. */
+            uint pick = tidyOptGetInt( tdoc, TidyDoctypeMode );
+            if ( pick != TidyDoctypeUser )
+            {
+                optval = TY_(GetPickListLabelForPick)( TidyDoctypeMode, pick );
+            } else {
+                optval = cfgStr( impl, optId );
+            }
+        } else {
+            /* Standard case. */
+            optval = cfgStr( impl, optId );
+        }
+    }
+    return optval;
 }
 Bool TIDY_CALL        tidyOptSetValue( TidyDoc tdoc, TidyOptionId optId, ctmbstr val )
 {
@@ -437,7 +466,13 @@ ulong TIDY_CALL        tidyOptGetInt( TidyDoc tdoc, TidyOptionId optId )
     TidyDocImpl* impl = tidyDocToImpl( tdoc );
     ulong opti = 0;
     if ( impl )
-        opti = cfg( impl, optId );
+    {
+        /* Special case for TidyDoctype, because it has a picklist */
+        if ( optId == TidyDoctype )
+            opti = cfg( impl, TidyDoctypeMode);
+        else
+            opti = cfg( impl, optId );
+    }
     return opti;
 }
 
@@ -445,7 +480,13 @@ Bool TIDY_CALL        tidyOptSetInt( TidyDoc tdoc, TidyOptionId optId, ulong val
 {
     TidyDocImpl* impl = tidyDocToImpl( tdoc );
     if ( impl )
-        return TY_(SetOptionInt)( impl, optId, val );
+    {
+        /* Special case for TidyDoctype, because it has a picklist */
+        if ( optId == TidyDoctype )
+            return TY_(SetOptionInt)( impl, TidyDoctypeMode, val );
+        else
+            return TY_(SetOptionInt)( impl, optId, val );
+    }
     return no;
 }
 
@@ -480,24 +521,8 @@ ctmbstr TIDY_CALL       tidyOptGetEncName( TidyDoc tdoc, TidyOptionId optId )
 
 ctmbstr TIDY_CALL       tidyOptGetCurrPick( TidyDoc tdoc, TidyOptionId optId )
 {
-    const TidyOptionImpl* option = TY_(getOption)( optId );
-
-    if ( option && option->pickList )
-    {
-        uint ix = 0;
-        uint pick = tidyOptGetInt( tdoc, optId );
-        const PickListItem *item = NULL;
-        
-        // loop through the picklist until index matches the value
-        while ( (item = &(*option->pickList)[ ix ]) && item->label && ix<pick )
-        {
-            ++ix;
-        }
-        if ( ix==pick && item->label )
-            return item->label;
-    }
-    
-    return NULL;
+    uint pick = tidyOptGetInt( tdoc, optId );
+    return TY_(GetPickListLabelForPick)( optId, pick );
 }
 
 

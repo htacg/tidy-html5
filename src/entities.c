@@ -2175,9 +2175,11 @@ ctmbstr TY_(EntityName)( uint ch, uint versions )
     {
         if ( ep->code == ch )
         {
-            if ( ep->versions & versions )
+            if (ep->versions & versions)
+            {
                 entnam = ep->name;
-            break; /* Found code. Stop search. */
+                break; /* Issue #643 - Found code and version. Stop search? */
+            }
         }
     }
     return entnam;

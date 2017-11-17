@@ -138,7 +138,7 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
     tmbstr src = lex ? "lexer" : "stream";
     SPRTF("R=%d C=%d: ", line, col );
     /* DEBUG: Be able to set a TRAP on a SPECIFIC row,col */
-    if ((line == 67) && (col == 95)) {
+    if ((line == 3) && (col == 1)) {
         check_me("Show_Node"); /* just a debug trap */
     }
     if (lexer && lexer->token && 

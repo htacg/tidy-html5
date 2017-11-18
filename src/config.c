@@ -224,6 +224,8 @@ static const TidyOptionImpl option_defs[] =
     { TidyMergeEmphasis,           MX, "merge-emphasis",              BL, yes,             ParsePickList,     &boolPicks          },
     { TidyMergeSpans,              MC, "merge-spans",                 IN, TidyAutoState,   ParsePickList,     &autoBoolPicks      },
     { TidyMetaCharset,             DT, "add-meta-charset",            BL, no,              ParsePickList,     &boolPicks          }, /* 20161004 - Issue #456 */
+    { TidyMuteReports,             DD, "mute",                        ST, 0,               ParseList,         NULL                },
+    { TidyMuteShow,                DD, "mute-id",                     BL, no,              ParsePickList,     &boolPicks          },
     { TidyNCR,                     ME, "ncr",                         BL, yes,             ParsePickList,     &boolPicks          },
     { TidyNewline,                 CE, "newline",                     IN, DLF,             ParsePickList,     &newlinePicks       },
     { TidyNumEntities,             ME, "numeric-entities",            BL, no,              ParsePickList,     &boolPicks          },
@@ -248,8 +250,6 @@ static const TidyOptionImpl option_defs[] =
     { TidyShowWarnings,            DD, "show-warnings",               BL, yes,             ParsePickList,     &boolPicks          },
     { TidySkipNested,              MR, "skip-nested",                 BL, yes,             ParsePickList,     &boolPicks          }, /* 1642186 - Issue #65 */
     { TidySortAttributes,          PP, "sort-attributes",             IN, TidySortAttrNone,ParsePickList,     &sorterPicks        },
-    { TidyMuteReports,             DD, "mute",                        ST, 0,               ParseList,         NULL                },
-    { TidyMuteShow,                DD, "mute-id",                     BL, no,              ParsePickList,     &boolPicks          },
     { TidyStrictTagsAttr,          MR, "strict-tags-attributes",      BL, no,              ParsePickList,     &boolPicks          }, /* 20160209 - Issue #350 */
     { TidyStyleTags,               MR, "fix-style-tags",              BL, yes,             ParsePickList,     &boolPicks          },
     { TidyTabSize,                 PP, "tab-size",                    IN, 8,               ParseInt,          NULL                },

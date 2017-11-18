@@ -74,8 +74,8 @@ Bool TY_(IsNewNode)(Node *node);
 
 
 /**
- *  Transforms a given node to another element, for example, from a <p>
- *  to a <br>.
+ *  Transforms a given node to another element, for example, from a `p`
+ *  to a `br`.
  *  @param doc The document which the node belongs to.
  *  @param node The node to coerce.
  *  @param tid The tag type to coerce the node into.

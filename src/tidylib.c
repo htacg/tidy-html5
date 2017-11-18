@@ -2481,6 +2481,18 @@ TidyAttrId TIDY_CALL tidyAttrGetId( TidyAttr tattr )
   return attrId;
 }
 
+TidyAttr TIDY_CALL tidyAttrGetById( TidyNode tnod, TidyAttrId attId )
+{
+    Node* nimp = tidyNodeToImpl(tnod);
+    return tidyImplToAttr( TY_(AttrGetById)( nimp, attId ) );
+}
+
+
+Bool TIDY_CALL tidyAttrIsEvent( TidyAttr tattr )
+{
+    return TY_(attrIsEvent)( tidyAttrToImpl(tattr) );
+}
+
 
 /*******************************************************************
  ** Message Key Management

@@ -336,11 +336,11 @@ set ( CFILES
         ${SRCDIR}/parser.c       ${SRCDIR}/tags.c         ${SRCDIR}/entities.c
         ${SRCDIR}/lexer.c        ${SRCDIR}/pprint.c       ${SRCDIR}/charsets.c
         ${SRCDIR}/clean.c        ${SRCDIR}/message.c      ${SRCDIR}/config.c
-        ${SRCDIR}/alloc.c        ${SRCDIR}/attrapi.c      ${SRCDIR}/attrdict.c
-        ${SRCDIR}/buffio.c       ${SRCDIR}/fileio.c       ${SRCDIR}/streamio.c
-        ${SRCDIR}/tagask.c       ${SRCDIR}/tmbstr.c       ${SRCDIR}/utf8.c
-        ${SRCDIR}/tidylib.c      ${SRCDIR}/mappedio.c     ${SRCDIR}/gdoc.c
-        ${SRCDIR}/language.c     ${SRCDIR}/messageobj.c   ${SRCDIR}/sprtf.c )
+        ${SRCDIR}/alloc.c        ${SRCDIR}/attrdict.c     ${SRCDIR}/buffio.c
+        ${SRCDIR}/fileio.c       ${SRCDIR}/streamio.c     ${SRCDIR}/tagask.c
+        ${SRCDIR}/tmbstr.c       ${SRCDIR}/utf8.c         ${SRCDIR}/tidylib.c
+        ${SRCDIR}/mappedio.c     ${SRCDIR}/gdoc.c         ${SRCDIR}/language.c
+        ${SRCDIR}/messageobj.c   ${SRCDIR}/sprtf.c )
         
 set ( HFILES
         ${INCDIR}/tidyplatform.h ${INCDIR}/tidy.h         ${INCDIR}/tidyenum.h

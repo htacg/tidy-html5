@@ -54,7 +54,7 @@ Bool TY_(CheckNodeIntegrity)(Node *node);
 
 /**
  *  Indicates whether or not a text node ends with a space or newline.
- *  @note Implementation of this method is found in @ref pprint.c for
+ *  @note Implementation of this method is found in `pprint.c` for
  *  some reason.
  *  @param lexer A reference to the lexer used to lex the document.
  *  @param node The node to check.
@@ -78,7 +78,7 @@ Bool TY_(IsNewNode)(Node *node);
  *  to a <br>.
  *  @param doc The document which the node belongs to.
  *  @param node The node to coerce.
- *  @param TidyTagId The tag type to coerce the node into.
+ *  @param tid The tag type to coerce the node into.
  *  @param obsolete If the old node was obsolete, a report will be generated.
  *  @param expected If the old node was not expected to be found in this
  *    particular location, a report will be generated.
@@ -147,7 +147,7 @@ Node *TY_(TrimEmptyElement)( TidyDocImpl* doc, Node *element );
 /**
  *  Trims a tree of empty elements recursively, returning the next node.
  *  @param doc The Tidy document.
- *  @param element The element to trim.
+ *  @param node The element to trim.
  *  @returns Returns the next node.
  */
 Node* TY_(DropEmptyElements)(TidyDocImpl* doc, Node* node);
@@ -184,7 +184,7 @@ void TY_(ParseDocument)( TidyDocImpl* doc );
 /**
  *  Indicates whether or not whitespace is to be preserved in XHTML/XML
  *  documents.
- *  @param lexer The Tidy document.
+ *  @param doc The Tidy document.
  *  @param element The node to test.
  *  @returns Returns the result of the test.
  */

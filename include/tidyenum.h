@@ -614,6 +614,8 @@ typedef enum
     TidyMergeEmphasis,           /**< Merge nested B and I elements */
     TidyMergeSpans,              /**< Merge multiple SPANs */
     TidyMetaCharset,             /**< Adds/checks/fixes meta charset in the head, based on document type */
+    TidyMuteReports,             /**< Filter these messages from output. */
+    TidyMuteShow,                /**< Show message ID's in the error table */
     TidyNCR,                     /**< Allow numeric character references */
     TidyNewline,                 /**< Output line ending (default to platform) */
     TidyNumEntities,             /**< Use numeric entities */
@@ -638,8 +640,6 @@ typedef enum
     TidyShowWarnings,            /**< However errors are always shown */
     TidySkipNested,              /**< Skip nested tags in script and style CDATA */
     TidySortAttributes,          /**< Sort attributes */
-    TidyMuteReports,             /**< Filter these messages from output. */
-    TidyMuteShow,                /**< Show message ID's in the error table */
     TidyStrictTagsAttr,          /**< Ensure tags and attributes match output HTML version */
     TidyStyleTags,               /**< Move sytle to head */
     TidyTabSize,                 /**< Expand tabs to n spaces */

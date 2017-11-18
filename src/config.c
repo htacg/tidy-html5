@@ -1241,9 +1241,15 @@ Bool ParseList( TidyDocImpl* doc, const TidyOptionImpl* option )
     TidyConfigImpl* cfg = &doc->config;
     tmbchar buf[1024];
     uint i = 0, nItems = 0;
-    uint c = SkipWhite( cfg );
+    uint c;
 
     SetOptionValue( doc, option->id, NULL );
+
+    /* Given an empty string, so signal success. */
+    if ( cfg->c == EndOfStream )
+        return yes;
+
+    c = SkipWhite( cfg );
 
     do
     {
@@ -1343,9 +1349,19 @@ Bool FUNC_UNUSED ParseName( TidyDocImpl* doc, const TidyOptionImpl* option )
 /* #508936 - CSS class naming for -clean option */
 Bool ParseCSS1Selector( TidyDocImpl* doc, const TidyOptionImpl* option )
 {
+    TidyConfigImpl* cfg = &doc->config;
     char buf[256] = {0};
     uint i = 0;
-    uint c = SkipWhite( &doc->config );
+    uint c;
+
+    /* Given an empty string, so signal success. */
+    if ( cfg->c == EndOfStream )
+    {
+        SetOptionValue( doc, option->id, NULL );
+        return yes;
+    }
+
+    c = SkipWhite( cfg );
 
     while ( i < sizeof(buf)-2 && c != EndOfStream && !TY_(IsWhite)(c) )
     {
@@ -1585,7 +1601,17 @@ Bool ParseDocType( TidyDocImpl* doc, const TidyOptionImpl* option )
     Bool status = yes;
     uint value;
     TidyConfigImpl* cfg = &doc->config;
-    tchar c = SkipWhite( cfg );
+    tchar c;
+
+    /* Given an empty string, so signal success. */
+    if ( cfg->c == EndOfStream )
+    {
+        SetOptionValue( doc, option->id, NULL );
+        return yes;
+    }
+
+    c = SkipWhite( cfg );
+
 
     /* "-//ACME//DTD HTML 3.14159//EN" or similar */
 

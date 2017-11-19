@@ -708,9 +708,15 @@ TIDY_EXPORT ctmbstr TIDY_CALL       tidyOptGetName( TidyOption opt );
 
 /** Get datatype of given Option
  ** @param opt An instance of a TidyOption to query.
- ** @result the TidyOptionType of the given option.
+ ** @result The TidyOptionType of the given option.
  */
 TIDY_EXPORT TidyOptionType TIDY_CALL tidyOptGetType( TidyOption opt );
+
+/** Indicates that an option takes a list of items.
+ ** @param opt An instance of a TidyOption to query.
+ ** @result A bool indicating whether or not the option accepts a list.
+ */
+TIDY_EXPORT Bool TIDY_CALL tidyOptionIsList( TidyOption opt );
 
 /** Is Option read-only? Some options (mainly internal use only options) are
  ** read-only.

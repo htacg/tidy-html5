@@ -357,6 +357,13 @@ TidyOptionType TIDY_CALL tidyOptGetType( TidyOption topt )
         return option->type;
     return (TidyOptionType) -1;
 }
+Bool TIDY_CALL           tidyOptionIsList( TidyOption opt )
+{
+    const TidyOptionImpl* option = tidyOptionToImpl( opt );
+    if ( option )
+        return TY_(getOptionIsList)( option->id );
+    return no;
+}
 TidyConfigCategory TIDY_CALL tidyOptGetCategory( TidyOption topt )
 {
     const TidyOptionImpl* option = tidyOptionToImpl( topt );

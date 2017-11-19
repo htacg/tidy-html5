@@ -149,6 +149,11 @@ const TidyOptionImpl* TY_(lookupOption)( ctmbstr optnam );
  */
 const TidyOptionImpl* TY_(getOption)( TidyOptionId optId );
 
+/** Given an option ID, indicates whether or not the option is a list.
+ ** @param optId The option ID to check.
+ ** @returns Returns yes if the option value is a list.
+ */
+const Bool TY_(getOptionIsList)( TidyOptionId optId );
 
 /** Initiates an iterator to cycle through all of the available options.
  ** @param doc The Tidy document to get options.

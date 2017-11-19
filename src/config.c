@@ -342,6 +342,11 @@ const TidyOptionImpl* TY_(getOption)( TidyOptionId optId )
   return NULL;
 }
 
+const Bool TY_(getOptionIsList)( TidyOptionId optId )
+{
+    const TidyOptionImpl* option = TY_(getOption)( optId );
+    return option->parser == ParseList;
+}
 
 static void FreeOptionValue( TidyDocImpl* doc, const TidyOptionImpl* option, TidyOptionValue* value )
 {

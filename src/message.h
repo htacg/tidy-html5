@@ -210,6 +210,19 @@ void TY_(FreeMutedMessageList)( TidyDocImpl* doc );
  */
 void TY_(DefineMutedMessage)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name );
 
+/** Start an iterator for muted messages.
+ ** @param doc The Tidy document.
+ ** @returns Returns an iterator token.
+ */
+TidyIterator TY_(getMutedMessageList)( TidyDocImpl* doc );
+
+/** Get the next priority attribute.
+ ** @param doc The Tidy document.
+ ** @param iter The iterator token.
+ ** @returns The next priority attribute.
+ */
+ctmbstr TY_(getNextMutedMessage)( TidyDocImpl* doc, TidyIterator* iter );
+
 
 /** @} message_muting group */
 

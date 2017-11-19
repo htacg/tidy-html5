@@ -933,6 +933,58 @@ TIDY_EXPORT ctmbstr TIDY_CALL       tidyOptGetNextDeclTag(TidyDoc tdoc,       /*
                                                           TidyIterator* iter  /**< The TidyIterator (initiated with tidyOptGetDeclTagList()) token.  */
                                                           );
 
+/** Initiates an iterator for a list of priority attributes. This iterator
+ ** allows you to iterate through all of the priority attributes defined with
+ ** the `priority-attributes` configuration option. In order to iterate through
+ ** the attributes, initiate the iterator with this function, and then use
+ ** tidyOptGetNextPriorityAttr() to retrieve the first and subsequent attributes.
+ ** For example:
+ ** @code{.c}
+ **   TidyIterator itAttr = tidyOptGetPriorityAttrList( tdoc );
+ **   while ( itAttr ) {
+ **     printf("%s", tidyOptGetNextPriorityAttr( tdoc, &itAttr ));
+ **   }
+ ** @endcode
+ ** @param tdoc An instance of a TidyDoc to query.
+ ** @result Returns a TidyIterator, which is a token used to represent the
+ **         current position in a list within LibTidy.
+ */
+TIDY_EXPORT TidyIterator TIDY_CALL  tidyOptGetPriorityAttrList( TidyDoc tdoc );
+
+/** Given a valid TidyIterator initiated with tidyOptGetPriorityAttrList(),
+ ** returns a string representing a priority attribute.
+ ** @result A string containing the next tag.
+ */
+TIDY_EXPORT ctmbstr TIDY_CALL       tidyOptGetNextPriorityAttr(TidyDoc tdoc,       /**< The tidy document to query. */
+                                                               TidyIterator* iter  /**< The TidyIterator (initiated with tidyOptGetPriorityAttrList()) token.  */
+                                                               );
+
+/** Initiates an iterator for a list of muted messages. This iterator allows
+ ** you to iterate through all of the priority attributes defined with the
+ ** `mute` configuration option. In order to iterate through the list, initiate
+ ** with this function, and then use tidyOptGetNextMutedMessage() to retrieve
+ ** the first and subsequent attributes.
+ ** For example:
+ ** @code{.c}
+ **   TidyIterator itAttr = tidyOptGetMutedMessageList( tdoc );
+ **   while ( itAttr ) {
+ **     printf("%s", tidyOptGetNextMutedMessage( tdoc, &itAttr ));
+ **   }
+ ** @endcode
+ ** @param tdoc An instance of a TidyDoc to query.
+ ** @result Returns a TidyIterator, which is a token used to represent the
+ **         current position in a list within LibTidy.
+ */
+TIDY_EXPORT TidyIterator TIDY_CALL  tidyOptGetMutedMessageList( TidyDoc tdoc );
+
+/** Given a valid TidyIterator initiated with tidyOptGetMutedMessageList(),
+ ** returns a string representing a muted message.
+ ** @result A string containing the next tag.
+ */
+TIDY_EXPORT ctmbstr TIDY_CALL       tidyOptGetNextMutedMessage(TidyDoc tdoc,       /**< The tidy document to query. */
+                                                               TidyIterator* iter  /**< The TidyIterator (initiated with tidyOptGetMutedMessageList()) token.  */
+                                                               );
+
 /** @}
  ** @name Option Documentation
  ** @{

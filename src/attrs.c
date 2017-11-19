@@ -807,6 +807,34 @@ void TY_(DefinePriorityAttribute)(TidyDocImpl* doc, ctmbstr name)
 }
 
 
+TidyIterator TY_(getPriorityAttrList)( TidyDocImpl* doc )
+{
+    PriorityAttribs *priorities = &(doc->attribs.priorityAttribs);
+    size_t result = priorities->count > 0 ? 1 : 0;
+
+    return (TidyIterator) result;
+}
+
+
+ctmbstr  TY_(getNextPriorityAttr)( TidyDocImpl* doc, TidyIterator* iter )
+{
+    PriorityAttribs *priorities = &(doc->attribs.priorityAttribs);
+    size_t index;
+    ctmbstr result = NULL;
+    assert( iter != NULL );
+    index = (size_t)*iter;
+
+    if ( index > 0 && index < priorities->count )
+    {
+        result = priorities->list[index-1];
+        index++;
+    }
+    *iter = (TidyIterator) ( index <= priorities->count ? index : (size_t)0 );
+
+    return result;
+}
+
+
 static Bool CheckAttrType( TidyDocImpl* doc,
                            ctmbstr attrname, AttrCheck type )
 {

@@ -98,6 +98,12 @@ AttVal* TY_(RepairAttrValue)(TidyDocImpl* doc, Node* node, ctmbstr name, ctmbstr
 /* Add an item to the list of priority attributes to write first. */
 void TY_(DefinePriorityAttribute)(TidyDocImpl* doc, ctmbstr name);
 
+/* Start an iterator for priority attributes. */
+TidyIterator TY_(getPriorityAttrList)( TidyDocImpl* doc );
+
+/* Get the next priority attribute. */
+ctmbstr TY_(getNextPriorityAttr)( TidyDocImpl* doc, TidyIterator* iter );
+
 Bool TY_(IsUrl)( TidyDocImpl* doc, ctmbstr attrname );
 
 /* Bool IsBool( TidyDocImpl* doc, ctmbstr attrname ); */

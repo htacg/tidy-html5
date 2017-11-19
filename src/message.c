@@ -1360,6 +1360,34 @@ void TY_(DefineMutedMessage)(TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbst
 }
 
 
+TidyIterator TY_(getMutedMessageList)( TidyDocImpl* doc )
+{
+    TidyMutedMessages *list = &(doc->muted);
+    size_t result = list->count > 0 ? 1 : 0;
+
+    return (TidyIterator) result;
+}
+
+
+ctmbstr TY_(getNextMutedMessage)( TidyDocImpl* doc, TidyIterator* iter )
+{
+    TidyMutedMessages *list = &(doc->muted);
+    size_t index;
+    ctmbstr result = NULL;
+    assert( iter != NULL );
+    index = (size_t)*iter;
+
+    if ( index > 0 && index < list->count )
+    {
+        result = TY_(tidyErrorCodeAsKey)(list->list[index-1]);
+        index++;
+    }
+    *iter = (TidyIterator) ( index <= list->count ? index : (size_t)0 );
+
+    return result;
+}
+
+
 /*********************************************************************
  * Key Discovery
  *********************************************************************/

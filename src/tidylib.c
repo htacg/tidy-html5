@@ -33,6 +33,7 @@
 #include "utf8.h"
 #include "mappedio.h"
 #include "language.h"
+#include "attrs.h"
 #include "sprtf.h"
 #if SUPPORT_LOCALIZATIONS
 #  include "locale.h"
@@ -555,6 +556,44 @@ ctmbstr TIDY_CALL       tidyOptGetNextDeclTag( TidyDoc tdoc, TidyOptionId optId,
             tagnam = TY_(GetNextDeclaredTag)( impl, tagtyp, iter );
     }
     return tagnam;
+}
+
+TidyIterator TIDY_CALL tidyOptGetPriorityAttrList( TidyDoc tdoc )
+{
+    TidyDocImpl* impl = tidyDocToImpl( tdoc );
+    if ( impl )
+        return TY_(getPriorityAttrList)( impl );
+    return (TidyIterator) -1;
+}
+
+ctmbstr TIDY_CALL      tidyOptGetNextPriorityAttr(TidyDoc tdoc, TidyIterator* iter )
+{
+    TidyDocImpl* impl = tidyDocToImpl( tdoc );
+    ctmbstr result = NULL;
+    if ( impl )
+        result = TY_(getNextPriorityAttr)( impl, iter );
+    else if ( iter )
+        *iter = 0;
+    return result;
+}
+
+TidyIterator TIDY_CALL tidyOptGetMutedMessageList( TidyDoc tdoc )
+{
+    TidyDocImpl* impl = tidyDocToImpl( tdoc );
+    if ( impl )
+        return TY_(getMutedMessageList)( impl );
+    return (TidyIterator) -1;
+}
+
+ctmbstr TIDY_CALL      tidyOptGetNextMutedMessage(TidyDoc tdoc, TidyIterator* iter )
+{
+    TidyDocImpl* impl = tidyDocToImpl( tdoc );
+    ctmbstr result = NULL;
+    if ( impl )
+        result = TY_(getNextMutedMessage)( impl, iter );
+    else if ( iter )
+        *iter = 0;
+    return result;
 }
 
 ctmbstr TIDY_CALL tidyOptGetDoc( TidyDoc ARG_UNUSED(tdoc), TidyOption opt )

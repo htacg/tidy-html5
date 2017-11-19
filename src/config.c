@@ -1620,7 +1620,7 @@ Bool ParseDocType( TidyDocImpl* doc, const TidyOptionImpl* option )
 
     /* "-//ACME//DTD HTML 3.14159//EN" or similar */
 
-    if ( c == '"' || c == '\'' )
+    if ( c == '"' || c == '\''|| c == '-' || c == '+' )
     {
         status = ParseString(doc, option);
         if (status)

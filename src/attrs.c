@@ -824,7 +824,7 @@ ctmbstr  TY_(getNextPriorityAttr)( TidyDocImpl* doc, TidyIterator* iter )
     assert( iter != NULL );
     index = (size_t)*iter;
 
-    if ( index > 0 && index < priorities->count )
+    if ( index > 0 && index <= priorities->count )
     {
         result = priorities->list[index-1];
         index++;

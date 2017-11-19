@@ -1377,7 +1377,7 @@ ctmbstr TY_(getNextMutedMessage)( TidyDocImpl* doc, TidyIterator* iter )
     assert( iter != NULL );
     index = (size_t)*iter;
 
-    if ( index > 0 && index < list->count )
+    if ( index > 0 && index <= list->count )
     {
         result = TY_(tidyErrorCodeAsKey)(list->list[index-1]);
         index++;

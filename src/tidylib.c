@@ -1434,6 +1434,9 @@ static ctmbstr integrity = "\nPanic - tree has lost its integrity\n";
 int         TY_(DocParseStream)( TidyDocImpl* doc, StreamIn* in )
 {
     Bool xmlIn = cfgBool( doc, TidyXmlTags );
+    TidyConfigChangeCallback callback = doc->pConfigChangeCallback;
+    
+    doc->pConfigChangeCallback = NULL;
     int bomEnc;
 
     assert( doc != NULL && in != NULL );
@@ -1488,6 +1491,8 @@ int         TY_(DocParseStream)( TidyDocImpl* doc, StreamIn* in )
     }
 
     doc->docIn = NULL;
+    doc->pConfigChangeCallback = callback;
+
     return tidyDocStatus( doc );
 }
 
@@ -2022,13 +2027,18 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     Bool wantNameAttr = cfgBool( doc, TidyAnchorAsName );
     Bool mergeEmphasis = cfgBool( doc, TidyMergeEmphasis );
     Node* node;
+    TidyConfigChangeCallback callback = doc->pConfigChangeCallback;
+    doc->pConfigChangeCallback = NULL;
 
 #if defined(ENABLE_DEBUG_LOG)
     SPRTF("All nodes BEFORE clean and repair\n");
     dbg_show_all_nodes( doc, &doc->root, 0  );
 #endif
     if (tidyXmlTags)
-       return tidyDocStatus( doc );
+    {
+        doc->pConfigChangeCallback = callback;
+        return tidyDocStatus( doc );
+    }
 
     /* Issue #567 - move style elements from body to head */
     TY_(CleanStyle)(doc, &doc->root);
@@ -2145,6 +2155,8 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
     SPRTF("All nodes AFTER clean and repair\n");
     dbg_show_all_nodes( doc, &doc->root, 0  );
 #endif
+
+    doc->pConfigChangeCallback = callback;
     return tidyDocStatus( doc );
 }
 
@@ -2185,6 +2197,8 @@ int         tidyDocSaveStream( TidyDocImpl* doc, StreamOut* out )
     Bool escapeCDATA  = cfgBool(doc, TidyEscapeCdata);
     Bool ppWithTabs   = cfgBool(doc, TidyPPrintTabs);
     TidyAttrSortStrategy sortAttrStrat = cfg(doc, TidySortAttributes);
+    TidyConfigChangeCallback callback = doc->pConfigChangeCallback;
+    doc->pConfigChangeCallback = NULL;
 
     if (ppWithTabs)
         TY_(PPrintTabs)();
@@ -2241,6 +2255,8 @@ int         tidyDocSaveStream( TidyDocImpl* doc, StreamOut* out )
     }
 
     TY_(ResetConfigToSnapshot)( doc );
+    doc->pConfigChangeCallback = callback;
+    
     return tidyDocStatus( doc );
 }
 

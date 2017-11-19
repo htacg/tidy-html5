@@ -314,6 +314,7 @@ void TY_(InitConfig)( TidyDocImpl* doc )
 
 void TY_(FreeConfig)( TidyDocImpl* doc )
 {
+    doc->pConfigChangeCallback = NULL;
     TY_(ResetConfigToDefault)( doc );
     TY_(TakeConfigSnapshot)( doc );
 }
@@ -348,6 +349,29 @@ const Bool TY_(getOptionIsList)( TidyOptionId optId )
     return option->parser == ParseList;
 }
 
+static Bool OptionChangedValuesDiffer( ctmbstr a, ctmbstr b )
+{
+    if ( a != b )
+    {
+        if ( a == NULL || b == NULL ) /* can't both be null at this point. */
+            return yes;
+        else
+            return TY_(tmbstrcmp)( a, b ) != 0;
+    }
+
+    return no;
+}
+
+static void PerformOptionChangedCallback( TidyDocImpl* doc, const TidyOptionImpl* option )
+{
+    if ( doc->pConfigChangeCallback )
+    {
+        TidyDoc tdoc = tidyImplToDoc( doc );
+        TidyOption opt = tidyImplToOption( option );
+        doc->pConfigChangeCallback( tdoc, opt );
+    }
+}
+
 static void FreeOptionValue( TidyDocImpl* doc, const TidyOptionImpl* option, TidyOptionValue* value )
 {
     if ( option->type == TidyString && value->p && value->p != option->pdflt )
@@ -358,7 +382,18 @@ static void FreeOptionValue( TidyDocImpl* doc, const TidyOptionImpl* option, Tid
 static void CopyOptionValue( TidyDocImpl* doc, const TidyOptionImpl* option,
                              TidyOptionValue* oldval, const TidyOptionValue* newval )
 {
+    Bool fire_callback = no;
     assert( oldval != NULL );
+
+    /* Compare the old and new values. */
+    if ( doc->pConfigChangeCallback )
+    {
+        if ( option->type == TidyString )
+            fire_callback = OptionChangedValuesDiffer( oldval->p, newval->p );
+        else
+            fire_callback = oldval->v != newval->v;
+    }
+
     FreeOptionValue( doc, option, oldval );
 
     if ( option->type == TidyString )
@@ -370,23 +405,40 @@ static void CopyOptionValue( TidyDocImpl* doc, const TidyOptionImpl* option,
     }
     else
         oldval->v = newval->v;
+
+    if ( fire_callback )
+        PerformOptionChangedCallback( doc, option );
 }
 
 
 static Bool SetOptionValue( TidyDocImpl* doc, TidyOptionId optId, ctmbstr val )
 {
-   const TidyOptionImpl* option = &option_defs[ optId ];
-   Bool status = ( optId < N_TIDY_OPTIONS );
-   if ( status )
-   {
-      assert( option->id == optId && option->type == TidyString );
-      FreeOptionValue( doc, option, &doc->config.value[ optId ] );
-      if ( TY_(tmbstrlen)(val)) /* Issue #218 - ONLY if it has LENGTH! */
-          doc->config.value[ optId ].p = TY_(tmbstrdup)( doc->allocator, val );
-      else
-          doc->config.value[ optId ].p = 0; /* should already be zero, but to be sure... */
-   }
-   return status;
+    const TidyOptionImpl* option = &option_defs[ optId ];
+    Bool fire_callback = no;
+    Bool status = ( optId < N_TIDY_OPTIONS );
+
+    if ( status )
+    {
+        assert( option->id == optId && option->type == TidyString );
+
+        /* Compare the old and new values. */
+        if ( doc->pConfigChangeCallback )
+        {
+            TidyOptionValue* oldval = &(doc->config.value[ optId ]);
+            fire_callback = OptionChangedValuesDiffer( oldval->p, val );
+        }
+
+        FreeOptionValue( doc, option, &doc->config.value[ optId ] );
+        if ( TY_(tmbstrlen)(val)) /* Issue #218 - ONLY if it has LENGTH! */
+            doc->config.value[ optId ].p = TY_(tmbstrdup)( doc->allocator, val );
+        else
+            doc->config.value[ optId ].p = 0; /* should already be zero, but to be sure... */
+    }
+
+    if ( fire_callback )
+        PerformOptionChangedCallback( doc, option );
+
+    return status;
 }
 
 
@@ -412,27 +464,39 @@ ctmbstr TY_(GetPickListLabelForPick)( TidyOptionId optId, uint pick )
 }
 
 
+static void SetOptionInteger( TidyDocImpl* doc, TidyOptionId optId, ulong val )
+{
+    const TidyOptionImpl* option = &option_defs[ optId ];
+    ulong* optVal = &(doc->config.value[ optId ].v);
+    Bool fire_callback = doc->pConfigChangeCallback && *optVal != val;
+
+    *optVal = val;
+
+    if ( fire_callback )
+        PerformOptionChangedCallback( doc, option );
+}
+
 Bool TY_(SetOptionInt)( TidyDocImpl* doc, TidyOptionId optId, ulong val )
 {
-   Bool status = ( optId < N_TIDY_OPTIONS );
-   if ( status )
-   {
-       assert( option_defs[ optId ].type == TidyInteger );
-       doc->config.value[ optId ].v = val;
-   }
-   return status;
+    Bool status = ( optId < N_TIDY_OPTIONS );
+    if ( status )
+    {
+        assert( option_defs[ optId ].type == TidyInteger );
+        SetOptionInteger( doc, optId, val );
+    }
+    return status;
 }
 
 
 Bool TY_(SetOptionBool)( TidyDocImpl* doc, TidyOptionId optId, Bool val )
 {
-   Bool status = ( optId < N_TIDY_OPTIONS );
-   if ( status )
-   {
-       assert( option_defs[ optId ].type == TidyBoolean );
-       doc->config.value[ optId ].v = val;
-   }
-   return status;
+    Bool status = ( optId < N_TIDY_OPTIONS );
+    if ( status )
+    {
+        assert( option_defs[ optId ].type == TidyBoolean );
+        SetOptionInteger( doc, optId, (ulong)val );
+    }
+    return status;
 }
 
 
@@ -1247,6 +1311,18 @@ Bool ParseList( TidyDocImpl* doc, const TidyOptionImpl* option )
     tmbchar buf[1024];
     uint i = 0, nItems = 0;
     uint c;
+    TidyConfigChangeCallback callback = doc->pConfigChangeCallback;
+    tmbstr oldbuff = NULL;
+
+    /* Handle comparing before and after for the config change callback.
+       We have do handle this manually, because otherwise TY_(DeclareListItem)
+       would fire a callback for EVERY list item being added. */
+    doc->pConfigChangeCallback = NULL;
+    if ( callback )
+    {
+        TidyOptionValue* oldval = &(doc->config.value[ option->id ]);
+        oldbuff = TY_(tmbstrdup)( doc->allocator, oldval->p );
+    }
 
     SetOptionValue( doc, option->id, NULL );
 
@@ -1301,6 +1377,22 @@ Bool ParseList( TidyDocImpl* doc, const TidyOptionImpl* option )
 
     if ( i > 0 )
         TY_(DeclareListItem)( doc, option, buf );
+
+    /* If there's a callback, compare the old and new values, and fire
+       the callback appropriately. */
+    if ( callback )
+    {
+        TidyOptionValue* val = &(doc->config.value[ option->id ]);
+        Bool fire_callback = OptionChangedValuesDiffer( val->p, oldbuff);
+
+        doc->pConfigChangeCallback = callback;
+
+        if ( oldbuff )
+            TidyFree( doc->allocator, oldbuff );
+
+        if ( fire_callback )
+            PerformOptionChangedCallback( doc, option );
+    }
 
     return ( nItems > 0 );
 }

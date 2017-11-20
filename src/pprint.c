@@ -1051,6 +1051,9 @@ static void PPrintAttrValue( TidyDocImpl* doc, uint indent,
     if ( delim == 0 )
         delim = '"';
 
+    if (value && (value[0] == 0) && cfgBool(doc, TidyBoolAttrs))
+        return; /* Issue #439 - If '--boolean-attributes yes', and value is null, no '=""' */
+
     AddChar( pprint, '=' );
 
     /* don't wrap after "=" for xml documents */

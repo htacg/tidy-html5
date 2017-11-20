@@ -184,6 +184,24 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - It's very important that <br/> be self-closing!
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
+        TidyBoolAttrs,                0,
+        "This option determines whether Tidy treats attributes without values "
+        "as boolean attributes, or as attributes with null values. "
+        "<br/>"
+        "If set to <var>no</var>, then all attributes without values will be "
+        "printed as attributes with null values. "
+        "<br/>"
+        "If set to <var>yes</var>, then all attributes without values will be "
+        "printed as boolean attributes, i.e., without values at all. "
+    },
+    {/* Important notes for translators:
+      - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+      <br/>.
+      - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+      - Option values should be enclosed in <var></var>.
+      - It's very important that <br/> be self-closing!
+      - The strings "Tidy" and "HTML Tidy" are the program name and must not
+      be translated. */
         TidyBreakBeforeBR,            0,
         "This option specifies if Tidy should output a line break before each "
         "<code>&lt;br&gt;</code> element. "
@@ -1974,6 +1992,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { MISMATCHED_ATTRIBUTE_ERROR,   0,   "%s attribute \"%s\" not allowed for %s"                                  },
     { MISMATCHED_ATTRIBUTE_WARN,    0,   "%s attribute \"%s\" not allowed for %s"                                  },
     { MISSING_ATTR_VALUE,           0,   "%s attribute \"%s\" lacks value"                                         },
+    { MISSING_ATTR_VALUE_BOOL,      0,   "%s attribute \"%s\" treated as boolean"                                  },
     { MISSING_ATTRIBUTE,            0,   "%s lacks \"%s\" attribute"                                               },
     { MISSING_DOCTYPE,              0,   "missing <!DOCTYPE> declaration"                                          },
     { MISSING_ENDTAG_BEFORE,        0,   "missing </%s> before %s"                                                 },

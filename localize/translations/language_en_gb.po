@@ -5,7 +5,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: HTML Tidy poconvert.rb\n"
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-11-20 09:54:14\n"
+"PO-Revision-Date: 2017-11-20 13:09:06\n"
 "Last-Translator: jderry\n"
 "Language-Team: \n"
 
@@ -135,6 +135,26 @@ msgid ""
 "page. "
 "<br/>"
 "This option has no effect if XML output is requested. "
+msgstr ""
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyBoolAttrs"
+msgid ""
+"This option determines whether Tidy treats attributes without values "
+"as boolean attributes, or as attributes with null values. "
+"<br/>"
+"If set to <var>no</var>, then all attributes without values will be "
+"printed as attributes with null values. "
+"<br/>"
+"If set to <var>yes</var>, then all attributes without values will be "
+"printed as boolean attributes, i.e., without values at all. "
 msgstr ""
 
 #. Important notes for translators:
@@ -2476,6 +2496,11 @@ msgstr ""
 #, c-format
 msgctxt "MISSING_ATTR_VALUE"
 msgid "%s attribute \"%s\" lacks value"
+msgstr ""
+
+#, c-format
+msgctxt "MISSING_ATTR_VALUE_BOOL"
+msgid "%s attribute \"%s\" treated as boolean"
 msgstr ""
 
 #, c-format

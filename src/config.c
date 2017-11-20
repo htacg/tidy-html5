@@ -174,6 +174,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyAsciiChars,              ME, "ascii-chars",                 BL, no,              ParsePickList,     &boolPicks          },
     { TidyBlockTags,               MT, "new-blocklevel-tags",         ST, 0,               ParseList,         NULL                },
     { TidyBodyOnly,                DD, "show-body-only",              IN, no,              ParsePickList,     &autoBoolPicks      },
+    { TidyBoolAttrs,               PP, "boolean-attributes",          IN, no,              ParsePickList,     &boolPicks          },
     { TidyBreakBeforeBR,           PP, "break-before-br",             BL, no,              ParsePickList,     &boolPicks          },
     { TidyCharEncoding,            CE, "char-encoding",               IN, UTF8,            ParseCharEnc,      &charEncPicks       },
     { TidyCoerceEndTags,           MR, "coerce-endtags",              BL, yes,             ParsePickList,     &boolPicks          },

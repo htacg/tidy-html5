@@ -221,6 +221,7 @@ extern "C" {
     FN(MISMATCHED_ATTRIBUTE_ERROR)    \
     FN(MISMATCHED_ATTRIBUTE_WARN)     \
     FN(MISSING_ATTR_VALUE)            \
+    FN(MISSING_ATTR_VALUE_BOOL)       \
     FN(MISSING_ATTRIBUTE)             \
     FN(MISSING_DOCTYPE)               \
     FN(MISSING_ENDTAG_BEFORE)         \
@@ -562,6 +563,7 @@ typedef enum
     TidyAsciiChars,              /**< Convert quotes and dashes to nearest ASCII char */
     TidyBlockTags,               /**< Declared block tags */
     TidyBodyOnly,                /**< Output BODY content only */
+    TidyBoolAttrs,               /**< Treat attributes without values as boolean */
     TidyBreakBeforeBR,           /**< Output newline before <br> or not? */
     TidyCharEncoding,            /**< In/out character encoding */
     TidyCoerceEndTags,           /**< Coerce end tags from start tags where probably intended */

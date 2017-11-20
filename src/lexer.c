@@ -138,7 +138,7 @@ static void Show_Node( TidyDocImpl* doc, const char *msg, Node *node )
     tmbstr src = lex ? "lexer" : "stream";
     SPRTF("R=%d C=%d: ", line, col );
     /* DEBUG: Be able to set a TRAP on a SPECIFIC row,col */
-    if ((line == 67) && (col == 95)) {
+    if ((line == 3) && (col == 1)) {
         check_me("Show_Node"); /* just a debug trap */
     }
     if (lexer && lexer->token && 
@@ -236,6 +236,14 @@ static struct _doctypes
   {  0,    0, 0,  no,  NULL,                     NULL,                                     NULL                                                        }
 };
 
+/* 
+ * Issue #643 - Since VERS_FROM40 was extended to include VERS_HTML5
+ * to be used in the expanded entity table some 155 times,
+ * need a special macro here to denote just HTML 4 plus XHTML,
+ * which is actually the former define of VERS_FROM40
+ */
+#define VERS_HMTL40PX        (VERS_HTML40|VERS_XHTML11|VERS_BASIC)
+
 int TY_(HTMLVersion)(TidyDocImpl* doc)
 {
     uint i;
@@ -247,7 +255,7 @@ int TY_(HTMLVersion)(TidyDocImpl* doc)
     Bool xhtml = (cfgBool(doc, TidyXmlOut) || doc->lexer->isvoyager) &&
                  !cfgBool(doc, TidyHtmlOut);
     Bool html4 = ((dtmode == TidyDoctypeStrict) || (dtmode == TidyDoctypeLoose) ||
-                  (VERS_FROM40 & dtver) ? yes : no);
+                  (VERS_HMTL40PX & dtver) ? yes : no);
     Bool html5 = (!html4 && ((dtmode == TidyDoctypeAuto) ||
                   (dtmode == TidyDoctypeHtml5)) ? yes : no);
 
@@ -262,7 +270,7 @@ int TY_(HTMLVersion)(TidyDocImpl* doc)
     for (i = 0; W3C_Doctypes[i].name; ++i)
     {
         if ((xhtml && !(VERS_XHTML & W3C_Doctypes[i].vers)) ||
-            (html4 && !(VERS_FROM40 & W3C_Doctypes[i].vers)))
+            (html4 && !(VERS_HMTL40PX & W3C_Doctypes[i].vers)))
             continue;
 
         if (vers & W3C_Doctypes[i].vers &&

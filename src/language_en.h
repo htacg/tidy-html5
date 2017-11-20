@@ -700,6 +700,27 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "Note this feature is not supported on some platforms. "
     },
     {/* Important notes for translators:
+     - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+     <br/>.
+     - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+     - Option values should be enclosed in <var></var>.
+     - It's very important that <br/> be self-closing!
+     - The strings "Tidy" and "HTML Tidy" are the program name and must not
+     be translated. */
+        TidyKeepTabs,            0,
+        "With the default <var>no</var> Tidy will replace all source tabs, with spaces, "
+        "controlled by the option <code>tab-size</code>, and the current line offset. "
+        "Of course, except in the special blocks/elements enumerated below, this will later "
+        "be reduced to just one space. "
+        "<br/>"
+        "If set <var>yes</var> this option specifies Tidy should keep certain tabs "
+        "found in the source, but only "
+        "in preformatted blocks like <code>&lt;pre&gt;</code>, and other CDATA elements like "
+        "<code>&lt;script&gt;</code>, <code>&lt;style&gt;<code>, and other pseudo elements like "
+        "<code>&lt;?php ... ?&gt;</code>. As always, all other tabs, or sequences of tabs, in "
+        "the source will continue to be replaced with a space. "
+    },
+    {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
       <br/>.
       - Entities, tags, attributes, etc., should be enclosed in <code></code>.

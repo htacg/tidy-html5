@@ -604,6 +604,7 @@ typedef enum
     TidyJoinClasses,             /**< Join multiple class attributes */
     TidyJoinStyles,              /**< Join multiple style attributes */
     TidyKeepFileTimes,           /**< If yes last modied time is preserved */
+    TidyKeepTabs,                /**< If yes keep input source tabs */
     TidyLiteralAttribs,          /**< If true attributes may use newlines */
     TidyLogicalEmphasis,         /**< Replace i by em and b by strong */
     TidyLowerLiterals,           /**< Folds known attribute values to lower case */

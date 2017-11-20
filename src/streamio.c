@@ -239,7 +239,6 @@ static void RestoreLastPos( StreamIn *in )
 uint TY_(ReadChar)( StreamIn *in )
 {
     uint c = EndOfStream;
-    uint tabsize = cfg( in->doc, TidyTabSize );
 
     if ( in->pushed )
         return PopChar( in );
@@ -269,11 +268,15 @@ uint TY_(ReadChar)( StreamIn *in )
 
         if (c == '\t')
         {
-            in->tabs = tabsize > 0 ?
-                tabsize - ((in->curcol - 1) % tabsize) - 1
-                : 0;
+            Bool keeptabs = cfg( in->doc, TidyKeepTabs );
             in->curcol++;
-            c = ' ';
+            if (!keeptabs) {
+                uint tabsize = cfg(in->doc, TidyTabSize);
+                in->tabs = tabsize > 0 ?
+                    tabsize - ((in->curcol - 1) % tabsize) - 1
+                    : 0;
+                c = ' ';
+            }
             break;
         }
 

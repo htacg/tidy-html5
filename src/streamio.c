@@ -269,7 +269,6 @@ uint TY_(ReadChar)( StreamIn *in )
         if (c == '\t')
         {
             Bool keeptabs = cfg( in->doc, TidyKeepTabs );
-            in->curcol++;
             if (!keeptabs) {
                 uint tabsize = cfg(in->doc, TidyTabSize);
                 in->tabs = tabsize > 0 ?
@@ -277,6 +276,7 @@ uint TY_(ReadChar)( StreamIn *in )
                     : 0;
                 c = ' ';
             }
+            in->curcol++;
             break;
         }
 

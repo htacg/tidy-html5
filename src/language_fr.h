@@ -1,4 +1,4 @@
-﻿#ifndef language_fr_h
+#ifndef language_fr_h
 #define language_fr_h
 /*
  * language_fr.h
@@ -1172,3 +1172,4 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
 
 
 #endif /* language_fr_h */
+

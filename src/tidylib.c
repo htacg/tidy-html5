@@ -1436,8 +1436,8 @@ int         TY_(DocParseStream)( TidyDocImpl* doc, StreamIn* in )
     Bool xmlIn = cfgBool( doc, TidyXmlTags );
     TidyConfigChangeCallback callback = doc->pConfigChangeCallback;
     
-    doc->pConfigChangeCallback = NULL;
     int bomEnc;
+    doc->pConfigChangeCallback = NULL;
 
     assert( doc != NULL && in != NULL );
     assert( doc->docIn == NULL );

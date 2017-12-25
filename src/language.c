@@ -22,13 +22,13 @@
 
 /**
  *  This structure type provides universal access to all of Tidy's strings.
- *  Note arbitrary limit of 256, to be changed if more...
+ *  Note limit of 8, to be changed as more added...
  */
 typedef struct {
     Bool manually_set;
     languageDefinition *currentLanguage;
     languageDefinition *fallbackLanguage;
-    languageDefinition *languages[256];
+    languageDefinition *languages[8];
 } tidyLanguagesType;
 
 

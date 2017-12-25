@@ -1135,14 +1135,16 @@ int   tidyDocParseFile( TidyDocImpl* doc, ctmbstr filnam )
     fin = fopen( filnam, "rb" );
 
 #if PRESERVE_FILE_TIMES
-    struct stat sbuf = {0};
-    /* get last modified time */
-    TidyClearMemory( &doc->filetimes, sizeof(doc->filetimes) );
-    if ( fin && cfgBool(doc,TidyKeepFileTimes) &&
-         fstat(fileno(fin), &sbuf) != -1 )
     {
-          doc->filetimes.actime  = sbuf.st_atime;
-          doc->filetimes.modtime = sbuf.st_mtime;
+        struct stat sbuf = { 0 };
+        /* get last modified time */
+        TidyClearMemory(&doc->filetimes, sizeof(doc->filetimes));
+        if (fin && cfgBool(doc, TidyKeepFileTimes) &&
+            fstat(fileno(fin), &sbuf) != -1)
+        {
+            doc->filetimes.actime = sbuf.st_atime;
+            doc->filetimes.modtime = sbuf.st_mtime;
+        }
     }
 #endif
 

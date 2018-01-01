@@ -1,4 +1,4 @@
-﻿#ifndef language_es_mx_h
+#ifndef language_es_mx_h
 #define language_es_mx_h
 /*
  * language_es_mx.h
@@ -76,3 +76,4 @@ static languageDefinition language_es_mx = { whichPluralForm_es_mx, {
 
 
 #endif /* language_es_mx_h */
+

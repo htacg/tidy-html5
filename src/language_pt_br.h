@@ -1,4 +1,4 @@
-﻿#ifndef language_pt_br_h
+#ifndef language_pt_br_h
 #define language_pt_br_h
 /*
  * language_pt_br.h
@@ -1294,3 +1294,4 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
 
 
 #endif /* language_pt_br_h */
+

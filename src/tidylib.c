@@ -1135,14 +1135,16 @@ int   tidyDocParseFile( TidyDocImpl* doc, ctmbstr filnam )
     fin = fopen( filnam, "rb" );
 
 #if PRESERVE_FILE_TIMES
-    struct stat sbuf = {0};
-    /* get last modified time */
-    TidyClearMemory( &doc->filetimes, sizeof(doc->filetimes) );
-    if ( fin && cfgBool(doc,TidyKeepFileTimes) &&
-         fstat(fileno(fin), &sbuf) != -1 )
     {
-          doc->filetimes.actime  = sbuf.st_atime;
-          doc->filetimes.modtime = sbuf.st_mtime;
+        struct stat sbuf = { 0 };
+        /* get last modified time */
+        TidyClearMemory(&doc->filetimes, sizeof(doc->filetimes));
+        if (fin && cfgBool(doc, TidyKeepFileTimes) &&
+            fstat(fileno(fin), &sbuf) != -1)
+        {
+            doc->filetimes.actime = sbuf.st_atime;
+            doc->filetimes.modtime = sbuf.st_mtime;
+        }
     }
 #endif
 
@@ -1436,8 +1438,8 @@ int         TY_(DocParseStream)( TidyDocImpl* doc, StreamIn* in )
     Bool xmlIn = cfgBool( doc, TidyXmlTags );
     TidyConfigChangeCallback callback = doc->pConfigChangeCallback;
     
-    doc->pConfigChangeCallback = NULL;
     int bomEnc;
+    doc->pConfigChangeCallback = NULL;
 
     assert( doc != NULL && in != NULL );
     assert( doc->docIn == NULL );

@@ -315,6 +315,15 @@ extern "C" {
 #  endif
 #endif
 
+/* === Convenience defines for Haiku platforms === */
+
+#if defined(__HAIKU__)
+#  define HAIKU
+#  ifndef PLATFORM_NAME
+#    define PLATFORM_NAME "Haiku"
+#  endif
+#endif
+
 /* === Convenience defines for Cygwin platforms === */
 
 #if defined(__CYGWIN__)
@@ -428,7 +437,7 @@ extern "C" {
 #if PRESERVE_FILE_TIMES
 
 #  ifndef HAS_FUTIME
-#    if defined(CYGWIN_OS) || defined(BE_OS) || defined(OS2_OS) || defined(HPUX_OS) || defined(SOLARIS_OS) || defined(LINUX_OS) || defined(BSD_BASED_OS) || defined(MAC_OS) || defined(__MSL__) || defined(IRIX_OS) || defined(AIX_OS) || defined(__BORLANDC__) || defined(__GLIBC__)
+#    if defined(CYGWIN_OS) || defined(BE_OS) || defined(OS2_OS) || defined(HPUX_OS) || defined(SOLARIS_OS) || defined(LINUX_OS) || defined(BSD_BASED_OS) || defined(MAC_OS) || defined(__MSL__) || defined(IRIX_OS) || defined(AIX_OS) || defined(__BORLANDC__) || defined(__GLIBC__) || defined(__HAIKU__)
 #      define HAS_FUTIME 0
 #    else
 #      define HAS_FUTIME 1
@@ -455,6 +464,12 @@ extern "C" {
 #  else
 #    include <utime.h>
 #  endif
+
+#if defined(__HAIKU__)
+#ifndef va_copy
+#define va_copy(dest, src) (dest = src)
+#endif
+#endif
 
 /* MS Windows needs _ prefix for Unix file functions.
    Not required by Metrowerks Standard Library (MSL).
@@ -549,7 +564,7 @@ extern "C" {
 #  include <sys/types.h>
 #endif
 
-#if !defined(HPUX_OS) && !defined(CYGWIN_OS) && !defined(MAC_OS_X) && !defined(BE_OS) && !defined(SOLARIS_OS) && !defined(BSD_BASED_OS) && !defined(OSF_OS) && !defined(IRIX_OS) && !defined(AIX_OS) && !defined(LINUX_OS)
+#if !defined(HPUX_OS) && !defined(CYGWIN_OS) && !defined(MAC_OS_X) && !defined(BE_OS) && !defined(SOLARIS_OS) && !defined(BSD_BASED_OS) && !defined(OSF_OS) && !defined(IRIX_OS) && !defined(AIX_OS) && !defined(LINUX_OS) && !defined(__HAIKU__)
 #  undef uint
    typedef unsigned int uint;
 #endif

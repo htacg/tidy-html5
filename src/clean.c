@@ -2211,8 +2211,10 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
     tidyBufAppend(&charsetString, "charset=", 8);
     tidyBufAppend(&charsetString, (char*)enc, TY_(tmbstrlen)(enc));
     tidyBufAppend(&charsetString, "\0", 1); /* zero terminate the buffer */
-                                            /* process the children of the head */
-    for (currentNode = head->content; currentNode; currentNode = currentNode->next)
+    /* process the children of the head */
+    /* Issue #656 - guard against 'currentNode' being set NULL in loop */
+    for (currentNode = head->content; currentNode; 
+        currentNode = (currentNode ? currentNode->next : NULL))
     {
         if (!nodeIsMETA(currentNode))
             continue;   /* not a meta node */

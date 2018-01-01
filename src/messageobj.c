@@ -158,8 +158,17 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
 
     if ( ( cfgBool(doc, TidyMuteShow) == yes ) && level <= TidyFatal )
     {
-        TY_(tmbsnprintf)(result->messageOutputDefault, sizeMessageBuf, "%s (%s)", result->messageOutputDefault, TY_(tidyErrorCodeAsKey)(code) );
-        TY_(tmbsnprintf)(result->messageOutput, sizeMessageBuf, "%s (%s)", result->messageOutput, TY_(tidyErrorCodeAsKey)(code) );
+        /*\ Issue #655 - Unsafe to use output buffer as one of the va_list
+         *  input parameters in some snprintf implmentations.
+        \*/
+        ctmbstr pc = TY_(tidyErrorCodeAsKey)(code);
+        i = TY_(tmbstrlen)(result->messageOutputDefault);
+        if (i < sizeMessageBuf)
+            TY_(tmbsnprintf)(result->messageOutputDefault + i, sizeMessageBuf - i, " (%s)", pc );
+        i = TY_(tmbstrlen)(result->messageOutput);
+        if (i < sizeMessageBuf)
+            TY_(tmbsnprintf)(result->messageOutput + i, sizeMessageBuf - i, " (%s)", pc );
+        i = 0;
     }
 
     result->allowMessage = yes;

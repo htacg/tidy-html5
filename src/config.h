@@ -335,12 +335,6 @@ Bool  TY_(ParseConfigValue)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr optVa
 Bool  TY_(AdjustCharEncoding)( TidyDocImpl* doc, int encoding );
 
 
-/** Ensure that the configuration options are self consistent.
- ** @param doc The Tidy document to adjust.
- */
-void TY_(AdjustConfig)( TidyDocImpl* doc );
-
-
 /** Indicates whether or not the current configuration is completely default.
  ** @param doc The Tidy document.
  ** @returns The result.

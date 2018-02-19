@@ -1445,6 +1445,24 @@ static void printOptionValues(TidyDoc ARG_UNUSED(tdoc),  /**< The Tidy document.
             }
         }
             break;
+        case TidyPriorityAttributes: /* Is #697 - This case seems missing */
+        {
+            TidyIterator itAttr = tidyOptGetPriorityAttrList(tdoc);
+            if (itAttr && (itAttr != (TidyIterator)-1))
+            {
+                while (itAttr)
+                {
+                    d->def = tidyOptGetNextPriorityAttr(tdoc, &itAttr);
+                    if (itAttr)
+                    {
+                        printf(fmt, d->name, d->type, d->def);
+                        d->name = "";
+                        d->type = "";
+                    }
+                }
+            }
+        }
+            break;
         default:
             break;
     }

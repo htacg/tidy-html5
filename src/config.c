@@ -1476,9 +1476,12 @@ Bool ParseCSS1Selector( TidyDocImpl* doc, const TidyOptionImpl* option )
         return no;
     }
 
+    buf[i] = 0; /* Is #697 - Do *not* add '-' */
+#if 0   /* Is #697 - Is this still required? KEEP HISTORY - DO NOT DELETE */
     buf[i++] = '-';  /* Make sure any escaped Unicode is terminated */
     buf[i] = 0;      /* so valid class names are generated after */
                      /* Tidy appends last digits. */
+#endif /* Is #697 - Is this still required? */
 
     SetOptionValue( doc, option->id, buf );
     return yes;

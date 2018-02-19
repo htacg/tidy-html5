@@ -1484,6 +1484,33 @@ static void optionvalues( TidyDoc tdoc )
  ** @{
  */
 
+/* Is #697 - specialised service to 'invert' a buffers content
+   split on a space character */
+static void invertBuffer(TidyBuffer *src, TidyBuffer *dst)
+{
+    uint len = src->size;
+    char *in = (char *)src->bp;
+    char *cp;
+    if (!in)
+        return;
+    while (len)
+    {
+        unsigned char uc;
+        len--;
+        uc = in[len];
+        if (uc == ' ')
+        {
+            in[len] = 0;
+            cp = &in[len + 1];
+            if (dst->size)
+                tidyBufAppend(dst, " ", 1);
+            tidyBufAppend(dst, cp, strlen(cp));
+        }
+    }
+    if (dst->size)
+        tidyBufAppend(dst, " ", 1);
+    tidyBufAppend(dst, in, strlen(in));
+}
 
 /** Prints the option value for a given option.
  */
@@ -1493,6 +1520,7 @@ static void printOptionExportValues(TidyDoc ARG_UNUSED(tdoc),  /**< The Tidy doc
                                     )
 {
     TidyOptionId optId = tidyOptGetId( topt );
+    TidyBuffer buf1, buf2;
 
     if ( tidyOptGetCategory(topt) == TidyInternalCategory )
         return;
@@ -1505,18 +1533,56 @@ static void printOptionExportValues(TidyDoc ARG_UNUSED(tdoc),  /**< The Tidy doc
         case TidyPreTags:
         {
             TidyIterator pos = tidyOptGetDeclTagList( tdoc );
-            while ( pos )
+            if ( pos )  /* Is #697 - one or more values */
             {
-                d->def = tidyOptGetNextDeclTag(tdoc, optId, &pos);
-                if ( pos )
+                tidyBufInit(&buf1);
+                tidyBufInit(&buf2);
+                while (pos)
                 {
-                    printf( "%s: %s\n", d->name, d->def );
-                    d->name = "";
-                    d->type = "";
+                    d->def = tidyOptGetNextDeclTag(tdoc, optId, &pos);
+                    if (d->def)
+                    {
+                        if (buf1.size)
+                            tidyBufAppend(&buf1, " ", 1);
+                        tidyBufAppend(&buf1, d->def, strlen(d->def));
+                    }
                 }
+                invertBuffer(&buf1, &buf2); /* Is #697 - specialised service to invert words */
+                tidyBufAppend(&buf2, (void *)"\0", 1); /* is this really required? */
+                printf("%s: %s\n", d->name, buf2.bp);
+                d->name = "";
+                d->type = "";
+                d->def = 0;
+                tidyBufFree(&buf1);
+                tidyBufFree(&buf2);
             }
         }
             break;
+        case TidyPriorityAttributes: /* Is #697 - This case seems missing */
+        {
+            TidyIterator itAttr = tidyOptGetPriorityAttrList(tdoc);
+            if (itAttr && (itAttr != (TidyIterator)-1))
+            {
+                tidyBufInit(&buf1);
+                while (itAttr)
+                {
+                    d->def = tidyOptGetNextPriorityAttr(tdoc, &itAttr);
+                    if (d->def)
+                    {
+                        if (buf1.size)
+                            tidyBufAppend(&buf1, " ", 1);
+                        tidyBufAppend(&buf1, d->def, strlen(d->def));
+                    }
+                }
+                tidyBufAppend(&buf1, (void *)"\0", 1); /* is this really required? */
+                printf("%s: %s\n", d->name, buf1.bp);
+                d->name = "";
+                d->type = "";
+                d->def = 0;
+                tidyBufFree(&buf1);
+            }
+        }
+        break;
         default:
             break;
     }

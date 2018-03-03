@@ -533,7 +533,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
         TidyHideComments,             0,
-        "This option specifies if Tidy should print out comments. "
+        "This option specifies if Tidy should not print out comments. "
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and

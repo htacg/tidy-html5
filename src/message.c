@@ -851,8 +851,10 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
 
         case COERCE_TO_ENDTAG:
         case NON_MATCHING_ENDTAG:
-        case TOO_MANY_ELEMENTS_IN:
             return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, node->element, node->element );
+        case TOO_MANY_ELEMENTS_IN:
+            return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, node->element, element->element);
+
     }
 
     return NULL;

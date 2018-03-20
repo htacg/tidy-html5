@@ -2143,7 +2143,8 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
                 TY_(PFlushLineSmart)( doc, indent );
             }
 
-            PPrintTag( doc, mode, indent, node );   /* add <pre> or <textarea> tag */
+            /* Issue #697 - Add NOWRAP to the mode */
+            PPrintTag( doc, (mode | NOWRAP), indent, node );   /* add <pre> or <textarea> tag */
 
             indent = 0;
             /* @camoy Fix #158 - remove inserted newlines in pre - TY_(PFlushLineSmart)( doc, indent ); */

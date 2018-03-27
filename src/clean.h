@@ -75,5 +75,8 @@ void TY_(FixLanguageInformation)(TidyDocImpl* doc, Node* node, Bool wantXmlLang,
 
 /* Issue #567 - move style elements from body to head */
 void TY_(CleanStyle)(TidyDocImpl* doc, Node *html);
+/* Issue #692 - discard multiple titles */
+void TY_(CleanHead)(TidyDocImpl* doc);
+
 
 #endif /* __CLEAN_H__ */

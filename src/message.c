@@ -261,6 +261,7 @@ static struct _dispatchTable {
 } dispatchTable[] = {
     { ADDED_MISSING_CHARSET,        TidyInfo,        formatStandard          },
     { ANCHOR_NOT_UNIQUE,            TidyWarning,     formatAttributeReport   },
+    { ANCHOR_DUPLICATED,            TidyWarning,     formatAttributeReport   },
     { APOS_UNDEFINED,               TidyWarning,     formatStandard          },
     { ATTR_VALUE_NOT_LCASE,         TidyWarning,     formatAttributeReport   },
     { ATTRIBUTE_VALUE_REPLACED,     TidyInfo,        formatAttributeReport   },
@@ -583,6 +584,7 @@ TidyMessageImpl *formatAttributeReport(TidyDocImpl* doc, Node *element, Node *no
             return TY_(tidyMessageCreateWithNode)(doc, node, code, level, tagdesc, name, HTMLVersion(doc));
 
         case ANCHOR_NOT_UNIQUE:
+        case ANCHOR_DUPLICATED:
         case ATTR_VALUE_NOT_LCASE:
         case PROPRIETARY_ATTR_VALUE:
         case XML_ID_SYNTAX:

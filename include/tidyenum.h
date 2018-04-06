@@ -171,6 +171,7 @@ extern "C" {
 #define FOREACH_REPORT_MSG(FN)        \
     FN(ADDED_MISSING_CHARSET)         \
     FN(ANCHOR_NOT_UNIQUE)             \
+    FN(ANCHOR_DUPLICATED)             \
     FN(APOS_UNDEFINED)                \
     FN(ATTR_VALUE_NOT_LCASE)          \
     FN(ATTRIBUTE_IS_NOT_ALLOWED)      \

@@ -363,8 +363,15 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
         TidyEmacs,                    0,
-        "This option specifies if Tidy should change the format for reporting "
-        "errors and warnings to a format that is more easily parsed by GNU Emacs. "
+        "This option specifies that Tidy should change the format for reporting "
+        "errors and warnings to a format that is more easily parsed by GNU Emacs "
+        "or some other program.  It changes them from the default "
+        "<br/>"
+        "  line &lt;line number&gt; column &lt;column number&gt; - (Error|Warning): &lt;message&gt; "
+        "<br/>"
+        "to a form which includes the input filename: "
+        "<br/>"
+        "  &lt;filename&gt;:&lt;line number&gt;:&lt;column number&gt;: (Error|Warning): &lt;message&gt; "
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and

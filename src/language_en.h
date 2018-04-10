@@ -2211,6 +2211,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TC_OPT_RAW,                   0,   "output values above 127 without conversion to entities"                  },
     { TC_OPT_SHIFTJIS,              0,   "use Shift_JIS for both input and output"                                 },
     { TC_OPT_SHOWCFG,               0,   "list the current configuration settings"                                 },
+    { TC_OPT_SHOWFN,                0,   "output the current filename, before parsing"                             },
     { TC_OPT_EXP_CFG,               0,   "list the current configuration settings, suitable for a config file"     },
     { TC_OPT_EXP_DEF,               0,   "list the default configuration settings, suitable for a config file"     },
     { TC_OPT_UPPER,                 0,   "force tags to upper case"                                                },

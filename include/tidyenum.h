@@ -462,6 +462,7 @@ extern "C" {
         FN(TC_OPT_RAW)                      \
         FN(TC_OPT_SHIFTJIS)                 \
         FN(TC_OPT_SHOWCFG)                  \
+        FN(TC_OPT_SHOWFN)                   \
         FN(TC_OPT_EXP_CFG)                  \
         FN(TC_OPT_EXP_DEF)                  \
         FN(TC_OPT_UPPER)                    \

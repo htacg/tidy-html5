@@ -379,6 +379,7 @@ static const CmdOptDesc cmdopt_defs[] =  {
     { CmdOptMisc,      "-help-config",           TC_OPT_HELPCFG,  0,             NULL },
     { CmdOptMisc,      "-help-env",              TC_OPT_HELPENV,  0,             NULL },
     { CmdOptMisc,      "-show-config",           TC_OPT_SHOWCFG,  0,             NULL },
+    { CmdOptMisc,      "-show-filename",         TC_OPT_SHOWFN,   0,             NULL },
     { CmdOptMisc,      "-export-config",         TC_OPT_EXP_CFG,  0,             NULL },
     { CmdOptMisc,      "-export-default-config", TC_OPT_EXP_DEF,  0,             NULL },
     { CmdOptMisc,      "-help-option <%s>",      TC_OPT_HELPOPT,  TC_LABEL_OPT,  NULL },
@@ -1991,6 +1992,7 @@ int main( int argc, char** argv )
     ctmbstr cfgfil = NULL, errfil = NULL, htmlfil = NULL;
     TidyDoc tdoc = NULL;
     int status = 0;
+    int show_filename = 0;
 
     uint contentErrors = 0;
     uint contentWarnings = 0;
@@ -2311,6 +2313,10 @@ int main( int argc, char** argv )
                 return 0;  /* success */
 
             }
+            else if (strcasecmp(arg, "show-filename") == 0)
+            {
+                show_filename = 1;
+            }
             else if ( strncmp(argv[1], "--", 2 ) == 0)
             {
                 if ( tidyOptParseValue(tdoc, argv[1]+2, argv[2]) )
@@ -2405,7 +2411,15 @@ int main( int argc, char** argv )
         if ( argc > 1 )
         {
             htmlfil = argv[1];
-            DEBUG_LOG( SPRTF("Tidying '%s'\n", htmlfil) );
+#ifdef ENABLE_DEBUG_LOG
+            SPRTF("Tidying '%s'\n", htmlfil);
+#else
+            if (show_filename)
+            {
+                fprintf(errout, "Tidying '%s'...", htmlfil);
+                fprintf(errout, "\n");
+            }
+#endif
             if ( tidyOptGetBool(tdoc, TidyEmacs) )
                 tidySetEmacsFile( tdoc, htmlfil );
             status = tidyParseFile( tdoc, htmlfil );

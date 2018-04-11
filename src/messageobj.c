@@ -127,6 +127,14 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
         TY_(tmbsnprintf)(result->messagePosDefault, sizeMessageBuf, "%s:%d:%d: ", cfgStr(doc, TidyEmacsFile), line, column);
         TY_(tmbsnprintf)(result->messagePos, sizeMessageBuf, "%s:%d:%d: ", cfgStr(doc, TidyEmacsFile), line, column);
     }
+    else if ( cfgBool(doc, TidyShowFilename) && cfgStr(doc, TidyEmacsFile) )
+    {
+        /* Include filename in output */
+        TY_(tmbsnprintf)(result->messagePosDefault, sizeMessageBuf, tidyDefaultString(FN_LINE_COLUMN_STRING), \
+            cfgStr(doc, TidyEmacsFile), line, column);
+        TY_(tmbsnprintf)(result->messagePos, sizeMessageBuf, tidyLocalizedString(FN_LINE_COLUMN_STRING), \
+            cfgStr(doc, TidyEmacsFile), line, column);
+    }
     else
     {
         /* traditional format */

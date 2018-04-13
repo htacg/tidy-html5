@@ -40,7 +40,7 @@ Concerning the “Tidy Code Style,” checkout [CODESTYLE.md](CODESTYLE.md), but
 ### Using Git appropriately
 
  1. Fork the repository to your GitHub account.
- 2. Optionally create a **topical branch**, a branch whose name is succint but explains what you're doing, such as "feature/add-new-lines".
+ 2. Optionally create a **topical branch**, a branch whose name is succinct but explains what you're doing, such as "feature/add-new-lines".
  3. Make your changes, committing at logical breaks.
  4. Push your work to your personal account.
  5. [Create a pull request](https://help.github.com/articles/using-pull-requests).

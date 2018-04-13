@@ -1180,6 +1180,21 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - It's very important that <br/> be self-closing!
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
+        TidyShowFilename,             0,
+        "This option specifies if Tidy should show the filename in messages. eg: "
+        "<br/>"
+        " tidy -q -e --show-filename yes index.html<br/>"
+        " index.html: line 43 column 3 - Warning: replacing invalid UTF-8 bytes (char. code U+00A9) "
+    },
+
+    {/* Important notes for translators:
+      - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+      <br/>.
+      - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+      - Option values should be enclosed in <var></var>.
+      - It's very important that <br/> be self-closing!
+      - The strings "Tidy" and "HTML Tidy" are the program name and must not
+      be translated. */
         TidyShowInfo,                 0,
         "This option specifies if Tidy should display info-level messages. "
     },
@@ -1688,6 +1703,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
      ** @remark enum generator FOREACH_MSG_MISC
      ********************************************/
     { LINE_COLUMN_STRING,           0,   "line %d column %d - "                                                    },
+    { FN_LINE_COLUMN_STRING,        0,   "%s: line %d column %d - "                                                },
     {/* For example, "discarding invalid UTF-16 surrogate pair" */
       STRING_DISCARDING,            0,   "discarding"
     },

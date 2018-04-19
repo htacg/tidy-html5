@@ -2490,7 +2490,7 @@ int main( int argc, char** argv )
         {
             htmlfil = argv[1];
             DEBUG_LOG( SPRTF("Tidying '%s'\n", htmlfil) );
-            if ( tidyOptGetBool(tdoc, TidyEmacs) )
+            if ( tidyOptGetBool(tdoc, TidyEmacs) || tidyOptGetBool(tdoc, TidyShowFilename) )
                 tidySetEmacsFile( tdoc, htmlfil );
             status = tidyParseFile( tdoc, htmlfil );
         }

@@ -107,6 +107,7 @@ extern "C" {
  */
 #define FOREACH_MSG_MISC(FN) \
 /** line %d column %d */                           FN(LINE_COLUMN_STRING)          \
+/** %s: line %d column %d */                       FN(FN_LINE_COLUMN_STRING)       \
 /** discarding */                                  FN(STRING_DISCARDING)           \
 /** error and errors */                            FN(STRING_ERROR_COUNT_ERROR)    \
 /** warning and warnings */                        FN(STRING_ERROR_COUNT_WARNING)  \
@@ -635,6 +636,7 @@ typedef enum
     TidyQuoteNbsp,               /**< Output non-breaking space as entity */
     TidyReplaceColor,            /**< Replace hex color attribute values with names */
     TidyShowErrors,              /**< Number of errors to put out */
+    TidyShowFilename,            /**< If true, the input filename is displayed with the error messages */
     TidyShowInfo,                /**< If true, info-level messages are shown */
     TidyShowMarkup,              /**< If false, normal output is suppressed */
     TidyShowMetaChange,          /**< show when meta http-equiv content charset was changed - compatibility */

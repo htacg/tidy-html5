@@ -2384,7 +2384,8 @@ static Node *GetCDATA( TidyDocImpl* doc, Node *container )
                 /*\ if javascript insert backslash before / 
                  *  Issue #348 - Add option, escape-scripts, to skip
                 \*/
-                if ((TY_(IsJavaScript)(container)) && cfgBool(doc, TidyEscapeScripts))
+                if ((TY_(IsJavaScript)(container)) && cfgBool(doc, TidyEscapeScripts) &&
+                    !TY_(IsHTML5Mode)(doc) )    /* Is #700 - This only applies to legacy html4 mode */
                 {
                     /* Issue #281 - only warn if adding the escape! */
                     TY_(Report)(doc, NULL, NULL, BAD_CDATA_CONTENT);

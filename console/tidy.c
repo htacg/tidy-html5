@@ -1562,7 +1562,7 @@ static void printOptionExportValues(TidyDoc ARG_UNUSED(tdoc),  /**< The Tidy doc
                     {
                         if (buf1.size)
                             tidyBufAppend(&buf1, " ", 1);
-                        tidyBufAppend(&buf1, d->def, strlen(d->def));
+                        tidyBufAppend(&buf1, (void *)d->def, strlen(d->def));
                     }
                 }
                 invertBuffer(&buf1, &buf2); /* Is #697 - specialised service to invert words */
@@ -1589,7 +1589,7 @@ static void printOptionExportValues(TidyDoc ARG_UNUSED(tdoc),  /**< The Tidy doc
                     {
                         if (buf1.size)
                             tidyBufAppend(&buf1, " ", 1);
-                        tidyBufAppend(&buf1, d->def, strlen(d->def));
+                        tidyBufAppend(&buf1, (void *)d->def, strlen(d->def));
                     }
                 }
                 tidyBufAppend(&buf1, (void *)"\0", 1); /* is this really required? */

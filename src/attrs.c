@@ -1659,7 +1659,10 @@ void CheckName( TidyDocImpl* doc, Node *node, AttVal *attval)
 
         if ((old = GetNodeByAnchor(doc, attval->value)) &&  old != node)
         {
-            TY_(ReportAttrError)( doc, node, attval, ANCHOR_NOT_UNIQUE);
+            if (node->implicit) /* Is #709 - improve warning text */
+                TY_(ReportAttrError)(doc, node, attval, ANCHOR_DUPLICATED);
+            else
+                TY_(ReportAttrError)( doc, node, attval, ANCHOR_NOT_UNIQUE);
         }
         else
             AddAnchor( doc, attval->value, node );
@@ -1687,7 +1690,10 @@ void CheckId( TidyDocImpl* doc, Node *node, AttVal *attval )
 
     if ((old = GetNodeByAnchor(doc, attval->value)) &&  old != node)
     {
-        TY_(ReportAttrError)( doc, node, attval, ANCHOR_NOT_UNIQUE);
+        if (node->implicit) /* Is #709 - improve warning text */
+            TY_(ReportAttrError)(doc, node, attval, ANCHOR_DUPLICATED);
+        else
+            TY_(ReportAttrError)( doc, node, attval, ANCHOR_NOT_UNIQUE);
     }
     else
         AddAnchor( doc, attval->value, node );

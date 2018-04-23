@@ -1924,6 +1924,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
      ********************************************/    
     { ADDED_MISSING_CHARSET,        0,   "Added appropriate missing <meta charset=...> to %s"                      },
     { ANCHOR_NOT_UNIQUE,            0,   "%s anchor \"%s\" already defined"                                        },
+    { ANCHOR_DUPLICATED,            0,   "Implicit %s anchor \"%s\" duplicated by Tidy."                           },
     { APOS_UNDEFINED,               0,   "named entity &apos; only defined in XML/XHTML"                           },
     { ATTR_VALUE_NOT_LCASE,         0,   "%s attribute value \"%s\" must be lower case for XHTML"                  },
     { ATTRIBUTE_IS_NOT_ALLOWED,     0,   "%s attribute \"is\" not allowed for autonomous custom tags."             },

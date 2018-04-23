@@ -144,7 +144,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_DATETIME,                "datetime",                CH_DATE      }, /* INS, DEL */
   { TidyAttr_DECLARE,                 "declare",                 CH_BOOL      }, /* OBJECT */
   { TidyAttr_DEFER,                   "defer",                   CH_BOOL      }, /* SCRIPT */
-  { TidyAttr_DIR,                     "dir",                     CH_TEXTDIR   }, /* ltr or rtl */
+  { TidyAttr_DIR,                     "dir",                     CH_TEXTDIR   }, /* ltr, rtl or auto */
   { TidyAttr_DISABLED,                "disabled",                CH_BOOL      }, /* form fields */
   { TidyAttr_DOWNLOAD,                "download",                CH_PCDATA    }, /* anchor */
   { TidyAttr_ENCODING,                "encoding",                CH_PCDATA    }, /* <?xml?> */
@@ -2015,7 +2015,7 @@ void CheckScroll( TidyDocImpl* doc, Node *node, AttVal *attval)
 /* checks dir attribute */
 void CheckTextDir( TidyDocImpl* doc, Node *node, AttVal *attval)
 {
-    ctmbstr const values[] = {"rtl", "ltr", NULL};
+    ctmbstr const values[] = {"rtl", "ltr", "auto", NULL};
     CheckAttrValidity( doc, node, attval, values );
 }
 

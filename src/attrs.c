@@ -2015,8 +2015,11 @@ void CheckScroll( TidyDocImpl* doc, Node *node, AttVal *attval)
 /* checks dir attribute */
 void CheckTextDir( TidyDocImpl* doc, Node *node, AttVal *attval)
 {
-    ctmbstr const values[] = {"rtl", "ltr", "auto", NULL};
-    CheckAttrValidity( doc, node, attval, values );
+    ctmbstr const values4[] = { "rtl", "ltr", NULL };
+    /* PR #712 - add 'auto' for HTML5 - @doronbehar */
+    ctmbstr const values5[] = { "rtl", "ltr", "auto", NULL };
+    CheckAttrValidity(doc, node, attval,
+        (TY_(IsHTML5Mode)(doc) ? values5 : values4));
 }
 
 /* checks lang and xml:lang attributes */

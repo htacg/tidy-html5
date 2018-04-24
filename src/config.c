@@ -245,6 +245,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyQuoteNbsp,               ME, "quote-nbsp",                  BL, yes,             ParsePickList,     &boolPicks          },
     { TidyReplaceColor,            MX, "replace-color",               BL, no,              ParsePickList,     &boolPicks          },
     { TidyShowErrors,              DD, "show-errors",                 IN, 6,               ParseInt,          NULL                },
+    { TidyShowFilename,            DD, "show-filename",               BL, no,              ParsePickList,     &boolPicks          },
     { TidyShowInfo,                DD, "show-info",                   BL, yes,             ParsePickList,     &boolPicks          },
     { TidyShowMarkup,              DD, "markup",                      BL, yes,             ParsePickList,     &boolPicks          },
     { TidyShowMetaChange,          DG, "show-meta-change",            BL, no,              ParsePickList,     &boolPicks          }, /* 20170609 - Issue #456 */

@@ -1522,6 +1522,7 @@ static const TidyOptionId TidyAsciiCharsLinks[] =      { TidyMakeClean, TidyUnkn
 static const TidyOptionId TidyBlockTagsLinks[] =       { TidyEmptyTags, TidyInlineTags, TidyPreTags, TidyUseCustomTags, TidyUnknownOption };
 static const TidyOptionId TidyCharEncodingLinks[] =    { TidyInCharEncoding, TidyOutCharEncoding, TidyUnknownOption };
 static const TidyOptionId TidyDuplicateAttrsLinks[] =  { TidyJoinClasses, TidyJoinStyles, TidyUnknownOption };
+static const TidyOptionId TidyEmacsLinks[] =           { TidyShowFilename, TidyUnknownOption };
 static const TidyOptionId TidyEmptyTagsLinks[] =       { TidyBlockTags, TidyInlineTags, TidyPreTags, TidyUseCustomTags, TidyUnknownOption };
 static const TidyOptionId TidyErrFileLinks[] =         { TidyOutFile, TidyUnknownOption };
 static const TidyOptionId TidyInCharEncodingLinks[] =  { TidyCharEncoding, TidyUnknownOption };
@@ -1536,6 +1537,7 @@ static const TidyOptionId TidyNumEntitiesLinks[] =     { TidyDoctype, TidyPreser
 static const TidyOptionId TidyOutCharEncodingLinks[] = { TidyCharEncoding, TidyUnknownOption };
 static const TidyOptionId TidyOutFileLinks[] =         { TidyErrFile, TidyUnknownOption };
 static const TidyOptionId TidyPreTagsLinks[] =         { TidyBlockTags, TidyEmptyTags, TidyInlineTags, TidyUseCustomTags, TidyUnknownOption };
+static const TidyOptionId TidyShowFilenameLinks[] =    { TidyEmacs, TidyUnknownOption };
 static const TidyOptionId TidySortAttributesLinks[] =  { TidyPriorityAttributes, TidyUnknownOption };
 static const TidyOptionId TidyUseCustomTagsLinks[] =   { TidyBlockTags, TidyEmptyTags, TidyInlineTags, TidyPreTags, TidyUnknownOption };
 static const TidyOptionId TidyWrapAttValsLinks[] =     { TidyWrapScriptlets, TidyLiteralAttribs, TidyUnknownOption };
@@ -1552,6 +1554,7 @@ static const TidyOptionDoc docs_xrefs[] =
     { TidyBlockTags,       TidyBlockTagsLinks       },
     { TidyCharEncoding,    TidyCharEncodingLinks    },
     { TidyDuplicateAttrs,  TidyDuplicateAttrsLinks  },
+    { TidyEmacs,           TidyEmacsLinks           },
     { TidyEmptyTags,       TidyEmptyTagsLinks       },
     { TidyErrFile,         TidyErrFileLinks         },
     { TidyInCharEncoding,  TidyInCharEncodingLinks  },
@@ -1565,6 +1568,7 @@ static const TidyOptionDoc docs_xrefs[] =
     { TidyOutCharEncoding, TidyOutCharEncodingLinks },
     { TidyOutFile,         TidyOutFileLinks         },
     { TidyPreTags,         TidyPreTagsLinks         },
+    { TidyShowFilename,    TidyShowFilenameLinks    },
     { TidySortAttributes,  TidySortAttributesLinks  },
     { TidyMuteReports,     TidyMuteLinks            },
     { TidyUseCustomTags,   TidyUseCustomTagsLinks   },

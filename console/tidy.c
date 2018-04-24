@@ -2489,8 +2489,17 @@ int main( int argc, char** argv )
         if ( argc > 1 )
         {
             htmlfil = argv[1];
-            DEBUG_LOG( SPRTF("Tidying '%s'\n", htmlfil) );
-            if ( tidyOptGetBool(tdoc, TidyEmacs) )
+#ifdef ENABLE_DEBUG_LOG
+            SPRTF("Tidy: '%s'\n", htmlfil);
+#else /* !ENABLE_DEBUG_LOG */
+            /* Is #713 - show-filename option */
+            if (tidyOptGetBool(tdoc, TidyShowFilename))
+            {
+                fprintf(errout, "Tidy: '%s'", htmlfil);
+                fprintf(errout, "\n");
+            }
+#endif /* ENABLE_DEBUG_LOG yes/no */
+            if ( tidyOptGetBool(tdoc, TidyEmacs) || tidyOptGetBool(tdoc, TidyShowFilename))
                 tidySetEmacsFile( tdoc, htmlfil );
             status = tidyParseFile( tdoc, htmlfil );
         }

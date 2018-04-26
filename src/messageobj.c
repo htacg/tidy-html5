@@ -96,6 +96,18 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
     result->line = line;
     result->column = column;
     result->level = level;
+    /* Is #719 - set 'muted' before any callbacks. */
+    result->muted = no;
+    i = 0;
+    while ((doc->muted.list) && (doc->muted.list[i] != 0))
+    {
+        if (doc->muted.list[i] == code)
+        {
+            result->muted = yes;
+            break;
+        }
+        i++;
+    }
 
     /* Things we create... */
 
@@ -206,19 +218,6 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
     if ( doc->messageCallback )
     {
         result->allowMessage = result->allowMessage & doc->messageCallback( tidyImplToMessage(result) );
-    }
-
-    /* finally, check the document's configuration to determine whether
-       this message is muted. */
-    result->muted = no;
-    while ( ( doc->muted.list ) && ( doc->muted.list[i] != 0 ) )
-    {
-        if ( doc->muted.list[i] == code )
-        {
-            result->muted = yes;
-            break;
-        }
-        i++;
     }
 
     return result;

@@ -83,7 +83,7 @@ Concerning 5., editing and committing your changes, **generally** it is better t
 
 But the situation varies. Like adding say an option, which can mean several files have to be edited, where it is likely appropriate to combine a considerable number of edits into one commit. There can be no hard and fast rules on this.
 
-Please note, if you want to change **multiple** things that don't depend on each other, use **different** `branches`, and make sure you check the `next` branch back out, before making more changes in a **new** branch name. That way we can take in each **change** separately, otherwise Github will **combine** all your branch commits into one **PR**. 
+Please note, if you want to change **multiple** things that don't depend on each other, use **different** `branches`, and make sure you checkout the `next` branch before creating a **new** branch. That way we can take in each **change** separately, otherwise Github will **combine** all your branch commits into one **PR**. 
 
 See below on keeping your forks `next` fully in sync with here, called `upstream` - **this is important**.
 
@@ -100,7 +100,7 @@ $ git push      # update the fork next
 
 This has to be repeated for other branches, too. `$ git checkout <your-branch>`, `$ git rebase next`, fix conflict, if any, and `$ git push`, for **each** branch. It is **not** fun to keep multiple `branches` fully up-to-date with an active `upstream`...
 
-Of course, the **regression** tests, 6., are really only if you have made `code` changes, but it is a good habit to get into. As can be seen the `tests` are in a **separate** repo, so you must also clone that, or **fork** and clone that, to be able to present a **PR**. This is best done in the same `root` folder where where you cloned `tidy-html5`, and your `tidy-fork`. See [RUNTESTS.md](https://github.com/htacg/tidy-html5-tests/blob/next/README/RUNTESTS.md).
+Of course, the **regression** tests, 7., are really only if you have made `code` changes, but it is a good habit to get into. As can be seen the `tests` are in a **separate** repo, so you must also clone that, or **fork** and clone that, to be able to present a **PR**. This is best done in the same `root` folder where where you cloned `tidy-html5`, and your `tidy-fork`. See [RUNTESTS.md](https://github.com/htacg/tidy-html5-tests/blob/next/README/RUNTESTS.md).
 
 If the `tests` shows a different exit value, or there are differences between the `expects` and `results`, these **must** be studied, and checked, very carefully. There may be cases where the **new** `results` are correct, in which case a simultaneous **PR** for the forked `tests` **must** be created to match your forked source **PR**.
 

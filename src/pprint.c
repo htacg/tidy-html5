@@ -2129,8 +2129,9 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
         if ( node->type == StartEndTag )
             node->type = StartTag;
 
-        if ( node->tag && 
-             (node->tag->parser == TY_(ParsePre) || nodeIsTEXTAREA(node)) )
+        /* Is. #738 - remove nodeIsTEXTAREA(node), deal with textarea later */
+        if ( node->tag &&
+             (node->tag->parser == TY_(ParsePre)) )
         {
             Bool classic  = TidyClassicVS; /* #228 - cfgBool( doc, TidyVertSpace ); */
             uint indprev = indent;
@@ -2144,7 +2145,7 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
             }
 
             /* Issue #697 - Add NOWRAP to the mode */
-            PPrintTag( doc, (mode | NOWRAP), indent, node );   /* add <pre> or <textarea> tag */
+            PPrintTag( doc, (mode | NOWRAP), indent, node );   /* Is. #738 - add <pre> tag */
 
             indent = 0;
             /* @camoy Fix #158 - remove inserted newlines in pre - TY_(PFlushLineSmart)( doc, indent ); */
@@ -2163,8 +2164,9 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
                  && node->next != NULL )
                 TY_(PFlushLineSmart)( doc, indent );
         }
-        else if ( nodeIsSTYLE(node) || nodeIsSCRIPT(node) )
+        else if ( nodeIsSTYLE(node) || nodeIsSCRIPT(node) || nodeIsTEXTAREA(node) )
         {
+            /* Is. #738 - add textarea to the list printed in this style */
             PPrintScriptStyle( doc, (mode | PREFORMATTED | NOWRAP | CDATA),
                                indent, node );
         }

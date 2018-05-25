@@ -2129,9 +2129,9 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
         if ( node->type == StartEndTag )
             node->type = StartTag;
 
-        /* Is. #738 - remove nodeIsTEXTAREA(node), deal with textarea later */
+        /* Is. #738 - html5 remove nodeIsTEXTAREA(node), deal with textarea later */
         if ( node->tag &&
-             (node->tag->parser == TY_(ParsePre)) )
+            (node->tag->parser == TY_(ParsePre) || (nodeIsTEXTAREA(node) && !TY_(IsHTML5Mode)(doc))))
         {
             Bool classic  = TidyClassicVS; /* #228 - cfgBool( doc, TidyVertSpace ); */
             uint indprev = indent;
@@ -2164,9 +2164,9 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
                  && node->next != NULL )
                 TY_(PFlushLineSmart)( doc, indent );
         }
-        else if ( nodeIsSTYLE(node) || nodeIsSCRIPT(node) || nodeIsTEXTAREA(node) )
+        else if ( nodeIsSTYLE(node) || nodeIsSCRIPT(node) || (nodeIsTEXTAREA(node) && TY_(IsHTML5Mode)(doc)) )
         {
-            /* Is. #738 - add textarea to the list printed in this style */
+            /* Is. #738 - add textarea to the list printed in this style in html5 */
             PPrintScriptStyle( doc, (mode | PREFORMATTED | NOWRAP | CDATA),
                                indent, node );
         }

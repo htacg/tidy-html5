@@ -263,7 +263,7 @@ static Dict tag_defs[] =
   { TidyTag_TABLE,      "table",      VERS_ELEM_TABLE,      &TY_(W3CAttrsFor_TABLE)[0],      (CM_BLOCK),                                    TY_(ParseTableTag), CheckTABLE     },
   { TidyTag_TBODY,      "tbody",      VERS_ELEM_TBODY,      &TY_(W3CAttrsFor_TBODY)[0],      (CM_TABLE|CM_ROWGRP|CM_OPT),                   TY_(ParseRowGroup), NULL           },
   { TidyTag_TD,         "td",         VERS_ELEM_TD,         &TY_(W3CAttrsFor_TD)[0],         (CM_ROW|CM_OPT|CM_NO_INDENT),                  TY_(ParseBlock),    NULL           },
-  { TidyTag_TEXTAREA,   "textarea",   VERS_ELEM_TEXTAREA,   &TY_(W3CAttrsFor_TEXTAREA)[0],   (CM_INLINE|CM_FIELD),                          TY_(ParseText),     NULL           },
+  { TidyTag_TEXTAREA,   "textarea",   VERS_ELEM_TEXTAREA,   &TY_(W3CAttrsFor_TEXTAREA)[0],   (CM_INLINE|CM_FIELD),                          TY_(ParseScript),   NULL           }, /* Is. #738 */
   { TidyTag_TFOOT,      "tfoot",      VERS_ELEM_TFOOT,      &TY_(W3CAttrsFor_TFOOT)[0],      (CM_TABLE|CM_ROWGRP|CM_OPT),                   TY_(ParseRowGroup), NULL           },
   { TidyTag_TH,         "th",         VERS_ELEM_TH,         &TY_(W3CAttrsFor_TH)[0],         (CM_ROW|CM_OPT|CM_NO_INDENT),                  TY_(ParseBlock),    NULL           },
   { TidyTag_THEAD,      "thead",      VERS_ELEM_THEAD,      &TY_(W3CAttrsFor_THEAD)[0],      (CM_TABLE|CM_ROWGRP|CM_OPT),                   TY_(ParseRowGroup), NULL           },

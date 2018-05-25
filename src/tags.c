@@ -809,6 +809,13 @@ void TY_(AdjustTags)( TidyDocImpl *doc )
         np->parser = TY_(ParseBlock);
     }
 
+    /* Is. #738 - html5 use ParseScript - html4 uses ParseText */
+    np = (Dict *)TY_(LookupTagDef)(TidyTag_TEXTAREA);
+    if (np)
+    {
+        np->parser = TY_(ParseText);
+    }
+
     tagsEmptyHash(doc, tags); /* not sure this is really required, but to be sure */
     doc->HTML5Mode = no;   /* set *NOT* HTML5 mode */
 
@@ -854,6 +861,12 @@ void TY_(ResetTags)( TidyDocImpl *doc )
     if (np)
     {
         np->parser = TY_(ParseInline);
+    }
+    /* Is. #738 - html5 use ParseScript */
+    np = (Dict *)TY_(LookupTagDef)(TidyTag_TEXTAREA);
+    if (np)
+    {
+        np->parser = TY_(ParseScript);
     }
 
     tagsEmptyHash( doc, tags ); /* not sure this is really required, but to be sure */

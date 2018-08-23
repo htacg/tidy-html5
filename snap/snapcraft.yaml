@@ -1,0 +1,65 @@
+%YAML 1.2
+---
+# Snapcraft Recipe for Tidy
+# ------------------------------
+# This file is in the YAML data serialization format:
+# http://yaml.org
+# For the spec. of writing this file refer the following documentation:
+# * The snapcraft syntax
+#   https://docs.snapcraft.io/build-snaps/syntax
+# * Snap Docs
+#   https://snapdocs.labix.org
+# * Latest doc topics in the Snapcraft Forum
+#   https://forum.snapcraft.io/c/doc
+# For support refer to the snapcraft section in the Snapcraft Forum:
+# https://forum.snapcraft.io/c/snapcraft
+
+name: tidy
+summary: HTML parser and pretty printer.  The grand daddy of HTML tools
+description: |
+    Tidy is a console application for Mac OS X, Linux, Windows, UNIX,
+    and more. It corrects and cleans up HTML and XML documents by fixing
+    markup errors and upgrading legacy code to modern standards.
+
+version: determined-by-version-script
+version-script: snap/utilities/set-snap-version.bash
+
+confinement: strict
+grade: stable
+
+apps:
+    tidy:
+        command: tidy
+        plugs:
+        - home
+        - removable-media
+
+parts:
+    tidy:
+        source: .
+        source-type: local
+
+        # For stable release build
+        #source-tag: '5.6.0'
+
+        plugin: cmake
+        configflags:
+        - -DCMAKE_BUILD_TYPE=Release
+
+        build-packages:
+        - build-essential
+        - xsltproc
+
+        filesets:
+            executables:
+            - bin/*
+            library-headers:
+            - include/*
+            library-shared:
+            - lib/*.so*
+            library-static:
+            - lib/*.a
+            pkgconfig:
+            - lib/pkgconfig/*
+            manpages:
+            - share/man/*

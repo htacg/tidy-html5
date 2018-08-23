@@ -16,3 +16,11 @@ temp*
 .DS_Store
 .idea
 *.old
+
+# Snap packaging specific rules
+/parts/
+/stage/
+/prime/
+
+/*.snap
+/*_source.tar.bz2

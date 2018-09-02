@@ -17,7 +17,7 @@ This assumes the current `next` branch is version 5.7.XXX. See VERSION.md for ch
 ### The Release:
  
  1. Update version.txt to 5.8.0, and date... commit
- 2. Create branch, `$ git checkout -b release/5.8`, add `$ git tag 5.8.0`
+ 2. Create branch, `$ git checkout -b release/5.8`
  3. Update README/vershist.log... perl script... commit
  4. Add `$ git tag 5.8.0`
  5. Publish `$ git push -u origin release/5.8 --tags`

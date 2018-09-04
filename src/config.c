@@ -880,7 +880,7 @@ static ctmbstr ExpandTilde( TidyDocImpl* doc, ctmbstr filename )
         if (home_dir) {
             ++filename;
         }
-#ifdef _MSC_VER 
+#ifdef _WIN32
         else if (strlen(filename) >= 3) {   /* at least '~/+1' */
             /* no HOME env in Windows - got for HOMEDRIVE=C: HOMEPATH=\Users\user */
             char * hd = getenv("HOMEDRIVE");
@@ -895,7 +895,7 @@ static ctmbstr ExpandTilde( TidyDocImpl* doc, ctmbstr filename )
             }
 
         }
-#endif /* _MSC_VER */
+#endif /* _WIN32 */
 
     }
 #ifdef SUPPORT_GETPWNAM

@@ -347,7 +347,7 @@ static struct _dispatchTable {
     { STRING_CONTENT_LOOKS,         TidyInfo,        formatStandard          }, /* reportMarkupVersion() */
     { STRING_DOCTYPE_GIVEN,         TidyInfo,        formatStandard          }, /* reportMarkupVersion() */
     { STRING_MISSING_MALFORMED,     TidyConfig,      formatStandard          },
-    { STRING_MUTING_TYPE,           TidyConfig,      formatStandard          },
+    { STRING_MUTING_TYPE,           TidyInfo,        formatStandard          },
     { STRING_NO_SYSID,              TidyInfo,        formatStandard          }, /* reportMarkupVersion() */
     { STRING_UNKNOWN_OPTION,        TidyConfig,      formatStandard          },
     { SUSPECTED_MISSING_QUOTE,      TidyWarning,     formatStandard          },

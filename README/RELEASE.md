@@ -37,7 +37,7 @@ This assumes the current `next` branch is version 5.7.XXX. See VERSION.md for ch
 
 ## Notes on `Release Process`:
  
-This **HTACG HTML Tidy** `official` release process must be supplimented with distribution by others. 
+This **HTACG HTML Tidy** `official` release process must be supplemented with distribution by others. 
 
 Of course, if possible, we recomend building tidy from the git source, it is easy, but also in some OS'es others offer distribution in various ways... 
 

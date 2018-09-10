@@ -2075,6 +2075,7 @@ int main( int argc, char** argv )
     ctmbstr cfgfil = NULL, errfil = NULL, htmlfil = NULL;
     TidyDoc tdoc = NULL;
     int status = 0;
+    int configSpecified = 0;
 
     uint contentErrors = 0;
     uint contentWarnings = 0;
@@ -2103,44 +2104,6 @@ int main( int argc, char** argv )
     win_cp = GetConsoleOutputCP();
     SetConsoleOutputCP(CP_UTF8);
 #endif
-
-    /*
-     * Look for default configuration files using any of
-     * the following possibilities:
-     *  - TIDY_CONFIG_FILE - from tidyplatform.h, typically /etc/tidy.conf
-     *  - HTML_TIDY        - environment variable
-     *  - TIDY_USER_CONFIG_FILE - from tidyplatform.h, typically ~/tidy.conf
-     */
-
-#ifdef TIDY_CONFIG_FILE
-    if ( tidyFileExists( tdoc, TIDY_CONFIG_FILE) )
-    {
-        status = tidyLoadConfig( tdoc, TIDY_CONFIG_FILE );
-        if ( status != 0 ) {
-            fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), TIDY_CONFIG_FILE, status);
-            fprintf(errout, "\n");
-        }
-    }
-#endif /* TIDY_CONFIG_FILE */
-
-    if ( (cfgfil = getenv("HTML_TIDY")) != NULL )
-    {
-        status = tidyLoadConfig( tdoc, cfgfil );
-        if ( status != 0 ) {
-            fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), cfgfil, status);
-            fprintf(errout, "\n");
-        }
-    }
-#ifdef TIDY_USER_CONFIG_FILE
-    else if ( tidyFileExists( tdoc, TIDY_USER_CONFIG_FILE) )
-    {
-        status = tidyLoadConfig( tdoc, TIDY_USER_CONFIG_FILE );
-        if ( status != 0 ) {
-            fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), TIDY_USER_CONFIG_FILE, status);
-            fprintf(errout, "\n");
-        }
-    }
-#endif /* TIDY_USER_CONFIG_FILE */
 
 
     /*
@@ -2332,6 +2295,7 @@ int main( int argc, char** argv )
                 {
                     ctmbstr post;
 
+                    configSpecified = 1;
                     tidyLoadConfig( tdoc, argv[2] );
 
                     /* Set new error output stream if setting changed */
@@ -2345,6 +2309,11 @@ int main( int argc, char** argv )
                     --argc;
                     ++argv;
                 }
+            }
+
+            else if ( strcasecmp(arg, "no-config") == 0 )
+            {
+                configSpecified = 1;
             }
 
             else if ( strcasecmp(arg, "output") == 0 ||
@@ -2484,6 +2453,46 @@ int main( int argc, char** argv )
             ++argv;
             continue;
         }
+
+    if ( ! configSpecified )
+    {
+        /*
+         * Configuration file not specified on the command line so
+         * look for a configuration file in the order of
+         *  - HTML_TIDY             - environment variable
+         *  - TIDY_USER_CONFIG_FILE - from tidyplatform.h, default:  ~/.tidyrc
+         *  - TIDY_CONFIG_FILE      - from tidyplatform.h, default:  /etc/tidy.conf
+         */
+
+        if ( (cfgfil = getenv("HTML_TIDY")) != NULL )
+        {
+            status = tidyLoadConfig( tdoc, cfgfil );
+            if ( status != 0 ) {
+                fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), cfgfil, status);
+                fprintf(errout, "\n");
+            }
+        }
+#ifdef TIDY_USER_CONFIG_FILE
+        else if ( tidyFileExists( tdoc, TIDY_USER_CONFIG_FILE) )
+        {
+            status = tidyLoadConfig( tdoc, TIDY_USER_CONFIG_FILE );
+            if ( status != 0 ) {
+                fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), TIDY_USER_CONFIG_FILE, status);
+                fprintf(errout, "\n");
+            }
+        }
+#endif /* TIDY_USER_CONFIG_FILE */
+#ifdef TIDY_CONFIG_FILE
+        else if ( tidyFileExists( tdoc, TIDY_CONFIG_FILE) )
+        {
+            status = tidyLoadConfig( tdoc, TIDY_CONFIG_FILE );
+            if ( status != 0 ) {
+                fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), TIDY_CONFIG_FILE, status);
+                fprintf(errout, "\n");
+            }
+        }
+#endif /* TIDY_CONFIG_FILE */
+    }  /* endif ( ! configSpecified ) */
 
 
         if ( argc > 1 )

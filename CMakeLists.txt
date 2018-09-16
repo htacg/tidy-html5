@@ -197,11 +197,27 @@ if(WIN32 AND MSVC)
     set( CMAKE_DEBUG_POSTFIX "d" ) # little effect in unix
 else()
     # add any gcc flags
+
+    set ( CFLAGS "${CFLAGS} -O2")
+# -O2: GCC performs nearly all supported optimizations that do not involve
+# a space-speed tradeoff.  As compared to '-O', this option increases
+# both compilation time and the performance of the generated code.
+
+    set ( LDFLAGS "${LDFLAGS} -Wl,--nxcompat")
+# https://en.wikipedia.org/wiki/Data_Execution_Prevention
+#   Enable DEP with -Wl,--nxcompat
+
+    set ( LDFLAGS "-Wl,--dynamicbase,--export-all-symbols")
+# https://en.wikipedia.org/wiki/Address_space_layout_randomization
+# https://stackoverflow.com/questions/24283918/how-can-i-enable-aslr-dep-and-safeseh-on-an-exe-in-codeblocks-using-mingw
+#   ASLR with gcc has a problem: -Wl,--dynamicbase doesn't emit the necessary relocation table.
+#   As a workaround, you can pass -Wl,--dynamicbase,--export-all-symbols
+
 endif()
 
 set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${WARNING_FLAGS} ${MSVC_FLAGS} -D_REENTRANT" )
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNING_FLAGS} ${MSVC_FLAGS} -D_REENTRANT" )
-set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${MSVC_LD_FLAGS}" )
+set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${LDFLAGS} ${MSVC_LD_FLAGS}" )
 
 
 #------------------------------------------------------------------------

@@ -454,6 +454,7 @@ uint TY_(nodeHeaderLevel)( Node* node );
 
 /* HTML5 */
 #define nodeIsDATALIST( node )   TagIsId( node, TidyTag_DATALIST )
+#define nodeIsDATA( node )       TagIsId( node, TidyTag_DATA )
 #define nodeIsMATHML( node )     TagIsId( node, TidyTag_MATHML ) /* #130 MathML attr and entity fix! */
 
 /* NOT in HTML 5 */

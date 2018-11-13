@@ -2075,6 +2075,7 @@ int main( int argc, char** argv )
     ctmbstr cfgfil = NULL, errfil = NULL, htmlfil = NULL;
     TidyDoc tdoc = NULL;
     int status = 0;
+    int configSpecified = 0;
 
     uint contentErrors = 0;
     uint contentWarnings = 0;
@@ -2105,43 +2106,56 @@ int main( int argc, char** argv )
 #endif
 
     /*
-     * Look for default configuration files using any of
-     * the following possibilities:
-     *  - TIDY_CONFIG_FILE - from tidyplatform.h, typically /etc/tidy.conf
-     *  - HTML_TIDY        - environment variable
-     *  - TIDY_USER_CONFIG_FILE - from tidyplatform.h, typically ~/tidy.conf
+     * Look for a configuration file in the order:
+     *  - command line option
+     *  - TIDY_USER_CONFIG_FILE - from tidyplatform.h, default: "~/.tidyrc"
+     *  - HTML_TIDY             - environment variable
+     *  - TIDY_CONFIG_FILE      - from tidyplatform.h, default: "/etc/tidy.conf"
      */
 
-#ifdef TIDY_CONFIG_FILE
-    if ( tidyFileExists( tdoc, TIDY_CONFIG_FILE) )
+    for ( int i = 1; i < argc && !configSpecified; i++ )
     {
-        status = tidyLoadConfig( tdoc, TIDY_CONFIG_FILE );
-        if ( status != 0 ) {
-            fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), TIDY_CONFIG_FILE, status);
-            fprintf(errout, "\n");
+        ctmbstr arg = argv[i] + 1;
+        if ( strcasecmp(arg, "config" ) == 0 )
+        {
+            configSpecified = 1;
+            break;
         }
     }
-#endif /* TIDY_CONFIG_FILE */
 
-    if ( (cfgfil = getenv("HTML_TIDY")) != NULL )
+    if ( ! configSpecified )
     {
-        status = tidyLoadConfig( tdoc, cfgfil );
-        if ( status != 0 ) {
-            fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), cfgfil, status);
-            fprintf(errout, "\n");
-        }
-    }
 #ifdef TIDY_USER_CONFIG_FILE
-    else if ( tidyFileExists( tdoc, TIDY_USER_CONFIG_FILE) )
-    {
-        status = tidyLoadConfig( tdoc, TIDY_USER_CONFIG_FILE );
-        if ( status != 0 ) {
-            fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), TIDY_USER_CONFIG_FILE, status);
-            fprintf(errout, "\n");
+        if ( tidyFileExists( tdoc, TIDY_USER_CONFIG_FILE) )
+        {
+            status = tidyLoadConfig( tdoc, TIDY_USER_CONFIG_FILE );
+            if ( status != 0 ) {
+                fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), TIDY_USER_CONFIG_FILE, status);
+                fprintf(errout, "\n");
+            }
         }
-    }
+        else
 #endif /* TIDY_USER_CONFIG_FILE */
-
+        if ( (cfgfil = getenv("HTML_TIDY")) != NULL )
+        {
+            status = tidyLoadConfig( tdoc, cfgfil );
+            if ( status != 0 ) {
+                fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), cfgfil, status);
+                fprintf(errout, "\n");
+            }
+        }
+#ifdef TIDY_CONFIG_FILE
+        else
+        if ( tidyFileExists( tdoc, TIDY_CONFIG_FILE) )
+        {
+            status = tidyLoadConfig( tdoc, TIDY_CONFIG_FILE );
+            if ( status != 0 ) {
+                fprintf(errout, tidyLocalizedString( TC_MAIN_ERROR_LOAD_CONFIG ), TIDY_CONFIG_FILE, status);
+                fprintf(errout, "\n");
+            }
+        }
+#endif /* TIDY_CONFIG_FILE */
+    }
 
     /*
      * Read command line

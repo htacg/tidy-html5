@@ -1056,8 +1056,6 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
     if ( fname != (tmbstr) file )
         TidyDocFree( doc, fname );
 
-    AdjustConfig( doc );
-
     /* any new config errors? If so, return warning status. */
     return (doc->optionErrors > opterrs ? 1 : 0); 
 }

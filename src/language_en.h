@@ -2311,7 +2311,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         - Second %s represents a version number, typically x.x.xx.
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TC_TXT_HELP_1,                0,
-        "\n"
         "%s [options...] [file...] [options...] [file...]\n"
         "Utility to clean up and pretty print HTML/XHTML/XML.\n"
         "\n"

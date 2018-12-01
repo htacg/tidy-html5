@@ -940,19 +940,31 @@ void TY_(FreeLexer)( TidyDocImpl* doc )
 /* Lexer uses bigger memory chunks than pprint as
 ** it must hold the entire input document. not just
 ** the last line or three.
+**
+** The buffer starts with an allocated 8192 bytes,
+** and is increased, as needed, by the same 8192 bytes,
+** each time, and calls 'TidyPanic' if the 32-bit uint
+** size overflows at about 4GB...
+**
+** 'TidyPanic' must/will never return.
 */
+static ctmbstr overflow = "\nPanic: 4GB lexer text buffer overrun! Aborting...\n";
 static void AddByte( Lexer *lexer, tmbchar ch )
 {
     if ( lexer->lexsize + 2 >= lexer->lexlength )
     {
         tmbstr buf = NULL;
-        uint allocAmt = lexer->lexlength;
+        uint prev, allocAmt = lexer->lexlength;
         while ( lexer->lexsize + 2 >= allocAmt )
         {
-            if ( allocAmt == 0 )
-                allocAmt = 8192;
-            else
-                allocAmt *= 2;
+            /* Issue #761 - change to additive method, replacing the 
+               doubling, and deal with buffer overflow at abt 4GB of text */
+            prev = allocAmt;
+            allocAmt += 8192;
+            if (allocAmt < prev) {
+                /* YEEK - size wrapped - need bigger buffer! */
+                TidyPanic(lexer->allocator, overflow);
+            }
         }
         buf = (tmbstr) TidyRealloc( lexer->allocator, lexer->lexbuf, allocAmt );
         if ( buf )

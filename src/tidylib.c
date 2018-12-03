@@ -36,6 +36,7 @@
 #include "attrs.h"
 #include "sprtf.h"
 #if SUPPORT_LOCALIZATIONS
+#  include "stdlib.h"
 #  include "locale.h"
 #endif
 
@@ -119,7 +120,13 @@ TidyDocImpl* tidyDocCreate( TidyAllocator *allocator )
 #if SUPPORT_LOCALIZATIONS
     if ( TY_(tidyGetLanguageSetByUser)() == no )
     {
-        TY_(tidySetLanguage)( setlocale( LC_ALL, "") );
+        if( ! TY_(tidySetLanguage)( getenv( "LC_MESSAGES" ) ) )
+        {
+            if( ! TY_(tidySetLanguage)( getenv( "LANG" ) ) )
+            {
+                TY_(tidySetLanguage)( setlocale( LC_ALL, "" ) );
+            }
+        }
     }
 #endif
 

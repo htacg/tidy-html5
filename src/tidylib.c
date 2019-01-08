@@ -124,7 +124,11 @@ TidyDocImpl* tidyDocCreate( TidyAllocator *allocator )
         {
             if( ! TY_(tidySetLanguage)( getenv( "LANG" ) ) )
             {
-                TY_(tidySetLanguage)( setlocale( LC_ALL, "" ) );
+                /*\
+                *  Is. #770 #783 #780 #790 and maybe others -
+                *  TY_(tidySetLanguage)( setlocale( LC_ALL, "" ) );
+                *  this seems a 'bad' choice!
+               \*/
             }
         }
     }

@@ -2092,13 +2092,13 @@ TIDY_EXPORT const tidyLocaleMapItem* TIDY_CALL getNextWindowsLanguage( TidyItera
  ** @param item An instance of tidyLocalMapItem to query.
  ** @result Returns a string with the Windows name of the mapping.
  */
-TIDY_EXPORT const ctmbstr TIDY_CALL TidyLangWindowsName( const tidyLocaleMapItem *item );
+TIDY_EXPORT ctmbstr TIDY_CALL TidyLangWindowsName( const tidyLocaleMapItem *item );
 
 /** Given a `tidyLocalMapItem`, return the POSIX name.
  ** @param item An instance of tidyLocalMapItem to query.
  ** @result Returns a string with the POSIX name of the mapping.
  */
-TIDY_EXPORT const ctmbstr TIDY_CALL TidyLangPosixName( const tidyLocaleMapItem *item );
+TIDY_EXPORT ctmbstr TIDY_CALL TidyLangPosixName( const tidyLocaleMapItem *item );
 
 /** @}
  ** @name Getting Localized Strings

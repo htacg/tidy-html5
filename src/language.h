@@ -191,12 +191,12 @@ const tidyLocaleMapItemImpl *TY_(getNextWindowsLanguage)( TidyIterator* iter );
 /**
  *  Given a `tidyLocalMapItemImpl, return the Windows name.
  */
-const ctmbstr TY_(TidyLangWindowsName)( const tidyLocaleMapItemImpl *item );
+ctmbstr TY_(TidyLangWindowsName)( const tidyLocaleMapItemImpl *item );
 
 /**
  *  Given a `tidyLocalMapItemImpl, return the POSIX name.
  */
-const ctmbstr TY_(TidyLangPosixName)( const tidyLocaleMapItemImpl *item );
+ctmbstr TY_(TidyLangPosixName)( const tidyLocaleMapItemImpl *item );
 
 /**
  *  Initializes the TidyIterator to point to the first item

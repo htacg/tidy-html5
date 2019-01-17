@@ -6,7 +6,7 @@ Starting with **HTML Tidy** 5.4.0, HTACG will adopt a new branch management stra
 
 As described thoroughly in our [VERSION.md](VERSION.md) document, this means that **master** will always consist of an even-numbered minor version, and activity will remain relatively quiet unless we backport a critical bug fix from **next**.
 
-The **next** branch, then will host the majority of our development activity, and any contributions and PR’s should be again this branch. This means that **next** will always consist of an odd minor version number.
+The **next** branch, then will host the majority of our development activity, and any contributions and PR’s should be against this branch. This means that **next** will always consist of an odd minor version number.
 
 
 ## About Versioning

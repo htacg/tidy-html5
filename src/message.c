@@ -1291,12 +1291,19 @@ void TY_(ReportMarkupVersion)( TidyDocImpl* doc )
 
 /* Reports the number of warnings and errors found in the document. 
 ** Called by tidyRunDiagnostics(), from console.
+** 
+** If there are 'warnings' or 'errors', then add 'not all shown'
+** msg, if the are any options that 'limit' message output. Not 
+** intended to be accurate or exact, just an indication that
+** some message(s) **may** have been suppressed, for some reason.
 */
 void TY_(ReportNumWarnings)( TidyDocImpl* doc )
 {
     if ( doc->warnings > 0 || doc->errors > 0 )
     {
-        if ( doc->errors > cfg(doc, TidyShowErrors) || !cfgBool(doc, TidyShowWarnings) )
+        if ( doc->errors > cfg(doc, TidyShowErrors) || !cfgBool(doc, TidyShowWarnings) ||
+             doc->muted.list) /* Is. #794 - add '--mute XXXX' option 
+                                 to other options which limit messages */
         {
             TY_(Dialogue)( doc, STRING_NOT_ALL_SHOWN );
         }

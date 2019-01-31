@@ -798,7 +798,7 @@ void TY_(DefinePriorityAttribute)(TidyDocImpl* doc, ctmbstr name)
     if ( priorities->count >= priorities->capacity )
     {
         priorities->capacity = priorities->capacity * 2;
-        priorities->list = realloc( priorities->list, sizeof(tmbstr) * priorities->capacity + 1 );
+        priorities->list = TidyRealloc(doc->allocator, priorities->list, sizeof(tmbstr) * priorities->capacity + 1 );
     }
 
     priorities->list[priorities->count] = TY_(tmbstrdup)( doc->allocator, name);

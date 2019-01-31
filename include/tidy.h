@@ -481,16 +481,16 @@ TIDY_EXPORT void TIDY_CALL        tidyGeneralInfo( TidyDoc tdoc );
     
     
 /** Load an ASCII Tidy configuration file and set the configuration per its
- ** contents.
- ** @result Returns 0 upon success, or any other value if there was an error.
+ ** contents. Reports config option errors, which can be filtered.
+ ** @result Returns 0 upon success, or any other value if there was an option error.
  */
 TIDY_EXPORT int TIDY_CALL         tidyLoadConfig(TidyDoc tdoc,      /**< The TidyDoc to which to apply the configuration. */
                                                  ctmbstr configFile /**< The complete path to the file to load. */
                                                  );
 
 /** Load a Tidy configuration file with the specified character encoding, and
- ** set the configuration per its contents. 
- ** @result Returns 0 upon success, or any other value if there was an error.
+ ** set the configuration per its contents.  Reports config option errors, which can be filtered.
+ ** @result Returns 0 upon success, or any other value if there was an option error.
  */
 TIDY_EXPORT int TIDY_CALL         tidyLoadConfigEnc(TidyDoc tdoc,       /**< The TidyDoc to which to apply the configuration. */
                                                     ctmbstr configFile, /**< The complete path to the file to load. */

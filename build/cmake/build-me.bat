@@ -23,7 +23,7 @@
 :GOTCMD
 
 @call chkmsvc %TMPPRJ%
-@call chkbranch master
+@call chkbranch next
 
 @echo Build %DATE% %TIME% > %TMPLOG%
 

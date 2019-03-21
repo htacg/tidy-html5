@@ -971,6 +971,7 @@ typedef enum
   TidyTag_BDI,           /**< BDI */
   TidyTag_CANVAS,        /**< CANVAS */
   TidyTag_COMMAND,       /**< COMMAND */
+  TidyTag_DATA,          /**< DATA */
   TidyTag_DATALIST,      /**< DATALIST */
   TidyTag_DETAILS,       /**< DETAILS */
   TidyTag_DIALOG,        /**< DIALOG */

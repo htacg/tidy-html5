@@ -144,6 +144,7 @@ extern const AttrVersion TY_(W3CAttrsFor_METER)[];
 extern const AttrVersion TY_(W3CAttrsFor_PROGRESS)[];
 extern const AttrVersion TY_(W3CAttrsFor_TEMPLATE)[];
 extern const AttrVersion TY_(W3CAttrsFor_TIME)[];
+extern const AttrVersion TY_(W3CAttrsFor_DATA)[];
 extern const AttrVersion TY_(W3CAttrsFor_DATALIST)[];
 extern const AttrVersion TY_(W3CAttrsFor_AUDIO)[];
 extern const AttrVersion TY_(W3CAttrsFor_VIDEO)[];

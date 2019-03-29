@@ -845,7 +845,6 @@ static void help(TidyDoc tdoc, /**< The tidy document for which help is showing.
     tmbstr temp_string = NULL;
     uint width = 78;
 
-    printf("\n");
     printf( tidyLocalizedString(TC_TXT_HELP_1), get_final_name(prog), tidyLibraryVersion() );
     printf("\n");
 

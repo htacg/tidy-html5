@@ -1012,13 +1012,14 @@ void CheckLINK( TidyDocImpl* doc, Node *node )
     Bool HasHref = TY_(AttrGetById)(node, TidyAttr_HREF) != NULL;
     Bool HasRel = TY_(AttrGetById)(node, TidyAttr_REL) != NULL;
     Bool HasItemprop = TY_(AttrGetById)(node, TidyAttr_ITEMPROP) != NULL;
+    Bool HasProperty = TY_(AttrGetById)(node, TidyAttr_PROPERTY) != NULL;
 
     if (!HasHref)
     {
       TY_(ReportMissingAttr)( doc, node, "href" );
     }
 
-    if (!HasItemprop && !HasRel)
+    if (!HasItemprop && !hasProperty && !HasRel)
     {
       TY_(ReportMissingAttr)( doc, node, "rel" );
     }

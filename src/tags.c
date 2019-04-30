@@ -458,22 +458,26 @@ static void declare( TidyDocImpl* doc, TidyTagImpl* tags,
 {
     if ( name )
     {
-        Dict* np = (Dict*) tagsLookup( doc, tags, name );
+        /* Make sure we are not over-writing predefined tags */
+        /* Issue #815 - Corollary 1 to making global dict const */
+        /* Follow const-correctness for tagsLookup() */
+        Dict* npNew = NULL;
+        const Dict* np = tagsLookup( doc, tags, name );
         if ( np == NULL )
         {
-            np = NewDict( doc, name );
-            np->next = tags->declared_tag_list;
-            tags->declared_tag_list = np;
+            npNew = NewDict( doc, name );
         }
 
-        /* Make sure we are not over-writing predefined tags */
-        if ( np->id == TidyTag_UNKNOWN )
+        if ( npNew )
         {
-          np->versions = versions;
-          np->model   |= model;
-          np->parser   = parser;
-          np->chkattrs = chkattrs;
-          np->attrvers = NULL;
+            npNew->next = tags->declared_tag_list;
+            tags->declared_tag_list = npNew;
+
+            npNew->versions = versions;
+            npNew->model   |= model;
+            npNew->parser   = parser;
+            npNew->chkattrs = chkattrs;
+            npNew->attrvers = NULL;
         }
     }
 }

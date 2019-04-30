@@ -165,6 +165,14 @@ static CheckAttribs CheckHTML;
  * Tidy defaults to HTML5 mode
  * but allow this table to be ADJUSTED if NOT HTML5
  * was static const Dict tag_defs[] = 
+ *
+ * Issue #815
+ * However, we can't manipulate this global table if everyone points to it, this doesn't work in MT environments.
+ * So, create "alternate" entries in the global namespace, switch this table back to const too.
+ * AdjustTags() then just re-points to alt entries, ResetTags() pulls out hash entry.
+ * This way anyone querying a node's tag properties will still get appropriate results (for HTML5 and so on).
+ *
+ * NOTE: If making changes to this table's entries, you MUST keep alt-entries in sync (as relevant for HTML4).
 \*/
 static Dict tag_defs[] =
 {
@@ -333,6 +341,34 @@ static Dict tag_defs[] =
   /* this must be the final entry */
   { (TidyTagId)0,        NULL,         0,                    NULL,                       (0),                                           NULL,          NULL           }
 };
+
+
+/* Don't forget to add the appropriate call in AdjustTags() */
+/* XXX LookupTagDef should return entries from this table when doc is configured to html4 mode instead of the other global table */
+/* but right now it doesn't take a doc as part of its arguments */
+static const Dict html4_tag_defs[] =
+{
+  { TidyTag_A,          "a",          VERS_ELEM_A,          &TY_(W3CAttrsFor_A)[0],          (CM_INLINE),                                   TY_(ParseInline),   NULL           },
+/*\
+ * Issue #196
+ * TidyTag_CAPTION allows %flow; in HTML5,
+ * but only %inline; in HTML4
+\*/
+  { TidyTag_CAPTION,    "caption",    VERS_ELEM_CAPTION,    &TY_(W3CAttrsFor_CAPTION)[0],    (CM_TABLE),                                    TY_(ParseInline),   CheckCaption   },
+/*\
+ * Issue #232
+ * TidyTag_OBJECT not in head in HTML5,
+ * but still allowed in HTML4
+\*/
+  { TidyTag_OBJECT,     "object",     VERS_ELEM_OBJECT,     &TY_(W3CAttrsFor_OBJECT)[0],     (CM_OBJECT|CM_IMG|CM_INLINE|CM_PARAM|CM_HEAD), TY_(ParseBlock),    NULL           },
+/*\
+ * Issue #461
+ * TidyTag_BUTTON is a block in HTML4,
+ * whereas it is inline in HTML5
+\*/
+  { TidyTag_BUTTON,     "button",     VERS_ELEM_BUTTON,     &TY_(W3CAttrsFor_BUTTON)[0],     (CM_INLINE),                                   TY_(ParseBlock),   NULL           }
+};
+
 
 static uint tagsHash(ctmbstr s)
 {
@@ -768,56 +804,19 @@ void TY_(FreeDeclaredTags)( TidyDocImpl* doc, UserTagType tagType )
  * Tidy defaults to HTML5 mode
  * If the <!DOCTYPE ...> is found to NOT be HTML5,
  * then adjust tags to HTML4 mode
- *
- * NOTE: For each change added to here, there must 
- * be a RESET added in TY_(ResetTags) below!
 \*/
 void TY_(AdjustTags)( TidyDocImpl *doc )
 {
-    Dict *np = (Dict *)TY_(LookupTagDef)( TidyTag_A );
+    TY_(ResetTags)( doc ); /* Reset tags ensures blank slate for tags we care about */
+
     TidyTagImpl* tags = &doc->tags;
-    if (np) 
+    size_t i;
+    for (i = 0; i < sizeof(html4_tag_defs)/sizeof(html4_tag_defs[0]); ++i)
     {
-        np->parser = TY_(ParseInline);
-        np->model  = CM_INLINE;
+        tagsInstall(doc, tags, &html4_tag_defs[i]);
     }
 
-/*\
- * Issue #196
- * TidyTag_CAPTION allows %flow; in HTML5,
- * but only %inline; in HTML4
-\*/
-    np = (Dict *)TY_(LookupTagDef)( TidyTag_CAPTION );
-    if (np)
-    {
-        np->parser = TY_(ParseInline);
-    }
-
-/*\
- * Issue #232
- * TidyTag_OBJECT not in head in HTML5,
- * but still allowed in HTML4
-\*/
-    np = (Dict *)TY_(LookupTagDef)( TidyTag_OBJECT );
-    if (np)
-    {
-        np->model |= CM_HEAD; /* add back allowed in head */
-    }
-
-/*\
- * Issue #461
- * TidyTag_BUTTON is a block in HTML4,
- * whereas it is inline in HTML5
-\*/
-    np = (Dict *)TY_(LookupTagDef)(TidyTag_BUTTON);
-    if (np)
-    {
-        np->parser = TY_(ParseBlock);
-    }
-
-    tagsEmptyHash(doc, tags); /* not sure this is really required, but to be sure */
     doc->HTML5Mode = no;   /* set *NOT* HTML5 mode */
-
 }
 
 Bool TY_(IsHTML5Mode)( TidyDocImpl *doc )
@@ -834,35 +833,9 @@ Bool TY_(IsHTML5Mode)( TidyDocImpl *doc )
 \*/
 void TY_(ResetTags)( TidyDocImpl *doc )
 {
-    Dict *np = (Dict *)TY_(LookupTagDef)( TidyTag_A );
     TidyTagImpl* tags = &doc->tags;
-    if (np) 
-    {
-        np->parser = TY_(ParseBlock);
-        np->model  = (CM_INLINE|CM_BLOCK|CM_MIXED);
-    }
-    np = (Dict *)TY_(LookupTagDef)( TidyTag_CAPTION );
-    if (np)
-    {
-        np->parser = TY_(ParseBlock);
-    }
-
-    np = (Dict *)TY_(LookupTagDef)( TidyTag_OBJECT );
-    if (np)
-    {
-        np->model = (CM_OBJECT|CM_IMG|CM_INLINE|CM_PARAM); /* reset */
-    }
-    /*\
-     * Issue #461
-     * TidyTag_BUTTON reset to inline in HTML5
-    \*/
-    np = (Dict *)TY_(LookupTagDef)(TidyTag_BUTTON);
-    if (np)
-    {
-        np->parser = TY_(ParseInline);
-    }
-
-    tagsEmptyHash( doc, tags ); /* not sure this is really required, but to be sure */
+    tagsEmptyHash( doc, tags ); /* clearing hash pointers defaults back to global HTML5 map */
+                                /* XXX: Remove by name? Then have to keep in sync, but not as destructive. */
     doc->HTML5Mode = yes;   /* set HTML5 mode */
 }
 

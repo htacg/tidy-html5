@@ -72,7 +72,7 @@ Bool TY_(IsNewNode)(Node *node)
 
 void TY_(CoerceNode)(TidyDocImpl* doc, Node *node, TidyTagId tid, Bool obsolete, Bool unexpected)
 {
-    const Dict* tag = TY_(LookupTagDef)(tid);
+    const Dict* tag = TY_(LookupTagDefForDoc)(doc, tid);
     Node* tmp = TY_(InferredTag)(doc, tag->id);
 
     if (obsolete)
@@ -1150,7 +1150,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
                         node = element->parent;
                         TidyDocFree(doc, node->element);
                         node->element = TY_(tmbstrdup)(doc->allocator, "th");
-                        node->tag = TY_(LookupTagDef)( TidyTag_TH );
+                        node->tag = TY_(LookupTagDefForDoc)( doc, TidyTag_TH );
                         continue;
                     }
                 }
@@ -1738,7 +1738,7 @@ void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
              )
            )
         {
-            node->tag = TY_(LookupTagDef)( TidyTag_BR );
+            node->tag = TY_(LookupTagDefForDoc)( doc, TidyTag_BR );
             TidyDocFree(doc, node->element);
             node->element = TY_(tmbstrdup)(doc->allocator, "br");
             TrimSpaces(doc, element);

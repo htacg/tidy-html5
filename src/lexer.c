@@ -2180,7 +2180,7 @@ Node* TY_(InferredTag)(TidyDocImpl* doc, TidyTagId id)
 {
     Lexer *lexer = doc->lexer;
     Node *node = TY_(NewNode)( lexer->allocator, lexer );
-    const Dict* dict = TY_(LookupTagDef)(id);
+    const Dict* dict = TY_(LookupTagDefForDoc)(doc, id);
 
     assert( dict != NULL );
 

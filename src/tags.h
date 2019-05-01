@@ -128,6 +128,14 @@ void TY_(DeclareUserTag)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr n
  */
 const Dict* TY_(LookupTagDef)( TidyTagId tid );
 
+/** Interface for finding a tag by TidyTagId.
+ ** Unlike the above, it takes html-ness of doc into account.
+ ** @param doc The Tidy document.
+ ** @param tid The TidyTagId to search for.
+ ** @returns An instance of a Tidy tag.
+ */
+const Dict* TY_(LookupTagDefForDoc)( TidyDocImpl* doc, TidyTagId tid );
+
 /** Assigns the node's tag.
  ** @param doc The Tidy document.
  ** @param node The node to assign the tag to.

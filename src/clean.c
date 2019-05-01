@@ -57,7 +57,7 @@ static Node* CleanNode( TidyDocImpl* doc, Node *node );
 
 static void RenameElem( TidyDocImpl* doc, Node* node, TidyTagId tid )
 {
-    const Dict* dict = TY_(LookupTagDef)( tid );
+    const Dict* dict = TY_(LookupTagDefForDoc)( doc, tid );
     TidyDocFree( doc, node->element );
     node->element = TY_(tmbstrdup)( doc->allocator, dict->name );
     node->tag = dict;
@@ -987,7 +987,7 @@ static Bool Dir2Div( TidyDocImpl* doc, Node *node, Node **ARG_UNUSED(pnode))
             return no;
 
         /* coerce dir to div */
-        node->tag = TY_(LookupTagDef)( TidyTag_DIV );
+        node->tag = TY_(LookupTagDefForDoc)( doc, TidyTag_DIV );
         TidyDocFree( doc, node->element );
         node->element = TY_(tmbstrdup)(doc->allocator, "div");
         TY_(AddStyleProperty)( doc, node, "margin-left: 2em" );
@@ -2029,7 +2029,7 @@ void TY_(CleanWord2000)( TidyDocImpl* doc, Node *node)
 
                 if ( !list || TagId(list) != listType )
                 {
-                    const Dict* tag = TY_(LookupTagDef)( listType );
+                    const Dict* tag = TY_(LookupTagDefForDoc)( doc, listType );
                     list = TY_(InferredTag)(doc, tag->id);
                     TY_(InsertNodeBeforeElement)(node, list);
                 }

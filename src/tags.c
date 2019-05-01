@@ -344,8 +344,6 @@ static const Dict tag_defs[] =
 
 
 /* Don't forget to add the appropriate call in AdjustTags() */
-/* XXX LookupTagDef should return entries from this table when doc is configured to html4 mode instead of the other global table */
-/* but right now it doesn't take a doc as part of its arguments */
 static const Dict html4_tag_defs[] =
 {
   { TidyTag_A,          "a",          VERS_ELEM_A,          &TY_(W3CAttrsFor_A)[0],          (CM_INLINE),                                   TY_(ParseInline),   NULL           },
@@ -455,6 +453,17 @@ static const Dict* tagsLookup( TidyDocImpl* doc, TidyTagImpl* tags, ctmbstr s )
     for (p = tags->hashtab[tagsHash(s)]; p && p->tag; p = p->next)
         if (TY_(tmbstrcmp)(s, p->tag->name) == 0)
             return p->tag;
+
+    if (!doc->HTML5Mode)
+    {
+        size_t i;
+        for (i = 0; i < sizeof(html4_tag_defs)/sizeof(html4_tag_defs[0]); ++i)
+        {
+            np = &html4_tag_defs[i];
+            if (TY_(tmbstrcmp)(s, np->name) == 0)
+                return tagsInstall(doc, tags, np);
+        }
+    }
 
     for (np = tag_defs + 1; np < tag_defs + N_TIDY_TAGS; ++np)
         if (TY_(tmbstrcmp)(s, np->name) == 0)
@@ -634,15 +643,46 @@ Bool TY_(FindTag)( TidyDocImpl* doc, Node *node )
     return no;
 }
 
+static const Dict* LookupTagDefAll( Bool html5, TidyTagId tid )
+{
+    const Dict *np = NULL;
+
+    if (!html5)
+    {
+        size_t i;
+        for (i = 0; i < sizeof(html4_tag_defs)/sizeof(html4_tag_defs[0]); ++i)
+        {
+            np = &html4_tag_defs[i];
+            if (np->id == tid)
+                break;
+        }
+    }
+
+    /* Assume html5 is a superset, even though that's not 100% true */
+    if (!np)
+    {
+        for (np = tag_defs + 1; np < tag_defs + N_TIDY_TAGS; ++np )
+        {
+            if (np->id == tid)
+                break;
+        }
+    }
+
+    return np;
+}
+
+const Dict* TY_(LookupTagDefForDoc)( TidyDocImpl* doc, TidyTagId tid )
+{
+    return LookupTagDefAll( doc->HTML5Mode, tid );
+}
+
+
+/* XXX: Not thread safe to use this API */
+static Bool HTML5Mode = yes;
 const Dict* TY_(LookupTagDef)( TidyTagId tid )
 {
-    const Dict *np;
-
-    for (np = tag_defs + 1; np < tag_defs + N_TIDY_TAGS; ++np )
-        if (np->id == tid)
-            return np;
-
-    return NULL;
+    Bool mode = HTML5Mode;
+    return LookupTagDefAll( mode, tid );
 }
 
 Parser* TY_(FindParser)( TidyDocImpl* doc, Node *node )
@@ -747,6 +787,9 @@ void TY_(InitTags)( TidyDocImpl* doc )
     xml->chkattrs = 0;
     xml->attrvers = NULL;
     tags->xml_tags = xml;
+
+    /* Set default to HTML5, since it is */
+    doc->HTML5Mode = yes;
 }
 
 /* By default, zap all of them.  But allow
@@ -816,7 +859,7 @@ void TY_(AdjustTags)( TidyDocImpl *doc )
         tagsInstall(doc, tags, &html4_tag_defs[i]);
     }
 
-    doc->HTML5Mode = no;   /* set *NOT* HTML5 mode */
+    HTML5Mode = doc->HTML5Mode = no;   /* set *NOT* HTML5 mode */
 }
 
 Bool TY_(IsHTML5Mode)( TidyDocImpl *doc )
@@ -836,7 +879,7 @@ void TY_(ResetTags)( TidyDocImpl *doc )
     TidyTagImpl* tags = &doc->tags;
     tagsEmptyHash( doc, tags ); /* clearing hash pointers defaults back to global HTML5 map */
                                 /* XXX: Remove by name? Then have to keep in sync, but not as destructive. */
-    doc->HTML5Mode = yes;   /* set HTML5 mode */
+    HTML5Mode = doc->HTML5Mode = yes;   /* set HTML5 mode */
 }
 
 void TY_(FreeTags)( TidyDocImpl* doc )

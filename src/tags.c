@@ -174,7 +174,7 @@ static CheckAttribs CheckHTML;
  *
  * NOTE: If making changes to this table's entries, you MUST keep alt-entries in sync (as relevant for HTML4).
 \*/
-static Dict tag_defs[] =
+static const Dict tag_defs[] =
 {
   { TidyTag_UNKNOWN,    "unknown!",   VERS_UNKNOWN,         NULL,                       (0),                                           NULL,          NULL           },
 

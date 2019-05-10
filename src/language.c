@@ -593,7 +593,7 @@ const tidyLocaleMapItemImpl *TY_(getNextWindowsLanguage)( TidyIterator *iter )
 /**
  *  Given a `tidyLocaleMapItemImpl, return the Windows name.
  */
-ctmbstr TY_(TidyLangWindowsName)( const tidyLocaleMapItemImpl *item )
+ctmbstr TY_(tidyLangWindowsName)( const tidyLocaleMapItemImpl *item )
 {
     return item->winName;
 }
@@ -602,7 +602,7 @@ ctmbstr TY_(TidyLangWindowsName)( const tidyLocaleMapItemImpl *item )
 /**
  *  Given a `tidyLocaleMapItemImpl, return the POSIX name.
  */
-ctmbstr TY_(TidyLangPosixName)( const tidyLocaleMapItemImpl *item )
+ctmbstr TY_(tidyLangPosixName)( const tidyLocaleMapItemImpl *item )
 {
     return item->POSIXName;
 }

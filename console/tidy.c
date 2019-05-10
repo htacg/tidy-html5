@@ -1351,8 +1351,8 @@ void tidyPrintWindowsLanguageNames( ctmbstr format )
 
     while (i) {
         item = getNextWindowsLanguage(&i);
-        winName = TidyLangWindowsName( item );
-        posixName = TidyLangPosixName( item );
+        winName = tidyLangWindowsName( item );
+        posixName = tidyLangPosixName( item );
         if ( format )
             printf( format, winName, posixName );
         else

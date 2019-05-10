@@ -2072,7 +2072,7 @@ opaque_type(tidyLocaleMapItem);
  **   TidyIterator itList = getWindowsLanguageList();
  **   while ( itList ) {
  **     tidyLocaleMapItem *item = getNextWindowsLanguage( &itList );
- **     // do something such as get the TidyLangWindowsName(item).
+ **     // do something such as get the tidyLangWindowsName(item).
  **   }
  ** @endcode
  ** @result Returns a TidyIterator, which is a token used to represent the
@@ -2082,7 +2082,7 @@ TIDY_EXPORT TidyIterator TIDY_CALL getWindowsLanguageList(void);
 
 /** Given a valid TidyIterator initiated with getWindowsLanguageList(), returns
  ** a pointer to a tidyLocaleMapItem, which can be further interrogated with
- ** TidyLangWindowsName() or TidyLangPosixName().
+ ** tidyLangWindowsName() or tidyLangPosixName().
  ** @param iter The TidyIterator (initiated with getWindowsLanguageList()) token.
  ** @result Returns a pointer to a tidyLocaleMapItem.
  */
@@ -2092,13 +2092,13 @@ TIDY_EXPORT const tidyLocaleMapItem* TIDY_CALL getNextWindowsLanguage( TidyItera
  ** @param item An instance of tidyLocaleMapItem to query.
  ** @result Returns a string with the Windows name of the mapping.
  */
-TIDY_EXPORT ctmbstr TIDY_CALL TidyLangWindowsName( const tidyLocaleMapItem *item );
+TIDY_EXPORT ctmbstr TIDY_CALL tidyLangWindowsName( const tidyLocaleMapItem *item );
 
 /** Given a `tidyLocaleMapItem`, return the POSIX name.
  ** @param item An instance of tidyLocaleMapItem to query.
  ** @result Returns a string with the POSIX name of the mapping.
  */
-TIDY_EXPORT ctmbstr TIDY_CALL TidyLangPosixName( const tidyLocaleMapItem *item );
+TIDY_EXPORT ctmbstr TIDY_CALL tidyLangPosixName( const tidyLocaleMapItem *item );
 
 /** @}
  ** @name Getting Localized Strings

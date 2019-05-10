@@ -2655,15 +2655,15 @@ const tidyLocaleMapItem* TIDY_CALL getNextWindowsLanguage( TidyIterator* iter )
 }
 
 
-ctmbstr TIDY_CALL TidyLangWindowsName( const tidyLocaleMapItem *item )
+ctmbstr TIDY_CALL tidyLangWindowsName( const tidyLocaleMapItem *item )
 {
-    return TY_(TidyLangWindowsName)( (tidyLocaleMapItemImpl*)(item) );
+    return TY_(tidyLangWindowsName)( (tidyLocaleMapItemImpl*)(item) );
 }
 
 
-ctmbstr TIDY_CALL TidyLangPosixName( const tidyLocaleMapItem *item )
+ctmbstr TIDY_CALL tidyLangPosixName( const tidyLocaleMapItem *item )
 {
-    return TY_(TidyLangPosixName)( (tidyLocaleMapItemImpl*)(item) );
+    return TY_(tidyLangPosixName)( (tidyLocaleMapItemImpl*)(item) );
 }
 
 

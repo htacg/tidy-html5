@@ -97,7 +97,7 @@ Congratulations, you can now expose new functionality to the API.
 
 ## API functions for opaque types
 
-For a more complicated example that demonstrates how to use opaque types (and also the `TidyIterator` type) have a look at the implementation of `getWindowsLanguageList()`, and its partners `*getNextWindowsLanguage()`, `TidyLangWindowsName()`, and `TidyLangPosixName()`. These demonstrate how to:
+For a more complicated example that demonstrates how to use opaque types (and also the `TidyIterator` type) have a look at the implementation of `getWindowsLanguageList()`, and its partners `*getNextWindowsLanguage()`, `tidyLangWindowsName()`, and `tidyLangPosixName()`. These demonstrate how to:
 
   - implement iteration for structures with multiple records.
   - write a function in `tidylib.c` that converts between the exposed, opaque type and the internal, implementation type.

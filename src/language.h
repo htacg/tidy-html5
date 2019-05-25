@@ -189,12 +189,12 @@ TidyIterator TY_(getWindowsLanguageList)(void);
 const tidyLocaleMapItemImpl *TY_(getNextWindowsLanguage)( TidyIterator* iter );
 
 /**
- *  Given a `tidyLocalMapItemImpl, return the Windows name.
+ *  Given a `tidyLocaleMapItemImpl, return the Windows name.
  */
 ctmbstr TY_(TidyLangWindowsName)( const tidyLocaleMapItemImpl *item );
 
 /**
- *  Given a `tidyLocalMapItemImpl, return the POSIX name.
+ *  Given a `tidyLocaleMapItemImpl, return the POSIX name.
  */
 ctmbstr TY_(TidyLangPosixName)( const tidyLocaleMapItemImpl *item );
 

@@ -97,3 +97,6 @@ Add an `issue` if you need further **help**... thanks...
 
 It goes without saying **all help is appreciated**. We need to work together to make Tidy better!
 
+### Issue triage [![Open Source Helpers](https://www.codetriage.com/htacg/tidy-html5/badges/users.svg)](https://www.codetriage.com/htacg/tidy-html5)
+
+You can contribute by triaging issues which may include reproducing bug reports or asking for vital information, such as version numbers or reproduction instructions. If you would like to start triaging issues, one easy way to get started is to [subscribe to tidy-html5 on CodeTriage](https://www.codetriage.com/htacg/tidy-html5).

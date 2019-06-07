@@ -1740,6 +1740,10 @@ static void printXMLCrossRefEqConsole(TidyDoc tdoc,   /**< The Tidy document. */
             free((tmbstr)localHit.name3);
             free(localName);
         }
+        if ( localHit.eqconfig ) /* Is. #791 */
+        {
+            free((tmbstr)localHit.eqconfig);
+        }
 
     }
     else
@@ -1886,6 +1890,7 @@ static void xml_help( void )
         if (localPos.name1) free((tmbstr)localPos.name1);
         if (localPos.name2) free((tmbstr)localPos.name2);
         if (localPos.name3) free((tmbstr)localPos.name3);
+        if (localPos.eqconfig) free((tmbstr)localPos.eqconfig); /* Is. #791 */
     }
 
     printf( "</cmdline>\n" );

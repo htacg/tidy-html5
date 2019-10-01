@@ -36,6 +36,7 @@ static Bool tabs = false;
  the next, and experience shows that wrapping the local
  mechanisms up provides for greater flexibility and allows
  out of memory conditions to be detected in one place.
+ Thankyou
 */
 void *MemAlloc(size_t size)
 {
@@ -352,8 +353,8 @@ int main(int argc, char **argv)
 
         --argc;
         ++argv;
-        
-        if (argc <= 1)
+        int argumentc = argc
+        if (argumentc <= 1)
             break;
     }
 

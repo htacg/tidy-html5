@@ -2880,6 +2880,17 @@ const AttrVersion TY_(W3CAttrsFor_SMALL)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
+const AttrVersion TY_(W3CAttrsFor_SLOT)[] =
+{
+  INCLUDE_ARIA
+  INCLUDE_MICRODATA
+  { TidyAttr_NAME,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
+  INCLUDE_CORE_ATTRIBS
+  INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
+  { TidyAttr_UNKNOWN,               0                                                                          },
+};
+
 const AttrVersion TY_(W3CAttrsFor_SOURCE)[] = 
 {
   INCLUDE_ARIA

@@ -1144,6 +1144,7 @@ typedef enum
   TidyAttr_SHOWGRIDX,              /**< SHOWGRIDX= */
   TidyAttr_SHOWGRIDY,              /**< SHOWGRIDY= */
   TidyAttr_SIZE,                   /**< SIZE= */
+  TidyAttr_SLOT,                   /**< SLOT= */
   TidyAttr_SPAN,                   /**< SPAN= */
   TidyAttr_SRC,                    /**< SRC= */
   TidyAttr_SRCSET,                 /**< SRCSET= (HTML5) */

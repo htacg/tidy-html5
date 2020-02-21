@@ -40,6 +40,17 @@ If you do **not** need the tidy library built as a 'shared' (DLL) library, then 
 
 See the `CMakeLists.txt` file for other CMake **options** offered.
 
+Alternatively, you can build and install tidy using [vcpkg](https://github.com/Microsoft/vcpkg/) dependency manager:
+
+  1. `git clone https://github.com/Microsoft/vcpkg.git`
+  2. `cd vcpkg`
+  3. `./bootstrap-vcpkg.sh`
+  4. `./vcpkg integrate install`
+  5. `./vcpkg install tidy-html5`
+
+The tidy-html5 port in vcpkg is kept up to date by Microsoft team members and community contributors.
+If the version is out of date, please [create an issue or pull request](https://github.com/Microsoft/vcpkg) on the vcpkg repository.
+
 ## Build the tidy packages
 
   1. `cd build/cmake`

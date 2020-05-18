@@ -2944,15 +2944,15 @@ msgstr "hífenes adjacentes dentro de comentário"
 
 msgctxt "MALFORMED_COMMENT_DROPPING"
 msgid "dropping a possible comment due to a missing hyphen"
-msgstr ""
+msgstr "descartando um possível comentário devido à falta de hífen"
 
 msgctxt "MALFORMED_COMMENT_EOS"
 msgid "the end of the document was reached before the end of the comment"
-msgstr ""
+msgstr "o fim do documento foi alcançado antes do fim do comentário"
 
 msgctxt "MALFORMED_COMMENT_WARN"
 msgid "detected adjacent hyphens within the comment; consider fix-bad-comments"
-msgstr ""
+msgstr "hífens adjacentes detectados dentro do comentário; considere fix-bad-comments"
 
 msgctxt "MALFORMED_DOCTYPE"
 msgid "discarding malformed <!DOCTYPE>"

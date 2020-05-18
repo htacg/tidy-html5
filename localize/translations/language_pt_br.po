@@ -2568,6 +2568,10 @@ msgid ""
 "this behavior, then consider setting the option \"drop-empty-elements\"\n"
 "to no.\n"
 msgstr ""
+"Um ou mais elementos vazios estavam presentes no documento-fonte mas\n"
+"foram descartados no resultado. Se esses elementos são necessários ou\n"
+"se você não deseja esse comportamento, então considere configurar a opção\n"
+"\"drop-empty-elements\" para no.\n"
 
 #. This console output should be limited to 78 characters per line.
 #. - The URL should not be translated unless you find a matching URL in your language.

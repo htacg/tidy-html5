@@ -4193,7 +4193,13 @@ msgid ""
 "  %s \n"
 "\n"
 msgstr ""
-
+"\n"
+" Ademais, Tidy tentará automaticamente utilizar configuração especificada \n"
+" nesses documentos, se presentes: \n"
+"\n"
+"  %s \n"
+"  %s \n"
+"\n"
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 msgctxt "TC_TXT_HELP_CONFIG"
@@ -4255,6 +4261,17 @@ msgid ""
 " - Options in a file specified on the command line. \n"
 " - Options set directly on the command line. \n"
 msgstr ""
+"\n"
+"Tidy pode configurar valores de opções a partir de várias fontes, \n"
+"na ordem abaixo. O uso subsequente da mesma opção sobreescreve \n"
+"configurações anteriores. \n"
+"\n"
+" - Valores inbutidos padrões de Tidy. \n"
+"%s" /* rc files */
+" - O documento especificado na variável de ambiente $HTML_TIDY: \n"
+"     %s \n"
+" - Opções num arquivo especificado na linha do comando. \n"
+" - Opções definidas diretamente na linha de comando. \n"
 
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.

@@ -1650,7 +1650,10 @@ msgid ""
 "use the <code>mute</code> configuration option in order to filter "
 "out certain report messages. "
 msgstr ""
-
+"Essa opção determina se Tidy deve apresentar ou não os IDs da mensagem "
+"com cada um de seus relatórios de erros. Pode ser útil se você quiser "
+"usar a opção de configuração <code>mute</code> a fim de filtrar "
+"certas mensagens do relatório. "
 #. Important notes for translators:
 #. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
 #. <br/>.

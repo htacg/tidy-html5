@@ -4283,13 +4283,16 @@ msgid ""
 " - The user runtime configuration file: \n"
 "     %s \n"
 msgstr ""
-
+" - O documento de configuração de execução do sistema: \n"
+"     %s \n"
+" - O documento de configuração de execução do usuário: \n"
+"     %s \n"
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 #. - This message indicates that a file name is not currently set.
 msgctxt "TC_TXT_HELP_ENV_1B"
 msgid "(not currently set)"
-msgstr ""
+msgstr "(não definido no momento)"
 
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
@@ -4300,7 +4303,9 @@ msgid ""
 "Note that because $HTML_TIDY is set, the user runtime configuration file \n"
 "%s will not be used. \n"
 msgstr ""
-
+"\n"
+"Note que, dado que $HTML_TIDY foi definida, o documento de configuração \n"
+"de execução do usuário %s não será utilizado. \n"
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 msgctxt "TC_TXT_HELP_LANG_1"

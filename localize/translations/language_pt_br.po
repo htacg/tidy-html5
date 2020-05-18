@@ -2215,7 +2215,7 @@ msgstr ""
 
 msgctxt "TidyWarning"
 msgid "Warning: "
-msgstr "Acesso: "
+msgstr "Aviso: "
 
 msgctxt "TidyConfig"
 msgid "Config: "

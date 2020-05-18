@@ -898,17 +898,17 @@ msgid ""
 "<code>&lt;?php ... ?&gt;</code>. As always, all other tabs, or sequences of tabs, in "
 "the source will continue to be replaced with a space. "
 msgstr ""
-"Com <var>no</var> preconfigurado, Tidy substituirá todas as tabs da fonte com espaços, "
+"Com <var>no</var> preconfigurado, Tidy substituirá todas as tabulações da fonte com espaços, "
 "em conformidade com a opção <code>tab-size</code> e o deslocamento da linha atual. "
 "Obviamente, com exceção dos blocos/elementos enumerados abaixo, isto será "
 "reduzido depois a apenas um espaço "
 "<br/>"
 "Se configurado para <var>yes</var> essa opção determina que Tidy deve manter "
-"certas tabs encontradas na fonte, mas apenas "
+"certas tabulaçõess encontradas na fonte, mas apenas "
 "em blocos preformatados como <code>&lt;pre&gt;</code> e outros elementos CDATA como "
 "<code>&lt;script&gt;</code>, <code>&lt;style&gt;</code> e outros pseudo-elementos como "
-"<code>&lt;?php ... ?&gt;</code>. Como sempre, todas as demais tabs ou sequências de tabs "
-"na fonte continuarão a ser substituídas por um espaço. "
+"<code>&lt;?php ... ?&gt;</code>. Como sempre, todas as demais tabulações ou "
+"sequências de tabulações na fonte continuarão a ser substituídas por um espaço. "
 #. Important notes for translators:
 #. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
 #. <br/>.
@@ -1628,7 +1628,13 @@ msgid ""
 "<code>mute-id</code> configuration option and examining Tidy's "
 "output. "
 msgstr ""
-
+"Use esta opção para impedir que Tidy mostre certos tipos de "
+"relatórios, por exemplo, para condições que você deseja ignorar. "
+"<br/>"
+"Essa opção recebe uma lista de uma ou mais chaves que indicam o tipo de "
+"mensagem a ser silenciada. Você pode descobrir as chaves destas mensagens "
+"usando a opção de configuração <code>mute-id</code> e examinando o resultado "
+"produzido por Tidy. "
 #. Important notes for translators:
 #. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
 #. <br/>.

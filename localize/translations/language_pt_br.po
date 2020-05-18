@@ -2995,7 +2995,7 @@ msgstr "faltando </%s>"
 #, c-format
 msgctxt "MISSING_ENDTAG_OPTIONAL"
 msgid "missing optional end tag </%s>"
-msgstr ""
+msgstr "faltando tag final opcional </%s>"
 
 #, c-format
 msgctxt "MISSING_IMAGEMAP"
@@ -3010,7 +3010,7 @@ msgstr "atributo de %s faltando aspas ao final"
 #, c-format
 msgctxt "MISSING_QUOTEMARK_OPEN"
 msgid "value for attribute \"%s\" missing quote marks"
-msgstr ""
+msgstr "valor para atributo \"%s\" faltando aspas"
 
 #, c-format
 msgctxt "MISSING_SEMICOLON_NCR"
@@ -3067,17 +3067,17 @@ msgstr "substituindo elemento obsoleto %s por %s"
 #, c-format
 msgctxt "OPTION_REMOVED"
 msgid "option \"%s\" no longer exists, and no replacement could be found."
-msgstr ""
+msgstr "opção \"%s\" não existe mais e nenhum substituto pôde ser encontrado."
 
 #, c-format
 msgctxt "OPTION_REMOVED_APPLIED"
 msgid "option \"%s\" replaced with \"%s\", which Tidy has set to \"%s\"."
-msgstr ""
+msgstr "opção \"%s\" substituída por \"%s\", que Tidy configurou para \"%s\"."
 
 #, c-format
 msgctxt "OPTION_REMOVED_UNAPPLIED"
 msgid "option \"%s\" replaced with \"%s\", but Tidy could not set it for you."
-msgstr ""
+msgstr "opção \"%s\" substituída por \"%s\", mas Tidy não pôde configurar para você"
 
 #, c-format
 msgctxt "PREVIOUS_LOCATION"
@@ -3126,7 +3126,7 @@ msgstr "removendo espaço em branco precedendo a declaração XML"
 #, c-format
 msgctxt "STRING_ARGUMENT_BAD"
 msgid "option \"%s\" given bad argument \"%s\""
-msgstr ""
+msgstr "opção \"%s\" recebeu argumento errado \"%s\""
 
 #, c-format
 msgctxt "STRING_MISSING_MALFORMED"
@@ -3136,7 +3136,7 @@ msgstr "argumento faltando ou malformado para opção: %s"
 #, c-format
 msgctxt "STRING_MUTING_TYPE"
 msgid "messages of type \"%s\" will not be output"
-msgstr ""
+msgstr "mensagens de tipo \"%s\" não vão ser geradas"
 
 #, c-format
 msgctxt "STRING_UNKNOWN_OPTION"

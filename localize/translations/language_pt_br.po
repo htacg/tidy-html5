@@ -3889,11 +3889,11 @@ msgstr "lista as definições da configuração atual"
 
 msgctxt "TC_OPT_EXP_CFG"
 msgid "list the current configuration settings, suitable for a config file"
-msgstr ""
+msgstr "lista as configurações atuais, apropriadas para um documento config"
 
 msgctxt "TC_OPT_EXP_DEF"
 msgid "list the default configuration settings, suitable for a config file"
-msgstr ""
+msgstr "lista as configurações padrões, apropriadas para um documento config"
 
 msgctxt "TC_OPT_UPPER"
 msgid "force tags to upper case"

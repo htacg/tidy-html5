@@ -3813,11 +3813,11 @@ msgstr "lista todas as opções de configuração"
 
 msgctxt "TC_OPT_HELPENV"
 msgid "show information about the environment and runtime configuration"
-msgstr ""
+msgstr "mostra informações sobre o ambiente e a configuração de execução"
 
 msgctxt "TC_OPT_HELPOPT"
 msgid "show a description of the <option>"
-msgstr "  mostra uma descrição da <opção>"
+msgstr "mostra uma descrição da <opção>"
 
 msgctxt "TC_OPT_IBM858"
 msgid "use IBM-858 (CP850+Euro) for input, US-ASCII for output"

@@ -3263,6 +3263,22 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
 
                     if (!name)
                     {
+                        /* check if attributes are created by ASP markup */
+                        if (asp)
+                        {
+                            av = TY_(NewAttribute)(doc);
+                            av->asp = asp;
+                            AddAttrToList( &attributes, av ); 
+                        }
+
+                        /* check if attributes are created by PHP markup */
+                        if (php)
+                        {
+                            av = TY_(NewAttribute)(doc);
+                            av->php = php;
+                            AddAttrToList( &attributes, av ); 
+                        }
+                      
                         /* fix for http://tidy.sf.net/bug/788031 */
                         lexer->lexsize -= 1;
                         lexer->txtend = lexer->txtstart;

@@ -412,9 +412,7 @@ if (BUILD_SHARED_LIB)
                                    VERSION   ${LIBTIDY_VERSION}
                                    SOVERSION ${TIDY_MAJOR_VERSION} )
     set_target_properties( ${name} PROPERTIES 
-                                   COMPILE_FLAGS "-DBUILD_SHARED_LIB" )
-    set_target_properties( ${name} PROPERTIES 
-                                   COMPILE_FLAGS "-DBUILDING_SHARED_LIB" )
+                                   COMPILE_FLAGS "-DBUILD_SHARED_LIB -DBUILDING_SHARED_LIB")
     install(TARGETS ${name}
         RUNTIME DESTINATION ${BIN_INSTALL_DIR}
         ARCHIVE DESTINATION ${LIB_INSTALL_DIR}

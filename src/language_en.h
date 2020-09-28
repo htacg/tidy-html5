@@ -1117,7 +1117,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
       be translated. */
         TidyQuoteAmpersand,           0,
         "This option specifies if Tidy should output unadorned <code>&amp;</code> "
-        "characters as <code>&amp;amp;</code>. "
+        "characters as <code>&amp;amp;</code>, in legacy doctypes only. "
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and

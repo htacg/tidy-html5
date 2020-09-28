@@ -2337,7 +2337,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         " of \"--some-option <value>\", for example, \"--indent-with-tabs yes\".\n"
         "\n"
         " You can also specify a file containing configuration options with the \n"
-        " -options <file> directive, or in one or more files specific to your \n"
+        " -config <file> directive, or in one or more files specific to your \n"
         " environment (see next section). \n"
         "\n"
         " For a list of all configuration options, use \"-help-config\" or refer\n"

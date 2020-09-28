@@ -4,11 +4,15 @@
 @set TMPPRJ=tidy
 @set TMPSRC=..\..
 @set TMPBGN=%TIME%
-@set TMPINS=..\..\..\software
+@set TMPINS=D:\Projects\3rdParty
 @set TMPLOG=bldlog-1.txt
 @set DOPAUSE=1
+@set TMPGEN=Visual Studio 16 2019
+@set TMPBR=next
+@set TMPINDBG=0
 
-@set TMPOPTS=-DCMAKE_INSTALL_PREFIX=%TMPINS%
+@set TMPOPTS=-G "%TMPGEN%" -A Win32
+@set TMPOPTS=%TMPOPTS% -DCMAKE_INSTALL_PREFIX=%TMPINS%
 @set TMPOPTS=%TMPOPTS% -DBUILD_SHARED_LIB=ON
 
 :RPT
@@ -23,9 +27,11 @@
 :GOTCMD
 
 @call chkmsvc %TMPPRJ%
-@call chkbranch next
+@if "%TMPBR%x" == "x" goto DNBR
+@call chkbranch %TMPBR%
+:DNBR
 
-@echo Build %DATE% %TIME% > %TMPLOG%
+@echo Build %TMPPRJ% 32-bits %DATE% %TIME%, in %CD%, to  %TMPLOG% > %TMPLOG%
 
 @if NOT EXIST %TMPSRC%\nul goto NOSRC
 
@@ -57,6 +63,11 @@
 @call elapsed %TMPBGN%
 @echo Appears a successful build... see %TMPLOG%
 @echo Note install location %TMPINS%
+@if "%TMPINDBG%x" == "1x" (
+@echo Will install Debug and Release
+) else {
+@echo Will only intall Release
+)
 @echo.
 
 @REM ##############################################
@@ -86,10 +97,12 @@
 :DOINST
 @echo Proceeding with INSTALL...
 @echo.
+@if NOT "%TMPINDBG%x" == "1x" goto DNDBGIN
 @echo Doing: 'cmake --build . --config Debug  --target INSTALL'
 @echo Doing: 'cmake --build . --config Debug  --target INSTALL' >> %TMPLOG% 2>&1
 @cmake --build . --config Debug  --target INSTALL >> %TMPLOG% 2>&1
 @if ERRORLEVEL 1 goto ERR4
+:DNDBGIN
 
 @echo Doing: 'cmake --build . --config Release  --target INSTALL'
 @echo Doing: 'cmake --build . --config Release  --target INSTALL' >> %TMPLOG% 2>&1

@@ -1828,7 +1828,11 @@ static uint FindGivenVersion( TidyDocImpl* doc, Node* doctype )
 
     if (!fpi || !fpi->value) 
     {
-        if (doctype->element && (TY_(tmbstrcmp)(doctype->element,"html") == 0))
+        /*\
+         * Is. #815 - change to case-insensitive test
+         * See REC: https://www.w3.org/TR/html5/syntax.html#the-doctype
+        \*/
+        if (doctype->element && (TY_(tmbstrcasecmp)(doctype->element,"html") == 0))
         {
             return VERS_HTML5;  /* TODO: do we need to check MORE? */
         }

@@ -898,7 +898,17 @@ msgid ""
 "<code>&lt;?php ... ?&gt;</code>. As always, all other tabs, or sequences of tabs, in "
 "the source will continue to be replaced with a space. "
 msgstr ""
-
+"Com <var>no</var> preconfigurado, Tidy substituirá todas as tabulações da fonte com espaços, "
+"em conformidade com a opção <code>tab-size</code> e o deslocamento da linha atual. "
+"Obviamente, com exceção dos blocos/elementos enumerados abaixo, isto será "
+"reduzido depois a apenas um espaço "
+"<br/>"
+"Se configurado para <var>yes</var> essa opção determina que Tidy deve manter "
+"certas tabulaçõess encontradas na fonte, mas apenas "
+"em blocos preformatados como <code>&lt;pre&gt;</code> e outros elementos CDATA como "
+"<code>&lt;script&gt;</code>, <code>&lt;style&gt;</code> e outros pseudo-elementos como "
+"<code>&lt;?php ... ?&gt;</code>. Como sempre, todas as demais tabulações ou "
+"sequências de tabulações na fonte continuarão a ser substituídas por um espaço. "
 #. Important notes for translators:
 #. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
 #. <br/>.
@@ -1618,7 +1628,13 @@ msgid ""
 "<code>mute-id</code> configuration option and examining Tidy's "
 "output. "
 msgstr ""
-
+"Use esta opção para impedir que Tidy mostre certos tipos de "
+"relatórios, por exemplo, para condições que você deseja ignorar. "
+"<br/>"
+"Essa opção recebe uma lista de uma ou mais chaves que indicam o tipo de "
+"mensagem a ser silenciada. Você pode descobrir as chaves destas mensagens "
+"usando a opção de configuração <code>mute-id</code> e examinando o resultado "
+"produzido por Tidy. "
 #. Important notes for translators:
 #. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
 #. <br/>.
@@ -1634,7 +1650,10 @@ msgid ""
 "use the <code>mute</code> configuration option in order to filter "
 "out certain report messages. "
 msgstr ""
-
+"Essa opção determina se Tidy deve apresentar ou não os IDs da mensagem "
+"com cada um de seus relatórios de erros. Pode ser útil se você quiser "
+"usar a opção de configuração <code>mute</code> a fim de filtrar "
+"certas mensagens do relatório. "
 #. Important notes for translators:
 #. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
 #. <br/>.
@@ -2196,7 +2215,7 @@ msgstr ""
 
 msgctxt "TidyWarning"
 msgid "Warning: "
-msgstr "Acesso: "
+msgstr "Aviso: "
 
 msgctxt "TidyConfig"
 msgid "Config: "
@@ -2549,6 +2568,10 @@ msgid ""
 "this behavior, then consider setting the option \"drop-empty-elements\"\n"
 "to no.\n"
 msgstr ""
+"Um ou mais elementos vazios estavam presentes no documento-fonte mas\n"
+"foram descartados no resultado. Se esses elementos são necessários ou\n"
+"se você não deseja esse comportamento, então considere configurar a opção\n"
+"\"drop-empty-elements\" para no.\n"
 
 #. This console output should be limited to 78 characters per line.
 #. - The URL should not be translated unless you find a matching URL in your language.
@@ -2921,15 +2944,15 @@ msgstr "hífenes adjacentes dentro de comentário"
 
 msgctxt "MALFORMED_COMMENT_DROPPING"
 msgid "dropping a possible comment due to a missing hyphen"
-msgstr ""
+msgstr "descartando um possível comentário devido à falta de hífen"
 
 msgctxt "MALFORMED_COMMENT_EOS"
 msgid "the end of the document was reached before the end of the comment"
-msgstr ""
+msgstr "o fim do documento foi alcançado antes do fim do comentário"
 
 msgctxt "MALFORMED_COMMENT_WARN"
 msgid "detected adjacent hyphens within the comment; consider fix-bad-comments"
-msgstr ""
+msgstr "hífens adjacentes detectados dentro do comentário; considere fix-bad-comments"
 
 msgctxt "MALFORMED_DOCTYPE"
 msgid "discarding malformed <!DOCTYPE>"
@@ -2972,7 +2995,7 @@ msgstr "faltando </%s>"
 #, c-format
 msgctxt "MISSING_ENDTAG_OPTIONAL"
 msgid "missing optional end tag </%s>"
-msgstr ""
+msgstr "faltando tag final opcional </%s>"
 
 #, c-format
 msgctxt "MISSING_IMAGEMAP"
@@ -2987,7 +3010,7 @@ msgstr "atributo de %s faltando aspas ao final"
 #, c-format
 msgctxt "MISSING_QUOTEMARK_OPEN"
 msgid "value for attribute \"%s\" missing quote marks"
-msgstr ""
+msgstr "valor para atributo \"%s\" faltando aspas"
 
 #, c-format
 msgctxt "MISSING_SEMICOLON_NCR"
@@ -3044,17 +3067,17 @@ msgstr "substituindo elemento obsoleto %s por %s"
 #, c-format
 msgctxt "OPTION_REMOVED"
 msgid "option \"%s\" no longer exists, and no replacement could be found."
-msgstr ""
+msgstr "opção \"%s\" não existe mais e nenhum substituto pôde ser encontrado."
 
 #, c-format
 msgctxt "OPTION_REMOVED_APPLIED"
 msgid "option \"%s\" replaced with \"%s\", which Tidy has set to \"%s\"."
-msgstr ""
+msgstr "opção \"%s\" substituída por \"%s\", que Tidy configurou para \"%s\"."
 
 #, c-format
 msgctxt "OPTION_REMOVED_UNAPPLIED"
 msgid "option \"%s\" replaced with \"%s\", but Tidy could not set it for you."
-msgstr ""
+msgstr "opção \"%s\" substituída por \"%s\", mas Tidy não pôde configurar para você"
 
 #, c-format
 msgctxt "PREVIOUS_LOCATION"
@@ -3103,7 +3126,7 @@ msgstr "removendo espaço em branco precedendo a declaração XML"
 #, c-format
 msgctxt "STRING_ARGUMENT_BAD"
 msgid "option \"%s\" given bad argument \"%s\""
-msgstr ""
+msgstr "opção \"%s\" recebeu argumento errado \"%s\""
 
 #, c-format
 msgctxt "STRING_MISSING_MALFORMED"
@@ -3113,7 +3136,7 @@ msgstr "argumento faltando ou malformado para opção: %s"
 #, c-format
 msgctxt "STRING_MUTING_TYPE"
 msgid "messages of type \"%s\" will not be output"
-msgstr ""
+msgstr "mensagens de tipo \"%s\" não vão ser geradas"
 
 #, c-format
 msgctxt "STRING_UNKNOWN_OPTION"
@@ -3790,11 +3813,11 @@ msgstr "lista todas as opções de configuração"
 
 msgctxt "TC_OPT_HELPENV"
 msgid "show information about the environment and runtime configuration"
-msgstr ""
+msgstr "mostra informações sobre o ambiente e a configuração de execução"
 
 msgctxt "TC_OPT_HELPOPT"
 msgid "show a description of the <option>"
-msgstr "  mostra uma descrição da <opção>"
+msgstr "mostra uma descrição da <opção>"
 
 msgctxt "TC_OPT_IBM858"
 msgid "use IBM-858 (CP850+Euro) for input, US-ASCII for output"
@@ -3866,11 +3889,11 @@ msgstr "lista as definições da configuração atual"
 
 msgctxt "TC_OPT_EXP_CFG"
 msgid "list the current configuration settings, suitable for a config file"
-msgstr ""
+msgstr "lista as configurações atuais, apropriadas para um documento config"
 
 msgctxt "TC_OPT_EXP_DEF"
 msgid "list the default configuration settings, suitable for a config file"
-msgstr ""
+msgstr "lista as configurações padrões, apropriadas para um documento config"
 
 msgctxt "TC_OPT_UPPER"
 msgid "force tags to upper case"
@@ -4170,7 +4193,13 @@ msgid ""
 "  %s \n"
 "\n"
 msgstr ""
-
+"\n"
+" Ademais, Tidy tentará automaticamente utilizar configuração especificada \n"
+" nesses documentos, se presentes: \n"
+"\n"
+"  %s \n"
+"  %s \n"
+"\n"
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 msgctxt "TC_TXT_HELP_CONFIG"
@@ -4232,6 +4261,17 @@ msgid ""
 " - Options in a file specified on the command line. \n"
 " - Options set directly on the command line. \n"
 msgstr ""
+"\n"
+"Tidy pode configurar valores de opções a partir de várias fontes, \n"
+"na ordem abaixo. O uso subsequente da mesma opção sobreescreve \n"
+"configurações anteriores. \n"
+"\n"
+" - Valores inbutidos padrões de Tidy. \n"
+"%s" /* rc files */
+" - O documento especificado na variável de ambiente $HTML_TIDY: \n"
+"     %s \n"
+" - Opções num arquivo especificado na linha do comando. \n"
+" - Opções definidas diretamente na linha de comando. \n"
 
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
@@ -4243,13 +4283,16 @@ msgid ""
 " - The user runtime configuration file: \n"
 "     %s \n"
 msgstr ""
-
+" - O documento de configuração de execução do sistema: \n"
+"     %s \n"
+" - O documento de configuração de execução do usuário: \n"
+"     %s \n"
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 #. - This message indicates that a file name is not currently set.
 msgctxt "TC_TXT_HELP_ENV_1B"
 msgid "(not currently set)"
-msgstr ""
+msgstr "(não definido no momento)"
 
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
@@ -4260,7 +4303,9 @@ msgid ""
 "Note that because $HTML_TIDY is set, the user runtime configuration file \n"
 "%s will not be used. \n"
 msgstr ""
-
+"\n"
+"Note que, dado que $HTML_TIDY foi definida, o documento de configuração \n"
+"de execução do usuário %s não será utilizado. \n"
 #. This console output should be limited to 78 characters per line.
 #. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
 msgctxt "TC_TXT_HELP_LANG_1"

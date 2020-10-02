@@ -1638,6 +1638,9 @@ static Node* PruneSection( TidyDocImpl* doc, Node *node )
 
     for (;;)
     {
+        if (node == NULL)
+            return NULL;
+        
         ctmbstr lexbuf = lexer->lexbuf + node->start;
         if ( TY_(tmbstrncmp)(lexbuf, "if !supportEmptyParas", 21) == 0 )
         {

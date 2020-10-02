@@ -947,12 +947,15 @@ static void AddByte( Lexer *lexer, tmbchar ch )
     {
         tmbstr buf = NULL;
         uint allocAmt = lexer->lexlength;
+        uint prev = allocAmt; /* Is. #761 */
         while ( lexer->lexsize + 2 >= allocAmt )
         {
             if ( allocAmt == 0 )
                 allocAmt = 8192;
             else
                 allocAmt *= 2;
+            if (allocAmt < prev) /* Is. #761 - watch for wrap - and */
+                TidyPanic(lexer->allocator, "\nPanic: out of internal memory!\nDocument input too big!\n");
         }
         buf = (tmbstr) TidyRealloc( lexer->allocator, lexer->lexbuf, allocAmt );
         if ( buf )

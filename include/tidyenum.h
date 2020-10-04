@@ -610,7 +610,7 @@ typedef enum
     TidyLiteralAttribs,          /**< If true attributes may use newlines */
     TidyLogicalEmphasis,         /**< Replace i by em and b by strong */
     TidyLowerLiterals,           /**< Folds known attribute values to lower case */
-    TidyMakeBare,                /**< Make bare HTML: remove Microsoft cruft */
+    TidyMakeBare,                /**< Replace smart quotes, em dashes, etc with ASCII */
     TidyMakeClean,               /**< Replace presentational clutter by style rules */
     TidyMark,                    /**< Add meta element indicating tidied doc */
     TidyMergeDivs,               /**< Merge multiple DIVs */

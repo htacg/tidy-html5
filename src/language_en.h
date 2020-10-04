@@ -786,9 +786,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
         TidyMakeBare,                 0,
-        "This option specifies if Tidy should strip Microsoft specific HTML "
-        "from Word 2000 documents, and output spaces rather than non-breaking "
-        "spaces where they exist in the input. "
+        "This option specifies if Tidy should replace smart quotes and em dashes with "
+        "ASCII, and output spaces rather than non-breaking "
+        "spaces, where they exist in the input. "
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and

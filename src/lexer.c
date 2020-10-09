@@ -3457,6 +3457,10 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
         return node;  /* the COMMENT token */
     }
 
+    /* check attributes before return NULL */
+    if (attributes)
+        TY_(FreeAttribute)( doc, attributes );
+
     DEBUG_LOG(SPRTF("Returning NULL...\n"));
     return NULL;
 }

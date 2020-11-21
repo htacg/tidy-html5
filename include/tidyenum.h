@@ -988,13 +988,13 @@ typedef enum
   TidyTag_OUTPUT,        /**< OUTPUT */
   TidyTag_PROGRESS,      /**< PROGRESS */
   TidyTag_SECTION,       /**< SECTION */
-  TidyTag_SLOT,          /**< SLOT */
   TidyTag_SOURCE,        /**< SOURCE */
   TidyTag_SUMMARY,       /**< SUMMARY */
   TidyTag_TEMPLATE,      /**< TEMPLATE */
   TidyTag_TIME,          /**< TIME */
   TidyTag_TRACK,         /**< TRACK */
   TidyTag_VIDEO,         /**< VIDEO */
+  TidyTag_SLOT,          /**< SLOT */
 
   N_TIDY_TAGS            /**< Must be last */
 } TidyTagId;
@@ -1144,7 +1144,6 @@ typedef enum
   TidyAttr_SHOWGRIDX,              /**< SHOWGRIDX= */
   TidyAttr_SHOWGRIDY,              /**< SHOWGRIDY= */
   TidyAttr_SIZE,                   /**< SIZE= */
-  TidyAttr_SLOT,                   /**< SLOT= */
   TidyAttr_SPAN,                   /**< SPAN= */
   TidyAttr_SRC,                    /**< SRC= */
   TidyAttr_SRCSET,                 /**< SRCSET= (HTML5) */
@@ -1344,6 +1343,7 @@ typedef enum
   TidyAttr_AS,                     /**< AS= */
    
   TidyAttr_XMLNSXLINK,             /**< svg xmls:xlink="url" */
+  TidyAttr_SLOT,                   /**< SLOT= */
    
   N_TIDY_ATTRIBS                   /**< Must be last */
 } TidyAttrId;

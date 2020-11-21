@@ -315,6 +315,7 @@ Bool TY_(AttributeIsMismatched)(Node* node, AttVal* attval, TidyDocImpl* doc);
 #define attrIsSHOWGRIDX(av)         AttrIsId( av, TidyAttr_SHOWGRIDX  )
 #define attrIsSHOWGRIDY(av)         AttrIsId( av, TidyAttr_SHOWGRIDY  )
 #define attrIsSIZE(av)              AttrIsId( av, TidyAttr_SIZE  )
+#define attrIsSLOT(av)              AttrIsId( av, TidyAttr_SLOT  )
 #define attrIsSPAN(av)              AttrIsId( av, TidyAttr_SPAN  )
 #define attrIsSRC(av)               AttrIsId( av, TidyAttr_SRC  )
 #define attrIsSTANDBY(av)           AttrIsId( av, TidyAttr_STANDBY  )

@@ -95,6 +95,7 @@
   { TidyAttr_IS,                    xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
   { TidyAttr_LANG,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
   { TidyAttr_ROLE,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
+  { TidyAttr_SLOT,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
   { TidyAttr_SPELLCHECK,            xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
   { TidyAttr_STYLE,                 xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
   { TidyAttr_TABINDEX,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
@@ -2874,6 +2875,17 @@ const AttrVersion TY_(W3CAttrsFor_SMALL)[] =
   { TidyAttr_TITLE,                 xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 }, /* CORE override */
   { TidyAttr_XMLNS,                 xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 }, /* CORE override */
   { TidyAttr_XML_LANG,              xxxx|xxxx|xxxx|xxxx|X10T|xxxx|xxxx|X10F|xxxx|xxxx|X10S|XH11|xxxx|xxxx|XH50 }, /* CORE override */
+  INCLUDE_CORE_ATTRIBS
+  INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
+  { TidyAttr_UNKNOWN,               0                                                                          },
+};
+
+const AttrVersion TY_(W3CAttrsFor_SLOT)[] =
+{
+  INCLUDE_ARIA
+  INCLUDE_MICRODATA
+  { TidyAttr_NAME,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
   INCLUDE_RDFA

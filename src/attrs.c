@@ -238,6 +238,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_SHOWGRIDX,               "showgridx",               CH_BOOL      }, /* TABLE Adobe golive*/
   { TidyAttr_SHOWGRIDY,               "showgridy",               CH_BOOL      }, /* TABLE Adobe golive*/
   { TidyAttr_SIZE,                    "size",                    CH_NUMBER    }, /* HR, FONT, BASEFONT, SELECT */
+  { TidyAttr_SLOT,                    "slot",                    CH_PCDATA    },
   { TidyAttr_SPAN,                    "span",                    CH_NUMBER    }, /* COL, COLGROUP */
   { TidyAttr_SRC,                     "src",                     CH_URL       }, /* IMG, FRAME, IFRAME */
   { TidyAttr_SRCSET,                  "srcset",                  CH_PCDATA    }, /* IMG (HTML5) */

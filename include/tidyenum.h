@@ -988,6 +988,7 @@ typedef enum
   TidyTag_OUTPUT,        /**< OUTPUT */
   TidyTag_PROGRESS,      /**< PROGRESS */
   TidyTag_SECTION,       /**< SECTION */
+  TidyTag_SLOT,          /**< SLOT */
   TidyTag_SOURCE,        /**< SOURCE */
   TidyTag_SUMMARY,       /**< SUMMARY */
   TidyTag_TEMPLATE,      /**< TEMPLATE */
@@ -1143,6 +1144,7 @@ typedef enum
   TidyAttr_SHOWGRIDX,              /**< SHOWGRIDX= */
   TidyAttr_SHOWGRIDY,              /**< SHOWGRIDY= */
   TidyAttr_SIZE,                   /**< SIZE= */
+  TidyAttr_SLOT,                   /**< SLOT= */
   TidyAttr_SPAN,                   /**< SPAN= */
   TidyAttr_SRC,                    /**< SRC= */
   TidyAttr_SRCSET,                 /**< SRCSET= (HTML5) */

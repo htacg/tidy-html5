@@ -1893,8 +1893,7 @@ void TY_(CleanWord2000)( TidyDocImpl* doc, Node *node)
         if ( nodeIsHTML(node) )
         {
             /* check that it's a Word 2000 document */
-            if ( !TY_(GetAttrByName)(node, "xmlns:o") &&
-                 !cfgBool(doc, TidyMakeBare) )
+            if ( !TY_(IsWord2000) (doc) ) /* Is. #896 */
                 return;
 
             /* Output proprietary attributes to maintain errout compatability

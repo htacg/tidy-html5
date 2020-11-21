@@ -2777,6 +2777,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                     }
 
 
+                    TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT_DROPPING); /* Is. #487 */
 
                     /* else swallow characters up to and including next '>' */
                     while ((c = TY_(ReadChar)(doc->docIn)) != '>')
@@ -3340,7 +3341,11 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                     }
                 }
 
-                if (c != ']')
+                if (c == '>')
+                {
+                    /* Is. #462 - reached '>' before ']' */
+                    TY_(UngetChar)(c, doc->docIn);
+                } else if (c != ']')
                     continue;
 
                 /* now look for '>' */

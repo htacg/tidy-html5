@@ -47,6 +47,7 @@ static AttrCheck CheckVType;
 static AttrCheck CheckScroll;
 static AttrCheck CheckTextDir;
 static AttrCheck CheckLang;
+static AttrCheck CheckLoading;
 static AttrCheck CheckType;
 static AttrCheck CheckRDFaSafeCURIE;
 static AttrCheck CheckRDFaTerm;
@@ -66,6 +67,7 @@ static AttrCheck CheckRDFaPrefix;
 #define CH_CLEAR       CheckClear
 #define CH_BORDER      CheckBool     /* kludge */
 #define CH_LANG        CheckLang
+#define CH_LOADING     CheckLoading
 #define CH_BOOL        CheckBool
 #define CH_COLS        NULL
 #define CH_NUMBER      CheckNumber
@@ -177,6 +179,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_LAST_VISIT,              "last_visit",              CH_PCDATA    }, /* A */
   { TidyAttr_LEFTMARGIN,              "leftmargin",              CH_NUMBER    }, /* used on BODY */
   { TidyAttr_LINK,                    "link",                    CH_COLOR     }, /* BODY */
+  { TidyAttr_LOADING,                 "loading",                 CH_LOADING   }, /* IMG, IFRAME */
   { TidyAttr_LONGDESC,                "longdesc",                CH_URL       }, /* IMG */
   { TidyAttr_LOWSRC,                  "lowsrc",                  CH_URL       }, /* IMG */
   { TidyAttr_MARGINHEIGHT,            "marginheight",            CH_NUMBER    }, /* FRAME, IFRAME, BODY */
@@ -2044,6 +2047,13 @@ void CheckLang( TidyDocImpl* doc, Node *node, AttVal *attval)
         }
         return;
     }
+}
+
+/* checks loading attribute */
+void CheckLoading( TidyDocImpl* doc, Node *node, AttVal *attval)
+{
+    ctmbstr const values[] = {"lazy", "eager", NULL};
+    CheckAttrValidity( doc, node, attval, values );
 }
 
 /* checks type attribute */

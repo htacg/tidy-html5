@@ -9,7 +9,7 @@
 @set DOPAUSE=1
 @set TMPGEN=Visual Studio 16 2019
 @set TMPBR=next
-@set TMPINDBG=0
+@set TMPINDBG=1
 
 @set TMPOPTS=-G "%TMPGEN%" -A x64
 @set TMPOPTS=%TMPOPTS% -DCMAKE_INSTALL_PREFIX=%TMPINS%
@@ -29,6 +29,7 @@
 @call chkmsvc %TMPPRJ%
 @if "%TMPBR%x" == "x" goto DNBR
 @call chkbranch %TMPBR%
+@if ERRORLEVEL 1 goto BAD_BR
 :DNBR
 
 @echo Build %TMPPRJ% 64-bits %DATE% %TIME%, in %CD%, to  %TMPLOG% > %TMPLOG%
@@ -98,16 +99,26 @@
 @echo Proceeding with INSTALL...
 @echo.
 @if NOT "%TMPINDBG%x" == "1x" goto DNDBGIN
+@if EXIST install_manifest.txt @del install_manifest.txt
 @echo Doing: 'cmake --build . --config Debug  --target INSTALL'
 @echo Doing: 'cmake --build . --config Debug  --target INSTALL' >> %TMPLOG% 2>&1
 @cmake --build . --config Debug  --target INSTALL >> %TMPLOG% 2>&1
 @if ERRORLEVEL 1 goto ERR4
+@if EXIST install_manifest.txt (
+    @copy install_manifest.txt install_manifest_debug.txt >nul
+    @call add2installs install_manifest.txt -o %TMPINS%\install_manifest.txt >> %TMPLOG%
+)
 :DNDBGIN
 
+@if EXIST install_manifest.txt @del install_manifest.txt
 @echo Doing: 'cmake --build . --config Release  --target INSTALL'
 @echo Doing: 'cmake --build . --config Release  --target INSTALL' >> %TMPLOG% 2>&1
 @cmake --build . --config Release  --target INSTALL >> %TMPLOG% 2>&1
 @if ERRORLEVEL 1 goto ERR5
+@if EXIST install_manifest.txt (
+    @copy install_manifest.txt install_manifest_release.txt >nul
+    @call add2installs install_manifest.txt -o %TMPINS%\install_manifest.txt >> %TMPLOG%
+)
 
 @fa4 " -- " %TMPLOG%
 
@@ -115,6 +126,18 @@
 @echo All done... see %TMPLOG%
 
 @goto END
+
+:BAD_BR
+@echo Try to do 'git checkout %TMPBR%'
+@git checkout %TMPBR% >> %TMPLOG% 2>&1
+@call chkbranch %TMPBR%
+@if ERRORLEVEL 1 goto NO_BR
+@goto DNBR
+:NO_BR
+@echo.
+@echo Unable to check out %TMPBR%! *** FIX ME ***
+@echo.
+@goto ISERR
 
 :GOTNO
 @echo.

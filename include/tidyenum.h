@@ -1083,7 +1083,6 @@ typedef enum
   TidyAttr_LAST_VISIT,             /**< LAST_VISIT= */
   TidyAttr_LEFTMARGIN,             /**< LEFTMARGIN= */
   TidyAttr_LINK,                   /**< LINK= */
-  TidyAttr_LOADING,                /**< LOADING= */
   TidyAttr_LONGDESC,               /**< LONGDESC= */
   TidyAttr_LOWSRC,                 /**< LOWSRC= */
   TidyAttr_MARGINHEIGHT,           /**< MARGINHEIGHT= */
@@ -1345,6 +1344,7 @@ typedef enum
    
   TidyAttr_XMLNSXLINK,             /**< svg xmls:xlink="url" */
   TidyAttr_SLOT,                   /**< SLOT= */
+  TidyAttr_LOADING,                /**< LOADING= */
    
   N_TIDY_ATTRIBS                   /**< Must be last */
 } TidyAttrId;

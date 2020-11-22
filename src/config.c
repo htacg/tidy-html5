@@ -265,7 +265,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyWrapAttVals,             PP, "wrap-attributes",             BL, no,              ParsePickList,     &boolPicks          },
     { TidyWrapJste,                PP, "wrap-jste",                   BL, yes,             ParsePickList,     &boolPicks          },
     { TidyWrapLen,                 PP, "wrap",                        IN, 68,              ParseInt,          NULL                },
-    { TidyWrapPhp,                 PP, "wrap-php",                    BL, yes,             ParsePickList,     &boolPicks          },
+    { TidyWrapPhp,                 PP, "wrap-php",                    BL, no,              ParsePickList,     &boolPicks          },
     { TidyWrapScriptlets,          PP, "wrap-script-literals",        BL, no,              ParsePickList,     &boolPicks          },
     { TidyWrapSection,             PP, "wrap-sections",               BL, yes,             ParsePickList,     &boolPicks          },
     { TidyWriteBack,               IO, "write-back",                  BL, no,              ParsePickList,     &boolPicks          },

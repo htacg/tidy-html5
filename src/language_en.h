@@ -1492,7 +1492,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
         TidyWrapPhp,                  0,
-        "This option specifies if Tidy should line wrap text contained within PHP "
+        "This option specifies if Tidy should add a new line after a PHP "
         "pseudo elements, which look like: <code>&lt;?php ... ?&gt;</code>. "
     },
     {/* Important notes for translators:

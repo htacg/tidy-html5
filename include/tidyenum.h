@@ -1346,6 +1346,22 @@ typedef enum
   TidyAttr_SLOT,                   /**< SLOT= */
   TidyAttr_LOADING,                /**< LOADING= */
    
+  /* SVG paint attributes (SVG 1.1) */
+  TidyAttr_FILL,                   /**< FILL= */
+  TidyAttr_FILLRULE,               /**< FILLRULE= */
+  TidyAttr_STROKE,                 /**< STROKE= */
+  TidyAttr_STROKEDASHARRAY,        /**< STROKEDASHARRAY= */
+  TidyAttr_STROKEDASHOFFSET,       /**< STROKEDASHOFFSET= */
+  TidyAttr_STROKELINECAP,          /**< STROKELINECAP= */
+  TidyAttr_STROKELINEJOIN,         /**< STROKELINEJOIN= */
+  TidyAttr_STROKEMITERLIMIT,       /**< STROKEMITERLIMIT= */
+  TidyAttr_STROKEWIDTH,            /**< STROKEWIDTH= */
+  TidyAttr_COLORINTERPOLATION,     /**< COLORINTERPOLATION= */
+  TidyAttr_COLORRENDERING,         /**< COLORRENDERING= */
+  TidyAttr_OPACITY,                /**< OPACITY= */
+  TidyAttr_STROKEOPACITY,          /**< STROKEOPACITY= */
+  TidyAttr_FILLOPACITY,            /**< FILLOPACITY= */
+
   N_TIDY_ATTRIBS                   /**< Must be last */
 } TidyAttrId;
 

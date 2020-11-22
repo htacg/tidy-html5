@@ -452,6 +452,8 @@ uint TY_(nodeHeaderLevel)( Node* node );
 #define nodeIsINS( node )        TagIsId( node, TidyTag_INS )
 #define nodeIsDEL( node )        TagIsId( node, TidyTag_DEL )
 
+#define nodeIsSVG( node )        TagIsId( node, TidyTag_SVG )
+
 /* HTML5 */
 #define nodeIsDATALIST( node )   TagIsId( node, TidyTag_DATALIST )
 #define nodeIsDATA( node )       TagIsId( node, TidyTag_DATA )

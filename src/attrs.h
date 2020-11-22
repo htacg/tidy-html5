@@ -375,8 +375,20 @@ Bool TY_(AttributeIsMismatched)(Node* node, AttVal* attval, TidyDocImpl* doc);
 #define attrIsARIA_VALUEMIN(av)         AttrIsId( av,  TidyAttr_ARIA_VALUEMIN  )
 #define attrIsARIA_VALUENOW(av)         AttrIsId( av,  TidyAttr_ARIA_VALUENOW  )
 #define attrIsARIA_VALUETEXT(av)        AttrIsId( av,  TidyAttr_ARIA_VALUETEXT  )
-
-
+#define attrIsSVG_FILL(av)              AttrIsId( av,  TidyAttr_FILL  )
+#define attrIsSVG_FILLRULE(av)          AttrIsId( av,  TidyAttr_FILLRULE  )
+#define attrIsSVG_STROKE(av)            AttrIsId( av,  TidyAttr_STROKE  )
+#define attrIsSVG_STROKEDASHARRAY(av)   AttrIsId( av,  TidyAttr_STROKEDASHARRAY  )
+#define attrIsSVG_STROKEDASHOFFSET(av)  AttrIsId( av,  TidyAttr_STROKEDASHOFFSET  )
+#define attrIsSVG_STROKELINECAP(av)     AttrIsId( av,  TidyAttr_STROKELINECAP  )
+#define attrIsSVG_STROKELINEJOIN(av)    AttrIsId( av,  TidyAttr_STROKELINEJOIN  )
+#define attrIsSVG_STROKEMITERLIMIT(av)  AttrIsId( av,  TidyAttr_STROKEMITERLIMIT  )
+#define attrIsSVG_STROKEWIDTH(av)       AttrIsId( av,  TidyAttr_STROKEWIDTH  )
+#define attrIsSVG_COLORINTERPOLATION(a) AttrIsId(  a,  TidyAttr_COLORINTERPOLATION  )
+#define attrIsSVG_COLORRENDERING(av)    AttrIsId( av,  TidyAttr_COLORRENDERING  )
+#define attrIsSVG_OPACITY(av)           AttrIsId( av,  TidyAttr_OPACITY  )
+#define attrIsSVG_STROKEOPACITY(av)     AttrIsId( av,  TidyAttr_STROKEOPACITY  )
+#define attrIsSVG_FILLOPACITY(av)       AttrIsId( av,  TidyAttr_FILLOPACITY  )
 
 /* Attribute Retrieval macros
 */

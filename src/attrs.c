@@ -52,6 +52,8 @@ static AttrCheck CheckType;
 static AttrCheck CheckRDFaSafeCURIE;
 static AttrCheck CheckRDFaTerm;
 static AttrCheck CheckRDFaPrefix;
+static AttrCheck CheckDecimal;
+static AttrCheck CheckSvgAttr;
 
 #define CH_PCDATA      NULL
 #define CH_CHARSET     NULL
@@ -97,6 +99,8 @@ static AttrCheck CheckRDFaPrefix;
 #define CH_RDFASCURIES CheckRDFaSafeCURIE
 #define CH_RDFATERM    CheckRDFaTerm
 #define CH_RDFATERMS   CheckRDFaTerm
+#define CH_DECIMAL     CheckDecimal
+#define CH_SVG         CheckSvgAttr
 
 static const Attribute attribute_defs [] =
 {
@@ -443,6 +447,22 @@ static const Attribute attribute_defs [] =
 
   /* for xmlns:xlink in <svg> */
   { TidyAttr_XMLNSXLINK,                "xmlns:xlink",           CH_URL       },
+
+  /* SVG paint attributes (SVG 1.1) */
+  { TidyAttr_FILL,                     "fill",                  CH_SVG        },
+  { TidyAttr_FILLRULE,                 "fill-rule",             CH_SVG        },
+  { TidyAttr_STROKE,                   "stroke",                CH_SVG        },
+  { TidyAttr_STROKEDASHARRAY,          "stroke-dasharray",      CH_SVG        },
+  { TidyAttr_STROKEDASHOFFSET,         "stroke-dashoffset",     CH_SVG        },
+  { TidyAttr_STROKELINECAP,            "stroke-linecap",        CH_SVG        },
+  { TidyAttr_STROKELINEJOIN,           "stroke-linejoin",       CH_SVG        },
+  { TidyAttr_STROKEMITERLIMIT,         "stroke-miterlimit",     CH_SVG        },
+  { TidyAttr_STROKEWIDTH,              "stroke-width",          CH_SVG        },
+  { TidyAttr_COLORINTERPOLATION,       "color-interpolation",   CH_SVG        },
+  { TidyAttr_COLORRENDERING,           "color-rendering",       CH_SVG        },
+  { TidyAttr_OPACITY,                  "opacity",               CH_SVG        },
+  { TidyAttr_STROKEOPACITY,            "stroke-opacity",        CH_SVG        },
+  { TidyAttr_FILLOPACITY,              "fill-opacity",          CH_SVG        },
 
   /* this must be the final entry */
   { N_TIDY_ATTRIBS,                    NULL,                     NULL         }
@@ -2097,6 +2117,180 @@ void CheckType( TidyDocImpl* doc, Node *node, AttVal *attval)
             TY_(ReportAttrError)( doc, node, attval, BAD_ATTRIBUTE_VALUE);
     }
     return;
+}
+
+static void CheckDecimal( TidyDocImpl* doc, Node *node, AttVal *attval)
+{
+    tmbstr p;
+    Bool hasPoint = no;
+
+    p  = attval->value;
+
+    /* Allow leading sign */
+    if (*p == '+' || *p == '-')
+        ++p;
+
+    while (*p)
+    {
+        /* Allow a single decimal point */
+        if (*p == '.')
+        {
+            if (!hasPoint)
+                hasPoint = yes;
+            else
+                TY_(ReportAttrError)( doc, node, attval, BAD_ATTRIBUTE_VALUE);
+                break;
+        }
+        
+        if (!TY_(IsDigit)(*p))
+        {
+            TY_(ReportAttrError)( doc, node, attval, BAD_ATTRIBUTE_VALUE);
+            break;
+        }
+        ++p;
+    }
+}
+
+static Bool IsSvgPaintAttr(AttVal *attval)
+{
+    return attrIsCOLOR(attval)
+        || attrIsSVG_FILL(attval)
+        || attrIsSVG_FILLRULE(attval)
+        || attrIsSVG_STROKE(attval)
+        || attrIsSVG_STROKEDASHARRAY(attval)
+        || attrIsSVG_STROKEDASHOFFSET(attval)
+        || attrIsSVG_STROKELINECAP(attval)
+        || attrIsSVG_STROKELINEJOIN(attval)
+        || attrIsSVG_STROKEMITERLIMIT(attval)
+        || attrIsSVG_STROKEWIDTH(attval)
+        || attrIsSVG_COLORINTERPOLATION(attval)
+        || attrIsSVG_COLORRENDERING(attval)
+        || attrIsSVG_OPACITY(attval)
+        || attrIsSVG_STROKEOPACITY(attval)
+        || attrIsSVG_FILLOPACITY(attval);
+}
+
+/* Check SVG attributes */
+static void CheckSvgAttr( TidyDocImpl* doc, Node *node, AttVal *attval)
+{
+    if (!nodeIsSVG(node))
+    {
+        TY_(ReportAttrError)(doc, node, attval, ATTRIBUTE_IS_NOT_ALLOWED);
+        return;
+    }
+
+    /* Issue #903 - check SVG paint attributes */
+    if (IsSvgPaintAttr(attval))
+    {
+        /* all valid paint attributes have values */
+        if (!AttrHasValue(attval))
+        {
+            TY_(ReportAttrError)(doc, node, attval, MISSING_ATTR_VALUE);
+            return;
+        }
+        /* all paint attributes support an 'inherit' value,
+        per https://dev.w3.org/SVG/profiles/1.1F2/publish/painting.html#SpecifyingPaint */
+        if (AttrValueIs(attval, "inherit"))
+        {
+            return;
+        }
+
+        /* check paint datatypes
+        see https://dev.w3.org/SVG/profiles/1.1F2/publish/painting.html#SpecifyingPaint
+        */
+        if (attrIsSVG_FILL(attval) || attrIsSVG_STROKE(attval))
+        {
+            /* TODO: support funciri */
+            static ctmbstr const values[] = {
+                "none", "currentColor", NULL};
+
+            if (AttrValueIsAmong(attval, values))
+                CheckLowerCaseAttrValue(doc, node, attval);
+            else
+                CheckColor(doc, node, attval);
+        } 
+        else if (attrIsSVG_FILLRULE(attval))
+        {
+            static ctmbstr const values[] = {"nonzero", "evenodd", NULL};
+
+            if (AttrValueIsAmong(attval, values))
+                CheckLowerCaseAttrValue(doc, node, attval);
+            else
+                TY_(ReportAttrError)(doc, node, attval, BAD_ATTRIBUTE_VALUE);
+        }
+        else if (attrIsSVG_STROKEDASHARRAY(attval))
+        {
+            static ctmbstr const values[] = {"none", NULL};
+
+            if (AttrValueIsAmong(attval, values))
+                CheckLowerCaseAttrValue(doc, node, attval);
+            else
+            {
+                /* TODO: process dash arrays */
+            }
+        }
+        else if (attrIsSVG_STROKEDASHOFFSET(attval))
+        {
+            CheckLength(doc, node, attval);
+        }
+        else if (attrIsSVG_STROKELINECAP(attval))
+        {
+            static ctmbstr const values[] = {"butt", "round", "square", NULL};
+
+            if (AttrValueIsAmong(attval, values))
+                CheckLowerCaseAttrValue(doc, node, attval);
+            else
+                TY_(ReportAttrError)(doc, node, attval, BAD_ATTRIBUTE_VALUE);
+        }
+        else if (attrIsSVG_STROKELINEJOIN(attval))
+        {
+            static ctmbstr const values[] = {"miter", "round", "bevel", NULL};
+
+            if (AttrValueIsAmong(attval, values))
+                CheckLowerCaseAttrValue(doc, node, attval);
+            else
+                TY_(ReportAttrError)(doc, node, attval, BAD_ATTRIBUTE_VALUE);
+        }
+        else if (attrIsSVG_STROKEMITERLIMIT(attval))
+        {
+            CheckNumber(doc, node, attval);
+        }
+        else if (attrIsSVG_STROKEWIDTH(attval))
+        {
+            CheckLength(doc, node, attval);
+        }
+        else if (attrIsSVG_COLORINTERPOLATION(attval))
+        {
+            static ctmbstr const values[] = {"auto", "sRGB", "linearRGB", NULL};
+
+            if (AttrValueIsAmong(attval, values))
+                CheckLowerCaseAttrValue(doc, node, attval);
+            else
+                TY_(ReportAttrError)(doc, node, attval, BAD_ATTRIBUTE_VALUE);
+        }
+        else if (attrIsSVG_COLORRENDERING(attval))
+        {
+            static ctmbstr const values[] = {
+                "auto", "optimizeSpeed", "optimizeQuality", NULL};
+
+            if (AttrValueIsAmong(attval, values))
+                CheckLowerCaseAttrValue(doc, node, attval);
+            else
+                TY_(ReportAttrError)(doc, node, attval, BAD_ATTRIBUTE_VALUE);
+        }
+        else if(attrIsSVG_OPACITY(attval))
+        {
+            CheckDecimal(doc, node, attval);
+        }
+        else if(attrIsSVG_STROKEOPACITY(attval))
+        {
+            CheckDecimal(doc, node, attval);
+        }
+        else if(attrIsSVG_FILLOPACITY(attval))
+        {
+            CheckDecimal(doc, node, attval);
+        }
+    }
 }
 
 static

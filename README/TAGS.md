@@ -11,7 +11,7 @@ So, adding a new HTML **tag** consists of the following simple steps:
  1. `tidyenum.h` - Give the element an internal name, like `TidyTag_XXXX`, and thus a value. Please keep this list in alphabetical order.
 
  2. `tags.c` - Add a line to the `tag_defs[]` table. This assigns the unique string value of the element. Then the html versions that support the element, a pointer to the attributes supported by that elelment, and a bit field of the elements characteristics, inline, block, etc.
- 
+
 So, just changing 2 files, `tidyenum.h` and `tags.c`, and libTidy will now support that element, tag, as W3C approved. Simple... And at times, there is some case for adding **tags** that are still in the `Working Draft` stage, especially when there has been wide spread support in the community, even before it reaches `REC` stage.
 
 Now, one could argue that this is not the **best** way to verify every attribute and value, for every tag, but that is a moot point - that is how tidy does it!

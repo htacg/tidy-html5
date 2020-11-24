@@ -109,13 +109,13 @@ int fillBuffer( HTTPInputSource *in )
 int openURL( HTTPInputSource *in, tmbstr pUrl )
 {
     int rc = -1;
-#ifdef WIN32    
+#ifdef WIN32
     WSADATA wsaData;
 
     rc = WSAStartup( 514, &wsaData );
 #endif
 
-    in->tis.getByte = (TidyGetByteFunc) HTTPGetByte; 
+    in->tis.getByte = (TidyGetByteFunc) HTTPGetByte;
     in->tis.ungetByte = (TidyUngetByteFunc) HTTPUngetByte;
     in->tis.eof = (TidyEOFFunc) HTTPIsEOF;
     in->tis.sourceData = (uint) in;
@@ -137,8 +137,8 @@ int openURL( HTTPInputSource *in, tmbstr pUrl )
         {
             if (1 < blanks)
                 break;
-            for (; in->nextBytePos < sizeof( in->buffer ) 
-                   && 0 != in->buffer[ in->nextBytePos ]; 
+            for (; in->nextBytePos < sizeof( in->buffer )
+                   && 0 != in->buffer[ in->nextBytePos ];
                  in->nextBytePos++ )
             {
                 ch = in->buffer[ in->nextBytePos ];
@@ -209,7 +209,7 @@ Bool HTTPIsEOF( HTTPInputSource *source )
         /* pending ungot bytes, not done */
         return no;
 
-    if (   0 != source->nBufSize 
+    if (   0 != source->nBufSize
         && source->nextBytePos >= source->nBufSize)
         /* We've consumed the existing buffer, get another */
         fillBuffer( source );

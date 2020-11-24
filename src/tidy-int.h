@@ -36,7 +36,7 @@
 struct _TidyDocImpl
 {
     /* The Document Tree (and backing store buffer) */
-    Node                root;       /* This MUST remain the first declared 
+    Node                root;       /* This MUST remain the first declared
                                        variable in this structure */
     Lexer*              lexer;
 
@@ -108,7 +108,7 @@ struct _TidyMessageImpl
     TidyReportLevel     level;        /* the severity level of the message */
     Bool                allowMessage; /* indicates whether or not a filter rejected a message */
     Bool                muted;        /* indicates whether or not a configuration mutes this message */
-    
+
     int                 argcount;    /* the number of arguments */
     struct printfArg*   arguments;   /* the arguments' values and types */
 
@@ -125,7 +125,7 @@ struct _TidyMessageImpl
 
     ctmbstr             messagePrefixDefault;   /* the prefix part, default language */
     ctmbstr             messagePrefix;          /* the prefix part, localized */
-    
+
     tmbstr              messageOutputDefault;   /* the complete string Tidy would output */
     tmbstr              messageOutput;          /* the complete string, localized */
 };

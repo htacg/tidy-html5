@@ -13,7 +13,7 @@
  *
  * [X] THIS FILE IS MACHINE GENERATED. It is a localization file for the
  *     language (and maybe region) "zh_cn". The source of
- *     these strings is a gettext PO file in Tidy's source, probably called 
+ *     these strings is a gettext PO file in Tidy's source, probably called
  *     "language_zh_cn.po".
  *
  * [ ] THIS FILE WAS HAND MODIFIED. Translators, please feel to edit this file
@@ -55,7 +55,7 @@ static uint whichPluralForm_zh_cn(uint n) {
  */
 static languageDefinition language_zh_cn = { whichPluralForm_zh_cn, {
     /***************************************
-     ** This MUST be present and first. 
+     ** This MUST be present and first.
      ** Specify the code for this language.
      ***************************************/
     {/* Specify the ll or ll_cc language code here. */

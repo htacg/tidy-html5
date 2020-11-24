@@ -13,7 +13,7 @@
  *
  * [X] THIS FILE IS MACHINE GENERATED. It is a localization file for the
  *     language (and maybe region) "pt_br". The source of
- *     these strings is a gettext PO file in Tidy's source, probably called 
+ *     these strings is a gettext PO file in Tidy's source, probably called
  *     "language_pt_br.po".
  *
  * [ ] THIS FILE WAS HAND MODIFIED. Translators, please feel to edit this file
@@ -55,13 +55,13 @@ static uint whichPluralForm_pt_br(uint n) {
  */
 static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     /***************************************
-     ** This MUST be present and first. 
+     ** This MUST be present and first.
      ** Specify the code for this language.
      ***************************************/
     {/* Specify the ll or ll_cc language code here. */
       TIDY_LANGUAGE,                                 0, "pt_br"
     },
-    { TidyAccessibilityCheckLevel,                   0,        
+    { TidyAccessibilityCheckLevel,                   0,
         "Esta opção especifica o nível de verificação de acessibilidade, se houver, "
         "que Tidy deve executar. <br/>Nível <var>0 (Tidy Classic)</var> é equivalente "
         "à verificação de acessibilidade do Tidy Classic.<br/> Para obter mais "
@@ -69,13 +69,13 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "http://www.html-tidy.org/accessibility/\"> Página de acessibilidade do "
         "Tidy</a>. "
     },
-    { TidyAltText,                                   0,        
+    { TidyAltText,                                   0,
         "Esta opção especifica o texto padrão <code>alt=</code> que o Tidy usa para "
         "atributos <code>&lt;img&gt;</code> quando o atributo <code>alt=</code> está "
         "faltando. <br/>Use com cuidado, pois é sua responsabilidade tornar seus "
         "documentos acessíveis para pessoas que não conseguem ver as imagens. "
     },
-    { TidyAnchorAsName,                              0,        
+    { TidyAnchorAsName,                              0,
         "Esta opção controla a exclusão ou adição do atributo <code>name</code> em "
         "elementos onde ele pode servir como âncora. <br/>Se configurado para "
         "<var>yes</var>, um atributo <code>name</code>, se não já existir, é "
@@ -84,14 +84,14 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "existente é removido se um atributo <code>id</code> existir ou tenha sido "
         "adicionado. "
     },
-    { TidyAsciiChars,                                0,        
+    { TidyAsciiChars,                                0,
         "Pode ser usado para modificar o comportamento da opção <code>clean</code> "
         "quando configurado para <var>yes</var>. <br/>Se configurado para "
         "<var>yes</var> ao usar <code>clean</code>, <code>&amp;emdash;</code>, "
         "<code>&amp;rdquo;</code>, e outras entidades de caracteres nomeadas são "
         "rebaixadas para os equivalentes ASCII mais próximos. "
     },
-    { TidyBlockTags,                                 0,        
+    { TidyBlockTags,                                 0,
         "Esta opção especifica novas tags de nível de bloco. Esta opção possui uma "
         "lista separada por vírgulas ou espaço de nomes de tags. <br/>A menos que "
         "você declare novas tags, o Tidy se recusará a gerar um arquivo arrumado se a "
@@ -100,18 +100,18 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "<code>&lt;table&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code> "
         "e <code>&lt;dl&gt;</code>. <br/>Esta opção é ignorada no modo XML. "
     },
-    { TidyBodyOnly,                                  0,        
+    { TidyBodyOnly,                                  0,
         "Esta opção especifica se o Tidy deve imprimir apenas o conteúdo da tag body "
         "como um fragmento HTML. <br/>Se configurado para <var>auto</var>, isso é "
         "realizado somente se a tag body tiver sido inferida. <br/>Útil para "
         "incorporar páginas inteiras existentes como uma porção de outra página. <br/>"
         "Esta opção não tem efeito se a saída XML for solicitada. "
     },
-    { TidyBreakBeforeBR,                             0,        
+    { TidyBreakBeforeBR,                             0,
         "Esta opção especifica se o Tidy deve emitir uma quebra de linha antes de "
         "cada elemento <code>&lt;br&gt;</code>. "
     },
-    { TidyCharEncoding,                              0,        
+    { TidyCharEncoding,                              0,
         "Esta opção especifica a codificação de caracteres que o Tidy usa tanto para "
         "a entrada como para a saída. <br/>Para <var>ascii</var>, o Tidy aceitará "
         "valores de caracteres Latin-1 (ISO-8859-1), mas usará entidades para todos "
@@ -126,23 +126,23 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "caracteres cujo valor seja &gt;127. <br/>Para codificações sem suporte, use "
         "um utilitário externo para converter de e para UTF-8. "
     },
-    { TidyCoerceEndTags,                             0,        
+    { TidyCoerceEndTags,                             0,
         "Esta opção especifica se o Tidy deve coagir uma tag de início em uma tag de "
         "fim nos casos em que parece que uma tag de fim provavelmente foi projetada; "
         "por exemplo, dado <br/><code>&lt;span&gt;foo &lt;b&gt;bar&lt;b&gt; "
         "baz&lt;/span&gt;</code>, <br/>Tidy vai emitir <br/><code>&lt;span&gt;foo "
         "&lt;b&gt;bar&lt;/b&gt; baz&lt;/span&gt;</code> "
     },
-    { TidyCSSPrefix,                                 0,        
+    { TidyCSSPrefix,                                 0,
         "Esta opção especifica o prefixo que o Tidy usa para regras de estilo. <br/>Por padrão, <var>c</"
         "var> será usado. "
     },
-    { TidyDecorateInferredUL,                        0,        
+    { TidyDecorateInferredUL,                        0,
         "Esta opção especifica se o Tidy deve decorar elementos inferidos "
         "<code>&lt;ul&gt;</code> com algumas marcações CSS para evitar recuo para a "
         "direita. "
     },
-    { TidyDoctype,                                   0,        
+    { TidyDoctype,                                   0,
         "Esta opção especifica a declaração DOCTYPE gerada pelo Tidy. <br/>Se "
         "configurado para <var>omit</var>, a saída não conterá uma declaração "
         "DOCTYPE. Note que isso também implica que <code>numeric-entity</code> esteja "
@@ -164,22 +164,22 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     },
     { TidyDropEmptyElems,                            0, "Esta opção especifica se Tidy deve descartar elementos vazios. "                                 },
     { TidyDropEmptyParas,                            0, "Esta opção especifica se Tidy deve descartar parágrafos vazios. "                                },
-    { TidyDropPropAttrs,                             0,        
+    { TidyDropPropAttrs,                             0,
         "Esta opção especifica se o Tidy deve remover os atributos de propriedade, "
         "como os atributos de ligação de dados da Microsoft. Além disso, os atributos "
         "que não são permitidos na versão de saída do HTML serão descartados se "
         "usados com <code>strict-tags-attributes</code>. "
     },
-    { TidyDuplicateAttrs,                            0,        
+    { TidyDuplicateAttrs,                            0,
         "Esta opção especifica se o Tidy deve manter o primeiro ou último atributo, "
         "se um atributo estiver repetido, p.ex. possui dois atributos "
         "<code>align</code>. "
     },
-    { TidyEmacs,                                     0,        
+    { TidyEmacs,                                     0,
         "Esta opção especifica se o Tidy deve alterar o formato para relatar erros e "
         "avisos para um formato que é analisado mais facilmente pelo GNU Emacs. "
     },
-    { TidyEmptyTags,                                 0,        
+    { TidyEmptyTags,                                 0,
         "Esta opção especifica novas tags em-linha vazias. Esta opção possui uma "
         "lista separada por espaço ou vírgulas de nomes de tags. <br/>A menos que "
         "você declare novas tags, o Tidy se recusará a gerar um arquivo arrumado se a "
@@ -187,73 +187,73 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "tags vazias como em linha ou bloqueio. <br/>Esta opção é ignorada no modo "
         "XML. "
     },
-    { TidyEncloseBlockText,                          0,        
+    { TidyEncloseBlockText,                          0,
         "Esta opção especifica se Tidy deve inserir um elemento <code>&lt;p&gt;</code>"
         " para incluir qualquer texto que encontre em qualquer elemento que permita o "
         "conteúdo misto para HTML transicional mas não HTML estrito. "
     },
-    { TidyEncloseBodyText,                           0,        
+    { TidyEncloseBodyText,                           0,
         "Esta opção especifica se o Tidy deve incluir qualquer texto encontrado no "
         "elemento do corpo dentro de um elemento <code>&lt;p&gt;</code>. <br/>Isso é "
         "útil quando você deseja usar o HTML existente e usá-lo com uma folha de "
         "estilo. "
     },
-    { TidyErrFile,                                   0,        
+    { TidyErrFile,                                   0,
         "Esta opção especifica o arquivo de erro que o Tidy usa para erros e avisos. "
         "Normalmente, erros e avisos são emitidos para <code>stderr</code>. "
     },
-    { TidyEscapeCdata,                               0,        
+    { TidyEscapeCdata,                               0,
         "Esta opção especifica se o Tidy deve converter seções "
         "<code>&lt;![CDATA[]]&gt;</code> em texto normal. "
     },
-    { TidyEscapeScripts,                             0,        
+    { TidyEscapeScripts,                             0,
         "Esta opção faz com que itens que se parecem com tags de fechamento, como <code>&lt;/g</code> "
         "sejam escapadas para <code>&lt;\\/g</code>. Defina esta opção para <var>no</var> se você não "
         "deseja isso."
     },
-    { TidyFixBackslash,                              0,        
+    { TidyFixBackslash,                              0,
         "Esta opção especifica se o Tidy deve substituir caracteres de barra "
         "invertida <code>\\</code> em URLs com barras <code>/</code>. "
     },
-    { TidyFixComments,                               0,        
+    { TidyFixComments,                               0,
         "Esta opção especifica se Tidy deve substituir hífenes inesperados com "
         "caracteres <code>=</code> quando se trata de hífenes adjacentes. <br/>O "
         "padrão é <var>yes</var>. <br/>Esta opção é fornecida para usuários do Cold "
         "Fusion que usam a sintaxe do comentário: <code>&lt;!--- ---&gt;</code>. "
     },
-    { TidyFixUri,                                    0,        
+    { TidyFixUri,                                    0,
         "Esta opção especifica se o Tidy deve verificar valores de atributos que "
         "carregam URIs para caracteres ilegais e, se tal for encontrado, escapa-os "
         "conforme o HTML4 recomenda. "
     },
-    { TidyForceOutput,                               0,        
+    { TidyForceOutput,                               0,
         "Esta opção especifica se o Tidy deve produzir saída, mesmo se forem "
         "encontrados erros. <br/>Use esta opção com cuidado; Se o Tidy relatar um "
         "erro, significa que o Tidy não conseguiu corrigir o erro (ou não sabe como), "
         "então a saída resultante pode não refletir sua intenção. "
     },
-    { TidyGDocClean,                                 0,        
+    { TidyGDocClean,                                 0,
         "Esta opção especifica se o Tidy deve habilitar comportamento específico para "
         "limpeza de HTML exportado do Google Docs. "
     },
     { TidyHideComments,                              0, "Esta opção especifica se Tidy deve imprimir os comentários. "                                    },
-    { TidyHtmlOut,                                   0,        
+    { TidyHtmlOut,                                   0,
         "Esta opção especifica se o Tidy deve gerar uma impressão amigável, "
         "escrevendo como HTML. "
     },
-    { TidyInCharEncoding,                            0,        
+    { TidyInCharEncoding,                            0,
         "Esta opção especifica a codificação de caracteres que o Tidy usa para a "
         "entrada. Veja <code>char-encoding</code> para mais informações. "
     },
-    { TidyIndentAttributes,                          0,        
+    { TidyIndentAttributes,                          0,
         "Esta opção especifica se o Tidy deve começar cada atributo em uma nova "
         "linha. "
     },
-    { TidyIndentCdata,                               0,        
+    { TidyIndentCdata,                               0,
         "Esta opção especifica se o Tidy deve aplicar recuo nas seções "
         "<code>&lt;![CDATA[]]&gt;</code>. "
     },
-    { TidyIndentContent,                             0,        
+    { TidyIndentContent,                             0,
         "Esta opção especifica se Tidy deve aplicar recuo nas tags de nível de bloco. "
         "<br/>Se configurado para <var>auto</var>, Tidy decidirá se aplica ou não "
         "recuo no conteúdo das tags, como <code>&lt;title&gt;</code>, "
@@ -265,30 +265,30 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "tabulações de saída por nível de recuo e <code>indent-with-tabs</code> para "
         "especificar se espaços ou tabulações são usados. "
     },
-    { TidyIndentSpaces,                              0,        
+    { TidyIndentSpaces,                              0,
         "Esta opção especifica o número de espaços ou guias que o Tidy usa para "
         "recuar o conteúdo quando <code>indent</code> está habilitado. <br/>Note que "
         "o valor padrão para esta opção depende do valor de <code>indent-with-"
         "tabs</code> (veja também). "
     },
-    { TidyInlineTags,                                0,        
+    { TidyInlineTags,                                0,
         "Esta opção especifica novas tags em-linha não vazias. Esta opção possui uma "
         "lista separada por espaço ou vírgulas de nomes de tags. <br/>A menos que "
         "você declare novas tags, o Tidy se recusará a gerar um arquivo arrumado se a "
         "entrada incluir tags anteriormente desconhecidas. <br/>Esta opção é ignorada "
         "no modo XML. "
     },
-    { TidyJoinClasses,                               0,        
+    { TidyJoinClasses,                               0,
         "Esta opção especifica se o Tidy deve combinar os nomes das classes para "
         "gerar um nome de classe único e novo se várias atribuições de classe forem "
         "detectadas em um elemento. "
     },
-    { TidyJoinStyles,                                0,        
+    { TidyJoinStyles,                                0,
         "Esta opção especifica se o Tidy deve combinar os estilos para gerar um "
         "estilo único e novo se vários valores de estilo forem detectados em um "
         "elemento. "
     },
-    { TidyKeepFileTimes,                             0,        
+    { TidyKeepFileTimes,                             0,
         "Esta opção especifica se o Tidy deve manter o tempo de modificação original "
         "dos arquivos que o Tidy modifica no local. <br/>Configurar a opção para "
         "<var>yes</var> permite arrumar arquivos sem alterar a data de modificação do "
@@ -296,7 +296,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "modificação para coisas como a implantação automática do servidor. <br/>Note "
         "que não há suporte a este recurso em algumas plataformas. "
     },
-    { TidyLiteralAttribs,                            0,        
+    { TidyLiteralAttribs,                            0,
         "Esta opção especifica como o Tidy lida com caracteres de espaço em branco "
         "dentro de valores de atributos. <br/>Se o valor for <var>no</var>, Tidy "
         "normaliza os valores dos atributos substituindo qualquer nova linha ou "
@@ -306,24 +306,24 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "dos valores de atributo sejam passados inalterados através, defina esta "
         "opção como <var>yes</var>. "
     },
-    { TidyLogicalEmphasis,                           0,        
+    { TidyLogicalEmphasis,                           0,
         "Esta opção especifica se o Tidy deve substitui qualquer ocorrência de "
         "<code>&lt;i&gt;</code> com <code>&lt;em&gt;</code> e qualquer ocorrência de "
         "<code>&lt;b&gt;</code> com <code>&lt;strong&gt;</code>. Quaisquer atributos "
         "são preservados inalterados. <br/>Esta opção pode ser definida "
         "independentemente da opção <code>clean</code>. "
     },
-    { TidyLowerLiterals,                             0,        
+    { TidyLowerLiterals,                             0,
         "Esta opção especifica se o Tidy deve converter o valor de um atributo que "
         "leva uma lista de valores predefinidos para minúsculas. <br/>Isto é "
         "necessário para documentos XHTML. "
     },
-    { TidyMakeBare,                                  0,        
+    { TidyMakeBare,                                  0,
         "Esta opção especifica se o Tidy deve retirar o HTML específico da Microsoft "
         "de documentos do Word 2000 e exibir espaços em vez de espaços rígidos (nbsp) "
         "nos quais eles existam na entrada. "
     },
-    { TidyMakeClean,                                 0,        
+    { TidyMakeClean,                                 0,
         "Esta opção especifica se o Tidy deve executar a limpeza de algumas tags de "
         "apresentação legadas (atualmente <code>&lt;i&gt;</code>, "
         "<code>&lt;b&gt;</code>, <code>&lt;center&gt;</code> quando incluídas nas "
@@ -331,12 +331,12 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "<var>yes</var>, as tags legadas serão substituídas por tags CSS "
         "<code>&lt;style&gt;</code> e marcação estrutural conforme apropriado. "
     },
-    { TidyMark,                                      0,        
+    { TidyMark,                                      0,
         "Esta opção especifica se o Tidy deve adicionar um elemento <code>meta</code> "
         "ao cabeçalho do documento para indicar que o documento foi arrumado. <br/>"
         "Tidy não adicionará um elemento meta se um já estiver presente. "
     },
-    { TidyMergeDivs,                                 0,        
+    { TidyMergeDivs,                                 0,
         "Esta opção pode ser usada para modificar o comportamento de "
         "<code>clean</code> quando configurado para <var>yes</var>. <br/>Esta opção "
         "especifica se o Tidy deve mesclar <code>&lt;div&gt;</code> aninhados, como "
@@ -347,30 +347,30 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "para <var>yes</var>, os atributos de <code>&lt;div&gt;</code> interno são "
         "descartados com a exceção de <code>class</code> e <code>style</code>. "
     },
-    { TidyMergeEmphasis,                             0,        
+    { TidyMergeEmphasis,                             0,
         "Esta opção especifica se o Tidy deve mesclar elementos <code>&lt;b&gt;</code>"
         " e <code>&lt;i&gt;</code> aninhados; por exemplo, para o caso de "
         "<br/><code>&lt;b class=\"rtop-2\"&gt;foo &lt;b class=\"r2-2\""
         "&gt;bar&lt;/b&gt; baz&lt;/b&gt;</code>, <br/>Tidy vai emitir <code>&lt;b "
         "class=\"rtop-2\"&gt;foo bar baz&lt;/b&gt;</code>. "
     },
-    { TidyMergeSpans,                                0,        
+    { TidyMergeSpans,                                0,
         "Esta opção pode ser usada para modificar o comportamento de "
         "<code>clean</code> quando configurado para <var>yes</var>. <br/>Esta opção "
         "especifica se o Tidy deve mesclar <code>&lt;span&gt;</code> aninhados como "
         "<code>&lt;span&gt;&lt;span&gt;...&lt;/span&gt;&lt;/span&gt;</code>. <br/>O "
         "algoritmo é idêntico àquele usado por <code>merge-divs</code>. "
     },
-    { TidyNCR,                                       0,        
+    { TidyNCR,                                       0,
         "Esta opção especifica se o Tidy deve permitir referências de caracteres "
         "numéricos. "
     },
-    { TidyNewline,                                   0,        
+    { TidyNewline,                                   0,
         "O padrão é apropriado para a plataforma atual. <br/>Geralmente, CRLF no PC-"
         "DOS, Windows e OS/2; CR no Mac OS Clássico; e LF nos demais (Linux, Mac OS X "
         "e Unix). "
     },
-    { TidyNumEntities,                               0,        
+    { TidyNumEntities,                               0,
         "Esta opção especifica se o Tidy deve produzir entidades diferentes das "
         "entidades HTML integradas (<code>&amp;amp;</code>, <code>&amp;lt;</code>, "
         "<code>&amp;gt;</code> e <code>&amp;quot;</code>) no formulário numérico em "
@@ -378,7 +378,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "a declaração DOCTYPE gerada. <br/>As entidades que podem ser representadas "
         "na codificação de saída são traduzidas correspondentemente. "
     },
-    { TidyOmitOptionalTags,                          0,        
+    { TidyOmitOptionalTags,                          0,
         "Esta opção especifica se o Tidy deve omitir tags de início e de fim "
         "opcionais ao gerar saída. <br/>Configurar essa opção causa todas as tags "
         "para os elementos <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code> e "
@@ -389,17 +389,17 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "<code>&lt;/td&gt;</code> e <code>&lt;/th&gt;</code>. <br/>Essa opção é "
         "ignorada para saída XML. "
     },
-    { TidyOutCharEncoding,                           0,        
+    { TidyOutCharEncoding,                           0,
         "Esta opção especifica a codificação de caracteres que o Tidy usa para a saída. <br/>Note que "
         "isso só pode ser diferente de <code>input-encoding</code> para codificações latinas "
         "(<var>ascii</var>, <var>latin0</var>, <var>latin1</var>, <var>mac</var>, <var>win1252</var>, "
         "<var>ibm858</var>). <br/>Veja <code>char-encoding</code> para mais informações"
     },
-    { TidyOutFile,                                   0,        
+    { TidyOutFile,                                   0,
         "Essa opção especifica o arquivo de saída que o Tidy usa para marcação. "
         "Normalmente, a marcação é escrita para <code>stdout</code>. "
     },
-    { TidyOutputBOM,                                 0,        
+    { TidyOutputBOM,                                 0,
         "Esta opção especifica se o Tidy deve escrever um caractere Unicode de marca "
         "de ordem de byte (BOM, também conhecido como Zero Width No Break Break, tem "
         "valor de U+FEFF) no início da saída, e aplica-se apenas a codificações de "
@@ -408,7 +408,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "presente no início da entrada. <br/>Um BOM está sempre escrita para saída "
         "XML/XHTML usando codificações de saída UTF-16. "
     },
-    { TidyPPrintTabs,                                0,        
+    { TidyPPrintTabs,                                0,
         "Esta opção especifica se o Tidy deve aplicar recuo com tabulações em vez de "
         "espaços, presumindo que <code>indent</code> seja <var>yes</var>. <br/>Defina-"
         "o para <var>yes</var> para recuar usando tabulações em vez dos espaços "
@@ -419,11 +419,11 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "conversão de tabulações de entrada em espaços. Coloque-o em zero para reter "
         "as tabulações de entrada. "
     },
-    { TidyPreserveEntities,                          0,        
+    { TidyPreserveEntities,                          0,
         "Esta opção especifica se o Tidy deve preservar entidades bem-formadas como "
         "localizado na entrada. "
     },
-    { TidyPreTags,                                   0,        
+    { TidyPreTags,                                   0,
         "Esta opção especifica novas tags que devem ser processadas exatamente da "
         "mesma forma que o elemento <code>&lt;pre&gt;</code> de HTML. Esta opção "
         "possui uma lista separada por vírgulas ou espaços de nomes de tag. <br/>A "
@@ -432,62 +432,62 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "que você ainda não pode adicionar novos elementos CDATA. <br/>Esta opção é "
         "ignorada no modo XML. "
     },
-    { TidyPunctWrap,                                 0,        
+    { TidyPunctWrap,                                 0,
         "Essa opção especifica se o Tidy deve quebrar linha após alguns Unicode ou "
         "caracteres de pontuação chineses. "
     },
-    { TidyQuiet,                                     0,        
+    { TidyQuiet,                                     0,
         "Essa opção especifica se o Tidy deve emitir o resumo dos números de erros e "
         "avisos, ou as mensagens de boas-vidas ou informacionais. "
     },
-    { TidyQuoteAmpersand,                            0,        
+    { TidyQuoteAmpersand,                            0,
         "Essa opção especifica se o Tidy deve emitir caracteres <code>&amp;</code> "
         "sem adornos como <code>&amp;amp;</code>. "
     },
-    { TidyQuoteMarks,                                0,        
+    { TidyQuoteMarks,                                0,
         "Esta opção especifica se o Tidy deve enviar caracteres <code>&quot;</code> "
         "como <code>&quot;</code> como é preferido por alguns ambientes de edição. "
         "<br/>O caractere do apóstrofe <code>'</code> é escrito como "
         "<code>&amp;#39;</code> porque muitos navegadores web ainda não oferecem "
         "suporte a <code>&amp;apos;</code>. "
     },
-    { TidyQuoteNbsp,                                 0,        
+    { TidyQuoteNbsp,                                 0,
         "Esta opção especifica se o Tidy deve produzir caracteres de espaço rígido "
         "como entidades, em vez de como o caractere Unicode de valor 160 (decimal). "
     },
-    { TidyReplaceColor,                              0,        
+    { TidyReplaceColor,                              0,
         "Esta opção especifica se o Tidy deve substituir os valores numéricos nos atributos de cor com "
         "nomes de cor HTML/XHTML onde definido, p.ex. substituir <code>#ffffff</code> com <code>white</"
         "code>. "
     },
-    { TidyShowErrors,                                0,        
+    { TidyShowErrors,                                0,
         "Esta opção especifica o número que o Tidy usa para determinar se outros "
         "erros devem ser exibidos. Se configurado para <var>0</var>, nenhum erro será "
         "mostrado. "
     },
-    { TidyShowInfo,                                  0,        
+    { TidyShowInfo,                                  0,
         "Esta opção especifica se o Tidy deve exibir mensagens de nível "
         "informacional. "
     },
-    { TidyShowMarkup,                                0,        
+    { TidyShowMarkup,                                0,
         "Esta opção especifica se o Tidy deve gerar uma versão de impressão amigável "
         "da marcação. Note que o Tidy não gerará uma versão de impressão amigável se "
         "encontrar erros significativos (veja <code>force-output</code>). "
     },
-    { TidyShowWarnings,                              0,        
+    { TidyShowWarnings,                              0,
         "Esta opção especifica se o Tidy deve suprimir avisos. Isso pode ser útil "
         "quando alguns erros estão ocultos em uma agitação de avisos. "
     },
-    { TidySkipNested,                                0,        
+    { TidySkipNested,                                0,
         "Esta opção especifica que o Tidy deve pular tags aninhadas ao analisar "
         "script e dados de estilo. "
     },
-    { TidySortAttributes,                            0,        
+    { TidySortAttributes,                            0,
         "Esta opção especifica que o Tidy deve ordenar atributos dentro de um "
         "elemento usando o algoritmo de ordenação especificado. Se configurado para "
         "<var>alpha</var>, o algoritmo é uma ordenação alfabética ascendente. "
     },
-    { TidyStrictTagsAttr,                            0,        
+    { TidyStrictTagsAttr,                            0,
         "Esta opção garante que tags e atributos sejam aplicáveis à versão do HTML "
         "que o Tidy emite. Quando definido para <var>yes</var> e o tipo de documento "
         "de saída é um doctype estrito, então o Tidy informará os erros. Se o tipo de "
@@ -497,12 +497,12 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "serão descartados. <br/>Quando configurado para <var>no</var>, essas "
         "verificações não são executadas. "
     },
-    { TidyTabSize,                                   0,        
+    { TidyTabSize,                                   0,
         "Esta opção especifica o número de colunas que o Tidy usa entre paradas de "
         "tabulação sucessivas. Ela é usada para mapear tabulações para espaços ao ler "
         "a entrada. "
     },
-    { TidyUpperCaseAttrs,                            0,        
+    { TidyUpperCaseAttrs,                            0,
         "Esta opção especifica se o Tidy deve produzir nomes de atributo em "
         "maiúsculo. <br/>Quando configurado para <var>no</var>, os nomes dos "
         "atributos serão escritos em minúsculas. Especificar <var>yes</var> exibirá "
@@ -510,12 +510,12 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "deixar nomes de atributos intactos. <br/>Ao usar a entrada XML, o "
         "maiusculização original é sempre preservada. "
     },
-    { TidyUpperCaseTags,                             0,        
+    { TidyUpperCaseTags,                             0,
         "Esta opção especifica se o Tidy deve emitir nomes de tags em maiúsculo. <br/>"
         "O padrão é <var>no</var>, o que resulta em nomes de tags minúsculos, exceto "
         "para entrada XML na qual a maiusculização original é preservada. "
     },
-    { TidyUseCustomTags,                             0,        
+    { TidyUseCustomTags,                             0,
         "Esta opção permite o uso de tags para elementos personalizados autônomos, "
         "p.ex. &lt;flag-icon&gt; com Tidy. As tags personalizadas são desativadas se "
         "esse valor for <var>no</var>. Outras configurações - <var>blocklevel</var>, "
@@ -529,24 +529,24 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "abertura; As tags de fechamento de correspondência serão reconhecidas de "
         "acordo, e as tags de fechamento desconhecidas serão descartadas. "
     },
-    { TidyVertSpace,                                 0,        
+    { TidyVertSpace,                                 0,
         "Esta opção especifica se o Tidy deve adicionar algumas linhas vazias extras para legibilidade. "
         "<br/>O padrão é <var>no</var>. <br/>Se configurado para <var>auto</var>, Tidy vai eliminar "
         "quase todos os caracteres de nova linha."
     },
     { TidyWarnPropAttrs,                             0, "Essa opção especifica se o Tidy deve avisar sobre atributos proprietários."                      },
-    { TidyWord2000,                                  0,        
+    { TidyWord2000,                                  0,
         "Esta opção especifica se o Tidy deve se esforçar duro para tirar todas as "
         "coisas excedentes que o Microsoft Word 2000 insere quando você salva os "
         "documentos do Word como \"páginas web\". Não manipula imagens embutidas ou "
         "VML. <br/>Você deve considerar usar o Word \"Salvar Como: Página da Web, "
         "Filtrada\". "
     },
-    { TidyWrapAsp,                                   0,        
+    { TidyWrapAsp,                                   0,
         "Essa opção especifica se o Tidy deve quebrar linha de textos contidos em "
         "pseudoelementos do ASP, que se parecem com: <code>&lt;% ... %&gt;</code>. "
     },
-    { TidyWrapAttVals,                               0,        
+    { TidyWrapAttVals,                               0,
         "Esta opção especifica se Tidy deve incluir valores de atributos de linha, o "
         "que significa que, se o valor de um atributo faz com que uma linha exceda a "
         "largura especificada por <code>wrap</code>, Tidy irá adicionar uma ou mais "
@@ -560,37 +560,37 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "através de alterações, configure <code>literal-attributes</code> para "
         "<var>yes</var>. "
     },
-    { TidyWrapJste,                                  0,        
+    { TidyWrapJste,                                  0,
         "Essa opção especifica se o Tidy deve quebrar linha de textos contidos em "
         "pseudoelementos do JSTE, que se parecem com: <code>&lt;# ... #&gt;</code>. "
     },
-    { TidyWrapLen,                                   0,        
+    { TidyWrapLen,                                   0,
         "Esta opção especifica a margem direita que o Tidy usa para quebra de linha. "
         "<br/>Tidy tenta quebrar linhas para que não excedam esse comprimento. <br/>"
         "Defina <code>wrap</code> para <var>0</var> (zero) se desejar desativar a "
         "quebra de linha. "
     },
-    { TidyWrapPhp,                                   0,        
+    { TidyWrapPhp,                                   0,
         "Essa opção especifica se o Tidy deve quebrar linha de textos contidos em "
         "pseudoelementos do PHP, que se parecem com: <code>&lt;?php ... ?&gt;</code>. "
     },
-    { TidyWrapScriptlets,                            0,        
+    { TidyWrapScriptlets,                            0,
         "Esta opção especifica se Tidy deve efetuar quebra de linha em string "
         "literais que aparecem em atributos de script. <br/>Tidy efetua essa quebra "
         "em string literais de scripts longos inserindo um caractere de barra "
         "invertida antes da quebra de linha. "
     },
-    { TidyWrapSection,                               0,        
+    { TidyWrapSection,                               0,
         "Essa opção especifica se o Tidy deve efetuar quebra de linha de textos "
         "contidos em tags de seção <code>&lt;![ ... ]&gt;</code>. "
     },
-    { TidyWriteBack,                                 0,        
+    { TidyWriteBack,                                 0,
         "Esta opção especifica se o Tidy deve escrever novamente a marcação arrumada "
         "para o mesmo arquivo que lê. <br/> É aconselhável manter cópias de arquivos "
         "importantes antes de ordená-los, como em ocasiões raras, o resultado pode "
         "não ser o que você espera. "
     },
-    { TidyXhtmlOut,                                  0,        
+    { TidyXhtmlOut,                                  0,
         "Esta opção especifica se o Tidy deve gerar uma impressão amigável, "
         "escrevendo como HTML extensível. <br/>Esta opção faz com que o Tidy "
         "configure o DOCTYPE e o espaço de nomes padrão conforme apropriado para "
@@ -600,7 +600,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "entities</code>. <br/>A maiusculização original de tags e atributos será "
         "preservada, independentemente de outras opções. "
     },
-    { TidyXmlDecl,                                   0,        
+    { TidyXmlDecl,                                   0,
         "Esta opção especifica se o Tidy deve adicionar a declaração XML ao enviar "
         "XML ou XHTML. <br/>Note que, se a entrada já incluir uma declaração "
         "<code>&lt;?xml ... ?&gt;</code>, esta opção será ignorada. <br/>Se a "
@@ -608,41 +608,41 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "codificações <var>utf*</var> ou de <var>raw</var>, então a declaração é "
         "sempre adicionado conforme exigido pelo padrão XML. "
     },
-    { TidyXmlOut,                                    0,        
+    { TidyXmlOut,                                    0,
         "Esta opção especifica se o Tidy deve emitir impressão amigável, escrevendo-o "
         "como XML bem formado. <br/>Todas as entidades não definidas no XML 1.0 serão "
         "escritas como entidades numéricas para permitir que elas sejam analisadas "
         "por um analisador XML. <br/>A maiusculização original de tags e atributos "
         "será preservada, independentemente de outras opções. "
     },
-    { TidyXmlPIs,                                    0,        
+    { TidyXmlPIs,                                    0,
         "Esta opção especifica se o Tidy deve alterar a análise das instruções de "
         "processamento para exigir <code>?&gt;</code> como o terminador, em vez de "
         "<code>&gt;</code>. <br/>Esta opção é configurada automaticamente se a "
         "entrada for um XML. "
     },
-    { TidyXmlSpace,                                  0,        
+    { TidyXmlSpace,                                  0,
         "Esta opção especifica se o Tidy deve adicionar <code>xml:space=\"preserve\"</code> para "
         "elementos tais como <code>&lt;pre&gt;</code>, <code>&lt;style&gt;</code> e <code>&lt;script&gt;"
         "</code> ao gerar o XML. <br/>Isso é necessário se o espaço em branco em tais elementos deve ser "
         "analisado apropriadamente sem ter acesso ao DTD. "
     },
-    { TidyXmlTags,                                   0,        
+    { TidyXmlTags,                                   0,
         "Esta opção especifica se o Tidy deve usar o analisador XML em vez do "
         "analisador HTML de correção de erro. "
     },
-    { TidyMetaCharset,                               0,        
+    { TidyMetaCharset,                               0,
         "Esta opção, quando ativada, adiciona um elemento <code>&lt;meta&gt;</code> e "
         "define o atributo <code>charset</code> para a codificação do documento. "
         "Configure esta opção para <var>yes</var> para habilitá-lo. "
     },
-    { TidyShowMetaChange,                            0,        
+    { TidyShowMetaChange,                            0,
         "Esta opção habilita uma mensagem sempre que o Tidy alterar o atributo "
         "<code>content</code> de uma declaração de meta conjunto de caracteres para "
         "coincidir com a codificação do documento. Defina esta opção para "
         "<var>yes</var> para habilitá-lo. "
     },
-    { TidyStyleTags,                                 0,        
+    { TidyStyleTags,                                 0,
         "Esta opção especifica se o Tidy deve mover todas as tags de estilo para o "
         "cabeçalho do documento. "
     },
@@ -660,7 +660,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     { STRING_ERROR_COUNT_ERROR,                      1, "erros"                                                                                           },
     { STRING_ERROR_COUNT_WARNING,                    0, "aviso"                                                                                           },
     { STRING_ERROR_COUNT_WARNING,                    1, "avisos"                                                                                          },
-    { STRING_HELLO_ACCESS,                           0,        
+    { STRING_HELLO_ACCESS,                           0,
         "\n"
         "Verificações de acessibilidade:\n"
     },
@@ -674,7 +674,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     { TIDYCUSTOMEMPTY_STRING,                        0, "vazio"                                                                                           },
     { TIDYCUSTOMINLINE_STRING,                       0, "em-linha"                                                                                        },
     { TIDYCUSTOMPRE_STRING,                          0, "pré"                                                                                             },
-    { TEXT_HTML_T_ALGORITHM,                         0,        
+    { TEXT_HTML_T_ALGORITHM,                         0,
         "\n"
         "      - Primeiro, pesquisa à esquerda da posição da célula para\n"
         "        localizar células de cabeçalho de linha.\n"
@@ -695,13 +695,13 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "        células TD que configuram o atributo de eixo também são tratadas\n"
         "        com células de cabeçalho.\n"
     },
-    { TEXT_VENDOR_CHARS,                             0,        
+    { TEXT_VENDOR_CHARS,                             0,
         "É improvável que as codificações dependentes do sistema específicas\n"
         "do fornecedor funcionem amplamente na World Wide Web; você deve\n"
         "evitar o uso da codificação de caracteres %s; em vez disso,\n"
         "recomenda-se que você use entidades nomeadas, p.ex. &trade;.\n"
     },
-    { TEXT_SGML_CHARS,                               0,        
+    { TEXT_SGML_CHARS,                               0,
         "Os códigos de caracteres 128 a 159 (U+0080 a U+009F)\n"
         "não são aceitos no HTML; mesmo se eles fossem, eles\n"
         "provavelmente seriam caracteres de controle não imprimíveis.\n"
@@ -709,7 +709,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "com o mesmo valor de bytes na codificação %s e substituiu\n"
         "aquela referência com o equivalente Unicode.\n"
     },
-    { TEXT_INVALID_UTF8,                             0,        
+    { TEXT_INVALID_UTF8,                             0,
         "Os códigos de caracteres para UTF-8 devem estar dentro\n"
         "do intervalo: U+0000 a U+10FFFF. A definição de UTF-8\n"
         "no Anexo D do ISO/IEC 10646-1:2000 também permite para\n"
@@ -723,7 +723,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "Para mais informações, veja http://www.unicode.org/ e\n"
         "http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
     },
-    { TEXT_INVALID_UTF16,                            0,        
+    { TEXT_INVALID_UTF16,                            0,
         "Os códigos de caracteres para UTF-16 devem estar dentro\n"
         "do intervalo: U+0000 a U+10FFFF. A definição de UTF-16\n"
         "no Anexo C da ISO/IEC 10646-1:2000 não permite o mapeamento\n"
@@ -731,7 +731,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "por favor veja http://www.unicode.org/ e\n"
         "http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
     },
-    { TEXT_INVALID_URI,                              0,        
+    { TEXT_INVALID_URI,                              0,
         "URIs devem ser devidamente escapadas, elas não devem\n"
         "conter caracteres não elaborados abaixo de U+0021,\n"
         "incluindo o caractere de espaço e não acima de U+007E.\n"
@@ -743,7 +743,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "por conta própria. Para mais informações, consulte\n"
         "http://www.w3.org/International/O-URL-and-ident.html\n"
     },
-    { TEXT_BAD_FORM,                                 0,        
+    { TEXT_BAD_FORM,                                 0,
         "Talvez seja necessário mover uma ou ambas as tags <form>\n"
         "e </form>. Os elementos HTML devem estar adequadamente\n"
         "aninhados e os elementos de formulário não são uma exceção.\n"
@@ -753,12 +753,12 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "da tabela! Note que um formulário não pode ser aninhado\n"
         "dentro de outro!\n"
     },
-    { TEXT_BAD_MAIN,                                 0,        
+    { TEXT_BAD_MAIN,                                 0,
         "Apenas um elemento <main> é permitido em um documento.\n"
         "Elementos <main> subsequentes foram descartados, o que\n"
         "pode tornar o documento inválido.\n"
     },
-    { TEXT_M_SUMMARY,                                0,        
+    { TEXT_M_SUMMARY,                                0,
         "O atributo de resumo da tabela deve ser usado para\n"
         "descrever a estrutura da tabela. É muito útil para\n"
         "pessoas que usam navegadores não visuais. Os atributos\n"
@@ -768,61 +768,61 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "não visuais forneçam um contexto significativo para\n"
         "cada célula.\n"
     },
-    { TEXT_M_IMAGE_ALT,                              0,        
+    { TEXT_M_IMAGE_ALT,                              0,
         "O atributo alt deve ser usado para dar uma breve descrição\n"
         "de uma imagem; descrições mais longas devem ser fornecidas\n"
         "com o atributo longdesc que leva uma URL vinculada à\n"
         "descrição. Essas medidas são necessárias para pessoas que\n"
         "usam navegadores não-gráficos.\n"
     },
-    { TEXT_M_IMAGE_MAP,                              0,        
+    { TEXT_M_IMAGE_MAP,                              0,
         "Use os mapas de imagens do lado do cliente de preferência\n"
         "aos mapas de imagens do lado do servidor, pois estes são\n"
         "inacessíveis para pessoas que usam navegadores não gráficos.\n"
         "Além disso, os mapas do lado do cliente são mais fáceis\n"
         "de configurar e fornecer feedback imediato aos usuários.\n"
     },
-    { TEXT_M_LINK_ALT,                               0,        
+    { TEXT_M_LINK_ALT,                               0,
         "Para links de hipertexto definidos usando um mapa de imagem\n"
         "do lado do cliente, você precisa usar o atributo alt para\n"
         "fornecer uma descrição textual do link para pessoas que usam\n"
         "navegadores não gráficos.\n"
     },
-    { TEXT_USING_FRAMES,                             0,        
+    { TEXT_USING_FRAMES,                             0,
         "Páginas desenhadas usando quadros apresentam problemas\n"
         "para pessoas que são cegas ou que usam um navegador que\n"
         "não oferece suporte a quadros. Uma página baseada em\n"
         "quadros deve sempre incluir um layout alternativo dentro\n"
         "de um elemento NOFRAMES.\n"
     },
-    { TEXT_ACCESS_ADVICE1,                           0,        
+    { TEXT_ACCESS_ADVICE1,                           0,
         "Para mais conselhos sobre como tornar suas páginas\n"
         "acessíveis, veja http://www.w3.org/WAI/GL."
     },
-    { TEXT_ACCESS_ADVICE2,                           0,        
+    { TEXT_ACCESS_ADVICE2,                           0,
         "Para mais conselhos sobre como tornar suas páginas\n"
         "acessíveis, veja http://www.w3.org/WAI/GL e\n"
         "http://www.html-tidy.org/accessibility/."
     },
-    { TEXT_USING_LAYER,                              0,        
+    { TEXT_USING_LAYER,                              0,
         "O mecanismo de posicionamento do Cascading Style\n"
         "Sheets (CSS) é recomendado em preferência ao\n"
         "elemento proprietário <LAYER> devido ao suporte\n"
         "de fornecedor limitado a LAYER.\n"
     },
-    { TEXT_USING_SPACER,                             0,        
+    { TEXT_USING_SPACER,                             0,
         "É recomendável usar CSS para controlar o espaço em\n"
         "branco (p.ex., para recuo, margens e espaçamento\n"
         "entre linhas). O elemento proprietário <SPACER>\n"
         "possui suporte limitado para fornecedores.\n"
     },
-    { TEXT_USING_FONT,                               0,        
+    { TEXT_USING_FONT,                               0,
         "É recomendável usar o CSS para especificar a fonte e\n"
         "as propriedades, como seu tamanho e cor. Isso reduzirá\n"
         "o tamanho dos arquivos HTML e facilitando a manutenção\n"
         "em comparação com o uso de elementos <FONT>.\n"
     },
-    { TEXT_USING_NOBR,                               0,        
+    { TEXT_USING_NOBR,                               0,
         "É recomendável usar CSS para controlar a quebra de linha.\n"
         "Use \"white-space: nowrap\" para inibir a quebra em vez\n"
         "de inserir <NOBR>...</NOBR> na marcação.\n"
@@ -831,14 +831,14 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     { STRING_CONTENT_LOOKS,                          0, "O conteúdo do documento se parece com %s"                                                        },
     { STRING_DOCTYPE_GIVEN,                          0, "Doctype dado é \"%s\""                                                                           },
     { STRING_ERROR_COUNT,                            0, "Tidy encontrou %u %s e %u %s!\n"                                                                 },
-    { STRING_NEEDS_INTERVENTION,                     0,        
+    { STRING_NEEDS_INTERVENTION,                     0,
         "Esse documento possui erros que devem ser corrigidos\n"
         "antes de usar HTML Tidy para gerar uma versão arrumada.\n"
     },
     { STRING_NO_ERRORS,                              0, "Nenhum aviso ou erro foi localizado.\n"                                                          },
     { STRING_NO_SYSID,                               0, "Nenhum identificado de sistema no doctype emitido"                                               },
     { STRING_NOT_ALL_SHOWN,                          0, "Tidy encontrou %u %s e %u %s! Nem todos avisos/erros foram mostrados.\n"                         },
-    { TEXT_GENERAL_INFO,                             0,        
+    { TEXT_GENERAL_INFO,                             0,
         "Sobre o HTML Tidy: https://github.com/htacg/tidy-html5\n"
         "Relatórios de erro e comentários: https://github.com/htacg/tidy-html5/"
         "issues\n"
@@ -847,7 +847,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "Valide seus documentos HTML: http://validator.w3.org/nu/\n"
         "Incentive sua empresa a se juntar à W3C: http://www.w3.org/Consortium\n"
     },
-    { TEXT_GENERAL_INFO_PLEA,                        0,        
+    { TEXT_GENERAL_INFO_PLEA,                        0,
         "Você fala um idioma diferente do português brasileiro, ou uma variante \n"
         "diferente do português? Considere em ajudar a traduzir o HTML Tidy. \n"
         "Para mais detalhes, por favor veja: \n"
@@ -864,15 +864,15 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     { BAD_ATTRIBUTE_VALUE,                           0, "atributo %s \"%s\" possui valor inválido \"%s\""                                                 },
     { BAD_CDATA_CONTENT,                             0, "'<' + '/' + letra não permitido aqui"                                                            },
     { BAD_SUMMARY_HTML5,                             0, "O atributo de resumo no elemento %s é obsoleto no HTML5"                                         },
-    { BAD_SURROGATE_LEAD,                            0,        
+    { BAD_SURROGATE_LEAD,                            0,
         "Par substituto ao final (baixo) U+%04X, com nenhuma entidade precedente "
         "(Alta), substituído por U+FFFD."
     },
-    { BAD_SURROGATE_PAIR,                            0,        
+    { BAD_SURROGATE_PAIR,                            0,
         "Possui par substituto U+%04X:U+%04X fora do intervalo, substituído pelo "
         "valor U+FFFD."
     },
-    { BAD_SURROGATE_TAIL,                            0,        
+    { BAD_SURROGATE_TAIL,                            0,
         "Par substituto precedente (alto) U+%04X, com nenhuma entidade ao final "
         "(Baixo), substituído por U+FFFD."
     },
@@ -886,7 +886,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     { ELEMENT_NOT_EMPTY,                             0, "%s elemento não vazio ou não fechado"                                                            },
     { ELEMENT_VERS_MISMATCH_ERROR,                   0, "%s elemento não disponível na %s"                                                                },
     { ELEMENT_VERS_MISMATCH_WARN,                    0, "%s elemento não disponível na %s"                                                                },
-    { ENCODING_MISMATCH,                             0,        
+    { ENCODING_MISMATCH,                             0,
         "a codificação de entrada especificada (%s) não corresponde à codificação de "
         "entrada atual (%s)"
     },
@@ -992,7 +992,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     { INFORMATION_NOT_CONVEYED_APPLET,               0, "[2.1.1.2]: certificar de que as informações não sejam transmitidas apenas por cores (applet)."   },
     { INFORMATION_NOT_CONVEYED_OBJECT,               0, "[2.1.1.3]: certificar de que as informações não sejam transmitidas apenas por cores (objeto)."   },
     { INFORMATION_NOT_CONVEYED_SCRIPT,               0, "[2.1.1.4]: certificar de que as informações não sejam transmitidas apenas por cores (script)."   },
-    { INFORMATION_NOT_CONVEYED_INPUT,                0,        
+    { INFORMATION_NOT_CONVEYED_INPUT,                0,
         "[2.1.1.5]: certificar de que as informações não sejam transmitidas apenas por cores "
         "(entrada)."
     },
@@ -1077,7 +1077,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     { FRAME_TITLE_INVALID_NULL,                      0, "[12.1.1.2]: título de <frame> inválido (nulo)."                                                  },
     { FRAME_TITLE_INVALID_SPACES,                    0, "[12.1.1.3]: título de <frame> inválido (espaços)."                                               },
     { ASSOCIATE_LABELS_EXPLICITLY,                   0, "[12.4.1.1]: associar rótulos explicitamente com controles de formulário."                        },
-    { ASSOCIATE_LABELS_EXPLICITLY_FOR,               0,        
+    { ASSOCIATE_LABELS_EXPLICITLY_FOR,               0,
         "[12.4.1.2]: associar rótulos explicitamente com controles de formulário "
         "(for)."
     },
@@ -1097,7 +1097,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     { TC_LABEL_LEVL,                                 0, "nível"                                                                                           },
     { TC_LABEL_OPT,                                  0, "opção"                                                                                           },
     { TC_MAIN_ERROR_LOAD_CONFIG,                     0, "Falha ao carregar o arquivo de config \"%s\", err = %d"                                          },
-    { TC_OPT_ACCESS,                                 0,        
+    { TC_OPT_ACCESS,                                 0,
         " faz verificações adicionais de acessibilidade (<nível> = 0, 1, 2, 3). 0 é "
         "presumido se <nível> estiver faltando."
     },
@@ -1117,7 +1117,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     { TC_OPT_IBM858,                                 0, "usa IBM-858 (CP850+Euro) para entrada, US-ASCII para saída"                                      },
     { TC_OPT_INDENT,                                 0, "recua o conteúdo do elemento"                                                                    },
     { TC_OPT_ISO2022,                                0, "usa ISO-2022 para tanto entrada quanto saída"                                                    },
-    { TC_OPT_LANGUAGE,                               0,        
+    { TC_OPT_LANGUAGE,                               0,
         "define o idioma de saída do Tidy para <idioma>. Especifique '-language help' "
         "para mais ajuda. Use antes de argumentos que gerem saída para garantir que o "
         "idioma surta efeitos, p.ex.:\n"
@@ -1141,7 +1141,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     { TC_OPT_UTF8,                                   0, "usa UTF-8 para tanto entrada quanto saída"                                                       },
     { TC_OPT_VERSION,                                0, "mostra a versão do Tidy"                                                                         },
     { TC_OPT_WIN1252,                                0, "usa Windows--1252 para entrada, US-ASCII para saída"                                             },
-    { TC_OPT_WRAP,                                   0,        
+    { TC_OPT_WRAP,                                   0,
         "efetua quebra de texto na <coluna> especificada, 0 é presumido se <coluna> "
         "estiver faltando. Quando esta opção é omitida, o padrão da opção da "
         "configuração 'wrap' é aplicado."
@@ -1171,7 +1171,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     { TC_STRING_UNKNOWN_OPTION_B,                    0, "HTML Tidy: opção desconhecida."                                                                  },
     { TC_STRING_VERS_A,                              0, "HTML Tidy para %s versão %s"                                                                     },
     { TC_STRING_VERS_B,                              0, "HTML Tidy versão %s"                                                                             },
-    { TC_TXT_HELP_1,                                 0,        
+    { TC_TXT_HELP_1,                                 0,
         "\n"
         "%s [opções...] [arquivo...] [opções...] [arquivo...]\n"
         "Utilitário para limpar e melhor imprimir HTML/XHTML/XML.\n"
@@ -1181,7 +1181,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     },
     { TC_TXT_HELP_2A,                                0, "Os argumentos de linha de comando para HTML Tidy para %s:"                                       },
     { TC_TXT_HELP_2B,                                0, "Os argumentos de linha de comando para HTML Tidy:"                                               },
-    { TC_TXT_HELP_3,                                 0,        
+    { TC_TXT_HELP_3,                                 0,
         "\n"
         "Opções de configuração do Tidy\n"
         "==========================\n"
@@ -1226,7 +1226,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "  http://validator.w3.org/nu/\n"
         "\n"
     },
-    { TC_TXT_HELP_CONFIG,                            0,        
+    { TC_TXT_HELP_CONFIG,                            0,
         "\n"
         "Definições de configuração do HTML Tidy\n"
         "\n"
@@ -1243,7 +1243,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     { TC_TXT_HELP_CONFIG_NAME,                       0, "Nome"                                                                                            },
     { TC_TXT_HELP_CONFIG_TYPE,                       0, "Tipo"                                                                                            },
     { TC_TXT_HELP_CONFIG_ALLW,                       0, "Valores permitidos"                                                                              },
-    { TC_TXT_HELP_LANG_1,                            0,        
+    { TC_TXT_HELP_LANG_1,                            0,
         "\n"
         "A opção -language (ou -lang) indica qual idioma o Tidy deve usar\n"
         "para comunicar sua saída. Por favor, note que este não é um serviço\n"
@@ -1263,7 +1263,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "Windows legado.\n"
         "\n"
     },
-    { TC_TXT_HELP_LANG_2,                            0,        
+    { TC_TXT_HELP_LANG_2,                            0,
         "\n"
         "Os seguintes idiomas estão atualmente instalados em Tidy. Por favor, \n"
         "note que não há garantia de que eles estejam completos; apenas que \n"
@@ -1273,7 +1273,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "Informe as instâncias de strings incorretas para a equipe do Tidy. \n"
         "\n"
     },
-    { TC_TXT_HELP_LANG_3,                            0,        
+    { TC_TXT_HELP_LANG_3,                            0,
         "\n"
         "Se o Tidy for capaz de determinar sua localidade, o Tidy usará \n"
         "o idioma da localidade automaticamente. Por exemplo, os sistemas \n"

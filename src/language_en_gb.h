@@ -13,7 +13,7 @@
  *
  * [X] THIS FILE IS MACHINE GENERATED. It is a localization file for the
  *     language (and maybe region) "en_gb". The source of
- *     these strings is a gettext PO file in Tidy's source, probably called 
+ *     these strings is a gettext PO file in Tidy's source, probably called
  *     "language_en_gb.po".
  *
  * [ ] THIS FILE WAS HAND MODIFIED. Translators, please feel to edit this file
@@ -55,13 +55,13 @@ static uint whichPluralForm_en_gb(uint n) {
  */
 static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
     /***************************************
-     ** This MUST be present and first. 
+     ** This MUST be present and first.
      ** Specify the code for this language.
      ***************************************/
     {/* Specify the ll or ll_cc language code here. */
       TIDY_LANGUAGE,                    0, "en_gb"
     },
-    { TidyAsciiChars,                   0,        
+    { TidyAsciiChars,                   0,
         "Can be used to modify behaviour of the <code>clean</code> option when set "
         "to <var>yes</var>. "
         "<br/>"
@@ -69,11 +69,11 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
         "<code>&amp;emdash;</code>, <code>&amp;rdquo;</code>, and other named "
         "character entities are downgraded to their closest ASCII equivalents. "
     },
-    { TidyGDocClean,                    0,        
+    { TidyGDocClean,                    0,
         "This option specifies if Tidy should enable specific behaviour for "
         "cleaning up HTML exported from Google Docs. "
     },
-    { TidyLiteralAttribs,               0,        
+    { TidyLiteralAttribs,               0,
         "This option specifies how Tidy deals with whitespace characters within "
         "attribute values. "
         "<br/>"
@@ -85,7 +85,7 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
         "and ensure that whitespace within attribute values is passed "
         "through unchanged, set this option to <var>yes</var>. "
     },
-    { TidyMergeDivs,                    0,        
+    { TidyMergeDivs,                    0,
         "This option can be used to modify the behaviour of <code>clean</code> when "
         "set to <code>yes</code>."
         "<br/>"
@@ -101,7 +101,7 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
         "<code>&lt;div&gt;</code> are discarded with the exception of "
         "<code>class</code> and <code>style</code>. "
     },
-    { TidyMergeSpans,                   0,        
+    { TidyMergeSpans,                   0,
         "This option can be used to modify the behaviour of <code>clean</code> when "
         "set to <code>yes</code>."
         "<br/>"
@@ -110,12 +110,12 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
         "<br/>"
         "The algorithm is identical to the one used by <code>merge-divs</code>. "
     },
-    { TidyReplaceColor,                 0,        
+    { TidyReplaceColor,                 0,
         "This option specifies if Tidy should replace numeric values in colour "
         "attributes with HTML/XHTML colour names where defined, e.g. replace "
         "<code>#ffffff</code> with <code>white</code>. "
     },
-    { TidyUseCustomTags,                0,        
+    { TidyUseCustomTags,                0,
         "This option enables the use of tags for autonomous custom elements, "
         "e.g. &lt;flag-icon&gt; with Tidy. Custom tags are disabled if this "
         "value is <var>no</var>. Other settings - <var>blocklevel</var>, "
@@ -132,14 +132,14 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
         "document using opening tags; matching closing tags will be recognised "
         "accordingly, and unknown closing tags will be discarded. "
     },
-    { TEXT_USING_FONT,                  0,        
+    { TEXT_USING_FONT,                  0,
         "You are recommended to use CSS to specify the font and\n"
         "properties such as its size and colour. This will reduce\n"
         "the size of HTML files and make them easier to maintain\n"
         "compared with using <FONT> elements.\n\n"
     },
     { TEXT_USING_BODY,                  0, "You are recommended to use CSS to specify page and link colours\n"           },
-    { TEXT_GENERAL_INFO_PLEA,           0,        
+    { TEXT_GENERAL_INFO_PLEA,           0,
         "\n"
         "Would you like to see Tidy in proper, British English? Please consider \n"
         "helping us to localise HTML Tidy. For details please see \n"
@@ -160,7 +160,7 @@ static languageDefinition language_en_gb = { whichPluralForm_en_gb, {
     { LAYOUT_TABLES_LINEARIZE_PROPERLY, 0, "[5.3.1.1]: verify layout tables linearise properly."                         },
 
 #if SUPPORT_CONSOLE_APP
-    { TC_TXT_HELP_LANG_2,               0,        
+    { TC_TXT_HELP_LANG_2,               0,
         "\n"
         "The following languages are currently installed in Tidy. Please \n"
         "note that there's no guarantee that they are complete; only that \n"

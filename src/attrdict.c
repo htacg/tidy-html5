@@ -108,7 +108,7 @@
 /* These are the core event-handler attributes that can apply to _any_ element
    starting with HTML5. In general they will be marked as not supported for
    previous versions of HTML, in which case please override the attribute in the
-   specific item below. **This macro must be expanded at the END of each 
+   specific item below. **This macro must be expanded at the END of each
    element. **
    Most of these attributes are defined as universal for HTML5 here:
      https://www.w3.org/TR/html-markup/global-attributes.html
@@ -219,7 +219,7 @@ const AttrVersion TY_(W3CAttrsFor_A)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_ABBR)[] = 
+const AttrVersion TY_(W3CAttrsFor_ABBR)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -247,7 +247,7 @@ const AttrVersion TY_(W3CAttrsFor_ABBR)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_ACRONYM)[] = 
+const AttrVersion TY_(W3CAttrsFor_ACRONYM)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -275,7 +275,7 @@ const AttrVersion TY_(W3CAttrsFor_ACRONYM)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_ADDRESS)[] = 
+const AttrVersion TY_(W3CAttrsFor_ADDRESS)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -305,7 +305,7 @@ const AttrVersion TY_(W3CAttrsFor_ADDRESS)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_APPLET)[] = 
+const AttrVersion TY_(W3CAttrsFor_APPLET)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -330,7 +330,7 @@ const AttrVersion TY_(W3CAttrsFor_APPLET)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_AREA)[] = 
+const AttrVersion TY_(W3CAttrsFor_AREA)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -372,7 +372,7 @@ const AttrVersion TY_(W3CAttrsFor_AREA)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_ARTICLE)[] = 
+const AttrVersion TY_(W3CAttrsFor_ARTICLE)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -382,7 +382,7 @@ const AttrVersion TY_(W3CAttrsFor_ARTICLE)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_ASIDE)[] = 
+const AttrVersion TY_(W3CAttrsFor_ASIDE)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -392,7 +392,7 @@ const AttrVersion TY_(W3CAttrsFor_ASIDE)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_AUDIO)[] = 
+const AttrVersion TY_(W3CAttrsFor_AUDIO)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -409,7 +409,7 @@ const AttrVersion TY_(W3CAttrsFor_AUDIO)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_B)[] = 
+const AttrVersion TY_(W3CAttrsFor_B)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -438,7 +438,7 @@ const AttrVersion TY_(W3CAttrsFor_B)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_BASE)[] = 
+const AttrVersion TY_(W3CAttrsFor_BASE)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -452,7 +452,7 @@ const AttrVersion TY_(W3CAttrsFor_BASE)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_BASEFONT)[] = 
+const AttrVersion TY_(W3CAttrsFor_BASEFONT)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -466,7 +466,7 @@ const AttrVersion TY_(W3CAttrsFor_BASEFONT)[] =
   { TidyAttr_UNKNOWN,               0                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_BDI)[] = 
+const AttrVersion TY_(W3CAttrsFor_BDI)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -476,7 +476,7 @@ const AttrVersion TY_(W3CAttrsFor_BDI)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_BDO)[] = 
+const AttrVersion TY_(W3CAttrsFor_BDO)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -504,7 +504,7 @@ const AttrVersion TY_(W3CAttrsFor_BDO)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_BIG)[] = 
+const AttrVersion TY_(W3CAttrsFor_BIG)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -532,7 +532,7 @@ const AttrVersion TY_(W3CAttrsFor_BIG)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_BLOCKQUOTE)[] = 
+const AttrVersion TY_(W3CAttrsFor_BLOCKQUOTE)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -562,7 +562,7 @@ const AttrVersion TY_(W3CAttrsFor_BLOCKQUOTE)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_BODY)[] = 
+const AttrVersion TY_(W3CAttrsFor_BODY)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -612,7 +612,7 @@ const AttrVersion TY_(W3CAttrsFor_BODY)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_BR)[] = 
+const AttrVersion TY_(W3CAttrsFor_BR)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -629,7 +629,7 @@ const AttrVersion TY_(W3CAttrsFor_BR)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_BUTTON)[] = 
+const AttrVersion TY_(W3CAttrsFor_BUTTON)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -672,7 +672,7 @@ const AttrVersion TY_(W3CAttrsFor_BUTTON)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_CANVAS)[] = 
+const AttrVersion TY_(W3CAttrsFor_CANVAS)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -684,7 +684,7 @@ const AttrVersion TY_(W3CAttrsFor_CANVAS)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_CAPTION)[] = 
+const AttrVersion TY_(W3CAttrsFor_CAPTION)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -713,7 +713,7 @@ const AttrVersion TY_(W3CAttrsFor_CAPTION)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_CENTER)[] = 
+const AttrVersion TY_(W3CAttrsFor_CENTER)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -740,7 +740,7 @@ const AttrVersion TY_(W3CAttrsFor_CENTER)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_CITE)[] = 
+const AttrVersion TY_(W3CAttrsFor_CITE)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -769,7 +769,7 @@ const AttrVersion TY_(W3CAttrsFor_CITE)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_CODE)[] = 
+const AttrVersion TY_(W3CAttrsFor_CODE)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -798,7 +798,7 @@ const AttrVersion TY_(W3CAttrsFor_CODE)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_COL)[] = 
+const AttrVersion TY_(W3CAttrsFor_COL)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -832,7 +832,7 @@ const AttrVersion TY_(W3CAttrsFor_COL)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_COLGROUP)[] = 
+const AttrVersion TY_(W3CAttrsFor_COLGROUP)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -866,7 +866,7 @@ const AttrVersion TY_(W3CAttrsFor_COLGROUP)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_COMMAND)[] = 
+const AttrVersion TY_(W3CAttrsFor_COMMAND)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -882,7 +882,7 @@ const AttrVersion TY_(W3CAttrsFor_COMMAND)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_DATALIST)[] = 
+const AttrVersion TY_(W3CAttrsFor_DATALIST)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -892,7 +892,7 @@ const AttrVersion TY_(W3CAttrsFor_DATALIST)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_DD)[] = 
+const AttrVersion TY_(W3CAttrsFor_DD)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -921,7 +921,7 @@ const AttrVersion TY_(W3CAttrsFor_DD)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_DEL)[] = 
+const AttrVersion TY_(W3CAttrsFor_DEL)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -951,7 +951,7 @@ const AttrVersion TY_(W3CAttrsFor_DEL)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_DETAILS)[] = 
+const AttrVersion TY_(W3CAttrsFor_DETAILS)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -962,7 +962,7 @@ const AttrVersion TY_(W3CAttrsFor_DETAILS)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_DFN)[] = 
+const AttrVersion TY_(W3CAttrsFor_DFN)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -990,7 +990,7 @@ const AttrVersion TY_(W3CAttrsFor_DFN)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_DIALOG)[] = 
+const AttrVersion TY_(W3CAttrsFor_DIALOG)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1001,7 +1001,7 @@ const AttrVersion TY_(W3CAttrsFor_DIALOG)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_DIR)[] = 
+const AttrVersion TY_(W3CAttrsFor_DIR)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1031,7 +1031,7 @@ const AttrVersion TY_(W3CAttrsFor_DIR)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_DIV)[] = 
+const AttrVersion TY_(W3CAttrsFor_DIV)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1060,7 +1060,7 @@ const AttrVersion TY_(W3CAttrsFor_DIV)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_DL)[] = 
+const AttrVersion TY_(W3CAttrsFor_DL)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1091,7 +1091,7 @@ const AttrVersion TY_(W3CAttrsFor_DL)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_DT)[] = 
+const AttrVersion TY_(W3CAttrsFor_DT)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1120,7 +1120,7 @@ const AttrVersion TY_(W3CAttrsFor_DT)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_EM)[] = 
+const AttrVersion TY_(W3CAttrsFor_EM)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1149,7 +1149,7 @@ const AttrVersion TY_(W3CAttrsFor_EM)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_EMBED)[] = 
+const AttrVersion TY_(W3CAttrsFor_EMBED)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1163,7 +1163,7 @@ const AttrVersion TY_(W3CAttrsFor_EMBED)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_FIELDSET)[] = 
+const AttrVersion TY_(W3CAttrsFor_FIELDSET)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1194,7 +1194,7 @@ const AttrVersion TY_(W3CAttrsFor_FIELDSET)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_FIGCAPTION)[] = 
+const AttrVersion TY_(W3CAttrsFor_FIGCAPTION)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1204,7 +1204,7 @@ const AttrVersion TY_(W3CAttrsFor_FIGCAPTION)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_FIGURE)[] = 
+const AttrVersion TY_(W3CAttrsFor_FIGURE)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1214,7 +1214,7 @@ const AttrVersion TY_(W3CAttrsFor_FIGURE)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_FONT)[] = 
+const AttrVersion TY_(W3CAttrsFor_FONT)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1234,7 +1234,7 @@ const AttrVersion TY_(W3CAttrsFor_FONT)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_FOOTER)[] = 
+const AttrVersion TY_(W3CAttrsFor_FOOTER)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1244,7 +1244,7 @@ const AttrVersion TY_(W3CAttrsFor_FOOTER)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_FORM)[] = 
+const AttrVersion TY_(W3CAttrsFor_FORM)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1285,7 +1285,7 @@ const AttrVersion TY_(W3CAttrsFor_FORM)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_FRAME)[] = 
+const AttrVersion TY_(W3CAttrsFor_FRAME)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1307,7 +1307,7 @@ const AttrVersion TY_(W3CAttrsFor_FRAME)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_FRAMESET)[] = 
+const AttrVersion TY_(W3CAttrsFor_FRAMESET)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1325,7 +1325,7 @@ const AttrVersion TY_(W3CAttrsFor_FRAMESET)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_H1)[] = 
+const AttrVersion TY_(W3CAttrsFor_H1)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1355,7 +1355,7 @@ const AttrVersion TY_(W3CAttrsFor_H1)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_H2)[] = 
+const AttrVersion TY_(W3CAttrsFor_H2)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1385,7 +1385,7 @@ const AttrVersion TY_(W3CAttrsFor_H2)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_H3)[] = 
+const AttrVersion TY_(W3CAttrsFor_H3)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1415,7 +1415,7 @@ const AttrVersion TY_(W3CAttrsFor_H3)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_H4)[] = 
+const AttrVersion TY_(W3CAttrsFor_H4)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1445,7 +1445,7 @@ const AttrVersion TY_(W3CAttrsFor_H4)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_H5)[] = 
+const AttrVersion TY_(W3CAttrsFor_H5)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1475,7 +1475,7 @@ const AttrVersion TY_(W3CAttrsFor_H5)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_H6)[] = 
+const AttrVersion TY_(W3CAttrsFor_H6)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1505,7 +1505,7 @@ const AttrVersion TY_(W3CAttrsFor_H6)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_HEAD)[] = 
+const AttrVersion TY_(W3CAttrsFor_HEAD)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1521,7 +1521,7 @@ const AttrVersion TY_(W3CAttrsFor_HEAD)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_HEADER)[] = 
+const AttrVersion TY_(W3CAttrsFor_HEADER)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1531,7 +1531,7 @@ const AttrVersion TY_(W3CAttrsFor_HEADER)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_HGROUP)[] = 
+const AttrVersion TY_(W3CAttrsFor_HGROUP)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1541,7 +1541,7 @@ const AttrVersion TY_(W3CAttrsFor_HGROUP)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_HR)[] = 
+const AttrVersion TY_(W3CAttrsFor_HR)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1574,7 +1574,7 @@ const AttrVersion TY_(W3CAttrsFor_HR)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_HTML)[] = 
+const AttrVersion TY_(W3CAttrsFor_HTML)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1592,7 +1592,7 @@ const AttrVersion TY_(W3CAttrsFor_HTML)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_I)[] = 
+const AttrVersion TY_(W3CAttrsFor_I)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1621,7 +1621,7 @@ const AttrVersion TY_(W3CAttrsFor_I)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_IFRAME)[] = 
+const AttrVersion TY_(W3CAttrsFor_IFRAME)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1650,7 +1650,7 @@ const AttrVersion TY_(W3CAttrsFor_IFRAME)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_IMG)[] = 
+const AttrVersion TY_(W3CAttrsFor_IMG)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1695,7 +1695,7 @@ const AttrVersion TY_(W3CAttrsFor_IMG)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_INPUT)[] = 
+const AttrVersion TY_(W3CAttrsFor_INPUT)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1763,7 +1763,7 @@ const AttrVersion TY_(W3CAttrsFor_INPUT)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_INS)[] = 
+const AttrVersion TY_(W3CAttrsFor_INS)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1793,7 +1793,7 @@ const AttrVersion TY_(W3CAttrsFor_INS)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_ISINDEX)[] = 
+const AttrVersion TY_(W3CAttrsFor_ISINDEX)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1812,7 +1812,7 @@ const AttrVersion TY_(W3CAttrsFor_ISINDEX)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_KBD)[] = 
+const AttrVersion TY_(W3CAttrsFor_KBD)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1841,7 +1841,7 @@ const AttrVersion TY_(W3CAttrsFor_KBD)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_KEYGEN)[] = 
+const AttrVersion TY_(W3CAttrsFor_KEYGEN)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1857,7 +1857,7 @@ const AttrVersion TY_(W3CAttrsFor_KEYGEN)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_LABEL)[] = 
+const AttrVersion TY_(W3CAttrsFor_LABEL)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1890,7 +1890,7 @@ const AttrVersion TY_(W3CAttrsFor_LABEL)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_LEGEND)[] = 
+const AttrVersion TY_(W3CAttrsFor_LEGEND)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1920,7 +1920,7 @@ const AttrVersion TY_(W3CAttrsFor_LEGEND)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_LI)[] = 
+const AttrVersion TY_(W3CAttrsFor_LI)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1951,7 +1951,7 @@ const AttrVersion TY_(W3CAttrsFor_LI)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_LINK)[] = 
+const AttrVersion TY_(W3CAttrsFor_LINK)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -1995,7 +1995,7 @@ const AttrVersion TY_(W3CAttrsFor_LINK)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_LISTING)[] = 
+const AttrVersion TY_(W3CAttrsFor_LISTING)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2007,7 +2007,7 @@ const AttrVersion TY_(W3CAttrsFor_LISTING)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_MAIN)[] = 
+const AttrVersion TY_(W3CAttrsFor_MAIN)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2017,7 +2017,7 @@ const AttrVersion TY_(W3CAttrsFor_MAIN)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_MAP)[] = 
+const AttrVersion TY_(W3CAttrsFor_MAP)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2078,7 +2078,7 @@ const AttrVersion TY_(W3CAttrsFor_MATHML)[] =  /* [i_a]2 */
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_MARK)[] = 
+const AttrVersion TY_(W3CAttrsFor_MARK)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2088,7 +2088,7 @@ const AttrVersion TY_(W3CAttrsFor_MARK)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_MENU)[] = 
+const AttrVersion TY_(W3CAttrsFor_MENU)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2120,7 +2120,7 @@ const AttrVersion TY_(W3CAttrsFor_MENU)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_MENUITEM)[] = 
+const AttrVersion TY_(W3CAttrsFor_MENUITEM)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2138,7 +2138,7 @@ const AttrVersion TY_(W3CAttrsFor_MENUITEM)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_META)[] = 
+const AttrVersion TY_(W3CAttrsFor_META)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2158,7 +2158,7 @@ const AttrVersion TY_(W3CAttrsFor_META)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_METER)[] = 
+const AttrVersion TY_(W3CAttrsFor_METER)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2175,7 +2175,7 @@ const AttrVersion TY_(W3CAttrsFor_METER)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_NAV)[] = 
+const AttrVersion TY_(W3CAttrsFor_NAV)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2185,7 +2185,7 @@ const AttrVersion TY_(W3CAttrsFor_NAV)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_NEXTID)[] = 
+const AttrVersion TY_(W3CAttrsFor_NEXTID)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2196,7 +2196,7 @@ const AttrVersion TY_(W3CAttrsFor_NEXTID)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_NOFRAMES)[] = 
+const AttrVersion TY_(W3CAttrsFor_NOFRAMES)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2223,7 +2223,7 @@ const AttrVersion TY_(W3CAttrsFor_NOFRAMES)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_NOSCRIPT)[] = 
+const AttrVersion TY_(W3CAttrsFor_NOSCRIPT)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2251,7 +2251,7 @@ const AttrVersion TY_(W3CAttrsFor_NOSCRIPT)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_OBJECT)[] = 
+const AttrVersion TY_(W3CAttrsFor_OBJECT)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2297,7 +2297,7 @@ const AttrVersion TY_(W3CAttrsFor_OBJECT)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_OL)[] = 
+const AttrVersion TY_(W3CAttrsFor_OL)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2330,7 +2330,7 @@ const AttrVersion TY_(W3CAttrsFor_OL)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_OPTGROUP)[] = 
+const AttrVersion TY_(W3CAttrsFor_OPTGROUP)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2360,7 +2360,7 @@ const AttrVersion TY_(W3CAttrsFor_OPTGROUP)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_OPTION)[] = 
+const AttrVersion TY_(W3CAttrsFor_OPTION)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2394,7 +2394,7 @@ const AttrVersion TY_(W3CAttrsFor_OPTION)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_OUTPUT)[] = 
+const AttrVersion TY_(W3CAttrsFor_OUTPUT)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2407,7 +2407,7 @@ const AttrVersion TY_(W3CAttrsFor_OUTPUT)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_P)[] = 
+const AttrVersion TY_(W3CAttrsFor_P)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2437,7 +2437,7 @@ const AttrVersion TY_(W3CAttrsFor_P)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_PARAM)[] = 
+const AttrVersion TY_(W3CAttrsFor_PARAM)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2478,7 +2478,7 @@ const AttrVersion TY_(W3CAttrsFor_PICTURE)[] = /* Issue #151 - support for 'pict
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_PLAINTEXT)[] = 
+const AttrVersion TY_(W3CAttrsFor_PLAINTEXT)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2489,7 +2489,7 @@ const AttrVersion TY_(W3CAttrsFor_PLAINTEXT)[] =
   { TidyAttr_UNKNOWN,            0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_PRE)[] = 
+const AttrVersion TY_(W3CAttrsFor_PRE)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2520,7 +2520,7 @@ const AttrVersion TY_(W3CAttrsFor_PRE)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_PROGRESS)[] = 
+const AttrVersion TY_(W3CAttrsFor_PROGRESS)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2533,7 +2533,7 @@ const AttrVersion TY_(W3CAttrsFor_PROGRESS)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_Q)[] = 
+const AttrVersion TY_(W3CAttrsFor_Q)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2562,7 +2562,7 @@ const AttrVersion TY_(W3CAttrsFor_Q)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_RB)[] = 
+const AttrVersion TY_(W3CAttrsFor_RB)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2589,7 +2589,7 @@ const AttrVersion TY_(W3CAttrsFor_RB)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_RBC)[] = 
+const AttrVersion TY_(W3CAttrsFor_RBC)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2616,7 +2616,7 @@ const AttrVersion TY_(W3CAttrsFor_RBC)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_RP)[] = 
+const AttrVersion TY_(W3CAttrsFor_RP)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2643,7 +2643,7 @@ const AttrVersion TY_(W3CAttrsFor_RP)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_RT)[] = 
+const AttrVersion TY_(W3CAttrsFor_RT)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2671,7 +2671,7 @@ const AttrVersion TY_(W3CAttrsFor_RT)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_RTC)[] = 
+const AttrVersion TY_(W3CAttrsFor_RTC)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2698,7 +2698,7 @@ const AttrVersion TY_(W3CAttrsFor_RTC)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_RUBY)[] = 
+const AttrVersion TY_(W3CAttrsFor_RUBY)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2725,7 +2725,7 @@ const AttrVersion TY_(W3CAttrsFor_RUBY)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_S)[] = 
+const AttrVersion TY_(W3CAttrsFor_S)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2752,7 +2752,7 @@ const AttrVersion TY_(W3CAttrsFor_S)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_SAMP)[] = 
+const AttrVersion TY_(W3CAttrsFor_SAMP)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2781,7 +2781,7 @@ const AttrVersion TY_(W3CAttrsFor_SAMP)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_SCRIPT)[] = 
+const AttrVersion TY_(W3CAttrsFor_SCRIPT)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2804,7 +2804,7 @@ const AttrVersion TY_(W3CAttrsFor_SCRIPT)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_SECTION)[] = 
+const AttrVersion TY_(W3CAttrsFor_SECTION)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2814,7 +2814,7 @@ const AttrVersion TY_(W3CAttrsFor_SECTION)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_SELECT)[] = 
+const AttrVersion TY_(W3CAttrsFor_SELECT)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2855,7 +2855,7 @@ const AttrVersion TY_(W3CAttrsFor_SELECT)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_SMALL)[] = 
+const AttrVersion TY_(W3CAttrsFor_SMALL)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2894,7 +2894,7 @@ const AttrVersion TY_(W3CAttrsFor_SLOT)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_SOURCE)[] = 
+const AttrVersion TY_(W3CAttrsFor_SOURCE)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2908,7 +2908,7 @@ const AttrVersion TY_(W3CAttrsFor_SOURCE)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_SPAN)[] = 
+const AttrVersion TY_(W3CAttrsFor_SPAN)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2936,7 +2936,7 @@ const AttrVersion TY_(W3CAttrsFor_SPAN)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_STRIKE)[] = 
+const AttrVersion TY_(W3CAttrsFor_STRIKE)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2963,7 +2963,7 @@ const AttrVersion TY_(W3CAttrsFor_STRIKE)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_STRONG)[] = 
+const AttrVersion TY_(W3CAttrsFor_STRONG)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -2992,7 +2992,7 @@ const AttrVersion TY_(W3CAttrsFor_STRONG)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_STYLE)[] = 
+const AttrVersion TY_(W3CAttrsFor_STYLE)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3012,7 +3012,7 @@ const AttrVersion TY_(W3CAttrsFor_STYLE)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_SUB)[] = 
+const AttrVersion TY_(W3CAttrsFor_SUB)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3040,7 +3040,7 @@ const AttrVersion TY_(W3CAttrsFor_SUB)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_SUMMARY)[] = 
+const AttrVersion TY_(W3CAttrsFor_SUMMARY)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3050,7 +3050,7 @@ const AttrVersion TY_(W3CAttrsFor_SUMMARY)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_SUP)[] = 
+const AttrVersion TY_(W3CAttrsFor_SUP)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3137,7 +3137,7 @@ const AttrVersion TY_(W3CAttrsFor_SVG)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_TABLE)[] = 
+const AttrVersion TY_(W3CAttrsFor_TABLE)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3175,7 +3175,7 @@ const AttrVersion TY_(W3CAttrsFor_TABLE)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_TBODY)[] = 
+const AttrVersion TY_(W3CAttrsFor_TBODY)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3207,7 +3207,7 @@ const AttrVersion TY_(W3CAttrsFor_TBODY)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_TD)[] = 
+const AttrVersion TY_(W3CAttrsFor_TD)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3249,7 +3249,7 @@ const AttrVersion TY_(W3CAttrsFor_TD)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_TEXTAREA)[] = 
+const AttrVersion TY_(W3CAttrsFor_TEXTAREA)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3296,7 +3296,7 @@ const AttrVersion TY_(W3CAttrsFor_TEXTAREA)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_TFOOT)[] = 
+const AttrVersion TY_(W3CAttrsFor_TFOOT)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3328,7 +3328,7 @@ const AttrVersion TY_(W3CAttrsFor_TFOOT)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_TH)[] = 
+const AttrVersion TY_(W3CAttrsFor_TH)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3370,7 +3370,7 @@ const AttrVersion TY_(W3CAttrsFor_TH)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_THEAD)[] = 
+const AttrVersion TY_(W3CAttrsFor_THEAD)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3402,7 +3402,7 @@ const AttrVersion TY_(W3CAttrsFor_THEAD)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_TEMPLATE)[] = 
+const AttrVersion TY_(W3CAttrsFor_TEMPLATE)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3412,7 +3412,7 @@ const AttrVersion TY_(W3CAttrsFor_TEMPLATE)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_TIME)[] = 
+const AttrVersion TY_(W3CAttrsFor_TIME)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3424,7 +3424,7 @@ const AttrVersion TY_(W3CAttrsFor_TIME)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_DATA)[] = 
+const AttrVersion TY_(W3CAttrsFor_DATA)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3435,7 +3435,7 @@ const AttrVersion TY_(W3CAttrsFor_DATA)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_TITLE)[] = 
+const AttrVersion TY_(W3CAttrsFor_TITLE)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3451,7 +3451,7 @@ const AttrVersion TY_(W3CAttrsFor_TITLE)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_TR)[] = 
+const AttrVersion TY_(W3CAttrsFor_TR)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3484,7 +3484,7 @@ const AttrVersion TY_(W3CAttrsFor_TR)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_TRACK)[] = 
+const AttrVersion TY_(W3CAttrsFor_TRACK)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3499,7 +3499,7 @@ const AttrVersion TY_(W3CAttrsFor_TRACK)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_TT)[] = 
+const AttrVersion TY_(W3CAttrsFor_TT)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3528,7 +3528,7 @@ const AttrVersion TY_(W3CAttrsFor_TT)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_U)[] = 
+const AttrVersion TY_(W3CAttrsFor_U)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3555,7 +3555,7 @@ const AttrVersion TY_(W3CAttrsFor_U)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_UL)[] = 
+const AttrVersion TY_(W3CAttrsFor_UL)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3586,7 +3586,7 @@ const AttrVersion TY_(W3CAttrsFor_UL)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_VAR)[] = 
+const AttrVersion TY_(W3CAttrsFor_VAR)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3615,7 +3615,7 @@ const AttrVersion TY_(W3CAttrsFor_VAR)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_VIDEO)[] = 
+const AttrVersion TY_(W3CAttrsFor_VIDEO)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3635,7 +3635,7 @@ const AttrVersion TY_(W3CAttrsFor_VIDEO)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_WBR)[] = 
+const AttrVersion TY_(W3CAttrsFor_WBR)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA
@@ -3645,7 +3645,7 @@ const AttrVersion TY_(W3CAttrsFor_WBR)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
-const AttrVersion TY_(W3CAttrsFor_XMP)[] = 
+const AttrVersion TY_(W3CAttrsFor_XMP)[] =
 {
   INCLUDE_ARIA
   INCLUDE_MICRODATA

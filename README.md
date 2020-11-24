@@ -5,14 +5,14 @@ All other READMEs and related materials can be found in [README/][100]. Although
 ## Building HTML Tidy
 
   - For build instructions please see [README/BUILD.md][115].
-  
+
 ## Branches and Versions
 
 Learn about which branches are available, which branch you should use, and how HTML Tidy’s versioning scheme works.
 
   - Learn about version numbering in [README/VERSION.md][160].
   - Learn about our repository branches in [README/BRANCHES.md][110].
-  
+
 ## Contributing and Development Guides
 
 We gladly accept PRs! Read about some of our contribution guidelines, and check out some of the additional explanatory documents that will aid your understanding of how to accomplish certain things in HTML Tidy.
@@ -63,7 +63,7 @@ Tidy supports localization, and welcomes translations into various languages. Pl
 This repository should be considered canonical for HTML Tidy as of 2015-January-15.
 
  - This repository originally transferred from [w3c.github.com/tidy-html5][20], now redirected to the current site.
- 
+
  - First moved to Github from [tidy.sourceforge.net][21]. Note, this site is kept only for historic reasons, and is not now well maintained.
 
 **Tidy is the granddaddy of HTML tools, with support for modern standards.** Have fun...
@@ -93,4 +93,4 @@ HTML Tidy and LibTidy are free and open source software with a permissive licens
   [150]: README/MESSAGE.md
   [155]: README/OPTIONS.md
   [160]: README/VERSION.md
- 
+

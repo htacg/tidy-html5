@@ -54,33 +54,33 @@
 .SH SYNOPSIS
 \fBtidy\fR [\fIoptions\fR] [\fIfile\fR ...] [\fIoptions\fR] [\fIfile\fR ...] ...
 .SH DESCRIPTION
-Tidy reads HTML, XHTML, and XML files and writes cleaned-up markup.  
+Tidy reads HTML, XHTML, and XML files and writes cleaned-up markup.
 For HTML variants, it detects, reports, and corrects many common coding errors
 and strives to produce visually equivalent markup that is both conformant
 to the HTML specifications and that works in most browsers.
 .LP
-A common use of Tidy is to convert plain HTML to XHTML.  
+A common use of Tidy is to convert plain HTML to XHTML.
 For generic XML files, Tidy is limited to correcting basic well-formedness
 errors and pretty printing.
 .LP
-If no input file is specified, Tidy reads the standard input.  
+If no input file is specified, Tidy reads the standard input.
 If no output file is specified, Tidy writes the tidied markup to the
 standard output.  If no error file is specified, Tidy writes messages
 to the standard error.
 .SH OPTIONS
-Tidy supports two different kinds of options.  
+Tidy supports two different kinds of options.
 Purely \fIcommand-line\fR options, starting with a single dash '\fB-\fR',
-can only be used on the command-line, not in configuration files.  
-They are listed in the first part of this section.  
+can only be used on the command-line, not in configuration files.
+They are listed in the first part of this section.
 \fIConfiguration\fR options, on the other hand, can either be passed
 on the command line, starting with two dashes \fB--\fR,
 or specified in a configuration file,
-using the option name, followed by a colon \fB:\fR, plus the value, without 
+using the option name, followed by a colon \fB:\fR, plus the value, without
 the starting dashes. They are listed in the second part of this section,
 with a sample config file.
 .LP
 For \fIcommand-line\fR options that expect a numerical argument,
-a default is assumed if no meaningful value can be found.  
+a default is assumed if no meaningful value can be found.
 On the other hand, \fIconfiguration\fR options cannot be used
 without a value; a \fIconfiguration\fR option without a value
 is simply discarded and reported as an error.
@@ -111,7 +111,7 @@ and telling tidy to read that file with the \fB-config\fR option:
 \fBtidy -config \fIconfig-file \fR ...
 .LP
 \fIConfiguration\fR options can be conveniently grouped
-in a single config file.  
+in a single config file.
 A Tidy configuration file is simply a text file, where each option
 is listed on a separate line in the form
 .LP
@@ -122,13 +122,13 @@ is listed on a separate line in the form
 .br
 etc.
 .LP
-The permissible values for a given option depend on the option's Type.  
+The permissible values for a given option depend on the option's Type.
 There are five Types: \fIBoolean\fR, \fIAutoBool\fR, \fIDocType\fR,
-\fIEnum\fR, and \fIString\fR.  
-\fIBoolean\fR Types allow any of \fByes/no, y/n, true/false, t/f, 1/0\fR.  
+\fIEnum\fR, and \fIString\fR.
+\fIBoolean\fR Types allow any of \fByes/no, y/n, true/false, t/f, 1/0\fR.
 \fIAutoBool\fRs allow \fBauto\fR in addition to the values allowed
-by \fIBooleans\fR.  
-\fIInteger\fR Types take non-negative integers.  
+by \fIBooleans\fR.
+\fIInteger\fR Types take non-negative integers.
 \fIString\fR Types generally have no defaults, and you should provide them in
 non-quoted form (unless you wish the output to contain the literal quotes).
 .LP
@@ -153,14 +153,14 @@ the five Types:
     error-file: errs.txt
 \fR
 .LP
-Below is a summary and brief description of each of the options.  
+Below is a summary and brief description of each of the options.
 They are listed alphabetically within each category.<xsl:text/>
 <xsl:call-template name="show-config-options" />
 .SH ENVIRONMENT
 .TP
 .B HTML_TIDY
 Name of the default configuration file.  This should be an absolute path,
-since you will probably invoke \fBtidy\fR from different directories.  
+since you will probably invoke \fBtidy\fR from different directories.
 The value of HTML_TIDY will be parsed after the compiled-in default
 (defined with -DTIDY_CONFIG_FILE), but before any of the files specified
 using \fB-config\fR.

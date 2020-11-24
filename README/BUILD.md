@@ -3,13 +3,13 @@
 ## Prerequisites
 
   1. git - [http://git-scm.com/book/en/v2/Getting-Started-Installing-Git][1]
-  
+
   2. cmake - [http://www.cmake.org/download/][2]
-  
+
   3. appropriate build tools for the platform
-  
+
   4. the [xsltproc][3] tool is required to build and install the `tidy.1` man page on Unix-like platforms.
-  
+
 CMake comes in two forms - command line and GUI. Some installations only install one or the other, but sometimes both. The build commands below are only for command line use.
 
 Also the actual build tools vary for each platform. But that is one of the great features of CMake, it can generate various 'native' build files. Running `cmake --help` should list the generators available on that platform. For sure one of the common ones is "Unix Makefiles", which needs autotools make installed, but many other generators are supported.
@@ -23,11 +23,11 @@ In Windows CMake offers various versions for MSVC. Again below only the command 
 
   2. `cmake ../.. -DCMAKE_BUILD_TYPE=Release [-DCMAKE_INSTALL_PREFIX=/path/for/install]`
 
-  3. Windows:  `cmake --build . --config Release`  
+  3. Windows:  `cmake --build . --config Release`
      Unix/OS X: `make`
 
-  4. Install, if desired:  
-     Windows: `cmake --build . --config Release --target INSTALL`  
+  4. Install, if desired:
+     Windows: `cmake --build . --config Release --target INSTALL`
      Unix/OS X: `[sudo] make install`
 
 By default cmake sets the install path to `/usr/local/bin` in Unix. If you wanted the binary in say `/usr/bin` instead, then in 2. above use `-DCMAKE_INSTALL_PREFIX=/usr`.
@@ -70,5 +70,5 @@ make install
   [2]: http://www.cmake.org/download/
   [3]: http://xmlsoft.org/XSLT/xsltproc2.html
 
-  
+
 ; eof

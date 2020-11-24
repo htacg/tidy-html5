@@ -6,7 +6,7 @@
  *
  * This header provides the public (within libtidy) interface to
  * basic localization support. To add your own localization, create
- * a new `language_xx.h` file and add it to the struct in 
+ * a new `language_xx.h` file and add it to the struct in
  * `language.c`.
  *
  * (c) 2015 HTACG
@@ -26,13 +26,13 @@
  *  therein.
  */
 typedef enum {
-    
+
     /* Specifies the language code for a particular language. */
     TIDY_LANGUAGE = 400,
-    
+
     /* Marker for the last key in the structure. */
     TIDY_MESSAGE_TYPE_LAST
-    
+
 } tidyLanguage;
 
 

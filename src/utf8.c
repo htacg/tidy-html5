@@ -10,12 +10,12 @@
 
   Note, UTF-8 encoding, by itself, does not affect the actual
   "codepoints" of the underlying character encoding.  In the
-  cases of ASCII, Latin1, Unicode (16-bit, BMP), these all 
+  cases of ASCII, Latin1, Unicode (16-bit, BMP), these all
   refer to ISO-10646 "codepoints".  For anything else, they
   refer to some other "codepoint" set.
 
-  Put another way, UTF-8 is a variable length method to 
-  represent any non-negative integer value.  The glyph 
+  Put another way, UTF-8 is a variable length method to
+  represent any non-negative integer value.  The glyph
   that a integer value represents is unchanged and defined
   externally (e.g. by ISO-10646, Big5, Win1252, MacRoman,
   Latin2-9, and so on).
@@ -28,7 +28,7 @@
 #include "forward.h"
 #include "utf8.h"
 
-/* 
+/*
 UTF-8 encoding/decoding functions
 Return # of bytes in UTF-8 sequence; result < 0 if illegal sequence
 
@@ -105,7 +105,7 @@ DBBF DFF*    F3 BF BF B*    000FFFF*
 DBFF DFF*    F4 8F BF B*    0010FFF*
 
 * = E or F
-                                   
+
 1010  A
 1011  B
 1100  C
@@ -158,7 +158,7 @@ static const struct validUTF8Sequence
     {0x1000,   0xFFFF,   3, {0xE1, 0xEF, 0x80, 0xBF, 0x80, 0xBF, 0x00, 0x00}},
     {0x10000,  0x3FFFF,  4, {0xF0, 0xF0, 0x90, 0xBF, 0x80, 0xBF, 0x80, 0xBF}},
     {0x40000,  0xFFFFF,  4, {0xF1, 0xF3, 0x80, 0xBF, 0x80, 0xBF, 0x80, 0xBF}},
-    {0x100000, 0x10FFFF, 4, {0xF4, 0xF4, 0x80, 0x8F, 0x80, 0xBF, 0x80, 0xBF}} 
+    {0x100000, 0x10FFFF, 4, {0xF4, 0xF4, 0x80, 0x8F, 0x80, 0xBF, 0x80, 0xBF}}
 };
 
 int TY_(DecodeUTF8BytesToChar)( uint* c, uint firstByte, ctmbstr successorBytes,
@@ -169,10 +169,10 @@ int TY_(DecodeUTF8BytesToChar)( uint* c, uint firstByte, ctmbstr successorBytes,
     uint ch = 0, n = 0;
     int i, bytes = 0;
     Bool hasError = no;
-    
+
     if ( successorBytes )
         buf = (byte*) successorBytes;
-        
+
     /* special check if we have been passed an EOF char */
     if ( firstByte == EndOfStream )
     {
@@ -183,7 +183,7 @@ int TY_(DecodeUTF8BytesToChar)( uint* c, uint firstByte, ctmbstr successorBytes,
     }
 
     ch = firstByte; /* first byte is passed in separately */
-    
+
     if (ch <= 0x7F) /* 0XXX XXXX one byte */
     {
         n = ch;
@@ -266,39 +266,39 @@ int TY_(DecodeUTF8BytesToChar)( uint* c, uint firstByte, ctmbstr successorBytes,
         hasError = yes;
         bytes = 1;
     }
-    
+
     if (!hasError && ((n == kUTF8ByteSwapNotAChar) || (n == kUTF8NotAChar)))
         hasError = yes;
-        
+
     if (!hasError && (n > kMaxUTF8FromUCS4))
         hasError = yes;
 
     if (!hasError)
     {
         int lo, hi;
-        
+
         lo = offsetUTF8Sequences[bytes - 1];
         hi = offsetUTF8Sequences[bytes] - 1;
-        
+
         /* check for overlong sequences */
         if ((n < validUTF8[lo].lowChar) || (n > validUTF8[hi].highChar))
             hasError = yes;
         else
         {
             hasError = yes; /* assume error until proven otherwise */
-        
+
             for (i = lo; i <= hi; i++)
             {
                 int tempCount;
                 byte theByte;
-                
+
                 for (tempCount = 0; tempCount < bytes; tempCount++)
                 {
                     if (!tempCount)
                         theByte = (tmbchar) firstByte;
                     else
                         theByte = buf[tempCount - 1];
-                        
+
                     if ( theByte >= validUTF8[i].validBytes[(tempCount * 2)] &&
                          theByte <= validUTF8[i].validBytes[(tempCount * 2) + 1] )
                         hasError = no;
@@ -335,10 +335,10 @@ int TY_(EncodeCharToUTF8Bytes)( uint c, tmbstr encodebuf,
     byte* buf = &tempbuf[0];
     int bytes = 0;
     Bool hasError = no;
-    
+
     if ( encodebuf )
         buf = (byte*) encodebuf;
-        
+
     if (c <= 0x7F)  /* 0XXX XXXX one byte */
     {
         buf[0] = (tmbchar) c;
@@ -392,7 +392,7 @@ int TY_(EncodeCharToUTF8Bytes)( uint c, tmbstr encodebuf,
     }
     else
         hasError = yes;
-        
+
     /* don't output invalid UTF-8 byte sequence to a stream */
     if ( !hasError && outp != NULL )
     {
@@ -411,7 +411,7 @@ int TY_(EncodeCharToUTF8Bytes)( uint c, tmbstr encodebuf,
         fprintf( stderr, "\n" );
     }
 #endif
-    
+
     *count = bytes;
     if (hasError)
         return -1;
@@ -428,9 +428,9 @@ uint TY_(GetUTF8)( ctmbstr str, uint *ch )
     int bytes;
 
     int err;
-    
+
     bytes = 0;
-    
+
     /* first byte "str[0]" is passed in separately from the */
     /* rest of the UTF-8 byte sequence starting at "str[1]" */
     err = TY_(DecodeUTF8BytesToChar)( &n, str[0], str+1, NULL, &bytes );
@@ -450,7 +450,7 @@ uint TY_(GetUTF8)( ctmbstr str, uint *ch )
 tmbstr TY_(PutUTF8)( tmbstr buf, uint c )
 {
     int err, count = 0;
-        
+
     err = TY_(EncodeCharToUTF8Bytes)( c, buf, NULL, &count );
     if (err)
     {
@@ -463,7 +463,7 @@ tmbstr TY_(PutUTF8)( tmbstr buf, uint c )
         buf[2] = (byte) 0xBD;
         count = 3;
     }
-    
+
     buf += count;
     return buf;
 }
@@ -485,7 +485,7 @@ Bool    TY_(IsLowSurrogate)( tchar ch )
 tchar   TY_(CombineSurrogatePair)( tchar high, tchar low )
 {
     assert( TY_(IsHighSurrogate)(high) && TY_(IsLowSurrogate)(low) );
-    return ( ((low - kUTF16LowSurrogateBegin) * 0x400) + 
+    return ( ((low - kUTF16LowSurrogateBegin) * 0x400) +
              high - kUTF16HighSurrogateBegin + 0x10000 );
 }
 

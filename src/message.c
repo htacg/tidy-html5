@@ -65,25 +65,25 @@ static void NtoS(int n, tmbstr str)
 {
     tmbchar buf[40];
     int i;
-    
+
     for (i = 0;; ++i)
     {
         buf[i] = (tmbchar)( (n % 10) + '0' );
-        
+
         n = n / 10;
-        
+
         if (n == 0)
             break;
     }
-    
+
     n = i;
-    
+
     while (i >= 0)
     {
         str[n-i] = buf[i];
         --i;
     }
-    
+
     str[n+1] = '\0';
 }
 
@@ -247,7 +247,7 @@ static messageFormatter formatStandard;
 static messageFormatter formatStandardDynamic;
 
 
-/* This structure ties together for each report Code the default 
+/* This structure ties together for each report Code the default
 ** TidyReportLevel, the Formatter to be used to construct the message, and the
 ** next code to output, if applicable. Assuming an existing formatter can,
 ** this it makes it simple to output new reports, or to change report level by
@@ -549,7 +549,7 @@ TidyMessageImpl *formatAttributeReport(TidyDocImpl* doc, Node *element, Node *no
     {
         case MISSING_QUOTEMARK_OPEN:
             return TY_(tidyMessageCreateWithNode)(doc, node, code, level, name );
-		
+
         case BACKSLASH_IN_URI:
         case ESCAPED_ILLEGAL_URI:
         case FIXED_BACKSLASH:
@@ -705,7 +705,7 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
 
         case STRING_NO_SYSID:
             return TY_(tidyMessageCreate)( doc, code, level );
-            
+
         case FILE_CANT_OPEN:
         case FILE_CANT_OPEN_CFG:
         case FILE_NOT_FILE:
@@ -1033,12 +1033,12 @@ static struct _dialogueDispatchTable {
     { STRING_HELLO_ACCESS,         TidyDialogueInfo     }, /* AccessibilityChecks() */
     { TEXT_GENERAL_INFO,           TidyDialogueInfo     }, /* tidyGeneralInfo() */
     { TEXT_GENERAL_INFO_PLEA,      TidyDialogueInfo     }, /* tidyGeneralInfo() */
-    
+
     { STRING_NEEDS_INTERVENTION,   TidyDialogueSummary  }, /* tidyDocRunDiagnostics() */
     { STRING_ERROR_COUNT,          TidyDialogueSummary  }, /* ReportNumWarnings() */
     { STRING_NO_ERRORS,            TidyDialogueSummary  }, /* ReportNumWarnings() */
     { STRING_NOT_ALL_SHOWN,        TidyDialogueSummary  }, /* ReportNumWarnings() */
-    
+
     { FOOTNOTE_TRIM_EMPTY_ELEMENT, TidyDialogueFootnote },
     { TEXT_ACCESS_ADVICE1,         TidyDialogueFootnote }, /* errorSummary() */
     { TEXT_ACCESS_ADVICE2,         TidyDialogueFootnote },
@@ -1060,7 +1060,7 @@ static struct _dialogueDispatchTable {
     { TEXT_USING_NOBR,             TidyDialogueFootnote },
     { TEXT_USING_SPACER,           TidyDialogueFootnote },
     { TEXT_VENDOR_CHARS,           TidyDialogueFootnote },
-    
+
     { 0, 0 }
 };
 
@@ -1079,7 +1079,7 @@ TidyMessageImpl *formatDialogue( TidyDocImpl* doc, uint code, TidyReportLevel le
             ctmbstr str = va_arg(args, ctmbstr);
             return TY_(tidyMessageCreate)( doc, code, level, str );
         }
-            
+
         case STRING_ERROR_COUNT:
         case STRING_NOT_ALL_SHOWN:
             return TY_(tidyMessageCreate)( doc, code, level,
@@ -1113,7 +1113,7 @@ TidyMessageImpl *formatDialogue( TidyDocImpl* doc, uint code, TidyReportLevel le
         default:
             return TY_(tidyMessageCreate)( doc, code, level );
     }
-    
+
     return NULL;
 }
 
@@ -1163,8 +1163,8 @@ void TY_(Dialogue)(TidyDocImpl* doc, uint code, ...)
 void TY_(ErrorSummary)( TidyDocImpl* doc )
 {
     ctmbstr encnam = tidyLocalizedString(STRING_SPECIFIED);
-    int charenc = cfg( doc, TidyCharEncoding ); 
-    if ( charenc == WIN1252 ) 
+    int charenc = cfg( doc, TidyCharEncoding );
+    if ( charenc == WIN1252 )
         encnam = "Windows-1252";
     else if ( charenc == MACROMAN )
         encnam = "MacRoman";
@@ -1199,7 +1199,7 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
         if (doc->badChars & BC_INVALID_URI)
             TY_(Dialogue)( doc, TEXT_INVALID_URI );
     }
-    
+
     if (doc->badForm)
     {
         if (doc->badForm & flg_BadForm) /* Issue #166 - changed to BIT flag to support other errors */
@@ -1249,11 +1249,11 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
 
         if (doc->badLayout & USING_NOBR)
             TY_(Dialogue)( doc, TEXT_USING_NOBR );
-        
+
         if (doc->badLayout & USING_BODY)
             TY_(Dialogue)( doc, TEXT_USING_BODY );
     }
-    
+
     if (doc->footnotes)
     {
         if (doc->footnotes & FN_TRIM_EMPTY_ELEMENT)
@@ -1262,7 +1262,7 @@ void TY_(ErrorSummary)( TidyDocImpl* doc )
 }
 
 
-/* Outputs document HTML version and version-related information. 
+/* Outputs document HTML version and version-related information.
 ** Called by tidyRunDiagnostics(), from console.
 ** Called by tidyDocReportDoctype(), currently unused.
 */
@@ -1289,7 +1289,7 @@ void TY_(ReportMarkupVersion)( TidyDocImpl* doc )
 }
 
 
-/* Reports the number of warnings and errors found in the document. 
+/* Reports the number of warnings and errors found in the document.
 ** Called by tidyRunDiagnostics(), from console.
 */
 void TY_(ReportNumWarnings)( TidyDocImpl* doc )
@@ -1461,14 +1461,14 @@ uint TY_(tidyErrorCodeFromKey)(ctmbstr code)
 static const uint tidyErrorCodeListSize()
 {
     static uint array_size = 0;
-    
+
     if ( array_size == 0 )
     {
         while ( tidyStringsKeys[array_size].key ) {
             array_size++;
         }
     }
-    
+
     return array_size;
 }
 
@@ -1490,15 +1490,15 @@ uint TY_(getNextErrorCode)( TidyIterator* iter )
     const tidyStringsKeyItem *item = NULL;
     size_t itemIndex;
     assert( iter != NULL );
-    
+
     itemIndex = (size_t)*iter;
-    
+
     if ( itemIndex > 0 && itemIndex <= tidyErrorCodeListSize() )
     {
         item = &tidyStringsKeys[itemIndex - 1];
         itemIndex++;
     }
-    
+
     *iter = (TidyIterator)( itemIndex <= tidyErrorCodeListSize() ? itemIndex : (size_t)0 );
     return item->value;
 }
@@ -1544,7 +1544,7 @@ static const TidyOptionId TidyWrapAttValsLinks[] =     { TidyWrapScriptlets, Tid
 static const TidyOptionId TidyWrapScriptletsLinks[] =  { TidyWrapAttVals, TidyUnknownOption };
 static const TidyOptionId TidyXmlDeclLinks[] =         { TidyCharEncoding, TidyOutCharEncoding, TidyUnknownOption };
 
-/* Cross-reference assignments. 
+/* Cross-reference assignments.
  * We can't build a complex array at compile time and we're not counting on
  * any type of initialization, so this two-stage building process is required.
  */

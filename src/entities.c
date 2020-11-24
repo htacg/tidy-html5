@@ -4,7 +4,7 @@
   See tidy.h for the copyright notice.
 
   Entity handling can be static because there are no config or
-  document-specific values.  Lookup table is 100% defined at 
+  document-specific values.  Lookup table is 100% defined at
   compile time.
 
 */
@@ -31,9 +31,9 @@ struct _entity
 /*
 ** Issue #643 - list increased to
 ** 2032 known entities.
-** Note also stuct /not/ padded to 
+** Note also stuct /not/ padded to
 ** keep source weight down, 79K vs 149K,
-** and is strictly alphabetic to optimize 
+** and is strictly alphabetic to optimize
 ** the searching.
 ** All new entities have been given VERS_CHECK
 ** This should be replaced if versioning can
@@ -2077,13 +2077,13 @@ static const entity entities[] =
     { NULL, VERS_UNKNOWN, 0 },
 };
 
-/* 
+/*
 ** Pure static implementation.  Trades off lookup speed
 ** for faster setup time (well, none actually).
 ** Optimization of comparing 1st character buys enough
 ** speed that hash doesn't improve things without > 500
 ** items in list.
-** Issue #643 - Keep list fully alphabetic for more 
+** Issue #643 - Keep list fully alphabetic for more
 ** optimization, now that the list has grown to 2031
 ** entries. Perhaps hashing setup should be now considered.
 **
@@ -2160,7 +2160,7 @@ Bool TY_(EntityInfo)( ctmbstr name, Bool isXml, uint* code, uint* versions )
 
 /*
 **
-** Issue #643 - Now that the list has been enlarged to 
+** Issue #643 - Now that the list has been enlarged to
 ** 2031 entries, including multiple case entries for some
 ** like &amp; & &AMP;, the value can be repeated several
 ** time, so this lookup will now only return the first.

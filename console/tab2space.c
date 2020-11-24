@@ -143,7 +143,7 @@ static int ReadChar(Stream *in)
         in->tabs--;
         return ' ';
     }
-    
+
     /* Else go on with normal buffer: */
     for (;;)
     {
@@ -331,14 +331,14 @@ int main(int argc, char **argv)
 
             if (fin != stdin)
                 fclose(fin);
-            
+
             if (fout != stdout)
                fout = fopen(outfile, "wb");
-            
+
             if (fout)
             {
                WriteFile(in, fout);
-                
+
                if (fout != stdout)
                   fclose(fout);
             }
@@ -352,7 +352,7 @@ int main(int argc, char **argv)
 
         --argc;
         ++argv;
-        
+
         if (argc <= 1)
             break;
     }

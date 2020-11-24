@@ -1,6 +1,6 @@
 /** @file buffio.h - Deprecated compatibility header. Use tidybuffio.h
 **
-** @deprecated This compatibility header is deprecated and 
+** @deprecated This compatibility header is deprecated and
 ** should be replaced by tidybuffio.h. This header will be removed!
 **
 */

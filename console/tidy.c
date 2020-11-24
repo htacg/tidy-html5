@@ -6,7 +6,7 @@
  * console application offering all of the features of LibTidy.
  *
  * @author  HTACG, et al (consult git log)
- * 
+ *
  * @copyright
  *     Copyright (c) 1998-2017 World Wide Web Consortium (Massachusetts
  *     Institute of Technology, European Research Consortium for Informatics
@@ -130,7 +130,7 @@ static tmbstr stringWithFormat(const ctmbstr fmt, /**< The format string. */
  */
 
 
-/** Used by `print1Column`, `print2Columns` and `print3Columns` to manage 
+/** Used by `print1Column`, `print2Columns` and `print3Columns` to manage
  ** wrapping text within columns.
  ** @result The pointer to the next part of the string to output.
  */
@@ -479,12 +479,12 @@ static tmbstr get_escaped_name( ctmbstr name )
 static Bool hasPickList( TidyOption topt )
 {
     TidyIterator pos;
-    
+
     if ( tidyOptGetType( topt ) != TidyInteger)
         return no;
-    
+
     pos = tidyOptGetPickList( topt );
-    
+
     return tidyOptGetNextPick( topt, &pos ) != NULL;
 }
 
@@ -519,7 +519,7 @@ typedef struct {
     Bool haveVals;        /**< if yes, vals is valid */
 } OptionDesc;
 
-/** A type for a function pointer for a function used to print out options 
+/** A type for a function pointer for a function used to print out options
  ** descriptions.
  ** @param TidyDoc The document.
  ** @param TidyOption The Tidy option.
@@ -562,7 +562,7 @@ static void GetOption(TidyDoc tdoc,    /**< The tidy document. */
             d->vals = "attributeX, attributeY, ...";
             d->def = NULL;
             break;
-            
+
         case TidyCharEncoding:
         case TidyInCharEncoding:
         case TidyOutCharEncoding:
@@ -572,7 +572,7 @@ static void GetOption(TidyDoc tdoc,    /**< The tidy document. */
                 d->def = "?";
             d->vals = NULL;
             break;
-            
+
             /* General case will handle remaining */
         default:
             switch ( optTyp )
@@ -581,7 +581,7 @@ static void GetOption(TidyDoc tdoc,    /**< The tidy document. */
                 d->type = "Boolean";
                 d->def = tidyOptGetCurrPick( tdoc, optId );
                 break;
-                
+
             case TidyInteger:
                 if (hasPickList(topt))
                 {
@@ -596,13 +596,13 @@ static void GetOption(TidyDoc tdoc,    /**< The tidy document. */
                         d->vals = "0 (no wrapping), 1, 2, ...";
                     else
                         d->vals = "0, 1, 2, ...";
-                    
+
                     idef = tidyOptGetInt( tdoc, optId );
                     sprintf(d->tempdefs, "%u", idef);
                     d->def = d->tempdefs;
                 }
                 break;
-                
+
             case TidyString:
                 d->type = "String";
                 d->vals = NULL;
@@ -1337,7 +1337,7 @@ static void optionDescribe(TidyDoc tdoc, /**< The Tidy Document */
  */
 
 
-/** Prints the Windows language names that Tidy recognizes, using the specified 
+/** Prints the Windows language names that Tidy recognizes, using the specified
  ** format string.
  ** @param format A format string used to display the Windows language names,
  **        or NULL to use the built-in default format.
@@ -1383,7 +1383,7 @@ void tidyPrintTidyLanguageNames( ctmbstr format )
 
 /** Handles the -lang help service.
  ** @remark We will not support console word wrapping for the tables. If users
- **         really have a small console, then they should make it wider or 
+ **         really have a small console, then they should make it wider or
  **         output to a file.
  ** @param tdoc The Tidy document.
  */
@@ -1834,7 +1834,7 @@ static void xml_error_strings( TidyDoc tdoc )
 
         printf( " </error_string>\n" );
     }
-    
+
     printf( "</error_strings>\n" );
 }
 
@@ -2023,7 +2023,7 @@ static Bool TIDY_CALL reportCallback(TidyMessage tmessage)
     ctmbstr messageFormat;
 
     printf("FILTER: %s, %s\n", tidyGetMessageKey( tmessage ), tidyGetMessageOutput( tmessage ));
-    
+
     /* loop through the arguments, if any, and print their details */
     pos = tidyGetMessageArguments( tmessage );
     while ( pos )
@@ -2032,17 +2032,17 @@ static Bool TIDY_CALL reportCallback(TidyMessage tmessage)
         messageType = tidyGetArgType( tmessage, &arg );
         messageFormat = tidyGetArgFormat( tmessage, &arg );
         printf( "  Type = %u, Format = %s, Value = ", messageType, messageFormat );
-        
+
         switch (messageType)
         {
             case tidyFormatType_STRING:
                 printf("%s\n", tidyGetArgValueString( tmessage, &arg ));
                 break;
-                
+
             case tidyFormatType_INT:
                 printf("%d\n", tidyGetArgValueInt( tmessage, &arg));
                 break;
-    
+
             case tidyFormatType_UINT:
                 printf("%u\n", tidyGetArgValueUInt( tmessage, &arg));
                 break;
@@ -2543,14 +2543,14 @@ int main( int argc, char** argv )
                 }
             }
         }
-        
+
         contentErrors   += tidyErrorCount( tdoc );
         contentWarnings += tidyWarningCount( tdoc );
         accessWarnings  += tidyAccessWarningCount( tdoc );
-        
+
         --argc;
         ++argv;
-        
+
         if ( argc <= 1 )
             break;
     } /* read command line loop */
@@ -2568,14 +2568,14 @@ int main( int argc, char** argv )
 
     /* called to free hash tables etc. */
     tidyRelease( tdoc );
-    
+
     /* return status can be used by scripts */
     if ( contentErrors > 0 )
         return 2;
-    
+
     if ( contentWarnings > 0 )
         return 1;
-    
+
     /* 0 signifies all is ok */
     return 0;
 }

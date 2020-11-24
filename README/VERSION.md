@@ -30,7 +30,7 @@ Barring some major, monumental, massive change to Tidy, or the [release of HTML6
 
 The minor version tells a lot more about the true version of Tidy that you have, but even so it’s not a simple matter that 5 > 2 and must be better. The minor number indicates **HTML Tidy** _release versions_ or _development versions_.
 
-- **even numbered minor versions** indicate released versions of **HTML Tidy**. We provide binaries for releases, API documentation, and full support including cherry picking bug fixes back to them. In standard parlance, _released_ versions are _stable_ versions, meaning that the API is stable and you can generally expect Tidy’s output to be the same (other than as a result of bug fixes). 
+- **even numbered minor versions** indicate released versions of **HTML Tidy**. We provide binaries for releases, API documentation, and full support including cherry picking bug fixes back to them. In standard parlance, _released_ versions are _stable_ versions, meaning that the API is stable and you can generally expect Tidy’s output to be the same (other than as a result of bug fixes).
 
 - **odd numbered minor versions** are development versions, or as is considered in many contexts _bleeding edge_ or _next_ versions. HTACG do not provide binaries, and API documentation is not usually up to date, but you do have access to the latest bug fixes, newest features, and knowledge of where Tidy is going. The downside, though, is that we make absolutely no guarantees that:
 
@@ -99,5 +99,5 @@ TIDY_EXPORT ctmbstr TIDY_CALL     tidyReleaseDate(void);
 Starting with HTML Tidy 5.4.0 release, our branching scheme aligns nicely with our version numbering scheme. Please consult [BRANCHES.md](BRANCHES.md).
 
 
-Updated: 20170210  
+Updated: 20170210
    Date: 20150904

@@ -18,7 +18,7 @@
  * the start of a line signifies a line continuation.
  *
  * @author  HTACG, et al (consult git log)
- * 
+ *
  * @copyright
  *     Copyright (c) 1998-2017 World Wide Web Consortium (Massachusetts
  *     Institute of Technology, European Research Consortium for Informatics
@@ -69,7 +69,7 @@ typedef struct PickListItem {
 } PickListItem;
 
 
-/** An array of PickListItems, fixed in size for in-code declarations. 
+/** An array of PickListItems, fixed in size for in-code declarations.
  ** Arrays must be populated in 0 to 10 order, as the option value is assigned
  ** based on this index and *not* on the structures' value field. It remains
  ** a best practice, however, to assign a public enum value with the proper

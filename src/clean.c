@@ -18,13 +18,13 @@
   Such rules are applied to the element's content and then
   to the element itself until none of the rules more apply.
   Having applied all the rules to an element, it will have
-  a style attribute with one or more properties. 
+  a style attribute with one or more properties.
 
   Other rules strip the element they apply to, replacing
   it by style properties on the contents, e.g.
-  
+
   <dir><li><p>...</li></dir> -> <p style="margin-left 1em">...
-      
+
   These rules are applied to an element before processing
   its content and replace the current element by the first
   element in the exposed content.
@@ -411,7 +411,7 @@ static void CleanBodyAttrs( TidyDocImpl* doc, Node* body )
     tmbstr bgcolor = NULL;
     tmbstr color   = NULL;
     AttVal* attr;
-    
+
     if (NULL != (attr = TY_(AttrGetById)(body, TidyAttr_BACKGROUND)))
     {
         bgurl = attr->value;
@@ -1206,7 +1206,7 @@ Bool FindCSSSpanEq( Node *node, ctmbstr *s, Bool deprecatedOnly )
             *s = CSS_SpanEq[i].CSSeq;
             return yes;
         }
-    return no; 
+    return no;
 }
 
 /* Necessary conditions to apply BlockStyle(). */
@@ -1352,7 +1352,7 @@ static Bool InlineElementToCSS( TidyDocImpl* doc, Node* node,
         return yes;
     }
     return no;
-} 
+}
 
 /*
   Replace font elements by span elements, deleting
@@ -1491,7 +1491,7 @@ static void DefineStyleRules( TidyDocImpl* doc, Node *node )
 void TY_(CleanDocument)( TidyDocImpl* doc )
 {
     /* placeholder.  CleanTree()/CleanNode() will not
-    ** zap root element 
+    ** zap root element
     */
     CleanTree( doc, &doc->root );
 
@@ -1640,7 +1640,7 @@ static Node* PruneSection( TidyDocImpl* doc, Node *node )
     {
         if (node == NULL)
             return NULL;
-        
+
         ctmbstr lexbuf = lexer->lexbuf + node->start;
         if ( TY_(tmbstrncmp)(lexbuf, "if !supportEmptyParas", 21) == 0 )
         {
@@ -1663,7 +1663,7 @@ static Node* PruneSection( TidyDocImpl* doc, Node *node )
 
         if (node == NULL)
             return NULL;
-        
+
         if (node->type == SectionTag)
         {
             if (TY_(tmbstrncmp)(lexer->lexbuf + node->start, "if", 2) == 0)
@@ -1899,7 +1899,7 @@ void TY_(CleanWord2000)( TidyDocImpl* doc, Node *node)
             /* Output proprietary attributes to maintain errout compatability
              * with traditional Tidy. This is a result of moving all of the
              * proprietary checks to near the end of the cleanup process,
-             * meaning this result would not ordinarily be displayed. 
+             * meaning this result would not ordinarily be displayed.
              */
             attval = node->attributes;
             while ( attval ) {
@@ -2009,7 +2009,7 @@ void TY_(CleanWord2000)( TidyDocImpl* doc, Node *node)
         if ( nodeIsP(node) )
         {
             AttVal *attr, *atrStyle;
-            
+
             attr = TY_(AttrGetById)(node, TidyAttr_CLASS);
             atrStyle = TY_(AttrGetById)(node, TidyAttr_STYLE);
             /*
@@ -2093,7 +2093,7 @@ Bool TY_(IsWord2000)( TidyDocImpl* doc )
 
     if (html && TY_(GetAttrByName)(html, "xmlns:o"))
         return yes;
-    
+
     /* search for <meta name="GENERATOR" content="Microsoft ..."> */
     head = TY_(FindHEAD)( doc );
 
@@ -2215,7 +2215,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
     tidyBufAppend(&charsetString, "\0", 1); /* zero terminate the buffer */
     /* process the children of the head */
     /* Issue #656 - guard against 'currentNode' being set NULL in loop */
-    for (currentNode = head->content; currentNode; 
+    for (currentNode = head->content; currentNode;
         currentNode = (currentNode ? currentNode->next : NULL))
     {
         if (!nodeIsMETA(currentNode))
@@ -2467,7 +2467,7 @@ void TY_(WbrToSpace)(TidyDocImpl* doc, Node* node)
     <p title='&#x2018;'>...</p>
 
   got
-  
+
     <p title='''>...</p>
 
   Since browser support is much better nowadays and
@@ -2615,7 +2615,7 @@ void TY_(FixLanguageInformation)(TidyDocImpl* doc, Node* node, Bool wantXmlLang,
 
             if (lang && !wantLang)
                 TY_(RemoveAttribute)(doc, node, lang);
-            
+
             if (xmlLang && !wantXmlLang)
                 TY_(RemoveAttribute)(doc, node, xmlLang);
         }
@@ -2731,7 +2731,7 @@ void TY_(FixAnchors)(TidyDocImpl* doc, Node *node, Bool wantName, Bool wantId)
     }
 }
 
-/* Issue #567 - move style elements from body to head 
+/* Issue #567 - move style elements from body to head
  * ==================================================
  */
 static void StyleToHead(TidyDocImpl* doc, Node *head, Node *node, Bool fix, int indent)

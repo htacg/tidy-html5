@@ -16,7 +16,7 @@ In either place please start with a short subject to describe the issue. If it i
   - the output
   - the _expected_ output
   - some sample code (if an API question).
-  
+
 This information will make replication of your issue much simpler for us.
 
 If you do add sample HTML input, then it can also be very helpful if that sample **passes** the W3C [validator](https://validator.w3.org/#validate_by_upload). Tidy attempts to follow all current W3C standards.
@@ -53,11 +53,11 @@ Concerning the “Tidy Code Style,” checkout [CODESTYLE.md](CODESTYLE.md), but
 
 Item 2., SSH Key, is optional, and only required if you want to use `clone git@github.com...`. And if you generate the ssh without a `passphrase`, things like `git push` can be done without a password. Just convenience. Alternatively you can use the `HTTPS` protocol...
 
-Concerning 5., editing and committing your changes, **generally** it is better to `commit` changes often, adding an appropriate commit message to each, like `$ git commit -m "Is. #NNN - reason for change" <file[s]>`. This also aids in the **PR** review. 
+Concerning 5., editing and committing your changes, **generally** it is better to `commit` changes often, adding an appropriate commit message to each, like `$ git commit -m "Is. #NNN - reason for change" <file[s]>`. This also aids in the **PR** review.
 
 But the situation varies. Like adding say an option, which can mean several files have to be edited, where it is likely appropriate to combine a considerable number of edits into one commit. There can be no hard and fast rules on this.
 
-Please note, if you want to change **multiple** things that don't depend on each other, use **different** `branches`, and make sure you check the `next` branch back out, before making more changes in a **new** branch name. That way we can take in each **change** separately, otherwise Github will **combine** all your branch commits into one **PR**. 
+Please note, if you want to change **multiple** things that don't depend on each other, use **different** `branches`, and make sure you check the `next` branch back out, before making more changes in a **new** branch name. That way we can take in each **change** separately, otherwise Github will **combine** all your branch commits into one **PR**.
 
 See below on keeping your forks `next` fully in sync with here, called `upstream` - **this is important**.
 
@@ -85,7 +85,7 @@ $ ./testall.sh ../../tidy-fork/build/cmake/tidy
 $ diff -u ../cases/testbase-expects ../cases/testbase-results
 ```
 
-Use folder `tools-cmd` for windows. Run `alltest.bat --help`. 
+Use folder `tools-cmd` for windows. Run `alltest.bat --help`.
 
 If the `tests` shows a different exit value, or there are differences between the `expects` and `results`, these **must** be studied, and checked, very carefully. There may be cases where the **new** `results` are correct, in which case a simultaneous **PR** for the forked `tests` **must** be created to match your forked source **PR**.
 

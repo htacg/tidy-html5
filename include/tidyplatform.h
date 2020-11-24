@@ -81,7 +81,7 @@ extern "C" {
 #ifndef SUPPORT_LOCALIZATIONS
 #  define SUPPORT_LOCALIZATIONS 1
 #endif
-    
+
 /* Enable/disable support for console */
 #ifndef SUPPORT_CONSOLE_APP
 #  define SUPPORT_CONSOLE_APP 1
@@ -251,7 +251,7 @@ extern "C" {
 #endif
 
 /* === Convenience defines for Solaris platforms === */
- 
+
 #if defined(sun)
 #  define SOLARIS_OS
 #  ifndef PLATFORM_NAME
@@ -473,7 +473,7 @@ extern "C" {
 
 /* MS Windows needs _ prefix for Unix file functions.
    Not required by Metrowerks Standard Library (MSL).
-  
+
    Tidy uses following for preserving the last modified time.
 
    WINDOWS automatically set by Win16 compilers.
@@ -637,7 +637,7 @@ typedef char tmbchar;       /* single, possibly partial character */
 /* `bool` is a reserved word in some but not all C++ compilers depending on age.
    age. Work around is to avoid bool by introducing a new enum called `Bool`.
 */
-    
+
 /* We could use the C99 definition where supported
 typedef _Bool Bool;
 #define no (_Bool)0
@@ -649,7 +649,7 @@ typedef enum
    yes
 } Bool;
 
-/* for NULL pointers 
+/* for NULL pointers
 #define null ((const void*)0)
 extern void* null;
 */

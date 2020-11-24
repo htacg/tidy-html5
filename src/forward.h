@@ -61,6 +61,6 @@ extern TidyAllocator TY_(g_default_allocator);
 #define TidyFree(allocator, block) ((allocator)->vtbl->free((allocator), (block)))
 #define TidyPanic(allocator, msg) ((allocator)->vtbl->panic((allocator), (msg)))
 #define TidyClearMemory(block, size) memset((block), 0, (size))
- 
+
 
 #endif /* __FORWARD_H__ */

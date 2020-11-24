@@ -203,7 +203,7 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
     }
 
     /* reportCallback is intended to allow LibTidy users to localize messages
-       via their own means by providing a key and the parameters to fill it. 
+       via their own means by providing a key and the parameters to fill it.
        As it's a "legacy" API, it does not receive TidyDialogue messages. */
     if ( (result->level <= TidyFatal) && doc->reportCallback )
     {
@@ -234,7 +234,7 @@ TidyMessageImpl *TY_(tidyMessageCreate)( TidyDocImpl *doc,
     va_start(args, level);
     result = tidyMessageCreateInitV(doc, NULL, code, 0, 0, level, args);
     va_end(args);
-    
+
     return result;
 }
 
@@ -251,11 +251,11 @@ TidyMessageImpl *TY_(tidyMessageCreateWithNode)( TidyDocImpl *doc,
                 ( doc->lexer ? doc->lexer->lines : 0 ) );
     int col  = ( node ? node->column :
                 ( doc->lexer ? doc->lexer->columns : 0 ) );
-    
+
     va_start(args_copy, level);
     result = tidyMessageCreateInitV(doc, node, code, line, col, level, args_copy);
     va_end(args_copy);
-    
+
     return result;
 }
 
@@ -269,11 +269,11 @@ TidyMessageImpl *TY_(tidyMessageCreateWithLexer)( TidyDocImpl *doc,
     va_list args_copy;
     int line = ( doc->lexer ? doc->lexer->lines : 0 );
     int col  = ( doc->lexer ? doc->lexer->columns : 0 );
-    
+
     va_start(args_copy, level);
     result = tidyMessageCreateInitV(doc, NULL, code, line, col, level, args_copy);
     va_end(args_copy);
-    
+
     return result;
 }
 
@@ -403,15 +403,15 @@ TidyMessageArgument TY_(getNextMessageArgument)( TidyMessageImpl message, TidyIt
     size_t item = 0;
     size_t itemIndex;
     assert( iter != NULL );
-    
+
     itemIndex = (size_t)*iter;
-    
+
     if ( itemIndex >= 1 && itemIndex <= (size_t)message.argcount )
     {
         item = itemIndex;
         itemIndex++;
     }
-    
+
     /* Just as TidyIterator is really just a dumb, one-based index, the
        TidyMessageArgument is really just a dumb, zero-based index; however
        this type of iterator and opaque interrogation is simply how Tidy
@@ -425,7 +425,7 @@ TidyFormatParameterType TY_(getArgType)( TidyMessageImpl message, TidyMessageArg
 {
     int argNum = (int)(size_t)*arg - 1;
     assert( argNum <= message.argcount );
-    
+
     return message.arguments[argNum].type;
 }
 
@@ -434,7 +434,7 @@ ctmbstr TY_(getArgFormat)( TidyMessageImpl message, TidyMessageArgument* arg )
 {
     int argNum = (int)(size_t)*arg - 1;
     assert( argNum <= message.argcount );
-    
+
     return message.arguments[argNum].format;
 }
 
@@ -444,7 +444,7 @@ ctmbstr TY_(getArgValueString)( TidyMessageImpl message, TidyMessageArgument* ar
     int argNum = (int)(size_t)*arg - 1;
     assert( argNum <= message.argcount );
     assert( message.arguments[argNum].type == tidyFormatType_STRING);
-    
+
     return message.arguments[argNum].u.s;
 }
 
@@ -474,7 +474,7 @@ double TY_(getArgValueDouble)( TidyMessageImpl message, TidyMessageArgument* arg
     int argNum = (int)(size_t)*arg - 1;
     assert( argNum <= message.argcount );
     assert( message.arguments[argNum].type == tidyFormatType_DOUBLE);
-    
+
     return message.arguments[argNum].u.d;
 }
 
@@ -508,28 +508,28 @@ static struct printfArg* BuildArgArray( TidyDocImpl *doc, ctmbstr fmt, va_list a
     const char* p;  /* current position in format string. */
     char c;         /* current character. */
     struct printfArg* nas;
-    
+
     /* first pass: determine number of valid % to allocate space. */
-    
+
     p = fmt;
     *rv = 0;
-    
+
     while( ( c = *p++ ) != 0 )
     {
         if( c != '%' )
             continue;
-        
+
         if( ( c = *p++ ) == '%' )	/* skip %% case */
             continue;
         else
             number++;
     }
-        
+
 
     if( number == 0 )
         return NULL;
 
-    
+
     nas = (struct printfArg*)TidyDocAlloc( doc, number * sizeof( struct printfArg ) );
     if( !nas )
     {
@@ -542,16 +542,16 @@ static struct printfArg* BuildArgArray( TidyDocImpl *doc, ctmbstr fmt, va_list a
     {
         nas[i].type = tidyFormatType_UNKNOWN;
     }
-    
-    
+
+
     /* second pass: set nas[].type and location. */
-    
+
     p = fmt;
     while( ( c = *p++ ) != 0 )
     {
         if( c != '%' )
             continue;
-        
+
         if( ( c = *p++ ) == '%' )
             continue; /* skip %% case */
 
@@ -564,13 +564,13 @@ static struct printfArg* BuildArgArray( TidyDocImpl *doc, ctmbstr fmt, va_list a
             *rv = -1;
             break;
         }
-        
+
         /* width field -- skip */
         while ((c >= '0') && (c <= '9'))
         {
             c = *p++;
         }
-        
+
         /* precision */
         if (c == '.')
         {
@@ -580,16 +580,16 @@ static struct printfArg* BuildArgArray( TidyDocImpl *doc, ctmbstr fmt, va_list a
                 *rv = -1;
                 break;
             }
-            
+
             while ((c >= '0') && (c <= '9'))
             {
                 c = *p++;
             }
         }
-        
-        
+
+
         cn++;
-        
+
         /* size and format */
         nas[cn].type = tidyFormatType_UINT;
         switch (c)
@@ -633,7 +633,7 @@ static struct printfArg* BuildArgArray( TidyDocImpl *doc, ctmbstr fmt, va_list a
         /* position and format */
         nas[cn].formatStart = pos;
         nas[cn].formatLength = (p - fmt) - pos;
-        
+
         /* the format string exceeds the buffer length */
         if ( nas[cn].formatLength >= FORMAT_LENGTH )
         {
@@ -644,7 +644,7 @@ static struct printfArg* BuildArgArray( TidyDocImpl *doc, ctmbstr fmt, va_list a
         {
             strncpy(nas[cn].format, fmt + nas[cn].formatStart, nas[cn].formatLength);
         }
-        
+
 
         /* Something's not right. */
         if( nas[cn].type == tidyFormatType_UNKNOWN )
@@ -653,10 +653,10 @@ static struct printfArg* BuildArgArray( TidyDocImpl *doc, ctmbstr fmt, va_list a
             break;
         }
     }
-    
-    
+
+
     /* third pass: fill the nas[cn].ap */
-    
+
     if( *rv < 0 )
     {
         TidyDocFree( doc, nas );;

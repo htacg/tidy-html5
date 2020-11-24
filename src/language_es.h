@@ -13,7 +13,7 @@
  *
  * [X] THIS FILE IS MACHINE GENERATED. It is a localization file for the
  *     language (and maybe region) "es". The source of
- *     these strings is a gettext PO file in Tidy's source, probably called 
+ *     these strings is a gettext PO file in Tidy's source, probably called
  *     "language_es.po".
  *
  * [ ] THIS FILE WAS HAND MODIFIED. Translators, please feel to edit this file
@@ -55,13 +55,13 @@ static uint whichPluralForm_es(uint n) {
  */
 static languageDefinition language_es = { whichPluralForm_es, {
     /***************************************
-     ** This MUST be present and first. 
+     ** This MUST be present and first.
      ** Specify the code for this language.
      ***************************************/
     {/* Specify the ll or ll_cc language code here. */
       TIDY_LANGUAGE,          0, "es"
     },
-    { TidyMakeClean,          0,        
+    { TidyMakeClean,          0,
         "Esta opción especifica si Tidy debe realizar la limpieza de algún legado etiquetas de "
         "presentación (actualmente <code>&lt;i&gt;</code>, <code>&lt;b&gt;</code>, <code>&lt;center&gt;</"
         "code> cuando encerrados dentro de las etiquetas apropiadas en línea y <code>&lt;font&gt;</"
@@ -69,7 +69,7 @@ static languageDefinition language_es = { whichPluralForm_es, {
         "con CSS <code>&lt;style&gt;</code> y estructural markup según corresponda. "
     },
     { TidyNCR,                0, "Esta opción especifica si Tidy debe permitir referencias de caracteres numéricos. "   },
-    { TEXT_GENERAL_INFO_PLEA, 0,        
+    { TEXT_GENERAL_INFO_PLEA, 0,
         "\n"
         "¿Le gustaría ver Tidy en un español correcto? Por favor considere \n"
         "ayudarnos a localizar HTML Tidy. Para más detalles consulte \n"
@@ -77,7 +77,7 @@ static languageDefinition language_es = { whichPluralForm_es, {
     },
 
 #if SUPPORT_CONSOLE_APP
-    { TC_TXT_HELP_LANG_1,     0,        
+    { TC_TXT_HELP_LANG_1,     0,
         "\n"
         "La opción -language (o -lang) indica el lenguaje Tidy debe \n"
         "utilizar para comunicar su salida. Tenga en cuenta que esto no es \n"
@@ -100,7 +100,7 @@ static languageDefinition language_es = { whichPluralForm_es, {
         "Tidy está utilizando la configuración regional %s. \n"
         "\n"
     },
-    { TC_TXT_HELP_LANG_2,     0,        
+    { TC_TXT_HELP_LANG_2,     0,
         "\n"
         "Los siguientes idiomas están instalados actualmente en Tidy. Tenga \n"
         "en cuenta que no hay garantía de que están completos; sólo quiere decir \n"
@@ -110,7 +110,7 @@ static languageDefinition language_es = { whichPluralForm_es, {
         "necesario. ¡Favor de informar los desarrolladores de estes casos! \n"
         "\n"
     },
-    { TC_TXT_HELP_LANG_3,     0,        
+    { TC_TXT_HELP_LANG_3,     0,
         "\n"
         "Si Tidy es capaz de determinar la configuración regional entonces \n"
         "Tidy utilizará el lenguaje de forma automática de la configuración \n"

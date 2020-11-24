@@ -11,9 +11,9 @@ team you will certainly earn the admiration of fellow Tidy users worldwide.
 
 ## How to Contribute
 
-All READMEs (including [instructions][2] on how to localize Tidy) and related 
+All READMEs (including [instructions][2] on how to localize Tidy) and related
 materials can be found in [localize][1].
 
  [1]: ../localize
  [2]: ../localize/README.md
- 
+

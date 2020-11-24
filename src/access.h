@@ -49,24 +49,24 @@ struct _TidyAccessImpl
     int counter;
 
     /* list of characters in the text nodes found within a container element */
-    tmbchar textNode[ TEXTBUF_SIZE ]; 
+    tmbchar textNode[ TEXTBUF_SIZE ];
 
     /* The list of characters found within one text node */
-    tmbchar text[ TEXTBUF_SIZE ]; 
+    tmbchar text[ TEXTBUF_SIZE ];
 
     /* Number of frame elements found within a frameset */
-    int numFrames; 
+    int numFrames;
 
     /* Number of 'longdesc' attributes found within a frameset */
-    int HasCheckedLongDesc; 
+    int HasCheckedLongDesc;
 
     int  CheckedHeaders;
     int  ListElements;
     int  OtherListElements;
 
     /* For 'USEMAP' identifier */
-    Bool HasUseMap; 
-    Bool HasName; 
+    Bool HasUseMap;
+    Bool HasName;
     Bool HasMap;
 
     /* For tracking nodes that are deleted from the original parse tree - TRT */

@@ -31,7 +31,7 @@
  *   - use a message filter callback routine.
  *
  * @author  HTACG, et al (consult git log)
- * 
+ *
  * @copyright
  *     Copyright (c) 1998-2017 World Wide Web Consortium (Massachusetts
  *     Institute of Technology, European Research Consortium for Informatics
@@ -68,7 +68,7 @@
  */
 ctmbstr TY_(ReleaseDate)(void);
 
-/** 
+/**
  *  Returns the release version of this instance of HTML Tidy.
  */
 ctmbstr TY_(tidyLibraryVersion)(void);
@@ -92,7 +92,7 @@ ctmbstr TY_(tidyLibraryVersion)(void);
  ** @{
  ******************************************************************************/
 
-/** @name General Report Writing 
+/** @name General Report Writing
  ** If one of the convenience reporting functions does not fit your required
  ** message signature, then this designated reporting function will fit the
  ** bill. Be sure to see if a message formatter exists that can handle the
@@ -149,7 +149,7 @@ void TY_(Dialogue)( TidyDocImpl* doc, uint code, ... );
 /** @{ */
 
 
-/** 
+/**
  *  Outputs the footnotes and other dialogue information after document cleanup
  *  is complete. LibTidy users might consider capturing these individually in
  *  the message callback rather than capturing this entire buffer.
@@ -160,7 +160,7 @@ void TY_(Dialogue)( TidyDocImpl* doc, uint code, ... );
 void TY_(ErrorSummary)( TidyDocImpl* doc );
 
 
-/** 
+/**
  *  Outputs document HTML version and version-related information as the final
  *  report(s) in the report table.
  *  Called by `tidyRunDiagnostics()`, from console.
@@ -241,8 +241,8 @@ ctmbstr TY_(getNextMutedMessage)( TidyDocImpl* doc, TidyIterator* iter );
 
 /**
  *  This function returns a string representing the enum value name that can
- *  be used as a lookup key independent of changing string values. 
- *  `TidyReportCallback` will return this general string as the report 
+ *  be used as a lookup key independent of changing string values.
+ *  `TidyReportCallback` will return this general string as the report
  *  message key.
  */
 ctmbstr TY_(tidyErrorCodeAsKey)(uint code);
@@ -283,7 +283,7 @@ uint TY_(getNextErrorCode)( TidyIterator* iter );
 #define BA_MISSING_IMAGE_MAP       8
 #define BA_USING_FRAMES            16
 #define BA_USING_NOFRAMES          32
-#define BA_INVALID_LINK_NOFRAMES   64  /* WAI [6.5.1.4] */  
+#define BA_INVALID_LINK_NOFRAMES   64  /* WAI [6.5.1.4] */
 #define BA_WAI                     (1 << 31)
 
 /* presentation flaws */

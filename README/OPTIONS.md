@@ -12,7 +12,7 @@ This file indicates how to add a new option to tidy, here adding an option `Tidy
  2. Add to the `table` `TidyOptionImpl option_defs[]` in `config.c`
  3. Add the id, with a `description` to `language_en.h`
  4. Use the option in the code.
- 
+
 #### 1. Option ID
 
 In `tidyenum.h` the `TidyOptionId` can be in any order, but please try to keep things alphabetical, and keep in mind that `N_TIDY_OPTIONS` must remain the last. Choosing the id name can be any string, but by convention it will commence with `Tidy` followed by brief descriptive text.
@@ -120,7 +120,7 @@ This is the desription added for this new option.
 This can be added anywhere in the code to change the current code action. While the testing of the option depends on the option type, the most common is `cfgBool( doc, id )`. Here is an example of where this new option is used -
 
 ~~~
-    /*\ if javascript insert backslash before / 
+    /*\ if javascript insert backslash before /
      *  Issue #348 - Add option, escape-scripts, to skip
     \*/
     if ((TY_(IsJavaScript)(container)) && cfgBool(doc, TidyEscapeScripts))

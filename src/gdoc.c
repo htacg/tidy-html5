@@ -18,13 +18,13 @@
   Such rules are applied to the element's content and then
   to the element itself until none of the rules more apply.
   Having applied all the rules to an element, it will have
-  a style attribute with one or more properties. 
+  a style attribute with one or more properties.
 
   Other rules strip the element they apply to, replacing
   it by style properties on the contents, e.g.
-  
+
   <dir><li><p>...</li></dir> -> <p style="margin-left 1em">...
-      
+
   These rules are applied to an element before processing
   its content and replace the current element by the first
   element in the exposed content.
@@ -163,7 +163,7 @@ static void SetUTF8( TidyDocImpl* doc )
 void TY_(CleanGoogleDocument)( TidyDocImpl* doc )
 {
     /* placeholder.  CleanTree()/CleanNode() will not
-    ** zap root element 
+    ** zap root element
     */
     CleanNode( doc, &doc->root );
     SetUTF8( doc );

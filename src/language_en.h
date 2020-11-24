@@ -1267,7 +1267,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option takes a list of one or more keys indicating the message "
         "type to mute. You can discover these message keys by using the "
         "<code>mute-id</code> configuration option and examining Tidy's "
-        "output. " 
+        "output. "
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -1695,8 +1695,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TidyDialogueSummary,    0,   "Summary: "       },
     { TidyDialogueInfo,       0,   "Information: "   },
     { TidyDialogueFootnote,   0,   "Footnote: "      },
-    
-    
+
+
     /********************************************
      ** Miscellaneous Strings
      ** @remark enum source TidyStrings
@@ -1728,8 +1728,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TIDYCUSTOMEMPTY_STRING,       0,   "empty"                                                                   },
     { TIDYCUSTOMINLINE_STRING,      0,   "inline"                                                                  },
     { TIDYCUSTOMPRE_STRING,         0,   "pre"                                                                     },
-  
-    
+
+
     /********************************************
      ** Footnote Strings
      ** @remark enum source TidyStrings
@@ -1900,7 +1900,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
       TEXT_USING_BODY,              0,
         "You are recommended to use CSS to specify page and link colors"
     },
-    
+
     /********************************************
      ** Miscellaneous Dialogue Strings
      ** @remark enum source TidyStrings
@@ -1930,7 +1930,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "Validate your HTML documents: http://validator.w3.org/nu/\n"
         "Lobby your company to join the W3C: http://www.w3.org/Consortium\n"
     },
-    {/* This console output should be limited to 78 characters per line. 
+    {/* This console output should be limited to 78 characters per line.
       - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
       - Don't terminate the last line with a newline. */
       TEXT_GENERAL_INFO_PLEA,       0,
@@ -1938,13 +1938,13 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "English? Consider helping us to localize HTML Tidy. For details please see \n"
         "https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
     },
-    
+
 
     /********************************************
      ** Report Output
      ** @remark enum source TidyStrings
      ** @rename enum generator FOREACH_REPORT_MSG
-     ********************************************/    
+     ********************************************/
     { ADDED_MISSING_CHARSET,        0,   "Added appropriate missing <meta charset=...> to %s"                      },
     { ANCHOR_NOT_UNIQUE,            0,   "%s anchor \"%s\" already defined"                                        },
     { ANCHOR_DUPLICATED,            0,   "Implicit %s anchor \"%s\" duplicated by Tidy."                           },
@@ -2179,8 +2179,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { METADATA_MISSING,                              0,   "[13.2.1.1]: Metadata missing."                                            },
     { METADATA_MISSING_REDIRECT_AUTOREFRESH,         0,   "[13.2.1.3]: Metadata missing (redirect/auto-refresh)."                    },
     { SKIPOVER_ASCII_ART,                            0,   "[13.10.1.1]: skip over ascii art."                                        },
-    
-    
+
+
 #if SUPPORT_CONSOLE_APP
     /********************************************************
      ** Console Application
@@ -2264,7 +2264,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TC_OPT_XMLERRS,               0,   "output error constants and strings in XML format"                        },
 
     { TC_OPT_XMLOPTS,               0,   "output option descriptions in XML format"                                },
-    
+
     { TC_STRING_CONF_HEADER,        0,   "Configuration File Settings:"                                            },
 
     {/* Must be 27 characters or fewer. */
@@ -2326,7 +2326,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
       TC_TXT_HELP_2B,               0,
         "Command Line Arguments for HTML Tidy:"
     },
-    {/* This console output should be limited to 78 characters per line. 
+    {/* This console output should be limited to 78 characters per line.
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
         - %s represents either a blank line, or TC_TXT_HELP_3A explaining environment options. */
       TC_TXT_HELP_3,                0,
@@ -2495,7 +2495,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "\n"
     },
 #endif /* SUPPORT_CONSOLE_APP */
-    
+
     {/* This MUST be present and last. */
       TIDY_MESSAGE_TYPE_LAST,      0,   NULL
     }

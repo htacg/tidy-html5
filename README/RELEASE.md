@@ -13,9 +13,9 @@ This assumes the current `next` branch is version 5.7.XXX. See VERSION.md for ch
  - Decide on any show-stopper outstanding issues, and action...
  - Change milestone of all excluded this time issues to the next 5.10 milestone, or to indefinite...
  - Decide target date for release...
- 
+
 ### The Release:
- 
+
  1. Update version.txt to 5.8.0, and date... commit
  2. Create branch, `$ git checkout -b release/5.8`
  3. Update README/vershist.log... perl script... commit
@@ -36,10 +36,10 @@ This assumes the current `next` branch is version 5.7.XXX. See VERSION.md for ch
  - Add more binaries...
 
 ## Notes on `Release Process`:
- 
-This **HTACG HTML Tidy** `official` release process must be supplemented with distribution by others. 
 
-Of course, if possible, we recomend building tidy from the git source, it is easy, but also in some OS'es others offer distribution in various ways... 
+This **HTACG HTML Tidy** `official` release process must be supplemented with distribution by others.
+
+Of course, if possible, we recomend building tidy from the git source, it is easy, but also in some OS'es others offer distribution in various ways...
 
 See [Get Tidy](http://www.html-tidy.org/#homepage19700601get_tidy) - This page really needs expanding. There are some suggestions pending, and more feedback welcome...
 

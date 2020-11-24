@@ -33,7 +33,7 @@ extern "C" {
  ** @ingroup IO
  */
 TIDY_STRUCT
-struct _TidyBuffer 
+struct _TidyBuffer
 {
     TidyAllocator* allocator;  /**< Memory allocator */
     byte* bp;                  /**< Pointer to bytes */
@@ -58,7 +58,7 @@ TIDY_EXPORT void TIDY_CALL tidyBufAllocWithAllocator( TidyBuffer* buf,
                                                       TidyAllocator* allocator,
                                                       uint allocSize );
 
-/** Expand buffer to given size. 
+/** Expand buffer to given size.
 **  Chunk size is minimum growth. Pass 0 for default of 256 bytes.
 */
 TIDY_EXPORT void TIDY_CALL tidyBufCheckAlloc( TidyBuffer* buf,

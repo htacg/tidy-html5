@@ -41,7 +41,7 @@ the event that you want to build Tidy with your new language.
   - [Update your PO to match the new POT](#update-your-po-to-match-the-new-pot)
 - [Help Tidy Get Better](#help-tidy-get-better)
 
-  
+
 ## Introduction
 
 HTML Tidy is built around the localization file `language_en.h`; without this
@@ -56,7 +56,7 @@ to them.
 
 
 ### PO and POT files
-HTML Tidy provides PO and POT files for language translations. The file 
+HTML Tidy provides PO and POT files for language translations. The file
 `tidy.pot` is the correct template to use as a basis for new translations. In a
 typical `gettext` workflow a translator will use the `tidy.pot` file to create a
 language translation PO file that contains original English strings and the
@@ -121,14 +121,14 @@ In the `localize\translations\` directory you can find existing languages, e.g.,
   - `tidy.pot` (Tidy's POT template for translations).
   - `language_en_gb.po` (British English variants for the built in language)
   - …and perhaps more.
-  
+
 In the `src\` directory you can find the master files for existing languages,
 e.g.,
 
  - `language_en.h` (Tidy's native, built-in language, mostly U.S. English)
  - `language_en_gb.po` (British English variants for the built in language)
  - …and perhaps more.
- 
+
 Although the header files are the master files for HTML Tidy, we understand that
 not all potential translators want to edit C files directly. Therefore as an
 option, the following workflow to use POT and PO files is offered.
@@ -139,7 +139,7 @@ If the language that you want to work on is already present:
   - Note that although you can use a text editor, we recommend that you use a
     dedicated PO editor so that you don't accidentally make the file illegible
     to our conversion utility.
-    
+
 If the language that you want to work on is _not_ already present:
 
   - You can open `tidy.pot` in your favorite PO editor and use its functions
@@ -187,8 +187,8 @@ Tidy, and issue a PR for the whole change.
 
 ### Repository Notes
 
-If you are working with PO files then please **only** commit PO files with 
-_English_ `msgid` fields. The `gettext` convention specifies only English 
+If you are working with PO files then please **only** commit PO files with
+_English_ `msgid` fields. The `gettext` convention specifies only English
 `msgid`, and other translators may not understand the original strings.
 
 Our `poconvert.rb` script can generate PO files using another language as
@@ -226,7 +226,7 @@ translation, or to save one of the developer team a few extra steps.
   - Build Tidy:
     - Build Tidy per the usual instructions, and try it out using the `-lang`
       option.
-    
+
 
 ## Best Practices
 
@@ -419,10 +419,10 @@ exclude strings matching another localization like so:
 ### Prepare your non-English PO for a PR
 
 Although we have provided tools to allow you to work in languages other than
-English, we can only accept PO's in the repository that have English `msgid` 
+English, we can only accept PO's in the repository that have English `msgid`
 fields. It's easy to convert your PO back to English:
 
-`./poconvert msgfmt <language_cc_ll.po>` 
+`./poconvert msgfmt <language_cc_ll.po>`
 
 `./poconvert msgunfmt <language_cc_ll.h>`
 
@@ -437,7 +437,7 @@ If Tidy's POT changes, e.g., new strings are added, new comments, etc., the
 simplest way to update your PO is to convert it to a header (which normalizes
 it to the latest Tidy standard), and then convert the header to a new PO again.
 
-`./poconvert msgfmt <language_cc_ll.po>` 
+`./poconvert msgfmt <language_cc_ll.po>`
 
 `./poconvert msgunfmt <language_cc_ll.h>`
 

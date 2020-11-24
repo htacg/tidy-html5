@@ -731,7 +731,7 @@ void TY_(ResetConfigToSnapshot)( TidyDocImpl* doc )
     uint changedUserTags;
     Bool needReparseTagsDecls = NeedReparseTagDecls( doc, value, snap,
                                                      &changedUserTags );
-    
+
     for ( ixVal=0; ixVal < N_TIDY_OPTIONS; ++option, ++ixVal )
     {
         assert( ixVal == (uint) option->id );
@@ -984,7 +984,7 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
         tchar c;
         cfg->cfgIn = TY_(FileInput)( doc, fin, enc );
         c = FirstChar( cfg );
-       
+
         for ( c = SkipWhite(cfg); c != EndOfStream; c = NextProperty(cfg) )
         {
             uint ix = 0;
@@ -1047,7 +1047,7 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
                             c = AdvanceChar( cfg );
                         }
                         buf[i] = '\0';
-                        
+
                         if ( doc->pOptCallback )
                             response = (*doc->pOptCallback)( name, buf );
 
@@ -1077,7 +1077,7 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
     AdjustConfig( doc );
 
     /* any new config errors? If so, return warning status. */
-    return (doc->optionErrors > opterrs ? 1 : 0); 
+    return (doc->optionErrors > opterrs ? 1 : 0);
 }
 
 
@@ -1158,7 +1158,7 @@ Bool  TY_(AdjustCharEncoding)( TidyDocImpl* doc, int encoding )
 {
     int outenc = -1;
     int inenc = -1;
-    
+
     switch( encoding )
     {
     case MACROMAN:
@@ -1275,7 +1275,7 @@ static void AdjustConfig( TidyDocImpl* doc )
         ulong enc = cfg( doc, TidyOutCharEncoding );
         if ( enc == UTF16LE || enc == UTF16BE || enc == UTF16 )
             TY_(SetOptionInt)( doc, TidyOutputBOM, yes );
-        
+
         TY_(SetOptionBool)( doc, TidyQuoteAmpersand, yes );
         TY_(SetOptionBool)( doc, TidyOmitOptionalTags, no );
     }
@@ -1571,7 +1571,7 @@ static Bool GetParsePickListValue( TidyDocImpl* doc, const TidyOptionImpl* entry
 Bool ParsePickList( TidyDocImpl* doc, const TidyOptionImpl* entry )
 {
     uint value;
-    
+
     if ( GetParsePickListValue( doc, entry, &value ) )
     {
         if ( entry->type == TidyBoolean )
@@ -1580,7 +1580,7 @@ Bool ParsePickList( TidyDocImpl* doc, const TidyOptionImpl* entry )
             TY_(SetOptionInt)( doc, entry->id, value );
         return yes;
     }
-  
+
     TY_(ReportBadArgument)( doc, entry->name );
     return no;
 }
@@ -1595,7 +1595,7 @@ Bool ParseTabs( TidyDocImpl* doc, const TidyOptionImpl* entry )
 {
     uint flag = 0;
     Bool status = GetParsePickListValue( doc, entry, &flag );
-    
+
     if ( status ) {
         Bool tabs = flag != 0 ? yes : no;
         TY_(SetOptionBool)( doc, entry->id, tabs );
@@ -1749,7 +1749,7 @@ Bool ParseDocType( TidyDocImpl* doc, const TidyOptionImpl* option )
         }
         return status;
     }
-    
+
     if ( (status = GetParsePickListValue( doc, option, &value ) ) )
     {
         TY_(SetOptionInt)( doc, TidyDoctypeMode, value );
@@ -1758,7 +1758,7 @@ Bool ParseDocType( TidyDocImpl* doc, const TidyOptionImpl* option )
     {
         TY_(ReportBadArgument)( doc, option->name );
     }
-    
+
     return status;
 }
 
@@ -1812,7 +1812,7 @@ ctmbstr      TY_(getNextOptionPick)( const TidyOptionImpl* option,
     assert( option!=NULL && iter != NULL );
 
     ix = (size_t) *iter;
-    
+
     if ( option->pickList )
     {
         if ( ix > 0 && ix < TIDY_PL_SIZE && option->pickList )
@@ -1823,7 +1823,7 @@ ctmbstr      TY_(getNextOptionPick)( const TidyOptionImpl* option,
         item = &(*option->pickList)[ ix ];
         *iter = (TidyIterator) ( val && item->label ? ix + 1 : (size_t)0 );
     }
-    
+
     return val;
 }
 
@@ -1863,7 +1863,7 @@ static int  WriteOptionPick( const TidyOptionImpl* option, uint ival, StreamOut*
 {
     uint ix = 0;
     const PickListItem *item = NULL;
-    
+
     if ( option-> pickList )
     {
         while ( (item = &(*option->pickList)[ ix ]) && item->label && ix<ival )
@@ -1873,7 +1873,7 @@ static int  WriteOptionPick( const TidyOptionImpl* option, uint ival, StreamOut*
         if ( ix==ival && item->label )
             return WriteOptionString( option, item->label, out );
     }
-    
+
     return -1;
 }
 
@@ -1917,16 +1917,16 @@ static int  SaveConfigToStream( TidyDocImpl* doc, StreamOut* out )
           if ( dtmode == TidyDoctypeUser )
           {
             tmbstr t;
-            
+
             /* add 2 double quotes */
             if (( t = (tmbstr)TidyDocAlloc( doc, TY_(tmbstrlen)( val->p ) + 2 ) ))
             {
               t[0] = '\"'; t[1] = 0;
-            
+
               TY_(tmbstrcat)( t, val->p );
               TY_(tmbstrcat)( t, "\"" );
               rc = WriteOptionString( option, t, out );
-            
+
               TidyDocFree( doc, t );
             }
           }

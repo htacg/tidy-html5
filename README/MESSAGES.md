@@ -5,14 +5,14 @@ Tidy has a quite complex warning/error report and footnote messaging system, but
 First assign the message a **key** value. This is done in `tidyenum.h`, in one of the two enumerations that are listed there.
 
  1. `tidyStrings` - starts with the value `TIDYSTRINGS_FIRST = 500`, and it must be first. This is the list of all strings available in Tidy with the exception of strings provided by other enumerations. **However** don't modify this enum directly. You'll modify a preprocessor macro instead.
- 
+
  2. `TidyOptionId` - You probably won't need this unless you're adding new options, and there's another readme for that.
- 
+
  3. `TidyConfigCategory` - You probably won't need this, either, unless you're adding a whole new category for options.
- 
+
  4. `TidyReportLevel` - And you probably won't need this, either.
 
-All enum values are only ever used by name within **libTidy** (and incidentally, should only ever be used by name in your client applications; never trust the value!), so feel free to enter new strings in English alphabetical order (this helps us audit all of the strings from time to time). 
+All enum values are only ever used by name within **libTidy** (and incidentally, should only ever be used by name in your client applications; never trust the value!), so feel free to enter new strings in English alphabetical order (this helps us audit all of the strings from time to time).
 
 As mentioned above, `tidyStrings` messages must be defined in one of the existing macros named like `FOREACH_...(FN)`, such as `FOREACH_DIALOG_MSG(FN)`. These macros ensure that another data structure used for localization and key lookup is updated automatically any time strings are added or removed, thus limiting the possibility of developer error.
 

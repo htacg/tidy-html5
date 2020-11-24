@@ -222,7 +222,7 @@ static const tidyLocaleMapItemImpl localeMappings[] = {
     { "united-states",          "en_us" },
     { "us",                     "en_us" },
     { "usa",                    "en_us" },
-    
+
     /* MUST be last. */
     { NULL,                     NULL    }
 };
@@ -236,7 +236,7 @@ static ctmbstr tidyLocalizedStringImpl( uint messageType, languageDefinition *de
     int i;
     languageDictionary *dictionary = &definition->messages;
     uint pluralForm = definition->whichPluralForm(plural);
-    
+
     for (i = 0; (*dictionary)[i].value; ++i)
     {
         if ( (*dictionary)[i].key == messageType && (*dictionary)[i].pluralForm == pluralForm )
@@ -260,26 +260,26 @@ static ctmbstr tidyLocalizedStringImpl( uint messageType, languageDefinition *de
 ctmbstr TY_(tidyLocalizedStringN)( uint messageType, uint quantity )
 {
     ctmbstr result;
-    
+
     result  = tidyLocalizedStringImpl( messageType, tidyLanguages.currentLanguage, quantity);
-    
+
     if (!result && tidyLanguages.fallbackLanguage )
     {
         result = tidyLocalizedStringImpl( messageType, tidyLanguages.fallbackLanguage, quantity);
     }
-    
+
     if (!result)
     {
         /* Fallback to en which is built in. */
         result = tidyLocalizedStringImpl( messageType, &language_en, quantity);
     }
-    
+
     if (!result)
     {
         /* Last resort: Fallback to en singular which is built in. */
         result = tidyLocalizedStringImpl( messageType, &language_en, 1);
     }
-    
+
     return result;
 }
 
@@ -313,7 +313,7 @@ tmbstr TY_(tidyNormalizedLocaleName)( ctmbstr locale )
 
     tmbstr search = TY_(tmbstrdup)( allocator, locale );
     search = TY_(tmbstrtolower)(search);
-    
+
     /* See if our string matches a Windows name. */
     for (i = 0; localeMappings[i].winName; ++i)
     {
@@ -324,15 +324,15 @@ tmbstr TY_(tidyNormalizedLocaleName)( ctmbstr locale )
             break;
         }
     }
-    
+
     /* We're going to be stupid about this and trust the user, and
      return just the first two characters if they exist and the
      4th and 5th if they exist. The worst that can happen is a
      junk language that doesn't exist and won't be set. */
-    
+
     len = strlen( search );
     len = ( len <= 5 ? len : 5 );
-    
+
     for ( i = 0; i < len; i++ )
     {
         if ( i == 2 )
@@ -351,7 +351,7 @@ tmbstr TY_(tidyNormalizedLocaleName)( ctmbstr locale )
             result[i] = tolower( search[i] );
         }
     }
-    
+
     TidyFree( allocator, search );
     return result;
 }
@@ -367,17 +367,17 @@ languageDefinition *TY_(tidyTestLanguage)( ctmbstr languageCode )
     languageDefinition *testLang;
     languageDictionary *testDict;
     ctmbstr testCode;
-    
+
     for (i = 0; tidyLanguages.languages[i]; ++i)
     {
         testLang = tidyLanguages.languages[i];
         testDict = &testLang->messages;
         testCode = (*testDict)[0].value;
-        
+
         if ( strcmp(testCode, languageCode) == 0 )
             return testLang;
     }
-    
+
     return NULL;
 }
 
@@ -399,26 +399,26 @@ Bool TY_(tidySetLanguage)( ctmbstr languageCode )
     languageDefinition *dict2 = NULL;
     tmbstr wantCode = NULL;
     char lang[3] = "";
-    
+
     if ( !languageCode || !(wantCode = TY_(tidyNormalizedLocaleName)( languageCode )) )
     {
         return no;
     }
-    
+
     /* We want to use the specified language as the currentLanguage, and set
      fallback language as necessary. We have either a two or five digit code,
      either or both of which might be installed. Let's test both of them:
      */
-    
+
     dict1 = TY_(tidyTestLanguage( wantCode ));  /* WANTED language */
-    
+
     if ( strlen( wantCode ) > 2 )
     {
         strncpy(lang, wantCode, 2);
         lang[2] = '\0';
         dict2 = TY_(tidyTestLanguage( lang ) ); /* BACKUP language? */
     }
-    
+
     if ( dict1 && dict2 )
     {
         tidyLanguages.currentLanguage = dict1;
@@ -438,7 +438,7 @@ Bool TY_(tidySetLanguage)( ctmbstr languageCode )
     {
         /* No change. */
     }
-    
+
     return dict1 || dict2;
 }
 
@@ -491,14 +491,14 @@ ctmbstr TY_(tidyDefaultString)( uint messageType )
 static const uint tidyStringKeyListSize()
 {
     static uint array_size = 0;
-    
+
     if ( array_size == 0 )
     {
         while ( language_en.messages[array_size].value != NULL ) {
             array_size++;
         }
     }
-    
+
     return array_size;
 }
 
@@ -525,15 +525,15 @@ uint TY_(getNextStringKey)( TidyIterator* iter )
     uint item = 0;
     size_t itemIndex;
     assert( iter != NULL );
-    
+
     itemIndex = (size_t)*iter;
-    
+
     if ( itemIndex > 0 && itemIndex <= tidyStringKeyListSize() )
     {
         item = language_en.messages[ itemIndex - 1 ].key;
         itemIndex++;
     }
-    
+
     *iter = (TidyIterator)( itemIndex <= tidyStringKeyListSize() ? itemIndex : (size_t)0 );
     return item;
 }
@@ -546,14 +546,14 @@ uint TY_(getNextStringKey)( TidyIterator* iter )
 static const uint tidyLanguageListSize()
 {
     static uint array_size = 0;
-    
+
     if ( array_size == 0 )
     {
         while ( localeMappings[array_size].winName ) {
             array_size++;
         }
     }
-    
+
     return array_size;
 }
 
@@ -576,15 +576,15 @@ const tidyLocaleMapItemImpl *TY_(getNextWindowsLanguage)( TidyIterator *iter )
     const tidyLocaleMapItemImpl *item = NULL;
     size_t itemIndex;
     assert( iter != NULL );
-    
+
     itemIndex = (size_t)*iter;
-    
+
     if ( itemIndex > 0 && itemIndex <= tidyLanguageListSize() )
     {
         item = &localeMappings[ itemIndex -1 ];
         itemIndex++;
     }
-    
+
     *iter = (TidyIterator)( itemIndex <= tidyLanguageListSize() ? itemIndex : (size_t)0 );
     return item;
 }
@@ -614,14 +614,14 @@ ctmbstr TY_(TidyLangPosixName)( const tidyLocaleMapItemImpl *item )
 static const uint tidyInstalledLanguageListSize()
 {
     static uint array_size = 0;
-    
+
     if ( array_size == 0 )
     {
         while ( tidyLanguages.languages[array_size] ) {
             array_size++;
         }
     }
-    
+
     return array_size;
 }
 
@@ -643,15 +643,15 @@ ctmbstr TY_(getNextInstalledLanguage)( TidyIterator* iter )
     ctmbstr item = NULL;
     size_t itemIndex;
     assert( iter != NULL );
-    
+
     itemIndex = (size_t)*iter;
-    
+
     if ( itemIndex > 0 && itemIndex <= tidyInstalledLanguageListSize() )
     {
         item = tidyLanguages.languages[itemIndex - 1]->messages[0].value;
         itemIndex++;
     }
-    
+
     *iter = (TidyIterator)( itemIndex <= tidyInstalledLanguageListSize() ? itemIndex : (size_t)0 );
     return item;
 }

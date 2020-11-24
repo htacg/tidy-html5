@@ -40,7 +40,7 @@ if [ ! -d "$TMPBINS" ]; then
 fi
 TMPDD="$TMPBINS/tidy-$TMPVER"
     echo ""
-if [ -d "$TMPDD" ]; then 
+if [ -d "$TMPDD" ]; then
     echo "$BN: Destination is $TMPDD"
 else
     echo "$BN: This is a NEW installation in $TMPDD"
@@ -62,7 +62,7 @@ echo ""
 echo "$BN: Will publish..."
 echo "$TMPFIL1"
 echo "$TMPFIL2"
-if [ ! -d "$TMPDD" ]; then 
+if [ ! -d "$TMPDD" ]; then
     echo "$BN: Will create dir $TMPDD"
 else
     echo "$BN: Destination $TMPDD"
@@ -71,9 +71,9 @@ echo ""
 echo "$BN: *** CONTINUE? ***"
 ask
 
-if [ ! -d "$TMPDD" ]; then 
+if [ ! -d "$TMPDD" ]; then
     mkdir $TMPDD
-    if [ ! -d "$TMPDD" ]; then 
+    if [ ! -d "$TMPDD" ]; then
         echo "$BN: Failed to create folder $TMPDD"
         exit 1
     fi

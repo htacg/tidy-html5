@@ -2,7 +2,7 @@
 #define __LEXER_H__
 
 /* lexer.h -- Lexer for html parser
-  
+
    (c) 1998-2008 (W3C) MIT, ERCIM, Keio University
    See tidy.h for the copyright notice.
 
@@ -141,7 +141,7 @@ typedef enum
 #define CM_IMG          (1 << 16)
 /* Elements with inline and block model. Used to avoid calling InlineDup. */
 #define CM_MIXED        (1 << 17)
-/* Elements whose content needs to be indented only if containing one 
+/* Elements whose content needs to be indented only if containing one
    CM_BLOCK element. */
 #define CM_NO_INDENT    (1 << 18)
 /* Elements that are obsolete (such as "dir", "menu"). */
@@ -348,7 +348,7 @@ struct _Lexer
     Node* itoken;           /* last duplicate inline returned by GetToken() */
     Node* root;             /* remember root node of the document */
     Node* parent;           /* remember parent node for CDATA elements */
-    
+
     Bool seenEndBody;       /* true if a </body> tag has been encountered */
     Bool seenEndHtml;       /* true if a </html> tag has been encountered */
 

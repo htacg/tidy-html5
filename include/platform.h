@@ -1,6 +1,6 @@
 /** @file platform.h - Deprecated compatibility header. Use tidyplatform.h
 **
-** @deprecated This compatibility header is deprecated and 
+** @deprecated This compatibility header is deprecated and
 ** should be replaced by tidyplatform.h. This header will be removed!
 **
 */

@@ -20,8 +20,8 @@
  *
  * @author  Dave Raggett [dsr@w3.org]
  * @author  HTACG, et al (consult git log)
- * 
- * @remarks The contributing author(s) would like to thank all those who 
+ *
+ * @remarks The contributing author(s) would like to thank all those who
  *          helped with testing, bug fixes and suggestions for improvements.
  *          This wouldn't have been possible without your help.
  *
@@ -32,9 +32,9 @@
  * @par
  *     All Rights Reserved.
  * @par
- *     This software and documentation is provided "as is," and the copyright 
+ *     This software and documentation is provided "as is," and the copyright
  *     holders and contributing author(s) make no representations or warranties,
- *     express or implied, including but not limited to, warranties of 
+ *     express or implied, including but not limited to, warranties of
  *     merchantability or fitness for any particular purpose or that the use of
  *     the software or documentation will not infringe any third party patents,
  *     copyrights, trademarks or other rights.
@@ -72,7 +72,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-    
+
 /***************************************************************************//**
  ** @defgroup internal_api Internal API
  ** The Internal API is used exclusively within LibTidy. If you are an
@@ -91,7 +91,7 @@ extern "C" {
 
 /***************************************************************************//**
  ** @defgroup public_api External Public API
- ** The Public API is the API that LibTidy programmers must access in order 
+ ** The Public API is the API that LibTidy programmers must access in order
  ** to harness HTML Tidy as a library. The API limits all exposure to internal
  ** structures and provides only accessors that return simple types such as
  ** C strings and integers, which makes it quite suitable for integration with
@@ -241,7 +241,7 @@ struct _TidyAllocator;
 typedef struct _TidyAllocatorVtbl TidyAllocatorVtbl;
 typedef struct _TidyAllocator TidyAllocator;
 
-    
+
 /** Tidy's built-in default allocator. */
 struct _TidyAllocator {
     const TidyAllocatorVtbl *vtbl; /**< The allocator's function table. */
@@ -270,7 +270,7 @@ struct _TidyAllocatorVtbl
                    void *block,         /**< The pointer to the existing block. */
                    size_t nBytes        /**< The number of bytes to allocate. */
                    );
-    
+
     /** Called to free a previously allocated block of memory.
      */
     void *free(TidyAllocator *self,  /**< The TidyAllocator to use to free memory. */
@@ -283,7 +283,7 @@ struct _TidyAllocatorVtbl
         called if an error is detected in the tree integrity via the internal
         function CheckNodeIntegrity(). This is a situation that can only arise
         in the case of a programming error in LibTidy. You can turn off node
-        integrity checking by defining the constant `NO_NODE_INTEGRITY_CHECK` 
+        integrity checking by defining the constant `NO_NODE_INTEGRITY_CHECK`
         during the build.
     **/
     void *panic(TidyAllocator *self,  /**< The TidyAllocator to use to panic. */
@@ -334,7 +334,7 @@ TIDY_EXPORT Bool TIDY_CALL tidySetPanicCall( TidyPanic fpanic );
 /** @name Instantiation and Destruction
  ** @{
  */
-    
+
 /** The primary creation of a document instance. Instances of a TidyDoc are used
  ** throughout the API as a token to represent a particular document. You must
  ** create at least one TidyDoc instance to initialize the library and begin
@@ -352,19 +352,19 @@ TIDY_EXPORT TidyDoc TIDY_CALL     tidyCreate(void);
  */
 TIDY_EXPORT TidyDoc TIDY_CALL     tidyCreateWithAllocator(TidyAllocator *allocator);
 
-/** Free all memory and release the TidyDoc. The TidyDoc can not be used after 
+/** Free all memory and release the TidyDoc. The TidyDoc can not be used after
  ** this call.
  ** @param tdoc The TidyDoc to free.
  */
 TIDY_EXPORT void TIDY_CALL        tidyRelease(TidyDoc tdoc);
 
-    
+
 /** @}
  ** @name Host Application Data
  ** @{
  */
-   
- 
+
+
 /** Allows the host application to store a chunk of data with each TidyDoc
  ** instance. This can be useful for callbacks, such as saving a reference to
  ** `self` within the document.
@@ -375,17 +375,17 @@ TIDY_EXPORT void TIDY_CALL        tidySetAppData(TidyDoc tdoc,  /**< The documen
 
 /** Returns the data previously stored with `tidySetAppData()`.
  ** @param tdoc  document where data has been stored.
- ** @result The pointer to the data block previously stored. 
+ ** @result The pointer to the data block previously stored.
  */
 TIDY_EXPORT void* TIDY_CALL       tidyGetAppData(TidyDoc tdoc);
 
-    
+
 /** @}
  ** @name LibTidy Version Information
  ** @{
  */
 
-    
+
 /** Get the release date for the current library.
  ** @result The string representing the release date.
  */
@@ -401,13 +401,13 @@ TIDY_EXPORT ctmbstr TIDY_CALL     tidyLibraryVersion(void);
  */
 TIDY_EXPORT ctmbstr TIDY_CALL     tidyPlatform(void);
 
-    
+
 /** @}
  ** @name Diagnostics and Repair
  ** @{
  */
 
-    
+
 /** Get status of current document.
  ** @param tdoc An instance of a TidyDoc to query.
  ** @result Returns the highest of `2` indicating that errors were present in
@@ -478,8 +478,8 @@ TIDY_EXPORT void TIDY_CALL        tidyGeneralInfo( TidyDoc tdoc );
  ** @name Configuration, File, and Encoding Operations
  ** @{
  */
-    
-    
+
+
 /** Load an ASCII Tidy configuration file and set the configuration per its
  ** contents. Reports config option errors, which can be filtered.
  ** @result Returns 0 upon success, or any other value if there was an option error.
@@ -510,7 +510,7 @@ TIDY_EXPORT Bool TIDY_CALL        tidyFileExists(TidyDoc tdoc,     /**< The Tidy
  ** include `ascii`, `latin1`, `raw`, `utf8`, `iso2022`, `mac`, `win1252`,
  ** `utf16le`, `utf16be`, `utf16`, `big5`, and `shiftjis`. These values are not
  ** case sensitive.
- ** @note This is the same as using TidySetInCharEncoding() and 
+ ** @note This is the same as using TidySetInCharEncoding() and
  **       TidySetOutCharEncoding() to set the same value.
  ** @result Returns 0 upon success, or a system standard error number `EINVAL`.
  */
@@ -518,7 +518,7 @@ TIDY_EXPORT int TIDY_CALL         tidySetCharEncoding(TidyDoc tdoc,  /**< The Ti
                                                       ctmbstr encnam /**< The encoding name as described above. */
                                                       );
 
-/** Set the input encoding for parsing markup.  Valid values include `ascii`, 
+/** Set the input encoding for parsing markup.  Valid values include `ascii`,
  ** `latin1`, `raw`, `utf8`, `iso2022`, `mac`, `win1252`, `utf16le`, `utf16be`,
  ** `utf16`, `big5`, and `shiftjis`. These values are not case sensitive.
  ** @result Returns 0 upon success, or a system standard error number `EINVAL`.
@@ -606,7 +606,7 @@ TIDY_EXPORT Bool TIDY_CALL          tidySetConfigCallback(TidyDoc tdoc,         
                                                           TidyConfigCallback pConfigCallback /**< The name of a function of type TidyConfigCallback() to serve as your callback. */
                                                           );
 
-    
+
 /** This typedef represents the required signature for your provided callback
  ** function should you wish to register one with tidySetConfigChangeCallback().
  ** Your callback function will be provided with the following parameters.
@@ -735,20 +735,20 @@ TIDY_EXPORT Bool TIDY_CALL          tidyOptIsReadOnly( TidyOption opt );
  */
 TIDY_EXPORT TidyConfigCategory TIDY_CALL tidyOptGetCategory( TidyOption opt );
 
-/** Get default value of given Option as a string 
+/** Get default value of given Option as a string
  ** @param opt An instance of a TidyOption to query.
  ** @result A string indicating the default value of the specified option.
  */
 TIDY_EXPORT ctmbstr TIDY_CALL       tidyOptGetDefault( TidyOption opt );
 
-/** Get default value of given Option as an unsigned integer 
+/** Get default value of given Option as an unsigned integer
  ** @param opt An instance of a TidyOption to query.
  ** @result An unsigned integer indicating the default value of the specified
  **         option.
  */
 TIDY_EXPORT ulong TIDY_CALL         tidyOptGetDefaultInt( TidyOption opt );
 
-/** Get default value of given Option as a Boolean value 
+/** Get default value of given Option as a Boolean value
  ** @param opt An instance of a TidyOption to query.
  ** @result A boolean indicating the default value of the specified option.
  */
@@ -757,7 +757,7 @@ TIDY_EXPORT Bool TIDY_CALL          tidyOptGetDefaultBool( TidyOption opt );
 /** Initiates an iterator for a list of TidyOption pick-list values, which
  ** allows you iterate through all of the available option values. In order to
  ** iterate through the available values, initiate the iterator with this
- ** function, and then use tidyOptGetNextPick() to retrieve the first and 
+ ** function, and then use tidyOptGetNextPick() to retrieve the first and
  ** subsequent option values. For example:
  ** @code{.c}
  **   TidyIterator itOpt = tidyOptGetPickList( opt );
@@ -868,7 +868,7 @@ TIDY_EXPORT Bool TIDY_CALL          tidyOptSnapshot( TidyDoc tdoc );
  */
 TIDY_EXPORT Bool TIDY_CALL          tidyOptResetToSnapshot( TidyDoc tdoc );
 
-/** Any settings different than default? 
+/** Any settings different than default?
  ** @param tdoc The tidy document to check.
  ** @result Returns a bool indicating whether or not a difference exists.
  */
@@ -909,7 +909,7 @@ TIDY_EXPORT ctmbstr TIDY_CALL       tidyOptGetCurrPick(TidyDoc tdoc,      /**< T
 
 /** Initiates an iterator for a list of user-declared tags, including autonomous
  ** custom tags detected in the document if @ref TidyUseCustomTags is not set to
- ** **no**. This iterator allows you to iterate through all of the custom tags. 
+ ** **no**. This iterator allows you to iterate through all of the custom tags.
  ** In order to iterate through the tags, initiate the iterator with this
  ** function, and then use tidyOptGetNextDeclTag() to retrieve the first and
  ** subsequent tags. For example:
@@ -927,8 +927,8 @@ TIDY_EXPORT TidyIterator TIDY_CALL  tidyOptGetDeclTagList( TidyDoc tdoc );
 
 /** Given a valid TidyIterator initiated with tidyOptGetDeclTagList(), returns a
  ** string representing a user-declared or autonomous custom tag.
- ** @remark Specifying optId limits the scope of the tags to one of 
- **         @ref TidyInlineTags, @ref TidyBlockTags, @ref TidyEmptyTags, or 
+ ** @remark Specifying optId limits the scope of the tags to one of
+ **         @ref TidyInlineTags, @ref TidyBlockTags, @ref TidyEmptyTags, or
  **         @ref TidyPreTags. Note that autonomous custom tags (if used) are
  **         added to one of these option types, depending on the value of
  **         @ref TidyUseCustomTags.
@@ -1036,10 +1036,10 @@ TIDY_EXPORT TidyOption TIDY_CALL    tidyOptGetNextDocLinks(TidyDoc tdoc,     /**
 /***************************************************************************//**
  ** @defgroup IO I/O and Messages
  **
- ** Tidy provides flexible I/O. By default, Tidy will define, create and use 
+ ** Tidy provides flexible I/O. By default, Tidy will define, create and use
  ** instances of input and output handlers for standard C buffered I/O (i.e.,
  ** `FILE* stdin`, `FILE* stdout`, and `FILE* stderr` for content input,
- ** content output and diagnostic output, respectively. A `FILE* cfgFile` 
+ ** content output and diagnostic output, respectively. A `FILE* cfgFile`
  ** input handler will be used for config files. Command line options will
  ** just be set directly.
  **
@@ -1047,7 +1047,7 @@ TIDY_EXPORT TidyOption TIDY_CALL    tidyOptGetNextDocLinks(TidyDoc tdoc,     /**
  ******************************************************************************/
 
 /** @name Forward declarations and typedefs.
- ** @{ 
+ ** @{
  */
 
 TIDY_STRUCT struct _TidyBuffer;
@@ -1132,7 +1132,7 @@ typedef struct _TidyOutputSink
   TidyPutByteFunc     putByte;   /**< Pointer to "put byte" callback */
 } TidyOutputSink;
 
-/** Facilitates user defined sinks by providing an entry point to marshal 
+/** Facilitates user defined sinks by providing an entry point to marshal
  ** pointers-to-functions. This is needed by .NET, and possibly other language
  ** bindings.
  ** @result Returns a bool indicating success or failure.
@@ -1169,21 +1169,21 @@ TIDY_EXPORT void TIDY_CALL tidySetEmacsFile(TidyDoc tdoc,    /**< The tidy docum
  ** @result Returns a string indicating the file path.
  */
 TIDY_EXPORT ctmbstr TIDY_CALL tidyGetEmacsFile( TidyDoc tdoc );
-    
+
 /** @}
  ** @name Error Sink
  ** Send Tidy's output to any of several destinations with these functions.
  ** @{
  */
 
-/** Set error sink to named file. 
+/** Set error sink to named file.
  ** @result Returns a file handle.
  */
 TIDY_EXPORT FILE* TIDY_CALL tidySetErrorFile(TidyDoc tdoc,     /**< The document to set. */
                                              ctmbstr errfilnam /**< The file path to send output. */
                                              );
 
-/** Set error sink to given buffer. 
+/** Set error sink to given buffer.
  ** @result Returns 0 upon success or a standard error number.
  */
 TIDY_EXPORT int TIDY_CALL tidySetErrorBuffer(TidyDoc tdoc,      /**< The document to set. */
@@ -1291,7 +1291,7 @@ TIDY_EXPORT Bool TIDY_CALL tidySetMessageCallback(TidyDoc tdoc,                 
                                                   );
 
 /** @name TidyMessageCallback API
- ** When using `TidyMessageCallback` you will be supplied with a TidyMessage 
+ ** When using `TidyMessageCallback` you will be supplied with a TidyMessage
  ** object, which is used as a token to be interrogated with the following
  ** API before the callback returns.
  ** @remark Upon returning from the callback, this object is destroyed so do
@@ -1300,7 +1300,7 @@ TIDY_EXPORT Bool TIDY_CALL tidySetMessageCallback(TidyDoc tdoc,                 
  ** @{
  */
 
-/** Get the tidy document this message comes from. 
+/** Get the tidy document this message comes from.
  ** @param tmessage Specify the message that you are querying.
  ** @result Returns the TidyDoc that generated the message.
  */
@@ -1520,7 +1520,7 @@ TIDY_EXPORT double TIDY_CALL tidyGetArgValueDouble(TidyMessage tmessage,    /**<
  ** document ended up in the output.
  ** @{
  */
-    
+
 /** This typedef represents the required signature for your provided callback
  ** function should you wish to register one with tidySetMessageCallback().
  ** Your callback function will be provided with the following parameters.
@@ -1612,7 +1612,7 @@ TIDY_EXPORT int TIDY_CALL         tidyParseSource(TidyDoc tdoc,           /**< T
  */
 TIDY_EXPORT int TIDY_CALL         tidyCleanAndRepair( TidyDoc tdoc );
 
-/** Reports the document type and diagnostic statistics on parsed and repaired 
+/** Reports the document type and diagnostic statistics on parsed and repaired
  ** markup. You must call tidyCleanAndRepair() before using this function.
  ** @param tdoc The tidy document to use.
  ** @result An integer representing the status.
@@ -1699,14 +1699,14 @@ TIDY_EXPORT int TIDY_CALL         tidyOptSaveSink(TidyDoc tdoc,        /**< The 
  ** @defgroup Tree Document Tree
  **
  ** A parsed (and optionally repaired) document is represented by Tidy as a
- ** tree, much like a W3C DOM. This tree may be traversed using these 
+ ** tree, much like a W3C DOM. This tree may be traversed using these
  ** functions. The following snippet gives a basic idea how these functions
  ** can be used.
  **
  ** @code{.c}
  ** void dumpNode( TidyNode tnod, int indent ) {
  **   TidyNode child;
- ** 
+ **
  **   for ( child = tidyGetChild(tnod); child; child = tidyGetNext(child) ) {
  **     ctmbstr name;
  **     switch ( tidyNodeGetType(child) ) {
@@ -1721,7 +1721,7 @@ TIDY_EXPORT int TIDY_CALL         tidyOptSaveSink(TidyDoc tdoc,        /**< The 
  **     case TidyNode_Jste:       name = "JSTE";                    break;
  **     case TidyNode_Php:        name = "PHP";                     break;
  **     case TidyNode_XmlDecl:    name = "XML Declaration";         break;
- ** 
+ **
  **     case TidyNode_Start:
  **     case TidyNode_End:
  **     case TidyNode_StartEnd:
@@ -1734,11 +1734,11 @@ TIDY_EXPORT int TIDY_CALL         tidyOptSaveSink(TidyDoc tdoc,        /**< The 
  **     dumpNode( child, indent + 4 );
  **   }
  ** }
- ** 
+ **
  ** void dumpDoc( TidyDoc tdoc ) {
  **   dumpNode( tidyGetRoot(tdoc), 0 );
  ** }
- ** 
+ **
  ** void dumpBody( TidyDoc tdoc ) {
  **   dumpNode( tidyGetBody(tdoc), 0 );
  ** }
@@ -2062,7 +2062,7 @@ TIDY_EXPORT ctmbstr TIDY_CALL tidyGetLanguage(void);
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 opaque_type(tidyLocaleMapItem);
 #endif
-    
+
 /** Initiates an iterator for a list of Tidy's Windows<->POSIX locale mappings.
  ** This iterator allows you to iterate through this list. In order to
  ** iterate through the list, initiate the iterator with this function, and then

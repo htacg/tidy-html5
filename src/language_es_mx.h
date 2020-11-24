@@ -13,7 +13,7 @@
  *
  * [X] THIS FILE IS MACHINE GENERATED. It is a localization file for the
  *     language (and maybe region) "es_mx". The source of
- *     these strings is a gettext PO file in Tidy's source, probably called 
+ *     these strings is a gettext PO file in Tidy's source, probably called
  *     "language_es_mx.po".
  *
  * [ ] THIS FILE WAS HAND MODIFIED. Translators, please feel to edit this file
@@ -55,13 +55,13 @@ static uint whichPluralForm_es_mx(uint n) {
  */
 static languageDefinition language_es_mx = { whichPluralForm_es_mx, {
     /***************************************
-     ** This MUST be present and first. 
+     ** This MUST be present and first.
      ** Specify the code for this language.
      ***************************************/
     {/* Specify the ll or ll_cc language code here. */
       TIDY_LANGUAGE,          0, "es_mx"
     },
-    { TEXT_GENERAL_INFO_PLEA, 0,        
+    { TEXT_GENERAL_INFO_PLEA, 0,
         "\n"
         "¿Le gustaría ver Tidy en adecuada, español mexicano? Por favor considere \n"
         "ayudarnos a localizar HTML Tidy. Para más detalles consulte \n"

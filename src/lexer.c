@@ -2701,10 +2701,9 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                         }
 
                         /*
-                           We only print this message if there's a missing
-                           starting hyphen; this comment will be dropped.
+                           TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT_DROPPING );
+                           Warning now done later - see issue #487
                          */
-                        TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT_DROPPING );
                     }
                     else if (c == 'd' || c == 'D')
                     {
@@ -2777,7 +2776,11 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                     }
 
 
-                    TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT_DROPPING); /* Is. #487 */
+                    /*
+                       We only print this message if there's a missing
+                       starting hyphen; this comment will be dropped.
+                     */
+                    TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT_DROPPING ); /* Is. #487 */
 
                     /* else swallow characters up to and including next '>' */
                     while ((c = TY_(ReadChar)(doc->docIn)) != '>')

@@ -102,6 +102,11 @@ static AttrCheck CheckSvgAttr;
 #define CH_DECIMAL     CheckDecimal
 #define CH_SVG         CheckSvgAttr
 
+/*
+   WARNING: This table /must/ be kept in the EXACT order of the TidyAttrId enum!
+   When running the DEBUG version, this order is checked, in TY_(InitAttrs)(doc),
+   and there is an assert() if any difference found.
+*/
 static const Attribute attribute_defs [] =
 {
   { TidyAttr_UNKNOWN,                 "unknown!",                NULL         }, 
@@ -183,7 +188,6 @@ static const Attribute attribute_defs [] =
   { TidyAttr_LAST_VISIT,              "last_visit",              CH_PCDATA    }, /* A */
   { TidyAttr_LEFTMARGIN,              "leftmargin",              CH_NUMBER    }, /* used on BODY */
   { TidyAttr_LINK,                    "link",                    CH_COLOR     }, /* BODY */
-  { TidyAttr_LOADING,                 "loading",                 CH_LOADING   }, /* IMG, IFRAME */
   { TidyAttr_LONGDESC,                "longdesc",                CH_URL       }, /* IMG */
   { TidyAttr_LOWSRC,                  "lowsrc",                  CH_URL       }, /* IMG */
   { TidyAttr_MARGINHEIGHT,            "marginheight",            CH_NUMBER    }, /* FRAME, IFRAME, BODY */
@@ -245,7 +249,6 @@ static const Attribute attribute_defs [] =
   { TidyAttr_SHOWGRIDX,               "showgridx",               CH_BOOL      }, /* TABLE Adobe golive*/
   { TidyAttr_SHOWGRIDY,               "showgridy",               CH_BOOL      }, /* TABLE Adobe golive*/
   { TidyAttr_SIZE,                    "size",                    CH_NUMBER    }, /* HR, FONT, BASEFONT, SELECT */
-  { TidyAttr_SLOT,                    "slot",                    CH_PCDATA    },
   { TidyAttr_SPAN,                    "span",                    CH_NUMBER    }, /* COL, COLGROUP */
   { TidyAttr_SRC,                     "src",                     CH_URL       }, /* IMG, FRAME, IFRAME */
   { TidyAttr_SRCSET,                  "srcset",                  CH_PCDATA    }, /* IMG (HTML5) */
@@ -447,6 +450,8 @@ static const Attribute attribute_defs [] =
 
   /* for xmlns:xlink in <svg> */
   { TidyAttr_XMLNSXLINK,                "xmlns:xlink",           CH_URL       },
+  { TidyAttr_SLOT,                      "slot",                  CH_PCDATA    },
+  { TidyAttr_LOADING,                   "loading",               CH_LOADING   }, /* IMG, IFRAME */
 
   /* SVG paint attributes (SVG 1.1) */
   { TidyAttr_FILL,                     "fill",                  CH_SVG        },

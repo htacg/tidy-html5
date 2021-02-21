@@ -1125,19 +1125,26 @@ int TIDY_CALL  tidyParseSource( TidyDoc tdoc, TidyInputSource* source )
     return tidyDocParseSource( doc, source );
 }
 
-
+#ifdef WIN32
+#define M_IS_DIR _S_IFDIR
+#else // !WIN32
+#define M_IS_DIR S_IFDIR
+#endif
 int   tidyDocParseFile( TidyDocImpl* doc, ctmbstr filnam )
 {
     int status = -ENOENT;
-    FILE* fin = fopen( filnam, "r+" );
-
-    if ( !fin )
+    FILE* fin = 0;
+    struct stat sbuf = { 0 }; /* Is. #681 - read-only files */
+    if ( stat(filnam,&sbuf) != 0 )
     {
         TY_(ReportFileError)( doc, filnam, FILE_NOT_FILE );
         return status;
     }
-
-    fclose( fin );
+    if (sbuf.st_mode & M_IS_DIR) /* and /NOT/ if a DIRECTORY */
+    {
+        TY_(ReportFileError)(doc, filnam, FILE_NOT_FILE);
+        return status;
+    }
 
 #ifdef _WIN32
     return TY_(DocParseFileWithMappedFile)( doc, filnam );
@@ -1147,7 +1154,6 @@ int   tidyDocParseFile( TidyDocImpl* doc, ctmbstr filnam )
 
 #if PRESERVE_FILE_TIMES
     {
-        struct stat sbuf = { 0 };
         /* get last modified time */
         TidyClearMemory(&doc->filetimes, sizeof(doc->filetimes));
         if (fin && cfgBool(doc, TidyKeepFileTimes) &&

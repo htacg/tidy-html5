@@ -318,7 +318,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_MEDIAGROUP,              "mediagroup",              CH_PCDATA   },
   { TidyAttr_MIN,                     "min",                     CH_PCDATA   },
   { TidyAttr_NOVALIDATE,              "novalidate",              CH_PCDATA   },
-  { TidyAttr_OPEN,                    "open",                    CH_PCDATA   },
+  { TidyAttr_OPEN,                    "open",                    CH_BOOL     }, /* Is. #925 PR #932 */
   { TidyAttr_OPTIMUM,                 "optimum",                 CH_PCDATA   },
   { TidyAttr_OnABORT,                 "onabort",                 CH_PCDATA   },
   { TidyAttr_OnAFTERPRINT,            "onafterprint",            CH_PCDATA   },

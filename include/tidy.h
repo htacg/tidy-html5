@@ -444,11 +444,23 @@ TIDY_EXPORT Bool TIDY_CALL        tidyDetectedGenericXml( TidyDoc tdoc );
  */
 TIDY_EXPORT uint TIDY_CALL        tidyErrorCount( TidyDoc tdoc );
 
+/** Indicates the number of error messages muted, that won't be output.
+ ** @param tdoc An instance of a TidyDoc to query.
+ ** @result Returns the number of muted error messages.
+ */
+TIDY_EXPORT uint TIDY_CALL        tidyMutedErrorCount( TidyDoc tdoc );
+
 /** Indicates the number of TidyWarning messages that were generated.
  ** @param tdoc An instance of a TidyDoc to query.
  ** @result Returns the number of TidyWarning messages that were generated.
  */
 TIDY_EXPORT uint TIDY_CALL        tidyWarningCount( TidyDoc tdoc );
+
+/** Indicates the number of warning messages muted, that won't be output.
+ ** @param tdoc An instance of a TidyDoc to query.
+ ** @result Returns the number of muted warning messages.
+ */
+TIDY_EXPORT uint TIDY_CALL        tidyMutedWarningCount( TidyDoc tdoc );
 
 /** Indicates the number of TidyAccess messages that were generated.
  ** @param tdoc An instance of a TidyDoc to query.

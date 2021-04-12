@@ -60,7 +60,7 @@ typedef struct _IStack IStack;
 struct _Lexer;
 typedef struct _Lexer Lexer;
 
-extern TidyAllocator TY_(g_default_allocator);
+TY_PRIVATE TidyAllocator TY_(g_default_allocator);
 
 /** Wrappers for easy memory allocation using an allocator */
 #define TidyAlloc(allocator, size) ((allocator)->vtbl->alloc((allocator), (size)))

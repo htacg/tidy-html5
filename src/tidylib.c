@@ -1571,7 +1571,7 @@ static struct _html5Info
     { "tt", TidyTag_TT },
     { 0, 0 }
 };
-Bool inRemovedInfo( uint tid )
+static Bool inRemovedInfo( uint tid )
 {
     int i;
     for (i = 0; ; i++) {

@@ -140,26 +140,26 @@ typedef struct {
  ** @param optnam The option name to retrieve.
  ** @returns The instance of the requested option.
  */
-const TidyOptionImpl* TY_(lookupOption)( ctmbstr optnam );
+TY_PRIVATE const TidyOptionImpl* TY_(lookupOption)( ctmbstr optnam );
 
 
 /** Given an option ID, return an instance of an option.
  ** @param optId The option ID to retrieve.
  ** @returns The instance of the requested option.
  */
-const TidyOptionImpl* TY_(getOption)( TidyOptionId optId );
+TY_PRIVATE const TidyOptionImpl* TY_(getOption)( TidyOptionId optId );
 
 /** Given an option ID, indicates whether or not the option is a list.
  ** @param optId The option ID to check.
  ** @returns Returns yes if the option value is a list.
  */
-const Bool TY_(getOptionIsList)( TidyOptionId optId );
+TY_PRIVATE const Bool TY_(getOptionIsList)( TidyOptionId optId );
 
 /** Initiates an iterator to cycle through all of the available options.
  ** @param doc The Tidy document to get options.
  ** @returns An iterator token to be used with TY_(getNextOption)().
  */
-TidyIterator TY_(getOptionList)( TidyDocImpl* doc );
+TY_PRIVATE TidyIterator TY_(getOptionList)( TidyDocImpl* doc );
 
 
 /** Gets the next option provided by the iterator.
@@ -167,7 +167,7 @@ TidyIterator TY_(getOptionList)( TidyDocImpl* doc );
  ** @param iter The iterator token initialized by TY_(getOptionList)().
  ** @returns The instance of the next option.
  */
-const TidyOptionImpl* TY_(getNextOption)( TidyDocImpl* doc, TidyIterator* iter );
+TY_PRIVATE const TidyOptionImpl* TY_(getNextOption)( TidyDocImpl* doc, TidyIterator* iter );
 
 
 /** Initiates an iterator to cycle through all of the available picklist
@@ -175,7 +175,7 @@ const TidyOptionImpl* TY_(getNextOption)( TidyDocImpl* doc, TidyIterator* iter )
  ** @param option An instance of an option for which to iterate a picklist.
  ** @returns An interator token to be used with TY_(getNextOptionPick)().
  */
-TidyIterator TY_(getOptionPickList)( const TidyOptionImpl* option );
+TY_PRIVATE TidyIterator TY_(getOptionPickList)( const TidyOptionImpl* option );
 
 
 /** Gets the next picklist possibility provided by the iterator.
@@ -183,7 +183,7 @@ TidyIterator TY_(getOptionPickList)( const TidyOptionImpl* option );
  ** @param iter The iterator token initialized by TY_(getOptionPickList)().
  ** @returns The next picklist entry.
  */
-ctmbstr TY_(getNextOptionPick)( const TidyOptionImpl* option, TidyIterator* iter );
+TY_PRIVATE ctmbstr TY_(getNextOptionPick)( const TidyOptionImpl* option, TidyIterator* iter );
 
 
 #if SUPPORT_CONSOLE_APP
@@ -192,20 +192,20 @@ ctmbstr TY_(getNextOptionPick)( const TidyOptionImpl* option, TidyIterator* iter
  ** @param optId The option ID to get cross-reference information for.
  ** @returns Cross reference information.
  */
-const TidyOptionDoc* TY_(OptGetDocDesc)( TidyOptionId optId );
+TY_PRIVATE const TidyOptionDoc* TY_(OptGetDocDesc)( TidyOptionId optId );
 #endif /* SUPPORT_CONSOLE_APP */
 
 
 /** Initialize the configuration for the given Tidy document.
  ** @param doc The Tidy document.
  */
-void TY_(InitConfig)( TidyDocImpl* doc );
+TY_PRIVATE void TY_(InitConfig)( TidyDocImpl* doc );
 
 
 /** Frees the configuration memory for the given Tidy document.
  ** @param doc The Tidy document.
  */
-void TY_(FreeConfig)( TidyDocImpl* doc );
+TY_PRIVATE void TY_(FreeConfig)( TidyDocImpl* doc );
 
 
 /** Gets the picklist label for a given value.
@@ -213,7 +213,7 @@ void TY_(FreeConfig)( TidyDocImpl* doc );
  ** @param pick the picklist item to retrieve.
  ** @returns The label for the pick.
  */
-ctmbstr TY_(GetPickListLabelForPick)( TidyOptionId optId, uint pick );
+TY_PRIVATE ctmbstr TY_(GetPickListLabelForPick)( TidyOptionId optId, uint pick );
 
 
 /** Sets the integer value for the given option Id.
@@ -222,7 +222,7 @@ ctmbstr TY_(GetPickListLabelForPick)( TidyOptionId optId, uint pick );
  ** @param val The value to set.
  ** @returns Success or failure.
  */
-Bool TY_(SetOptionInt)( TidyDocImpl* doc, TidyOptionId optId, ulong val );
+TY_PRIVATE Bool TY_(SetOptionInt)( TidyDocImpl* doc, TidyOptionId optId, ulong val );
 
 
 /** Sets the bool value for the given option Id.
@@ -231,7 +231,7 @@ Bool TY_(SetOptionInt)( TidyDocImpl* doc, TidyOptionId optId, ulong val );
  ** @param val The value to set.
  ** @returns Success or failure.
  */
-Bool TY_(SetOptionBool)( TidyDocImpl* doc, TidyOptionId optId, Bool val );
+TY_PRIVATE Bool TY_(SetOptionBool)( TidyDocImpl* doc, TidyOptionId optId, Bool val );
 
 
 /** Resets the given option to its default value.
@@ -239,33 +239,33 @@ Bool TY_(SetOptionBool)( TidyDocImpl* doc, TidyOptionId optId, Bool val );
  ** @param optId The option ID to set.
  ** @returns Success or failure.
  */
-Bool TY_(ResetOptionToDefault)( TidyDocImpl* doc, TidyOptionId optId );
+TY_PRIVATE Bool TY_(ResetOptionToDefault)( TidyDocImpl* doc, TidyOptionId optId );
 
 
 /** Resets all options in the document to their default values.
  ** @param doc The Tidy document.
  */
-void TY_(ResetConfigToDefault)( TidyDocImpl* doc );
+TY_PRIVATE void TY_(ResetConfigToDefault)( TidyDocImpl* doc );
 
 
 /** Stores a snapshot of all of the configuration values that can be
  ** restored later.
  ** @param doc The Tidy document.
  */
-void TY_(TakeConfigSnapshot)( TidyDocImpl* doc );
+TY_PRIVATE void TY_(TakeConfigSnapshot)( TidyDocImpl* doc );
 
 
 /** Restores all of the configuration values to their snapshotted values.
  ** @param doc The Tidy document.
  */
-void TY_(ResetConfigToSnapshot)( TidyDocImpl* doc );
+TY_PRIVATE void TY_(ResetConfigToSnapshot)( TidyDocImpl* doc );
 
 
 /** Copies the configuration from one document to another.
  ** @param docTo The destination Tidy document.
  ** @param docFrom The source Tidy document.
  */
-void TY_(CopyConfig)( TidyDocImpl* docTo, TidyDocImpl* docFrom );
+TY_PRIVATE void TY_(CopyConfig)( TidyDocImpl* docTo, TidyDocImpl* docFrom );
 
 
 /** Attempts to parse the given config file into the document.
@@ -273,7 +273,7 @@ void TY_(CopyConfig)( TidyDocImpl* docTo, TidyDocImpl* docFrom );
  ** @param cfgfil The file to load.
  ** @returns a file system error code.
  */
-int  TY_(ParseConfigFile)( TidyDocImpl* doc, ctmbstr cfgfil );
+TY_PRIVATE int  TY_(ParseConfigFile)( TidyDocImpl* doc, ctmbstr cfgfil );
 
 
 /** Attempts to parse the given config file into the document, using
@@ -283,7 +283,7 @@ int  TY_(ParseConfigFile)( TidyDocImpl* doc, ctmbstr cfgfil );
  ** @param charenc The name of the encoding to use for reading the file.
  ** @returns a file system error code.
  */
-int  TY_(ParseConfigFileEnc)( TidyDocImpl* doc,
+TY_PRIVATE int  TY_(ParseConfigFileEnc)( TidyDocImpl* doc,
                               ctmbstr cfgfil, ctmbstr charenc );
 
 
@@ -293,7 +293,7 @@ int  TY_(ParseConfigFileEnc)( TidyDocImpl* doc,
  ** @param cfgfil The file to save.
  ** @returns a file system error code.
  */
-int  TY_(SaveConfigFile)( TidyDocImpl* doc, ctmbstr cfgfil );
+TY_PRIVATE int  TY_(SaveConfigFile)( TidyDocImpl* doc, ctmbstr cfgfil );
 
 
 /** Writes the current configuration for options not having default values
@@ -302,7 +302,7 @@ int  TY_(SaveConfigFile)( TidyDocImpl* doc, ctmbstr cfgfil );
  ** @param sink The sink to save into.
  ** @returns a file system error code.
  */
-int  TY_(SaveConfigSink)( TidyDocImpl* doc, TidyOutputSink* sink );
+TY_PRIVATE int  TY_(SaveConfigSink)( TidyDocImpl* doc, TidyOutputSink* sink );
 
 
 /** Attempts to parse the provided value for the given option name. Returns
@@ -313,7 +313,7 @@ int  TY_(SaveConfigSink)( TidyDocImpl* doc, TidyOutputSink* sink );
  ** @param optVal The string value to attempt to parse.
  ** @returns Success or failure.
  */
-Bool  TY_(ParseConfigOption)( TidyDocImpl* doc, ctmbstr optnam, ctmbstr optVal );
+TY_PRIVATE Bool  TY_(ParseConfigOption)( TidyDocImpl* doc, ctmbstr optnam, ctmbstr optVal );
 
 
 /** Attempts to parse the provided value for the given option id. Returns
@@ -324,7 +324,7 @@ Bool  TY_(ParseConfigOption)( TidyDocImpl* doc, ctmbstr optnam, ctmbstr optVal )
  ** @param optVal The string value to attempt to parse.
  ** @returns Success or failure.
  */
-Bool  TY_(ParseConfigValue)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr optVal );
+TY_PRIVATE Bool  TY_(ParseConfigValue)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr optVal );
 
 
 /** Ensure that char encodings are self consistent.
@@ -332,14 +332,14 @@ Bool  TY_(ParseConfigValue)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr optVa
  ** @param encoding The encoding being applied.
  ** @returns A bool indicating success or failure.
  */
-Bool  TY_(AdjustCharEncoding)( TidyDocImpl* doc, int encoding );
+TY_PRIVATE Bool  TY_(AdjustCharEncoding)( TidyDocImpl* doc, int encoding );
 
 
 /** Indicates whether or not the current configuration is completely default.
  ** @param doc The Tidy document.
  ** @returns The result.
  */
-Bool  TY_(ConfigDiffThanDefault)( TidyDocImpl* doc );
+TY_PRIVATE Bool  TY_(ConfigDiffThanDefault)( TidyDocImpl* doc );
 
 
 /** Indicates whether or not the current configuration is different from the
@@ -347,7 +347,7 @@ Bool  TY_(ConfigDiffThanDefault)( TidyDocImpl* doc );
  ** @param doc The Tidy document.
  ** @returns The result.
  */
-Bool  TY_(ConfigDiffThanSnapshot)( TidyDocImpl* doc );
+TY_PRIVATE Bool  TY_(ConfigDiffThanSnapshot)( TidyDocImpl* doc );
 
 
 /** Returns the character encoding ID for the given character encoding
@@ -356,21 +356,21 @@ Bool  TY_(ConfigDiffThanSnapshot)( TidyDocImpl* doc );
  ** @param charenc The name of the character encoding.
  ** @returns The Id of the character encoding.
  */
-int TY_(CharEncodingId)( TidyDocImpl* doc, ctmbstr charenc );
+TY_PRIVATE int TY_(CharEncodingId)( TidyDocImpl* doc, ctmbstr charenc );
 
 
 /** Returns the full name of the encoding for the given ID.
  ** @param encoding The Id of the encoding.
  ** @returns The name of the character encoding.
  */
-ctmbstr TY_(CharEncodingName)( int encoding );
+TY_PRIVATE ctmbstr TY_(CharEncodingName)( int encoding );
 
 
 /** Returns the Tidy command line option name of the encoding for the given ID.
  ** @param encoding The Id of the encoding.
  ** @returns The Tidy command line option representing the encoding.
  */
-ctmbstr TY_(CharEncodingOptName)( int encoding );
+TY_PRIVATE ctmbstr TY_(CharEncodingOptName)( int encoding );
 
 
 /** Coordinates Config update and list data.
@@ -378,15 +378,15 @@ ctmbstr TY_(CharEncodingOptName)( int encoding );
  ** @param opt The option the list item is intended for.
  ** @param name The name of the new list item.
  */
-void TY_(DeclareListItem)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name );
+TY_PRIVATE void TY_(DeclareListItem)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name );
 
 #ifdef _DEBUG
 
 /* Debug lookup functions will be type-safe and assert option type match */
-ulong   TY_(_cfgGet)( TidyDocImpl* doc, TidyOptionId optId );
-Bool    TY_(_cfgGetBool)( TidyDocImpl* doc, TidyOptionId optId );
-TidyTriState TY_(_cfgGetAutoBool)( TidyDocImpl* doc, TidyOptionId optId );
-ctmbstr TY_(_cfgGetString)( TidyDocImpl* doc, TidyOptionId optId );
+TY_PRIVATE ulong   TY_(_cfgGet)( TidyDocImpl* doc, TidyOptionId optId );
+TY_PRIVATE Bool    TY_(_cfgGetBool)( TidyDocImpl* doc, TidyOptionId optId );
+TY_PRIVATE TidyTriState TY_(_cfgGetAutoBool)( TidyDocImpl* doc, TidyOptionId optId );
+TY_PRIVATE ctmbstr TY_(_cfgGetString)( TidyDocImpl* doc, TidyOptionId optId );
 
 #define cfg(doc, id)            TY_(_cfgGet)( (doc), (id) )
 #define cfgBool(doc, id)        TY_(_cfgGetBool)( (doc), (id) )

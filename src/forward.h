@@ -22,6 +22,13 @@
 #define TYDYAPPEND(str1,str2) str1##str2
 #define TY_(str) TYDYAPPEND(prvTidy,str)
 
+/* Internal symbols are prefixed with 'hidden' attr, to avoid exporting */
+#ifdef _WIN32
+#define TY_PRIVATE
+#else
+#define TY_PRIVATE __attribute__((__visibility__("hidden")))
+#endif
+
 struct _StreamIn;
 typedef struct _StreamIn StreamIn;
 

@@ -12,7 +12,7 @@
 
 /* entity starting with "&" returns zero on error */
 /* uint    EntityCode( ctmbstr name, uint versions ); */
-ctmbstr TY_(EntityName)( uint charCode, uint versions );
-Bool    TY_(EntityInfo)( ctmbstr name, Bool isXml, uint* code, uint* versions );
+TY_PRIVATE ctmbstr TY_(EntityName)( uint charCode, uint versions );
+TY_PRIVATE Bool    TY_(EntityInfo)( ctmbstr name, Bool isXml, uint* code, uint* versions );
 
 #endif /* __ENTITIES_H__ */

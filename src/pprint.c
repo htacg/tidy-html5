@@ -713,7 +713,7 @@ static void PCondFlushLine( TidyDocImpl* doc, uint indent )
  * These need to be used in the right place. In same cases `PFlushLine`
  * and `PCondFlushLine` should still be used.
  */
-void TY_(PFlushLineSmart)( TidyDocImpl* doc, uint indent )
+static void TY_(PFlushLineSmart)( TidyDocImpl* doc, uint indent )
 {
     TidyPrintImpl* pprint = &doc->pprint;
 

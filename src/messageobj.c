@@ -643,6 +643,7 @@ static struct printfArg* BuildArgArray( TidyDocImpl *doc, ctmbstr fmt, va_list a
         else
         {
             strncpy(nas[cn].format, fmt + nas[cn].formatStart, nas[cn].formatLength);
+            nas[cn].format[nas[cn].formatLength] = 0; /* Is. #800 - If count <= srcLen, no 0 added! */
         }
         
 

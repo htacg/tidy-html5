@@ -12,14 +12,14 @@ ask()
 
 # @REM Build HTML from log of 'version.txt'
 # @REM Versify the tools used
-echo "$BN: Doing: 'verhist -? >/dev/null'"
-verhist -? >/dev/null
+echo "$BN: Doing: 'verhist.pl -? >/dev/null'"
+verhist.pl -? >/dev/null
 if [ ! "$?" = "0" ]; then
     echo "Unable to run 'verhist.pl'! *** FIX ME ***"
     exit 1
 fi
-echo "$BN: Doing: 'emailobfuscate -? >/dev/null'"
-emailobfuscate -? >/dev/null
+echo "$BN: Doing: 'emailobfuscate.pl -? >/dev/null'"
+emailobfuscate.pl -? >/dev/null
 if [ ! "$?" = "0" ]; then
     echo "Unable to run 'emailobfuscate.pl'! *** FIX ME ***"
     exit 1
@@ -65,8 +65,8 @@ echo "$BN: Got log 1 '$TMPLOG1' ..."
 ls -l "$TMPLOG1"
 
 if [ ! -f "$TMPLOG2" ]; then
-echo "$BN: Doing: 'verhist $TMPLOG1 -o $TMPLOG2'"
-verhist $TMPLOG1 -o $TMPLOG2
+echo "$BN: Doing: 'verhist.pl $TMPLOG1 -o $TMPLOG2'"
+verhist.pl $TMPLOG1 -o $TMPLOG2
 if [ ! -f "$TMPLOG2" ]; then
 echo "Gen of $TMPLOG2 FAILED! *** FIX ME ***"
 exit 1
@@ -111,8 +111,8 @@ ls -l "$TMPLOG3"
 
 TMPHTM="../../../temp-$TMPVER.html"
 if [ ! -f "$TMPHTM" ]; then
-echo "$BN: Doing: 'emailobfuscate $TMPLOG3 -o $TMPHTM -a $TMPVER -i'"
-emailobfuscate $TMPLOG3 -o $TMPHTM -a $TMPVER -i
+echo "$BN: Doing: 'emailobfuscate.pl $TMPLOG3 -o $TMPHTM -a $TMPVER -i'"
+emailobfuscate.pl $TMPLOG3 -o $TMPHTM -a $TMPVER -i
 if [ ! -f "$TMPHTM" ]; then
 echo "FAILED to generate $TMPHTM! *** FIX ME ***"
 exit 1

@@ -13,6 +13,6 @@
         <key>CFBundleVersion</key>
         <string>@LIBTIDY_DATE@</string>
         <key>NSHumanReadableCopyright</key>
-        <string>©@CURRENT_YEAR@ HATCG and Contributors</string>
+        <string>©@CURRENT_YEAR@ HTACG and Contributors</string>
 </dict>
 </plist>

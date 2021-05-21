@@ -1,0 +1,10 @@
+line 1 column 1 - Access: [3.3.1.1]: use style sheets to control presentation.
+line 3 column 1 - Access: [13.2.1.1]: Metadata missing.
+line 7 column 1 - Access: [1.5.1.1]: image map (client-side) missing text links.
+line 7 column 1 - Access: [1.5.1.1]: image map (client-side) missing text links.
+line 7 column 1 - Access: [1.5.1.1]: image map (client-side) missing text links.
+line 9 column 1 - Access: [1.1.9.1]: <area> missing 'alt' text.
+line 13 column 1 - Access: [2.1.1.1]: ensure information not conveyed through color alone (image).
+line 13 column 76 - Access: [1.1.2.2]: <img> missing d-link.
+No warnings or errors were found.
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+   <head>
+       <title>My page</title>
+   </head>
+   <body id="cv">
+   This should return 2 HTML errors. But there is none<br/>
+   DIV or UL are not allowed in address<br/>
+   <address id="contact_postal">
+       <div id="identite">toto titi</div>
+       <div id="adresse">
+           1st street<br />
+           23X52 - NY <br />
+       </div>
+   </address>
+   <hr />
+   <address id="contact_autre">
+     <ul id="contact_tel">
+       <li id="portable">...</li>
+       <li id="fixe">...</li>
+     </ul>
+   </address>
+   <hr />
+   <p>p is allowed within address only in html transitional.</p>
+   <address id="contact_autre">
+     <p><a id="adresse_mail" href="/path/to/contact/page">contact name</a></p>
+   </address>
+</body>
+</html>

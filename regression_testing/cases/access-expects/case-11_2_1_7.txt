@@ -1,0 +1,13 @@
+line 1 column 1 - Access: [3.3.1.1]: use style sheets to control presentation.
+line 3 column 1 - Access: [13.2.1.1]: Metadata missing.
+line 7 column 1 - Access: [11.2.1.7]: replace deprecated html <menu>.
+line 7 column 1 - Warning: trimming empty <menu>
+Tidy found 1 warning and 0 errors!
+
+For further advice on how to make your pages accessible
+see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/.
+One or more empty elements were present in the source document but
+dropped on output. If these elements are necessary or you don't want
+this behavior, then consider setting the option "drop-empty-elements"
+to no.
+

@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=us-ascii" />
+  <title></title>
+</head>
+<body>
+  <blockquote>
+    &raquo;Aufkl&auml;rung ist der Ausgang des Menschen<br />
+    aus seiner selbstverschuldeten Unm&uuml;ndigkeit.&laquo;<br />
+    /Immanuel Kant/
+  </blockquote>
+  <h1>&raquo;TCPA&laquo; und &raquo;Palladium&laquo;</h1>
+  <h2>Ein weiterer Schritt in die Unm&uuml;ndigkeit<br />
+  oder ein Schritt hin zur Emanzipation? &euro;</h2>
+  <p>Von der &Ouml;ffentlichkeit weitgehend unbemerkt geistern seit
+  einigen Wochen geheimnisvolle neue Schlagworte und K&uuml;rzel
+  durch die Welt der EDV-Profis: &raquo;TCPA&laquo; und
+  &raquo;Palladium&laquo;. Interessiert habe ich mich damit
+  n&auml;her besch&auml;ftigt, denn allein die Tatsache, da&szlig;
+  die Bezeichnung &raquo;Palladium&laquo; in unserem Fall anders
+  als in den Naturwissenschaften nicht ein wertvolles Metall meint,
+  sondern eine Wortsch&ouml;pfung der Firma &raquo;Microsoft&laquo;
+  darstellt, verhei&szlig;t nichts Gutes und weckte daher meinen
+  Argwohn. Der wesentlich neutralere Begriff &raquo;TCPA&laquo;
+  (das steht f&uuml;r &raquo;Trusted Computing Platform
+  Alliance&laquo;) dagegen scheint auf den ersten Blick positive
+  oder zumindest neutrale Emotionen zu wecken - aber auch nur auf
+  den ersten Blick, denn wenn man sich des Horrorszenarios
+  bewu&szlig;t wird, das hinter &raquo;TCPA&laquo; in Kombination
+  mit &raquo;Palladium&laquo; steckt, so d&uuml;rfte wohl selbst
+  der unbedarfteste EDV-Anwender schlaflose N&auml;chte
+  bekommen.</p>
+  <p>Was hat es also mit diesen Begriffen auf sich, welche
+  Intentionen liegen diesen Schlagworten zugrunde und was bedeuten
+  die dahintersteckenden neuen Techniken f&uuml;r den
+  EDV-Anwender?</p>
+  <p>Die &raquo;TCPA&laquo; ist ein Zusammenschlu&szlig;
+  f&uuml;hrender Hardwarehersteller, darunter IBM, HP, AMD und
+  Intel, die sich vorgenommen haben, den Personal Computer durch
+  Implementation neuer Hardwaretechnologien sicherer zu machen. Wie
+  uns allen bewu&szlig;t ist, hat die Monokultur im
+  Betriebssystemsektor dazu gef&uuml;hrt, da&szlig; durch das
+  uns&auml;gliche Monopol von &raquo;Microsoft&laquo; in
+  Kombination mit der grottenschlechten Software dieser Firma
+  allerorten und allenthalben eine wahre Flut von Computerviren,
+  sogenannten trojanischen Pferden, W&uuml;rmern und
+  Sicherheitsl&ouml;chern entstanden ist und t&auml;glich neu auf
+  den Anwender zurollt, die den Umgang mit dem PC immer wieder zum
+  &Auml;rgernis werden l&auml;&szlig;t. Diesem &Uuml;bel wollen die
+  an der &raquo;TCPA&laquo; beteiligten Konzerne nun durch den
+  sogenannten &raquo;Fritz&laquo;-Chip (benannt nach dem US-Senator
+  Fritz Hollings) abhelfen - ein hehrer Wunsch. Bei dem Fritz-Chip
+  handelt es sich um einen Krypto-Baustein, der in zuk&uuml;nftige
+  Generationen von Personal Computern integriert werden und
+  allgemein die Systeme sicherer machen soll. Dieser Chip speichert
+  mehrere Schl&uuml;ssel, die hardware- und anwenderspezifisch
+  definiert sind. Sobald der PC eingeschaltet wird, nimmt der
+  Fritz-Chip seine Arbeit auf und fragt einen Schl&uuml;ssel nach
+  dem anderen ab: Zun&auml;chst wird das BIOS abgefragt,
+  anschlie&szlig;end alle im Rechner vorhandenen BIOS-Erweiterungen
+  der Steckkarten. Danach wird die Festplatte &uuml;berpr&uuml;ft,
+  und anschlie&szlig;end pr&uuml;ft der TCPA-Chip auch noch den
+  Bootsektor, den Bootloader, den Kernel und die
+  Ger&auml;tetreiber. Da bei jedem dieser Schritte eine
+  Pr&uuml;fsumme abgespeichert und ein 160 Bit langer eindeutiger
+  Wert aus den gewonnenen Daten und einem speziellen Schl&uuml;ssel
+  generiert wird, hat der Fritz-Chip jederzeit die v&ouml;llige
+  Kontrolle &uuml;ber das Gesamtsystem.</p>
+  <p>Damit taucht schon die erste Problematik f&uuml;r den Anwender
+  auf: Bereits ein Flash-Update des Rechner-BIOS legt das gesamte
+  System lahm, da dann die generierten Werte des Fritz-Chip nicht
+  mehr mit den gespeicherten Werten, die zertifiziert sind,
+  &uuml;bereinstimmen. In Zeiten, in denen aufgrund der oftmals
+  schlampig implementierten BIOS-Versionen Flash-Updates derselben
+  zumindest bei den &uuml;blichen Consumer-Produkten an der
+  Tagesordnung sind, ist also der Fritz-Chip eher hinderlich denn
+  ein Segen f&uuml;r den Anwender. Gleiches gilt &uuml;brigens
+  f&uuml;r diejenigen Anwender, die beispielsweise eine neue
+  Grafikkarte oder eine gr&ouml;&szlig;ere Festplatte einbauen
+  wollen - auch f&uuml;r sie bedeutet jede Hardware-Modifikation
+  eine - vermutlich nat&uuml;rlich kostenpflichtige -
+  Neuzertifizierung des Gesamtsystems, damit dieses wieder als
+  &raquo;TCPA-konform&laquo; angesehen werden kann. Bei der
+  Neuzertifizierung wird online anhand einer Liste mit
+  gepr&uuml;fter Hardware (HCL) und einer weiteren Liste mit
+  gesperrten Seriennummern (SRL) die Konformit&auml;tstabelle des
+  Rechners gepr&uuml;ft und aktualisiert.</p>
+  <p>Hat der Fritz-Chip beim Bootvorgang alle Komponenten als
+  &raquo;TCPA-konform&laquo; &uuml;berpr&uuml;ft und erkannt,
+  &uuml;bergibt er die Kontrolle schlie&szlig;lich an das
+  Betriebssystem. Ab diesem Punkt hakt nun - wie k&ouml;nnte es
+  anders sein? - die Firma &raquo;Microsoft&laquo; ein mit ihrer
+  &raquo;Palladium&laquo;-Technologie. Sobald der Anwender jetzt
+  ein Programm startet, &uuml;berpr&uuml;ft das Betriebssystem
+  dieses anhand der im Fritz-Chip gespeicherten Werte f&uuml;r die
+  SRL. Sollte sich herausstellen, da&szlig; dieses Programm keine
+  g&uuml;ltige Lizenz und/oder Seriennummer besitzt oder die Lizenz
+  abgelaufen ist, wird es gar nicht erst gestartet. Stellt es sich
+  als &raquo;TCPA-konform&laquo; heraus, so wird nach der Freigabe
+  und dem anschlie&szlig;enden Start erneut online eine Liste mit
+  gesperrten Dokumenten f&uuml;r dieses Programm abgerufen (DRL),
+  um zu verhindern, da&szlig; der Anwender f&uuml;r ihn nicht
+  vorgesehene Dateien &ouml;ffnet oder unerlaubterweise nutzt.</p>
+  <p>Was sich auf den ersten Blick tats&auml;chlich als wirksame
+  Waffe gegen Viren, Trojaner, W&uuml;rmer und &auml;hnliche
+  Probleme geriert, entm&uuml;ndigt jedoch den Anwender:
+  &raquo;Palladium&laquo; st&ouml;&szlig;t vor allem bei der
+  Unterhaltungsindustrie, die einen erbitterten Kampf gegen
+  jegliche Weiterverbreitung urheberrechtlich gesch&uuml;tzter
+  Produkte im Internet f&uuml;hrt, auf gro&szlig;e Zustimmung,
+  bietet sich hier jedoch erstmals vordergr&uuml;ndig die
+  M&ouml;glichkeit, MP3-Tauschb&ouml;rsen und &auml;hnliche Dienste
+  effizient trockenzulegen dank &raquo;Microsoft&laquo;. Auch das
+  Kopieren einzelner Musikst&uuml;cke zu privaten Zwecken am
+  heimischen PC wird damit unterbunden - dank
+  &raquo;Microsoft&laquo; werden also vermutlich die ohnehin
+  &uuml;bervollen Kassen der Unterhaltungsindustrie zuk&uuml;nftig
+  noch kr&auml;ftiger klingeln!</p>
+  <p>Doch der Anwender hat nat&uuml;rlich noch die
+  M&ouml;glichkeit, auch nicht &raquo;TCPA-konforme&laquo; Software
+  auf seinem heimischen PC zu installieren und zu starten. Bemerkt
+  &raquo;Palladium&laquo; eine solche Anwendung, wird das
+  Gesamtsystem als &raquo;kompromittiert&laquo; gekennzeichnet und
+  alle konformen Anwendungen samt Dateien werden geschlossen. Der
+  Nutzwert eines solchen Systems d&uuml;rfte f&uuml;r den Anwender
+  dann wohl gegen Null tendieren.</p>
+  <p>Doch gehen wir einen Schritt weiter und bedenken wir die
+  Folgen dieser Technologie:</p>
+  <ol>
+    <li>Die SRL's, DRL's und HCL's, die f&uuml;r die
+    Konformit&auml;ts-Authentifizierung eines PC's unbedingt
+    ben&ouml;tigt werden, werden an zentraler Stelle im Internet
+    gespeichert und abgerufen. Hacker brauchen jetzt also nicht
+    mehr einzelne PC's anzugreifen, sondern k&ouml;nnen ihr
+    Engagement auf diese Server konzentrieren - und damit unter
+    Umst&auml;nden mit einem einzigen gelungenen Angriff Millionen
+    von Rechnern unbrauchbar machen.</li>
+    <li>Es bedarf keiner ausgesprochen ausgepr&auml;gten Phantasie,
+    um sich auszumalen, wie &raquo;Palladium&laquo; mit
+    unerw&uuml;nschten Konkurrenzprodukten verfahren kann: Sollen
+    bestimmte Softwareprodukte anderer Hersteller als
+    &raquo;Microsoft&laquo; nicht als &raquo;konform&laquo;
+    zertifiziert werden, so gen&uuml;gt es, sie auf die
+    &raquo;schwarze Liste&laquo; des
+    &raquo;Palladium&laquo;-Systems zu setzen. Bei einem Start
+    solcher Software w&auml;re der Rechner nur noch sehr
+    eingeschr&auml;nkt nutzbar, da &raquo;kompromittiert&laquo; -
+    jeder Anwender w&uuml;rde sich wohl zumindest &uuml;berlegen,
+    ob er beim n&auml;chsten Mal nicht doch zur drittklassigen
+    Spyware aus dem Hause &raquo;Microsoft&laquo; greift.</li>
+    <li>Die Zertifizierungen f&uuml;r Software und Dateien kosten
+    Geld: Sch&auml;tzungen gehen von bis zu sechsstelligen
+    Dollarsummen aus f&uuml;r eine einzige Anwendung. Die Folge
+    dieser Lizenzierungspraxis w&auml;re, da&szlig; die
+    Freewareszene von der Bildfl&auml;che verschwindet. Viele
+    tausend Programmierer, die unter oftmals gro&szlig;em
+    pers&ouml;nlichen Engagament und erheblichem Zeitaufwand
+    ansehnliche Projekte als Freeware entwickelt haben, h&auml;tten
+    keine M&ouml;glichkeit und auch keine Motivation mehr, ihre oft
+    wirklich innovativen Projekte der Anwendergemeinde zur
+    Verf&uuml;gung zu stellen dank der kriminellen Krake
+    &raquo;Microsoft&laquo;.</li>
+    <li>Der gesamte von der GPL-Lizenz abgedeckte Bereich
+    w&uuml;rde ebenfalls sang- und klanglos vor dem Aus stehen, da
+    auch hier zun&auml;chst erhebliche Betr&auml;ge in eine
+    Zertifizierung gesteckt werden m&uuml;&szlig;ten, denen keine
+    Einnahmen gegen&uuml;berstehen. Die wohl gef&auml;hrlichste
+    Konkurrenz f&uuml;r &raquo;Microsoft&laquo;, n&auml;mlich die
+    oftmals aus idealistischer und moralischer Intention heraus
+    handelnden freien Entwickler, die ihre Software unter der
+    GPL-Lizenz vertreiben, w&auml;re mit einem Schlag
+    ausgeschaltet.</li>
+    <li>Dem uns&auml;glichen Monopol der Firma
+    &raquo;Microsoft&laquo; im Betriebssystemmarkt w&uuml;rde ein
+    weiterer nachhaltiger Schub verliehen, denn Konkurrenzsysteme
+    m&uuml;&szlig;ten, um mit dem Fritz-Chip und damit letztendlich
+    auch mit &raquo;Palladium&laquo; zu harmonieren, ebenfalls
+    &raquo;TCPA-konform&laquo; gestaltet werden. F&uuml;r OS/2 WARP
+    ebenso wie f&uuml;r die meisten Linux-Distributionen und auch
+    Systeme wie FreeBSD, NetBSD oder auch BeOS und (mit
+    Einschr&auml;nkungen) QNX w&uuml;rde der Zwang zur
+    &raquo;TCPA-&laquo; und
+    &raquo;Palladium&laquo;-Konformit&auml;t das Verschwinden vom
+    EDV-Markt bedeuten, denn ohne diese Konformit&auml;t
+    w&uuml;rden diese meist besseren Betriebssysteme als
+    &raquo;unsicher&laquo; gelten. OS/2 WARP und die eComStation
+    w&uuml;rden aus den gro&szlig;en Banken und Versicherungen, bei
+    TK-Dienstleistern und bei den anderen Anwendern im
+    professionellen Umfeld ge&auml;chtet und von den Festplatten
+    verbannt zugunsten der wesentlich schlechteren
+    &raquo;Windows&laquo;-Systeme. Die einzige Alternative bliebe
+    nach dem derzeitigen Stand der Dinge HP-Linux, da HP bereits an
+    der &raquo;TCPA-&laquo; und
+    &raquo;Palladium&laquo;-Konformit&auml;t seines Linux
+    arbeitet.</li>
+    <li>Mit dem &raquo;Palladium&laquo;-System w&uuml;rde die
+    offene, basisdemokratische Struktur des Internet endg&uuml;ltig
+    zu Grabe getragen und einem Meinungs- und Zensurmonopol der
+    Firma &raquo;Microsoft&laquo; weichen. &raquo;Microsoft&laquo;
+    k&ouml;nnte &uuml;ber die variable Gestaltung von
+    Zertifizierungsgeb&uuml;hren die Weiterverbreitung kritischer
+    Dokumente im Internet oder im Rahmen von
+    Software-Distributionen verhindern. Obendrein w&auml;ren alle
+    Newsdienste au&szlig;er den &raquo;Microsoft&laquo;-eigenen
+    davon betroffen - freiwillige, sehr anerkennenswerte
+    Initiativen wie beispielsweise auch die VOICE, die sich der
+    Aufkl&auml;rung der OS/2-Gemeinde verschrieben hat,
+    m&uuml;&szlig;ten f&uuml;r die einzelnen Beitr&auml;ge
+    Zertifizierungsgeb&uuml;hren an &raquo;Microsoft&laquo; zahlen
+    f&uuml;r die &raquo;Palladium&laquo;-Konformit&auml;t, um nicht
+    auf der &raquo;schwarzen Liste&laquo; der DRL-Server zu landen.
+    Das Internet als Transporteur basisdemokratischer Ideale
+    w&auml;re zerst&ouml;rt und zu einem Sprachrohr von
+    &raquo;Microsoft&laquo; verkommen.</li>
+    <li>Durch die enge Kopplung der
+    &raquo;Palladium&laquo;-Technologie in Kooperation mit dem
+    Fritz-Chip an Hard- und Software w&uuml;rde der
+    Gebrauchtsoftwaremarkt zum Erliegen kommen - weil bereits
+    einmal durch TCPA und &raquo;Palladium&laquo; zertifizierte
+    Software aufgrund der Verschl&uuml;sselung untrennbar an die
+    Hardware gekoppelt ist. F&uuml;r &raquo;Microsoft&laquo;
+    erf&uuml;llt sich damit ein lange gehegter Traum: Jeder
+    K&auml;ufer eines PC mu&szlig; Software aus Redmond neu kaufen,
+    da die alte Software nur &uuml;ber eine Seriennummern-Freigabe
+    auf ein anderes Ger&auml;t &uuml;bertragbar w&auml;re - und
+    davon steht nicht ein einziges Wort in den entsprechenden
+    Standardisierungs-Richtlinien.</li>
+  </ol>
+  <p>Das hier geschilderte Horrorszenario erscheint keineswegs
+  abwegig: Bill Gates hat mit der Unterhaltungsindustrie starke
+  Kombattanten im R&uuml;cken, denen es genauso wie ihm um die
+  Profitmaximierung um jeden Preis geht - auch wenn dabei
+  demokratische und ethische Prinzipien nicht nur ausgeh&ouml;hlt,
+  sondern offen mit F&uuml;&szlig;en getreten werden und auf der
+  Strecke bleiben. Offen diskutiert werden die Folgen seiner
+  Technologie noch nicht; bislang hat Gates gr&ouml;&szlig;ten Wert
+  darauf gelegt, sich stets &ouml;ffentlich und lauthals als
+  Vork&auml;mpfer gegen Raubkopierertum zum Wohle der Software- und
+  der Unterhaltungsindustrie und auch zum angeblichen Nutzen des
+  Endverbrauchers zu gerieren - mit &raquo;Palladium&laquo; jedoch
+  &uuml;berschreitet &raquo;Microsoft&laquo; im Halbdunkel ein-
+  f&uuml;r allemal eine Grenze, die dem vermeintlichen
+  Vork&auml;mpfer Gates f&uuml;r die Durchsetzung von
+  Urheberrechten bislang Fesseln anlegte: Nun geht es um die
+  vollkommene Kontrolle der Informationsgesellschaft durch einen
+  Konzern, der krimineller Machenschaften mehrfach
+  &uuml;berf&uuml;hrt ist - die Weltherrschaft einer einzelnen
+  kleinen Clique im Mediensektor droht, und das auch noch mit
+  blau&auml;ugiger Zustimmung einiger international agierender
+  Medienkonzerne, die bisher offenbar noch gar nicht realisiert
+  haben, da&szlig; sie sich mit ihrer offensichtlich blinden
+  Profitsucht einem Mann ausliefern, den andere als den
+  gef&auml;hrlichsten Zeitgenossen seit Adolf Hitler
+  betrachten.</p>
+  <p>Es wird Zeit, da&szlig; die Demokraten unter den EDV-Profis
+  und -Anwendern endlich aus ihrem Dornr&ouml;schenschlaf
+  aufwachen, denn:</p>
+  <blockquote>
+    &raquo;Man darf nicht warten, bis aus dem Schneeball eine
+    Lawine geworden ist. Man mu&szlig; den rollenden Schneeball
+    zertreten. Die Lawine h&auml;lt keiner mehr auf. Sie ruht erst,
+    wenn sie alles unter sich begraben hat...&laquo;<br />
+    /Erich K&auml;stner/
+  </blockquote>
+</body>
+</html>

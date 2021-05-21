@@ -1,0 +1,101 @@
+################################################################################
+# Build and Test tidy on the latest versions of all of the major platforms. 
+#
+#   - Build on multiple operating systems, and where possible, multiple
+#     architectures. On Windows, we will also build and test MingGW in
+#     addition to MSVC.
+#
+#   - Report the version number for each binary that is built.
+#
+#   - Run each binary against the regression test suite.
+#
+################################################################################
+
+name: Build and Test
+
+on:
+  push:
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - '.github/workflows/**'
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - '.github/workflows/**'
+
+jobs:
+
+  build_and_test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+
+         - os: ubuntu-latest
+           flags: 
+           vers_command: "./tidy --version"
+           test_command: "ruby test.rb test"
+
+         - os: macOS-latest
+           flags: "'-DCMAKE_OSX_ARCHITECTURES=x86_64;arm64'"
+           vers_command: "./tidy --version"
+           test_command: "ruby test.rb test"
+
+         - os: windows-latest
+           flags: 
+           vers_command: "./tidy.exe --version"
+           test_command: "ruby test.rb test"
+           
+         - os: windows-2016
+           flags: "-G 'MinGW Makefiles'"
+           vers_command: "./tidy --version"
+           test_command: "ruby test.rb test"
+
+    steps:
+    - uses: actions/checkout@v2
+
+
+    # We'll use the windows-2016 instance to perform a MinGW build.
+    # Of course, we only want to install if this is the correct target.
+    - name: Install MinGW-w64
+      if: ${{matrix.os == 'windows-2016'}}
+      uses: egor-tensin/setup-mingw@v2
+      with:
+        platform: x64
+     
+    - name: Build
+      working-directory: ${{github.workspace}}/build/cmake
+      run: cmake ../.. -DCMAKE_BUILD_TYPE=Release ${{matrix.flags}}
+      
+    - name: Make
+      working-directory: ${{github.workspace}}/build/cmake
+      run: cmake --build . --config Release
+      
+    # Windows MSVC is the only oddball here; why does it install the 
+    # binary into a subfolder, unlike all of the other builds? Let's
+    # make everything else easier by relocating it to the same spot
+    # as all the other build locations.
+    - name: Move the exe to someplace sensible
+      if: ${{matrix.os == 'windows-latest'}}
+      run: move-item -path "${{github.workspace}}/build/cmake/Release/tidy.exe" -destination "${{github.workspace}}/build/cmake/"
+
+    - name: Show Version
+      working-directory: ${{github.workspace}}/build/cmake
+      run: ${{matrix.vers_command}}
+
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+        bundler-cache: true
+           
+    - name: Bundle Install 
+      working-directory: ${{github.workspace}}/regression_testing
+      run: bundle install      
+
+    - name: Run Regression Test
+      working-directory: ${{github.workspace}}/regression_testing
+      run: ${{matrix.test_command}}
+

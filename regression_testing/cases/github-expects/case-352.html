@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>issue 352, illegal character in path segment</title>
+</head>
+<body>
+<p>This test case address #352 wherein HTML Tidy does not flag
+illegal code points in the URL.</p>
+<a href="http://%E2%82%AC.com">Valid; works with multibyte
+characters.</a><br>
+<a href=":|">Invalid</a><br>
+<a href="http://[">Invalid</a><br>
+<a href="http://www.example.com">Valid</a><br>
+<a href="http://www.example.com">Valid</a><br>
+<a href="%E2%82%AC">Same €, already escaped; Valid</a><br>
+<a href="http://example.com/%C3%A9">Valid</a>
+</body>
+</html>

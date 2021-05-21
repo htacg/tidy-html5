@@ -441,6 +441,14 @@ if (SUPPORT_CONSOLE_APP)
     if (MSVC)
         set_target_properties( ${name} PROPERTIES DEBUG_POSTFIX d )
     endif ()
+    if (APPLE)
+        string(TIMESTAMP CURRENT_YEAR "%Y")
+        configure_file(
+            ${CMAKE_CURRENT_SOURCE_DIR}/console/Info.plist.in 
+            ${CMAKE_CURRENT_BINARY_DIR}/Info.plist
+        )
+        target_link_options(${name} PRIVATE LINKER:-sectcreate,__TEXT,__info_plist,Info.plist)
+    endif ()
     if (NOT TIDY_CONSOLE_SHARED)
         set_target_properties( ${name} PROPERTIES 
                                        COMPILE_FLAGS "-DTIDY_STATIC" )

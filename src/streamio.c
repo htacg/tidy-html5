@@ -803,7 +803,7 @@ static void EncodeIbm858( uint c, StreamOut* out )
 /* Convert from Latin0 (aka Latin9, ISO-8859-15) to Unicode */
 static uint DecodeLatin0(uint c)
 {
-    if (159 < c && c < 191)
+    if (163 < c && c < 191)
     {
         switch (c)
         {

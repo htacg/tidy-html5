@@ -282,7 +282,8 @@ extern "C" {
     FN(VENDOR_SPECIFIC_CHARS)         \
     FN(WHITE_IN_URI)                  \
     FN(XML_DECLARATION_DETECTED)      \
-    FN(XML_ID_SYNTAX)
+    FN(XML_ID_SYNTAX)                 \
+    FN(BLANK_TITLE_ELEMENT)
 
 
 /** These are report messages added by Tidy's accessibility module. 

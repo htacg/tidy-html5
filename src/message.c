@@ -372,6 +372,7 @@ static struct _dispatchTable {
     { WHITE_IN_URI,                 TidyWarning,     formatAttributeReport   },
     { XML_DECLARATION_DETECTED,     TidyWarning,     formatStandard          },
     { XML_ID_SYNTAX,                TidyWarning,     formatAttributeReport   },
+    { BLANK_TITLE_ELEMENT,          TidyWarning,     formatStandard          },
 
     { APPLET_MISSING_ALT,                            TidyAccess, formatAccessReport },
     { AREA_MISSING_ALT,                              TidyAccess, formatAccessReport },
@@ -819,6 +820,7 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
         case NESTED_QUOTATION:
         case SUSPECTED_MISSING_QUOTE:
         case XML_DECLARATION_DETECTED:
+        case BLANK_TITLE_ELEMENT:
             return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level );
 
         case ELEMENT_NOT_EMPTY:

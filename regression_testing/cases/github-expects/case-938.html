@@ -1,0 +1,23 @@
+<!--
+This test case represents HTML Tidy issue #839, which describes
+a descrepancy between tidy's behavior and the W3C Nu HTML
+checker behavior. Tidy has historically allowed empty <title>
+elements, but this is not allowed by HTML5, and is flagged by
+the Nu checker. Because a <title> is required by HTML5, it
+would be even worse for HTML Tidy to remove this element, and
+so Tidy will now provide a warning if the title element is
+empty. It is assumed the HTML author will add a title as well
+as addressing other warnings.
+ -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      Video Muted Attribute Test
+    </title>
+  </head>
+  <body>
+    <video autoplay="" loop="" muted playsinline><source src="video/Mine.mp4" type="video/mp4"></video>
+  </body>
+</html>

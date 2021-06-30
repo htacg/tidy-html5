@@ -1,0 +1,25 @@
+<!--
+This test case represents HTML Tidy issue #729, which describes
+how Tidy misbehaves when strict-tags-attributes is set to `no`,
+wherein Tidy complains but shouldn't.
+
+Version a of this test shows proper behavior when set to `yes`.
+Version b of this test shows proper behavior when set to `no`.
+ -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Alignment </title>
+    </head>
+    <body>
+
+        <table>
+            <tr valign="bottom">
+                <td width="50" align="center">
+                    text
+                </td>
+            </tr>
+        </table>
+
+    </body>
+</html>

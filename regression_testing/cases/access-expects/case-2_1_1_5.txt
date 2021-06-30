@@ -1,0 +1,6 @@
+line 8 column 8 - Warning: discarding unexpected </input>
+line 8 column 1 - Access: [2.1.1.5]: ensure information not conveyed through color alone (input).
+Tidy found 1 warning and 0 errors!
+
+For further advice on how to make your pages accessible
+see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/.

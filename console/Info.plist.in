@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+        <key>CFBundleDisplayName</key>
+        <string>HTML Tidy</string>
+        <key>CFBundleIdentifier</key>
+        <string>org.htacg.html-tidy.tidy5</string>
+        <key>CFBundleInfoDictionaryVersion</key>
+        <string>6.0</string>
+        <key>CFBundleShortVersionString</key>
+        <string>@LIBTIDY_VERSION@</string>
+        <key>CFBundleVersion</key>
+        <string>@LIBTIDY_DATE@</string>
+        <key>NSHumanReadableCopyright</key>
+        <string>©@CURRENT_YEAR@ HTACG and Contributors</string>
+</dict>
+</plist>

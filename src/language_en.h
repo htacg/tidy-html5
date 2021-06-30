@@ -2055,6 +2055,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { WHITE_IN_URI,                 0,   "%s discarding whitespace in URI reference"                               },
     { XML_DECLARATION_DETECTED,     0,   "An XML declaration was detected. Did you mean to use input-xml?"         },
     { XML_ID_SYNTAX,                0,   "%s ID \"%s\" uses XML ID syntax"                                         },
+    { BLANK_TITLE_ELEMENT,          0,   "blank 'title' element"                                                   },
 
 
     /***************************************

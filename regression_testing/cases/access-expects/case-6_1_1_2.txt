@@ -1,0 +1,6 @@
+line 7 column 1 - Access: [6.1.1.2]: style sheets require testing (style element).
+line 7 column 1 - Warning: moved <style> tag to <head>! fix-style-tags: no to avoid.
+Tidy found 1 warning and 0 errors!
+
+For further advice on how to make your pages accessible
+see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/.

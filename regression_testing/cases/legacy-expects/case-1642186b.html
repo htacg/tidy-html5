@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Issue #65 - Parser too greedy over script blocks</title>
+  <script>
+  /* the <script */
+  var m1 = "\"<script \"";
+  var m2 = '<script '; // <script 
+  </script>
+  <script>
+   document.write('<style>body{font-family:"'+XCOOKIE.gui_font+'",Verdana, Arial;}<\/style>');
+  </script>
+</head>
+<body>
+  <p>para 1</p>
+  <script type="text/javascript">
+  //<![CDATA[
+        var request_uri = "http://www.cubrid.org/";
+        var waiting_message = "Requesting to the server, please wait";
+        var ssl_actions = new Array();
+    //]]>
+  </script>
+  <p>para 2</p>
+  <script>
+  // We don't like single quotes.
+  </script>
+  <p>para 3</p>
+</body>
+</html>

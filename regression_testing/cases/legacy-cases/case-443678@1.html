@@ -1,0 +1,19 @@
+<HTML>
+<HEAD>
+<TITLE>[ #443678 ] Unclosed &lt;script&gt; in &lt;head&gt; messes Tidy</TITLE>
+<script src="bar.js">
+function baz()
+{
+  document.write( '<foo></foo>' );
+  document.write( "<bar>\"Some Text\"<\/bar>" );
+}
+</script>
+<script src="foo.js">
+</HEAD>
+<BODY text = "#ff0000">
+Just a test.
+<script>
+test();
+</script>
+</BODY>
+</HTML>

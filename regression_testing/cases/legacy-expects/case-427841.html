@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test input for bug #427841</title>
+</head>
+<body>
+  <p>Tidy crashes on badly formed HTML involving nested lists.</p>
+  <ul>
+    <li>
+      <a href="rememberwhenb.html">Next</a>
+    </li>
+    <li>
+      <a href="daysofourlives.html">Back</a>
+    </li>
+    <li>
+      <a href="newstuff.html">New Stuff</a>
+    </li>
+  </ul>
+  <ul>
+    <li>Merge adjacent lists</li>
+  </ul>
+  <ul>
+    <ul>
+      <li>
+        <a href="one.html">One</a>
+      </li>
+      <li>
+        <a href="two.html">Two</a>
+      </li>
+      <li>
+        <a href="three.html">Three</a>
+      </li>
+    </ul>
+  </ul>
+</body>
+</html>

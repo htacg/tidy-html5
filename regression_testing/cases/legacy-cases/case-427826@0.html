@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<title>[#427826] Script source needs escaping/CDATA section</title>
+<script type="application/ecmascript">
+<!--
+  function isLessThan()
+  {
+    var a = 2, b = 3;
+    if (a < b) alert("a less than b");
+    return ( a < b );
+  }
+-->
+</script>
+<script type="text/javascript" language='JavaScript'>
+  <!--
+  alert("...");
+  //-->
+</script>
+<script type="text/javascript" language='JavaScript'>
+  function loop_de_loop()
+  {
+    for ( ix=0; ix < 5; ++ix )
+    {
+      alert( "Bob's yer uncle " + ix );
+    }
+  }
+</script>
+<script type="text/javascript" language='JavaScript'>
+//<![CDATA[
+  function round_again()
+  {
+    for ( ix=0; ix < 5; ++ix )
+    {
+      alert( "Shivver me timbers " + ix );
+    }
+  }
+//]]>
+</script>
+</head>
+<body onload="isLessThan()">
+<p>If converted to XML/XHTML, the &lt; in the javascript source
+above causes problems for XML tools.</p>
+</body>
+</html>
+

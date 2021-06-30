@@ -1,0 +1,18 @@
+<html> 
+<head>
+<title>[ #427823 ] Multiple &lt;BODY&gt;'s in &lt;NOFRAMES&gt; allowed</title>
+</head> 
+<frameset> 
+<frame> 
+<noframes> 
+<body> 
+Text in body 1. 
+</body> 
+<body> 
+Text in illegal body 2. 
+</body> 
+Text in inferred illegal body 3. 
+</noframes> 
+</frameset> 
+</html> 
+Text in inferred illegal body 4.

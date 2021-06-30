@@ -4713,7 +4713,8 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
         TY_(ParseHTML)(doc, html, IgnoreWhitespace);
     }
 
-    if (!TY_(FindTITLE)(doc))
+    node = TY_(FindTITLE)(doc);
+    if (!node)
     {
         Node* head = TY_(FindHEAD)(doc);
         /* #72, avoid MISSING_TITLE_ELEMENT if show-body-only (but allow InsertNodeAtEnd to avoid new warning) */
@@ -4722,6 +4723,14 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
             TY_(Report)(doc, head, NULL, MISSING_TITLE_ELEMENT);
         }
         TY_(InsertNodeAtEnd)(head, TY_(InferredTag)(doc, TidyTag_TITLE));
+    }
+    else if (!node->content && !showingBodyOnly(doc))
+    {
+        /* Is #839 - warn node is blank in HTML5 */
+        if (TY_(IsHTML5Mode)(doc))
+        {
+            TY_(Report)(doc, node, NULL, BLANK_TITLE_ELEMENT);
+        }
     }
 
     AttributeChecks(doc, &doc->root);

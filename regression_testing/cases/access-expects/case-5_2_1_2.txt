@@ -1,0 +1,19 @@
+line 8 column 1 - Access: [5.2.1.2]: data <table> may require markup (row headers).
+
+      - First, search left from the cell's position to find row header cells.
+      - Then search upwards to find column header cells.
+      - The search in a given direction stops when the edge of the table is
+        reached or when a data cell is found after a header cell.
+      - Row headers are inserted into the list in the order they appear in
+        the table. 
+      - For left-to-right tables, headers are inserted from left to right.
+      - Column headers are inserted after row headers, in 
+        the order they appear in the table, from top to bottom. 
+      - If a header cell has the headers attribute set, then the headers 
+        referenced by this attribute are inserted into the list and the 
+        search stops for the current direction.
+        TD cells that set the axis attribute are also treated as header cells.
+
+line 8 column 1 - Access: [5.1.2.3]: data <table> missing row/column headers (1 row).
+No warnings or errors were found.
+

@@ -1,0 +1,8 @@
+line 2 column 1 - Warning: missing <!DOCTYPE> declaration
+line 1 column 1 - Access: [3.2.1.1]: <doctype> missing.
+line 1 column 1 - Access: [3.3.1.1]: use style sheets to control presentation.
+line 3 column 1 - Access: [13.2.1.1]: Metadata missing.
+Tidy found 1 warning and 0 errors!
+
+For further advice on how to make your pages accessible
+see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/.

@@ -1,0 +1,6 @@
+line 8 column 1 - Access: [2.1.1.1]: ensure information not conveyed through color alone (image).
+line 9 column 51 - Access: [1.1.2.1]: <img> missing 'longdesc' and d-link.
+line 9 column 51 - Access: [9.1.1.1]: image map (server-side) requires conversion.
+line 9 column 51 - Access: [1.2.1.1]: image map (server-side) requires text links.
+No warnings or errors were found.
+

@@ -32,6 +32,7 @@ module TidyRegressionTestModule
   ###########################################################
   DIR_TEST_SETS = File.expand_path('cases')
   EXE_TIDY      = File.expand_path(File.join('..', 'build', 'cmake', 'tidy'))
+  VERSION_FILE  = File.join(File.expand_path('..', File.dirname(__FILE__)), 'version.txt')
 
 
   ###########################################################
@@ -851,7 +852,7 @@ module TidyRegressionTestModule
     def print_report_footer( total_tested, total_passed )
       tidy_version = %x( #{self.tidy_path} --version )
       tidy_version = tidy_version[/^.*(\d+\.\d+\.\d+).*/,1]
-      cases_version = File.open(File.join(DIR_TEST_SETS, '_version.txt')).first.chomp
+      cases_version = File.open(VERSION_FILE).first.chomp
 
       puts
       puts "Note that no valid cases were found." if total_tested < 1

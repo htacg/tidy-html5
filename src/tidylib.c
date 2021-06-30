@@ -1880,7 +1880,8 @@ void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
                 next_attr = attval->next;
 
                 attrIsProprietary = TY_(AttributeIsProprietary)(node, attval);
-                attrIsMismatched = check_versions ? TY_(AttributeIsMismatched)(node, attval, doc) : no;
+                /* Is. #729 - always check version match if HTML5 */
+                attrIsMismatched = (check_versions | htmlIs5) ? TY_(AttributeIsMismatched)(node, attval, doc) : no;
                 /* Let the PROPRIETARY_ATTRIBUTE warning have precedence. */
                 if ( attrIsProprietary )
                 {
@@ -1889,7 +1890,15 @@ void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
                 }
                 else if ( attrIsMismatched )
                 {
-                    TY_(ReportAttrError)(doc, node, attval, attrReportType);
+                    if (htmlIs5) 
+                    { 
+                        /* Is. #729 - In html5 TidyStrictTagsAttr controls error or warn */
+                        TY_(ReportAttrError)(doc, node, attval,
+                            check_versions ? MISMATCHED_ATTRIBUTE_ERROR : MISMATCHED_ATTRIBUTE_WARN);
+                    }
+                    else
+                        TY_(ReportAttrError)(doc, node, attval, attrReportType);
+
                 }
 
                 /* @todo: do we need a new option to drop mismatches? Or should we

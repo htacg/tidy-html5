@@ -1211,6 +1211,7 @@ typedef enum
   TidyAttr_MAX,                    /**< MAX= */
   TidyAttr_MEDIAGROUP,             /**< MEDIAGROUP= */
   TidyAttr_MIN,                    /**< MIN= */
+  TidyAttr_MUTED,                  /**< MUTED= */
   TidyAttr_NOVALIDATE,             /**< NOVALIDATE= */
   TidyAttr_OPEN,                   /**< OPEN= */
   TidyAttr_OPTIMUM,                /**< OPTIMUM= */
@@ -1266,6 +1267,7 @@ typedef enum
   TidyAttr_OnWAITING,              /**< OnWAITING= */
   TidyAttr_PATTERN,                /**< PATTERN= */
   TidyAttr_PLACEHOLDER,            /**< PLACEHOLDER= */
+  TidyAttr_PLAYSINLINE,            /**< PLAYSINLINE= */
   TidyAttr_POSTER,                 /**< POSTER= */
   TidyAttr_PRELOAD,                /**< PRELOAD= */
   TidyAttr_PUBDATE,                /**< PUBDATE= */

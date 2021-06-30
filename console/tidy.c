@@ -2585,7 +2585,7 @@ int main( int argc, char** argv )
      *  or malformed option, etc ...
      */
     if (errorCount > 0)   
-        return -1; /* Is. #921 */
+        return 3; /* Is. #921 */
 
     if ( contentErrors > 0 )
         return 2;

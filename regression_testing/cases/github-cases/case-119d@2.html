@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<title>Issue #119 - Test HTML5, custom-tags: no</title>
+<body>
+<h1>About this case</h1>
+<p>
+This test case ensures that Tidy handles autonomous custom tags appropriately
+for HTML5 documents.
+</p>
+<p>
+In this case, <kbd>custom-tags</kbd> is <strong>no</strong>, and so Tidy should
+report unknown tags. We will use <kbd>force-output</kbd> to ensure that a
+document is generated, and to gather additional warning output.
+</p>
+
+<pizzerias>
+  This is a user-defined tag, and Tidy should provide a warning, but allow it.
+  The warning is issued because although being a user-defined tag, there's
+  nothing in the specification that allows such a tag that we know about.
+</pizzerias>
+
+<jets-pizza>
+  This is a user-defined tag, and Tidy should <em>not</em> provide a warning.
+  Although <kbd>custom-tags</kbd> is <strong>no</strong>, it looks like an
+  autonomous custom tag, and the user defined it, and so there's no reason to
+  warn about it.
+</jets-pizza>
+
+<dominos-pizza>
+  This is an autonomous custom tag, but it's not supported in this test case.
+  It should be rejected and cause an error.
+</dominos-pizza>
+
+</body>
+</html>

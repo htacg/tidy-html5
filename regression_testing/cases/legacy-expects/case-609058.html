@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>609058 - elements replaced by CSS</title>
+  <style type="text/css">
+  /*<![CDATA[*/
+  strong.c4 {text-decoration: line-through}
+  strong.c3 {text-decoration: underline}
+  span.c2 {text-decoration: line-through}
+  span.c1 {text-decoration: underline}
+  /*]]>*/
+  </style>
+</head>
+<body>
+  <div>
+    <span class="c1">aa</span> <span class="c2">aa</span>
+    <span class="c2">aa</span>
+  </div>
+  <div>
+    <span class="c1">aa</span> <span class="c2">aa</span>
+    <span class="c2">aa</span>
+  </div>
+  <div>
+    <p><span class="c1">aa</span></p>
+    <p><span class="c2">aa</span></p>
+    <p><span class="c2">aa</span></p>
+  </div>
+  <div>
+    <p><span class="c1">aa</span> bb</p>
+    <p><span class="c2">aa</span> bb</p>
+    <p><span class="c2">aa</span> bb</p>
+  </div>
+  <div>
+    <p><strong class="c3">aa</strong></p>
+    <p><strong class="c4">aa</strong></p>
+    <p><strong class="c4">aa</strong></p>
+  </div>
+  <div>
+    <p><strong><span class="c1">aa</span> bb</strong></p>
+    <p><strong><span class="c2">aa</span> bb</strong></p>
+    <p><strong><span class="c2">aa</span> bb</strong></p>
+  </div>
+  <div>
+    <p><strong>cc <span class="c1">aa</span> bb</strong></p>
+    <p><strong>cc <span class="c2">aa</span> bb</strong></p>
+    <p><strong>cc <span class="c2">aa</span> bb</strong></p>
+  </div>
+</body>
+</html>

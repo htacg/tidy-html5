@@ -1,0 +1,18 @@
+line 1 column 1 - Access: [3.3.1.1]: use style sheets to control presentation.
+line 3 column 1 - Access: [13.2.1.1]: Metadata missing.
+line 7 column 1 - Access: [6.2.2.2]: text equivalents require updating (script).
+line 7 column 1 - Access: [6.3.1.1]: programmatic objects require testing (script).
+line 7 column 1 - Access: [8.1.1.1]: ensure programmatic objects are accessible (script).
+line 7 column 1 - Access: [7.1.1.1]: remove flicker (script).
+line 7 column 1 - Access: [2.1.1.4]: ensure information not conveyed through color alone (script).
+line 7 column 1 - Access: [1.1.10.1]: <script> missing <noscript> section.
+line 7 column 1 - Warning: trimming empty <script>
+Tidy found 1 warning and 0 errors!
+
+For further advice on how to make your pages accessible
+see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/.
+One or more empty elements were present in the source document but
+dropped on output. If these elements are necessary or you don't want
+this behavior, then consider setting the option "drop-empty-elements"
+to no.
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Issue 412 - Warnings for Quotes</title>
+  <style type="text/css">
+  a.c1 {generic_style}
+  </style>
+</head>
+<body>
+  <p>This issue ensures that the fix properly warns for the
+  following:</p>
+  <ul>
+    <li>The <kbd>style</kbd> attribute in the paragraph tag has
+    three closing quotes, and the <kbd>name</kbd> has an extra
+    closing quote. This should generate a warning for each extra
+    quote (todo: only warn once, and indicate the name of the
+    attribute).</li>
+    <li>Both <kbd>is</kbd> and <kbd>id</kbd> should report missing
+    quotes.</li>
+    <li>Tidy will not notice that the value for <kbd>id</kbd> is
+    "midnight shows", and will create a new attribute called
+    <kbd>shows</kbd>, which is reported as being proprietary.</li>
+  </ul><a class="myclass c1"
+        href="http://example.com"
+        is="some-thing&quot;"
+        id="midnight"
+        shows=""
+        title="cool">You are cool.</a>
+</body>
+</html>

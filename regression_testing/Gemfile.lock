@@ -1,0 +1,30 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    pastel (0.8.0)
+      tty-color (~> 0.5)
+    thor (1.1.0)
+    tty-color (0.6.0)
+    tty-cursor (0.7.1)
+    tty-editor (0.6.0)
+      tty-prompt (~> 0.22)
+    tty-prompt (0.23.1)
+      pastel (~> 0.8)
+      tty-reader (~> 0.8)
+    tty-reader (0.9.0)
+      tty-cursor (~> 0.7)
+      tty-screen (~> 0.8)
+      wisper (~> 2.0)
+    tty-screen (0.8.1)
+    wisper (2.0.1)
+
+PLATFORMS
+  ruby
+  x64-mingw32
+
+DEPENDENCIES
+  thor
+  tty-editor
+
+BUNDLED WITH
+   2.1.4

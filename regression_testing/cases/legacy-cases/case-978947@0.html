@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content=
+"text/html; charset=us-ascii">
+<meta name="AUTHOR" content="Christian Engstr&ouml;m">
+<title>Bug: &amp;nbsp; disappears after &lt;/pre&gt;</title>
+</head>
+<body lang="en-US">
+Here the non-breaking spaces (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
+remain.
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Works multiple times
+(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) as well.<br>
+But&nbsp;.&nbsp;.&nbsp;.&nbsp;&nbsp;:</p>
+<pre>
+A&nbsp;block&nbsp;of&nbsp;
+preformatted&nbsp;text.
+</pre>
+Now the non-breaking spaces (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
+are replaced with ordinary spaces, and disappear.
+</body>
+</html>

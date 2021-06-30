@@ -1,0 +1,44 @@
+line 1 column 1 - Warning: missing <!DOCTYPE> declaration
+line 6 column 1 - Info: value for attribute "http-equiv" missing quote marks
+line 7 column 1 - Info: value for attribute "name" missing quote marks
+line 7 column 1 - Info: value for attribute "content" missing quote marks
+line 8 column 1 - Info: value for attribute "name" missing quote marks
+line 9 column 1 - Info: value for attribute "name" missing quote marks
+line 10 column 1 - Info: value for attribute "rel" missing quote marks
+line 154 column 1 - Info: value for attribute "lang" missing quote marks
+line 156 column 1 - Info: value for attribute "class" missing quote marks
+line 160 column 1 - Info: value for attribute "class" missing quote marks
+line 162 column 1 - Info: value for attribute "class" missing quote marks
+line 170 column 1 - Info: value for attribute "class" missing quote marks
+line 172 column 1 - Info: value for attribute "class" missing quote marks
+line 177 column 1 - Info: value for attribute "class" missing quote marks
+line 181 column 1 - Info: value for attribute "class" missing quote marks
+line 185 column 1 - Info: value for attribute "class" missing quote marks
+line 189 column 1 - Info: value for attribute "class" missing quote marks
+line 191 column 1 - Info: value for attribute "class" missing quote marks
+line 204 column 1 - Info: value for attribute "class" missing quote marks
+line 1 column 1 - Warning: <html> proprietary attribute "xmlns:o"
+line 1 column 1 - Warning: <html> proprietary attribute "xmlns:w"
+line 160 column 121 - Warning: <o:p> is not approved by W3C
+line 168 column 73 - Warning: <o:p> is not approved by W3C
+line 170 column 119 - Warning: <o:p> is not approved by W3C
+line 175 column 45 - Warning: <o:p> is not approved by W3C
+line 177 column 1 - Warning: replacing unexpected <p> with <li>
+line 181 column 1 - Warning: replacing unexpected <p> with <li>
+line 185 column 1 - Warning: replacing unexpected <p> with <li>
+line 189 column 119 - Warning: <o:p> is not approved by W3C
+line 202 column 56 - Warning: <o:p> is not approved by W3C
+line 204 column 119 - Warning: <o:p> is not approved by W3C
+Info: Document content looks like HTML5
+Tidy found 13 warnings and 0 errors!
+
+About HTML Tidy: https://github.com/htacg/tidy-html5
+Bug reports and comments: https://github.com/htacg/tidy-html5/issues
+Official mailing list: https://lists.w3.org/Archives/Public/public-htacg/
+Latest HTML specification: http://dev.w3.org/html5/spec-author-view/
+Validate your HTML documents: http://validator.w3.org/nu/
+Lobby your company to join the W3C: http://www.w3.org/Consortium
+
+Do you speak a language other than English, or a different variant of 
+English? Consider helping us to localize HTML Tidy. For details please see 
+https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md

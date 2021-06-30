@@ -1,0 +1,804 @@
+<html>
+<head><title>[ #433012 ] Illegal ampersands/character entities</title></head>
+<body>
+<p>
+ <!--=====================================================================-->
+ <!-- These are the standard HTML character entities in the order they    -->
+ <!-- are listed in section 24 of the HTML 4.01 spec.                     -->
+ <!--=====================================================================-->
+
+ <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+ <!-- Start of first of two groups of character entities < 256. -->
+ <!-- Assume a missing semicolon.                               -->
+
+ <!--     ?id=ID&nbsp;=XX -->
+ <a href="?id=ID&nbsp=XX">id=ID&nbsp=XX</a> <br>
+
+ <!--     ?id=ID&iexcl;=XX -->
+ <a href="?id=ID&iexcl=XX">id=ID&iexcl=XX</a> <br>
+
+ <!--     ?id=ID&cent;=XX -->
+ <a href="?id=ID&cent=XX">id=ID&cent=XX</a> <br>
+
+ <!--     ?id=ID&pound;=XX -->
+ <a href="?id=ID&pound=XX">id=ID&pound=XX</a> <br>
+
+ <!--     ?id=ID&curren;=XX -->
+ <a href="?id=ID&curren=XX">id=ID&curren=XX</a> <br>
+
+ <!--     ?id=ID&yen;=XX -->
+ <a href="?id=ID&yen=XX">id=ID&yen=XX</a> <br>
+
+ <!--     ?id=ID&brvbar;=XX -->
+ <a href="?id=ID&brvbar=XX">id=ID&brvbar=XX</a> <br>
+
+ <!--     ?id=ID&sect;=XX -->
+ <a href="?id=ID&sect=XX">id=ID&sect=XX</a> <br>
+
+ <!--     ?id=ID&uml;=XX -->
+ <a href="?id=ID&uml=XX">id=ID&uml=XX</a> <br>
+
+ <!--     ?id=ID&copy;=XX -->
+ <a href="?id=ID&copy=XX">id=ID&copy=XX</a> <br>
+
+ <!--     ?id=ID&ordf;=XX -->
+ <a href="?id=ID&ordf=XX">id=ID&ordf=XX</a> <br>
+
+ <!--     ?id=ID&laquo;=XX -->
+ <a href="?id=ID&laquo=XX">id=ID&laquo=XX</a> <br>
+
+ <!--     ?id=ID&not;=XX -->
+ <a href="?id=ID&not=XX">id=ID&not=XX</a> <br>
+
+ <!--     ?id=ID&shy;=XX -->
+ <a href="?id=ID&shy=XX">id=ID&shy=XX</a> <br>
+
+ <!--     ?id=ID&reg;=XX -->
+ <a href="?id=ID&reg=XX">id=ID&reg=XX</a> <br>
+
+ <!--     ?id=ID&macr;=XX -->
+ <a href="?id=ID&macr=XX">id=ID&macr=XX</a> <br>
+
+ <!--     ?id=ID&deg;=XX -->
+ <a href="?id=ID&deg=XX">id=ID&deg=XX</a> <br>
+
+ <!--     ?id=ID&plusmn;=XX -->
+ <a href="?id=ID&plusmn=XX">id=ID&plusmn=XX</a> <br>
+
+ <!--     ?id=ID&sup;2=XX -->
+ <a href="?id=ID&sup2=XX">id=ID&sup2=XX</a> <br>
+
+ <!--     ?id=ID&sup;3=XX -->
+ <a href="?id=ID&sup3=XX">id=ID&sup3=XX</a> <br>
+
+ <!--     ?id=ID&acute;=XX -->
+ <a href="?id=ID&acute=XX">id=ID&acute=XX</a> <br>
+
+ <!--     ?id=ID&micro;=XX -->
+ <a href="?id=ID&micro=XX">id=ID&micro=XX</a> <br>
+
+ <!--     ?id=ID&para;=XX -->
+ <a href="?id=ID&para=XX">id=ID&para=XX</a> <br>
+
+ <!--     ?id=ID&middot;=XX -->
+ <a href="?id=ID&middot=XX">id=ID&middot=XX</a> <br>
+
+ <!--     ?id=ID&cedil;=XX -->
+ <a href="?id=ID&cedil=XX">id=ID&cedil=XX</a> <br>
+
+ <!--     ?id=ID&sup;1=XX -->
+ <a href="?id=ID&sup1=XX">id=ID&sup1=XX</a> <br>
+
+ <!--     ?id=ID&ordm;=XX -->
+ <a href="?id=ID&ordm=XX">id=ID&ordm=XX</a> <br>
+
+ <!--     ?id=ID&raquo;=XX -->
+ <a href="?id=ID&raquo=XX">id=ID&raquo=XX</a> <br>
+
+ <!--     ?id=ID&frac;14=XX -->
+ <a href="?id=ID&frac14=XX">id=ID&frac14=XX</a> <br>
+
+ <!--     ?id=ID&frac;12=XX -->
+ <a href="?id=ID&frac12=XX">id=ID&frac12=XX</a> <br>
+
+ <!--     ?id=ID&frac;34=XX -->
+ <a href="?id=ID&frac34=XX">id=ID&frac34=XX</a> <br>
+
+ <!--     ?id=ID&iquest;=XX -->
+ <a href="?id=ID&iquest=XX">id=ID&iquest=XX</a> <br>
+
+ <!--     ?id=ID&Agrave;=XX -->
+ <a href="?id=ID&Agrave=XX">id=ID&Agrave=XX</a> <br>
+
+ <!--     ?id=ID&Aacute;=XX -->
+ <a href="?id=ID&Aacute=XX">id=ID&Aacute=XX</a> <br>
+
+ <!--     ?id=ID&Acirc;=XX -->
+ <a href="?id=ID&Acirc=XX">id=ID&Acirc=XX</a> <br>
+
+ <!--     ?id=ID&Atilde;=XX -->
+ <a href="?id=ID&Atilde=XX">id=ID&Atilde=XX</a> <br>
+
+ <!--     ?id=ID&Auml;=XX -->
+ <a href="?id=ID&Auml=XX">id=ID&Auml=XX</a> <br>
+
+ <!--     ?id=ID&Aring;=XX -->
+ <a href="?id=ID&Aring=XX">id=ID&Aring=XX</a> <br>
+
+ <!--     ?id=ID&AElig;=XX -->
+ <a href="?id=ID&AElig=XX">id=ID&AElig=XX</a> <br>
+
+ <!--     ?id=ID&Ccedil;=XX -->
+ <a href="?id=ID&Ccedil=XX">id=ID&Ccedil=XX</a> <br>
+
+ <!--     ?id=ID&Egrave;=XX -->
+ <a href="?id=ID&Egrave=XX">id=ID&Egrave=XX</a> <br>
+
+ <!--     ?id=ID&Eacute;=XX -->
+ <a href="?id=ID&Eacute=XX">id=ID&Eacute=XX</a> <br>
+
+ <!--     ?id=ID&Ecirc;=XX -->
+ <a href="?id=ID&Ecirc=XX">id=ID&Ecirc=XX</a> <br>
+
+ <!--     ?id=ID&Euml;=XX -->
+ <a href="?id=ID&Euml=XX">id=ID&Euml=XX</a> <br>
+
+ <!--     ?id=ID&Igrave;=XX -->
+ <a href="?id=ID&Igrave=XX">id=ID&Igrave=XX</a> <br>
+
+ <!--     ?id=ID&Iacute;=XX -->
+ <a href="?id=ID&Iacute=XX">id=ID&Iacute=XX</a> <br>
+
+ <!--     ?id=ID&Icirc;=XX -->
+ <a href="?id=ID&Icirc=XX">id=ID&Icirc=XX</a> <br>
+
+ <!--     ?id=ID&Iuml;=XX -->
+ <a href="?id=ID&Iuml=XX">id=ID&Iuml=XX</a> <br>
+
+ <!--     ?id=ID&ETH;=XX -->
+ <a href="?id=ID&ETH=XX">id=ID&ETH=XX</a> <br>
+
+ <!--     ?id=ID&Ntilde;=XX -->
+ <a href="?id=ID&Ntilde=XX">id=ID&Ntilde=XX</a> <br>
+
+ <!--     ?id=ID&Ograve;=XX -->
+ <a href="?id=ID&Ograve=XX">id=ID&Ograve=XX</a> <br>
+
+ <!--     ?id=ID&Oacute;=XX -->
+ <a href="?id=ID&Oacute=XX">id=ID&Oacute=XX</a> <br>
+
+ <!--     ?id=ID&Ocirc;=XX -->
+ <a href="?id=ID&Ocirc=XX">id=ID&Ocirc=XX</a> <br>
+
+ <!--     ?id=ID&Otilde;=XX -->
+ <a href="?id=ID&Otilde=XX">id=ID&Otilde=XX</a> <br>
+
+ <!--     ?id=ID&Ouml;=XX -->
+ <a href="?id=ID&Ouml=XX">id=ID&Ouml=XX</a> <br>
+
+ <!--     ?id=ID&times;=XX -->
+ <a href="?id=ID&times=XX">id=ID&times=XX</a> <br>
+
+ <!--     ?id=ID&Oslash;=XX -->
+ <a href="?id=ID&Oslash=XX">id=ID&Oslash=XX</a> <br>
+
+ <!--     ?id=ID&Ugrave;=XX -->
+ <a href="?id=ID&Ugrave=XX">id=ID&Ugrave=XX</a> <br>
+
+ <!--     ?id=ID&Uacute;=XX -->
+ <a href="?id=ID&Uacute=XX">id=ID&Uacute=XX</a> <br>
+
+ <!--     ?id=ID&Ucirc;=XX -->
+ <a href="?id=ID&Ucirc=XX">id=ID&Ucirc=XX</a> <br>
+
+ <!--     ?id=ID&Uuml;=XX -->
+ <a href="?id=ID&Uuml=XX">id=ID&Uuml=XX</a> <br>
+
+ <!--     ?id=ID&Yacute;=XX -->
+ <a href="?id=ID&Yacute=XX">id=ID&Yacute=XX</a> <br>
+
+ <!--     ?id=ID&THORN;=XX -->
+ <a href="?id=ID&THORN=XX">id=ID&THORN=XX</a> <br>
+
+ <!--     ?id=ID&szlig;=XX -->
+ <a href="?id=ID&szlig=XX">id=ID&szlig=XX</a> <br>
+
+ <!--     ?id=ID&agrave;=XX -->
+ <a href="?id=ID&agrave=XX">id=ID&agrave=XX</a> <br>
+
+ <!--     ?id=ID&aacute;=XX -->
+ <a href="?id=ID&aacute=XX">id=ID&aacute=XX</a> <br>
+
+ <!--     ?id=ID&acirc;=XX -->
+ <a href="?id=ID&acirc=XX">id=ID&acirc=XX</a> <br>
+
+ <!--     ?id=ID&atilde;=XX -->
+ <a href="?id=ID&atilde=XX">id=ID&atilde=XX</a> <br>
+
+ <!--     ?id=ID&auml;=XX -->
+ <a href="?id=ID&auml=XX">id=ID&auml=XX</a> <br>
+
+ <!--     ?id=ID&aring;=XX -->
+ <a href="?id=ID&aring=XX">id=ID&aring=XX</a> <br>
+
+ <!--     ?id=ID&aelig;=XX -->
+ <a href="?id=ID&aelig=XX">id=ID&aelig=XX</a> <br>
+
+ <!--     ?id=ID&ccedil;=XX -->
+ <a href="?id=ID&ccedil=XX">id=ID&ccedil=XX</a> <br>
+
+ <!--     ?id=ID&egrave;=XX -->
+ <a href="?id=ID&egrave=XX">id=ID&egrave=XX</a> <br>
+
+ <!--     ?id=ID&eacute;=XX -->
+ <a href="?id=ID&eacute=XX">id=ID&eacute=XX</a> <br>
+
+ <!--     ?id=ID&ecirc;=XX -->
+ <a href="?id=ID&ecirc=XX">id=ID&ecirc=XX</a> <br>
+
+ <!--     ?id=ID&euml;=XX -->
+ <a href="?id=ID&euml=XX">id=ID&euml=XX</a> <br>
+
+ <!--     ?id=ID&igrave;=XX -->
+ <a href="?id=ID&igrave=XX">id=ID&igrave=XX</a> <br>
+
+ <!--     ?id=ID&iacute;=XX -->
+ <a href="?id=ID&iacute=XX">id=ID&iacute=XX</a> <br>
+
+ <!--     ?id=ID&icirc;=XX -->
+ <a href="?id=ID&icirc=XX">id=ID&icirc=XX</a> <br>
+
+ <!--     ?id=ID&iuml;=XX -->
+ <a href="?id=ID&iuml=XX">id=ID&iuml=XX</a> <br>
+
+ <!--     ?id=ID&eth;=XX -->
+ <a href="?id=ID&eth=XX">id=ID&eth=XX</a> <br>
+
+ <!--     ?id=ID&ntilde;=XX -->
+ <a href="?id=ID&ntilde=XX">id=ID&ntilde=XX</a> <br>
+
+ <!--     ?id=ID&ograve;=XX -->
+ <a href="?id=ID&ograve=XX">id=ID&ograve=XX</a> <br>
+
+ <!--     ?id=ID&oacute;=XX -->
+ <a href="?id=ID&oacute=XX">id=ID&oacute=XX</a> <br>
+
+ <!--     ?id=ID&ocirc;=XX -->
+ <a href="?id=ID&ocirc=XX">id=ID&ocirc=XX</a> <br>
+
+ <!--     ?id=ID&otilde;=XX -->
+ <a href="?id=ID&otilde=XX">id=ID&otilde=XX</a> <br>
+
+ <!--     ?id=ID&ouml;=XX -->
+ <a href="?id=ID&ouml=XX">id=ID&ouml=XX</a> <br>
+
+ <!--     ?id=ID&divide;=XX -->
+ <a href="?id=ID&divide=XX">id=ID&divide=XX</a> <br>
+
+ <!--     ?id=ID&oslash;=XX -->
+ <a href="?id=ID&oslash=XX">id=ID&oslash=XX</a> <br>
+
+ <!--     ?id=ID&ugrave;=XX -->
+ <a href="?id=ID&ugrave=XX">id=ID&ugrave=XX</a> <br>
+
+ <!--     ?id=ID&uacute;=XX -->
+ <a href="?id=ID&uacute=XX">id=ID&uacute=XX</a> <br>
+
+ <!--     ?id=ID&ucirc;=XX -->
+ <a href="?id=ID&ucirc=XX">id=ID&ucirc=XX</a> <br>
+
+ <!--     ?id=ID&uuml;=XX -->
+ <a href="?id=ID&uuml=XX">id=ID&uuml=XX</a> <br>
+
+ <!--     ?id=ID&yacute;=XX -->
+ <a href="?id=ID&yacute=XX">id=ID&yacute=XX</a> <br>
+
+ <!--     ?id=ID&thorn;=XX -->
+ <a href="?id=ID&thorn=XX">id=ID&thorn=XX</a> <br>
+
+ <!--     ?id=ID&yuml;=XX -->
+ <a href="?id=ID&yuml=XX">id=ID&yuml=XX</a> <br>
+
+ <!-- End of first of two groups of character entities < 256. -->
+ <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+
+
+ <!--     ?id=ID&amp;fnof=XX -->
+ <a href="?id=ID&fnof=XX">id=ID&fnof=XX</a> <br>
+
+ <!--     ?id=ID&amp;Alpha=XX -->
+ <a href="?id=ID&Alpha=XX">id=ID&Alpha=XX</a> <br>
+
+ <!--     ?id=ID&amp;Beta=XX -->
+ <a href="?id=ID&Beta=XX">id=ID&Beta=XX</a> <br>
+
+ <!--     ?id=ID&amp;Gamma=XX -->
+ <a href="?id=ID&Gamma=XX">id=ID&Gamma=XX</a> <br>
+
+ <!--     ?id=ID&amp;Delta=XX -->
+ <a href="?id=ID&Delta=XX">id=ID&Delta=XX</a> <br>
+
+ <!--     ?id=ID&amp;Epsilon=XX -->
+ <a href="?id=ID&Epsilon=XX">id=ID&Epsilon=XX</a> <br>
+
+ <!--     ?id=ID&amp;Zeta=XX -->
+ <a href="?id=ID&Zeta=XX">id=ID&Zeta=XX</a> <br>
+
+ <!--     ?id=ID&amp;Eta=XX -->
+ <a href="?id=ID&Eta=XX">id=ID&Eta=XX</a> <br>
+
+ <!--     ?id=ID&amp;Theta=XX -->
+ <a href="?id=ID&Theta=XX">id=ID&Theta=XX</a> <br>
+
+ <!--     ?id=ID&amp;Iota=XX -->
+ <a href="?id=ID&Iota=XX">id=ID&Iota=XX</a> <br>
+
+ <!--     ?id=ID&amp;Kappa=XX -->
+ <a href="?id=ID&Kappa=XX">id=ID&Kappa=XX</a> <br>
+
+ <!--     ?id=ID&amp;Lambda=XX -->
+ <a href="?id=ID&Lambda=XX">id=ID&Lambda=XX</a> <br>
+
+ <!--     ?id=ID&amp;Mu=XX -->
+ <a href="?id=ID&Mu=XX">id=ID&Mu=XX</a> <br>
+
+ <!--     ?id=ID&amp;Nu=XX -->
+ <a href="?id=ID&Nu=XX">id=ID&Nu=XX</a> <br>
+
+ <!--     ?id=ID&amp;Xi=XX -->
+ <a href="?id=ID&Xi=XX">id=ID&Xi=XX</a> <br>
+
+ <!--     ?id=ID&amp;Omicron=XX -->
+ <a href="?id=ID&Omicron=XX">id=ID&Omicron=XX</a> <br>
+
+ <!--     ?id=ID&amp;Pi=XX -->
+ <a href="?id=ID&Pi=XX">id=ID&Pi=XX</a> <br>
+
+ <!--     ?id=ID&amp;Rho=XX -->
+ <a href="?id=ID&Rho=XX">id=ID&Rho=XX</a> <br>
+
+ <!--     ?id=ID&amp;Sigma=XX -->
+ <a href="?id=ID&Sigma=XX">id=ID&Sigma=XX</a> <br>
+
+ <!--     ?id=ID&amp;Tau=XX -->
+ <a href="?id=ID&Tau=XX">id=ID&Tau=XX</a> <br>
+
+ <!--     ?id=ID&amp;Upsilon=XX -->
+ <a href="?id=ID&Upsilon=XX">id=ID&Upsilon=XX</a> <br>
+
+ <!--     ?id=ID&amp;Phi=XX -->
+ <a href="?id=ID&Phi=XX">id=ID&Phi=XX</a> <br>
+
+ <!--     ?id=ID&amp;Chi=XX -->
+ <a href="?id=ID&Chi=XX">id=ID&Chi=XX</a> <br>
+
+ <!--     ?id=ID&amp;Psi=XX -->
+ <a href="?id=ID&Psi=XX">id=ID&Psi=XX</a> <br>
+
+ <!--     ?id=ID&amp;Omega=XX -->
+ <a href="?id=ID&Omega=XX">id=ID&Omega=XX</a> <br>
+
+ <!--     ?id=ID&amp;alpha=XX -->
+ <a href="?id=ID&alpha=XX">id=ID&alpha=XX</a> <br>
+
+ <!--     ?id=ID&amp;beta=XX -->
+ <a href="?id=ID&beta=XX">id=ID&beta=XX</a> <br>
+
+ <!--     ?id=ID&amp;gamma=XX -->
+ <a href="?id=ID&gamma=XX">id=ID&gamma=XX</a> <br>
+
+ <!--     ?id=ID&amp;delta=XX -->
+ <a href="?id=ID&delta=XX">id=ID&delta=XX</a> <br>
+
+ <!--     ?id=ID&amp;epsilon=XX -->
+ <a href="?id=ID&epsilon=XX">id=ID&epsilon=XX</a> <br>
+
+ <!--     ?id=ID&amp;zeta=XX -->
+ <a href="?id=ID&zeta=XX">id=ID&zeta=XX</a> <br>
+
+ <!--     ?id=ID&amp;eta=XX -->
+ <a href="?id=ID&eta=XX">id=ID&eta=XX</a> <br>
+
+ <!--     ?id=ID&amp;theta=XX -->
+ <a href="?id=ID&theta=XX">id=ID&theta=XX</a> <br>
+
+ <!--     ?id=ID&amp;iota=XX -->
+ <a href="?id=ID&iota=XX">id=ID&iota=XX</a> <br>
+
+ <!--     ?id=ID&amp;kappa=XX -->
+ <a href="?id=ID&kappa=XX">id=ID&kappa=XX</a> <br>
+
+ <!--     ?id=ID&amp;lambda=XX -->
+ <a href="?id=ID&lambda=XX">id=ID&lambda=XX</a> <br>
+
+ <!--     ?id=ID&amp;mu=XX -->
+ <a href="?id=ID&mu=XX">id=ID&mu=XX</a> <br>
+
+ <!--     ?id=ID&amp;nu=XX -->
+ <a href="?id=ID&nu=XX">id=ID&nu=XX</a> <br>
+
+ <!--     ?id=ID&amp;xi=XX -->
+ <a href="?id=ID&xi=XX">id=ID&xi=XX</a> <br>
+
+ <!--     ?id=ID&amp;omicron=XX -->
+ <a href="?id=ID&omicron=XX">id=ID&omicron=XX</a> <br>
+
+ <!--     ?id=ID&amp;pi=XX -->
+ <a href="?id=ID&pi=XX">id=ID&pi=XX</a> <br>
+
+ <!--     ?id=ID&amp;rho=XX -->
+ <a href="?id=ID&rho=XX">id=ID&rho=XX</a> <br>
+
+ <!--     ?id=ID&amp;sigmaf=XX -->
+ <a href="?id=ID&sigmaf=XX">id=ID&sigmaf=XX</a> <br>
+
+ <!--     ?id=ID&amp;sigma=XX -->
+ <a href="?id=ID&sigma=XX">id=ID&sigma=XX</a> <br>
+
+ <!--     ?id=ID&amp;tau=XX -->
+ <a href="?id=ID&tau=XX">id=ID&tau=XX</a> <br>
+
+ <!--     ?id=ID&amp;upsilon=XX -->
+ <a href="?id=ID&upsilon=XX">id=ID&upsilon=XX</a> <br>
+
+ <!--     ?id=ID&amp;phi=XX -->
+ <a href="?id=ID&phi=XX">id=ID&phi=XX</a> <br>
+
+ <!--     ?id=ID&amp;chi=XX -->
+ <a href="?id=ID&chi=XX">id=ID&chi=XX</a> <br>
+
+ <!--     ?id=ID&amp;psi=XX -->
+ <a href="?id=ID&psi=XX">id=ID&psi=XX</a> <br>
+
+ <!--     ?id=ID&amp;omega=XX -->
+ <a href="?id=ID&omega=XX">id=ID&omega=XX</a> <br>
+
+ <!--     ?id=ID&amp;thetasym=XX -->
+ <a href="?id=ID&thetasym=XX">id=ID&thetasym=XX</a> <br>
+
+ <!--     ?id=ID&amp;upsih=XX -->
+ <a href="?id=ID&upsih=XX">id=ID&upsih=XX</a> <br>
+
+ <!--     ?id=ID&amp;piv=XX -->
+ <a href="?id=ID&piv=XX">id=ID&piv=XX</a> <br>
+
+ <!--     ?id=ID&amp;bull=XX -->
+ <a href="?id=ID&bull=XX">id=ID&bull=XX</a> <br>
+
+ <!--     ?id=ID&amp;hellip=XX -->
+ <a href="?id=ID&hellip=XX">id=ID&hellip=XX</a> <br>
+
+ <!--     ?id=ID&amp;prime=XX -->
+ <a href="?id=ID&prime=XX">id=ID&prime=XX</a> <br>
+
+ <!--     ?id=ID&amp;Prime=XX -->
+ <a href="?id=ID&Prime=XX">id=ID&Prime=XX</a> <br>
+
+ <!--     ?id=ID&amp;oline=XX -->
+ <a href="?id=ID&oline=XX">id=ID&oline=XX</a> <br>
+
+ <!--     ?id=ID&amp;frasl=XX -->
+ <a href="?id=ID&frasl=XX">id=ID&frasl=XX</a> <br>
+
+ <!--     ?id=ID&amp;weierp=XX -->
+ <a href="?id=ID&weierp=XX">id=ID&weierp=XX</a> <br>
+
+ <!--     ?id=ID&amp;image=XX -->
+ <a href="?id=ID&image=XX">id=ID&image=XX</a> <br>
+
+ <!--     ?id=ID&amp;real=XX -->
+ <a href="?id=ID&real=XX">id=ID&real=XX</a> <br>
+
+ <!--     ?id=ID&amp;trade=XX -->
+ <a href="?id=ID&trade=XX">id=ID&trade=XX</a> <br>
+
+ <!--     ?id=ID&amp;alefsym=XX -->
+ <a href="?id=ID&alefsym=XX">id=ID&alefsym=XX</a> <br>
+
+ <!--     ?id=ID&amp;larr=XX -->
+ <a href="?id=ID&larr=XX">id=ID&larr=XX</a> <br>
+
+ <!--     ?id=ID&amp;uarr=XX -->
+ <a href="?id=ID&uarr=XX">id=ID&uarr=XX</a> <br>
+
+ <!--     ?id=ID&amp;rarr=XX -->
+ <a href="?id=ID&rarr=XX">id=ID&rarr=XX</a> <br>
+
+ <!--     ?id=ID&amp;darr=XX -->
+ <a href="?id=ID&darr=XX">id=ID&darr=XX</a> <br>
+
+ <!--     ?id=ID&amp;harr=XX -->
+ <a href="?id=ID&harr=XX">id=ID&harr=XX</a> <br>
+
+ <!--     ?id=ID&amp;crarr=XX -->
+ <a href="?id=ID&crarr=XX">id=ID&crarr=XX</a> <br>
+
+ <!--     ?id=ID&amp;lArr=XX -->
+ <a href="?id=ID&lArr=XX">id=ID&lArr=XX</a> <br>
+
+ <!--     ?id=ID&amp;uArr=XX -->
+ <a href="?id=ID&uArr=XX">id=ID&uArr=XX</a> <br>
+
+ <!--     ?id=ID&amp;rArr=XX -->
+ <a href="?id=ID&rArr=XX">id=ID&rArr=XX</a> <br>
+
+ <!--     ?id=ID&amp;dArr=XX -->
+ <a href="?id=ID&dArr=XX">id=ID&dArr=XX</a> <br>
+
+ <!--     ?id=ID&amp;hArr=XX -->
+ <a href="?id=ID&hArr=XX">id=ID&hArr=XX</a> <br>
+
+ <!--     ?id=ID&amp;forall=XX -->
+ <a href="?id=ID&forall=XX">id=ID&forall=XX</a> <br>
+
+ <!--     ?id=ID&amp;part=XX -->
+ <a href="?id=ID&part=XX">id=ID&part=XX</a> <br>
+
+ <!--     ?id=ID&amp;exist=XX -->
+ <a href="?id=ID&exist=XX">id=ID&exist=XX</a> <br>
+
+ <!--     ?id=ID&amp;empty=XX -->
+ <a href="?id=ID&empty=XX">id=ID&empty=XX</a> <br>
+
+ <!--     ?id=ID&amp;nabla=XX -->
+ <a href="?id=ID&nabla=XX">id=ID&nabla=XX</a> <br>
+
+ <!--     ?id=ID&amp;isin=XX -->
+ <a href="?id=ID&isin=XX">id=ID&isin=XX</a> <br>
+
+ <!-- NOTE: In character content (but not in attribute values), IE 5.5    -->
+ <!-- treats this as id=ID&not;in=XX but this looks like an IE bug so we  -->
+ <!-- ignore this behavior and stick to our simple < 256 rule.            -->
+ <!--     ?id=ID&amp;notin=XX -->
+ <a href="?id=ID&notin=XX">id=ID&notin=XX</a> <br>
+
+ <!--     ?id=ID&amp;ni=XX -->
+ <a href="?id=ID&ni=XX">id=ID&ni=XX</a> <br>
+
+ <!--     ?id=ID&amp;prod=XX -->
+ <a href="?id=ID&prod=XX">id=ID&prod=XX</a> <br>
+
+ <!--     ?id=ID&amp;sum=XX -->
+ <a href="?id=ID&sum=XX">id=ID&sum=XX</a> <br>
+
+ <!--     ?id=ID&amp;minus=XX -->
+ <a href="?id=ID&minus=XX">id=ID&minus=XX</a> <br>
+
+ <!--     ?id=ID&amp;lowast=XX -->
+ <a href="?id=ID&lowast=XX">id=ID&lowast=XX</a> <br>
+
+ <!--     ?id=ID&amp;radic=XX -->
+ <a href="?id=ID&radic=XX">id=ID&radic=XX</a> <br>
+
+ <!--     ?id=ID&amp;prop=XX -->
+ <a href="?id=ID&prop=XX">id=ID&prop=XX</a> <br>
+
+ <!--     ?id=ID&amp;infin=XX -->
+ <a href="?id=ID&infin=XX">id=ID&infin=XX</a> <br>
+
+ <!--     ?id=ID&amp;ang=XX -->
+ <a href="?id=ID&ang=XX">id=ID&ang=XX</a> <br>
+
+ <!--     ?id=ID&amp;and=XX -->
+ <a href="?id=ID&and=XX">id=ID&and=XX</a> <br>
+
+ <!--     ?id=ID&amp;or=XX -->
+ <a href="?id=ID&or=XX">id=ID&or=XX</a> <br>
+
+ <!--     ?id=ID&amp;cap=XX -->
+ <a href="?id=ID&cap=XX">id=ID&cap=XX</a> <br>
+
+ <!--     ?id=ID&amp;cup=XX -->
+ <a href="?id=ID&cup=XX">id=ID&cup=XX</a> <br>
+
+ <!--     ?id=ID&amp;int=XX -->
+ <a href="?id=ID&int=XX">id=ID&int=XX</a> <br>
+
+ <!--     ?id=ID&amp;there4=XX -->
+ <a href="?id=ID&there4=XX">id=ID&there4=XX</a> <br>
+
+ <!--     ?id=ID&amp;sim=XX -->
+ <a href="?id=ID&sim=XX">id=ID&sim=XX</a> <br>
+
+ <!--     ?id=ID&amp;cong=XX -->
+ <a href="?id=ID&cong=XX">id=ID&cong=XX</a> <br>
+
+ <!--     ?id=ID&amp;asymp=XX -->
+ <a href="?id=ID&asymp=XX">id=ID&asymp=XX</a> <br>
+
+ <!--     ?id=ID&amp;ne=XX -->
+ <a href="?id=ID&ne=XX">id=ID&ne=XX</a> <br>
+
+ <!--     ?id=ID&amp;equiv=XX -->
+ <a href="?id=ID&equiv=XX">id=ID&equiv=XX</a> <br>
+
+ <!--     ?id=ID&amp;le=XX -->
+ <a href="?id=ID&le=XX">id=ID&le=XX</a> <br>
+
+ <!--     ?id=ID&amp;ge=XX -->
+ <a href="?id=ID&ge=XX">id=ID&ge=XX</a> <br>
+
+ <!--     ?id=ID&amp;sub=XX -->
+ <a href="?id=ID&sub=XX">id=ID&sub=XX</a> <br>
+
+ <!--     ?id=ID&amp;sup=XX -->
+ <a href="?id=ID&sup=XX">id=ID&sup=XX</a> <br>
+
+ <!--     ?id=ID&amp;nsub=XX -->
+ <a href="?id=ID&nsub=XX">id=ID&nsub=XX</a> <br>
+
+ <!--     ?id=ID&amp;sube=XX -->
+ <a href="?id=ID&sube=XX">id=ID&sube=XX</a> <br>
+
+ <!--     ?id=ID&amp;supe=XX -->
+ <a href="?id=ID&supe=XX">id=ID&supe=XX</a> <br>
+
+ <!--     ?id=ID&amp;oplus=XX -->
+ <a href="?id=ID&oplus=XX">id=ID&oplus=XX</a> <br>
+
+ <!--     ?id=ID&amp;otimes=XX -->
+ <a href="?id=ID&otimes=XX">id=ID&otimes=XX</a> <br>
+
+ <!--     ?id=ID&amp;perp=XX -->
+ <a href="?id=ID&perp=XX">id=ID&perp=XX</a> <br>
+
+ <!--     ?id=ID&amp;sdot=XX -->
+ <a href="?id=ID&sdot=XX">id=ID&sdot=XX</a> <br>
+
+ <!--     ?id=ID&amp;lceil=XX -->
+ <a href="?id=ID&lceil=XX">id=ID&lceil=XX</a> <br>
+
+ <!--     ?id=ID&amp;rceil=XX -->
+ <a href="?id=ID&rceil=XX">id=ID&rceil=XX</a> <br>
+
+ <!--     ?id=ID&amp;lfloor=XX -->
+ <a href="?id=ID&lfloor=XX">id=ID&lfloor=XX</a> <br>
+
+ <!--     ?id=ID&amp;rfloor=XX -->
+ <a href="?id=ID&rfloor=XX">id=ID&rfloor=XX</a> <br>
+
+ <!--     ?id=ID&amp;lang=XX -->
+ <a href="?id=ID&lang=XX">id=ID&lang=XX</a> <br>
+
+ <!--     ?id=ID&amp;rang=XX -->
+ <a href="?id=ID&rang=XX">id=ID&rang=XX</a> <br>
+
+ <!--     ?id=ID&amp;loz=XX -->
+ <a href="?id=ID&loz=XX">id=ID&loz=XX</a> <br>
+
+ <!--     ?id=ID&amp;spades=XX -->
+ <a href="?id=ID&spades=XX">id=ID&spades=XX</a> <br>
+
+ <!--     ?id=ID&amp;clubs=XX -->
+ <a href="?id=ID&clubs=XX">id=ID&clubs=XX</a> <br>
+
+ <!--     ?id=ID&amp;hearts=XX -->
+ <a href="?id=ID&hearts=XX">id=ID&hearts=XX</a> <br>
+
+ <!--     ?id=ID&amp;diams=XX -->
+ <a href="?id=ID&diams=XX">id=ID&diams=XX</a> <br>
+
+
+
+ <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+ <!-- Start of second of two groups of character entities < 256.-->
+ <!-- Assume a missing semicolon.                               -->
+
+ <!--     ?id=ID&quot;=XX -->
+ <a href="?id=ID&quot=XX">id=ID&quot=XX</a> <br>
+
+ <!--     ?id=ID&amp;=XX -->
+ <a href="?id=ID&amp=XX">id=ID&amp=XX</a> <br>
+
+ <!--     ?id=ID&lt;=XX -->
+ <a href="?id=ID&lt=XX">id=ID&lt=XX</a> <br>
+
+ <!--     ?id=ID&gt;=XX -->
+ <a href="?id=ID&gt=XX">id=ID&gt=XX</a> <br>
+
+ <!-- End of second of two groups of character entities < 256.-->
+ <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+
+
+ <!--     ?id=ID&amp;OElig=XX -->
+ <a href="?id=ID&OElig=XX">id=ID&OElig=XX</a> <br>
+
+ <!--     ?id=ID&amp;oelig=XX -->
+ <a href="?id=ID&oelig=XX">id=ID&oelig=XX</a> <br>
+
+ <!--     ?id=ID&amp;Scaron=XX -->
+ <a href="?id=ID&Scaron=XX">id=ID&Scaron=XX</a> <br>
+
+ <!--     ?id=ID&amp;scaron=XX -->
+ <a href="?id=ID&scaron=XX">id=ID&scaron=XX</a> <br>
+
+ <!--     ?id=ID&amp;Yuml=XX -->
+ <a href="?id=ID&Yuml=XX">id=ID&Yuml=XX</a> <br>
+
+ <!--     ?id=ID&amp;circ=XX -->
+ <a href="?id=ID&circ=XX">id=ID&circ=XX</a> <br>
+
+ <!--     ?id=ID&amp;tilde=XX -->
+ <a href="?id=ID&tilde=XX">id=ID&tilde=XX</a> <br>
+
+ <!--     ?id=ID&amp;ensp=XX -->
+ <a href="?id=ID&ensp=XX">id=ID&ensp=XX</a> <br>
+
+ <!--     ?id=ID&amp;emsp=XX -->
+ <a href="?id=ID&emsp=XX">id=ID&emsp=XX</a> <br>
+
+ <!--     ?id=ID&amp;thinsp=XX -->
+ <a href="?id=ID&thinsp=XX">id=ID&thinsp=XX</a> <br>
+
+ <!--     ?id=ID&amp;zwnj=XX -->
+ <a href="?id=ID&zwnj=XX">id=ID&zwnj=XX</a> <br>
+
+ <!--     ?id=ID&amp;zwj=XX -->
+ <a href="?id=ID&zwj=XX">id=ID&zwj=XX</a> <br>
+
+ <!--     ?id=ID&amp;lrm=XX -->
+ <a href="?id=ID&lrm=XX">id=ID&lrm=XX</a> <br>
+
+ <!--     ?id=ID&amp;rlm=XX -->
+ <a href="?id=ID&rlm=XX">id=ID&rlm=XX</a> <br>
+
+ <!--     ?id=ID&amp;ndash=XX -->
+ <a href="?id=ID&ndash=XX">id=ID&ndash=XX</a> <br>
+
+ <!--     ?id=ID&amp;mdash=XX -->
+ <a href="?id=ID&mdash=XX">id=ID&mdash=XX</a> <br>
+
+ <!--     ?id=ID&amp;lsquo=XX -->
+ <a href="?id=ID&lsquo=XX">id=ID&lsquo=XX</a> <br>
+
+ <!--     ?id=ID&amp;rsquo=XX -->
+ <a href="?id=ID&rsquo=XX">id=ID&rsquo=XX</a> <br>
+
+ <!--     ?id=ID&amp;sbquo=XX -->
+ <a href="?id=ID&sbquo=XX">id=ID&sbquo=XX</a> <br>
+
+ <!--     ?id=ID&amp;ldquo=XX -->
+ <a href="?id=ID&ldquo=XX">id=ID&ldquo=XX</a> <br>
+
+ <!--     ?id=ID&amp;rdquo=XX -->
+ <a href="?id=ID&rdquo=XX">id=ID&rdquo=XX</a> <br>
+
+ <!--     ?id=ID&amp;bdquo=XX -->
+ <a href="?id=ID&bdquo=XX">id=ID&bdquo=XX</a> <br>
+
+ <!--     ?id=ID&amp;dagger=XX -->
+ <a href="?id=ID&dagger=XX">id=ID&dagger=XX</a> <br>
+
+ <!--     ?id=ID&amp;Dagger=XX -->
+ <a href="?id=ID&Dagger=XX">id=ID&Dagger=XX</a> <br>
+
+ <!--     ?id=ID&amp;permil=XX -->
+ <a href="?id=ID&permil=XX">id=ID&permil=XX</a> <br>
+
+ <!--     ?id=ID&amp;lsaquo=XX -->
+ <a href="?id=ID&lsaquo=XX">id=ID&lsaquo=XX</a> <br>
+
+ <!--     ?id=ID&amp;rsaquo=XX -->
+ <a href="?id=ID&rsaquo=XX">id=ID&rsaquo=XX</a> <br>
+
+ <!-- NOTE: Netscape 4.7 treats this as a missing semicolon. Since IE 5.5 -->
+ <!-- treats it as an unescaped ampersand, we choose IE's behavior since  -->
+ <!-- it allows us to stick with our simple < 256 rule.                   -->
+ <!--     ?id=ID&amp;euro=XX -->
+ <a href="?id=ID&euro=XX">id=ID&euro=XX</a> <br>
+
+
+ <!--=====================================================================-->
+ <!-- These are a few non-standard character entities.                    -->
+ <!--=====================================================================-->
+
+ <!--     ?id=ID&amp;apos=XX... -->
+ <a href="?id=ID&apos=XX">id=ID&apos=XX</a> <br>
+
+ <!--     ?id=ID&amp;foo=XX... -->
+ <a href="?id=ID&foo=XX">id=ID&foo=XX</a> <br>
+</p>
+</body>
+</html>

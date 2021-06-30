@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>[#427811] FRAME inside NOFRAME infinite loop</title>
+</head><!--
+<frameset rows="25%,*">
+  <frame src="title.html" name="p1" scrolling=no> 
+</frameset>
+-->
+<body>
+  <h1>Need a Frame Capable Browser!</h1>
+  <frame src="body.html"
+         name="p2">
+</body>
+</html>

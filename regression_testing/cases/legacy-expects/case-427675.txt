@@ -1,11 +1,12 @@
 line 1 column 1 - Warning: missing <!DOCTYPE> declaration
 line 8 column 1 - Warning: discarding unexpected <frame>
 line 10 column 1 - Warning: missing </noframes>
+line 3 column 3 - Warning: blank 'title' element
 line 5 column 1 - Warning: <frameset> element removed from HTML5
 line 6 column 3 - Warning: <frame> element removed from HTML5
 line 10 column 1 - Warning: <noframes> element removed from HTML5
 Info: Document content looks like HTML5
-Tidy found 6 warnings and 0 errors!
+Tidy found 7 warnings and 0 errors!
 
 About HTML Tidy: https://github.com/htacg/tidy-html5
 Bug reports and comments: https://github.com/htacg/tidy-html5/issues

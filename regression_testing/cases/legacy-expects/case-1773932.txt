@@ -3,9 +3,10 @@ line 7 column 1 - Warning: missing </font> before <ol>
 line 8 column 9 - Warning: inserting implicit <font>
 line 9 column 10 - Warning: inserting implicit <font>
 line 10 column 10 - Warning: inserting implicit <font>
+line 3 column 1 - Warning: blank 'title' element
 line 7 column 1 - Warning: trimming empty <font>
 Info: Document content looks like HTML5
-Tidy found 6 warnings and 0 errors!
+Tidy found 7 warnings and 0 errors!
 
 You are recommended to use CSS to specify the font and
 properties such as its size and color. This will reduce

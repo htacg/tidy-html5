@@ -5,9 +5,10 @@ line 6 column 14 - Error: <spanstyle> is not recognized!
 line 6 column 14 - Warning: discarding unexpected <spanstyle>
 line 6 column 44 - Warning: discarding unexpected </span>
 line 6 column 52 - Info: value for attribute "href" missing quote marks
+line 3 column 3 - Warning: blank 'title' element
 line 6 column 52 - Warning: <a> illegal characters found in URI
 Info: Document content looks like HTML5
-Tidy found 6 warnings and 1 error!
+Tidy found 7 warnings and 1 error!
 
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.

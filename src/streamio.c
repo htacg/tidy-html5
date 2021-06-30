@@ -724,7 +724,7 @@ static const uint Mac2Unicode[128] =
 /* Function to convert from MacRoman to Unicode */
 uint TY_(DecodeMacRoman)(uint c)
 {
-    if (127 < c)
+    if (127 < c && c < 256) /* Is. #891 */
         c = Mac2Unicode[c - 128];
     return c;
 }

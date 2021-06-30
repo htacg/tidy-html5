@@ -1,0 +1,5 @@
+line 9 column 6 - Warning: Have out-of-range surrogate pair U+D83F:U+1FFFE, replaced with U+FFFD value.
+line 10 column 6 - Warning: Leading (High) surrogate pair U+D83D, with no trailing (Low) entity, replaced with U+FFFD.
+line 11 column 6 - Warning: Trailing (Low) surrogate pair U+DE0D, with no leading (High) entity, replaced with U+FFFD.
+Tidy found 3 warnings and 0 errors!
+

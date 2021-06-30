@@ -363,8 +363,15 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
         TidyEmacs,                    0,
-        "This option specifies if Tidy should change the format for reporting "
-        "errors and warnings to a format that is more easily parsed by GNU Emacs. "
+        "This option specifies that Tidy should change the format for reporting "
+        "errors and warnings to a format that is more easily parsed by GNU Emacs "
+        "or some other program.  It changes them from the default "
+        "<br/>"
+        "  line &lt;line number&gt; column &lt;column number&gt; - (Error|Warning): &lt;message&gt; "
+        "<br/>"
+        "to a form which includes the input filename: "
+        "<br/>"
+        "  &lt;filename&gt;:&lt;line number&gt;:&lt;column number&gt;: (Error|Warning): &lt;message&gt; "
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -533,7 +540,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
         TidyHideComments,             0,
-        "This option specifies if Tidy should print out comments. "
+        "This option specifies if Tidy should not print out comments. "
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -779,9 +786,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
         TidyMakeBare,                 0,
-        "This option specifies if Tidy should strip Microsoft specific HTML "
-        "from Word 2000 documents, and output spaces rather than non-breaking "
-        "spaces where they exist in the input. "
+        "This option specifies if Tidy should replace smart quotes and em dashes with "
+        "ASCII, and output spaces rather than non-breaking "
+        "spaces, where they exist in the input. "
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -1110,7 +1117,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
       be translated. */
         TidyQuoteAmpersand,           0,
         "This option specifies if Tidy should output unadorned <code>&amp;</code> "
-        "characters as <code>&amp;amp;</code>. "
+        "characters as <code>&amp;amp;</code>, in legacy doctypes only. "
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -1165,6 +1172,21 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "This option specifies the number Tidy uses to determine if further errors "
         "should be shown. If set to <var>0</var>, then no errors are shown. "
     },
+    {/* Important notes for translators:
+      - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+      <br/>.
+      - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+      - Option values should be enclosed in <var></var>.
+      - It's very important that <br/> be self-closing!
+      - The strings "Tidy" and "HTML Tidy" are the program name and must not
+      be translated. */
+        TidyShowFilename,             0,
+        "This option specifies if Tidy should show the filename in messages. eg: "
+        "<br/>"
+        " tidy -q -e --show-filename yes index.html<br/>"
+        " index.html: line 43 column 3 - Warning: replacing invalid UTF-8 bytes (char. code U+00A9) "
+    },
+
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
       <br/>.
@@ -1470,7 +1492,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
         TidyWrapPhp,                  0,
-        "This option specifies if Tidy should line wrap text contained within PHP "
+        "This option specifies if Tidy should add a new line after a PHP "
         "pseudo elements, which look like: <code>&lt;?php ... ?&gt;</code>. "
     },
     {/* Important notes for translators:
@@ -1681,6 +1703,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
      ** @remark enum generator FOREACH_MSG_MISC
      ********************************************/
     { LINE_COLUMN_STRING,           0,   "line %d column %d - "                                                    },
+    { FN_LINE_COLUMN_STRING,        0,   "%s: line %d column %d - "                                                },
     {/* For example, "discarding invalid UTF-16 surrogate pair" */
       STRING_DISCARDING,            0,   "discarding"
     },
@@ -1924,6 +1947,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
      ********************************************/    
     { ADDED_MISSING_CHARSET,        0,   "Added appropriate missing <meta charset=...> to %s"                      },
     { ANCHOR_NOT_UNIQUE,            0,   "%s anchor \"%s\" already defined"                                        },
+    { ANCHOR_DUPLICATED,            0,   "Implicit %s anchor \"%s\" duplicated by Tidy."                           },
     { APOS_UNDEFINED,               0,   "named entity &apos; only defined in XML/XHTML"                           },
     { ATTR_VALUE_NOT_LCASE,         0,   "%s attribute value \"%s\" must be lower case for XHTML"                  },
     { ATTRIBUTE_IS_NOT_ALLOWED,     0,   "%s attribute \"is\" not allowed for autonomous custom tags."             },
@@ -2170,7 +2194,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TC_LABEL_LANG,                0,   "lang"                                                                    },
     { TC_LABEL_LEVL,                0,   "level"                                                                   },
     { TC_LABEL_OPT,                 0,   "option"                                                                  },
-    { TC_MAIN_ERROR_LOAD_CONFIG,    0,   "Loading config file \"%s\" failed, err = %d"                             },
+    { TC_MAIN_ERROR_LOAD_CONFIG,    0,   "Loading config file \"%s\" problems, err = %d"                             },
     { TC_OPT_ACCESS,                0,
         "do additional accessibility checks (<level> = 0, 1, 2, 3). 0 is "
         "assumed if <level> is missing."
@@ -2287,7 +2311,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         - Second %s represents a version number, typically x.x.xx.
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TC_TXT_HELP_1,                0,
-        "\n"
         "%s [options...] [file...] [options...] [file...]\n"
         "Utility to clean up and pretty print HTML/XHTML/XML.\n"
         "\n"
@@ -2314,7 +2337,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         " of \"--some-option <value>\", for example, \"--indent-with-tabs yes\".\n"
         "\n"
         " You can also specify a file containing configuration options with the \n"
-        " -options <file> directive, or in one or more files specific to your \n"
+        " -config <file> directive, or in one or more files specific to your \n"
         " environment (see next section). \n"
         "\n"
         " For a list of all configuration options, use \"-help-config\" or refer\n"

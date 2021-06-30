@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<title>[ #443362 ] null-pointer except. for doctype in pre</title> 
+</head> 
+
+<body> 
+<h1>Unofficial W3C Validator FAQ</h1> 
+<p>This is a list of frequently asked questions and answers asked on the 
+<a href="http://lists.w3.org/Archive/Public/www-validator-css/" 
+title="Mailing list archive">www-validator-css@w3.org mailing list</a>. 
+
+<h2>
+What does "<code>org.xml.sax.SAXException: 
+Please, fix your system identifier (URI) in the DOCTYPE rule.</code>" mean?
+</h2> 
+
+<p>Your XHTML document contains a document type 
+declaration but the system identifier points at some 
+non-W3C URI. Your document probably contains something 
+like this:
+</p> 
+<pre> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+
+</pre> 
+</body> 
+</html>

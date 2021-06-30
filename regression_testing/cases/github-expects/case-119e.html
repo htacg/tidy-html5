@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Issue #119 - Test HTML5, custom-tags: inline
+    </title>
+  </head>
+  <body>
+    <h1>
+      About this case
+    </h1>
+    <p>
+      This test case ensures that Tidy handles autonomous custom tags appropriately for HTML5 documents.
+    </p>
+    <p>
+      In this case, <kbd>custom-tags</kbd> is <strong>inline</strong>, and so Tidy should accept unknown tags if they look like autonomous custom elements.
+    </p>
+    <pizzerias>
+      This is a user-defined tag, and Tidy should provide a warning, but allow it.
+    </pizzerias>
+    <jets-pizza>
+      This is a user-defined tag, and Tidy should not provide a warning. Even though <kbd>custom-tags</kbd> is <strong>inline</strong>, this tag is configured as <strong>blocklevel</strong> in the configuration, and so will be treated as such.
+    </jets-pizza>
+    <p>
+      <dominos-pizza>This is an autonomous custom tag,</dominos-pizza>, and it should show up as an inline element, <new-inline-element>as does this.</new-inline-element>.
+    </p>
+  </body>
+</html>

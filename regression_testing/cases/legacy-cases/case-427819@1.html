@@ -1,0 +1,17 @@
+<html> 
+<head> 
+<title>[ #427819 ] OPTION w/illegal FONT eats whitespace</title> 
+</head> 
+<body> 
+<form method="get"> 
+<select name="select"> 
+<option value="1"> Tidy <font size="7"> gets </font> 
+this right </option> 
+<!-- The following gets tidied into "Tidy getsthis 
+wrong" --> 
+<option value="2"> Tidy <font size="7"> gets</font> 
+this wrong </option> 
+</select> 
+</form> 
+</body> 
+</html>

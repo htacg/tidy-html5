@@ -1,56 +1,19 @@
 @setlocal
-@REM 20170702 - Check branch
-@set TMPBR=next
-@REM 20161002 - Change to msvc140 build
-@set VCVERS=14
-@set GENERATOR=Visual Studio %VCVERS% Win64
-@REM 20160324 - Change to relative, and use choice
+
+@set TMPVER=1
 @set TMPPRJ=tidy
-@echo Build %TMPPRJ% project, in 64-bits
-@set TMPLOG=bldlog-1.txt
-@set BLDDIR=%CD%
-@set TMPROOT=..\..\..
-@set SET_BAT=%ProgramFiles(x86)%\Microsoft Visual Studio %VCVERS%.0\VC\vcvarsall.bat
-@if NOT EXIST "%SET_BAT%" goto NOBAT
-@REM if NOT EXIST %TMPROOT%\nul goto NOROOT
 @set TMPSRC=..\..
-@if NOT EXIST %TMPSRC%\CMakeLists.txt goto NOCM
+@set TMPBGN=%TIME%
+@set TMPINS=D:\Projects\3rdParty.x64
+@set TMPLOG=bldlog-1.txt
 @set DOPAUSE=1
+@set TMPGEN=Visual Studio 16 2019
+@set TMPBR=next
+@set TMPINDBG=1
 
-@if /I "%PROCESSOR_ARCHITECTURE%" EQU "AMD64" (
-@set TMPINST=%TMPROOT%\software.x64
-) ELSE (
- @if /I "%PROCESSOR_ARCHITECTURE%" EQU "x86_64" (
-@set TMPINST=%TMPROOT%\software.x64
- ) ELSE (
-@echo ERROR: Appears 64-bit is NOT available... aborting...
-@goto ISERR
- )
-)
-@if NOT EXIST %TMPINST%\nul goto NOINST
-
-@echo Doing build output to %TMPLOG%
-@echo Doing build output to %TMPLOG% > %TMPLOG%
-
-@echo Doing: 'call "%SET_BAT%" %PROCESSOR_ARCHITECTURE%'
-@echo Doing: 'call "%SET_BAT%" %PROCESSOR_ARCHITECTURE%' >> %TMPLOG%
-@call "%SET_BAT%" %PROCESSOR_ARCHITECTURE% >> %TMPLOG% 2>&1
-@if ERRORLEVEL 1 goto ERR0
-@REM call setupqt64
-@cd %BLDDIR%
-
-@REM :DNARCH
-
-@REM ############################################
-@REM NOTE: SPECIAL INSTALL LOCATION
-@REM Adjust to suit your environment
-@REM ##########################################
-@REM set TMPINST=F:\Projects\software.x64
-@set TMPOPTS=-DCMAKE_INSTALL_PREFIX=%TMPINST%
-@set TMPOPTS=%TMPOPTS% -G "%GENERATOR%"
-@REM set TMPOPTS=%TMPOPTS% -DTIDY_CONFIG_FILE="C:\MDOS\tidy5.cfg"
-@REM set TMPOPTS=%TMPOPTS% -DTIDY_USER_CONFIG_FILE="C:\MDOS\tidy5.cfg"
-@set TMPOPTS=%TMPOPTS% -DBUILD_SHARED_LIB:BOOL=OFF
+@set TMPOPTS=-G "%TMPGEN%" -A x64
+@set TMPOPTS=%TMPOPTS% -DCMAKE_INSTALL_PREFIX=%TMPINS%
+@set TMPOPTS=%TMPOPTS% -DBUILD_SHARED_LIB=ON
 
 :RPT
 @if "%~1x" == "x" goto GOTCMD
@@ -64,31 +27,48 @@
 :GOTCMD
 
 @call chkmsvc %TMPPRJ%
+@if "%TMPBR%x" == "x" goto DNBR
 @call chkbranch %TMPBR%
-@if ERRORLEVEL 1 goto BADBR
-:GOTBR
+@if ERRORLEVEL 1 goto BAD_BR
+:DNBR
 
-@echo Begin %DATE% %TIME%, output to %TMPLOG%
-@echo Begin %DATE% %TIME% >> %TMPLOG%
+@echo Build %TMPPRJ% 64-bits %DATE% %TIME%, in %CD%, to  %TMPLOG% > %TMPLOG%
 
-@echo Doing: 'cmake %TMPSRC% %TMPOPTS%'
-@echo Doing: 'cmake %TMPSRC% %TMPOPTS%' >> %TMPLOG%
-@cmake %TMPSRC% %TMPOPTS% >> %TMPLOG% 2>&1
+@if NOT EXIST %TMPSRC%\nul goto NOSRC
+
+@echo Build source %TMPSRC%... all output to build log %TMPLOG%
+@echo Build source %TMPSRC%... all output to build log %TMPLOG% >> %TMPLOG%
+
+@if EXIST build-cmake.bat (
+@call build-cmake >> %TMPLOG%
+)
+
+@if NOT EXIST %TMPSRC%\CMakeLists.txt goto NOCM
+
+@echo Doing: 'cmake -S %TMPSRC% %TMPOPTS%'
+@echo Doing: 'cmake -S %TMPSRC% %TMPOPTS%' >> %TMPLOG% 2>&1
+@cmake -S %TMPSRC% %TMPOPTS% >> %TMPLOG% 2>&1
 @if ERRORLEVEL 1 goto ERR1
 
-@echo Doing: 'cmake --build . --config debug'
-@echo Doing: 'cmake --build . --config debug' >> %TMPLOG%
-@cmake --build . --config debug >> %TMPLOG%
+@echo Doing: 'cmake --build . --config Debug'
+@echo Doing: 'cmake --build . --config Debug'  >> %TMPLOG% 2>&1
+@cmake --build . --config Debug  >> %TMPLOG% 2>&1
 @if ERRORLEVEL 1 goto ERR2
 
-@echo Doing: 'cmake --build . --config release'
-@echo Doing: 'cmake --build . --config release' >> %TMPLOG%
-@cmake --build . --config release >> %TMPLOG% 2>&1
+@echo Doing: 'cmake --build . --config Release'
+@echo Doing: 'cmake --build . --config Release'  >> %TMPLOG% 2>&1
+@cmake --build . --config Release  >> %TMPLOG% 2>&1
 @if ERRORLEVEL 1 goto ERR3
-:DNREL
 
-@echo Appears a successful build
-@echo Note install location %TMPINST%
+@fa4 "***" %TMPLOG%
+@call elapsed %TMPBGN%
+@echo Appears a successful build... see %TMPLOG%
+@echo Note install location %TMPINS%
+@if "%TMPINDBG%x" == "1x" (
+@echo Will install Debug and Release
+) else (
+@echo Will only intall Release
+)
 @echo.
 
 @REM ##############################################
@@ -118,20 +98,46 @@
 :DOINST
 @echo Proceeding with INSTALL...
 @echo.
-@REM cmake -P cmake_install.cmake
-@echo Doing: 'cmake --build . --config debug --target INSTALL'
-@echo Doing: 'cmake --build . --config debug --target INSTALL' >> %TMPLOG%
-@cmake --build . --config debug --target INSTALL >> %TMPLOG% 2>&1
+@if NOT "%TMPINDBG%x" == "1x" goto DNDBGIN
+@if EXIST install_manifest.txt @del install_manifest.txt
+@echo Doing: 'cmake --build . --config Debug  --target INSTALL'
+@echo Doing: 'cmake --build . --config Debug  --target INSTALL' >> %TMPLOG% 2>&1
+@cmake --build . --config Debug  --target INSTALL >> %TMPLOG% 2>&1
+@if ERRORLEVEL 1 goto ERR4
+@if EXIST install_manifest.txt (
+    @copy install_manifest.txt install_manifest_debug.txt >nul
+    @call add2installs install_manifest.txt -o %TMPINS%\install_manifest.txt >> %TMPLOG%
+)
+:DNDBGIN
 
-@echo Doing: 'cmake --build . --config release --target INSTALL'
-@echo Doing: 'cmake --build . --config release --target INSTALL' >> %TMPLOG%
-@cmake --build . --config release --target INSTALL >> %TMPLOG% 2>&1
+@if EXIST install_manifest.txt @del install_manifest.txt
+@echo Doing: 'cmake --build . --config Release  --target INSTALL'
+@echo Doing: 'cmake --build . --config Release  --target INSTALL' >> %TMPLOG% 2>&1
+@cmake --build . --config Release  --target INSTALL >> %TMPLOG% 2>&1
+@if ERRORLEVEL 1 goto ERR5
+@if EXIST install_manifest.txt (
+    @copy install_manifest.txt install_manifest_release.txt >nul
+    @call add2installs install_manifest.txt -o %TMPINS%\install_manifest.txt >> %TMPLOG%
+)
 
 @fa4 " -- " %TMPLOG%
 
-@echo Done build and install of %TMPPRJ%...
+@call elapsed %TMPBGN%
+@echo All done... see %TMPLOG%
 
 @goto END
+
+:BAD_BR
+@echo Try to do 'git checkout %TMPBR%'
+@git checkout %TMPBR% >> %TMPLOG% 2>&1
+@call chkbranch %TMPBR%
+@if ERRORLEVEL 1 goto NO_BR
+@goto DNBR
+:NO_BR
+@echo.
+@echo Unable to check out %TMPBR%! *** FIX ME ***
+@echo.
+@goto ISERR
 
 :GOTNO
 @echo.
@@ -139,59 +145,43 @@
 @echo.
 @goto END
 
-:NOBAT
-@echo Can NOT locate MSVC setup batch "%SET_BAT%"! *** FIX ME ***
+:NOSRC
+@echo Can NOT locate source %TMPSRC%! *** FIX ME ***
+@echo Can NOT locate source %TMPSRC%! *** FIX ME *** >> %TMPLOG%
 @goto ISERR
-
-@REM :NOROOT
-@REM @echo Can NOT locate %TMPROOT%! *** FIX ME ***
-@REM @goto ISERR
 
 :NOCM
-@echo Can NOT locate %TMPSRC%\CMakeLists.txt! *** FIX ME ***
-@goto ISERR
-
-:NOINST
-@echo Can NOT locate directory %TMPINST%! *** FIX ME ***
-@goto ISERR
-
-:ERR0
-@echo MSVC 10 setup error
+@echo Can NOT locate %TMPSRC%\CMakeLists.txt!
+@echo Can NOT locate %TMPSRC%\CMakeLists.txt! >> %TMPLOG%
 @goto ISERR
 
 :ERR1
-@echo cmake config, generation error
+@echo cmake configuration or generations ERROR
+@echo cmake configuration or generations ERROR >> %TMPLOG%
 @goto ISERR
 
 :ERR2
-@echo debug build error
+@echo ERROR: Cmake build Debug FAILED!
+@echo ERROR: Cmake build Debug FAILED! >> %TMPLOG%
 @goto ISERR
 
 :ERR3
-@fa4 "mt.exe : general error c101008d:" %TMPLOG% >nul
-@if ERRORLEVEL 1 goto ERR32
-:ERR33
-@echo release build error
+@echo ERROR: Cmake build Release FAILED!
+@echo ERROR: Cmake build Release FAILED! >> %TMPLOG%
 @goto ISERR
-:ERR32
-@echo Stupid error... trying again...
-@echo Doing: 'cmake --build . --config release'
-@echo Doing: 'cmake --build . --config release' >> %TMPLOG%
-@cmake --build . --config release >> %TMPLOG% 2>&1
-@if ERRORLEVEL 1 goto ERR33
-@goto DNREL
 
-:BADBR
-@call git checkout %TMPBR%
-@call chkbranch %TMPBR%
-@if ERRORLEVEL 1 goto BADBR2
-@goto GOTBR
-:BADBR2
-@call shwbranch
-@echo Not on correct branch %TMPBR%
+:ERR4
+@echo ERROR: Install Debug FAILED!
+@echo ERROR: Install Debug  FAILED! >> %TMPLOG%
+@goto ISERR
+
+:ERR5
+@echo ERROR: Install Release FAILED!
+@echo ERROR: Install Release  FAILED! >> %TMPLOG%
 @goto ISERR
 
 :ISERR
+@echo See %TMPLOG% for details...
 @endlocal
 @exit /b 1
 

@@ -1,0 +1,38 @@
+line 1 column 1 - Warning: missing <!DOCTYPE> declaration
+line 4 column 1 - Warning: discarding unexpected <frame>
+line 5 column 1 - Error: <overlay> is not recognized!
+line 5 column 1 - Warning: discarding unexpected <overlay>
+line 9 column 1 - Warning: <spacer> isn't allowed in <tr> elements
+line 8 column 1 - Info: <tr> previously mentioned
+line 5 column 1 - Warning: missing </noframes>
+line 1 column 1 - Warning: inserting missing 'title' element
+line 8 column 1 - Warning: trimming empty <tr>
+line 2 column 1 - Warning: <frameset> element removed from HTML5
+line 5 column 1 - Warning: <noframes> element removed from HTML5
+line 9 column 1 - Warning: <spacer> is not approved by W3C
+line 6 column 1 - Warning: <bgsound> is not approved by W3C
+Info: Document content looks like HTML5
+Tidy found 11 warnings and 1 error!
+
+This document has errors that must be fixed before
+using HTML Tidy to generate a tidied up version.
+
+You are recommended to use CSS for controlling white
+space (e.g. for indentation, margins and line spacing).
+The proprietary <SPACER> element has limited vendor support.
+
+One or more empty elements were present in the source document but
+dropped on output. If these elements are necessary or you don't want
+this behavior, then consider setting the option "drop-empty-elements"
+to no.
+
+About HTML Tidy: https://github.com/htacg/tidy-html5
+Bug reports and comments: https://github.com/htacg/tidy-html5/issues
+Official mailing list: https://lists.w3.org/Archives/Public/public-htacg/
+Latest HTML specification: http://dev.w3.org/html5/spec-author-view/
+Validate your HTML documents: http://validator.w3.org/nu/
+Lobby your company to join the W3C: http://www.w3.org/Consortium
+
+Do you speak a language other than English, or a different variant of 
+English? Consider helping us to localize HTML Tidy. For details please see 
+https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md

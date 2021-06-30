@@ -96,6 +96,18 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
     result->line = line;
     result->column = column;
     result->level = level;
+    /* Is #719 - set 'muted' before any callbacks. */
+    result->muted = no;
+    i = 0;
+    while ((doc->muted.list) && (doc->muted.list[i] != 0))
+    {
+        if (doc->muted.list[i] == code)
+        {
+            result->muted = yes;
+            break;
+        }
+        i++;
+    }
 
     /* Things we create... */
 
@@ -126,6 +138,14 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
         /* Change formatting to be parsable by GNU Emacs */
         TY_(tmbsnprintf)(result->messagePosDefault, sizeMessageBuf, "%s:%d:%d: ", cfgStr(doc, TidyEmacsFile), line, column);
         TY_(tmbsnprintf)(result->messagePos, sizeMessageBuf, "%s:%d:%d: ", cfgStr(doc, TidyEmacsFile), line, column);
+    }
+    else if ( cfgBool(doc, TidyShowFilename) && cfgStr(doc, TidyEmacsFile) )
+    {
+        /* Include filename in output */
+        TY_(tmbsnprintf)(result->messagePosDefault, sizeMessageBuf, tidyDefaultString(FN_LINE_COLUMN_STRING),
+            cfgStr(doc, TidyEmacsFile), line, column);
+        TY_(tmbsnprintf)(result->messagePos, sizeMessageBuf, tidyLocalizedString(FN_LINE_COLUMN_STRING),
+            cfgStr(doc, TidyEmacsFile), line, column);
     }
     else
     {
@@ -198,19 +218,6 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
     if ( doc->messageCallback )
     {
         result->allowMessage = result->allowMessage & doc->messageCallback( tidyImplToMessage(result) );
-    }
-
-    /* finally, check the document's configuration to determine whether
-       this message is muted. */
-    result->muted = no;
-    while ( ( doc->muted.list ) && ( doc->muted.list[i] != 0 ) )
-    {
-        if ( doc->muted.list[i] == code )
-        {
-            result->muted = yes;
-            break;
-        }
-        i++;
     }
 
     return result;
@@ -636,6 +643,7 @@ static struct printfArg* BuildArgArray( TidyDocImpl *doc, ctmbstr fmt, va_list a
         else
         {
             strncpy(nas[cn].format, fmt + nas[cn].formatStart, nas[cn].formatLength);
+            nas[cn].format[nas[cn].formatLength] = 0; /* Is. #800 - If count <= srcLen, no 0 added! */
         }
         
 

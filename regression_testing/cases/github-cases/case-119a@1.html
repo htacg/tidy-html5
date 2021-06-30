@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<title>Issue #119 - Test IS attribute</title>
+<body>
+<h1>About this case</h1>
+<p>
+This test case ensures that the <kbd>is</kbd> attribute it handled correctly.
+Tidy accepts <kbd>is</kbd> for all versions of HTML, but ensures that it is
+correct per the HTML5 rules.
+</p>
+
+<ul>
+  <li is><kbd>is</kbd> must have a value.</li>
+  <li is=""><kbd>is</kbd> must have a value.</li>
+  <li is="custom_element"><kbd>is</kbd> must contain a hyphen.</li>
+  <li is="custom-element me_too"><kbd>is</kbd> must not contain a space.</li>
+  <li is="custom-element"><kbd>is</kbd> is correct for this paragraph.</li>
+  <li>
+    <pizzerias is="custom-element">
+      <kbd>is</kbd> can be used with user-defined tags…
+    </pizzerias>
+    <jets-pizza is="custom-element">
+      …unless they look like autonomous custom tags.
+    </jets-pizza>
+    <new-tag is="custom-element">
+      <kbd>is</kbd> cannot be used with autonomous custom tags detected in
+      the document, either.
+    </new-tag>
+  </li>
+</ul>
+
+</body>
+</html>

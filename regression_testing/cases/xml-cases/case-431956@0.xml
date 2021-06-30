@@ -1,0 +1,8 @@
+<!--[ #431956 ] Well formed XSL <xsl:text> gives error-->
+<!-- Use -xml on command line -->
+<!--FAILS (Tidy returns zero length string):-->
+<!--========================================-->
+<?xml version="1.0"?>
+<xsl:stylesheet version="1.0">
+   <xsl:text>Test</xsl:text>
+</xsl:stylesheet>

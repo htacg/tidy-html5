@@ -317,7 +317,7 @@ int TY_(DecodeUTF8BytesToChar)( uint* c, uint firstByte, ctmbstr successorBytes,
        fprintf( stderr, "0x%02x ", firstByte );
        for (i = 1; i < bytes; i++)
            fprintf( stderr, "0x%02x ", buf[i - 1] );
-       fprintf( stderr, " = U+%04ulx\n", n );
+       fprintf( stderr, " = U+%04X\n", n );
     }
 #endif
 

@@ -1,0 +1,8 @@
+<html>
+<head>
+<title>Testcase #503436</title>
+</head>
+<body>
+  <img src="image.gif" alt="first" alt="second" />
+</body>
+</html>

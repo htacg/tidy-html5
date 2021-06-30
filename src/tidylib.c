@@ -2169,6 +2169,8 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
         }
     }
 
+    TY_(CleanHead)(doc); /* Is #692 - discard multiple <title> tags */
+
 #if defined(ENABLE_DEBUG_LOG)
     SPRTF("All nodes AFTER clean and repair\n");
     dbg_show_all_nodes( doc, &doc->root, 0  );

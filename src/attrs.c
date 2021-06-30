@@ -317,6 +317,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_MAX,                     "max",                     CH_PCDATA   },
   { TidyAttr_MEDIAGROUP,              "mediagroup",              CH_PCDATA   },
   { TidyAttr_MIN,                     "min",                     CH_PCDATA   },
+  { TidyAttr_MUTED,                   "muted",                   CH_BOOL     },
   { TidyAttr_NOVALIDATE,              "novalidate",              CH_PCDATA   },
   { TidyAttr_OPEN,                    "open",                    CH_BOOL     }, /* Is. #925 PR #932 */
   { TidyAttr_OPTIMUM,                 "optimum",                 CH_PCDATA   },
@@ -372,6 +373,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_OnWAITING,               "onwaiting",               CH_PCDATA   },
   { TidyAttr_PATTERN,                 "pattern",                 CH_PCDATA   },
   { TidyAttr_PLACEHOLDER,             "placeholder",             CH_PCDATA   },
+  { TidyAttr_PLAYSINLINE,             "playsinline",             CH_BOOL     },
   { TidyAttr_POSTER,                  "poster",                  CH_PCDATA   },
   { TidyAttr_PRELOAD,                 "preload",                 CH_PCDATA   },
   { TidyAttr_PUBDATE,                 "pubdate",                 CH_PCDATA   },

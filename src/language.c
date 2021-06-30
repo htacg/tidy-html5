@@ -17,6 +17,7 @@
 #include "language_pt_br.h"
 #include "language_zh_cn.h"
 #include "language_fr.h"
+#include "language_de.h"
 #endif
 
 
@@ -28,7 +29,7 @@ typedef struct {
     Bool manually_set;
     languageDefinition *currentLanguage;
     languageDefinition *fallbackLanguage;
-    languageDefinition *languages[8];
+    languageDefinition *languages[9];
 } tidyLanguagesType;
 
 
@@ -51,6 +52,7 @@ static tidyLanguagesType tidyLanguages = {
         &language_pt_br,
         &language_zh_cn,
         &language_fr,
+        &language_de,
 #endif
         NULL /* This array MUST be null terminated. */
     }

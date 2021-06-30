@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>Issue 434 – Custom Attribute Sorting</title>
+</head>
+<body>
+<p>
+  Tidy can sort attributes or leave them in source document order. However the
+  <kbd>priority-attributes</kbd> option can place certain attributes in
+  user-desired order ahead of the sorting mechanism specified by 
+  <kbd>sort-attributes</kbd>.
+</p>
+<p>
+  The anchor tag below contains several attributes, but the config file for this
+  test indicates that <kbd>id</kbd>, <kbd>style</kbd>, and <kbd>class</kbd>
+  shall be placed first.
+</p>
+<a style="generic_style" class="myclass" href="http://example.com" is="some-thing" id=midnight title="cool">You are cool.</a>
+</body>
+</html>

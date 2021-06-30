@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>[ #433672 ] Anchor enclosing Header tags is
+  omitted</title>
+  <style type="text/css">
+  div.c1 {text-align: center}
+  </style>
+</head>
+<body>
+  <a name="xyz"
+        id="xyz">
+  <h2>Section heading</h2></a>
+  <h2><a name="abc"
+     id="abc">Another heading</a></h2><a href='#xyz'>
+  <div class="c1"><img alt='ack!'
+       src='joebob.gif'></div></a>
+  <p><a href='#abc'>Goto Another Heading</a></p>
+</body>
+</html>

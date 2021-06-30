@@ -142,6 +142,7 @@ extern const AttrVersion TY_(W3CAttrsFor_OUTPUT)[];
 extern const AttrVersion TY_(W3CAttrsFor_MENUITEM)[];
 extern const AttrVersion TY_(W3CAttrsFor_METER)[];
 extern const AttrVersion TY_(W3CAttrsFor_PROGRESS)[];
+extern const AttrVersion TY_(W3CAttrsFor_SLOT)[];
 extern const AttrVersion TY_(W3CAttrsFor_TEMPLATE)[];
 extern const AttrVersion TY_(W3CAttrsFor_TIME)[];
 extern const AttrVersion TY_(W3CAttrsFor_DATA)[];

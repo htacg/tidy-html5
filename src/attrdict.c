@@ -95,6 +95,7 @@
   { TidyAttr_IS,                    xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
   { TidyAttr_LANG,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
   { TidyAttr_ROLE,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
+  { TidyAttr_SLOT,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
   { TidyAttr_SPELLCHECK,            xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
   { TidyAttr_STYLE,                 xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
   { TidyAttr_TABINDEX,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, \
@@ -1630,6 +1631,7 @@ const AttrVersion TY_(W3CAttrsFor_IFRAME)[] =
   { TidyAttr_FRAMEBORDER,           xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_HEIGHT,                xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_ID,                    xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 }, /* CORE override */
+  { TidyAttr_LOADING,               xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_LONGDESC,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_MARGINHEIGHT,          xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_MARGINWIDTH,           xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx },
@@ -1663,6 +1665,7 @@ const AttrVersion TY_(W3CAttrsFor_IMG)[] =
   { TidyAttr_ID,                    xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|HT50|XH50 }, /* CORE override */
   { TidyAttr_ISMAP,                 HT20|HT32|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_LANG,                  xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|xxxx|xxxx|HT50|XH50 }, /* CORE override */
+  { TidyAttr_LOADING,               xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
   { TidyAttr_LONGDESC,              xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|XB10|xxxx|xxxx },
   { TidyAttr_NAME,                  xxxx|xxxx|xxxx|H41T|X10T|xxxx|H41F|X10F|xxxx|H41S|xxxx|xxxx|xxxx|xxxx|xxxx },
   { TidyAttr_OnCLICK,               xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|H40S|H41S|X10S|XH11|xxxx|HT50|XH50 }, /* CORE override */
@@ -2880,6 +2883,17 @@ const AttrVersion TY_(W3CAttrsFor_SMALL)[] =
   { TidyAttr_UNKNOWN,               0                                                                          },
 };
 
+const AttrVersion TY_(W3CAttrsFor_SLOT)[] =
+{
+  INCLUDE_ARIA
+  INCLUDE_MICRODATA
+  { TidyAttr_NAME,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50 },
+  INCLUDE_CORE_ATTRIBS
+  INCLUDE_CORE_EVENTS
+  INCLUDE_RDFA
+  { TidyAttr_UNKNOWN,               0                                                                          },
+};
+
 const AttrVersion TY_(W3CAttrsFor_SOURCE)[] = 
 {
   INCLUDE_ARIA
@@ -3102,6 +3116,21 @@ const AttrVersion TY_(W3CAttrsFor_SVG)[] =
   { TidyAttr_BASEPROFILE,           xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_CONTENTSCRIPTTYPE,     xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|H41S|X10S|XH11|xxxx|HT50|XH50 },
   { TidyAttr_CONTENTSTYLETYPE,      xxxx|xxxx|H40T|H41T|X10T|H40F|H41F|X10F|xxxx|H41S|X10S|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_COLOR,                 xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_FILL,                  xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_FILLRULE,              xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_STROKE,                xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_STROKEDASHARRAY,       xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_STROKEDASHOFFSET,      xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_STROKELINECAP,         xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_STROKELINEJOIN,        xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_STROKEMITERLIMIT,      xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_STROKEWIDTH,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_COLORINTERPOLATION,    xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_COLORRENDERING,        xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_OPACITY,               xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_STROKEOPACITY,         xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
+  { TidyAttr_FILLOPACITY,           xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|XH11|xxxx|HT50|XH50 },
   INCLUDE_CORE_ATTRIBS
   INCLUDE_CORE_EVENTS
   INCLUDE_RDFA

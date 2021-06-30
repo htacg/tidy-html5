@@ -1699,15 +1699,17 @@ static void PPrintPhp( TidyDocImpl* doc, uint indent, Node *node )
 {
     TidyPrintImpl* pprint = &doc->pprint;
     Bool wrapPhp = cfgBool( doc, TidyWrapPhp );
-    uint saveWrap = WrapOffCond( doc, !wrapPhp  );
+    /* uint saveWrap = WrapOffCond( doc, !wrapPhp  ); */
 
     AddString( pprint, "<?" );
-    PPrintText( doc, (wrapPhp ? CDATA : COMMENT),
-                indent, node );
+    PPrintText( doc, CDATA, indent, node );
     AddString( pprint, "?>" );
 
-    /* PCondFlushLine( doc, indent ); */
-    WrapOn( doc, saveWrap );
+    /* Issue #437 - add a new line if 'wrap-php' is on */
+    if (wrapPhp)
+        PCondFlushLine( doc, indent ); 
+       
+    /* WrapOn( doc, saveWrap ); */
 }
 
 static void PPrintCDATA( TidyDocImpl* doc, uint indent, Node *node )

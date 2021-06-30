@@ -151,6 +151,7 @@ static CheckAttribs CheckHTML;
 #define VERS_ELEM_OUTPUT     (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_PROGRESS   (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_SECTION    (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
+#define VERS_ELEM_SLOT       (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_SOURCE     (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_SUMMARY    (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
 #define VERS_ELEM_TEMPLATE   (xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|xxxx|HT50|XH50)
@@ -321,6 +322,7 @@ static Dict tag_defs[] =
   { TidyTag_OUTPUT,      "output",       VERS_ELEM_OUTPUT,      &TY_(W3CAttrsFor_OUTPUT)[0],      (CM_INLINE),                   TY_(ParseInline),    NULL           },
   { TidyTag_PROGRESS,    "progress",     VERS_ELEM_PROGRESS,    &TY_(W3CAttrsFor_PROGRESS)[0],    (CM_INLINE),                   TY_(ParseInline),    NULL           },
   { TidyTag_SECTION,     "section",      VERS_ELEM_SECTION,     &TY_(W3CAttrsFor_SECTION)[0],     (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
+  { TidyTag_SLOT,        "slot",         VERS_ELEM_SLOT,        &TY_(W3CAttrsFor_SLOT)[0],        (CM_BLOCK|CM_INLINE|CM_MIXED), TY_(ParseBlock),     NULL           },
   { TidyTag_SOURCE,      "source",       VERS_ELEM_SOURCE,      &TY_(W3CAttrsFor_SOURCE)[0],      (CM_BLOCK|CM_INLINE|CM_EMPTY), TY_(ParseBlock),     NULL           },
   { TidyTag_SUMMARY,     "summary",      VERS_ELEM_SUMMARY,     &TY_(W3CAttrsFor_SUMMARY)[0],     (CM_BLOCK),                    TY_(ParseBlock),     NULL           }, /* Is. #895 */
   { TidyTag_TEMPLATE,    "template",     VERS_ELEM_TEMPLATE,    &TY_(W3CAttrsFor_TEMPLATE)[0],    (CM_BLOCK),                    TY_(ParseBlock),     NULL           },

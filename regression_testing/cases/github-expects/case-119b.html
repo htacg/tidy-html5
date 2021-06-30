@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Issue #119 - Test HTML4, custom-tags: no
+    </title>
+  </head>
+  <body>
+    <h1>
+      About this case
+    </h1>
+    <p>
+      This test case ensures that Tidy handles autonomous custom tags appropriately for pre-HTML5 documents. Tidy will support them via the <kbd>custom-tags</kbd> option, even though such documents do not support such tags.
+    </p>
+    <p>
+      In this case, <kbd>custom-tags</kbd> is <strong>no</strong>, and so Tidy should report unknown tags. We will use <kbd>force-output</kbd> to ensure that a document is generated, and to gather additional warning output.
+    </p>
+    <pizzerias>
+      This is a user-defined tag, and Tidy should provide a warning, but allow it.
+    </pizzerias>
+    <jets-pizza>
+      This is a user-defined tag, and Tidy should provide a warning, but allow it. Because <kbd>custom-tags</kbd> is <strong>no</strong>, it's treated like any other user-defined tag, even though it looks like an autonomous custom tag.
+    </jets-pizza>This is an autonomous custom tag, but it's not supported in this test case. It should be rejected and cause an error.
+  </body>
+</html>

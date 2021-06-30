@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<title>Issue #119 - Test HTML4, custom-tags: inline</title>
+<body>
+<h1>About this case</h1>
+<p>
+This test case ensures that Tidy handles autonomous custom tags appropriately
+for pre-HTML5 documents. Tidy will support them via the <kbd>custom-tags</kbd>
+option, even though such documents do not support such tags.
+</p>
+<p>
+In this case, <kbd>custom-tags</kbd> is <strong>inline</strong>, and so Tidy
+should allow them, and treat them as inline. However because this is not an
+HTML5 document, Tidy will report warnings about their use.
+</p>
+
+<pizzerias>
+  This is a user-defined tag, and Tidy should provide a warning, but allow it.
+</pizzerias>
+
+<jets-pizza>
+  This is a user-defined tag, and Tidy should provide a warning, but allow it.
+  Even though <kbd>custom-tags</kbd> is <strong>inline</strong>, this tag is
+  configured as <strong>blocklevel</strong> in the configuration, and so will
+  be treated as such.
+</jets-pizza>
+
+<p>
+<dominos-pizza>This is an autonomous custom tag,</dominos-pizza>, and it should
+show up as an inline element, 
+<new-inline-element>as does this.</new-inline-element>.
+</p>
+
+</body>
+</html>

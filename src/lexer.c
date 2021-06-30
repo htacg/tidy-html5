@@ -2701,10 +2701,9 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                         }
 
                         /*
-                           We only print this message if there's a missing
-                           starting hyphen; this comment will be dropped.
+                           TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT_DROPPING );
+                           Warning now done later - see issue #487
                          */
-                        TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT_DROPPING );
                     }
                     else if (c == 'd' || c == 'D')
                     {
@@ -2777,6 +2776,11 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                     }
 
 
+                    /*
+                       We only print this message if there's a missing
+                       starting hyphen; this comment will be dropped.
+                     */
+                    TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT_DROPPING ); /* Is. #487 */
 
                     /* else swallow characters up to and including next '>' */
                     while ((c = TY_(ReadChar)(doc->docIn)) != '>')
@@ -3340,7 +3344,11 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                     }
                 }
 
-                if (c != ']')
+                if (c == '>')
+                {
+                    /* Is. #462 - reached '>' before ']' */
+                    TY_(UngetChar)(c, doc->docIn);
+                } else if (c != ']')
                     continue;
 
                 /* now look for '>' */
@@ -3463,6 +3471,10 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
         GTDBG(doc,"COMMENT", node);
         return node;  /* the COMMENT token */
     }
+
+    /* check attributes before return NULL */
+    if (attributes)
+        TY_(FreeAttribute)( doc, attributes );
 
     DEBUG_LOG(SPRTF("Returning NULL...\n"));
     return NULL;

@@ -47,10 +47,13 @@ static AttrCheck CheckVType;
 static AttrCheck CheckScroll;
 static AttrCheck CheckTextDir;
 static AttrCheck CheckLang;
+static AttrCheck CheckLoading;
 static AttrCheck CheckType;
 static AttrCheck CheckRDFaSafeCURIE;
 static AttrCheck CheckRDFaTerm;
 static AttrCheck CheckRDFaPrefix;
+static AttrCheck CheckDecimal;
+static AttrCheck CheckSvgAttr;
 
 #define CH_PCDATA      NULL
 #define CH_CHARSET     NULL
@@ -66,6 +69,7 @@ static AttrCheck CheckRDFaPrefix;
 #define CH_CLEAR       CheckClear
 #define CH_BORDER      CheckBool     /* kludge */
 #define CH_LANG        CheckLang
+#define CH_LOADING     CheckLoading
 #define CH_BOOL        CheckBool
 #define CH_COLS        NULL
 #define CH_NUMBER      CheckNumber
@@ -95,7 +99,14 @@ static AttrCheck CheckRDFaPrefix;
 #define CH_RDFASCURIES CheckRDFaSafeCURIE
 #define CH_RDFATERM    CheckRDFaTerm
 #define CH_RDFATERMS   CheckRDFaTerm
+#define CH_DECIMAL     CheckDecimal
+#define CH_SVG         CheckSvgAttr
 
+/*
+   WARNING: This table /must/ be kept in the EXACT order of the TidyAttrId enum!
+   When running the DEBUG version, this order is checked, in TY_(InitAttrs)(doc),
+   and there is an assert() if any difference found.
+*/
 static const Attribute attribute_defs [] =
 {
   { TidyAttr_UNKNOWN,                 "unknown!",                NULL         }, 
@@ -307,7 +318,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_MEDIAGROUP,              "mediagroup",              CH_PCDATA   },
   { TidyAttr_MIN,                     "min",                     CH_PCDATA   },
   { TidyAttr_NOVALIDATE,              "novalidate",              CH_PCDATA   },
-  { TidyAttr_OPEN,                    "open",                    CH_PCDATA   },
+  { TidyAttr_OPEN,                    "open",                    CH_BOOL     }, /* Is. #925 PR #932 */
   { TidyAttr_OPTIMUM,                 "optimum",                 CH_PCDATA   },
   { TidyAttr_OnABORT,                 "onabort",                 CH_PCDATA   },
   { TidyAttr_OnAFTERPRINT,            "onafterprint",            CH_PCDATA   },
@@ -439,6 +450,24 @@ static const Attribute attribute_defs [] =
 
   /* for xmlns:xlink in <svg> */
   { TidyAttr_XMLNSXLINK,                "xmlns:xlink",           CH_URL       },
+  { TidyAttr_SLOT,                      "slot",                  CH_PCDATA    },
+  { TidyAttr_LOADING,                   "loading",               CH_LOADING   }, /* IMG, IFRAME */
+
+  /* SVG paint attributes (SVG 1.1) */
+  { TidyAttr_FILL,                     "fill",                  CH_SVG        },
+  { TidyAttr_FILLRULE,                 "fill-rule",             CH_SVG        },
+  { TidyAttr_STROKE,                   "stroke",                CH_SVG        },
+  { TidyAttr_STROKEDASHARRAY,          "stroke-dasharray",      CH_SVG        },
+  { TidyAttr_STROKEDASHOFFSET,         "stroke-dashoffset",     CH_SVG        },
+  { TidyAttr_STROKELINECAP,            "stroke-linecap",        CH_SVG        },
+  { TidyAttr_STROKELINEJOIN,           "stroke-linejoin",       CH_SVG        },
+  { TidyAttr_STROKEMITERLIMIT,         "stroke-miterlimit",     CH_SVG        },
+  { TidyAttr_STROKEWIDTH,              "stroke-width",          CH_SVG        },
+  { TidyAttr_COLORINTERPOLATION,       "color-interpolation",   CH_SVG        },
+  { TidyAttr_COLORRENDERING,           "color-rendering",       CH_SVG        },
+  { TidyAttr_OPACITY,                  "opacity",               CH_SVG        },
+  { TidyAttr_STROKEOPACITY,            "stroke-opacity",        CH_SVG        },
+  { TidyAttr_FILLOPACITY,              "fill-opacity",          CH_SVG        },
 
   /* this must be the final entry */
   { N_TIDY_ATTRIBS,                    NULL,                     NULL         }
@@ -560,7 +589,144 @@ static const struct _colors colors[] =
     { NULL,      NULL      }
 };
 
-static ctmbstr GetColorCode(ctmbstr name)
+static const struct _colors extended_colors[] =
+{
+    { "aliceblue", "#f0f8ff" },
+    { "antiquewhite", "#faebd7" },
+    { "aquamarine", "#7fffd4" },
+    { "azure", "#f0ffff" },
+    { "beige", "#f5f5dc" },
+    { "bisque", "#ffe4c4" },
+    { "blanchedalmond", "#ffebcd" },
+    { "blueviolet", "#8a2be2" },
+    { "brown", "#a52a2a" },
+    { "burlywood", "#deb887" },
+    { "cadetblue", "#5f9ea0" },
+    { "chartreuse", "#7fff00" },
+    { "chocolate", "#d2691e" },
+    { "coral", "#ff7f50" },
+    { "cornflowerblue", "#6495ed" },
+    { "cornsilk", "#fff8dc" },
+    { "crimson", "#dc143c" },
+    { "cyan", "#00ffff" },
+    { "darkblue", "#00008b" },
+    { "darkcyan", "#008b8b" },
+    { "darkgoldenrod", "#b8860b" },
+    { "darkgray", "#a9a9a9" },
+    { "darkgreen", "#006400" },
+    { "darkgrey", "#a9a9a9" },
+    { "darkkhaki", "#bdb76b" },
+    { "darkmagenta", "#8b008b" },
+    { "darkolivegreen", "#556b2f" },
+    { "darkorange", "#ff8c00" },
+    { "darkorchid", "#9932cc" },
+    { "darkred", "#8b0000" },
+    { "darksalmon", "#e9967a" },
+    { "darkseagreen", "#8fbc8f" },
+    { "darkslateblue", "#483d8b" },
+    { "darkslategray", "#2f4f4f" },
+    { "darkslategrey", "#2f4f4f" },
+    { "darkturquoise", "#00ced1" },
+    { "darkviolet", "#9400d3" },
+    { "deeppink", "#ff1493" },
+    { "deepskyblue", "#00bfff" },
+    { "dimgray", "#696969" },
+    { "dimgrey", "#696969" },
+    { "dodgerblue", "#1e90ff" },
+    { "firebrick", "#b22222" },
+    { "floralwhite", "#fffaf0" },
+    { "forestgreen", "#228b22" },
+    { "gainsboro", "#dcdcdc" },
+    { "ghostwhite", "#f8f8ff" },
+    { "gold", "#ffd700" },
+    { "goldenrod", "#daa520" },
+    { "greenyellow", "#adff2f" },
+    { "grey", "#808080" },
+    { "honeydew", "#f0fff0" },
+    { "hotpink", "#ff69b4" },
+    { "indianred", "#cd5c5c" },
+    { "indigo", "#4b0082" },
+    { "ivory", "#fffff0" },
+    { "khaki", "#f0e68c" },
+    { "lavender", "#e6e6fa" },
+    { "lavenderblush", "#fff0f5" },
+    { "lawngreen", "#7cfc00" },
+    { "lemonchiffon", "#fffacd" },
+    { "lightblue", "#add8e6" },
+    { "lightcoral", "#f08080" },
+    { "lightcyan", "#e0ffff" },
+    { "lightgoldenrodyellow", "#fafad2" },
+    { "lightgray", "#d3d3d3" },
+    { "lightgreen", "#90ee90" },
+    { "lightgrey", "#d3d3d3" },
+    { "lightpink", "#ffb6c1" },
+    { "lightsalmon", "#ffa07a" },
+    { "lightseagreen", "#20b2aa" },
+    { "lightskyblue", "#87cefa" },
+    { "lightslategray", "#778899" },
+    { "lightslategrey", "#778899" },
+    { "lightsteelblue", "#b0c4de" },
+    { "lightyellow", "#ffffe0" },
+    { "limegreen", "#32cd32" },
+    { "linen", "#faf0e6" },
+    { "magenta", "#ff00ff" },
+    { "mediumaquamarine", "#66cdaa" },
+    { "mediumblue", "#0000cd" },
+    { "mediumorchid", "#ba55d3" },
+    { "mediumpurple", "#9370db" },
+    { "mediumseagreen", "#3cb371" },
+    { "mediumslateblue", "#7b68ee" },
+    { "mediumspringgreen", "#00fa9a" },
+    { "mediumturquoise", "#48d1cc" },
+    { "mediumvioletred", "#c71585" },
+    { "midnightblue", "#191970" },
+    { "mintcream", "#f5fffa" },
+    { "mistyrose", "#ffe4e1" },
+    { "moccasin", "#ffe4b5" },
+    { "navajowhite", "#ffdead" },
+    { "oldlace", "#fdf5e6" },
+    { "olivedrab", "#6b8e23" },
+    { "orange", "#ffa500" },
+    { "orangered", "#ff4500" },
+    { "orchid", "#da70d6" },
+    { "palegoldenrod", "#eee8aa" },
+    { "palegreen", "#98fb98" },
+    { "paleturquoise", "#afeeee" },
+    { "palevioletred", "#db7093" },
+    { "papayawhip", "#ffefd5" },
+    { "peachpuff", "#ffdab9" },
+    { "peru", "#cd853f" },
+    { "pink", "#ffc0cb" },
+    { "plum", "#dda0dd" },
+    { "powderblue", "#b0e0e6" },
+    { "rebeccapurple", "#663399" },
+    { "rosybrown", "#bc8f8f" },
+    { "royalblue", "#4169e1" },
+    { "saddlebrown", "#8b4513" },
+    { "salmon", "#fa8072" },
+    { "sandybrown", "#f4a460" },
+    { "seagreen", "#2e8b57" },
+    { "seashell", "#fff5ee" },
+    { "sienna", "#a0522d" },
+    { "skyblue", "#87ceeb" },
+    { "slateblue", "#6a5acd" },
+    { "slategray", "#708090" },
+    { "slategrey", "#708090" },
+    { "snow", "#fffafa" },
+    { "springgreen", "#00ff7f" },
+    { "steelblue", "#4682b4" },
+    { "tan", "#d2b48c" },
+    { "thistle", "#d8bfd8" },
+    { "tomato", "#ff6347" },
+    { "turquoise", "#40e0d0" },
+    { "violet", "#ee82ee" },
+    { "wheat", "#f5deb3" },
+    { "whitesmoke", "#f5f5f5" },
+    { "yellowgreen", "#9acd32" },
+    { NULL, NULL }
+};
+
+static ctmbstr GetColorCode(ctmbstr name, Bool use_css_colors)
 {
     uint i;
 
@@ -568,16 +734,26 @@ static ctmbstr GetColorCode(ctmbstr name)
         if (TY_(tmbstrcasecmp)(name, colors[i].name) == 0)
             return colors[i].hex;
 
+    if (use_css_colors)
+        for (i = 0; extended_colors[i].name; ++i)
+            if (TY_(tmbstrcasecmp)(name, extended_colors[i].name) == 0)
+                return extended_colors[i].hex;
+
     return NULL;
 }
 
-static ctmbstr GetColorName(ctmbstr code)
+static ctmbstr GetColorName(ctmbstr code, Bool use_css_colors)
 {
     uint i;
 
     for (i = 0; colors[i].name; ++i)
         if (TY_(tmbstrcasecmp)(code, colors[i].hex) == 0)
             return colors[i].name;
+
+    if (use_css_colors)
+        for (i = 0; extended_colors[i].name; ++i)
+            if (TY_(tmbstrcasecmp)(code, extended_colors[i].hex) == 0)
+                return extended_colors[i].name;
 
     return NULL;
 }
@@ -1832,13 +2008,19 @@ void CheckLength( TidyDocImpl* doc, Node *node, AttVal *attval)
     }
     else
     {
+        Bool percentFound = no;
         while (*p)
         {
-            if (!TY_(IsDigit)(*p) && *p != '%')
+            if (!percentFound && *p == '%')
+            {
+                percentFound = yes;
+            }
+            else if (percentFound || !TY_(IsDigit)(*p))
             {
                 TY_(ReportAttrError)( doc, node, attval, BAD_ATTRIBUTE_VALUE);
                 break;
             }
+
             ++p;
         }
     }
@@ -1985,7 +2167,7 @@ void CheckColor( TidyDocImpl* doc, Node *node, AttVal *attval)
 
     if (valid && given[0] == '#' && cfgBool(doc, TidyReplaceColor))
     {
-        ctmbstr newName = GetColorName(given);
+        ctmbstr newName = GetColorName(given, TY_(IsHTML5Mode)(doc));
 
         if (newName)
         {
@@ -1996,7 +2178,7 @@ void CheckColor( TidyDocImpl* doc, Node *node, AttVal *attval)
 
     /* if it is not a valid color code, it is a color name */
     if (!valid)
-        valid = GetColorCode(given) != NULL;
+        valid = GetColorCode(given, TY_(IsHTML5Mode)(doc)) != NULL;
 
     if (valid && given[0] == '#')
         attval->value = TY_(tmbstrtoupper)(attval->value);
@@ -2045,6 +2227,13 @@ void CheckLang( TidyDocImpl* doc, Node *node, AttVal *attval)
     }
 }
 
+/* checks loading attribute */
+void CheckLoading( TidyDocImpl* doc, Node *node, AttVal *attval)
+{
+    ctmbstr const values[] = {"lazy", "eager", NULL};
+    CheckAttrValidity( doc, node, attval, values );
+}
+
 /* checks type attribute */
 void CheckType( TidyDocImpl* doc, Node *node, AttVal *attval)
 {
@@ -2086,6 +2275,180 @@ void CheckType( TidyDocImpl* doc, Node *node, AttVal *attval)
             TY_(ReportAttrError)( doc, node, attval, BAD_ATTRIBUTE_VALUE);
     }
     return;
+}
+
+static void CheckDecimal( TidyDocImpl* doc, Node *node, AttVal *attval)
+{
+    tmbstr p;
+    Bool hasPoint = no;
+
+    p  = attval->value;
+
+    /* Allow leading sign */
+    if (*p == '+' || *p == '-')
+        ++p;
+
+    while (*p)
+    {
+        /* Allow a single decimal point */
+        if (*p == '.')
+        {
+            if (!hasPoint)
+                hasPoint = yes;
+            else
+                TY_(ReportAttrError)( doc, node, attval, BAD_ATTRIBUTE_VALUE);
+                break;
+        }
+        
+        if (!TY_(IsDigit)(*p))
+        {
+            TY_(ReportAttrError)( doc, node, attval, BAD_ATTRIBUTE_VALUE);
+            break;
+        }
+        ++p;
+    }
+}
+
+static Bool IsSvgPaintAttr(AttVal *attval)
+{
+    return attrIsCOLOR(attval)
+        || attrIsSVG_FILL(attval)
+        || attrIsSVG_FILLRULE(attval)
+        || attrIsSVG_STROKE(attval)
+        || attrIsSVG_STROKEDASHARRAY(attval)
+        || attrIsSVG_STROKEDASHOFFSET(attval)
+        || attrIsSVG_STROKELINECAP(attval)
+        || attrIsSVG_STROKELINEJOIN(attval)
+        || attrIsSVG_STROKEMITERLIMIT(attval)
+        || attrIsSVG_STROKEWIDTH(attval)
+        || attrIsSVG_COLORINTERPOLATION(attval)
+        || attrIsSVG_COLORRENDERING(attval)
+        || attrIsSVG_OPACITY(attval)
+        || attrIsSVG_STROKEOPACITY(attval)
+        || attrIsSVG_FILLOPACITY(attval);
+}
+
+/* Check SVG attributes */
+static void CheckSvgAttr( TidyDocImpl* doc, Node *node, AttVal *attval)
+{
+    if (!nodeIsSVG(node))
+    {
+        TY_(ReportAttrError)(doc, node, attval, ATTRIBUTE_IS_NOT_ALLOWED);
+        return;
+    }
+
+    /* Issue #903 - check SVG paint attributes */
+    if (IsSvgPaintAttr(attval))
+    {
+        /* all valid paint attributes have values */
+        if (!AttrHasValue(attval))
+        {
+            TY_(ReportAttrError)(doc, node, attval, MISSING_ATTR_VALUE);
+            return;
+        }
+        /* all paint attributes support an 'inherit' value,
+        per https://dev.w3.org/SVG/profiles/1.1F2/publish/painting.html#SpecifyingPaint */
+        if (AttrValueIs(attval, "inherit"))
+        {
+            return;
+        }
+
+        /* check paint datatypes
+        see https://dev.w3.org/SVG/profiles/1.1F2/publish/painting.html#SpecifyingPaint
+        */
+        if (attrIsSVG_FILL(attval) || attrIsSVG_STROKE(attval))
+        {
+            /* TODO: support funciri */
+            static ctmbstr const values[] = {
+                "none", "currentColor", NULL};
+
+            if (AttrValueIsAmong(attval, values))
+                CheckLowerCaseAttrValue(doc, node, attval);
+            else
+                CheckColor(doc, node, attval);
+        } 
+        else if (attrIsSVG_FILLRULE(attval))
+        {
+            static ctmbstr const values[] = {"nonzero", "evenodd", NULL};
+
+            if (AttrValueIsAmong(attval, values))
+                CheckLowerCaseAttrValue(doc, node, attval);
+            else
+                TY_(ReportAttrError)(doc, node, attval, BAD_ATTRIBUTE_VALUE);
+        }
+        else if (attrIsSVG_STROKEDASHARRAY(attval))
+        {
+            static ctmbstr const values[] = {"none", NULL};
+
+            if (AttrValueIsAmong(attval, values))
+                CheckLowerCaseAttrValue(doc, node, attval);
+            else
+            {
+                /* TODO: process dash arrays */
+            }
+        }
+        else if (attrIsSVG_STROKEDASHOFFSET(attval))
+        {
+            CheckLength(doc, node, attval);
+        }
+        else if (attrIsSVG_STROKELINECAP(attval))
+        {
+            static ctmbstr const values[] = {"butt", "round", "square", NULL};
+
+            if (AttrValueIsAmong(attval, values))
+                CheckLowerCaseAttrValue(doc, node, attval);
+            else
+                TY_(ReportAttrError)(doc, node, attval, BAD_ATTRIBUTE_VALUE);
+        }
+        else if (attrIsSVG_STROKELINEJOIN(attval))
+        {
+            static ctmbstr const values[] = {"miter", "round", "bevel", NULL};
+
+            if (AttrValueIsAmong(attval, values))
+                CheckLowerCaseAttrValue(doc, node, attval);
+            else
+                TY_(ReportAttrError)(doc, node, attval, BAD_ATTRIBUTE_VALUE);
+        }
+        else if (attrIsSVG_STROKEMITERLIMIT(attval))
+        {
+            CheckNumber(doc, node, attval);
+        }
+        else if (attrIsSVG_STROKEWIDTH(attval))
+        {
+            CheckLength(doc, node, attval);
+        }
+        else if (attrIsSVG_COLORINTERPOLATION(attval))
+        {
+            static ctmbstr const values[] = {"auto", "sRGB", "linearRGB", NULL};
+
+            if (AttrValueIsAmong(attval, values))
+                CheckLowerCaseAttrValue(doc, node, attval);
+            else
+                TY_(ReportAttrError)(doc, node, attval, BAD_ATTRIBUTE_VALUE);
+        }
+        else if (attrIsSVG_COLORRENDERING(attval))
+        {
+            static ctmbstr const values[] = {
+                "auto", "optimizeSpeed", "optimizeQuality", NULL};
+
+            if (AttrValueIsAmong(attval, values))
+                CheckLowerCaseAttrValue(doc, node, attval);
+            else
+                TY_(ReportAttrError)(doc, node, attval, BAD_ATTRIBUTE_VALUE);
+        }
+        else if(attrIsSVG_OPACITY(attval))
+        {
+            CheckDecimal(doc, node, attval);
+        }
+        else if(attrIsSVG_STROKEOPACITY(attval))
+        {
+            CheckDecimal(doc, node, attval);
+        }
+        else if(attrIsSVG_FILLOPACITY(attval))
+        {
+            CheckDecimal(doc, node, attval);
+        }
+    }
 }
 
 static

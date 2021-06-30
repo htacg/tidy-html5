@@ -1,0 +1,7 @@
+line 1 column 1 - Access: [3.3.1.1]: use style sheets to control presentation.
+line 3 column 1 - Access: [13.2.1.1]: Metadata missing.
+line 8 column 1 - Access: [5.4.1.1]: invalid markup used in layout <table>.
+line 11 column 13 - Access: [5.6.1.1]: <table> may require header abbreviations.
+line 11 column 60 - Access: [5.6.1.1]: <table> may require header abbreviations.
+No warnings or errors were found.
+

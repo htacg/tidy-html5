@@ -32,13 +32,14 @@ When you’re ready to add a great new feature, these write-ups may be useful.
   - Discover how to add new tags to Tidy in [README/TAGS.md][130].
   - If you want to add new messages to Tidy, read [README/MESSAGE.md][150].
   - Configuration options can be added according to [README/OPTIONS.md][155].
+  - Pull Requests must pass all existing regression tests, or you must change existing regression test expectations with a good explanation. New features require that you add new regression tests. See [README/TESTING.md][165] for more details.
 
 ### Language Localization Guides
 
 Tidy supports localization, and welcomes translations into various languages. Please read up on how to localize HTML Tidy.
 
- - The general README for localizing can be found in [/README/LOCALIZE.md][140].
- - And [/localize/README.md][145] contains specific instructions for localizing.
+ - The general README for localizing can be found in [README/LOCALIZE.md][140].
+ - And [localize/README.md][145] contains specific instructions for localizing.
 
 
 ## Other Important Links
@@ -88,9 +89,10 @@ HTML Tidy and LibTidy are free and open source software with a permissive licens
   [125]: README/CONTRIBUTING.md
   [130]: README/TAGS.md
   [135]: README/LICENSE.md
-  [140]: /README/LOCALIZE.md
-  [145]: /localize/README.md
+  [140]: README/LOCALIZE.md
+  [145]: localize/README.md
   [150]: README/MESSAGE.md
   [155]: README/OPTIONS.md
   [160]: README/VERSION.md
+  [165]: README/TESTING.md
  

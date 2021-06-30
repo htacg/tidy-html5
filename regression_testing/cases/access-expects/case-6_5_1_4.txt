@@ -1,0 +1,10 @@
+line 8 column 9 - Warning: discarding unexpected <a>
+line 8 column 29 - Warning: discarding unexpected plain text
+line 8 column 34 - Warning: discarding unexpected </a>
+line 1 column 1 - Access: [3.3.1.1]: use style sheets to control presentation.
+line 4 column 1 - Access: [13.2.1.1]: Metadata missing.
+line 7 column 1 - Access: [6.5.1.4]: <noframes> section invalid (link).
+Tidy found 3 warnings and 0 errors!
+
+For further advice on how to make your pages accessible
+see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/.

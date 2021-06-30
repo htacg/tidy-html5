@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+  <title>span merging tests</title>
+</head>
+<body>
+  <p><span id="id1">1</span></p>
+  <p><span id="id2_1"><span id="id2_2">2</span></span></p>
+  <p><span title="span2">3</span></p>
+  <p><span class="cl1 cl2"
+        title="span2">4</span></p>
+  <p><span title="span2"
+        onclick="f()"
+        id="id5">5</span></p>
+  <p><span title="span2"
+        onclick="f()"
+        id="id6">6</span></p>
+</body>
+</html>

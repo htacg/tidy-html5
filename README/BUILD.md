@@ -50,7 +50,7 @@ See the `CMakeLists.txt` file for other CMake **options** offered.
 
 ## Build PHP with the tidy-html5 library
 
-Due to API changes in the PHP source, `buffio.h` needs to be renamed to `tidybuffio.h` in the file `ext/tidy/tidy.c` in PHP's source.
+Before PHP 7.1, due to API changes in the PHP source, `buffio.h` needs to be renamed to `tidybuffio.h` in the file `ext/tidy/tidy.c` in PHP's source.
 
 That is - prior to configuring PHP run this in the PHP source directory:
 ~~~

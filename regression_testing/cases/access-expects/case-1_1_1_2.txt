@@ -1,0 +1,6 @@
+line 7 column 1 - Access: [7.1.1.5]: remove flicker (animated gif).
+line 7 column 1 - Access: [2.1.1.1]: ensure information not conveyed through color alone (image).
+line 7 column 1 - Access: [1.1.1.2]: suspicious 'alt' text (filename).
+line 7 column 44 - Access: [1.1.2.1]: <img> missing 'longdesc' and d-link.
+No warnings or errors were found.
+

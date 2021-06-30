@@ -786,9 +786,9 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
         TidyMakeBare,                 0,
-        "This option specifies if Tidy should strip Microsoft specific HTML "
-        "from Word 2000 documents, and output spaces rather than non-breaking "
-        "spaces where they exist in the input. "
+        "This option specifies if Tidy should replace smart quotes and em dashes with "
+        "ASCII, and output spaces rather than non-breaking "
+        "spaces, where they exist in the input. "
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -1117,7 +1117,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
       be translated. */
         TidyQuoteAmpersand,           0,
         "This option specifies if Tidy should output unadorned <code>&amp;</code> "
-        "characters as <code>&amp;amp;</code>. "
+        "characters as <code>&amp;amp;</code>, in legacy doctypes only. "
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -1492,7 +1492,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
         TidyWrapPhp,                  0,
-        "This option specifies if Tidy should line wrap text contained within PHP "
+        "This option specifies if Tidy should add a new line after a PHP "
         "pseudo elements, which look like: <code>&lt;?php ... ?&gt;</code>. "
     },
     {/* Important notes for translators:
@@ -2194,7 +2194,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
     { TC_LABEL_LANG,                0,   "lang"                                                                    },
     { TC_LABEL_LEVL,                0,   "level"                                                                   },
     { TC_LABEL_OPT,                 0,   "option"                                                                  },
-    { TC_MAIN_ERROR_LOAD_CONFIG,    0,   "Loading config file \"%s\" failed, err = %d"                             },
+    { TC_MAIN_ERROR_LOAD_CONFIG,    0,   "Loading config file \"%s\" problems, err = %d"                             },
     { TC_OPT_ACCESS,                0,
         "do additional accessibility checks (<level> = 0, 1, 2, 3). 0 is "
         "assumed if <level> is missing."
@@ -2311,7 +2311,6 @@ static languageDefinition language_en = { whichPluralForm_en, {
         - Second %s represents a version number, typically x.x.xx.
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
       TC_TXT_HELP_1,                0,
-        "\n"
         "%s [options...] [file...] [options...] [file...]\n"
         "Utility to clean up and pretty print HTML/XHTML/XML.\n"
         "\n"
@@ -2338,7 +2337,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         " of \"--some-option <value>\", for example, \"--indent-with-tabs yes\".\n"
         "\n"
         " You can also specify a file containing configuration options with the \n"
-        " -options <file> directive, or in one or more files specific to your \n"
+        " -config <file> directive, or in one or more files specific to your \n"
         " environment (see next section). \n"
         "\n"
         " For a list of all configuration options, use \"-help-config\" or refer\n"

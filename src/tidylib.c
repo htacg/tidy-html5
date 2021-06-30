@@ -36,6 +36,7 @@
 #include "attrs.h"
 #include "sprtf.h"
 #if SUPPORT_LOCALIZATIONS
+#  include "stdlib.h"
 #  include "locale.h"
 #endif
 
@@ -119,7 +120,17 @@ TidyDocImpl* tidyDocCreate( TidyAllocator *allocator )
 #if SUPPORT_LOCALIZATIONS
     if ( TY_(tidyGetLanguageSetByUser)() == no )
     {
-        TY_(tidySetLanguage)( setlocale( LC_ALL, "") );
+        if( ! TY_(tidySetLanguage)( getenv( "LC_MESSAGES" ) ) )
+        {
+            if( ! TY_(tidySetLanguage)( getenv( "LANG" ) ) )
+            {
+                /*\
+                *  Is. #770 #783 #780 #790 and maybe others -
+                *  TY_(tidySetLanguage)( setlocale( LC_ALL, "" ) );
+                *  this seems a 'bad' choice!
+               \*/
+            }
+        }
     }
 #endif
 
@@ -1114,19 +1125,26 @@ int TIDY_CALL  tidyParseSource( TidyDoc tdoc, TidyInputSource* source )
     return tidyDocParseSource( doc, source );
 }
 
-
+#ifdef WIN32
+#define M_IS_DIR _S_IFDIR
+#else // !WIN32
+#define M_IS_DIR S_IFDIR
+#endif
 int   tidyDocParseFile( TidyDocImpl* doc, ctmbstr filnam )
 {
     int status = -ENOENT;
-    FILE* fin = fopen( filnam, "r+" );
-
-    if ( !fin )
+    FILE* fin = 0;
+    struct stat sbuf = { 0 }; /* Is. #681 - read-only files */
+    if ( stat(filnam,&sbuf) != 0 )
     {
         TY_(ReportFileError)( doc, filnam, FILE_NOT_FILE );
         return status;
     }
-
-    fclose( fin );
+    if (sbuf.st_mode & M_IS_DIR) /* and /NOT/ if a DIRECTORY */
+    {
+        TY_(ReportFileError)(doc, filnam, FILE_NOT_FILE);
+        return status;
+    }
 
 #ifdef _WIN32
     return TY_(DocParseFileWithMappedFile)( doc, filnam );
@@ -1136,7 +1154,6 @@ int   tidyDocParseFile( TidyDocImpl* doc, ctmbstr filnam )
 
 #if PRESERVE_FILE_TIMES
     {
-        struct stat sbuf = { 0 };
         /* get last modified time */
         TidyClearMemory(&doc->filetimes, sizeof(doc->filetimes));
         if (fin && cfgBool(doc, TidyKeepFileTimes) &&
@@ -2161,6 +2178,8 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
         }
     }
 
+    TY_(CleanHead)(doc); /* Is #692 - discard multiple <title> tags */
+
 #if defined(ENABLE_DEBUG_LOG)
     SPRTF("All nodes AFTER clean and repair\n");
     dbg_show_all_nodes( doc, &doc->root, 0  );
@@ -2653,13 +2672,13 @@ const tidyLocaleMapItem* TIDY_CALL getNextWindowsLanguage( TidyIterator* iter )
 }
 
 
-const ctmbstr TIDY_CALL TidyLangWindowsName( const tidyLocaleMapItem *item )
+ctmbstr TIDY_CALL TidyLangWindowsName( const tidyLocaleMapItem *item )
 {
     return TY_(TidyLangWindowsName)( (tidyLocaleMapItemImpl*)(item) );
 }
 
 
-const ctmbstr TIDY_CALL TidyLangPosixName( const tidyLocaleMapItem *item )
+ctmbstr TIDY_CALL TidyLangPosixName( const tidyLocaleMapItem *item )
 {
     return TY_(TidyLangPosixName)( (tidyLocaleMapItemImpl*)(item) );
 }

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>[ #504206] Tidy errors in processing forms.</title>
+</head>
+<body>
+  <h1>COMM 428: Feedback Survey</h1>
+  <p>Please fill out the following form based on YOUR experience in
+  COMM 428 to date.</p>
+  <p>Use the <strong>Send</strong> button at the bottom of the page
+  to send your feedback to me via e-mail.</p>
+  <hr>
+  <form method="post"
+        action=
+        "http://hobbes.itc.virginia.edu/cgi-%20uva/cgiwrap/rrn2n/cgi-bin/formmail.cgi">
+    <input type="hidden"
+          name="recipient"
+          value="rnelson@virginia.edu"> <input type="hidden"
+          name="subject"
+          value="Feedback Survey"> <input type="hidden"
+          name="sort"
+          value=
+          "order:realname,email,Future,MIS,Finance,Marketin g,Management,Accounting,Other,questions,practical,prese nts,prepared,enthusiasm,available,stimulates,STRENGTHS, WEAKNESSES,SUGGESTIONS">
+     <input type="hidden"
+          name="required"
+          value="SUGGESTIONS"> <input type="hidden"
+          name="env_report"
+          value="REMOTE_HOST,HTTP_USER_AGENT">
+    <p><strong>Name (optional):</strong> <input type="text"
+           name="realname"></p>
+    <p><strong>E-Mail Address (optional):</strong> <input type=
+    "text"
+           name="email"></p>
+    <p><strong>Where will you be this time next year?</strong>
+    <select name="Future">
+      <option>
+        Consulting
+      </option>
+      <option>
+        Corporate MIS
+      </option>
+      <option>
+        Other Employment
+      </option>
+      <option>
+        Graduate School
+      </option>
+      <option>
+        Don't Know Yet
+      </option>
+    </select></p>
+    <p><strong>Area(s) of concentation? (Select all that
+    Apply):</strong><br>
+    <input type="checkbox"
+           name="MIS">MIS<br>
+    <input type="checkbox"
+           name="Finance">Finance<br>
+    <input type="checkbox"
+           name="Marketing">Marketing<br>
+    <input type="checkbox"
+           name="Management">Management<br>
+    <input type="checkbox"
+           name="Accounting">Accounting<br>
+    <input type="checkbox"
+           name="Other">Other<br></p>
+    <p><strong>Q1: The instructor gives appropriate consideration
+    to the comments and questions of students.</strong><br>
+    <input type="radio"
+           name="questions"
+           value="SA">Strongly Agree <input type="radio"
+           name="questions"
+           value="A">Agree <input type="radio"
+           name="questions"
+           value="N">Neither Agree Nor Disagree <input type="radio"
+           name="questions"
+           value="D">Disagree <input type="radio"
+           name="questions"
+           value="SD">Strongly Disagree</p>
+    <p><strong>Q2: The instructor relates theoretical concepts
+    covered in the course to practical applications.</strong><br>
+    <input type="radio"
+           name="practical"
+           value="SA">Strongly Agree <input type="radio"
+           name="practical"
+           value="A">Agree <input type="radio"
+           name="practical"
+           value="N">Neither Agree Nor Disagree <input type="radio"
+           name="practical"
+           value="D">Disagree <input type="radio"
+           name="practical"
+           value="SD">Strongly Disagree</p>
+    <p><strong>Q3: The instructor presents class material in a
+    clear and organized manner.</strong><br>
+    <input type="radio"
+           name="presents"
+           value="SA">Strongly Agree <input type="radio"
+           name="presents"
+           value="A">Agree <input type="radio"
+           name="presents"
+           value="N">Neither Agree Nor Disagree <input type="radio"
+           name="presents"
+           value="D">Disagree <input type="radio"
+           name="presents"
+           value="SD">Strongly Disagree</p>
+    <p><strong>Q4: The instructor is prepared for
+    class.</strong><br>
+    <input type="radio"
+           name="prepared"
+           value="SA">Strongly Agree <input type="radio"
+           name="prepared"
+           value="A">Agree <input type="radio"
+           name="prepared"
+           value="N">Neither Agree Nor Disagree <input type="radio"
+           name="prepared"
+           value="D">Disagree <input type="radio"
+           name="prepared"
+           value="SD">Strongly Disagree</p>
+    <p><strong>Q5: The instructor demonstrates enthusiasm and
+    interest in the subject matter.</strong><br>
+    <input type="radio"
+           name="enthusiasm"
+           value="SA">Strongly Agree <input type="radio"
+           name="enthusiasm"
+           value="A">Agree <input type="radio"
+           name="enthusiasm"
+           value="N">Neither Agree Nor Disagree <input type="radio"
+           name="enthusiasm"
+           value="D">Disagree <input type="radio"
+           name="enthusiasm"
+           value="SD">Strongly Disagree</p>
+    <p><strong>Q6: The instructor posts reasonable office hours and
+    is available whenever I try to see him during those
+    hours.</strong><br>
+    <input type="radio"
+           name="available"
+           value="SA">Strongly Agree <input type="radio"
+           name="available"
+           value="A">Agree <input type="radio"
+           name="available"
+           value="N">Neither Agree Nor Disagree <input type="radio"
+           name="available"
+           value="D">Disagree <input type="radio"
+           name="available"
+           value="SD">Strongly Disagree</p>
+    <p><strong>Q7: The instructor stimulates me to think about the
+    course.</strong><br>
+    <input type="radio"
+           name="stimulates"
+           value="SA">Strongly Agree <input type="radio"
+           name="stimulates"
+           value="A">Agree <input type="radio"
+           name="stimulates"
+           value="N">Neither Agree Nor Disagree <input type="radio"
+           name="stimulates"
+           value="D">Disagree <input type="radio"
+           name="stimulates"
+           value="SD">Strongly Disagree</p>
+    <p><strong>Stengths (class/instructor):</strong><br>
+    <textarea rows="5"
+              cols="60"
+              name="STRENGTHS"></textarea><br></p>
+    <p><strong>Weaknesses (class/instructor):</strong><br>
+    <textarea rows="5"
+              cols="60"
+              name="WEAKNESSES"></textarea><br></p>
+    <p><strong>Suggestions for improvement (class/instructor; NOTE:
+    This field is REQUIRED):</strong><br>
+    <textarea rows="5"
+              cols="60"
+              name="SUGGESTIONS"></textarea><br></p>
+    <p><input type="submit"
+           value="Send"> <input type="reset"
+           value="Clear Form"></p>
+    <form>
+      <hr>
+    </form>
+  </form>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<!-- [ 537604 ] Expansion of entity references in -xml -->
+<!-- use "input-xml: yes " configuration options -->
+<test>
+this is a test of &copy;. &amp;, &lt;, &gt;, &apos;, &quot; must be recognized.
+</test>

@@ -610,7 +610,7 @@ typedef enum
     TidyLiteralAttribs,          /**< If true attributes may use newlines */
     TidyLogicalEmphasis,         /**< Replace i by em and b by strong */
     TidyLowerLiterals,           /**< Folds known attribute values to lower case */
-    TidyMakeBare,                /**< Make bare HTML: remove Microsoft cruft */
+    TidyMakeBare,                /**< Replace smart quotes, em dashes, etc with ASCII */
     TidyMakeClean,               /**< Replace presentational clutter by style rules */
     TidyMark,                    /**< Add meta element indicating tidied doc */
     TidyMergeDivs,               /**< Merge multiple DIVs */
@@ -657,7 +657,7 @@ typedef enum
     TidyWrapAttVals,             /**< Wrap within attribute values */
     TidyWrapJste,                /**< Wrap within JSTE pseudo elements */
     TidyWrapLen,                 /**< Wrap margin */
-    TidyWrapPhp,                 /**< Wrap within PHP pseudo elements */
+    TidyWrapPhp,                 /**< Wrap consecutive PHP pseudo elements */
     TidyWrapScriptlets,          /**< Wrap within JavaScript string literals */
     TidyWrapSection,             /**< Wrap within <![ ... ]> section tags */
     TidyWriteBack,               /**< If true then output tidied markup */
@@ -971,6 +971,7 @@ typedef enum
   TidyTag_BDI,           /**< BDI */
   TidyTag_CANVAS,        /**< CANVAS */
   TidyTag_COMMAND,       /**< COMMAND */
+  TidyTag_DATA,          /**< DATA */
   TidyTag_DATALIST,      /**< DATALIST */
   TidyTag_DETAILS,       /**< DETAILS */
   TidyTag_DIALOG,        /**< DIALOG */
@@ -993,6 +994,7 @@ typedef enum
   TidyTag_TIME,          /**< TIME */
   TidyTag_TRACK,         /**< TRACK */
   TidyTag_VIDEO,         /**< VIDEO */
+  TidyTag_SLOT,          /**< SLOT */
 
   N_TIDY_TAGS            /**< Must be last */
 } TidyTagId;
@@ -1341,7 +1343,25 @@ typedef enum
   TidyAttr_AS,                     /**< AS= */
    
   TidyAttr_XMLNSXLINK,             /**< svg xmls:xlink="url" */
+  TidyAttr_SLOT,                   /**< SLOT= */
+  TidyAttr_LOADING,                /**< LOADING= */
    
+  /* SVG paint attributes (SVG 1.1) */
+  TidyAttr_FILL,                   /**< FILL= */
+  TidyAttr_FILLRULE,               /**< FILLRULE= */
+  TidyAttr_STROKE,                 /**< STROKE= */
+  TidyAttr_STROKEDASHARRAY,        /**< STROKEDASHARRAY= */
+  TidyAttr_STROKEDASHOFFSET,       /**< STROKEDASHOFFSET= */
+  TidyAttr_STROKELINECAP,          /**< STROKELINECAP= */
+  TidyAttr_STROKELINEJOIN,         /**< STROKELINEJOIN= */
+  TidyAttr_STROKEMITERLIMIT,       /**< STROKEMITERLIMIT= */
+  TidyAttr_STROKEWIDTH,            /**< STROKEWIDTH= */
+  TidyAttr_COLORINTERPOLATION,     /**< COLORINTERPOLATION= */
+  TidyAttr_COLORRENDERING,         /**< COLORRENDERING= */
+  TidyAttr_OPACITY,                /**< OPACITY= */
+  TidyAttr_STROKEOPACITY,          /**< STROKEOPACITY= */
+  TidyAttr_FILLOPACITY,            /**< FILLOPACITY= */
+
   N_TIDY_ATTRIBS                   /**< Must be last */
 } TidyAttrId;
 

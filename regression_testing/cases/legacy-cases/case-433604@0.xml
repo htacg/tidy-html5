@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<text>[ #433604 ] Tidy inserts &amp;nbsp; entity in -xml mode.
+Use -xml on command line.
+Test of &#160;</text>

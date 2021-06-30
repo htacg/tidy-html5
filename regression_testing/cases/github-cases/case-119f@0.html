@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<title>Issue #119 - Test HTML5, custom-tags: blocklevel</title>
+<body>
+<h1>About this case</h1>
+<p>
+In this case, <kbd>custom-tags</kbd> is <strong>blocklevel</strong>, and so Tidy
+should output them as blocklevel elements instead of inline.
+</p>
+
+<dominos-pizza>This is an autonomous custom tag,</dominos-pizza>, and it should
+show up as a blocklevel element, 
+<new-blocklevel-element>as does this.</new-blocklevel-element>.
+
+</body>
+</html>

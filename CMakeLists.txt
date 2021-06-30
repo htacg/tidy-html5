@@ -394,7 +394,11 @@ install(TARGETS ${name}
         LIBRARY DESTINATION ${LIB_INSTALL_DIR}
         )
 install( FILES ${HFILES} DESTINATION ${INCLUDE_INSTALL_DIR} )
-
+if(MSVC)
+    # install(FILES $<TARGET_PDB_FILE:${name}> DESTINATION lib OPTIONAL)
+    INSTALL(FILES ${PROJECT_BINARY_DIR}/${name}.dir/Debug/${name}.pdb
+    DESTINATION lib CONFIGURATIONS Debug )
+endif()
 
 #------------------------------------------------------------------------
 # Dynamic Library
@@ -412,9 +416,7 @@ if (BUILD_SHARED_LIB)
                                    VERSION   ${LIBTIDY_VERSION}
                                    SOVERSION ${TIDY_MAJOR_VERSION} )
     set_target_properties( ${name} PROPERTIES 
-                                   COMPILE_FLAGS "-DBUILD_SHARED_LIB" )
-    set_target_properties( ${name} PROPERTIES 
-                                   COMPILE_FLAGS "-DBUILDING_SHARED_LIB" )
+                                   COMPILE_FLAGS "-DBUILD_SHARED_LIB -DBUILDING_SHARED_LIB")
     install(TARGETS ${name}
         RUNTIME DESTINATION ${BIN_INSTALL_DIR}
         ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
@@ -438,6 +440,14 @@ if (SUPPORT_CONSOLE_APP)
     target_link_libraries( ${name} ${add_LIBS} )
     if (MSVC)
         set_target_properties( ${name} PROPERTIES DEBUG_POSTFIX d )
+    endif ()
+    if (APPLE)
+        string(TIMESTAMP CURRENT_YEAR "%Y")
+        configure_file(
+            ${CMAKE_CURRENT_SOURCE_DIR}/console/Info.plist.in 
+            ${CMAKE_CURRENT_BINARY_DIR}/Info.plist
+        )
+        target_link_options(${name} PRIVATE LINKER:-sectcreate,__TEXT,__info_plist,Info.plist)
     endif ()
     if (NOT TIDY_CONSOLE_SHARED)
         set_target_properties( ${name} PROPERTIES 

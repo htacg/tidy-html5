@@ -17,6 +17,7 @@
 #include "language_pt_br.h"
 #include "language_zh_cn.h"
 #include "language_fr.h"
+#include "language_de.h"
 #endif
 
 
@@ -28,7 +29,7 @@ typedef struct {
     Bool manually_set;
     languageDefinition *currentLanguage;
     languageDefinition *fallbackLanguage;
-    languageDefinition *languages[8];
+    languageDefinition *languages[9];
 } tidyLanguagesType;
 
 
@@ -51,6 +52,7 @@ static tidyLanguagesType tidyLanguages = {
         &language_pt_br,
         &language_zh_cn,
         &language_fr,
+        &language_de,
 #endif
         NULL /* This array MUST be null terminated. */
     }
@@ -591,18 +593,18 @@ const tidyLocaleMapItemImpl *TY_(getNextWindowsLanguage)( TidyIterator *iter )
 
 
 /**
- *  Given a `tidyLocalMapItemImpl, return the Windows name.
+ *  Given a `tidyLocaleMapItemImpl, return the Windows name.
  */
-const ctmbstr TY_(TidyLangWindowsName)( const tidyLocaleMapItemImpl *item )
+ctmbstr TY_(TidyLangWindowsName)( const tidyLocaleMapItemImpl *item )
 {
     return item->winName;
 }
 
 
 /**
- *  Given a `tidyLocalMapItemImpl, return the POSIX name.
+ *  Given a `tidyLocaleMapItemImpl, return the POSIX name.
  */
-const ctmbstr TY_(TidyLangPosixName)( const tidyLocaleMapItemImpl *item )
+ctmbstr TY_(TidyLangPosixName)( const tidyLocaleMapItemImpl *item )
 {
     return item->POSIXName;
 }

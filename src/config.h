@@ -335,6 +335,20 @@ Bool  TY_(ParseConfigValue)( TidyDocImpl* doc, TidyOptionId optId, ctmbstr optVa
 Bool  TY_(AdjustCharEncoding)( TidyDocImpl* doc, int encoding );
 
 
+/** Ensure that the configuration options are self consistent.
+ ** THIS PROCESS IS DESTRUCTIVE TO THE USER STATE. It examines
+ ** certain user-specified options and changes other options
+ ** as a result. This means that documented API functions such
+ ** as tidyOptGetValue() won't return the user-set values after
+ ** this is used. As a result, *don't* just use this function
+ ** at every opportunity, but only where needed, which is ONLY
+ ** prior to parsing a stream, and again prior to saving a
+ ** stream (because we reset after parsing.)
+ ** @param doc The Tidy document to adjust.
+ */
+void  TY_(AdjustConfig)( TidyDocImpl* doc );
+
+
 /** Indicates whether or not the current configuration is completely default.
  ** @param doc The Tidy document.
  ** @returns The result.

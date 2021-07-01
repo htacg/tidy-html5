@@ -1462,8 +1462,9 @@ int         TY_(DocParseStream)( TidyDocImpl* doc, StreamIn* in )
     assert( doc->docIn == NULL );
     doc->docIn = in;
 
-    TY_(ResetTags)(doc);    /* reset table to html5 mode */
-    TY_(TakeConfigSnapshot)( doc );    /* Save config state */
+    TY_(ResetTags)(doc);             /* Reset table to html5 mode */
+    TY_(TakeConfigSnapshot)( doc );  /* Save config state */
+    TY_(AdjustConfig)( doc );        /* Ensure config internal consistency */
     TY_(FreeAnchors)( doc );
 
     TY_(FreeNode)(doc, &doc->root);
@@ -2283,7 +2284,8 @@ int         tidyDocSaveStream( TidyDocImpl* doc, StreamOut* out )
         doc->docOut = NULL;
     }
 
-    TY_(ResetConfigToSnapshot)( doc );
+    /* @jsd: removing this should solve #673, and allow saving of the buffer multiple times. */
+//    TY_(ResetConfigToSnapshot)( doc );
     doc->pConfigChangeCallback = callback;
     
     return tidyDocStatus( doc );

@@ -50,6 +50,7 @@ Tidy supports localization, and welcomes translations into various languages. Pl
  - bugs: [https://github.com/htacg/tidy-html5/issues][7]
  - list: [https://lists.w3.org/Archives/Public/html-tidy/][8]
  - api and quickref: [http://api.html-tidy.org/][9]
+ - Wikidata: [https://www.wikidata.org/wiki/Q1566084][10]
 
   [4]: http://www.html-tidy.org/
   [5]: https://github.com/htacg/tidy-html5
@@ -57,6 +58,7 @@ Tidy supports localization, and welcomes translations into various languages. Pl
   [7]: https://github.com/htacg/tidy-html5/issues
   [8]: https://lists.w3.org/Archives/Public/html-tidy/
   [9]: http://api.html-tidy.org/
+  [10]: https://www.wikidata.org/wiki/Q1566084
 
 
 ## History

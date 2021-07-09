@@ -325,7 +325,7 @@ static Dict tag_defs[] =
   { TidyTag_SLOT,        "slot",         VERS_ELEM_SLOT,        &TY_(W3CAttrsFor_SLOT)[0],        (CM_BLOCK|CM_INLINE|CM_MIXED), TY_(ParseBlock),     NULL           },
   { TidyTag_SOURCE,      "source",       VERS_ELEM_SOURCE,      &TY_(W3CAttrsFor_SOURCE)[0],      (CM_BLOCK|CM_INLINE|CM_EMPTY), TY_(ParseBlock),     NULL           },
   { TidyTag_SUMMARY,     "summary",      VERS_ELEM_SUMMARY,     &TY_(W3CAttrsFor_SUMMARY)[0],     (CM_BLOCK),                    TY_(ParseBlock),     NULL           }, /* Is. #895 */
-  { TidyTag_TEMPLATE,    "template",     VERS_ELEM_TEMPLATE,    &TY_(W3CAttrsFor_TEMPLATE)[0],    (CM_BLOCK),                    TY_(ParseBlock),     NULL           },
+  { TidyTag_TEMPLATE,    "template",     VERS_ELEM_TEMPLATE,    &TY_(W3CAttrsFor_TEMPLATE)[0],    (CM_BLOCK|CM_HEAD),            TY_(ParseBlock),     NULL           },
   { TidyTag_TIME,        "time",         VERS_ELEM_TIME,        &TY_(W3CAttrsFor_TIME)[0],        (CM_INLINE),                   TY_(ParseInline),    NULL           },
   { TidyTag_TRACK,       "track",        VERS_ELEM_TRACK,       &TY_(W3CAttrsFor_TRACK)[0],       (CM_BLOCK|CM_EMPTY),           TY_(ParseBlock),     NULL           },
   { TidyTag_VIDEO,       "video",        VERS_ELEM_VIDEO,       &TY_(W3CAttrsFor_VIDEO)[0],       (CM_BLOCK|CM_INLINE),          TY_(ParseBlock),     NULL           },

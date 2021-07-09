@@ -1568,7 +1568,9 @@ TIDY_EXPORT int TIDY_CALL         tidyParseFile(TidyDoc tdoc,    /**< The tidy d
  */
 TIDY_EXPORT int TIDY_CALL         tidyParseStdin( TidyDoc tdoc );
 
-/** Parse markup in given string.
+/** Parse markup in given string. Note that the supplied string is of type
+ ** `ctmbstr` based on `char` and therefore doesn't support the use of
+ ** UTF-16 strings. Use `tidyParseBuffer()` if parsing multibyte strings.
  ** @result Returns the highest of `2` indicating that errors were present in
  **         the document, `1` indicating warnings, and `0` in the case of
  **         everything being okay.

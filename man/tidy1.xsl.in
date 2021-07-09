@@ -98,6 +98,8 @@ Single-letter \fIcommand-line\fR options without an associated value
 can be combined; for example '\fB-i\fR', '\fB-m\fR' and '\fB-u\fR'
 may be combined as '\fB-imu\fR'.<xsl:text/>
 <xsl:call-template name="show-cmdline-options" />
+.SS Configuration Options General
+.rs
 .LP
 \fIConfiguration\fR options can be specified
 by preceding each option with \fB--\fR at the command line,

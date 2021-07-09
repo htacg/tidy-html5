@@ -491,7 +491,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "for HTML5 document types, and <var>yes</var> for all other document "
         "types. "
         "<br/>"
-        "HTML has abandonded SGML comment syntax, and allows adjacent hypens "
+        "HTML has abandoned SGML comment syntax, and allows adjacent hyphens "
         "for all versions of HTML, although XML and XHTML do not. If you plan "
         "to support older browsers that require SGML comment syntax, then "
         "consider setting this value to <var>yes</var>."

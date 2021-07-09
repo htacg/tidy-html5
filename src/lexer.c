@@ -1035,7 +1035,7 @@ static SPStatus GetSurrogatePair(TidyDocImpl* doc, Bool isXml, uint *pch)
 {
     Lexer* lexer = doc->lexer;
     uint bufSize = 32;
-    uint c, ch, offset = 0;
+    uint c, ch = 0, offset = 0;
     tmbstr buf = 0;
     SPStatus status = SP_error;  /* assume failed */
     int type = 0;   /* assume numeric */
@@ -1088,13 +1088,15 @@ static SPStatus GetSurrogatePair(TidyDocImpl* doc, Bool isXml, uint *pch)
 
     if (c == ';')
     {
+        int scanned;
+
         buf[offset] = 0;
         if (type)
-            sscanf(buf + 2, "%x", &ch);
+            scanned = sscanf(buf + 2, "%x", &ch);
         else
-            sscanf(buf + 1, "%d", &ch);
+            scanned = sscanf(buf + 1, "%d", &ch);
 
-        if (TY_(IsHighSurrogate)(ch))
+        if (scanned == 1 && TY_(IsHighSurrogate)(ch))
         {
             ch = TY_(CombineSurrogatePair)(ch, fch);
             if (TY_(IsValidCombinedChar)(ch))

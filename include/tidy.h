@@ -1916,7 +1916,8 @@ TIDY_EXPORT Bool TIDY_CALL tidyNodeHasText(TidyDoc tdoc, /**< The document to qu
                                            TidyNode tnod /**< The node to query. */
                                            );
 
-/** Gets the text of a node and places it into the given TidyBuffer.
+/** Gets the text of a node and places it into the given TidyBuffer. The text will be terminated with a `TidyNewline`.
+ ** If you want the raw utf-8 stream see `tidyNodeGetValue()`.
  ** @result Returns a bool indicating success or not.
  */
 TIDY_EXPORT Bool TIDY_CALL tidyNodeGetText(TidyDoc tdoc,   /**< The document to query. */

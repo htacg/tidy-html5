@@ -19,24 +19,44 @@ In Windows CMake offers various versions for MSVC. Again below only the command 
 
 ## Build the tidy library and command line tool
 
-  1. `cd build/cmake`
+### macOS/Linux/Unix
 
-  2. `cmake ../.. -DCMAKE_BUILD_TYPE=Release [-DCMAKE_INSTALL_PREFIX=/path/for/install]`
+~~~
+    cd build/cmake
+    cmake ../.. -DCMAKE_BUILD_TYPE=Release [-DCMAKE_INSTALL_PREFIX=/path/for/install]
+    make
+    [sudo] make install
+~~~
 
-  3. Windows:  `cmake --build . --config Release`  
-     Unix/OS X: `make`
+### macOS (multi-architecture)
 
-  4. Install, if desired:  
-     Windows: `cmake --build . --config Release --target INSTALL`  
-     Unix/OS X: `[sudo] make install`
+~~~
+    cd build/cmake
+    cmake ../.. -DCMAKE_BUILD_TYPE=Release "-DCMAKE_OSX_ARCHITECTURES=x86_64;arm64"
+    make
+    [sudo] make install
+~~~
 
-By default cmake sets the install path to `/usr/local/bin` in Unix. If you wanted the binary in say `/usr/bin` instead, then in 2. above use `-DCMAKE_INSTALL_PREFIX=/usr`.
+### Windows
 
-Also, in Unix if you want to build the release library without any debug `assert` in the code then add `-DCMAKE_BUILD_TYPE=Release` in step 2. This adds a `-DNDEBUG` macro to the compile switches. This is normally added in windows build for the `Release` config.
+~~~
+    cd build/cmake
+    cmake ../.. -DCMAKE_BUILD_TYPE=Release [-DCMAKE_INSTALL_PREFIX=/path/for/install]
+    cmake --build . --config Release
+    cmake --build . --config Release --target INSTALL
+~~~
+
+### Build options
+
+By default cmake sets the install path to `/usr/local/bin` in Unix. If you wanted the binary in say `/usr/bin` instead, then in the second step, use `-DCMAKE_INSTALL_PREFIX=/usr`.
+
+Also, in Unix if you want to build the release library without any debug `assert` in the code then add `-DCMAKE_BUILD_TYPE=Release` in the second step. This adds a `-DNDEBUG` macro to the compile switches. This is normally added in windows build for the `Release` config.
 
 In Windows the default install is to `C:\Program Files\tidy`, or `C:/Program Files (x86)/tidy`, which is  not very useful. After the build the `tidy.exe` is in the `Release` directory, and can be copied to any directory in your `PATH` environment variable for global use.
 
-If you do **not** need the tidy library built as a 'shared' (DLL) library, then in 2. add the command `-DBUILD_SHARED_LIB:BOOL=OFF`. This option is **ON** by default. The static library is always built and linked with the command line tool for convenience in Windows, and so the binary can be run as part of the man page build without the shared library being installed in unix.
+On macOS, you can build for both Intel and Apple Silicon by adding "-DCMAKE_OSX_ARCHITECTURES=x86_64;arm64" in the second step.
+
+If you do **not** need the tidy library built as a 'shared' (DLL) library, then in the second step add the command `-DBUILD_SHARED_LIB:BOOL=OFF`. This option is **ON** by default. The static library is always built and linked with the command line tool for convenience in Windows, and so the binary can be run as part of the man page build without the shared library being installed in unix.
 
 See the `CMakeLists.txt` file for other CMake **options** offered.
 

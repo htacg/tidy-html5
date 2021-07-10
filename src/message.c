@@ -1073,7 +1073,7 @@ static struct _dialogueDispatchTable {
 ** every message, because they're not all the complex and there aren't that
 ** many.
 */
-TidyMessageImpl *formatDialogue( TidyDocImpl* doc, uint code, TidyReportLevel level, va_list args )
+static TidyMessageImpl *formatDialogue( TidyDocImpl* doc, uint code, TidyReportLevel level, va_list args )
 {
     switch (code)
     {

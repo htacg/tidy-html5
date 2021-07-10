@@ -95,7 +95,7 @@ typedef struct tidyLocaleMapItemImpl {
  **          Returns NULL on failure.
  **  @return The same buffer for convenience.
  */
-tmbstr TY_(tidySystemLocale)(tmbstr result);
+TY_PRIVATE tmbstr TY_(tidySystemLocale)(tmbstr result);
 
 /**
  *  Tells Tidy to use a different language for output.
@@ -108,12 +108,12 @@ tmbstr TY_(tidySystemLocale)(tmbstr result);
  *          true. However the opposite is not true; if es is requested but
  *          not present, Tidy will not try to select from the es_XX variants.
  */
-Bool TY_(tidySetLanguage)( ctmbstr languageCode );
+TY_PRIVATE Bool TY_(tidySetLanguage)( ctmbstr languageCode );
 
 /**
  *  Gets the current language used by Tidy.
  */
-ctmbstr TY_(tidyGetLanguage)(void);
+TY_PRIVATE ctmbstr TY_(tidyGetLanguage)(void);
 
 
 /**
@@ -124,7 +124,7 @@ ctmbstr TY_(tidyGetLanguage)(void);
  *  @returns Returns yes to indicate that the current language was
  *    specified by an API user.
  */
-Bool TY_(tidyGetLanguageSetByUser)(void);
+TY_PRIVATE Bool TY_(tidyGetLanguageSetByUser)(void);
 
 
 /**
@@ -132,20 +132,20 @@ Bool TY_(tidyGetLanguageSetByUser)(void);
  *  selected the current language. This flag prevents subsequently
  *  created instances of TidyDocument from changing the user's language.
  */
-void TY_(tidySetLanguageSetByUser)( void );
+TY_PRIVATE void TY_(tidySetLanguageSetByUser)( void );
 
 
 /**
  *  Provides a string given `messageType` in the current
  *  localization for `quantity`.
  */
-ctmbstr TY_(tidyLocalizedStringN)( uint messageType, uint quantity );
+TY_PRIVATE ctmbstr TY_(tidyLocalizedStringN)( uint messageType, uint quantity );
 
 /**
  *  Provides a string given `messageType` in the current
  *  localization for the single case.
  */
-ctmbstr TY_(tidyLocalizedString)( uint messageType );
+TY_PRIVATE ctmbstr TY_(tidyLocalizedString)( uint messageType );
 
 
 /** @} */
@@ -157,7 +157,7 @@ ctmbstr TY_(tidyLocalizedString)( uint messageType );
  *  Provides a string given `messageType` in the default
  *  localization (which is `en`).
  */
-ctmbstr TY_(tidyDefaultString)( uint messageType );
+TY_PRIVATE ctmbstr TY_(tidyDefaultString)( uint messageType );
 
 /*
  *  Initializes the TidyIterator to point to the first item
@@ -165,7 +165,7 @@ ctmbstr TY_(tidyDefaultString)( uint messageType );
  *  these are provided for documentation generation purposes
  *  and probably aren't useful for LibTidy implementors.
  */
-TidyIterator TY_(getStringKeyList)(void);
+TY_PRIVATE TidyIterator TY_(getStringKeyList)(void);
 
 /*
  *  Provides the next key value in Tidy's list of localized
@@ -173,42 +173,42 @@ TidyIterator TY_(getStringKeyList)(void);
  *  generation purposes and probably aren't useful to
  *  libtidy implementors.
  */
-uint TY_(getNextStringKey)( TidyIterator* iter );
+TY_PRIVATE uint TY_(getNextStringKey)( TidyIterator* iter );
 
 /**
  *  Initializes the TidyIterator to point to the first item
  *  in Tidy's structure of Windows<->POSIX local mapping.
  *  Items can be retrieved with getNextWindowsLanguage();
  */
-TidyIterator TY_(getWindowsLanguageList)(void);
+TY_PRIVATE TidyIterator TY_(getWindowsLanguageList)(void);
 
 /**
  *  Returns the next record of type `localeMapItem` in
  *  Tidy's structure of Windows<->POSIX local mapping.
  */
-const tidyLocaleMapItemImpl *TY_(getNextWindowsLanguage)( TidyIterator* iter );
+TY_PRIVATE const tidyLocaleMapItemImpl *TY_(getNextWindowsLanguage)( TidyIterator* iter );
 
 /**
  *  Given a `tidyLocaleMapItemImpl, return the Windows name.
  */
-ctmbstr TY_(TidyLangWindowsName)( const tidyLocaleMapItemImpl *item );
+TY_PRIVATE ctmbstr TY_(TidyLangWindowsName)( const tidyLocaleMapItemImpl *item );
 
 /**
  *  Given a `tidyLocaleMapItemImpl, return the POSIX name.
  */
-ctmbstr TY_(TidyLangPosixName)( const tidyLocaleMapItemImpl *item );
+TY_PRIVATE ctmbstr TY_(TidyLangPosixName)( const tidyLocaleMapItemImpl *item );
 
 /**
  *  Initializes the TidyIterator to point to the first item
  *  in Tidy's list of installed language codes.
  *  Items can be retrieved with getNextInstalledLanguage();
  */
-TidyIterator TY_(getInstalledLanguageList)(void);
+TY_PRIVATE TidyIterator TY_(getInstalledLanguageList)(void);
 
 /**
  *  Returns the next installed language.
  */
-ctmbstr TY_(getNextInstalledLanguage)( TidyIterator* iter );
+TY_PRIVATE ctmbstr TY_(getNextInstalledLanguage)( TidyIterator* iter );
 
 
 /** @} */

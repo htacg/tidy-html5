@@ -383,8 +383,14 @@ endif ()
 #------------------------------------------------------------------------
 set(name tidy-static)
 add_library ( ${name} STATIC ${CFILES} ${HFILES} ${LIBHFILES} )
-set_target_properties( ${name} PROPERTIES 
-                       OUTPUT_NAME ${LIB_NAME}s )
+if (WIN32)
+    set_target_properties( ${name} PROPERTIES 
+                           OUTPUT_NAME ${LIB_NAME}_static ) 
+else ()
+    set_target_properties( ${name} PROPERTIES 
+                           OUTPUT_NAME ${LIB_NAME} )
+
+endif ()
 if (NOT TIDY_CONSOLE_SHARED) # user wants default static linkage
     list ( APPEND add_LIBS ${name} )
 endif ()    

@@ -1,0 +1,18 @@
+<!--
+This test case represents HTML Tidy issue #692, which describes
+how Tidy misbehaves when there are multiple <title> elements present.
+The reason this change is needed is to alert the user that multiple
+<title> elements are present, and to deleted all but the first title
+element, which is consistent with the behavior of mainline web browers
+as of this commit date.
+ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Test stuff</title>
+</head>
+<body>
+  <p>This is my paragraph</p>
+</body>
+</html>

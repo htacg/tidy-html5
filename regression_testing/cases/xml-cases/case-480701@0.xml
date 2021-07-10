@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [ #480701 ] -xml conflicts with -output-xhtml -->
+<test>
+<image rdf:resource="http://www.atmedia.net/"/>
+</test>
+
+<!--
+Expected output:
+<image rdf:resource="http://www.atmedia.net/"/>
+or
+<image rdf:resource="http://www.atmedia.net/"></image>
+
+Actual output:
+<image rdf:resource="http://www.atmedia.net/"/></image>
+-->

@@ -84,7 +84,7 @@ struct _TidyAccessImpl
 };
 
 
-void TY_(AccessibilityChecks)( TidyDocImpl* doc );
+TY_PRIVATE void TY_(AccessibilityChecks)( TidyDocImpl* doc );
 
 
 #endif /* __ACCESS_H__ */

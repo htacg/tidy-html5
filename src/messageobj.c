@@ -96,6 +96,18 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
     result->line = line;
     result->column = column;
     result->level = level;
+    /* Is #719 - set 'muted' before any callbacks. */
+    result->muted = no;
+    i = 0;
+    while ((doc->muted.list) && (doc->muted.list[i] != 0))
+    {
+        if (doc->muted.list[i] == code)
+        {
+            result->muted = yes;
+            break;
+        }
+        i++;
+    }
 
     /* Things we create... */
 
@@ -126,6 +138,14 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
         /* Change formatting to be parsable by GNU Emacs */
         TY_(tmbsnprintf)(result->messagePosDefault, sizeMessageBuf, "%s:%d:%d: ", cfgStr(doc, TidyEmacsFile), line, column);
         TY_(tmbsnprintf)(result->messagePos, sizeMessageBuf, "%s:%d:%d: ", cfgStr(doc, TidyEmacsFile), line, column);
+    }
+    else if ( cfgBool(doc, TidyShowFilename) && cfgStr(doc, TidyEmacsFile) )
+    {
+        /* Include filename in output */
+        TY_(tmbsnprintf)(result->messagePosDefault, sizeMessageBuf, tidyDefaultString(FN_LINE_COLUMN_STRING),
+            cfgStr(doc, TidyEmacsFile), line, column);
+        TY_(tmbsnprintf)(result->messagePos, sizeMessageBuf, tidyLocalizedString(FN_LINE_COLUMN_STRING),
+            cfgStr(doc, TidyEmacsFile), line, column);
     }
     else
     {
@@ -158,8 +178,17 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
 
     if ( ( cfgBool(doc, TidyMuteShow) == yes ) && level <= TidyFatal )
     {
-        TY_(tmbsnprintf)(result->messageOutputDefault, sizeMessageBuf, "%s (%s)", result->messageOutputDefault, TY_(tidyErrorCodeAsKey)(code) );
-        TY_(tmbsnprintf)(result->messageOutput, sizeMessageBuf, "%s (%s)", result->messageOutput, TY_(tidyErrorCodeAsKey)(code) );
+        /*\ Issue #655 - Unsafe to use output buffer as one of the va_list
+         *  input parameters in some snprintf implmentations.
+        \*/
+        ctmbstr pc = TY_(tidyErrorCodeAsKey)(code);
+        i = TY_(tmbstrlen)(result->messageOutputDefault);
+        if (i < sizeMessageBuf)
+            TY_(tmbsnprintf)(result->messageOutputDefault + i, sizeMessageBuf - i, " (%s)", pc );
+        i = TY_(tmbstrlen)(result->messageOutput);
+        if (i < sizeMessageBuf)
+            TY_(tmbsnprintf)(result->messageOutput + i, sizeMessageBuf - i, " (%s)", pc );
+        i = 0;
     }
 
     result->allowMessage = yes;
@@ -189,19 +218,6 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
     if ( doc->messageCallback )
     {
         result->allowMessage = result->allowMessage & doc->messageCallback( tidyImplToMessage(result) );
-    }
-
-    /* finally, check the document's configuration to determine whether
-       this message is muted. */
-    result->muted = no;
-    while ( ( doc->muted.list ) && ( doc->muted.list[i] != 0 ) )
-    {
-        if ( doc->muted.list[i] == code )
-        {
-            result->muted = yes;
-            break;
-        }
-        i++;
     }
 
     return result;
@@ -627,6 +643,7 @@ static struct printfArg* BuildArgArray( TidyDocImpl *doc, ctmbstr fmt, va_list a
         else
         {
             strncpy(nas[cn].format, fmt + nas[cn].formatStart, nas[cn].formatLength);
+            nas[cn].format[nas[cn].formatLength] = 0; /* Is. #800 - If count <= srcLen, no 0 added! */
         }
         
 

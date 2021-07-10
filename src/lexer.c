@@ -947,12 +947,15 @@ static void AddByte( Lexer *lexer, tmbchar ch )
     {
         tmbstr buf = NULL;
         uint allocAmt = lexer->lexlength;
+        uint prev = allocAmt; /* Is. #761 */
         while ( lexer->lexsize + 2 >= allocAmt )
         {
             if ( allocAmt == 0 )
                 allocAmt = 8192;
             else
                 allocAmt *= 2;
+            if (allocAmt < prev) /* Is. #761 - watch for wrap - and */
+                TidyPanic(lexer->allocator, "\nPanic: out of internal memory!\nDocument input too big!\n");
         }
         buf = (tmbstr) TidyRealloc( lexer->allocator, lexer->lexbuf, allocAmt );
         if ( buf )
@@ -1032,7 +1035,7 @@ static SPStatus GetSurrogatePair(TidyDocImpl* doc, Bool isXml, uint *pch)
 {
     Lexer* lexer = doc->lexer;
     uint bufSize = 32;
-    uint c, ch, offset = 0;
+    uint c, ch = 0, offset = 0;
     tmbstr buf = 0;
     SPStatus status = SP_error;  /* assume failed */
     int type = 0;   /* assume numeric */
@@ -1085,13 +1088,15 @@ static SPStatus GetSurrogatePair(TidyDocImpl* doc, Bool isXml, uint *pch)
 
     if (c == ';')
     {
+        int scanned;
+
         buf[offset] = 0;
         if (type)
-            sscanf(buf + 2, "%x", &ch);
+            scanned = sscanf(buf + 2, "%x", &ch);
         else
-            sscanf(buf + 1, "%d", &ch);
+            scanned = sscanf(buf + 1, "%d", &ch);
 
-        if (TY_(IsHighSurrogate)(ch))
+        if (scanned == 1 && TY_(IsHighSurrogate)(ch))
         {
             ch = TY_(CombineSurrogatePair)(ch, fch);
             if (TY_(IsValidCombinedChar)(ch))
@@ -1828,7 +1833,11 @@ static uint FindGivenVersion( TidyDocImpl* doc, Node* doctype )
 
     if (!fpi || !fpi->value) 
     {
-        if (doctype->element && (TY_(tmbstrcmp)(doctype->element,"html") == 0))
+        /*\
+         * Is. #815 - change to case-insensitive test
+         * See REC: https://www.w3.org/TR/html5/syntax.html#the-doctype
+        \*/
+        if (doctype->element && (TY_(tmbstrcasecmp)(doctype->element,"html") == 0))
         {
             return VERS_HTML5;  /* TODO: do we need to check MORE? */
         }
@@ -2384,7 +2393,8 @@ static Node *GetCDATA( TidyDocImpl* doc, Node *container )
                 /*\ if javascript insert backslash before / 
                  *  Issue #348 - Add option, escape-scripts, to skip
                 \*/
-                if ((TY_(IsJavaScript)(container)) && cfgBool(doc, TidyEscapeScripts))
+                if ((TY_(IsJavaScript)(container)) && cfgBool(doc, TidyEscapeScripts) &&
+                    !TY_(IsHTML5Mode)(doc) )    /* Is #700 - This only applies to legacy html4 mode */
                 {
                     /* Issue #281 - only warn if adding the escape! */
                     TY_(Report)(doc, NULL, NULL, BAD_CDATA_CONTENT);
@@ -2693,10 +2703,9 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                         }
 
                         /*
-                           We only print this message if there's a missing
-                           starting hyphen; this comment will be dropped.
+                           TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT_DROPPING );
+                           Warning now done later - see issue #487
                          */
-                        TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT_DROPPING );
                     }
                     else if (c == 'd' || c == 'D')
                     {
@@ -2769,6 +2778,11 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                     }
 
 
+                    /*
+                       We only print this message if there's a missing
+                       starting hyphen; this comment will be dropped.
+                     */
+                    TY_(Report)(doc, NULL, NULL, MALFORMED_COMMENT_DROPPING ); /* Is. #487 */
 
                     /* else swallow characters up to and including next '>' */
                     while ((c = TY_(ReadChar)(doc->docIn)) != '>')
@@ -3262,6 +3276,22 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
 
                     if (!name)
                     {
+                        /* check if attributes are created by ASP markup */
+                        if (asp)
+                        {
+                            av = TY_(NewAttribute)(doc);
+                            av->asp = asp;
+                            AddAttrToList( &attributes, av ); 
+                        }
+
+                        /* check if attributes are created by PHP markup */
+                        if (php)
+                        {
+                            av = TY_(NewAttribute)(doc);
+                            av->php = php;
+                            AddAttrToList( &attributes, av ); 
+                        }
+                      
                         /* fix for http://tidy.sf.net/bug/788031 */
                         lexer->lexsize -= 1;
                         lexer->txtend = lexer->txtstart;
@@ -3316,7 +3346,11 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                     }
                 }
 
-                if (c != ']')
+                if (c == '>')
+                {
+                    /* Is. #462 - reached '>' before ']' */
+                    TY_(UngetChar)(c, doc->docIn);
+                } else if (c != ']')
                     continue;
 
                 /* now look for '>' */
@@ -3439,6 +3473,10 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
         GTDBG(doc,"COMMENT", node);
         return node;  /* the COMMENT token */
     }
+
+    /* check attributes before return NULL */
+    if (attributes)
+        TY_(FreeAttribute)( doc, attributes );
 
     DEBUG_LOG(SPRTF("Returning NULL...\n"));
     return NULL;

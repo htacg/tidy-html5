@@ -1,0 +1,8 @@
+line 7 column 1 - Access: [6.2.2.2]: text equivalents require updating (script).
+line 7 column 1 - Access: [6.3.1.1]: programmatic objects require testing (script).
+line 7 column 1 - Access: [8.1.1.1]: ensure programmatic objects are accessible (script).
+line 7 column 1 - Access: [7.1.1.1]: remove flicker (script).
+line 7 column 1 - Access: [2.1.1.4]: ensure information not conveyed through color alone (script).
+line 7 column 1 - Access: [1.1.10.1]: <script> missing <noscript> section.
+No warnings or errors were found.
+

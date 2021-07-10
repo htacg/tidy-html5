@@ -245,6 +245,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyQuoteNbsp,               ME, "quote-nbsp",                  BL, yes,             ParsePickList,     &boolPicks          },
     { TidyReplaceColor,            MX, "replace-color",               BL, no,              ParsePickList,     &boolPicks          },
     { TidyShowErrors,              DD, "show-errors",                 IN, 6,               ParseInt,          NULL                },
+    { TidyShowFilename,            DD, "show-filename",               BL, no,              ParsePickList,     &boolPicks          },
     { TidyShowInfo,                DD, "show-info",                   BL, yes,             ParsePickList,     &boolPicks          },
     { TidyShowMarkup,              DD, "markup",                      BL, yes,             ParsePickList,     &boolPicks          },
     { TidyShowMetaChange,          DG, "show-meta-change",            BL, no,              ParsePickList,     &boolPicks          }, /* 20170609 - Issue #456 */
@@ -264,7 +265,7 @@ static const TidyOptionImpl option_defs[] =
     { TidyWrapAttVals,             PP, "wrap-attributes",             BL, no,              ParsePickList,     &boolPicks          },
     { TidyWrapJste,                PP, "wrap-jste",                   BL, yes,             ParsePickList,     &boolPicks          },
     { TidyWrapLen,                 PP, "wrap",                        IN, 68,              ParseInt,          NULL                },
-    { TidyWrapPhp,                 PP, "wrap-php",                    BL, yes,             ParsePickList,     &boolPicks          },
+    { TidyWrapPhp,                 PP, "wrap-php",                    BL, no,              ParsePickList,     &boolPicks          },
     { TidyWrapScriptlets,          PP, "wrap-script-literals",        BL, no,              ParsePickList,     &boolPicks          },
     { TidyWrapSection,             PP, "wrap-sections",               BL, yes,             ParsePickList,     &boolPicks          },
     { TidyWriteBack,               IO, "write-back",                  BL, no,              ParsePickList,     &boolPicks          },
@@ -711,6 +712,11 @@ void TY_(TakeConfigSnapshot)( TidyDocImpl* doc )
     const TidyOptionValue* value = &doc->config.value[ 0 ];
     TidyOptionValue* snap  = &doc->config.snapshot[ 0 ];
 
+    /* @jsd: do NOT mess with user-specified settings until
+     *       absolutely necessary, and ensure that we can
+     *       can restore them immediately after the need.
+     */
+    // TY_(AdjustConfig)( doc );  /* Make sure it's consistent */
     for ( ixVal=0; ixVal < N_TIDY_OPTIONS; ++option, ++ixVal )
     {
         assert( ixVal == (uint) option->id );
@@ -759,6 +765,12 @@ void TY_(CopyConfig)( TidyDocImpl* docTo, TidyDocImpl* docFrom )
         }
         if ( needReparseTagsDecls )
             ReparseTagDecls( docTo, changedUserTags  );
+        
+        /* @jsd: do NOT mess with user-specified settings until
+         *       absolutely necessary, and ensure that we can
+         *       can restore them immediately after the need.
+         */
+        // TY_(AdjustConfig)( docTo );  /* Make sure it's consistent */
     }
 }
 
@@ -873,8 +885,26 @@ static ctmbstr ExpandTilde( TidyDocImpl* doc, ctmbstr filename )
     if (filename[1] == '/')
     {
         home_dir = getenv("HOME");
-        if ( home_dir )
+        if (home_dir) {
             ++filename;
+        }
+#ifdef _WIN32
+        else if (strlen(filename) >= 3) {   /* at least '~/+1' */
+            /* no HOME env in Windows - got for HOMEDRIVE=C: HOMEPATH=\Users\user */
+            char * hd = getenv("HOMEDRIVE");
+            char * hp = getenv("HOMEPATH");
+            if (hd && hp) {
+                ctmbstr s = TidyDocAlloc(doc, _MAX_PATH);
+                strcpy(s, hd);
+                strcat(s, hp);
+                strcat(s, "\\");
+                strcat(s, &filename[2]);
+                return s;
+            }
+
+        }
+#endif /* _WIN32 */
+
     }
 #ifdef SUPPORT_GETPWNAM
     else
@@ -1051,6 +1081,12 @@ int TY_(ParseConfigFileEnc)( TidyDocImpl* doc, ctmbstr file, ctmbstr charenc )
 
     if ( fname != (tmbstr) file )
         TidyDocFree( doc, fname );
+
+    /* @jsd: do NOT mess with user-specified settings until
+     *       absolutely necessary, and ensure that we can
+     *       can restore them immediately after the need.
+     */
+    // TY_(AdjustConfig)( docTo );  /* Make sure it's consistent */
 
     /* any new config errors? If so, return warning status. */
     return (doc->optionErrors > opterrs ? 1 : 0); 
@@ -1476,9 +1512,12 @@ Bool ParseCSS1Selector( TidyDocImpl* doc, const TidyOptionImpl* option )
         return no;
     }
 
+    buf[i] = 0; /* Is #697 - Do *not* add '-' */
+#if 0   /* Is #697 - Is this still required? KEEP HISTORY - DO NOT DELETE */
     buf[i++] = '-';  /* Make sure any escaped Unicode is terminated */
     buf[i] = 0;      /* so valid class names are generated after */
                      /* Tidy appends last digits. */
+#endif /* Is #697 - Is this still required? */
 
     SetOptionValue( doc, option->id, buf );
     return yes;

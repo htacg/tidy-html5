@@ -54,6 +54,7 @@ if (LIBTIDY_VERSION)
     list(GET VERSION_LIST 0 TIDY_MAJOR_VERSION)
     list(GET VERSION_LIST 1 TIDY_MINOR_VERSION)
     list(GET VERSION_LIST 2 TIDY_POINT_VERSION)
+    set(TIDY_SO_VERSION "${TIDY_MAJOR_VERSION}${TIDY_MINOR_VERSION}")
 else ()
     message(FATAL_ERROR "*** FAILED to get a VERSION from version.txt!")
 endif ()   
@@ -66,6 +67,21 @@ if (LIBTIDY_DATE)
     list(GET DATE_LIST 2 tidy_DAY)
 else ()
     message(FATAL_ERROR "*** FAILED to get a DATE from version.txt!")
+endif ()
+
+# Establish SOVERSION. Tidy uses a weird form of semantic versioning,
+# wherein even minor versions are stable versions with SONAMEs, and
+# odd minor versions are `next` versions that should NOT be released,
+# are NOT stable, and should NOT have a valid SONAME.
+if (TIDY_SO_VERSION)
+    math(EXPR NO_SONAME "${TIDY_SO_VERSION} % 2")
+    if ( NO_SONAME EQUAL 0)
+        message("-> TIDY_SO_VERSION = ${TIDY_SO_VERSION}. This is an EVEN (stable) release.")
+    else ()
+        message("-> TIDY_SO_VERSION = ${TIDY_SO_VERSION}. This is an ODD (development) release.")
+    endif ()
+else ()
+    message(FATAL_ERROR "*** FAILED to build a TIDY_SO_VERSION!")
 endif ()
 
 
@@ -383,8 +399,14 @@ endif ()
 #------------------------------------------------------------------------
 set(name tidy-static)
 add_library ( ${name} STATIC ${CFILES} ${HFILES} ${LIBHFILES} )
-set_target_properties( ${name} PROPERTIES 
-                       OUTPUT_NAME ${LIB_NAME}s )
+if (WIN32)
+    set_target_properties( ${name} PROPERTIES 
+                           OUTPUT_NAME ${LIB_NAME}_static ) 
+else ()
+    set_target_properties( ${name} PROPERTIES 
+                           OUTPUT_NAME ${LIB_NAME} )
+
+endif ()
 if (NOT TIDY_CONSOLE_SHARED) # user wants default static linkage
     list ( APPEND add_LIBS ${name} )
 endif ()    
@@ -394,7 +416,11 @@ install(TARGETS ${name}
         LIBRARY DESTINATION ${LIB_INSTALL_DIR}
         )
 install( FILES ${HFILES} DESTINATION ${INCLUDE_INSTALL_DIR} )
-
+if(MSVC)
+    # install(FILES $<TARGET_PDB_FILE:${name}> DESTINATION lib OPTIONAL)
+    INSTALL(FILES ${PROJECT_BINARY_DIR}/${name}.dir/Debug/${name}.pdb
+    DESTINATION lib CONFIGURATIONS Debug )
+endif()
 
 #------------------------------------------------------------------------
 # Dynamic Library
@@ -410,11 +436,10 @@ if (BUILD_SHARED_LIB)
                                    OUTPUT_NAME ${LIB_NAME} )
     set_target_properties( ${name} PROPERTIES
                                    VERSION   ${LIBTIDY_VERSION}
-                                   SOVERSION ${TIDY_MAJOR_VERSION} )
+                                   SOVERSION ${TIDY_SO_VERSION}
+                                   NO_SONAME ${NO_SONAME} )
     set_target_properties( ${name} PROPERTIES 
-                                   COMPILE_FLAGS "-DBUILD_SHARED_LIB" )
-    set_target_properties( ${name} PROPERTIES 
-                                   COMPILE_FLAGS "-DBUILDING_SHARED_LIB" )
+                                   COMPILE_FLAGS "-DBUILD_SHARED_LIB -DBUILDING_SHARED_LIB")
     install(TARGETS ${name}
         RUNTIME DESTINATION ${BIN_INSTALL_DIR}
         ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
@@ -440,7 +465,12 @@ if (SUPPORT_CONSOLE_APP)
         set_target_properties( ${name} PROPERTIES DEBUG_POSTFIX d )
     endif ()
     if (APPLE)
-        target_link_options(${name} PRIVATE LINKER:-sectcreate,__TEXT,__info_plist,${CMAKE_CURRENT_SOURCE_DIR}/console/Info.plist)
+        string(TIMESTAMP CURRENT_YEAR "%Y")
+        configure_file(
+            ${CMAKE_CURRENT_SOURCE_DIR}/console/Info.plist.in 
+            ${CMAKE_CURRENT_BINARY_DIR}/Info.plist
+        )
+        target_link_options(${name} PRIVATE LINKER:-sectcreate,__TEXT,__info_plist,Info.plist)
     endif ()
     if (NOT TIDY_CONSOLE_SHARED)
         set_target_properties( ${name} PROPERTIES 

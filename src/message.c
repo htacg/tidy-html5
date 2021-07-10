@@ -261,6 +261,7 @@ static struct _dispatchTable {
 } dispatchTable[] = {
     { ADDED_MISSING_CHARSET,        TidyInfo,        formatStandard          },
     { ANCHOR_NOT_UNIQUE,            TidyWarning,     formatAttributeReport   },
+    { ANCHOR_DUPLICATED,            TidyWarning,     formatAttributeReport   },
     { APOS_UNDEFINED,               TidyWarning,     formatStandard          },
     { ATTR_VALUE_NOT_LCASE,         TidyWarning,     formatAttributeReport   },
     { ATTRIBUTE_VALUE_REPLACED,     TidyInfo,        formatAttributeReport   },
@@ -346,7 +347,7 @@ static struct _dispatchTable {
     { STRING_CONTENT_LOOKS,         TidyInfo,        formatStandard          }, /* reportMarkupVersion() */
     { STRING_DOCTYPE_GIVEN,         TidyInfo,        formatStandard          }, /* reportMarkupVersion() */
     { STRING_MISSING_MALFORMED,     TidyConfig,      formatStandard          },
-    { STRING_MUTING_TYPE,           TidyConfig,      formatStandard          },
+    { STRING_MUTING_TYPE,           TidyInfo,        formatStandard          },
     { STRING_NO_SYSID,              TidyInfo,        formatStandard          }, /* reportMarkupVersion() */
     { STRING_UNKNOWN_OPTION,        TidyConfig,      formatStandard          },
     { SUSPECTED_MISSING_QUOTE,      TidyWarning,     formatStandard          },
@@ -371,6 +372,7 @@ static struct _dispatchTable {
     { WHITE_IN_URI,                 TidyWarning,     formatAttributeReport   },
     { XML_DECLARATION_DETECTED,     TidyWarning,     formatStandard          },
     { XML_ID_SYNTAX,                TidyWarning,     formatAttributeReport   },
+    { BLANK_TITLE_ELEMENT,          TidyWarning,     formatStandard          },
 
     { APPLET_MISSING_ALT,                            TidyAccess, formatAccessReport },
     { AREA_MISSING_ALT,                              TidyAccess, formatAccessReport },
@@ -583,6 +585,7 @@ TidyMessageImpl *formatAttributeReport(TidyDocImpl* doc, Node *element, Node *no
             return TY_(tidyMessageCreateWithNode)(doc, node, code, level, tagdesc, name, HTMLVersion(doc));
 
         case ANCHOR_NOT_UNIQUE:
+        case ANCHOR_DUPLICATED:
         case ATTR_VALUE_NOT_LCASE:
         case PROPRIETARY_ATTR_VALUE:
         case XML_ID_SYNTAX:
@@ -817,6 +820,7 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
         case NESTED_QUOTATION:
         case SUSPECTED_MISSING_QUOTE:
         case XML_DECLARATION_DETECTED:
+        case BLANK_TITLE_ELEMENT:
             return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level );
 
         case ELEMENT_NOT_EMPTY:
@@ -851,8 +855,10 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
 
         case COERCE_TO_ENDTAG:
         case NON_MATCHING_ENDTAG:
-        case TOO_MANY_ELEMENTS_IN:
             return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, node->element, node->element );
+        case TOO_MANY_ELEMENTS_IN:
+            return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, node->element, element->element);
+
     }
 
     return NULL;
@@ -1067,7 +1073,7 @@ static struct _dialogueDispatchTable {
 ** every message, because they're not all the complex and there aren't that
 ** many.
 */
-TidyMessageImpl *formatDialogue( TidyDocImpl* doc, uint code, TidyReportLevel level, va_list args )
+static TidyMessageImpl *formatDialogue( TidyDocImpl* doc, uint code, TidyReportLevel level, va_list args )
 {
     switch (code)
     {
@@ -1348,7 +1354,7 @@ void TY_(DefineMutedMessage)(TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbst
     if ( list->count >= list->capacity )
     {
         list->capacity = list->capacity * 2;
-        list->list = realloc( list->list, sizeof(tidyStrings) * list->capacity + 1 );
+        list->list = TidyRealloc(doc->allocator, list->list, sizeof(tidyStrings) * list->capacity + 1 );
     }
 
     list->list[list->count] = message;
@@ -1520,6 +1526,7 @@ static const TidyOptionId TidyAsciiCharsLinks[] =      { TidyMakeClean, TidyUnkn
 static const TidyOptionId TidyBlockTagsLinks[] =       { TidyEmptyTags, TidyInlineTags, TidyPreTags, TidyUseCustomTags, TidyUnknownOption };
 static const TidyOptionId TidyCharEncodingLinks[] =    { TidyInCharEncoding, TidyOutCharEncoding, TidyUnknownOption };
 static const TidyOptionId TidyDuplicateAttrsLinks[] =  { TidyJoinClasses, TidyJoinStyles, TidyUnknownOption };
+static const TidyOptionId TidyEmacsLinks[] =           { TidyShowFilename, TidyUnknownOption };
 static const TidyOptionId TidyEmptyTagsLinks[] =       { TidyBlockTags, TidyInlineTags, TidyPreTags, TidyUseCustomTags, TidyUnknownOption };
 static const TidyOptionId TidyErrFileLinks[] =         { TidyOutFile, TidyUnknownOption };
 static const TidyOptionId TidyInCharEncodingLinks[] =  { TidyCharEncoding, TidyUnknownOption };
@@ -1534,6 +1541,7 @@ static const TidyOptionId TidyNumEntitiesLinks[] =     { TidyDoctype, TidyPreser
 static const TidyOptionId TidyOutCharEncodingLinks[] = { TidyCharEncoding, TidyUnknownOption };
 static const TidyOptionId TidyOutFileLinks[] =         { TidyErrFile, TidyUnknownOption };
 static const TidyOptionId TidyPreTagsLinks[] =         { TidyBlockTags, TidyEmptyTags, TidyInlineTags, TidyUseCustomTags, TidyUnknownOption };
+static const TidyOptionId TidyShowFilenameLinks[] =    { TidyEmacs, TidyUnknownOption };
 static const TidyOptionId TidySortAttributesLinks[] =  { TidyPriorityAttributes, TidyUnknownOption };
 static const TidyOptionId TidyUseCustomTagsLinks[] =   { TidyBlockTags, TidyEmptyTags, TidyInlineTags, TidyPreTags, TidyUnknownOption };
 static const TidyOptionId TidyWrapAttValsLinks[] =     { TidyWrapScriptlets, TidyLiteralAttribs, TidyUnknownOption };
@@ -1550,6 +1558,7 @@ static const TidyOptionDoc docs_xrefs[] =
     { TidyBlockTags,       TidyBlockTagsLinks       },
     { TidyCharEncoding,    TidyCharEncodingLinks    },
     { TidyDuplicateAttrs,  TidyDuplicateAttrsLinks  },
+    { TidyEmacs,           TidyEmacsLinks           },
     { TidyEmptyTags,       TidyEmptyTagsLinks       },
     { TidyErrFile,         TidyErrFileLinks         },
     { TidyInCharEncoding,  TidyInCharEncodingLinks  },
@@ -1563,6 +1572,7 @@ static const TidyOptionDoc docs_xrefs[] =
     { TidyOutCharEncoding, TidyOutCharEncodingLinks },
     { TidyOutFile,         TidyOutFileLinks         },
     { TidyPreTags,         TidyPreTagsLinks         },
+    { TidyShowFilename,    TidyShowFilenameLinks    },
     { TidySortAttributes,  TidySortAttributesLinks  },
     { TidyMuteReports,     TidyMuteLinks            },
     { TidyUseCustomTags,   TidyUseCustomTagsLinks   },

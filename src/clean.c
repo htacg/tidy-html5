@@ -1638,6 +1638,9 @@ static Node* PruneSection( TidyDocImpl* doc, Node *node )
 
     for (;;)
     {
+        if (node == NULL)
+            return NULL;
+        
         ctmbstr lexbuf = lexer->lexbuf + node->start;
         if ( TY_(tmbstrncmp)(lexbuf, "if !supportEmptyParas", 21) == 0 )
         {
@@ -1890,8 +1893,7 @@ void TY_(CleanWord2000)( TidyDocImpl* doc, Node *node)
         if ( nodeIsHTML(node) )
         {
             /* check that it's a Word 2000 document */
-            if ( !TY_(GetAttrByName)(node, "xmlns:o") &&
-                 !cfgBool(doc, TidyMakeBare) )
+            if ( !TY_(IsWord2000) (doc) ) /* Is. #896 */
                 return;
 
             /* Output proprietary attributes to maintain errout compatability
@@ -2211,8 +2213,10 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
     tidyBufAppend(&charsetString, "charset=", 8);
     tidyBufAppend(&charsetString, (char*)enc, TY_(tmbstrlen)(enc));
     tidyBufAppend(&charsetString, "\0", 1); /* zero terminate the buffer */
-                                            /* process the children of the head */
-    for (currentNode = head->content; currentNode; currentNode = currentNode->next)
+    /* process the children of the head */
+    /* Issue #656 - guard against 'currentNode' being set NULL in loop */
+    for (currentNode = head->content; currentNode; 
+        currentNode = (currentNode ? currentNode->next : NULL))
     {
         if (!nodeIsMETA(currentNode))
             continue;   /* not a meta node */
@@ -2777,6 +2781,37 @@ void TY_(CleanStyle)(TidyDocImpl* doc, Node *html)
 }
 /* ==================================================
  */
+
+/*
+ * CleanHead - clean the head node, if it exists, and we
+ * are going to show it in the output.
+ * Issue #692 - Remove multiple title elements
+ */
+void TY_(CleanHead)(TidyDocImpl* doc)
+{
+    Node *head, *node, *next;
+    uint titles = 0;
+    if (cfgAutoBool(doc, TidyBodyOnly) == TidyYesState)
+        return; /* not going to show head, so forget it */
+    head = TY_(FindHEAD)(doc);
+    if (!head)
+        return;
+    node = head->content;
+    while (node)
+    {
+        next = node->next;  /* get any 'next' */
+        if (nodeIsTITLE(node))
+        {
+            titles++;
+            if (titles > 1)
+            {
+                TY_(Report)(doc, head, node, DISCARDING_UNEXPECTED);
+                TY_(DiscardElement)(doc, node); /* delete this node */
+            }
+        }
+        node = next;
+    }
+}
 
 /*
  * local variables:

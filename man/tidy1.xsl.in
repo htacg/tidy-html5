@@ -75,8 +75,9 @@ They are listed in the first part of this section.
 \fIConfiguration\fR options, on the other hand, can either be passed
 on the command line, starting with two dashes \fB--\fR,
 or specified in a configuration file,
-using the option name without the starting dashes.  
-They are listed in the second part of this section.
+using the option name, followed by a colon \fB:\fR, plus the value, without 
+the starting dashes. They are listed in the second part of this section,
+with a sample config file.
 .LP
 For \fIcommand-line\fR options that expect a numerical argument,
 a default is assumed if no meaningful value can be found.  
@@ -97,6 +98,8 @@ Single-letter \fIcommand-line\fR options without an associated value
 can be combined; for example '\fB-i\fR', '\fB-m\fR' and '\fB-u\fR'
 may be combined as '\fB-imu\fR'.<xsl:text/>
 <xsl:call-template name="show-cmdline-options" />
+.SS Configuration Options General
+.rs
 .LP
 \fIConfiguration\fR options can be specified
 by preceding each option with \fB--\fR at the command line,

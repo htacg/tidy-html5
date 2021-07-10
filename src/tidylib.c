@@ -36,6 +36,7 @@
 #include "attrs.h"
 #include "sprtf.h"
 #if SUPPORT_LOCALIZATIONS
+#  include "stdlib.h"
 #  include "locale.h"
 #endif
 
@@ -119,7 +120,17 @@ TidyDocImpl* tidyDocCreate( TidyAllocator *allocator )
 #if SUPPORT_LOCALIZATIONS
     if ( TY_(tidyGetLanguageSetByUser)() == no )
     {
-        TY_(tidySetLanguage)( setlocale( LC_ALL, "") );
+        if( ! TY_(tidySetLanguage)( getenv( "LC_MESSAGES" ) ) )
+        {
+            if( ! TY_(tidySetLanguage)( getenv( "LANG" ) ) )
+            {
+                /*\
+                *  Is. #770 #783 #780 #790 and maybe others -
+                *  TY_(tidySetLanguage)( setlocale( LC_ALL, "" ) );
+                *  this seems a 'bad' choice!
+               \*/
+            }
+        }
     }
 #endif
 
@@ -1114,19 +1125,26 @@ int TIDY_CALL  tidyParseSource( TidyDoc tdoc, TidyInputSource* source )
     return tidyDocParseSource( doc, source );
 }
 
-
+#ifdef WIN32
+#define M_IS_DIR _S_IFDIR
+#else // !WIN32
+#define M_IS_DIR S_IFDIR
+#endif
 int   tidyDocParseFile( TidyDocImpl* doc, ctmbstr filnam )
 {
     int status = -ENOENT;
-    FILE* fin = fopen( filnam, "r+" );
-
-    if ( !fin )
+    FILE* fin = 0;
+    struct stat sbuf = { 0 }; /* Is. #681 - read-only files */
+    if ( stat(filnam,&sbuf) != 0 )
     {
         TY_(ReportFileError)( doc, filnam, FILE_NOT_FILE );
         return status;
     }
-
-    fclose( fin );
+    if (sbuf.st_mode & M_IS_DIR) /* and /NOT/ if a DIRECTORY */
+    {
+        TY_(ReportFileError)(doc, filnam, FILE_NOT_FILE);
+        return status;
+    }
 
 #ifdef _WIN32
     return TY_(DocParseFileWithMappedFile)( doc, filnam );
@@ -1135,14 +1153,15 @@ int   tidyDocParseFile( TidyDocImpl* doc, ctmbstr filnam )
     fin = fopen( filnam, "rb" );
 
 #if PRESERVE_FILE_TIMES
-    struct stat sbuf = {0};
-    /* get last modified time */
-    TidyClearMemory( &doc->filetimes, sizeof(doc->filetimes) );
-    if ( fin && cfgBool(doc,TidyKeepFileTimes) &&
-         fstat(fileno(fin), &sbuf) != -1 )
     {
-          doc->filetimes.actime  = sbuf.st_atime;
-          doc->filetimes.modtime = sbuf.st_mtime;
+        /* get last modified time */
+        TidyClearMemory(&doc->filetimes, sizeof(doc->filetimes));
+        if (fin && cfgBool(doc, TidyKeepFileTimes) &&
+            fstat(fileno(fin), &sbuf) != -1)
+        {
+            doc->filetimes.actime = sbuf.st_atime;
+            doc->filetimes.modtime = sbuf.st_mtime;
+        }
     }
 #endif
 
@@ -1436,16 +1455,16 @@ int         TY_(DocParseStream)( TidyDocImpl* doc, StreamIn* in )
     Bool xmlIn = cfgBool( doc, TidyXmlTags );
     TidyConfigChangeCallback callback = doc->pConfigChangeCallback;
     
-    doc->pConfigChangeCallback = NULL;
     int bomEnc;
+    doc->pConfigChangeCallback = NULL;
 
     assert( doc != NULL && in != NULL );
     assert( doc->docIn == NULL );
     doc->docIn = in;
 
-    TY_(ResetTags)(doc);    /* reset table to html5 mode */
-    TY_(TakeConfigSnapshot)( doc );    /* Save config state */
-    TY_(AdjustConfig)( doc ); /* ensure config consistency */
+    TY_(ResetTags)(doc);             /* Reset table to html5 mode */
+    TY_(TakeConfigSnapshot)( doc );  /* Save config state */
+    TY_(AdjustConfig)( doc );        /* Ensure config internal consistency */
     TY_(FreeAnchors)( doc );
 
     TY_(FreeNode)(doc, &doc->root);
@@ -1559,7 +1578,7 @@ static struct _html5Info
     { "tt", TidyTag_TT },
     { 0, 0 }
 };
-Bool inRemovedInfo( uint tid )
+static Bool inRemovedInfo( uint tid )
 {
     int i;
     for (i = 0; ; i++) {
@@ -1607,7 +1626,7 @@ static Bool nodeHasAlignAttr( Node *node )
  *
  *  See also: http://www.whatwg.org/specs/web-apps/current-work/multipage/obsolete.html#obsolete
  */
-void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
+static void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
 {
     Bool clean = cfgBool( doc, TidyMakeClean );
     Bool already_strict = cfgBool( doc, TidyStrictTagsAttr );
@@ -1793,7 +1812,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
  * The propriety checks are *always* run as they have always been an integral
  * part of Tidy. The version checks are controlled by `strict-tags-attributes`.
  */
-void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
+static void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
 {
     uint versionEmitted = doc->lexer->versionEmitted;
     uint declared = doc->lexer->doctype;
@@ -1862,7 +1881,8 @@ void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
                 next_attr = attval->next;
 
                 attrIsProprietary = TY_(AttributeIsProprietary)(node, attval);
-                attrIsMismatched = check_versions ? TY_(AttributeIsMismatched)(node, attval, doc) : no;
+                /* Is. #729 - always check version match if HTML5 */
+                attrIsMismatched = (check_versions | htmlIs5) ? TY_(AttributeIsMismatched)(node, attval, doc) : no;
                 /* Let the PROPRIETARY_ATTRIBUTE warning have precedence. */
                 if ( attrIsProprietary )
                 {
@@ -1871,7 +1891,15 @@ void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
                 }
                 else if ( attrIsMismatched )
                 {
-                    TY_(ReportAttrError)(doc, node, attval, attrReportType);
+                    if (htmlIs5) 
+                    { 
+                        /* Is. #729 - In html5 TidyStrictTagsAttr controls error or warn */
+                        TY_(ReportAttrError)(doc, node, attval,
+                            check_versions ? MISMATCHED_ATTRIBUTE_ERROR : MISMATCHED_ATTRIBUTE_WARN);
+                    }
+                    else
+                        TY_(ReportAttrError)(doc, node, attval, attrReportType);
+
                 }
 
                 /* @todo: do we need a new option to drop mismatches? Or should we
@@ -2151,6 +2179,8 @@ int         tidyDocCleanAndRepair( TidyDocImpl* doc )
         }
     }
 
+    TY_(CleanHead)(doc); /* Is #692 - discard multiple <title> tags */
+
 #if defined(ENABLE_DEBUG_LOG)
     SPRTF("All nodes AFTER clean and repair\n");
     dbg_show_all_nodes( doc, &doc->root, 0  );
@@ -2254,7 +2284,8 @@ int         tidyDocSaveStream( TidyDocImpl* doc, StreamOut* out )
         doc->docOut = NULL;
     }
 
-    TY_(ResetConfigToSnapshot)( doc );
+    /* @jsd: removing this should solve #673, and allow saving of the buffer multiple times. */
+//    TY_(ResetConfigToSnapshot)( doc );
     doc->pConfigChangeCallback = callback;
     
     return tidyDocStatus( doc );
@@ -2643,13 +2674,13 @@ const tidyLocaleMapItem* TIDY_CALL getNextWindowsLanguage( TidyIterator* iter )
 }
 
 
-const ctmbstr TIDY_CALL TidyLangWindowsName( const tidyLocaleMapItem *item )
+ctmbstr TIDY_CALL TidyLangWindowsName( const tidyLocaleMapItem *item )
 {
     return TY_(TidyLangWindowsName)( (tidyLocaleMapItemImpl*)(item) );
 }
 
 
-const ctmbstr TIDY_CALL TidyLangPosixName( const tidyLocaleMapItem *item )
+ctmbstr TIDY_CALL TidyLangPosixName( const tidyLocaleMapItem *item )
 {
     return TY_(TidyLangPosixName)( (tidyLocaleMapItemImpl*)(item) );
 }

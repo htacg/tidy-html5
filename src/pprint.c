@@ -713,7 +713,7 @@ static void PCondFlushLine( TidyDocImpl* doc, uint indent )
  * These need to be used in the right place. In same cases `PFlushLine`
  * and `PCondFlushLine` should still be used.
  */
-void TY_(PFlushLineSmart)( TidyDocImpl* doc, uint indent )
+static void TY_(PFlushLineSmart)( TidyDocImpl* doc, uint indent )
 {
     TidyPrintImpl* pprint = &doc->pprint;
 
@@ -1699,15 +1699,17 @@ static void PPrintPhp( TidyDocImpl* doc, uint indent, Node *node )
 {
     TidyPrintImpl* pprint = &doc->pprint;
     Bool wrapPhp = cfgBool( doc, TidyWrapPhp );
-    uint saveWrap = WrapOffCond( doc, !wrapPhp  );
+    /* uint saveWrap = WrapOffCond( doc, !wrapPhp  ); */
 
     AddString( pprint, "<?" );
-    PPrintText( doc, (wrapPhp ? CDATA : COMMENT),
-                indent, node );
+    PPrintText( doc, CDATA, indent, node );
     AddString( pprint, "?>" );
 
-    /* PCondFlushLine( doc, indent ); */
-    WrapOn( doc, saveWrap );
+    /* Issue #437 - add a new line if 'wrap-php' is on */
+    if (wrapPhp)
+        PCondFlushLine( doc, indent ); 
+       
+    /* WrapOn( doc, saveWrap ); */
 }
 
 static void PPrintCDATA( TidyDocImpl* doc, uint indent, Node *node )
@@ -2143,7 +2145,8 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
                 TY_(PFlushLineSmart)( doc, indent );
             }
 
-            PPrintTag( doc, mode, indent, node );   /* add <pre> or <textarea> tag */
+            /* Issue #697 - Add NOWRAP to the mode */
+            PPrintTag( doc, (mode | NOWRAP), indent, node );   /* add <pre> or <textarea> tag */
 
             indent = 0;
             /* @camoy Fix #158 - remove inserted newlines in pre - TY_(PFlushLineSmart)( doc, indent ); */

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary 
+SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+<dictionary title="Demo XML space issues">
+  <suite name="Test Suite" description="Keeping spaces with 
+break tags">
+    <doc name="a lost space">
+      <html>
+There is no <b>space</b> after <code>tagged</code> 
+words.</html>
+    </doc>
+    <doc name="b using xml:space preserve">
+      <html xml:space="preserve">
+There is <b>space</b> after <code>tagged</code> 
+words.</html>
+    </doc>
+    <doc name="c using pre">
+      <html>
+        <pre>
+There is <b>space</b> after <code>tagged</code> words.</pre>
+      </html>
+    </doc>
+  </suite>
+</dictionary>

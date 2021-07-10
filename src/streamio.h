@@ -83,17 +83,17 @@ struct _StreamIn
     TidyDocImpl* doc;
 };
 
-StreamIn* TY_(initStreamIn)( TidyDocImpl* doc, int encoding );
-void TY_(freeStreamIn)(StreamIn* in);
+TY_PRIVATE StreamIn* TY_(initStreamIn)( TidyDocImpl* doc, int encoding );
+TY_PRIVATE void TY_(freeStreamIn)(StreamIn* in);
 
-StreamIn* TY_(FileInput)( TidyDocImpl* doc, FILE* fp, int encoding );
-StreamIn* TY_(BufferInput)( TidyDocImpl* doc, TidyBuffer* content, int encoding );
-StreamIn* TY_(UserInput)( TidyDocImpl* doc, TidyInputSource* source, int encoding );
+TY_PRIVATE StreamIn* TY_(FileInput)( TidyDocImpl* doc, FILE* fp, int encoding );
+TY_PRIVATE StreamIn* TY_(BufferInput)( TidyDocImpl* doc, TidyBuffer* content, int encoding );
+TY_PRIVATE StreamIn* TY_(UserInput)( TidyDocImpl* doc, TidyInputSource* source, int encoding );
 
-int       TY_(ReadBOMEncoding)(StreamIn *in);
-uint      TY_(ReadChar)( StreamIn* in );
-void      TY_(UngetChar)( uint c, StreamIn* in );
-Bool      TY_(IsEOF)( StreamIn* in );
+TY_PRIVATE int       TY_(ReadBOMEncoding)(StreamIn *in);
+TY_PRIVATE uint      TY_(ReadChar)( StreamIn* in );
+TY_PRIVATE void      TY_(UngetChar)( uint c, StreamIn* in );
+TY_PRIVATE Bool      TY_(IsEOF)( StreamIn* in );
 
 
 /************************
@@ -109,20 +109,20 @@ struct _StreamOut
     TidyOutputSink sink;
 };
 
-StreamOut* TY_(FileOutput)( TidyDocImpl *doc, FILE* fp, int encoding, uint newln );
-StreamOut* TY_(BufferOutput)( TidyDocImpl *doc, TidyBuffer* buf, int encoding, uint newln );
-StreamOut* TY_(UserOutput)( TidyDocImpl *doc, TidyOutputSink* sink, int encoding, uint newln );
+TY_PRIVATE StreamOut* TY_(FileOutput)( TidyDocImpl *doc, FILE* fp, int encoding, uint newln );
+TY_PRIVATE StreamOut* TY_(BufferOutput)( TidyDocImpl *doc, TidyBuffer* buf, int encoding, uint newln );
+TY_PRIVATE StreamOut* TY_(UserOutput)( TidyDocImpl *doc, TidyOutputSink* sink, int encoding, uint newln );
 
-StreamOut* TY_(StdErrOutput)(void);
+TY_PRIVATE StreamOut* TY_(StdErrOutput)(void);
 /* StreamOut* StdOutOutput(void); */
-void       TY_(ReleaseStreamOut)( TidyDocImpl *doc, StreamOut* out );
+TY_PRIVATE void       TY_(ReleaseStreamOut)( TidyDocImpl *doc, StreamOut* out );
 
-void TY_(WriteChar)( uint c, StreamOut* out );
-void TY_(outBOM)( StreamOut *out );
+TY_PRIVATE void TY_(WriteChar)( uint c, StreamOut* out );
+TY_PRIVATE void TY_(outBOM)( StreamOut *out );
 
-ctmbstr TY_(GetEncodingNameFromTidyId)(uint id);
-ctmbstr TY_(GetEncodingOptNameFromTidyId)(uint id);
-int TY_(GetCharEncodingFromOptName)(ctmbstr charenc);
+TY_PRIVATE ctmbstr TY_(GetEncodingNameFromTidyId)(uint id);
+TY_PRIVATE ctmbstr TY_(GetEncodingOptNameFromTidyId)(uint id);
+TY_PRIVATE int TY_(GetCharEncodingFromOptName)(ctmbstr charenc);
 
 /************************
 ** Misc
@@ -146,10 +146,10 @@ int TY_(GetCharEncodingFromOptName)(ctmbstr charenc);
 #define SHIFTJIS    13
 
 /* Function for conversion from Windows-1252 to Unicode */
-uint TY_(DecodeWin1252)(uint c);
+TY_PRIVATE uint TY_(DecodeWin1252)(uint c);
 
 /* Function to convert from MacRoman to Unicode */
-uint TY_(DecodeMacRoman)(uint c);
+TY_PRIVATE uint TY_(DecodeMacRoman)(uint c);
 
 #ifdef __cplusplus
 }

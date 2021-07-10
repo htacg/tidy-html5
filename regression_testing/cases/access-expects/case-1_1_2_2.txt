@@ -1,0 +1,4 @@
+line 7 column 1 - Access: [2.1.1.1]: ensure information not conveyed through color alone (image).
+line 7 column 92 - Access: [1.1.2.2]: <img> missing d-link.
+No warnings or errors were found.
+

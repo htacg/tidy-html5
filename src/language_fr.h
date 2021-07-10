@@ -1,4 +1,4 @@
-﻿#ifndef language_fr_h
+#ifndef language_fr_h
 #define language_fr_h
 /*
  * language_fr.h
@@ -505,8 +505,7 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
     },
     { TidyWrapScriptlets,                            0,        
         "Cette option précise si Tidy doit ajouter des sauts de lignes aux chaînes littérales dans les "
-        "attributs de script. <br/>Tidy prend en charge la césure des longues chaînes littérales de scripts "
-        "en ajoutant un caractère de barre oblique arrière (backslash) avant le saut de ligne. "
+        "attributs de script. "
     },
     { TidyWrapSection,                               0,        
         "Cette option précise si Tidy doit ajouter des sauts de ligne pour le texte compris dans des balises "
@@ -1172,3 +1171,4 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
 
 
 #endif /* language_fr_h */
+

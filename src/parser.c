@@ -1536,7 +1536,7 @@ void TY_(ParseNamespace)(TidyDocImpl* doc, Node *basenode, GetTokenMode mode)
 }
 
 
-void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
+TY_PRIVATE void TY_(ParseInline)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
 {
 #if defined(ENABLE_DEBUG_LOG)
     static int in_parse_inline = 0;
@@ -3738,7 +3738,7 @@ void TY_(ParseHead)(TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode))
  *  Issue #166 - repeated <main> element
  *  But this service is generalised to check for other duplicate elements
 \*/
-Bool TY_(FindNodeWithId)( Node *node, TidyTagId tid )
+static Bool TY_(FindNodeWithId)( Node *node, TidyTagId tid )
 {
     Node *content;
     while (node)
@@ -3768,7 +3768,7 @@ Bool TY_(FindNodeWithId)( Node *node, TidyTagId tid )
  *  Issue #166 - repeated <main> element
  *  Do a global search for an element
 \*/
-Bool TY_(FindNodeById)( TidyDocImpl* doc, TidyTagId tid )
+static Bool TY_(FindNodeById)( TidyDocImpl* doc, TidyTagId tid )
 {
     Node *node = (doc ? doc->root.content : NULL);
     return TY_(FindNodeWithId)(node,tid);
@@ -4713,7 +4713,8 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
         TY_(ParseHTML)(doc, html, IgnoreWhitespace);
     }
 
-    if (!TY_(FindTITLE)(doc))
+    node = TY_(FindTITLE)(doc);
+    if (!node)
     {
         Node* head = TY_(FindHEAD)(doc);
         /* #72, avoid MISSING_TITLE_ELEMENT if show-body-only (but allow InsertNodeAtEnd to avoid new warning) */
@@ -4722,6 +4723,14 @@ void TY_(ParseDocument)(TidyDocImpl* doc)
             TY_(Report)(doc, head, NULL, MISSING_TITLE_ELEMENT);
         }
         TY_(InsertNodeAtEnd)(head, TY_(InferredTag)(doc, TidyTag_TITLE));
+    }
+    else if (!node->content && !showingBodyOnly(doc))
+    {
+        /* Is #839 - warn node is blank in HTML5 */
+        if (TY_(IsHTML5Mode)(doc))
+        {
+            TY_(Report)(doc, node, NULL, BLANK_TITLE_ELEMENT);
+        }
     }
 
     AttributeChecks(doc, &doc->root);

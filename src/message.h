@@ -66,12 +66,12 @@
 /**
  *  Returns the release date of this instance of HTML Tidy.
  */
-ctmbstr TY_(ReleaseDate)(void);
+TY_PRIVATE ctmbstr TY_(ReleaseDate)(void);
 
 /** 
  *  Returns the release version of this instance of HTML Tidy.
  */
-ctmbstr TY_(tidyLibraryVersion)(void);
+TY_PRIVATE ctmbstr TY_(tidyLibraryVersion)(void);
 
 
 /** @} message_releaseinfo group */
@@ -105,7 +105,7 @@ ctmbstr TY_(tidyLibraryVersion)(void);
  *  The designated report writing function. When a proper formatter exists,
  *  this one function can hanle all report output.
  */
-void TY_(Report)(TidyDocImpl* doc, Node *element, Node *node, uint code, ...);
+TY_PRIVATE void TY_(Report)(TidyDocImpl* doc, Node *element, Node *node, uint code, ...);
 
 
 /** @} */
@@ -117,16 +117,16 @@ void TY_(Report)(TidyDocImpl* doc, Node *element, Node *node, uint code, ...);
 /** @{ */
 
 
-void TY_(ReportAccessError)( TidyDocImpl* doc, Node* node, uint code );
-void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code);
-void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option );
-void TY_(ReportEntityError)( TidyDocImpl* doc, uint code, ctmbstr entity, int c );
-void TY_(ReportFileError)( TidyDocImpl* doc, ctmbstr file, uint code );
-void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarded);
-void TY_(ReportEncodingWarning)(TidyDocImpl* doc, uint code, uint encoding);
-void TY_(ReportMissingAttr)( TidyDocImpl* doc, Node* node, ctmbstr name );
-void TY_(ReportSurrogateError)(TidyDocImpl* doc, uint code, uint c1, uint c2);
-void TY_(ReportUnknownOption)( TidyDocImpl* doc, ctmbstr option );
+TY_PRIVATE void TY_(ReportAccessError)( TidyDocImpl* doc, Node* node, uint code );
+TY_PRIVATE void TY_(ReportAttrError)(TidyDocImpl* doc, Node *node, AttVal *av, uint code);
+TY_PRIVATE void TY_(ReportBadArgument)( TidyDocImpl* doc, ctmbstr option );
+TY_PRIVATE void TY_(ReportEntityError)( TidyDocImpl* doc, uint code, ctmbstr entity, int c );
+TY_PRIVATE void TY_(ReportFileError)( TidyDocImpl* doc, ctmbstr file, uint code );
+TY_PRIVATE void TY_(ReportEncodingError)(TidyDocImpl* doc, uint code, uint c, Bool discarded);
+TY_PRIVATE void TY_(ReportEncodingWarning)(TidyDocImpl* doc, uint code, uint encoding);
+TY_PRIVATE void TY_(ReportMissingAttr)( TidyDocImpl* doc, Node* node, ctmbstr name );
+TY_PRIVATE void TY_(ReportSurrogateError)(TidyDocImpl* doc, uint code, uint c1, uint c2);
+TY_PRIVATE void TY_(ReportUnknownOption)( TidyDocImpl* doc, ctmbstr option );
 
 
 /** @} */
@@ -141,7 +141,7 @@ void TY_(ReportUnknownOption)( TidyDocImpl* doc, ctmbstr option );
  *  Emits a single dialogue message, and is capable of accepting a variadic
  *  that is passed to the correct message formatter as needed.
  */
-void TY_(Dialogue)( TidyDocImpl* doc, uint code, ... );
+TY_PRIVATE void TY_(Dialogue)( TidyDocImpl* doc, uint code, ... );
 
 
 /** @} */
@@ -157,7 +157,7 @@ void TY_(Dialogue)( TidyDocImpl* doc, uint code, ... );
  *  @todo: This name is a bit misleading and should probably be renamed to
  *  indicate its focus on printing footnotes.
  */
-void TY_(ErrorSummary)( TidyDocImpl* doc );
+TY_PRIVATE void TY_(ErrorSummary)( TidyDocImpl* doc );
 
 
 /** 
@@ -166,7 +166,7 @@ void TY_(ErrorSummary)( TidyDocImpl* doc );
  *  Called by `tidyRunDiagnostics()`, from console.
  *  Called by `tidyDocReportDoctype()`, currently unused.
  */
-void TY_(ReportMarkupVersion)( TidyDocImpl* doc );
+TY_PRIVATE void TY_(ReportMarkupVersion)( TidyDocImpl* doc );
 
 
 /**
@@ -174,7 +174,7 @@ void TY_(ReportMarkupVersion)( TidyDocImpl* doc );
  *  inforation.
  *  Called by `tidyRunDiagnostics()`, from console.
  */
-void TY_(ReportNumWarnings)( TidyDocImpl* doc );
+TY_PRIVATE void TY_(ReportNumWarnings)( TidyDocImpl* doc );
 
 
 /** @} */
@@ -201,27 +201,27 @@ typedef struct _mutedMessages {
 /** Frees the list of muted messages.
  ** @param doc The Tidy document.
  */
-void TY_(FreeMutedMessageList)( TidyDocImpl* doc );
+TY_PRIVATE void TY_(FreeMutedMessageList)( TidyDocImpl* doc );
 
 /** Adds a new message ID to the list of muted messages.
  ** @param doc The Tidy document.
  ** @param opt The option that is defining the muted message.
  ** @param name The message code as a string.
  */
-void TY_(DefineMutedMessage)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name );
+TY_PRIVATE void TY_(DefineMutedMessage)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name );
 
 /** Start an iterator for muted messages.
  ** @param doc The Tidy document.
  ** @returns Returns an iterator token.
  */
-TidyIterator TY_(getMutedMessageList)( TidyDocImpl* doc );
+TY_PRIVATE TidyIterator TY_(getMutedMessageList)( TidyDocImpl* doc );
 
 /** Get the next priority attribute.
  ** @param doc The Tidy document.
  ** @param iter The iterator token.
  ** @returns The next priority attribute.
  */
-ctmbstr TY_(getNextMutedMessage)( TidyDocImpl* doc, TidyIterator* iter );
+TY_PRIVATE ctmbstr TY_(getNextMutedMessage)( TidyDocImpl* doc, TidyIterator* iter );
 
 
 /** @} message_muting group */
@@ -245,13 +245,13 @@ ctmbstr TY_(getNextMutedMessage)( TidyDocImpl* doc, TidyIterator* iter );
  *  `TidyReportCallback` will return this general string as the report 
  *  message key.
  */
-ctmbstr TY_(tidyErrorCodeAsKey)(uint code);
+TY_PRIVATE ctmbstr TY_(tidyErrorCodeAsKey)(uint code);
 
 /**
  *  Given an error code string, return the integer value of it, or UINT_MAX
  *  as an error flag.
  */
-uint TY_(tidyErrorCodeFromKey)(ctmbstr code);
+TY_PRIVATE uint TY_(tidyErrorCodeFromKey)(ctmbstr code);
 
 
 /**
@@ -260,14 +260,14 @@ uint TY_(tidyErrorCodeFromKey)(ctmbstr code);
  *  `TidyReportFilter3`.
  *  Items can be retrieved with getNextErrorCode();
  */
-TidyIterator TY_(getErrorCodeList)(void);
+TY_PRIVATE TidyIterator TY_(getErrorCodeList)(void);
 
 /**
  *  Returns the next error code having initialized the iterator
  *  with `getErrorCodeList()`. You can use tidyErrorCodeAsKey
  *  to determine the key for this value.
  */
-uint TY_(getNextErrorCode)( TidyIterator* iter );
+TY_PRIVATE uint TY_(getNextErrorCode)( TidyIterator* iter );
 
 
 /** @} message_keydiscovery group */

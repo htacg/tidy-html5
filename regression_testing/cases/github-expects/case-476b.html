@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Issue 476 – Mention what -- becomes when fixing
+comments</title>
+</head>
+<body>
+<p>Warn the user when Tidy changes -- to == in comments.</p>
+<!-- This comment - this one, here - has some embedded hyphens that
+     Tidy will not change to equals signs = -->
+<!-- This comment -- this one, here -- has some embedded double hyphens that
+     Tidy will change to double equals signs == -->
+<!-- This comment --- this one, here --- has some embedded triple hyphens that
+     Tidy will change to triple equals signs === -->
+<!--- Cold Fusion uses this syntax for comments. --->
+<!---->
+<!-- -->
+<!----->
+<!--- CF --->
+<!--- CF2 --->
+<!---- CF3 ---->
+<!----- CF4 ----->
+</body>
+</html>

@@ -724,7 +724,7 @@ static const uint Mac2Unicode[128] =
 /* Function to convert from MacRoman to Unicode */
 uint TY_(DecodeMacRoman)(uint c)
 {
-    if (127 < c)
+    if (127 < c && c < 256) /* Is. #891 */
         c = Mac2Unicode[c - 128];
     return c;
 }
@@ -803,7 +803,7 @@ static void EncodeIbm858( uint c, StreamOut* out )
 /* Convert from Latin0 (aka Latin9, ISO-8859-15) to Unicode */
 static uint DecodeLatin0(uint c)
 {
-    if (159 < c && c < 191)
+    if (163 < c && c < 191)
     {
         switch (c)
         {

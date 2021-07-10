@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<!--
+                          bug-2000-12-27-b.html
+
+Problem:
+  The "alt-text:" and "doctype: <fpi>" options do not work when specified
+  in a config file with a quoted string parameter.
+
+Expected behavior:
+  The strings specified as parameters to these options should be processed
+  correctly.  Instead, they are ignored.
+
+Verification:
+  tidy -config config.ini bug-2000-12-27-b.html
+    
+  With a configuration file "config.ini" containing either of these lines:
+
+      doctype: "-//ACME//DTD HTML 3.14159//EN"
+      alt-text: "Alternate"
+
+Correction:
+  config.c (ParseString)
+  lexer.c (FixDocType)
+-->
+
+<html>
+
+<head>
+<title>Bug-2000-12-27-B [ #431889 ] Config file options w/"param" don't work</title>
+</head>
+
+<body>
+
+<p><img src="a">This image has no ALT attribute.</p>
+
+</body>
+</html>

@@ -49,7 +49,7 @@
  *  @param node The root node for the integrity check.
  *  @returns Returns yes or no indicating integrity of the node structure.
  */
-Bool TY_(CheckNodeIntegrity)(Node *node);
+TY_PRIVATE Bool TY_(CheckNodeIntegrity)(Node *node);
 
 
 /**
@@ -60,7 +60,7 @@ Bool TY_(CheckNodeIntegrity)(Node *node);
  *  @param node The node to check.
  *  @returns The result of the check.
  */
-Bool TY_(TextNodeEndWithSpace)( Lexer *lexer, Node *node );
+TY_PRIVATE Bool TY_(TextNodeEndWithSpace)( Lexer *lexer, Node *node );
 
 
 /**
@@ -70,7 +70,7 @@ Bool TY_(TextNodeEndWithSpace)( Lexer *lexer, Node *node );
  *  @param node The node to check.
  *  @returns The result of the check.
  */
-Bool TY_(IsNewNode)(Node *node);
+TY_PRIVATE Bool TY_(IsNewNode)(Node *node);
 
 
 /**
@@ -83,7 +83,7 @@ Bool TY_(IsNewNode)(Node *node);
  *  @param expected If the old node was not expected to be found in this
  *    particular location, a report will be generated.
  */
-void TY_(CoerceNode)(TidyDocImpl* doc, Node *node, TidyTagId tid, Bool obsolete, Bool expected);
+TY_PRIVATE void TY_(CoerceNode)(TidyDocImpl* doc, Node *node, TidyTagId tid, Bool obsolete, Bool expected);
 
 
 /**
@@ -91,7 +91,7 @@ void TY_(CoerceNode)(TidyDocImpl* doc, Node *node, TidyTagId tid, Bool obsolete,
  *  @param node The node to remove.
  *  @returns Returns the removed node.
  */
-Node *TY_(RemoveNode)(Node *node);
+TY_PRIVATE Node *TY_(RemoveNode)(Node *node);
 
 
 /**
@@ -100,7 +100,7 @@ Node *TY_(RemoveNode)(Node *node);
  *  @param element The node to discard.
  *  @returns Returns the next node.
  */
-Node *TY_(DiscardElement)( TidyDocImpl* doc, Node *element);
+TY_PRIVATE Node *TY_(DiscardElement)( TidyDocImpl* doc, Node *element);
 
 
 /**
@@ -108,7 +108,7 @@ Node *TY_(DiscardElement)( TidyDocImpl* doc, Node *element);
  *  @param element The new destination node.
  *  @param node The node to insert.
  */
-void TY_(InsertNodeAtStart)(Node *element, Node *node);
+TY_PRIVATE void TY_(InsertNodeAtStart)(Node *element, Node *node);
 
 
 /**
@@ -116,7 +116,7 @@ void TY_(InsertNodeAtStart)(Node *element, Node *node);
  *  @param element The new destination node.
  *  @param node The node to insert.
  */
-void TY_(InsertNodeAtEnd)(Node *element, Node *node);
+TY_PRIVATE void TY_(InsertNodeAtEnd)(Node *element, Node *node);
 
 
 /**
@@ -124,7 +124,7 @@ void TY_(InsertNodeAtEnd)(Node *element, Node *node);
  *  @param element The node before which the node is inserted.
  *  @param node The node to insert.
  */
-void TY_(InsertNodeBeforeElement)(Node *element, Node *node);
+TY_PRIVATE void TY_(InsertNodeBeforeElement)(Node *element, Node *node);
 
 
 /**
@@ -132,7 +132,7 @@ void TY_(InsertNodeBeforeElement)(Node *element, Node *node);
  *  @param element The node after which the node is inserted.
  *  @param node The node to insert.
  */
-void TY_(InsertNodeAfterElement)(Node *element, Node *node);
+TY_PRIVATE void TY_(InsertNodeAfterElement)(Node *element, Node *node);
 
 
 /**
@@ -141,7 +141,7 @@ void TY_(InsertNodeAfterElement)(Node *element, Node *node);
  *  @param element The element to trim.
  *  @returns Returns the next node.
  */
-Node *TY_(TrimEmptyElement)( TidyDocImpl* doc, Node *element );
+TY_PRIVATE Node *TY_(TrimEmptyElement)( TidyDocImpl* doc, Node *element );
 
 
 /**
@@ -150,7 +150,7 @@ Node *TY_(TrimEmptyElement)( TidyDocImpl* doc, Node *element );
  *  @param node The element to trim.
  *  @returns Returns the next node.
  */
-Node* TY_(DropEmptyElements)(TidyDocImpl* doc, Node* node);
+TY_PRIVATE Node* TY_(DropEmptyElements)(TidyDocImpl* doc, Node* node);
 
 
 /**
@@ -160,7 +160,7 @@ Node* TY_(DropEmptyElements)(TidyDocImpl* doc, Node* node);
  *  @param node The node to test.
  *  @returns Returns the result of the test.
  */
-Bool TY_(IsBlank)(Lexer *lexer, Node *node);
+TY_PRIVATE Bool TY_(IsBlank)(Lexer *lexer, Node *node);
 
 
 /**
@@ -169,7 +169,7 @@ Bool TY_(IsBlank)(Lexer *lexer, Node *node);
  *  @param node The node to test.
  *  @returns Returns the result of the test.
  */
-Bool TY_(IsJavaScript)(Node *node);
+TY_PRIVATE Bool TY_(IsJavaScript)(Node *node);
 
 
 /**
@@ -178,7 +178,7 @@ Bool TY_(IsJavaScript)(Node *node);
  *  remaining nodes. HTML is the root node.
  *  @param doc The Tidy document.
  */
-void TY_(ParseDocument)( TidyDocImpl* doc );
+TY_PRIVATE void TY_(ParseDocument)( TidyDocImpl* doc );
 
 
 /**
@@ -188,14 +188,14 @@ void TY_(ParseDocument)( TidyDocImpl* doc );
  *  @param element The node to test.
  *  @returns Returns the result of the test.
  */
-Bool TY_(XMLPreserveWhiteSpace)( TidyDocImpl* doc, Node *element );
+TY_PRIVATE Bool TY_(XMLPreserveWhiteSpace)( TidyDocImpl* doc, Node *element );
 
 
 /**
  *  Parses a document after lexing using the XML parser.
  *  @param doc The Tidy document.
  */
-void TY_(ParseXMLDocument)( TidyDocImpl* doc );
+TY_PRIVATE void TY_(ParseXMLDocument)( TidyDocImpl* doc );
 
 
 /** @} end parser_h group */

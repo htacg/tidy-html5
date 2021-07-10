@@ -1510,11 +1510,8 @@ static languageDefinition language_en = { whichPluralForm_en, {
       - The strings "Tidy" and "HTML Tidy" are the program name and must not
       be translated. */
         TidyWrapScriptlets,           0,
-        "This option specifies if Tidy should line wrap string literals that "
-        "appear in script attributes. "
-        "<br/>"
-        "Tidy wraps long script string literals by inserting a backslash character "
-        "before the line break. "
+        "This option specifies if Tidy should line wrap string literals assigned "
+        "to element event handler attributes, such as element.onmouseover()."
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and

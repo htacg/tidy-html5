@@ -1557,9 +1557,6 @@ static languageDefinition language_de = { whichPluralForm_de, {
         /* option-name: wrap-script-literals */
         "Mit dieser Option wird bestimmt, ob Tidy Literale, die in Skript-Attributen "
         "auftauchen, umbrechen soll. "
-        "<br/>"
-        "Tidy bricht Skript-Literale um, indem es vor jedem Zeilenumbruch einen Backslash "
-        "einsetzt. "
     },
     {/* Important notes for translators:
       - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and

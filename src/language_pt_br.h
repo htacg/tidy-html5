@@ -576,9 +576,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     },
     { TidyWrapScriptlets,                            0,        
         "Esta opção especifica se Tidy deve efetuar quebra de linha em string "
-        "literais que aparecem em atributos de script. <br/>Tidy efetua essa quebra "
-        "em string literais de scripts longos inserindo um caractere de barra "
-        "invertida antes da quebra de linha. "
+        "literais que aparecem em atributos de script."
     },
     { TidyWrapSection,                               0,        
         "Essa opção especifica se o Tidy deve efetuar quebra de linha de textos "

@@ -119,21 +119,21 @@ typedef struct _TidyTagImpl
  ** @param opt The option the tag is intended for.
  ** @param name The name of the new tag.
  */
-void TY_(DeclareUserTag)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name );
+TY_PRIVATE void TY_(DeclareUserTag)( TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbstr name );
 
 
 /** Interface for finding a tag by TidyTagId.
  ** @param tid The TidyTagId to search for.
  ** @returns An instance of a Tidy tag.
  */
-const Dict* TY_(LookupTagDef)( TidyTagId tid );
+TY_PRIVATE const Dict* TY_(LookupTagDef)( TidyTagId tid );
 
 /** Assigns the node's tag.
  ** @param doc The Tidy document.
  ** @param node The node to assign the tag to.
  ** @returns Returns a bool indicating whether or not the tag was assigned.
  */
-Bool    TY_(FindTag)( TidyDocImpl* doc, Node *node );
+TY_PRIVATE Bool    TY_(FindTag)( TidyDocImpl* doc, Node *node );
 
 
 /** Finds the parser function for a given node.
@@ -141,7 +141,7 @@ Bool    TY_(FindTag)( TidyDocImpl* doc, Node *node );
  ** @param node The node to lookup.
  ** @returns The parser for the given node.
  */
-Parser* TY_(FindParser)( TidyDocImpl* doc, Node *node );
+TY_PRIVATE Parser* TY_(FindParser)( TidyDocImpl* doc, Node *node );
 
 
 /** Defines a new user-defined tag.
@@ -149,7 +149,7 @@ Parser* TY_(FindParser)( TidyDocImpl* doc, Node *node );
  ** @param tagType The type of user-defined tag to define.
  ** @param name The name of the new tag.
  */
-void    TY_(DefineTag)( TidyDocImpl* doc, UserTagType tagType, ctmbstr name );
+TY_PRIVATE void    TY_(DefineTag)( TidyDocImpl* doc, UserTagType tagType, ctmbstr name );
 
 
 /** Frees user-defined tags of the given type, or all user tags in given
@@ -158,7 +158,7 @@ void    TY_(DefineTag)( TidyDocImpl* doc, UserTagType tagType, ctmbstr name );
  ** @param tagType The type of tag to free, or `tagtype_null` to free all
  **        user-defined tags.
  */
-void    TY_(FreeDeclaredTags)( TidyDocImpl* doc, UserTagType tagType );
+TY_PRIVATE void    TY_(FreeDeclaredTags)( TidyDocImpl* doc, UserTagType tagType );
 
 
 /** Initiates an iterator for a list of user-declared tags, including autonomous
@@ -168,7 +168,7 @@ void    TY_(FreeDeclaredTags)( TidyDocImpl* doc, UserTagType tagType );
  ** @result Returns a TidyIterator, which is a token used to represent the
  **         current position in a list within LibTidy.
  */
-TidyIterator   TY_(GetDeclaredTagList)( TidyDocImpl* doc );
+TY_PRIVATE TidyIterator   TY_(GetDeclaredTagList)( TidyDocImpl* doc );
 
 
 /** Given a valid TidyIterator initiated with TY_(GetDeclaredTagList)(),
@@ -183,40 +183,40 @@ TidyIterator   TY_(GetDeclaredTagList)( TidyDocImpl* doc );
  **        TY_(GetDeclaredTagList)().
  ** @result A string containing the next tag.
  */
-ctmbstr        TY_(GetNextDeclaredTag)( TidyDocImpl* doc, UserTagType tagType,
+TY_PRIVATE ctmbstr        TY_(GetNextDeclaredTag)( TidyDocImpl* doc, UserTagType tagType,
                                         TidyIterator* iter );
 
 
 /** Initializes tags and tag structures for the given Tidy document.
  ** @param doc The Tidy document.
  */
-void TY_(InitTags)( TidyDocImpl* doc );
+TY_PRIVATE void TY_(InitTags)( TidyDocImpl* doc );
 
 
 /** Frees the tags and structures used by Tidy for tags.
  ** @param doc The Tidy document.
  */
-void TY_(FreeTags)( TidyDocImpl* doc );
+TY_PRIVATE void TY_(FreeTags)( TidyDocImpl* doc );
 
 
 /** Tidy defaults to HTML5 mode. If the <!DOCTYPE ...> is found to NOT be
  ** HTML5, then adjust the tags table to HTML4 mode.
  ** @param doc The Tidy document.
  */
-void TY_(AdjustTags)( TidyDocImpl *doc );
+TY_PRIVATE void TY_(AdjustTags)( TidyDocImpl *doc );
 
 
 /** Reset the tags table back to default HTML5 mode.
  ** @param doc The Tidy document.
  */
-void TY_(ResetTags)( TidyDocImpl *doc );
+TY_PRIVATE void TY_(ResetTags)( TidyDocImpl *doc );
 
 
 /** Indicates whether or not the Tidy is procesing in HTML5 mode.
  ** @param doc The Tidy document.
  ** @returns Returns `yes` if processing in HTML5 mode.
  */
-Bool TY_(IsHTML5Mode)( TidyDocImpl *doc );
+TY_PRIVATE Bool TY_(IsHTML5Mode)( TidyDocImpl *doc );
 
 
 /** @} */
@@ -227,30 +227,30 @@ Bool TY_(IsHTML5Mode)( TidyDocImpl *doc );
 /** @{ */
 
 
-Parser TY_(ParseHTML);
-Parser TY_(ParseHead);
-Parser TY_(ParseTitle);
-Parser TY_(ParseScript);
-Parser TY_(ParseFrameSet);
-Parser TY_(ParseNoFrames);
-Parser TY_(ParseBody);
-Parser TY_(ParsePre);
-Parser TY_(ParseList);
-Parser TY_(ParseDefList);
-Parser TY_(ParseBlock);
-Parser TY_(ParseInline);
-Parser TY_(ParseEmpty);
-Parser TY_(ParseTableTag);
-Parser TY_(ParseColGroup);
-Parser TY_(ParseRowGroup);
-Parser TY_(ParseRow);
-Parser TY_(ParseSelect);
-Parser TY_(ParseOptGroup);
-Parser TY_(ParseText);
-Parser TY_(ParseDatalist);
-Parser TY_(ParseNamespace);
+TY_PRIVATE Parser TY_(ParseHTML);
+TY_PRIVATE Parser TY_(ParseHead);
+TY_PRIVATE Parser TY_(ParseTitle);
+TY_PRIVATE Parser TY_(ParseScript);
+TY_PRIVATE Parser TY_(ParseFrameSet);
+TY_PRIVATE Parser TY_(ParseNoFrames);
+TY_PRIVATE Parser TY_(ParseBody);
+TY_PRIVATE Parser TY_(ParsePre);
+TY_PRIVATE Parser TY_(ParseList);
+TY_PRIVATE Parser TY_(ParseDefList);
+TY_PRIVATE Parser TY_(ParseBlock);
+TY_PRIVATE Parser TY_(ParseInline);
+TY_PRIVATE Parser TY_(ParseEmpty);
+TY_PRIVATE Parser TY_(ParseTableTag);
+TY_PRIVATE Parser TY_(ParseColGroup);
+TY_PRIVATE Parser TY_(ParseRowGroup);
+TY_PRIVATE Parser TY_(ParseRow);
+TY_PRIVATE Parser TY_(ParseSelect);
+TY_PRIVATE Parser TY_(ParseOptGroup);
+TY_PRIVATE Parser TY_(ParseText);
+TY_PRIVATE Parser TY_(ParseDatalist);
+TY_PRIVATE Parser TY_(ParseNamespace);
 
-CheckAttribs TY_(CheckAttributes);
+TY_PRIVATE CheckAttribs TY_(CheckAttributes);
 
 
 /** @} */
@@ -274,14 +274,14 @@ CheckAttribs TY_(CheckAttributes);
  ** @param node The node being interrogated.
  ** @returns The status of the inquiry.
  */
-Bool TY_(nodeIsText)( Node* node );
+TY_PRIVATE Bool TY_(nodeIsText)( Node* node );
 
 
 /** Inquires whether or not the given node is an element node.
  ** @param node The node being interrogated.
  ** @returns The status of the inquiry.
  */
-Bool TY_(nodeIsElement)( Node* node );
+TY_PRIVATE Bool TY_(nodeIsElement)( Node* node );
 
 
 /** Inquires whether or not the given node has any text.
@@ -289,7 +289,7 @@ Bool TY_(nodeIsElement)( Node* node );
  ** @param node The node being interrogated.
  ** @returns The status of the inquiry.
  */
-Bool TY_(nodeHasText)( TidyDocImpl* doc, Node* node );
+TY_PRIVATE Bool TY_(nodeHasText)( TidyDocImpl* doc, Node* node );
 
 
 /** Inquires whether the given element looks like it's an autonomous custom
@@ -297,7 +297,7 @@ Bool TY_(nodeHasText)( TidyDocImpl* doc, Node* node );
  ** @param element A string to be checked.
  ** @returns The status of the inquiry.
  */
-Bool TY_(elementIsAutonomousCustomFormat)( ctmbstr element );
+TY_PRIVATE Bool TY_(elementIsAutonomousCustomFormat)( ctmbstr element );
 
 
 /** Inquires whether the given node looks like it's an autonomous custom
@@ -305,7 +305,7 @@ Bool TY_(elementIsAutonomousCustomFormat)( ctmbstr element );
  ** @param node The node being interrogated.
  ** @returns The status of the inquiry.
  */
-Bool TY_(nodeIsAutonomousCustomFormat)( Node* node );
+TY_PRIVATE Bool TY_(nodeIsAutonomousCustomFormat)( Node* node );
 
 
 /** True if the node looks like it's an autonomous custom element tag, and
@@ -315,7 +315,7 @@ Bool TY_(nodeIsAutonomousCustomFormat)( Node* node );
  ** @param node The node being interrogated.
  ** @returns The status of the inquiry.
  */
-Bool TY_(nodeIsAutonomousCustomTag)( TidyDocImpl* doc, Node* node );
+TY_PRIVATE Bool TY_(nodeIsAutonomousCustomTag)( TidyDocImpl* doc, Node* node );
 
 
 /** Does the node have the indicated content model? True if any of the bits
@@ -324,42 +324,42 @@ Bool TY_(nodeIsAutonomousCustomTag)( TidyDocImpl* doc, Node* node );
  ** @param contentModel The content model to check against.
  ** @returns The status of the inquiry.
  */
-Bool TY_(nodeHasCM)( Node* node, uint contentModel );
+TY_PRIVATE Bool TY_(nodeHasCM)( Node* node, uint contentModel );
 
 
 /** Does the content model of the node include block?
  ** @param node The node being interrogated.
  ** @returns The status of the inquiry.
  */
-Bool TY_(nodeCMIsBlock)( Node* node );
+TY_PRIVATE Bool TY_(nodeCMIsBlock)( Node* node );
 
 
 /** Does the content model of the node include inline?
  ** @param node The node being interrogated.
  ** @returns The status of the inquiry.
  */
-Bool TY_(nodeCMIsInline)( Node* node );
+TY_PRIVATE Bool TY_(nodeCMIsInline)( Node* node );
 
 
 /** Does the content model of the node include empty?
  ** @param node The node being interrogated.
  ** @returns The status of the inquiry.
  */
-Bool TY_(nodeCMIsEmpty)( Node* node );
+TY_PRIVATE Bool TY_(nodeCMIsEmpty)( Node* node );
 
 
 /** Is the node a header, such as H1, H2, ..., H6?
  ** @param node The node being interrogated.
  ** @returns The status of the inquiry.
  */
-Bool TY_(nodeIsHeader)( Node* node );
+TY_PRIVATE Bool TY_(nodeIsHeader)( Node* node );
 
 
 /** Inquires as to the header level of the given node: 1, 2, ..., 6.
  ** @param node The node being interrogated.
  ** @returns The header level.
  */
-uint TY_(nodeHeaderLevel)( Node* node );
+TY_PRIVATE uint TY_(nodeHeaderLevel)( Node* node );
 
 
 #define nodeIsHTML( node )       TagIsId( node, TidyTag_HTML )

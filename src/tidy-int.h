@@ -153,7 +153,7 @@ struct _TidyMessageImpl
 #define TidyDocFree(doc, block) TidyFree((doc)->allocator, block)
 #define TidyDocPanic(doc, msg) TidyPanic((doc)->allocator, msg)
 
-int          TY_(DocParseStream)( TidyDocImpl* impl, StreamIn* in );
+TY_PRIVATE int          TY_(DocParseStream)( TidyDocImpl* impl, StreamIn* in );
 
 /*
    [i_a] generic node tree traversal code; used in several spots.
@@ -175,6 +175,6 @@ typedef enum
 
 typedef NodeTraversalSignal NodeTraversalCallBack(TidyDocImpl* doc, Node* node, void *propagate);
 
-NodeTraversalSignal TY_(TraverseNodeTree)(TidyDocImpl* doc, Node* node, NodeTraversalCallBack *cb, void *propagate);
+TY_PRIVATE NodeTraversalSignal TY_(TraverseNodeTree)(TidyDocImpl* doc, Node* node, NodeTraversalCallBack *cb, void *propagate);
 
 #endif /* __TIDY_INT_H__ */

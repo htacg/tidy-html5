@@ -1578,7 +1578,7 @@ static struct _html5Info
     { "tt", TidyTag_TT },
     { 0, 0 }
 };
-Bool inRemovedInfo( uint tid )
+static Bool inRemovedInfo( uint tid )
 {
     int i;
     for (i = 0; ; i++) {
@@ -1626,7 +1626,7 @@ static Bool nodeHasAlignAttr( Node *node )
  *
  *  See also: http://www.whatwg.org/specs/web-apps/current-work/multipage/obsolete.html#obsolete
  */
-void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
+static void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
 {
     Bool clean = cfgBool( doc, TidyMakeClean );
     Bool already_strict = cfgBool( doc, TidyStrictTagsAttr );
@@ -1812,7 +1812,7 @@ void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
  * The propriety checks are *always* run as they have always been an integral
  * part of Tidy. The version checks are controlled by `strict-tags-attributes`.
  */
-void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
+static void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
 {
     uint versionEmitted = doc->lexer->versionEmitted;
     uint declared = doc->lexer->doctype;

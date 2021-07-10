@@ -15,15 +15,15 @@
 ** Does not convert character "codepoints", i.e. to/from 10646.
 */
 
-int TY_(DecodeUTF8BytesToChar)( uint* c, uint firstByte, ctmbstr successorBytes,
+TY_PRIVATE int TY_(DecodeUTF8BytesToChar)( uint* c, uint firstByte, ctmbstr successorBytes,
                                 TidyInputSource* inp, int* count );
 
-int TY_(EncodeCharToUTF8Bytes)( uint c, tmbstr encodebuf,
+TY_PRIVATE int TY_(EncodeCharToUTF8Bytes)( uint c, tmbstr encodebuf,
                                 TidyOutputSink* outp, int* count );
 
 
-uint  TY_(GetUTF8)( ctmbstr str, uint *ch );
-tmbstr TY_(PutUTF8)( tmbstr buf, uint c );
+TY_PRIVATE uint  TY_(GetUTF8)( ctmbstr str, uint *ch );
+TY_PRIVATE tmbstr TY_(PutUTF8)( tmbstr buf, uint c );
 
 #define UNICODE_BOM_BE   0xFEFF   /* big-endian (default) UNICODE BOM */
 #define UNICODE_BOM      UNICODE_BOM_BE
@@ -31,15 +31,15 @@ tmbstr TY_(PutUTF8)( tmbstr buf, uint c );
 #define UNICODE_BOM_UTF8 0xEFBBBF /* UTF-8 UNICODE BOM */
 
 
-Bool    TY_(IsValidUTF16FromUCS4)( tchar ucs4 );
-Bool    TY_(IsHighSurrogate)( tchar ch );
-Bool    TY_(IsLowSurrogate)( tchar ch );
+TY_PRIVATE Bool    TY_(IsValidUTF16FromUCS4)( tchar ucs4 );
+TY_PRIVATE Bool    TY_(IsHighSurrogate)( tchar ch );
+TY_PRIVATE Bool    TY_(IsLowSurrogate)( tchar ch );
 
-Bool    TY_(IsCombinedChar)( tchar ch );
-Bool    TY_(IsValidCombinedChar)( tchar ch );
+TY_PRIVATE Bool    TY_(IsCombinedChar)( tchar ch );
+TY_PRIVATE Bool    TY_(IsValidCombinedChar)( tchar ch );
 
-tchar   TY_(CombineSurrogatePair)( tchar high, tchar low );
-Bool    TY_(SplitSurrogatePair)( tchar utf16, tchar* high, tchar* low );
+TY_PRIVATE tchar   TY_(CombineSurrogatePair)( tchar high, tchar low );
+TY_PRIVATE Bool    TY_(SplitSurrogatePair)( tchar utf16, tchar* high, tchar* low );
 
 
 

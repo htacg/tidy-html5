@@ -70,7 +70,7 @@ github_changelog_generator -u htacg -p tidy-html5 \
    --since-tag 5.6.0 \
    --usernames-as-github-logins \
    --future-release 5.8.0 \
-   -o README/testlog.md
+   -o README/CHANGELOG.md
 ~~~
 
 **Important**: the `--since-tag` value should be the git tag of the previous release, because we're only interested in the changes since then. The `--future-release` value should be the git tag that you _will apply_ (but have not yet) for this release.

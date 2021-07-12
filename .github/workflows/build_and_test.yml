@@ -34,68 +34,145 @@ jobs:
       matrix:
         include:
 
+         ############################################################
+         # Ubuntu latest is a normal build with nothing special that
+         # really need be done.
+         ############################################################
          - os: ubuntu-latest
-           flags: 
+           name: Standard
+           cmake_command: "cmake ../.. -DCMAKE_BUILD_TYPE=Release"
+           build_command: "cmake --build . --config Release"
            vers_command: "./tidy --version"
            test_command: "ruby test.rb test"
 
+         ############################################################
+         # On macOS, we'll build both architectures.
+         ############################################################
          - os: macOS-latest
-           flags: "'-DCMAKE_OSX_ARCHITECTURES=x86_64;arm64'"
+           name: X86_64 & Arm64
+           cmake_command: "cmake ../.. -DCMAKE_BUILD_TYPE=Release '-DCMAKE_OSX_ARCHITECTURES=x86_64;arm64'"
+           build_command: "cmake --build . --config Release"
            vers_command: "./tidy --version"
            test_command: "ruby test.rb test"
 
+         ############################################################
+         # The standard Windows build is perfectly vanilla, and as
+         # of now is using MSVC 19.
+         ############################################################
          - os: windows-latest
-           flags: 
+           name: MSVC
+           cmake_command: "cmake ../.. -DCMAKE_BUILD_TYPE=Release"
+           build_command: "cmake --build . --config Release"
            vers_command: "./tidy.exe --version"
            test_command: "ruby test.rb test"
            
+         ############################################################
+         # We'll also build using MinGW on Windows, because it's
+         # always nice to support FOSS toolchains. While we could
+         # do this another way, we'll use the windows-2016 runner
+         # to distinguish it from the windows-latest runner.
+         ############################################################
          - os: windows-2016
-           flags: "-G 'MinGW Makefiles'"
+           name: MinGW
+           cmake_command: "cmake ../.. -DCMAKE_BUILD_TYPE=Release -G 'MinGW Makefiles'"
+           build_command: "cmake --build . --config Release"
+           vers_command: "./tidy --version"
+           test_command: "ruby test.rb test"
+         
+         ############################################################
+         # We'll also build using Cygwin on Windows, because even
+         # Windows people sometimes dislike Windows. While we could
+         # do this another way, we'll use the windows-2019 runner to
+         # distinguish it from the windows-latest runner.
+         # Note: only the `tidy` target will be built (without the
+         # man page) for this runner, because xltproc has issues
+         # loading files in the virtual environment. The man page
+         # is tested and builds perfectly fine on real installs.
+         ############################################################
+         - os: windows-2019
+           name: Cygwin
+           cmake_command: "cmake ../.. -DCMAKE_BUILD_TYPE=Release"
+           build_command: "cmake --build . --target tidy --config Release"
            vers_command: "./tidy --version"
            test_command: "ruby test.rb test"
 
     steps:
+
+    ############################################################
+    # Checkput the repository.
+    ############################################################
     - uses: actions/checkout@v2
 
-
-    # We'll use the windows-2016 instance to perform a MinGW build.
-    # Of course, we only want to install if this is the correct target.
+    ############################################################
+    # Install MinGW-w64 if needed for the current runner.
+    ############################################################
     - name: Install MinGW-w64
       if: ${{matrix.os == 'windows-2016'}}
       uses: egor-tensin/setup-mingw@v2
       with:
         platform: x64
-     
+    
+    ############################################################
+    # Install Cygwin if needed for the current runner.
+    ############################################################
+    - name: Install Cygwin
+      if: ${{matrix.os == 'windows-2019'}}
+      uses: egor-tensin/setup-cygwin@v3
+      with:
+        platform: x64
+        packages: make gcc-core gcc-g++ cmake
+    
+    ############################################################
+    # Cmake and Make the project.
+    ############################################################
     - name: Build
       working-directory: ${{github.workspace}}/build/cmake
-      run: cmake ../.. -DCMAKE_BUILD_TYPE=Release ${{matrix.flags}}
-      
-    - name: Make
-      working-directory: ${{github.workspace}}/build/cmake
-      run: cmake --build . --config Release
-      
-    # Windows MSVC is the only oddball here; why does it install the 
-    # binary into a subfolder, unlike all of the other builds? Let's
-    # make everything else easier by relocating it to the same spot
-    # as all the other build locations.
-    - name: Move the exe to someplace sensible
+      run: |
+        ${{matrix.cmake_command}}
+        ${{matrix.build_command}}
+   
+    ############################################################
+    # Windows MSVC is the only oddball here; why does it 
+    # install the binary into a subfolder, unlike all of the
+    # other builds? Let's make everything else easier by 
+    # relocating it to the same spot as all the other build
+    # locations.
+    ############################################################
+    - name: Move the MSVC exe to someplace sensible
       if: ${{matrix.os == 'windows-latest'}}
-      run: move-item -path "${{github.workspace}}/build/cmake/Release/tidy.exe" -destination "${{github.workspace}}/build/cmake/"
+      run: |
+        move-item -path "${{github.workspace}}/build/cmake/Release/tidy.exe" -destination "${{github.workspace}}/build/cmake/"
 
+    ############################################################
+    # Just so that a human can make a quick sanity check.
+    ############################################################
     - name: Show Version
       working-directory: ${{github.workspace}}/build/cmake
-      run: ${{matrix.vers_command}}
+      run: |
+        ${{matrix.vers_command}}
 
+    ############################################################
+    # Install Ruby for running our regression tests. It's quite
+    # nice that this package is generic enough to work on all
+    # of the different runners.
+    ############################################################
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.7
         bundler-cache: true
            
+    ############################################################
+    # Ensure that dependencies are met.
+    ############################################################
     - name: Bundle Install 
       working-directory: ${{github.workspace}}/regression_testing
-      run: bundle install      
+      run: |
+        bundle install      
 
+    ############################################################
+    # Finally, check for regressions.
+    ############################################################
     - name: Run Regression Test
       working-directory: ${{github.workspace}}/regression_testing
-      run: ${{matrix.test_command}}
-
+      run: |
+        ${{matrix.test_command}}

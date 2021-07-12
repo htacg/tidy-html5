@@ -23,7 +23,7 @@
 #define TY_(str) TYDYAPPEND(prvTidy,str)
 
 /* Internal symbols are prefixed with 'hidden' attr, to avoid exporting */
-#ifdef _WIN32
+#if defined(_WIN32) || defined(__CYGWIN__)
 #define TY_PRIVATE
 #else
 #define TY_PRIVATE __attribute__((__visibility__("hidden")))

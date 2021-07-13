@@ -346,7 +346,7 @@ TY_PRIVATE Bool  TY_(AdjustCharEncoding)( TidyDocImpl* doc, int encoding );
  ** stream (because we reset after parsing.)
  ** @param doc The Tidy document to adjust.
  */
-void  TY_(AdjustConfig)( TidyDocImpl* doc );
+TY_PRIVATE void  TY_(AdjustConfig)( TidyDocImpl* doc );
 
 
 /** Indicates whether or not the current configuration is completely default.

@@ -1,0 +1,191 @@
+################################################################################
+# Build Release Packages for Major Platforms 
+#
+#   - Builds release packages on multiple operating systems.
+#
+#   - Some packages may have to be supplmented with manually-built releases
+#     to account for code-signing and/or notorization requirements.
+#
+################################################################################
+
+name: Build and Publish Packages
+
+on:
+  release:
+    types: [published]
+
+jobs:
+
+  build_packages:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+
+         ############################################################
+         # Ubuntu latest is a normal build.
+         # Package building requires rpm in order to generate
+         # .rpm packages. The runner already includes this by
+         # default.
+         ############################################################
+         - os: ubuntu-latest
+           name: Standard
+           cmake_command: "cmake ../.. -DCMAKE_BUILD_TYPE=Release"
+           build_command: "cmake --build . --config Release --target package"
+           sha_command: "sha256sum"
+           stat_command: "stat"
+           artifacts: "tidy-%s-Linux-64bit.deb tidy-%s-Linux-64bit.rpm"
+
+         ############################################################
+         # On macOS, we'll build both architectures.
+         # Package building has all prerequisites install already.
+         ############################################################
+         - os: macOS-latest
+           name: X86_64 & Arm64
+           cmake_command: "cmake ../.. -DCMAKE_BUILD_TYPE=Release '-DCMAKE_OSX_ARCHITECTURES=x86_64;arm64'"
+           build_command: "cmake --build . --config Release --target package"
+           sha_command: "shasum -a 256"
+           stat_command: "gstat"
+           artifacts: "tidy-%s-macOS-x86_64+arm64.pkg"
+
+         ############################################################
+         # The standard Windows build is using MSVC 19 as of now.
+         # Package building requires nsis and wixtoolset, both of
+         # which can be installed via choco, which is already
+         # installed. Note: looks like xictoolset is already
+         # installed.
+         ############################################################
+         - os: windows-latest
+           name: MSVC
+           cmake_command: "cmake ../.. -DCMAKE_BUILD_TYPE=Release"
+           build_command: "cmake --build . --config Release --target package"
+           sha_command: "sha256sum"
+           stat_command: "stat"
+           artifacts: "tidy-%s-win64.exe tidy-%s-win64.msi tidy-%s-win64.zip"
+                        
+
+    steps:
+
+    ############################################################
+    # Install Windows Pre-Requisites
+    ############################################################
+    - name: Install Windows Requirements
+      if: ${{matrix.os == 'windows-latest'}}
+      run: |
+        choco install nsis -y
+
+
+    ############################################################
+    # Install macOS Pre-Requisites
+    ############################################################
+    - name: Install macOS Requirements
+      if: ${{matrix.os == 'macOS-latest'}}
+      run: |
+        brew install coreutils
+
+
+    ############################################################
+    # Checkput the repository.
+    ############################################################
+    - name: Checkout Self
+      uses: actions/checkout@v2
+
+
+    ############################################################
+    # Get the version number. The output isn't available until
+    # we exit this step.
+    ############################################################
+    - name: Get Tidy Version
+      id: getversion
+      working-directory: ${{github.workspace}}
+      shell: bash
+      run: | 
+        echo "::set-output name=version::$(head -1 version.txt)"
+
+        
+    ############################################################
+    # Print the version number, which is now available from
+    # the previous step.
+    ############################################################
+    - name: Print Tidy Version
+      shell: bash
+      run: | 
+        echo "Tidy version is ${{ steps.getversion.outputs.version }}."
+    
+
+    ############################################################
+    # Configure and Build
+    ############################################################
+    - name: Configure and Build
+      working-directory: ${{github.workspace}}/build/cmake
+      shell: bash
+      run: |
+        ${{matrix.cmake_command}}
+        ${{matrix.build_command}}
+
+
+    ############################################################
+    # Move Files and Make Checksums
+    ############################################################
+    - name: Move Files and Make Checksums
+      working-directory: ${{github.workspace}}/build/cmake
+      shell: bash
+      run: |
+        ls -al
+        mkdir artifacts
+        array="${{matrix.artifacts}}"
+        for i in ${array[@]}; do
+          filename=$(printf "$i\n" ${{ steps.getversion.outputs.version }})
+          ${{matrix.sha_command}} "$filename" > "artifacts/${filename}.sha256"
+          mv "$filename" "artifacts/"
+        done
+
+
+    ############################################################
+    # Build Manifest Partials for binaries.html-tidy.org
+    ############################################################
+    - name: Build Manifest Partials
+      working-directory: ${{github.workspace}}/build/cmake/artifacts
+      shell: bash
+      run: |
+        ls -al
+        manifest="../binaries-partial.yml"
+        touch "${manifest}"
+        for filename in *.*[^sha256]; do
+            filesize=$(numfmt --to=si --suffix=B $(wc -c < ${filename}))
+            modified=$(${{matrix.stat_command}} -c %y "${filename}" | cut -d'.' -f1)
+            sha256=$(${{matrix.sha_command}} "${filename}" | awk '{print $1}')
+            echo "    - filename: ${filename}" >> "${manifest}"
+            echo "      filesize: ${filesize}" >> "${manifest}"
+            echo "      modified: ${modified}" >> "${manifest}"
+            echo "      describe: ''"          >> "${manifest}"
+            echo "      sha256: ${sha256}"     >> "${manifest}"
+            echo ""                            >> "${manifest}"
+        done;
+        cat "${manifest}"
+
+
+    ############################################################
+    # Release the artifacts.
+    ############################################################
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        #name: "New Draft Release"
+        #tag_name: "v1.2.7"
+        #draft: true
+        #prerelease: true
+        files: "${{github.workspace}}/build/cmake/artifacts/*"
+
+
+    ############################################################
+    # Post the manifest to the run results.
+    ############################################################
+    - name: Post the Manifest
+      uses: actions/upload-artifact@v2
+      with:
+        name: "partials_for_website-${{matrix.os}}.yml"
+        path: ${{github.workspace}}/build/cmake/binaries-partial.yml

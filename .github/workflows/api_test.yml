@@ -1,0 +1,95 @@
+################################################################################
+# Test LibTidy Public API (via Swift SwLibTidy).
+#
+# Because SwLibTidy wraps nearly 100% of LibTidy's API, it's a great candidate
+# for testing LibTidy via a high-level, easy to write and understand tests.
+#
+#   - This is a Public API test of LibTidy. It does not test the console
+#     application, is not a unit test, and is not an output regression test.
+#
+#   - Build on multiple operating systems, once the runners are equipped with
+#     Swift.
+#
+################################################################################
+
+name: API Test via SwLibTidy
+
+on:
+  push:
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - '.github/workflows/**'
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - '.github/workflows/**'
+
+jobs:
+
+  test_library_api:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+
+         ############################################################
+         # Ubuntu latest is a normal build with nothing special that
+         # really need be done.
+         # Note: currently disabled because some tests need to be
+         #   refactored to avoid using macOS specific library calls.
+         ############################################################
+#          - os: ubuntu-latest
+#            name: Ubuntu
+
+         ############################################################
+         # On macOS, we'll build both architectures.
+         # Note: this is the currently only enabled runner, and I'm
+         #   comfortable with it. This excercises nearly all of
+         #   HTML Tidy's library API, which should be platform
+         #   agnostic.
+         ############################################################
+         - os: macOS-latest
+           name: macOS
+
+         ############################################################
+         # The standard Windows build is perfectly vanilla, and as
+         # of now is using MSVC 19.
+         # Note: currently disabled because some tests need to be
+         #   refactored to avoid using macOS specific library calls,
+         #   but mostly because the Windows runners aren't set up
+         #   yet for running Swift code.
+         ############################################################
+#          - os: windows-latest
+#            name: MSVC
+           
+    steps:
+
+    ############################################################
+    # Checkout the Swift testing repository.
+    ############################################################
+    - name: Checkout SwLibTidy
+      uses: actions/checkout@v2
+      with:
+        repository: htacg/SwLibTidy
+
+
+    ############################################################
+    # Checkout the Tidy repository as Source/CLibTidy
+    ############################################################
+    - name: Checkout this repository
+      uses: actions/checkout@v2
+      with:
+        path: ${{github.workspace}}/Sources/CLibTidy
+
+
+    ############################################################
+    # Perform swift test
+    # Note: Github truncates the in-browser log. If you want
+    #   to see everything, look for the Raw Logs button.
+    ############################################################
+    - name: Swift Test
+      run: |
+        swift test

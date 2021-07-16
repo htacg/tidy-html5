@@ -593,6 +593,8 @@ endif ()
 # Windows
 #   MSI - this needs WiX Tooset installed and a path to candle.exe
 #   EXE - this needs NSIS tools to be in path
+# Everything Else
+#   RPM required to build RPM's, and might not be installed by default.
 #------------------------------------------------------------------------
 if (WIN32)
     set(CPACK_GENERATOR "NSIS;WIX;ZIP")
@@ -621,10 +623,23 @@ set(CPACK_PACKAGE_VERSION_MINOR "${TIDY_MINOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_PATCH "${TIDY_POINT_VERSION}")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
 
-# use one compatible license file for all
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/README/LICENSE.txt")
-set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
-set(CPACK_RESOURCE_FILE_WELCOME "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
+
+#------------------------------------------------------------------------
+# Windows: it looks like only the LICENSE.txt file is used by Windows,
+#   for either package type (.exe and .msi).
+# Linux: none of the files are shown publicly by default when installing
+#   from a .deb or .rpm.
+# Mac: cannot show HTML; need RTF. CPACK_RESOURCE_FILE_WELCOME isn't
+#   needed.
+#------------------------------------------------------------------------
+if (APPLE)
+    set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/build/macos/Installer-License.rtf")
+    set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/build/macos/Installer-Introduction.rtf")
+else ()
+    set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/README/LICENSE.txt")
+    set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
+    set(CPACK_RESOURCE_FILE_WELCOME "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
+endif ()
 
 
 #------------------------------------------------------------------------
@@ -632,25 +647,44 @@ set(CPACK_RESOURCE_FILE_WELCOME "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html"
 #------------------------------------------------------------------------
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER ${CPACK_PACKAGE_CONTACT})
 set(CPACK_DEBIAN_PACKAGE_HOMEPAGE ${LIBTIDY_URL})
-#set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc")
 set(CPACK_DEBIAN_PACKAGE_SECTION "Libraries")
-set(CPACK_SOURCE_IGNORE_FILES
-  "${PROJECT_SOURCE_DIR}/build"
-  )
+set(CPACK_SOURCE_IGNORE_FILES "${PROJECT_SOURCE_DIR}/build" )
 
 
 #------------------------------------------------------------------------
 # RPM config
 #------------------------------------------------------------------------
 set(CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/usr/share/man" "/usr/share/man/man1")
-
 set(CPACK_SOURCE_IGNORE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/test/;${CMAKE_CURRENT_SOURCE_DIR}/build/;${CMAKE_CURRENT_SOURCE_DIR}/.git/")
 
-if (NOT WIN32 AND NOT APPLE)
-set( CPACK_PACKAGE_FILE_NAME "${LIB_NAME}-${CPACK_PACKAGE_VERSION}-${BITNESS}bit" )
+
+#------------------------------------------------------------------------
+# Package name configuration
+#   The default is LIB_NAME-CPACK_PACKAGE_VERSION-CMAKE_SYSTEM_NAME,
+#   but we want to include system name for Unixes, and correct the
+#   system name on Apple targets.
+#------------------------------------------------------------------------
+if (UNIX AND NOT APPLE)
+    set(CPACK_PACKAGE_FILE_NAME "${LIB_NAME}-${CPACK_PACKAGE_VERSION}-${CMAKE_SYSTEM_NAME}-${BITNESS}bit")
+endif ()
+if (APPLE AND NOT IOS)
+    if (CMAKE_OSX_ARCHITECTURES)
+        set(CPACK_PACKAGE_FILE_NAME "${LIB_NAME}-${CPACK_PACKAGE_VERSION}-macOS-${CMAKE_OSX_ARCHITECTURES}")
+        string(REPLACE ";" "+" CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_FILE_NAME}")
+    else ()
+        set(CPACK_PACKAGE_FILE_NAME "${LIB_NAME}-${CPACK_PACKAGE_VERSION}-macOS-${BITNESS}bit")
+    endif ()
+endif ()
+if (IOS)
+    set(CPACK_PACKAGE_FILE_NAME "${LIB_NAME}-${CPACK_PACKAGE_VERSION}-iOS-${BITNESS}bit")
 endif ()
 
+
+#------------------------------------------------------------------------
+# Build the Package
+#------------------------------------------------------------------------
 include(CPack)
+
 
 #------------------------------------------------------------------------
 # pkg-config

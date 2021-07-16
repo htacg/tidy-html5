@@ -623,10 +623,23 @@ set(CPACK_PACKAGE_VERSION_MINOR "${TIDY_MINOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_PATCH "${TIDY_POINT_VERSION}")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
 
-# use one compatible license file for all
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/README/LICENSE.txt")
-set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
-set(CPACK_RESOURCE_FILE_WELCOME "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
+
+#------------------------------------------------------------------------
+# Windows: it looks like only the LICENSE.txt file is used by Windows,
+#   for either package type (.exe and .msi).
+# Linux: none of the files are shown publicly by default when installing
+#   from a .deb or .rpm.
+# Mac: cannot show HTML; need RTF. CPACK_RESOURCE_FILE_WELCOME isn't
+#   needed.
+#------------------------------------------------------------------------
+if (APPLE)
+    set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/build/macos/Installer-License.rtf")
+    set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/build/macos/Installer-Introduction.rtf")
+else ()
+    set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/README/LICENSE.txt")
+    set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
+    set(CPACK_RESOURCE_FILE_WELCOME "${CMAKE_CURRENT_SOURCE_DIR}/README/README.html")
+endif ()
 
 
 #------------------------------------------------------------------------
@@ -657,6 +670,7 @@ endif ()
 if (APPLE AND NOT IOS)
     if (CMAKE_OSX_ARCHITECTURES)
         set(CPACK_PACKAGE_FILE_NAME "${LIB_NAME}-${CPACK_PACKAGE_VERSION}-macOS-${CMAKE_OSX_ARCHITECTURES}")
+        string(REPLACE ";" "+" CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_FILE_NAME}")
     else ()
         set(CPACK_PACKAGE_FILE_NAME "${LIB_NAME}-${CPACK_PACKAGE_VERSION}-macOS-${BITNESS}bit")
     endif ()

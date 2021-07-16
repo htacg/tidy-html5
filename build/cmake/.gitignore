@@ -34,3 +34,4 @@ tidy.pc
 *.vcproj
 .pkg
 Info.plist
+*.pkg

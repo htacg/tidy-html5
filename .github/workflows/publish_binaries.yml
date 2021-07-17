@@ -155,7 +155,7 @@ jobs:
         for filename in *.*[^sha256]; do
             filesize=$(numfmt --to=si --suffix=B $(wc -c < ${filename}))
             modified=$(${{matrix.stat_command}} -c %y "${filename}" | cut -d'.' -f1)
-            modified="${modified//-/\/}"
+            modified="${modified//-//}"
             sha256=$(${{matrix.sha_command}} "${filename}" | awk '{print $1}')
             echo "    - filename: ${filename}" >> "${manifest}"
             echo "      filesize: ${filesize}" >> "${manifest}"

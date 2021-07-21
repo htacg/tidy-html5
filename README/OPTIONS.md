@@ -2,7 +2,7 @@
 
 Tidy supports a quite large number of configuration options. The full list can be output using `-help-config`. This will show the option to be used either on the command line or in a configuration file, the type of option, and the value(s) that can be used. The current default value for each option can be seen using `-show-config`.
 
-The options can also be listed in xml format. `-xml-help` will output each option plus a description. `-xml-config` will not only output the option and a desciption, but will include the type, default and examples. These xml outputs are used, with the aid of `xsltproc` and `doxygen`, to generate the [API Documentation](http://api.html-tidy.org/).
+The options can also be listed in xml format. `-xml-help` will output each option plus a description. `-xml-config` will not only output the option and a description, but will include the type, default and examples. These xml outputs are used, with the aid of `xsltproc` and `doxygen`, to generate the [API Documentation](http://api.html-tidy.org/).
 
 These options can also be used by application linking with `libtidy`. For each option there is a `TidyOptionId` enumeration in the `tidyenum.h` file, and get/set functions for each option type.
 
@@ -17,7 +17,7 @@ This file indicates how to add a new option to tidy, here adding an option `Tidy
 
 In `tidyenum.h` the `TidyOptionId` can be in any order, but please try to keep things alphabetical, and keep in mind that `N_TIDY_OPTIONS` must remain the last. Choosing the id name can be any string, but by convention it will commence with `Tidy` followed by brief descriptive text.
 
-Naturally it can not be the same as any exisitng option. That is, it must be unique. And it will be followed by a brief descriptive special doxygen formatted comment. So for this new option I have chosen -
+Naturally it can not be the same as any existing option. That is, it must be unique. And it will be followed by a brief descriptive special doxygen formatted comment. So for this new option I have chosen -
 
 ~~~
   TidyEscapeScripts,       /**< Escape items that look like closing tags */
@@ -105,7 +105,7 @@ The `key` is the option `ID`; The `pluralForm` is not used for options, and shou
 
 Some care has to be taken with the description string. The only html allowed here is `<code>...</code>`, `<var>...</var>`, `<em>...</em>`, `<strong>...</strong>`, and `<br/>`. Entities, tags, attributes, etc., should be enclosed in `<code>...</code>`. Option values should be enclosed in `<var>...</var>`. It's very important that `<br/>` be self-closing! This string is processed to build the API documentation.
 
-This is the desription added for this new option.
+This is the description added for this new option.
 
 ~~~
     {

@@ -37,7 +37,7 @@ TMPZFIL="../../documentation/$TMPZIP"
 if [ -f "$TMPZFIL" ]; then
     ls -l $TMPZFIL
     echo "$BN: WARNING: Current ZIP will be overwritten!"
-    echo "$BN: DO you want to coninue?"
+    echo "$BN: DO you want to continue?"
     ask
 fi
 
@@ -49,7 +49,7 @@ if [ ! -x "$TMPFIL" ]; then
 fi
 
 if [ -d "$TMPDIR" ]; then
-    echo "$BN: Directory '$TMPDIR' will be deleted prior the documentaion build..."
+    echo "$BN: Directory '$TMPDIR' will be deleted prior the documentation build..."
 fi
 
 ./$TMPFIL -DBUILD_DOCUMENTATION:BOOL=YES

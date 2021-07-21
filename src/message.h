@@ -103,7 +103,7 @@ TY_PRIVATE ctmbstr TY_(tidyLibraryVersion)(void);
 
 /**
  *  The designated report writing function. When a proper formatter exists,
- *  this one function can hanle all report output.
+ *  this one function can handle all report output.
  */
 TY_PRIVATE void TY_(Report)(TidyDocImpl* doc, Node *element, Node *node, uint code, ...);
 
@@ -171,7 +171,7 @@ TY_PRIVATE void TY_(ReportMarkupVersion)( TidyDocImpl* doc );
 
 /**
  *  Reports the number of warnings and errors found in the document as dialogue
- *  inforation.
+ *  information.
  *  Called by `tidyRunDiagnostics()`, from console.
  */
 TY_PRIVATE void TY_(ReportNumWarnings)( TidyDocImpl* doc );

@@ -135,7 +135,7 @@ module TidyRegressionTestModule
           case_name = File.basename( html_file[/(.*)@/,1] )
           candidate_expects_html = File.join( self.dir_expects, "#{case_name}#{File.extname(html_file)}" )
           candidate_expects_output = File.join( self.dir_expects, "#{case_name}.txt" )
-          #noinspection RubyNilAnalysis -- this is a false positive, because we've explicitely made this an array.
+          #noinspection RubyNilAnalysis -- this is a false positive, because we've explicitly made this an array.
           @case_paths.push(html_file)
           unless File.exist?(candidate_expects_html) && File.exist?(candidate_expects_output)
             SHARED_LOGGER.warn("Note: #{html_file} is missing some expectations files in #{self.dir_expects}.")

@@ -1339,7 +1339,7 @@ static Bool InlineElementToCSS( TidyDocImpl* doc, Node* node,
     ctmbstr CSSeq;
 
     /* if node is the only child of parent element then leave alone
-          Do so only if BlockStyle may be succesful. */
+          Do so only if BlockStyle may be successful. */
     if ( node->parent->content == node && node->next == NULL &&
          (CanApplyBlockStyle(node->parent)
           || CanApplyInlineStyle(node->parent)) )
@@ -1366,7 +1366,7 @@ static Bool Font2Span( TidyDocImpl* doc, Node *node, Node **pnode )
     if ( nodeIsFONT(node) )
     {
         /* if node is the only child of parent element then leave alone
-          Do so only if BlockStyle may be succesful. */
+          Do so only if BlockStyle may be successful. */
         if ( node->parent->content == node && node->next == NULL &&
              CanApplyBlockStyle(node->parent) )
             return no;
@@ -1882,7 +1882,7 @@ static Bool SingleSpace( Lexer* lexer, Node* node )
 */
 void TY_(CleanWord2000)( TidyDocImpl* doc, Node *node)
 {
-    /* used to a list from a sequence of bulletted p's */
+    /* used to a list from a sequence of bulleted p's */
     Lexer* lexer = doc->lexer;
     Node* list = NULL;
     AttVal *next_attr, *attval;
@@ -1896,7 +1896,7 @@ void TY_(CleanWord2000)( TidyDocImpl* doc, Node *node)
             if ( !TY_(IsWord2000) (doc) ) /* Is. #896 */
                 return;
 
-            /* Output proprietary attributes to maintain errout compatability
+            /* Output proprietary attributes to maintain errout compatibility
              * with traditional Tidy. This is a result of moving all of the
              * proprietary checks to near the end of the cleanup process,
              * meaning this result would not ordinarily be displayed. 
@@ -1984,7 +1984,7 @@ void TY_(CleanWord2000)( TidyDocImpl* doc, Node *node)
         /* discards <o:p> which encodes the paragraph mark */
         if ( node->tag && TY_(tmbstrcmp)(node->tag->name,"o:p")==0)
         {
-            /* Output proprietary elements to maintain errout compatability
+            /* Output proprietary elements to maintain errout compatibility
              * with traditional Tidy. This is a result of moving all of the
              * proprietary checks to near the end of the cleanup process,
              * meaning this result would not ordinarily be displayed.
@@ -2303,7 +2303,7 @@ Bool TY_(TidyMetaCharset)(TidyDocImpl* doc)
             }
             else
             {
-                /* fix a mis-match */
+                /* fix a mismatch */
                 if (charsetFound)
                 {
                     prevNode = currentNode->prev;

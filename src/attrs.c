@@ -1333,7 +1333,7 @@ static void AppendToStyleAttr( TidyDocImpl* doc, AttVal *styleattr, ctmbstr styl
 
     if (end >0 && styleattr->value[end - 1] == ';')
     {
-        /* attribute ends with declaration seperator */
+        /* attribute ends with declaration separator */
 
         styleattr->value = (tmbstr) TidyDocRealloc(doc, styleattr->value,
             end + TY_(tmbstrlen)(styleprop) + 2);
@@ -1894,7 +1894,7 @@ void CheckIs( TidyDocImpl* doc, Node *node, AttVal *attval )
 
     /* Even if we fail the above test, we'll continue to emit reports because
        the user should *also* know that his attribute values are wrong, even
-       if they should't be in custom tags anyway. */
+       if they shouldn't be in custom tags anyway. */
 
     /* `is` MUST have a value */
     if (!AttrHasValue(attval))
@@ -2103,7 +2103,7 @@ void CheckNumber( TidyDocImpl* doc, Node *node, AttVal *attval)
     /* font size may be preceded by + or - */
     if ( nodeIsFONT(node) && (*p == '+' || *p == '-') )
         ++p;
-    /* tabindex may be preceeded by - */
+    /* tabindex may be preceded by - */
     if (attval->attribute && (strcmp(attval->attribute,"tabindex") == 0) && (*p == '-'))
         ++p;
 
@@ -2472,7 +2472,7 @@ void TY_(SortAttributes)(TidyDocImpl* doc, Node* node, TidyAttrSortStrategy stra
 * 
 * Portions copyright Simon Tatham 2001.
 *
-* Merge sort algortithm adpated from listsort.c linked from 
+* Merge sort algorithm adapted from listsort.c linked from 
 * http://www.chiark.greenend.org.uk/~sgtatham/algorithms/listsort.html
 * 
 * Original copyright notice proceeds below.

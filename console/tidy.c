@@ -310,7 +310,7 @@ typedef enum
     CmdOptCatLAST
 } CmdOptCategory;
 
-/** This array contains headings that will be used in help ouput.
+/** This array contains headings that will be used in help output.
  */
 static const struct {
     ctmbstr mnemonic;  /**< Used in XML as a class. */
@@ -649,7 +649,7 @@ static void getSortedOption(TidyDoc tdoc,         /**< The Tidy document. */
     tOption->topt[i] = NULL; /* sentinel */
 
     qsort(tOption->topt,
-          i, /* there are i items, not including the sentinal */
+          i, /* there are i items, not including the sentinel */
           sizeof(tOption->topt[0]),
           cmpOpt);
 }
@@ -2224,7 +2224,7 @@ int main( int argc, char** argv )
             else if ( strcasecmp(arg, "quiet") == 0 )
                 tidyOptSetBool( tdoc, TidyQuiet, yes );
 
-            /* Currenly user must specify a language
+            /* Currently user must specify a language
              prior to anything that causes output */
             else if ( strcasecmp(arg, "language") == 0 ||
                      strcasecmp(arg,     "lang") == 0 )

@@ -14,7 +14,7 @@
  *  continues on the next line
  *
  * Property names are case insensitive and should be less than 60 characters
- * in length, and must start at the begining of the line, as whitespace at
+ * in length, and must start at the beginning of the line, as whitespace at
  * the start of a line signifies a line continuation.
  *
  * @author  HTACG, et al (consult git log)
@@ -173,7 +173,7 @@ TY_PRIVATE const TidyOptionImpl* TY_(getNextOption)( TidyDocImpl* doc, TidyItera
 /** Initiates an iterator to cycle through all of the available picklist
  ** possibilities.
  ** @param option An instance of an option for which to iterate a picklist.
- ** @returns An interator token to be used with TY_(getNextOptionPick)().
+ ** @returns An iterator token to be used with TY_(getNextOptionPick)().
  */
 TY_PRIVATE TidyIterator TY_(getOptionPickList)( const TidyOptionImpl* option );
 

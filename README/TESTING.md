@@ -37,7 +37,7 @@ write at least one test case in `github-cases` and put the expected results in
 importantly, will become part of the standard regression testing suite once the
 PR is merged.
 
-Try to keep your test case(s) as succint as possible, and do try to put some HTML
+Try to keep your test case(s) as succinct as possible, and do try to put some HTML
 comments in the file explaining the purpose of the test case, and if applicable,
 the Github issue and/or PR number.
 

@@ -10,7 +10,7 @@
  *
  * @note It should be largely unnecessary to modify this file unless adding
  * support for a completely new architecture. Most options defined in this
- * file specify defaults that can be overriden by the build system; for
+ * file specify defaults that can be overridden by the build system; for
  * example, passing -D flags to CMake.
  *
  * @author  Charles Reitzel [creitzel@rcn.com]

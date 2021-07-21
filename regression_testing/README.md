@@ -97,7 +97,7 @@ Running Test Tests
 
 ### Preparing the Environment
 
-Assuming that you have a working Ruby interpretor, version 2.7 or so, upon 
+Assuming that you have a working Ruby interpreter, version 2.7 or so, upon 
 `CD`-ing into the `tidy-html5-test` directory, you should execute `bundle 
 install`, which ensures that any dependencies that your environment doesn’t 
 already have will be downloaded.
@@ -155,7 +155,7 @@ set of case files).
 
   - Optional Tidy configuration files shall be named `case-basename.conf`.
 
-  - In the absense of a configuration file, the file `config_default.conf` in
+  - In the absence of a configuration file, the file `config_default.conf` in
     each directory will be used instead.
 
   - `README<.txt|.md>`, which describes the test set.

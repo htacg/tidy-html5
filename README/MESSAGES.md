@@ -36,6 +36,6 @@ Note that Tidy doesn't currently support numbered `printf` parameters; parameter
 
 The last step — hopefully — is adding the message key to the `dispatchTable[]` structure in `message.c`. This structure determines the `TidyReportLevel` (report severity) and message formatter (how to print the message). Then whenever you issue the report with `TY_(Report)()` or one of the existing convenience report functions, the correct message formatter will be used for the parameters that you specify.
 
-Please read the source code in `message.c` for help on how to choose a message formatter, or how to modify one of the existing message formatters if you need to accomodate a new function signature for your report.
+Please read the source code in `message.c` for help on how to choose a message formatter, or how to modify one of the existing message formatters if you need to accommodate a new function signature for your report.
 
 eof;

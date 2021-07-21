@@ -540,7 +540,7 @@ static Bool IsValidSrcExtension( ctmbstr sType )
 /*********************************************************************
 * IsValidMediaExtension
 *
-* Checks to warn the user that syncronized text equivalents are 
+* Checks to warn the user that synchronized text equivalents are
 * required if multimedia is used.
 *********************************************************************/
 
@@ -2545,7 +2545,7 @@ static void CheckParagraphHeader( TidyDocImpl* doc, Node* node )
 * CheckEmbed
 *
 * Checks to see if 'SRC' is a multimedia type.  Must have 
-* syncronized captions if used.
+* synchronized captions if used.
 ****************************************************************/
 
 static void CheckEmbed( TidyDocImpl* doc, Node* node )
@@ -3426,7 +3426,7 @@ static void AccessibilityCheckNode( TidyDocImpl* doc, Node* node )
         CheckParagraphHeader( doc, node );
     }
 
-    /* Checks HTML elemnt for valid 'LANG' */
+    /* Checks HTML element for valid 'LANG' */
     else if ( nodeIsHTML(node) )
     {
         CheckHTMLAccess( doc, node );

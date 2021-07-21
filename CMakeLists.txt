@@ -21,7 +21,7 @@ cmake_minimum_required (VERSION 2.8.12)
 
 set(LIB_NAME tidy)
 set(LIBTIDY_DESCRIPTION "${LIB_NAME} - HTML syntax checker")
-set(LIBTIDY_URL "http://www.html-tidy.org")
+set(LIBTIDY_URL "https://www.html-tidy.org")
 
 project (${LIB_NAME})
 

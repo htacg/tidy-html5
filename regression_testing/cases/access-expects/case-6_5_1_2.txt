@@ -6,7 +6,7 @@ line 10 column 9 - Warning: trimming empty <noframes>
 Tidy found 1 warning and 0 errors!
 
 For further advice on how to make your pages accessible
-see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/.
+see https://www.w3.org/WAI/GL and https://www.html-tidy.org/accessibility/.
 One or more empty elements were present in the source document but
 dropped on output. If these elements are necessary or you don't want
 this behavior, then consider setting the option "drop-empty-elements"

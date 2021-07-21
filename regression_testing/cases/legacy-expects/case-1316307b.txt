@@ -16,7 +16,7 @@ to each table cell, enabling non-visual browsers to provide
 a meaningful context for each cell.
 
 For further advice on how to make your pages accessible
-see http://www.w3.org/WAI/GL.
+see https://www.w3.org/WAI/GL.
 One or more empty elements were present in the source document but
 dropped on output. If these elements are necessary or you don't want
 this behavior, then consider setting the option "drop-empty-elements"
@@ -25,9 +25,9 @@ to no.
 About HTML Tidy: https://github.com/htacg/tidy-html5
 Bug reports and comments: https://github.com/htacg/tidy-html5/issues
 Official mailing list: https://lists.w3.org/Archives/Public/public-htacg/
-Latest HTML specification: http://dev.w3.org/html5/spec-author-view/
-Validate your HTML documents: http://validator.w3.org/nu/
-Lobby your company to join the W3C: http://www.w3.org/Consortium
+Latest HTML specification: https://html.spec.whatwg.org/multipage/
+Validate your HTML documents: https://validator.w3.org/nu/
+Lobby your company to join the W3C: https://www.w3.org/Consortium
 
 Do you speak a language other than English, or a different variant of 
 English? Consider helping us to localize HTML Tidy. For details please see 

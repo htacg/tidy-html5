@@ -7,4 +7,4 @@ line 8 column 1 - Warning: replacing obsolete element <dir> with <ul>
 Tidy found 2 warnings and 0 errors!
 
 For further advice on how to make your pages accessible
-see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/.
+see https://www.w3.org/WAI/GL and https://www.html-tidy.org/accessibility/.

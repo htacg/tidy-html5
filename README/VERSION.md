@@ -70,7 +70,7 @@ add_definitions ( -DLIBTIDY_VERSION="${LIBTIDY_VERSION}" )
 add_definitions ( -DRELEASE_DATE="${tidy_YEAR}/${tidy_MONTH}/${tidy_DAY}" )
 ~~~
 
-And in `CMakeLists.txt` there is the posibility to define another macro, when and if required:
+And in `CMakeLists.txt` there is the possibility to define another macro, when and if required:
 
 ~~~
 # add_definitions ( -DRC_NUMBER="D231" )

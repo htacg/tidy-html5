@@ -76,7 +76,7 @@ int parseURL( HTTPInputSource *pHttp, tmbstr url )
             if (!pHttp->nPort)
                 return -1;
         }
-        else                      /* or just a misformed port number */
+        else                      /* or just a malformed port number */
             return -1;
     }
     else

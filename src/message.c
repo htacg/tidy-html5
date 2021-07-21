@@ -103,7 +103,7 @@ static ctmbstr HTMLVersion( TidyDocImpl* doc )
 
 /*********************************************************************
  * Message Writing Functions
- * These funtions provide final, formatted output to the output sink.
+ * These functions provide final, formatted output to the output sink.
  *********************************************************************/
 
 
@@ -209,7 +209,7 @@ static void messageOut( TidyMessageImpl *message )
 
         /* Always add a trailing newline. Reports require this, and dialogue
            messages will be better spaced out without having to fill the
-           language file with superflous newlines. */
+           language file with superfluous newlines. */
         TY_(WriteChar)( '\n', doc->errout );
     }
 
@@ -229,7 +229,7 @@ static void messageOut( TidyMessageImpl *message )
 
 
 /* Functions of this type will create new instances of TidyMessage specific to
-** the type of report being emitted. Many messages share the same fomatter for
+** the type of report being emitted. Many messages share the same formatter for
 ** messages, but new ones can be written as required. Please have a look at
 ** the existing formatters in order to determine if an existing signature is
 ** compatible with the report you wish to output before adding a new formatter.
@@ -890,7 +890,7 @@ TidyMessageImpl *formatStandardDynamic(TidyDocImpl* doc, Node *element, Node *no
 /*********************************************************************
  * High Level Message Writing Functions
  * When adding new reports to LibTidy, preference should be given
- * to one of the existing, general pupose message writing functions
+ * to one of the existing, general purpose message writing functions
  * above, if possible, otherwise try to use one of these, or as a
  * last resort add a new one in this section.
  *********************************************************************/
@@ -937,7 +937,7 @@ static void vReport(TidyDocImpl* doc, Node *element, Node *node, uint code, va_l
 ** type safety by using the variable arguments. To counter this some convenience
 ** report output functions exist, too. Any new reports you wish to create must
 ** be able to use this function signature, although convenience functions should
-** be added to abstract the full fuction signature and to preserve type safety.
+** be added to abstract the full function signature and to preserve type safety.
 */
 void TY_(Report)(TidyDocImpl* doc, Node *element, Node *node, uint code, ...)
 {
@@ -1286,7 +1286,7 @@ void TY_(ReportMarkupVersion)( TidyDocImpl* doc )
 
         TY_(Report)( doc, NULL, NULL, STRING_CONTENT_LOOKS, vers );
 
-        /* Warn about missing sytem identifier (SI) in emitted doctype */
+        /* Warn about missing system identifier (SI) in emitted doctype */
         if ( TY_(WarnMissingSIInEmittedDocType)( doc ) )
             TY_(Report)( doc, NULL, NULL, STRING_NO_SYSID );
     }

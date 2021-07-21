@@ -205,7 +205,7 @@ typedef enum
   document.
 
   Characters of the General Category Pi and Ps in the Unicode
-  character database (opening punctuation and intial quote
+  character database (opening punctuation and initial quote
   characters) mark a wrapping point before the character, other
   punctuation characters (Pc, Pd, Pe, Pf, and Po), breakable
   space characters (Zs), and paragraph and line separators
@@ -544,9 +544,9 @@ static void ResetLineAfterWrap( TidyPrintImpl* pprint )
 /*\
  *  Write the 'indent' char to output
  *  Issue #335 - The GetSpaces() returns the number of spaces to be
- *  used for the indent. This is fine if ouputting spaces.
+ *  used for the indent. This is fine if outputting spaces.
  *  However, if outputting 'tab' chars, then the number of tabs 
- *  output should euivalent to spaces divided by 'tab-size'
+ *  output should equivalent to spaces divided by 'tab-size'
 \*/
 static void WriteIndentChar(TidyDocImpl* doc )
 {
@@ -1861,7 +1861,7 @@ void PPrintScriptStyle( TidyDocImpl* doc, uint mode, uint indent, Node *node )
     if ( InsideHead(doc, node) )
       TY_(PFlushLineSmart)( doc, indent );
 
-    PCondFlushLineSmart( doc, indent );  /* Issue #56 - long oustanding bug - flush any existing closing tag */
+    PCondFlushLineSmart( doc, indent );  /* Issue #56 - long outstanding bug - flush any existing closing tag */
 
     PPrintTag( doc, mode, indent, node );
 
@@ -2027,7 +2027,7 @@ void TY_(PrintBody)( TidyDocImpl* doc )
 }
 
 /* #130 MathML attr and entity fix! 
-   Support MathML namepsace */
+   Support MathML namespace */
 static void PPrintMathML( TidyDocImpl* doc, uint indent, Node *node )
 {
     Node *content;
@@ -2234,7 +2234,7 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
 
             /*\
              *  Issue #180 - with the above PCondFlushLine, 
-             *  this adds an uneccessary additional line!
+             *  this adds an unnecessary additional line!
              *  Maybe only if 'classic' ie --vertical-space yes 
              *  Issue #582 - maybe this is no longer needed!
              *  It adds a 3rd newline if indent: auto...

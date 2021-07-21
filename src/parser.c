@@ -131,7 +131,7 @@ Node *TY_(DiscardElement)( TidyDocImpl* doc, Node *element )
 }
 
 /*
- insert "node" into markup tree as the firt element
+ insert "node" into markup tree as the first element
  of content of "element"
 */
 void TY_(InsertNodeAtStart)(Node *element, Node *node)
@@ -852,7 +852,7 @@ void TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode)
     {
         /* Issue #212 - Further fix in case ParseBlock() is called with 'IgnoreWhitespace'
            when such a leading space may need to be inserted before this element to 
-           preverve the browser view */
+           preserve the browser view */
         mode = MixedContent;
     }
 
@@ -3216,7 +3216,7 @@ void TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) )
               the <pre> into the newly opened <p>.
 
               Todo: IMG, OBJECT, APPLET, BIG, SMALL, SUB, SUP, FONT, and BASEFONT are
-              dissallowed in <pre>, Tidy neither detects this nor does it perform any
+              disallowed in <pre>, Tidy neither detects this nor does it perform any
               cleanup operation. Tidy should at least issue a warning if it encounters
               such constructs.
 

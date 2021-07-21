@@ -66,7 +66,7 @@
 @if "%TMPINDBG%x" == "1x" (
 @echo Will install Debug and Release
 ) else {
-@echo Will only intall Release
+@echo Will only install Release
 )
 @echo.
 

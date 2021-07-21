@@ -627,7 +627,7 @@ typedef enum
     TidyOutCharEncoding,         /**< Output character encoding (if different) */
     TidyOutFile,                 /**< File name to write markup to */
     TidyOutputBOM,               /**< Output a Byte Order Mark (BOM) for UTF-16 encodings */
-    TidyPPrintTabs,              /**< Indent using tabs istead of spaces */
+    TidyPPrintTabs,              /**< Indent using tabs instead of spaces */
     TidyPreserveEntities,        /**< Preserve entities */
     TidyPreTags,                 /**< Declared pre tags */
     TidyPriorityAttributes,      /**< Attributes to place first in an element */
@@ -646,7 +646,7 @@ typedef enum
     TidySkipNested,              /**< Skip nested tags in script and style CDATA */
     TidySortAttributes,          /**< Sort attributes */
     TidyStrictTagsAttr,          /**< Ensure tags and attributes match output HTML version */
-    TidyStyleTags,               /**< Move sytle to head */
+    TidyStyleTags,               /**< Move style to head */
     TidyTabSize,                 /**< Expand tabs to n spaces */
     TidyUpperCaseAttrs,          /**< Output attributes in upper not lower case */
     TidyUpperCaseTags,           /**< Output tags in upper not lower case */

@@ -26,7 +26,7 @@
  *
  * Template Created by Jim Derry on 01/14/2016.
  *
- * Orginating PO file metadata:
+ * Originating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
  *   PO_REVISION_DATE=2017-10-05 15:13:40
  */

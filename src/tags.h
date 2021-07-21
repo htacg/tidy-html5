@@ -212,7 +212,7 @@ TY_PRIVATE void TY_(AdjustTags)( TidyDocImpl *doc );
 TY_PRIVATE void TY_(ResetTags)( TidyDocImpl *doc );
 
 
-/** Indicates whether or not the Tidy is procesing in HTML5 mode.
+/** Indicates whether or not the Tidy is processing in HTML5 mode.
  ** @param doc The Tidy document.
  ** @returns Returns `yes` if processing in HTML5 mode.
  */

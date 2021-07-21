@@ -104,7 +104,7 @@ TY_PRIVATE Node *TY_(DiscardElement)( TidyDocImpl* doc, Node *element);
 
 
 /**
- *  Insert node into markup tree as the firt element of content of element.
+ *  Insert node into markup tree as the first element of content of element.
  *  @param element The new destination node.
  *  @param node The node to insert.
  */

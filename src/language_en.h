@@ -905,7 +905,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         TidyNewline,                  0,
         "The default is appropriate to the current platform. "
         "<br/>"
-        "Genrally <var>CRLF</var> on PC-DOS, Windows and OS/2; <var>CR</var> "
+        "Generally <var>CRLF</var> on PC-DOS, Windows and OS/2; <var>CR</var> "
         "on Classic Mac OS; and <var>LF</var> everywhere else (Linux, macOS, "
         "and Unix). "
     },

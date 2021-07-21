@@ -1137,7 +1137,7 @@ static SPStatus GetSurrogatePair(TidyDocImpl* doc, Bool isXml, uint *pch)
 
 /*
   No longer attempts to insert missing ';' for unknown
-  enitities unless one was present already, since this
+ entities unless one was present already, since this
   gives unexpected results.
 
   For example:   <a href="something.htm?foo&bar&fred">
@@ -1364,7 +1364,7 @@ static void ParseEntity( TidyDocImpl* doc, GetTokenMode mode )
     {
         if ( c != ';' )    /* issue warning if not terminated by ';' */
         {
-            /* set error position just before offending chararcter */
+            /* set error position just before offending character */
             SetLexerLocus( doc, lexer );
             lexer->columns = startcol;
             TY_(ReportEntityError)( doc, MISSING_SEMICOLON, lexer->lexbuf+start, c );
@@ -3375,7 +3375,7 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
                             }
                             /* this failed!
                                TY_(AddCharToLexer)(lexer, '-'); TY_(AddCharToLexer)(lexer, '-'); lexdump = 0; 
-                               got output <![endif]--]> - needs furhter fix in pprint section output 
+                               got output <![endif]--]> - needs further fix in pprint section output
                              */
                         }
                         else
@@ -3727,7 +3727,7 @@ static tmbstr  ParseAttribute( TidyDocImpl* doc, Bool *isempty,
             {
                 /* Not '/>' - put it back */
                 TY_(UngetChar)(c, doc->docIn);
-                c = '/';  /* retore original char */
+                c = '/';  /* restore original char */
             }
         }
 

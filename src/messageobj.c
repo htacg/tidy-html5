@@ -179,7 +179,7 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
     if ( ( cfgBool(doc, TidyMuteShow) == yes ) && level <= TidyFatal )
     {
         /*\ Issue #655 - Unsafe to use output buffer as one of the va_list
-         *  input parameters in some snprintf implmentations.
+         *  input parameters in some snprintf implementations.
         \*/
         ctmbstr pc = TY_(tidyErrorCodeAsKey)(code);
         i = TY_(tmbstrlen)(result->messageOutputDefault);

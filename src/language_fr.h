@@ -747,7 +747,7 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
         "À propos de HTML Tidy: https://github.com/htacg/tidy-html5\n"
         "Rapports de bugs et commentaires: https://github.com/htacg/tidy-html5/issues\n"
         "Liste officielle de diffusion: https://lists.w3.org/Archives/Public/public-htacg/\n"
-        "Dernière spécification HTML: https://dev.w3.org/html5/spec-author-view/\n"
+        "Dernière spécification HTML: https://html.spec.whatwg.org/multipage/\n"
         "Validez vos documents HTML: https://validator.w3.org/nu/\n"
         "Encouragez votre entreprise à rejoindre le W3C: https://www.w3.org/Consortium\n"
         "\n"

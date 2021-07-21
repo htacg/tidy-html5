@@ -1929,7 +1929,7 @@ static languageDefinition language_en = { whichPluralForm_en, {
         "About HTML Tidy: https://github.com/htacg/tidy-html5\n"
         "Bug reports and comments: https://github.com/htacg/tidy-html5/issues\n"
         "Official mailing list: https://lists.w3.org/Archives/Public/public-htacg/\n"
-        "Latest HTML specification: https://dev.w3.org/html5/spec-author-view/\n"
+        "Latest HTML specification: https://html.spec.whatwg.org/multipage/\n"
         "Validate your HTML documents: https://validator.w3.org/nu/\n"
         "Lobby your company to join the W3C: https://www.w3.org/Consortium\n"
     },

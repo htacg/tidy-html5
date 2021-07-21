@@ -2003,7 +2003,7 @@ static languageDefinition language_de = { whichPluralForm_de, {
         "Offizielle Mailing-Liste:\n"
         "\thttps://lists.w3.org/Archives/Public/public-htacg/\n"
         "Neueste HTML Spezifikation:\n" 
-        "\thttps://dev.w3.org/html5/spec-author-view/\n"
+        "\thttps://html.spec.whatwg.org/multipage/\n"
         "Validieren Sie Ihre HTML-Dokumente:\n"
         "\thttps://validator.w3.org/nu/\n"
         "Setzen Sie sich für den Eintritt Ihrer Firma ins W3C ein:\n"

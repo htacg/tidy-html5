@@ -44,20 +44,20 @@ Tidy supports localization, and welcomes translations into various languages. Pl
 
 ## Other Important Links
 
- - site: [http://www.html-tidy.org/][4]
+ - site: [https://www.html-tidy.org/][4]
  - source: [https://github.com/htacg/tidy-html5][5]
- - binaries: [http://binaries.html-tidy.org][6]
+ - binaries: [https://binaries.html-tidy.org][6]
  - bugs: [https://github.com/htacg/tidy-html5/issues][7]
  - list: [https://lists.w3.org/Archives/Public/html-tidy/][8]
- - api and quickref: [http://api.html-tidy.org/][9]
+ - api and quickref: [https://api.html-tidy.org/][9]
  - Wikidata: [https://www.wikidata.org/wiki/Q1566084][10]
 
-  [4]: http://www.html-tidy.org/
+  [4]: https://www.html-tidy.org/
   [5]: https://github.com/htacg/tidy-html5
-  [6]: http://binaries.html-tidy.org
+  [6]: https://binaries.html-tidy.org
   [7]: https://github.com/htacg/tidy-html5/issues
   [8]: https://lists.w3.org/Archives/Public/html-tidy/
-  [9]: http://api.html-tidy.org/
+  [9]: https://api.html-tidy.org/
   [10]: https://www.wikidata.org/wiki/Q1566084
 
 
@@ -65,13 +65,13 @@ Tidy supports localization, and welcomes translations into various languages. Pl
 
 This repository should be considered canonical for HTML Tidy starting from 2015-January-15.
 
- - This repository originally transferred from [w3c.github.com/tidy-html5][20], now redirected to the current site.
+ - This repository originally transferred from [w3c.github.com/tidy-html5][20], then redirected to the current site, but now dead.
  
  - First moved to Github from [tidy.sourceforge.net][21]. Note, this site is kept only for historic reasons, and is not now well maintained.
 
 **Tidy is the granddaddy of HTML tools, with support for modern standards.** Have fun...
 
-  [20]: http://w3c.github.com/tidy-html5/
+  [20]: https://w3c.github.com/tidy-html5/
   [21]: http://tidy.sourceforge.net
 
 

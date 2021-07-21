@@ -9,4 +9,4 @@ line 7 column 1 - Access: [3.6.1.4]: list usage invalid <li>.
 Tidy found 5 warnings and 0 errors!
 
 For further advice on how to make your pages accessible
-see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/.
+see https://www.w3.org/WAI/GL and https://www.html-tidy.org/accessibility/.

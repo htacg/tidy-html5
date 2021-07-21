@@ -4,7 +4,7 @@ This is about adding a new HTML **tag**.
 
 Tidy tries to support all **tags** supported by the W3C. To add a new supported **tag**, the definition begins in `tidyenum.h`, to give it a value. Then it is added to the `tag_defs[]` table in `tags.c`, where it is given a unique string, supported html versions, attributes support, and a bit `type`.
 
-Note, there are a group of configuration options to add **tags** not yet approved by the W3C. These are [new-blocklevel-tags](http://api.html-tidy.org/tidy/quickref_5.2.0.html#new-blocklevel-tags), [new-empty-tags](http://api.html-tidy.org/tidy/quickref_5.2.0.html#new-empty-tags), [new-inline-tags](http://api.html-tidy.org/tidy/quickref_5.2.0.html#new-inline-tags). and [new-pre-tags](http://api.html-tidy.org/tidy/quickref_5.2.0.html#new-pre-tags). This provides a way to extend the `tag_defs[]` table just for that tidy session.
+Note, there are a group of configuration options to add **tags** not yet approved by the W3C. These are [new-blocklevel-tags](https://api.html-tidy.org/tidy/quickref_next.html#new-blocklevel-tags), [new-empty-tags](https://api.html-tidy.org/tidy/quickref_next.html#new-empty-tags), [new-inline-tags](https://api.html-tidy.org/tidy/quickref_next.html#new-inline-tags). and [new-pre-tags](https://api.html-tidy.org/tidy/quickref_next.html#new-pre-tags). This provides a way to extend the `tag_defs[]` table just for that tidy session.
 
 So, adding a new HTML **tag** consists of the following simple steps:
 

@@ -20,7 +20,7 @@
  *   2. priority 1 & 2
  *   3. priority 1, 2, & 3
  *
- * Reference document: http://www.w3.org/TR/WAI-WEBCONTENT/
+ * Reference document: https://www.w3.org/TR/WAI-WEBCONTENT/
  *
  * Copyright University of Toronto
  * Portions (c) 1998-2006 (W3C) MIT, ERCIM, Keio University

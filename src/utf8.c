@@ -44,10 +44,10 @@ ISO/IEC 10646-1:1996 Amendment 2 or ISO/IEC 10646-1:2000 Annex D
 Table 4 - Mapping from UCS-4 to UTF-8
 
 2) Unicode standards:
-<http://www.unicode.org/unicode/standard/standard.html>
+<https://www.unicode.org/standard/standard.html>
 
 3) Legal UTF-8 byte sequences:
-<http://www.unicode.org/unicode/uni2errata/UTF-8_Corrigendum.html>
+<https://www.unicode.org/versions/corrigendum1.html>
 
 Code point          1st byte    2nd byte    3rd byte    4th byte
 ----------          --------    --------    --------    --------
@@ -91,7 +91,7 @@ ISO/IEC 10646-1:1996 Amendment 1 or ISO/IEC 10646-1:2000 Annex C
 <http://www.ietf.org/rfc/rfc2781.txt>
 
 11) UTF-16 invalid surrogate pairs:
-<http://www.unicode.org/unicode/faq/utf_bom.html#16>
+<https://www.unicode.org/faq/utf_bom.html#16>
 
 UTF-16       UTF-8          UCS-4
 D83F DFF*    F0 9F BF B*    0001FFF*

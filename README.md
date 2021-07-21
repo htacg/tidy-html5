@@ -63,7 +63,7 @@ Tidy supports localization, and welcomes translations into various languages. Pl
 
 ## History
 
-This repository should be considered canonical for HTML Tidy as of 2015-January-15.
+This repository should be considered canonical for HTML Tidy starting from 2015-January-15.
 
  - This repository originally transferred from [w3c.github.com/tidy-html5][20], now redirected to the current site.
  

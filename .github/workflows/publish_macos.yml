@@ -64,7 +64,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: htacg/tidy-mac-installer
-        ref: test_builing
+        ref: master
         path: ${{github.workspace}}/tidy-mac-installer
 
 

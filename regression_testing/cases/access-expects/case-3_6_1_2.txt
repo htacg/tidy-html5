@@ -8,4 +8,4 @@ line 12 column 4 - Access: [3.6.1.2]: list usage invalid <ol>.
 Tidy found 2 warnings and 0 errors!
 
 For further advice on how to make your pages accessible
-see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/.
+see https://www.w3.org/WAI/GL and https://www.html-tidy.org/accessibility/.

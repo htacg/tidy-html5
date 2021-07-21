@@ -5,4 +5,4 @@ line 7 column 1 - Warning: <a> attribute "target" has invalid value "_new"
 Tidy found 1 warning and 0 errors!
 
 For further advice on how to make your pages accessible
-see http://www.w3.org/WAI/GL and http://www.html-tidy.org/accessibility/.
+see https://www.w3.org/WAI/GL and https://www.html-tidy.org/accessibility/.

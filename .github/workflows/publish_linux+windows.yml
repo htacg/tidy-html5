@@ -3,20 +3,25 @@
 #
 #   - Builds release packages on multiple operating systems.
 #
-#   - Some packages may have to be supplmented with manually-built releases
-#     to account for code-signing and/or notorization requirements.
+#   - Some packages may have to be supplemented with manually-built releases
+#     to account for code-signing and/or notarization requirements.
 #
 ################################################################################
 
-name: Build and Publish Packages
+name: Publish Linux+Windows
 
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: true
+        description: "Specify a ref (tag, branch, or sha) to build. If you specify a tag and a release exists, then artifacts will be attached to it."
 
 jobs:
 
-  build_packages:
+  publish_packages:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -37,23 +42,26 @@ jobs:
            stat_command: "stat"
            artifacts: "tidy-%s-Linux-64bit.deb tidy-%s-Linux-64bit.rpm"
 
+
          ############################################################
-         # On macOS, we'll build both architectures.
-         # Package building has all prerequisites install already.
+         # We won't actually build macOS, because CMake is broken.
+         # We have a separate build script for macOS that's better
+         # than CMake's results anyway.
          ############################################################
-         - os: macOS-latest
-           name: X86_64 & Arm64
-           cmake_command: "cmake ../.. -DCMAKE_BUILD_TYPE=Release '-DCMAKE_OSX_ARCHITECTURES=x86_64;arm64'"
-           build_command: "cmake --build . --config Release --target package"
-           sha_command: "shasum -a 256"
-           stat_command: "gstat"
-           artifacts: "tidy-%s-macOS-x86_64+arm64.pkg"
+         #- os: macOS-latest
+         #  name: X86_64 & Arm64
+         #  cmake_command: "cmake ../.. -DCMAKE_BUILD_TYPE=Release '-DCMAKE_OSX_ARCHITECTURES=x86_64;arm64'"
+         #  build_command: "cmake --build . --config Release --target package"
+         #  sha_command: "shasum -a 256"
+         #  stat_command: "gstat"
+         #  artifacts: "tidy-%s-macOS-x86_64+arm64.pkg"
+
 
          ############################################################
          # The standard Windows build is using MSVC 19 as of now.
          # Package building requires nsis and wixtoolset, both of
          # which can be installed via choco, which is already
-         # installed. Note: looks like xictoolset is already
+         # installed. Note: looks like wixtoolset is already
          # installed.
          ############################################################
          - os: windows-latest
@@ -66,6 +74,7 @@ jobs:
                         
 
     steps:
+
 
     ############################################################
     # Install Windows Pre-Requisites
@@ -168,17 +177,27 @@ jobs:
 
 
     ############################################################
-    # Release the artifacts.
+    # Release the artifacts (existing tag specified)
     ############################################################
-    - name: Release
+    - name: Release to Existing Tag
+      if: ${{github.event.inputs.tag}}
       uses: softprops/action-gh-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        #name: "New Draft Release"
-        #tag_name: "v1.2.7"
-        #draft: true
-        #prerelease: true
+        tag_name: "${{github.event.inputs.tag}}"
+        files: "${{github.workspace}}/build/cmake/artifacts/*"
+
+
+    ############################################################
+    # Release the artifacts (done via release)
+    ############################################################
+    - name: Release via Publish Release
+      if: ${{!github.event.inputs.tag}}
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
         files: "${{github.workspace}}/build/cmake/artifacts/*"
 
 

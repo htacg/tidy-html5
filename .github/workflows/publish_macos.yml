@@ -1,0 +1,135 @@
+################################################################################
+# Build a macOS Installer and Disk Image
+#
+# Although CMake generates macOS installers, it's kind of inflexible and sucks
+# a little bit. We can do better, as well as sign and notarize the image as
+# well. What's worse is, they're currently broken and don't work at all.
+################################################################################
+
+name: Publish macOS
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: true
+        description: "Specify a ref (tag, branch, or sha) to build. If you specify a tag and a release exists, then artifacts will be attached to it."
+
+jobs:
+
+  publish_packages:
+    runs-on: macOS-latest
+    env:
+        APPLE_DEVELOPER_ID_INSTALLER: ${{ secrets.APPLE_DEVELOPER_ID_INSTALLER }}
+        APPLE_DEVELOPER_ID_INSTALLER_PW: ${{ secrets.APPLE_DEVELOPER_ID_INSTALLER_PW }}
+        APPLE_DEVELOPER_ID_APPLICATION: ${{ secrets.APPLE_DEVELOPER_ID_APPLICATION }}
+        APPLE_DEVELOPER_ID_APPLICATION_PW: ${{ secrets.APPLE_DEVELOPER_ID_APPLICATION_PW }}
+        MACOS_PRODUCTSIGN_ID: ${{ secrets.APPLE_DEVELOPER_PRODUCTSIGN_ID }}
+        MACOS_CODESIGN_ID: ${{ secrets.APPLE_DEVELOPER_CODESIGN_ID }}
+        APPLE_ID: ${{ secrets.APPLE_ID }}
+        APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+    steps:
+
+
+    ############################################################
+    # Checkout the Tidy repository as tidy-html5.
+    #   If the user chooses a ref that doesn't exist, we
+    #   fail.
+    ############################################################
+    - name: Checkout this repository
+      uses: actions/checkout@v2
+      with:
+        path: ${{github.workspace}}/tidy-html5
+        ref: ${{github.event.inputs.tag}}
+
+
+    ############################################################
+    # Install Required Packages
+    ############################################################
+    - name: Install Requirements
+      shell: bash
+      run: | 
+        brew install ImageMagick
+        brew install libmagic
+        brew install create-dmg
+        brew install coreutils
+
+
+    ############################################################
+    # Checkout the Installer repository as tidy-mac-installer.
+    ############################################################
+    - name: Checkout tidy-mac-installer
+      uses: actions/checkout@v2
+      with:
+        repository: htacg/tidy-mac-installer
+        ref: test_builing
+        path: ${{github.workspace}}/tidy-mac-installer
+
+
+    ############################################################
+    # Configure the environment for code-signing.
+    #   For local environment compatibility, we'll still
+    #   sign in the script; this just gives us the environment
+    #   on the runner.
+    ############################################################
+    - name: Codesign Setup
+      working-directory: ${{github.workspace}}/tidy-mac-installer
+      shell: bash
+      run: |
+        security create-keychain -p password1234 build.keychain 
+        security default-keychain -s build.keychain
+        security unlock-keychain -p password1234 build.keychain
+        echo "${APPLE_DEVELOPER_ID_INSTALLER}" | base64 --decode > "certificate.p12"
+        security import "certificate.p12" -k build.keychain -P ${APPLE_DEVELOPER_ID_INSTALLER_PW} -T /usr/bin/codesign -T /usr/bin/productsign
+        echo "${APPLE_DEVELOPER_ID_APPLICATION}" | base64 --decode > "certificate.p12"
+        security import "certificate.p12" -k build.keychain -P ${APPLE_DEVELOPER_ID_APPLICATION_PW} -T /usr/bin/codesign -T /usr/bin/productsign
+        security set-key-partition-list -S apple-tool:,apple:,codesign:,productsign: -s -k password1234 build.keychain
+
+
+    ############################################################
+    # Run the build script.
+    ############################################################
+    - name: Run the Build Script
+      id: build_script
+      working-directory: ${{github.workspace}}/tidy-mac-installer
+      shell: bash
+      run: | 
+        ./build_installer_image.sh
+
+
+    ############################################################
+    # Release the artifacts (existing tag specified)
+    ############################################################
+    - name: Release to Existing Tag
+      if: ${{github.event.inputs.tag}}
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: "${{github.event.inputs.tag}}"
+        files: "${{github.workspace}}/tidy-mac-installer/build/artifacts/*"
+
+
+    ############################################################
+    # Release the artifacts (done via release)
+    ############################################################
+    - name: Release via Publish Release
+      if: ${{!github.event.inputs.tag}}
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        files: "${{github.workspace}}/tidy-mac-installer/build/artifacts/*"
+
+
+    ############################################################
+    # Post the manifest to the run results.
+    ############################################################
+    - name: Post the Dmg Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "partials_for_website-macos.yml"
+        path: "${{github.workspace}}/tidy-mac-installer/build/binaries-partial.yml"
+

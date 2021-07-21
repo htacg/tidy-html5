@@ -114,8 +114,8 @@ struct _TidyMessageImpl
 
     ctmbstr             messageKey;             /* the message code as a key string */
 
-    ctmbstr             messageFormatDefault;   /* the built-in format string */
-    ctmbstr             messageFormat;          /* the localized format string */
+    tmbstr              messageFormatDefault;   /* the built-in format string */
+    tmbstr              messageFormat;          /* the localized format string */
 
     tmbstr              messageDefault;         /* the message, formatted, default language */
     tmbstr              message;                /* the message, formatted, localized */

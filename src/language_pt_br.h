@@ -66,7 +66,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "que Tidy deve executar. <br/>Nível <var>0 (Tidy Classic)</var> é equivalente "
         "à verificação de acessibilidade do Tidy Classic.<br/> Para obter mais "
         "informações sobre a verificação de acessibilidade do Tidy, visite <a href=\""
-        "http://www.html-tidy.org/accessibility/\"> Página de acessibilidade do "
+        "https://www.html-tidy.org/accessibility/\"> Página de acessibilidade do "
         "Tidy</a>. "
     },
     { TidyAltText,                                   0,        
@@ -718,16 +718,16 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "transformação de caracteres Unicode. ISO/IEC 10646 não\n"
         "permite mapeamento de substitutos não pareados, nem\n"
         "U+FFFE e U+FFFF (mas permite outros não caracteres).\n"
-        "Para mais informações, veja http://www.unicode.org/ e\n"
-        "http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+        "Para mais informações, veja https://home.unicode.org/ e\n"
+        "https://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
     },
     { TEXT_INVALID_UTF16,                            0,        
         "Os códigos de caracteres para UTF-16 devem estar dentro\n"
         "do intervalo: U+0000 a U+10FFFF. A definição de UTF-16\n"
         "no Anexo C da ISO/IEC 10646-1:2000 não permite o mapeamento\n"
         "de substitutos não pareados. Para mais informações,\n"
-        "por favor veja http://www.unicode.org/ e\n"
-        "http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+        "por favor veja https://home.unicode.org/ e\n"
+        "https://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
     },
     { TEXT_INVALID_URI,                              0,        
         "URIs devem ser devidamente escapadas, elas não devem\n"
@@ -739,7 +739,7 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "tais URIs e alguns scripts de servidor dependem disso.\n"
         "Se você quiser depender disso, você deve escapar a URI\n"
         "por conta própria. Para mais informações, consulte\n"
-        "http://www.w3.org/International/O-URL-and-ident.html\n"
+        "https://www.w3.org/International/O-URL-and-ident.html\n"
     },
     { TEXT_BAD_FORM,                                 0,        
         "Talvez seja necessário mover uma ou ambas as tags <form>\n"
@@ -795,12 +795,12 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
     },
     { TEXT_ACCESS_ADVICE1,                           0,        
         "Para mais conselhos sobre como tornar suas páginas\n"
-        "acessíveis, veja http://www.w3.org/WAI/GL."
+        "acessíveis, veja https://www.w3.org/WAI/GL."
     },
     { TEXT_ACCESS_ADVICE2,                           0,        
         "Para mais conselhos sobre como tornar suas páginas\n"
-        "acessíveis, veja http://www.w3.org/WAI/GL e\n"
-        "http://www.html-tidy.org/accessibility/."
+        "acessíveis, veja https://www.w3.org/WAI/GL e\n"
+        "https://www.html-tidy.org/accessibility/."
     },
     { TEXT_USING_LAYER,                              0,        
         "O mecanismo de posicionamento do Cascading Style\n"
@@ -841,9 +841,9 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "Relatórios de erro e comentários: https://github.com/htacg/tidy-html5/"
         "issues\n"
         "Lista de discussão: https://lists.w3.org/Archives/Public/public-htacg/\n"
-        "Especificação HTML mais recente: http://dev.w3.org/html5/spec-author-view/\n"
-        "Valide seus documentos HTML: http://validator.w3.org/nu/\n"
-        "Incentive sua empresa a se juntar à W3C: http://www.w3.org/Consortium\n"
+        "Especificação HTML mais recente: https://html.spec.whatwg.org/multipage/\n"
+        "Valide seus documentos HTML: https://validator.w3.org/nu/\n"
+        "Incentive sua empresa a se juntar à W3C: https://www.w3.org/Consortium\n"
     },
     { TEXT_GENERAL_INFO_PLEA,                        0,        
         "Você fala um idioma diferente do português brasileiro, ou uma variante \n"
@@ -1207,21 +1207,18 @@ static languageDefinition language_pt_br = { whichPluralForm_pt_br, {
         "Informação\n"
         "===========\n"
         "Para mais informações sobre HTML Tidy, veja\n"
-        "  http://www.html-tidy.org/\n"
+        "  https://www.html-tidy.org/\n"
         "\n"
         "Para mais informações sobre HTML, veja o seguinte:\n"
         "\n"
-        "  HTML: Edition for Web Authors (the latest HTML specification)\n"
-        "  http://dev.w3.org/html5/spec-author-view\n"
-        "\n"
-        "  HTML: The Markup Language (an HTML language reference)\n"
-        "  http://dev.w3.org/html5/markup/\n"
+        "  HTML Living Standard (the latest HTML specification)\n"
+        "  https://html.spec.whatwg.org/multipage/\n"
         "\n"
         "Preencha relatórios de erros em https://github.com/htacg/tidy-html5/issues/\n"
         "ou envie perguntas e comentários para public-htacg@w3.org.\n"
         "\n"
         "Valide seus documentos HTML usando Nu, o validador de marcação da W3C:\n"
-        "  http://validator.w3.org/nu/\n"
+        "  https://validator.w3.org/nu/\n"
         "\n"
     },
     { TC_TXT_HELP_CONFIG,                            0,        

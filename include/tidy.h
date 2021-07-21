@@ -326,7 +326,7 @@ TIDY_EXPORT Bool TIDY_CALL tidySetPanicCall( TidyPanic fpanic );
  **
  ** For an excellent example of how to invoke LibTidy, please consult
  ** `console/tidy.c:main()` for in-depth implementation details. A simplified
- ** example can be seen on our site: http://www.html-tidy.org/developer/
+ ** example can be seen on our site: https://www.html-tidy.org/developer/
  **
  ** @{
  ******************************************************************************/

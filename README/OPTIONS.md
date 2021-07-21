@@ -2,7 +2,7 @@
 
 Tidy supports a quite large number of configuration options. The full list can be output using `-help-config`. This will show the option to be used either on the command line or in a configuration file, the type of option, and the value(s) that can be used. The current default value for each option can be seen using `-show-config`.
 
-The options can also be listed in xml format. `-xml-help` will output each option plus a description. `-xml-config` will not only output the option and a description, but will include the type, default and examples. These xml outputs are used, with the aid of `xsltproc` and `doxygen`, to generate the [API Documentation](http://api.html-tidy.org/).
+The options can also be listed in xml format. `-xml-help` will output each option plus a description. `-xml-config` will not only output the option and a description, but will include the type, default and examples. These xml outputs are used, with the aid of `xsltproc` and `doxygen`, to generate the [API Documentation](https://api.html-tidy.org/).
 
 These options can also be used by application linking with `libtidy`. For each option there is a `TidyOptionId` enumeration in the `tidyenum.h` file, and get/set functions for each option type.
 

@@ -90,7 +90,7 @@ static languageDefinition language_de = { whichPluralForm_de, {
         "Niveau <var>0 (Tiidy Classic)</var> entsprichte dem Niveau der Prüfugen von Tidy Classic."
         "<br/>"
         "Auf dieser Seite finden Sie weitere Informationen zur Prüfung der Barrierefreiheit mit Tidy: "
-        "<a href=\"http://www.html-tidy.org/accessibility/\">Barrierefreiheit mit Tidy</a>. "
+        "<a href=\"https://www.html-tidy.org/accessibility/\">Barrierefreiheit mit Tidy</a>. "
     },
     {/* Important notes for translators:
         - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
@@ -1844,7 +1844,7 @@ static languageDefinition language_de = { whichPluralForm_de, {
         "erlaubt kein Mapping nicht paarweise zugeordneter Ersatzzeichen,\n"
         "auch nicht U+FFFE oder U+FFFF (es erlaubt aber andere\n" 
         "nichtdruckbare Zeichen). Mehr Informationen, erhalten Sie auf\n"
-        "http://www.unicode.org/ und http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+        "https://home.unicode.org/ und https://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_INVALID_UTF16,           0,
@@ -1852,7 +1852,7 @@ static languageDefinition language_de = { whichPluralForm_de, {
         "Die UTF-16 Definition im Anhang C zu ISO/IEC 10646-1:2000 erlaubt\n"
         "kein Mapping nicht paarweise zugeordneter Ersatzzeichen. Weitere\n"
         "Informationen finden Sie auf\n"
-        "http://www.unicode.org/ und http://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+        "https://home.unicode.org/ und https://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
     },
     {/* This console output should be limited to 78 characters per line.
         - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated. */
@@ -1867,7 +1867,7 @@ static languageDefinition language_de = { whichPluralForm_de, {
         "server-seitiger Skripte ist davon abhängig. Wenn Sie damit nicht\n"
         "einverstanden sind, müssen Sie die Escape-Sequenzuen selbst\n"
         "schreiben. Dazu gibt es mehr Informationen auf\n"
-        "http://www.w3.org/International/O-URL-and-ident.html\n"
+        "https://www.w3.org/International/O-URL-and-ident.html\n"
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_BAD_FORM,                0,
@@ -1935,13 +1935,13 @@ static languageDefinition language_de = { whichPluralForm_de, {
         - The URL should not be translated unless you find a matching URL in your language. */
       TEXT_ACCESS_ADVICE1,          0,
         "Weitere Ratschläge zur Barrierefreiheit finden Sie auf\n"
-        "http://www.w3.org/WAI/GL."
+        "https://www.w3.org/WAI/GL."
     },
     {/* This console output should be limited to 78 characters per line.
         - The URL should not be translated unless you find a matching URL in your language. */
       TEXT_ACCESS_ADVICE2,          0,
         "Weitere Ratschläge zur Barrierefreiheit finden Sie auf\n"
-        "http://www.w3.org/WAI/GL und http://www.html-tidy.org/accessibility/."
+        "https://www.w3.org/WAI/GL und https://www.html-tidy.org/accessibility/."
     },
     {/* This console output should be limited to 78 characters per line. */
       TEXT_USING_LAYER,             0,
@@ -2003,11 +2003,11 @@ static languageDefinition language_de = { whichPluralForm_de, {
         "Offizielle Mailing-Liste:\n"
         "\thttps://lists.w3.org/Archives/Public/public-htacg/\n"
         "Neueste HTML Spezifikation:\n" 
-        "\thttp://dev.w3.org/html5/spec-author-view/\n"
+        "\thttps://dev.w3.org/html5/spec-author-view/\n"
         "Validieren Sie Ihre HTML-Dokumente:\n"
-        "\tttp://validator.w3.org/nu/\n"
+        "\thttps://validator.w3.org/nu/\n"
         "Setzen Sie sich für den Eintritt Ihrer Firma ins W3C ein:\n"
-        "\thttp://www.w3.org/Consortium\n"
+        "\thttps://www.w3.org/Consortium\n"
     },
     {/* This console output should be limited to 78 characters per line. 
       - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
@@ -2443,21 +2443,18 @@ static languageDefinition language_de = { whichPluralForm_de, {
         "Information\n"
         "===========\n"
         " Für weitere Informationen über HTML Tidy, besuchen Sie\n"
-        "  http://www.html-tidy.org/\n"
+        "  https://www.html-tidy.org/\n"
         "\n"
         " Mehr zu HTML finden Sie auf den folgenden Seiten (in englischer Sprache):\n"
         "\n"
-        "   HTML: Ausgabe für Web-Autoren (die neueste HTML Spezifikation)\n"
-        "   http://dev.w3.org/html5/spec-author-view\n"
-        "\n"
-        "   HTML: Die Auszeichnungssprache (ein HTML Handbuch)\n"
-        "   http://dev.w3.org/html5/markup/\n"
+        "   HTML Living Standard (die neueste HTML Spezifikation)\n"
+        "   https://html.spec.whatwg.org/multipage/\n"
         "\n"
         " Senden Sie Fehlerberichte an https://github.com/htacg/tidy-html5/issues/\n"
         " oder senden Sie Fragen und Kommentare an public-htacg@w3.org.\n"
         "\n"
         " Überprüfen Sie Ihre HTML Dokumente mit dem W3C Nu Validierer:\n"
-        "   http://validator.w3.org/nu/\n"
+        "   https://validator.w3.org/nu/\n"
         "\n"
     },
 

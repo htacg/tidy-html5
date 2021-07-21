@@ -2,9 +2,9 @@
 
 ## Prerequisites
 
-  1. git - [http://git-scm.com/book/en/v2/Getting-Started-Installing-Git][1]
+  1. git - [https://git-scm.com/book/en/v2/Getting-Started-Installing-Git][1]
   
-  2. cmake - [http://www.cmake.org/download/][2]
+  2. cmake - [https://cmake.org/download/][2]
   
   3. appropriate build tools for the platform
   
@@ -86,9 +86,6 @@ make test
 make install
 ~~~
 
-  [1]: http://git-scm.com/book/en/v2/Getting-Started-Installing-Git
-  [2]: http://www.cmake.org/download/
+  [1]: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+  [2]: https://cmake.org/download/
   [3]: http://xmlsoft.org/XSLT/xsltproc2.html
-
-  
-; eof

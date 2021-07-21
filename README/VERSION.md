@@ -4,7 +4,7 @@ This document provides an explanation of how to interpret HTML Tidy’s version 
 
 ## Background
 
-**HTML Tidy** uses a modified version of [Semantic Versioning](http://semver.org/), and so it’s important to understand what the version number of **HTML Tidy** means to you, and how it might impact your workflow.
+**HTML Tidy** uses a modified version of [Semantic Versioning](https://semver.org/), and so it’s important to understand what the version number of **HTML Tidy** means to you, and how it might impact your workflow.
 
 When you execute `tidy -v` on the command line, you might see responses such as:
 

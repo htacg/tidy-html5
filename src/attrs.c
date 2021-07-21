@@ -1327,7 +1327,7 @@ static void AppendToStyleAttr( TidyDocImpl* doc, AttVal *styleattr, ctmbstr styl
     /*
     this doesn't handle CSS comments and
     leading/trailing white-space very well
-    see http://www.w3.org/TR/css-style-attr
+    see https://www.w3.org/TR/css-style-attr/
     */
     uint end = TY_(tmbstrlen)(styleattr->value);
 
@@ -2473,7 +2473,7 @@ void TY_(SortAttributes)(TidyDocImpl* doc, Node* node, TidyAttrSortStrategy stra
 * Portions copyright Simon Tatham 2001.
 *
 * Merge sort algorithm adapted from listsort.c linked from 
-* http://www.chiark.greenend.org.uk/~sgtatham/algorithms/listsort.html
+* https://www.chiark.greenend.org.uk/~sgtatham/algorithms/listsort.html
 * 
 * Original copyright notice proceeds below.
 * 

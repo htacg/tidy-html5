@@ -2,7 +2,7 @@
 # Build and Test tidy on the latest versions of all of the major platforms. 
 #
 #   - Build on multiple operating systems, and where possible, multiple
-#     architectures. On Windows, we will also build and test MingGW in
+#     architectures. On Windows, we will also build and test mingw in
 #     addition to MSVC.
 #
 #   - Report the version number for each binary that is built.

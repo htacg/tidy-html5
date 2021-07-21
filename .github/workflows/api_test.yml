@@ -47,7 +47,7 @@ jobs:
          ############################################################
          # On macOS, we'll build both architectures.
          # Note: this is the currently only enabled runner, and I'm
-         #   comfortable with it. This excercises nearly all of
+         #   comfortable with it. This exercises nearly all of
          #   HTML Tidy's library API, which should be platform
          #   agnostic.
          ############################################################

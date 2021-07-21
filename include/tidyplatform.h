@@ -579,7 +579,7 @@ extern "C" {
  * Visibility support
  *   With GCC 4,  __attribute__ ((visibility("default"))) can be used
  *   along compiling with tidylib with "-fvisibility=hidden". See
- *   http://gcc.gnu.org/wiki/Visibility and build/gmake/Makefile.
+ *   https://gcc.gnu.org/wiki/Visibility and build/gmake/Makefile.
  *===========================================================================*/
 /*
 #if defined(__GNUC__) && __GNUC__ >= 4

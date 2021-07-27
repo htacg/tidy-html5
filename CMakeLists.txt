@@ -416,11 +416,6 @@ install(TARGETS ${name}
         LIBRARY DESTINATION ${LIB_INSTALL_DIR}
         )
 install( FILES ${HFILES} DESTINATION ${INCLUDE_INSTALL_DIR} )
-if(MSVC)
-    # install(FILES $<TARGET_PDB_FILE:${name}> DESTINATION lib OPTIONAL)
-    INSTALL(FILES ${PROJECT_BINARY_DIR}/${name}.dir/Debug/${name}.pdb
-    DESTINATION lib CONFIGURATIONS Debug )
-endif()
 
 #------------------------------------------------------------------------
 # Dynamic Library
@@ -445,6 +440,9 @@ if (BUILD_SHARED_LIB)
         ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
         LIBRARY DESTINATION ${LIB_INSTALL_DIR}
         )
+    if(MSVC)
+        install(FILES $<TARGET_PDB_FILE:tidy-share> DESTINATION ${LIB_INSTALL_DIR} OPTIONAL)
+    endif()
     if (TIDY_CONSOLE_SHARED) # user wants shared/dll linkage
         list ( APPEND add_LIBS ${name} )
     endif ()    

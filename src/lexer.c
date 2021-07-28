@@ -877,15 +877,6 @@ static tmbchar LastChar( tmbstr str )
     return 0;
 }
 
-/*
-   node->type is one of these:
-
-    #define TextNode    1
-    #define StartTag    2
-    #define EndTag      3
-    #define StartEndTag 4
-*/
-
 Lexer* TY_(NewLexer)( TidyDocImpl* doc )
 {
     Lexer* lexer = (Lexer*) TidyDocAlloc( doc, sizeof(Lexer) );
@@ -1545,13 +1536,7 @@ void TY_(FreeNode)( TidyDocImpl* doc, Node *node )
         }
     }
 #endif
-    /* this is no good ;=((
-    if (node && doc && doc->lexer) {
-        if (node == doc->lexer->token) {
-            doc->lexer->token = NULL; // TY_(NewNode)( doc->lexer->allocator, doc->lexer );
-        }
-    }
-      ----------------- */
+
     while ( node )
     {
         Node* next = node->next;
@@ -4462,11 +4447,102 @@ static Node *ParseDocTypeDecl(TidyDocImpl* doc)
     return NULL;
 }
 
-/*
- * local variables:
- * mode: c
- * indent-tabs-mode: nil
- * c-basic-offset: 4
- * eval: (c-set-offset 'substatement-open 0)
- * end:
+
+/****************************************************************************//*
+ ** MARK: - Node Stack
+ ***************************************************************************/
+
+
+/**
+ * Create a new stack with a given starting capacity. If memory allocation
+ * fails, then the allocator will panic the program automatically.
  */
+Stack* TY_(newStack)(TidyDocImpl *doc, uint capacity)
+{
+    Stack *stack = (Stack *)TidyAlloc(doc->allocator, sizeof(Stack));
+    stack->top = -1;
+    stack->capacity = capacity;
+    stack->firstNode = (Node **)TidyAlloc(doc->allocator, stack->capacity * sizeof(Node**));
+    stack->allocator = doc->allocator;
+    return stack;
+}
+ 
+
+/**
+ *  Increase the stack size. This will be called automatically when the
+ *  current stack is full. If memory allocation fails, then the allocator
+ *  will panic the program automatically.
+ */
+void TY_(growStack)(Stack *stack)
+{
+    uint new_capacity = stack->capacity * 2;
+    
+    Node **firstNode = (Node **)TidyAlloc(stack->allocator, new_capacity);
+    
+    memcpy( firstNode, stack->firstNode, sizeof(Node**) * (stack->top + 1) );
+    TidyFree(stack->allocator, stack->firstNode);
+
+    stack->firstNode = firstNode;
+    stack->capacity = new_capacity;
+}
+
+
+/**
+ * Stack is full when top is equal to the last index.
+ */
+Bool TY_(stackFull)(Stack *stack)
+{
+    return stack->top == stack->capacity - 1;
+}
+
+
+/**
+ * Stack is empty when top is equal to -1
+ */
+Bool TY_(stackEmpty)(Stack *stack)
+{
+    return stack->top == -1;
+}
+ 
+
+/**
+ * Push an item to the stack.
+ */
+void TY_(push)(Stack *stack, Node *node)
+{
+    if (TY_(stackFull)(stack))
+        TY_(growStack)(stack);
+    
+    if (node)
+        stack->firstNode[++stack->top] = node;
+}
+
+
+/**
+ * Pop an item from the stack.
+ */
+Node* TY_(pop)(Stack *stack)
+{
+    return TY_(stackEmpty)(stack) ? NULL : stack->firstNode[stack->top--];
+}
+
+
+/**
+ * Peek at the stack.
+ */
+FUNC_UNUSED Node* TY_(peek)(Stack *stack)
+{
+    return TY_(stackEmpty)(stack) ? NULL : stack->firstNode[stack->top--];
+}
+
+/**
+ *  Frees the stack when done.
+ */
+void TY_(freeStack)(Stack *stack)
+{
+    TidyFree( stack->allocator, stack->firstNode );
+    stack->top = -1;
+    stack->capacity = 0;
+    stack->firstNode = NULL;
+    stack->allocator = NULL;
+}

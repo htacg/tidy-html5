@@ -16,6 +16,7 @@
 #include "pprint.h"
 #include "access.h"
 #include "message.h"
+#include "parser.h"
 
 #ifndef MAX
 #define MAX(a,b) (((a) > (b))?(a):(b))
@@ -41,19 +42,20 @@ struct _TidyDocImpl
     Lexer*              lexer;
 
     /* Config + Markup Declarations */
-    TidyConfigImpl          config;
-    TidyTagImpl             tags;
-    TidyAttribImpl          attribs;
-    TidyAccessImpl          access;
-    TidyMutedMessages       muted;
+    TidyConfigImpl           config;
+    TidyTagImpl              tags;
+    TidyAttribImpl           attribs;
+    TidyAccessImpl           access;
+    TidyMutedMessages        muted;
 
     /* The Pretty Print buffer */
-    TidyPrintImpl       pprint;
+    TidyPrintImpl            pprint;
 
     /* I/O */
     StreamIn*                docIn;
     StreamOut*               docOut;
     StreamOut*               errout;
+
     TidyReportFilter         reportFilter;
     TidyReportCallback       reportCallback;
     TidyMessageCallback      messageCallback;
@@ -61,6 +63,8 @@ struct _TidyDocImpl
     TidyConfigCallback       pConfigCallback;
     TidyConfigChangeCallback pConfigChangeCallback;
     TidyPPProgress           progressCallback;
+
+    TidyParserStack          stack;
 
     /* Parse + Repair Results */
     uint                optionErrors;

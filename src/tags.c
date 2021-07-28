@@ -168,7 +168,7 @@ static CheckAttribs CheckHTML;
 \*/
 static Dict tag_defs[] =
 {
-  { TidyTag_UNKNOWN,    "unknown!",   VERS_UNKNOWN,         NULL,                       (0),                                           NULL,          NULL           },
+  { TidyTag_UNKNOWN,    "unknown!",   VERS_UNKNOWN,         NULL,                            (0),                                           NULL,               NULL           },
 
   /* W3C defined elements */
   { TidyTag_A,          "a",          VERS_ELEM_A,          &TY_(W3CAttrsFor_A)[0],          (CM_INLINE|CM_BLOCK|CM_MIXED),                 TY_(ParseBlock),    NULL           }, /* Issue #167 & #169 - default HTML5 */
@@ -332,7 +332,7 @@ static Dict tag_defs[] =
   { TidyTag_WBR,         "wbr",          VERS_ELEM_WBR,         &TY_(W3CAttrsFor_WBR)[0],         (CM_INLINE|CM_EMPTY),          TY_(ParseEmpty),     NULL           },
 
   /* this must be the final entry */
-  { (TidyTagId)0,        NULL,         0,                    NULL,                       (0),                                           NULL,          NULL           }
+  { (TidyTagId)0,        NULL,           0,                     NULL,                             (0),                           NULL,                NULL           }
 };
 
 static uint tagsHash(ctmbstr s)

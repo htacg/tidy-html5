@@ -1585,11 +1585,16 @@ void TY_(List2BQ)( TidyDocImpl* doc, Node* node )
 */
 void TY_(BQ2Div)( TidyDocImpl* doc, Node *node )
 {
+    Stack *stack = TY_(newStack)(doc, 16);
+    Node *next;
+    
     tmbchar indent_buf[ 32 ];
     uint indent;
 
     while (node)
     {
+        next = node->next;
+        
         if ( nodeIsBLOCKQUOTE(node) && node->implicit )
         {
             indent = 1;
@@ -1602,19 +1607,27 @@ void TY_(BQ2Div)( TidyDocImpl* doc, Node *node )
                 StripOnlyChild( doc, node );
             }
 
-            if (node->content)
-                TY_(BQ2Div)( doc, node->content );
-
             TY_(tmbsnprintf)(indent_buf, sizeof(indent_buf), "margin-left: %dem",
                              2*indent);
 
             RenameElem( doc, node, TidyTag_DIV );
             TY_(AddStyleProperty)(doc, node, indent_buf );
+
+            if (node->content)
+            {
+                TY_(push)(stack, next);
+                node = node->content;
+                continue;
+            }
         }
         else if (node->content)
-            TY_(BQ2Div)( doc, node->content );
+        {
+            TY_(push)(stack, next);
+            node = node->content;
+            continue;
+        }
 
-        node = node->next;
+        node = next ? next : TY_(pop)(stack);
     }
 }
 
@@ -2736,30 +2749,42 @@ void TY_(FixAnchors)(TidyDocImpl* doc, Node *node, Bool wantName, Bool wantId)
  */
 static void StyleToHead(TidyDocImpl* doc, Node *head, Node *node, Bool fix, int indent)
 {
-	Node *next;
-	while (node)
-	{
-		next = node->next;	/* get 'next' now , in case the node is moved */
-		/* dbg_show_node(doc, node, 0, indent); */
-		if (nodeIsSTYLE(node))
-		{
-			if (fix)
-			{
-				TY_(RemoveNode)(node); /* unhook style node from body */
-				TY_(InsertNodeAtEnd)(head, node);   /* add to end of head */
-				TY_(Report)(doc, node, head, MOVED_STYLE_TO_HEAD); /* report move */
-			}
-			else
-			{
-				TY_(Report)(doc, node, head, FOUND_STYLE_IN_BODY);
-			}
-		}
-		else if (node->content)
-		{
-			StyleToHead(doc, head, node->content, fix, indent + 1);
-		}
-		node = next;	/* process the 'next', if any */
-	}
+    Stack *stack = TY_(newStack)(doc, 16);
+    Node *next;
+    
+    while (node)
+    {
+        next = node->next;
+        
+        if (nodeIsSTYLE(node))
+        {
+            if (fix)
+            {
+                TY_(RemoveNode)(node); /* unhook style node from body */
+                TY_(InsertNodeAtEnd)(head, node);   /* add to end of head */
+                TY_(Report)(doc, node, head, MOVED_STYLE_TO_HEAD); /* report move */
+            }
+            else
+            {
+                TY_(Report)(doc, node, head, FOUND_STYLE_IN_BODY);
+            }
+        }
+        else if (node->content)
+        {
+            TY_(push)(stack, next);
+            node = node->content;
+            indent++;
+            continue;
+        }
+        
+        if (next)
+            node = next;
+        else
+        {
+            node = TY_(pop)(stack);
+            indent--;
+        }
+    }
 }
 
 

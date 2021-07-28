@@ -19,11 +19,13 @@ on:
       - 'src/**'
       - 'include/**'
       - '.github/workflows/**'
+      - 'CMakeLists.txt'
   pull_request:
     paths:
       - 'src/**'
       - 'include/**'
       - '.github/workflows/**'
+      - 'CMakeLists.txt'
 
 jobs:
 

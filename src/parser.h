@@ -42,6 +42,74 @@
 
 
 /**
+ *  The parsers keeps track of their states with the states defined here, and
+ *  use these symbols when pushing to the stack so that they can later recreate
+ *  their environments when re-entered.
+ */
+typedef enum {
+    /* Universal states. */
+    STATE_INITIAL,             /**< This is the initial state for every parser. */
+    STATE_COMPLETE,            /**< Complete! */
+    STATE_PARSE_TAG,
+    STATE_PARSE_TAG_DONE,
+    /* ParseHTML states. */
+    STATE_PRE_HEAD,            /**< In this state, we've not detected head yet. */
+    STATE_PRE_BODY,            /**< In this state, we'll consider frames vs. body. */
+    STATE_PARSE_BODY,          /**< In this state, we can parse the body. */
+    STATE_PARSE_HEAD,          /**< In this state, we will setup head for parsing. */
+    STATE_PARSE_HEAD_DONE,     /**< Resume here after parsing head. */
+    STATE_PARSE_NOFRAMES,      /**< In this state, we can parse noframes content. */
+    STATE_PARSE_NOFRAMES_DONE, /**< In this state, we can restore more state. */
+    STATE_PARSE_FRAMESET,      /**< In this state, we will parse frameset content. */
+    STATE_PARSE_FRAMESET_DONE, /**< We need to cleanup some things after parsing frameset. */
+} parserState;
+
+
+/**
+ *  This typedef represents the state of a parser when it enters and exits.
+ *  When the parser needs to finish work on the way back up the stack, it will
+ *  push one of these records to the stack, and it will pop a record from the
+ *  stack upon re-entry.
+ */
+typedef struct _TidyParserMemory
+{
+    Parser       *identity;      /**< Which parser pushed this record? */
+    Node         *original_node; /**< Originally provided node at entry. */
+    Node         *reentry_node;  /**< A node a parser might want to save. */
+    GetTokenMode reentry_mode;   /**< The mode to use for the next node. */
+    parserState  reentry_state;  /**< State to set during re-entry. */
+    GetTokenMode mode;           /**< The caller will peek at this value to get the correct mode. */
+} TidyParserMemory;
+
+
+/**
+ *  This typedef represents a stack of parserState. The Tidy document has its
+ *  own instance of this.
+ */
+typedef struct _TidyParserStack
+{
+    TidyParserMemory* content;    /**< A state record. */
+    TidyAllocator* allocator;     /**< The allocator used for creating. */
+    uint size;                    /**< Current size of the stack. */
+    int top;                      /**< Top of the stack. */
+} TidyParserStack;
+
+
+/**
+ *  Allocates and initializes the parser's stack. TidyCreate will perform
+ *  this automatically.
+ */
+void TY_(InitParserStack)( TidyDocImpl* doc );
+
+
+/**
+ *  Frees the parser's stack when done. TidyRelease will perform this
+ *  automatically.
+ */
+void TY_(FreeParserStack)( TidyDocImpl* doc );
+
+
+/**
  *  Is used to perform a node integrity check recursively after parsing
  *  an HTML or XML document.
  *  @note Actual performance of this check can be disabled by defining the
@@ -96,7 +164,7 @@ TY_PRIVATE Node *TY_(RemoveNode)(Node *node);
 
 /**
  *  Remove node from markup tree and discard it.
- *  @param doc The Tidy document from which to discarb the node.
+ *  @param doc The Tidy document from which to discard the node.
  *  @param element The node to discard.
  *  @returns Returns the next node.
  */
@@ -202,4 +270,3 @@ TY_PRIVATE void TY_(ParseXMLDocument)( TidyDocImpl* doc );
 /** @} end internal_api group */
 
 #endif /* __PARSER_H__ */
-

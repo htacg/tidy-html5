@@ -112,6 +112,7 @@ TidyDocImpl* tidyDocCreate( TidyAllocator *allocator )
     TY_(InitAttrs)( doc );
     TY_(InitConfig)( doc );
     TY_(InitPrintBuf)( doc );
+    TY_(InitParserStack)( doc );
 
     /* Set the locale for tidy's output. This both configures
     ** LibTidy to use the environment's locale as well as the
@@ -172,6 +173,7 @@ void          tidyDocRelease( TidyDocImpl* doc )
          *  to determine which hash is to be used, so free it last.
         \*/
         TY_(FreeLexer)( doc );
+        TY_(FreeParserStack)( doc );
         TidyDocFree( doc, doc );
     }
 }

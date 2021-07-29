@@ -61,8 +61,13 @@ typedef enum
 
 
 /** This typedef describes a function to be used to parse HTML of a Tidy tag.
+ ** @param doc The Tidy document.
+ ** @param node The node being parsed.
+ ** @param mode The GetTokenMode to be used for parsing the node contents.
+ ** @param popStack A flag indicating that we are re-entering this parser, and
+ **   it should restore a state from the stack.
  */
-typedef void (Parser)( TidyDocImpl* doc, Node *node, GetTokenMode mode );
+typedef Node* (Parser)( TidyDocImpl* doc, Node *node, GetTokenMode mode, Bool popStack );
 
 
 /** This typedef describes a function be be used to check the attributes

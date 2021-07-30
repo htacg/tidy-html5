@@ -247,6 +247,36 @@ int TY_(tmbsnprintf)(tmbstr buffer, size_t count, ctmbstr format, ...)
     return retval;
 }
 
+void TY_(strrep)(tmbstr buffer, ctmbstr str, ctmbstr rep)
+{
+    char *p = strstr(buffer, str);
+    do
+    {
+        if(p)
+        {
+            char buf[1024];
+            memset(buf,'\0',strlen(buf));
+
+            if(buffer == p)
+            {
+                strcpy(buf,rep);
+                strcat(buf,p+strlen(str));
+            }
+            else
+            {
+                strncpy(buf,buffer,strlen(buffer) - strlen(p));
+                strcat(buf,rep);
+                strcat(buf,p+strlen(str));
+            }
+
+            memset(buffer,'\0',strlen(buffer));
+            strcpy(buffer,buf);
+        }
+
+    } while(p && (p = strstr(buffer, str)));
+}
+
+
 /*
  * local variables:
  * mode: c

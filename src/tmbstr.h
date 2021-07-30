@@ -79,6 +79,9 @@ __attribute__((format(printf, 3, 4)))
 #endif
 ;
 
+TY_PRIVATE void TY_(strrep)(tmbstr buffer, ctmbstr str, ctmbstr rep);
+
+
 #ifdef __cplusplus
 }  /* extern "C" */
 #endif

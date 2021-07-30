@@ -1,4 +1,4 @@
-#ifndef language_fr_h
+﻿#ifndef language_fr_h
 #define language_fr_h
 /*
  * language_fr.h
@@ -21,14 +21,14 @@
  *     `poconvert.rb msgunfmt language_fr.h` (our own
  *     conversion tool) to generate a fresh PO from this file first!
  *
- * (c) 2015-2017 HTACG
+ * (c) 2015-2021 HTACG
  * See tidy.h and access.h for the copyright notice.
  *
  * Template Created by Jim Derry on 01/14/2016.
  *
  * Originating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-10-05 15:13:40
+ *   PO_REVISION_DATE=2021-07-30 10:35:03
  */
 
 #ifdef _MSC_VER
@@ -1171,4 +1171,3 @@ static languageDefinition language_fr = { whichPluralForm_fr, {
 
 
 #endif /* language_fr_h */
-

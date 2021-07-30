@@ -1,4 +1,4 @@
-#ifndef language_zh_cn_h
+﻿#ifndef language_zh_cn_h
 #define language_zh_cn_h
 /*
  * language_zh_cn.h
@@ -21,14 +21,14 @@
  *     `poconvert.rb msgunfmt language_zh_cn.h` (our own
  *     conversion tool) to generate a fresh PO from this file first!
  *
- * (c) 2015-2017 HTACG
+ * (c) 2015-2021 HTACG
  * See tidy.h and access.h for the copyright notice.
  *
  * Template Created by Jim Derry on 01/14/2016.
  *
  * Originating PO file metadata:
  *   PO_LAST_TRANSLATOR=jderry
- *   PO_REVISION_DATE=2017-10-03 12:44:37
+ *   PO_REVISION_DATE=2021-07-30 10:35:03
  */
 
 #ifdef _MSC_VER
@@ -78,4 +78,3 @@ static languageDefinition language_zh_cn = { whichPluralForm_zh_cn, {
 
 
 #endif /* language_zh_cn_h */
-

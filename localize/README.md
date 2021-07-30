@@ -116,13 +116,13 @@ accomplished with our `poconvert.rb` tool.
 If you've not already cloned the HTML Tidy source code repository that will be
 your first step.
 
-In the `localize\translations\` directory you can find existing languages, e.g.,
+In the `localize/translations/` directory you can find existing languages, e.g.,
 
   - `tidy.pot` (Tidy's POT template for translations).
   - `language_en_gb.po` (British English variants for the built in language)
   - …and perhaps more.
   
-In the `src\` directory you can find the master files for existing languages,
+In the `src/` directory you can find the master files for existing languages,
 e.g.,
 
  - `language_en.h` (Tidy's native, built-in language, mostly U.S. English)
@@ -215,9 +215,9 @@ translation, or to save one of the developer team a few extra steps.
     - The tool should generate a file named `language_ll_cc.h` in the working
       directory, where `ll_cc` will be replaced with the language/region of your
       translation.
-    - Copy this `.h` file into `src\`.
+    - Copy this `.h` file into `src/`.
   - Modify Tidy's source:
-    - Edit the file `src\language.c` to ensure that the new `.h` file you added
+    - Edit the file `src/language.c` to ensure that the new `.h` file you added
       is in the `#include` section.
     - Look for the `static tidyLanguagesType tidyLanguages` structure starting
       near line 40, and look for the comment `These languages are installed.`.

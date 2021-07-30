@@ -1190,8 +1190,6 @@ static void PPrintAttribute( TidyDocImpl* doc, uint indent,
             indent += xtra;
             PCondFlushLineSmart( doc, indent );
         }
-        else
-          indAttrs = no;
     }
 
     CheckWrapIndent( doc, indent );

@@ -203,7 +203,6 @@ static TidyMessageImpl *tidyMessageCreateInitV( TidyDocImpl *doc,
         i = TY_(tmbstrlen)(result->messageOutput);
         if (i < sizeMessageBuf)
             TY_(tmbsnprintf)(result->messageOutput + i, sizeMessageBuf - i, " (%s)", pc );
-        i = 0;
     }
 
     result->allowMessage = yes;

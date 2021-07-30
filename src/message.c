@@ -792,7 +792,7 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
 
         case TAG_NOT_ALLOWED_IN:
             /* Can we use `rpt` here? No; `element` has a value in every case. */
-            return TY_(tidyMessageCreateWithNode)(doc, node, code, level, nodedesc, element->element );
+            return TY_(tidyMessageCreateWithNode)(doc, node, code, level, nodedesc, element ? element->element : NULL );
 
         case INSERTING_TAG:
         case MISSING_STARTTAG:
@@ -804,7 +804,7 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
 
         case UNEXPECTED_ENDTAG_IN:
             /* Can we use `rpt` here? No; `element` has a value in every case. */
-            return TY_(tidyMessageCreateWithNode)(doc, node, code, level, node->element, element->element );
+            return TY_(tidyMessageCreateWithNode)(doc, node, code, level, node->element, element ? element->element : NULL );
 
         case BAD_CDATA_CONTENT:
         case CONTENT_AFTER_BODY:
@@ -848,16 +848,16 @@ TidyMessageImpl *formatStandard(TidyDocImpl* doc, Node *element, Node *node, uin
         case MISSING_ENDTAG_FOR:
         case MISSING_ENDTAG_OPTIONAL:
         case PREVIOUS_LOCATION:
-            return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, element->element );
+            return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, element? element->element : NULL );
 
         case MISSING_ENDTAG_BEFORE:
-            return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, element->element, nodedesc );
+            return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, element? element->element : NULL, nodedesc );
 
         case COERCE_TO_ENDTAG:
         case NON_MATCHING_ENDTAG:
             return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, node->element, node->element );
         case TOO_MANY_ELEMENTS_IN:
-            return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, node->element, element->element);
+            return TY_(tidyMessageCreateWithNode)(doc, rpt, code, level, node->element, element ? element->element : NULL);
 
     }
 
@@ -1504,7 +1504,7 @@ uint TY_(getNextErrorCode)( TidyIterator* iter )
     }
     
     *iter = (TidyIterator)( itemIndex <= tidyErrorCodeListSize() ? itemIndex : (size_t)0 );
-    return item->value;
+    return item ? item->value : 0;
 }
 
 

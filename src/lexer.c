@@ -4477,7 +4477,7 @@ void TY_(growStack)(Stack *stack)
 {
     uint new_capacity = stack->capacity * 2;
     
-    Node **firstNode = (Node **)TidyAlloc(stack->allocator, new_capacity);
+    Node **firstNode = (Node **)TidyAlloc(stack->allocator, new_capacity * sizeof(Node**));
     
     memcpy( firstNode, stack->firstNode, sizeof(Node**) * (stack->top + 1) );
     TidyFree(stack->allocator, stack->firstNode);

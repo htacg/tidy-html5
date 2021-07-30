@@ -590,7 +590,6 @@ void TY_(WriteChar)( uint c, StreamOut* out )
         if ( !TY_(IsValidUTF16FromUCS4)(c) )
         {
             /* invalid UTF-16 value */
-            c = 0;
             numChars = 0;
         }
         else if ( TY_(IsCombinedChar)(c) )
@@ -599,7 +598,6 @@ void TY_(WriteChar)( uint c, StreamOut* out )
             numChars = 2;
             if ( !TY_(SplitSurrogatePair)(c, &theChars[0], &theChars[1]) )
             {
-                c = 0;
                 numChars = 0;
             }
         }

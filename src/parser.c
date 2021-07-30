@@ -2345,7 +2345,7 @@ void* TY_(oldParseDefList)(TidyDocImpl* doc, Node *list, GetTokenMode mode)
              * unless node has been blown away because the
              * center was empty, as above.
              */
-            if (parent->last == node)
+            if (parent && parent->last == node)
             {
                 list = TY_(InferredTag)(doc, TidyTag_DL);
                 TY_(InsertNodeAfterElement)(node, list);
@@ -4225,14 +4225,14 @@ void* TY_(oldParseFrameSet)(TidyDocImpl* doc, Node *frameset, GetTokenMode ARG_U
             TY_(Report)(doc, frameset, node, INSERTING_TAG);
         }
 
-        if (node->type == StartTag && (node->tag->model & CM_FRAMES))
+        if (node->type == StartTag && (node->tag && node->tag->model & CM_FRAMES))
         {
             TY_(InsertNodeAtEnd)(frameset, node);
             lexer->excludeBlocks = no;
             ParseTag(doc, node, MixedContent);
             continue;
         }
-        else if (node->type == StartEndTag && (node->tag->model & CM_FRAMES))
+        else if (node->type == StartEndTag && (node->tag && node->tag->model & CM_FRAMES))
         {
             TY_(InsertNodeAtEnd)(frameset, node);
             continue;
@@ -4345,7 +4345,7 @@ Node* TY_(ParseHTML)( TidyDocImpl *doc, Node *html, GetTokenMode mode, Bool popS
                 }
 
                 /* We did not expect to find an html closing tag here! */
-                if (node->tag == html->tag && node->type == EndTag)
+                if (html && (node->tag == html->tag) && (node->type == EndTag))
                 {
                     TY_(Report)(doc, html, node, DISCARDING_UNEXPECTED);
                     TY_(FreeNode)( doc, node);
@@ -5382,7 +5382,8 @@ Node* TY_(ParseNamespace)( TidyDocImpl* doc, Node *basenode, GetTokenMode mode, 
                 if (outside == no)
                 {
                     /* EndTag for a node within the basenode subtree. Roll on... */
-                    n->closed = yes;
+                    if (n)
+                        n->closed = yes;
                     TY_(FreeNode)(doc, node);
 
                     node = n;

@@ -4353,7 +4353,7 @@ Node* TY_(ParseHTML)( TidyDocImpl *doc, Node *html, GetTokenMode mode, Bool popS
                 }
 
                 /* Find and discard multiple <html> elements. */
-                if (node->tag == html->tag && node->type == StartTag)
+                if (html && (node->tag == html->tag) && (node->type == StartTag))
                 {
                     TY_(Report)(doc, html, node, DISCARDING_UNEXPECTED);
                     TY_(FreeNode)(doc, node);
@@ -5387,7 +5387,7 @@ Node* TY_(ParseNamespace)( TidyDocImpl* doc, Node *basenode, GetTokenMode mode, 
                     TY_(FreeNode)(doc, node);
 
                     node = n;
-                    parent = node->parent;
+                    parent = node ? node->parent : NULL;
                 }
                 else
                 {
@@ -5401,7 +5401,7 @@ Node* TY_(ParseNamespace)( TidyDocImpl* doc, Node *basenode, GetTokenMode mode, 
                 if (node == basenode)
                 {
                     lexer->istackbase = istackbase;
-                    assert(basenode->closed == yes);
+                    assert(basenode && basenode->closed == yes);
                     return NULL;
                 }
             }
@@ -6301,14 +6301,16 @@ void TY_(InsertNodeAtStart)(Node *element, Node *node)
 void TY_(InsertNodeAtEnd)(Node *element, Node *node)
 {
     node->parent = element;
-    node->prev = element->last;
+    node->prev = element ? element->last : NULL;
 
-    if (element->last != NULL)
+    if (element && element->last != NULL)
         element->last->next = node;
     else
-        element->content = node;
+        if (element)
+            element->content = node;
 
-    element->last = node;
+    if (element)
+        element->last = node;
 }
 
 
@@ -6319,16 +6321,17 @@ void TY_(InsertNodeBeforeElement)(Node *element, Node *node)
 {
     Node *parent;
 
-    parent = element->parent;
+    parent = element ? element->parent : NULL;
     node->parent = parent;
     node->next = element;
-    node->prev = element->prev;
-    element->prev = node;
+    node->prev = element ? element->prev : NULL;
+    if (element)
+        element->prev = node;
 
     if (node->prev)
         node->prev->next = node;
 
-    if (parent->content == element)
+    if (parent && parent->content == element)
         parent->content = node;
 }
 

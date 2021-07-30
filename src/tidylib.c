@@ -1630,15 +1630,19 @@ static Bool nodeHasAlignAttr( Node *node )
  */
 static void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
 {
+    Stack *stack = TY_(newStack)(doc, 16);
     Bool clean = cfgBool( doc, TidyMakeClean );
     Bool already_strict = cfgBool( doc, TidyStrictTagsAttr );
     Node* body = TY_(FindBody)( doc );
+    Node* next;
     Bool warn = yes;    /* should this be a warning, error, or report??? */
     AttVal* attr = NULL;
     int i = 0;
 
     while (node)
     {
+        next = node->next;
+        
         if ( nodeHasAlignAttr( node ) ) {
             /* @todo: Is this for ALL elements that accept an 'align' attribute,
              * or should this be a sub-set test?
@@ -1792,10 +1796,15 @@ static void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
             }
 
         if (node->content)
-            TY_(CheckHTML5)( doc, node->content );
-        
-        node = node->next;
+        {
+            TY_(push)(stack, next);
+            node = node->content;
+            continue;
+        }
+
+        node = next ? next : TY_(pop)(stack);
     }
+    TY_(freeStack)(stack);
 }
 /*****************************************************************************
  *  END HTML5 STUFF
@@ -1816,6 +1825,8 @@ static void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
  */
 static void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
 {
+    Stack *stack = TY_(newStack)(doc, 16);
+    Node *next;
     uint versionEmitted = doc->lexer->versionEmitted;
     uint declared = doc->lexer->doctype;
     uint version = versionEmitted == 0 ? declared : versionEmitted;
@@ -1830,6 +1841,8 @@ static void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
 
     while (node)
     {
+        next = node->next;
+
         /* This bit here handles our HTML tags */
         if ( TY_(nodeIsElement)(node) && node->tag ) {
 
@@ -1914,10 +1927,15 @@ static void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
         }
 
         if (node->content)
-            TY_(CheckHTMLTagsAttribsVersions)( doc, node->content );
-        
-        node = node->next;
+        {
+            TY_(push)(stack, next);
+            node = node->content;
+            continue;
+        }
+
+        node = next ? next : TY_(pop)(stack);
     }
+    TY_(freeStack)(stack);
 }
 
 

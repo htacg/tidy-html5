@@ -1629,6 +1629,7 @@ void TY_(BQ2Div)( TidyDocImpl* doc, Node *node )
 
         node = next ? next : TY_(pop)(stack);
     }
+    TY_(freeStack)(stack);
 }
 
 
@@ -2591,6 +2592,7 @@ void TY_(ConvertCDATANodes)(TidyDocImpl* doc, Node* node)
 */
 void TY_(FixLanguageInformation)(TidyDocImpl* doc, Node* node, Bool wantXmlLang, Bool wantLang)
 {
+    Stack *stack = TY_(newStack)(doc, 16);
     Node* next;
 
     while (node)
@@ -2634,10 +2636,15 @@ void TY_(FixLanguageInformation)(TidyDocImpl* doc, Node* node, Bool wantXmlLang,
         }
 
         if (node->content)
-            TY_(FixLanguageInformation)(doc, node->content, wantXmlLang, wantLang);
+        {
+            TY_(push)(stack, next);
+            node = node->content;
+            continue;
+        }
 
-        node = next;
+        node = next ? next : TY_(pop)(stack);
     }
+    TY_(freeStack)(stack);
 }
 
 /*
@@ -2669,6 +2676,7 @@ void TY_(FixXhtmlNamespace)(TidyDocImpl* doc, Bool wantXmlns)
 */
 void TY_(FixAnchors)(TidyDocImpl* doc, Node *node, Bool wantName, Bool wantId)
 {
+    Stack *stack = TY_(newStack)(doc, 16);
     Node* next;
 
     while (node)
@@ -2738,10 +2746,15 @@ void TY_(FixAnchors)(TidyDocImpl* doc, Node *node, Bool wantName, Bool wantId)
         }
 
         if (node->content)
-            TY_(FixAnchors)(doc, node->content, wantName, wantId);
+        {
+            TY_(push)(stack, next);
+            node = node->content;
+            continue;
+        }
 
-        node = next;
+        node = next ? next : TY_(pop)(stack);
     }
+    TY_(freeStack)(stack);
 }
 
 /* Issue #567 - move style elements from body to head 
@@ -2785,6 +2798,7 @@ static void StyleToHead(TidyDocImpl* doc, Node *head, Node *node, Bool fix, int 
             indent--;
         }
     }
+    TY_(freeStack)(stack);
 }
 
 

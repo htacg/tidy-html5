@@ -478,6 +478,16 @@ TY_PRIVATE void TY_(tidySetLanguageSetByUser)( void )
 
 /**
  *  Provides a string given `messageType` in the default
+ *  localization (which is `en`), for the given quantity.
+ */
+TY_PRIVATE ctmbstr TY_(tidyDefaultStringN)( uint messageType, uint quantity )
+{
+    return tidyLocalizedStringImpl( messageType, &language_en, quantity);
+}
+
+
+/**
+ *  Provides a string given `messageType` in the default
  *  localization (which is `en`), for single plural form.
  */
 TY_PRIVATE ctmbstr TY_(tidyDefaultString)( uint messageType )

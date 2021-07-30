@@ -155,6 +155,12 @@ TY_PRIVATE ctmbstr TY_(tidyLocalizedString)( uint messageType );
 
 /**
  *  Provides a string given `messageType` in the default
+ *  localization (which is `en`), for the given quantity.
+ */
+TY_PRIVATE ctmbstr TY_(tidyDefaultStringN)( uint messageType, uint quantity );
+
+/**
+ *  Provides a string given `messageType` in the default
  *  localization (which is `en`).
  */
 TY_PRIVATE ctmbstr TY_(tidyDefaultString)( uint messageType );

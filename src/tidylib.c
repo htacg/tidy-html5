@@ -2643,6 +2643,11 @@ ctmbstr TIDY_CALL tidyLocalizedString( uint messageType )
     return TY_(tidyLocalizedString)( messageType );
 }
 
+ctmbstr TIDY_CALL tidyDefaultStringN( uint messageType, uint quantity )
+{
+    return TY_(tidyDefaultStringN)( messageType, quantity);
+}
+
 ctmbstr TIDY_CALL tidyDefaultString( uint messageType )
 {
     return TY_(tidyDefaultString)( messageType );

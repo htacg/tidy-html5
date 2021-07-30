@@ -2125,6 +2125,16 @@ TIDY_EXPORT ctmbstr TIDY_CALL tidyLocalizedStringN(uint messageType, /**< The me
  */
 TIDY_EXPORT ctmbstr TIDY_CALL tidyLocalizedString( uint messageType );
 
+/** Provides a string given `messageType` in the default localization for
+ ** `quantity`. Some strings have one or more plural forms, and this function
+ ** will ensure that the correct singular or plural form is returned for the
+ ** specified quantity.
+ ** @result Returns the desired string.
+ */
+TIDY_EXPORT ctmbstr TIDY_CALL tidyDefaultStringN(uint messageType, /**< The message type. */
+                                                 uint quantity     /**< The quantity. */
+                                                 );
+
 /** Provides a string given `messageType` in the default localization (which
  ** is `en`).
  ** @param messageType The message type.

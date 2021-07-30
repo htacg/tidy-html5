@@ -50,9 +50,9 @@ static char* TagToString(Node* tag, char* buf, size_t count)
         else if (tag->type == DocTypeTag)
             TY_(tmbsnprintf)(buf, count, "<!DOCTYPE>");
         else if (tag->type == TextNode)
-            TY_(tmbsnprintf)(buf, count, "%s", tidyLocalizedString(STRING_PLAIN_TEXT));
+            TY_(tmbsnprintf)(buf, count, "%s", "STRING_PLAIN_TEXT");
         else if (tag->type == XmlDecl)
-            TY_(tmbsnprintf)(buf, count, "%s", tidyLocalizedString(STRING_XML_DECLARATION));
+            TY_(tmbsnprintf)(buf, count, "%s", "STRING_XML_DECLARATION");
         else if (tag->element)
             TY_(tmbsnprintf)(buf, count, "%s", tag->element);
     }
@@ -1070,7 +1070,7 @@ static struct _dialogueDispatchTable {
 
 
 /* This message formatter for dialogue messages should be capable of formatting
-** every message, because they're not all the complex and there aren't that
+** every message, because they're not all that complex and there aren't that
 ** many.
 */
 static TidyMessageImpl *formatDialogue( TidyDocImpl* doc, uint code, TidyReportLevel level, va_list args )
@@ -1087,8 +1087,8 @@ static TidyMessageImpl *formatDialogue( TidyDocImpl* doc, uint code, TidyReportL
         case STRING_ERROR_COUNT:
         case STRING_NOT_ALL_SHOWN:
             return TY_(tidyMessageCreate)( doc, code, level,
-                                           doc->warnings, tidyLocalizedStringN( STRING_ERROR_COUNT_WARNING, doc->warnings ),
-                                           doc->errors, tidyLocalizedStringN( STRING_ERROR_COUNT_ERROR, doc->errors ) );
+                                           doc->warnings, "STRING_ERROR_COUNT_WARNING",
+                                           doc->errors, "STRING_ERROR_COUNT_ERROR" );
 
         case FOOTNOTE_TRIM_EMPTY_ELEMENT:
         case STRING_HELLO_ACCESS:

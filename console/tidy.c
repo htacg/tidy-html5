@@ -2022,7 +2022,7 @@ static Bool TIDY_CALL reportCallback(TidyMessage tmessage)
     TidyFormatParameterType messageType;
     ctmbstr messageFormat;
 
-    printf("FILTER: %s, %s\n", tidyGetMessageKey( tmessage ), tidyGetMessageOutput( tmessage ));
+    printf("FILTER: %s\n%s\n%s\n", tidyGetMessageKey( tmessage ), tidyGetMessageOutput( tmessage ), tidyGetMessageOutputDefault( tmessage ));
     
     /* loop through the arguments, if any, and print their details */
     pos = tidyGetMessageArguments( tmessage );

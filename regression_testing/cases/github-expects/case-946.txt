@@ -1,0 +1,330 @@
+line 1 column 1 - Warning: discarding malformed <!DOCTYPE>
+line 1 column 26 - Warning: replacing invalid UTF-8 bytes (char. code U+00A5)
+line 1 column 27 - Warning: replacing invalid UTF-8 bytes (char. code U+009F)
+line 1 column 32 - Warning: replacing invalid UTF-8 bytes (char. code U+008D)
+line 1 column 33 - Warning: replacing invalid UTF-8 bytes (char. code U+008D)
+line 1 column 20 - Warning: <div> attribute name "i��ioz{��~" (value="la") is invalid
+line 1 column 33 - Warning: inserting implicit <body>
+line 1 column 41 - Warning: <svg> attribute with missing trailing quote mark
+line 1 column 56 - Warning: <br> attribute "!doctype" lacks value
+line 1 column 114 - Warning: replacing invalid UTF-8 bytes (char. code U+0080)
+line 1 column 216 - Warning: <meta> attribute with missing trailing quote mark
+line 1 column 216 - Warning: <meta> attribute with missing trailing quote mark
+line 1 column 318 - Warning: missing </br> before <br>
+line 1 column 216 - Warning: missing </meta> before <br>
+line 1 column 148 - Warning: missing </meta> before <meta>
+line 1 column 142 - Warning: missing </head> before <meta>
+line 1 column 74 - Warning: missing </html> before <head>
+line 1 column 56 - Warning: missing </br> before <html>
+line 1 column 41 - Warning: missing </svg> before <br>
+line 1 column 20 - Warning: missing </div> before <svg>
+line 1 column 403 - Warning: <ttype> unexpected or duplicate quote mark
+line 1 column 500 - Warning: replacing invalid UTF-8 bytes (char. code U+0083)
+line 1 column 513 - Warning: replacing invalid UTF-8 bytes (char. code U+0000)
+line 1 column 578 - Warning: replacing invalid UTF-8 bytes (char. code U+0091)
+line 2 column 114 - Warning: <input> attribute with missing trailing quote mark
+line 2 column 156 - Warning: replacing invalid UTF-8 bytes (char. code U+0080)
+line 2 column 168 - Warning: replacing invalid UTF-8 bytes (char. code U+008D)
+line 2 column 169 - Warning: replacing invalid UTF-8 bytes (char. code U+008D)
+line 2 column 25 - Warning: missing </input> before <input>
+line 1 column 581 - Warning: missing </input> before <input>
+line 1 column 536 - Warning: missing </input> before <input>
+line 1 column 403 - Warning: missing </ttype> before <input>
+line 1 column 364 - Warning: missing </table> before <ttype>
+line 1 column 332 - Warning: missing </worm> before <table>
+line 1 column 33 - Warning: missing </body> before <worm>
+line 1 column 1 - Warning: missing </html> before <body>
+line 2 column 193 - Warning: replacing invalid UTF-8 bytes (char. code U+0091)
+line 2 column 177 - Warning: discarding unexpected </html>
+line 2 column 1448 - Warning: <meta> attribute "conten/body" lacks value
+line 2 column 1466 - Warning: discarding unexpected </html>
+line 2 column 1515 - Warning: <meta> attribute with missing trailing quote mark
+line 2 column 1596 - Warning: discarding unexpected </title6>
+line 2 column 1709 - Warning: replacing invalid UTF-8 bytes (char. code U+00FF)
+line 2 column 2542 - Warning: replacing invalid UTF-8 bytes (char. code U+00B5)
+line 2 column 2909 - Warning: replacing invalid UTF-8 bytes (char. code U+0005)
+line 4 column 49 - Warning: unescaped & or unknown entity "&ei"
+line 4 column 61 - Warning: unescaped & or unknown entity "&ei"
+line 4 column 86 - Warning: unescaped & or unknown entity "&lei"
+line 4 column 110 - Warning: unescaped & or unknown entity "&lei"
+line 4 column 129 - Warning: unescaped & or unknown entity "&window._cshid"
+line 4 column 144 - Warning: unescaped & or unknown entity "&-1"
+line 4 column 159 - Warning: unescaped & or unknown entity "&cshid"
+line 4 column 184 - Warning: unescaped & or unknown entity "&cshid"
+line 4 column 240 - Warning: unescaped & or unknown entity "&ct"
+line 4 column 246 - Warning: replacing invalid UTF-8 bytes (char. code U+00FF)
+line 4 column 247 - Warning: replacing invalid UTF-8 bytes (char. code U+00FF)
+line 4 column 249 - Warning: unescaped & or unknown entity "&cad"
+line 4 column 261 - Warning: unescaped & or unknown entity "&zx"
+line 4 column 346 - Warning: unescaped & or unknown entity "&google.ml"
+line 4 column 619 - Warning: replacing invalid UTF-8 bytes (char. code U+001D)
+line 4 column 619 - Warning: <area> attribute "(a)*a;l" lacks value
+line 4 column 632 - Warning: replacing invalid UTF-8 bytes (char. code U+00FF)
+line 4 column 633 - Warning: replacing invalid UTF-8 bytes (char. code U+00FF)
+line 4 column 619 - Warning: <area> attribute "h(ao��widte" lacks value
+line 4 column 619 - Warning: <area> attribute name "h[e]};a.src" (value="c}};google.logUrl=m;}).call(thi);(function(){") is invalid
+line 5 column 25 - Warning: replacing invalid UTF-8 bytes (char. code U+0010)
+line 4 column 619 - Info: value for attribute "google.y" missing quote marks
+line 4 column 619 - Info: value for attribute "c" missing quote marks
+line 4 column 619 - Info: value for attribute "c" missing quote marks
+line 4 column 619 - Warning: <area> attribute "document.documentelement.addeventlistener("submit",function(b){var" lacks value
+line 4 column 619 - Warning: <area> attribute name "a;if(a" (value="b.target){var") is invalid
+line 6 column 184 - Warning: replacing invalid UTF-8 bytes (char. code U+00FF)
+line 6 column 185 - Warning: replacing invalid UTF-8 bytes (char. code U+00FF)
+line 6 column 186 - Warning: replacing invalid UTF-8 bytes (char. code U+00FF)
+line 6 column 187 - Warning: replacing invalid UTF-8 bytes (char. code U+008D)
+line 4 column 619 - Info: value for attribute "c" missing quote marks
+line 6 column 321 - Warning: unescaped & or unknown entity "&a"
+line 4 column 619 - Warning: <area> attribute name "ion())},!0);document.documentelement.addeventlistener("click",function(b){var0a;a:{for(a" (value="b.target;a&&a!=document.documentElement;a=a.parentElement)if("A"==a.tagName){a="1"==a.getAttribute("data-nohref");break") is invalid
+line 6 column 439 - Warning: unescaped & or unknown entity "&b.preventDefault"
+line 4 column 619 - Warning: <area> missing '>' for end of tag
+line 4 column 619 - Warning: <area> attribute name "a}a" (value="!1}a&&b.preventDefault()},!0);}).call(this);") is invalid
+line 4 column 619 - Warning: <area> dropping value "a.id;else{do" for repeated attribute "c"
+line 4 column 619 - Warning: <area> dropping value "Math.random();while(google.y[c])}google.y[c]=[a,b];return!1};google.sx=f64,1960,718,530,2,61,174,44unction(a){google.sy.push(a)};google.lm=[];google.plm=function(a){google.lm.push.apply(google.lm,a)};google.lq=[];google.load=function(a,b,c){google.lq.push([[a],b,c])};google.loadAll=function(a,b){google.lq.push([a,b])};google.bx=!1;google.lx=function(){};}).call(this);google.f={};(function(){" for repeated attribute "c"
+line 2 column 1583 - Warning: missing </title> before <area>
+line 2 column 1515 - Warning: missing </meta> before <title>
+line 2 column 1448 - Warning: missing </meta> before <meta>
+line 2 column 1442 - Warning: missing </head> before <meta>
+line 2 column 275 - Warning: missing </script> before <head>
+line 7 column 1034 - Warning: replacing invalid UTF-8 bytes (char. code U+00BC)
+line 7 column 1137 - Warning: discarding unexpected </head>
+line 8 column 23 - Warning: unescaped & or unknown entity "&document.f.q.focus"
+line 8 column 59 - Warning: unescaped & or unknown entity "&document.gbqf.q.focus"
+line 10 column 30 - Info: value for attribute "id" missing quote marks
+line 10 column 49 - Info: value for attribute "class" missing quote marks
+line 10 column 73 - Info: value for attribute "class" missing quote marks
+line 10 column 127 - Warning: unescaped & or unknown entity "&tab"
+line 10 column 147 - Info: value for attribute "class" missing quote marks
+line 10 column 201 - Warning: unescaped & or unknown entity "&tab"
+line 10 column 219 - Info: value for attribute "class" missing quote marks
+line 10 column 268 - Warning: unescaped & or unknown entity "&tab"
+line 10 column 286 - Info: value for attribute "class" missing quote marks
+line 10 column 334 - Warning: unescaped & or unknown entity "&tab"
+line 10 column 355 - Info: value for attribute "class" missing quote marks
+line 10 column 416 - Info: value for attribute "class" missing quote marks
+line 10 column 483 - Info: value for attribute "class" missing quote marks
+line 10 column 546 - Info: value for attribute "class" missing quote marks
+line 10 column 686 - Info: value for attribute "id" missing quote marks
+line 10 column 686 - Info: value for attribute "width" missing quote marks
+line 10 column 717 - Info: value for attribute "id" missing quote marks
+line 10 column 717 - Info: value for attribute "class" missing quote marks
+line 10 column 747 - Info: value for attribute "id" missing quote marks
+line 10 column 747 - Info: value for attribute "class" missing quote marks
+line 10 column 777 - Info: value for attribute "id" missing quote marks
+line 10 column 797 - Info: value for attribute "class" missing quote marks
+line 10 column 880 - Info: value for attribute "class" missing quote marks
+line 10 column 935 - Info: value for attribute "target" missing quote marks
+line 10 column 935 - Info: value for attribute "id" missing quote marks
+line 10 column 1011 - Warning: unescaped & or unknown entity "&passive"
+line 10 column 1024 - Warning: unescaped & or unknown entity "&continue"
+line 10 column 1056 - Warning: unescaped & or unknown entity "&ec"
+line 10 column 935 - Info: value for attribute "class" missing quote marks
+line 10 column 1102 - Info: value for attribute "class" missing quote marks
+line 10 column 1102 - Info: value for attribute "style" missing quote marks
+line 10 column 1136 - Info: value for attribute "class" missing quote marks
+line 10 column 1136 - Info: value for attribute "style" missing quote marks
+line 10 column 1391 - Warning: missing </br> before <br>
+line 10 column 1225 - Warning: missing </img> before <br>
+line 10 column 1211 - Warning: missing </div> before <img>
+line 10 column 1493 - Info: value for attribute "width" missing quote marks
+line 10 column 1753 - Warning: missing </dlv> before <input>
+line 10 column 1721 - Warning: missing </input> before <dlv>
+line 10 column 1689 - Warning: missing </input> before <input>
+line 10 column 1643 - Warning: missing </input> before <input>
+line 10 column 1598 - Warning: missing </input> before <input>
+line 10 column 1548 - Warning: missing </input> before <input>
+line 10 column 1519 - Warning: missing </td> before <input>
+line 10 column 1476 - Warning: missing </tr> before <td>
+line 10 column 1437 - Warning: missing </table> before <tr>
+line 10 column 1405 - Warning: missing </form> before <table>
+line 10 column 1185 - Warning: missing </br> before <form>
+line 10 column 1177 - Warning: missing </center> before <br>
+line 10 column 15 - Warning: missing </div> before <center>
+line 10 column 2025 - Warning: missing </span> before <input>
+line 10 column 2161 - Warning: missing </input> before <input>
+line 10 column 2142 - Warning: missing </span> before <input>
+line 11 column 149 - Warning: discarding unexpected </td>
+line 11 column 155 - Warning: replacing invalid UTF-8 bytes (char. code U+00FF)
+line 11 column 156 - Warning: replacing invalid UTF-8 bytes (char. code U+00FF)
+line 11 column 277 - Warning: discarding unexpected </td>
+line 11 column 282 - Warning: discarding unexpected </tr>
+line 11 column 287 - Warning: discarding unexpected </table>
+line 12 column 25 - Warning: unescaped & or unknown entity "&document.getElementById"
+line 1 column 20 - Warning: missing </div>
+line 1 column 20 - Warning: missing </div>
+line 1 column 33 - Warning: inserting missing 'title' element
+line 4 column 619 - Warning: <area> lacks "alt" attribute
+line 4 column 619 - Warning: <area> lacks "href" attribute
+line 10 column 1225 - Warning: <img> lacks "alt" attribute
+line 10 column 1225 - Warning: <img> lacks "src" attribute
+line 10 column 717 - Warning: trimming empty <span>
+line 10 column 747 - Warning: trimming empty <span>
+line 10 column 777 - Warning: trimming empty <span>
+line 10 column 1177 - Warning: <center> element removed from HTML5
+line 1 column 56 - Warning: <br> proprietary attribute "html"
+line 1 column 74 - Warning: <html> proprietary attribute "itemscope"
+line 1 column 74 - Warning: <html> proprietary attribute "itemtype"
+line 1 column 74 - Warning: <html> proprietary attribute "lang"
+line 1 column 148 - Warning: <meta> proprietary attribute "content"
+line 1 column 148 - Warning: <meta> proprietary attribute "http-equiv"
+line 1 column 216 - Warning: <meta> proprietary attribute "content"
+line 1 column 216 - Warning: <meta> proprietary attribute "style"
+line 1 column 364 - Warning: <table> proprietary attribute "cellpadding"
+line 1 column 364 - Warning: <table> proprietary attribute "cellspacing"
+line 1 column 432 - Warning: <td> proprietary attribute "width"
+line 1 column 536 - Warning: <input> proprietary attribute "value"
+line 1 column 536 - Warning: <input> proprietary attribute "name"
+line 1 column 536 - Warning: <input> proprietary attribute "type"
+line 1 column 581 - Warning: <input> proprietary attribute "name"
+line 1 column 581 - Warning: <input> proprietary attribute "tg"
+line 1 column 581 - Warning: <input> proprietary attribute "ype"
+line 1 column 581 - Warning: <input> proprietary attribute "value"
+line 2 column 25 - Warning: <input> proprietary attribute "name"
+line 2 column 25 - Warning: <input> proprietary attribute "type"
+line 2 column 275 - Warning: <script> proprietary attribute "nonce"
+line 2 column 1515 - Warning: <meta> proprietary attribute "itemprop"
+line 4 column 619 - Warning: <area> proprietary attribute "google.y"
+line 4 column 619 - Warning: <area> proprietary attribute "c"
+line 7 column 1087 - Warning: <script> proprietary attribute "nonce"
+line 7 column 1144 - Warning: <body> proprietary attribute "bgcolor"
+line 7 column 1165 - Warning: <script> proprietary attribute "nonce"
+line 10 column 15 - Warning: <div> proprietary attribute "id"
+line 10 column 30 - Warning: <div> proprietary attribute "id"
+line 10 column 43 - Warning: <nobr> is not approved by W3C
+line 10 column 49 - Warning: <b> proprietary attribute "class"
+line 10 column 73 - Warning: <a> proprietary attribute "class"
+line 10 column 73 - Warning: <a> proprietary attribute "href"
+line 10 column 147 - Warning: <a> proprietary attribute "class"
+line 10 column 147 - Warning: <a> proprietary attribute "href"
+line 10 column 219 - Warning: <a> proprietary attribute "class"
+line 10 column 219 - Warning: <a> proprietary attribute "href"
+line 10 column 286 - Warning: <a> proprietary attribute "class"
+line 10 column 286 - Warning: <a> proprietary attribute "href"
+line 10 column 355 - Warning: <a> proprietary attribute "class"
+line 10 column 355 - Warning: <a> proprietary attribute "href"
+line 10 column 416 - Warning: <a> proprietary attribute "class"
+line 10 column 416 - Warning: <a> proprietary attribute "href"
+line 10 column 483 - Warning: <a> proprietary attribute "class"
+line 10 column 483 - Warning: <a> proprietary attribute "href"
+line 10 column 546 - Warning: <a> proprietary attribute "class"
+line 10 column 546 - Warning: <a> proprietary attribute "style"
+line 10 column 546 - Warning: <a> proprietary attribute "href"
+line 10 column 686 - Warning: <div> proprietary attribute "id"
+line 10 column 686 - Warning: <div> proprietary attribute "width"
+line 10 column 711 - Warning: <nobr> is not approved by W3C
+line 10 column 797 - Warning: <a> proprietary attribute "href"
+line 10 column 797 - Warning: <a> proprietary attribute "class"
+line 10 column 880 - Warning: <a> proprietary attribute "href"
+line 10 column 880 - Warning: <a> proprietary attribute "class"
+line 10 column 935 - Warning: <a> proprietary attribute "target"
+line 10 column 935 - Warning: <a> proprietary attribute "id"
+line 10 column 935 - Warning: <a> proprietary attribute "href"
+line 10 column 935 - Warning: <a> proprietary attribute "class"
+line 10 column 1102 - Warning: <div> proprietary attribute "class"
+line 10 column 1102 - Warning: <div> proprietary attribute "style"
+line 10 column 1136 - Warning: <div> proprietary attribute "class"
+line 10 column 1136 - Warning: <div> proprietary attribute "style"
+line 10 column 1185 - Warning: <br> proprietary attribute "clear"
+line 10 column 1185 - Warning: <br> proprietary attribute "id"
+line 10 column 1211 - Warning: <div> proprietary attribute "id"
+line 10 column 1225 - Warning: <img> proprietary attribute "alt"
+line 10 column 1225 - Warning: <img> proprietary attribute "height"
+line 10 column 1225 - Warning: <img> proprietary attribute "src"
+line 10 column 1225 - Warning: <img> proprietary attribute "style"
+line 10 column 1225 - Warning: <img> proprietary attribute "width"
+line 10 column 1225 - Warning: <img> proprietary attribute "id"
+line 10 column 1405 - Warning: <form> proprietary attribute "action"
+line 10 column 1405 - Warning: <form> proprietary attribute "name"
+line 10 column 1437 - Warning: <table> proprietary attribute "cellpadding"
+line 10 column 1437 - Warning: <table> proprietary attribute "cellspacing"
+line 10 column 1476 - Warning: <tr> proprietary attribute "valign"
+line 10 column 1493 - Warning: <td> proprietary attribute "width"
+line 10 column 1519 - Warning: <td> proprietary attribute "align"
+line 10 column 1519 - Warning: <td> proprietary attribute "nowrap"
+line 10 column 1548 - Warning: <input> proprietary attribute "name"
+line 10 column 1548 - Warning: <input> proprietary attribute "value"
+line 10 column 1548 - Warning: <input> proprietary attribute "type"
+line 10 column 1598 - Warning: <input> proprietary attribute "value"
+line 10 column 1598 - Warning: <input> proprietary attribute "name"
+line 10 column 1598 - Warning: <input> proprietary attribute "type"
+line 10 column 1643 - Warning: <input> proprietary attribute "name"
+line 10 column 1643 - Warning: <input> proprietary attribute "type"
+line 10 column 1643 - Warning: <input> proprietary attribute "value"
+line 10 column 1689 - Warning: <input> proprietary attribute "name"
+line 10 column 1689 - Warning: <input> proprietary attribute "type"
+line 10 column 1721 - Warning: <input> proprietary attribute "name"
+line 10 column 1721 - Warning: <input> proprietary attribute "type"
+line 10 column 1802 - Warning: <input> proprietary attribute "class"
+line 10 column 1802 - Warning: <input> proprietary attribute "style"
+line 10 column 1802 - Warning: <input> proprietary attribute "autocomplete"
+line 10 column 1802 - Warning: <input> proprietary attribute "value"
+line 10 column 1802 - Warning: <input> proprietary attribute "title"
+line 10 column 1802 - Warning: <input> proprietary attribute "maxlength"
+line 10 column 1802 - Warning: <input> proprietary attribute "name"
+line 10 column 1802 - Warning: <input> proprietary attribute "size"
+line 10 column 1982 - Warning: <br> proprietary attribute "style"
+line 10 column 2008 - Warning: <span> proprietary attribute "class"
+line 10 column 2025 - Warning: <span> proprietary attribute "class"
+line 10 column 2044 - Warning: <input> proprietary attribute "class"
+line 10 column 2044 - Warning: <input> proprietary attribute "value"
+line 10 column 2044 - Warning: <input> proprietary attribute "name"
+line 10 column 2044 - Warning: <input> proprietary attribute "type"
+line 10 column 2125 - Warning: <span> proprietary attribute "class"
+line 10 column 2142 - Warning: <span> proprietary attribute "class"
+line 10 column 2161 - Warning: <input> proprietary attribute "class"
+line 10 column 2161 - Warning: <input> proprietary attribute "lue"
+line 10 column 2161 - Warning: <input> proprietary attribute "name"
+line 10 column 2161 - Warning: <input> proprietary attribute "type"
+line 10 column 2229 - Warning: <script> proprietary attribute "nonce"
+line 11 column 47 - Warning: <input> proprietary attribute "value"
+line 11 column 47 - Warning: <input> proprietary attribute "name"
+line 11 column 47 - Warning: <input> proprietary attribute "type"
+line 11 column 207 - Warning: <a> proprietary attribute "href"
+line 11 column 295 - Warning: <input> proprietary attribute "id"
+line 11 column 295 - Warning: <input> proprietary attribute "name"
+line 11 column 295 - Warning: <input> proprietary attribute "type"
+line 11 column 295 - Warning: <input> proprietary attribute "value"
+line 11 column 346 - Warning: <script> proprietary attribute "nonce"
+Info: Document content looks like HTML5
+Tidy found 256 warnings and 0 errors!
+
+Character codes for UTF-8 must be in the range: U+0000 to U+10FFFF.
+The definition of UTF-8 in Annex D of ISO/IEC 10646-1:2000 also
+allows for the use of five- and six-byte sequences to encode
+characters that are outside the range of the Unicode character set;
+those five- and six-byte sequences are illegal for the use of
+UTF-8 as a transformation of Unicode characters. ISO/IEC 10646
+does not allow mapping of unpaired surrogates, nor U+FFFE and U+FFFF
+(but it does allow other noncharacters). For more information please refer to
+https://home.unicode.org/ and https://www.cl.cam.ac.uk/~mgk25/unicode.html
+
+The alt attribute should be used to give a short description
+of an image; longer descriptions should be given with the
+longdesc attribute which takes a URL linked to the description.
+These measures are needed for people using non-graphical browsers.
+
+For hypertext links defined using a client-side image map, you
+need to use the alt attribute to provide a textual description
+of the link for people using non-graphical browsers.
+
+For further advice on how to make your pages accessible
+see https://www.w3.org/WAI/GL.
+You are recommended to use CSS to control line wrapping.
+Use "white-space: nowrap" to inhibit wrapping in place
+of inserting <NOBR>...</NOBR> into the markup.
+
+One or more empty elements were present in the source document but
+dropped on output. If these elements are necessary or you don't want
+this behavior, then consider setting the option "drop-empty-elements"
+to no.
+
+About HTML Tidy: https://github.com/htacg/tidy-html5
+Bug reports and comments: https://github.com/htacg/tidy-html5/issues
+Official mailing list: https://lists.w3.org/Archives/Public/public-htacg/
+Latest HTML specification: https://html.spec.whatwg.org/multipage/
+Validate your HTML documents: https://validator.w3.org/nu/
+Lobby your company to join the W3C: https://www.w3.org/Consortium
+
+Do you speak a language other than English, or a different variant of 
+English? Consider helping us to localize HTML Tidy. For details please see 
+https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md

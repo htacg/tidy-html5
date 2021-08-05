@@ -42,30 +42,6 @@
 
 
 /**
- *  The parsers keeps track of their states with the states defined here, and
- *  use these symbols when pushing to the stack so that they can later recreate
- *  their environments when re-entered.
- */
-typedef enum {
-    /* Universal states. */
-    STATE_INITIAL,             /**< This is the initial state for every parser. */
-    STATE_COMPLETE,            /**< Complete! */
-    STATE_PARSE_TAG,
-    STATE_PARSE_TAG_DONE,
-    /* ParseHTML states. */
-    STATE_PRE_HEAD,            /**< In this state, we've not detected head yet. */
-    STATE_PRE_BODY,            /**< In this state, we'll consider frames vs. body. */
-    STATE_PARSE_BODY,          /**< In this state, we can parse the body. */
-    STATE_PARSE_HEAD,          /**< In this state, we will setup head for parsing. */
-    STATE_PARSE_HEAD_DONE,     /**< Resume here after parsing head. */
-    STATE_PARSE_NOFRAMES,      /**< In this state, we can parse noframes content. */
-    STATE_PARSE_NOFRAMES_DONE, /**< In this state, we can restore more state. */
-    STATE_PARSE_FRAMESET,      /**< In this state, we will parse frameset content. */
-    STATE_PARSE_FRAMESET_DONE, /**< We need to cleanup some things after parsing frameset. */
-} parserState;
-
-
-/**
  *  This typedef represents the state of a parser when it enters and exits.
  *  When the parser needs to finish work on the way back up the stack, it will
  *  push one of these records to the stack, and it will pop a record from the
@@ -75,10 +51,12 @@ typedef struct _TidyParserMemory
 {
     Parser       *identity;      /**< Which parser pushed this record? */
     Node         *original_node; /**< Originally provided node at entry. */
-    Node         *reentry_node;  /**< A node a parser might want to save. */
-    GetTokenMode reentry_mode;   /**< The mode to use for the next node. */
-    parserState  reentry_state;  /**< State to set during re-entry. */
+    Node         *reentry_node;  /**< The node with which to re-enter. */
+    GetTokenMode reentry_mode;   /**< The token mode to use when re-entering. */
+    int          reentry_state;  /**< State to set during re-entry. Defined locally in each parser. */
     GetTokenMode mode;           /**< The caller will peek at this value to get the correct mode. */
+    Bool         register_b_1;   /**< Local variable storage. */
+    Bool         register_b_2;   /**< Local variable storage. */
 } TidyParserMemory;
 
 
@@ -89,7 +67,6 @@ typedef struct _TidyParserMemory
 typedef struct _TidyParserStack
 {
     TidyParserMemory* content;    /**< A state record. */
-    TidyAllocator* allocator;     /**< The allocator used for creating. */
     uint size;                    /**< Current size of the stack. */
     int top;                      /**< Top of the stack. */
 } TidyParserStack;

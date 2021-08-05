@@ -1,0 +1,39 @@
+<!--
+This test case tests the datalist element and the datalist parser.
+Oddly, there's not an existing test case that has the datalist element.
+ -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      This is a title
+    </title>
+  </head>
+  <body>
+    <label for="ice-cream-choice">Choose a flavor:</label> <input list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice"> <datalist id="ice-cream-flavors">
+      <option value="Chocolate">
+      </option>
+      <option value="Coconut">
+      </option>
+      <option value="Mint">
+      </option>
+      <option value="Strawberry">
+      </option>
+      <option value="Vanilla">
+      </option>
+    </datalist> <label for="myBrowser">Choose a browser from this list:</label> <input list="browsers" id="myBrowser" name="myBrowser"> <datalist id="browsers">
+      <option value="Chrome">
+      </option>
+      <option value="Firefox">
+      </option>
+      <option value="Internet Explorer">
+      </option>
+      <option value="Opera">
+      </option>
+      <option value="Safari">
+      </option>
+      <option value="Microsoft Edge">
+      </option>
+    </datalist>
+  </body>
+</html>

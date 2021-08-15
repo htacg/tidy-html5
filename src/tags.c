@@ -166,7 +166,7 @@ static CheckAttribs CheckHTML;
  * but allow this table to be ADJUSTED if NOT HTML5
  * was static const Dict tag_defs[] = 
 \*/
-static Dict tag_defs[] =
+static TIDY_THREAD_LOCAL Dict tag_defs[] =
 {
   { TidyTag_UNKNOWN,    "unknown!",   VERS_UNKNOWN,         NULL,                            (0),                                           NULL,               NULL           },
 

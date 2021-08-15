@@ -507,12 +507,12 @@ extern "C" {
 #    define setmode _setmode
 #  endif
 
-# if defined(_MSC_VER)
+#  if defined(_MSC_VER)
 #    define fileno _fileno
-#if !defined(NDEBUG) && !defined(ENABLE_DEBUG_LOG) && !defined(DISABLE_DEBUG_LOG)
-#define ENABLE_DEBUG_LOG
-#endif
-#endif
+#    if !defined(NDEBUG) && !defined(ENABLE_DEBUG_LOG) && !defined(DISABLE_DEBUG_LOG)
+#      define ENABLE_DEBUG_LOG
+#    endif
+#  endif
 
 #  define access _access
 #  define strcasecmp _stricmp
@@ -552,6 +552,13 @@ extern "C" {
 #      define TIDY_CALL __stdcall
 #    endif
 #  endif
+
+#  ifndef TIDY_THREAD_LOCAL
+#    ifdef _MSC_VER
+#      define TIDY_THREAD_LOCAL __declspec( thread )
+#    endif
+#  endif
+
 
 #endif /* _WIN32 */
 
@@ -598,6 +605,10 @@ extern "C" {
 
 #ifndef TIDY_STRUCT
 #  define TIDY_STRUCT
+#endif
+
+#ifndef TIDY_THREAD_LOCAL
+#  define TIDY_THREAD_LOCAL __thread
 #endif
 
 typedef unsigned char byte;

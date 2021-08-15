@@ -976,12 +976,7 @@ static Parser* GetParserForNode( TidyDocImpl* doc, Node *node )
  *  This controller is responsible for calling each of the individual parsers,
  *  based on the tokens it pulls from the lexer, or the tokens passed back via
  *  the parserMemory stack from each of the parsers. Having a main, central
- *  looping dispatcher in this fashion allows the prevention of recursion. Note,
- *  though, that some of the parsers are still recursive and have to be
- *  refactored in order to cooperate with this controller.
- *
- *  (The goal is to update the old-style parsers slowly and deliberately
- *  without causing regressions, in a series of smaller commits and updates.)
+ *  looping dispatcher in this fashion allows the prevention of recursion.
  */
 void ParseHTMLWithNode( TidyDocImpl* doc, Node* node )
 {

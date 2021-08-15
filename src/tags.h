@@ -67,7 +67,7 @@ typedef enum
  ** @param popStack A flag indicating that we are re-entering this parser, and
  **   it should restore a state from the stack.
  */
-typedef Node* (Parser)( TidyDocImpl* doc, Node *node, GetTokenMode mode, Bool popStack );
+typedef Node* (Parser)( TidyDocImpl* doc, Node *node, GetTokenMode mode );
 
 
 /** This typedef describes a function be be used to check the attributes

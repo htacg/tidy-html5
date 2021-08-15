@@ -1,0 +1,16 @@
+line 32 column 1 - Warning: discarding unexpected </body>
+line 33 column 1 - Warning: discarding unexpected </html>
+line 25 column 5 - Warning: missing </datalist>
+Info: Document content looks like HTML5
+Tidy found 3 warnings and 0 errors!
+
+About HTML Tidy: https://github.com/htacg/tidy-html5
+Bug reports and comments: https://github.com/htacg/tidy-html5/issues
+Official mailing list: https://lists.w3.org/Archives/Public/public-htacg/
+Latest HTML specification: https://html.spec.whatwg.org/multipage/
+Validate your HTML documents: https://validator.w3.org/nu/
+Lobby your company to join the W3C: https://www.w3.org/Consortium
+
+Do you speak a language other than English, or a different variant of 
+English? Consider helping us to localize HTML Tidy. For details please see 
+https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md

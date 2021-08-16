@@ -16,6 +16,7 @@
 #include "entities.h"
 #include "tmbstr.h"
 #include "utf8.h"
+#include "sprtf.h"
 
 /* *** FOR DEBUG ONLY *** */
 /* #define DEBUG_PPRINT */
@@ -2330,101 +2331,151 @@ void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
     }
 }
 
+
 void TY_(PPrintXMLTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
 {
     Bool xhtmlOut = cfgBool( doc, TidyXhtmlOut );
-    if (node == NULL)
-        return;
-
-    if (doc->progressCallback)
-    {
-        doc->progressCallback( tidyImplToDoc(doc), node->line, node->column, doc->pprint.line + 1 );
-    }
+    Node* next = NULL;
     
-    if ( node->type == TextNode)
+    while ( node  )
     {
-        PPrintText( doc, mode, indent, node );
-    }
-    else if ( node->type == CommentTag )
-    {
-        PCondFlushLineSmart( doc, indent );
-        PPrintComment( doc, indent, node);
-        /* PCondFlushLine( doc, 0 ); */
-    }
-    else if ( node->type == RootNode )
-    {
-        Node *content;
-        for ( content = node->content;
-              content != NULL;
-              content = content->next )
-           TY_(PPrintXMLTree)( doc, mode, indent, content );
-    }
-    else if ( node->type == DocTypeTag )
-        PPrintDocType( doc, indent, node );
-    else if ( node->type == ProcInsTag )
-        PPrintPI( doc, indent, node );
-    else if ( node->type == XmlDecl )
-        PPrintXmlDecl( doc, indent, node );
-    else if ( node->type == CDATATag )
-        PPrintCDATA( doc, indent, node );
-    else if ( node->type == SectionTag )
-        PPrintSection( doc, indent, node );
-    else if ( node->type == AspTag )
-        PPrintAsp( doc, indent, node );
-    else if ( node->type == JsteTag)
-        PPrintJste( doc, indent, node );
-    else if ( node->type == PhpTag)
-        PPrintPhp( doc, indent, node );
-    else if ( TY_(nodeHasCM)(node, CM_EMPTY) ||
-              (node->type == StartEndTag && !xhtmlOut) )
-    {
-        PCondFlushLineSmart( doc, indent );
-        PPrintTag( doc, mode, indent, node );
-        /* TY_(PFlushLine)( doc, indent ); */
-    }
-    else /* some kind of container element */
-    {
-        uint spaces = cfg( doc, TidyIndentSpaces );
-        Node *content;
-        Bool mixed = no;
-        uint cindent;
-
-        for ( content = node->content; content; content = content->next )
+        next = node->next;
+        
+        if (doc->progressCallback)
         {
-            if ( TY_(nodeIsText)(content) )
+            doc->progressCallback( tidyImplToDoc(doc), node->line, node->column, doc->pprint.line + 1 );
+        }
+        
+        if ( node->type == TextNode)
+        {
+            PPrintText( doc, mode, indent, node );
+        }
+        else if ( node->type == RootNode )
+        {
+            if (node->content)
+                node = node->content;
+            continue;
+        }
+        else if ( node->type == CommentTag )
+        {
+            PCondFlushLineSmart( doc, indent );
+            PPrintComment( doc, indent, node);
+            /* PCondFlushLine( doc, 0 ); */
+        }
+        else if ( node->type == DocTypeTag )
+            PPrintDocType( doc, indent, node );
+        else if ( node->type == ProcInsTag )
+            PPrintPI( doc, indent, node );
+        else if ( node->type == XmlDecl )
+            PPrintXmlDecl( doc, indent, node );
+        else if ( node->type == CDATATag )
+            PPrintCDATA( doc, indent, node );
+        else if ( node->type == SectionTag )
+            PPrintSection( doc, indent, node );
+        else if ( node->type == AspTag )
+            PPrintAsp( doc, indent, node );
+        else if ( node->type == JsteTag)
+            PPrintJste( doc, indent, node );
+        else if ( node->type == PhpTag)
+            PPrintPhp( doc, indent, node );
+        else if ( TY_(nodeHasCM)(node, CM_EMPTY) ||
+                  (node->type == StartEndTag && !xhtmlOut) )
+        {
+            PCondFlushLineSmart( doc, indent );
+            PPrintTag( doc, mode, indent, node );
+            /* TY_(PFlushLine)( doc, indent ); */
+        }
+        else if ( node->type != RootNode )  /* some kind of container element */
+        {
+            TidyParserMemory memory = {0};
+            uint spaces = cfg( doc, TidyIndentSpaces );
+            Node *content;
+            Bool mixed = no;
+            uint cindent;
+
+            for ( content = node->content; content; content = content->next )
             {
-                mixed = yes;
-                break;
+                if ( TY_(nodeIsText)(content) )
+                {
+                    mixed = yes;
+                    break;
+                }
             }
-        }
 
-        PCondFlushLineSmart( doc, indent );
-
-        if ( TY_(XMLPreserveWhiteSpace)(doc, node) )
-        {
-            indent = 0;
-            mixed = no;
-            cindent = 0;
-        }
-        else if (mixed)
-            cindent = indent;
-        else
-            cindent = indent + spaces;
-
-        PPrintTag( doc, mode, indent, node );
-        if ( !mixed && node->content )
-            TY_(PFlushLineSmart)( doc, cindent );
- 
-        for ( content = node->content; content; content = content->next )
-            TY_(PPrintXMLTree)( doc, mode, cindent, content );
-
-        if ( !mixed && node->content )
             PCondFlushLineSmart( doc, indent );
 
-        PPrintEndTag( doc, mode, indent, node );
-        /* PCondFlushLine( doc, indent ); */
-    }
+            if ( TY_(XMLPreserveWhiteSpace)(doc, node) )
+            {
+                indent = 0;
+                mixed = no;
+                cindent = 0;
+            }
+            else if (mixed)
+                cindent = indent;
+            else
+                cindent = indent + spaces;
+
+            PPrintTag( doc, mode, indent, node );
+            if ( !mixed && node->content )
+                TY_(PFlushLineSmart)( doc, cindent );
+     
+            memory.original_node = node;
+            memory.reentry_node = next;
+            memory.register_1 = mixed;
+            memory.register_2 = indent;
+            TY_(pushMemory)(doc, memory);
+
+            /* Prevent infinite indentation. Seriously, at what point is
+               anyone going to read a file with infinite indentation? It
+               slows down rendering for arbitrarily-deep test cases that
+               are only meant to crash Tidy in the first place. Let's
+               consider whether to remove this limitation, lower it,
+               increase it, or add a new configuration option to control
+               it, or even emit an info-level message about it.
+             */
+            if (indent < TIDY_INDENTATION_LIMIT * spaces)
+                indent = cindent;
+
+            if (node->content)
+            {
+                node = node->content;
+                continue;
+            }
+        }
+        
+        if (next)
+        {
+            node = next;
+            continue;
+        }
+        
+        if ( TY_(isEmptyParserStack)(doc) == no )
+        {
+            /* It's possible that the reentry_node is null, because we
+               only pushed this record as a marker for the end tag while
+               there was no next node. Thus the loop will pop until we have
+               what we need. This also closes multiple end tags.
+             */
+            do {
+                TidyParserMemory memory = TY_(popMemory)(doc);
+                Node* close_node = memory.original_node;
+                Bool mixed = memory.register_1;
+                indent = memory.register_2;
+                
+                if ( !mixed && close_node->content )
+                    PCondFlushLineSmart( doc, indent );
+
+                PPrintEndTag( doc, mode, indent, close_node );
+                /* PCondFlushLine( doc, indent ); */
+           
+                node = memory.reentry_node;
+            } while ( node == NULL && TY_(isEmptyParserStack)(doc) == no );
+            continue;;
+        }
+        node = NULL;
+    } /* while */
 }
+
 
 /*
  * local variables:

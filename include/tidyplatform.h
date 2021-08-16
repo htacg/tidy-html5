@@ -611,6 +611,10 @@ extern "C" {
 #  define TIDY_THREAD_LOCAL __thread
 #endif
 
+#ifndef TIDY_INDENTATION_LIMIT
+#  define TIDY_INDENTATION_LIMIT 50
+#endif
+
 typedef unsigned char byte;
 
 typedef uint tchar;         /* single, full character */

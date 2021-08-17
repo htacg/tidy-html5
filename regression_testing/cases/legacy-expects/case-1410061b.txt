@@ -2,12 +2,18 @@ line 1 column 1 - Warning: missing <!DOCTYPE> declaration
 line 6 column 4 - Warning: replacing unexpected b with </b>
 line 6 column 30 - Warning: inserting implicit <font>
 line 6 column 30 - Warning: missing </font> before <li>
+line 7 column 1 - Warning: <li> isn't allowed in <body> elements
+line 5 column 1 - Info: <body> previously mentioned
+line 7 column 1 - Warning: inserting implicit <ul>
 line 7 column 5 - Warning: inserting implicit <font>
 line 8 column 5 - Warning: inserting implicit <font>
 line 9 column 5 - Warning: inserting implicit <font>
+line 10 column 1 - Warning: discarding unexpected </body>
+line 11 column 1 - Warning: discarding unexpected </html>
+line 7 column 1 - Warning: missing </ul>
 line 6 column 30 - Warning: trimming empty <font>
 Info: Document content looks like HTML5
-Tidy found 8 warnings and 0 errors!
+Tidy found 13 warnings and 0 errors!
 
 You are recommended to use CSS to specify the font and
 properties such as its size and color. This will reduce

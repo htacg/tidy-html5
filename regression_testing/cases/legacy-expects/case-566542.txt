@@ -1,23 +1,26 @@
 line 1 column 1 - Warning: missing <!DOCTYPE> declaration
 line 4 column 1 - Warning: inserting implicit <body>
+line 4 column 1 - Warning: <li> isn't allowed in <body> elements
+line 4 column 1 - Info: <body> previously mentioned
+line 4 column 1 - Warning: inserting implicit <ul>
 line 4 column 39 - Warning: missing </b> before <p>
 line 6 column 9 - Warning: inserting implicit <b>
 line 6 column 9 - Warning: missing </b> before <li>
-line 4 column 1 - Info: missing optional end tag </li>
-line 7 column 1 - Warning: inserting implicit <ul>
 line 7 column 5 - Warning: inserting implicit <b>
 line 7 column 5 - Warning: missing </b> before <p>
 line 7 column 8 - Warning: inserting implicit <b>
 line 7 column 8 - Warning: nested emphasis <b>
 line 7 column 8 - Warning: missing </b> before <p>
 line 7 column 8 - Warning: missing </b> before <p>
-line 7 column 1 - Warning: missing </ul>
+line 4 column 1 - Warning: missing </ul>
+line 4 column 1 - Warning: trimming empty <li>
 line 6 column 9 - Warning: trimming empty <b>
 line 6 column 6 - Warning: trimming empty <p>
 line 7 column 5 - Warning: trimming empty <b>
+line 7 column 1 - Warning: trimming empty <li>
 line 8 column 35 - Warning: trimming empty <p>
 Info: Document content looks like HTML5
-Tidy found 17 warnings and 0 errors!
+Tidy found 20 warnings and 0 errors!
 
 One or more empty elements were present in the source document but
 dropped on output. If these elements are necessary or you don't want

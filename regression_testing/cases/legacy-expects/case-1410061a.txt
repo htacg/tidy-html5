@@ -1,6 +1,8 @@
 line 1 column 1 - Warning: missing <!DOCTYPE> declaration
+line 6 column 319 - Warning: <li> isn't allowed in <body> elements
+line 5 column 1 - Info: <body> previously mentioned
+line 6 column 319 - Warning: inserting implicit <ul>
 line 6 column 319 - Info: missing optional end tag </li>
-line 6 column 378 - Warning: inserting implicit <ul>
 line 6 column 378 - Info: missing optional end tag </li>
 line 6 column 412 - Info: missing optional end tag </li>
 line 6 column 456 - Info: missing optional end tag </li>
@@ -10,7 +12,7 @@ line 6 column 665 - Info: missing optional end tag </li>
 line 6 column 690 - Info: missing optional end tag </li>
 line 6 column 754 - Info: missing optional end tag </li>
 line 6 column 842 - Info: missing optional end tag </li>
-line 6 column 378 - Warning: missing </ul> before </li>
+line 6 column 1041 - Warning: discarding unexpected </li>
 line 6 column 1046 - Warning: discarding unexpected </li>
 line 6 column 1051 - Warning: discarding unexpected </li>
 line 6 column 1056 - Warning: discarding unexpected </li>
@@ -20,8 +22,11 @@ line 6 column 1071 - Warning: discarding unexpected </li>
 line 6 column 1076 - Warning: discarding unexpected </li>
 line 6 column 1081 - Warning: discarding unexpected </li>
 line 6 column 1086 - Warning: discarding unexpected </li>
+line 7 column 1 - Warning: discarding unexpected </body>
+line 8 column 1 - Warning: discarding unexpected </html>
+line 6 column 319 - Warning: missing </ul>
 Info: Document content looks like HTML5
-Tidy found 12 warnings and 0 errors!
+Tidy found 16 warnings and 0 errors!
 
 About HTML Tidy: https://github.com/htacg/tidy-html5
 Bug reports and comments: https://github.com/htacg/tidy-html5/issues

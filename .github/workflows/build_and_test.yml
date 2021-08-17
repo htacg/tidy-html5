@@ -1,5 +1,5 @@
 ################################################################################
-# Build and Test tidy on the latest versions of all of the major platforms. 
+# Build and Test tidy on the latest versions of all of the major platforms.
 #
 #   - Build on multiple operating systems, and where possible, multiple
 #     architectures. On Windows, we will also build and test mingw in
@@ -20,6 +20,9 @@ on:
       - 'include/**'
       - '.github/workflows/**'
       - 'CMakeLists.txt'
+    branches:
+      - 'master'
+      - 'next'
   pull_request:
     paths:
       - 'src/**'
@@ -67,7 +70,7 @@ jobs:
            build_command: "cmake --build . --config Release"
            vers_command: "./tidy.exe --version"
            test_command: "ruby test.rb test"
-           
+
          ############################################################
          # We'll also build using MinGW on Windows, because it's
          # always nice to support FOSS toolchains. While we could
@@ -80,7 +83,7 @@ jobs:
            build_command: "cmake --build . --config Release"
            vers_command: "./tidy --version"
            test_command: "ruby test.rb test"
-         
+
          ############################################################
          # We'll also build using Cygwin on Windows, because even
          # Windows people sometimes dislike Windows. While we could
@@ -113,7 +116,7 @@ jobs:
       uses: egor-tensin/setup-mingw@v2
       with:
         platform: x64
-    
+
     ############################################################
     # Install Cygwin if needed for the current runner.
     ############################################################
@@ -123,7 +126,7 @@ jobs:
       with:
         platform: x64
         packages: make gcc-core gcc-g++ cmake
-    
+
     ############################################################
     # Cmake and Make the project.
     ############################################################
@@ -132,11 +135,11 @@ jobs:
       run: |
         ${{matrix.cmake_command}}
         ${{matrix.build_command}}
-   
+
     ############################################################
-    # Windows MSVC is the only oddball here; why does it 
+    # Windows MSVC is the only oddball here; why does it
     # install the binary into a subfolder, unlike all of the
-    # other builds? Let's make everything else easier by 
+    # other builds? Let's make everything else easier by
     # relocating it to the same spot as all the other build
     # locations.
     ############################################################
@@ -162,14 +165,14 @@ jobs:
       with:
         ruby-version: 2.7
         bundler-cache: true
-           
+
     ############################################################
     # Ensure that dependencies are met.
     ############################################################
-    - name: Bundle Install 
+    - name: Bundle Install
       working-directory: ${{github.workspace}}/regression_testing
       run: |
-        bundle install      
+        bundle install
 
     ############################################################
     # Finally, check for regressions.

@@ -55,8 +55,8 @@ typedef struct _TidyParserMemory
     GetTokenMode reentry_mode;   /**< The token mode to use when re-entering. */
     int          reentry_state;  /**< State to set during re-entry. Defined locally in each parser. */
     GetTokenMode mode;           /**< The caller will peek at this value to get the correct mode. */
-    Bool         register_b_1;   /**< Local variable storage. */
-    Bool         register_b_2;   /**< Local variable storage. */
+    int          register_1;     /**< Local variable storage. */
+    int          register_2;   /**< Local variable storage. */
 } TidyParserMemory;
 
 
@@ -84,6 +84,44 @@ void TY_(InitParserStack)( TidyDocImpl* doc );
  *  automatically.
  */
 void TY_(FreeParserStack)( TidyDocImpl* doc );
+
+
+/**
+ *  Indicates whether or not the stack is empty.
+ */
+Bool TY_(isEmptyParserStack)( TidyDocImpl* doc );
+
+
+/**
+ *  Peek at the parser memory.
+ */
+TidyParserMemory TY_(peekMemory)( TidyDocImpl* doc );
+
+
+/**
+ *  Peek at the parser memory "identity" field. This is just a convenience
+ *  to avoid having to create a new struct instance in the caller.
+ */
+Parser* TY_(peekMemoryIdentity)( TidyDocImpl* doc );
+
+
+/**
+ *  Peek at the parser memory "mode" field. This is just a convenience
+ *  to avoid having to create a new struct instance in the caller.
+ */
+GetTokenMode TY_(peekMemoryMode)( TidyDocImpl* doc );
+
+
+/**
+ *  Pop out a parser memory.
+ */
+TidyParserMemory TY_(popMemory)( TidyDocImpl* doc );
+
+
+/**
+ * Push the parser memory to the stack.
+ */
+void TY_(pushMemory)( TidyDocImpl* doc, TidyParserMemory data );
 
 
 /**

@@ -2048,14 +2048,22 @@ void dbg_show_node( TidyDocImpl* doc, Node *node, int caller, int indent )
     SPRTF("\n");
 }
 
-void dbg_show_all_nodes( TidyDocImpl* doc, Node *node, int indent )
+/* Tail recursion here with sensible compilers will re-use
+   the stack frame and avoid overflows during debugging.
+ */
+void dbg_show_all_nodes_loop( TidyDocImpl* doc, Node *node, int indent )
 {
-    while (node)
+    while ( node && (node = node->next) )
     {
         dbg_show_node( doc, node, 0, indent );
-        dbg_show_all_nodes( doc, node->content, indent + 1 );
-        node = node->next;
+        dbg_show_all_nodes_loop( doc, node->content, indent + 1 );
     }
+}
+
+void dbg_show_all_nodes( TidyDocImpl* doc, Node *node, int indent )
+{
+    dbg_show_node( doc, node, 0, indent );
+    dbg_show_all_nodes_loop( doc, node->content, indent + 1 );
 }
 
 #endif

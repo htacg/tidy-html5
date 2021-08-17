@@ -1,0 +1,47 @@
+<!--
+This test case represents HTML Tidy issue #464, which describes
+a descrepancy between tidy's behavior and the W3C Nu HTML
+checker behavior. In this case, <dl> is now allowed to contain
+a div as a descendent in HTML5.
+ -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Issue #464
+    </title>
+  </head>
+  <body>
+    <dl>
+      <dt>
+        term
+      </dt>
+      <dd>
+        def
+      </dd>
+      <dt>
+        another term
+      </dt>
+      <dd>
+        another def
+      </dd>
+    </dl>
+    <dl>
+      <div>
+        <dt>
+          term
+        </dt>
+        <dd>
+          def
+        </dd>
+        <dt>
+          another term
+        </dt>
+        <dd>
+          another def
+        </dd>
+      </div>
+    </dl>
+  </body>
+</html>

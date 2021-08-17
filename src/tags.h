@@ -463,6 +463,7 @@ TY_PRIVATE uint TY_(nodeHeaderLevel)( Node* node );
 #define nodeIsDATALIST( node )   TagIsId( node, TidyTag_DATALIST )
 #define nodeIsDATA( node )       TagIsId( node, TidyTag_DATA )
 #define nodeIsMATHML( node )     TagIsId( node, TidyTag_MATHML ) /* #130 MathML attr and entity fix! */
+#define nodeIsTEMPLATE( node )   TagIsId( node, TidyTag_TEMPLATE )
 
 /* NOT in HTML 5 */
 #define nodeIsACRONYM( node )    TagIsId( node, TidyTag_ACRONYM )

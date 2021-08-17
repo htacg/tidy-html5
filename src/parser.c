@@ -1417,7 +1417,7 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                     return NULL;
                 }
             }
-            else /* things like list items */
+            else if ( ! nodeIsTEMPLATE( element ) )/* things like list items */
             {
                 if (node->tag->model & CM_HEAD)
                 {

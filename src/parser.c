@@ -866,7 +866,7 @@ static void growParserStack( TidyDocImpl* doc )
 /**
  *  Indicates whether or not the stack is empty.
  */
-inline Bool TY_(isEmptyParserStack)( TidyDocImpl* doc )
+Bool TY_(isEmptyParserStack)( TidyDocImpl* doc )
 {
     return doc->stack.top < 0;
 }
@@ -875,7 +875,7 @@ inline Bool TY_(isEmptyParserStack)( TidyDocImpl* doc )
 /**
  *  Peek at the parser memory.
  */
-inline TidyParserMemory TY_(peekMemory)( TidyDocImpl* doc )
+TidyParserMemory TY_(peekMemory)( TidyDocImpl* doc )
 {
     return doc->stack.content[doc->stack.top];
 }
@@ -885,7 +885,7 @@ inline TidyParserMemory TY_(peekMemory)( TidyDocImpl* doc )
  *  Peek at the parser memory "identity" field. This is just a convenience
  *  to avoid having to create a new struct instance in the caller.
  */
-inline Parser* TY_(peekMemoryIdentity)( TidyDocImpl* doc )
+Parser* TY_(peekMemoryIdentity)( TidyDocImpl* doc )
 {
     return doc->stack.content[doc->stack.top].identity;
 }
@@ -895,7 +895,7 @@ inline Parser* TY_(peekMemoryIdentity)( TidyDocImpl* doc )
  *  Peek at the parser memory "mode" field. This is just a convenience
  *  to avoid having to create a new struct instance in the caller.
  */
-inline GetTokenMode TY_(peekMemoryMode)( TidyDocImpl* doc )
+GetTokenMode TY_(peekMemoryMode)( TidyDocImpl* doc )
 {
     return doc->stack.content[doc->stack.top].mode;
 }

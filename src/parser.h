@@ -56,7 +56,7 @@ typedef struct _TidyParserMemory
     int          reentry_state;  /**< State to set during re-entry. Defined locally in each parser. */
     GetTokenMode mode;           /**< The caller will peek at this value to get the correct mode. */
     int          register_1;     /**< Local variable storage. */
-    int          register_2;   /**< Local variable storage. */
+    int          register_2;     /**< Local variable storage. */
 } TidyParserMemory;
 
 

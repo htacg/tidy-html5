@@ -1115,6 +1115,11 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
             return NULL;
         }
 
+        if ( nodeIsDIV(element) && nodeIsDL(element->parent) && TY_(IsHTML5Mode)(doc) )
+        {
+            return TY_(ParseDefList)(doc, element, mode);
+        }
+        
         if ( nodeIsFORM(element) &&
              DescendantOf(element, TidyTag_FORM) )
             TY_(Report)(doc, element, NULL, ILLEGAL_NESTING );
@@ -1332,7 +1337,7 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                 TY_(FreeNode)( doc, node );
                 continue;
             }
-
+            
             /* #427671 - Fix by Randy Waki - 10 Aug 00 */
             /*
              If an LI contains an illegal FRAME, FRAMESET, OPTGROUP, or OPTION
@@ -2311,7 +2316,7 @@ Node* TY_(ParseDefList)( TidyDocImpl* doc, Node *list, GetTokenMode mode )
                     }
                 }
 
-                if ( !(nodeIsDT(node) || nodeIsDD(node)) )
+                if ( !( nodeIsDT(node) || nodeIsDD(node) || ( nodeIsDIV(node) && TY_(IsHTML5Mode)(doc) ) ) )
                 {
                     TY_(UngetToken)( doc );
 
@@ -2340,7 +2345,7 @@ Node* TY_(ParseDefList)( TidyDocImpl* doc, Node *list, GetTokenMode mode )
                     continue;
                 }
 
-                /* node should be <DT> or <DD>*/
+                /* node should be <DT> or <DD> or <DIV>*/
                 TY_(InsertNodeAtEnd)(list, node);
                 {
                     TidyParserMemory memory = {0};

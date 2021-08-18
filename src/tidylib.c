@@ -2259,9 +2259,9 @@ int         tidyDocSaveStream( TidyDocImpl* doc, StreamOut* out )
     doc->pConfigChangeCallback = NULL;
 
     if (ppWithTabs)
-        TY_(PPrintTabs)();
+        doc->indent_char = '\t';
     else
-        TY_(PPrintSpaces)();
+        doc->indent_char = ' ';
 
     if (escapeCDATA)
         TY_(ConvertCDATANodes)(doc, &doc->root);

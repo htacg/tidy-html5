@@ -157,7 +157,8 @@ typedef enum
 #define CM_NO_INDENT    (1 << 18)  /**< Elements whose content needs to be indented only if containing one CM_BLOCK element. */
 #define CM_OBSOLETE     (1 << 19)  /**< Elements that are obsolete (such as "dir", "menu"). */
 #define CM_NEW          (1 << 20)  /**< User defined elements. Used to determine how attributes without value should be printed. */
-#define CM_OMITST       (1 << 21)   /**< Elements that cannot be omitted. */
+#define CM_OMITST       (1 << 21)  /**< Elements that cannot be omitted. */
+#define CM_VOID         (1 << 22)  /**< Elements that are void per https://www.w3.org/TR/2011/WD-html-markup-20110113/syntax.html#syntax-elements. */
 
 
 /**
@@ -649,7 +650,7 @@ TY_PRIVATE int TY_(InlineDup)( TidyDocImpl* doc, Node *node );
 
 
 /**
- *  Fefer duplicates when entering a table or other
+ *  Defer duplicates when entering a table or other
  *  element where the inlines shouldn't be duplicated.
  */
 TY_PRIVATE void TY_(DeferDup)( TidyDocImpl* doc );

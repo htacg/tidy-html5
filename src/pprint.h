@@ -1,89 +1,143 @@
 #ifndef __PPRINT_H__
 #define __PPRINT_H__
 
-/* pprint.h -- pretty print parse tree  
-  
-   (c) 1998-2007 (W3C) MIT, ERCIM, Keio University
-   See tidy.h for the copyright notice.
-  
-*/
+/**************************************************************************//**
+ * @file
+ * Pretty Print the parse tree.
+ *
+ * Pretty printer for HTML and XML documents.
+ *   - Block-level and unknown elements are printed on new lines and
+ *     their contents indented with a user configured amount of spaces/tabs.
+ *   - Inline elements are printed inline.
+ *   - Inline content is wrapped on spaces (except in attribute values or
+ *     preformatted text, after start tags and before end tags.
+ *
+ * @author  HTACG, et al (consult git log)
+ *
+ * @copyright
+ *     Copyright (c) 1998-2021 World Wide Web Consortium (Massachusetts
+ *     Institute of Technology, European Research Consortium for Informatics
+ *     and Mathematics, Keio University) and HTACG.
+ * @par
+ *     All Rights Reserved.
+ * @par
+ *     See `tidy.h` for the complete license.
+ *
+ * @date Additional updates: consult git log
+ *
+ ******************************************************************************/
 
 #include "forward.h"
 
-/*
-  Block-level and unknown elements are printed on
-  new lines and their contents indented 2 spaces
-
-  Inline elements are printed inline.
-
-  Inline content is wrapped on spaces (except in
-  attribute values or preformatted text, after
-  start tags and before end tags
-*/
-
-#define NORMAL        0u
-#define PREFORMATTED  1u
-#define COMMENT       2u
-#define ATTRIBVALUE   4u
-#define NOWRAP        8u
-#define CDATA         16u
+/** @addtogroup internal_api */
+/** @{ */
 
 
-/* The pretty printer keeps at most two lines of text in the
-** buffer before flushing output.  We need to capture the
-** indent state (indent level) at the _beginning_ of _each_
-** line, not the end of just the second line.
-**
-** We must also keep track "In Attribute" and "In String"
-** states at the _end_ of each line, 
-*/
+/***************************************************************************//**
+ ** @defgroup print_h HTML and XML Pretty Printing
+ **
+ ** These functions and structures form the internal API for document
+ ** printing.
+ **
+ ** @{
+ ******************************************************************************/
 
+
+/**
+ *  This typedef represents the current pretty-printing mode, and instructs
+ *  the printer behavior per the content currently being output.
+ */
+typedef enum {
+    NORMAL       = 0u,  /**< Normal output. */
+    PREFORMATTED = 1u,  /**< Preformatted output. */
+    COMMENT      = 2u,  /**< Comment. */
+    ATTRIBVALUE  = 4u,  /**< An attribute's value. */
+    NOWRAP       = 8u,  /**< Content that should not be wrapped. */
+    CDATA        = 16u  /**< CDATA content. */
+} PrettyPrintMode;
+
+
+/**
+ *  A record of the state of a single line, capturing the indent
+ *  level, in-attribute, and in-string state of a line. Instances
+ *  of this record are used by the pretty-printing buffer.
+ *
+ *  The pretty printer keeps at most two lines of text in the
+ *  buffer before flushing output.  We need to capture the
+ *  indent state (indent level) at the _beginning_ of _each_
+ *  line, not the end of just the second line.
+ *
+ *  We must also keep track "In Attribute" and "In String"
+ *  states at the _end_ of each line,
+ */
 typedef struct _TidyIndent
 {
-    int spaces;
-    int attrValStart;
-    int attrStringStart;
+    int spaces;           /**< Indent level of the line. */
+    int attrValStart;     /**< Attribute in-value state. */
+    int attrStringStart;  /**< Attribute in-string state. */
 } TidyIndent;
 
+
+/**
+ *  The pretty-printing buffer.
+ */
 typedef struct _TidyPrintImpl
 {
-    TidyAllocator *allocator; /* Allocator */
+    TidyAllocator *allocator; /**< Allocator */
 
-    uint *linebuf;
-    uint lbufsize;
-    uint linelen;
-    uint wraphere;
-    uint line;
+    uint *linebuf;            /**< The line buffer proper. */
+    uint lbufsize;            /**< Current size of the buffer. */
+    uint linelen;             /**< Current line length. */
+    uint wraphere;            /**< Point in the line to wrap text. */
+    uint line;                /**< Current line. */
   
-    uint ixInd;
-    TidyIndent indent[2];  /* Two lines worth of indent state */
+    uint ixInd;               /**< Index into the indent[] array. */
+    TidyIndent indent[2];     /**< Two lines worth of indent state */
 } TidyPrintImpl;
 
 
+/**
+ *  Allocates and initializes the pretty-printing buffer for a Tidy document.
+ */
 TY_PRIVATE void TY_(InitPrintBuf)( TidyDocImpl* doc );
+
+
+/**
+ *  Deallocates and free a Tidy document's pretty-printing buffer.
+ */
 TY_PRIVATE void TY_(FreePrintBuf)( TidyDocImpl* doc );
 
+
+/**
+ *  Flushes the current buffer to the actual output sink.
+ */
 TY_PRIVATE void TY_(PFlushLine)( TidyDocImpl* doc, uint indent );
 
 
-/* print just the content of the body element.
-** useful when you want to reuse material from
-** other documents.
-** 
-** -- Sebastiano Vigna <vigna@dsi.unimi.it>
-*/
+/**
+ *  Print just the content of the HTML body element, which is useful when
+ *  want to reuse material from other documents.
+ *  -- Sebastiano Vigna <vigna@dsi.unimi.it>
+ */
+TY_PRIVATE void TY_(PrintBody)( TidyDocImpl* doc );
 
-TY_PRIVATE void TY_(PrintBody)( TidyDocImpl* doc );       /* you can print an entire document */
-                                          /* node as body using PPrintTree() */
 
+/**
+ *  Print the HTML document tree for the given document using the given node
+ *  as the root of the document. Note that you can print an entire document
+ *  node as body using PPrintTree()
+ */
 TY_PRIVATE void TY_(PPrintTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node );
 
+
+/**
+ *  Print the XML document tree for the given document using the given node
+ *  as the root of the document.
+ */
 TY_PRIVATE void TY_(PPrintXMLTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node );
 
-/*\
- * 20150515 - support using tabs instead of spaces
-\*/
-TY_PRIVATE void TY_(PPrintTabs)(void);
-TY_PRIVATE void TY_(PPrintSpaces)(void);
+
+/** @} end print_h group */
+/** @} end internal_api group */
 
 #endif /* __PPRINT_H__ */

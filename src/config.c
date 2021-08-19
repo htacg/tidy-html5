@@ -1291,6 +1291,12 @@ void TY_(AdjustConfig)( TidyDocImpl* doc )
         TY_(SetOptionBool)( doc, TidyQuoteAmpersand, yes );
         TY_(SetOptionBool)( doc, TidyOmitOptionalTags, no );
     }
+    
+    /* Setup the indent character. */
+    if cfgBool(doc, TidyPPrintTabs) 
+        doc->indent_char = '\t';
+    else
+        doc->indent_char = ' ';
 }
 
 

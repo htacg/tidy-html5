@@ -2253,16 +2253,11 @@ int         tidyDocSaveStream( TidyDocImpl* doc, StreamOut* out )
     Bool asciiChars   = cfgBool(doc, TidyAsciiChars);
     Bool makeBare     = cfgBool(doc, TidyMakeBare);
     Bool escapeCDATA  = cfgBool(doc, TidyEscapeCdata);
-    Bool ppWithTabs   = cfgBool(doc, TidyPPrintTabs);
     TidyAttrSortStrategy sortAttrStrat = cfg(doc, TidySortAttributes);
     TidyConfigChangeCallback callback = doc->pConfigChangeCallback;
     doc->pConfigChangeCallback = NULL;
 
-    if (ppWithTabs)
-        TY_(PPrintTabs)();
-    else
-        TY_(PPrintSpaces)();
-
+    
     if (escapeCDATA)
         TY_(ConvertCDATANodes)(doc, &doc->root);
 

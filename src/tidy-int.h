@@ -83,6 +83,8 @@ struct _TidyDocImpl
 
     Bool                HTML5Mode;   /* current mode is html5 */
     Bool                xmlDetected; /* true if XML was used/detected */
+    
+    uint                indent_char; /* space or tab character, for indenting */
 
     /* Memory allocator */
     TidyAllocator*      allocator;

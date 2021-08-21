@@ -913,11 +913,13 @@ TidyParserMemory TY_(popMemory)( TidyDocImpl* doc )
                         "<--POP  original: %s @ %p\n"
                         "         reentry: %s @ %p\n"
                         "     stack depth: %lu @ %p\n"
+                        "            mode: %u\n"
                         "      register 1: %i\n"
                         "      register 2: %i\n\n",
                         data.original_node ? data.original_node->element : "none", data.original_node,
                         data.reentry_node ? data.reentry_node->element : "none", data.reentry_node,
                         doc->stack.top, &doc->stack.content[doc->stack.top],
+                        data.mode,
                         data.register_1,
                         data.register_2
                         ));
@@ -944,15 +946,46 @@ void TY_(pushMemory)( TidyDocImpl* doc, TidyParserMemory data )
                     "-->PUSH original: %s @ %p\n"
                     "         reentry: %s @ %p\n"
                     "     stack depth: %lu @ %p\n"
+                    "            mode: %u\n"
                     "      register 1: %i\n"
                     "      register 2: %i\n\n",
                     data.original_node ? data.original_node->element : "none", data.original_node,
                     data.reentry_node ? data.reentry_node->element : "none", data.reentry_node,
                     doc->stack.top, &doc->stack.content[doc->stack.top],
+                    data.mode,
                     data.register_1,
                     data.register_2
                     ));
 }
+
+
+/***************************************************************************//*
+ ** MARK: Convenience Logging Macros
+ ***************************************************************************/
+
+
+#if defined(ENABLE_DEBUG_LOG)
+#  define DEBUG_LOG_COUNTERS \
+     static int depth_parser = 0;\
+     static int count_parser = 0;\
+     int old_mode = IgnoreWhitespace;
+#  define DEBUG_LOG_GET_OLD_MODE old_mode = mode;
+#  define DEBUG_LOG_REENTER_WITH_NODE(NODE) SPRTF("\n>>>Re-Enter %s-%u with '%s', +++mode: %u, depth: %d, cnt: %d\n", __FUNCTION__, __LINE__, NODE->element, mode, ++depth_parser, ++count_parser);
+#  define DEBUG_LOG_ENTER_WITH_NODE(NODE) SPRTF("\n>>>Enter %s-%u with '%s', +++mode: %u, depth: %d, cnt: %d\n", __FUNCTION__, __LINE__, NODE->element, mode, ++depth_parser, ++count_parser);
+#  define DEBUG_LOG_CHANGE_MODE SPRTF("+++%s-%u Changing mode to %u (was %u)\n", __FUNCTION__, __LINE__, mode, old_mode);
+#  define DEBUG_LOG_GOT_TOKEN(NODE) SPRTF("---%s-%u got token '%s' with mode '%u'.\n", __FUNCTION__, __LINE__, NODE ? NODE->element : NULL, mode);
+#  define DEBUG_LOG_EXIT_WITH_NODE(NODE) SPRTF("<<<Exit %s-%u with a node to parse: '%s', depth: %d\n", __FUNCTION__, __LINE__, NODE->element, depth_parser--);
+#  define DEBUG_LOG_EXIT SPRTF("<<<Exit %s-%u, depth: %d\n", __FUNCTION__, __LINE__, depth_parser--);
+#else
+#  define DEBUG_LOG_COUNTERS
+#  define DEBUG_LOG_GET_OLD_MODE
+#  define DEBUG_LOG_REENTER_WITH_NODE(NODE)
+#  define DEBUG_LOG_ENTER_WITH_NODE(NODE)
+#  define DEBUG_LOG_CHANGE_MODE
+#  define DEBUG_LOG_GOT_TOKEN(NODE)
+#  define DEBUG_LOG_EXIT_WITH_NODE(NODE)
+#  define DEBUG_LOG_EXIT
+#endif
 
 
 /***************************************************************************//*
@@ -1061,8 +1094,8 @@ void ParseHTMLWithNode( TidyDocImpl* doc, Node* node )
          nothing on the stack, so we can draw a new node from the lexer.
          */
         node = TY_(GetToken)( doc, mode );
-        DEBUG_LOG(SPRTF("---ParseHTMLWithNode got token %s with mode %u.\n", node ? node->element : NULL, mode));
-      
+        DEBUG_LOG_GOT_TOKEN(node);
+
         if (node)
             parser = GetParserForNode( doc, node );
         else
@@ -1087,42 +1120,42 @@ void ParseHTMLWithNode( TidyDocImpl* doc, Node* node )
  */
 Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
 {
-#if defined(ENABLE_DEBUG_LOG)
-    static int in_parse_block = 0;
-    static int parse_block_cnt = 0;
-#endif
     Lexer* lexer = doc->lexer;
-    Node *node;
+    Node *node = NULL;
     Bool checkstack = yes;
     uint istackbase = 0;
+    DEBUG_LOG_COUNTERS;
     
     if ( element == NULL )
     {
         TidyParserMemory memory = TY_(popMemory)( doc );
         node = memory.reentry_node; /* Throwaway, because the loop overwrites this immediately. */
-        mode = memory.reentry_mode;
+        DEBUG_LOG_REENTER_WITH_NODE(node);
         element = memory.original_node;
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParseBlock with %s\n", node->element));
+        DEBUG_LOG_GET_OLD_MODE;
+        mode = memory.reentry_mode;
+        DEBUG_LOG_CHANGE_MODE;
     }
     else
     {
-        DEBUG_LOG(SPRTF(">>>Entering ParseBlock %d... %d %s\n",++in_parse_block,++parse_block_cnt,
-            ((element && element->element) ? element->element : "")));
+        DEBUG_LOG_ENTER_WITH_NODE(element);
 
         if ( element->tag->model & CM_EMPTY )
         {
-            DEBUG_LOG(SPRTF("<<<Exit ParseBlock 1 %d...\n", --in_parse_block));
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
         if ( nodeIsDIV(element) && nodeIsDL(element->parent) && TY_(IsHTML5Mode)(doc) )
         {
-            return TY_(ParseDefList)(doc, element, mode);
+            DEBUG_LOG_EXIT;
+            return TY_(ParseDefList)(doc, element, mode); /* @warning: possible recursion! */
         }
         
-        if ( nodeIsFORM(element) &&
-             DescendantOf(element, TidyTag_FORM) )
+        if ( nodeIsFORM(element) && DescendantOf(element, TidyTag_FORM) )
+        {
             TY_(Report)(doc, element, NULL, ILLEGAL_NESTING );
+        }
 
         /*
          InlineDup() asks the lexer to insert inline emphasis tags
@@ -1139,7 +1172,9 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
         }
 
         if (!(element->tag->model & CM_MIXED))
+        {
             TY_(InlineDup)( doc, NULL );
+        }
 
         /*\
          *  Issue #212 - If it is likely that it may be necessary
@@ -1150,14 +1185,18 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
         if ( !(element->tag->model & CM_INLINE) ||
               (element->tag->model & CM_FIELD ) )
         {
+            DEBUG_LOG_GET_OLD_MODE;
             mode = IgnoreWhitespace;
+            DEBUG_LOG_CHANGE_MODE;
         }
         else if (mode == IgnoreWhitespace)
         {
             /* Issue #212 - Further fix in case ParseBlock() is called with 'IgnoreWhitespace'
                when such a leading space may need to be inserted before this element to
                preserve the browser view */
+            DEBUG_LOG_GET_OLD_MODE;
             mode = MixedContent;
+            DEBUG_LOG_CHANGE_MODE;
         }
     } /* Re-Entering */
     
@@ -1167,7 +1206,7 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
     
     while ((node = TY_(GetToken)(doc, mode /*MixedContent*/)) != NULL)
     {
-        DEBUG_LOG(SPRTF("---ParseBlock got token %s with mode %u\n", node->element, IgnoreWhitespace));
+        DEBUG_LOG_GOT_TOKEN(node);
         /* end tag for this element */
         if (node->type == EndTag && node->tag &&
             (node->tag == element->tag || element->was == node->tag))
@@ -1184,7 +1223,7 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
 
             element->closed = yes;
             TrimSpaces( doc, element );
-            DEBUG_LOG(SPRTF("<<<Exit ParseBlock 2 %d...\n",--in_parse_block));
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -1206,7 +1245,9 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                 continue;
             }
             else if ( nodeIsBR(node) )
+            {
                 node->type = StartTag;
+            }
             else if ( nodeIsP(node) )
             {
                 /* Cannot have a block inside a paragraph, so no checking
@@ -1235,7 +1276,7 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                 {
                     TY_(UngetToken)( doc );
                     TrimSpaces( doc, element );
-                    DEBUG_LOG(SPRTF("<<<Exit ParseBlock 2 %d...\n",--in_parse_block));
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
             }
@@ -1255,8 +1296,9 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
             }
 
             TY_(InsertNodeAtEnd)(element, node);
+            DEBUG_LOG_GET_OLD_MODE
             mode = MixedContent;
-
+            DEBUG_LOG_CHANGE_MODE;
             /*
               HTML4 strict doesn't allow mixed content for
               elements with %block; as their content model
@@ -1396,7 +1438,7 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                 {
                     TY_(UngetToken)( doc );
                     TrimSpaces( doc, element );
-                    DEBUG_LOG(SPRTF("<<<Exit ParseBlock 3 %d...\n",--in_parse_block));
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
             }
@@ -1413,7 +1455,7 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                         lexer->istackbase = istackbase;
 
                     TrimSpaces( doc, element );
-                    DEBUG_LOG(SPRTF("<<<Exit ParseBlock 4 %d...\n",--in_parse_block));
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
             }
@@ -1469,7 +1511,7 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                          element->parent->tag->parser == TY_(ParseList) )
                     {
                         TrimSpaces( doc, element );
-                        DEBUG_LOG(SPRTF("<<<Exit ParseBlock 5 %d...\n",--in_parse_block));
+                        DEBUG_LOG_EXIT;
                         return NULL;
                     }
 
@@ -1481,7 +1523,7 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                     if ( nodeIsDL(element->parent) )
                     {
                         TrimSpaces( doc, element );
-                        DEBUG_LOG(SPRTF("<<<Exit ParseBlock 6 %d...\n", --in_parse_block));
+                        DEBUG_LOG_EXIT;
                         return NULL;
                     }
 
@@ -1494,7 +1536,7 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                        continue. */
                     if (lexer->exiled)
                     {
-                        DEBUG_LOG(SPRTF("<<<Exit ParseBlock 7 %d...\n", --in_parse_block));
+                        DEBUG_LOG_EXIT;
                         return NULL;
                     }
                     node = TY_(InferredTag)(doc, TidyTag_TABLE);
@@ -1506,14 +1548,14 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                         TY_(PopInline)( doc, NULL );
                     lexer->istackbase = istackbase;
                     TrimSpaces( doc, element );
-                    DEBUG_LOG(SPRTF("<<<Exit ParseBlock 8 %d...\n", --in_parse_block));
+                    DEBUG_LOG_EXIT;
                     return NULL;
 
                 }
                 else
                 {
                     TrimSpaces( doc, element );
-                    DEBUG_LOG(SPRTF("<<<Exit ParseBlock 9 %d...\n", --in_parse_block));
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
             }
@@ -1554,7 +1596,7 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
             if (!(mode & Preformatted))
                 TrimSpaces(doc, element);
 
-            DEBUG_LOG(SPRTF("<<<Exit ParseBlock 9b %d...\n", --in_parse_block));
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -1574,12 +1616,16 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                     }
                 }
 
+                DEBUG_LOG_GET_OLD_MODE;
                 mode = MixedContent;
+                DEBUG_LOG_CHANGE_MODE;
             }
             else
             {
                 checkstack = yes;
+                DEBUG_LOG_GET_OLD_MODE;
                 mode = IgnoreWhitespace;
+                DEBUG_LOG_CHANGE_MODE;
             }
 
             /* trim white space before <br> */
@@ -1602,7 +1648,7 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                 memory.reentry_mode = mode;
                 memory.original_node = element;
                 TY_(pushMemory)(doc, memory);
-                DEBUG_LOG(SPRTF("<<<Leave ParseBlock to return node %s\n", node->element));
+                DEBUG_LOG_EXIT_WITH_NODE(node);
             }
             return node;
         }
@@ -1629,7 +1675,7 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
 
     TrimSpaces( doc, element );
 
-    DEBUG_LOG(SPRTF("<<<Exit ParseBlock 10 %d...\n", --in_parse_block));
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 
@@ -1645,9 +1691,10 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
 Node* TY_(ParseBody)( TidyDocImpl* doc, Node *body, GetTokenMode mode )
 {
     Lexer* lexer = doc->lexer;
-    Node *node;
+    Node *node = NULL;
     Bool checkstack = no;
     Bool iswhitenode = no;
+    DEBUG_LOG_COUNTERS;
 
     mode = IgnoreWhitespace;
     checkstack = yes;
@@ -1661,21 +1708,23 @@ Node* TY_(ParseBody)( TidyDocImpl* doc, Node *body, GetTokenMode mode )
     {
         TidyParserMemory memory = TY_(popMemory)( doc );
         node = memory.reentry_node; /* Throwaway, as main loop overrwrites anyway. */
+        DEBUG_LOG_REENTER_WITH_NODE(node);
         body = memory.original_node;
         checkstack = memory.register_1;
         iswhitenode = memory.register_2;
+        DEBUG_LOG_GET_OLD_MODE;
         mode = memory.mode;
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParseBody with %s\n", node->element));
+        DEBUG_LOG_CHANGE_MODE;
     }
     else
     {
-        DEBUG_LOG(SPRTF(">>>Enter ParseBody...\n"));
+        DEBUG_LOG_ENTER_WITH_NODE(body);
         TY_(BumpObject)( doc, body->parent );
     }
     
     while ((node = TY_(GetToken)(doc, mode)) != NULL)
     {
-        DEBUG_LOG(SPRTF("---ParseBody got token %s with mode %u\n", node->element, IgnoreWhitespace));
+        DEBUG_LOG_GOT_TOKEN(node);
         /* find and discard multiple <body> elements */
         if (node->tag == body->tag && node->type == StartTag)
         {
@@ -1710,7 +1759,9 @@ Node* TY_(ParseBody)( TidyDocImpl* doc, Node *body, GetTokenMode mode )
             TrimSpaces(doc, body);
             TY_(FreeNode)( doc, node);
             lexer->seenEndBody = 1;
+            DEBUG_LOG_GET_OLD_MODE;
             mode = IgnoreWhitespace;
+            DEBUG_LOG_CHANGE_MODE;
 
             if ( nodeIsNOFRAMES(body->parent) )
                 break;
@@ -1733,6 +1784,7 @@ Node* TY_(ParseBody)( TidyDocImpl* doc, Node *body, GetTokenMode mode )
                 memory.register_2 = iswhitenode;
                 memory.mode = mode;
                 TY_(pushMemory)( doc, memory );
+                DEBUG_LOG_EXIT_WITH_NODE(node);
                 return node;
             }
 
@@ -1784,7 +1836,9 @@ Node* TY_(ParseBody)( TidyDocImpl* doc, Node *body, GetTokenMode mode )
             }
 
             TY_(InsertNodeAtEnd)(body, node);
+            DEBUG_LOG_GET_OLD_MODE;
             mode = MixedContent;
+            DEBUG_LOG_CHANGE_MODE;
             continue;
         }
 
@@ -1870,6 +1924,7 @@ Node* TY_(ParseBody)( TidyDocImpl* doc, Node *body, GetTokenMode mode )
                 if ( !TY_(nodeHasCM)(node, CM_ROW | CM_FIELD) )
                 {
                     TY_(UngetToken)( doc );
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
 
@@ -1882,7 +1937,9 @@ Node* TY_(ParseBody)( TidyDocImpl* doc, Node *body, GetTokenMode mode )
         if (node->type == EndTag)
         {
             if ( nodeIsBR(node) )
+            {
                 node->type = StartTag;
+            }
             else if ( nodeIsP(node) )
             {
                 node->type = StartEndTag;
@@ -1927,16 +1984,22 @@ Node* TY_(ParseBody)( TidyDocImpl* doc, Node *body, GetTokenMode mode )
                         continue;
                 }
 
+                DEBUG_LOG_GET_OLD_MODE;
                 mode = MixedContent;
+                DEBUG_LOG_CHANGE_MODE;
             }
             else
             {
                 checkstack = yes;
+                DEBUG_LOG_GET_OLD_MODE;
                 mode = IgnoreWhitespace;
+                DEBUG_LOG_CHANGE_MODE;
             }
 
             if (node->implicit)
+            {
                 TY_(Report)(doc, body, node, INSERTING_TAG);
+            }
 
             TY_(InsertNodeAtEnd)(body, node);
             
@@ -1950,7 +2013,7 @@ Node* TY_(ParseBody)( TidyDocImpl* doc, Node *body, GetTokenMode mode )
                 memory.mode = mode;
                 TY_(pushMemory)( doc, memory );
             }
-            DEBUG_LOG(SPRTF("<<<Exiting ParseBody with a node to parse: %s\n", node->element));
+            DEBUG_LOG_EXIT_WITH_NODE(node);
             return node;
         }
 
@@ -1958,7 +2021,7 @@ Node* TY_(ParseBody)( TidyDocImpl* doc, Node *body, GetTokenMode mode )
         TY_(Report)(doc, body, node, DISCARDING_UNEXPECTED);
         TY_(FreeNode)( doc, node);
     }
-    DEBUG_LOG(SPRTF("<<<Exit ParseBody at bottom\n"));
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 
@@ -1974,6 +2037,7 @@ Node* TY_(ParseBody)( TidyDocImpl* doc, Node *body, GetTokenMode mode )
 Node* TY_(ParseColGroup)( TidyDocImpl* doc, Node *colgroup, GetTokenMode ARG_UNUSED(mode) )
 {
     Node *node, *parent;
+    DEBUG_LOG_COUNTERS;
 
     /*
      If we're re-entering, then we need to setup from a previous state,
@@ -1984,20 +2048,22 @@ Node* TY_(ParseColGroup)( TidyDocImpl* doc, Node *colgroup, GetTokenMode ARG_UNU
     {
         TidyParserMemory memory = TY_(popMemory)( doc );
         node = memory.reentry_node; /* Throwaway, as main loop overrwrites anyway. */
+        DEBUG_LOG_REENTER_WITH_NODE(node);
         colgroup = memory.original_node;
+        DEBUG_LOG_GET_OLD_MODE;
         mode = memory.mode;
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParseColGroup with %s\n", node->element));
+        DEBUG_LOG_CHANGE_MODE;
     }
     else
     {
-        DEBUG_LOG(SPRTF(">>>Enter ParseColGroup...\n"));
+        DEBUG_LOG_ENTER_WITH_NODE(colgroup);
         if (colgroup->tag->model & CM_EMPTY)
             return NULL;
     }
 
     while ((node = TY_(GetToken)(doc, IgnoreWhitespace)) != NULL)
     {
-        DEBUG_LOG(SPRTF("---ParseColGroup got token %s with mode %u\n", node->element, IgnoreWhitespace));
+        DEBUG_LOG_GOT_TOKEN(node);
 
         if (node->tag == colgroup->tag && node->type == EndTag)
         {
@@ -2027,6 +2093,7 @@ Node* TY_(ParseColGroup)( TidyDocImpl* doc, Node *colgroup, GetTokenMode ARG_UNU
                 if (node->tag == parent->tag)
                 {
                     TY_(UngetToken)( doc );
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
             }
@@ -2035,6 +2102,7 @@ Node* TY_(ParseColGroup)( TidyDocImpl* doc, Node *colgroup, GetTokenMode ARG_UNU
         if (TY_(nodeIsText)(node))
         {
             TY_(UngetToken)( doc );
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -2053,6 +2121,7 @@ Node* TY_(ParseColGroup)( TidyDocImpl* doc, Node *colgroup, GetTokenMode ARG_UNU
         if ( !nodeIsCOL(node) )
         {
             TY_(UngetToken)( doc );
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -2073,10 +2142,12 @@ Node* TY_(ParseColGroup)( TidyDocImpl* doc, Node *colgroup, GetTokenMode ARG_UNU
             memory.reentry_node = node;
             memory.mode = mode;
             TY_(pushMemory)( doc, memory );
+            DEBUG_LOG_EXIT_WITH_NODE(node);
         }
-        DEBUG_LOG(SPRTF("<<<Exiting ParseColGroup with a node to parse: %s\n", node->element));
+        DEBUG_LOG_EXIT;
         return node;
     }
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 
@@ -2091,22 +2162,23 @@ Node* TY_(ParseColGroup)( TidyDocImpl* doc, Node *colgroup, GetTokenMode ARG_UNU
 */
 Node* TY_(ParseDatalist)( TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(mode) )
 {
-#if defined(ENABLE_DEBUG_LOG)
-    static int in_parse_datalist = 0;
-#endif
     Lexer* lexer = doc->lexer;
     Node *node;
+    DEBUG_LOG_COUNTERS;
 
     if ( field == NULL )
     {
         TidyParserMemory memory = TY_(popMemory)( doc );
-        field = memory.original_node;
         node = memory.reentry_node; /* Throwaway, as main loop overrwrites anyway. */
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParseDataList with %s\n", node->element));
+        DEBUG_LOG_REENTER_WITH_NODE(node);
+        field = memory.original_node;
+        DEBUG_LOG_GET_OLD_MODE;
+        mode = memory.mode;
+        DEBUG_LOG_CHANGE_MODE;
     }
     else
     {
-        DEBUG_LOG(SPRTF("Entering ParseDatalist %d...\n", ++in_parse_datalist));
+        DEBUG_LOG_ENTER_WITH_NODE(field);
     }
     
     lexer->insert = NULL;  /* defer implicit inline start tags */
@@ -2119,7 +2191,7 @@ Node* TY_(ParseDatalist)( TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED
             field->closed = yes;
             TrimSpaces(doc, field);
 
-            DEBUG_LOG(SPRTF("Exit ParseDatalist 1 %d...\n", --in_parse_datalist));
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -2142,6 +2214,7 @@ Node* TY_(ParseDatalist)( TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED
 
             TY_(InsertNodeAtEnd)(field, node);
             TY_(pushMemory)(doc, memory);
+            DEBUG_LOG_EXIT_WITH_NODE(node);
             return node;
         }
 
@@ -2152,7 +2225,7 @@ Node* TY_(ParseDatalist)( TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED
 
     TY_(Report)(doc, field, node, MISSING_ENDTAG_FOR);
 
-    DEBUG_LOG(SPRTF("Exit ParseDatalist 2 %d...\n", --in_parse_datalist));
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 
@@ -2167,12 +2240,10 @@ Node* TY_(ParseDatalist)( TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED
 */
 Node* TY_(ParseDefList)( TidyDocImpl* doc, Node *list, GetTokenMode mode )
 {
-#if defined(ENABLE_DEBUG_LOG)
-    static int in_parse_deflist = 0;
-#endif
     Lexer* lexer = doc->lexer;
     Node *node = NULL;
-    Node *parent = NULL;;
+    Node *parent = NULL;
+    DEBUG_LOG_COUNTERS;
 
     enum parserState {
         STATE_INITIAL,                /* This is the initial state for every parser. */
@@ -2183,14 +2254,17 @@ Node* TY_(ParseDefList)( TidyDocImpl* doc, Node *list, GetTokenMode mode )
     if ( list == NULL )
     {
         TidyParserMemory memory = TY_(popMemory)( doc );
-        list = memory.original_node;
         node = memory.reentry_node; /* Throwaway, as main loop overrwrites anyway. */
+        DEBUG_LOG_REENTER_WITH_NODE(node);
+        list = memory.original_node;
         state = memory.reentry_state;
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParseDefList with %s\n", node->element));
+        DEBUG_LOG_GET_OLD_MODE;
+        mode = memory.mode;
+        DEBUG_LOG_CHANGE_MODE;
     }
     else
     {
-        DEBUG_LOG(SPRTF(">>>Entering ParseDefList %d...\n", ++in_parse_deflist));
+        DEBUG_LOG_ENTER_WITH_NODE(list);
     }
 
     if (list->tag->model & CM_EMPTY)
@@ -2217,7 +2291,7 @@ Node* TY_(ParseDefList)( TidyDocImpl* doc, Node *list, GetTokenMode mode )
                 {
                     TY_(FreeNode)( doc, node);
                     list->closed = yes;
-                    DEBUG_LOG(SPRTF("<<<Exit ParseDefList 1 %d... CM_EMPTY\n", --in_parse_deflist));
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
 
@@ -2268,9 +2342,9 @@ Node* TY_(ParseDefList)( TidyDocImpl* doc, Node *list, GetTokenMode mode )
                         if (node->tag == parent->tag)
                         {
                             TY_(Report)(doc, list, node, MISSING_ENDTAG_BEFORE);
-
                             TY_(UngetToken)( doc );
-                            DEBUG_LOG(SPRTF("<<<Exit ParseDefList 2 %d... CM_EMPTY\n", --in_parse_deflist));
+
+                            DEBUG_LOG_EXIT;
                             return NULL;
                         }
                     }
@@ -2311,7 +2385,7 @@ Node* TY_(ParseDefList)( TidyDocImpl* doc, Node *list, GetTokenMode mode )
                         memory.reentry_node = node;
                         memory.reentry_state = STATE_POST_NODEISCENTER;
                         TY_(pushMemory)( doc, memory );
-                        DEBUG_LOG(SPRTF("<<<Exiting ParseDefList 3 with a node to parse: %s\n", node->element));
+                        DEBUG_LOG_EXIT_WITH_NODE(node);
                         return node;
                     }
                 }
@@ -2323,14 +2397,14 @@ Node* TY_(ParseDefList)( TidyDocImpl* doc, Node *list, GetTokenMode mode )
                     if (!(node->tag->model & (CM_BLOCK | CM_INLINE)))
                     {
                         TY_(Report)(doc, list, node, TAG_NOT_ALLOWED_IN);
-                        DEBUG_LOG(SPRTF("<<<Exit ParseDefList 3 %d... CM_EMPTY\n", --in_parse_deflist));
+                        DEBUG_LOG_EXIT;
                         return NULL;
                     }
 
                     /* if DD appeared directly in BODY then exclude blocks */
                     if (!(node->tag->model & CM_INLINE) && lexer->excludeBlocks)
                     {
-                        DEBUG_LOG(SPRTF("<<<Exit ParseDefList 4 %d... CM_EMPTY\n", --in_parse_deflist));
+                        DEBUG_LOG_EXIT;
                         return NULL;
                     }
 
@@ -2354,7 +2428,7 @@ Node* TY_(ParseDefList)( TidyDocImpl* doc, Node *list, GetTokenMode mode )
                     memory.reentry_node = node;
                     memory.reentry_state = STATE_INITIAL;
                     TY_(pushMemory)( doc, memory );
-                    DEBUG_LOG(SPRTF("<<<Exiting ParseDefList 4 with a node to parse: %s\n", node->element));
+                    DEBUG_LOG_EXIT;
                     return node;
                 }
             } break;
@@ -2384,7 +2458,7 @@ Node* TY_(ParseDefList)( TidyDocImpl* doc, Node *list, GetTokenMode mode )
     } /* while */
 
     TY_(Report)(doc, list, node, MISSING_ENDTAG_FOR);
-    DEBUG_LOG(SPRTF("<<<Exit ParseDefList at bottom %d... CM_EMPTY\n", --in_parse_deflist));
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 
@@ -2432,6 +2506,7 @@ Node* TY_(ParseFrameSet)( TidyDocImpl* doc, Node *frameset, GetTokenMode ARG_UNU
 {
     Lexer* lexer = doc->lexer;
     Node *node;
+    DEBUG_LOG_COUNTERS;
 
     /*
      If we're re-entering, then we need to setup from a previous state,
@@ -2442,12 +2517,15 @@ Node* TY_(ParseFrameSet)( TidyDocImpl* doc, Node *frameset, GetTokenMode ARG_UNU
     {
         TidyParserMemory memory = TY_(popMemory)( doc );
         node = memory.reentry_node; /* Throwaway, because we replace it entering the loop. */
+        DEBUG_LOG_REENTER_WITH_NODE(node);
         frameset = memory.original_node;
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParseFrameSet with %s\n", node->element));
+        DEBUG_LOG_GET_OLD_MODE;
+        mode = memory.mode;
+        DEBUG_LOG_CHANGE_MODE;
     }
     else
     {
-        DEBUG_LOG(SPRTF("<<<Enter ParseFrameSet with %s\n", frameset->element));
+        DEBUG_LOG_ENTER_WITH_NODE(frameset);
         if ( cfg(doc, TidyAccessibilityCheckLevel) == 0 )
         {
             doc->badAccess |= BA_USING_FRAMES;
@@ -2461,6 +2539,7 @@ Node* TY_(ParseFrameSet)( TidyDocImpl* doc, Node *frameset, GetTokenMode ARG_UNU
             TY_(FreeNode)( doc, node);
             frameset->closed = yes;
             TrimSpaces(doc, frameset);
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -2507,7 +2586,7 @@ Node* TY_(ParseFrameSet)( TidyDocImpl* doc, Node *frameset, GetTokenMode ARG_UNU
             memory.reentry_node = node;
             memory.mode = MixedContent;
             TY_(pushMemory)( doc, memory );
-            DEBUG_LOG(SPRTF("<<<Exiting ParseFrameSet with a node to parse: %s\n", node->element));
+            DEBUG_LOG_EXIT_WITH_NODE(node);
             return node;
         }
         else if (node->type == StartEndTag && (node->tag && node->tag->model & CM_FRAMES))
@@ -2526,6 +2605,7 @@ Node* TY_(ParseFrameSet)( TidyDocImpl* doc, Node *frameset, GetTokenMode ARG_UNU
     }
 
     TY_(Report)(doc, frameset, node, MISSING_ENDTAG_FOR);
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 
@@ -2544,19 +2624,23 @@ Node* TY_(ParseHead)( TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode
     Node *node;
     int HasTitle = 0;
     int HasBase = 0;
+    DEBUG_LOG_COUNTERS;
 
     if ( head == NULL )
     {
         TidyParserMemory memory = TY_(popMemory)( doc );
-        head = memory.original_node;
         node = memory.reentry_node; /* Throwaway, as main loop overrwrites anyway. */
+        DEBUG_LOG_REENTER_WITH_NODE(node);
+        head = memory.original_node;
         HasTitle = memory.register_1;
         HasBase = memory.register_2;
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParseHead with %s\n", node->element));
+        DEBUG_LOG_GET_OLD_MODE;
+        mode = memory.mode;
+        DEBUG_LOG_CHANGE_MODE;
     }
     else
     {
-        DEBUG_LOG(SPRTF(">>>Enter ParseHead...\n"));
+        DEBUG_LOG_ENTER_WITH_NODE(head);
     }
     
     while ((node = TY_(GetToken)(doc, IgnoreWhitespace)) != NULL)
@@ -2663,7 +2747,7 @@ Node* TY_(ParseHead)( TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode
                 memory.register_1 = HasTitle;
                 memory.register_2 = HasBase;
                 TY_(pushMemory)( doc, memory );
-                DEBUG_LOG(SPRTF("<<<Exiting ParseHead with a node to parse: %s\n", node->element));
+                DEBUG_LOG_EXIT_WITH_NODE(node);
                 return node;
             }
         }
@@ -2672,7 +2756,7 @@ Node* TY_(ParseHead)( TidyDocImpl* doc, Node *head, GetTokenMode ARG_UNUSED(mode
         TY_(Report)(doc, head, node, DISCARDING_UNEXPECTED);
         TY_(FreeNode)( doc, node);
     }
-    DEBUG_LOG(SPRTF("<<<Exit ParseHead at bottom\n"));
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 
@@ -2693,6 +2777,7 @@ Node* TY_(ParseHTML)( TidyDocImpl *doc, Node *html, GetTokenMode mode )
     Node *head = NULL;
     Node *frameset = NULL;
     Node *noframes = NULL;
+    DEBUG_LOG_COUNTERS;
 
     enum parserState {
         STATE_INITIAL,                /* This is the initial state for every parser. */
@@ -2707,26 +2792,22 @@ Node* TY_(ParseHTML)( TidyDocImpl *doc, Node *html, GetTokenMode mode )
         STATE_PARSE_FRAMESET_REENTER, /* We need to cleanup some things after parsing frameset. */
     } state = STATE_INITIAL;
 
-#if defined(ENABLE_DEBUG_LOG)
-    static int parser_depth = 0;
-    static int parser_count = 0;
-    SPRTF(">>>Entering ParseHTML, count: %d, depth %d\n", ++parser_count, ++parser_depth);
-#endif
-
     TY_(SetOptionBool)( doc, TidyXmlTags, no );
 
-    /*
-     If we're re-entering, then we need to setup from a previous state,
-     instead of starting fresh. We can pull what we need from the document's
-     stack.
-     */
     if ( html == NULL )
     {
         TidyParserMemory memory = TY_(popMemory)( doc );
         node = memory.reentry_node;
-        mode = memory.reentry_mode;
-        state = memory.reentry_state;
+        DEBUG_LOG_REENTER_WITH_NODE(node);
         html = memory.original_node;
+        state = memory.reentry_state;
+        DEBUG_LOG_GET_OLD_MODE;
+        mode = memory.reentry_mode;
+        DEBUG_LOG_CHANGE_MODE;
+    }
+    else
+    {
+        DEBUG_LOG_ENTER_WITH_NODE(html);
     }
 
     /*
@@ -2735,14 +2816,11 @@ Node* TY_(ParseHTML)( TidyDocImpl *doc, Node *html, GetTokenMode mode )
      */
     while ( state != STATE_COMPLETE )
     {
-        /*
-         We don't want to get the next token unless we're
-         done with this one. Using this flag is much quicker
-         than using `UngetToken()` every time we want to keep
-         the token.
-         */
         if ( state == STATE_INITIAL || state == STATE_PRE_BODY )
+        {
             node = TY_(GetToken)( doc, IgnoreWhitespace );
+            DEBUG_LOG_GOT_TOKEN(node);
+        }
 
         switch ( state )
         {
@@ -2995,7 +3073,7 @@ Node* TY_(ParseHTML)( TidyDocImpl *doc, Node *html, GetTokenMode mode )
                 memory.reentry_state = STATE_PARSE_HEAD_REENTER;
                 TY_(InsertNodeAtEnd)(html, node);
                 TY_(pushMemory)( doc, memory );
-                DEBUG_LOG(SPRTF("<<<Exiting ParseHTML at STATE_PARSE_HEAD, count: %d, depth %d\n", parser_count, --parser_depth));
+                DEBUG_LOG_EXIT_WITH_NODE(node);
                 return node;
             } break;
 
@@ -3020,7 +3098,7 @@ Node* TY_(ParseHTML)( TidyDocImpl *doc, Node *html, GetTokenMode mode )
                 memory.reentry_state = STATE_COMPLETE;
                 TY_(InsertNodeAtEnd)(html, node);
                 TY_(pushMemory)( doc, memory );
-                DEBUG_LOG(SPRTF("<<<Exiting ParseHTML at STATE_PARSE_BODY, count: %d, depth %d\n", parser_count, --parser_depth));
+                DEBUG_LOG_EXIT_WITH_NODE(node);
                 return node;
             } break;
 
@@ -3039,7 +3117,7 @@ Node* TY_(ParseHTML)( TidyDocImpl *doc, Node *html, GetTokenMode mode )
                 memory.reentry_mode = mode;
                 memory.reentry_state = STATE_PARSE_NOFRAMES_REENTER;
                 TY_(pushMemory)( doc, memory );
-                DEBUG_LOG(SPRTF("<<<Exiting ParseHTML at STATE_PARSE_NOFRAMES, count: %d, depth %d\n", parser_count, --parser_depth));
+                DEBUG_LOG_EXIT_WITH_NODE(node);
                 return noframes;
             } break;
 
@@ -3065,7 +3143,7 @@ Node* TY_(ParseHTML)( TidyDocImpl *doc, Node *html, GetTokenMode mode )
                 memory.reentry_state = STATE_PARSE_FRAMESET_REENTER;
                 TY_(InsertNodeAtEnd)(html, node);
                 TY_(pushMemory)( doc, memory );
-                DEBUG_LOG(SPRTF("<<<Exiting ParseHTML at STATE_PARSE_FRAMESET, count: %d, depth %d\n", parser_count, --parser_depth));
+                DEBUG_LOG_EXIT_WITH_NODE(node);
                 return node;
             } break;
 
@@ -3095,7 +3173,7 @@ Node* TY_(ParseHTML)( TidyDocImpl *doc, Node *html, GetTokenMode mode )
         } /* switch */
     } /* while */
 
-    DEBUG_LOG(SPRTF("<<<Exiting ParseHTML at bottom, count: %d, depth %d\n", parser_count, --parser_depth));
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 
@@ -3110,28 +3188,28 @@ Node* TY_(ParseHTML)( TidyDocImpl *doc, Node *html, GetTokenMode mode )
 */
 Node* TY_(ParseInline)( TidyDocImpl *doc, Node *element, GetTokenMode mode )
 {
-#if defined(ENABLE_DEBUG_LOG)
-    static int in_parse_inline = 0;
-#endif
     Lexer* lexer = doc->lexer;
     Node *node = NULL;
     Node *parent = NULL;
-
+    DEBUG_LOG_COUNTERS;
+    
     if ( element == NULL )
     {
         TidyParserMemory memory = TY_(popMemory)( doc );
-        element = memory.original_node;
         node = memory.reentry_node; /* Throwaway, as main loop overrwrites anyway. */
+        DEBUG_LOG_REENTER_WITH_NODE(node);
+        element = memory.original_node;
+        DEBUG_LOG_GET_OLD_MODE;
         mode = memory.reentry_mode;
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParseInline with %s\n", node->element));
+        DEBUG_LOG_CHANGE_MODE;
     }
     else
     {
-        DEBUG_LOG(SPRTF(">>>Entering ParseInline %d...\n", ++in_parse_inline));
+        DEBUG_LOG_ENTER_WITH_NODE(element);
 
         if (element->tag->model & CM_EMPTY)
         {
-            DEBUG_LOG(SPRTF("<<<Exit ParseInline 1 %d...\n", --in_parse_inline));
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -3164,7 +3242,11 @@ Node* TY_(ParseInline)( TidyDocImpl *doc, Node *element, GetTokenMode mode )
 
         /* Inline elements may or may not be within a preformatted element */
         if (mode != Preformatted)
+        {
+            DEBUG_LOG_GET_OLD_MODE;
             mode = MixedContent;
+            DEBUG_LOG_CHANGE_MODE;
+        }
     }
     
     while ((node = TY_(GetToken)(doc, mode)) != NULL)
@@ -3212,7 +3294,7 @@ Node* TY_(ParseInline)( TidyDocImpl *doc, Node *element, GetTokenMode mode )
             element->closed = yes;
             TrimSpaces( doc, element );
 
-            DEBUG_LOG(SPRTF("<<<Exit ParseInline 2 %d...\n", --in_parse_inline));
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -3301,7 +3383,7 @@ Node* TY_(ParseInline)( TidyDocImpl *doc, Node *element, GetTokenMode mode )
             if (!(mode & Preformatted))
                 TrimSpaces(doc, element);
 
-            DEBUG_LOG(SPRTF("<<<Exit ParseInline 3 %d...\n", --in_parse_inline));
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -3389,7 +3471,7 @@ Node* TY_(ParseInline)( TidyDocImpl *doc, Node *element, GetTokenMode mode )
                         if (!(mode & Preformatted))
                             TrimSpaces( doc, element );
 
-                        DEBUG_LOG(SPRTF("<<<Exit ParseInline 4 %d...\n", --in_parse_inline));
+                        DEBUG_LOG_EXIT;
                         return NULL; /* close <i>, but will re-open it, after </b> */
                     }
                 }
@@ -3411,7 +3493,7 @@ Node* TY_(ParseInline)( TidyDocImpl *doc, Node *element, GetTokenMode mode )
                     if (!(mode & Preformatted))
                         TrimSpaces(doc, element);
 
-                    DEBUG_LOG(SPRTF("<<<Exit ParseInline 5 %d...\n", --in_parse_inline));
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
 
@@ -3426,7 +3508,7 @@ Node* TY_(ParseInline)( TidyDocImpl *doc, Node *element, GetTokenMode mode )
                 TY_(UngetToken)( doc );
                 TrimSpaces(doc, element);
 
-                DEBUG_LOG(SPRTF("<<<Exit ParseInline 6 %d...\n", --in_parse_inline));
+                DEBUG_LOG_EXIT;
                 return NULL;
             }
         }
@@ -3449,7 +3531,7 @@ Node* TY_(ParseInline)( TidyDocImpl *doc, Node *element, GetTokenMode mode )
             if (!(mode & Preformatted))
                 TrimSpaces(doc, element);
 
-            DEBUG_LOG(SPRTF("<<<Exit ParseInline 7 %d...\n", --in_parse_inline));
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -3483,7 +3565,7 @@ Node* TY_(ParseInline)( TidyDocImpl *doc, Node *element, GetTokenMode mode )
             if (!(mode & Preformatted))
                 TrimSpaces(doc, element);
 
-            DEBUG_LOG(SPRTF("<<<Exit ParseInline 8 %d...\n", --in_parse_inline));
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -3606,7 +3688,7 @@ Node* TY_(ParseInline)( TidyDocImpl *doc, Node *element, GetTokenMode mode )
                     if (!(mode & Preformatted))
                         TrimSpaces(doc, element);
 
-                    DEBUG_LOG(SPRTF("<<<Exit ParseInline 9 %d...\n", --in_parse_inline));
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
             }
@@ -3656,7 +3738,7 @@ Node* TY_(ParseInline)( TidyDocImpl *doc, Node *element, GetTokenMode mode )
                     TY_(DiscardElement)( doc, element );
                     TY_(UngetToken)( doc );
 
-                    DEBUG_LOG(SPRTF("<<<Exit ParseInline 10 %d...\n", --in_parse_inline));
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
             }
@@ -3666,7 +3748,7 @@ Node* TY_(ParseInline)( TidyDocImpl *doc, Node *element, GetTokenMode mode )
             if (!(mode & Preformatted))
                 TrimSpaces(doc, element);
 
-            DEBUG_LOG(SPRTF("<<<Exit ParseInline 11 %d...\n", --in_parse_inline));
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -3690,7 +3772,7 @@ Node* TY_(ParseInline)( TidyDocImpl *doc, Node *element, GetTokenMode mode )
                 memory.mode = mode;
                 memory.reentry_mode = mode;
                 TY_(pushMemory)( doc, memory );
-                DEBUG_LOG(SPRTF("<<<Exiting ParseInline 1 with a node to parse: %s\n", node->element));
+                DEBUG_LOG_EXIT_WITH_NODE(node);
                 return node;
             }
         }
@@ -3704,7 +3786,7 @@ Node* TY_(ParseInline)( TidyDocImpl *doc, Node *element, GetTokenMode mode )
     if (!(element->tag->model & CM_OPT))
         TY_(Report)(doc, element, node, MISSING_ENDTAG_FOR);
 
-    DEBUG_LOG(SPRTF("<<<Exit ParseInline 12 %d...\n", --in_parse_inline));
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 
@@ -3719,30 +3801,31 @@ Node* TY_(ParseInline)( TidyDocImpl *doc, Node *element, GetTokenMode mode )
 */
 Node* TY_(ParseList)( TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode) )
 {
-#if defined(ENABLE_DEBUG_LOG)
-    static int in_parse_list = 0;
-#endif
     Lexer* lexer = doc->lexer;
     Node *node = NULL;
     Node *parent = NULL;
     Node *lastli = NULL;;
     Bool wasblock = no;
     Bool nodeisOL = nodeIsOL(list);
+    DEBUG_LOG_COUNTERS;
 
     if ( list == NULL )
     {
         TidyParserMemory memory = TY_(popMemory)( doc );
-        list = memory.original_node;
         node = memory.reentry_node; /* Throwaway, as main loop overrwrites anyway. */
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParseList with %s\n", node->element));
+        DEBUG_LOG_REENTER_WITH_NODE(node);
+        list = memory.original_node;
+        DEBUG_LOG_GET_OLD_MODE;
+        mode = memory.mode;
+        DEBUG_LOG_CHANGE_MODE;
     }
     else
     {
-        DEBUG_LOG(SPRTF(">>>Entering ParseList %d...\n", ++in_parse_list));
+        DEBUG_LOG_ENTER_WITH_NODE(list);
 
         if (list->tag->model & CM_EMPTY)
         {
-            DEBUG_LOG(SPRTF("<<<Exit ParseList 1 %d... CM_EMPTY\n", --in_parse_list));
+            DEBUG_LOG_EXIT;
             return NULL;
         }
     }
@@ -3756,7 +3839,7 @@ Node* TY_(ParseList)( TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode
         {
             TY_(FreeNode)( doc, node);
             list->closed = yes;
-            DEBUG_LOG(SPRTF("<<<Exit ParseList 2 %d... Endtag\n", --in_parse_list));
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -3820,7 +3903,7 @@ Node* TY_(ParseList)( TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode
                 {
                     TY_(Report)(doc, list, node, MISSING_ENDTAG_BEFORE);
                     TY_(UngetToken)( doc );
-                    DEBUG_LOG(SPRTF("<<<Exit ParseList 3 %d... No End Tag\n", --in_parse_list));
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
             }
@@ -3850,7 +3933,7 @@ Node* TY_(ParseList)( TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode
             if (TY_(nodeHasCM)(node,CM_BLOCK) && lexer->excludeBlocks)
             {
                 TY_(Report)(doc, list, node, MISSING_ENDTAG_BEFORE);
-                DEBUG_LOG(SPRTF("<<<Exit ParseList 4 %d... No End Tag\n", --in_parse_list));
+                DEBUG_LOG_EXIT;
                 return NULL;
             }
             /* http://tidy.sf.net/issue/1316307 */
@@ -3859,7 +3942,7 @@ Node* TY_(ParseList)( TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode
                       && (TY_(nodeHasCM)(node, CM_TABLE|CM_ROWGRP|CM_ROW)
                           || nodeIsTABLE(node)) )
             {
-                DEBUG_LOG(SPRTF("<<<Exit ParseList 5 %d... exiled\n", --in_parse_list));
+                DEBUG_LOG_EXIT;
                 return NULL;
             }
             /* http://tidy.sf.net/issue/836462
@@ -3898,13 +3981,13 @@ Node* TY_(ParseList)( TidyDocImpl* doc, Node *list, GetTokenMode ARG_UNUSED(mode
             memory.reentry_node = node;
             memory.mode = IgnoreWhitespace;
             TY_(pushMemory)( doc, memory );
-            DEBUG_LOG(SPRTF("<<<Exiting ParseList with a node to parse: %s\n", node->element));
+            DEBUG_LOG_EXIT_WITH_NODE(node);
             return node;
         }
     }
 
     TY_(Report)(doc, list, node, MISSING_ENDTAG_FOR);
-    DEBUG_LOG(SPRTF("<<<Exit ParseList 6 %d... missing end tag\n", --in_parse_list));
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 
@@ -4065,6 +4148,7 @@ Node* TY_(ParseNoFrames)( TidyDocImpl* doc, Node *noframes, GetTokenMode mode )
     Lexer* lexer = doc->lexer;
     Node *node = NULL;
     Bool body_seen = no;
+    DEBUG_LOG_COUNTERS;
 
     enum parserState {
         STATE_INITIAL,                /* This is the initial state for every parser. */
@@ -4081,14 +4165,17 @@ Node* TY_(ParseNoFrames)( TidyDocImpl* doc, Node *noframes, GetTokenMode mode )
     {
         TidyParserMemory memory = TY_(popMemory)( doc );
         node = memory.reentry_node; /* Throwaway, because we replace it entering the loop anyway.*/
+        DEBUG_LOG_REENTER_WITH_NODE(node);
         noframes = memory.original_node;
         state = memory.reentry_state;
         body_seen = memory.register_1;
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParseNoFrames with %s\n", node->element));
+        DEBUG_LOG_GET_OLD_MODE;
+        mode = memory.mode;
+        DEBUG_LOG_CHANGE_MODE;
     }
     else
     {
-        DEBUG_LOG(SPRTF(">>>Enter ParseNoFrames with %s\n", noframes->element));
+        DEBUG_LOG_ENTER_WITH_NODE(noframes);
         if ( cfg(doc, TidyAccessibilityCheckLevel) == 0 )
         {
             doc->badAccess |=  BA_USING_NOFRAMES;
@@ -4102,7 +4189,7 @@ Node* TY_(ParseNoFrames)( TidyDocImpl* doc, Node *noframes, GetTokenMode mode )
         if ( state == STATE_INITIAL )
         {
             node = TY_(GetToken)(doc, mode);
-            DEBUG_LOG(SPRTF("---ParseNoFrames got token %s with mode %u\n", node->element, mode));
+            DEBUG_LOG_GOT_TOKEN(node);
         }
         
         switch ( state )
@@ -4120,7 +4207,7 @@ Node* TY_(ParseNoFrames)( TidyDocImpl* doc, Node *noframes, GetTokenMode mode )
                     TY_(FreeNode)( doc, node);
                     noframes->closed = yes;
                     TrimSpaces(doc, noframes);
-                    DEBUG_LOG(SPRTF("<<<Exiting ParseNoFrames 1.\n"));
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
 
@@ -4137,7 +4224,7 @@ Node* TY_(ParseNoFrames)( TidyDocImpl* doc, Node *noframes, GetTokenMode mode )
                         TY_(Report)(doc, noframes, node, MISSING_ENDTAG_BEFORE);
                         TY_(UngetToken)( doc );
                     }
-                    DEBUG_LOG(SPRTF("<<<Exiting ParseNoFrames 2.\n"));
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
 
@@ -4166,7 +4253,7 @@ Node* TY_(ParseNoFrames)( TidyDocImpl* doc, Node *noframes, GetTokenMode mode )
 
                     TY_(InsertNodeAtEnd)(noframes, node);
                     TY_(pushMemory)( doc, memory );
-                    DEBUG_LOG(SPRTF("<<<Exiting ParseNoFrames with a node to parse: %s\n", node->element));
+                    DEBUG_LOG_EXIT_WITH_NODE(node);
                     return node;
                 }
 
@@ -4207,7 +4294,7 @@ Node* TY_(ParseNoFrames)( TidyDocImpl* doc, Node *noframes, GetTokenMode mode )
                         memory.mode = IgnoreWhitespace; /*MixedContent*/
                         memory.reentry_state = STATE_INITIAL;
                         TY_(pushMemory)( doc, memory );
-                        DEBUG_LOG(SPRTF("<<<Exiting ParseNoFrames with a node to parse: %s\n", node->element));
+                        DEBUG_LOG_EXIT_WITH_NODE(node);
                         return node;
                     }
                 }
@@ -4238,7 +4325,7 @@ Node* TY_(ParseNoFrames)( TidyDocImpl* doc, Node *noframes, GetTokenMode mode )
     } /* while */
 
     TY_(Report)(doc, noframes, node, MISSING_ENDTAG_FOR);
-    DEBUG_LOG(SPRTF("<<<Exiting ParseNoFrames at bottom.\n"));
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 
@@ -4255,17 +4342,21 @@ Node* TY_(ParseOptGroup)( TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED
 {
     Lexer* lexer = doc->lexer;
     Node *node;
-
+    DEBUG_LOG_COUNTERS;
+    
     if ( field == NULL )
     {
         TidyParserMemory memory = TY_(popMemory)( doc );
-        field = memory.original_node;
         node = memory.reentry_node; /* Throwaway, as main loop overrwrites anyway. */
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParseOptGroup with %s\n", node->element));
+        DEBUG_LOG_REENTER_WITH_NODE(node);
+        field = memory.original_node;
+        DEBUG_LOG_GET_OLD_MODE;
+        mode = memory.mode;
+        DEBUG_LOG_CHANGE_MODE;
     }
     else
     {
-        DEBUG_LOG(SPRTF(">>>Enter ParseOptGroup\n"));
+        DEBUG_LOG_ENTER_WITH_NODE(field);
     }
     
     lexer->insert = NULL;  /* defer implicit inline start tags */
@@ -4277,6 +4368,7 @@ Node* TY_(ParseOptGroup)( TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED
             TY_(FreeNode)( doc, node);
             field->closed = yes;
             TrimSpaces(doc, field);
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -4298,7 +4390,7 @@ Node* TY_(ParseOptGroup)( TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED
             memory.original_node = field;
             memory.reentry_node = node;
             TY_(pushMemory)( doc, memory );
-            DEBUG_LOG(SPRTF("<<<Exiting ParseOptGroup with a node to parse: %s\n", node->element));
+            DEBUG_LOG_EXIT_WITH_NODE(node);
             return node;
         }
 
@@ -4306,6 +4398,7 @@ Node* TY_(ParseOptGroup)( TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED
         TY_(Report)(doc, field, node, DISCARDING_UNEXPECTED );
         TY_(FreeNode)( doc, node);
     }
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 
@@ -4321,7 +4414,8 @@ Node* TY_(ParseOptGroup)( TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED
 Node* TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) )
 {
     Node *node = NULL;
-    
+    DEBUG_LOG_COUNTERS;
+
     enum parserState {
         STATE_INITIAL,                /* This is the initial state for every parser. */
         STATE_RENTRY_ACTION,          /* To-do after re-entering after checks. */
@@ -4332,17 +4426,20 @@ Node* TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) 
     if ( pre == NULL )
     {
         TidyParserMemory memory = TY_(popMemory)( doc );
-        pre = memory.original_node;
         node = memory.reentry_node; /* Throwaway, as main loop overrwrites anyway. */
+        DEBUG_LOG_REENTER_WITH_NODE(node);
+        pre = memory.original_node;
         state = memory.reentry_state;
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParsePre with %s\n", node->element));
+        DEBUG_LOG_GET_OLD_MODE;
+        mode = memory.mode;
+        DEBUG_LOG_CHANGE_MODE;
     }
     else
     {
-        DEBUG_LOG(SPRTF(">>>Enter ParsePre\n"));
+        DEBUG_LOG_ENTER_WITH_NODE(pre);
         if (pre->tag->model & CM_EMPTY)
         {
-            DEBUG_LOG(SPRTF("<<<Exiting ParsePre 1\n"));
+            DEBUG_LOG_EXIT;
             return NULL;
         }
     }
@@ -4384,7 +4481,7 @@ Node* TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) 
                     }
                     pre->closed = yes;
                     TrimSpaces(doc, pre);
-                    DEBUG_LOG(SPRTF("<<<Exiting ParsePre 2\n"));
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
 
@@ -4417,7 +4514,7 @@ Node* TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) 
                        {
                           TY_(UngetToken)(doc);
                           TrimSpaces(doc, pre);
-                          DEBUG_LOG(SPRTF("<<<Exiting ParsePre 3\n"));
+                           DEBUG_LOG_EXIT;
                           return NULL;
                        }
 
@@ -4434,7 +4531,7 @@ Node* TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) 
                             TY_(Report)(doc, pre, node, MISSING_ENDTAG_BEFORE);
 
                         TY_(UngetToken)(doc);
-                        DEBUG_LOG(SPRTF("<<<Exiting ParsePre 4\n"));
+                        DEBUG_LOG_EXIT;
                         return NULL;
                     }
 
@@ -4485,7 +4582,7 @@ Node* TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) 
                         memory.reentry_node = node;
                         memory.reentry_state = STATE_RENTRY_ACTION;
                         TY_(pushMemory)( doc, memory );
-                        DEBUG_LOG(SPRTF("<<<Exiting ParsePre with a node to parse: %s\n", node->element));
+                        DEBUG_LOG_EXIT_WITH_NODE(node);
                         return node;
                     }
                 }
@@ -4527,7 +4624,7 @@ Node* TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) 
                         memory.reentry_node = node;
                         memory.reentry_state = STATE_INITIAL;
                         TY_(pushMemory)( doc, memory );
-                        DEBUG_LOG(SPRTF("<<<Exiting ParsePre with a node to parse: %s\n", node->element));
+                        DEBUG_LOG_EXIT_WITH_NODE(node);
                         return node;
                     }
                 }
@@ -4554,7 +4651,7 @@ Node* TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) 
     } /* while */
 
     TY_(Report)(doc, pre, node, MISSING_ENDTAG_FOR);
-    DEBUG_LOG(SPRTF("<<<Exiting ParsePre at bottom\n"));
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 
@@ -4569,13 +4666,10 @@ Node* TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) 
  */
 Node* TY_(ParseRow)( TidyDocImpl* doc, Node *row, GetTokenMode ARG_UNUSED(mode) )
 {
-#if defined(ENABLE_DEBUG_LOG)
-    static int in_parse_row = 0;
-#endif
-
     Lexer* lexer = doc->lexer;
     Node *node = NULL;
     Bool exclude_state = no;
+    DEBUG_LOG_COUNTERS;
 
     enum parserState {
         STATE_INITIAL,                /* This is the initial state for every parser. */
@@ -4587,15 +4681,18 @@ Node* TY_(ParseRow)( TidyDocImpl* doc, Node *row, GetTokenMode ARG_UNUSED(mode) 
     if ( row == NULL )
     {
         TidyParserMemory memory = TY_(popMemory)( doc );
-        row = memory.original_node;
         node = memory.reentry_node; /* Throwaway, as main loop overrwrites anyway. */
+        DEBUG_LOG_REENTER_WITH_NODE(node);
+        row = memory.original_node;
         state = memory.reentry_state;
         exclude_state = memory.register_1;
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParseRow with %s\n", node->element));
+        DEBUG_LOG_GET_OLD_MODE;
+        mode = memory.mode;
+        DEBUG_LOG_CHANGE_MODE;
     }
     else
     {
-        DEBUG_LOG(SPRTF(">>>Entering ParseRow %d...\n", ++in_parse_row));
+        DEBUG_LOG_ENTER_WITH_NODE(row);
 
         if (row->tag->model & CM_EMPTY)
             return NULL;
@@ -4604,7 +4701,10 @@ Node* TY_(ParseRow)( TidyDocImpl* doc, Node *row, GetTokenMode ARG_UNUSED(mode) 
     while ( state != STATE_COMPLETE )
     {
         if ( state == STATE_INITIAL )
+        {
             node = TY_(GetToken)( doc, IgnoreWhitespace );
+            DEBUG_LOG_GOT_TOKEN(node);
+        }
     
         switch (state)
         {
@@ -4623,14 +4723,14 @@ Node* TY_(ParseRow)( TidyDocImpl* doc, Node *row, GetTokenMode ARG_UNUSED(mode) 
                         TY_(FreeNode)( doc, node);
                         row->closed = yes;
                         FixEmptyRow( doc, row);
-                        DEBUG_LOG(SPRTF("<<<Exit ParseRow 1 %d... CM_EMPTY\n", --in_parse_row));
+                        DEBUG_LOG_EXIT;
                         return NULL;
                     }
 
                     /* New row start implies end of current row */
                     TY_(UngetToken)( doc );
                     FixEmptyRow( doc, row);
-                    DEBUG_LOG(SPRTF("<<<Exit ParseRow 2 %d... CM_EMPTY\n", --in_parse_row));
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
 
@@ -4644,7 +4744,7 @@ Node* TY_(ParseRow)( TidyDocImpl* doc, Node *row, GetTokenMode ARG_UNUSED(mode) 
                          && DescendantOf(row, TagId(node)) )
                     {
                         TY_(UngetToken)( doc );
-                        DEBUG_LOG(SPRTF("<<<Exit ParseRow 3 %d... CM_EMPTY\n", --in_parse_row));
+                        DEBUG_LOG_EXIT;
                         return NULL;
                     }
 
@@ -4690,7 +4790,7 @@ Node* TY_(ParseRow)( TidyDocImpl* doc, Node *row, GetTokenMode ARG_UNUSED(mode) 
                 if ( TY_(nodeHasCM)(node, CM_ROWGRP) )
                 {
                     TY_(UngetToken)( doc );
-                    DEBUG_LOG(SPRTF("<<<Exit ParseRow 4 %d... CM_EMPTY\n", --in_parse_row));
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
 
@@ -4732,7 +4832,7 @@ Node* TY_(ParseRow)( TidyDocImpl* doc, Node *row, GetTokenMode ARG_UNUSED(mode) 
                             memory.reentry_state = STATE_POST_NOT_ENDTAG;
                             memory.register_1 = exclude_state;
                             TY_(pushMemory)( doc, memory );
-                            DEBUG_LOG(SPRTF("<<<Exiting ParseRow 1 with a node to parse: %s\n", node->element));
+                            DEBUG_LOG_EXIT_WITH_NODE(node);
                             return node;
                         }
                         
@@ -4767,7 +4867,7 @@ Node* TY_(ParseRow)( TidyDocImpl* doc, Node *row, GetTokenMode ARG_UNUSED(mode) 
                     memory.reentry_state = STATE_POST_TD_TH;
                     memory.register_1 = exclude_state;
                     TY_(pushMemory)( doc, memory );
-                    DEBUG_LOG(SPRTF("<<<Exiting ParseRow 2 with a node to parse: %s\n", node->element));
+                    DEBUG_LOG_EXIT_WITH_NODE(node);
                     return node;
                 }
             } break;
@@ -4800,7 +4900,7 @@ Node* TY_(ParseRow)( TidyDocImpl* doc, Node *row, GetTokenMode ARG_UNUSED(mode) 
                 
         } /* switch */
     } /* while */
-    DEBUG_LOG(SPRTF("<<<Exit ParseRow at bottom %d... CM_EMPTY\n", --in_parse_row));
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 
@@ -4815,12 +4915,10 @@ Node* TY_(ParseRow)( TidyDocImpl* doc, Node *row, GetTokenMode ARG_UNUSED(mode) 
  */
 Node* TY_(ParseRowGroup)( TidyDocImpl* doc, Node *rowgroup, GetTokenMode ARG_UNUSED(mode) )
 {
-#if defined(ENABLE_DEBUG_LOG)
-    static int in_parse_rowgroup = 0;
-#endif
     Lexer* lexer = doc->lexer;
     Node *node = NULL;
     Node *parent = NULL;
+    DEBUG_LOG_COUNTERS;
 
     enum parserState {
         STATE_INITIAL,                /* This is the initial state for every parser. */
@@ -4831,17 +4929,20 @@ Node* TY_(ParseRowGroup)( TidyDocImpl* doc, Node *rowgroup, GetTokenMode ARG_UNU
     if ( rowgroup == NULL )
     {
         TidyParserMemory memory = TY_(popMemory)( doc );
-        rowgroup = memory.original_node;
         node = memory.reentry_node; /* Throwaway, as main loop overrwrites anyway. */
+        DEBUG_LOG_REENTER_WITH_NODE(node);
+        rowgroup = memory.original_node;
         state = memory.reentry_state;
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParseRowGroup with %s\n", node->element));
+        DEBUG_LOG_GET_OLD_MODE;
+        mode = memory.mode;
+        DEBUG_LOG_CHANGE_MODE;
     }
     else
     {
-        DEBUG_LOG(SPRTF(">>>Entering ParseRowGroup %d...\n", ++in_parse_rowgroup));
+        DEBUG_LOG_ENTER_WITH_NODE(rowgroup);
         if (rowgroup->tag->model & CM_EMPTY)
         {
-            DEBUG_LOG(SPRTF("<<<Exit ParseRowGroup 1 %d\n", --in_parse_rowgroup));
+            DEBUG_LOG_EXIT;
             return NULL;
         }
     }
@@ -4869,12 +4970,12 @@ Node* TY_(ParseRowGroup)( TidyDocImpl* doc, Node *rowgroup, GetTokenMode ARG_UNU
                     {
                         rowgroup->closed = yes;
                         TY_(FreeNode)( doc, node);
-                        DEBUG_LOG(SPRTF("<<<Exit ParseRowGroup 2 %d\n", --in_parse_rowgroup));
+                        DEBUG_LOG_EXIT;
                         return NULL;
                     }
 
                     TY_(UngetToken)( doc );
-                    DEBUG_LOG(SPRTF("<<<Exit ParseRowGroup 3 %d\n", --in_parse_rowgroup));
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
 
@@ -4882,7 +4983,7 @@ Node* TY_(ParseRowGroup)( TidyDocImpl* doc, Node *rowgroup, GetTokenMode ARG_UNU
                 if ( nodeIsTABLE(node) && node->type == EndTag )
                 {
                     TY_(UngetToken)( doc );
-                    DEBUG_LOG(SPRTF("<<<Exit ParseRowGroup 4 %d\n", --in_parse_rowgroup));
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
 
@@ -4926,7 +5027,7 @@ Node* TY_(ParseRowGroup)( TidyDocImpl* doc, Node *rowgroup, GetTokenMode ARG_UNU
                             memory.reentry_node = node;
                             memory.reentry_state = STATE_POST_NOT_TEXTNODE;
                             TY_(pushMemory)( doc, memory );
-                            DEBUG_LOG(SPRTF("<<<Exiting ParseRowGroup 1 with a node to parse: %s\n", node->element));
+                            DEBUG_LOG_EXIT_WITH_NODE(node);
                             return node;
                         }
                         
@@ -4971,7 +5072,7 @@ Node* TY_(ParseRowGroup)( TidyDocImpl* doc, Node *rowgroup, GetTokenMode ARG_UNU
                         if (node->tag == parent->tag)
                         {
                             TY_(UngetToken)( doc );
-                            DEBUG_LOG(SPRTF("<<<Exit ParseRowGroup 5 %d\n", --in_parse_rowgroup));
+                            DEBUG_LOG_EXIT;
                             return NULL;
                         }
                     }
@@ -4986,7 +5087,7 @@ Node* TY_(ParseRowGroup)( TidyDocImpl* doc, Node *rowgroup, GetTokenMode ARG_UNU
                     if (node->type != EndTag)
                     {
                         TY_(UngetToken)( doc );
-                        DEBUG_LOG(SPRTF("<<<Exit ParseRowGroup 6 %d\n", --in_parse_rowgroup));
+                        DEBUG_LOG_EXIT;
                         return NULL;
                     }
                 }
@@ -5012,7 +5113,7 @@ Node* TY_(ParseRowGroup)( TidyDocImpl* doc, Node *rowgroup, GetTokenMode ARG_UNU
                 memory.reentry_node = node;
                 memory.reentry_state = STATE_INITIAL;
                 TY_(pushMemory)( doc, memory );
-                DEBUG_LOG(SPRTF("<<<Exiting ParseRowGroup 2 with a node to parse: %s\n", node->element));
+                DEBUG_LOG_EXIT_WITH_NODE(node);
                 return node;
             } break;
                 
@@ -5029,7 +5130,7 @@ Node* TY_(ParseRowGroup)( TidyDocImpl* doc, Node *rowgroup, GetTokenMode ARG_UNU
                 break;
         } /* switch */
     } /* while */
-    DEBUG_LOG(SPRTF("<<<Exit ParseRowGroup at bottom %d\n", --in_parse_rowgroup));
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 
@@ -5053,7 +5154,7 @@ Node* TY_(ParseRowGroup)( TidyDocImpl* doc, Node *rowgroup, GetTokenMode ARG_UNU
 Node* TY_(ParseScript)( TidyDocImpl* doc, Node *script, GetTokenMode ARG_UNUSED(mode) )
 {
     Node *node = NULL;
-
+    
     doc->lexer->parent = script;
     node = TY_(GetToken)(doc, CdataContent);
     doc->lexer->parent = NULL;
@@ -5097,22 +5198,23 @@ Node* TY_(ParseScript)( TidyDocImpl* doc, Node *script, GetTokenMode ARG_UNUSED(
  */
 Node* TY_(ParseSelect)( TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(mode) )
 {
-#if defined(ENABLE_DEBUG_LOG)
-    static int in_parse_select = 0;
-#endif
     Lexer* lexer = doc->lexer;
     Node *node;
+    DEBUG_LOG_COUNTERS;
 
     if ( field == NULL )
     {
         TidyParserMemory memory = TY_(popMemory)( doc );
-        field = memory.original_node;
         node = memory.reentry_node; /* Throwaway, as main loop overrwrites anyway. */
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParseSelect with %s\n", node->element));
+        DEBUG_LOG_REENTER_WITH_NODE(node);
+        field = memory.original_node;
+        DEBUG_LOG_GET_OLD_MODE;
+        mode = memory.mode;
+        DEBUG_LOG_CHANGE_MODE;
     }
     else
     {
-        DEBUG_LOG(SPRTF(">>>Entering ParseSelect %d...\n", ++in_parse_select));
+        DEBUG_LOG_ENTER_WITH_NODE(field);
     }
     
     lexer->insert = NULL;  /* defer implicit inline start tags */
@@ -5125,7 +5227,7 @@ Node* TY_(ParseSelect)( TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(m
             field->closed = yes;
             TrimSpaces(doc, field);
 
-            DEBUG_LOG(SPRTF("<<<Exit ParseSelect 1 %d...\n", --in_parse_select));
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -5147,7 +5249,7 @@ Node* TY_(ParseSelect)( TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(m
 
             TY_(InsertNodeAtEnd)(field, node);
             TY_(pushMemory)( doc, memory );
-            DEBUG_LOG(SPRTF("<<<Exiting ParseSelect with a node to parse: %s\n", node->element));
+            DEBUG_LOG_EXIT_WITH_NODE(node);
             return node;
         }
 
@@ -5158,7 +5260,7 @@ Node* TY_(ParseSelect)( TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(m
 
     TY_(Report)(doc, field, node, MISSING_ENDTAG_FOR);
 
-    DEBUG_LOG(SPRTF("<<<Exit ParseSelect 2 %d...\n", --in_parse_select));
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 
@@ -5173,24 +5275,25 @@ Node* TY_(ParseSelect)( TidyDocImpl* doc, Node *field, GetTokenMode ARG_UNUSED(m
  */
 Node* TY_(ParseTableTag)( TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED(mode) )
 {
-#if defined(ENABLE_DEBUG_LOG)
-    static int in_parse_table = 0;
-#endif
     Lexer* lexer = doc->lexer;
     Node *node, *parent;
     uint istackbase;
+    DEBUG_LOG_COUNTERS;
 
     if ( table == NULL )
     {
         TidyParserMemory memory = TY_(popMemory)( doc );
         node = memory.reentry_node; /* Throwaway, as main loop overrwrites anyway. */
+        DEBUG_LOG_REENTER_WITH_NODE(node);
         table = memory.original_node;
         lexer->exiled = memory.register_1;
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParseTableTag with %s\n", node->element));
+        DEBUG_LOG_GET_OLD_MODE;
+        mode = memory.mode;
+        DEBUG_LOG_CHANGE_MODE;
     }
     else
     {
-        DEBUG_LOG(SPRTF(">>>Entering ParseTableTag %d...\n", ++in_parse_table));
+        DEBUG_LOG_ENTER_WITH_NODE(table);
         TY_(DeferDup)( doc );
     }
 
@@ -5199,7 +5302,7 @@ Node* TY_(ParseTableTag)( TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED
 
     while ((node = TY_(GetToken)(doc, IgnoreWhitespace)) != NULL)
     {
-        DEBUG_LOG(SPRTF("---ParseTableTag got token %s with mode %u\n", node->element, IgnoreWhitespace));
+        DEBUG_LOG_GOT_TOKEN(node);
         if (node->tag == table->tag )
         {
             if (node->type == EndTag)
@@ -5219,7 +5322,7 @@ Node* TY_(ParseTableTag)( TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED
             lexer->istackbase = istackbase;
             table->closed = yes;
 
-            DEBUG_LOG(SPRTF("<<<Exit ParseTableTag 1 %d... EndTag\n", --in_parse_table));
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -5260,7 +5363,7 @@ Node* TY_(ParseTableTag)( TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED
                     memory.register_1 = no; /* later, lexer->exiled = no */
                     memory.mode = IgnoreWhitespace;
                     TY_(pushMemory)( doc, memory );
-                    DEBUG_LOG(SPRTF("<<<Exiting ParseTableTag with a node to parse: %s\n", node->element));
+                    DEBUG_LOG_EXIT_WITH_NODE(node);
                     return node;
                 }
 
@@ -5307,7 +5410,7 @@ Node* TY_(ParseTableTag)( TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED
                     TY_(UngetToken)( doc );
                     lexer->istackbase = istackbase;
 
-                    DEBUG_LOG(SPRTF("<<<Exit ParseTableTag 2 %d... missing EndTag\n", --in_parse_table));
+                    DEBUG_LOG_EXIT;
                     return NULL;
                 }
             }
@@ -5319,7 +5422,7 @@ Node* TY_(ParseTableTag)( TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED
             TY_(Report)(doc, table, node, TAG_NOT_ALLOWED_IN);
             lexer->istackbase = istackbase;
 
-            DEBUG_LOG(SPRTF("<<<Exit ParseTableTag 3 %d... CM_TABLE\n", --in_parse_table));
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -5332,7 +5435,7 @@ Node* TY_(ParseTableTag)( TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED
             memory.reentry_node = node;
             memory.register_1 = lexer->exiled;
             TY_(pushMemory)( doc, memory );
-            DEBUG_LOG(SPRTF("<<<Exiting ParseTableTag with a node to parse: %s\n", node->element));
+            DEBUG_LOG_EXIT_WITH_NODE(node);
             return node;
         }
 
@@ -5344,7 +5447,7 @@ Node* TY_(ParseTableTag)( TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED
     TY_(Report)(doc, table, node, MISSING_ENDTAG_FOR);
     lexer->istackbase = istackbase;
 
-    DEBUG_LOG(SPRTF("<<<Exit ParseTableTag 4 %d... missing end\n", --in_parse_table));
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 
@@ -5361,13 +5464,18 @@ Node* TY_(ParseText)( TidyDocImpl* doc, Node *field, GetTokenMode mode )
 {
     Lexer* lexer = doc->lexer;
     Node *node;
+    DEBUG_LOG_COUNTERS;
+    
+    DEBUG_LOG_ENTER_WITH_NODE(field);
 
     lexer->insert = NULL;  /* defer implicit inline start tags */
 
+    DEBUG_LOG_GET_OLD_MODE;
     if ( nodeIsTEXTAREA(field) )
         mode = Preformatted;
     else
         mode = MixedContent;  /* kludge for font tags */
+    DEBUG_LOG_CHANGE_MODE;
 
     while ((node = TY_(GetToken)(doc, mode)) != NULL)
     {
@@ -5376,6 +5484,7 @@ Node* TY_(ParseText)( TidyDocImpl* doc, Node *field, GetTokenMode mode )
             TY_(FreeNode)( doc, node);
             field->closed = yes;
             TrimSpaces(doc, field);
+            DEBUG_LOG_EXIT;
             return NULL;
         }
 
@@ -5417,11 +5526,13 @@ Node* TY_(ParseText)( TidyDocImpl* doc, Node *field, GetTokenMode mode )
 
         TY_(UngetToken)( doc );
         TrimSpaces(doc, field);
+        DEBUG_LOG_EXIT;
         return NULL;
     }
 
     if (!(field->tag->model & CM_OPT))
         TY_(Report)(doc, field, node, MISSING_ENDTAG_FOR);
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 

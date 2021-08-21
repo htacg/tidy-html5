@@ -388,19 +388,15 @@ struct _Lexer
 
 /**
  *  modes for GetToken()
- *
- *  MixedContent   -- for elements which don't accept PCDATA
- *  Preformatted   -- white space preserved as is
- *  IgnoreMarkup   -- for CDATA elements such as script, style
  */
 typedef enum
 {
-  IgnoreWhitespace,
-  MixedContent,
-  Preformatted,
-  IgnoreMarkup,
-  OtherNamespace,
-  CdataContent
+  IgnoreWhitespace,     /**< */
+  MixedContent,         /**< for elements which don't accept PCDATA */
+  Preformatted,         /**< white space preserved as is */
+  IgnoreMarkup,         /**< for CDATA elements such as script, style */
+  OtherNamespace,       /**< */
+  CdataContent          /**< */
 } GetTokenMode;
 
 

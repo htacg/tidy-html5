@@ -913,11 +913,13 @@ TidyParserMemory TY_(popMemory)( TidyDocImpl* doc )
                         "<--POP  original: %s @ %p\n"
                         "         reentry: %s @ %p\n"
                         "     stack depth: %lu @ %p\n"
+                        "            mode: %u\n"
                         "      register 1: %i\n"
                         "      register 2: %i\n\n",
                         data.original_node ? data.original_node->element : "none", data.original_node,
                         data.reentry_node ? data.reentry_node->element : "none", data.reentry_node,
                         doc->stack.top, &doc->stack.content[doc->stack.top],
+                        data.mode,
                         data.register_1,
                         data.register_2
                         ));
@@ -944,11 +946,13 @@ void TY_(pushMemory)( TidyDocImpl* doc, TidyParserMemory data )
                     "-->PUSH original: %s @ %p\n"
                     "         reentry: %s @ %p\n"
                     "     stack depth: %lu @ %p\n"
+                    "            mode: %u\n"
                     "      register 1: %i\n"
                     "      register 2: %i\n\n",
                     data.original_node ? data.original_node->element : "none", data.original_node,
                     data.reentry_node ? data.reentry_node->element : "none", data.reentry_node,
                     doc->stack.top, &doc->stack.content[doc->stack.top],
+                    data.mode,
                     data.register_1,
                     data.register_2
                     ));
@@ -1061,7 +1065,7 @@ void ParseHTMLWithNode( TidyDocImpl* doc, Node* node )
          nothing on the stack, so we can draw a new node from the lexer.
          */
         node = TY_(GetToken)( doc, mode );
-        DEBUG_LOG(SPRTF("---ParseHTMLWithNode got token %s with mode %u.\n", node ? node->element : NULL, mode));
+        DEBUG_LOG(SPRTF("---ParseHTMLWithNode got token '%s' with mode '%u'.\n", node ? node->element : NULL, mode));
       
         if (node)
             parser = GetParserForNode( doc, node );
@@ -1090,6 +1094,7 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
 #if defined(ENABLE_DEBUG_LOG)
     static int in_parse_block = 0;
     static int parse_block_cnt = 0;
+    int old_mode = IgnoreWhitespace;
 #endif
     Lexer* lexer = doc->lexer;
     Node *node;
@@ -1102,7 +1107,7 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
         node = memory.reentry_node; /* Throwaway, because the loop overwrites this immediately. */
         mode = memory.reentry_mode;
         element = memory.original_node;
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParseBlock with %s\n", node->element));
+        DEBUG_LOG(SPRTF(">>>Re-Enter %s-&u with %s\n", __FUNCTION__, __LINE__, node->element));
     }
     else
     {
@@ -1151,13 +1156,17 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
               (element->tag->model & CM_FIELD ) )
         {
             mode = IgnoreWhitespace;
+            DEBUG_LOG(old_mode = mode);
+            DEBUG_LOG(SPRTF("+++ParseBlock() 1 Changing mode to %u (was %u)\n", mode, old_mode));
         }
         else if (mode == IgnoreWhitespace)
         {
             /* Issue #212 - Further fix in case ParseBlock() is called with 'IgnoreWhitespace'
                when such a leading space may need to be inserted before this element to
                preserve the browser view */
+            DEBUG_LOG(old_mode = mode);
             mode = MixedContent;
+            DEBUG_LOG(SPRTF("+++ParseBlock() 2 Changing mode to %u (was %u)\n", mode, old_mode));
         }
     } /* Re-Entering */
     
@@ -1167,7 +1176,7 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
     
     while ((node = TY_(GetToken)(doc, mode /*MixedContent*/)) != NULL)
     {
-        DEBUG_LOG(SPRTF("---ParseBlock got token %s with mode %u\n", node->element, IgnoreWhitespace));
+        DEBUG_LOG(SPRTF("---ParseBlock got token '%s' with mode '%u'\n", node->element, mode));
         /* end tag for this element */
         if (node->type == EndTag && node->tag &&
             (node->tag == element->tag || element->was == node->tag))
@@ -1256,6 +1265,7 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
 
             TY_(InsertNodeAtEnd)(element, node);
             mode = MixedContent;
+            DEBUG_LOG(SPRTF("+++ParseBlock() Changing mode to %u\n", mode));
 
             /*
               HTML4 strict doesn't allow mixed content for
@@ -1575,12 +1585,14 @@ Node* TY_(ParseBlock)( TidyDocImpl* doc, Node *element, GetTokenMode mode )
                 }
 
                 mode = MixedContent;
+                DEBUG_LOG(SPRTF("+++ParseBlock() Changing mode to %u\n", mode));
             }
             else
             {
                 checkstack = yes;
                 mode = IgnoreWhitespace;
-            }
+                DEBUG_LOG(SPRTF("+++ParseBlock() Changing mode to %u\n", mode));
+}
 
             /* trim white space before <br> */
             if ( nodeIsBR(node) )
@@ -1665,17 +1677,17 @@ Node* TY_(ParseBody)( TidyDocImpl* doc, Node *body, GetTokenMode mode )
         checkstack = memory.register_1;
         iswhitenode = memory.register_2;
         mode = memory.mode;
-        DEBUG_LOG(SPRTF(">>>Re-Enter ParseBody with %s\n", node->element));
+        DEBUG_LOG(SPRTF(">>>Re-Enter ParseBody with %s, mode %u.\n", node->element, mode));
     }
     else
     {
-        DEBUG_LOG(SPRTF(">>>Enter ParseBody...\n"));
+        DEBUG_LOG(SPRTF(">>>Enter ParseBody with %s, mode %u.\n", body->element, mode));
         TY_(BumpObject)( doc, body->parent );
     }
     
     while ((node = TY_(GetToken)(doc, mode)) != NULL)
     {
-        DEBUG_LOG(SPRTF("---ParseBody got token %s with mode %u\n", node->element, IgnoreWhitespace));
+        DEBUG_LOG(SPRTF("---ParseBody got token '%s' with mode '%u'\n", node->element, mode));
         /* find and discard multiple <body> elements */
         if (node->tag == body->tag && node->type == StartTag)
         {
@@ -1711,6 +1723,7 @@ Node* TY_(ParseBody)( TidyDocImpl* doc, Node *body, GetTokenMode mode )
             TY_(FreeNode)( doc, node);
             lexer->seenEndBody = 1;
             mode = IgnoreWhitespace;
+            DEBUG_LOG(SPRTF("+++ParseBody() Changing mode to %u\n", mode));
 
             if ( nodeIsNOFRAMES(body->parent) )
                 break;
@@ -1785,6 +1798,7 @@ Node* TY_(ParseBody)( TidyDocImpl* doc, Node *body, GetTokenMode mode )
 
             TY_(InsertNodeAtEnd)(body, node);
             mode = MixedContent;
+            DEBUG_LOG(SPRTF("+++ParseBody() Changing mode to %u\n", mode));
             continue;
         }
 
@@ -1928,11 +1942,13 @@ Node* TY_(ParseBody)( TidyDocImpl* doc, Node *body, GetTokenMode mode )
                 }
 
                 mode = MixedContent;
+                DEBUG_LOG(SPRTF("+++ParseBody() Changing mode to %u\n", mode));
             }
             else
             {
                 checkstack = yes;
                 mode = IgnoreWhitespace;
+                DEBUG_LOG(SPRTF("+++ParseBody() Changing mode to %u\n", mode));
             }
 
             if (node->implicit)
@@ -1997,7 +2013,7 @@ Node* TY_(ParseColGroup)( TidyDocImpl* doc, Node *colgroup, GetTokenMode ARG_UNU
 
     while ((node = TY_(GetToken)(doc, IgnoreWhitespace)) != NULL)
     {
-        DEBUG_LOG(SPRTF("---ParseColGroup got token %s with mode %u\n", node->element, IgnoreWhitespace));
+        DEBUG_LOG(SPRTF("---ParseColGroup got token '%s' with mode '%u'\n", node->element, IgnoreWhitespace));
 
         if (node->tag == colgroup->tag && node->type == EndTag)
         {
@@ -2710,7 +2726,7 @@ Node* TY_(ParseHTML)( TidyDocImpl *doc, Node *html, GetTokenMode mode )
 #if defined(ENABLE_DEBUG_LOG)
     static int parser_depth = 0;
     static int parser_count = 0;
-    SPRTF(">>>Entering ParseHTML, count: %d, depth %d\n", ++parser_count, ++parser_depth);
+    SPRTF(">>>Entering ParseHTML, count: %d, depth %d, mode %u.\n", ++parser_count, ++parser_depth, mode);
 #endif
 
     TY_(SetOptionBool)( doc, TidyXmlTags, no );
@@ -2727,6 +2743,7 @@ Node* TY_(ParseHTML)( TidyDocImpl *doc, Node *html, GetTokenMode mode )
         mode = memory.reentry_mode;
         state = memory.reentry_state;
         html = memory.original_node;
+        DEBUG_LOG(SPRTF(">>>Re-Enter ParseHTML with %s, mode %u.\n", node->element, mode));
     }
 
     /*
@@ -3164,7 +3181,10 @@ Node* TY_(ParseInline)( TidyDocImpl *doc, Node *element, GetTokenMode mode )
 
         /* Inline elements may or may not be within a preformatted element */
         if (mode != Preformatted)
+        {
             mode = MixedContent;
+            DEBUG_LOG(SPRTF("+++ParseInline() Changing mode to %u\n", mode));
+        }
     }
     
     while ((node = TY_(GetToken)(doc, mode)) != NULL)
@@ -4102,7 +4122,7 @@ Node* TY_(ParseNoFrames)( TidyDocImpl* doc, Node *noframes, GetTokenMode mode )
         if ( state == STATE_INITIAL )
         {
             node = TY_(GetToken)(doc, mode);
-            DEBUG_LOG(SPRTF("---ParseNoFrames got token %s with mode %u\n", node->element, mode));
+            DEBUG_LOG(SPRTF("---ParseNoFrames got token '%s' with mode '%u'\n", node->element, mode));
         }
         
         switch ( state )
@@ -5199,7 +5219,7 @@ Node* TY_(ParseTableTag)( TidyDocImpl* doc, Node *table, GetTokenMode ARG_UNUSED
 
     while ((node = TY_(GetToken)(doc, IgnoreWhitespace)) != NULL)
     {
-        DEBUG_LOG(SPRTF("---ParseTableTag got token %s with mode %u\n", node->element, IgnoreWhitespace));
+        DEBUG_LOG(SPRTF("---ParseTableTag got token '%s' with mode '%u'\n", node->element, IgnoreWhitespace));
         if (node->tag == table->tag )
         {
             if (node->type == EndTag)
@@ -5368,6 +5388,7 @@ Node* TY_(ParseText)( TidyDocImpl* doc, Node *field, GetTokenMode mode )
         mode = Preformatted;
     else
         mode = MixedContent;  /* kludge for font tags */
+    DEBUG_LOG(SPRTF("+++ParseText() Changing mode to %u\n", mode));
 
     while ((node = TY_(GetToken)(doc, mode)) != NULL)
     {

@@ -1983,7 +1983,7 @@ Node* TY_(ParseBody)( TidyDocImpl* doc, Node *body, GetTokenMode mode )
                     if ( TY_(InlineDup)(doc, node) > 0 )
                         continue;
                 }
-
+                
                 DEBUG_LOG_GET_OLD_MODE;
                 mode = MixedContent;
                 DEBUG_LOG_CHANGE_MODE;
@@ -6079,7 +6079,8 @@ Bool TY_(IsBlank)(Lexer *lexer, Node *node)
         isBlank = ( node->end == node->start ||       /* Zero length */
                    ( node->end == node->start+1      /* or one blank. */
                     && lexer->lexbuf[node->start] == ' ' ) );
-        return isBlank;
+    
+    return isBlank;
 }
 
 

@@ -5154,6 +5154,12 @@ Node* TY_(ParseRowGroup)( TidyDocImpl* doc, Node *rowgroup, GetTokenMode ARG_UNU
 Node* TY_(ParseScript)( TidyDocImpl* doc, Node *script, GetTokenMode ARG_UNUSED(mode) )
 {
     Node *node = NULL;
+#if defined(ENABLE_DEBUG_LOG)
+    static int depth_parser = 0;
+    static int count_parser = 0;
+#endif
+    
+    DEBUG_LOG_ENTER_WITH_NODE(script);
     
     doc->lexer->parent = script;
     node = TY_(GetToken)(doc, CdataContent);
@@ -5167,10 +5173,12 @@ Node* TY_(ParseScript)( TidyDocImpl* doc, Node *script, GetTokenMode ARG_UNUSED(
     {
         /* handle e.g. a document like "<script>" */
         TY_(Report)(doc, script, NULL, MISSING_ENDTAG_FOR);
+        DEBUG_LOG_EXIT;
         return NULL;
     }
 
     node = TY_(GetToken)(doc, IgnoreWhitespace);
+    DEBUG_LOG_GOT_TOKEN(node);
 
     if (!(node && node->type == EndTag && node->tag &&
         node->tag->id == script->tag->id))
@@ -5184,6 +5192,7 @@ Node* TY_(ParseScript)( TidyDocImpl* doc, Node *script, GetTokenMode ARG_UNUSED(
     {
         TY_(FreeNode)(doc, node);
     }
+    DEBUG_LOG_EXIT;
     return NULL;
 }
 

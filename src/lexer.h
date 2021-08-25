@@ -322,6 +322,8 @@ struct _Node
 
     uint        line;           /**< current line of document */
     uint        column;         /**< current column of document */
+    
+    int         idx;            /**< general purpose register */
 
     Bool        closed;         /**< true if closed by explicit end tag */
     Bool        implicit;       /**< true if inferred */

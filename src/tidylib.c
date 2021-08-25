@@ -2048,24 +2048,52 @@ void dbg_show_node( TidyDocImpl* doc, Node *node, int caller, int indent )
     SPRTF("\n");
 }
 
-/* Tail recursion here with sensible compilers will re-use
-   the stack frame and avoid overflows during debugging.
+/* Make this non-recursive, because we really do want to eliminate
+   recursion that makes us crash, even when debugging.
  */
-void dbg_show_all_nodes_loop( TidyDocImpl* doc, Node *node, int indent )
-{
-    while ( node && (node = node->next) )
-    {
-        dbg_show_node( doc, node, 0, indent );
-        dbg_show_all_nodes_loop( doc, node->content, indent + 1 );
-    }
-}
-
 void dbg_show_all_nodes( TidyDocImpl* doc, Node *node, int indent )
 {
-    dbg_show_node( doc, node, 0, indent );
-    dbg_show_all_nodes_loop( doc, node->content, indent + 1 );
-}
+    Stack *stack = TY_(newStack)(doc, 16);
+    Node *child = NULL;
+    Node *next = NULL;
 
+    dbg_show_node( doc, node, 0, indent++ );
+
+    if ( (child = node->content) )
+    {
+        while ( child )
+        {
+            if ( (next = child->next) )
+            {
+                next->idx = indent;
+            }
+            
+            dbg_show_node( doc, child, 0, indent );
+            
+            if (child->content)
+            {
+                TY_(push)(stack, next);
+                indent++;
+                child = child->content;
+                continue;
+            }
+
+            if (next)
+            {
+                child = next;
+            }
+            else
+            {
+                if ( (child = TY_(pop)(stack)) )
+                {
+                    indent = child->idx;
+                }
+            }
+
+        }
+        TY_(freeStack)(stack);
+    }
+}
 #endif
 
 int         tidyDocCleanAndRepair( TidyDocImpl* doc )

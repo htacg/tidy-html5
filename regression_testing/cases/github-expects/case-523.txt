@@ -1,0 +1,26 @@
+line 19 column 1 - Warning: <img> lacks "alt" attribute
+line 23 column 41 - Warning: <img> lacks "alt" attribute
+line 25 column 38 - Warning: <img> lacks "alt" attribute
+line 26 column 1 - Warning: <img> lacks "alt" attribute
+line 26 column 20 - Warning: <img> lacks "alt" attribute
+line 26 column 39 - Warning: <img> lacks "alt" attribute
+Info: Document content looks like HTML5
+Tidy found 6 warnings and 0 errors!
+
+The alt attribute should be used to give a short description
+of an image; longer descriptions should be given with the
+longdesc attribute which takes a URL linked to the description.
+These measures are needed for people using non-graphical browsers.
+
+For further advice on how to make your pages accessible
+see https://www.w3.org/WAI/GL.
+About HTML Tidy: https://github.com/htacg/tidy-html5
+Bug reports and comments: https://github.com/htacg/tidy-html5/issues
+Official mailing list: https://lists.w3.org/Archives/Public/public-htacg/
+Latest HTML specification: https://html.spec.whatwg.org/multipage/
+Validate your HTML documents: https://validator.w3.org/nu/
+Lobby your company to join the W3C: https://www.w3.org/Consortium
+
+Do you speak a language other than English, or a different variant of 
+English? Consider helping us to localize HTML Tidy. For details please see 
+https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md

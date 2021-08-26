@@ -413,6 +413,14 @@ static Bool CleanLeadingWhitespace(TidyDocImpl* ARG_UNUSED(doc), Node* node)
 
     if (node->parent->tag && node->parent->tag->parser == TY_(ParseScript))
         return no;
+    
+    /* #523, prevent blank spaces after script if the next item is script.
+     * This is actually more generalized as, if the preceding element is
+     * a body level script, then indicate that we want to clean leading
+     * whitespace.
+     */
+    if ( node->prev && nodeIsSCRIPT(node->prev) && nodeIsBODY(node->prev->parent) )
+        return yes;
 
     /* <p>...<br> <em>...</em>...</p> */
     if (nodeIsBR(node->prev))
@@ -453,6 +461,14 @@ static Bool CleanTrailingWhitespace(TidyDocImpl* doc, Node* node)
 
     if (node->parent->tag && node->parent->tag->parser == TY_(ParseScript))
         return no;
+
+    /* #523, prevent blank spaces after script if the next item is script.
+     * This is actually more generalized as, if the next element is
+     * a body level script, then indicate that we want to clean trailing
+     * whitespace.
+     */
+    if ( node->next && nodeIsSCRIPT(node->next) && nodeIsBODY(node->next->parent) )
+        return yes;
 
     next = node->next;
 

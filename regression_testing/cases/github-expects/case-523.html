@@ -1,0 +1,27 @@
+<!--
+This test case is for issue #523, in which a space is placed after the
+closing tag of certain elements. For example below, a space is added after
+the first script closing tag and after the img tag.
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<title>test</title>
+</head>
+<body>
+<script type="text/javascript"></script>
+<script type="text/javascript"></script>
+<h1>Hello</h1>
+<script type="text/javascript"></script><img src="hi.jpg">
+<script type="text/javascript"></script>
+<p>This is a block level element, and as such, is capable of inlining inline elements.
+<script type="text/javascript">
+let x = "Hello, world"
+</script> Scripts are inline elements, so this script should be included in the flow.</p>
+<script type="text/javascript"></script><img src="bye.jpg">
+<script type="text/javascript"></script>
+<hr>
+<p>This is another paragraph with an <img src="meh.jpg"> tag inline.</p>
+<img src="one.jpg"><img src="two.jpg"><img src="three.jpg">
+</body>
+</html>

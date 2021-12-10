@@ -2297,9 +2297,10 @@ static void CheckDecimal( TidyDocImpl* doc, Node *node, AttVal *attval)
         {
             if (!hasPoint)
                 hasPoint = yes;
-            else
+            else {
                 TY_(ReportAttrError)( doc, node, attval, BAD_ATTRIBUTE_VALUE);
                 break;
+            }
         }
         
         if (!TY_(IsDigit)(*p))

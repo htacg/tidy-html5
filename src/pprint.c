@@ -2586,9 +2586,12 @@ void TY_(PPrintXMLTree)( TidyDocImpl* doc, uint mode, uint indent, Node *node )
         }
         else if ( node->type == RootNode )
         {
-            if (node->content)
+            if (node->content) {
                 node = node->content;
-            continue;
+                continue;
+            } else {
+                break;
+            }
         }
         else if ( node->type == CommentTag )
         {

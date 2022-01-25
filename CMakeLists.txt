@@ -399,6 +399,7 @@ endif ()
 #------------------------------------------------------------------------
 set(name tidy-static)
 add_library ( ${name} STATIC ${CFILES} ${HFILES} ${LIBHFILES} )
+target_include_directories( ${name} PUBLIC "${PROJECT_SOURCE_DIR}/include")
 if (WIN32)
     set_target_properties( ${name} PROPERTIES 
                            OUTPUT_NAME ${LIB_NAME}_static ) 
@@ -427,6 +428,7 @@ if (BUILD_SHARED_LIB)
         set(CMAKE_MACOSX_RPATH 1)
     endif ()
     add_library ( ${name} SHARED ${CFILES} ${HFILES} ${LIBHFILES} )
+    target_include_directories( ${name} PUBLIC "${PROJECT_SOURCE_DIR}/include")
     set_target_properties( ${name} PROPERTIES 
                                    OUTPUT_NAME ${LIB_NAME} )
     set_target_properties( ${name} PROPERTIES

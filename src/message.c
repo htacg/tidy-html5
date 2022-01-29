@@ -169,7 +169,7 @@ static void messageOut( TidyMessageImpl *message )
         go = go && message->code != STRING_CONTENT_LOOKS;
         go = go && message->code != STRING_NO_SYSID;
         go = go && message->level != TidyDialogueInfo;
-        go = go && message->level != TidyConfig;
+        /* go = go && message->level != TidyConfig; Is. #921 - these are errors, not informational! */
         go = go && message->level != TidyInfo;
         go = go && !(message->level >= TidyDialogueSummary &&
                             message->code != STRING_NEEDS_INTERVENTION);

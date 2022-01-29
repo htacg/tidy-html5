@@ -1599,7 +1599,10 @@ Bool ParsePickList( TidyDocImpl* doc, const TidyOptionImpl* entry )
         return yes;
     }
   
-    TY_(ReportBadArgument)( doc, entry->name );
+    /* Is. #921 - this service calls 'GetParsePickListValue', which already emits
+     *  'ReportBadArgument' if it fails, so eliminate this duplicate call
+     * TY_(ReportBadArgument)( doc, entry->name );
+     */
     return no;
 }
 

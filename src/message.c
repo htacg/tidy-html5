@@ -133,6 +133,8 @@ static void messageOut( TidyMessageImpl *message )
             break;
         case TidyWarning:
             doc->warnings++;
+            if ( message->muted )
+                doc->mutedWarningCount++;
             break;
         case TidyConfig:
             doc->optionErrors++;
@@ -142,6 +144,8 @@ static void messageOut( TidyMessageImpl *message )
             break;
         case TidyError:
             doc->errors++;
+            if ( message->muted )
+                doc->mutedErrorCount++;
             break;
         case TidyBadDocument:
             doc->docErrors++;

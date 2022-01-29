@@ -69,7 +69,9 @@ struct _TidyDocImpl
     /* Parse + Repair Results */
     uint                optionErrors;
     uint                errors;
+    uint                mutedErrorCount;
     uint                warnings;
+    uint                mutedWarningCount;
     uint                accessErrors;
     uint                infoMessages;
     uint                docErrors;

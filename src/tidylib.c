@@ -1046,12 +1046,28 @@ uint TIDY_CALL       tidyErrorCount( TidyDoc tdoc )
         count = impl->errors;
     return count;
 }
+uint TIDY_CALL       tidyMutedErrorCount( TidyDoc tdoc )
+{
+    TidyDocImpl* impl = tidyDocToImpl( tdoc );
+    uint count = 0xFFFFFFFF;
+    if ( impl )
+        count = impl->mutedErrorCount;
+    return count;
+}
 uint TIDY_CALL       tidyWarningCount( TidyDoc tdoc )
 {
     TidyDocImpl* impl = tidyDocToImpl( tdoc );
     uint count = 0xFFFFFFFF;
     if ( impl )
         count = impl->warnings;
+    return count;
+}
+uint TIDY_CALL       tidyMutedWarningCount( TidyDoc tdoc )
+{
+    TidyDocImpl* impl = tidyDocToImpl( tdoc );
+    uint count = 0xFFFFFFFF;
+    if ( impl )
+        count = impl->mutedWarningCount;
     return count;
 }
 uint TIDY_CALL       tidyAccessWarningCount( TidyDoc tdoc )

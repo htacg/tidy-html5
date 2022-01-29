@@ -2544,8 +2544,8 @@ int main( int argc, char** argv )
             }
         }
         
-        contentErrors   += tidyErrorCount( tdoc );
-        contentWarnings += tidyWarningCount( tdoc );
+        contentErrors   += tidyErrorCount( tdoc )   - tidyMutedErrorCount( tdoc );
+        contentWarnings += tidyWarningCount( tdoc ) - tidyMutedWarningCount( tdoc );
         accessWarnings  += tidyAccessWarningCount( tdoc );
         
         --argc;

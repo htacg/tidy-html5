@@ -156,7 +156,7 @@ static int TIDY_CALL mapped_getByte( void *sourceData )
 static Bool TIDY_CALL mapped_eof( void *sourceData )
 {
     MappedFileSource *data = sourceData;
-    return ( data->pos >= data->size );
+    return ( data->pos + (data->iter - data->view) >= data->size );
 }
 
 static void TIDY_CALL mapped_ungetByte( void *sourceData, byte ARG_UNUSED(bt) )

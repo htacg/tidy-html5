@@ -255,7 +255,7 @@ void TY_(strrep)(tmbstr buffer, ctmbstr str, ctmbstr rep)
         if(p)
         {
             char buf[1024];
-            memset(buf,'\0',strlen(buf));
+            memset(buf,'\0',sizeof(buf));
 
             if(buffer == p)
             {

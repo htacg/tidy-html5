@@ -508,6 +508,8 @@ endif ()
 # Create man pages
 #################################################
 
+set(HOST_TIDY "${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}" CACHE STRING "Host tidy")
+
 if (UNIX AND SUPPORT_CONSOLE_APP)
     find_program( XSLTPROC_FOUND xsltproc )
     if (XSLTPROC_FOUND)
@@ -529,7 +531,7 @@ if (UNIX AND SUPPORT_CONSOLE_APP)
         # Run the built EXE to generate xml output .
         add_custom_command(
             TARGET man
-            COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME} -xml-help > ${TIDYHELP}
+            COMMAND ${HOST_TIDY} -xml-help > ${TIDYHELP}
             COMMENT "Generate ${TIDYHELP}"
             VERBATIM
         )
@@ -537,7 +539,7 @@ if (UNIX AND SUPPORT_CONSOLE_APP)
         # Run the built EXE to generate more xml output.
         add_custom_command(
             TARGET man
-            COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME} -xml-config > ${TIDYCONFIG}
+            COMMAND ${HOST_TIDY} -xml-config > ${TIDYCONFIG}
             COMMENT "Generate ${TIDYCONFIG}"
             VERBATIM
         )

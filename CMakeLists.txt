@@ -509,8 +509,8 @@ endif ()
 #################################################
 
 if (UNIX AND SUPPORT_CONSOLE_APP)
-    find_program( XSLTPROC_FOUND xsltproc )
-    if (XSLTPROC_FOUND)
+    find_program( LIBXSLT_XSLTPROC_EXECUTABLE xsltproc )
+    if (LIBXSLT_XSLTPROC_EXECUTABLE)
         ## NOTE: man name must match exe ie currently `${LIB_NAME}.1` not `tidy.1`
         ## also could use `manpath` command output to determine target install path
         set(TIDY_MANFILE ${LIB_NAME}.1)
@@ -546,7 +546,7 @@ if (UNIX AND SUPPORT_CONSOLE_APP)
         add_custom_command(
             TARGET man
             DEPENDS ${TIDYHELP}
-            COMMAND xsltproc ARGS ${TIDY1XSL} ${TIDYHELP} > ${CMAKE_CURRENT_BINARY_DIR}/${TIDY_MANFILE}
+            COMMAND "${LIBXSLT_XSLTPROC_EXECUTABLE}" ARGS ${TIDY1XSL} ${TIDYHELP} > ${CMAKE_CURRENT_BINARY_DIR}/${TIDY_MANFILE}
             COMMENT "Generate ${TIDY_MANFILE}"
             VERBATIM
         )

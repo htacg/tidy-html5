@@ -546,7 +546,7 @@ if (UNIX AND SUPPORT_CONSOLE_APP)
         add_custom_command(
             TARGET man
             DEPENDS ${TIDYHELP}
-            COMMAND xsltproc ARGS ${TIDY1XSL} ${TIDYHELP} > ${CMAKE_CURRENT_BINARY_DIR}/${TIDY_MANFILE}
+            COMMAND ${XSLTPROC_FOUND} ARGS ${TIDY1XSL} ${TIDYHELP} > ${CMAKE_CURRENT_BINARY_DIR}/${TIDY_MANFILE}
             COMMENT "Generate ${TIDY_MANFILE}"
             VERBATIM
         )

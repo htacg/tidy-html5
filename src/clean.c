@@ -1629,7 +1629,7 @@ void TY_(BQ2Div)( TidyDocImpl* doc, Node *node )
 
         node = next ? next : TY_(pop)(stack);
     }
-    TY_(freeStack)(stack);
+    TY_(freeStack)(stack, doc);
 }
 
 
@@ -2644,7 +2644,7 @@ void TY_(FixLanguageInformation)(TidyDocImpl* doc, Node* node, Bool wantXmlLang,
 
         node = next ? next : TY_(pop)(stack);
     }
-    TY_(freeStack)(stack);
+    TY_(freeStack)(stack, doc);
 }
 
 /*
@@ -2754,7 +2754,7 @@ void TY_(FixAnchors)(TidyDocImpl* doc, Node *node, Bool wantName, Bool wantId)
 
         node = next ? next : TY_(pop)(stack);
     }
-    TY_(freeStack)(stack);
+    TY_(freeStack)(stack, doc);
 }
 
 /* Issue #567 - move style elements from body to head 
@@ -2798,7 +2798,7 @@ static void StyleToHead(TidyDocImpl* doc, Node *head, Node *node, Bool fix, int 
             indent--;
         }
     }
-    TY_(freeStack)(stack);
+    TY_(freeStack)(stack, doc);
 }
 
 

@@ -4538,11 +4538,12 @@ FUNC_UNUSED Node* TY_(peek)(Stack *stack)
 /**
  *  Frees the stack when done.
  */
-void TY_(freeStack)(Stack *stack)
+void TY_(freeStack)(Stack *stack, TidyDocImpl *doc)
 {
     TidyFree( stack->allocator, stack->firstNode );
     stack->top = -1;
     stack->capacity = 0;
     stack->firstNode = NULL;
     stack->allocator = NULL;
+    TidyFree( doc->allocator, stack)
 }

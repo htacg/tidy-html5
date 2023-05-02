@@ -1804,7 +1804,7 @@ static void TY_(CheckHTML5)( TidyDocImpl* doc, Node* node )
 
         node = next ? next : TY_(pop)(stack);
     }
-    TY_(freeStack)(stack);
+    TY_(freeStack)(stack, doc);
 }
 /*****************************************************************************
  *  END HTML5 STUFF
@@ -1935,7 +1935,7 @@ static void TY_(CheckHTMLTagsAttribsVersions)( TidyDocImpl* doc, Node* node )
 
         node = next ? next : TY_(pop)(stack);
     }
-    TY_(freeStack)(stack);
+    TY_(freeStack)(stack, doc);
 }
 
 
@@ -2091,7 +2091,7 @@ void dbg_show_all_nodes( TidyDocImpl* doc, Node *node, int indent )
             }
 
         }
-        TY_(freeStack)(stack);
+        TY_(freeStack)(stack, doc);
     }
 }
 #endif

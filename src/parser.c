@@ -584,7 +584,7 @@ static void CleanSpaces(TidyDocImpl* doc, Node* node)
 
         node = next ? next : TY_(pop)(stack);
     }
-    TY_(freeStack)(stack);
+    TY_(freeStack)(stack, doc);
 }
 
 

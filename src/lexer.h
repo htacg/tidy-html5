@@ -731,7 +731,7 @@ TY_PRIVATE Node* TY_(peek)(Stack *stack);
 /**
  *  Frees the stack when done.
  */
-TY_PRIVATE void TY_(freeStack)(Stack *stack);
+TY_PRIVATE void TY_(freeStack)(Stack *stack, TidyDocImpl *doc);
 
 
 /** @}

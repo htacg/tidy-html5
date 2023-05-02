@@ -139,7 +139,7 @@ static void CleanNode( TidyDocImpl* doc, Node *node )
             }
             child = next ? next : TY_(pop)(stack);
         }
-        TY_(freeStack)(stack);
+        TY_(freeStack)(stack, doc);
     }
 }
 

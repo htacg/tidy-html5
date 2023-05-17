@@ -1345,7 +1345,7 @@ void TY_(DefineMutedMessage)(TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbst
 
     if ( !list->list )
     {
-        list->list = TidyAlloc(doc->allocator, sizeof(tidyStrings) * capacity );
+        list->list = TidyAlloc(doc->allocator, sizeof(tidyStrings) * (capacity + 1));
         list->list[0] = 0;
         list->capacity = capacity;
         list->count = 0;
@@ -1354,7 +1354,7 @@ void TY_(DefineMutedMessage)(TidyDocImpl* doc, const TidyOptionImpl* opt, ctmbst
     if ( list->count >= list->capacity )
     {
         list->capacity = list->capacity * 2;
-        list->list = TidyRealloc(doc->allocator, list->list, sizeof(tidyStrings) * list->capacity + 1 );
+        list->list = TidyRealloc(doc->allocator, list->list, sizeof(tidyStrings) * (list->capacity + 1) );
     }
 
     list->list[list->count] = message;

@@ -1,0 +1,4597 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: sr\n"
+"X-Generator: HTML Tidy poconvert.rb\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-07-30 10:35:03\n"
+"Last-Translator: eevan78\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language-Team: \n"
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyAccessibilityCheckLevel"
+msgid ""
+"This option specifies what level of accessibility checking, if any, "
+"that Tidy should perform. "
+"<br/>"
+"Level <var>0 (Tidy Classic)</var> performs no additional accessibility checking. "
+"<br/>"
+"Level <var>1 (Priority 1 Checks)</var> performs the Priority Level 1 checks."
+"<br/>"
+"Level <var>2 (Priority 2 Checks)</var> performs the Priority Level 1 and 2 checks."
+"<br/>"
+"Level <var>3 (Priority 3 Checks)</var> performs the Priority Level 1, 2, and 3 checks."
+"<br/>"
+"For more information on Tidy's accessibility checking, including the specific "
+"checks that are made for each Priority Level, please visit "
+"<a href=\"https://www.html-tidy.org/accessibility/\"> Tidy's Accessibility Page</a>. "
+msgstr ""
+"Ова опција навода да ли и који ниво провере приступачности би Tidy требало да изврши."
+"<br/>"
+"Ниво <var>0 (Tidy класични)</var> не врши се додатна провера приступачности."
+"<br/>"
+"Ниво <var>1 (Провере приоритета 1)</var> извршавају се провере 1. нивоа приоритета."
+"<br/>"
+"Ниво <var>2 (Провере приоритета 2)</var> извршавају се провере 1. и 2. нивоа приоритета."
+"<br/>"
+"Ниво <var>3 (Провере приоритета 3)</var> извршавају се провере 1., 2. и 3. нивоа приоритета."
+"<br/>"
+"Ако желите да сазнате више о Tidy провери приступачности, укључујући специфичне провере "
+"које се извршавају на сваком од нивоа приоритета, молимо вас да посетите "
+"<a href=\"https://www.html-tidy.org/accessibility/\"> Tidy страницу о приступачности</a>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyAltText"
+msgid ""
+"This option specifies the default <code>alt=</code> text Tidy uses for "
+"<code>&lt;img&gt;</code> attributes when the <code>alt=</code> attribute "
+"is missing. "
+"<br/>"
+"Use with care, as it is your responsibility to make your documents accessible "
+"to people who cannot see the images. "
+msgstr ""
+"Ова опција наводи подразумевани <code>alt=</code> текст који Tidy користи за "
+"<code>&lt;img&gt;</code> атрибуте у случају да <code>alt=</code> атрибут "
+"недостаје. "
+"<br/>"
+"Користите пажљиво, јер је одговорност да своје документе учините приступачним "
+"људима који не могу да виде слике на вама. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyAnchorAsName"
+msgid ""
+"This option controls the deletion or addition of the <code>name</code> "
+"attribute in elements where it can serve as anchor. "
+"<br/>"
+"If set to <var>yes</var> a <code>name</code> attribute, if not already "
+"existing, is added along an existing <code>id</code> attribute if the DTD "
+"allows it. "
+"<br/>"
+"If set to <var>no</var> any existing name attribute is removed if an "
+"<code>id</code> attribute exists or has been added. "
+msgstr ""
+"Ова опција контролише брисање или додавање <code>name</code> атрибута у "
+"елементе у којима може да служи као сидро. "
+"<br/>"
+"Ако се постави на <var>yes</var> атрибут <code>name</code> се, у случају да већ "
+"не постоји, додаје уз постојећи атрибут <code>id</code> када DTD то "
+"дозвољава. "
+"<br/>"
+"Ако се постави на <var>no</var> уклања се било који постојећи name атрибут "
+"ако постоји <code>id</code> атрибут или ако је додат. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyAsciiChars"
+msgid ""
+"Can be used to modify behavior of the <code>clean</code> option when set "
+"to <var>yes</var>. "
+"<br/>"
+"If set to <var>yes</var> when using <code>clean</code>, "
+"<code>&amp;emdash;</code>, <code>&amp;rdquo;</code>, and other named "
+"character entities are downgraded to their closest ASCII equivalents. "
+msgstr ""
+"Може да се употреби за промену понашања опције <code>clean</code> када се "
+"постави на <var>yes</var>. "
+"<br/>"
+"Ако се постави на <var>yes</var> када се користи <code>clean</code>, "
+"<code>&amp;emdash;</code>, <code>&amp;rdquo;</code> и остали именовани "
+"карактер ентитети се упрошћују на њихове најближе одговарајуће ASCII еквиваленте. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyBlockTags"
+msgid ""
+"This option specifies new block-level tags. This option takes a space or "
+"comma separated list of tag names. "
+"<br/>"
+"Unless you declare new tags, Tidy will refuse to generate a tidied file if "
+"the input includes previously unknown tags. "
+"<br/>"
+"Note you can't change the content model for elements such as "
+"<code>&lt;table&gt;</code>, <code>&lt;ul&gt;</code>, "
+"<code>&lt;ol&gt;</code> and <code>&lt;dl&gt;</code>. "
+"<br/>"
+"This option is ignored in XML mode. "
+msgstr ""
+"Ова опција наводи нове ознаке блок нивоа. Она као вредност узима листу имена "
+"ознака раздвојених размацима или запетама. "
+"<br/>"
+"У случају да не декларишете нове ознаке, Tidy ће одбити да генерише сређени "
+"фајл када се у улазном документу налазе претходно непознате ознаке. "
+"<br/>"
+"Имајте на уму да не можете променити модел садржаја за елементе као што су "
+"<code>&lt;table&gt;</code>, <code>&lt;ul&gt;</code>, "
+"<code>&lt;ol&gt;</code> и <code>&lt;dl&gt;</code>. "
+"<br/>"
+"Ова опција се игнорише у XML режиму. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyBodyOnly"
+msgid ""
+"This option specifies if Tidy should print only the contents of the "
+"body tag as an HTML fragment. "
+"<br/>"
+"If set to <var>auto</var>, this is performed only if the body tag has "
+"been inferred. "
+"<br/>"
+"Useful for incorporating existing whole pages as a portion of another "
+"page. "
+"<br/>"
+"This option has no effect if XML output is requested. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да као HTML фрагмент штампа "
+"само садржај body ознаке. "
+"<br/>"
+"Ако се постави на <var>auto</var>, ово се изводу само ако је body ознака "
+"изведена. "
+"<br/>"
+"Корисно је да се као део неке странице укључе комплетне постојеће странице. "
+"<br/>"
+"Ова опција нема ефекат ако се захтева XML излаз. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyBreakBeforeBR"
+msgid ""
+"This option specifies if Tidy should output a line break before each "
+"<code>&lt;br&gt;</code> element. "
+msgstr ""
+"Ова опција наводи да ли би Tidy пре сваког <code>&lt;br&gt;</code> елемента "
+"требало да постави прелом линије. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyCharEncoding"
+msgid ""
+"This option specifies the character encoding Tidy uses for input, and "
+"when set, automatically chooses an appropriate character encoding to "
+"be used for output. The output encoding Tidy chooses may be different "
+"from the input encoding. "
+"<br/>"
+"For <var>ascii</var>, <var>latin0</var>, <var>ibm858</var>, "
+"<var>mac</var>, and <var>win1252</var> input encodings, the "
+"<code>output-encoding</code> option will automatically be set to "
+"<var>ascii</var>. You can set <code>output-encoding</code> manually "
+"to override this. "
+"<br/>"
+"For other input encodings, the <code>output-encoding</code> option "
+"will automatically be set to the the same value. "
+"<br/>"
+"Regardless of the preset value, you can set "
+"<code>output-encoding</code> manually to override this. "
+"<br/>"
+"Tidy is not an encoding converter. Although the Latin and UTF "
+"encodings can be mixed freely, it is not possible to convert Asian "
+"encodings to Latin encodings with Tidy. "
+msgstr ""
+"Ова опција наводи кодирање карактера које Tidy користи за улаз, а "
+"када се постави, аутоматски бира одговарајуће кодирање карактера које "
+"ће се користити за излаз. Кодирање карактера које Tidy изабере за "
+"излаз може да се разликује од кодирања улазних карактера. "
+"<br/>"
+"За <var>ascii</var>, <var>latin0</var>, <var>ibm858</var>, "
+"<var>mac</var> и <var>win1252</var> кодирања улаза, опција "
+"<code>output-encoding</code> ће се аутоматски поставити на "
+"<var>ascii</var>. Ако то желите да преиначите, "
+"<code>output-encoding</code> можете да поставите ручно. "
+"<br/>"
+"У случају осталих кодирања улаза, опција <code>output-encoding</code> "
+"ће се аутоматски поставити на исту вредност. "
+"<br/>"
+"Без обзира на постављену вредности, <code>output-encoding</code> "
+"можете ручно да поставите и тако премостите предодређену вредност. "
+"<br/>"
+"Tidy није претварач кодирања. Мада латинична и UTF кодирања могу "
+"слободно да се мешају, програмом Tidy није могуће претварање из "
+"азијских кодирања у латинична. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyCoerceEndTags"
+msgid ""
+"This option specifies if Tidy should coerce a start tag into an end tag "
+"in cases where it looks like an end tag was probably intended; "
+"for example, given "
+"<br/>"
+"<code>&lt;span&gt;foo &lt;b&gt;bar&lt;b&gt; baz&lt;/span&gt;</code> "
+"<br/>"
+"Tidy will output "
+"<br/>"
+"<code>&lt;span&gt;foo &lt;b&gt;bar&lt;/b&gt; baz&lt;/span&gt;</code> "
+msgstr ""
+"Ова опција наводи да ли би у случајевима када изгледа вероватно да је "
+"постојала намера да се постави затварајућа ознака, Tidy требало да принудно "
+"претвори отварајућу ознаку у затварајућу; на пример, када је дато "
+"<br/>"
+"<code>&lt;span&gt;foo &lt;b&gt;bar&lt;b&gt; baz&lt;/span&gt;</code> "
+"<br/>"
+"Tidy ће да испише "
+"<br/>"
+"<code>&lt;span&gt;foo &lt;b&gt;bar&lt;/b&gt; baz&lt;/span&gt;</code> "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyCSSPrefix"
+msgid ""
+"This option specifies the prefix that Tidy uses for styles rules. "
+"<br/>"
+"By default, <var>c</var> will be used. "
+msgstr ""
+"Ова опција наводи префикс који Tidy користи за стилска правила. "
+"<br/>"
+"Подразумевано ће се користити <var>c</var>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDecorateInferredUL"
+msgid ""
+"This option specifies if Tidy should decorate inferred "
+"<code>&lt;ul&gt;</code> elements with some CSS markup to avoid indentation "
+"to the right. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да украси наслућене "
+"<code>&lt;ul&gt;</code> елементе неким CSS означавањем како би се спречило "
+"увлачење у десно. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDoctype"
+msgid ""
+"This option specifies the DOCTYPE declaration generated by Tidy. "
+"<br/>"
+"If set to <var>omit</var> the output won't contain a DOCTYPE "
+"declaration. Note this this also implies <code>numeric-entities</code> is "
+"set to <var>yes</var>."
+"<br/>"
+"If set to <var>html5</var> the DOCTYPE is set to "
+"<code>&lt;!DOCTYPE html&gt;</code>."
+"<br/>"
+"If set to <var>auto</var> (the default) Tidy will use an educated guess "
+"based upon the contents of the document. Note that selecting this option "
+"will <em>not</em> change the current document's DOCTYPE on output. "
+"<br/>"
+"If set to <var>strict</var>, Tidy will set the DOCTYPE to the HTML4 or "
+"XHTML1 strict DTD."
+"<br/>"
+"If set to <var>loose</var>, the DOCTYPE is set to the HTML4 or XHTML1 "
+"loose (transitional) DTD."
+"<br/>"
+"Alternatively, you can supply a string for the formal public identifier "
+"(FPI)."
+"<br/>"
+"For example: "
+"<br/>"
+"<code>doctype: \"-//ACME//DTD HTML 3.14159//EN\"</code>"
+"<br/>"
+"If you specify the FPI for an XHTML document, Tidy will set the "
+"system identifier to an empty string. For an HTML document, Tidy adds a "
+"system identifier only if one was already present in order to preserve "
+"the processing mode of some browsers. Tidy leaves the DOCTYPE for "
+"generic XML documents unchanged. "
+"<br/>"
+"This option does not offer a validation of document conformance. "
+msgstr ""
+"Ова опција наводи DOCTYPE декларацију коју генерише Tidy. "
+"<br/>"
+"Ако се постави на <var>omit</var> у излазу се неће појавити DOCTYPE "
+"декларација. Имајте на уму да ово такође повлачи постављање опције "
+"<code>numeric-entities</code> на <var>yes</var>."
+"<br/>"
+"Ако се постави на <var>html5</var> DOCTYPE се поставља на "
+"<code>&lt;!DOCTYPE html&gt;</code>."
+"<br/>"
+"Ако се постави на <var>auto</var> (што је подразумевана вредност) Tidy ће "
+"употребити информисано погађање засновано на садржају документа. Имајте "
+"на уму да избор ове опције <em>неће</em> променити DOCTYPE текућег "
+"документа на излазу. "
+"<br/>"
+"Ако се постави на <var>strict</var>, Tidy ће поставити DOCTYPE на HTML4 или "
+"XHTML1 strict DTD."
+"<br/>"
+"Ако се постави на <var>loose</var>, DOCTYPE се поставља на HTML4 или XHTML1 "
+"loose (transitional) DTD."
+"<br/>"
+"У супротном можете да наведете стринг који ће да се користи као формални "
+"јавни идентификатор (FPI)."
+"<br/>"
+"На пример: "
+"<br/>"
+"<code>doctype: \"-//ACME//DTD HTML 3.14159//EN\"</code>"
+"<br/>"
+"Ако наведете FPI за XHTML документ, Tidy ће идентификатор система да "
+"постави на празан стринг. У случају HTML документа, Tidy додаје "
+"идентификатор система само онда када је неки био већ присутан, тако да "
+"се у неким прегледачима очува режим обраде. У случају генеричких XML "
+"докумената, Tidy не мења DOCTYPE. "
+"<br/>"
+"Ова опција не омогућава проверу сагласности документа. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDropEmptyElems"
+msgid "This option specifies if Tidy should discard empty elements. "
+msgstr "Ова опција наводи да ли би Tidy требало да одбаци празне елементе. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDropEmptyParas"
+msgid "This option specifies if Tidy should discard empty paragraphs. "
+msgstr "Ова опција наводи да ли би Tidy требало да одбаци празне пасусе. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDropPropAttrs"
+msgid ""
+"This option specifies if Tidy should strip out proprietary attributes, "
+"such as Microsoft data binding attributes. Additionally attributes "
+"that aren't permitted in the output version of HTML will be dropped "
+"if used with <code>strict-tags-attributes</code>. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да уклони власничке атрибуте, "
+"као што су Microsoft атрибути везивања података. Уз то, уклониће се и "
+"атрибути који нису дозвољени у HTML верзији која се користи за излаз "
+"ако се користи у комбинацији са <code>strict-tags-attributes</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDuplicateAttrs"
+msgid ""
+"This option specifies if Tidy should keep the first or last attribute, if "
+"an attribute is repeated, e.g. has two <code>align</code> attributes. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да задржи први или последњи атрибут, "
+"у случају када се атрибут понавља, нпр. ако постоје два <code>align</code> "
+"атрибута. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEmacs"
+msgid ""
+"This option specifies that Tidy should change the format for reporting "
+"errors and warnings to a format that is more easily parsed by GNU Emacs "
+"or some other program.  It changes them from the default "
+"<br/>"
+"  line &lt;line number&gt; column &lt;column number&gt; - (Error|Warning): &lt;message&gt; "
+"<br/>"
+"to a form which includes the input filename: "
+"<br/>"
+"  &lt;filename&gt;:&lt;line number&gt;:&lt;column number&gt;: (Error|Warning): &lt;message&gt; "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да промени формат извештавања "
+"о грешкама и упозорењима на формат који се лакше парсира програмом GNU Emacs "
+"или неким другим. Мења се из подразумеваног формата "
+"<br/>"
+"  line &lt;број линије&gt; column &lt;број колоне&gt; - (Error|Warning): &lt;порука&gt; "
+"<br/>"
+"у облик који укључује и име улазног фајла: "
+"<br/>"
+"  &lt;име_фајла&gt;:&lt;број линије&gt;:&lt;број колоне&gt;: (Error|Warning): &lt;порука&gt; "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEmptyTags"
+msgid ""
+"This option specifies new empty inline tags. This option takes a space "
+"or comma separated list of tag names. "
+"<br/>"
+"Unless you declare new tags, Tidy will refuse to generate a tidied file if "
+"the input includes previously unknown tags. "
+"<br/>"
+"Remember to also declare empty tags as either inline or blocklevel. "
+"<br/>"
+"This option is ignored in XML mode. "
+msgstr ""
+"Ова опција наводи нове празне ознаке унутар линије. Њена вредност је листа "
+"имена ознака раздвојених размаком или запетом. "
+"<br/>"
+"Ако не декларишете нове ознаке, Tidy ће одбити да генерише сређени фајл када "
+"се у улазном налазе непознате ознаке. "
+"<br/>"
+"Не заборавите да празне ознаке такође декларишете као унутар линије или на "
+"нивоу блока. "
+"<br/>"
+"Ова опција се игнорише у XML режиму. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEncloseBlockText"
+msgid ""
+"This option specifies if Tidy should insert a <code>&lt;p&gt;</code> "
+"element to enclose any text it finds in any element that allows mixed "
+"content for HTML transitional but not HTML strict. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да уметне <code>&lt;p&gt;</code> "
+"елемент како би уоквирио текст који пронађе у било ком елементу који "
+"дозвољава мешовити садржај за HTML transitional, али не и за HTML strict. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEncloseBodyText"
+msgid ""
+"This option specifies if Tidy should enclose any text it finds in the "
+"body element within a <code>&lt;p&gt;</code> element."
+"<br/>"
+"This is useful when you want to take existing HTML and use it with a "
+"style sheet. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да уоквири <code>&lt;p&gt;</code> "
+"елементом било који текст који пронађе унутар body елемента."
+"<br/>"
+"Ово је корисно када постојећи HTML желите да користите са листом стилова. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyErrFile"
+msgid ""
+"This option specifies the error file Tidy uses for errors and warnings. "
+"Normally errors and warnings are output to <code>stderr</code>. "
+msgstr ""
+"Ова опција наводи фајл грешака који Tidy користи за грешке и упозорења. "
+"Обично се грешке и упозорења исписују на <code>stderr</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEscapeCdata"
+msgid ""
+"This option specifies if Tidy should convert "
+"<code>&lt;![CDATA[]]&gt;</code> sections to normal text. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да одељке "
+"<code>&lt;![CDATA[]]&gt;</code> претвори у обични текст. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEscapeScripts"
+msgid ""
+"This option causes items that look like closing tags, like "
+"<code>&lt;/g</code> to be escaped to <code>&lt;\\/g</code>. Set "
+"this option to <var>no</var> if you do not want this."
+msgstr ""
+"Резултат ове опције је да се ставке који личе на затварајуће "
+"ознаке, као што је <code>&lt;/g</code> означавају са <code>&lt;\\/g</code>. "
+"Ако то не желите, поставите вредност ове опције на <var>no</var>."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyFixBackslash"
+msgid ""
+"This option specifies if Tidy should replace backslash characters "
+"<code>\\</code> in URLs with forward slashes <code>/</code>. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да у URL адресама замени "
+"карактере обрнуте косе црте <code>\\</code> са косим цртама <code>/</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyFixComments"
+msgid ""
+"This option specifies if Tidy should replace unexpected hyphens with "
+"<code>=</code> characters when it comes across adjacent hyphens. "
+"<br/>"
+"The default is <var>auto</var> will which will act as <var>no</var> "
+"for HTML5 document types, and <var>yes</var> for all other document "
+"types. "
+"<br/>"
+"HTML has abandoned SGML comment syntax, and allows adjacent hyphens "
+"for all versions of HTML, although XML and XHTML do not. If you plan "
+"to support older browsers that require SGML comment syntax, then "
+"consider setting this value to <var>yes</var>."
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да када наиђе на узастопне "
+"цртице замени неочекиване карактерима <code>=</code>. "
+"<br/>"
+"Подразумевана вредност је <var>auto</var> и она ће у HTML5 типовима "
+"докумената да се понаша као <var>no</var>, а као <var>yes</var> за "
+"све остале типове докумената. "
+"<br/>"
+"HTML је напустио SGML синтаксу коментара, тако да се у свим HTML верзијама "
+"дозвољавају узастопне цртице, мада то није дозвољено у XML и XHTML. Ако "
+"планирате да подржавате старије прегледаче којима је потребна SGML синтакса "
+"коментара, онда размотрите потребу да ову вредност поставите на <var>yes</var>."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyFixUri"
+msgid ""
+"This option specifies if Tidy should check attribute values that carry "
+"URIs for illegal characters and if such are found, escape them as HTML4 "
+"recommends. "
+msgstr ""
+"Ова опција наводи да ли Tidy треба да провери постојање неважећих карактера "
+"у URI идентификаторима унутар вредности атрибута, па ако се пронађу, онда да "
+"их означи онако како то препоручује HTML4 спецификација. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyForceOutput"
+msgid ""
+"This option specifies if Tidy should produce output even if errors are "
+"encountered. "
+"<br/>"
+"Use this option with care; if Tidy reports an error, this "
+"means Tidy was not able to (or is not sure how to) fix the error, so the "
+"resulting output may not reflect your intention. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да креира излаз чак и када наиђе "
+"на грешке. "
+"<br/>"
+"Пажљиво користите ову опцију; ако Tidy пријави грешку, то значи да Tidy "
+"није могао (или није био сигуран на који начин) да исправи грешку, тако "
+"да генерисани излаз можда неће осликавати вашу намеру. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyGDocClean"
+msgid ""
+"This option specifies if Tidy should enable specific behavior for "
+"cleaning up HTML exported from Google Docs. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да укључи одређено понашање за "
+"чишћење HTML кода извезеног из Google Docs. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyHideComments"
+msgid "This option specifies if Tidy should not print out comments. "
+msgstr "Ова опција наводи да ли Tidy не треба да штампа коментаре. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyHtmlOut"
+msgid ""
+"This option specifies if Tidy should generate pretty printed output, "
+"writing it as HTML. "
+msgstr ""
+"Ова опција наводи да ли Tidy треба да генерише лепо исписан излаз, "
+"пишући га као HTML. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyInCharEncoding"
+msgid ""
+"This option specifies the character encoding Tidy uses for input. "
+"Tidy makes certain assumptions about some of the input encodings. "
+"<br/>"
+"For <var>ascii</var>, Tidy will accept Latin-1 (ISO-8859-1) character "
+"values and convert them to entities as necessary. "
+"<br/>"
+"For <var>raw</var>, Tidy will make no assumptions about the character "
+"values and will pass them unchanged to output. "
+"<br/>"
+"For <var>mac</var> and <var>win1252</var>, vendor specific characters "
+"values will be accepted and converted to entities as necessary. "
+"<br/>"
+"Asian encodings such as <var>iso2022</var> will be handled "
+"appropriately assuming the corresponding <code>output-encoding</code> "
+"is also specified. "
+"<br/>"
+"Tidy is not an encoding converter. Although the Latin and UTF "
+"encodings can be mixed freely, it is not possible to convert Asian "
+"encodings to Latin encodings with Tidy. "
+msgstr ""
+"Ова опција наводи кодирање карактера које Tidy користи за улаз. "
+"Tidy прави неколико претпоставки у вези са одређеним кодирањима улаза. "
+"<br/>"
+"За <var>ascii</var>, Tidy ће да прихвати Latin-1 (ISO-8859-1) вредности "
+"карактера и по потреби ће их претварати у ентитете. "
+"<br/>"
+"За <var>raw</var>, Tidy неће правити никакве претпоставке у вези са "
+"вредностима карактера и проследиће их ба излаз неизмењене. "
+"<br/>"
+"За <var>mac</var> и <var>win1252</var>, прихватаће се вредности карактера "
+"специфичне за произвођача и по потреби ће се претварати у ентитете. "
+"<br/>"
+"Азијска кодирања као што су <var>iso2022</var> ће се обрађивати на "
+"одговарајући начин уз претпоставку да је такође наведена одговарајућа "
+"вредност за <code>output-encoding</code>. "
+"<br/>"
+"Tidy није претварач кодирања. Мада латинична и UTF кодирања могу "
+"слободно да се мешају, програмом Tidy није могуће претварање из "
+"азијских кодирања у латинична. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyIndentAttributes"
+msgid "This option specifies if Tidy should begin each attribute on a new line. "
+msgstr "Ова опција наводи да ли би Tidy сваки атрибут требало да почне на новој линији. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyIndentCdata"
+msgid ""
+"This option specifies if Tidy should indent "
+"<code>&lt;![CDATA[]]&gt;</code> sections. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да увлачи "
+"<code>&lt;![CDATA[]]&gt;</code> одељке. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyIndentContent"
+msgid ""
+"This option specifies if Tidy should indent block-level tags. "
+"<br/>"
+"If set to <var>auto</var> Tidy will decide whether or not to indent the "
+"content of tags such as <code>&lt;title&gt;</code>, "
+"<code>&lt;h1&gt;</code>-<code>&lt;h6&gt;</code>, <code>&lt;li&gt;</code>, "
+"<code>&lt;td&gt;</code>, or <code>&lt;p&gt;</code> "
+"based on the content including a block-level element. "
+"<br/>"
+"Setting <code>indent</code> to <var>yes</var> can expose layout bugs in "
+"some browsers. "
+"<br/>"
+"Use the option <code>indent-spaces</code> to control the number of spaces "
+"or tabs output per level of indent, and <code>indent-with-tabs</code> to "
+"specify whether spaces or tabs are used. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да увлачи ознаке блок-нивоа. "
+"<br/>"
+"Ако се постави на <var>auto</var> Tidy ће на основу садржаја који укључује "
+"елемент блок-нивоа одлучити да ли да увлачи садржај ознака као што су "
+"<code>&lt;title&gt;</code>, <code>&lt;h1&gt;</code>-<code>&lt;h6&gt;</code>, "
+"<code>&lt;li&gt;</code>, <code>&lt;td&gt;</code>, или <code>&lt;p&gt;</code>. "
+"<br/>"
+"Постављање <code>indent</code> на <var>yes</var> може да открије багове у "
+"распоређивању странице на неким прегледачима. "
+"<br/>"
+"Користите опцију <code>indent-spaces</code> за контролу броја размака или "
+"табулатора који се исписују за сваки ниво увлачења, а <code>indent-with-tabs</code> "
+"да наведете да се за увлачење користе размаци или табулатори. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyIndentSpaces"
+msgid ""
+"This option specifies the number of spaces or tabs that Tidy uses to "
+"indent content when <code>indent</code> is enabled. "
+"<br/>"
+"Note that the default value for this option is dependent upon the value of "
+"<code>indent-with-tabs</code> (see also). "
+msgstr ""
+"Ова опција наводи број размака или табулатора које Tidy користи за увлачење "
+"садржаја када се укључи <code>indent</code>. "
+"<br/>"
+"Имајте на уму да подразумевана вредност ове опције зависи од вредности "
+"опције <code>indent-with-tabs</code> (погледајте и њу). "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyInlineTags"
+msgid ""
+"This option specifies new non-empty inline tags. This option takes a "
+"space or comma separated list of tag names. "
+"<br/>"
+"Unless you declare new tags, Tidy will refuse to generate a tidied file if "
+"the input includes previously unknown tags. "
+"<br/>"
+"This option is ignored in XML mode. "
+msgstr ""
+"Ова опција наводи нове ознаке унутар линије које нису празне. Њена вредност "
+"је листа имена ознака раздвојених размацима или запетама. "
+"<br/>"
+"Ако не декларишете нове ознаке, Tidy ће одбити да генерише сређени фајл када "
+"се у улазу нађу непознате ознаке. "
+"<br/>"
+"Ова опција се игнорише у XML режиму. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyJoinClasses"
+msgid ""
+"This option specifies if Tidy should combine class names to generate "
+"a single, new class name if multiple class assignments are detected on "
+"an element. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да комбинује имена класа тако "
+"да генерише јединствено, ново име класе, онда када се у елементу открију "
+"вишеструке доделе класа. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyJoinStyles"
+msgid ""
+"This option specifies if Tidy should combine styles to generate a single, "
+"new style if multiple style values are detected on an element. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да комбинује стилове тако да "
+"генерише јединствени, нови стил, онда када се у елементу открију вишеструке "
+"вредности стила. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyKeepFileTimes"
+msgid ""
+"This option specifies if Tidy should keep the original modification time "
+"of files that Tidy modifies in place. "
+"<br/>"
+"Setting the option to <var>yes</var> allows you to tidy files without "
+"changing the file modification date, which may be useful with certain "
+"tools that use the modification date for things such as automatic server "
+"deployment."
+"<br/>"
+"Note this feature is not supported on some platforms. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да задржи оригинално време измене "
+"фајлова које мења у-месту. "
+"<br/>"
+"Постављањем ове опције на <var>yes</var> можете да средите фајлове без "
+"измене датума измене фајла, што може бити корисно у случају неких алата "
+"који датум измене користе за ствари као што је аутоматско постављање на "
+"сервер."
+"<br/>"
+"Имајте на уму да се ова могућност не подржава на неким платформама. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyKeepTabs"
+msgid ""
+"With the default <var>no</var> Tidy will replace all source tabs with spaces, "
+"controlled by the option <code>tab-size</code>, and the current line offset. "
+"Of course, except in the special blocks/elements enumerated below, this will later "
+"be reduced to just one space. "
+"<br/>"
+"If set <var>yes</var> this option specifies Tidy should keep certain tabs "
+"found in the source, but only "
+"in preformatted blocks like <code>&lt;pre&gt;</code>, and other CDATA elements like "
+"<code>&lt;script&gt;</code>, <code>&lt;style&gt;</code>, and other pseudo elements like "
+"<code>&lt;?php ... ?&gt;</code>. As always, all other tabs, or sequences of tabs, in "
+"the source will continue to be replaced with a space. "
+msgstr ""
+"Са подразумеваном вредности <var>no</var> Tidy ће све табулаторе у улазу да замени "
+"размацима на начин контролисан опцијом <code>tab-size</code> и текућим померајем линије. "
+"Наравно, осим у случају специјалних блокова/елемената набројаних испод, ово ће се "
+"касније редуковати само на један размак. "
+"<br/>"
+"Ако се постави на <var>yes</var> ова опција наводи да Tidy одређене табулаторе треба "
+"да задржи када их пронађе у извору, али само у преформатираним блоковима као што су "
+"<code>&lt;pre&gt;</code> и остали CDATA елементи као што су <code>&lt;script&gt;</code>, "
+"<code>&lt;style&gt;</code> и остали псеудо елементи као што су "
+"<code>&lt;?php ... ?&gt;</code>. Као увек, сви остали табулатори или низови табулатора "
+"у извору ће наставити да се замењују размаком. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyLiteralAttribs"
+msgid ""
+"This option specifies how Tidy deals with whitespace characters within "
+"attribute values. "
+"<br/>"
+"If the value is <var>no</var> Tidy normalizes attribute values by "
+"replacing any newline or tab with a single space, and further by replacing "
+"any contiguous whitespace with a single space. "
+"<br/>"
+"To force Tidy to preserve the original, literal values of all attributes "
+"and ensure that whitespace within attribute values is passed "
+"through unchanged, set this option to <var>yes</var>. "
+msgstr ""
+"Ова опција наводи како Tidy обрађује карактере празног простора унутар "
+"вредности атрибута. "
+"<br/>"
+"Ако је вредност <var>no</var> Tidy нормализује вредности атрибута тако што "
+"све преломе редова или табулаторе замењује једним размаком, а уз то и сваку "
+"групу узастопних карактера празног простора једним размаком. "
+"<br/>"
+"Ако желите принудити Tidy да задржи оригиналне, дословне вредности свих "
+"атрибута и обезбедите да се празан простор унутар вредности атрибута прослеђује "
+"на излаз неизмењен, поставите ову опцију на <var>yes</var>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyLogicalEmphasis"
+msgid ""
+"This option specifies if Tidy should replace any occurrence of "
+"<code>&lt;i&gt;</code> with <code>&lt;em&gt;</code> and any occurrence of "
+"<code>&lt;b&gt;</code> with <code>&lt;strong&gt;</code>. Any attributes "
+"are preserved unchanged. "
+"<br/>"
+"This option can be set independently of the <code>clean</code> option. "
+msgstr ""
+"Ова опција наводи да ли Tidy треба да замени било које појављивање "
+"<code>&lt;i&gt;</code> са <code>&lt;em&gt;</code> и било које појављивање "
+"<code>&lt;b&gt;</code> са <code>&lt;strong&gt;</code>. Сви атрибути остају "
+"неизмењени. "
+"<br/>"
+"Ова опција може да се постави независно од опције <code>clean</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyLowerLiterals"
+msgid ""
+"This option specifies if Tidy should convert the value of an attribute "
+"that takes a list of predefined values to lower case. "
+"<br/>"
+"This is required for XHTML documents. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да претвори вредност атрибута "
+"који узима листу предефинисаних вредности у мала слова. "
+"<br/>"
+"Ово је потребно за XHTML документе. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMakeBare"
+msgid ""
+"This option specifies if Tidy should replace smart quotes and em dashes with "
+"ASCII, and output spaces rather than non-breaking "
+"spaces, where they exist in the input. "
+msgstr ""
+"Ова опција наводи да ли Tidy треба да замени типографске наводнике и em црте "
+"са ASCII карактерима, и да тамо где постоје у улазу уместо непреламајућих "
+"размака у излаз постави размаке. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMakeClean"
+msgid ""
+"This option specifies if Tidy should perform cleaning of some legacy "
+"presentational tags (currently <code>&lt;i&gt;</code>, "
+"<code>&lt;b&gt;</code>, <code>&lt;center&gt;</code> when enclosed "
+"within appropriate inline tags, and <code>&lt;font&gt;</code>). If "
+"set to <var>yes</var>, then the legacy tags will be replaced with CSS "
+"<code>&lt;style&gt;</code> tags and structural markup as appropriate. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да обавља чишћење неких застарелих "
+"презентационих ознака (тренутно су то <code>&lt;i&gt;</code>, "
+"<code>&lt;b&gt;</code>, <code>&lt;center&gt;</code> онда када су окружени "
+"одговарајућим ознакама унутар линије, као и <code>&lt;font&gt;</code>). Ако "
+"се постави на <var>yes</var>, онда ће се застареле ознаке заменити са CSS "
+"<code>&lt;style&gt;</code> ознакама и погодним структурним означавањем. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMark"
+msgid ""
+"This option specifies if Tidy should add a <code>meta</code> element to "
+"the document head to indicate that the document has been tidied. "
+"<br/>"
+"Tidy won't add a meta element if one is already present. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да дода <code>meta</code> елемент "
+"главу документа који означава да је документ био сређен. "
+"<br/>"
+"Tidy неће додати meta елемент ако је неки већ присутан. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMergeDivs"
+msgid ""
+"This option can be used to modify the behavior of <code>clean</code> when "
+"set to <var>yes</var>."
+"<br/>"
+"This option specifies if Tidy should merge nested <code>&lt;div&gt;</code> "
+"such as <code>&lt;div&gt;&lt;div&gt;...&lt;/div&gt;&lt;/div&gt;</code>. "
+"<br/>"
+"If set to <var>auto</var> the attributes of the inner "
+"<code>&lt;div&gt;</code> are moved to the outer one. Nested "
+"<code>&lt;div&gt;</code> with <code>id</code> attributes are <em>not</em> "
+"merged. "
+"<br/>"
+"If set to <var>yes</var> the attributes of the inner "
+"<code>&lt;div&gt;</code> are discarded with the exception of "
+"<code>class</code> and <code>style</code>. "
+msgstr ""
+"Ова опција може да се употреби за измену понашања опције <code>clean</code> "
+"када је она постављена на <var>yes</var>."
+"<br/>"
+"Ова опција наводу да ли би Tidy требало да споји угњеждене <code>&lt;div&gt;</code> "
+"ознаке као што је <code>&lt;div&gt;&lt;div&gt;...&lt;/div&gt;&lt;/div&gt;</code>. "
+"<br/>"
+"Ако се постави на <var>auto</var> атрибути унутрашње <code>&lt;div&gt;</code> "
+"ознаке се премештају у спољашњу. Угњеждене <code>&lt;div&gt;</code> са"
+"<code>id</code> атрибутима се <em>не</em> спајају. "
+"<br/>"
+"Ако се постави на <var>yes</var> атрибути унутрашње <code>&lt;div&gt;</code> "
+"ознаке се одбацују са изузетком <code>class</code> и <code>style</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMergeEmphasis"
+msgid ""
+"This option specifies if Tidy should merge nested <code>&lt;b&gt;</code> "
+"and <code>&lt;i&gt;</code> elements; for example, for the case "
+"<br/>"
+"<code>&lt;b class=\"rtop-2\"&gt;foo &lt;b class=\"r2-2\"&gt;bar&lt;/b&gt; baz&lt;/b&gt;</code>, "
+"<br/>"
+"Tidy will output <code>&lt;b class=\"rtop-2\"&gt;foo bar baz&lt;/b&gt;</code>. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да споји угњеждене <code>&lt;b&gt;</code> "
+"и <code>&lt;i&gt;</code> елементе; на пример, у случају "
+"<br/>"
+"<code>&lt;b class=\"rtop-2\"&gt;foo &lt;b class=\"r2-2\"&gt;bar&lt;/b&gt; baz&lt;/b&gt;</code>, "
+"<br/>"
+"Tidy ће да испише на излаз <code>&lt;b class=\"rtop-2\"&gt;foo bar baz&lt;/b&gt;</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMergeSpans"
+msgid ""
+"This option can be used to modify the behavior of <code>clean</code> when "
+"set to <var>yes</var>."
+"<br/>"
+"This option specifies if Tidy should merge nested <code>&lt;span&gt;</code> "
+"such as <code>&lt;span&gt;&lt;span&gt;...&lt;/span&gt;&lt;/span&gt;</code>. "
+"<br/>"
+"The algorithm is identical to the one used by <code>merge-divs</code>. "
+msgstr ""
+"Ова опција може да се употреби за измену понашања опције <code>clean</code> када "
+"је она постављена на <var>yes</var>."
+"<br/>"
+"Ова опција наводи да ли би Tidy требало да споју угњеждене <code>&lt;span&gt;</code> "
+"ознаке као што је <code>&lt;span&gt;&lt;span&gt;...&lt;/span&gt;&lt;/span&gt;</code>. "
+"<br/>"
+"Алгоритам је идентичан оном који се користи за <code>merge-divs</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyNCR"
+msgid "This option specifies if Tidy should allow numeric character references. "
+msgstr "Ова опција наводи да ли би Tidy требало да дозволи нумеричке карактер референце. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyNewline"
+msgid ""
+"The default is appropriate to the current platform. "
+"<br/>"
+"Generally <var>CRLF</var> on PC-DOS, Windows and OS/2; <var>CR</var> "
+"on Classic Mac OS; and <var>LF</var> everywhere else (Linux, macOS, "
+"and Unix). "
+msgstr ""
+"Подразумевана вредност је она која одговара тренутној платформи. "
+"<br/>"
+"У општем случају <var>CRLF</var> на PC-DOS, Windows и OS/2; <var>CR</var> "
+"на класичном Mac OS; и <var>LF</var> на свим осталим (Linux, macOS, "
+"и Unix). "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyNumEntities"
+msgid ""
+"This option specifies if Tidy should output entities other than the "
+"built-in HTML entities (<code>&amp;amp;</code>, <code>&amp;lt;</code>, "
+"<code>&amp;gt;</code>, and <code>&amp;quot;</code>) in the numeric rather "
+"than the named entity form. "
+"<br/>"
+"Only entities compatible with the DOCTYPE declaration generated are used. "
+"<br/>"
+"Entities that can be represented in the output encoding are translated "
+"correspondingly. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да исписује и ентитете који нису "
+"уграђени HTML ентитети (<code>&amp;amp;</code>, <code>&amp;lt;</code>, "
+"<code>&amp;gt;</code> и <code>&amp;quot;</code>) у нумеричком облику, а не "
+"у форми именованог ентитета. "
+"<br/>"
+"Користе се само ентитети компатибилни са DOCTYPE декларацијом која се "
+"користи за генерисани текст. "
+"<br/>"
+"Ентитети који могу да се представе у излазном кодирању се преводе у "
+"одговарајуће карактере. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyOmitOptionalTags"
+msgid ""
+"This option specifies if Tidy should omit optional start tags and end tags "
+"when generating output. "
+"<br/>"
+"Setting this option causes all tags for the <code>&lt;html&gt;</code>, "
+"<code>&lt;head&gt;</code>, and <code>&lt;body&gt;</code> elements to be "
+"omitted from output, as well as such end tags as <code>&lt;/p&gt;</code>, "
+"<code>&lt;/li&gt;</code>, <code>&lt;/dt&gt;</code>, "
+"<code>&lt;/dd&gt;</code>, <code>&lt;/option&gt;</code>, "
+"<code>&lt;/tr&gt;</code>, <code>&lt;/td&gt;</code>, and "
+"<code>&lt;/th&gt;</code>. "
+"<br/>"
+"This option is ignored for XML output. "
+msgstr ""
+"Ова опција наводи да ли би приликом генерисања излаза Tidy требало да "
+"изостави отварајуће и затварајуће ознаке које нису обавезне. "
+"<br/>"
+"Постављање ове опције чини да се све ознаке за <code>&lt;html&gt;</code>, "
+"<code>&lt;head&gt;</code> и <code>&lt;body&gt;</code> елементе изоставе из "
+"излаза, као и такве затварајуће ознаке као што су <code>&lt;/p&gt;</code>, "
+"<code>&lt;/li&gt;</code>, <code>&lt;/dt&gt;</code>, "
+"<code>&lt;/dd&gt;</code>, <code>&lt;/option&gt;</code>, "
+"<code>&lt;/tr&gt;</code>, <code>&lt;/td&gt;</code>, and "
+"<code>&lt;/th&gt;</code>. "
+"<br/>"
+"Ова опција се игнорише за XML излаз. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyOutCharEncoding"
+msgid ""
+"This option specifies the character encoding Tidy uses for "
+"output. Some of the output encodings affect whether or not "
+"some characters are translated to entities, although in all "
+"cases, some entities will be written according to other Tidy "
+"configuration options. "
+"<br/>"
+"For <var>ascii</var>, <var>mac</var>, and <var>win1252</var> "
+"output encodings, entities will be used for all characters "
+"with values over 127. "
+"<br/>"
+"For <var>raw</var> output, Tidy will write values above 127 "
+"without translating them to entities. "
+"<br/>"
+"Output using <var>latin1</var> will cause Tidy to write "
+"character values higher than 255 as entities. "
+"<br/>"
+"The UTF family such as <var>utf8</var> will write output "
+"in the respective UTF encoding. "
+"<br/>"
+"Asian output encodings such as <var>iso2022</var> will write "
+"output in the specified encoding, assuming a corresponding "
+"<code>input-encoding</code> was specified. "
+"<br/>"
+"Tidy is not an encoding converter. Although the Latin and UTF "
+"encodings can be mixed freely, it is not possible to convert Asian "
+"encodings to Latin encodings with Tidy. "
+msgstr ""
+"Ова опција наводи које кодирање карактера Tidy користи за излаз. "
+"Нека од излазних кодирања утичу на то да ли ће се неки карактери "
+"превести у ентитете, мада у свим случајевима, неки ентитети ће се "
+"записивати сагласно са осталим опцијама Tidy конфигурације. "
+"<br/>"
+"За <var>ascii</var>, <var>mac</var> и <var>win1252</var> кодирања "
+"излаза, ентитети ће се користити за све карактере чија је вредност "
+"изнад 127. "
+"<br/>"
+"За <var>raw</var> излаз, Tidy ће да испише вредности преко 127 и "
+"неће их преводити у ентитете. "
+"<br/>"
+"Када се излаз исписује употребом <var>latin1</var> кодирања Tidy ће "
+"да уписује све вредности карактера веће од 255 као ентитете. "
+"<br/>"
+"UTF породицом, као што је <var>utf8</var>, излаз се пише у "
+"одговарајућем UTF кодирању. "
+"<br/>"
+"Азијским излазним кодирањем, као што је <var>iso2022</var>, излаз "
+"ће се исписивати наведеним кодирањем, претпостављајући да је наведено "
+"одговарајуће <code>input-encoding</code>. "
+"<br/>"
+"Tidy није претварач кодирања. Мада латинична и UTF кодирања могу "
+"слободно да се мешају, програмом Tidy није могуће претварање из "
+"азијских кодирања у латинична. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyOutFile"
+msgid ""
+"This option specifies the output file Tidy uses for markup. Normally "
+"markup is written to <code>stdout</code>. "
+msgstr ""
+"Ова опција наводи излазни фајл који Tidy користи за означену текст. "
+"Означени текст се обично исписује не <code>stdout</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyOutputBOM"
+msgid ""
+"This option specifies if Tidy should write a Unicode Byte Order Mark "
+"character (BOM; also known as Zero Width No-Break Space; has value of "
+"U+FEFF) to the beginning of the output, and only applies to UTF-8 and "
+"UTF-16 output encodings. "
+"<br/>"
+"If set to <var>auto</var> this option causes Tidy to write a BOM to "
+"the output only if a BOM was present at the beginning of the input. "
+"<br/>"
+"A BOM is always written for XML/XHTML output using UTF-16 output "
+"encodings. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да исписује Unicode Byte Order Mark "
+"карактер (BOM; познат и под називом Zero Width No-Break Space; има вредност "
+"U+FEFF) на почетак излаза, и примењује се само на UTF-8 и UTF-16 кодирања "
+"излаза. "
+"<br/>"
+"Ако се постави на <var>auto</var> Tidy ће да исписује BOM на излаз само онда "
+"када је BOM био присутан на почетку улаза. "
+"<br/>"
+"BOM се увек исписује за XML/XHTML излаз који користи UTF-16 кодирање излаза. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyPPrintTabs"
+msgid ""
+"This option specifies if Tidy should indent with tabs instead of spaces, "
+"assuming <code>indent</code> is <var>yes</var>. "
+"<br/>"
+"Set it to <var>yes</var> to indent using tabs instead of the default "
+"spaces. "
+"<br/>"
+"Use the option <code>indent-spaces</code> to control the number of tabs "
+"output per level of indent. Note that when <code>indent-with-tabs</code> "
+"is enabled the default value of <code>indent-spaces</code> is reset to "
+"<var>1</var>. "
+"<br/>"
+"Note <code>tab-size</code> controls converting input tabs to spaces. Set "
+"it to zero to retain input tabs. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да врши увлачење табулаторима уместо "
+"размацима, под претпоставком да опција <code>indent</code> има вредност "
+"<var>yes</var>. "
+"<br/>"
+"Поставите је на <var>yes</var> ако желите да се текст увлачи табулаторима "
+"уместо подразумеваним размацима. "
+"<br/>"
+"Користите опцију <code>indent-spaces</code> да контролишете број табулатора "
+"у излазу по нивоу увлачења. Имајте на уму да када је укључена опција "
+"<code>indent-with-tabs</code>, подразумевана вредност опције "
+"<code>indent-spaces</code> се ресетује на <var>1</var>. "
+"<br/>"
+"Напомена: <code>tab-size</code> контролише претварање улазних табулатора у "
+"размаке. Поставите је на нулу ако желите да задржите табулаторе са улаза. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyPreserveEntities"
+msgid ""
+"This option specifies if Tidy should preserve well-formed entities "
+"as found in the input. "
+msgstr ""
+"Ова опција наводи да ли Tidy треба да очува добро формиране ентитете, "
+"онакве какви се пронађу у улазу. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyPreTags"
+msgid ""
+"This option specifies new tags that are to be processed in exactly the "
+"same way as HTML's <code>&lt;pre&gt;</code> element. This option takes a "
+"space or comma separated list of tag names. "
+"<br/>"
+"Unless you declare new tags, Tidy will refuse to generate a tidied file if "
+"the input includes previously unknown tags. "
+"<br/>"
+"Note you cannot as yet add new CDATA elements. "
+"<br/>"
+"This option is ignored in XML mode. "
+msgstr ""
+"Ова опција наводи нове ознаке које треба да се обраде на потпуно исти начин "
+"као HTML елемент <code>&lt;pre&gt;</code>. Њена вредност је листа имена "
+"ознака раздвојених размацима или запетама. "
+"<br/>"
+"Ако не декларишете нове ознаке, Tidy ће одбити да генерише сређени фајл онда "
+"када се у улазу налазе непознате ознаке. "
+"<br/>"
+"Имајте на уму да још увек не можете да додате нове CDATA елементе. "
+"<br/>"
+"Ова опција се игнорише у XML режиму. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyPriorityAttributes"
+msgid ""
+"This option allows prioritizing the writing of attributes in tidied "
+"documents, allowing them to written before the other attributes of an "
+"element. For example, you might specify that <strong>id</strong> and "
+"<strong>name</strong> are written before every other attribute. "
+"<br/>"
+"This option takes a space or comma separated list of attribute names. "
+msgstr ""
+"Ова опција омогућава приоритизацију уписивања атрибута у сређеним "
+"документима тако што омогућава да се упишу пре осталих атрибута елемента. "
+"На пример, могли бисте навести да се <strong>id</strong> и "
+"<strong>name</strong> исписују пре било којих других атрибута. "
+"<br/>"
+"Вредност ове опције представља листа имена атрибута раздвојена "
+"размацима или запетама. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyPunctWrap"
+msgid ""
+"This option specifies if Tidy should line wrap after some Unicode or "
+"Chinese punctuation characters. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да обавије линију након неких "
+"Unicode или кинеских интерпункцијских карактера. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyQuiet"
+msgid ""
+"When enabled, this option limits Tidy's non-document output to report "
+"only document warnings and errors. "
+msgstr ""
+"Када је укључена, ова опција ограничава излаз програма Tidy који није "
+"документ само на упозорења и грешке у вези са документом. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyQuoteAmpersand"
+msgid ""
+"This option specifies if Tidy should output unadorned <code>&amp;</code> "
+"characters as <code>&amp;amp;</code>, in legacy doctypes only. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да исписује неукрашене <code>&amp;</code> "
+"карактере као <code>&amp;amp;</code>, само у застарелим doctype спецификацијама. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyQuoteMarks"
+msgid ""
+"This option specifies if Tidy should output <code>&quot;</code> characters "
+"as <code>&amp;quot;</code> as is preferred by some editing environments. "
+"<br/>"
+"The apostrophe character <code>'</code> is written out as "
+"<code>&amp;#39;</code> since many web browsers don't yet support "
+"<code>&amp;apos;</code>. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да исписује <code>&quot;</code> карактере "
+"као <code>&amp;quot;</code>, тј. онако како одговара неким окружењима за уређивање. "
+"<br/>"
+"Карактер апостроф <code>'</code> се исписује као <code>&amp;#39;</code> јер "
+"многи веб прегледачи још увек не подржавају <code>&amp;apos;</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyQuoteNbsp"
+msgid ""
+"This option specifies if Tidy should output non-breaking space characters "
+"as entities, rather than as the Unicode character value 160 (decimal). "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да исписује карактере непреламајућег "
+"размака као ентитете, а не као Unicode карактер чија је вредност 160 (децимално). "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyReplaceColor"
+msgid ""
+"This option specifies if Tidy should replace numeric values in color "
+"attributes with HTML/XHTML color names where defined, e.g. replace "
+"<code>#ffffff</code> with <code>white</code>. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да замени бројчане вредности у "
+"color атрибутима са HTML/XHTML именима боја онда када су дефинисана, нпр. "
+"<code>#ffffff</code> се мења са <code>white</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowErrors"
+msgid ""
+"This option specifies the number Tidy uses to determine if further errors "
+"should be shown. If set to <var>0</var>, then no errors are shown. "
+msgstr ""
+"Ова опција наводи број који Tidy користи да одреди треба ли да прикаже "
+"накнадне грешке. Ако је постављена на <var>0</var>, онда се грешке уопште "
+"не приказују. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowFilename"
+msgid ""
+"This option specifies if Tidy should show the filename in messages. eg: "
+"<br/>"
+" tidy -q -e --show-filename yes index.html<br/>"
+" index.html: line 43 column 3 - Warning: replacing invalid UTF-8 bytes (char. code U+00A9) "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да приказује име фајла у порукама. Нпр.: "
+"<br/>"
+" tidy -q -e --show-filename yes index.html<br/>"
+" index.html: линија 43 колона 3 - Упозорење: замењују се неисправни UTF-8 бајтови (кар. кôд U+00A9) "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowInfo"
+msgid "This option specifies if Tidy should display info-level messages. "
+msgstr "Ова опција наводи да ли би Tidy требало да исписује поруке инфо нивоа."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowMarkup"
+msgid ""
+"This option specifies if Tidy should generate a pretty printed version "
+"of the markup. Note that Tidy won't generate a pretty printed version if "
+"it finds significant errors (see <code>force-output</code>). "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да генерише лепо исписану верзију "
+"означеног текста. Имајте на уму да Tidy неће генерисати лепо исписану верзију "
+"ако пронађе значајне грешке (погледајте <code>force-output</code>). "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowWarnings"
+msgid ""
+"This option specifies if Tidy should suppress warnings. This can be "
+"useful when a few errors are hidden in a flurry of warnings. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да потисне упозорења. Ово може да "
+"буде корисно када је неколико грешака скривено у мору упозорења. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidySkipNested"
+msgid ""
+"This option specifies that Tidy should skip nested tags when parsing "
+"script and style data. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да прескочи угњеждене ознаке "
+"када парсира script и style податке. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidySortAttributes"
+msgid ""
+"This option specifies that Tidy should sort attributes within an element "
+"using the specified sort algorithm. If set to <var>alpha</var>, the "
+"algorithm is an ascending alphabetic sort. "
+"<br/>"
+"When used while sorting with <code>priority-attributes</code>, any "
+"attribute sorting will take place after the priority attributes have "
+"been output. "
+msgstr ""
+"Ова опција наводи да би Tidy требало да сортира атрибуте у елементу "
+"употребом задатог алгоритма сортирања. Ако се постави на <var>alpha</var>, "
+"алгоритам је растуће азбучно сортирање. "
+"<br/>"
+"Када се користи док се сортира са <code>priority-attributes</code>, било "
+"какво сортирање атрибута ће се вршити након исписивања приоритетних"
+"атрибута на излаз. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMuteReports"
+msgid ""
+"Use this option to prevent Tidy from displaying certain types of "
+"report output, for example, for conditions that you wish to ignore. "
+"<br/>"
+"This option takes a list of one or more keys indicating the message "
+"type to mute. You can discover these message keys by using the "
+"<code>mute-id</code> configuration option and examining Tidy's "
+"output. "
+msgstr ""
+"Овом опцијом спречавате Tidy да прикаже одређене типове излазних извештаја, "
+"на пример, у случају услова које желите да се игноришу. "
+"<br/>"
+"Вредност ове опције је листа једног или више  кључева који означавају "
+"тип поруке која се потискује. Ове кључеве порука можете открити употребом "
+"<code>mute-id</code> опције конфигурације и испитивањем излаза који Tidy "
+"онда генерише. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMuteShow"
+msgid ""
+"This option indicates whether or not Tidy should display message ID's "
+"with each of its error reports. This could be useful if you wanted to "
+"use the <code>mute</code> configuration option in order to filter "
+"out certain report messages. "
+msgstr ""
+"Ова опција наводи да ли Tidy треба да прикаже ID порука у сваком од "
+"извештаја о грешкама. Ово може бити корисно када желите да употребите "
+"<code>mute</code> опцију конфигурације како би филтрирали одређене "
+"поруке у извештају. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyStrictTagsAttr"
+msgid ""
+"This options ensures that tags and attributes are applicable for the "
+"version of HTML that Tidy outputs. When set to <var>yes</var> and the "
+"output document type is a strict doctype, then Tidy will report "
+"errors. If the output document type is a loose or transitional "
+"doctype, then Tidy will report warnings. "
+"<br/>"
+"Additionally if <code>drop-proprietary-attributes</code> is enabled, "
+"then not applicable attributes will be dropped, too. "
+"<br/>"
+"When set to <var>no</var>, these checks are not performed. "
+msgstr ""
+"Ова опција обезбеђује да су ознаке и атрибути које Tidy исписује на излаз "
+"у сагласности са HTML верзијом. Када се постави на <var>yes</var> и тип "
+"излазног документа је strict doctype, онда ће Tidy да пријави грешке. "
+"Ако је тип излазног документа loose или transitional doctype, онда ће "
+"Tidy да пријави упозорења. "
+"<br/>"
+"Уз то, ако је укључена опција <code>drop-proprietary-attributes</code>, "
+"онда се такође одбацују и атрибути који не постоје у HTML верзији. "
+"<br/>"
+"Када се постави на <var>no</var>, ове провере се не извршавају. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyTabSize"
+msgid ""
+"This option specifies the number of columns that Tidy uses between "
+"successive tab stops. It is used to map tabs to spaces when reading the "
+"input. "
+msgstr ""
+"Ова опција наводи број колона које Tidy користи између две узастопне "
+"станице табулатора. Користи се за мапирање табулатора у размаке током "
+"читања улаза. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyUpperCaseAttrs"
+msgid ""
+"This option specifies if Tidy should output attribute names in upper "
+"case. "
+"<br/>"
+"When set to <var>no</var>, attribute names will be written in lower "
+"case. Specifying <var>yes</var> will output attribute names in upper "
+"case, and <var>preserve</var> can used to leave attribute names "
+"untouched. "
+"<br/>"
+"When using XML input, the original case is always preserved. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да имена атрибута исписује "
+"великим словима. "
+"<br/>"
+"Када се постави на <var>no</var>, имена атрибута ће се исписивати "
+"малим словима. Ако наведете <var>yes</var> имена атрибута ће се "
+"исписивати великим словима, а <var>preserve</var> може да се употреби "
+"када желите да се имена атрибута оставе неизмењена. "
+"<br/>"
+"Када се користи XML улаз, увек се задржава оригинална величина слова. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyUpperCaseTags"
+msgid ""
+"This option specifies if Tidy should output tag names in upper case. "
+"<br/>"
+"The default is <var>no</var> which results in lower case tag names, "
+"except for XML input where the original case is preserved. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да исписује имена ознака великим "
+"словима. "
+"<br/>"
+"Подразумевана вредност је <var>no</var> којом се добијају имена "
+"ознака исписана малим словима, осим за XML улаз где се задржава "
+"оригинална величина слова. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyUseCustomTags"
+msgid ""
+"This option enables the use of tags for autonomous custom elements, "
+"e.g. <code>&lt;flag-icon&gt;</code> with Tidy. Custom tags are "
+"disabled if this value is <var>no</var>. Other settings - "
+"<var>blocklevel</var>, <var>empty</var>, <var>inline</var>, and "
+"<var>pre</var> will treat <em>all</em> detected custom tags "
+"accordingly. "
+"<br/>"
+"The use of <code>new-blocklevel-tags</code>, "
+"<code>new-empty-tags</code>, <code>new-inline-tags</code>, or "
+"<code>new-pre-tags</code> will override the treatment of custom tags "
+"by this configuration option. This may be useful if you have "
+"different types of custom tags."
+"<br/>"
+"When enabled these tags are determined during the processing of your "
+"document using opening tags; matching closing tags will be recognized "
+"accordingly, and unknown closing tags will be discarded. "
+msgstr ""
+"Ова опција омогућава да се са Tidy користе ознаке за аутономне "
+"произвољне елементе, нпр. <code>&lt;flag-icon&gt;</code>. Произвољне "
+"ознаке су искључене када је њена вредност <var>no</var>. Остала "
+"подешавања - <var>blocklevel</var>, <var>empty</var>, <var>inline</var>, "
+"и <var>pre</var> ће третирати <em>све</em> детектоване произвољне ознаке "
+"на одговарајући начин наведен у вредности. "
+"<br/>"
+"Употрба <code>new-blocklevel-tags</code>, "
+"<code>new-empty-tags</code>, <code>new-inline-tags</code>, или "
+"<code>new-pre-tags</code> ће да премости третман произвољних ознака "
+"овом опцијом конфигурације. Ово може да буде корисно ако имате различите "
+"типове произвољних ознака."
+"<br/>"
+"Када је укључена, ове ознаке се одређују током обраде вашег документа "
+"користећи отварајуће ознаке; одговарајуће затварајуће ознаке ће се "
+"препознати сагласно њима, а непознате затварајуће ознаке ће се одбацити. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyVertSpace"
+msgid ""
+"This option specifies if Tidy should add some extra empty lines for "
+"readability. "
+"<br/>"
+"The default is <var>no</var>. "
+"<br/>"
+"If set to <var>auto</var> Tidy will eliminate nearly all newline "
+"characters."
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да дода мало додатних празних "
+"линија како би се побољшала читљивост. "
+"<br/>"
+"Подразумевана вредност је <var>no</var>. "
+"<br/>"
+"Ако се постави на <var>auto</var> Tidy ће да елиминише скоро све карактере "
+"прелома реда."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWarnPropAttrs"
+msgid "This option specifies if Tidy should warn on proprietary attributes."
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да упозори на постојање "
+"власничких атрибута."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWord2000"
+msgid ""
+"This option specifies if Tidy should go to great pains to strip out "
+"all the surplus stuff Microsoft Word 2000 inserts when you save Word "
+"documents as \"Web pages\". It doesn't handle embedded images or VML. "
+"<br/>"
+"You should consider saving using Word's <strong>Save As...</strong>, "
+"and choosing <strong>Web Page, Filtered</strong>. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало максимално да се потруди и скине "
+"све додатне ствари које Microsoft Word 2000 умеће у документ који Word "
+"чува као „Web pages”. Не обрађује уграђене слике или VML. "
+"<br/>"
+"Требало би да размотрите могућност да искористите команду "
+"<strong>Save As...</strong> програма Word, па да изаберете "
+"<strong>Web Page, Filtered</strong>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapAsp"
+msgid ""
+"This option specifies if Tidy should line wrap text contained within ASP "
+"pseudo elements, which look like: <code>&lt;% ... %&gt;</code>. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да обавија линије које се садрже "
+"унутар ASP псеудо елемената, који изгледају као: <code>&lt;% ... %&gt;</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapAttVals"
+msgid ""
+"This option specifies if Tidy should line-wrap attribute values, meaning "
+"that if the value of an attribute causes a line to exceed the width "
+"specified by <code>wrap</code>, Tidy will add one or more line breaks to "
+"the value, causing it to be wrapped into multiple lines. "
+"<br/>"
+"Note that this option can be set independently of "
+"<code>wrap-script-literals</code>. "
+"By default Tidy replaces any newline or tab with a single space and "
+"replaces any sequences of whitespace with a single space. "
+"<br/>"
+"To force Tidy to preserve the original, literal values of all attributes, "
+"and ensure that whitespace characters within attribute values are passed "
+"through unchanged, set <code>literal-attributes</code> to "
+"<var>yes</var>. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да обавија линије на вредностима "
+"атрибута, што значи да ако вредност атрибута учини да линија постане дужа од "
+"ширине наведене опцијом <code>wrap</code>, Tidy ће да дода један или више "
+"прелома линије у вредност, па ће се он тако преломити у више линија. "
+"<br/>"
+"Имајте на уму да се ова опција може поставити независно у односу на "
+"<code>wrap-script-literals</code> опцију. "
+"Tidy подразумевано замењује све преломе редова или табулаторе једним размаком "
+"и замењује све низове карактера празног простора једним размаком. "
+"<br/>"
+"Ако желите да Tidy обавезно задржи оригиналне, дословне вредности свих атрибута, "
+"и обезбедите да се карактери празног простора унутар атрибута прослеђују "
+"неизмењени на излаз, поставите опцију <code>literal-attributes</code> на "
+"<var>yes</var>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapJste"
+msgid ""
+"This option specifies if Tidy should line wrap text contained within "
+"JSTE pseudo elements, which look like: <code>&lt;# ... #&gt;</code>. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да обавија линију на тексту који "
+"се налази унутар JSTE псеудо елемената, који изгледају овако: "
+"<code>&lt;# ... #&gt;</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapLen"
+msgid ""
+"This option specifies the right margin Tidy uses for line wrapping. "
+"<br/>"
+"Tidy tries to wrap lines so that they do not exceed this length. "
+"<br/>"
+"Set <code>wrap</code> to <var>0</var> (zero) if you want to disable "
+"line wrapping. "
+msgstr ""
+"Ова опција наводи десну маргину коју Tidy користи за обавијање линије. "
+"<br/>"
+"Tidy се труди да обавија линије тако да њихова дужина не прекорачи ову дужину. "
+"<br/>"
+"Поставите <code>wrap</code> на <var>0</var> (нулу) ако желите да искључите "
+"обавијање линије. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapPhp"
+msgid ""
+"This option specifies if Tidy should add a new line after a PHP "
+"pseudo elements, which look like: <code>&lt;?php ... ?&gt;</code>. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да дода нову линију након PHP "
+"псеудо елемената, који изгледају овако: <code>&lt;?php ... ?&gt;</code>. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapScriptlets"
+msgid ""
+"This option specifies if Tidy should line wrap string literals assigned "
+"to element event handler attributes, such as element.onmouseover()."
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да обавија стринг дословне "
+"вредности додељене атрибутима елемента који служе за обрађивач догађаја, "
+"као што је element.onmouseover()."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapSection"
+msgid ""
+"This option specifies if Tidy should line wrap text contained within "
+"<code>&lt;![ ... ]&gt;</code> section tags. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да обавија текст који се налази "
+"унутар <code>&lt;![ ... ]&gt;</code> ознака одељка. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWriteBack"
+msgid ""
+"This option specifies if Tidy should write back the tidied markup to the "
+"same file it read from. "
+"<br/>"
+"You are advised to keep copies of important files before tidying them, as "
+"on rare occasions the result may not be what you expect. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да сређени означени текст упише назад "
+"фајл из којег је прочитао оригинални документ. "
+"<br/>"
+"Саветујемо вам да чувате копије важних фајлова пре него што их средите, јер "
+"резултат у ретким случајевима можда неће бити оно што очекујете. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXhtmlOut"
+msgid ""
+"This option specifies if Tidy should generate pretty printed output, "
+"writing it as extensible HTML. "
+"<br/>"
+"This option causes Tidy to set the DOCTYPE and default namespace as "
+"appropriate to XHTML, and will use the corrected value in output "
+"regardless of other sources. "
+"<br/>"
+"For XHTML, entities can be written as named or numeric entities according "
+"to the setting of <code>numeric-entities</code>. "
+"<br/>"
+"The original case of tags and attributes will be preserved, regardless of "
+"other options. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да генерише лепо исписани излаз, "
+"записујући га као прошириви HTML. "
+"<br/>"
+"Ова опција приморава Tidy да постави DOCTYPE и подразумевани простор имена "
+"онако како то одговара за XHTML, и на излазу ће користити исправљену вредност "
+"без обзира на остале изворе. "
+"<br/>"
+"У XHTML, ентитети могу да се запишу као именовани или нумерички ентитети, "
+"сагласно са вредности опције <code>numeric-entities</code>. "
+"<br/>"
+"Оригинална величина слова ознака и атрибута ће се очувати, без обзира на "
+"вредности осталих опција. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXmlDecl"
+msgid ""
+"This option specifies if Tidy should add the XML declaration when "
+"outputting XML or XHTML. "
+"<br/>"
+"Note that if the input already includes an <code>&lt;?xml ... ?&gt;</code> "
+"declaration then this option will be ignored. "
+"<br/>"
+"If the encoding for the output is different from <var>ascii</var>, one "
+"of the <var>utf*</var> encodings, or <var>raw</var>, then the "
+"declaration is always added as required by the XML standard. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да дода XML декларацију када "
+"исписује XML или XHTML. "
+"<br/>"
+"Имајте на уму да ако улаз већ садржи <code>&lt;?xml ... ?&gt;</code> "
+"декларацију, онда ће се ова опција игнорисати. "
+"<br/>"
+"Ако се кодирање за излаз није <var>ascii</var>, једно од <var>utf*</var> "
+"кодирања, или <var>raw</var>, онда се декларација увек додаје онако "
+"како то захтева XML стандард. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXmlOut"
+msgid ""
+"This option specifies if Tidy should pretty print output, writing it as "
+"well-formed XML. "
+"<br/>"
+"Any entities not defined in XML 1.0 will be written as numeric entities to "
+"allow them to be parsed by an XML parser. "
+"<br/>"
+"The original case of tags and attributes will be preserved, regardless of "
+"other options. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да лепо испише излаз, записујући га "
+"као добро формирани XML. "
+"<br/>"
+"Сви ентитети који нису дефинисани у XML 1.0 ће се записивати као нумерички "
+"ентитети чиме се омогућава да их парсира XML парсер. "
+"<br/>"
+"Оригинална величина слова ознака и атрибута ће се очувати, без обзира на "
+"вредности осталих опција. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXmlPIs"
+msgid ""
+"This option specifies if Tidy should change the parsing of processing "
+"instructions to require <code>?&gt;</code> as the terminator rather than "
+"<code>&gt;</code>. "
+"<br/>"
+"This option is automatically set if the input is in XML. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да промени парсирање инструкција "
+"обраде тако да се као терминатор уместо <code>&gt;</code> захтева "
+"<code>?&gt;</code>. "
+"<br/>"
+"Ова опција се аутоматски поставља ако је улаз на XML језику. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXmlSpace"
+msgid ""
+"This option specifies if Tidy should add "
+"<code>xml:space=\"preserve\"</code> to elements such as "
+"<code>&lt;pre&gt;</code>, <code>&lt;style&gt;</code> and "
+"<code>&lt;script&gt;</code> when generating XML. "
+"<br/>"
+"This is needed if the whitespace in such elements is to "
+"be parsed appropriately without having access to the DTD. "
+msgstr ""
+"Ова опција наводи да ли би Tidy када генерише XML требало да "
+"у елементе као што су <code>&lt;pre&gt;</code>, "
+"<code>&lt;style&gt;</code> и <code>&lt;script&gt;</code> дода "
+"<code>xml:space=\"preserve\"</code> "
+"<br/>"
+"Ово је потребно ако празан простор у таквим елементима треба "
+"да се парсира на погодан начин без потребе за приступом DTD "
+"документу. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXmlTags"
+msgid ""
+"This option specifies if Tidy should use the XML parser rather than the "
+"error correcting HTML parser. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да уместо HTML парсера који "
+"исправља грешке користи XML парсер. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMetaCharset"
+msgid ""
+"This option, when enabled, adds a <code>&lt;meta&gt;</code> element "
+"and sets the <code>charset</code> attribute to the encoding of the "
+"document. Set this option to <var>yes</var> to enable it. "
+msgstr ""
+"Када је укључена, ова опција додаје <code>&lt;meta&gt;</code> елемент "
+"и поставља <code>charset</code> атрибут на кодирање документа. Поставите "
+"вредност опције на <var>yes</var> ако желите да је укључите. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowMetaChange"
+msgid ""
+"This option enables a message whenever Tidy changes the "
+"<code>content</code> attribute of a meta charset declaration to match "
+"the encoding of the document. Set this option to <var>yes</var> to "
+"enable it. "
+msgstr ""
+"Ова порука укључује поруку кадгод Tidy измени the <code>content</code> "
+"атрибут meta charset декларације тако да се подудара са кодирањем "
+"документа. Поставите ову опцију на <var>yes</var> ако желите да је "
+"укључите. "
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyStyleTags"
+msgid ""
+"This option specifies if Tidy should move all style tags to the "
+"head of the document. "
+msgstr ""
+"Ова опција наводи да ли би Tidy требало да премести све ознаке стилова у "
+"заглавље документа. "
+
+msgctxt "TidyInfo"
+msgid "Info: "
+msgstr "Инфо: "
+
+msgctxt "TidyWarning"
+msgid "Warning: "
+msgstr "Упозорење: "
+
+msgctxt "TidyConfig"
+msgid "Config: "
+msgstr "Конфиг: "
+
+msgctxt "TidyAccess"
+msgid "Access: "
+msgstr "Приступ: "
+
+msgctxt "TidyError"
+msgid "Error: "
+msgstr "Грешка: "
+
+msgctxt "TidyBadDocument"
+msgid "Document: "
+msgstr "Документ: "
+
+msgctxt "TidyFatal"
+msgid "Panic: "
+msgstr "Паника: "
+
+msgctxt "TidyDialogueSummary"
+msgid "Summary: "
+msgstr "Резиме: "
+
+msgctxt "TidyDialogueInfo"
+msgid "Information: "
+msgstr "Информација: "
+
+msgctxt "TidyDialogueFootnote"
+msgid "Footnote: "
+msgstr "Фуснота: "
+
+#, c-format
+msgctxt "LINE_COLUMN_STRING"
+msgid "line %d column %d - "
+msgstr "линија %d колона %d - "
+
+#, c-format
+msgctxt "FN_LINE_COLUMN_STRING"
+msgid "%s: line %d column %d - "
+msgstr "%s: линија %d колона %d - "
+
+#. For example, "discarding invalid UTF-16 surrogate pair"
+msgctxt "STRING_DISCARDING"
+msgid "discarding"
+msgstr "одбацује се"
+
+msgctxt "STRING_ERROR_COUNT_ERROR"
+msgid "error"
+msgid_plural "errors"
+msgstr[0] "грешка"
+msgstr[1] "грешке"
+msgstr[2] "грешака"
+
+msgctxt "STRING_ERROR_COUNT_WARNING"
+msgid "warning"
+msgid_plural "warnings"
+msgstr[0] "упозорење"
+msgstr[1] "упозорења"
+msgstr[2] "упозорења"
+
+msgctxt "STRING_HELLO_ACCESS"
+msgid "\nAccessibility Checks:\n"
+msgstr "\nПровере приступачности:\n"
+
+#. This is not a formal name and can be translated.
+msgctxt "STRING_HTML_PROPRIETARY"
+msgid "HTML Proprietary"
+msgstr "HTML власнички"
+
+msgctxt "STRING_XML_DECLARATION"
+msgid "XML declaration"
+msgstr "XML декларација"
+
+msgctxt "STRING_PLAIN_TEXT"
+msgid "plain text"
+msgstr "чисти текст"
+
+#. For example, "replacing invalid UTF-8 bytes"
+msgctxt "STRING_REPLACING"
+msgid "replacing"
+msgstr "замењује се"
+
+#. For example, "you should avoid using the specified encoding."
+msgctxt "STRING_SPECIFIED"
+msgid "specified"
+msgstr "наведено"
+
+msgctxt "TIDYCUSTOMNO_STRING"
+msgid "no"
+msgstr "не"
+
+msgctxt "TIDYCUSTOMBLOCKLEVEL_STRING"
+msgid "block level"
+msgstr "блоковски ниво"
+
+msgctxt "TIDYCUSTOMEMPTY_STRING"
+msgid "empty"
+msgstr "празно"
+
+msgctxt "TIDYCUSTOMINLINE_STRING"
+msgid "inline"
+msgstr "унутар линије"
+
+msgctxt "TIDYCUSTOMPRE_STRING"
+msgid "pre"
+msgstr "преформатирано"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_HTML_T_ALGORITHM"
+msgid ""
+"\n"
+"      - First, search left from the cell's position to find row header cells.\n"
+"      - Then search upwards to find column header cells.\n"
+"      - The search in a given direction stops when the edge of the table is\n"
+"        reached or when a data cell is found after a header cell.\n"
+"      - Row headers are inserted into the list in the order they appear in\n"
+"        the table. \n"
+"      - For left-to-right tables, headers are inserted from left to right.\n"
+"      - Column headers are inserted after row headers, in \n"
+"        the order they appear in the table, from top to bottom. \n"
+"      - If a header cell has the headers attribute set, then the headers \n"
+"        referenced by this attribute are inserted into the list and the \n"
+"        search stops for the current direction.\n"
+"        TD cells that set the axis attribute are also treated as header cells.\n"
+msgstr ""
+"\n"
+"      - Најпре, претражи лево од позиције ћелије да пронађеш ћелије заглавља\n"
+"        реда.\n"
+"      - Затим претражуј навише да пронађеш колону ћелија заглавља.\n"
+"      - Претрага у датом смеру се зауставља када се достигне ивица табеле или\n"
+"        када се након ћелије заглавља пронађе ћелија података.\n"
+"      - Заглавља редова се умећу у листу у редоследу по којем се јављају у\n"
+"        табели. \n"
+"      - У случају лево-у-десно табела, заглавља се умећу с лева у десно.\n"
+"      - Заглавља колона се умећу након заглавља реда, у редоследу по којем\n"
+"        се појављују у табели, од врха ка дну.\n"
+"      - Ако ћелија заглавља има постављене атрибуте заглавља, онда се\n"
+"        заглавља на која указује тај атрибут умећу у листу и претрага у\n"
+"        текућем смеру се зауставља.\n"
+"        TD ћелије које постављају атрибут axis се такође третирају као ћелије\n"
+"        заглавља.\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - %s represents a string-encoding name which may be localized in your language.
+#, c-format
+msgctxt "TEXT_VENDOR_CHARS"
+msgid ""
+"It is unlikely that vendor-specific, system-dependent encodings\n"
+"work widely enough on the World Wide Web; you should avoid using the \n"
+"%s character encoding, instead you are recommended to\n"
+"use named entities, e.g. &trade;.\n"
+msgstr ""
+"Мало је вероватно да су кодирања специфична за произвођача и зависна од\n"
+"система широко распрострањена на World Wide Web; не би требало да користите\n"
+"%s кодирање карактера, уместо њега се препоручује да употребите именоване\n"
+"ентитете, нпр. &trade;.\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - %s represents a string-encoding name which may be localized in your language.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#, c-format
+msgctxt "TEXT_SGML_CHARS"
+msgid ""
+"Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML;\n"
+"even if they were, they would likely be unprintable control characters.\n"
+"Tidy assumed you wanted to refer to a character with the same byte value in the \n"
+"%s encoding and replaced that reference with the Unicode \n"
+"equivalent.\n"
+msgstr ""
+"Кодови карактера од 128 до 159 (U+0080 до U+009F) нису дозвољени у HTML; чак\n"
+"и да јесу, највероватније би то били контролни карактери који не могу да се\n"
+"прикажу. Tidy је претпоставио да сте мислили на карактер који има исту бајт\n"
+"вредност у %s кодирању, па је ту референцу заменио Unicode еквивалентом.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_INVALID_UTF8"
+msgid ""
+"Character codes for UTF-8 must be in the range: U+0000 to U+10FFFF.\n"
+"The definition of UTF-8 in Annex D of ISO/IEC 10646-1:2000 also\n"
+"allows for the use of five- and six-byte sequences to encode\n"
+"characters that are outside the range of the Unicode character set;\n"
+"those five- and six-byte sequences are illegal for the use of\n"
+"UTF-8 as a transformation of Unicode characters. ISO/IEC 10646\n"
+"does not allow mapping of unpaired surrogates, nor U+FFFE and U+FFFF\n"
+"(but it does allow other noncharacters). For more information please refer to\n"
+"https://home.unicode.org/ and https://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+msgstr ""
+"Кодови карактера за UTF-8 морају бити у опсегу: U+0000 до U+10FFFF.\n"
+"Дефиниција UTF-8 у Анексу D стандарда ISO/IEC 10646-1:2000 такође\n"
+"дозвољава употребу низова од пет и шест бајтова за кодирање карактера који\n"
+"се налазе ван опсега Unicode скупа карактера; ти петобајтни и шестобајтни\n"
+"низови нису дозвољени за употребу у UTF-8 као трансформацији Unicode\n"
+"карактера. ISO/IEC 10646 не дозвољава мапирање неупарених сурогата, нити\n"
+"U+FFFE ни U+FFFF (али дозвољава остале не-карактере). Ако вам је потребно\n"
+"више информација, молимо вас да погледате https://home.unicode.org/ и\n"
+"https://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_INVALID_UTF16"
+msgid ""
+"Character codes for UTF-16 must be in the range: U+0000 to U+10FFFF.\n"
+"The definition of UTF-16 in Annex C of ISO/IEC 10646-1:2000 does not allow the\n"
+"mapping of unpaired surrogates. For more information please refer to\n"
+"https://home.unicode.org/ and https://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+msgstr ""
+"Кодови карактера за UTF-16 морају бити у опсегу: U+0000 до U+10FFFF.\n"
+"Дефиниција UTF-16 у Анексу C стандарда ISO/IEC 10646-1:2000 не дозвољава\n"
+"мапирање неупарених сурогата. За више информација, молимо вас да погледате\n"
+"https://home.unicode.org/ и https://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TEXT_INVALID_URI"
+msgid ""
+"URIs must be properly escaped, they must not contain unescaped\n"
+"characters below U+0021 including the space character and not\n"
+"above U+007E. Tidy escapes the URI for you as recommended by\n"
+"HTML 4.01 section B.2.1 and XML 1.0 section 4.2.2. Some user agents\n"
+"use another algorithm to escape such URIs and some server-sided\n"
+"scripts depend on that. If you want to depend on that, you must\n"
+"escape the URI on your own. For more information please refer to\n"
+"https://www.w3.org/International/O-URL-and-ident.html\n"
+msgstr ""
+"URI идентификатори моја бити исправно означени, они не смеју да садрже\n"
+"карактере испод U+0021 укључујући и карактер размака, као и карактере\n"
+"изнад U+007E. Tidy за вас означава URI онако као се препоручује у HTML\n"
+"4.01 одељку B.2.1 и у XML 1.0 одељку 4.2.2. Неки кориснички агенти користе\n"
+"другачији алгоритам за означавање таквих URI идентификатора, а неке скрипте\n"
+"на страни сервера зависе од тога. Ако желите ту зависност, онда сами морате\n"
+"да означите URI. Ако вам је потребно више информација, молимо вас да\n"
+"погледате https://www.w3.org/International/O-URL-and-ident.html\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_BAD_FORM"
+msgid ""
+"You may need to move one or both of the <form> and </form>\n"
+"tags. HTML elements should be properly nested and form elements\n"
+"are no exception. For instance you should not place the <form>\n"
+"in one table cell and the </form> in another. If the <form> is\n"
+"placed before a table, the </form> cannot be placed inside the\n"
+"table! Note that one form can't be nested inside another!\n"
+msgstr ""
+"Можда је потребна да преместите једну или обе ознаке <form> и </form>.\n"
+"HTML елементи би требало да су исправно угњеждени, а form елементи нису\n"
+"изузетак. На пример, не би требало да поставите <form> у једну ћелију\n"
+"табеле, а </form> у другу. Ако се <form> постави пре табеле, </form> не\n"
+"може да се постави унутар табеле! Имајте на уму да један формулар не може\n"
+"да се угнезди унутар другог!\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_BAD_MAIN"
+msgid ""
+"Only one <main> element is allowed in a document.\n"
+"Subsequent <main> elements have been discarded, which may\n"
+"render the document invalid.\n"
+msgstr ""
+"У документу је дозвољен само један <main> елемент.\n"
+"Накнадни <main> елементи су одбачени, па због тога документ може да\n"
+"постане неисправан.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_M_SUMMARY"
+msgid ""
+"The table summary attribute should be used to describe\n"
+"the table structure. It is very helpful for people using\n"
+"non-visual browsers. The scope and headers attributes for\n"
+"table cells are useful for specifying which headers apply\n"
+"to each table cell, enabling non-visual browsers to provide\n"
+"a meaningful context for each cell.\n"
+msgstr ""
+"Summary атрибут табеле може да се употреби за опис структуре\n"
+"табеле. Доста помаже људима који не користе визуелне прегледаче.\n"
+"Атрибути scope и headers за ћелије табеле су корисни за навођење\n"
+"заглавља која се примењују на сваку ћелију табеле, па на тај начин\n"
+"омогућавају да невизуелни прегледачи пруже контекст значења за\n"
+"сваку појединачну ћелију.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_M_IMAGE_ALT"
+msgid ""
+"The alt attribute should be used to give a short description\n"
+"of an image; longer descriptions should be given with the\n"
+"longdesc attribute which takes a URL linked to the description.\n"
+"These measures are needed for people using non-graphical browsers.\n"
+msgstr ""
+"Атрибут alt би требало да се користи за давање кратког описа слике; дужи\n"
+"описи би требало да се поставе у longdesc атрибут који као вредност узима\n"
+"URL који указује на опис. Ове мере су неопходне људима који не користе\n"
+"графичке прегледаче.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_M_IMAGE_MAP"
+msgid ""
+"Use client-side image maps in preference to server-side image\n"
+"maps as the latter are inaccessible to people using non-\n"
+"graphical browsers. In addition, client-side maps are easier\n"
+"to set up and provide immediate feedback to users.\n"
+msgstr ""
+"Радије користите мапе слика на страни клијента уместо слика мапа на страни\n"
+"сервера јер оне могу бити неприступачне људима који не користе графичке\n"
+"прегледаче- Уз то, мапе на страни клијента се једноставније подешавају и\n"
+"корисницима тренутно пружају повратну информацију.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_M_LINK_ALT"
+msgid ""
+"For hypertext links defined using a client-side image map, you\n"
+"need to use the alt attribute to provide a textual description\n"
+"of the link for people using non-graphical browsers.\n"
+msgstr ""
+"За коришћење хипертекст линкова дефинисаних употребом слике мапе на\n"
+"клијентској страни, морате да искористите alt атрибут у којем наводите\n"
+"текстуални опис линка људима који не користе графичке прегледаче.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_FRAMES"
+msgid ""
+"Pages designed using frames present problems for\n"
+"people who are either blind or using a browser that\n"
+"doesn't support frames. A frames-based page should always\n"
+"include an alternative layout inside a NOFRAMES element.\n"
+msgstr ""
+"Странице дизајниране употребом оквира представљају проблем\n"
+"људима који су или слабовиди или користе прегледач који не\n"
+"подржава оквире. Страница базирана на оквирима би увек требало\n"
+"да укључи алтернативни распоред унутар NOFRAMES елемента.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "FOOTNOTE_TRIM_EMPTY_ELEMENT"
+msgid ""
+"One or more empty elements were present in the source document but\n"
+"dropped on output. If these elements are necessary or you don't want\n"
+"this behavior, then consider setting the option \"drop-empty-elements\"\n"
+"to no.\n"
+msgstr ""
+"Један или више празних елемената су били присутни у изворном документу,\n"
+"али су изостављени у излазу. Ако су ови елементи неопходни, или ако не\n"
+"желите овакво понашање, размотрите да опцију „drop-empty-elements”\n"
+"поставите на no.\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The URL should not be translated unless you find a matching URL in your language.
+msgctxt "TEXT_ACCESS_ADVICE1"
+msgid ""
+"For further advice on how to make your pages accessible\n"
+"see https://www.w3.org/WAI/GL."
+msgstr ""
+"За још савета у вези са начином да ваше странице постану\n"
+"приступачне, погледајте https://www.w3.org/WAI/GL."
+
+#. This console output should be limited to 78 characters per line.
+#. - The URL should not be translated unless you find a matching URL in your language.
+msgctxt "TEXT_ACCESS_ADVICE2"
+msgid ""
+"For further advice on how to make your pages accessible\n"
+"see https://www.w3.org/WAI/GL and https://www.html-tidy.org/accessibility/."
+msgstr ""
+"За још савета у вези са начином да ваше странице постану приступачне,\n"
+"погледајте https://www.w3.org/WAI/GL и\n"
+"https://www.html-tidy.org/accessibility/."
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_LAYER"
+msgid ""
+"The Cascading Style Sheets (CSS) Positioning mechanism\n"
+"is recommended in preference to the proprietary <LAYER>\n"
+"element due to limited vendor support for LAYER.\n"
+msgstr ""
+"Уместо власничког елемента <LAYER>, препоручује се употреба\n"
+"Cascading Style Sheets (CSS) механизма позиционирања јер је\n"
+"подршка произвођача за LAYER елемент ограничена.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_SPACER"
+msgid ""
+"You are recommended to use CSS for controlling white\n"
+"space (e.g. for indentation, margins and line spacing).\n"
+"The proprietary <SPACER> element has limited vendor support.\n"
+msgstr ""
+"Препоручује се за контролисање празног простора користите CSS\n"
+"(нпр. за увлачење, маргине и проред). Власнички елемент\n"
+"<SPACER> има ограничену подршку произвођача.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_FONT"
+msgid ""
+"You are recommended to use CSS to specify the font and\n"
+"properties such as its size and color. This will reduce\n"
+"the size of HTML files and make them easier to maintain\n"
+"compared with using <FONT> elements.\n"
+msgstr ""
+"Препоручује се да за навођење фонта и његових особина као\n"
+"што су величина и боја користите CSS. То ће да смањи величину\n"
+"HTML фајлова и лакше ће се одржавати у односу на фајлове у\n"
+"којима се користе <FONT> елементи.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_NOBR"
+msgid ""
+"You are recommended to use CSS to control line wrapping.\n"
+"Use \"white-space: nowrap\" to inhibit wrapping in place\n"
+"of inserting <NOBR>...</NOBR> into the markup.\n"
+msgstr ""
+"Препоручује се да за контролу обавијања линија користите CSS.\n"
+"Уместо да за искључивање обавијања у означавање уметнете\n"
+"<NOBR>...</NOBR>, употребите „white-space: nowrap”.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_BODY"
+msgid "You are recommended to use CSS to specify page and link colors"
+msgstr "Препоручује се да навођење боја странице и линка користите CSS"
+
+#, c-format
+msgctxt "STRING_CONTENT_LOOKS"
+msgid "Document content looks like %s"
+msgstr "Садржај документа изгледа овако %s"
+
+#, c-format
+msgctxt "STRING_DOCTYPE_GIVEN"
+msgid "Doctype given is \"%s\""
+msgstr "Наведени Doctype је „%s”"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#, c-format
+msgctxt "STRING_ERROR_COUNT"
+msgid "Tidy found %u %s and %u %s!\n"
+msgstr "Tidy је пронашао %u %s и %u %s!\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "STRING_NEEDS_INTERVENTION"
+msgid ""
+"This document has errors that must be fixed before\n"
+"using HTML Tidy to generate a tidied up version.\n"
+msgstr ""
+"Овај документ садржи грешке које се морају исправити пре\n"
+"него што се HTML Tidy употреби за генерисање сређене\n"
+"верзије.\n"
+
+msgctxt "STRING_NO_ERRORS"
+msgid "No warnings or errors were found.\n"
+msgstr "Није пронађено ниједно упозорење нити грешка.\n"
+
+msgctxt "STRING_NO_SYSID"
+msgid "No system identifier in emitted doctype"
+msgstr "У емитованом doctype нема ниједном идентификатора система"
+
+#, c-format
+msgctxt "STRING_NOT_ALL_SHOWN"
+msgid "Tidy found %u %s and %u %s! Not all warnings/errors were shown.\n"
+msgstr "Tidy је пронашао %u %s и %u %s! Нису приказана сва упозорења/грешке.\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TEXT_GENERAL_INFO"
+msgid ""
+"About HTML Tidy: https://github.com/htacg/tidy-html5\n"
+"Bug reports and comments: https://github.com/htacg/tidy-html5/issues\n"
+"Official mailing list: https://lists.w3.org/Archives/Public/public-htacg/\n"
+"Latest HTML specification: https://html.spec.whatwg.org/multipage/\n"
+"Validate your HTML documents: https://validator.w3.org/nu/\n"
+"Lobby your company to join the W3C: https://www.w3.org/Consortium\n"
+msgstr ""
+"О програму HTML Tidy: https://github.com/htacg/tidy-html5\n"
+"Извештаји о багу и коментари: https://github.com/htacg/tidy-html5/issues\n"
+"Званична мејлинг листа: https://lists.w3.org/Archives/Public/public-htacg/\n"
+"Последња HTML спецификација: https://html.spec.whatwg.org/multipage/\n"
+"Потврдите своје HTML документе: https://validator.w3.org/nu/\n"
+"Лобирајте да ваша компанија постане члан W3C: https://www.w3.org/Consortium\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#. - Don't terminate the last line with a newline.
+msgctxt "TEXT_GENERAL_INFO_PLEA"
+msgid ""
+"Do you speak a language other than English, or a different variant of \n"
+"English? Consider helping us to localize HTML Tidy. For details please see \n"
+"https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
+msgstr ""
+"Говорите ли неки други језик, а не енглески, или различиту варијанту\n"
+"енглеског? Размотрите могућност да нам помогнете да локализујемо HTML Tidy.\n"
+"За више детаља, молимо вас да погледате страницу\n"
+"https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
+
+#, c-format
+msgctxt "ADDED_MISSING_CHARSET"
+msgid "Added appropriate missing <meta charset=...> to %s"
+msgstr "У %s је додата одговарајућа <meta charset=...> која недостаје"
+
+#, c-format
+msgctxt "ANCHOR_NOT_UNIQUE"
+msgid "%s anchor \"%s\" already defined"
+msgstr "%s сидро „%s” је већ дефинисано"
+
+#, c-format
+msgctxt "ANCHOR_DUPLICATED"
+msgid "Implicit %s anchor \"%s\" duplicated by Tidy."
+msgstr "Tidy је дуплирао имплицитно %s сидро „%s”."
+
+msgctxt "APOS_UNDEFINED"
+msgid "named entity &apos; only defined in XML/XHTML"
+msgstr "именовани ентитет &apos; је дефинисан само у XML/XHTML"
+
+#, c-format
+msgctxt "ATTR_VALUE_NOT_LCASE"
+msgid "%s attribute value \"%s\" must be lower case for XHTML"
+msgstr "Вредност „%s” атрибута %s мора бити исписана малим словима у XHTML"
+
+#, c-format
+msgctxt "ATTRIBUTE_IS_NOT_ALLOWED"
+msgid "%s attribute \"is\" not allowed for autonomous custom tags."
+msgstr "%s атрибут „is” се не дозвољава за аутономне произвољне ознаке."
+
+#, c-format
+msgctxt "ATTRIBUTE_VALUE_REPLACED"
+msgid "%s attribute \"%s\", incorrect value \"%s\" replaced"
+msgstr "%s атрибут „%s”, замењена је неисправна вредност „%s”"
+
+#, c-format
+msgctxt "BACKSLASH_IN_URI"
+msgid "%s URI reference contains backslash. Typo?"
+msgstr "%s URI референца садржи обрнуту косу црту. Грешка у куцању?"
+
+#, c-format
+msgctxt "BAD_ATTRIBUTE_VALUE_REPLACED"
+msgid "%s attribute \"%s\" had invalid value \"%s\" and has been replaced"
+msgstr "%s атрибут „%s” је имао неисправну вредност „%s” која је замењена"
+
+#, c-format
+msgctxt "BAD_ATTRIBUTE_VALUE"
+msgid "%s attribute \"%s\" has invalid value \"%s\""
+msgstr "%s атрибут „%s” има неисправну вредност „%s”"
+
+msgctxt "BAD_CDATA_CONTENT"
+msgid "'<' + '/' + letter not allowed here"
+msgstr "Овде није дозвољено ’<’ + ’/’ + слово"
+
+#, c-format
+msgctxt "BAD_SUMMARY_HTML5"
+msgid "The summary attribute on the %s element is obsolete in HTML5"
+msgstr "Атрибут summary у елементу %s је застарело у HTML5"
+
+msgctxt "BAD_SURROGATE_LEAD"
+msgid "Trailing (Low) surrogate pair U+%04X, with no leading (High) entity, replaced with U+FFFD."
+msgstr "Зачељни (ниски) сурогат пар U+%04X, без водећег (високог) ентитета, замењује се са U+FFFD."
+
+msgctxt "BAD_SURROGATE_PAIR"
+msgid "Have out-of-range surrogate pair U+%04X:U+%04X, replaced with U+FFFD value."
+msgstr "Постоји сурогат пар U+%04X:U+%04X који је ван опсега, замењује се са вредности U+FFFD."
+
+msgctxt "BAD_SURROGATE_TAIL"
+msgid "Leading (High) surrogate pair U+%04X, with no trailing (Low) entity, replaced with U+FFFD."
+msgstr "Водећи (високи) сурогат пар U+%04X, без зачељног (ниског) ентитета, замењује се са U+FFFD."
+
+#, c-format
+msgctxt "CANT_BE_NESTED"
+msgid "%s can't be nested"
+msgstr "%s не може да се угњезди"
+
+#, c-format
+msgctxt "COERCE_TO_ENDTAG"
+msgid "<%s> is probably intended as </%s>"
+msgstr "Вероватно је <%s> требало да буде </%s>"
+
+msgctxt "CONTENT_AFTER_BODY"
+msgid "content occurs after end of body"
+msgstr "постоји садржај након краја тела"
+
+#, c-format
+msgctxt "CUSTOM_TAG_DETECTED"
+msgid "detected autonomous custom tag %s; will treat as %s"
+msgstr "detected autonomous custom tag %s; will treat as %s"
+
+#, c-format
+msgctxt "DISCARDING_UNEXPECTED"
+msgid "discarding unexpected %s"
+msgstr "одбацује се неочекивано %s"
+
+msgctxt "DOCTYPE_AFTER_TAGS"
+msgid "<!DOCTYPE> isn't allowed after elements"
+msgstr "<!DOCTYPE> се не дозвољава након елемената"
+
+msgctxt "DUPLICATE_FRAMESET"
+msgid "repeated FRAMESET element"
+msgstr "поновљени FRAMESET елемент"
+
+#, c-format
+msgctxt "ELEMENT_NOT_EMPTY"
+msgid "%s element not empty or not closed"
+msgstr "Елемент %s није празан или није затворен"
+
+#, c-format
+msgctxt "ELEMENT_VERS_MISMATCH_ERROR"
+msgid "%s element not available in %s"
+msgstr "Елемент %s није доступан у %s"
+
+#, c-format
+msgctxt "ELEMENT_VERS_MISMATCH_WARN"
+msgid "%s element not available in %s"
+msgstr "Елемент %s није доступан у %s"
+
+#, c-format
+msgctxt "ENCODING_MISMATCH"
+msgid "specified input encoding (%s) does not match actual input encoding (%s)"
+msgstr "наведено кодирање улаза (%s) се не подудара за стварним кодирањем улазног документа (%s)"
+
+#, c-format
+msgctxt "ESCAPED_ILLEGAL_URI"
+msgid "%s escaping malformed URI reference"
+msgstr "%s означава се погрешно формирана URI референца"
+
+#, c-format
+msgctxt "FILE_CANT_OPEN"
+msgid "Can't open \"%s\"\n"
+msgstr "Не може да се отвори „%s”\n"
+
+#, c-format
+msgctxt "FILE_CANT_OPEN_CFG"
+msgid "Can't open configuration file \"%s\"\n"
+msgstr "Не може да се отвори конфигурациони фајл „%s”\n"
+
+#, c-format
+msgctxt "FILE_NOT_FILE"
+msgid "\"%s\" is not a file!\n"
+msgstr "„%s” није фајл!\n"
+
+#, c-format
+msgctxt "FIXED_BACKSLASH"
+msgid "%s converting backslash in URI to slash"
+msgstr "%s обрнута коса црта у URI се претвара у косу црту"
+
+msgctxt "FOUND_STYLE_IN_BODY"
+msgid "found <style> tag in <body>! fix-style-tags: yes to move."
+msgstr "пронађена је <style> ознака у <body>! fix-style-tags: yes да се премести."
+
+#, c-format
+msgctxt "ID_NAME_MISMATCH"
+msgid "%s id and name attribute value mismatch"
+msgstr "%s не подударају се вредности id и name атрибута"
+
+#, c-format
+msgctxt "ILLEGAL_NESTING"
+msgid "%s shouldn't be nested"
+msgstr "%s не би требало да буде угњеждена"
+
+#, c-format
+msgctxt "ILLEGAL_URI_CODEPOINT"
+msgid "%s illegal characters found in URI"
+msgstr "%s у URI су пронађени неважећи карактери"
+
+#, c-format
+msgctxt "ILLEGAL_URI_REFERENCE"
+msgid "%s improperly escaped URI reference"
+msgstr "%s неправилно означена URI референца"
+
+#, c-format
+msgctxt "INSERTING_AUTO_ATTRIBUTE"
+msgid "%s inserting \"%s\" attribute using value \"%s\""
+msgstr "%s умеће се атрибут „%s” користећи вредност „%s”"
+
+#, c-format
+msgctxt "INSERTING_TAG"
+msgid "inserting implicit <%s>"
+msgstr "уметање имплицитног <%s>"
+
+#, c-format
+msgctxt "INVALID_ATTRIBUTE"
+msgid "%s attribute name \"%s\" (value=\"%s\") is invalid"
+msgstr "%s име атрибута „%s” (вредност=„%s”) није исправно"
+
+#, c-format
+msgctxt "INVALID_NCR"
+msgid "%s invalid numeric character reference %s"
+msgstr "%s неисправна нумеричка карактер референца %s"
+
+#, c-format
+msgctxt "INVALID_SGML_CHARS"
+msgid "%s invalid character code %s"
+msgstr "%s неисправан кôд карактера %s"
+
+#, c-format
+msgctxt "INVALID_UTF8"
+msgid "%s invalid UTF-8 bytes (char. code %s)"
+msgstr "%s неисправни UTF-8 бајтови (кар. кôд %s)"
+
+#, c-format
+msgctxt "INVALID_UTF16"
+msgid "%s invalid UTF-16 surrogate pair (char. code %s)"
+msgstr "%s неисправан UTF-16 сурогат пар (кар. кôд %s)"
+
+#, c-format
+msgctxt "INVALID_XML_ID"
+msgid "%s cannot copy name attribute to id"
+msgstr "%s name атрибут не може да се копира у id"
+
+#, c-format
+msgctxt "JOINING_ATTRIBUTE"
+msgid "%s joining values of repeated attribute \"%s\""
+msgstr "%s спајају се вредности поновљеног атрибута „%s”"
+
+msgctxt "MALFORMED_COMMENT"
+msgid "tidy replaced adjacent \"-\" with \"=\""
+msgstr "tidy је заменио суседне „-” са „=”"
+
+msgctxt "MALFORMED_COMMENT_DROPPING"
+msgid "dropping a possible comment due to a missing hyphen"
+msgstr "одбацује се могући коментар јер недостаје цртица"
+
+msgctxt "MALFORMED_COMMENT_EOS"
+msgid "the end of the document was reached before the end of the comment"
+msgstr "достигнут је крај документа пре краја коментара"
+
+msgctxt "MALFORMED_COMMENT_WARN"
+msgid "detected adjacent hyphens within the comment; consider fix-bad-comments"
+msgstr "у коментару су откривене узастопне цртице; размотрите употребу fix-bad-comments"
+
+msgctxt "MALFORMED_DOCTYPE"
+msgid "discarding malformed <!DOCTYPE>"
+msgstr "одбацује се неисправно формиран <!DOCTYPE>"
+
+#, c-format
+msgctxt "MISMATCHED_ATTRIBUTE_ERROR"
+msgid "%s attribute \"%s\" not allowed for %s"
+msgstr "%s атрибут „%s” се не дозвољава за %s"
+
+#, c-format
+msgctxt "MISMATCHED_ATTRIBUTE_WARN"
+msgid "%s attribute \"%s\" not allowed for %s"
+msgstr "%s атрибут „%s” се не дозвољава за %s"
+
+#, c-format
+msgctxt "MISSING_ATTR_VALUE"
+msgid "%s attribute \"%s\" lacks value"
+msgstr "%s недостаје вредност атрибута „%s”"
+
+#, c-format
+msgctxt "MISSING_ATTRIBUTE"
+msgid "%s lacks \"%s\" attribute"
+msgstr "%s нема атрибут „%s”"
+
+msgctxt "MISSING_DOCTYPE"
+msgid "missing <!DOCTYPE> declaration"
+msgstr "недостаје <!DOCTYPE> декларација"
+
+#, c-format
+msgctxt "MISSING_ENDTAG_BEFORE"
+msgid "missing </%s> before %s"
+msgstr "недостаје </%s> пре %s"
+
+#, c-format
+msgctxt "MISSING_ENDTAG_FOR"
+msgid "missing </%s>"
+msgstr "недостаје </%s>"
+
+#, c-format
+msgctxt "MISSING_ENDTAG_OPTIONAL"
+msgid "missing optional end tag </%s>"
+msgstr "недостаје необавезна затварајућа ознака </%s>"
+
+#, c-format
+msgctxt "MISSING_IMAGEMAP"
+msgid "%s should use client-side image map"
+msgstr "%s требало би да се користи слика мапа на страни клијента"
+
+#, c-format
+msgctxt "MISSING_QUOTEMARK"
+msgid "%s attribute with missing trailing quote mark"
+msgstr "%s атрибут којем недостаје знак навода на крају"
+
+#, c-format
+msgctxt "MISSING_QUOTEMARK_OPEN"
+msgid "value for attribute \"%s\" missing quote marks"
+msgstr "вредности атрибута „%s” недостају знаци навода"
+
+#, c-format
+msgctxt "MISSING_SEMICOLON_NCR"
+msgid "numeric character reference \"%s\" doesn't end in ';'"
+msgstr "нумеричка карактер референца „%s” се не завршава са ’;’"
+
+#, c-format
+msgctxt "MISSING_SEMICOLON"
+msgid "entity \"%s\" doesn't end in ';'"
+msgstr "ентитет „%s” се не завршава са ’;’"
+
+#, c-format
+msgctxt "MISSING_STARTTAG"
+msgid "missing <%s>"
+msgstr "недостаје <%s>"
+
+msgctxt "MISSING_TITLE_ELEMENT"
+msgid "inserting missing 'title' element"
+msgstr "умеће се елемент ’title’ који недостаје"
+
+msgctxt "MOVED_STYLE_TO_HEAD"
+msgid "moved <style> tag to <head>! fix-style-tags: no to avoid."
+msgstr "ознака <style> је премештена у <head>! fix-style-tags: no да спречите."
+
+#, c-format
+msgctxt "NESTED_EMPHASIS"
+msgid "nested emphasis %s"
+msgstr "угњеждено наглашавање %s"
+
+msgctxt "NESTED_QUOTATION"
+msgid "nested q elements, possible typo."
+msgstr "угњеждени q елементи, могућа грешка у куцању."
+
+#, c-format
+msgctxt "NEWLINE_IN_URI"
+msgid "%s discarding newline in URI reference"
+msgstr "%s одбацује се прелом реда у URI референци"
+
+#, c-format
+msgctxt "NOFRAMES_CONTENT"
+msgid "%s not inside 'noframes' element"
+msgstr "%s није унутар ’noframes’ елемента"
+
+#, c-format
+msgctxt "NON_MATCHING_ENDTAG"
+msgid "replacing unexpected %s with </%s>"
+msgstr "замењује се неочекивано %s са </%s>"
+
+#, c-format
+msgctxt "OBSOLETE_ELEMENT"
+msgid "replacing obsolete element %s with %s"
+msgstr "застарели елемент %s се замењује са %s"
+
+#, c-format
+msgctxt "OPTION_REMOVED"
+msgid "option \"%s\" no longer exists, and no replacement could be found."
+msgstr "опција „%s” више не постоји, и не може да се пронађе ниједна замена."
+
+#, c-format
+msgctxt "OPTION_REMOVED_APPLIED"
+msgid "option \"%s\" replaced with \"%s\", which Tidy has set to \"%s\"."
+msgstr "опција „%s” је замењена опцијом „%s”, коју је Tidy поставио на „%s”."
+
+#, c-format
+msgctxt "OPTION_REMOVED_UNAPPLIED"
+msgid "option \"%s\" replaced with \"%s\", but Tidy could not set it for you."
+msgstr "опција „%s” је замењена са „%s”, али Tidy није могао да је поставу уместо вас."
+
+#, c-format
+msgctxt "PREVIOUS_LOCATION"
+msgid "<%s> previously mentioned"
+msgstr "<%s> је раније поменуто"
+
+#, c-format
+msgctxt "PROPRIETARY_ATTR_VALUE"
+msgid "%s proprietary attribute value \"%s\""
+msgstr "%s вредност „%s” власничког атрибута"
+
+#, c-format
+msgctxt "PROPRIETARY_ATTRIBUTE"
+msgid "%s proprietary attribute \"%s\""
+msgstr "%s власнички атрибут „%s”"
+
+#, c-format
+msgctxt "PROPRIETARY_ELEMENT"
+msgid "%s is not approved by W3C"
+msgstr "%s није одобрио W3C"
+
+#, c-format
+msgctxt "REMOVED_HTML5"
+msgid "%s element removed from HTML5"
+msgstr "%s елемент је уклоњен из HTML5"
+
+#, c-format
+msgctxt "REPEATED_ATTRIBUTE"
+msgid "%s dropping value \"%s\" for repeated attribute \"%s\""
+msgstr "%s одбацује се вредност „%s” за поновљени атрибут „%s”"
+
+#, c-format
+msgctxt "REPLACING_ELEMENT"
+msgid "replacing %s with %s"
+msgstr "%s се замењује са %s"
+
+#, c-format
+msgctxt "REPLACING_UNEX_ELEMENT"
+msgid "replacing unexpected %s with %s"
+msgstr "неочекивано %s се замењује са %s"
+
+msgctxt "SPACE_PRECEDING_XMLDECL"
+msgid "removing whitespace preceding XML Declaration"
+msgstr "уклања се празан простор испред XML декларације"
+
+#, c-format
+msgctxt "STRING_ARGUMENT_BAD"
+msgid "option \"%s\" given bad argument \"%s\""
+msgstr "опцији „%s” је задат погрешан аргумент „%s”"
+
+#, c-format
+msgctxt "STRING_MISSING_MALFORMED"
+msgid "missing or malformed argument for option: %s"
+msgstr "опцији недостаје аргумент или није исправно формиран: %s"
+
+#, c-format
+msgctxt "STRING_MUTING_TYPE"
+msgid "messages of type \"%s\" will not be output"
+msgstr "поруке типа „%s” се неће исписивати"
+
+#, c-format
+msgctxt "STRING_UNKNOWN_OPTION"
+msgid "unknown option: %s"
+msgstr "непозната опција: %s"
+
+msgctxt "SUSPECTED_MISSING_QUOTE"
+msgid "suspected missing quote mark for attribute value"
+msgstr "сумња се да недостаје знак навода за вредност атрибута"
+
+#, c-format
+msgctxt "TAG_NOT_ALLOWED_IN"
+msgid "%s isn't allowed in <%s> elements"
+msgstr "%s се не дозвољава у <%s> елементима"
+
+#, c-format
+msgctxt "TOO_MANY_ELEMENTS_IN"
+msgid "too many %s elements in <%s>"
+msgstr "too many %s elements in <%s>"
+
+#, c-format
+msgctxt "TOO_MANY_ELEMENTS"
+msgid "too many %s elements"
+msgstr "превише %s елемената"
+
+#, c-format
+msgctxt "TRIM_EMPTY_ELEMENT"
+msgid "trimming empty %s"
+msgstr "скраћује се празно %s"
+
+msgctxt "UNESCAPED_AMPERSAND"
+msgid "unescaped & which should be written as &amp;"
+msgstr "неозначено & које би требало да се испише као &amp;"
+
+#, c-format
+msgctxt "UNEXPECTED_END_OF_FILE_ATTR"
+msgid "%s end of file while parsing attributes"
+msgstr "%s наишао је крај фајла током парсирања атрибута"
+
+#, c-format
+msgctxt "UNEXPECTED_END_OF_FILE"
+msgid "unexpected end of file %s"
+msgstr "неочекивани крај фајла %s"
+
+#, c-format
+msgctxt "UNEXPECTED_ENDTAG_ERR"
+msgid "unexpected </%s>"
+msgstr "неочекивано </%s>"
+
+#, c-format
+msgctxt "UNEXPECTED_ENDTAG_IN"
+msgid "unexpected </%s> in <%s>"
+msgstr "неочекивано </%s> у <%s>"
+
+#, c-format
+msgctxt "UNEXPECTED_ENDTAG"
+msgid "unexpected </%s>"
+msgstr "неочекивано </%s>"
+
+#, c-format
+msgctxt "UNEXPECTED_EQUALSIGN"
+msgid "%s unexpected '=', expected attribute name"
+msgstr "% неочекивано ’=’, очекивало се име атрибута"
+
+#, c-format
+msgctxt "UNEXPECTED_GT"
+msgid "%s missing '>' for end of tag"
+msgstr "%s недостаје ’>’ затварајуће ознаке"
+
+#, c-format
+msgctxt "UNEXPECTED_QUOTEMARK"
+msgid "%s unexpected or duplicate quote mark"
+msgstr "%s неочекивани или дуплирани знак навода"
+
+#, c-format
+msgctxt "UNKNOWN_ELEMENT_LOOKS_CUSTOM"
+msgid "%s is not recognized! Did you mean to enable the custom-tags option?"
+msgstr "%s се не препознаје! Да ли сте хтели да укључите опцију custom-tags?"
+
+#, c-format
+msgctxt "UNKNOWN_ELEMENT"
+msgid "%s is not recognized!"
+msgstr "%s се не препознаје!"
+
+#, c-format
+msgctxt "UNKNOWN_ENTITY"
+msgid "unescaped & or unknown entity \"%s\""
+msgstr "неозначено & или непознат ентитет „%s”"
+
+#, c-format
+msgctxt "USING_BR_INPLACE_OF"
+msgid "using <br> in place of %s"
+msgstr "користи се <br> уместо %s"
+
+#, c-format
+msgctxt "VENDOR_SPECIFIC_CHARS"
+msgid "%s invalid character code %s"
+msgstr "%s неисправан кôд карактера %s"
+
+#, c-format
+msgctxt "WHITE_IN_URI"
+msgid "%s discarding whitespace in URI reference"
+msgstr "%s одбацује се празан простор у URI референци"
+
+msgctxt "XML_DECLARATION_DETECTED"
+msgid "An XML declaration was detected. Did you mean to use input-xml?"
+msgstr "Детектована је XML декларација. Да ли сте хтели да употребите input-xml?"
+
+#, c-format
+msgctxt "XML_ID_SYNTAX"
+msgid "%s ID \"%s\" uses XML ID syntax"
+msgstr "%s ID „%s” користи XML ID ситнаксу"
+
+msgctxt "BLANK_TITLE_ELEMENT"
+msgid "blank 'title' element"
+msgstr "празан ’title’ елемент"
+
+msgctxt "IMG_MISSING_ALT"
+msgid "[1.1.1.1]: <img> missing 'alt' text."
+msgstr "[1.1.1.1]: <img> нема ’alt’ текст."
+
+msgctxt "IMG_ALT_SUSPICIOUS_FILENAME"
+msgid "[1.1.1.2]: suspicious 'alt' text (filename)."
+msgstr "[1.1.1.2]: сумњиви ’alt’ текст (име фајла)."
+
+msgctxt "IMG_ALT_SUSPICIOUS_FILE_SIZE"
+msgid "[1.1.1.3]: suspicious 'alt' text (file size)."
+msgstr "[1.1.1.3]: сумњиви ’alt’ текст (величина фајла)."
+
+msgctxt "IMG_ALT_SUSPICIOUS_PLACEHOLDER"
+msgid "[1.1.1.4]: suspicious 'alt' text (placeholder)."
+msgstr "[1.1.1.4]: сумњиви ’alt’ текст (чувар места)."
+
+msgctxt "IMG_ALT_SUSPICIOUS_TOO_LONG"
+msgid "[1.1.1.10]: suspicious 'alt' text (too long)."
+msgstr "[1.1.1.10]: сумњиви ’alt’ текст (сувише дугачак)."
+
+msgctxt "IMG_MISSING_LONGDESC_DLINK"
+msgid "[1.1.2.1]: <img> missing 'longdesc' and d-link."
+msgstr "[1.1.2.1]: <img> недостају ’longdesc’ и d-link."
+
+msgctxt "IMG_MISSING_DLINK"
+msgid "[1.1.2.2]: <img> missing d-link."
+msgstr "[1.1.2.2]: <img> недостаје d-link."
+
+msgctxt "IMG_MISSING_LONGDESC"
+msgid "[1.1.2.3]: <img> missing 'longdesc'."
+msgstr "[1.1.2.3]: <img> недостаје ’longdesc’."
+
+msgctxt "IMG_BUTTON_MISSING_ALT"
+msgid "[1.1.3.1]: <img> (button) missing 'alt' text."
+msgstr "[1.1.3.1]: <img> (дугме) недостаје ’alt’ текст."
+
+msgctxt "APPLET_MISSING_ALT"
+msgid "[1.1.4.1]: <applet> missing alternate content."
+msgstr "[1.1.4.1]: <applet> недостаје алтернативни садржај."
+
+msgctxt "OBJECT_MISSING_ALT"
+msgid "[1.1.5.1]: <object> missing alternate content."
+msgstr "[1.1.5.1]: <object> недостаје алтернативни садржај."
+
+msgctxt "AUDIO_MISSING_TEXT_WAV"
+msgid "[1.1.6.1]: audio missing text transcript (wav)."
+msgstr "[1.1.6.1]: звуку недостаје текстуални транскрипт (wav)."
+
+msgctxt "AUDIO_MISSING_TEXT_AU"
+msgid "[1.1.6.2]: audio missing text transcript (au)."
+msgstr "[1.1.6.2]: звуку недостаје текстуални транскрипт (au)."
+
+msgctxt "AUDIO_MISSING_TEXT_AIFF"
+msgid "[1.1.6.3]: audio missing text transcript (aiff)."
+msgstr "[1.1.6.3]: звуку недостаје текстуални транскрипт (aiff)."
+
+msgctxt "AUDIO_MISSING_TEXT_SND"
+msgid "[1.1.6.4]: audio missing text transcript (snd)."
+msgstr "[1.1.6.4]: звуку недостаје текстуални транскрипт (snd)."
+
+msgctxt "AUDIO_MISSING_TEXT_RA"
+msgid "[1.1.6.5]: audio missing text transcript (ra)."
+msgstr "[1.1.6.5]: звуку недостаје текстуални транскрипт (ra)."
+
+msgctxt "AUDIO_MISSING_TEXT_RM"
+msgid "[1.1.6.6]: audio missing text transcript (rm)."
+msgstr "[1.1.6.6]: звуку недостаје текстуални транскрипт (rm)."
+
+msgctxt "FRAME_MISSING_LONGDESC"
+msgid "[1.1.8.1]: <frame> may require 'longdesc'."
+msgstr "[1.1.8.1]: <frame> може да захтева ’longdesc’."
+
+msgctxt "AREA_MISSING_ALT"
+msgid "[1.1.9.1]: <area> missing 'alt' text."
+msgstr "[1.1.9.1]: <area> недостаје ’alt’ текст."
+
+msgctxt "SCRIPT_MISSING_NOSCRIPT"
+msgid "[1.1.10.1]: <script> missing <noscript> section."
+msgstr "[1.1.10.1]: <script> недостаје <noscript> одељак."
+
+msgctxt "ASCII_REQUIRES_DESCRIPTION"
+msgid "[1.1.12.1]: ascii art requires description."
+msgstr "[1.1.12.1]: потребан је опис ascii слике."
+
+msgctxt "IMG_MAP_SERVER_REQUIRES_TEXT_LINKS"
+msgid "[1.2.1.1]: image map (server-side) requires text links."
+msgstr "[1.2.1.1]: слика мапа (на страни сервера) захтева текст линкове."
+
+msgctxt "MULTIMEDIA_REQUIRES_TEXT"
+msgid "[1.4.1.1]: multimedia requires synchronized text equivalents."
+msgstr "[1.4.1.1]: за мултимедију су потребни еквиваленти синхронизованог текста."
+
+msgctxt "IMG_MAP_CLIENT_MISSING_TEXT_LINKS"
+msgid "[1.5.1.1]: image map (client-side) missing text links."
+msgstr "[1.5.1.1]: у мапи слици (на страни клијента) недостају текст линкови."
+
+msgctxt "INFORMATION_NOT_CONVEYED_IMAGE"
+msgid "[2.1.1.1]: ensure information not conveyed through color alone (image)."
+msgstr "[2.1.1.1]: обезбедите да се информација не преноси само бојом (image)."
+
+msgctxt "INFORMATION_NOT_CONVEYED_APPLET"
+msgid "[2.1.1.2]: ensure information not conveyed through color alone (applet)."
+msgstr "[2.1.1.2]: обезбедите да се информација не преноси само бојом (applet)."
+
+msgctxt "INFORMATION_NOT_CONVEYED_OBJECT"
+msgid "[2.1.1.3]: ensure information not conveyed through color alone (object)."
+msgstr "[2.1.1.3]: обезбедите да се информација не преноси само бојом (object)."
+
+msgctxt "INFORMATION_NOT_CONVEYED_SCRIPT"
+msgid "[2.1.1.4]: ensure information not conveyed through color alone (script)."
+msgstr "[2.1.1.4]: обезбедите да се информација не преноси само бојом (script)."
+
+msgctxt "INFORMATION_NOT_CONVEYED_INPUT"
+msgid "[2.1.1.5]: ensure information not conveyed through color alone (input)."
+msgstr "[2.1.1.5]: обезбедите да се информација не преноси само бојом (input)."
+
+msgctxt "COLOR_CONTRAST_TEXT"
+msgid "[2.2.1.1]: poor color contrast (text)."
+msgstr "[2.2.1.1]: слаб контраст боје (текст)."
+
+msgctxt "COLOR_CONTRAST_LINK"
+msgid "[2.2.1.2]: poor color contrast (link)."
+msgstr "[2.2.1.2]: слаб контраст боје (линк)."
+
+msgctxt "COLOR_CONTRAST_ACTIVE_LINK"
+msgid "[2.2.1.3]: poor color contrast (active link)."
+msgstr "[2.2.1.3]: слаб контраст боје (активни линк)."
+
+msgctxt "COLOR_CONTRAST_VISITED_LINK"
+msgid "[2.2.1.4]: poor color contrast (visited link)."
+msgstr "[2.2.1.4]: слаб контраст боје (посећени линк)."
+
+msgctxt "DOCTYPE_MISSING"
+msgid "[3.2.1.1]: <doctype> missing."
+msgstr "[3.2.1.1]: недостаје <doctype>."
+
+msgctxt "STYLE_SHEET_CONTROL_PRESENTATION"
+msgid "[3.3.1.1]: use style sheets to control presentation."
+msgstr "[3.3.1.1]: употребите листе стилова за контролу презентације."
+
+msgctxt "HEADERS_IMPROPERLY_NESTED"
+msgid "[3.5.1.1]: headers improperly nested."
+msgstr "[3.5.1.1]: заглавља нису исправно угњеждена."
+
+msgctxt "POTENTIAL_HEADER_BOLD"
+msgid "[3.5.2.1]: potential header (bold)."
+msgstr "[3.5.2.1]: потенцијално заглавље (подебљано)."
+
+msgctxt "POTENTIAL_HEADER_ITALICS"
+msgid "[3.5.2.2]: potential header (italics)."
+msgstr "[3.5.2.2]: потенцијално заглавље (курзив)."
+
+msgctxt "POTENTIAL_HEADER_UNDERLINE"
+msgid "[3.5.2.3]: potential header (underline)."
+msgstr "[3.5.2.3]: потенцијално заглавље (подвучено)."
+
+msgctxt "HEADER_USED_FORMAT_TEXT"
+msgid "[3.5.3.1]: header used to format text."
+msgstr "[3.5.3.1]: заглавље се користи за форматирање текста."
+
+msgctxt "LIST_USAGE_INVALID_UL"
+msgid "[3.6.1.1]: list usage invalid <ul>."
+msgstr "[3.6.1.1]: неисправна употреба листе <ul>."
+
+msgctxt "LIST_USAGE_INVALID_OL"
+msgid "[3.6.1.2]: list usage invalid <ol>."
+msgstr "[3.6.1.2]: неисправна употреба листе <ol>."
+
+msgctxt "LIST_USAGE_INVALID_LI"
+msgid "[3.6.1.4]: list usage invalid <li>."
+msgstr "[3.6.1.4]: неисправна употреба листе <li>."
+
+msgctxt "LANGUAGE_NOT_IDENTIFIED"
+msgid "[4.3.1.1]: language not identified."
+msgstr "[4.3.1.1]: није идентификован језик."
+
+msgctxt "LANGUAGE_INVALID"
+msgid "[4.3.1.2]: language attribute invalid."
+msgstr "[4.3.1.2]: атрибут језика је неисправан."
+
+msgctxt "DATA_TABLE_MISSING_HEADERS"
+msgid "[5.1.2.1]: data <table> missing row/column headers (all)."
+msgstr "[5.1.2.1]: <table> података недостају заглавља редова/колона (сва)."
+
+msgctxt "DATA_TABLE_MISSING_HEADERS_COLUMN"
+msgid "[5.1.2.2]: data <table> missing row/column headers (1 col)."
+msgstr "[5.1.2.2]: <table> података недостају заглавља редова/колона (1 кол)."
+
+msgctxt "DATA_TABLE_MISSING_HEADERS_ROW"
+msgid "[5.1.2.3]: data <table> missing row/column headers (1 row)."
+msgstr "[5.1.2.3]: <table> података недостају заглавља редова/колона (1 ред)."
+
+msgctxt "DATA_TABLE_REQUIRE_MARKUP_COLUMN_HEADERS"
+msgid "[5.2.1.1]: data <table> may require markup (column headers)."
+msgstr "[5.2.1.1]: <table> података - можда је потребно означавање (заглавља колоне)."
+
+msgctxt "DATA_TABLE_REQUIRE_MARKUP_ROW_HEADERS"
+msgid "[5.2.1.2]: data <table> may require markup (row headers)."
+msgstr "[5.2.1.2]: <table> података - можда је потребно означавање (заглавља редова)."
+
+msgctxt "LAYOUT_TABLES_LINEARIZE_PROPERLY"
+msgid "[5.3.1.1]: verify layout tables linearize properly."
+msgstr "[5.3.1.1]: потврдите да се распоред табеле исправно линеаризује."
+
+msgctxt "LAYOUT_TABLE_INVALID_MARKUP"
+msgid "[5.4.1.1]: invalid markup used in layout <table>."
+msgstr "[5.4.1.1]: у распореду <table> се користи неисправно означавање."
+
+msgctxt "TABLE_MISSING_SUMMARY"
+msgid "[5.5.1.1]: <table> missing summary."
+msgstr "[5.5.1.1]: недостаје резиме за <table>."
+
+msgctxt "TABLE_SUMMARY_INVALID_NULL"
+msgid "[5.5.1.2]: <table> summary invalid (null)."
+msgstr "[5.5.1.2]: резиме за <table> није исправан (null)."
+
+msgctxt "TABLE_SUMMARY_INVALID_SPACES"
+msgid "[5.5.1.3]: <table> summary invalid (spaces)."
+msgstr "[5.5.1.3]: резиме за <table> није исправан (размаци)."
+
+msgctxt "TABLE_SUMMARY_INVALID_PLACEHOLDER"
+msgid "[5.5.1.6]: <table> summary invalid (placeholder text)."
+msgstr "[5.5.1.6]: резиме за <table> није исправан (текст чувара места)."
+
+msgctxt "TABLE_MISSING_CAPTION"
+msgid "[5.5.2.1]: <table> missing <caption>."
+msgstr "[5.5.2.1]: у <table> недостаје <caption>."
+
+msgctxt "TABLE_MAY_REQUIRE_HEADER_ABBR"
+msgid "[5.6.1.1]: <table> may require header abbreviations."
+msgstr "[5.6.1.1]: можда су потребне скраћенице заглавља за <table>."
+
+msgctxt "TABLE_MAY_REQUIRE_HEADER_ABBR_NULL"
+msgid "[5.6.1.2]: <table> header abbreviations invalid (null)."
+msgstr "[5.6.1.2]: скраћенице заглавља за <table> су неисправне (null)."
+
+msgctxt "TABLE_MAY_REQUIRE_HEADER_ABBR_SPACES"
+msgid "[5.6.1.3]: <table> header abbreviations invalid (spaces)."
+msgstr "[5.6.1.3]: скраћенице заглавља за <table> су неисправне (размаци)."
+
+msgctxt "STYLESHEETS_REQUIRE_TESTING_LINK"
+msgid "[6.1.1.1]: style sheets require testing (link)."
+msgstr "[6.1.1.1]: потребна су тестирања листи стилова (линк)."
+
+msgctxt "STYLESHEETS_REQUIRE_TESTING_STYLE_ELEMENT"
+msgid "[6.1.1.2]: style sheets require testing (style element)."
+msgstr "[6.1.1.2]: потребна су тестирања листи стилова (елемент style)."
+
+msgctxt "STYLESHEETS_REQUIRE_TESTING_STYLE_ATTR"
+msgid "[6.1.1.3]: style sheets require testing (style attribute)."
+msgstr "[6.1.1.3]: потребна су тестирања листи стилова (атрибут style)."
+
+msgctxt "FRAME_SRC_INVALID"
+msgid "[6.2.1.1]: <frame> source invalid."
+msgstr "[6.2.1.1]: извор <frame> је неисправан."
+
+msgctxt "TEXT_EQUIVALENTS_REQUIRE_UPDATING_APPLET"
+msgid "[6.2.2.1]: text equivalents require updating (applet)."
+msgstr "[6.2.2.1]: потребно је ажурирање текст еквивалената (applet)."
+
+msgctxt "TEXT_EQUIVALENTS_REQUIRE_UPDATING_SCRIPT"
+msgid "[6.2.2.2]: text equivalents require updating (script)."
+msgstr "[6.2.2.2]: потребно је ажурирање текст еквивалената (script)."
+
+msgctxt "TEXT_EQUIVALENTS_REQUIRE_UPDATING_OBJECT"
+msgid "[6.2.2.3]: text equivalents require updating (object)."
+msgstr "[6.2.2.3]: потребно је ажурирање текст еквивалената (object)."
+
+msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_SCRIPT"
+msgid "[6.3.1.1]: programmatic objects require testing (script)."
+msgstr "[6.3.1.1]: потребно је тестирање програмских објеката (script)."
+
+msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_OBJECT"
+msgid "[6.3.1.2]: programmatic objects require testing (object)."
+msgstr "[6.3.1.2]: потребно је тестирање програмских објеката (object)."
+
+msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_EMBED"
+msgid "[6.3.1.3]: programmatic objects require testing (embed)."
+msgstr "[6.3.1.3]: потребно је тестирање програмских објеката (embed)."
+
+msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_APPLET"
+msgid "[6.3.1.4]: programmatic objects require testing (applet)."
+msgstr "[6.3.1.4]: потребно је тестирање програмских објеката (applet)."
+
+msgctxt "FRAME_MISSING_NOFRAMES"
+msgid "[6.5.1.1]: <frameset> missing <noframes> section."
+msgstr "[6.5.1.1]: за <frameset> недостаје <noframes> одељак."
+
+msgctxt "NOFRAMES_INVALID_NO_VALUE"
+msgid "[6.5.1.2]: <noframes> section invalid (no value)."
+msgstr "[6.5.1.2]: <noframes> одељак није исправан (нема вредност)."
+
+msgctxt "NOFRAMES_INVALID_CONTENT"
+msgid "[6.5.1.3]: <noframes> section invalid (content)."
+msgstr "[6.5.1.3]: <noframes> одељак је неисправан (садржај)."
+
+msgctxt "NOFRAMES_INVALID_LINK"
+msgid "[6.5.1.4]: <noframes> section invalid (link)."
+msgstr "[6.5.1.4]: <noframes> одељак је неисправан (линк)."
+
+msgctxt "REMOVE_FLICKER_SCRIPT"
+msgid "[7.1.1.1]: remove flicker (script)."
+msgstr "[7.1.1.1]: уклоните треперење (script)."
+
+msgctxt "REMOVE_FLICKER_OBJECT"
+msgid "[7.1.1.2]: remove flicker (object)."
+msgstr "[7.1.1.2]: уклоните треперење (object)."
+
+msgctxt "REMOVE_FLICKER_EMBED"
+msgid "[7.1.1.3]: remove flicker (embed)."
+msgstr "[7.1.1.3]: уклоните треперење (embed)."
+
+msgctxt "REMOVE_FLICKER_APPLET"
+msgid "[7.1.1.4]: remove flicker (applet)."
+msgstr "[7.1.1.4]: уклоните треперење (applet)."
+
+msgctxt "REMOVE_FLICKER_ANIMATED_GIF"
+msgid "[7.1.1.5]: remove flicker (animated gif)."
+msgstr "[7.1.1.5]: уклоните треперење (animated gif)."
+
+msgctxt "REMOVE_BLINK_MARQUEE"
+msgid "[7.2.1.1]: remove blink/marquee."
+msgstr "[7.2.1.1]: уклоните blink/marquee."
+
+msgctxt "REMOVE_AUTO_REFRESH"
+msgid "[7.4.1.1]: remove auto-refresh."
+msgstr "[7.4.1.1]: уклоните аутоматско освежавање."
+
+msgctxt "REMOVE_AUTO_REDIRECT"
+msgid "[7.5.1.1]: remove auto-redirect."
+msgstr "[7.5.1.1]: уклоните аутоматско преусмеравање."
+
+msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_SCRIPT"
+msgid "[8.1.1.1]: ensure programmatic objects are accessible (script)."
+msgstr "[8.1.1.1]: (script)."
+
+msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_OBJECT"
+msgid "[8.1.1.2]: ensure programmatic objects are accessible (object)."
+msgstr "[8.1.1.2]: обезбедите да су програмски објекти приступачни (object)."
+
+msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_APPLET"
+msgid "[8.1.1.3]: ensure programmatic objects are accessible (applet)."
+msgstr "[8.1.1.3]: обезбедите да су програмски објекти приступачни (applet)."
+
+msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_EMBED"
+msgid "[8.1.1.4]: ensure programmatic objects are accessible (embed)."
+msgstr "[8.1.1.4]: обезбедите да су програмски објекти приступачни (embed)."
+
+msgctxt "IMAGE_MAP_SERVER_SIDE_REQUIRES_CONVERSION"
+msgid "[9.1.1.1]: image map (server-side) requires conversion."
+msgstr "[9.1.1.1]: потребно је претварање слике мапе (на страни сервера)."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_DOWN"
+msgid "[9.3.1.1]: <script> not keyboard accessible (onMouseDown)."
+msgstr "[9.3.1.1]: <script> није приступачан преко тастатуре (onMouseDown)."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_UP"
+msgid "[9.3.1.2]: <script> not keyboard accessible (onMouseUp)."
+msgstr "[9.3.1.2]: <script> није приступачан преко тастатуре (onMouseUp)."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_CLICK"
+msgid "[9.3.1.3]: <script> not keyboard accessible (onClick)."
+msgstr "[9.3.1.3]: <script> није приступачан преко тастатуре (onClick)."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OVER"
+msgid "[9.3.1.4]: <script> not keyboard accessible (onMouseOver)."
+msgstr "[9.3.1.4]: <script> није приступачан преко тастатуре (onMouseOver)."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OUT"
+msgid "[9.3.1.5]: <script> not keyboard accessible (onMouseOut)."
+msgstr "[9.3.1.5]: <script> није приступачан преко тастатуре (onMouseOut)."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_MOVE"
+msgid "[9.3.1.6]: <script> not keyboard accessible (onMouseMove)."
+msgstr "[9.3.1.6]: <script> није приступачан преко тастатуре (onMouseMove)."
+
+msgctxt "NEW_WINDOWS_REQUIRE_WARNING_NEW"
+msgid "[10.1.1.1]: new windows require warning (_new)."
+msgstr "[10.1.1.1]: потребно је упозорење у вези са новим прозорима (_new)."
+
+msgctxt "NEW_WINDOWS_REQUIRE_WARNING_BLANK"
+msgid "[10.1.1.2]: new windows require warning (_blank)."
+msgstr "[10.1.1.2]: потребно је упозорење у вези са новим прозорима (_blank)."
+
+msgctxt "REPLACE_DEPRECATED_HTML_APPLET"
+msgid "[11.2.1.1]: replace deprecated html <applet>."
+msgstr "[11.2.1.1]: замените застарели html <applet>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_BASEFONT"
+msgid "[11.2.1.2]: replace deprecated html <basefont>."
+msgstr "[11.2.1.2]: замените застарели html <basefont>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_CENTER"
+msgid "[11.2.1.3]: replace deprecated html <center>."
+msgstr "[11.2.1.3]: замените застарели html <center>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_DIR"
+msgid "[11.2.1.4]: replace deprecated html <dir>."
+msgstr "[11.2.1.4]: замените застарели html <dir>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_FONT"
+msgid "[11.2.1.5]: replace deprecated html <font>."
+msgstr "[11.2.1.5]: замените застарели html <font>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_ISINDEX"
+msgid "[11.2.1.6]: replace deprecated html <isindex>."
+msgstr "[11.2.1.6]: замените застарели html <isindex>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_MENU"
+msgid "[11.2.1.7]: replace deprecated html <menu>."
+msgstr "[11.2.1.7]: замените застарели html <menu>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_S"
+msgid "[11.2.1.8]: replace deprecated html <s>."
+msgstr "[11.2.1.8]: замените застарели html <s>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_STRIKE"
+msgid "[11.2.1.9]: replace deprecated html <strike>."
+msgstr "[11.2.1.9]: замените застарели html <strike>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_U"
+msgid "[11.2.1.10]: replace deprecated html <u>."
+msgstr "[11.2.1.10]: замените застарели html <u>."
+
+msgctxt "FRAME_MISSING_TITLE"
+msgid "[12.1.1.1]: <frame> missing title."
+msgstr "[12.1.1.1]: недостаје наслов за <frame>."
+
+msgctxt "FRAME_TITLE_INVALID_NULL"
+msgid "[12.1.1.2]: <frame> title invalid (null)."
+msgstr "[12.1.1.2]: није исправан наслова за <frame> (null)."
+
+msgctxt "FRAME_TITLE_INVALID_SPACES"
+msgid "[12.1.1.3]: <frame> title invalid (spaces)."
+msgstr "[12.1.1.3]: није исправан наслова за <frame> (размаци)."
+
+msgctxt "ASSOCIATE_LABELS_EXPLICITLY"
+msgid "[12.4.1.1]: associate labels explicitly with form controls."
+msgstr "[12.4.1.1]: експлицитно придружите лабеле контролама формулара."
+
+msgctxt "ASSOCIATE_LABELS_EXPLICITLY_FOR"
+msgid "[12.4.1.2]: associate labels explicitly with form controls (for)."
+msgstr "[12.4.1.2]: експлицитно придружите лабеле контролама формулара (for)."
+
+msgctxt "ASSOCIATE_LABELS_EXPLICITLY_ID"
+msgid "[12.4.1.3]: associate labels explicitly with form controls (id)."
+msgstr "[12.4.1.3]: експлицитно придружите лабеле контролама формулара (id)."
+
+msgctxt "LINK_TEXT_NOT_MEANINGFUL"
+msgid "[13.1.1.1]: link text not meaningful."
+msgstr "[13.1.1.1]: текст линка нема значење."
+
+msgctxt "LINK_TEXT_MISSING"
+msgid "[13.1.1.2]: link text missing."
+msgstr "[13.1.1.2]: недостаје текст линка."
+
+msgctxt "LINK_TEXT_TOO_LONG"
+msgid "[13.1.1.3]: link text too long."
+msgstr "[13.1.1.3]: дужина текста линка је сувише велика."
+
+msgctxt "LINK_TEXT_NOT_MEANINGFUL_CLICK_HERE"
+msgid "[13.1.1.4]: link text not meaningful (click here)."
+msgstr "[13.1.1.4]: текст линка нема значење (кликните овде)."
+
+msgctxt "METADATA_MISSING"
+msgid "[13.2.1.1]: Metadata missing."
+msgstr "[13.2.1.1]: Недостају метаподаци."
+
+msgctxt "METADATA_MISSING_REDIRECT_AUTOREFRESH"
+msgid "[13.2.1.3]: Metadata missing (redirect/auto-refresh)."
+msgstr "[13.2.1.3]: Недостају метаподаци (преусмеравање/ауто-освежавање)."
+
+msgctxt "SKIPOVER_ASCII_ART"
+msgid "[13.10.1.1]: skip over ascii art."
+msgstr "[13.10.1.1]: прескакање преко ascii уметности."
+
+msgctxt "TC_LABEL_COL"
+msgid "column"
+msgstr "колона"
+
+msgctxt "TC_LABEL_FILE"
+msgid "file"
+msgstr "фајл"
+
+msgctxt "TC_LABEL_LANG"
+msgid "lang"
+msgstr "језик"
+
+msgctxt "TC_LABEL_LEVL"
+msgid "level"
+msgstr "ниво"
+
+msgctxt "TC_LABEL_OPT"
+msgid "option"
+msgstr "опција"
+
+#, c-format
+msgctxt "TC_MAIN_ERROR_LOAD_CONFIG"
+msgid "Loading config file \"%s\" problems, err = %d"
+msgstr "Учитава се конфиг фајл „%s” проблеми, греш = %d"
+
+msgctxt "TC_OPT_ACCESS"
+msgid ""
+"do additional accessibility checks (<level> = 0, 1, 2, 3). 0 is "
+"assumed if <level> is missing."
+msgstr ""
+"ради додатне провере приступачности (<ниво> = 0, 1, 2, 3). 0 се "
+"подразумева у случају да недостаје <ниво>."
+
+msgctxt "TC_OPT_ASCII"
+msgid "use ISO-8859-1 for input, US-ASCII for output"
+msgstr "користи се ISO-8859-1 за улаз, US-ASCII за излаз"
+
+msgctxt "TC_OPT_ASHTML"
+msgid "force XHTML to well formed HTML"
+msgstr "форсира XHTML у добро формирани HTML"
+
+msgctxt "TC_OPT_ASXML"
+msgid "convert HTML to well formed XHTML"
+msgstr "претвара HTML у добро формирани XHTML"
+
+msgctxt "TC_OPT_BARE"
+msgid "strip out smart quotes and em dashes, etc."
+msgstr "уклања паметне наводе, ем црте, итд."
+
+msgctxt "TC_OPT_BIG5"
+msgid "use Big5 for both input and output"
+msgstr "користи се Big5 и за улаз и за излаз"
+
+msgctxt "TC_OPT_CLEAN"
+msgid "replace FONT, NOBR and CENTER tags with CSS"
+msgstr "замењује FONT, NOBR и CENTER ознаке са CSS"
+
+msgctxt "TC_OPT_CONFIG"
+msgid "set configuration options from the specified <file>"
+msgstr "поставља опције конфигурације из наведеног <фајл>"
+
+msgctxt "TC_OPT_ERRORS"
+msgid "show only errors and warnings"
+msgstr "приказују се само грешке и упозорења"
+
+msgctxt "TC_OPT_FILE"
+msgid "write errors and warnings to the specified <file>"
+msgstr "грешке и упозорења се исписују у наведени <file>"
+
+msgctxt "TC_OPT_GDOC"
+msgid "produce clean version of html exported by Google Docs"
+msgstr "производи чисту верзију html кода извезеног из Google Docs"
+
+msgctxt "TC_OPT_HELP"
+msgid "list the command line options"
+msgstr "исписује опције командне линије"
+
+msgctxt "TC_OPT_HELPCFG"
+msgid "list all configuration options"
+msgstr "исписује све опције конфигурације"
+
+msgctxt "TC_OPT_HELPENV"
+msgid "show information about the environment and runtime configuration"
+msgstr "приказује информације у вези са окружењем и конфигурацију која се користи током извршавања"
+
+msgctxt "TC_OPT_HELPOPT"
+msgid "show a description of the <option>"
+msgstr "приказује опис <option>"
+
+msgctxt "TC_OPT_IBM858"
+msgid "use IBM-858 (CP850+Euro) for input, US-ASCII for output"
+msgstr "користи се IBM-858 (CP850+Euro) за улаз, US-ASCII за излаз"
+
+msgctxt "TC_OPT_INDENT"
+msgid "indent element content"
+msgstr "увлачи се садржај елемента"
+
+msgctxt "TC_OPT_ISO2022"
+msgid "use ISO-2022 for both input and output"
+msgstr "користи се ISO-2022 и за улаз и за излаз"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_OPT_LANGUAGE"
+msgid ""
+"set Tidy's output language to <lang>. Specify '-language help' for more help. "
+"Use before output-causing arguments to ensure the language takes effect, e.g.,"
+"`tidy -lang es -lang help`."
+msgstr ""
+"поставља излазни језик програма Tidy на <језик>. За више информација наведите. "
+"’-language help’ Употребите пре аргумената који производе излаз да би се "
+"осигурало да се језик примењује."
+"`tidy -lang es -lang help`."
+
+msgctxt "TC_OPT_LATIN0"
+msgid "use ISO-8859-15 for input, US-ASCII for output"
+msgstr "користи се ISO-8859-15 за улаз, US-ASCII за излаз"
+
+msgctxt "TC_OPT_LATIN1"
+msgid "use ISO-8859-1 for both input and output"
+msgstr "користи се ISO-8859-1 и за улаз и за излаз"
+
+msgctxt "TC_OPT_MAC"
+msgid "use MacRoman for input, US-ASCII for output"
+msgstr "користи се MacRoman за улаз, US-ASCII за излаз"
+
+msgctxt "TC_OPT_MODIFY"
+msgid "modify the original input files"
+msgstr "измењују се оригинални улазни фајлови"
+
+msgctxt "TC_OPT_NUMERIC"
+msgid "output numeric rather than named entities"
+msgstr "уместо именованих, исписују се нумерички ентитети"
+
+msgctxt "TC_OPT_OMIT"
+msgid "omit optional start tags and end tags"
+msgstr "изостављају се отварајуће и затварајуће ознаке које нису обавезне"
+
+msgctxt "TC_OPT_OUTPUT"
+msgid "write output to the specified <file>"
+msgstr "излаз се уписује у наведени <фајл>"
+
+msgctxt "TC_OPT_QUIET"
+msgid "suppress nonessential output"
+msgstr "потискује се излаз који није од суштинског значаја"
+
+msgctxt "TC_OPT_RAW"
+msgid "output values above 127 without conversion to entities"
+msgstr "вредности преко 127 се исписују без претварања у ентитете"
+
+msgctxt "TC_OPT_SHIFTJIS"
+msgid "use Shift_JIS for both input and output"
+msgstr "користи се Shift_JIS и за улаз и за излаз"
+
+msgctxt "TC_OPT_SHOWCFG"
+msgid "list the current configuration settings"
+msgstr "исписују се текућа подешавања конфигурације"
+
+msgctxt "TC_OPT_EXP_CFG"
+msgid "list the current configuration settings, suitable for a config file"
+msgstr "исписују се текућа подешавања конфигурације, погодно је за конфиг фајл"
+
+msgctxt "TC_OPT_EXP_DEF"
+msgid "list the default configuration settings, suitable for a config file"
+msgstr "испиисују подразумевана подешавања конфигурације, погодно је за конфиг фајл"
+
+msgctxt "TC_OPT_UPPER"
+msgid "force tags to upper case"
+msgstr "форсира испис ознака великим словима"
+
+msgctxt "TC_OPT_UTF16"
+msgid "use UTF-16 for both input and output"
+msgstr "користи се UTF-16 и за улаз и за излаз."
+
+msgctxt "TC_OPT_UTF16BE"
+msgid "use UTF-16BE for both input and output"
+msgstr "користи се UTF-16BE и за улаз и за излаз"
+
+msgctxt "TC_OPT_UTF16LE"
+msgid "use UTF-16LE for both input and output"
+msgstr "користи се UTF-16LE и за улаз и за излаз"
+
+msgctxt "TC_OPT_UTF8"
+msgid "use UTF-8 for both input and output"
+msgstr "користи се UTF-8 и за улаз и за излаз"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_OPT_VERSION"
+msgid "show the version of Tidy"
+msgstr "приказује верзију програма Tidy"
+
+msgctxt "TC_OPT_WIN1252"
+msgid "use Windows-1252 for input, US-ASCII for output"
+msgstr "користи се Windows-1252  за улаз, US-ASCII за излаз"
+
+msgctxt "TC_OPT_WRAP"
+msgid ""
+"wrap text at the specified <column>. 0 is assumed if <column> is "
+"missing. When this option is omitted, the default of the "
+"configuration option 'wrap' applies."
+msgstr ""
+"текст се обавија на наведеној <колона>. Узима се 0 ако <колона> "
+"недостаје. Када се ова опција изостави, примењује се подразумевана "
+"вредност опције конфигурације ’wrap’."
+
+msgctxt "TC_OPT_XML"
+msgid "specify the input is well formed XML"
+msgstr "наводи да је улаз добро формирани XML"
+
+msgctxt "TC_OPT_XMLCFG"
+msgid "list all configuration options in XML format"
+msgstr "исписују се све опције конфигурације у XML формату"
+
+msgctxt "TC_OPT_XMLHELP"
+msgid "list the command line options in XML format"
+msgstr "исписују се све опције командне линије у XML формату"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_OPT_XMLSTRG"
+msgid "output all of Tidy's strings in XML format"
+msgstr "исписују се сви стрингови програма Tidy у XML формату"
+
+msgctxt "TC_OPT_XMLERRS"
+msgid "output error constants and strings in XML format"
+msgstr "исписују се све константе грешке и стрингови у XML формату"
+
+msgctxt "TC_OPT_XMLOPTS"
+msgid "output option descriptions in XML format"
+msgstr "исписују се описи опција у XML формату"
+
+msgctxt "TC_STRING_CONF_HEADER"
+msgid "Configuration File Settings:"
+msgstr "Подешавања фајла конфигурације:"
+
+#. Must be 27 characters or fewer.
+msgctxt "TC_STRING_CONF_NAME"
+msgid "Name"
+msgstr "Назив"
+
+#. Must be 9 characters or fewer.
+msgctxt "TC_STRING_CONF_TYPE"
+msgid "Type"
+msgstr "Тип"
+
+#. Must be 40 characters or fewer.
+msgctxt "TC_STRING_CONF_VALUE"
+msgid "Current Value"
+msgstr "Текућа вредност"
+
+#, c-format
+msgctxt "TC_STRING_OPT_NOT_DOCUMENTED"
+msgid "Warning: option `%s' is not documented."
+msgstr "Упозорење: опција ’%s’ није документована."
+
+msgctxt "TC_STRING_OUT_OF_MEMORY"
+msgid "Out of memory. Bailing out."
+msgstr "Нема меморије. Спашавам се."
+
+#, c-format
+msgctxt "TC_STRING_FATAL_ERROR"
+msgid "Fatal error: impossible value for id='%d'."
+msgstr "Фатална грешка: немогућа вредност за id='%d'."
+
+msgctxt "TC_STRING_FILE_MANIP"
+msgid "File manipulation"
+msgstr "Манипулација фајловима"
+
+msgctxt "TC_STRING_PROCESS_DIRECTIVES"
+msgid "Processing directives"
+msgstr "Обрада директива"
+
+msgctxt "TC_STRING_CHAR_ENCODING"
+msgid "Character encodings"
+msgstr "Кодирања карактера"
+
+msgctxt "TC_STRING_LANG_MUST_SPECIFY"
+msgid "A POSIX or Windows locale must be specified."
+msgstr "Мора да се наведе POSIX или Windows локалитет."
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#, c-format
+msgctxt "TC_STRING_LANG_NOT_FOUND"
+msgid "Tidy doesn't have language '%s,' will use '%s' instead."
+msgstr "Tidy нема језик ’%s’, уместо њега ће користити ’%s’."
+
+msgctxt "TC_STRING_MISC"
+msgid "Miscellaneous"
+msgstr "Разно"
+
+msgctxt "TC_STRING_XML"
+msgid "XML"
+msgstr "XML"
+
+msgctxt "TC_STRING_MUST_SPECIFY"
+msgid "A Tidy option name must be specified."
+msgstr "Мора да се наведе име Tidy опције."
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_STRING_UNKNOWN_OPTION"
+msgid "HTML Tidy: unknown option: %c"
+msgstr "HTML Tidy: непозната опција: %c"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_STRING_UNKNOWN_OPTION_B"
+msgid "HTML Tidy: unknown option."
+msgstr "HTML Tidy: непозната опција."
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#, c-format
+msgctxt "TC_STRING_VERS_A"
+msgid "HTML Tidy for %s version %s"
+msgstr "HTML Tidy за %s верзија %s"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#, c-format
+msgctxt "TC_STRING_VERS_B"
+msgid "HTML Tidy version %s"
+msgstr "HTML Tidy верзија %s"
+
+#. This console output should be limited to 78 characters per line.
+#. - First %s represents the name of the executable from the file system, and is mostly like going to be "tidy".
+#. - Second %s represents a version number, typically x.x.xx.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#, c-format
+msgctxt "TC_TXT_HELP_1"
+msgid ""
+"%s [options...] [file...] [options...] [file...]\n"
+"Utility to clean up and pretty print HTML/XHTML/XML.\n"
+"\n"
+"This is modern HTML Tidy version %s.\n"
+"\n"
+msgstr ""
+"%s [опције...] [фајл...] [опције...] [фајл...]\n"
+"Алат који чисти и лепо исписује HTML/XHTML/XML.\n"
+"\n"
+"Ово је модерни HTML Tidy верзија %s.\n"
+"\n"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#. - %s represents the platform, for example, "Mac OS X" or "Windows".
+#, c-format
+msgctxt "TC_TXT_HELP_2A"
+msgid "Command Line Arguments for HTML Tidy for %s:"
+msgstr "Аргументи команде линије за HTML Tidy за %s:"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_TXT_HELP_2B"
+msgid "Command Line Arguments for HTML Tidy:"
+msgstr "Аргументи команде линије за HTML Tidy:"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#. - %s represents either a blank line, or TC_TXT_HELP_3A explaining environment options.
+#, c-format
+msgctxt "TC_TXT_HELP_3"
+msgid ""
+"\n"
+"Tidy Configuration Options\n"
+"==========================\n"
+" Use Tidy's configuration options as command line arguments in the form\n"
+" of \"--some-option <value>\", for example, \"--indent-with-tabs yes\".\n"
+"\n"
+" You can also specify a file containing configuration options with the \n"
+" -config <file> directive, or in one or more files specific to your \n"
+" environment (see next section). \n"
+"\n"
+" For a list of all configuration options, use \"-help-config\" or refer\n"
+" to the man page (if your OS has one).\n"
+"\n"
+"Configuration Files\n"
+"===================\n"
+" If your environment has an $HTML_TIDY variable set to point to a Tidy \n"
+" configuration file, then Tidy will attempt to use it. \n"
+"%s"
+" Use \"-help-env\" for more information about how you can use the environment. \n"
+" to specify Tidy options. \n"
+"\n"
+"Other\n"
+"=====\n"
+" Input/Output default to stdin/stdout respectively.\n"
+"\n"
+" Single letter options apart from -f may be combined\n"
+" as in:  tidy -f errs.txt -imu foo.html\n"
+"\n"
+"Information\n"
+"===========\n"
+" For more information about HTML Tidy, see\n"
+"  https://www.html-tidy.org/\n"
+"\n"
+" For more information on HTML, see the following:\n"
+"\n"
+"   HTML Living Standard (the latest HTML specification)\n"
+"   https://html.spec.whatwg.org/multipage/\n"
+"\n"
+" File bug reports at https://github.com/htacg/tidy-html5/issues/\n"
+" or send questions and comments to public-htacg@w3.org.\n"
+"\n"
+" Validate your HTML documents using the W3C Nu Markup Validator:\n"
+"   https://validator.w3.org/nu/\n"
+"\n"
+msgstr ""
+"\n"
+"Tidy опције конфигурације\n"
+"=========================\n"
+" Користите опције Tidy конфигурације као аргументе командне линије у облику\n"
+" „--нека-опција <вредност>”, на пример, „--indent-with-tabs yes”.\n"
+"\n"
+" Такође можете да наведете фајл који садржи опције конфигурације директивом\n"
+" -config <фајл>, или у једном или више фајлова у зависности од вашег\n"
+" окружења (погледајте наредни одељак). \n"
+"\n"
+" Да видите листу свих опција конфигурације, употребите „-help-config” или\n"
+" погледајте man страницу (ако је ваш ОС има).\n"
+"\n"
+"Фајлови конфигурације\n"
+"=====================\n"
+" Ако ваше окружење има променљиву $HTML_TIDY постављену тако да указује на\n"
+" Tidy фајл конфигурације, онда ће Tidy покушати да га употреби.\n"
+"%s"
+" Употребите „-help-env” за више информација у вези са начином на који можете\n"
+" да наведете Tidy опције. \n"
+"\n"
+"Остало\n"
+"=====\n"
+" Улаз/Излаз су подразумевано stdin/stdout редом.\n"
+"\n"
+" Опције једног слова осим -f могу да се комбинују\n"
+" као у:  tidy -f errs.txt -imu foo.html\n"
+"\n"
+"Информације\n"
+"===========\n"
+" За више информација о програму HTML Tidy, погледајте\n"
+"  https://www.html-tidy.org/\n"
+"\n"
+" За више информација о HTML, погледајте следеће:\n"
+"\n"
+"   HTML Living Standard (најновија HTML спецификација)\n"
+"   https://html.spec.whatwg.org/multipage/\n"
+"\n"
+" Поднесите извештаје о багу на https://github.com/htacg/tidy-html5/issues/\n"
+" или пошаљите питања и коментаре на public-htacg@w3.org.\n"
+"\n"
+" Потврдите своје HTML документе W3C Nu валидатором означавања:\n"
+"   https://validator.w3.org/nu/\n"
+"\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#. - Both parameters %s reflect file paths and names.
+#, c-format
+msgctxt "TC_TXT_HELP_3A"
+msgid ""
+"\n"
+" Additionally, Tidy will automatically attempt to use configuration specified \n"
+" in these files, if present: \n"
+"\n"
+"  %s \n"
+"  %s \n"
+"\n"
+msgstr ""
+"\n"
+" Уз то, Tidy ће аутоматски покушати да користи конфигурацију наведену у\n"
+" следећим фајловима, ако постоје: \n"
+"\n"
+"  %s \n"
+"  %s \n"
+"\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_TXT_HELP_CONFIG"
+msgid ""
+"\n"
+"HTML Tidy Configuration Settings\n"
+"\n"
+"Within a file, use the form:\n"
+"\n"
+"wrap: 72\n"
+"indent: no\n"
+"\n"
+"When specified on the command line, use the form:\n"
+"\n"
+"--wrap 72 --indent no\n"
+"\n"
+msgstr ""
+"\n"
+"HTML Tidy поставке конфигурације\n"
+"\n"
+"Унутар фајла, користите формат:\n"
+"\n"
+"wrap: 72\n"
+"indent: no\n"
+"\n"
+"Када се наводи на командној линији користите облик:\n"
+"\n"
+"--wrap 72 --indent no\n"
+"\n"
+
+msgctxt "TC_TXT_HELP_CONFIG_NAME"
+msgid "Name"
+msgstr "Име"
+
+msgctxt "TC_TXT_HELP_CONFIG_TYPE"
+msgid "Type"
+msgstr "Тип"
+
+msgctxt "TC_TXT_HELP_CONFIG_ALLW"
+msgid "Allowable values"
+msgstr "Дозвољене вредности"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#. - The first %s indicates two more list items, or an empty string.
+#. - The second %s indicates a file name, or a message indicating no file name.
+#, c-format
+msgctxt "TC_TXT_HELP_ENV_1"
+msgid ""
+"\n"
+"Tidy can configure its option values from multiple sources, in the \n"
+"order below. Subsequent use of the same option overrides previous \n"
+"option settings. \n"
+"\n"
+" - Tidy's built-in default values. \n"
+"%s"
+" - The file specified in the $HTML_TIDY environment variable: \n"
+"     %s \n"
+" - Options in a file specified on the command line. \n"
+" - Options set directly on the command line. \n"
+msgstr ""
+"\n"
+"Tidy вредности својих опција може да подеси из више извора, у редоследу\n"
+"приказаном испод. Накнадна употреба исте опције преиначује претходна\n"
+"подешавања те опције.\n"
+"\n"
+" - Уграђене подразумеване вредност програма Tidy.\n"
+"%s"
+" - Фајл наведен у вредности $HTML_TIDY променљиве окружења:\n"
+"     %s \n"
+" - Опције у фајлу наведеном у командној линији.\n"
+" - Опције постављене директно у командној линији. \n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#, c-format
+msgctxt "TC_TXT_HELP_ENV_1A"
+msgid ""
+" - The system runtime configuration file:\n"
+"     %s \n"
+" - The user runtime configuration file:\n"
+"     %s \n"
+msgstr ""
+" - Системски фајл конфигурације током извршавања:\n"
+"     %s \n"
+" - Кориснички фајл конфигурације током извршавања:\n"
+"     %s \n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#. - This message indicates that a file name is not currently set.
+msgctxt "TC_TXT_HELP_ENV_1B"
+msgid "(not currently set)"
+msgstr "(тренутно није постављено)"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#, c-format
+msgctxt "TC_TXT_HELP_ENV_1C"
+msgid ""
+"\n"
+"Note that because $HTML_TIDY is set, the user runtime configuration file \n"
+"%s will not be used. \n"
+msgstr ""
+"\n"
+"Имајте на уму да пошто је променљива $HTML_TIDY постављена, кориснички фајл\n"
+"конфигурације током извршавања %s се неће користити.\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_TXT_HELP_LANG_1"
+msgid ""
+"\n"
+"The -language (or -lang) option indicates which language Tidy \n"
+"should use to communicate its output. Please note that this is not \n"
+"a document translation service, and only affects the messages that \n"
+"Tidy communicates to you. \n"
+"\n"
+"When used from the command line the -language argument must \n"
+"be used before any arguments that result in output, otherwise Tidy \n"
+"will produce output before it knows which language to use. \n"
+"\n"
+"In addition to standard POSIX language codes, Tidy is capable of \n"
+"understanding legacy Windows language codes. Please note that this \n"
+"list indicates codes Tidy understands, and does not indicate that \n"
+"the language is currently installed. \n"
+"\n"
+"The rightmost column indicates how Tidy will understand the \n"
+"legacy Windows name.\n"
+"\n"
+msgstr ""
+"\n"
+"Опција -language (или -lang) наводи језик који би Tidy \n"
+"требало да користи за испис свог излаза. Молимо вас да имате на уму да \n"
+"ово није сервис за превођење документа, и да само утиче на поруке које \n"
+"вам Tidy исписује. \n"
+"\n"
+"Када се користи из командне линије, аргумент -language мора да се употреби \n"
+"пре било којих аргумената који исписују излаз, у супротном ће Tidy да \n"
+"произведе излаз пре него што буде знао који језик да употреби. \n"
+"\n"
+"Уз стандардне POSIX кодове језика, Tidy има могућност да разуме застареле \n"
+"Windows кодове језика. Молимо вас да имате на уму да ова листа наводи \n"
+"кодове које Tidy разуме, и не означава да је језик тренутно инсталиран. \n"
+"\n"
+"Крајња десна колона наводи како ће Tidy разумети застарело Windows име. \n"
+"\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+msgctxt "TC_TXT_HELP_LANG_2"
+msgid ""
+"\n"
+"The following languages are currently installed in Tidy. Please \n"
+"note that there's no guarantee that they are complete; only that \n"
+"one developer or another started to add the language indicated. \n"
+"\n"
+"Incomplete localizations will default to \"en\" when necessary. \n"
+"Please report instances of incorrect strings to the Tidy team. \n"
+"\n"
+msgstr ""
+"\n"
+"Тренутно су у програм Tidy инсталирани следећи језици. Молимо вас \n"
+"да имате на ума да нема гаранције да су они комплетни; само да је \n"
+"један програмер или други почео да додаје наведени језик. \n"
+"\n"
+"Када је то потребно, локализације које нису комплетне ће преузети „en”. \n"
+"Молимо вас да Tidy тиму пријавите случајеве неисправних стрингова. \n"
+"\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be translated.
+#. - The parameter %s is likely to be two to five characters, e.g., en or en_US.
+#, c-format
+msgctxt "TC_TXT_HELP_LANG_3"
+msgid ""
+"\n"
+"If Tidy is able to determine your locale then Tidy will use the \n"
+"locale's language automatically. For example Unix-like systems use a \n"
+"$LANG and/or $LC_ALL environment variable. Consult your operating \n"
+"system documentation for more information. \n"
+"\n"
+"Tidy is currently using locale %s. \n"
+"\n"
+msgstr ""
+"\n"
+"Ако је Tidy у могућности да одреди ваш локалитет, онда ће Tidy аутоматски \n"
+"да употреби језик тог локалитета. На пример, системи слични са Unix користе \n"
+"променљиву окружења $LANG и/или $LC_ALL. Погледајте документацију вашег\n"
+"система ако желите да сазнате више. \n"
+"\n"
+"Tidy тренутно користи локалитет %s. \n"
+"\n"
+

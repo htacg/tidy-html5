@@ -1129,6 +1129,7 @@ typedef enum
   TidyAttr_PROMPT,                 /**< PROMPT= */
   TidyAttr_RBSPAN,                 /**< RBSPAN= */
   TidyAttr_READONLY,               /**< READONLY= */
+  TidyAttr_REFERRERPOLICY,         /**< REFERRERPOLICY= */
   TidyAttr_REL,                    /**< REL= */
   TidyAttr_REV,                    /**< REV= */
   TidyAttr_RIGHTMARGIN,            /**< RIGHTMARGIN= */

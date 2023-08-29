@@ -54,6 +54,7 @@ static AttrCheck CheckRDFaTerm;
 static AttrCheck CheckRDFaPrefix;
 static AttrCheck CheckDecimal;
 static AttrCheck CheckSvgAttr;
+static AttrCheck CheckRefPol;
 
 #define CH_PCDATA      NULL
 #define CH_CHARSET     NULL
@@ -101,6 +102,7 @@ static AttrCheck CheckSvgAttr;
 #define CH_RDFATERMS   CheckRDFaTerm
 #define CH_DECIMAL     CheckDecimal
 #define CH_SVG         CheckSvgAttr
+#define CH_REFPOL      CheckRefPol
 
 /*
    WARNING: This table /must/ be kept in the EXACT order of the TidyAttrId enum!
@@ -233,6 +235,7 @@ static const Attribute attribute_defs [] =
   { TidyAttr_PROMPT,                  "prompt",                  CH_PCDATA    }, /* ISINDEX */
   { TidyAttr_RBSPAN,                  "rbspan",                  CH_NUMBER    }, /* ruby markup */
   { TidyAttr_READONLY,                "readonly",                CH_BOOL      }, /* form fields */
+  { TidyAttr_REFERRERPOLICY,          "referrerpolicy",          CH_REFPOL      }, /* form fields */
   { TidyAttr_REL,                     "rel",                     CH_LINKTYPES }, 
   { TidyAttr_REV,                     "rev",                     CH_LINKTYPES }, 
   { TidyAttr_RIGHTMARGIN,             "rightmargin",             CH_NUMBER    }, /* used on BODY */
@@ -2765,6 +2768,12 @@ void CheckRDFaSafeCURIE ( TidyDocImpl* doc, Node *node, AttVal *attval)
         return;
     }
 
+}
+
+void CheckRefPol ( TidyDocImpl* doc, Node *node, AttVal *attval)
+{
+    ctmbstr const values[] = {"no-referrer", "no-referrer-when-downgrade", "same-origin", "origin", "strict-origin", "origin-when-cross-origin", "strict-origin-when-cross-origin", "unsafe-url", NULL};
+    CheckAttrValidity( doc, node, attval, values );
 }
 
 /*

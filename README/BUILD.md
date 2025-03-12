@@ -88,4 +88,4 @@ make install
 
   [1]: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
   [2]: https://cmake.org/download/
-  [3]: http://xmlsoft.org/XSLT/xsltproc2.html
+  [3]: https://gitlab.gnome.org/GNOME/libxslt/-/wikis

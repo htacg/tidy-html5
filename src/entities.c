@@ -2077,6 +2077,8 @@ static const entity entities[] =
     { NULL, VERS_UNKNOWN, 0 },
 };
 
+static entity* entity_lookup_by_initial[128];
+
 /* 
 ** Pure static implementation.  Trades off lookup speed
 ** for faster setup time (well, none actually).
@@ -2094,12 +2096,16 @@ static const entity* entitiesLookup( ctmbstr s )
     const entity *np = entities;
     if (ch == 0)
         return NULL;
-    while (np->name)
-    {
+
+    if (entity_lookup_by_initial[ch] == 0) {
+      while (np->name) {
         if (ch == *np->name)
-            break;  /* stop when first letter matches */
+          break; /* stop when first letter matches */
         np++;
+      }
+      entity_lookup_by_initial[ch] = np;
     }
+    np = entity_lookup_by_initial[ch];
     while (np->name)
     {
         if (ch != *np->name)

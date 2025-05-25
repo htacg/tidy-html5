@@ -18,9 +18,22 @@
 TY_PRIVATE int TY_(DecodeUTF8BytesToChar)( uint* c, uint firstByte, ctmbstr successorBytes,
                                 TidyInputSource* inp, int* count );
 
-TY_PRIVATE int TY_(EncodeCharToUTF8Bytes)( uint c, tmbstr encodebuf,
+TY_PRIVATE int TY_(EncodeCharToUTF8BytesSlow)( uint c, tmbstr encodebuf,
                                 TidyOutputSink* outp, int* count );
 
+static inline int TY_(EncodeCharToUTF8Bytes)(uint c, tmbstr encodebuf,
+                                             TidyOutputSink *outp, int *count) {
+  if (c <= 0x7F) {
+    if (encodebuf)
+      encodebuf[0] = c;
+    if (outp)
+      outp->putByte(outp->sinkData, c);
+    *count = 1;
+    return 0;
+  }
+
+  TY_(EncodeCharToUTF8BytesSlow)(c, encodebuf, outp, count);
+}
 
 TY_PRIVATE uint  TY_(GetUTF8)( ctmbstr str, uint *ch );
 TY_PRIVATE tmbstr TY_(PutUTF8)( tmbstr buf, uint c );

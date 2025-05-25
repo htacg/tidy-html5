@@ -328,7 +328,7 @@ int TY_(DecodeUTF8BytesToChar)( uint* c, uint firstByte, ctmbstr successorBytes,
     return 0;
 }
 
-int TY_(EncodeCharToUTF8Bytes)( uint c, tmbstr encodebuf,
+int TY_(EncodeCharToUTF8BytesSlow)( uint c, tmbstr encodebuf,
                                 TidyOutputSink* outp, int* count )
 {
     byte tempbuf[10] = {0};

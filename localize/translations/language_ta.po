@@ -1,0 +1,4404 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-07-30 10:35:03\n"
+"PO-Revision-Date: 2025-06-10 01:34\n"
+"Last-Translator: jderry\n"
+"Language-Team: \n"
+"Language: en\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: HTML Tidy poconvert.rb\n"
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyAccessibilityCheckLevel"
+msgid ""
+"This option specifies what level of accessibility checking, if any, that "
+"Tidy should perform. <br/>Level <var>0 (Tidy Classic)</var> performs no "
+"additional accessibility checking. <br/>Level <var>1 (Priority 1 "
+"Checks)</var> performs the Priority Level 1 checks.<br/>Level <var>2 "
+"(Priority 2 Checks)</var> performs the Priority Level 1 and 2 "
+"checks.<br/>Level <var>3 (Priority 3 Checks)</var> performs the Priority "
+"Level 1, 2, and 3 checks.<br/>For more information on Tidy's accessibility "
+"checking, including the specific checks that are made for each Priority "
+"Level, please visit <a href=\"https://www.html-tidy.org/accessibility/\"> "
+"Tidy's Accessibility Page</a>. "
+msgstr ""
+"இந்த விருப்பம் எந்த அளவிலான அணுகல் சரிபார்ப்பு, ஏதேனும் இருந்தால், அந்த "
+"நேர்த்தியானது செய்ய வேண்டும் என்பதைக் குறிப்பிடுகிறது. <br/> நிலை <var>0 "
+"(நேர்த்தியான கிளாசிக்) </var> கூடுதல் அணுகல் சோதனை எதுவும் செய்யாது. <br/> "
+"நிலை <var>1 (முன்னுரிமை 1 காசோலைகள்) </var> முன்னுரிமை நிலை 1 காசோலைகளைச் "
+"செய்கிறது. ஒவ்வொரு முன்னுரிமை நிலைக்கும் செய்யப்படும் காசோலைகள், தயவுசெய்து "
+"<a href = \"https://www.html-tidy.org/accessibility/\"> டைடியின் அணுகல் "
+"பக்கம் </a> ஐப் பார்வையிடவும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyAltText"
+msgid ""
+"This option specifies the default <code>alt=</code> text Tidy uses for "
+"<code>&lt;img&gt;</code> attributes when the <code>alt=</code> attribute is "
+"missing. <br/>Use with care, as it is your responsibility to make your "
+"documents accessible to people who cannot see the images. "
+msgstr ""
+"இந்த விருப்பம் இயல்புநிலை <code> மாற்று = </code> உரை நேர்த்தியாக <குறியீடு>"
+" &lt;img&gt;</code> பண்புக்கூறுகள் <code> மாற்று = </code> பண்புக்கூறு "
+"இல்லாதபோது குறிப்பிடுகிறது. <br/> கவனத்துடன் பயன்படுத்தவும், ஏனெனில் உங்கள் "
+"ஆவணங்களை படங்களைப் பார்க்க முடியாத நபர்களுக்கு அணுகுவது உங்கள் பொறுப்பாகும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyAnchorAsName"
+msgid ""
+"This option controls the deletion or addition of the <code>name</code> "
+"attribute in elements where it can serve as anchor. <br/>If set to "
+"<var>yes</var> a <code>name</code> attribute, if not already existing, is "
+"added along an existing <code>id</code> attribute if the DTD allows it. "
+"<br/>If set to <var>no</var> any existing name attribute is removed if an "
+"<code>id</code> attribute exists or has been added. "
+msgstr ""
+"இந்த விருப்பம் <குறியீடு> பெயர் </code> என்ற பண்புகளை நீக்குதல் அல்லது "
+"சேர்ப்பதை கட்டுப்படுத்துகிறது, இது நங்கூரமாக செயல்படக்கூடிய உறுப்புகளில். "
+"<br/> <var>ஆம் </var> ஒரு <code> பெயர் </code> பண்புக்கூறு, ஏற்கனவே "
+"இல்லாதிருந்தால், டிடிடி அனுமதித்தால் ஏற்கனவே உள்ள <code> அடையாளம் </code> "
+"பண்புக்கூறுடன் சேர்க்கப்படும். <br/> <var>இல்லை </var> என அமைக்கப்பட்டால், "
+"ஒரு <code> அடையாளம் </code> பண்புக்கூறு இருந்தால் அல்லது சேர்க்கப்பட்டால் "
+"ஏற்கனவே இருக்கும் பெயர் பண்புக்கூறு அகற்றப்படும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyAsciiChars"
+msgid ""
+"Can be used to modify behavior of the <code>clean</code> option when set to "
+"<var>yes</var>. <br/>If set to <var>yes</var> when using <code>clean</code>,"
+" <code>&amp;emdash;</code>, <code>&amp;rdquo;</code>, and other named "
+"character entities are downgraded to their closest ASCII equivalents. "
+msgstr ""
+"<var> ஆம் </var> என அமைக்கப்பட்டால் <code> தூய்மையான </code> விருப்பத்தின் "
+"நடத்தையை மாற்ற பயன்படுத்தலாம். <br/> <var> ஆம் </var> என அமைக்கப்பட்டால் "
+"<குறியீடு> தூய்மையான </code>, <code> & amp; emdash; </code>, <code> & amp;"
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyBlockTags"
+msgid ""
+"This option specifies new block-level tags. This option takes a space or "
+"comma separated list of tag names. <br/>Unless you declare new tags, Tidy "
+"will refuse to generate a tidied file if the input includes previously "
+"unknown tags. <br/>Note you can't change the content model for elements such"
+" as <code>&lt;table&gt;</code>, <code>&lt;ul&gt;</code>, "
+"<code>&lt;ol&gt;</code> and <code>&lt;dl&gt;</code>. <br/>This option is "
+"ignored in XML mode. "
+msgstr ""
+"இந்த விருப்பம் புதிய தொகுதி-நிலை குறிச்சொற்களைக் குறிப்பிடுகிறது. இந்த "
+"விருப்பம் குறிச்சொல் பெயர்களின் இடம் அல்லது கமா பிரிக்கப்பட்ட பட்டியலை "
+"எடுக்கும். <br/> புதிய குறிச்சொற்களை நீங்கள் அறிவிக்காவிட்டால், உள்ளீட்டில் "
+"முன்னர் அறியப்படாத குறிச்சொற்களை உள்ளடக்கியிருந்தால் டைடி ஒரு நேர்த்தியான "
+"கோப்பை உருவாக்க மறுக்கும். <br/> குறிப்பு <code> &lt; அட்டவணை &gt; "
+"</code>, <code> &lt; ul &gt; <br/> இந்த விருப்பம் எக்ச்எம்எல் பயன்முறையில்"
+" புறக்கணிக்கப்படுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyBodyOnly"
+msgid ""
+"This option specifies if Tidy should print only the contents of the body tag"
+" as an HTML fragment. <br/>If set to <var>auto</var>, this is performed only"
+" if the body tag has been inferred. <br/>Useful for incorporating existing "
+"whole pages as a portion of another page. <br/>This option has no effect if "
+"XML output is requested. "
+msgstr ""
+"உடல் குறிச்சொல்லின் உள்ளடக்கங்களை மட்டுமே உஉகுமொ துண்டுகளாக அச்சிட வேண்டுமா "
+"என்று இந்த விருப்பம் குறிப்பிடுகிறது. <br/> <var>தானி </var> என "
+"அமைக்கப்பட்டால், உடல் குறிச்சொல் ஊகிக்கப்பட்டிருந்தால் மட்டுமே இது "
+"செய்யப்படுகிறது. <br/> ஏற்கனவே இருக்கும் முழு பக்கங்களையும் மற்றொரு "
+"பக்கத்தின் ஒரு பகுதியாக இணைக்க பயனுள்ளதாக இருக்கும். <br/> எக்ச்எம்எல் "
+"வெளியீடு கோரப்பட்டால் இந்த விருப்பம் எந்த விளைவையும் ஏற்படுத்தாது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyBreakBeforeBR"
+msgid ""
+"This option specifies if Tidy should output a line break before each "
+"<code>&lt;br&gt;</code> element. "
+msgstr ""
+"ஒவ்வொரு <code> &lt; br &gt; </code> உறுப்புக்கும் முன் நேர்த்தியாக ஒரு வரி"
+" இடைவெளியை வெளியிட வேண்டுமா என்று இந்த விருப்பம் குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyCharEncoding"
+msgid ""
+"This option specifies the character encoding Tidy uses for input, and when "
+"set, automatically chooses an appropriate character encoding to be used for "
+"output. The output encoding Tidy chooses may be different from the input "
+"encoding. <br/>For <var>ascii</var>, <var>latin0</var>, <var>ibm858</var>, "
+"<var>mac</var>, and <var>win1252</var> input encodings, the <code>output-"
+"encoding</code> option will automatically be set to <var>ascii</var>. You "
+"can set <code>output-encoding</code> manually to override this. <br/>For "
+"other input encodings, the <code>output-encoding</code> option will "
+"automatically be set to the the same value. <br/>Regardless of the preset "
+"value, you can set <code>output-encoding</code> manually to override this. "
+"<br/>Tidy is not an encoding converter. Although the Latin and UTF encodings"
+" can be mixed freely, it is not possible to convert Asian encodings to Latin"
+" encodings with Tidy. "
+msgstr ""
+"இந்த விருப்பம் உள்ளீட்டிற்கான எழுத்துக்குறி குறியாக்கம் நேர்த்தியான "
+"பயன்பாடுகளைக் குறிப்பிடுகிறது, மேலும் அமைக்கும்போது, ​​வெளியீட்டிற்கு "
+"பயன்படுத்த பொருத்தமான எழுத்து குறியாக்கத்தை தானாகவே தேர்வு செய்கிறது. "
+"வெளியீட்டு குறியாக்கம் நேர்த்தியான தேர்வு உள்ளீட்டு குறியாக்கத்திலிருந்து "
+"வேறுபட்டிருக்கலாம். <br/> <var>ASCII </ar>, <var>லத்தீன் 0 </ar>, <var>"
+"ஐபிஎம் 858 </ar>, <var>மேக் </var>, மற்றும் <var>வின் 1252 </var>உள்ளீட்டு "
+"குறியாக்கங்கள், <குறியீடு> வெளியீடு-குறியீட்டு </code> விருப்பம் தானாகவே "
+"</varilis இல் அமைக்கப்படும். இதை மீறுவதற்கு <குறியீடு> வெளியீடு-குறியாக்கம் "
+"</code> ஐ கைமுறையாக அமைக்கலாம். <br/> பிற உள்ளீட்டு குறியாக்கங்களுக்கு, "
+"<code> வெளியீடு-குறியீட்டு </code> விருப்பம் தானாகவே அதே மதிப்புக்கு "
+"அமைக்கப்படும். <br/> முன்னமைக்கப்பட்ட மதிப்பைப் பொருட்படுத்தாமல், இதை "
+"மீறுவதற்கு <குறியீடு> வெளியீடு-குறியீட்டு </code> ஐ கைமுறையாக அமைக்கலாம். "
+"<br/> நேர்த்தியானது ஒரு குறியாக்க மாற்றி அல்ல. லத்தீன் மற்றும் யுடிஎஃப் "
+"குறியாக்கங்களை சுதந்திரமாக கலக்க முடியும் என்றாலும், ஆசிய குறியாக்கங்களை "
+"லத்தீன் குறியாக்கங்களாக நேர்த்தியாக மாற்ற முடியாது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyCoerceEndTags"
+msgid ""
+"This option specifies if Tidy should coerce a start tag into an end tag in "
+"cases where it looks like an end tag was probably intended; for example, "
+"given <br/><code>&lt;span&gt;foo &lt;b&gt;bar&lt;b&gt; "
+"baz&lt;/span&gt;</code> <br/>Tidy will output <br/><code>&lt;span&gt;foo "
+"&lt;b&gt;bar&lt;/b&gt; baz&lt;/span&gt;</code> "
+msgstr ""
+"இந்த விருப்பம் ஒரு தொடக்க குறிச்சொல்லாக ஒரு தொடக்க குறிச்சொல்லாக "
+"கட்டாயப்படுத்த வேண்டுமா என்பதைக் குறிப்பிடுகிறது. எடுத்துக்காட்டாக, "
+"கொடுக்கப்பட்ட <br/> <code> &lt; span &gt; foo &lt; b &gt; மதுக்கூடம் & "
+"lt; b &gt; பாச் &lt;/span &gt; </code> <br/> நேர்த்தியாக வெளியிடும் <br/>"
+" <code> &lt; span &gt; foo &lt; b &gt; மதுக்கூடம் &lt;/b &gt; பாச் & "
+"lt;/span &gt; </code>"
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyCSSPrefix"
+msgid ""
+"This option specifies the prefix that Tidy uses for styles rules. <br/>By "
+"default, <var>c</var> will be used. "
+msgstr ""
+"இந்த விருப்பம் ச்டைல்ச் விதிகளுக்கு நேர்த்தியாகப் பயன்படுத்தும் முன்னொட்டைக்"
+" குறிப்பிடுகிறது. <br/> இயல்பாக, <var>சி </var> பயன்படுத்தப்படும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDecorateInferredUL"
+msgid ""
+"This option specifies if Tidy should decorate inferred "
+"<code>&lt;ul&gt;</code> elements with some CSS markup to avoid indentation "
+"to the right. "
+msgstr ""
+"வலதுபுறத்தில் உள்தள்ளலைத் தவிர்ப்பதற்காக சில சிஎச்எச் மார்க்அப்பைக் கொண்ட "
+"கூறுகள் ஊகிக்கப்பட்ட <குறியீடு> &lt; </gt;"
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDoctype"
+msgid ""
+"This option specifies the DOCTYPE declaration generated by Tidy. <br/>If set"
+" to <var>omit</var> the output won't contain a DOCTYPE declaration. Note "
+"this this also implies <code>numeric-entities</code> is set to "
+"<var>yes</var>.<br/>If set to <var>html5</var> the DOCTYPE is set to "
+"<code>&lt;!DOCTYPE html&gt;</code>.<br/>If set to <var>auto</var> (the "
+"default) Tidy will use an educated guess based upon the contents of the "
+"document. Note that selecting this option will <em>not</em> change the "
+"current document's DOCTYPE on output. <br/>If set to <var>strict</var>, Tidy"
+" will set the DOCTYPE to the HTML4 or XHTML1 strict DTD.<br/>If set to "
+"<var>loose</var>, the DOCTYPE is set to the HTML4 or XHTML1 loose "
+"(transitional) DTD.<br/>Alternatively, you can supply a string for the "
+"formal public identifier (FPI).<br/>For example: <br/><code>doctype: "
+"\"-//ACME//DTD HTML 3.14159//EN\"</code><br/>If you specify the FPI for an "
+"XHTML document, Tidy will set the system identifier to an empty string. For "
+"an HTML document, Tidy adds a system identifier only if one was already "
+"present in order to preserve the processing mode of some browsers. Tidy "
+"leaves the DOCTYPE for generic XML documents unchanged. <br/>This option "
+"does not offer a validation of document conformance. "
+msgstr ""
+"இந்த விருப்பம் நேர்த்தியாக உருவாக்கிய டாக்டைப் அறிவிப்பைக் குறிப்பிடுகிறது. "
+"<br/> <var> omit </var> என அமைக்கப்பட்டால், வெளியீட்டில் ஒரு டாக்டைப் "
+"அறிவிப்பு இருக்காது. நினைவில் கொள்ளுங்கள் இது <குறியீடு> எண்-நிறுவனங்கள் "
+"</code> <var>ஆம் </var> ஆக அமைக்கப்பட்டுள்ளது. ஆவணம். இந்த விருப்பத்தைத் "
+"தேர்ந்தெடுப்பது <em> இல்லை </em> தற்போதைய ஆவணத்தின் ஆவணத்தை வெளியீட்டில் "
+"மாற்றும் என்பதை நினைவில் கொள்க. <br/> <var>கண்டிப்பான </var> என "
+"அமைக்கப்பட்டால், டைடி டாக்டிப்பை HTML4 அல்லது XHTML1 கண்டிப்பான டி.டி.டி. "
+"(FPI). ஒரு உஉகுமொ ஆவணத்திற்கு, சில உலாவிகளின் செயலாக்க பயன்முறையைப் "
+"பாதுகாப்பதற்காக ஒருவர் ஏற்கனவே இருந்தால் மட்டுமே கணினி அடையாளங்காட்டியைச் "
+"சேர்க்கிறது. பொதுவான எக்ச்எம்எல் ஆவணங்களுக்கான டைடி டாக் டைப்பை மாற்றாமல் "
+"விட்டுவிடுகிறது. <br/> இந்த விருப்பம் ஆவண இணக்கத்தின் சரிபார்ப்பை வழங்காது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDropEmptyElems"
+msgid "This option specifies if Tidy should discard empty elements. "
+msgstr ""
+"நேர்த்தியாக வெற்று கூறுகளை நிராகரிக்க வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDropEmptyParas"
+msgid "This option specifies if Tidy should discard empty paragraphs. "
+msgstr ""
+"நேர்த்தியாக வெற்று பத்திகளை நிராகரிக்க வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDropPropAttrs"
+msgid ""
+"This option specifies if Tidy should strip out proprietary attributes, such "
+"as Microsoft data binding attributes. Additionally attributes that aren't "
+"permitted in the output version of HTML will be dropped if used with "
+"<code>strict-tags-attributes</code>. "
+msgstr ""
+"நுண்மென் தரவு பிணைப்பு பண்புக்கூறுகள் போன்ற தனியுரிம பண்புகளை நேர்த்தியாக "
+"அகற்ற வேண்டுமா என்று இந்த விருப்பம் குறிப்பிடுகிறது. கூடுதலாக, உஉகுமொ இன் "
+"வெளியீட்டு பதிப்பில் அனுமதிக்கப்படாத பண்புக்கூறுகள் <code> "
+"கடுமையான-குறிச்சொற்கள்-பண்புக்கூறுகள் </code> உடன் பயன்படுத்தினால் "
+"கைவிடப்படும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyDuplicateAttrs"
+msgid ""
+"This option specifies if Tidy should keep the first or last attribute, if an"
+" attribute is repeated, e.g. has two <code>align</code> attributes. "
+msgstr ""
+"ஒரு பண்புக்கூறு மீண்டும் செய்யப்பட்டால், நேர்த்தியாக முதல் அல்லது கடைசி "
+"பண்புக்கூறுகளை வைத்திருக்க வேண்டுமா என்று இந்த விருப்பம் குறிப்பிடுகிறது, "
+"எ.கா. இரண்டு <code> Align </code> பண்புக்கூறுகள் உள்ளன."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEmacs"
+msgid ""
+"This option specifies that Tidy should change the format for reporting "
+"errors and warnings to a format that is more easily parsed by GNU Emacs or "
+"some other program.  It changes them from the default <br/>  line &lt;line "
+"number&gt; column &lt;column number&gt; - (Error|Warning): &lt;message&gt; "
+"<br/>to a form which includes the input filename: <br/>  "
+"&lt;filename&gt;:&lt;line number&gt;:&lt;column number&gt;: (Error|Warning):"
+" &lt;message&gt; "
+msgstr ""
+"பிழைகள் மற்றும் எச்சரிக்கைகளைப் புகாரளிப்பதற்கான வடிவமைப்பை நேர்த்தியாக "
+"மாற்ற வேண்டும் என்று இந்த விருப்பம் குறிப்பிடுகிறது, இது குனு எமாக்கள் "
+"அல்லது வேறு சில திட்டங்களால் எளிதில் பாகுபடுத்தப்படும் வடிவத்திற்கு. இது "
+"இயல்புநிலை <br/> வரி &lt; வரி எண் &gt; நெடுவரிசை &lt; நெடுவரிசை எண் &gt;"
+" - (பிழை | எச்சரிக்கை): &lt; செய்தி &gt; <br/> உள்ளீட்டு கோப்பு பெயரை "
+"உள்ளடக்கிய ஒரு வடிவத்திற்கு: <br/> &lt; கோப்பு பெயர் &gt;: &lt; வரி எண் &"
+" gt ;: &lt; நெடுவரிசை எண் &gt;"
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEmptyTags"
+msgid ""
+"This option specifies new empty inline tags. This option takes a space or "
+"comma separated list of tag names. <br/>Unless you declare new tags, Tidy "
+"will refuse to generate a tidied file if the input includes previously "
+"unknown tags. <br/>Remember to also declare empty tags as either inline or "
+"blocklevel. <br/>This option is ignored in XML mode. "
+msgstr ""
+"இந்த விருப்பம் புதிய வெற்று இன்லைன் குறிச்சொற்களைக் குறிப்பிடுகிறது. இந்த "
+"விருப்பம் குறிச்சொல் பெயர்களின் இடம் அல்லது கமா பிரிக்கப்பட்ட பட்டியலை "
+"எடுக்கும். <br/> புதிய குறிச்சொற்களை நீங்கள் அறிவிக்காவிட்டால், உள்ளீட்டில் "
+"முன்னர் அறியப்படாத குறிச்சொற்களை உள்ளடக்கியிருந்தால் டைடி ஒரு நேர்த்தியான "
+"கோப்பை உருவாக்க மறுக்கும். <br/> வெற்று குறிச்சொற்களை இன்லைன் அல்லது "
+"பிளாக்கல் என அறிவிக்க நினைவில் கொள்ளுங்கள். <br/> இந்த விருப்பம் எக்ச்எம்எல்"
+" பயன்முறையில் புறக்கணிக்கப்படுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEncloseBlockText"
+msgid ""
+"This option specifies if Tidy should insert a <code>&lt;p&gt;</code> element"
+" to enclose any text it finds in any element that allows mixed content for "
+"HTML transitional but not HTML strict. "
+msgstr ""
+"நேர்த்தியாக ஒரு <குறியீடு> &lt; p &gt; </code> உறுப்பு உஉகுமொ "
+"இடைக்காலத்திற்கான கலவையான உள்ளடக்கத்தை அனுமதிக்கும் எந்தவொரு உறுப்பிலும் "
+"இணைக்க வேண்டும் என்று சேர்க்க வேண்டுமா என்று இந்த விருப்பம் குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEncloseBodyText"
+msgid ""
+"This option specifies if Tidy should enclose any text it finds in the body "
+"element within a <code>&lt;p&gt;</code> element.<br/>This is useful when you"
+" want to take existing HTML and use it with a style sheet. "
+msgstr ""
+"<குறியீடு> &lt; p &gt; </code> உறுப்புக்குள் உடல் உறுப்பில் காணும் "
+"எந்தவொரு உரையையும் நேர்த்தியாக இணைக்க வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyErrFile"
+msgid ""
+"This option specifies the error file Tidy uses for errors and warnings. "
+"Normally errors and warnings are output to <code>stderr</code>. "
+msgstr ""
+"இந்த விருப்பம் பிழைகள் மற்றும் எச்சரிக்கைகளுக்கு நேர்த்தியாகப் பயன்படுத்தும்"
+" பிழை கோப்பைக் குறிப்பிடுகிறது. பொதுவாக பிழைகள் மற்றும் எச்சரிக்கைகள் <code>"
+" stderr </code> க்கு வெளியீடு ஆகும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEscapeCdata"
+msgid ""
+"This option specifies if Tidy should convert <code>&lt;![CDATA[]]&gt;</code>"
+" sections to normal text. "
+msgstr "நேர்த்தியாக <குறியீடு> &lt;!"
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyEscapeScripts"
+msgid ""
+"This option causes items that look like closing tags, like "
+"<code>&lt;/g</code> to be escaped to <code>&lt;\\/g</code>. Set this option "
+"to <var>no</var> if you do not want this."
+msgstr ""
+"இந்த விருப்பம் <code> &lt;/g </code> போன்ற குறிச்சொற்களை மூடுவது போன்ற "
+"உருப்படிகளை <code> &lt; \\/g </code> க்கு தப்பிக்க காரணமாகிறது. இதை நீங்கள்"
+" விரும்பவில்லை என்றால் இந்த விருப்பத்தை <var>இல்லை </var> என அமைக்கவும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyFixBackslash"
+msgid ""
+"This option specifies if Tidy should replace backslash characters "
+"<code>\\</code> in URLs with forward slashes <code>/</code>. "
+msgstr ""
+"முன்னோக்கி ச்லாச்கள் <code>/</code> உடன் முகவரி களில் பேக்ச்லாச் "
+"எழுத்துக்களை <குறியீடு> \\ </code> ஐ மாற்ற வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyFixComments"
+msgid ""
+"This option specifies if Tidy should replace unexpected hyphens with "
+"<code>=</code> characters when it comes across adjacent hyphens. <br/>The "
+"default is <var>auto</var> will which will act as <var>no</var> for HTML5 "
+"document types, and <var>yes</var> for all other document types. <br/>HTML "
+"has abandoned SGML comment syntax, and allows adjacent hyphens for all "
+"versions of HTML, although XML and XHTML do not. If you plan to support "
+"older browsers that require SGML comment syntax, then consider setting this "
+"value to <var>yes</var>."
+msgstr ""
+"இந்த விருப்பம் நேர்த்தியாக எதிர்பாராத ஐபன்களை <code> = </code> எழுத்துக்களை "
+"அருகிலுள்ள ஐபன்கள் காணும்போது மாற்ற வேண்டும். <br/> இயல்புநிலை <var>தானி "
+"</var> ஆகும், இது HTML5 ஆவண வகைகளுக்கு <var>இல்லை </var> ஆக செயல்படும், "
+"மேலும் மற்ற எல்லா ஆவண வகைகளுக்கும் <var>ஆம் </var>. <br/> உஉகுமொ SGML "
+"கருத்து தொடரியல் கைவிட்டுள்ளது, மேலும் உஉகுமொ இன் அனைத்து பதிப்புகளுக்கும் "
+"அருகிலுள்ள ஐபன்களை அனுமதிக்கிறது, இருப்பினும் நீகுமொ மற்றும் XHTML இல்லை. "
+"எச்சிஎம்எல் கருத்து தொடரியல் தேவைப்படும் பழைய உலாவிகளை ஆதரிக்க நீங்கள் "
+"திட்டமிட்டால், இந்த மதிப்பை <var>ஆம் </var> என அமைப்பதைக் கவனியுங்கள்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyFixUri"
+msgid ""
+"This option specifies if Tidy should check attribute values that carry URIs "
+"for illegal characters and if such are found, escape them as HTML4 "
+"recommends. "
+msgstr ""
+"சட்டவிரோத எழுத்துக்களுக்கு யுஆர்ஐக்களைக் கொண்டு செல்லும் பண்புக்கூறு "
+"மதிப்புகளை நேர்த்தியாக சரிபார்க்க வேண்டுமா, அது கண்டுபிடிக்கப்பட்டால், HTML4"
+" பரிந்துரைப்பது போல அவற்றிலிருந்து தப்பிக்க வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyForceOutput"
+msgid ""
+"This option specifies if Tidy should produce output even if errors are "
+"encountered. <br/>Use this option with care; if Tidy reports an error, this "
+"means Tidy was not able to (or is not sure how to) fix the error, so the "
+"resulting output may not reflect your intention. "
+msgstr ""
+"பிழைகள் ஏற்பட்டாலும் நேர்த்தியாக வெளியீட்டை உருவாக்க வேண்டுமா என்று இந்த "
+"விருப்பம் குறிப்பிடுகிறது. <br/> இந்த விருப்பத்தை கவனமாக பயன்படுத்தவும்; "
+"நேர்த்தியான ஒரு பிழையைப் புகாரளித்தால், இதன் பொருள் பிழையை சரிசெய்ய டைடி "
+"முடியவில்லை (அல்லது எப்படி என்று தெரியவில்லை), எனவே இதன் விளைவாக வெளியீடு "
+"உங்கள் நோக்கத்தை பிரதிபலிக்காது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyGDocClean"
+msgid ""
+"This option specifies if Tidy should enable specific behavior for cleaning "
+"up HTML exported from Google Docs. "
+msgstr ""
+"கூகிள் டாக்சிலிருந்து ஏற்றுமதி செய்யப்பட்ட உஉகுமொ ஐ தூய்மை செய்வதற்கான "
+"குறிப்பிட்ட நடத்தையை நேர்த்தியாக இயக்க வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyHideComments"
+msgid "This option specifies if Tidy should not print out comments. "
+msgstr ""
+"நேர்த்தியான கருத்துக்களை அச்சிடக்கூடாது என்றால் இந்த விருப்பம் "
+"குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyHtmlOut"
+msgid ""
+"This option specifies if Tidy should generate pretty printed output, writing"
+" it as HTML. "
+msgstr ""
+"இந்த விருப்பம் நேர்த்தியாக அழகாக அச்சிடப்பட்ட வெளியீட்டை உருவாக்க வேண்டும், "
+"அதை உஉகுமொ ஆக எழுதுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyInCharEncoding"
+msgid ""
+"This option specifies the character encoding Tidy uses for input. Tidy makes"
+" certain assumptions about some of the input encodings. <br/>For "
+"<var>ascii</var>, Tidy will accept Latin-1 (ISO-8859-1) character values and"
+" convert them to entities as necessary. <br/>For <var>raw</var>, Tidy will "
+"make no assumptions about the character values and will pass them unchanged "
+"to output. <br/>For <var>mac</var> and <var>win1252</var>, vendor specific "
+"characters values will be accepted and converted to entities as necessary. "
+"<br/>Asian encodings such as <var>iso2022</var> will be handled "
+"appropriately assuming the corresponding <code>output-encoding</code> is "
+"also specified. <br/>Tidy is not an encoding converter. Although the Latin "
+"and UTF encodings can be mixed freely, it is not possible to convert Asian "
+"encodings to Latin encodings with Tidy. "
+msgstr ""
+"இந்த விருப்பம் உள்ளீட்டுக்கு நேர்த்தியான பயன்பாடுகளை குறியாக்கம் செய்யும் "
+"எழுத்து குறிப்பிடுகிறது. சில உள்ளீட்டு குறியாக்கங்களைப் பற்றி நேர்த்தியாக "
+"சில அனுமானங்களைச் செய்கிறது. <br/> <var>ASCII </var>க்கு, டைடி லத்தீன் -1 "
+"(ISO-8859-1) எழுத்து மதிப்புகளை ஏற்றுக்கொண்டு அவற்றை தேவையான நிறுவனங்களாக "
+"மாற்றும். <br/> <var>ரா </var> க்கு, நேர்த்தியானது எழுத்து மதிப்புகளைப் "
+"பற்றி எந்த அனுமானங்களையும் செய்யாது, மேலும் அவற்றை வெளியீட்டிற்கு மாறாமல் "
+"கடந்து செல்லும். <br/> <var>மேக் </var> மற்றும் <var>Win1252 </var>க்கு, "
+"விற்பனையாளர் குறிப்பிட்ட எழுத்துக்கள் மதிப்புகள் ஏற்றுக்கொள்ளப்பட்டு தேவையான"
+" நிறுவனங்களாக மாற்றப்படும். <br/> <var>ISO2022 </var> போன்ற ஆசிய "
+"குறியாக்கங்களும் தொடர்புடைய <குறியீடு> வெளியீடு-குறியாக்க </code> ஐக் "
+"கருத்தில் கொண்டு சரியான முறையில் கையாளப்படும். <br/> நேர்த்தியானது ஒரு "
+"குறியாக்க மாற்றி அல்ல. லத்தீன் மற்றும் யுடிஎஃப் குறியாக்கங்களை சுதந்திரமாக "
+"கலக்க முடியும் என்றாலும், ஆசிய குறியாக்கங்களை லத்தீன் குறியாக்கங்களாக "
+"நேர்த்தியாக மாற்ற முடியாது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyIndentAttributes"
+msgid ""
+"This option specifies if Tidy should begin each attribute on a new line. "
+msgstr ""
+"ஒவ்வொரு பண்புகளையும் ஒரு புதிய வரியில் நேர்த்தியாகத் தொடங்க வேண்டுமா என்று "
+"இந்த விருப்பம் குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyIndentCdata"
+msgid ""
+"This option specifies if Tidy should indent <code>&lt;![CDATA[]]&gt;</code> "
+"sections. "
+msgstr "நேர்த்தியாக <குறியீடு> &lt;!"
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyIndentContent"
+msgid ""
+"This option specifies if Tidy should indent block-level tags. <br/>If set to"
+" <var>auto</var> Tidy will decide whether or not to indent the content of "
+"tags such as <code>&lt;title&gt;</code>, "
+"<code>&lt;h1&gt;</code>-<code>&lt;h6&gt;</code>, <code>&lt;li&gt;</code>, "
+"<code>&lt;td&gt;</code>, or <code>&lt;p&gt;</code> based on the content "
+"including a block-level element. <br/>Setting <code>indent</code> to "
+"<var>yes</var> can expose layout bugs in some browsers. <br/>Use the option "
+"<code>indent-spaces</code> to control the number of spaces or tabs output "
+"per level of indent, and <code>indent-with-tabs</code> to specify whether "
+"spaces or tabs are used. "
+msgstr ""
+"நேர்த்தியானது தொகுதி-நிலை குறிச்சொற்களை உள்தள்ள வேண்டும் என்றால் இந்த "
+"விருப்பம் குறிப்பிடுகிறது. <br/> <var>தானி </var> என அமைக்கப்பட்டால், "
+"<குறியீடு> &lt; தலைப்பு &gt; <code> &lt; td &gt; </code>, அல்லது <code> "
+"&lt; p &gt; </code> ஒரு தொகுதி-நிலை உறுப்பு உள்ளிட்ட உள்ளடக்கத்தின் "
+"அடிப்படையில். <br/> <code> இன்டென்ட் </code> ஐ <var>ஆம் </var> க்கு அமைத்தல்"
+" சில உலாவிகளில் தளவமைப்பு பிழைகளை அம்பலப்படுத்தலாம். <br/> இன்டெண்டின் "
+"நிலைக்கு இடைவெளிகள் அல்லது தாவல்கள் வெளியீட்டைக் கட்டுப்படுத்த <குறியீடு> "
+"இன்டென்ட்-ச்பேச் </code> விருப்பத்தைப் பயன்படுத்தவும், மற்றும் <code> "
+"இன்டென்ட்-வித்-டேப்ச் </code> இடங்கள் அல்லது தாவல்கள் "
+"பயன்படுத்தப்படுகின்றனவா என்பதைக் குறிப்பிட."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyIndentSpaces"
+msgid ""
+"This option specifies the number of spaces or tabs that Tidy uses to indent "
+"content when <code>indent</code> is enabled. <br/>Note that the default "
+"value for this option is dependent upon the value of <code>indent-with-"
+"tabs</code> (see also). "
+msgstr ""
+"<code> இன்டென்ட் </code> இயக்கப்பட்டிருக்கும் போது உள்ளடக்கத்தை "
+"உள்தள்ளுவதற்கு நேர்த்தியாகப் பயன்படுத்தும் இடங்கள் அல்லது தாவல்களின் "
+"எண்ணிக்கையை இந்த விருப்பம் குறிப்பிடுகிறது. <br/> இந்த விருப்பத்திற்கான "
+"இயல்புநிலை மதிப்பு <குறியீடு> உள்தள்ளல்-உடன்-தாவல்கள் </code> இன் மதிப்பைப் "
+"பொறுத்தது என்பதை நினைவில் கொள்க (மேலும் காண்க)."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyInlineTags"
+msgid ""
+"This option specifies new non-empty inline tags. This option takes a space "
+"or comma separated list of tag names. <br/>Unless you declare new tags, Tidy"
+" will refuse to generate a tidied file if the input includes previously "
+"unknown tags. <br/>This option is ignored in XML mode. "
+msgstr ""
+"இந்த விருப்பம் புதிய வெற்று அல்லாத இன்லைன் குறிச்சொற்களைக் குறிப்பிடுகிறது. "
+"இந்த விருப்பம் குறிச்சொல் பெயர்களின் இடம் அல்லது கமா பிரிக்கப்பட்ட பட்டியலை "
+"எடுக்கும். <br/> புதிய குறிச்சொற்களை நீங்கள் அறிவிக்காவிட்டால், உள்ளீட்டில் "
+"முன்னர் அறியப்படாத குறிச்சொற்களை உள்ளடக்கியிருந்தால் டைடி ஒரு நேர்த்தியான "
+"கோப்பை உருவாக்க மறுக்கும். <br/> இந்த விருப்பம் எக்ச்எம்எல் பயன்முறையில் "
+"புறக்கணிக்கப்படுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyJoinClasses"
+msgid ""
+"This option specifies if Tidy should combine class names to generate a "
+"single, new class name if multiple class assignments are detected on an "
+"element. "
+msgstr ""
+"ஒரு உறுப்பில் பல வகுப்பு பணிகள் கண்டறியப்பட்டால், ஒற்றை, புதிய வகுப்பு பெயரை"
+" உருவாக்க நேர்த்தியாக வகுப்பு பெயர்களை இணைக்க வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyJoinStyles"
+msgid ""
+"This option specifies if Tidy should combine styles to generate a single, "
+"new style if multiple style values are detected on an element. "
+msgstr ""
+"ஒரு உறுப்பில் பல பாணி மதிப்புகள் கண்டறியப்பட்டால், ஒற்றை, புதிய பாணியை "
+"உருவாக்க நேர்த்தியாக பாணிகளை இணைக்க வேண்டும் என்றால் இந்த விருப்பம் "
+"குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyKeepFileTimes"
+msgid ""
+"This option specifies if Tidy should keep the original modification time of "
+"files that Tidy modifies in place. <br/>Setting the option to <var>yes</var>"
+" allows you to tidy files without changing the file modification date, which"
+" may be useful with certain tools that use the modification date for things "
+"such as automatic server deployment.<br/>Note this feature is not supported "
+"on some platforms. "
+msgstr ""
+"நேர்த்தியாக மாற்றியமைக்கும் கோப்புகளின் அசல் மாற்ற நேரத்தை நேர்த்தியாக "
+"வைத்திருக்க வேண்டுமா என்று இந்த விருப்பம் குறிப்பிடுகிறது. <br/> விருப்பத்தை"
+" அமைத்தல் <var>ஆம் </var> கோப்பு மாற்றும் தேதியை மாற்றாமல் நேர்த்தியான "
+"கோப்புகளை அனுமதிக்கிறது, இது தானியங்கி சேவையக வரிசைப்படுத்தல் போன்ற "
+"விசயங்களுக்கு மாற்றும் தேதியைப் பயன்படுத்தும் சில கருவிகளுடன் பயனுள்ளதாக "
+"இருக்கும். <br/> குறிப்பு இந்த நற்பொருத்தம் சில தளங்களில் ஆதரிக்கப்படவில்லை."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyKeepTabs"
+msgid ""
+"With the default <var>no</var> Tidy will replace all source tabs with "
+"spaces, controlled by the option <code>tab-size</code>, and the current line"
+" offset. Of course, except in the special blocks/elements enumerated below, "
+"this will later be reduced to just one space. <br/>If set <var>yes</var> "
+"this option specifies Tidy should keep certain tabs found in the source, but"
+" only in preformatted blocks like <code>&lt;pre&gt;</code>, and other CDATA "
+"elements like <code>&lt;script&gt;</code>, <code>&lt;style&gt;</code>, and "
+"other pseudo elements like <code>&lt;?php ... ?&gt;</code>. As always, all "
+"other tabs, or sequences of tabs, in the source will continue to be replaced"
+" with a space. "
+msgstr ""
+"இயல்புநிலை <var>இல்லை </var> நேர்த்தியுடன் அனைத்து மூல தாவல்களையும் "
+"இடைவெளிகளுடன் மாற்றும், <குறியீடு> தாவல்-அளவு </code> மற்றும் தற்போதைய வரி "
+"ஆஃப்செட் ஆகியவற்றால் கட்டுப்படுத்தப்படுகிறது. நிச்சயமாக, கீழே "
+"குறிப்பிடப்பட்டுள்ள சிறப்புத் தொகுதிகள்/கூறுகளைத் தவிர, இது பின்னர் ஒரு "
+"இடமாகக் குறைக்கப்படும். <br/> அமைக்கப்பட்டால் <var> ஆம் </var> இந்த "
+"விருப்பம் நேர்த்தியாக மூலத்தில் காணப்படும் சில தாவல்களை வைத்திருக்க "
+"வேண்டும், ஆனால் <குறியீடு> &lt; முன் &gt; </code> போன்ற முன் "
+"வடிவமைக்கப்பட்ட தொகுதிகளில் மட்டுமே, மற்றும் <code> &lt; கைஉரை &gt; "
+"<code> &lt;? பிஎச்பி ...? &gt; </code>. எப்போதும்போல, மூலத்தில் உள்ள மற்ற "
+"எல்லா தாவல்களும் அல்லது தாவல்களின் வரிசைகளும் ஒரு இடத்துடன் மாற்றப்படும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyLiteralAttribs"
+msgid ""
+"This option specifies how Tidy deals with whitespace characters within "
+"attribute values. <br/>If the value is <var>no</var> Tidy normalizes "
+"attribute values by replacing any newline or tab with a single space, and "
+"further by replacing any contiguous whitespace with a single space. <br/>To "
+"force Tidy to preserve the original, literal values of all attributes and "
+"ensure that whitespace within attribute values is passed through unchanged, "
+"set this option to <var>yes</var>. "
+msgstr ""
+"பண்புக்கூறு மதிப்புகளுக்குள் உள்ள இடைவெளி எழுத்துக்களை நேர்த்தியாக எவ்வாறு "
+"கையாள்கிறது என்பதை இந்த விருப்பம் குறிப்பிடுகிறது. <br/> மதிப்பு <var>இல்லை "
+"</var> நேர்த்தியானது எந்தவொரு புதிய இடத்தையும் தாவலையும் ஒற்றை இடத்துடன் "
+"மாற்றுவதன் மூலம் பண்புக்கூறு மதிப்புகளை இயல்பாக்குகிறது, மேலும் எந்தவொரு "
+"தொடர்ச்சியான வைட்ச்பேசையும் ஒற்றை இடத்துடன் மாற்றுவதன் மூலம். <br/> அனைத்து "
+"பண்புகளின் அசல், நேரடி மதிப்புகளையும் பாதுகாக்க நேர்த்தியாக "
+"கட்டாயப்படுத்தவும், பண்புக்கூறு மதிப்புகளுக்குள் உள்ள இடைவெளி மாறாத வழியாக "
+"அனுப்பப்படுவதை உறுதிசெய்யவும், இந்த விருப்பத்தை <var>ஆம் </var> ஆகவும் "
+"அமைக்கவும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyLogicalEmphasis"
+msgid ""
+"This option specifies if Tidy should replace any occurrence of "
+"<code>&lt;i&gt;</code> with <code>&lt;em&gt;</code> and any occurrence of "
+"<code>&lt;b&gt;</code> with <code>&lt;strong&gt;</code>. Any attributes are "
+"preserved unchanged. <br/>This option can be set independently of the "
+"<code>clean</code> option. "
+msgstr ""
+"<code> &lt; </gt; எந்த பண்புகளும் மாறாமல் பாதுகாக்கப்படுகின்றன. <br/> இந்த "
+"விருப்பத்தை <code> தூய்மையான </code> விருப்பத்திலிருந்து சுயாதீனமாக "
+"அமைக்கலாம்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyLowerLiterals"
+msgid ""
+"This option specifies if Tidy should convert the value of an attribute that "
+"takes a list of predefined values to lower case. <br/>This is required for "
+"XHTML documents. "
+msgstr ""
+"முன் வரையறுக்கப்பட்ட மதிப்புகளின் பட்டியலை எடுக்கும் பண்புக்கூறின் மதிப்பை "
+"நேர்த்தியாக மாற்ற வேண்டுமா என்று இந்த விருப்பம் குறிப்பிடுகிறது. <br/> இது "
+"XHTML ஆவணங்களுக்கு தேவைப்படுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMakeBare"
+msgid ""
+"This option specifies if Tidy should replace smart quotes and em dashes with"
+" ASCII, and output spaces rather than non-breaking spaces, where they exist "
+"in the input. "
+msgstr ""
+"இந்த விருப்பம் நேர்த்தியாக அறிவுள்ள மேற்கோள்கள் மற்றும் ஈ.எம் கோடுகளை ASCII "
+"உடன் மாற்ற வேண்டுமா, மற்றும் அவை உள்ளீட்டில் இருக்கும் இடங்களை விட "
+"வெளியீட்டு இடங்களை விட வெளியீட்டு இடைவெளிகளைக் குறிப்பிடுகின்றன."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMakeClean"
+msgid ""
+"This option specifies if Tidy should perform cleaning of some legacy "
+"presentational tags (currently <code>&lt;i&gt;</code>, "
+"<code>&lt;b&gt;</code>, <code>&lt;center&gt;</code> when enclosed within "
+"appropriate inline tags, and <code>&lt;font&gt;</code>). If set to "
+"<var>yes</var>, then the legacy tags will be replaced with CSS "
+"<code>&lt;style&gt;</code> tags and structural markup as appropriate. "
+msgstr ""
+"சில மரபு விளக்கக்காட்சி குறிச்சொற்களை தூய்மை செய்ய வேண்டுமா என்று இந்த "
+"விருப்பம் குறிப்பிடுகிறது (தற்போது <code> &lt; i &gt; <var>ஆம் </var> என "
+"அமைக்கப்பட்டால், மரபு குறிச்சொற்கள் சிஎச்எச் <code> &lt; நடை &gt; </code> "
+"குறிச்சொற்கள் மற்றும் கட்டமைப்பு மார்க்அப் பொருத்தமானதாக மாற்றப்படும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMark"
+msgid ""
+"This option specifies if Tidy should add a <code>meta</code> element to the "
+"document head to indicate that the document has been tidied. <br/>Tidy won't"
+" add a meta element if one is already present. "
+msgstr ""
+"ஆவணம் நேர்த்தியாக இருப்பதைக் குறிக்க ஆவணத் தலைவருக்கு <குறியீடு> மேவு "
+"</code> உறுப்பை நேர்த்தியாக சேர்க்க வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது. <br/> ஒருவர் ஏற்கனவே இருந்தால் மேவு உறுப்பை நேர்த்தியாக "
+"சேர்க்காது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMergeDivs"
+msgid ""
+"This option can be used to modify the behavior of <code>clean</code> when "
+"set to <var>yes</var>.<br/>This option specifies if Tidy should merge nested"
+" <code>&lt;div&gt;</code> such as "
+"<code>&lt;div&gt;&lt;div&gt;...&lt;/div&gt;&lt;/div&gt;</code>. <br/>If set "
+"to <var>auto</var> the attributes of the inner <code>&lt;div&gt;</code> are "
+"moved to the outer one. Nested <code>&lt;div&gt;</code> with <code>id</code>"
+" attributes are <em>not</em> merged. <br/>If set to <var>yes</var> the "
+"attributes of the inner <code>&lt;div&gt;</code> are discarded with the "
+"exception of <code>class</code> and <code>style</code>. "
+msgstr ""
+"<var> ஆம் </var> என அமைக்கப்பட்டால் <கோட்> தூய்மையான </code> இன் நடத்தையை "
+"மாற்ற இந்த விருப்பம் பயன்படுத்தப்படலாம். <br/> <var>தானி </var> என "
+"அமைக்கப்பட்டால், உள் <code> &lt; div &gt; </code> இன் பண்புக்கூறுகள் "
+"வெளிப்புறத்திற்கு நகர்த்தப்படுகின்றன. புதுமையான <code> &lt; div &gt; "
+"</code> <குறியீடு> அடையாளம் </code> பண்புக்கூறுகள் <em> இல்லை </em> "
+"ஒன்றிணைக்கப்பட்டுள்ளன. <br/> <var>ஆம் </var> என அமைக்கப்பட்டால், உள் <code> "
+"&lt; div &gt; </code> இன் பண்புக்கூறுகள் <குறியீடு> வகுப்பு </code> "
+"மற்றும் <code> நடை </code> ஐத் தவிர்த்து நிராகரிக்கப்படுகின்றன."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMergeEmphasis"
+msgid ""
+"This option specifies if Tidy should merge nested <code>&lt;b&gt;</code> and"
+" <code>&lt;i&gt;</code> elements; for example, for the case <br/><code>&lt;b"
+" class=\"rtop-2\"&gt;foo &lt;b class=\"r2-2\"&gt;bar&lt;/b&gt; "
+"baz&lt;/b&gt;</code>, <br/>Tidy will output <code>&lt;b "
+"class=\"rtop-2\"&gt;foo bar baz&lt;/b&gt;</code>. "
+msgstr ""
+"நேர்த்தியாக உள்ளமைக்கப்பட்ட <குறியீடு> &lt; b &gt; </code> மற்றும் <code> "
+"&lt; i &gt; </code> கூறுகள்; எடுத்துக்காட்டாக, வழக்குக்கு <br/> <code> & "
+"lt; b வகுப்பு = \"rtop-2\" &gt; foo &lt; b வகுப்பு = \"r2-2\" &gt; "
+"மதுக்கூடம் &lt;/b &gt; பாச் &lt;/b &gt; </code>, <br/> நேர்த்தியாக "
+"<குறியீடு> &lt; b வகுப்பு = \"rtop-2\" &gt;"
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMergeSpans"
+msgid ""
+"This option can be used to modify the behavior of <code>clean</code> when "
+"set to <var>yes</var>.<br/>This option specifies if Tidy should merge nested"
+" <code>&lt;span&gt;</code> such as "
+"<code>&lt;span&gt;&lt;span&gt;...&lt;/span&gt;&lt;/span&gt;</code>. <br/>The"
+" algorithm is identical to the one used by <code>merge-divs</code>. "
+msgstr ""
+"<var>ஆம் </var> என அமைக்கப்பட்டால் <குறியீடு> தூய்மையான </code> இன் நடத்தையை"
+" மாற்ற இந்த விருப்பத்தைப் பயன்படுத்தலாம். <br/> அல்காரிதம் <குறியீடு> "
+"ஒன்றிணைப்பு-டிவிகள் </code> பயன்படுத்தியதைப் போன்றது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyNCR"
+msgid ""
+"This option specifies if Tidy should allow numeric character references. "
+msgstr ""
+"நேர்த்தியாக எண் எழுத்து குறிப்புகளை அனுமதிக்க வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyNewline"
+msgid ""
+"The default is appropriate to the current platform. <br/>Generally "
+"<var>CRLF</var> on PC-DOS, Windows and OS/2; <var>CR</var> on Classic Mac "
+"OS; and <var>LF</var> everywhere else (Linux, macOS, and Unix). "
+msgstr ""
+"தற்போதைய தளத்திற்கு இயல்புநிலை பொருத்தமானது. <br/> பொதுவாக <var>சிஆர்எல்எஃப்"
+" </var> பிசி-டாச், சாளரங்கள் மற்றும் ஓஎச்/2 இல்; கிளாசிக் மேக் ஓஎச்சில் <ar>"
+" சிஆர் </ar>; மற்றும் <var>எல்.எஃப் </var> எல்லா இடங்களிலும் (லினக்ச், "
+"மேகோச் மற்றும் யூனிக்ச்)."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyNumEntities"
+msgid ""
+"This option specifies if Tidy should output entities other than the built-in"
+" HTML entities (<code>&amp;amp;</code>, <code>&amp;lt;</code>, "
+"<code>&amp;gt;</code>, and <code>&amp;quot;</code>) in the numeric rather "
+"than the named entity form. <br/>Only entities compatible with the DOCTYPE "
+"declaration generated are used. <br/>Entities that can be represented in the"
+" output encoding are translated correspondingly. "
+msgstr ""
+"உள்ளமைக்கப்பட்ட உஉகுமொ நிறுவனங்களைத் தவிர வேறு நிறுவனங்களை நேர்த்தியாக "
+"வெளியிட வேண்டுமா என்று இந்த விருப்பம் குறிப்பிடுகிறது (<குறியீடு> &amp; "
+"<br/> உருவாக்கப்பட்ட டாக்டைப் அறிவிப்புடன் இணக்கமான நிறுவனங்கள் மட்டுமே "
+"பயன்படுத்தப்படுகின்றன. <br/> வெளியீட்டு குறியாக்கத்தில் குறிப்பிடக்கூடிய "
+"நிறுவனங்கள் அதற்கேற்ப மொழிபெயர்க்கப்படுகின்றன."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyOmitOptionalTags"
+msgid ""
+"This option specifies if Tidy should omit optional start tags and end tags "
+"when generating output. <br/>Setting this option causes all tags for the "
+"<code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, and "
+"<code>&lt;body&gt;</code> elements to be omitted from output, as well as "
+"such end tags as <code>&lt;/p&gt;</code>, <code>&lt;/li&gt;</code>, "
+"<code>&lt;/dt&gt;</code>, <code>&lt;/dd&gt;</code>, "
+"<code>&lt;/option&gt;</code>, <code>&lt;/tr&gt;</code>, "
+"<code>&lt;/td&gt;</code>, and <code>&lt;/th&gt;</code>. <br/>This option is "
+"ignored for XML output. "
+msgstr ""
+"வெளியீட்டை உருவாக்கும் போது விருப்பமான தொடக்க குறிச்சொற்கள் மற்றும் இறுதி "
+"குறிச்சொற்களை நேர்த்தியாக தவிர்க்க வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது. <br/> இந்த விருப்பத்தை அமைப்பது <code> &lt; உஉகுமொ &gt; "
+"<code> &lt;/li &gt; </code>, <code> &lt;/dt &gt; <code> &lt;/th &gt; "
+"</code>. <br/> இந்த விருப்பம் எக்ச்எம்எல் வெளியீட்டிற்கு "
+"புறக்கணிக்கப்படுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyOutCharEncoding"
+msgid ""
+"This option specifies the character encoding Tidy uses for output. Some of "
+"the output encodings affect whether or not some characters are translated to"
+" entities, although in all cases, some entities will be written according to"
+" other Tidy configuration options. <br/>For <var>ascii</var>, "
+"<var>mac</var>, and <var>win1252</var> output encodings, entities will be "
+"used for all characters with values over 127. <br/>For <var>raw</var> "
+"output, Tidy will write values above 127 without translating them to "
+"entities. <br/>Output using <var>latin1</var> will cause Tidy to write "
+"character values higher than 255 as entities. <br/>The UTF family such as "
+"<var>utf8</var> will write output in the respective UTF encoding. <br/>Asian"
+" output encodings such as <var>iso2022</var> will write output in the "
+"specified encoding, assuming a corresponding <code>input-encoding</code> was"
+" specified. <br/>Tidy is not an encoding converter. Although the Latin and "
+"UTF encodings can be mixed freely, it is not possible to convert Asian "
+"encodings to Latin encodings with Tidy. "
+msgstr ""
+"இந்த விருப்பம் வெளியீட்டிற்கு நேர்த்தியான பயன்பாடுகளை குறியாக்கம் செய்யும் "
+"எழுத்து. சில வெளியீட்டு குறியாக்கங்கள் சில எழுத்துக்கள் நிறுவனங்களுக்கு "
+"மொழிபெயர்க்கப்பட்டுள்ளதா இல்லையா என்பதை பாதிக்கின்றன, இருப்பினும் எல்லா "
+"சந்தர்ப்பங்களிலும், சில நிறுவனங்கள் மற்ற நேர்த்தியான உள்ளமைவு "
+"விருப்பங்களின்படி எழுதப்படும். <br/> <var>தபஅஇகு </var>, <var>மேக் </var>, "
+"மற்றும் <var>வின் 1252 </var>வெளியீட்டு குறியாக்கங்களுக்கு, நிறுவனங்கள் 127 "
+"க்கு மேல் மதிப்புகளைக் கொண்ட அனைத்து எழுத்துக்களுக்கும் பயன்படுத்தப்படும். "
+"<pr/> <var>லத்தீன் 1 </var>ஐப் பயன்படுத்தி வெளியீடு 255 ஐ விட அதிகமான "
+"எழுத்து மதிப்புகளை நிறுவனங்களாக எழுத நேரிடும். <br/> <var>UTF8 </var>போன்ற "
+"UTF குடும்பம் அந்தந்த யுடிஎஃப் குறியாக்கத்தில் வெளியீட்டை எழுதும். <br/> "
+"ஆசிய வெளியீட்டு குறியாக்கங்களான <var>ISO2022 </var> குறிப்பிட்ட "
+"குறியாக்கத்தில் வெளியீட்டை எழுதும், அதனுடன் தொடர்புடைய <code> "
+"உள்ளீடு-குறியாக்கம் </code> குறிப்பிடப்பட்டுள்ளது. <br/> நேர்த்தியானது ஒரு "
+"குறியாக்க மாற்றி அல்ல. லத்தீன் மற்றும் யுடிஎஃப் குறியாக்கங்களை சுதந்திரமாக "
+"கலக்க முடியும் என்றாலும், ஆசிய குறியாக்கங்களை லத்தீன் குறியாக்கங்களாக "
+"நேர்த்தியாக மாற்ற முடியாது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyOutFile"
+msgid ""
+"This option specifies the output file Tidy uses for markup. Normally markup "
+"is written to <code>stdout</code>. "
+msgstr ""
+"இந்த விருப்பம் மார்க்அப்பிற்கு நேர்த்தியாகப் பயன்படுத்தும் வெளியீட்டு "
+"கோப்பைக் குறிப்பிடுகிறது. பொதுவாக மார்க்அப் <code> stdout </code> க்கு "
+"எழுதப்பட்டுள்ளது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyOutputBOM"
+msgid ""
+"This option specifies if Tidy should write a Unicode Byte Order Mark "
+"character (BOM; also known as Zero Width No-Break Space; has value of "
+"U+FEFF) to the beginning of the output, and only applies to UTF-8 and UTF-16"
+" output encodings. <br/>If set to <var>auto</var> this option causes Tidy to"
+" write a BOM to the output only if a BOM was present at the beginning of the"
+" input. <br/>A BOM is always written for XML/XHTML output using UTF-16 "
+"output encodings. "
+msgstr ""
+"இந்த விருப்பம் நேர்த்தியாக ஒரு யூனிகோட் பைட் ஆர்டர் மார்க் எழுத்தை (போம்; "
+"சுழிய அகலம் நோ-பிரேக் ச்பேச் என்றும் அழைக்கப்படுகிறது; U+FEFF இன் மதிப்பு "
+"உள்ளது) வெளியீட்டின் தொடக்கத்திற்கு எழுத வேண்டுமா என்பதைக் குறிப்பிடுகிறது, "
+"மேலும் UTF-8 மற்றும் UTF-16 வெளியீட்டு குறியாக்கங்களுக்கு மட்டுமே "
+"பொருந்தும். <br/> <var>தானி </var> என அமைக்கப்பட்டால், உள்ளீட்டின் "
+"தொடக்கத்தில் ஒரு வெடிகுண்டு இருந்தால் மட்டுமே இந்த விருப்பம் வெளியீட்டிற்கு "
+"ஒரு வெடிகுண்டு எழுத இந்த விருப்பம் ஏற்படுத்துகிறது. <br/> யுடிஎஃப் -16 "
+"வெளியீட்டு குறியாக்கங்களைப் பயன்படுத்தி எக்ச்எம்எல்/எக்ச்எச்.டி.எம்.எல் "
+"வெளியீட்டிற்கு ஒரு பிஓஎம் எப்போதும் எழுதப்படுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyPPrintTabs"
+msgid ""
+"This option specifies if Tidy should indent with tabs instead of spaces, "
+"assuming <code>indent</code> is <var>yes</var>. <br/>Set it to "
+"<var>yes</var> to indent using tabs instead of the default spaces. <br/>Use "
+"the option <code>indent-spaces</code> to control the number of tabs output "
+"per level of indent. Note that when <code>indent-with-tabs</code> is enabled"
+" the default value of <code>indent-spaces</code> is reset to <var>1</var>. "
+"<br/>Note <code>tab-size</code> controls converting input tabs to spaces. "
+"Set it to zero to retain input tabs. "
+msgstr ""
+"<code> இன்டென்ட் </code> <var>ஆம் </var> என்று கருதி, இடைவெளிகளுக்கு பதிலாக "
+"தாவல்களுடன் நேர்த்தியாக உள்துறை இருக்க வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது. <br/> இயல்புநிலை இடைவெளிகளுக்கு பதிலாக தாவல்களைப் "
+"பயன்படுத்தி உள்தள்ள <var>ஆம் </var> என அமைக்கவும். <br/> இன்டெண்டின் "
+"நிலைக்கு தாவல்கள் வெளியீட்டின் எண்ணிக்கையைக் கட்டுப்படுத்த <குறியீடு> "
+"இன்டென்ட்-ச்பேச் </code> விருப்பத்தைப் பயன்படுத்தவும். <code> "
+"இன்டென்ட்-வித்-டேப்ச் </code> இயக்கப்பட்டால் <குறியீடு> இன்டென்ட்-ச்பேச் "
+"</code> இன் இயல்புநிலை மதிப்பு <var>1 </var> க்கு மீட்டமைக்கப்படுகிறது "
+"என்பதை நினைவில் கொள்க. <br/> குறிப்பு <குறியீடு> தாவல்-அளவு </code> "
+"உள்ளீட்டு தாவல்களை இடைவெளிகளாக மாற்றுவதை கட்டுப்படுத்துகிறது. உள்ளீட்டு "
+"தாவல்களைத் தக்கவைக்க அதை பூச்சியமாக அமைக்கவும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyPreserveEntities"
+msgid ""
+"This option specifies if Tidy should preserve well-formed entities as found "
+"in the input. "
+msgstr ""
+"உள்ளீட்டில் காணப்படுவது போல் நேர்த்தியாக நன்கு உருவாக்கப்பட்ட நிறுவனங்களை "
+"பாதுகாக்க வேண்டுமா என்று இந்த விருப்பம் குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyPreTags"
+msgid ""
+"This option specifies new tags that are to be processed in exactly the same "
+"way as HTML's <code>&lt;pre&gt;</code> element. This option takes a space or"
+" comma separated list of tag names. <br/>Unless you declare new tags, Tidy "
+"will refuse to generate a tidied file if the input includes previously "
+"unknown tags. <br/>Note you cannot as yet add new CDATA elements. <br/>This "
+"option is ignored in XML mode. "
+msgstr ""
+"இந்த விருப்பம் உஉகுமொ இன் <code> &lt; முன் &gt; </code> உறுப்பு போலவே "
+"செயலாக்கப்பட வேண்டிய புதிய குறிச்சொற்களைக் குறிப்பிடுகிறது. இந்த விருப்பம் "
+"குறிச்சொல் பெயர்களின் இடம் அல்லது கமா பிரிக்கப்பட்ட பட்டியலை எடுக்கும். "
+"<br/> புதிய குறிச்சொற்களை நீங்கள் அறிவிக்காவிட்டால், உள்ளீட்டில் முன்னர் "
+"அறியப்படாத குறிச்சொற்களை உள்ளடக்கியிருந்தால் டைடி ஒரு நேர்த்தியான கோப்பை "
+"உருவாக்க மறுக்கும். <br/> குறிப்பு நீங்கள் இன்னும் புதிய சிடா கூறுகளைச் "
+"சேர்க்க முடியாது. <br/> இந்த விருப்பம் எக்ச்எம்எல் பயன்முறையில் "
+"புறக்கணிக்கப்படுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyPriorityAttributes"
+msgid ""
+"This option allows prioritizing the writing of attributes in tidied "
+"documents, allowing them to written before the other attributes of an "
+"element. For example, you might specify that <strong>id</strong> and "
+"<strong>name</strong> are written before every other attribute. <br/>This "
+"option takes a space or comma separated list of attribute names. "
+msgstr ""
+"இந்த விருப்பம் நேர்த்தியான ஆவணங்களில் பண்புகளை எழுதுவதற்கு முன்னுரிமை அளிக்க"
+" அனுமதிக்கிறது, இது ஒரு உறுப்பின் மற்ற பண்புகளுக்கு முன் எழுத அனுமதிக்கிறது."
+" எடுத்துக்காட்டாக, <strong> அடையாளம் </strong> மற்றும் <strong> பெயர் "
+"</strong> ஆகியவை மற்ற எல்லா பண்புகளுக்கும் முன் எழுதப்பட்டுள்ளன என்பதை "
+"நீங்கள் குறிப்பிடலாம். <br/> இந்த விருப்பம் ஒரு இடம் அல்லது கமாவைப் "
+"பிரிக்கப்பட்ட பண்புக்கூறு பெயர்களின் பட்டியலை எடுக்கும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyPunctWrap"
+msgid ""
+"This option specifies if Tidy should line wrap after some Unicode or Chinese"
+" punctuation characters. "
+msgstr ""
+"சில யூனிகோட் அல்லது சீன நிறுத்தற்குறி எழுத்துக்களுக்குப் பிறகு நேர்த்தியாக "
+"வரிசைப்படுத்த வேண்டுமா என்று இந்த விருப்பம் குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyQuiet"
+msgid ""
+"When enabled, this option limits Tidy's non-document output to report only "
+"document warnings and errors. "
+msgstr ""
+"இயக்கப்பட்டால், இந்த விருப்பம் ஆவண எச்சரிக்கைகள் மற்றும் பிழைகளை மட்டுமே "
+"தெரிவிக்க டைடியின் ஆவணமற்ற வெளியீட்டைக் கட்டுப்படுத்துகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyQuoteAmpersand"
+msgid ""
+"This option specifies if Tidy should output unadorned <code>&amp;</code> "
+"characters as <code>&amp;amp;</code>, in legacy doctypes only. "
+msgstr "டைடி அலங்காரமற்ற <code> &amp; </code> எழுத்துக்களை <குறியீடு> &amp;"
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyQuoteMarks"
+msgid ""
+"This option specifies if Tidy should output <code>&quot;</code> characters "
+"as <code>&amp;quot;</code> as is preferred by some editing environments. "
+"<br/>The apostrophe character <code>'</code> is written out as "
+"<code>&amp;#39;</code> since many web browsers don't yet support "
+"<code>&amp;apos;</code>. "
+msgstr ""
+"சில திருத்துதல் சூழல்களால் விரும்பப்படுவது போல <குறியீடு> & quot; </code> "
+"எழுத்துக்கள் </code> & amp; quot; </code> என வெளியீடு செய்ய வேண்டுமா என்று "
+"இந்த விருப்பம் குறிப்பிடுகிறது. <br/> அப்போச்ட்ரோபி எழுத்து <code> '</code> "
+"<குறியீடு> &amp;#39; </code> என எழுதப்பட்டுள்ளது, ஏனெனில் பல வலை உலாவிகள் "
+"இன்னும் ஆதரிக்கவில்லை <code> & amp; apos; </code>."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyQuoteNbsp"
+msgid ""
+"This option specifies if Tidy should output non-breaking space characters as"
+" entities, rather than as the Unicode character value 160 (decimal). "
+msgstr ""
+"யூனிகோட் எழுத்து மதிப்பு 160 (தசம) என இல்லாமல், நேர்த்தியாக உடைக்கும் "
+"விண்வெளி எழுத்துக்களை நிறுவனங்களாக வெளியிட வேண்டும் என்றால் இந்த விருப்பம் "
+"குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyReplaceColor"
+msgid ""
+"This option specifies if Tidy should replace numeric values in color "
+"attributes with HTML/XHTML color names where defined, e.g. replace "
+"<code>#ffffff</code> with <code>white</code>. "
+msgstr ""
+"வரையறுக்கப்பட்ட இடங்களில் HTML/XHTML வண்ண பெயர்களுடன் வண்ண பண்புகளில் உள்ள "
+"எண் மதிப்புகளை நேர்த்தியாக மாற்ற வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது, எ.கா. <code> #ffffff </code> ஐ <code> வெள்ளை </code> உடன் "
+"மாற்றவும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowErrors"
+msgid ""
+"This option specifies the number Tidy uses to determine if further errors "
+"should be shown. If set to <var>0</var>, then no errors are shown. "
+msgstr ""
+"இந்த விருப்பம் மேலும் பிழைகள் காட்டப்பட வேண்டுமா என்பதை தீர்மானிக்க "
+"நேர்த்தியான பயன்படுத்தும் எண்ணைக் குறிப்பிடுகிறது. <var>0 </var>என "
+"அமைக்கப்பட்டால், பிழைகள் எதுவும் காட்டப்படவில்லை."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowFilename"
+msgid ""
+"This option specifies if Tidy should show the filename in messages. eg: "
+"<br/> tidy -q -e --show-filename yes index.html<br/> index.html: line 43 "
+"column 3 - Warning: replacing invalid UTF-8 bytes (char. code U+00A9) "
+msgstr ""
+"செய்திகளில் கோப்பு பெயரை நேர்த்தியாகக் காட்ட வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது. எ.கா: <br/> tidy -q -e --show -filename ஆம் index.html "
+"<br/> index.html: வரி 43 நெடுவரிசை 3 -எச்சரிக்கை: தவறான UTF -8 பைட்டுகளை "
+"மாற்றுதல் (கரி. குறியீடு U+00A9)"
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowInfo"
+msgid "This option specifies if Tidy should display info-level messages. "
+msgstr ""
+"நேர்த்தியாக தகவல்-நிலை செய்திகளைக் காண்பிக்க வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowMarkup"
+msgid ""
+"This option specifies if Tidy should generate a pretty printed version of "
+"the markup. Note that Tidy won't generate a pretty printed version if it "
+"finds significant errors (see <code>force-output</code>). "
+msgstr ""
+"நேர்த்தியாக மார்க்அப்பின் அழகான அச்சிடப்பட்ட பதிப்பை உருவாக்க வேண்டுமா என்று"
+" இந்த விருப்பம் குறிப்பிடுகிறது. குறிப்பிடத்தக்க பிழைகள் கண்டால் "
+"நேர்த்தியானது அழகான அச்சிடப்பட்ட பதிப்பை உருவாக்காது என்பதை நினைவில் கொள்க "
+"(<code> படை-வெளியீடு </code> ஐப் பார்க்கவும்)."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowWarnings"
+msgid ""
+"This option specifies if Tidy should suppress warnings. This can be useful "
+"when a few errors are hidden in a flurry of warnings. "
+msgstr ""
+"நேர்த்தியாக எச்சரிக்கைகளை அடக்க வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது. சில பிழைகள் எச்சரிக்கைகளின் பரபரப்பில் மறைக்கப்படும்போது "
+"இது பயனுள்ளதாக இருக்கும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidySkipNested"
+msgid ""
+"This option specifies that Tidy should skip nested tags when parsing script "
+"and style data. "
+msgstr ""
+"கைஉரை மற்றும் பாணி தரவுகளை பாகுபடுத்தும்போது நேர்த்தியான நேர்த்தியான "
+"குறிச்சொற்களைத் தவிர்க்க வேண்டும் என்று இந்த விருப்பம் குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidySortAttributes"
+msgid ""
+"This option specifies that Tidy should sort attributes within an element "
+"using the specified sort algorithm. If set to <var>alpha</var>, the "
+"algorithm is an ascending alphabetic sort. <br/>When used while sorting with"
+" <code>priority-attributes</code>, any attribute sorting will take place "
+"after the priority attributes have been output. "
+msgstr ""
+"குறிப்பிட்ட வரிசை வழிமுறையைப் பயன்படுத்தி ஒரு உறுப்புக்குள் டைடி பண்புகளை "
+"வரிசைப்படுத்த வேண்டும் என்பதை இந்த விருப்பம் குறிப்பிடுகிறது. <var>ஆல்பா "
+"</var> என அமைக்கப்பட்டால், வழிமுறை ஒரு ஏறும் அகரவரிசை வகை. <br/> <code> "
+"முன்னுரிமை-காரணிகள் </code> உடன் வரிசைப்படுத்தும் போது பயன்படுத்தும்போது, "
+"​​முன்னுரிமை பண்புக்கூறுகள் வெளியீட்டிற்குப் பிறகு எந்தவொரு பண்புக்கூறு "
+"வரிசையாக்கமும் நடைபெறும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMuteReports"
+msgid ""
+"Use this option to prevent Tidy from displaying certain types of report "
+"output, for example, for conditions that you wish to ignore. <br/>This "
+"option takes a list of one or more keys indicating the message type to mute."
+" You can discover these message keys by using the <code>mute-id</code> "
+"configuration option and examining Tidy's output. "
+msgstr ""
+"சில வகையான அறிக்கை வெளியீட்டைக் காண்பிப்பதைத் தடுக்க இந்த விருப்பத்தைப் "
+"பயன்படுத்தவும், எடுத்துக்காட்டாக, நீங்கள் புறக்கணிக்க விரும்பும் "
+"நிபந்தனைகளுக்கு. <br/> இந்த விருப்பம் செய்தி வகையை முடக்குவதைக் குறிக்கும் "
+"ஒன்று அல்லது அதற்கு மேற்பட்ட விசைகளின் பட்டியலை எடுக்கும். <code> MUTE-ID "
+"</code> உள்ளமைவு விருப்பத்தைப் பயன்படுத்தி, நேர்த்தியின் வெளியீட்டை "
+"ஆராய்வதன் மூலம் இந்த செய்தி விசைகளை நீங்கள் கண்டறியலாம்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMuteShow"
+msgid ""
+"This option indicates whether or not Tidy should display message ID's with "
+"each of its error reports. This could be useful if you wanted to use the "
+"<code>mute</code> configuration option in order to filter out certain report"
+" messages. "
+msgstr ""
+"இந்த விருப்பம் அதன் ஒவ்வொரு பிழை அறிக்கைகளிலும் செய்தி ஐடியைக் காண்பிக்க "
+"வேண்டுமா இல்லையா என்பதைக் குறிக்கிறது. சில அறிக்கை செய்திகளை வடிகட்ட "
+"<குறியீடு> முடக்கு </code> உள்ளமைவு விருப்பத்தைப் பயன்படுத்த விரும்பினால் "
+"இது பயனுள்ளதாக இருக்கும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyStrictTagsAttr"
+msgid ""
+"This options ensures that tags and attributes are applicable for the version"
+" of HTML that Tidy outputs. When set to <var>yes</var> and the output "
+"document type is a strict doctype, then Tidy will report errors. If the "
+"output document type is a loose or transitional doctype, then Tidy will "
+"report warnings. <br/>Additionally if <code>drop-proprietary-"
+"attributes</code> is enabled, then not applicable attributes will be "
+"dropped, too. <br/>When set to <var>no</var>, these checks are not "
+"performed. "
+msgstr ""
+"நேர்த்தியான வெளியீடுகளை உஉகுமொ இன் பதிப்பிற்கு குறிச்சொற்கள் மற்றும் "
+"பண்புக்கூறுகள் பொருந்தும் என்பதை இந்த விருப்பங்கள் உறுதி செய்கின்றன. <var>"
+"ஆம் </var> என அமைக்கப்பட்டால், வெளியீட்டு ஆவண வகை ஒரு கடுமையான டாக்டைப் "
+"ஆகும், பின்னர் நேர்த்தியானது பிழைகளைப் புகாரளிக்கும். வெளியீட்டு ஆவண வகை ஒரு"
+" தளர்வான அல்லது இடைக்கால டாக்டைப் என்றால், டைடி எச்சரிக்கைகளைப் "
+"புகாரளிக்கும். <br/> கூடுதலாக <code> துளி-தனியுரிம-பண்புக்கூறு </code> "
+"இயக்கப்பட்டிருந்தால், பொருந்தக்கூடிய பண்புகளும் கைவிடப்படாது. <br/> <var>"
+"இல்லை </var> என அமைக்கப்பட்டால், இந்த காசோலைகள் செய்யப்படாது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyTabSize"
+msgid ""
+"This option specifies the number of columns that Tidy uses between "
+"successive tab stops. It is used to map tabs to spaces when reading the "
+"input. "
+msgstr ""
+"இந்த விருப்பம் அடுத்தடுத்த தாவல் நிறுத்தங்களுக்கு இடையில் நேர்த்தியாகப் "
+"பயன்படுத்தும் நெடுவரிசைகளின் எண்ணிக்கையைக் குறிப்பிடுகிறது. உள்ளீட்டைப் "
+"படிக்கும்போது தாவல்களை இடைவெளிகளுக்கு வரைபடமாக்க இது பயன்படுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyUpperCaseAttrs"
+msgid ""
+"This option specifies if Tidy should output attribute names in upper case. "
+"<br/>When set to <var>no</var>, attribute names will be written in lower "
+"case. Specifying <var>yes</var> will output attribute names in upper case, "
+"and <var>preserve</var> can used to leave attribute names untouched. "
+"<br/>When using XML input, the original case is always preserved. "
+msgstr ""
+"இந்த விருப்பம் நேர்த்தியான வழக்கில் பண்புக்கூறு பெயர்களை வெளியீடு செய்ய "
+"வேண்டுமா என்பதைக் குறிப்பிடுகிறது. <br/> <var>இல்லை </var> என "
+"அமைக்கப்பட்டால், பண்புக்கூறு பெயர்கள் சிறிய விசயத்தில் எழுதப்படும். <var>ஆம்"
+" </var> ஐக் குறிப்பிடுவது மேல் வழக்கில் பண்புக்கூறு பெயர்களை வெளியிடும், "
+"மேலும் <var>பாதுகாத்தல் </var> பண்புக்கூறு பெயர்களை தீண்டத்தகாததாக விட "
+"பயன்படுத்தலாம். <br/> எக்ச்எம்எல் உள்ளீட்டைப் பயன்படுத்தும் போது, ​​அசல் "
+"வழக்கு எப்போதும் பாதுகாக்கப்படுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyUpperCaseTags"
+msgid ""
+"This option specifies if Tidy should output tag names in upper case. "
+"<br/>The default is <var>no</var> which results in lower case tag names, "
+"except for XML input where the original case is preserved. "
+msgstr ""
+"இந்த விருப்பம் நேர்த்தியானது மேல் வழக்கில் குறிச்சொல் பெயர்களை வெளியிட "
+"வேண்டுமா என்பதைக் குறிப்பிடுகிறது. <br/> இயல்புநிலை <var>இல்லை </var>, இது "
+"அசல் வழக்கு பாதுகாக்கப்படும் எக்ச்எம்எல் உள்ளீட்டைத் தவிர, குறைந்த வழக்கு "
+"குறிச்சொல் பெயர்களில் விளைகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyUseCustomTags"
+msgid ""
+"This option enables the use of tags for autonomous custom elements, e.g. "
+"<code>&lt;flag-icon&gt;</code> with Tidy. Custom tags are disabled if this "
+"value is <var>no</var>. Other settings - <var>blocklevel</var>, "
+"<var>empty</var>, <var>inline</var>, and <var>pre</var> will treat "
+"<em>all</em> detected custom tags accordingly. <br/>The use of <code>new-"
+"blocklevel-tags</code>, <code>new-empty-tags</code>, <code>new-inline-"
+"tags</code>, or <code>new-pre-tags</code> will override the treatment of "
+"custom tags by this configuration option. This may be useful if you have "
+"different types of custom tags.<br/>When enabled these tags are determined "
+"during the processing of your document using opening tags; matching closing "
+"tags will be recognized accordingly, and unknown closing tags will be "
+"discarded. "
+msgstr ""
+"இந்த விருப்பம் தன்னாட்சி தனிப்பயன் கூறுகளுக்கான குறிச்சொற்களைப் பயன்படுத்த "
+"உதவுகிறது, எ.கா. <code> &lt; கொடி-ஐகான் &gt; </code> நேர்த்தியுடன். இந்த "
+"மதிப்பு <var>இல்லை </var> என்றால் தனிப்பயன் குறிச்சொற்கள் முடக்கப்படும். பிற"
+" அமைப்புகள் - <var>பிளாக்க்லெவல் </var>, <var>வெற்று </var>, <var>இன்லைன் "
+"</var>, மற்றும் <var>முன் </var> ஆகியவை <em> அனைத்து </em> அதற்கேற்ப "
+"கண்டறியப்பட்ட தனிப்பயன் குறிச்சொற்களுக்கு சிகிச்சையளிக்கும். <br/> <CODE> "
+"புதிய-தடுப்பு-குறிச்சொற்கள் </code>, <code> புதிய-வெற்று-குறிச்சொற்கள் "
+"</code>, <code> புதிய-இன்லைன்-டேக்ச் </code>, அல்லது <code> "
+"புதிய-பிரே-டேக்ச் </code> இந்த உள்ளமைவு விருப்பத்தின் மூலம் தனிப்பயன் "
+"குறிச்சொற்களின் சிகிச்சையை மீறும். உங்களிடம் பல்வேறு வகையான தனிப்பயன் "
+"குறிச்சொற்கள் இருந்தால் இது பயனுள்ளதாக இருக்கும். <br/> இயக்கப்பட்டால் இந்த "
+"குறிச்சொற்கள் திறக்கும் குறிச்சொற்களைப் பயன்படுத்தி உங்கள் ஆவணத்தின் "
+"செயலாக்கத்தின் போது தீர்மானிக்கப்படும்; பொருந்தும் இறுதி குறிச்சொற்கள் "
+"அதற்கேற்ப அங்கீகரிக்கப்படும், மேலும் அறியப்படாத நிறைவு குறிச்சொற்கள் "
+"நிராகரிக்கப்படும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyVertSpace"
+msgid ""
+"This option specifies if Tidy should add some extra empty lines for "
+"readability. <br/>The default is <var>no</var>. <br/>If set to "
+"<var>auto</var> Tidy will eliminate nearly all newline characters."
+msgstr ""
+"இந்த விருப்பம் நேர்த்தியாக வாசிப்புக்கு சில கூடுதல் வெற்று வரிகளைச் சேர்க்க "
+"வேண்டுமா என்பதைக் குறிப்பிடுகிறது. <br/> இயல்புநிலை <var>இல்லை </var>. <br/>"
+" <var>தானி </var> என அமைக்கப்பட்டால், கிட்டத்தட்ட எல்லா புதிய "
+"எழுத்துக்களையும் அகற்றும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWarnPropAttrs"
+msgid "This option specifies if Tidy should warn on proprietary attributes."
+msgstr ""
+"தனியுரிம பண்புகளை நேர்த்தியாக எச்சரிக்க வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWord2000"
+msgid ""
+"This option specifies if Tidy should go to great pains to strip out all the "
+"surplus stuff Microsoft Word 2000 inserts when you save Word documents as "
+"\"Web pages\". It doesn't handle embedded images or VML. <br/>You should "
+"consider saving using Word's <strong>Save As...</strong>, and choosing "
+"<strong>Web Page, Filtered</strong>. "
+msgstr ""
+"நீங்கள் சொல் ஆவணங்களை \"வலைப்பக்கங்கள்\" என்று சேமிக்கும்போது அனைத்து உபரி "
+"விசயங்களையும் நுண்மென் வேர்ட் 2000 செருகும் அனைத்து உபரி விசயங்களையும் அகற்ற"
+" நேர்த்தியாக மிகுந்த வலிகள் செல்ல வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது. இது உட்பொதிக்கப்பட்ட படங்கள் அல்லது வி.எம்.எல். <br/> "
+"வேர்டின் <strong> சேமி ... </strong> ஐப் பயன்படுத்தி சேமிப்பதை நீங்கள் "
+"கருத்தில் கொள்ள வேண்டும், மேலும் <strong> வலைப்பக்கத்தைத் தேர்ந்தெடுப்பது, "
+"வடிகட்டப்பட்டது </strong>."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapAsp"
+msgid ""
+"This option specifies if Tidy should line wrap text contained within ASP "
+"pseudo elements, which look like: <code>&lt;% ... %&gt;</code>. "
+msgstr ""
+"ஏஎச்பி சூடோ கூறுகளுக்குள் உள்ள நேர்த்தியாக வரி மடக்கு உரையை நேர்த்தியாக "
+"வேண்டுமா என்று இந்த விருப்பம் குறிப்பிடுகிறது, அவை போல: <code> &lt; % ... %"
+" &gt; </code>."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapAttVals"
+msgid ""
+"This option specifies if Tidy should line-wrap attribute values, meaning "
+"that if the value of an attribute causes a line to exceed the width "
+"specified by <code>wrap</code>, Tidy will add one or more line breaks to the"
+" value, causing it to be wrapped into multiple lines. <br/>Note that this "
+"option can be set independently of <code>wrap-script-literals</code>. By "
+"default Tidy replaces any newline or tab with a single space and replaces "
+"any sequences of whitespace with a single space. <br/>To force Tidy to "
+"preserve the original, literal values of all attributes, and ensure that "
+"whitespace characters within attribute values are passed through unchanged, "
+"set <code>literal-attributes</code> to <var>yes</var>. "
+msgstr ""
+"இந்த விருப்பம் நேர்த்தியாக வரி-மடக்கு பண்புக்கூறு மதிப்புகளை வேண்டுமா "
+"என்பதைக் குறிப்பிடுகிறது, அதாவது ஒரு பண்புக்கூறின் மதிப்பு <குறியீடு> மடக்கு"
+" </code> ஆல் குறிப்பிடப்பட்ட அகலத்தை விட அதிகமாக இருந்தால், நேர்த்தியானது "
+"மதிப்புக்கு ஒன்று அல்லது அதற்கு மேற்பட்ட வரி இடைவெளிகளைச் சேர்க்கும், இதனால்"
+" அது பல வரிகளில் மூடப்பட்டிருக்கும். <br/> இந்த விருப்பத்தை <code> "
+"மடக்கு-SCRIPT-LITERALS </code> இலிருந்து சுயாதீனமாக அமைக்க முடியும் என்பதை "
+"நினைவில் கொள்க. இயல்பாக நேர்த்தியாக எந்த புதிய இடத்தையும் தாவலையும் ஒற்றை "
+"இடத்துடன் மாற்றுகிறது மற்றும் இடைவெளியின் எந்தவொரு காட்சிகளையும் ஒற்றை "
+"இடத்துடன் மாற்றுகிறது. <br/> அனைத்து பண்புகளின் அசல், நேரடி மதிப்புகளையும் "
+"பாதுகாக்க நேர்த்தியாக கட்டாயப்படுத்தவும், பண்புக்கூறு மதிப்புகளுக்குள் உள்ள "
+"இடைவெளி எழுத்துக்கள் மாறாமல், அமைக்கவும் <குறியீடு> நேரடி-பண்புக்கூறுகள் "
+"</code> க்கு <var>ஆம் </var> வழியாக அனுப்பப்படுவதை உறுதிசெய்யவும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapJste"
+msgid ""
+"This option specifies if Tidy should line wrap text contained within JSTE "
+"pseudo elements, which look like: <code>&lt;# ... #&gt;</code>. "
+msgstr ""
+"சே.எச்.டி.இ சூடோ கூறுகளுக்குள் உள்ள டைடி லைன் மடக்கு உரையை நேர்த்தியாகக் "
+"கொண்டிருக்க வேண்டுமா என்று இந்த விருப்பம் குறிப்பிடுகிறது, அவை போல் "
+"தோன்றும்: <code> &lt; # ... # &gt; </code>."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapLen"
+msgid ""
+"This option specifies the right margin Tidy uses for line wrapping. "
+"<br/>Tidy tries to wrap lines so that they do not exceed this length. "
+"<br/>Set <code>wrap</code> to <var>0</var> (zero) if you want to disable "
+"line wrapping. "
+msgstr ""
+"இந்த விருப்பம் வரி மடக்குதலுக்கான சரியான விளிம்பு நேர்த்தியான பயன்பாடுகளைக் "
+"குறிப்பிடுகிறது. <br/> நேர்த்தியானது கோடுகளை மடிக்க முயற்சிக்கிறது, இதனால் "
+"அவை இந்த நீளத்தை மீறாது. <br/> <code> மடக்கு </code> ஐ <var>0 </var> "
+"(பூச்சியம்) என அமைக்கவும் நீங்கள் வரி மடக்குதலை முடக்க விரும்பினால்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapPhp"
+msgid ""
+"This option specifies if Tidy should add a new line after a PHP pseudo "
+"elements, which look like: <code>&lt;?php ... ?&gt;</code>. "
+msgstr ""
+"ஒரு பிஎச்பி சூடோ கூறுகளுக்குப் பிறகு நேர்த்தியாக ஒரு புதிய வரியைச் சேர்க்க "
+"வேண்டுமா என்று இந்த விருப்பம் குறிப்பிடுகிறது, இது போல: <code> &lt;? "
+"பிஎச்பி ...? &gt; </code>."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapScriptlets"
+msgid ""
+"This option specifies if Tidy should line wrap string literals assigned to "
+"element event handler attributes, such as element.onmouseover()."
+msgstr ""
+"ELEMERT.ONMouseOver () போன்ற உறுப்பு நிகழ்வு கையாளுபவர் பண்புகளுக்கு "
+"ஒதுக்கப்பட்டுள்ள மடக்கு சரம் எழுத்தாளர்களை நேர்த்தியாகக் கொண்டிருக்க "
+"வேண்டுமா என்று இந்த விருப்பம் குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWrapSection"
+msgid ""
+"This option specifies if Tidy should line wrap text contained within "
+"<code>&lt;![ ... ]&gt;</code> section tags. "
+msgstr ""
+"<code> &lt;! [...] &gt; </code> பிரிவு குறிச்சொற்களுக்குள் உள்ள "
+"நேர்த்தியான மடக்கு உரையை நேர்த்தியாகக் கொண்டிருக்க வேண்டுமா என்று இந்த "
+"விருப்பம் குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyWriteBack"
+msgid ""
+"This option specifies if Tidy should write back the tidied markup to the "
+"same file it read from. <br/>You are advised to keep copies of important "
+"files before tidying them, as on rare occasions the result may not be what "
+"you expect. "
+msgstr ""
+"டைடி நேர்த்தியான மார்க்அப்பை அது படித்த அதே கோப்பில் மீண்டும் எழுத வேண்டுமா "
+"என்று இந்த விருப்பம் குறிப்பிடுகிறது. <br/> முக்கியமான கோப்புகளின் நகல்களை "
+"நேர்த்தியாக வைத்திருப்பதற்கு முன்பு அவற்றை வைத்திருக்க "
+"அறிவுறுத்தப்படுகிறீர்கள், அரிதான சந்தர்ப்பங்களில் இதன் விளைவாக நீங்கள் "
+"எதிர்பார்ப்பது அல்ல."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXhtmlOut"
+msgid ""
+"This option specifies if Tidy should generate pretty printed output, writing"
+" it as extensible HTML. <br/>This option causes Tidy to set the DOCTYPE and "
+"default namespace as appropriate to XHTML, and will use the corrected value "
+"in output regardless of other sources. <br/>For XHTML, entities can be "
+"written as named or numeric entities according to the setting of "
+"<code>numeric-entities</code>. <br/>The original case of tags and attributes"
+" will be preserved, regardless of other options. "
+msgstr ""
+"இந்த விருப்பம் நேர்த்தியாக அழகாக அச்சிடப்பட்ட வெளியீட்டை உருவாக்க வேண்டுமா "
+"என்பதைக் குறிப்பிடுகிறது, அதை நீட்டிக்கக்கூடிய உஉகுமொ ஆக எழுதுகிறது. <br/> "
+"இந்த விருப்பம் டாக் டைப் மற்றும் இயல்புநிலை பெயர்வெளியை XHTML க்கு "
+"பொருத்தமானதாக அமைக்க நேர்த்தியாக உள்ளது, மேலும் பிற மூலங்களைப் "
+"பொருட்படுத்தாமல் வெளியீட்டில் சரிசெய்யப்பட்ட மதிப்பைப் பயன்படுத்தும். <br/> "
+"XHTML க்கு, <குறியீடு> எண்-நிறுவனங்கள் </code> அமைப்பின் படி நிறுவனங்களை "
+"பெயரிடப்பட்ட அல்லது எண் நிறுவனங்களாக எழுதலாம். <br/> குறிச்சொற்கள் மற்றும் "
+"பண்புகளின் அசல் வழக்கு பிற விருப்பங்களைப் பொருட்படுத்தாமல் பாதுகாக்கப்படும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXmlDecl"
+msgid ""
+"This option specifies if Tidy should add the XML declaration when outputting"
+" XML or XHTML. <br/>Note that if the input already includes an "
+"<code>&lt;?xml ... ?&gt;</code> declaration then this option will be "
+"ignored. <br/>If the encoding for the output is different from "
+"<var>ascii</var>, one of the <var>utf*</var> encodings, or <var>raw</var>, "
+"then the declaration is always added as required by the XML standard. "
+msgstr ""
+"எக்ச்எம்எல் அல்லது எக்ச்எச்.டி.எம்.எல் வெளியிடும் போது நேர்த்தியாக "
+"எக்ச்எம்எல் அறிவிப்பை சேர்க்க வேண்டுமா என்று இந்த விருப்பம் குறிப்பிடுகிறது."
+" <br/> உள்ளீட்டில் ஏற்கனவே ஒரு <code> &lt;? நீகுமொ ...? &gt; </code> "
+"அறிவிப்பு இருந்தால் இந்த விருப்பம் புறக்கணிக்கப்படும் என்பதை நினைவில் கொள்க."
+" <br/> வெளியீட்டிற்கான குறியாக்கம் <var>ASCII </var>இலிருந்து "
+"வேறுபட்டிருந்தால், <var>utf*</var>குறியாக்கங்களில் ஒன்று, அல்லது <var>ரா "
+"</var>, பின்னர் எக்ச்எம்எல் தரநிலைக்குத் தேவையான அறிவிப்பு எப்போதும் "
+"சேர்க்கப்படும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXmlOut"
+msgid ""
+"This option specifies if Tidy should pretty print output, writing it as "
+"well-formed XML. <br/>Any entities not defined in XML 1.0 will be written as"
+" numeric entities to allow them to be parsed by an XML parser. <br/>The "
+"original case of tags and attributes will be preserved, regardless of other "
+"options. "
+msgstr ""
+"இந்த விருப்பம் நேர்த்தியான வெளியீட்டை அழகாக அச்சிட வேண்டுமா என்பதைக் "
+"குறிப்பிடுகிறது, அதை நன்கு உருவாக்கிய எக்ச்எம்எல் எழுதுகிறது. <br/> "
+"எக்ச்எம்எல் 1.0 இல் வரையறுக்கப்படாத எந்தவொரு நிறுவனங்களும் எக்ச்எம்எல் "
+"பாகுபடுத்தி பாகுபடுத்த அனுமதிக்க எண் நிறுவனங்களாக எழுதப்படும். <br/> "
+"குறிச்சொற்கள் மற்றும் பண்புகளின் அசல் வழக்கு பிற விருப்பங்களைப் "
+"பொருட்படுத்தாமல் பாதுகாக்கப்படும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXmlPIs"
+msgid ""
+"This option specifies if Tidy should change the parsing of processing "
+"instructions to require <code>?&gt;</code> as the terminator rather than "
+"<code>&gt;</code>. <br/>This option is automatically set if the input is in "
+"XML. "
+msgstr ""
+"<குறியீடு> &gt; </code> ஐ விட டெர்மினேட்டராக தேவைப்படும் செயலாக்க "
+"வழிமுறைகளின் பாகுபடுத்தலை நேர்த்தியாக மாற்ற வேண்டுமா என்று இந்த விருப்பம் "
+"குறிப்பிடுகிறது. <br/> உள்ளீடு எக்ச்எம்எல்லில் இருந்தால் இந்த விருப்பம் "
+"தானாக அமைக்கப்படும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXmlSpace"
+msgid ""
+"This option specifies if Tidy should add <code>xml:space=\"preserve\"</code>"
+" to elements such as <code>&lt;pre&gt;</code>, <code>&lt;style&gt;</code> "
+"and <code>&lt;script&gt;</code> when generating XML. <br/>This is needed if "
+"the whitespace in such elements is to be parsed appropriately without having"
+" access to the DTD. "
+msgstr ""
+"<குறியீடு> எக்ச்எம்எல்: ச்பேச் = \"பாதுகாத்தல்\" </குறியீடு> ஐ <குறியீடு> & "
+"எல்.டி; முன் & சி.டி; <br/> அத்தகைய கூறுகளில் உள்ள இடைவெளி டி.டி.டி.க்கு "
+"அணுகாமல் சரியான முறையில் பாகுபடுத்தப்பட வேண்டுமானால் இது தேவை."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyXmlTags"
+msgid ""
+"This option specifies if Tidy should use the XML parser rather than the "
+"error correcting HTML parser. "
+msgstr ""
+"உஉகுமொ பாகுபடுத்தியை சரிசெய்வதை விட நேர்த்தியாக எக்ச்எம்எல் பாகுபடுத்தி "
+"பயன்படுத்த வேண்டுமா என்று இந்த விருப்பம் குறிப்பிடுகிறது."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyMetaCharset"
+msgid ""
+"This option, when enabled, adds a <code>&lt;meta&gt;</code> element and sets"
+" the <code>charset</code> attribute to the encoding of the document. Set "
+"this option to <var>yes</var> to enable it. "
+msgstr ""
+"இந்த விருப்பம், இயக்கப்பட்டால், ஒரு <code> &lt; மேவு &gt; </code> "
+"உறுப்பைச் சேர்த்து, ஆவணத்தின் குறியாக்கத்திற்கான <code> சார்செட் </code> "
+"பண்புகளை அமைக்கிறது. இந்த விருப்பத்தை <var>ஆம் </var> க்கு அமைக்கவும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyShowMetaChange"
+msgid ""
+"This option enables a message whenever Tidy changes the <code>content</code>"
+" attribute of a meta charset declaration to match the encoding of the "
+"document. Set this option to <var>yes</var> to enable it. "
+msgstr ""
+"ஆவணத்தின் குறியாக்கத்துடன் பொருந்த ஒரு மேவு சார்செட் பிரகடனத்தின் <குறியீடு>"
+" உள்ளடக்கம் </code> பண்புக்கூறு மாற்றும் போதெல்லாம் இந்த விருப்பம் ஒரு "
+"செய்தியை செயல்படுத்துகிறது. இந்த விருப்பத்தை <var>ஆம் </var> க்கு "
+"அமைக்கவும்."
+
+#. Important notes for translators:
+#. - Use only <code></code>, <var></var>, <em></em>, <strong></strong>, and
+#. <br/>.
+#. - Entities, tags, attributes, etc., should be enclosed in <code></code>.
+#. - Option values should be enclosed in <var></var>.
+#. - It's very important that <br/> be self-closing!
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not
+#. be translated.
+msgctxt "TidyStyleTags"
+msgid ""
+"This option specifies if Tidy should move all style tags to the head of the "
+"document. "
+msgstr ""
+"நேர்த்தியாக அனைத்து பாணி குறிச்சொற்களையும் ஆவணத்தின் தலைக்கு நகர்த்த "
+"வேண்டுமா என்று இந்த விருப்பம் குறிப்பிடுகிறது."
+
+msgctxt "TidyInfo"
+msgid "Info: "
+msgstr "தகவல்:"
+
+msgctxt "TidyWarning"
+msgid "Warning: "
+msgstr "எச்சரிக்கை:"
+
+msgctxt "TidyConfig"
+msgid "Config: "
+msgstr "கட்டமைப்பு:"
+
+msgctxt "TidyAccess"
+msgid "Access: "
+msgstr "அணுகல்:"
+
+msgctxt "TidyError"
+msgid "Error: "
+msgstr "பிழை:"
+
+msgctxt "TidyBadDocument"
+msgid "Document: "
+msgstr "ஆவணம்:"
+
+msgctxt "TidyFatal"
+msgid "Panic: "
+msgstr "பீதி:"
+
+msgctxt "TidyDialogueSummary"
+msgid "Summary: "
+msgstr "சுருக்கம்:"
+
+msgctxt "TidyDialogueInfo"
+msgid "Information: "
+msgstr "தகவல்:"
+
+msgctxt "TidyDialogueFootnote"
+msgid "Footnote: "
+msgstr "அடிக்குறிப்பு:"
+
+#, c-format
+msgctxt "LINE_COLUMN_STRING"
+msgid "line %d column %d - "
+msgstr "வரி %d நெடுவரிசை %d -"
+
+#, c-format
+msgctxt "FN_LINE_COLUMN_STRING"
+msgid "%s: line %d column %d - "
+msgstr "%s: வரி %d நெடுவரிசை %d -"
+
+#. For example, "discarding invalid UTF-16 surrogate pair"
+msgctxt "STRING_DISCARDING"
+msgid "discarding"
+msgstr "நிராகரிப்பு"
+
+msgctxt "STRING_ERROR_COUNT_ERROR"
+msgid "error"
+msgid_plural "errors"
+msgstr[0] "பிழை"
+msgstr[1] "பிழைகள்"
+
+msgctxt "STRING_ERROR_COUNT_WARNING"
+msgid "warning"
+msgid_plural "warnings"
+msgstr[0] "எச்சரிக்கை"
+msgstr[1] "எச்சரிக்கைகள்"
+
+msgctxt "STRING_HELLO_ACCESS"
+msgid ""
+"\n"
+"Accessibility Checks:\n"
+msgstr ""
+"\n"
+"அணுகல் காசோலைகள்:\n"
+
+#. This is not a formal name and can be translated.
+msgctxt "STRING_HTML_PROPRIETARY"
+msgid "HTML Proprietary"
+msgstr "உஉகுமொ தனியுரிம"
+
+msgctxt "STRING_XML_DECLARATION"
+msgid "XML declaration"
+msgstr "எக்ச்எம்எல் அறிவிப்பு"
+
+msgctxt "STRING_PLAIN_TEXT"
+msgid "plain text"
+msgstr "சாதாரண எழுத்து"
+
+#. For example, "replacing invalid UTF-8 bytes"
+msgctxt "STRING_REPLACING"
+msgid "replacing"
+msgstr "மாற்றுகிறது"
+
+#. For example, "you should avoid using the specified encoding."
+msgctxt "STRING_SPECIFIED"
+msgid "specified"
+msgstr "குறிப்பிடப்பட்டது"
+
+msgctxt "TIDYCUSTOMNO_STRING"
+msgid "no"
+msgstr "இல்லை"
+
+msgctxt "TIDYCUSTOMBLOCKLEVEL_STRING"
+msgid "block level"
+msgstr "தொகுதி நிலை"
+
+msgctxt "TIDYCUSTOMEMPTY_STRING"
+msgid "empty"
+msgstr "காலி"
+
+msgctxt "TIDYCUSTOMINLINE_STRING"
+msgid "inline"
+msgstr "நேர்வரிசை"
+
+msgctxt "TIDYCUSTOMPRE_STRING"
+msgid "pre"
+msgstr "முன்"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_HTML_T_ALGORITHM"
+msgid ""
+"\n"
+"      - First, search left from the cell's position to find row header cells.\n"
+"      - Then search upwards to find column header cells.\n"
+"      - The search in a given direction stops when the edge of the table is\n"
+"        reached or when a data cell is found after a header cell.\n"
+"      - Row headers are inserted into the list in the order they appear in\n"
+"        the table. \n"
+"      - For left-to-right tables, headers are inserted from left to right.\n"
+"      - Column headers are inserted after row headers, in \n"
+"        the order they appear in the table, from top to bottom. \n"
+"      - If a header cell has the headers attribute set, then the headers \n"
+"        referenced by this attribute are inserted into the list and the \n"
+"        search stops for the current direction.\n"
+"        TD cells that set the axis attribute are also treated as header cells.\n"
+msgstr ""
+"\n"
+"- முதலில், வரிசை தலைப்பு செல்களைக் கண்டுபிடிக்க கலத்தின் நிலையில் இருந்து இடதுபுறமாகத் தேடுங்கள். \n"
+"- பின்னர் நெடுவரிசை தலைப்பு கலங்களைக் கண்டுபிடிக்க மேல்நோக்கி தேடுங்கள். \n"
+"- ஒரு குறிப்பிட்ட திசையில் தேடல் அட்டவணையின் விளிம்பு இருக்கும்போது நிறுத்தப்படும் \n"
+"ஒரு தலைப்பு கலத்திற்குப் பிறகு ஒரு தரவு செல் காணப்படும் போது. \n"
+"- வரிசை தலைப்புகள் அவை தோன்றும் வரிசையில் பட்டியலில் செருகப்படுகின்றன \n"
+"அட்டவணை. \n"
+"-இடது முதல் வலது அட்டவணைகளுக்கு, தலைப்புகள் இடமிருந்து வலமாக செருகப்படுகின்றன. \n"
+"- வரிசை தலைப்புகளுக்குப் பிறகு நெடுவரிசை தலைப்புகள் செருகப்படுகின்றன \n"
+"அவை மேலிருந்து கீழாக அட்டவணையில் தோன்றும் வரிசை. \n"
+"- ஒரு தலைப்பு கலத்திற்கு தலைப்புகள் பண்புக்கூறு தொகுப்பு இருந்தால், தலைப்புகள் \n"
+"இந்த பண்புக்கூறு மூலம் குறிப்பிடப்பட்டவை பட்டியல் மற்றும் இல் செருகப்பட்டுள்ளன \n"
+"தற்போதைய திசைக்கான தேடல் நிறுத்தங்கள். \n"
+"அச்சு பண்புகளை அமைக்கும் டிடி செல்கள் தலைப்பு கலங்களாக கருதப்படுகின்றன.\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - %s represents a string-encoding name which may be localized in your
+#. language.
+#, c-format
+msgctxt "TEXT_VENDOR_CHARS"
+msgid ""
+"It is unlikely that vendor-specific, system-dependent encodings\n"
+"work widely enough on the World Wide Web; you should avoid using the \n"
+"%s character encoding, instead you are recommended to\n"
+"use named entities, e.g. &trade;.\n"
+msgstr ""
+"விற்பனையாளர்-குறிப்பிட்ட, கணினி சார்ந்த குறியாக்கங்கள் சாத்தியமில்லை \n"
+"உலகளாவிய வலையில் பரவலாக வேலை செய்யுங்கள்; நீங்கள் பயன்படுத்துவதைத் தவிர்க்க வேண்டும் \n"
+"%s எழுத்து குறியாக்கம், அதற்கு பதிலாக நீங்கள் பரிந்துரைக்கப்படுவீர்கள் \n"
+"பெயரிடப்பட்ட நிறுவனங்களைப் பயன்படுத்தவும், எ.கா. & வர்த்தகம்;\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - %s represents a string-encoding name which may be localized in your
+#. language.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+#, c-format
+msgctxt "TEXT_SGML_CHARS"
+msgid ""
+"Character codes 128 to 159 (U+0080 to U+009F) are not allowed in HTML;\n"
+"even if they were, they would likely be unprintable control characters.\n"
+"Tidy assumed you wanted to refer to a character with the same byte value in the \n"
+"%s encoding and replaced that reference with the Unicode \n"
+"equivalent.\n"
+msgstr ""
+"உஉகுமொ இல் 128 முதல் 159 வரை (U+0080 முதல் U+009F வரை) அனுமதிக்கப்படவில்லை; \n"
+"அவர்கள் இருந்தாலும், அவை அச்சிட முடியாத கட்டுப்பாட்டு எழுத்துக்களாக இருக்கும். \n"
+"அதே பைட் மதிப்பைக் கொண்ட ஒரு கதாபாத்திரத்தை நீங்கள் குறிப்பிட விரும்புகிறீர்கள் என்று நேர்த்தியாக கருதினார் \n"
+"%குறியீட்டு மற்றும் அந்த குறிப்பை யூனிகோட் மூலம் மாற்றியது \n"
+"சமமான.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_INVALID_UTF8"
+msgid ""
+"Character codes for UTF-8 must be in the range: U+0000 to U+10FFFF.\n"
+"The definition of UTF-8 in Annex D of ISO/IEC 10646-1:2000 also\n"
+"allows for the use of five- and six-byte sequences to encode\n"
+"characters that are outside the range of the Unicode character set;\n"
+"those five- and six-byte sequences are illegal for the use of\n"
+"UTF-8 as a transformation of Unicode characters. ISO/IEC 10646\n"
+"does not allow mapping of unpaired surrogates, nor U+FFFE and U+FFFF\n"
+"(but it does allow other noncharacters). For more information please refer to\n"
+"https://home.unicode.org/ and https://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+msgstr ""
+"UTF-8 க்கான எழுத்து குறியீடுகள் வரம்பில் இருக்க வேண்டும்: U+0000 முதல் U+10ffff வரை. \n"
+"ஐஎச்ஓ/ஐஇசி 10646-1: 2000 இன் இணைப்பு டி இல் யுடிஎஃப் -8 இன் வரையறை \n"
+"ஐந்து மற்றும் ஆறு-பைட் காட்சிகளைப் பயன்படுத்த அனுமதிக்கிறது \n"
+"யூனிகோட் எழுத்து தொகுப்பின் வரம்பிற்கு வெளியே இருக்கும் எழுத்துக்கள்; \n"
+"அந்த ஐந்து மற்றும் ஆறு-பைட் காட்சிகள் பயன்படுத்த சட்டவிரோதமானது \n"
+"யூனிகோட் எழுத்துக்களின் மாற்றமாக யுடிஎஃப் -8. ஐஎச்ஓ/ஐஇசி 10646 \n"
+"இணைக்கப்படாத வாடகைதாரர்களின் மேப்பிங்கை அனுமதிக்காது, அல்லது U+fffe மற்றும் U+ffff \n"
+"(ஆனால் இது பிற அல்லாத எழுத்தாளர்களை அனுமதிக்கிறது). மேலும் தகவலுக்கு தயவுசெய்து பார்க்கவும் \n"
+"https://home.unicode.org/ மற்றும் https://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_INVALID_UTF16"
+msgid ""
+"Character codes for UTF-16 must be in the range: U+0000 to U+10FFFF.\n"
+"The definition of UTF-16 in Annex C of ISO/IEC 10646-1:2000 does not allow the\n"
+"mapping of unpaired surrogates. For more information please refer to\n"
+"https://home.unicode.org/ and https://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+msgstr ""
+"யுடிஎஃப் -16 க்கான எழுத்து குறியீடுகள் வரம்பில் இருக்க வேண்டும்: u+0000 முதல் U+10ffff வரை. \n"
+"ஐஎச்ஓ/ஐஇசி 10646-1: 2000 இன் இணைப்பு சி இல் யுடிஎஃப் -16 இன் வரையறை அனுமதிக்காது \n"
+"இணைக்கப்படாத வாகைகளின் மேப்பிங். மேலும் தகவலுக்கு தயவுசெய்து பார்க்கவும் \n"
+"https://home.unicode.org/ மற்றும் https://www.cl.cam.ac.uk/~mgk25/unicode.html\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+msgctxt "TEXT_INVALID_URI"
+msgid ""
+"URIs must be properly escaped, they must not contain unescaped\n"
+"characters below U+0021 including the space character and not\n"
+"above U+007E. Tidy escapes the URI for you as recommended by\n"
+"HTML 4.01 section B.2.1 and XML 1.0 section 4.2.2. Some user agents\n"
+"use another algorithm to escape such URIs and some server-sided\n"
+"scripts depend on that. If you want to depend on that, you must\n"
+"escape the URI on your own. For more information please refer to\n"
+"https://www.w3.org/International/O-URL-and-ident.html\n"
+msgstr ""
+"யூரி கள் சரியாக தப்பிக்கப்பட வேண்டும், அவற்றில் கட்டுப்பாடற்றதாக இருக்கக்கூடாது \n"
+"விண்வெளி எழுத்து உட்பட U+0021 க்கு கீழே உள்ள எழுத்துக்கள் இல்லை \n"
+"u+007e க்கு மேலே. பரிந்துரைத்தபடி நேர்த்தியானது உங்களுக்காக யூரி இலிருந்து தப்பிக்கிறது \n"
+"HTML 4.01 பிரிவு B.2.1 மற்றும் நீகுமொ 1.0 பிரிவு 4.2.2. சில பயனர் முகவர்கள் \n"
+"அத்தகைய யூரி கள் மற்றும் சில சேவையக பக்கத்திலிருந்து தப்பிக்க மற்றொரு வழிமுறையைப் பயன்படுத்தவும் \n"
+"கைஉரைகள் அதைப் பொறுத்தது. நீங்கள் அதைச் சார்ந்து இருக்க விரும்பினால், நீங்கள் வேண்டும் \n"
+"யூரியை உங்கள் சொந்தமாக தப்பிக்க. மேலும் தகவலுக்கு தயவுசெய்து பார்க்கவும் \n"
+"https://www.w3.org/international/o-url-and-ident.html\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_BAD_FORM"
+msgid ""
+"You may need to move one or both of the <form> and </form>\n"
+"tags. HTML elements should be properly nested and form elements\n"
+"are no exception. For instance you should not place the <form>\n"
+"in one table cell and the </form> in another. If the <form> is\n"
+"placed before a table, the </form> cannot be placed inside the\n"
+"table! Note that one form can't be nested inside another!\n"
+msgstr ""
+"நீங்கள் <படிவம்> மற்றும் </form> ஐ ஒன்று அல்லது இரண்டையும் நகர்த்த வேண்டியிருக்கலாம் \n"
+"குறிச்சொற்கள். உஉகுமொ கூறுகள் சரியாக கூடு மற்றும் கூறுகளை உருவாக்க வேண்டும் \n"
+"விதிவிலக்கல்ல. உதாரணமாக நீங்கள் <படிவம்> வைக்கக்கூடாது \n"
+"ஒரு அட்டவணை கலத்தில் மற்றும் </form> மற்றொன்றில். <form> என்றால் \n"
+"ஒரு அட்டவணைக்கு முன் வைக்கப்படுகிறது, </form> க்குள் வைக்க முடியாது \n"
+"அட்டவணை! ஒரு படிவத்தை இன்னொருவருக்குள் கூடு கட்ட முடியாது என்பதை நினைவில் கொள்க!\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_BAD_MAIN"
+msgid ""
+"Only one <main> element is allowed in a document.\n"
+"Subsequent <main> elements have been discarded, which may\n"
+"render the document invalid.\n"
+msgstr ""
+"ஒரு ஆவணத்தில் ஒரே ஒரு <மெயின்> உறுப்பு மட்டுமே அனுமதிக்கப்படுகிறது. \n"
+"அடுத்தடுத்த <ain> கூறுகள் நிராகரிக்கப்பட்டுள்ளன, இது இருக்கலாம் \n"
+"ஆவணத்தை செல்லாது.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_M_SUMMARY"
+msgid ""
+"The table summary attribute should be used to describe\n"
+"the table structure. It is very helpful for people using\n"
+"non-visual browsers. The scope and headers attributes for\n"
+"table cells are useful for specifying which headers apply\n"
+"to each table cell, enabling non-visual browsers to provide\n"
+"a meaningful context for each cell.\n"
+msgstr ""
+"விவரிக்க அட்டவணை சுருக்கம் பண்புக்கூறு பயன்படுத்தப்பட வேண்டும் \n"
+"அட்டவணை அமைப்பு. பயன்படுத்தும் நபர்களுக்கு இது மிகவும் உதவியாக இருக்கும் \n"
+"காட்சி அல்லாத உலாவிகள். நோக்கம் மற்றும் தலைப்புகள் பண்புக்கூறுகள் \n"
+"எந்த தலைப்புகள் பொருந்தும் என்பதைக் குறிப்பிட அட்டவணை செல்கள் பயனுள்ளதாக இருக்கும் \n"
+"ஒவ்வொரு அட்டவணை கலத்திற்கும், காட்சி அல்லாத உலாவிகளை வழங்க உதவுகிறது \n"
+"ஒவ்வொரு கலத்திற்கும் ஒரு பொருள்உள்ள சூழல்.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_M_IMAGE_ALT"
+msgid ""
+"The alt attribute should be used to give a short description\n"
+"of an image; longer descriptions should be given with the\n"
+"longdesc attribute which takes a URL linked to the description.\n"
+"These measures are needed for people using non-graphical browsers.\n"
+msgstr ""
+"ஒரு குறுகிய விளக்கத்தை வழங்க மாற்று பண்புக்கூறு பயன்படுத்தப்பட வேண்டும் \n"
+"ஒரு படத்தின்; நீண்ட விளக்கங்கள் வழங்கப்பட வேண்டும் \n"
+"விளக்கத்துடன் இணைக்கப்பட்ட முகவரி ஐ எடுக்கும் லாங்டெச் பண்புக்கூறு. \n"
+"கிராஃபிகல் அல்லாத உலாவிகளைப் பயன்படுத்தும் நபர்களுக்கு இந்த நடவடிக்கைகள் தேவை.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_M_IMAGE_MAP"
+msgid ""
+"Use client-side image maps in preference to server-side image\n"
+"maps as the latter are inaccessible to people using non-\n"
+"graphical browsers. In addition, client-side maps are easier\n"
+"to set up and provide immediate feedback to users.\n"
+msgstr ""
+"சேவையக பக்க படத்திற்கு முன்னுரிமை அளித்து கிளையன்ட் பக்க பட வரைபடங்களைப் பயன்படுத்தவும் \n"
+"பிந்தையவற்றாக வரைபடங்கள் அல்லாதவர்களுக்கு அணுக முடியாதவை \n"
+"வரைகலை உலாவிகள். கூடுதலாக, கிளையன்ட் பக்க வரைபடங்கள் எளிதானவை \n"
+"பயனர்களுக்கு உடனடி கருத்துக்களை அமைத்து வழங்க.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_M_LINK_ALT"
+msgid ""
+"For hypertext links defined using a client-side image map, you\n"
+"need to use the alt attribute to provide a textual description\n"
+"of the link for people using non-graphical browsers.\n"
+msgstr ""
+"கிளையன்ட் பக்க பட வரைபடத்தைப் பயன்படுத்தி வரையறுக்கப்பட்ட ஐபர்டெக்ச்ட் இணைப்புகளுக்கு, நீங்கள் \n"
+"உரை விளக்கத்தை வழங்க மாற்று பண்புக்கூறைப் பயன்படுத்த வேண்டும் \n"
+"கிராஃபிகல் அல்லாத உலாவிகளைப் பயன்படுத்தும் நபர்களுக்கான இணைப்பு.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_FRAMES"
+msgid ""
+"Pages designed using frames present problems for\n"
+"people who are either blind or using a browser that\n"
+"doesn't support frames. A frames-based page should always\n"
+"include an alternative layout inside a NOFRAMES element.\n"
+msgstr ""
+"பிரேம்களைப் பயன்படுத்தி வடிவமைக்கப்பட்ட பக்கங்கள் சிக்கல்களை வழங்குகின்றன \n"
+"குருடர்கள் அல்லது உலாவியைப் பயன்படுத்துபவர்கள் \n"
+"பிரேம்களை ஆதரிக்கவில்லை. பிரேம்கள் அடிப்படையிலான பக்கம் எப்போதும் இருக்க வேண்டும் \n"
+"ஒரு நோஃப்ரேம்ச் உறுப்புக்குள் மாற்று தளவமைப்பைச் சேர்க்கவும்.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "FOOTNOTE_TRIM_EMPTY_ELEMENT"
+msgid ""
+"One or more empty elements were present in the source document but\n"
+"dropped on output. If these elements are necessary or you don't want\n"
+"this behavior, then consider setting the option \"drop-empty-elements\"\n"
+"to no.\n"
+msgstr ""
+"ஒன்று அல்லது அதற்கு மேற்பட்ட வெற்று கூறுகள் மூல ஆவணத்தில் இருந்தன, ஆனால் \n"
+"வெளியீட்டில் கைவிடப்பட்டது. இந்த கூறுகள் அவசியமானவை அல்லது நீங்கள் விரும்பவில்லை என்றால் \n"
+"இந்த நடத்தை, பின்னர் \"டிராப்-வெற்று கூறுகள்\" என்ற விருப்பத்தை அமைப்பதைக் கவனியுங்கள் \n"
+"இல்லை.\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The URL should not be translated unless you find a matching URL in your
+#. language.
+msgctxt "TEXT_ACCESS_ADVICE1"
+msgid ""
+"For further advice on how to make your pages accessible\n"
+"see https://www.w3.org/WAI/GL."
+msgstr ""
+"உங்கள் பக்கங்களை எவ்வாறு அணுகுவது என்பது குறித்த கூடுதல் ஆலோசனைக்கு \n"
+"https://www.w3.org/wai/gl ஐப் பார்க்கவும்."
+
+#. This console output should be limited to 78 characters per line.
+#. - The URL should not be translated unless you find a matching URL in your
+#. language.
+msgctxt "TEXT_ACCESS_ADVICE2"
+msgid ""
+"For further advice on how to make your pages accessible\n"
+"see https://www.w3.org/WAI/GL and https://www.html-tidy.org/accessibility/."
+msgstr ""
+"உங்கள் பக்கங்களை எவ்வாறு அணுகுவது என்பது குறித்த கூடுதல் ஆலோசனைக்கு \n"
+"https://www.w3.org/wai/gl மற்றும் https://www.html-tidy.org/accessibility/ ஐப் பார்க்கவும்."
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_LAYER"
+msgid ""
+"The Cascading Style Sheets (CSS) Positioning mechanism\n"
+"is recommended in preference to the proprietary <LAYER>\n"
+"element due to limited vendor support for LAYER.\n"
+msgstr ""
+"அடுக்கு பாணி தாள்கள் (சிஎச்எச்) பொருத்துதல் வழிமுறை \n"
+"தனியுரிம <அடுக்கு> க்கு முன்னுரிமை அளிக்க பரிந்துரைக்கப்படுகிறது \n"
+"அடுக்குக்கு வரையறுக்கப்பட்ட விற்பனையாளர் உதவி காரணமாக உறுப்பு.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_SPACER"
+msgid ""
+"You are recommended to use CSS for controlling white\n"
+"space (e.g. for indentation, margins and line spacing).\n"
+"The proprietary <SPACER> element has limited vendor support.\n"
+msgstr ""
+"வெள்ளை கட்டுப்படுத்த சிஎச்எச் ஐப் பயன்படுத்த நீங்கள் பரிந்துரைக்கப்படுகிறீர்கள் \n"
+"இடம் (எ.கா. உள்தள்ளல், விளிம்புகள் மற்றும் வரி இடைவெளிக்கு). \n"
+"தனியுரிம <spacer> உறுப்பு வரையறுக்கப்பட்ட விற்பனையாளர் ஆதரவைக் கொண்டுள்ளது.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_FONT"
+msgid ""
+"You are recommended to use CSS to specify the font and\n"
+"properties such as its size and color. This will reduce\n"
+"the size of HTML files and make them easier to maintain\n"
+"compared with using <FONT> elements.\n"
+msgstr ""
+"எழுத்துருவைக் குறிப்பிட சிஎச்எச் ஐப் பயன்படுத்த பரிந்துரைக்கப்படுகிறது \n"
+"அதன் அளவு மற்றும் நிறம் போன்ற பண்புகள். இது குறையும் \n"
+"HTML கோப்புகளின் அளவு மற்றும் அவற்றை பராமரிக்க எளிதாக்குகிறது \n"
+"<font> கூறுகளைப் பயன்படுத்துவதோடு ஒப்பிடும்போது.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_NOBR"
+msgid ""
+"You are recommended to use CSS to control line wrapping.\n"
+"Use \"white-space: nowrap\" to inhibit wrapping in place\n"
+"of inserting <NOBR>...</NOBR> into the markup.\n"
+msgstr ""
+"வரி மடக்குதலைக் கட்டுப்படுத்த சிஎச்எச் ஐப் பயன்படுத்த பரிந்துரைக்கப்படுகிறது. \n"
+"இடத்தில் மடக்குவதைத் தடுக்க \"வெள்ளை-இடம்: Nowrap\" ஐப் பயன்படுத்தவும் \n"
+"<நோபர்> ... </nobr> ஐ மார்க்அப்பில் செருகுவது.\n"
+
+#. This console output should be limited to 78 characters per line.
+msgctxt "TEXT_USING_BODY"
+msgid "You are recommended to use CSS to specify page and link colors"
+msgstr ""
+"பக்கம் மற்றும் இணைக்க வண்ணங்களைக் குறிப்பிட சிஎச்எச் ஐப் பயன்படுத்த "
+"பரிந்துரைக்கப்படுகிறது"
+
+#, c-format
+msgctxt "STRING_CONTENT_LOOKS"
+msgid "Document content looks like %s"
+msgstr "ஆவண உள்ளடக்கம் %s போல் தெரிகிறது"
+
+#, c-format
+msgctxt "STRING_DOCTYPE_GIVEN"
+msgid "Doctype given is \"%s\""
+msgstr "கொடுக்கப்பட்ட டாக்டைப் \"%s\""
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+#, c-format
+msgctxt "STRING_ERROR_COUNT"
+msgid "Tidy found %u %s and %u %s!\n"
+msgstr "நேர்த்தியாக %u %s மற்றும் %u %s!\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+msgctxt "STRING_NEEDS_INTERVENTION"
+msgid ""
+"This document has errors that must be fixed before\n"
+"using HTML Tidy to generate a tidied up version.\n"
+msgstr ""
+"இந்த ஆவணத்தில் பிழைகள் உள்ளன, அவை முன் சரி செய்யப்பட வேண்டும் \n"
+"நேர்த்தியான பதிப்பை உருவாக்க உஉகுமொ நேர்த்தியைப் பயன்படுத்துதல்.\n"
+
+msgctxt "STRING_NO_ERRORS"
+msgid "No warnings or errors were found.\n"
+msgstr "எச்சரிக்கைகள் அல்லது பிழைகள் எதுவும் காணப்படவில்லை.\n"
+
+msgctxt "STRING_NO_SYSID"
+msgid "No system identifier in emitted doctype"
+msgstr "உமிழும் டாக்டைப்பில் கணினி அடையாளங்காட்டி இல்லை"
+
+#, c-format
+msgctxt "STRING_NOT_ALL_SHOWN"
+msgid "Tidy found %u %s and %u %s! Not all warnings/errors were shown.\n"
+msgstr ""
+"நேர்த்தியாக %u %s மற்றும் %u %s! அனைத்து எச்சரிக்கைகள்/பிழைகள் "
+"காட்டப்படவில்லை.\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+msgctxt "TEXT_GENERAL_INFO"
+msgid ""
+"About HTML Tidy: https://github.com/htacg/tidy-html5\n"
+"Bug reports and comments: https://github.com/htacg/tidy-html5/issues\n"
+"Official mailing list: https://lists.w3.org/Archives/Public/public-htacg/\n"
+"Latest HTML specification: https://html.spec.whatwg.org/multipage/\n"
+"Validate your HTML documents: https://validator.w3.org/nu/\n"
+"Lobby your company to join the W3C: https://www.w3.org/Consortium\n"
+msgstr ""
+"உஉகுமொ நேர்த்தியானது பற்றி: https://github.com/htacg/tidy-html5 \n"
+"பிழை அறிக்கைகள் மற்றும் கருத்துகள்: https://github.com/htacg/tidy-html5/issues \n"
+"அதிகாரப்பூர்வ அஞ்சல் பட்டியல்: https://lists.w3.org/archives/public/public-htacg/ \n"
+"சமீபத்திய உஉகுமொ விவரக்குறிப்பு: https://html.spec.whatwg.org/multipage/ \n"
+"உங்கள் உஉகுமொ ஆவணங்களை சரிபார்க்கவும்: https://validator.w3.org/nu/ \n"
+"W3C: https://www.w3.org/consortium இல் சேர உங்கள் நிறுவனத்தை லாபி செய்யுங்கள்\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+#. - Don't terminate the last line with a newline.
+msgctxt "TEXT_GENERAL_INFO_PLEA"
+msgid ""
+"Do you speak a language other than English, or a different variant of \n"
+"English? Consider helping us to localize HTML Tidy. For details please see \n"
+"https://github.com/htacg/tidy-html5/blob/master/README/LOCALIZE.md"
+msgstr ""
+"நீங்கள் ஆங்கிலத்தைத் தவிர வேறு மொழியைப் பேசுகிறீர்களா, அல்லது வேறுபட்ட மாறுபாடு \n"
+"ஆங்கிலம்? உஉகுமொ நேர்த்தியாக உள்ளூர்மயமாக்க எங்களுக்கு உதவுவதைக் கவனியுங்கள். விவரங்களுக்கு பார்க்கவும் \n"
+"https://github.com/htacg/tidy-html5/blob/master/readme/localize.md"
+
+#, c-format
+msgctxt "ADDED_MISSING_CHARSET"
+msgid "Added appropriate missing <meta charset=...> to %s"
+msgstr "பொருத்தமான காணாமல் போன <மெட்டா சார்செட் = ...> க்கு %s"
+
+#, c-format
+msgctxt "ANCHOR_NOT_UNIQUE"
+msgid "%s anchor \"%s\" already defined"
+msgstr "ஏற்கனவே வரையறுக்கப்பட்டுள்ள%s நங்கூரம் \"%s\""
+
+#, c-format
+msgctxt "ANCHOR_DUPLICATED"
+msgid "Implicit %s anchor \"%s\" duplicated by Tidy."
+msgstr "மறைமுகமாக %s ஆங்கர் \" %s\" நேர்த்தியால் நகல்."
+
+msgctxt "APOS_UNDEFINED"
+msgid "named entity &apos; only defined in XML/XHTML"
+msgstr ""
+"பெயரிடப்பட்ட நிறுவனம் & apos; XML/XHTML இல் மட்டுமே வரையறுக்கப்பட்டுள்ளது"
+
+#, c-format
+msgctxt "ATTR_VALUE_NOT_LCASE"
+msgid "%s attribute value \"%s\" must be lower case for XHTML"
+msgstr "XHTML க்கு%s பண்புக்கூறு மதிப்பு \"%s\" சிறியதாக இருக்க வேண்டும்"
+
+#, c-format
+msgctxt "ATTRIBUTE_IS_NOT_ALLOWED"
+msgid "%s attribute \"is\" not allowed for autonomous custom tags."
+msgstr ""
+"%s பண்புக்கூறு \"தன்னாட்சி தனிப்பயன் குறிச்சொற்களுக்கு\" "
+"அனுமதிக்கப்படவில்லை."
+
+#, c-format
+msgctxt "ATTRIBUTE_VALUE_REPLACED"
+msgid "%s attribute \"%s\", incorrect value \"%s\" replaced"
+msgstr "%s பண்புக்கூறு \"%s\", தவறான மதிப்பு \"%s\" மாற்றப்பட்டது"
+
+#, c-format
+msgctxt "BACKSLASH_IN_URI"
+msgid "%s URI reference contains backslash. Typo?"
+msgstr "%s யூரி குறிப்பில் பின்வாங்கல் உள்ளது. எழுத்துப்பிழை?"
+
+#, c-format
+msgctxt "BAD_ATTRIBUTE_VALUE_REPLACED"
+msgid "%s attribute \"%s\" had invalid value \"%s\" and has been replaced"
+msgstr "\"%s\" என்ற பண்புக்கூறு தவறான மதிப்பு \"%s\" மற்றும் மாற்றப்பட்டுள்ளது"
+
+#, c-format
+msgctxt "BAD_ATTRIBUTE_VALUE"
+msgid "%s attribute \"%s\" has invalid value \"%s\""
+msgstr "%s பண்புக்கூறு \"%s\" தவறான மதிப்பு \"%s\""
+
+msgctxt "BAD_CDATA_CONTENT"
+msgid "'<' + '/' + letter not allowed here"
+msgstr "'<' + '/' + கடிதம் இங்கே அனுமதிக்கப்படவில்லை"
+
+#, c-format
+msgctxt "BAD_SUMMARY_HTML5"
+msgid "The summary attribute on the %s element is obsolete in HTML5"
+msgstr "%s உறுப்பில் உள்ள சுருக்க பண்பு HTML5 இல் வழக்கற்றுப் போய்விட்டது"
+
+msgctxt "BAD_SURROGATE_LEAD"
+msgid ""
+"Trailing (Low) surrogate pair U+%04X, with no leading (High) entity, "
+"replaced with U+FFFD."
+msgstr ""
+"பின்தங்கிய (குறைந்த) வாகை இணை U+%04x, முன்னணி (உயர்) நிறுவனம் இல்லாமல், "
+"U+FFFD உடன் மாற்றப்படுகிறது."
+
+msgctxt "BAD_SURROGATE_PAIR"
+msgid ""
+"Have out-of-range surrogate pair U+%04X:U+%04X, replaced with U+FFFD value."
+msgstr ""
+"வரம்புக்கு வெளியே வாடகை இணை U+%04x: U+%04x, U+FFFD மதிப்புடன் "
+"மாற்றப்படுகிறது."
+
+msgctxt "BAD_SURROGATE_TAIL"
+msgid ""
+"Leading (High) surrogate pair U+%04X, with no trailing (Low) entity, "
+"replaced with U+FFFD."
+msgstr ""
+"முன்னணி (உயர்) வாகை இணை U+%04x, எந்தவொரு பின்னடைவு (குறைந்த) நிறுவனம் "
+"இல்லாமல், U+FFFD உடன் மாற்றப்படுகிறது."
+
+#, c-format
+msgctxt "CANT_BE_NESTED"
+msgid "%s can't be nested"
+msgstr "%s கூடு கட்ட முடியாது"
+
+#, c-format
+msgctxt "COERCE_TO_ENDTAG"
+msgid "<%s> is probably intended as </%s>"
+msgstr "<%s> அநேகமாக </%s> ஆக கருதப்படுகிறது"
+
+msgctxt "CONTENT_AFTER_BODY"
+msgid "content occurs after end of body"
+msgstr "உடலின் முடிவுக்குப் பிறகு உள்ளடக்கம் ஏற்படுகிறது"
+
+#, c-format
+msgctxt "CUSTOM_TAG_DETECTED"
+msgid "detected autonomous custom tag %s; will treat as %s"
+msgstr "கண்டறியப்பட்ட தன்னாட்சி தனிப்பயன் குறிச்சொல் %s; %s ஆக கருதப்படும்"
+
+#, c-format
+msgctxt "DISCARDING_UNEXPECTED"
+msgid "discarding unexpected %s"
+msgstr "எதிர்பாராத %s ஐ நிராகரித்தல்"
+
+msgctxt "DOCTYPE_AFTER_TAGS"
+msgid "<!DOCTYPE> isn't allowed after elements"
+msgstr "<! Doctype> உறுப்புகளுக்குப் பிறகு அனுமதிக்கப்படவில்லை"
+
+msgctxt "DUPLICATE_FRAMESET"
+msgid "repeated FRAMESET element"
+msgstr "மீண்டும் மீண்டும் பிரேம்செட் உறுப்பு"
+
+#, c-format
+msgctxt "ELEMENT_NOT_EMPTY"
+msgid "%s element not empty or not closed"
+msgstr "%s உறுப்பு காலியாக இல்லை அல்லது மூடப்படவில்லை"
+
+#, c-format
+msgctxt "ELEMENT_VERS_MISMATCH_ERROR"
+msgid "%s element not available in %s"
+msgstr "%s இன் உறுப்பு %s இல் கிடைக்கவில்லை"
+
+#, c-format
+msgctxt "ELEMENT_VERS_MISMATCH_WARN"
+msgid "%s element not available in %s"
+msgstr "%s இன் உறுப்பு %s இல் கிடைக்கவில்லை"
+
+#, c-format
+msgctxt "ENCODING_MISMATCH"
+msgid ""
+"specified input encoding (%s) does not match actual input encoding (%s)"
+msgstr ""
+"குறிப்பிட்ட உள்ளீட்டு குறியாக்கம் (%s) உண்மையான உள்ளீட்டு குறியாக்கத்துடன் "
+"(%s) பொருந்தவில்லை"
+
+#, c-format
+msgctxt "ESCAPED_ILLEGAL_URI"
+msgid "%s escaping malformed URI reference"
+msgstr "%s தவறான யூரி குறிப்பிலிருந்து தப்பிக்கின்றன"
+
+#, c-format
+msgctxt "FILE_CANT_OPEN"
+msgid "Can't open \"%s\"\n"
+msgstr "\"%s\" ஐ திறக்க முடியாது\n"
+
+#, c-format
+msgctxt "FILE_CANT_OPEN_CFG"
+msgid "Can't open configuration file \"%s\"\n"
+msgstr "உள்ளமைவு கோப்பை \"%s\" திறக்க முடியாது\n"
+
+#, c-format
+msgctxt "FILE_NOT_FILE"
+msgid "\"%s\" is not a file!\n"
+msgstr "\"%s\" ஒரு கோப்பு அல்ல!\n"
+
+#, c-format
+msgctxt "FIXED_BACKSLASH"
+msgid "%s converting backslash in URI to slash"
+msgstr "யூரி இல் பின்சாய்வுக்கோடுகளை குறைப்பதற்கு %s மாற்றுகின்றன"
+
+msgctxt "FOUND_STYLE_IN_BODY"
+msgid "found <style> tag in <body>! fix-style-tags: yes to move."
+msgstr ""
+"<உடல்> இல் <style> குறிச்சொல் காணப்பட்டது! "
+"பிழைத்திருத்தம்-பாணி-குறிச்சொற்கள்: ஆம் நகர்த்த."
+
+#, c-format
+msgctxt "ID_NAME_MISMATCH"
+msgid "%s id and name attribute value mismatch"
+msgstr "%s அடையாளம் மற்றும் பெயர் பண்புக்கூறு மதிப்பு பொருந்தாத தன்மை"
+
+#, c-format
+msgctxt "ILLEGAL_NESTING"
+msgid "%s shouldn't be nested"
+msgstr "%s கூடு கட்டக்கூடாது"
+
+#, c-format
+msgctxt "ILLEGAL_URI_CODEPOINT"
+msgid "%s illegal characters found in URI"
+msgstr "யூரி இல் காணப்படும் %சட்டவிரோத எழுத்துக்கள்"
+
+#, c-format
+msgctxt "ILLEGAL_URI_REFERENCE"
+msgid "%s improperly escaped URI reference"
+msgstr "%s முறையற்ற முறையில் யூரி குறிப்பிலிருந்து தப்பின"
+
+#, c-format
+msgctxt "INSERTING_AUTO_ATTRIBUTE"
+msgid "%s inserting \"%s\" attribute using value \"%s\""
+msgstr "\"%s\" என்ற மதிப்பைப் பயன்படுத்தி \"%s\" பண்புகளை%செருகும்"
+
+#, c-format
+msgctxt "INSERTING_TAG"
+msgid "inserting implicit <%s>"
+msgstr "மறைமுகமான <%s> ஐ செருகும்"
+
+#, c-format
+msgctxt "INVALID_ATTRIBUTE"
+msgid "%s attribute name \"%s\" (value=\"%s\") is invalid"
+msgstr "%s பண்புக்கூறு பெயர் \"%s\" (மதிப்பு = \"%s\") தவறானது"
+
+#, c-format
+msgctxt "INVALID_NCR"
+msgid "%s invalid numeric character reference %s"
+msgstr "%s தவறான எண் எழுத்து குறிப்பு %s"
+
+#, c-format
+msgctxt "INVALID_SGML_CHARS"
+msgid "%s invalid character code %s"
+msgstr "%s தவறான எழுத்து குறியீடு %s"
+
+#, c-format
+msgctxt "INVALID_UTF8"
+msgid "%s invalid UTF-8 bytes (char. code %s)"
+msgstr "%s தவறான UTF-8 பைட்டுகள் (கரி. குறியீடு %s)"
+
+#, c-format
+msgctxt "INVALID_UTF16"
+msgid "%s invalid UTF-16 surrogate pair (char. code %s)"
+msgstr "%s தவறான யுடிஎஃப் -16 வாடகை இணை (கரி. குறியீடு %s)"
+
+#, c-format
+msgctxt "INVALID_XML_ID"
+msgid "%s cannot copy name attribute to id"
+msgstr "%s ஐடிக்கு பெயர் பண்புகளை நகலெடுக்க முடியாது"
+
+#, c-format
+msgctxt "JOINING_ATTRIBUTE"
+msgid "%s joining values of repeated attribute \"%s\""
+msgstr "\"%s\" மீண்டும் மீண்டும் பண்புக்கூறு மதிப்புகள்%s"
+
+msgctxt "MALFORMED_COMMENT"
+msgid "tidy replaced adjacent \"-\" with \"=\""
+msgstr "tidy replaced adjacent \"-\" with \"=\""
+
+msgctxt "MALFORMED_COMMENT_DROPPING"
+msgid "dropping a possible comment due to a missing hyphen"
+msgstr "காணாமல் போன ஐபன் காரணமாக சாத்தியமான கருத்தை கைவிடுதல்"
+
+msgctxt "MALFORMED_COMMENT_EOS"
+msgid "the end of the document was reached before the end of the comment"
+msgstr "கருத்தின் முடிவுக்கு முன்பே ஆவணத்தின் முடிவு எட்டப்பட்டது"
+
+msgctxt "MALFORMED_COMMENT_WARN"
+msgid ""
+"detected adjacent hyphens within the comment; consider fix-bad-comments"
+msgstr ""
+"கருத்துக்குள் அருகிலுள்ள ஐபன்கள் கண்டறியப்பட்டன; பிழைத்திருத்த-பாதிப்புகளைக்"
+" கவனியுங்கள்"
+
+msgctxt "MALFORMED_DOCTYPE"
+msgid "discarding malformed <!DOCTYPE>"
+msgstr "தவறாக நிராகரித்தல் <! Doctype>"
+
+#, c-format
+msgctxt "MISMATCHED_ATTRIBUTE_ERROR"
+msgid "%s attribute \"%s\" not allowed for %s"
+msgstr "%s \" %s\" %s க்கு அனுமதிக்கப்படவில்லை"
+
+#, c-format
+msgctxt "MISMATCHED_ATTRIBUTE_WARN"
+msgid "%s attribute \"%s\" not allowed for %s"
+msgstr "%s \" %s\" %s க்கு அனுமதிக்கப்படவில்லை"
+
+#, c-format
+msgctxt "MISSING_ATTR_VALUE"
+msgid "%s attribute \"%s\" lacks value"
+msgstr "%s பண்புக்கூறு \"%s\" மதிப்பு இல்லை"
+
+#, c-format
+msgctxt "MISSING_ATTRIBUTE"
+msgid "%s lacks \"%s\" attribute"
+msgstr "%s \"%s\" பண்புக்கூறு இல்லை"
+
+msgctxt "MISSING_DOCTYPE"
+msgid "missing <!DOCTYPE> declaration"
+msgstr "காணவில்லை <! Doctype> அறிவிப்பு"
+
+#, c-format
+msgctxt "MISSING_ENDTAG_BEFORE"
+msgid "missing </%s> before %s"
+msgstr "காணவில்லை </ %s> %s க்கு முன்"
+
+#, c-format
+msgctxt "MISSING_ENDTAG_FOR"
+msgid "missing </%s>"
+msgstr "காணவில்லை </%s>"
+
+#, c-format
+msgctxt "MISSING_ENDTAG_OPTIONAL"
+msgid "missing optional end tag </%s>"
+msgstr "விருப்பமான முடிவு குறிச்சொல் காணவில்லை </%s>"
+
+#, c-format
+msgctxt "MISSING_IMAGEMAP"
+msgid "%s should use client-side image map"
+msgstr "%s கிளையன்ட் பக்க பட வரைபடத்தைப் பயன்படுத்த வேண்டும்"
+
+#, c-format
+msgctxt "MISSING_QUOTEMARK"
+msgid "%s attribute with missing trailing quote mark"
+msgstr "காணாமல் போன பின்தங்கிய அடையாளத்துடன் %s பண்புக்கூறு"
+
+#, c-format
+msgctxt "MISSING_QUOTEMARK_OPEN"
+msgid "value for attribute \"%s\" missing quote marks"
+msgstr "பண்புக்கூறு \"%s\" காணாமல் போன மேற்கோள் மதிப்பெண்களுக்கான மதிப்பு"
+
+#, c-format
+msgctxt "MISSING_SEMICOLON_NCR"
+msgid "numeric character reference \"%s\" doesn't end in ';'"
+msgstr "எண் எழுத்து குறிப்பு \"%s\" முடிவடையாது ';'"
+
+#, c-format
+msgctxt "MISSING_SEMICOLON"
+msgid "entity \"%s\" doesn't end in ';'"
+msgstr "\"%s\" நிறுவனம் முடிவதில்லை ';'"
+
+#, c-format
+msgctxt "MISSING_STARTTAG"
+msgid "missing <%s>"
+msgstr "<%s> காணவில்லை"
+
+msgctxt "MISSING_TITLE_ELEMENT"
+msgid "inserting missing 'title' element"
+msgstr "காணாமல் போன 'தலைப்பு' உறுப்பைச் செருகும்"
+
+msgctxt "MOVED_STYLE_TO_HEAD"
+msgid "moved <style> tag to <head>! fix-style-tags: no to avoid."
+msgstr ""
+"<எட்> க்கு <ச்டைல்> குறிச்சொல் நகர்த்தப்பட்டது! "
+"பிழைத்திருத்தம்-பாணி-குறிச்சொற்கள்: தவிர்க்க வேண்டாம்."
+
+#, c-format
+msgctxt "NESTED_EMPHASIS"
+msgid "nested emphasis %s"
+msgstr "உள்ளமைக்கப்பட்ட முக்கியத்துவம் %s"
+
+msgctxt "NESTED_QUOTATION"
+msgid "nested q elements, possible typo."
+msgstr "உள்ளமைக்கப்பட்ட Q கூறுகள், சாத்தியமான எழுத்துப்பிழை."
+
+#, c-format
+msgctxt "NEWLINE_IN_URI"
+msgid "%s discarding newline in URI reference"
+msgstr "யுஆர்ஐ குறிப்பில் நியூலைனை நிராகரித்தல்"
+
+#, c-format
+msgctxt "NOFRAMES_CONTENT"
+msgid "%s not inside 'noframes' element"
+msgstr "'நோஃப்ரேம்ச்' உறுப்புக்குள் %இல்லை"
+
+#, c-format
+msgctxt "NON_MATCHING_ENDTAG"
+msgid "replacing unexpected %s with </%s>"
+msgstr "எதிர்பாராத %s ஐ </ %s> உடன் மாற்றுகிறது"
+
+#, c-format
+msgctxt "OBSOLETE_ELEMENT"
+msgid "replacing obsolete element %s with %s"
+msgstr "வழக்கற்றுப் போன உறுப்பு %s ஐ %s உடன் மாற்றுகிறது"
+
+#, c-format
+msgctxt "OPTION_REMOVED"
+msgid "option \"%s\" no longer exists, and no replacement could be found."
+msgstr "விருப்பம் \"%s\" இனி இல்லை, மாற்றீடு எதுவும் காணப்படவில்லை."
+
+#, c-format
+msgctxt "OPTION_REMOVED_APPLIED"
+msgid "option \"%s\" replaced with \"%s\", which Tidy has set to \"%s\"."
+msgstr "\"%s\" என்ற விருப்பம் \"%s\" உடன் மாற்றப்பட்டது, இது டைடி \"%s\" ஆக அமைத்துள்ளது."
+
+#, c-format
+msgctxt "OPTION_REMOVED_UNAPPLIED"
+msgid "option \"%s\" replaced with \"%s\", but Tidy could not set it for you."
+msgstr ""
+"விருப்பம் \"%s\" \"%s\" உடன் மாற்றப்பட்டது, ஆனால் நேர்த்தியாக அதை "
+"உங்களுக்காக அமைக்க முடியவில்லை."
+
+#, c-format
+msgctxt "PREVIOUS_LOCATION"
+msgid "<%s> previously mentioned"
+msgstr "<%s> முன்னர் குறிப்பிட்டது"
+
+#, c-format
+msgctxt "PROPRIETARY_ATTR_VALUE"
+msgid "%s proprietary attribute value \"%s\""
+msgstr "%s தனியுரிம பண்புக்கூறு மதிப்பு \"%s\""
+
+#, c-format
+msgctxt "PROPRIETARY_ATTRIBUTE"
+msgid "%s proprietary attribute \"%s\""
+msgstr "%s தனியுரிம பண்புக்கூறு \"%s\""
+
+#, c-format
+msgctxt "PROPRIETARY_ELEMENT"
+msgid "%s is not approved by W3C"
+msgstr "%s W3C ஆல் அங்கீகரிக்கப்படவில்லை"
+
+#, c-format
+msgctxt "REMOVED_HTML5"
+msgid "%s element removed from HTML5"
+msgstr "HTML5 இலிருந்து அகற்றப்பட்ட %s உறுப்பு"
+
+#, c-format
+msgctxt "REPEATED_ATTRIBUTE"
+msgid "%s dropping value \"%s\" for repeated attribute \"%s\""
+msgstr "\"%s\" க்கு \"%s\" என்று%s கைவிடுதல் \"%s\""
+
+#, c-format
+msgctxt "REPLACING_ELEMENT"
+msgid "replacing %s with %s"
+msgstr "%s ஐ %s உடன் மாற்றுகிறது"
+
+#, c-format
+msgctxt "REPLACING_UNEX_ELEMENT"
+msgid "replacing unexpected %s with %s"
+msgstr "எதிர்பாராத %s ஐ %s உடன் மாற்றுகிறது"
+
+msgctxt "SPACE_PRECEDING_XMLDECL"
+msgid "removing whitespace preceding XML Declaration"
+msgstr "எக்ச்எம்எல் அறிவிப்புக்கு முந்தைய இடைவெளியை நீக்குதல்"
+
+#, c-format
+msgctxt "STRING_ARGUMENT_BAD"
+msgid "option \"%s\" given bad argument \"%s\""
+msgstr "\"%s\" என்ற விருப்பம் மோசமான வாதத்தை \"%s\""
+
+#, c-format
+msgctxt "STRING_MISSING_MALFORMED"
+msgid "missing or malformed argument for option: %s"
+msgstr "விருப்பத்திற்கான காணாமல் அல்லது தவறான வாதம்: %s"
+
+#, c-format
+msgctxt "STRING_MUTING_TYPE"
+msgid "messages of type \"%s\" will not be output"
+msgstr "\"%s\" வகையின் செய்திகள் வெளியீடாக இருக்காது"
+
+#, c-format
+msgctxt "STRING_UNKNOWN_OPTION"
+msgid "unknown option: %s"
+msgstr "தெரியாத விருப்பம்: %s"
+
+msgctxt "SUSPECTED_MISSING_QUOTE"
+msgid "suspected missing quote mark for attribute value"
+msgstr "பண்புக்கூறு மதிப்புக்கு காணாமல் போன மேற்கோள் குறி"
+
+#, c-format
+msgctxt "TAG_NOT_ALLOWED_IN"
+msgid "%s isn't allowed in <%s> elements"
+msgstr "<%s> கூறுகளில்%s அனுமதிக்கப்படவில்லை"
+
+#, c-format
+msgctxt "TOO_MANY_ELEMENTS_IN"
+msgid "too many %s elements in <%s>"
+msgstr "< %s> இல் பல %s கூறுகள்"
+
+#, c-format
+msgctxt "TOO_MANY_ELEMENTS"
+msgid "too many %s elements"
+msgstr "பல %s கூறுகள்"
+
+#, c-format
+msgctxt "TRIM_EMPTY_ELEMENT"
+msgid "trimming empty %s"
+msgstr "வெற்று %s ஐ ஒழுங்கமைத்தல்"
+
+msgctxt "UNESCAPED_AMPERSAND"
+msgid "unescaped & which should be written as &amp;"
+msgstr "uncable & & amp;"
+
+#, c-format
+msgctxt "UNEXPECTED_END_OF_FILE_ATTR"
+msgid "%s end of file while parsing attributes"
+msgstr "பண்புகளை பாகுபடுத்தும் போது கோப்பின் முடிவு"
+
+#, c-format
+msgctxt "UNEXPECTED_END_OF_FILE"
+msgid "unexpected end of file %s"
+msgstr "கோப்பு %s இன் எதிர்பாராத முடிவு"
+
+#, c-format
+msgctxt "UNEXPECTED_ENDTAG_ERR"
+msgid "unexpected </%s>"
+msgstr "எதிர்பாராதது </%s>"
+
+#, c-format
+msgctxt "UNEXPECTED_ENDTAG_IN"
+msgid "unexpected </%s> in <%s>"
+msgstr "எதிர்பாராத </%s> <%s> இல்"
+
+#, c-format
+msgctxt "UNEXPECTED_ENDTAG"
+msgid "unexpected </%s>"
+msgstr "எதிர்பாராதது </%s>"
+
+#, c-format
+msgctxt "UNEXPECTED_EQUALSIGN"
+msgid "%s unexpected '=', expected attribute name"
+msgstr "%s எதிர்பாராத '=', எதிர்பார்க்கப்படும் பண்புக்கூறு பெயர்"
+
+#, c-format
+msgctxt "UNEXPECTED_GT"
+msgid "%s missing '>' for end of tag"
+msgstr "குறிச்சொல்லின் முடிவுக்கு %s காணவில்லை '>'"
+
+#, c-format
+msgctxt "UNEXPECTED_QUOTEMARK"
+msgid "%s unexpected or duplicate quote mark"
+msgstr "%எதிர்பாராத அல்லது நகல் மேற்கோள் குறி"
+
+#, c-format
+msgctxt "UNKNOWN_ELEMENT_LOOKS_CUSTOM"
+msgid "%s is not recognized! Did you mean to enable the custom-tags option?"
+msgstr ""
+"%s அங்கீகரிக்கப்படவில்லை! தனிப்பயன்-டேக்ச் விருப்பத்தை இயக்க நீங்கள் "
+"சொன்னீர்களா?"
+
+#, c-format
+msgctxt "UNKNOWN_ELEMENT"
+msgid "%s is not recognized!"
+msgstr "%s அங்கீகரிக்கப்படவில்லை!"
+
+#, c-format
+msgctxt "UNKNOWN_ENTITY"
+msgid "unescaped & or unknown entity \"%s\""
+msgstr "Uncable & அல்லது அறியப்படாத நிறுவனம் \"%s\""
+
+#, c-format
+msgctxt "USING_BR_INPLACE_OF"
+msgid "using <br> in place of %s"
+msgstr "%s க்கு பதிலாக <br> ஐப் பயன்படுத்துதல்"
+
+#, c-format
+msgctxt "VENDOR_SPECIFIC_CHARS"
+msgid "%s invalid character code %s"
+msgstr "%s தவறான எழுத்து குறியீடு %s"
+
+#, c-format
+msgctxt "WHITE_IN_URI"
+msgid "%s discarding whitespace in URI reference"
+msgstr "யூரி குறிப்பில் இடைவெளியை நிராகரித்தல்"
+
+msgctxt "XML_DECLARATION_DETECTED"
+msgid "An XML declaration was detected. Did you mean to use input-xml?"
+msgstr ""
+"ஒரு எக்ச்எம்எல் அறிவிப்பு கண்டறியப்பட்டது. உள்ளீடு-எக்ச்எம்எல் பயன்படுத்த "
+"வேண்டுமா?"
+
+#, c-format
+msgctxt "XML_ID_SYNTAX"
+msgid "%s ID \"%s\" uses XML ID syntax"
+msgstr "%s அடையாளம் \"%s\" எக்ச்எம்எல் அடையாளம் தொடரியல் பயன்படுத்துகிறது"
+
+msgctxt "BLANK_TITLE_ELEMENT"
+msgid "blank 'title' element"
+msgstr "வெற்று 'தலைப்பு' உறுப்பு"
+
+msgctxt "IMG_MISSING_ALT"
+msgid "[1.1.1.1]: <img> missing 'alt' text."
+msgstr "[1.1.1.1]: <img> 'alt' உரையைக் காணவில்லை."
+
+msgctxt "IMG_ALT_SUSPICIOUS_FILENAME"
+msgid "[1.1.1.2]: suspicious 'alt' text (filename)."
+msgstr "[1.1.1.2]: சந்தேகத்திற்கிடமான 'ஆல்ட்' உரை (கோப்பு பெயர்)."
+
+msgctxt "IMG_ALT_SUSPICIOUS_FILE_SIZE"
+msgid "[1.1.1.3]: suspicious 'alt' text (file size)."
+msgstr "[1.1.1.3]: சந்தேகத்திற்கிடமான 'ஆல்ட்' உரை (கோப்பு அளவு)."
+
+msgctxt "IMG_ALT_SUSPICIOUS_PLACEHOLDER"
+msgid "[1.1.1.4]: suspicious 'alt' text (placeholder)."
+msgstr "[1.1.1.4]: சந்தேகத்திற்கிடமான 'ஆல்ட்' உரை (ஒதுக்கிட)."
+
+msgctxt "IMG_ALT_SUSPICIOUS_TOO_LONG"
+msgid "[1.1.1.10]: suspicious 'alt' text (too long)."
+msgstr "[1.1.1.10]: சந்தேகத்திற்கிடமான 'ஆல்ட்' உரை (மிக நீண்டது)."
+
+msgctxt "IMG_MISSING_LONGDESC_DLINK"
+msgid "[1.1.2.1]: <img> missing 'longdesc' and d-link."
+msgstr "[1.1.2.1]: <img> missing 'longdesc' and d-link."
+
+msgctxt "IMG_MISSING_DLINK"
+msgid "[1.1.2.2]: <img> missing d-link."
+msgstr "[1.1.2.2]: <img> டி-லிங்கைக் காணவில்லை."
+
+msgctxt "IMG_MISSING_LONGDESC"
+msgid "[1.1.2.3]: <img> missing 'longdesc'."
+msgstr "[1.1.2.3]: <img> 'லாங்டெச்' காணவில்லை."
+
+msgctxt "IMG_BUTTON_MISSING_ALT"
+msgid "[1.1.3.1]: <img> (button) missing 'alt' text."
+msgstr "[1.1.3.1]: <img> (பொத்தான்) 'ஆல்ட்' உரையைக் காணவில்லை."
+
+msgctxt "APPLET_MISSING_ALT"
+msgid "[1.1.4.1]: <applet> missing alternate content."
+msgstr "[1.1.4.1]: <Applet> மாற்று உள்ளடக்கத்தைக் காணவில்லை."
+
+msgctxt "OBJECT_MISSING_ALT"
+msgid "[1.1.5.1]: <object> missing alternate content."
+msgstr "[1.1.5.1]: <பொருள்> மாற்று உள்ளடக்கத்தைக் காணவில்லை."
+
+msgctxt "AUDIO_MISSING_TEXT_WAV"
+msgid "[1.1.6.1]: audio missing text transcript (wav)."
+msgstr "[1.1.6.1]: ஆடியோ காணாமல் போன உரை டிரான்கைஉரை (WAV)."
+
+msgctxt "AUDIO_MISSING_TEXT_AU"
+msgid "[1.1.6.2]: audio missing text transcript (au)."
+msgstr "[1.1.6.2]: ஆடியோ காணாமல் போன உரை டிரான்கைஉரை (AU)."
+
+msgctxt "AUDIO_MISSING_TEXT_AIFF"
+msgid "[1.1.6.3]: audio missing text transcript (aiff)."
+msgstr "[1.1.6.3]: ஆடியோ காணாமல் போன உரை டிரான்கைஉரை (AIFF)."
+
+msgctxt "AUDIO_MISSING_TEXT_SND"
+msgid "[1.1.6.4]: audio missing text transcript (snd)."
+msgstr "[1.1.6.4]: ஆடியோ காணாமல் போன உரை டிரான்கைஉரை (எச்.என்.டி)."
+
+msgctxt "AUDIO_MISSING_TEXT_RA"
+msgid "[1.1.6.5]: audio missing text transcript (ra)."
+msgstr "[1.1.6.5]: ஆடியோ காணாமல் போன உரை டிரான்கைஉரை (ஆர்.ஏ)."
+
+msgctxt "AUDIO_MISSING_TEXT_RM"
+msgid "[1.1.6.6]: audio missing text transcript (rm)."
+msgstr "[1.1.6.6]: ஆடியோ காணாமல் போன உரை டிரான்கைஉரை (ஆர்.எம்)."
+
+msgctxt "FRAME_MISSING_LONGDESC"
+msgid "[1.1.8.1]: <frame> may require 'longdesc'."
+msgstr "[1.1.8.1]: <frame> 'விரிவுஉரை' தேவைப்படலாம்."
+
+msgctxt "AREA_MISSING_ALT"
+msgid "[1.1.9.1]: <area> missing 'alt' text."
+msgstr "[1.1.9.1]: <பகுதி> 'மாற்று' உரையைக் காணவில்லை."
+
+msgctxt "SCRIPT_MISSING_NOSCRIPT"
+msgid "[1.1.10.1]: <script> missing <noscript> section."
+msgstr "[1.1.10.1]: <கைஉரை> காணவில்லை <இல்லைகைஉரை> பிரிவு."
+
+msgctxt "ASCII_REQUIRES_DESCRIPTION"
+msgid "[1.1.12.1]: ascii art requires description."
+msgstr "[1.1.12.1]: ASCII கலைக்கு விளக்கம் தேவை."
+
+msgctxt "IMG_MAP_SERVER_REQUIRES_TEXT_LINKS"
+msgid "[1.2.1.1]: image map (server-side) requires text links."
+msgstr "[1.2.1.1]: பட வரைபடம் (சேவையக பக்க) உரை இணைப்புகள் தேவை."
+
+msgctxt "MULTIMEDIA_REQUIRES_TEXT"
+msgid "[1.4.1.1]: multimedia requires synchronized text equivalents."
+msgstr "[1.4.1.1]: மல்டிமீடியாவுக்கு ஒத்திசைக்கப்பட்ட உரை சமமானவை தேவை."
+
+msgctxt "IMG_MAP_CLIENT_MISSING_TEXT_LINKS"
+msgid "[1.5.1.1]: image map (client-side) missing text links."
+msgstr "[1.5.1.1]: பட வரைபடம் (கிளையன்ட்-சைட்) உரை இணைப்புகளைக் காணவில்லை."
+
+msgctxt "INFORMATION_NOT_CONVEYED_IMAGE"
+msgid ""
+"[2.1.1.1]: ensure information not conveyed through color alone (image)."
+msgstr ""
+"[2.1.1.1]: வண்ணத்தின் மூலம் மட்டும் (படம்) தெரிவிக்கப்படாத தகவல்களை "
+"உறுதிப்படுத்தவும்."
+
+msgctxt "INFORMATION_NOT_CONVEYED_APPLET"
+msgid ""
+"[2.1.1.2]: ensure information not conveyed through color alone (applet)."
+msgstr ""
+"[2.1.1.2]: வண்ணத்தின் மூலம் மட்டும் (ஆப்லெட்) தெரிவிக்கப்படாத தகவல்களை "
+"உறுதிப்படுத்தவும்."
+
+msgctxt "INFORMATION_NOT_CONVEYED_OBJECT"
+msgid ""
+"[2.1.1.3]: ensure information not conveyed through color alone (object)."
+msgstr ""
+"[2.1.1.3]: வண்ணத்தின் மூலம் மட்டும் (பொருள்) தெரிவிக்கப்படாத தகவல்களை "
+"உறுதிப்படுத்தவும்."
+
+msgctxt "INFORMATION_NOT_CONVEYED_SCRIPT"
+msgid ""
+"[2.1.1.4]: ensure information not conveyed through color alone (script)."
+msgstr ""
+"[2.1.1.4]: வண்ணத்தின் மூலம் மட்டும் (கைஉரை) தெரிவிக்கப்படாத தகவல்களை "
+"உறுதிப்படுத்தவும்."
+
+msgctxt "INFORMATION_NOT_CONVEYED_INPUT"
+msgid ""
+"[2.1.1.5]: ensure information not conveyed through color alone (input)."
+msgstr ""
+"[2.1.1.5]: வண்ணத்தின் மூலம் மட்டும் (உள்ளீடு) தெரிவிக்கப்படாத தகவல்களை "
+"உறுதிப்படுத்தவும்."
+
+msgctxt "COLOR_CONTRAST_TEXT"
+msgid "[2.2.1.1]: poor color contrast (text)."
+msgstr "[2.2.1.1]: மோசமான வண்ண மாறுபாடு (உரை)."
+
+msgctxt "COLOR_CONTRAST_LINK"
+msgid "[2.2.1.2]: poor color contrast (link)."
+msgstr "[2.2.1.2]: மோசமான வண்ண மாறுபாடு (இணைப்பு)."
+
+msgctxt "COLOR_CONTRAST_ACTIVE_LINK"
+msgid "[2.2.1.3]: poor color contrast (active link)."
+msgstr "[2.2.1.3]: மோசமான வண்ண மாறுபாடு (செயலில் உள்ள இணைப்பு)."
+
+msgctxt "COLOR_CONTRAST_VISITED_LINK"
+msgid "[2.2.1.4]: poor color contrast (visited link)."
+msgstr "[2.2.1.4]: மோசமான வண்ண மாறுபாடு (பார்வையிட்ட இணைப்பு)."
+
+msgctxt "DOCTYPE_MISSING"
+msgid "[3.2.1.1]: <doctype> missing."
+msgstr "[3.2.1.1]: <doctype> காணவில்லை."
+
+msgctxt "STYLE_SHEET_CONTROL_PRESENTATION"
+msgid "[3.3.1.1]: use style sheets to control presentation."
+msgstr ""
+"[3.3.1.1]: விளக்கக்காட்சியைக் கட்டுப்படுத்த பாணி ​​தாள்களைப் பயன்படுத்தவும்."
+
+msgctxt "HEADERS_IMPROPERLY_NESTED"
+msgid "[3.5.1.1]: headers improperly nested."
+msgstr "[3.5.1.1]: தலைப்புகள் முறையற்ற கூடு."
+
+msgctxt "POTENTIAL_HEADER_BOLD"
+msgid "[3.5.2.1]: potential header (bold)."
+msgstr "[3.5.2.1]: சாத்தியமான தலைப்பு (தைரியமான)."
+
+msgctxt "POTENTIAL_HEADER_ITALICS"
+msgid "[3.5.2.2]: potential header (italics)."
+msgstr "[3.5.2.2]: சாத்தியமான தலைப்பு (சாய்வு)."
+
+msgctxt "POTENTIAL_HEADER_UNDERLINE"
+msgid "[3.5.2.3]: potential header (underline)."
+msgstr "[3.5.2.3]: சாத்தியமான தலைப்பு (அடிக்கோடிட்டு)."
+
+msgctxt "HEADER_USED_FORMAT_TEXT"
+msgid "[3.5.3.1]: header used to format text."
+msgstr "[3.5.3.1]: உரையை வடிவமைக்க பயன்படுத்தப்படும் தலைப்பு."
+
+msgctxt "LIST_USAGE_INVALID_UL"
+msgid "[3.6.1.1]: list usage invalid <ul>."
+msgstr "[3.6.1.1]: பயன்பாடு தவறானது <ul> ஐ பட்டியலிடுங்கள்."
+
+msgctxt "LIST_USAGE_INVALID_OL"
+msgid "[3.6.1.2]: list usage invalid <ol>."
+msgstr "[3.6.1.2]: பயன்பாடு தவறானது <ol> ஐ பட்டியலிடுங்கள்."
+
+msgctxt "LIST_USAGE_INVALID_LI"
+msgid "[3.6.1.4]: list usage invalid <li>."
+msgstr "[3.6.1.4]: பயன்பாடு தவறானது <li> ஐ பட்டியலிடுங்கள்."
+
+msgctxt "LANGUAGE_NOT_IDENTIFIED"
+msgid "[4.3.1.1]: language not identified."
+msgstr "[4.3.1.1]: மொழி அடையாளம் காணப்படவில்லை."
+
+msgctxt "LANGUAGE_INVALID"
+msgid "[4.3.1.2]: language attribute invalid."
+msgstr "[4.3.1.2]: மொழி பண்புக்கூறு தவறானது."
+
+msgctxt "DATA_TABLE_MISSING_HEADERS"
+msgid "[5.1.2.1]: data <table> missing row/column headers (all)."
+msgstr ""
+"[5.1.2.1]: தரவு <அட்டவணை> காணாமல் போன வரிசை/நெடுவரிசை தலைப்புகள் "
+"(அனைத்தும்)."
+
+msgctxt "DATA_TABLE_MISSING_HEADERS_COLUMN"
+msgid "[5.1.2.2]: data <table> missing row/column headers (1 col)."
+msgstr ""
+"[5.1.2.2]: தரவு <அட்டவணை> காணாமல் போன வரிசை/நெடுவரிசை தலைப்புகள் (1 கோல்)."
+
+msgctxt "DATA_TABLE_MISSING_HEADERS_ROW"
+msgid "[5.1.2.3]: data <table> missing row/column headers (1 row)."
+msgstr ""
+"[5.1.2.3]: தரவு <அட்டவணை> காணாமல் போன வரிசை/நெடுவரிசை தலைப்புகள் (1 வரிசை)."
+
+msgctxt "DATA_TABLE_REQUIRE_MARKUP_COLUMN_HEADERS"
+msgid "[5.2.1.1]: data <table> may require markup (column headers)."
+msgstr ""
+"[5.2.1.1]: தரவு <அட்டவணை> க்கு மார்க்அப் தேவைப்படலாம் (நெடுவரிசை "
+"தலைப்புகள்)."
+
+msgctxt "DATA_TABLE_REQUIRE_MARKUP_ROW_HEADERS"
+msgid "[5.2.1.2]: data <table> may require markup (row headers)."
+msgstr ""
+"[5.2.1.2]: தரவு <அட்டவணை> க்கு மார்க்அப் தேவைப்படலாம் (வரிசை தலைப்புகள்)."
+
+msgctxt "LAYOUT_TABLES_LINEARIZE_PROPERLY"
+msgid "[5.3.1.1]: verify layout tables linearize properly."
+msgstr "[5.3.1.1]: தளவமைப்பு அட்டவணைகள் சரியாக நேர்கோட்டு சரிபார்க்கவும்."
+
+msgctxt "LAYOUT_TABLE_INVALID_MARKUP"
+msgid "[5.4.1.1]: invalid markup used in layout <table>."
+msgstr "[5.4.1.1]: தளவமைப்பு <அட்டவணை> இல் பயன்படுத்தப்படும் தவறான மார்க்அப்."
+
+msgctxt "TABLE_MISSING_SUMMARY"
+msgid "[5.5.1.1]: <table> missing summary."
+msgstr "[5.5.1.1]: <அட்டவணை> சுருக்கம் இல்லை."
+
+msgctxt "TABLE_SUMMARY_INVALID_NULL"
+msgid "[5.5.1.2]: <table> summary invalid (null)."
+msgstr "[5.5.1.2]: <அட்டவணை> சுருக்கம் தவறானது (சுழியம்)."
+
+msgctxt "TABLE_SUMMARY_INVALID_SPACES"
+msgid "[5.5.1.3]: <table> summary invalid (spaces)."
+msgstr "[5.5.1.3]: <அட்டவணை> சுருக்கம் தவறானது (இடைவெளிகள்)."
+
+msgctxt "TABLE_SUMMARY_INVALID_PLACEHOLDER"
+msgid "[5.5.1.6]: <table> summary invalid (placeholder text)."
+msgstr "[5.5.1.6]: <அட்டவணை> சுருக்கம் தவறானது (ஒதுக்கிட உரை)."
+
+msgctxt "TABLE_MISSING_CAPTION"
+msgid "[5.5.2.1]: <table> missing <caption>."
+msgstr "[5.5.2.1]: <அட்டவணை> காணவில்லை <தலைப்பு>."
+
+msgctxt "TABLE_MAY_REQUIRE_HEADER_ABBR"
+msgid "[5.6.1.1]: <table> may require header abbreviations."
+msgstr "[5.6.1.1]: <அட்டவணை> தலைப்பு சுருக்கங்கள் தேவைப்படலாம்."
+
+msgctxt "TABLE_MAY_REQUIRE_HEADER_ABBR_NULL"
+msgid "[5.6.1.2]: <table> header abbreviations invalid (null)."
+msgstr "[5.6.1.2]: <அட்டவணை> தலைப்பு சுருக்கங்கள் தவறானவை (சுழியம்)."
+
+msgctxt "TABLE_MAY_REQUIRE_HEADER_ABBR_SPACES"
+msgid "[5.6.1.3]: <table> header abbreviations invalid (spaces)."
+msgstr "[5.6.1.3]: <அட்டவணை> தலைப்பு சுருக்கங்கள் தவறானவை (இடைவெளிகள்)."
+
+msgctxt "STYLESHEETS_REQUIRE_TESTING_LINK"
+msgid "[6.1.1.1]: style sheets require testing (link)."
+msgstr "[6.1.1.1]: பாணி ​​தாள்களுக்கு சோதனை தேவை (இணைப்பு)."
+
+msgctxt "STYLESHEETS_REQUIRE_TESTING_STYLE_ELEMENT"
+msgid "[6.1.1.2]: style sheets require testing (style element)."
+msgstr "[6.1.1.2]: பாணி ​​தாள்களுக்கு சோதனை தேவை (பாணி உறுப்பு)."
+
+msgctxt "STYLESHEETS_REQUIRE_TESTING_STYLE_ATTR"
+msgid "[6.1.1.3]: style sheets require testing (style attribute)."
+msgstr "[6.1.1.3]: பாணி ​​தாள்களுக்கு சோதனை தேவை (பாணி பண்புக்கூறு)."
+
+msgctxt "FRAME_SRC_INVALID"
+msgid "[6.2.1.1]: <frame> source invalid."
+msgstr "[6.2.1.1]: <frame> மூல தவறானது."
+
+msgctxt "TEXT_EQUIVALENTS_REQUIRE_UPDATING_APPLET"
+msgid "[6.2.2.1]: text equivalents require updating (applet)."
+msgstr "[6.2.2.1]: உரை equivalents require updating (applet)."
+
+msgctxt "TEXT_EQUIVALENTS_REQUIRE_UPDATING_SCRIPT"
+msgid "[6.2.2.2]: text equivalents require updating (script)."
+msgstr "[6.2.2.2]: உரை சமமானவர்களுக்கு புதுப்பித்தல் தேவை (கைஉரை)."
+
+msgctxt "TEXT_EQUIVALENTS_REQUIRE_UPDATING_OBJECT"
+msgid "[6.2.2.3]: text equivalents require updating (object)."
+msgstr "[6.2.2.3]: உரை சமமானவர்களுக்கு புதுப்பித்தல் தேவை (பொருள்)."
+
+msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_SCRIPT"
+msgid "[6.3.1.1]: programmatic objects require testing (script)."
+msgstr "[6.3.1.1]: நிரல் பொருள்களுக்கு சோதனை தேவை (கைஉரை)."
+
+msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_OBJECT"
+msgid "[6.3.1.2]: programmatic objects require testing (object)."
+msgstr "[6.3.1.2]: நிரல் பொருள்களுக்கு சோதனை தேவை (பொருள்)."
+
+msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_EMBED"
+msgid "[6.3.1.3]: programmatic objects require testing (embed)."
+msgstr "[6.3.1.3]: நிரல் பொருள்களுக்கு சோதனை தேவை (உட்பொதித்தல்)."
+
+msgctxt "PROGRAMMATIC_OBJECTS_REQUIRE_TESTING_APPLET"
+msgid "[6.3.1.4]: programmatic objects require testing (applet)."
+msgstr "[6.3.1.4]: நிரல் பொருள்களுக்கு சோதனை தேவை (ஆப்லெட்)."
+
+msgctxt "FRAME_MISSING_NOFRAMES"
+msgid "[6.5.1.1]: <frameset> missing <noframes> section."
+msgstr "[6.5.1.1]: <frameset> missing <noframes> section."
+
+msgctxt "NOFRAMES_INVALID_NO_VALUE"
+msgid "[6.5.1.2]: <noframes> section invalid (no value)."
+msgstr "[6.5.1.2]: <noframes> பிரிவு தவறானது (மதிப்பு இல்லை)."
+
+msgctxt "NOFRAMES_INVALID_CONTENT"
+msgid "[6.5.1.3]: <noframes> section invalid (content)."
+msgstr "[6.5.1.3]: <noframes> பிரிவு தவறானது (உள்ளடக்கம்)."
+
+msgctxt "NOFRAMES_INVALID_LINK"
+msgid "[6.5.1.4]: <noframes> section invalid (link)."
+msgstr "[6.5.1.4]: <noframes> பிரிவு தவறானது (இணைப்பு)."
+
+msgctxt "REMOVE_FLICKER_SCRIPT"
+msgid "[7.1.1.1]: remove flicker (script)."
+msgstr "[7.1.1.1]: ஃப்ளிக்கரை அகற்று (கைஉரை)."
+
+msgctxt "REMOVE_FLICKER_OBJECT"
+msgid "[7.1.1.2]: remove flicker (object)."
+msgstr "[7.1.1.2]: ஃப்ளிக்கரை அகற்று (பொருள்)."
+
+msgctxt "REMOVE_FLICKER_EMBED"
+msgid "[7.1.1.3]: remove flicker (embed)."
+msgstr "[7.1.1.3]: ஃப்ளிக்கரை அகற்று (உட்பொதித்தல்)."
+
+msgctxt "REMOVE_FLICKER_APPLET"
+msgid "[7.1.1.4]: remove flicker (applet)."
+msgstr "[7.1.1.4]: ஃப்ளிக்கரை அகற்று (ஆப்லெட்)."
+
+msgctxt "REMOVE_FLICKER_ANIMATED_GIF"
+msgid "[7.1.1.5]: remove flicker (animated gif)."
+msgstr "[7.1.1.5]: ஃப்ளிக்கரை அகற்று (அனிமேசன் செய்யப்பட்ட GIF)."
+
+msgctxt "REMOVE_BLINK_MARQUEE"
+msgid "[7.2.1.1]: remove blink/marquee."
+msgstr "[7.2.1.1]: பிளிங்கை/மார்க்யூவை அகற்று."
+
+msgctxt "REMOVE_AUTO_REFRESH"
+msgid "[7.4.1.1]: remove auto-refresh."
+msgstr "[7.4.1.1]: தானி-புதுப்பியை அகற்று."
+
+msgctxt "REMOVE_AUTO_REDIRECT"
+msgid "[7.5.1.1]: remove auto-redirect."
+msgstr "[7.5.1.1]: தானி-திருப்புமுனை அகற்று."
+
+msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_SCRIPT"
+msgid "[8.1.1.1]: ensure programmatic objects are accessible (script)."
+msgstr ""
+"[8.1.1.1]: நிரல் பொருள்கள் அணுகக்கூடியவை என்பதை உறுதிப்படுத்தவும் "
+"(கைஉரை)."
+
+msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_OBJECT"
+msgid "[8.1.1.2]: ensure programmatic objects are accessible (object)."
+msgstr ""
+"[8.1.1.2]: நிரல் பொருள்கள் அணுகக்கூடியவை என்பதை உறுதிப்படுத்தவும் (பொருள்)."
+
+msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_APPLET"
+msgid "[8.1.1.3]: ensure programmatic objects are accessible (applet)."
+msgstr ""
+"[8.1.1.3]: நிரல் பொருள்கள் அணுகக்கூடியவை என்பதை உறுதிப்படுத்தவும் (ஆப்லெட்)."
+
+msgctxt "ENSURE_PROGRAMMATIC_OBJECTS_ACCESSIBLE_EMBED"
+msgid "[8.1.1.4]: ensure programmatic objects are accessible (embed)."
+msgstr ""
+"[8.1.1.4]: நிரல் பொருள்கள் அணுகக்கூடியவை (உட்பொதிக்கப்பட்டவை) என்பதை "
+"உறுதிப்படுத்தவும்."
+
+msgctxt "IMAGE_MAP_SERVER_SIDE_REQUIRES_CONVERSION"
+msgid "[9.1.1.1]: image map (server-side) requires conversion."
+msgstr "[9.1.1.1]: பட வரைபடம் (சேவையக பக்க) மாற்றம் தேவை."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_DOWN"
+msgid "[9.3.1.1]: <script> not keyboard accessible (onMouseDown)."
+msgstr "[9.3.1.1]: <script> not keyboard accessible (onMouseDown)."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_UP"
+msgid "[9.3.1.2]: <script> not keyboard accessible (onMouseUp)."
+msgstr "[9.3.1.2]: <கைஉரை> விசைப்பலகை அணுக முடியாதது (onmouseup)."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_CLICK"
+msgid "[9.3.1.3]: <script> not keyboard accessible (onClick)."
+msgstr "[9.3.1.3]: <கைஉரை> விசைப்பலகை அணுக முடியாதது (OnClick)."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OVER"
+msgid "[9.3.1.4]: <script> not keyboard accessible (onMouseOver)."
+msgstr "[9.3.1.4]: <script> not keyboard accessible (onMouseOver)."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_OUT"
+msgid "[9.3.1.5]: <script> not keyboard accessible (onMouseOut)."
+msgstr "[9.3.1.5]: <கைஉரை> விசைப்பலகை அணுக முடியாதது (onMouseOut)."
+
+msgctxt "SCRIPT_NOT_KEYBOARD_ACCESSIBLE_ON_MOUSE_MOVE"
+msgid "[9.3.1.6]: <script> not keyboard accessible (onMouseMove)."
+msgstr "[9.3.1.6]: <script> not keyboard accessible (onMouseMove)."
+
+msgctxt "NEW_WINDOWS_REQUIRE_WARNING_NEW"
+msgid "[10.1.1.1]: new windows require warning (_new)."
+msgstr "[10.1.1.1]: புதிய சாளரங்களுக்கு முன்னறிவிப்பு தேவை (_new)."
+
+msgctxt "NEW_WINDOWS_REQUIRE_WARNING_BLANK"
+msgid "[10.1.1.2]: new windows require warning (_blank)."
+msgstr "[10.1.1.2]: புதிய சாளரங்களுக்கு முன்னறிவிப்பு தேவை (_blank)."
+
+msgctxt "REPLACE_DEPRECATED_HTML_APPLET"
+msgid "[11.2.1.1]: replace deprecated html <applet>."
+msgstr "[11.2.1.1]: நீக்கப்பட்ட உஉகுமொ <applet> ஐ மாற்றவும்."
+
+msgctxt "REPLACE_DEPRECATED_HTML_BASEFONT"
+msgid "[11.2.1.2]: replace deprecated html <basefont>."
+msgstr "[11.2.1.2]: நீக்கப்பட்ட உஉகுமொ <basefont> ஐ மாற்றவும்."
+
+msgctxt "REPLACE_DEPRECATED_HTML_CENTER"
+msgid "[11.2.1.3]: replace deprecated html <center>."
+msgstr "[11.2.1.3]: நீக்கப்பட்ட உஉகுமொ <center> ஐ மாற்றவும்."
+
+msgctxt "REPLACE_DEPRECATED_HTML_DIR"
+msgid "[11.2.1.4]: replace deprecated html <dir>."
+msgstr "[11.2.1.4]: நீக்கப்பட்ட உஉகுமொ <dir> ஐ மாற்றவும்."
+
+msgctxt "REPLACE_DEPRECATED_HTML_FONT"
+msgid "[11.2.1.5]: replace deprecated html <font>."
+msgstr "[11.2.1.5]: நீக்கப்பட்ட உஉகுமொ <font> ஐ மாற்றவும்."
+
+msgctxt "REPLACE_DEPRECATED_HTML_ISINDEX"
+msgid "[11.2.1.6]: replace deprecated html <isindex>."
+msgstr "[11.2.1.6]: நீக்கப்பட்ட உஉகுமொ <isindex> ஐ மாற்றவும்."
+
+msgctxt "REPLACE_DEPRECATED_HTML_MENU"
+msgid "[11.2.1.7]: replace deprecated html <menu>."
+msgstr "[11.2.1.7]: மாற்றவும் deprecated உஉகுமொ <menu>."
+
+msgctxt "REPLACE_DEPRECATED_HTML_S"
+msgid "[11.2.1.8]: replace deprecated html <s>."
+msgstr "[11.2.1.8]: நீக்கப்பட்ட உஉகுமொ <s> ஐ மாற்றவும்."
+
+msgctxt "REPLACE_DEPRECATED_HTML_STRIKE"
+msgid "[11.2.1.9]: replace deprecated html <strike>."
+msgstr "[11.2.1.9]: நீக்கப்பட்ட உஉகுமொ <strike> ஐ மாற்றவும்."
+
+msgctxt "REPLACE_DEPRECATED_HTML_U"
+msgid "[11.2.1.10]: replace deprecated html <u>."
+msgstr "[11.2.1.10]: நீக்கப்பட்ட உஉகுமொ <u> ஐ மாற்றவும்."
+
+msgctxt "FRAME_MISSING_TITLE"
+msgid "[12.1.1.1]: <frame> missing title."
+msgstr "[12.1.1.1]: <frame> தலைப்பு இல்லை தலைப்பு."
+
+msgctxt "FRAME_TITLE_INVALID_NULL"
+msgid "[12.1.1.2]: <frame> title invalid (null)."
+msgstr "[12.1.1.2]: <frame> தலைப்பு தவறானது (சுழியம்)."
+
+msgctxt "FRAME_TITLE_INVALID_SPACES"
+msgid "[12.1.1.3]: <frame> title invalid (spaces)."
+msgstr "[12.1.1.3]: <frame> தலைப்பு தவறானது (இடைவெளிகள்)."
+
+msgctxt "ASSOCIATE_LABELS_EXPLICITLY"
+msgid "[12.4.1.1]: associate labels explicitly with form controls."
+msgstr "[12.4.1.1]: படிவக் கட்டுப்பாடுகளுடன் வெளிப்படையாக இணை சிட்டைகள்."
+
+msgctxt "ASSOCIATE_LABELS_EXPLICITLY_FOR"
+msgid "[12.4.1.2]: associate labels explicitly with form controls (for)."
+msgstr ""
+"[12.4.1.2]: படிவக் கட்டுப்பாடுகளுடன் (க்கு) வெளிப்படையாக இணை சிட்டைகள்."
+
+msgctxt "ASSOCIATE_LABELS_EXPLICITLY_ID"
+msgid "[12.4.1.3]: associate labels explicitly with form controls (id)."
+msgstr ""
+"[12.4.1.3]: படிவக் கட்டுப்பாடுகள் (ஐடி) உடன் வெளிப்படையாக இணை சிட்டைகள்."
+
+msgctxt "LINK_TEXT_NOT_MEANINGFUL"
+msgid "[13.1.1.1]: link text not meaningful."
+msgstr "[13.1.1.1]: இணைப்பு உரை பொருள்உள்ளதாக இல்லை."
+
+msgctxt "LINK_TEXT_MISSING"
+msgid "[13.1.1.2]: link text missing."
+msgstr "[13.1.1.2]: இணைப்பு உரை இல்லை."
+
+msgctxt "LINK_TEXT_TOO_LONG"
+msgid "[13.1.1.3]: link text too long."
+msgstr "[13.1.1.3]: உரை மிக நீளமாக இணைக்கவும்."
+
+msgctxt "LINK_TEXT_NOT_MEANINGFUL_CLICK_HERE"
+msgid "[13.1.1.4]: link text not meaningful (click here)."
+msgstr "[13.1.1.4]: இணைப்பு உரை பொருள்உள்ளதாக இல்லை (இங்கே சொடுக்கு செய்க)."
+
+msgctxt "METADATA_MISSING"
+msgid "[13.2.1.1]: Metadata missing."
+msgstr "[13.2.1.1]: மேனிலை தரவு இல்லை."
+
+msgctxt "METADATA_MISSING_REDIRECT_AUTOREFRESH"
+msgid "[13.2.1.3]: Metadata missing (redirect/auto-refresh)."
+msgstr "[13.2.1.3]: மேனிலை தரவு காணவில்லை (திருப்பி/தானி-புதுப்பி)."
+
+msgctxt "SKIPOVER_ASCII_ART"
+msgid "[13.10.1.1]: skip over ascii art."
+msgstr "[13.10.1.1]: தபஅஇகு கலையைத் தவிர்."
+
+msgctxt "TC_LABEL_COL"
+msgid "column"
+msgstr "நெடுவரிசை"
+
+msgctxt "TC_LABEL_FILE"
+msgid "file"
+msgstr "கோப்பு"
+
+msgctxt "TC_LABEL_LANG"
+msgid "lang"
+msgstr "மொழி"
+
+msgctxt "TC_LABEL_LEVL"
+msgid "level"
+msgstr "நிலை"
+
+msgctxt "TC_LABEL_OPT"
+msgid "option"
+msgstr "விருப்பம்"
+
+#, c-format
+msgctxt "TC_MAIN_ERROR_LOAD_CONFIG"
+msgid "Loading config file \"%s\" problems, err = %d"
+msgstr "கட்டமைப்பு கோப்பை ஏற்றுகிறது \" %s\" சிக்கல்கள், பிழை = %d"
+
+msgctxt "TC_OPT_ACCESS"
+msgid ""
+"do additional accessibility checks (<level> = 0, 1, 2, 3). 0 is assumed if "
+"<level> is missing."
+msgstr ""
+"கூடுதல் அணுகல் காசோலைகளைச் செய்யுங்கள் (<நிலை> = 0, 1, 2, 3). <நிலை> "
+"காணவில்லை என்றால் 0 கருதப்படுகிறது."
+
+msgctxt "TC_OPT_ASCII"
+msgid "use ISO-8859-1 for input, US-ASCII for output"
+msgstr ""
+"உள்ளீட்டிற்கு ஐஎச்ஓ -8859-1 ஐப் பயன்படுத்தவும், வெளியீட்டிற்கு யுஎச்-அசிஐஐ"
+
+msgctxt "TC_OPT_ASHTML"
+msgid "force XHTML to well formed HTML"
+msgstr "XHTML ஐ நன்கு உருவாக்கிய உஉகுமொ க்கு கட்டாயப்படுத்துங்கள்"
+
+msgctxt "TC_OPT_ASXML"
+msgid "convert HTML to well formed XHTML"
+msgstr "உஉகுமொ ஐ நன்கு உருவாக்கிய XHTML ஆக மாற்றவும்"
+
+msgctxt "TC_OPT_BARE"
+msgid "strip out smart quotes and em dashes, etc."
+msgstr "அறிவுள்ள மேற்கோள்கள் மற்றும் ஈ.எம் கோடுகள் போன்றவற்றை அகற்றவும்."
+
+msgctxt "TC_OPT_BIG5"
+msgid "use Big5 for both input and output"
+msgstr "உள்ளீடு மற்றும் வெளியீடு இரண்டிற்கும் BIG5 ஐப் பயன்படுத்தவும்"
+
+msgctxt "TC_OPT_CLEAN"
+msgid "replace FONT, NOBR and CENTER tags with CSS"
+msgstr "எழுத்துரு, NOBR மற்றும் மைய குறிச்சொற்களை சிஎச்எச் உடன் மாற்றவும்"
+
+msgctxt "TC_OPT_CONFIG"
+msgid "set configuration options from the specified <file>"
+msgstr "குறிப்பிடப்பட்ட <file> இலிருந்து உள்ளமைவு விருப்பங்களை அமைக்கவும்"
+
+msgctxt "TC_OPT_ERRORS"
+msgid "show only errors and warnings"
+msgstr "பிழைகள் மற்றும் எச்சரிக்கைகளை மட்டுமே காட்டுங்கள்"
+
+msgctxt "TC_OPT_FILE"
+msgid "write errors and warnings to the specified <file>"
+msgstr "குறிப்பிட்ட <file> க்கு பிழைகள் மற்றும் எச்சரிக்கைகளை எழுதுங்கள்"
+
+msgctxt "TC_OPT_GDOC"
+msgid "produce clean version of html exported by Google Docs"
+msgstr ""
+"கூகிள் டாக்சால் ஏற்றுமதி செய்யப்பட்ட உஉகுமொ இன் தூய்மையான பதிப்பை "
+"உருவாக்குங்கள்"
+
+msgctxt "TC_OPT_HELP"
+msgid "list the command line options"
+msgstr "கட்டளை வரி விருப்பங்களை பட்டியலிடுங்கள்"
+
+msgctxt "TC_OPT_HELPCFG"
+msgid "list all configuration options"
+msgstr "அனைத்து உள்ளமைவு விருப்பங்களையும் பட்டியலிடுங்கள்"
+
+msgctxt "TC_OPT_HELPENV"
+msgid "show information about the environment and runtime configuration"
+msgstr "சுற்றுச்சூழல் மற்றும் இயக்க நேர உள்ளமைவு பற்றிய தகவல்களைக் காட்டு"
+
+msgctxt "TC_OPT_HELPOPT"
+msgid "show a description of the <option>"
+msgstr "<விருப்பம்> இன் விளக்கத்தைக் காட்டு"
+
+msgctxt "TC_OPT_IBM858"
+msgid "use IBM-858 (CP850+Euro) for input, US-ASCII for output"
+msgstr ""
+"உள்ளீட்டிற்கு ஐபிஎம் -858 (சிபி 850+யூரோ) ஐப் பயன்படுத்தவும், வெளியீட்டிற்கு"
+" யுஎச்-அசிஐஐ"
+
+msgctxt "TC_OPT_INDENT"
+msgid "indent element content"
+msgstr "உறுப்பு உள்ளடக்கம்"
+
+msgctxt "TC_OPT_ISO2022"
+msgid "use ISO-2022 for both input and output"
+msgstr "உள்ளீடு மற்றும் வெளியீடு இரண்டிற்கும் ஐஎச்ஓ -2022 ஐப் பயன்படுத்தவும்"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+msgctxt "TC_OPT_LANGUAGE"
+msgid ""
+"set Tidy's output language to <lang>. Specify '-language help' for more "
+"help. Use before output-causing arguments to ensure the language takes "
+"effect, e.g.,`tidy -lang es -lang help`."
+msgstr ""
+"டைடியின் வெளியீட்டு மொழியை <lang> ஆக அமைக்கவும். மேலும் உதவிக்கு '-மொழி "
+"உதவி' குறிப்பிடவும். மொழி நடைமுறைக்கு வருவதை உறுதிசெய்ய வெளியீட்டை "
+"உருவாக்கும் வாதங்களுக்கு முன் பயன்படுத்தவும், எ.கா., `நேர்த்தியான -லாங் எச் "
+"-லாங் உதவி`."
+
+msgctxt "TC_OPT_LATIN0"
+msgid "use ISO-8859-15 for input, US-ASCII for output"
+msgstr ""
+"உள்ளீட்டிற்கு ஐஎச்ஓ -8859-15 ஐப் பயன்படுத்தவும், வெளியீட்டிற்கு யுஎச்-அசிஐஐ"
+
+msgctxt "TC_OPT_LATIN1"
+msgid "use ISO-8859-1 for both input and output"
+msgstr "உள்ளீடு மற்றும் வெளியீடு இரண்டிற்கும் ISO-8859-1 ஐப் பயன்படுத்தவும்"
+
+msgctxt "TC_OPT_MAC"
+msgid "use MacRoman for input, US-ASCII for output"
+msgstr "உள்ளீட்டிற்கு மேக்ரோமனை பயன்படுத்தவும், வெளியீட்டிற்கு யு.எச்-அசி"
+
+msgctxt "TC_OPT_MODIFY"
+msgid "modify the original input files"
+msgstr "அசல் உள்ளீட்டு கோப்புகளை மாற்றவும்"
+
+msgctxt "TC_OPT_NUMERIC"
+msgid "output numeric rather than named entities"
+msgstr "பெயரிடப்பட்ட நிறுவனங்களை விட வெளியீட்டு எண்"
+
+msgctxt "TC_OPT_OMIT"
+msgid "omit optional start tags and end tags"
+msgstr ""
+"விருப்ப தொடக்க குறிச்சொற்கள் மற்றும் இறுதி குறிச்சொற்களைத் தவிர்"
+
+msgctxt "TC_OPT_OUTPUT"
+msgid "write output to the specified <file>"
+msgstr "குறிப்பிட்ட <file> க்கு வெளியீட்டை எழுதுங்கள்"
+
+msgctxt "TC_OPT_QUIET"
+msgid "suppress nonessential output"
+msgstr "தேவையில்லாத வெளியீட்டை அடக்கவும்"
+
+msgctxt "TC_OPT_RAW"
+msgid "output values above 127 without conversion to entities"
+msgstr "நிறுவனங்களாக மாற்றாமல் 127 க்கு மேல் வெளியீட்டு மதிப்புகள்"
+
+msgctxt "TC_OPT_SHIFTJIS"
+msgid "use Shift_JIS for both input and output"
+msgstr "உள்ளீடு மற்றும் வெளியீடு இரண்டிற்கும் SHIFT_JIS ஐப் பயன்படுத்தவும்"
+
+msgctxt "TC_OPT_SHOWCFG"
+msgid "list the current configuration settings"
+msgstr "தற்போதைய உள்ளமைவு அமைப்புகளை பட்டியலிடுங்கள்"
+
+msgctxt "TC_OPT_EXP_CFG"
+msgid "list the current configuration settings, suitable for a config file"
+msgstr ""
+"கட்டமைப்பு கோப்புக்கு ஏற்ற தற்போதைய உள்ளமைவு அமைப்புகளை பட்டியலிடுங்கள்"
+
+msgctxt "TC_OPT_EXP_DEF"
+msgid "list the default configuration settings, suitable for a config file"
+msgstr ""
+"இயல்புநிலை உள்ளமைவு அமைப்புகளை பட்டியலிடுங்கள், இது கட்டமைப்பு கோப்புக்கு "
+"ஏற்றது"
+
+msgctxt "TC_OPT_UPPER"
+msgid "force tags to upper case"
+msgstr "குறிச்சொற்களை மேல் வழக்குக்கு கட்டாயப்படுத்துங்கள்"
+
+msgctxt "TC_OPT_UTF16"
+msgid "use UTF-16 for both input and output"
+msgstr "உள்ளீடு மற்றும் வெளியீடு இரண்டிற்கும் UTF-16 ஐப் பயன்படுத்தவும்"
+
+msgctxt "TC_OPT_UTF16BE"
+msgid "use UTF-16BE for both input and output"
+msgstr "உள்ளீடு மற்றும் வெளியீடு இரண்டிற்கும் UTF-16BE ஐப் பயன்படுத்தவும்"
+
+msgctxt "TC_OPT_UTF16LE"
+msgid "use UTF-16LE for both input and output"
+msgstr "உள்ளீடு மற்றும் வெளியீடு இரண்டிற்கும் UTF-16LE ஐப் பயன்படுத்தவும்"
+
+msgctxt "TC_OPT_UTF8"
+msgid "use UTF-8 for both input and output"
+msgstr "உள்ளீடு மற்றும் வெளியீடு இரண்டிற்கும் UTF-8 ஐப் பயன்படுத்தவும்"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+msgctxt "TC_OPT_VERSION"
+msgid "show the version of Tidy"
+msgstr "நேர்த்தியின் பதிப்பைக் காட்டு"
+
+msgctxt "TC_OPT_WIN1252"
+msgid "use Windows-1252 for input, US-ASCII for output"
+msgstr ""
+"உள்ளீட்டிற்கு சாளரங்கள் -1252 ஐப் பயன்படுத்தவும், வெளியீட்டிற்கு யுஎச்-அசிஐஐ"
+" பயன்படுத்தவும்"
+
+msgctxt "TC_OPT_WRAP"
+msgid ""
+"wrap text at the specified <column>. 0 is assumed if <column> is missing. "
+"When this option is omitted, the default of the configuration option 'wrap' "
+"applies."
+msgstr ""
+"குறிப்பிட்ட <நெடுவரிசை> இல் உரையை மடிக்கவும். <நெடுவரிசை> காணவில்லை என்றால் "
+"0 கருதப்படுகிறது. இந்த விருப்பம் தவிர்க்கப்படும்போது, ​​உள்ளமைவு "
+"விருப்பத்தின் இயல்புநிலை 'மடக்கு' பொருந்தும்."
+
+msgctxt "TC_OPT_XML"
+msgid "specify the input is well formed XML"
+msgstr "உள்ளீடு நன்கு உருவாக்கப்பட்ட எக்ச்எம்எல் என்பதைக் குறிப்பிடவும்"
+
+msgctxt "TC_OPT_XMLCFG"
+msgid "list all configuration options in XML format"
+msgstr ""
+"அனைத்து உள்ளமைவு விருப்பங்களையும் எக்ச்எம்எல் வடிவத்தில் பட்டியலிடுங்கள்"
+
+msgctxt "TC_OPT_XMLHELP"
+msgid "list the command line options in XML format"
+msgstr "கட்டளை வரி விருப்பங்களை எக்ச்எம்எல் வடிவத்தில் பட்டியலிடுங்கள்"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+msgctxt "TC_OPT_XMLSTRG"
+msgid "output all of Tidy's strings in XML format"
+msgstr "எக்ச்எம்எல் வடிவத்தில் நேர்த்தியின் அனைத்து சரங்களையும் வெளியிடுங்கள்"
+
+msgctxt "TC_OPT_XMLERRS"
+msgid "output error constants and strings in XML format"
+msgstr "எக்ச்எம்எல் வடிவத்தில் வெளியீட்டு பிழை மாறிலிகள் மற்றும் சரங்கள்"
+
+msgctxt "TC_OPT_XMLOPTS"
+msgid "output option descriptions in XML format"
+msgstr "எக்ச்எம்எல் வடிவத்தில் வெளியீட்டு விருப்ப விளக்கங்கள்"
+
+msgctxt "TC_STRING_CONF_HEADER"
+msgid "Configuration File Settings:"
+msgstr "உள்ளமைவு கோப்பு அமைப்புகள்:"
+
+#. Must be 27 characters or fewer.
+msgctxt "TC_STRING_CONF_NAME"
+msgid "Name"
+msgstr "பெயர்"
+
+#. Must be 9 characters or fewer.
+msgctxt "TC_STRING_CONF_TYPE"
+msgid "Type"
+msgstr "வகை"
+
+#. Must be 40 characters or fewer.
+msgctxt "TC_STRING_CONF_VALUE"
+msgid "Current Value"
+msgstr "தற்போதைய மதிப்பு"
+
+#, c-format
+msgctxt "TC_STRING_OPT_NOT_DOCUMENTED"
+msgid "Warning: option `%s' is not documented."
+msgstr "எச்சரிக்கை: விருப்பம் `%s 'ஆவணப்படுத்தப்படவில்லை."
+
+msgctxt "TC_STRING_OUT_OF_MEMORY"
+msgid "Out of memory. Bailing out."
+msgstr "நினைவகத்திற்கு வெளியே. பிணை எடுப்பது."
+
+#, c-format
+msgctxt "TC_STRING_FATAL_ERROR"
+msgid "Fatal error: impossible value for id='%d'."
+msgstr "அபாயகரமான பிழை: அடையாளம் க்கு சாத்தியமற்ற மதிப்பு = '%d'."
+
+msgctxt "TC_STRING_FILE_MANIP"
+msgid "File manipulation"
+msgstr "கோப்பு கையாளுதல்"
+
+msgctxt "TC_STRING_PROCESS_DIRECTIVES"
+msgid "Processing directives"
+msgstr "செயலாக்க வழிமுறைகள்"
+
+msgctxt "TC_STRING_CHAR_ENCODING"
+msgid "Character encodings"
+msgstr "எழுத்து குறியாக்கங்கள்"
+
+msgctxt "TC_STRING_LANG_MUST_SPECIFY"
+msgid "A POSIX or Windows locale must be specified."
+msgstr "ஒரு போசிக்ச் அல்லது சாளரங்கள் லோகேல் குறிப்பிடப்பட வேண்டும்."
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+#, c-format
+msgctxt "TC_STRING_LANG_NOT_FOUND"
+msgid "Tidy doesn't have language '%s,' will use '%s' instead."
+msgstr "நேர்த்தியாக '%s மொழி இல்லை, அதற்கு பதிலாக'%s 'ஐப் பயன்படுத்தும்."
+
+msgctxt "TC_STRING_MISC"
+msgid "Miscellaneous"
+msgstr "மற்றவை"
+
+msgctxt "TC_STRING_XML"
+msgid "XML"
+msgstr "நீகுமொ"
+
+msgctxt "TC_STRING_MUST_SPECIFY"
+msgid "A Tidy option name must be specified."
+msgstr "ஒரு நேர்த்தியான விருப்பத்தின் பெயர் குறிப்பிடப்பட வேண்டும்."
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+msgctxt "TC_STRING_UNKNOWN_OPTION"
+msgid "HTML Tidy: unknown option: %c"
+msgstr "உஉகுமொ நேர்த்தியான: தெரியாத விருப்பம்: %c"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+msgctxt "TC_STRING_UNKNOWN_OPTION_B"
+msgid "HTML Tidy: unknown option."
+msgstr "உஉகுமொ நேர்த்தியான: தெரியாத விருப்பம்."
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+#, c-format
+msgctxt "TC_STRING_VERS_A"
+msgid "HTML Tidy for %s version %s"
+msgstr "%s பதிப்பு %s க்கான உஉகுமொ நேர்த்தியானது"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+#, c-format
+msgctxt "TC_STRING_VERS_B"
+msgid "HTML Tidy version %s"
+msgstr "உஉகுமொ நேர்த்தியான பதிப்பு %s"
+
+#. This console output should be limited to 78 characters per line.
+#. - First %s represents the name of the executable from the file system, and
+#. is mostly like going to be "tidy".
+#. - Second %s represents a version number, typically x.x.xx.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+#, c-format
+msgctxt "TC_TXT_HELP_1"
+msgid ""
+"%s [options...] [file...] [options...] [file...]\n"
+"Utility to clean up and pretty print HTML/XHTML/XML.\n"
+"\n"
+"This is modern HTML Tidy version %s.\n"
+"\n"
+msgstr ""
+"%s [விருப்பங்கள்...] [கோப்பு...] [விருப்பங்கள்...] [கோப்பு...] \n"
+"சுத்தம் செய்வதற்கான பயன்பாடு மற்றும் அழகாக அச்சிட HTML/XHTML/XML. \n"
+"\n"
+"இது நவீன உஉகுமொ நேர்த்தியான பதிப்பு %s.\n"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+#. - %s represents the platform, for example, "Mac OS X" or "Windows".
+#, c-format
+msgctxt "TC_TXT_HELP_2A"
+msgid "Command Line Arguments for HTML Tidy for %s:"
+msgstr "%s க்கு உஉகுமொ நேர்த்தியான கட்டளை வரி வாதங்கள்:"
+
+#. The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+msgctxt "TC_TXT_HELP_2B"
+msgid "Command Line Arguments for HTML Tidy:"
+msgstr "உஉகுமொ நேர்த்தியான கட்டளை வரி வாதங்கள்:"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+#. - %s represents either a blank line, or TC_TXT_HELP_3A explaining
+#. environment options.
+#, c-format
+msgctxt "TC_TXT_HELP_3"
+msgid ""
+"\n"
+"Tidy Configuration Options\n"
+"==========================\n"
+" Use Tidy's configuration options as command line arguments in the form\n"
+" of \"--some-option <value>\", for example, \"--indent-with-tabs yes\".\n"
+"\n"
+" You can also specify a file containing configuration options with the \n"
+" -config <file> directive, or in one or more files specific to your \n"
+" environment (see next section). \n"
+"\n"
+" For a list of all configuration options, use \"-help-config\" or refer\n"
+" to the man page (if your OS has one).\n"
+"\n"
+"Configuration Files\n"
+"===================\n"
+" If your environment has an $HTML_TIDY variable set to point to a Tidy \n"
+" configuration file, then Tidy will attempt to use it. \n"
+"%s Use \"-help-env\" for more information about how you can use the environment. \n"
+" to specify Tidy options. \n"
+"\n"
+"Other\n"
+"=====\n"
+" Input/Output default to stdin/stdout respectively.\n"
+"\n"
+" Single letter options apart from -f may be combined\n"
+" as in:  tidy -f errs.txt -imu foo.html\n"
+"\n"
+"Information\n"
+"===========\n"
+" For more information about HTML Tidy, see\n"
+"  https://www.html-tidy.org/\n"
+"\n"
+" For more information on HTML, see the following:\n"
+"\n"
+"   HTML Living Standard (the latest HTML specification)\n"
+"   https://html.spec.whatwg.org/multipage/\n"
+"\n"
+" File bug reports at https://github.com/htacg/tidy-html5/issues/\n"
+" or send questions and comments to public-htacg@w3.org.\n"
+"\n"
+" Validate your HTML documents using the W3C Nu Markup Validator:\n"
+"   https://validator.w3.org/nu/\n"
+"\n"
+msgstr ""
+"\n"
+"நேர்த்தியான உள்ளமைவு விருப்பங்கள் \n"
+"=========================== \n"
+"படிவத்தில் கட்டளை வரி வாதங்களாக டைடியின் உள்ளமைவு விருப்பங்களைப் பயன்படுத்தவும் \n"
+"\"--சில-விருப்ப <மதிப்பு>\", எடுத்துக்காட்டாக, \"--தாவல்களுடன் ஆம்\". \n"
+"\n"
+"உள்ளமைவு விருப்பங்களைக் கொண்ட ஒரு கோப்பையும் நீங்கள் குறிப்பிடலாம் \n"
+"-கன்ஃபிக் <file> கட்டளை, அல்லது உங்களுக்கு குறிப்பிட்ட ஒன்று அல்லது அதற்கு மேற்பட்ட கோப்புகளில் \n"
+"சூழல் (அடுத்த பகுதியைக் காண்க). \n"
+"\n"
+"அனைத்து உள்ளமைவு விருப்பங்களின் பட்டியலுக்கு, \"-help-config\" ஐப் பயன்படுத்தவும் அல்லது பார்க்கவும் \n"
+"மேன் பக்கத்திற்கு (உங்கள் OS க்கு ஒன்று இருந்தால்). \n"
+"\n"
+"உள்ளமைவு கோப்புகள் \n"
+"==================== \n"
+"உங்கள் சூழலில் ஒரு நேர்த்தியை சுட்டிக்காட்ட $ HTML_TIDY மாறி அமைக்கப்பட்டிருந்தால் \n"
+"உள்ளமைவு கோப்பு, பின்னர் நேர்த்தியாக அதைப் பயன்படுத்த முயற்சிக்கும். \n"
+"நீங்கள் சூழலை எவ்வாறு பயன்படுத்தலாம் என்பது பற்றிய கூடுதல் தகவலுக்கு \"-help-env\" ஐப் பயன்படுத்துங்கள். \n"
+"நேர்த்தியான விருப்பங்களைக் குறிப்பிட. \n"
+"\n"
+"மற்றொன்று \n"
+"==== \n"
+"உள்ளீடு/வெளியீட்டு இயல்புநிலை முறையே stdin/stdout க்கு. \n"
+"\n"
+"-F தவிர ஒற்றை கடிதம் விருப்பங்கள் இணைக்கப்படலாம் \n"
+"உள்ளதைப் போல: tidy -f errs.txt -imu foo.html \n"
+"\n"
+"தகவல் \n"
+"=========== \n"
+"HTML நேர்த்தியைப் பற்றிய கூடுதல் தகவலுக்கு, பார்க்கவும் \n"
+"https://www.html-tidy.org/ \n"
+"\n"
+"HTML பற்றிய கூடுதல் தகவலுக்கு, பின்வருவனவற்றைக் காண்க: \n"
+"\n"
+"HTML லிவிங் ச்டாண்டர்ட் (சமீபத்திய உஉகுமொ விவரக்குறிப்பு) \n"
+"https://html.spec.whatwg.org/multipage/ \n"
+"\n"
+"கோப்பு பிழை அறிக்கைகள் https://github.com/htacg/tidy-html5/issues/ \n"
+"அல்லது கேள்விகள் மற்றும் கருத்துகளை பொது-htacg@w3.org க்கு அனுப்பவும். \n"
+"\n"
+"W3C Nu Markup Validator ஐப் பயன்படுத்தி உங்கள் உஉகுமொ ஆவணங்களை சரிபார்க்கவும்: \n"
+"https://validator.w3.org/nu/\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+#. - Both parameters %s reflect file paths and names.
+#, c-format
+msgctxt "TC_TXT_HELP_3A"
+msgid ""
+"\n"
+" Additionally, Tidy will automatically attempt to use configuration specified \n"
+" in these files, if present: \n"
+"\n"
+"  %s \n"
+"  %s \n"
+"\n"
+msgstr ""
+"\n"
+"கூடுதலாக, நேர்த்தியாக தானாகவே குறிப்பிடப்பட்ட உள்ளமைவைப் பயன்படுத்த முயற்சிக்கும் \n"
+"இந்த கோப்புகளில், இருந்தால்: \n"
+"\n"
+"%s \n"
+"%s \n"
+"\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+msgctxt "TC_TXT_HELP_CONFIG"
+msgid ""
+"\n"
+"HTML Tidy Configuration Settings\n"
+"\n"
+"Within a file, use the form:\n"
+"\n"
+"wrap: 72\n"
+"indent: no\n"
+"\n"
+"When specified on the command line, use the form:\n"
+"\n"
+"--wrap 72 --indent no\n"
+"\n"
+msgstr ""
+"\n"
+"உஉகுமொ நேர்த்தியான உள்ளமைவு அமைப்புகள் \n"
+"\n"
+"ஒரு கோப்பிற்குள், படிவத்தைப் பயன்படுத்தவும்: \n"
+"\n"
+"மடக்கு: 72 \n"
+"உள்தள்ளல்: இல்லை \n"
+"\n"
+"கட்டளை வரியில் குறிப்பிடப்படும்போது, ​​படிவத்தைப் பயன்படுத்தவும்: \n"
+"\n"
+"-மடக்கு 72 --உள்தள்ளல் இல்லை\n"
+
+msgctxt "TC_TXT_HELP_CONFIG_NAME"
+msgid "Name"
+msgstr "பெயர்"
+
+msgctxt "TC_TXT_HELP_CONFIG_TYPE"
+msgid "Type"
+msgstr "வகை"
+
+msgctxt "TC_TXT_HELP_CONFIG_ALLW"
+msgid "Allowable values"
+msgstr "அனுமதிக்கக்கூடிய மதிப்புகள்"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+#. - The first %s indicates two more list items, or an empty string.
+#. - The second %s indicates a file name, or a message indicating no file
+#. name.
+#, c-format
+msgctxt "TC_TXT_HELP_ENV_1"
+msgid ""
+"\n"
+"Tidy can configure its option values from multiple sources, in the \n"
+"order below. Subsequent use of the same option overrides previous \n"
+"option settings. \n"
+"\n"
+" - Tidy's built-in default values. \n"
+"%s\" /* rc files */ - The file specified in the $HTML_TIDY environment variable: \n"
+"     %s \n"
+" - Options in a file specified on the command line. \n"
+" - Options set directly on the command line. \n"
+msgstr ""
+"\n"
+"நேர்த்தியாக அதன் விருப்ப மதிப்புகளை பல மூலங்களிலிருந்து கட்டமைக்க முடியும் \n"
+"கீழே ஆர்டர். அதே விருப்பத்தின் அடுத்தடுத்த பயன்பாடு முந்தையதை மீறுகிறது \n"
+"விருப்ப அமைப்புகள். \n"
+"\n"
+"- நேர்த்தியின் உள்ளமைக்கப்பட்ட இயல்புநிலை மதிப்புகள். \n"
+"%s \" / * rc கோப்புகள் * / - $ HTML_TIDY சூழல் மாறியில் குறிப்பிடப்பட்டுள்ள கோப்பு: \n"
+"%s \n"
+"- கட்டளை வரியில் குறிப்பிடப்பட்டுள்ள கோப்பில் விருப்பங்கள். \n"
+"- கட்டளை வரியில் நேரடியாக அமைக்கப்பட்ட விருப்பங்கள்.\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+#, c-format
+msgctxt "TC_TXT_HELP_ENV_1A"
+msgid ""
+" - The system runtime configuration file: \n"
+"     %s \n"
+" - The user runtime configuration file: \n"
+"     %s \n"
+msgstr ""
+"- கணினி இயக்க நேர உள்ளமைவு கோப்பு: \n"
+"%s \n"
+"- பயனர் இயக்க நேர உள்ளமைவு கோப்பு: \n"
+"%s\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+#. - This message indicates that a file name is not currently set.
+msgctxt "TC_TXT_HELP_ENV_1B"
+msgid "(not currently set)"
+msgstr "(தற்போது அமைக்கப்படவில்லை)"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+#, c-format
+msgctxt "TC_TXT_HELP_ENV_1C"
+msgid ""
+"\n"
+"Note that because $HTML_TIDY is set, the user runtime configuration file \n"
+"%s will not be used. \n"
+msgstr ""
+"\n"
+"$ HTML_TIDY அமைக்கப்பட்டிருப்பதால், பயனர் இயக்க நேர உள்ளமைவு கோப்பு \n"
+"%s பயன்படுத்தப்படாது.\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+msgctxt "TC_TXT_HELP_LANG_1"
+msgid ""
+"\n"
+"The -language (or -lang) option indicates which language Tidy \n"
+"should use to communicate its output. Please note that this is not \n"
+"a document translation service, and only affects the messages that \n"
+"Tidy communicates to you. \n"
+"\n"
+"When used from the command line the -language argument must \n"
+"be used before any arguments that result in output, otherwise Tidy \n"
+"will produce output before it knows which language to use. \n"
+"\n"
+"In addition to standard POSIX language codes, Tidy is capable of \n"
+"understanding legacy Windows language codes. Please note that this \n"
+"list indicates codes Tidy understands, and does not indicate that \n"
+"the language is currently installed. \n"
+"\n"
+"The rightmost column indicates how Tidy will understand the \n"
+"legacy Windows name.\n"
+"\n"
+msgstr ""
+"\n"
+"-நாள் (அல்லது -லாங்) விருப்பம் எந்த மொழி நேர்த்தியாக குறிக்கிறது என்பதைக் குறிக்கிறது \n"
+"அதன் வெளியீட்டைத் தொடர்பு கொள்ள பயன்படுத்த வேண்டும். இது இல்லை என்பதை நினைவில் கொள்க \n"
+"ஒரு ஆவண மொழிபெயர்ப்பு பணி, மற்றும் செய்திகளை மட்டுமே பாதிக்கிறது \n"
+"நேர்த்தியானது உங்களுக்கு தொடர்பு கொள்கிறது. \n"
+"\n"
+"கட்டளை வரியிலிருந்து பயன்படுத்தும்போது -மொழி உரையாடல் வேண்டும் \n"
+"வெளியீட்டை விளைவிக்கும் எந்தவொரு வாதத்திற்கும் முன் பயன்படுத்தப்பட வேண்டும், இல்லையெனில் நேர்த்தியாக \n"
+"எந்த மொழியைப் பயன்படுத்த வேண்டும் என்பதை அறிவதற்கு முன்பு வெளியீட்டை உருவாக்கும். \n"
+"\n"
+"நிலையான POSIX மொழி குறியீடுகளுக்கு கூடுதலாக, நேர்த்தியான திறன் கொண்டது \n"
+"மரபு சாளரங்கள் மொழி குறியீடுகளைப் புரிந்துகொள்வது. இதை நினைவில் கொள்க \n"
+"பட்டியல் குறியீடுகளை நேர்த்தியாக புரிந்துகொள்வதைக் குறிக்கிறது, அதைக் குறிக்கவில்லை \n"
+"மொழி தற்போது நிறுவப்பட்டுள்ளது. \n"
+"\n"
+"வலதுபுற நெடுவரிசை எவ்வாறு நேர்த்தியாக புரிந்துகொள்ளும் என்பதைக் குறிக்கிறது \n"
+"மரபு சாளரங்கள் பெயர்.\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+msgctxt "TC_TXT_HELP_LANG_2"
+msgid ""
+"\n"
+"The following languages are currently installed in Tidy. Please \n"
+"note that there's no guarantee that they are complete; only that \n"
+"one developer or another started to add the language indicated. \n"
+"\n"
+"Incomplete localizations will default to \"en\" when necessary. \n"
+"Please report instances of incorrect strings to the Tidy team. \n"
+"\n"
+msgstr ""
+"\n"
+"பின்வரும் மொழிகள் தற்போது நேர்த்தியாக நிறுவப்பட்டுள்ளன. தயவுசெய்து \n"
+"அவை முழுமையானவை என்பதற்கு எந்த உத்தரவாதமும் இல்லை என்பதை நினைவில் கொள்க; அது மட்டுமே \n"
+"ஒரு உருவாக்குபவர் அல்லது இன்னொருவர் சுட்டிக்காட்டப்பட்ட மொழியைச் சேர்க்கத் தொடங்கினார். \n"
+"\n"
+"முழுமையற்ற உள்ளூர்மயமாக்கல்கள் தேவைப்படும்போது \"en\" க்கு இயல்புநிலையாக இருக்கும். \n"
+"தவறான சரங்களின் நிகழ்வுகளை நேர்த்தியான குழுவுக்கு தெரிவிக்கவும்.\n"
+
+#. This console output should be limited to 78 characters per line.
+#. - The strings "Tidy" and "HTML Tidy" are the program name and must not be
+#. translated.
+#. - The parameter %s is likely to be two to five characters, e.g., en or
+#. en_US.
+#, c-format
+msgctxt "TC_TXT_HELP_LANG_3"
+msgid ""
+"\n"
+"If Tidy is able to determine your locale then Tidy will use the \n"
+"locale's language automatically. For example Unix-like systems use a \n"
+"$LANG and/or $LC_ALL environment variable. Consult your operating \n"
+"system documentation for more information. \n"
+"\n"
+"Tidy is currently using locale %s. \n"
+"\n"
+msgstr ""
+"\n"
+"நேர்த்தியாக உங்கள் இருப்பிடத்தை தீர்மானிக்க முடிந்தால், நேர்த்தியாகப் பயன்படுத்தும் \n"
+"லோகேலின் மொழி தானாகவே. எடுத்துக்காட்டாக யூனிக்ச் போன்ற அமைப்புகள் ஒரு \n"
+"$LANG மற்றும்/அல்லது $LC_ALL சுற்றுச்சூழல் மாறி. உங்கள் இயக்கத்தை அணுகவும் \n"
+"மேலும் தகவலுக்கு கணினி ஆவணங்கள். \n"
+"\n"
+"டைடி தற்போது %s லோகேல் பயன்படுத்துகிறது.\n"

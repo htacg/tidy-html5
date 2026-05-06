@@ -108,9 +108,9 @@ static void CleanNode( TidyDocImpl* doc, Node *node )
             if (TY_(nodeIsElement)(child))
             {
                 if (nodeIsSTYLE(child))
-                    TY_(DiscardElement)(doc, child);
-                if (nodeIsP(child) && !child->content)
-                    TY_(DiscardElement)(doc, child);
+                    next = TY_(DiscardElement)(doc, child);
+                else if (nodeIsP(child) && !child->content)
+                    next = TY_(DiscardElement)(doc, child);
                 else if (nodeIsSPAN(child))
                     DiscardContainer( doc, child, &next);
                 else if (nodeIsA(child) && !child->content)

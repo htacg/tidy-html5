@@ -1,0 +1,15 @@
+<!--
+This test case represents HTML Tidy issue #1185, an infinite loop
+and unbounded memory growth when a <pre> (or <xmp>) element is
+nested inside a still-open inline element and itself contains
+another element node before the input ends.
+
+TY_(ParsePre) called TY_(InlineDup) unconditionally on every
+invocation, including reentrant continuations, unlike
+TY_(ParseBlock) and TY_(ParseInline), which only call it on the
+initial, non-reentrant entry. This kept re-arming the lexer's
+implicit-inline-duplication state on every reentry, so GetToken()
+manufactured a fresh implicit clone of the still-open inline element
+forever instead of settling once the inline stack was drained.
+ -->
+<b><pre><br>

@@ -4458,9 +4458,20 @@ Node* TY_(ParsePre)( TidyDocImpl* doc, Node *pre, GetTokenMode ARG_UNUSED(mode) 
             DEBUG_LOG_EXIT;
             return NULL;
         }
-    }
 
-    TY_(InlineDup)( doc, NULL ); /* tell lexer to insert inlines if needed */
+        /* tell lexer to insert inlines if needed; as with ParseBlock and
+           ParseInline, this must only happen on the initial, non-reentrant
+           call. Calling it again on every reentry re-arms the lexer's
+           pending-insertion state (lexer->insert) even though a previous
+           call already fully drained the inline stack for this element,
+           so the lexer keeps manufacturing a fresh implicit clone of the
+           same inline element on every subsequent GetToken() call. Since
+           each clone is itself dispatched back through this same reentry
+           path, that turns into an infinite loop that never touches the
+           input stream again, growing the node and message lists without
+           bound (see the "missing </b>" duplicate-tag testcase). */
+        TY_(InlineDup)( doc, NULL );
+    }
 
     while ( state != STATE_COMPLETE )
     {

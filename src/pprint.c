@@ -1077,6 +1077,24 @@ static Bool HasCDATA( Lexer* lexer, Node* node )
 
 
 /**
+ *  Indicates whether children require block indentation. Elements which can
+ *  contain either inline or block content must be checked by their contents.
+ */
+static Bool HasBlockContent( Node *node )
+{
+    Node *child;
+
+    for ( child = node->content; child; child = child->next )
+    {
+        if ( TY_(nodeHasCM)(child, CM_BLOCK) &&
+             ( !TY_(nodeCMIsInline)(child) || HasBlockContent(child) ) )
+            return yes;
+    }
+    return no;
+}
+
+
+/**
  *  Indicates whether or not the given node should be indented.
  */
 static Bool ShouldIndent( TidyDocImpl* doc, Node *node )
@@ -1092,10 +1110,7 @@ static Bool ShouldIndent( TidyDocImpl* doc, Node *node )
     {
         if ( node->content && TY_(nodeHasCM)(node, CM_NO_INDENT) )
         {
-            for ( node = node->content; node; node = node->next )
-                if ( TY_(nodeHasCM)(node, CM_BLOCK) )
-                    return yes;
-            return no;
+            return HasBlockContent(node);
         }
 
         if ( TY_(nodeHasCM)(node, CM_HEADING) )

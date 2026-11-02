@@ -3460,8 +3460,17 @@ static Node* GetTokenFromStream( TidyDocImpl* doc, GetTokenMode mode )
     }
 
     /* check attributes before return NULL */
-    if (attributes)
-        TY_(FreeAttribute)( doc, attributes );
+    /* FreeAttribute() is documented as not repairing list linkage: it
+       frees one AttVal and does not follow ->next.  The pseudo-attributes
+       of an XML declaration that ends at end-of-stream are a list, so
+       freeing only the head leaked every attribute after the first. */
+    while (attributes)
+    {
+        AttVal *av = attributes;
+
+        attributes = av->next;
+        TY_(FreeAttribute)( doc, av );
+    }
 
     DEBUG_LOG(SPRTF("Returning NULL...\n"));
     return NULL;
@@ -4540,9 +4549,16 @@ FUNC_UNUSED Node* TY_(peek)(Stack *stack)
  */
 void TY_(freeStack)(Stack *stack)
 {
-    TidyFree( stack->allocator, stack->firstNode );
+    TidyAllocator *allocator = stack->allocator;
+
+    TidyFree( allocator, stack->firstNode );
     stack->top = -1;
     stack->capacity = 0;
     stack->firstNode = NULL;
     stack->allocator = NULL;
+    /* newStack() allocates the Stack itself as well as firstNode, and
+       nothing else frees it -- and because the allocator is cleared
+       just above, no caller could.  24 bytes per newStack()/freeStack()
+       pair, over ten call sites, on every document parsed. */
+    TidyFree( allocator, stack );
 }
